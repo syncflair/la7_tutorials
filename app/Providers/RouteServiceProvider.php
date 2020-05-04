@@ -21,7 +21,12 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    
+    //public const HOME = '/home';
+    //public const DASHBOARD = '/dashboard';
+    /*No need any route here because i OverWrite this to other Controller*/
+
+
 
     /**
      * Define your route model bindings, pattern filters, etc.

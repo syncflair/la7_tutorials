@@ -19,6 +19,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Styles -->
+        <style>            
+            .navbar-nav > .nav-item > a{color:#000000 !important;}
+        </style>
 </head>
 <body>
     <div id="app">

@@ -175,7 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        //My Custom Helper
+        //My Custom Helper Provider
         App\Providers\HelperServiceProvider::class,
 
     ],

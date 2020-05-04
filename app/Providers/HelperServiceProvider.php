@@ -6,6 +6,9 @@ use Illuminate\Support\ServiceProvider;
 
 class HelperServiceProvider extends ServiceProvider
 {
+    //this is my custome helper
+
+
     /**
      * Register services.
      *
