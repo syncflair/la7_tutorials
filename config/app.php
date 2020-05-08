@@ -175,7 +175,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        //My Custom Helper Provider
+        /*Yajra Datatable provider*/
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
+        /*My Custom Helper Provider*/
         App\Providers\HelperServiceProvider::class,
 
     ],
@@ -229,6 +232,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class, /*Yajra Datatable*/
 
         'MyHelper' => App\Helpers\Helper::class, //My Custom Helper
 

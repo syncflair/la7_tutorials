@@ -2,9 +2,10 @@
 
 /*Enable Query Log to check raw sql query*/
 DB::listen(function($sql) {
-    print_r($sql->sql);
+   // print_r($sql->sql);
     //print_r($sql->time);
 });
+//print_r( RoleId() );
 
 
 use Illuminate\Support\Facades\Route;
@@ -20,10 +21,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome'); 
-   // return view('auth.login'); //redirect to login page
+   // return view('auth.login'); //redirect to login page    
 });
+Route::get('/NotFound', function () {
+    return view('errors.404_master_dashboard'); 
+   // return view('auth.login'); //redirect to login page    
+});
+
 
 
 Auth::routes();
@@ -39,7 +46,10 @@ Route::group(['middleware'=>['user','auth'] ], function(){
 
 Route::group(['middleware'=>['admin','auth'] ], function() {
 
-    Route::get('dashboard', 'HomeController@dashboard')->name('dashboard');
+    Route::get('dashboard', 'Admin\AdminController@index')->name('dashboard');
+    Route::resource('user', 'Admin\AuthManagement\UserController');
+    Route::resource('role', 'Admin\AuthManagement\RoleController');
+    Route::resource('permission', 'Admin\AuthManagement\PermissionController');
 });
 
 

@@ -11,6 +11,14 @@
 
 @import '~admin-lte/dist/css/adminlte.css';
 
+//jquery ui
+//@import '~jquery-ui/themes/base/all.css';
+
+
+//Datatables
+@import '~datatables.net-bs4/css/dataTables.bootstrap4.css';
+//@import '~datatables.net-responsive-bs4/css/responsive.bootstrap4.css';
+
 
 
 //Fortawesome
@@ -24,6 +32,9 @@
 
 // iCheck
 @import '~icheck-bootstrap/icheck-bootstrap.css';
+
+//Toastr
+@import "toastr";
 
 //inport My Custome css
 @import 'style.scss';

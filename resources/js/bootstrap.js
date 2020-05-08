@@ -10,7 +10,29 @@ try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
 
+
+    //require('jquery-ui-dist/jquery-ui.min.js'); 
+
     require('bootstrap');
+
+	//for Datatables
+    //require('datatables.net');
+    require('datatables.net-bs4');
+    //require('datatables.net-responsive-bs4');
+    /*require('datatables.net-buttons');
+    require('datatables.net-buttons-bs4');
+    require('datatables.net-colreorder');
+    require('datatables.net-colreorder-bs4');
+    require('datatables.net-fixedcolumns');
+    require('datatables.net-fixedcolumns-bs4');
+    require('datatables.net-fixedheader');
+    require('datatables.net-fixedheader-bs4');
+    require('datatables.net-responsive');
+    require('datatables.net-responsive-bs4');
+    require('datatables.net-rowgroup');
+    require('datatables.net-rowgroup-bs4');*/
+
+
 
     //Custom add
     require('admin-lte');  

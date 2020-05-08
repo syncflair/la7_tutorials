@@ -30,7 +30,7 @@ class UserMiddleware
          */
        
        //my Custome Code
-        if (Auth::check() && Auth::user()->role->id ==2) {
+        if (Auth::check() && Auth::user()->role->id ==14) { /*User = 14*/
             return $next($request);
 
         }else{

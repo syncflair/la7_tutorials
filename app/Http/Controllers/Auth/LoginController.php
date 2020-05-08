@@ -32,15 +32,15 @@ class LoginController extends Controller
     //protected $redirectTo = RouteServiceProvider::DASHBOARD;
     
     //my Custome Code OverWeite redirectT0
-    protected function redirectTo()
+    protected function redirectTo()    
     {
-        if (auth()->user()->role_id == 1) {
-            //1 is Admin
+        //if (auth()->user()->role_id == 1) { /*Compare with single role id*/
+        if (auth()->user()->role_id == in_array(auth()->user()->role_id, RoleId() )) { /*Compare with multiple role id. RoleId come from AuthRolePermissionHelper.php */
             return route('dashboard');
 
         }
 
-        elseif (auth()->user()->role_id == 2) {
+        elseif (auth()->user()->role_id == 14) { /*User = 14*/
             return route('home');
         }
     }

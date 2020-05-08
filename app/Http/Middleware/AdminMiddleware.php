@@ -27,9 +27,10 @@ class AdminMiddleware
          * @param  \Closure  $next
          * @return mixed
          */
-
+        
          //my Custome Code
-        if (Auth::check() && Auth::user()->role->id==1) {
+        //if (Auth::check() && Auth::user()->role->id==1) { /*Compare with single role id*/
+        if (Auth::check() && Auth::user()->role->id == in_array( Auth::user()->role->id, RoleId() )  ) { /*Compare with multiple role id. RoleId come from AuthRolePermissionHelper.php*/
             return $next($request);
 
         }else{

@@ -22,4 +22,8 @@ class UserController extends Controller
     {
         return view('home');
     }*/
+
+
+
+    /*Its for Visitor users. for future use*/
 }

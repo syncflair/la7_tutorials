@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id',
+        'name', 'email', 'password', 'role_id', 'status_id','avatar'
     ];
 
     /**
@@ -40,7 +40,13 @@ class User extends Authenticatable
 
     //My Custome Relation --  user belong to this Role 
     public function role(){
-        return $this->belongsTo('App\Role');
+        //return $this->belongsTo('App\Models\Role');
+        return $this->belongsTo(Models\Role::class);
+    }
+
+    public function UserStatus(){
+        //return $this->belongsTo('App\Models\UserStatus');
+        return $this->belongsTo(Models\UserStatus::class);
     }
 
 

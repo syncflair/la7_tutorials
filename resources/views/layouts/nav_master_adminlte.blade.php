@@ -11,23 +11,23 @@
       <!--Sales Link-->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
-           <i class="fas fa-money-check-alt top-fa-size"></i>  Sales
+           <i class="fas fa-money-check-alt top-fa-size"></i>  Authentication
         </a>
         
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
+          <a href="{{route('user.index')}}" class="dropdown-item {{ Request::is('user*') ? 'active' : '' }}">
+            <i class="fas fa-envelope mr-2"></i> User
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
+          <a href="{{route('role.index')}}" class="dropdown-item {{ Request::is('role*') ? 'active' : '' }}">
+            <i class="fas fa-users mr-2"></i> Role
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
+          <a href="{{route('permission.index')}}" class="dropdown-item {{ Request::is('permission*') ? 'active' : '' }}">
+            <i class="fas fa-file mr-2"></i> Permission
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
+          <a href="#" class="dropdown-item dropdown-footer">See All Authentication</a>
         </div>
       </li>
 
@@ -38,27 +38,27 @@
       </li>
 
       <li class="nav-item nav-item-btn">
-        <a type="button" class="btn btn-block btn-outline-success-"> 
+        <a type="button" class="btn btn-block btn-sm btn-outline-success-"> 
           <!--<i class="nav-icon fas fa-file-invoice-dollar -success"></i>--> 
           <i class="fas fa-plus"></i>
            Sale</a>
       </li>
 
       <li class="nav-item nav-item-btn">
-        <a type="button" class="btn btn-block btn-outline-success-"> 
+        <a type="button" class="btn btn-block btn-sm btn-outline-success-"> 
           <!--<i class="nav-icon fas fa-cart-plus -warning"></i>  -->
           <i class="fas fa-plus"></i> Purchase</a>
       </li>
 
 
       <li class="nav-item nav-item-btn">
-        <a type="button" class="btn btn-block btn-outline-success-"> 
+        <a type="button" class="btn btn-block btn-sm btn-outline-success-"> 
           <!--<i class="nav-icon fas fa-hand-holding-usd --danger"></i>-->
           <i class="fas fa-plus"></i> Expences</a>
       </li>
 
       <li class="nav-item nav-item-btn">
-        <a type="button" onclick="click_me()" class="btn btn-block"> <i class="fas fa-plus"></i>  Click </a>
+        <a type="button" onclick="click_me()" class="btn btn-block btn-sm"> <i class="fas fa-plus"></i>  Click </a>
       </li>
 
 

@@ -7,6 +7,7 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 
 
+
 class RedirectIfAuthenticated
 {
     /**
@@ -30,9 +31,10 @@ class RedirectIfAuthenticated
      public function handle($request, Closure $next, $guard = null)
     {
         //My Custom Code
-        if (Auth::guard($guard)->check() && Auth::user()->role->id==1) {
+        //if (Auth::guard($guard)->check() && Auth::user()->role->id==1) { /*Compare with single role id*/
+        if (Auth::guard($guard)->check() && Auth::user()->role->id == in_array(Auth::user()->role->id, RoleId() ) ) { /*Compare with multiple role id. RoleId come from AuthRolePermissionHelper.php*/
             return redirect()->route('dashboard');
-        } elseif (Auth::guard($guard)->check() && Auth::user()->role->id==2){
+        } elseif (Auth::guard($guard)->check() && Auth::user()->role->id==14){ /*User = 14*/
             return redirect()->route('home');
         } else {
             return $next($request);

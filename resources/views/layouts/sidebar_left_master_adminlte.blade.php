@@ -4,7 +4,7 @@
     <a href="{{ URL::to('/dashboard') }}" class="brand-link">
       <img src="{{ asset('backend/AdminLTE/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light orange">SORBORAHO</span>
     </a>
 
     <!-- Sidebar -->
@@ -16,7 +16,7 @@
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-          <i class="nav-icon fas fa-circle success"> </i><span><small> Supper Admin </small></span>
+          <i class="nav-icon fas fa-circle success"> </i><span><small> {{ RoleName() }} </small></span>
         </div>
       </div>
 
@@ -29,7 +29,7 @@
 
          
           <li class="nav-item">
-            <a href="{{URL::to('/dashboard')}}" class="nav-link">
+            <a href="{{URL::to('/dashboard')}}" class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard

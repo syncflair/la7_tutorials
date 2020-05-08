@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use app\user;
+use App\Helpers\AuthRolePermissionHelper;
 
 class HomeController extends Controller
 {
@@ -24,11 +25,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+       // print_r(RoleId);        
+
         return view('home');
     }
 
-    public function dashboard()
+    /*public function dashboard()
     {
         return view('admin.dashboard');
-    }
+    }*/
 }

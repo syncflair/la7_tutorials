@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,5 +17,6 @@ class Role extends Model
     //My Custome Relation - A Role Has Many User (hasMany())
     public function user(){
         return $this->hasMany('App\User');
+        //return $this->hasMany(User::class);  
     }
 }
