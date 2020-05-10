@@ -2,11 +2,11 @@
 
 /*Enable Query Log to check raw sql query*/
 DB::listen(function($sql) {
-   // print_r($sql->sql);
+   //print_r($sql->sql);
     //print_r($sql->time);
 });
 //print_r( RoleId() );
-
+//echo \Config::get('constants.CommonFilesPath'); //get constants from app/config/constants.php
 
 use Illuminate\Support\Facades\Route;
 
@@ -48,7 +48,11 @@ Route::group(['middleware'=>['admin','auth'] ], function() {
 
     Route::get('dashboard', 'Admin\AdminController@index')->name('dashboard');
     Route::resource('user', 'Admin\AuthManagement\UserController');
+
+    Route::get('/role-unactive/{role_id}', 'Admin\AuthManagement\RoleController@role_unactive');
+    Route::get('/role-active/{role_id}', 'Admin\AuthManagement\RoleController@role_active');  
     Route::resource('role', 'Admin\AuthManagement\RoleController');
+
     Route::resource('permission', 'Admin\AuthManagement\PermissionController');
 });
 

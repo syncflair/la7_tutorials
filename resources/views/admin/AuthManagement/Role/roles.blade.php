@@ -26,9 +26,6 @@
     </div>
     <!-- /.content-header -->
 
-
-   
-
     <!-- Main content -->
     <section class="content">      
       <div class="container-fluid">
@@ -44,78 +41,25 @@
                 <h3 class="card-title">Bordered Table</h3>
               </div> -->
               <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-sm">
+              <div class="card-body pt-0">
+                <table id="roles_table" class="table table-sm table-striped">
                   <thead>                  
                     <tr>
                       <th style="width: 10%">ID</th>
-                      <th style="width: 45%">Role name</th>
+                      <th style="width: 45%">Role Name</th>
                       <th style="width: 10%;">Status</th>
                       <th style="width: 40%; text-align:right;">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                     @foreach ($roles as $role)
-                      <tr>                     
-                          <td>
-                            <?php
-                              if($role->is_enabled == 1){ echo $role->id; }
-                              else{ echo '<span class="red">'.$role->id.'</span>'; }
-                            ?>
-                          </td>
-                          <td>
-                            <?php
-                              if($role->is_enabled == 1){ echo $role->name; }
-                              else{ echo '<span class="red">'.$role->name.'</span>'; }
-                            ?>
-                          </td>
-                          <td>
-                            <?php 
-                              if($role->is_enabled == 1){
-                                  echo '<span class="btn btn-flat btn-success btn-sm">Active</span>';
-                              }else{ 
-                                  echo '<span class="btn btn-flat btn-danger btn-sm">Unactive</span>';
-                              }
-                            ?>
-                          </td>
-                          <td style="text-align: right;">
-                            <?php
-                              if($role->is_enabled == 1){
-                                echo '<a onclick="RoleUnactive('.$role->id.')" class="btn btn-danger- btn-flat btn-sm" data-toggle="tooltip" data-placement="right" title="Click to Unactive" >                
-                                    <i class="far fa-thumbs-down danger"></i>
-                                  </a>';
+                     
+                      <!--Datatable here-->
 
-                              }elseif($role->is_enabled == 0){
-                                  echo '<a onclick="RoleActive('.$role->id.')" class="use-tooltip btn btn-success- btn-flat btn-sm" data-toggle="tooltip" data-placement="left" title="Click to Active" >                
-                                    <i class="far fa-thumbs-up success"></i>
-                                  </a>';
-                              }
-                            ?>
-
-                            <a onclick="EditRole(<?php echo $role->id; ?>)" class="btn  btn-primary- btn-flat btn-sm">
-                                <i class="fas fa-edit primary "></i>
-                            </a>
-                                
-                            <a onclick="DeleteRole(<?php echo $role->id; ?>)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete" >
-                                <i class="far fa-trash-alt red"></i>
-                            </a>
-                          </td>                    
-                      </tr>
-                     @endforeach
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
              
-              <!--<div class="card-footer clearfix">
-                <ul class="pagination pagination-sm m-0 float-right">
-                  <li class="page-item"><a class="page-link" href="#">«</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">»</a></li>
-                </ul>
-              </div>-->
 
             </div>
             
@@ -124,20 +68,29 @@
           <!--col-5-->
           <div class="col-5- col-md-5 col-sm-6 float-sm-right">
             <div class="card card-info- cusotme-card">
-              <!--<div class="card-header pb-0">
-                <h3 class="card-title">Add Role</h3>
-              </div>-->
+              
+              <div class="card-header pb-0">
+                <h4 id="form_title" class="card-title mb-0">Add Role</h4>
+              </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" id="quickForm" novalidate="novalidate" method="post">
-                <div class="card-body pb-1">
+              <form role="form" id="role_form" method="POST">
                   
-                 
+                  {{ csrf_field() }}  <!--@method('PATCH') {{ method_field('POST') }}-->
+                  <input type="hidden" id="input_method" name="_method" value="PATCH">
+
+                  <input type="hidden" name="form_action" id="form_action" value="add" />
+                  <input type="hidden" name="id" id="id" value="" />
+
+                  <!--<span id="errors_output"></span>-->
+
+                <div class="card-body pb-1">
 
                  <div class="form-group">
-                    <label for="role_name">Add Role</label>
-                    <input type="text" class="form-control" name="role_name" id="role_name" placeholder="Enter role">
-                  </div>
+                    <!--<label  for="role_name">Add Role</label>-->
+                    <input type="text" id="name" class="form-control" name="name" id="name" placeholder="Enter role">
+                    <span class="danger" id="name_error"> </span>
+                </div>
                   
                   <!--<div class="form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -147,7 +100,7 @@
                 <!-- /.card-body -->
 
                 <div class="card-footer pt-0">
-                  <button type="submit" class="btn btn-primary btn-flat btn-sm">Submit</button>
+                  <button type="submit" id="form_button" class="btn btn-primary btn-flat btn-sm">Save</button>
                 </div>
               </form>
 
@@ -182,41 +135,223 @@
 	<!--Extra Script-->
   <script type="text/javascript">
 
- // $.fn.dataTable.ext.errMode = 'none'; //scape error message
+  $.fn.dataTable.ext.errMode = 'none'; //scape error message
+  //show user datatable
+  var table1 = $('#roles_table').DataTable({    
+    processing:true,
+    serverSide:true,
+    paging: false,
+    searching: false,
+    info:false,
+    ajax:{ url: "{{ route('role.index') }}" },
+    columns: [
+          {data:'id', name:'id'},
+          {data:'name', name:'name'},
+          {data:'is_enabled', name:'is_enabled' , orderable: false, searchable: false },
+          {data:'action', name:'action', orderable: false, searchable: false }        
+        ]
+  });
 
+
+//Insert/UPdate data by Ajax    
+  $(function(){      
+    $('#role_form').on('submit', function (e) {
+      e.preventDefault(); // this prevents the form from submitting
+           
+    if( $('#form_action').val() == 'add' ){
+      $("#input_method").val("POST"); //change hidden method type to POST default is PATCH
+      
+      $.ajax({                  
+          type : "POST", //find store method if type=POST               
+          url : "{{ route('role.store') }}",                         
+          data: new FormData($("#role_form")[0]),
+          cache:false,
+          contentType: false,
+          processData: false,
+          //dataType: 'json', //work without dataType                 
+          success : function(data) { 
+            if(data.errors){              
+              if(data.errors.name){ $( '#name_error' ).html( data.errors.name ); }
+              if(!data.errors.name){ $( '#name_error' ).html( '' ); }
+            }
+            if(data.success){            
+              $('#name').val(0);
+              $('#role_form')[0].reset();
+
+              toastr.success(data.success); 
+
+              $( '#name_error' ).html( '' );
+              table1.ajax.reload( null, false );     
+            }                   
+          }
+      });//*/
+        //return false;
+    }//end Insert check //*/
+   
+    if($('#form_action').val() == 'update'){ 
+      //var csrf_token = $('input[name="_token"]').val();
+      var id = $('#id').val(); 
+      var urlTo = "{{ route('role.update', ':id') }}" ;
+      urlTo = urlTo.replace(':id', id ); //resource rout not work without this 
+  
+      $.ajax({    
+         // type: "PATCH",  
+          type: 'POST',              
+          url : urlTo,  
+          data:  new FormData($("#role_form")[0]),           
+          //data: { id:id, },
+          cache:false,
+          contentType: false,
+          processData: false,
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'), '_method': 'PATCH'
+          },
+          dataType: 'json', //work without dataType
+          success : function(data) {  
+             if(data.errors)
+            {
+              if(data.errors.name){ $( '#name_error' ).html( data.errors.name ); }
+              if(!data.errors.name){ $( '#name_error' ).html( '' ); }                  
+            }
+            if(data.success){
+
+              $( '#name_error' ).html( '' );
+              $('#name').val(0);
+              $('#role_form')[0].reset();
+
+              //Get ready for new entry
+              $('#form_title').text('Add Role');
+              $('#form_button').text('Save');
+              $('#form_action').val('add');
+              $("#input_method").val("POST");//change hidden method type to POST default is PATCH
+
+              toastr.success(data.success); 
+
+              table1.ajax.reload( null, false ); 
+            }                                     
+          }//end success
+      });
+
+    }//end update check//*/
+
+    });/*end submit evert*/
+  });/*end function evert*/
  
 
 
+  function RoleEdit(id){
+    event.preventDefault(); 
+    var urlTo = "{{ route('role.edit', ':id') }}" 
+    urlTo = urlTo.replace(':id', id );
 
-    function EditRole(id){
-      //info, success, warning or error
-      toastr.success('Are you the 6 fingered man?');
-    }
+    $.ajax({
+      type : "GET", //'_method': 'DELETE' not require in data section
+      dataType:"JSON",
+      url : urlTo,
+      success : function(data) {  
+
+        ///$('input[name=_method]').val('PATCH');     
+        $('#form_title').text('Update Role');
+        $('#form_button').text('Update');
+
+        $('#form_action').val('update');
+        $("#input_method").val("PATCH");
+
+        $('#id').val(data.id);
+        $('#name').val(data.name);
+                     
+      }
+    });
+  }
 
 
-    function RoleActive(id){
-        alert('Role Active');        
-    }
 
-    function RoleUnactive(id){
-      //alert('Role Unactive');
-      //success, error, warning, info, question
-      Toast.fire({
-        icon: 'info',
-        title: 'Role Unactive'
-      });//*/
-    }
+  function RoleActive(id){
+    event.preventDefault();  //this is importent
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+    $.ajax({
+        type : "GET",       
+        url : '/role-active/'+ id,
+        data : {"_token": csrf_token}, //csrf token is must be use
+        success : function(data) {
+          if(data.success){ 
+            table1.ajax.reload( null, false ); 
+            toastr.success(data.success);               
+          }
+          if(data.errors){
+            toastr.info(data.errors);                 
+          }
+        }
+      });        
+  }
 
 
-    function DeleteRole(id){
+  function RoleUnactive(id){
+    event.preventDefault();  //this is importent
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
 
-      //alert('Its Ok');
-      //success, error, warning, info, question
-      Toast.fire({
-        icon: 'error',
-        title: 'Delete'+id
-      });//*/
-    }
+    $.ajax({
+        type : "GET",       
+        url : '/role-unactive/'+ id,
+        data : {"_token": csrf_token}, //csrf token is must be use
+        success : function(data) {
+          if(data.success){ 
+            table1.ajax.reload( null, false ); 
+            toastr.warning(data.success);               
+          }
+          if(data.errors){
+            toastr.info(data.errors);                 
+          }
+        }
+      }); 
+  }
+
+
+//Delete Function
+  function RoleDelete(id){
+    event.preventDefault();  //this is importent
+
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
+    var id = id; //alert('deleteData '+id);
+    
+    var urlTo = "{{ route('role.destroy', ':id') }}" 
+    urlTo = urlTo.replace(':id', id ); //resource rout not work without this 
+
+    Swal.fire({
+      title: 'Are you sure to Delete?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',  
+      confirmButtonText: 'Yes, delete it!'
+    }).then( (result) => {
+
+      if ( result.value ) {
+
+        $.ajax({
+          type : "DELETE", //'_method': 'DELETE' not require in data section       
+          url : urlTo,
+          data : {"_token": csrf_token}, //csrf token is must be use
+          success : function(data) {
+            if(data.success){ //alert(data.success);
+              //table1.ajax.reload();
+              table1.ajax.reload( null, false ); 
+              toastr.info(data.success);               
+            }
+            if(data.errors){
+              toastr.info(data.errors);                 
+            }
+          }
+        }); 
+
+      }else{
+        toastr.info( 'Your data is safe!');
+      }
+    })
+  }
+
 
 
 

@@ -18,9 +18,6 @@
                 {{TodayDate()}} <!--Data from Helper-->
                 {{FirstHelper()}}
                 {{GetUserName()}}
-
-                {{HelperOneTest()}} <!--Data from HelperOne-->
-                {{HelperTwoTest()}} <!--Data from HelperTwo-->
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

@@ -137,7 +137,7 @@ body{
 .breadcrumb >.breadcrumb-item > a{font-size:14px !important; font-weight:400;}
 
 /*Bootstrap Modal */
-.modal-open .modal{top:10% !important;}
+.modal-open .modal{top:5% !important;}
 .modal-backdrop.show{ opacity: 0.6; width:100% !important; height: 100% !important;}
 .modal-backdrop{width:100% !important; height: 100% !important;}
 
@@ -146,7 +146,7 @@ body{
 .modal-footer{ border-top: unset !important;}
 
 /*Datatables style */
-#users_table > tbody > tr > td:last-child{text-align: right;}
+#users_table > tbody > tr > td:last-child, #roles_table > tbody > tr > td:last-child{text-align: right;}
 
 
 

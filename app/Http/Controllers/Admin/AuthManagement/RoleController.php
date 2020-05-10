@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Admin\AuthManagement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Role;
+use Yajra\DataTables\DataTables;
+use Auth;
 
 class RoleController extends Controller
 {
@@ -14,27 +16,46 @@ class RoleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $roles = Role::get();
+        if( $request->ajax() ){
+        $roles_data = Role::latest()->get();
 
-        
-        //return view('admin.AuthManagement.Role.roles');
+        //pass data to dataTable
+        return DataTables::of($roles_data)
+            ->addColumn('action', function($roles_data){
+             
+                $actionData = ''; 
 
-       // return view('layouts.master_adminlte')->with('admin.AuthManagement.Role.roles', $roles);
-        
-        //return view('admin.AuthManagement.Role.roles')->with('layouts.master_adminlte', $roles);
+                if($roles_data->is_enabled == 1){
+                    $actionData .= '<a onclick="RoleUnactive('.$roles_data->id.')" class="btn btn-danger- btn-flat btn-sm" data-toggle="tooltip" data-placement="right" title="Click to Unactive" >  <i class="far fa-thumbs-down danger"></i>  </a>';
+                }elseif($roles_data->is_enabled == 0){
+                    $actionData .= '<a onclick="RoleActive('.$roles_data->id.')" class="use-tooltip btn btn-success- btn-flat btn-sm" data-toggle="tooltip" data-placement="left" title="Click to Active" >   <i class="far fa-thumbs-up success"></i>  </a>';
+                }
 
-        /*$all_brand_info = DB::table('tbl_brand')->get(); // get all row from table
+                $actionData .= '
+                    <a onclick="RoleEdit('.$roles_data->id.')" class="btn  btn-primary- btn-flat btn-sm">
+                        <i class="fas fa-edit primary "></i>
+                    </a>';
+                if($roles_data->id != Auth::user()->role_id ){
+                    $actionData .= ' <a onclick="RoleDelete('.$roles_data->id.')" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete" >
+                        <i class="far fa-trash-alt red"></i>
+                    </a>';               
+                }
+                 return $actionData;
 
-        $manage_brand = view('admin.all_brand')->with('all_brand_info_view', $all_brand_info); 
+            })->editColumn('is_enabled', function($roles_data){
+                if($roles_data->is_enabled == 1){
+                    return '<span class="btn btn-flat btn-success btn-sm">Active</span>';
+                }elseif($roles_data->is_enabled == 0){
+                    return '<span class="btn btn-flat btn-danger btn-sm">Unactive</span>';
+                }
 
-        return view('template.dashboard_layout')->with('admin.all_brand', $manage_brand);*/
+            })->rawColumns(['action','is_enabled'])->make(true);       
 
+       }/*endif*/
 
-        $roles_v = view('admin.AuthManagement.Role.roles')->with('roles', $roles); 
-
-        return view('layouts.master_adminlte')->with('admin.AuthManagement.Role.roles', $roles_v);
+        return view('admin.AuthManagement.Role.roles');
     }
 
     /**
@@ -55,7 +76,20 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|min:3|max:20', 
+        ]);
+
+        if($validator->fails()){
+            return response()->json(['errors'=>$validator->errors()]);
+        }elseif($validator->passes()){
+
+            $role = New Role;
+            $role->name =$request->name; 
+            $role->save();
+
+            return response()->json(['success'=>'Role inserted successfully']);
+        }
     }
 
     /**
@@ -77,7 +111,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        return Role::find($id);
     }
 
     /**
@@ -89,7 +123,20 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|min:3|max:20', 
+        ]);
+
+        if($validator->fails()){
+            return response()->json(['errors'=>$validator->errors()]);
+        }elseif($validator->passes()){
+
+            $role = Role::find($id);
+            $role->name = $request->name;
+            $role->save();
+
+            return response()->json(['success'=>'Role Updated successfully']);
+        }
     }
 
     /**
@@ -100,6 +147,36 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::findOrFail($id)->delete();        
+        if($role){
+            return response()->json(['success'=> 'Record is deleted successfully']);
+        }else{
+            return response()->json(['errors'=> 'Something is wrong..']);
+        }
     }
+
+
+    public function role_active($id){
+
+        $role = Role::find($id);
+        $role->is_enabled = 1;
+        $role->save();
+
+        return response()->json(['success'=> $role->name.' is Active Now']);
+
+        /*Role::where('active', 1)
+          ->where('destination', 'San Diego')
+          ->update(['delayed' => 1]);*/
+    }
+
+    public function role_unactive($id){
+        $role = Role::find($id);
+        $role->is_enabled = 0;
+        $role->save();
+
+        return response()->json(['success'=> $role->name.' is Unactive Now']);
+
+    }
+
+
 }

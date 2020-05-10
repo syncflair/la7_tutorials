@@ -48408,7 +48408,7 @@ body {
 /*Bootstrap Modal */
 
 .modal-open .modal {
-  top: 10% !important;
+  top: 5% !important;
 }
 
 .modal-backdrop.show {
@@ -48439,7 +48439,8 @@ body {
 
 /*Datatables style */
 
-#users_table > tbody > tr > td:last-child {
+#users_table > tbody > tr > td:last-child,
+#roles_table > tbody > tr > td:last-child {
   text-align: right;
 }
 
