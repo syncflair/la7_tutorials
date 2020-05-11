@@ -13,7 +13,7 @@
       <div class="user-panel mt-2 pb-2 mb-1 d-flex">
         <div class="image">
           @if(!empty( UserAvatar() ))
-            <img src="{{ UserAvatar() }}" class="img-circle elevation-2" alt="User Image">
+            <img src="{{asset( UserAvatar() ) }}" class="img-circle elevation-2" alt="User Image">
           @else
             <img src="{{asset('FilesStorage/CommonFiles/avatar.png')}}" class="img-circle elevation-2" alt="User Image">
           @endif

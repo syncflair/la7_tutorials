@@ -206,7 +206,7 @@
       <li class="dropdown user user-menu open">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
             @if(!empty( UserAvatar() ))
-              <img src="{{ UserAvatar() }}" class="user-image" alt="User Image" style="//witdh:30px; //height: 30px;">
+              <img src="{{ asset( UserAvatar() ) }}" class="user-image" alt="User Image" style="//witdh:30px; //height: 30px;">
             @else
                 <img src="{{asset('FilesStorage/CommonFiles/avatar.png')}}" class="user-image" alt="User Image" style="//witdh:30px; //height: 30px;">
             @endif
@@ -216,7 +216,7 @@
             <!-- User image -->
             <li class="user-header">
               @if(!empty( UserAvatar() ))
-                  <img src="{{ UserAvatar() }}" class="img-circle" alt="User Image" style="//witdh:90px; //height: 90px;">
+                  <img src="{{ asset(UserAvatar()) }}" class="img-circle" alt="User Image" style="//witdh:90px; //height: 90px;">
               @else
                 <img src="{{asset('FilesStorage/CommonFiles/avatar.png')}}" class="img-circle" alt="User Image" style="//witdh:90px; //height: 90px;">
               @endif

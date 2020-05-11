@@ -20,7 +20,8 @@ class Role extends Model
 
     //My Custome Relation - A Role Has Many User (hasMany())
     public function permission(){
-        return $this->hasMany('Models\Permission');
+        return $this->hasOne('App\Models\Permission');
+        //return $this->hasMany('App\Models\Permission');
         //return $this->hasMany(Permission::class);  
     }
 }

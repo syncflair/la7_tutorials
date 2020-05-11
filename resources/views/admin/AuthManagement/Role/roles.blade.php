@@ -4,6 +4,9 @@
 
 @section('extra_css')
 	<!--Extra CSS-->
+  <style type="text/css">
+    #roles_table > tbody > tr > td:last-child{text-align: right;}/*Datatables style  */
+  </style>
 @endsection 
 
 @section('content')

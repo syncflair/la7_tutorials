@@ -48016,7 +48016,7 @@ button.toast-close-button {
 }
 
 body {
-  zoom: 2;
+  zoom: 0.9 !important;
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   letter-spacing: 1px;
@@ -48436,12 +48436,5 @@ body {
 
 .modal-footer {
   border-top: unset !important;
-}
-
-/*Datatables style */
-
-#users_table > tbody > tr > td:last-child,
-#roles_table > tbody > tr > td:last-child {
-  text-align: right;
 }
 

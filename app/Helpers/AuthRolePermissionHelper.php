@@ -13,6 +13,22 @@ function RoleId(){
 	return $RoleId = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 );
 }
 
+
+//Use for Check Role Permission for Logged-in user 
+function GetAuthRolePermission(){
+  $AuthenticateUserRolePermission = auth()->user()->role->permission->permission;
+  $json_data_decode = json_decode($AuthenticateUserRolePermission);  
+  return $json_data_decode;
+  //dd($json_data_decode->role->add);
+
+  //Use like that
+  //GetAuthRolePermission()->role->add; 
+  //GetAuthRolePermission()->role->edit; 
+  //GetAuthRolePermission()->role->list; 
+  //GetAuthRolePermission()->role->delete; 
+  //GetAuthRolePermission()->role->view; 
+}
+
 function RoleName(){
 	//$AuthUserId = Auth::user()->id;
 	$users = User::where('users.id', Auth::user()->id )

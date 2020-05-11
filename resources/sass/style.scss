@@ -3,7 +3,7 @@
 }
 
 body{
-    zoom:2;
+    zoom: 0.9 !important;
    
 
 
@@ -148,8 +148,7 @@ body{
 .modal-header{border-bottom: unset !important;}
 .modal-footer{ border-top: unset !important;}
 
-/*Datatables style */
-#users_table > tbody > tr > td:last-child, #roles_table > tbody > tr > td:last-child{text-align: right;}
+
 
 
 

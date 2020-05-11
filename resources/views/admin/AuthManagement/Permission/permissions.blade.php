@@ -1,9 +1,12 @@
 @extends('layouts.master_adminlte')
-@section('title', 'Dashboard')
+@section('title')  Role {{ ucfirst(\Request::segment(1)) }} @endsection
 
 
 @section('extra_css')
 	<!--Extra CSS-->
+   <style type="text/css">
+    #permission_table > tbody > tr > td:last-child{ text-align: right;  } /*Datatables style  */
+  </style>
 @endsection 
 
 @section('content')
@@ -19,7 +22,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6 text-right">
               <a href="{{ BackPath() }}" type="button" class="btn btn-flat btn-primary btn-sm">Back</a> 
-              <a type="button" class="btn btn-primary btn-flat btn-sm"> <i class="fas fa-plus"></i> Add New</a>
+              <a href="{{route('permission.create')}}" type="button" class="btn btn-primary btn-flat btn-sm"> <i class="fas fa-plus"></i> Add Permission</a>
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -89,6 +92,9 @@
   var table1 = $('#permission_table').DataTable({    
     processing:true,
     serverSide:true,
+    //paging: false,
+    //searching: false,
+    info:false,
     ajax:{ url: "{{ route('permission.index') }}" },
     columns: [
           {data:'id', name:'id'},

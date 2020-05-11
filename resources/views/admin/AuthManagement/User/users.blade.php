@@ -4,6 +4,9 @@
 
 @section('extra_css')
 	<!--Extra CSS-->
+  <style type="text/css">
+    #users_table > tbody > tr > td:last-child{text-align: right;}/*Datatables style  */
+  </style>
 @endsection 
 
 @section('content')
@@ -92,6 +95,7 @@
   var table1 = $('#users_table').DataTable({    
     processing:true,
     serverSide:true,
+    info:false,
     ajax:{ url: "{{ route('user.index') }}" },
     columns: [
           {data:'id', name:'id'},

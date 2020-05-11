@@ -10,6 +10,7 @@ use App\User;
 use Auth;
 use Yajra\DataTables\DataTables;
 use Validator; //for vlidation
+use Illuminate\Support\Str; //for str::random
 
 class PermissionController extends Controller
 {
@@ -40,17 +41,25 @@ class PermissionController extends Controller
             //pass data to dataTable
             return DataTables::of($permession_data)
                 ->addColumn('action', function($permession_data){
-                    return '<a onclick="ShowUser('.$permession_data->id.')"  class="btn  btn-primary- btn-flat btn-sm">
+                    return '<a onclick="PermissionShow('.$permession_data->id.')"  class="btn  btn-primary- btn-flat btn-sm">
                             <i class="fas fa-eye info"></i>
                         </a>
-                        <a onclick="UserEdit('.$permession_data->id.')" class="btn  btn-primary- btn-flat btn-sm">
+                        <a onclick="PermissionEdit('.$permession_data->id.')" class="btn  btn-primary- btn-flat btn-sm">
                             <i class="fas fa-edit primary "></i>
                         </a>
-                        <a onclick="UserDelete('.$permession_data->id.')" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
+                        <a onclick="PermissionDelete('.$permession_data->id.')" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
                             <i class="far fa-trash-alt red"></i>
                         </a>';                 
               
-            })->rawColumns(['action'])->make(true);       
+            })->editColumn('permission', function($permession_data){
+                $json_data_decode = json_decode($permession_data->permission);
+                    $PermissionModels = '';
+                foreach($json_data_decode as $key => $value) {
+                    $PermissionModels .= '<span class="btn btn-info btn-sm btn-flat-">'.ucfirst($key).'</span> ';
+                } 
+                return $PermissionModels; 
+                
+            })->rawColumns(['action','permission'])->make(true);       
 
        }//*/ /*endif*/
 
@@ -65,7 +74,7 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.AuthManagement.Permission.add_permissions');
     }
 
     /**
@@ -76,7 +85,16 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data =array();
+        $data['role_id'] = $request->role_id;
+        $data['permission'] = json_encode($request->permission); //insert by using json_encode()
+
+
+       
+        //dd($data);
+        //return response()->json($request->permission);
+        Permission::create($data);
+        
     }
 
     /**
