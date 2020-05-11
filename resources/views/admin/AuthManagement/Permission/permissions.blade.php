@@ -30,7 +30,41 @@
     <section class="content">      
       <div class="container-fluid">
         
-      		<h3>Permissin List</h3>
+      		<!-- Data row -->
+        <div class="row mt-3 mb-4">
+          
+          <div class="col-md-12">
+
+            <div class="card cusotme-card">
+              <!-- <div class="card-header">
+                <h3 class="card-title">Bordered Table</h3>
+              </div>-->
+              <!-- /.card-header -->
+              <div class="card-body pt-3">
+                <table id="permission_table" class="table table-sm table-striped" style="width:100%">
+                  <thead>                  
+                    <tr>
+                      <th style="width: 5%">#</th>
+                      <th style="width: 10%">Role</th>
+                      <th style="width: 70%">Permission Module</th>
+                      <th style="width: 15%; text-align: right;">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <!--Datatables here-->                   
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+
+            </div>
+            
+          </div>          
+
+        </div>
+        <!-- /Data row -->
 
       </div><!-- /.container-fluid -->
     </section>
@@ -40,5 +74,31 @@
 @endsection
 
 @section('extra_script')
-	<!--Extra Script-->
+<!--Extra Script-->
+<script type="text/javascript">
+
+  $( window ).on( "load", function(){
+    //add pagination-sm class to Pagination
+     $(".pagination").addClass("pagination-sm");
+  } );
+
+   
+    
+  $.fn.dataTable.ext.errMode = 'none'; //scape error message
+  //show user datatable
+  var table1 = $('#permission_table').DataTable({    
+    processing:true,
+    serverSide:true,
+    ajax:{ url: "{{ route('permission.index') }}" },
+    columns: [
+          {data:'id', name:'id'},
+          {data:'role_name', name:'role_name' , orderable: false, searchable: false },
+          {data:'permission', name:'permission'},
+          {data:'action', name:'action', orderable: false, searchable: false }        
+        ]
+  }); //*/
+
+
+
+</script>
 @endsection 

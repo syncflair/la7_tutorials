@@ -12,7 +12,11 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-2 pb-2 mb-1 d-flex">
         <div class="image">
-          <img src="{{ asset('/backend/AdminLTE/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          @if(!empty( UserAvatar() ))
+            <img src="{{ UserAvatar() }}" class="img-circle elevation-2" alt="User Image">
+          @else
+            <img src="{{asset('FilesStorage/CommonFiles/avatar.png')}}" class="img-circle elevation-2" alt="User Image">
+          @endif
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>

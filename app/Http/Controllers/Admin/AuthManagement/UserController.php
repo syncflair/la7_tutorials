@@ -15,6 +15,17 @@ use Illuminate\Support\Facades\Config; //use for get constant velue without - \C
 
 class UserController extends Controller
 {
+
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -86,7 +97,7 @@ class UserController extends Controller
     public function store(Request $request, User $user)
     {
         $validator = \Validator::make($request->all(), [
-            'name' => 'required|min:3|max:20', 
+            'name' => 'required|min:3|max:80', 
             'email' => 'required|email|unique:users,email', 
             'role_id' => 'required', 
             'status_id' => 'required', 

@@ -22,6 +22,12 @@ function RoleName(){
     return $users->role_name;
 }
 
+function UserAvatar(){
+  //return $AuthUserId = Auth::user()->id;
+   $userAvatar = User::where('id', Auth::user()->id )->select('avatar')->first();
+   return $userAvatar->avatar;
+}
+
 /*
   New image Name Generate
   $imageFile = Original Image file from imput ($request->file('files');)

@@ -27,6 +27,10 @@
             <i class="fas fa-file mr-2"></i> Permission
           </a>
           <div class="dropdown-divider"></div>
+          <a href="{{route('profile.index')}}" class="dropdown-item {{ Request::is('profile*') ? 'active' : '' }}">
+            <i class="fas fa-file mr-2"></i> User Profile
+          </a>
+          <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item dropdown-footer">See All Authentication</a>
         </div>
       </li>
@@ -201,16 +205,24 @@
 
       <li class="dropdown user user-menu open">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-            <img src="{{asset('backend/AdminLTE/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
+            @if(!empty( UserAvatar() ))
+              <img src="{{ UserAvatar() }}" class="user-image" alt="User Image" style="//witdh:30px; //height: 30px;">
+            @else
+                <img src="{{asset('FilesStorage/CommonFiles/avatar.png')}}" class="user-image" alt="User Image" style="//witdh:30px; //height: 30px;">
+            @endif
             <!--<span class="hidden-xs">{{ Auth::user()->name }}</span>-->
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="{{asset('backend/AdminLTE/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
+              @if(!empty( UserAvatar() ))
+                  <img src="{{ UserAvatar() }}" class="img-circle" alt="User Image" style="//witdh:90px; //height: 90px;">
+              @else
+                <img src="{{asset('FilesStorage/CommonFiles/avatar.png')}}" class="img-circle" alt="User Image" style="//witdh:90px; //height: 90px;">
+              @endif
 
               <p>
-                {{ Auth::user()->name }}- Web Developer
+                {{ Auth::user()->name }}
                 <small>Member since Nov. {{ \Carbon\Carbon::parse(Auth::user()->created_at)->format('j F, Y') }}</small>
 
               </p>
@@ -233,7 +245,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a onclick="click_me()" href="#" class="btn btn-block btn-outline-info btn-flat">Click Profile</a>
+                <a href="{{ route('profile.index')}}" class="btn btn-block btn-outline-info btn-flat">Click Profile</a>
               </div>
               <div class="pull-right">
                 <!--<a href="#" class="btn btn-block btn-outline-danger btn-flat">Sign out</a>-->

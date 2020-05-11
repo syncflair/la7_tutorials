@@ -79,8 +79,13 @@
 @endsection
 
 @section('extra_script')
-	<!--Extra Script-->
-  <script type="text/javascript">
+<!--Extra Script-->
+<script type="text/javascript">
+
+  $( window ).on( "load", function(){
+    //add pagination-sm class to Pagination
+     $(".pagination").addClass("pagination-sm");
+  } );
 
   $.fn.dataTable.ext.errMode = 'none'; //scape error message
   //show user datatable

@@ -15,13 +15,12 @@ class CreatePermissionsTable extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedInteger('role_id');  
             $table->text('permission'); /*JSON Data will store*/
-            $table->string('guard_name', 100); /*Use for future*/
+            //$table->string('guard_name', 100); /*Use for future*/
             //$table->string('object', 55);
-            //$table->string('operation', 55);
-            $table->unsignedInteger('role_id');             
-            $table->timestamps();
-            
+            //$table->string('operation', 55);                       
+            $table->timestamps();            
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             //$table->primary(['id']);
         });

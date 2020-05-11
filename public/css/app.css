@@ -48016,7 +48016,7 @@ button.toast-close-button {
 }
 
 body {
-  zoom: 90%;
+  zoom: 2;
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   letter-spacing: 1px;
@@ -48172,6 +48172,7 @@ body {
 
 .user-panel img {
   width: 3.1rem;
+  height: 50px !important;
   margin-top: 7px;
 }
 
