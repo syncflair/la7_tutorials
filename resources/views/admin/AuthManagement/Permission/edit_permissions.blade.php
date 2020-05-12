@@ -1,5 +1,5 @@
 @extends('layouts.master_adminlte')
-@section('title') Add {{ ucfirst(\Request::segment(1)) }} @endsection
+@section('title') Edit {{ ucfirst(\Request::segment(1)) }} @endsection
 
 @section('extra_css')
 	<style type="text/css">
@@ -18,7 +18,15 @@
 
 @section('content')
 
+
 <?php
+
+	//$permissionData= $permission->permission;
+	//$permissionDecode = json_decode($permissionData);
+	//$permissionDecode = json_decode($permission->permission);
+	//dd($permissionDecode);
+	//echo @$permissionDecode->user->page;
+	//echo @json_decode($permission->permission)->user->page;
 //test
  //echo @GetAuthUserRolePermission()->role->add;
  ?>
@@ -47,7 +55,7 @@
 
         <div class="form-body mt-3">
           <div class="col-md-10 offset-1 pt-4 pb-5">
-      		  @include('admin.AuthManagement.Permission.add_permissions_form')
+      		  @include('admin.AuthManagement.Permission.edit_permissions_form')
           </div>
         </div>
 

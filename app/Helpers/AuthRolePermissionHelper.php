@@ -15,20 +15,21 @@ function RoleId(){
 
 
 //Use for Check Role Permission for Logged-in user 
-function GetAuthRolePermission(){
-  $AuthenticateUserRolePermission = auth()->user()->role->permission->permission;
+function GetAuthUserRolePermission(){
+  @$AuthenticateUserRolePermission = auth()->user()->role->permission->permission;
   $json_data_decode = json_decode($AuthenticateUserRolePermission);  
   return $json_data_decode;
   //dd($json_data_decode->role->add);
 
   //Use like that
+  //GetAuthRolePermission()->role->page; 
   //GetAuthRolePermission()->role->add; 
-  //GetAuthRolePermission()->role->edit; 
-  //GetAuthRolePermission()->role->list; 
+  //GetAuthRolePermission()->role->edit;   
   //GetAuthRolePermission()->role->delete; 
   //GetAuthRolePermission()->role->view; 
 }
 
+//Show Auth User Name
 function RoleName(){
 	//$AuthUserId = Auth::user()->id;
 	$users = User::where('users.id', Auth::user()->id )
@@ -38,6 +39,7 @@ function RoleName(){
     return $users->role_name;
 }
 
+//User Avatar image url
 function UserAvatar(){
   //return $AuthUserId = Auth::user()->id;
    $userAvatar = User::where('id', Auth::user()->id )->select('avatar')->first();

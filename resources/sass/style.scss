@@ -25,7 +25,7 @@ body{
 }
 .layout-navbar-fixed .wrapper .main-header{ /*height:8.5%;*/}
 .main-header >.navbar-nav>li>a:hover, .main-header >.navbar-nav>li>a:focus, .main-header >.navbar-nav>.show>a, .main-header >.navbar-nav>.show>a:active{color: #FFFFFF !important; background:#367fa9 !important; text-decoration:none}
-.dropdown-menu{box-shadow:unset !important; margin-top:1px !important; border-radius: 0px 0px 5px 5px; /*border: 1px solid #f4f6f9; */}/*box-shadow remove*/
+.dropdown-menu{margin-top:1px !important; border-radius: 0px 0px 5px 5px; /*border: 1px solid #f4f6f9; */}/*box-shadow remove box-shadow:unset !important; */
 .main-header >.navbar-nav > li > .dropdown-menu-left{left:0;} /*dropdown menu show from left, Cusotme Code*/
 .main-header .navbar-nav .nav-item > .btn {margin: 14px 0px 10px 0px; color: #ffffff; border-color: #ffffff;}
 .main-header .navbar-nav .nav-item > btn:focus, .main-header .navbar-nav .nav-item > button:active, .main-header .navbar-nav .nav-item > button:hover {background:#367fa9 !important;}

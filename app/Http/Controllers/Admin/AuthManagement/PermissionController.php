@@ -11,6 +11,8 @@ use Auth;
 use Yajra\DataTables\DataTables;
 use Validator; //for vlidation
 use Illuminate\Support\Str; //for str::random
+use Illuminate\Support\Facades\Redirect;
+use Session; //for session
 
 class PermissionController extends Controller
 {
@@ -40,16 +42,20 @@ class PermissionController extends Controller
 
             //pass data to dataTable
             return DataTables::of($permession_data)
-                ->addColumn('action', function($permession_data){
-                    return '<a onclick="PermissionShow('.$permession_data->id.')"  class="btn  btn-primary- btn-flat btn-sm">
+                ->addColumn('action', function($permession_data){                    
+                    $ActionData = '<a onclick="PermissionShow('.$permession_data->id.')"  class="btn  btn-primary- btn-flat btn-sm">
                             <i class="fas fa-eye info"></i>
                         </a>
-                        <a onclick="PermissionEdit('.$permession_data->id.')" class="btn  btn-primary- btn-flat btn-sm">
+                        <a onclick="PermissionEdit('.$permession_data->id.')" href="';
+                    $ActionData .=   route('permission.edit', $permession_data->id);
+                    $ActionData  .='" class="btn  btn-primary- btn-flat btn-sm">
                             <i class="fas fa-edit primary "></i>
                         </a>
                         <a onclick="PermissionDelete('.$permession_data->id.')" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
                             <i class="far fa-trash-alt red"></i>
-                        </a>';                 
+                        </a>';   
+
+                    return $ActionData;            
               
             })->editColumn('permission', function($permession_data){
                 $json_data_decode = json_decode($permession_data->permission);
@@ -85,16 +91,20 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
+       
+        $validator = $this->validate($request, [
+            'role_id' => 'required|unique:permissions,role_id', 
+            'permission' => 'required', 
+        ]);
+
         $data =array();
         $data['role_id'] = $request->role_id;
         $data['permission'] = json_encode($request->permission); //insert by using json_encode()
 
-
-       
-        //dd($data);
-        //return response()->json($request->permission);
-        Permission::create($data);
-        
+        Permission::create($data); //*/           
+        //return back()->with('success', 'Permission added successfully.'); //return to same page with message
+        Session::put('success','Permission added successfully'); //massage after insert
+        return Redirect::to('permission'); //*/       
     }
 
     /**
@@ -116,7 +126,13 @@ class PermissionController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+       $permission = Permission::find($id);
+       
+        //dd($data);
+       //dd(json_decode($data));
+      
+        return view('admin.AuthManagement.Permission.edit_permissions', compact('permission'));//->with($data);
     }
 
     /**
@@ -128,7 +144,19 @@ class PermissionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = $this->validate($request, [
+            'role_id' => 'required|unique:permissions,role_id,'.$id, 
+            'permission' => 'required', 
+        ]);
+
+        $data =array();
+        $data['role_id'] = $request->role_id;
+        $data['permission'] = json_encode($request->permission); //insert by using json_encode()
+
+        Permission::create($data); //*/           
+        //return back()->with('success', 'Permission added successfully.'); //return to same page with message
+        Session::put('success','Permission added successfully'); //massage after insert
+        return Redirect::to('permission'); //*/    
     }
 
     /**

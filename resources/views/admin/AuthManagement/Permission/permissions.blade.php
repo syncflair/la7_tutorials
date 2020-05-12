@@ -1,5 +1,5 @@
 @extends('layouts.master_adminlte')
-@section('title')  Role {{ ucfirst(\Request::segment(1)) }} @endsection
+@section('title') {{ ucfirst(\Request::segment(1)) }} of Role @endsection
 
 
 @section('extra_css')
@@ -10,6 +10,7 @@
 @endsection 
 
 @section('content')
+
 
 <!-- Content Header (Page header) -->
     <div class="content-header pb-1">
@@ -32,9 +33,21 @@
     <!-- Main content -->
     <section class="content">      
       <div class="container-fluid">
+
+        @if(Session::has('success'))
+          <div class="alert alert-success mt-2">
+              {{ Session::get('success') }}
+              @php
+                  Session::forget('success');
+                  //Session::put('success');
+              @endphp
+          </div>
+        @endif 
         
       		<!-- Data row -->
         <div class="row mt-3 mb-4">
+
+
           
           <div class="col-md-12">
 
@@ -81,6 +94,8 @@
 <script type="text/javascript">
 
   $( window ).on( "load", function(){
+       
+
     //add pagination-sm class to Pagination
      $(".pagination").addClass("pagination-sm");
   } );

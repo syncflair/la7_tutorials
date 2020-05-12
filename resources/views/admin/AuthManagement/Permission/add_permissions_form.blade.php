@@ -1,5 +1,4 @@
 
-<input class="select_all" type="checkbox" name="" value="1">
 <form id="permission_form" action="{{route('permission.store')}}" class="form-horizontal" method="POST">
 	{{ csrf_field() }}  <!--@method('PATCH') {{ method_field('POST') }}-->
 
@@ -17,7 +16,14 @@
               <option value="{{ $role->id }}">{{ $role->name }} </option>
              @endforeach
        	</select>
-       	<span class="danger error_message" id="role_id_error"> </span>	    
+       	@if ($errors->has('role_id'))
+		    <span class="text-danger">{{ $errors->first('role_id') }}</span>
+		@endif    
+	</div>
+
+	<div class="form-group titleBox">
+	    <label class="titleText" for="exampleInputPassword1">Checked for first time if you need</label>	   
+    	<input class="select_all mycheckbox TitelBoxInput" type="checkbox" value="">
 	</div>
 
   </div><!--/Col-md-4-->
@@ -30,6 +36,10 @@
 
 		<table class="table table-sm table-success table-striped">
 			<thead>
+				@if ($errors->has('permission'))
+				    <span class="text-danger">{{ $errors->first('permission') }}</span>
+				@endif  
+
 				<tr>
 					<th>Modules</th>
 					<th>Page</th>				
@@ -42,7 +52,7 @@
 			<tbody>    			
 				<tr>
 	    			<td>Roles</td>
-	    			<td><input class="mycheckbox" type="checkbox" name="permission[role][list]" value="1"></td>
+	    			<td><input class="mycheckbox" type="checkbox" name="permission[role][page]" value="1"></td>
 	    			<td><input class="mycheckbox" type="checkbox" name="permission[role][add]" value="1"></td>
 	    			<td><input class="mycheckbox" type="checkbox" name="permission[role]['edit]" value="1"></td>
 	    			<td><input class="mycheckbox" type="checkbox" name="permission[role]['view]" value="1"></td>
@@ -51,7 +61,7 @@
 
 	    		<tr>
 	    			<td>Permission</td>
-	    			<td><input class="mycheckbox" type="checkbox" name="permission[permission][list]" value="1"></td>
+	    			<td><input class="mycheckbox" type="checkbox" name="permission[permission][page]" value="1"></td>
 	    			<td><input class="mycheckbox" type="checkbox" name="permission[permission][add]" value="1"></td>
 	    			<td><input class="mycheckbox" type="checkbox" name="permission[permission][edit]" value="1"></td>
 	    			<td><input class="mycheckbox" type="checkbox" name="permission[permission][view]" value="1"></td>
@@ -60,7 +70,7 @@
 
 	    		<tr>
 	    			<td>User</td>
-	    			<td><input class="mycheckbox" type="checkbox" name="permission[user][list]" value="1"></td>
+	    			<td><input class="mycheckbox" type="checkbox" name="permission[user][page]" value="1"></td>
 	    			<td><input class="mycheckbox" type="checkbox" name="permission[user][add]" value="1"></td>
 	    			<td><input class="mycheckbox" type="checkbox" name="permission[user][edit]" value="1"></td>
 	    			<td><input class="mycheckbox" type="checkbox" name="permission[user][view]" value="1"></td>

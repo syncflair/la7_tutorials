@@ -48052,13 +48052,12 @@ body {
 }
 
 .dropdown-menu {
-  box-shadow: unset !important;
   margin-top: 1px !important;
   border-radius: 0px 0px 5px 5px;
   /*border: 1px solid #f4f6f9; */
 }
 
-/*box-shadow remove*/
+/*box-shadow remove box-shadow:unset !important; */
 
 .main-header > .navbar-nav > li > .dropdown-menu-left {
   left: 0;
