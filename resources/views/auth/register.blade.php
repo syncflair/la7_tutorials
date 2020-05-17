@@ -16,20 +16,12 @@
   <div class="card">
     <div class="card-body register-card-body">
 
-      @if(Session::has('success_register') == Null)
+      @if(Session::has('success') == Null)
       	<p class="login-box-msg">{{ __('Register a new membership') }}</p>
       @endif
 
-      @if(Session::has('success_register'))
-	      <div class="alert alert-success mt-2 mb-2 text-center ml-0 mr-0">
-	          {{ Session::get('success_register') }}
-	          <!--<p>You can <a href="login">login</a></p>-->
-	          @php
-	              Session::forget('success_register');
-	              //Session::put('success_register');
-	          @endphp
-	      </div>
-	  @endif 
+      <!--Display message-->
+      @include('commonParts.message_display')
 
       <form method="POST" action="{{ route('register') }}">
       	@csrf

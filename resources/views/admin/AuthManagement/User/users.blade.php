@@ -65,8 +65,8 @@
                       <th style="width: 20%">Name</th>
                       <th style="width: 25%">Email</th>
                       <th style="width: 10%">Role</th>
-                      <th style="width: 10%">Status</th>
-                      <th style="width: 15%; text-align: right;">Action</th>
+                      <th style="width: 5%">Status</th>
+                      <th style="width: 20%; text-align: right;">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -337,10 +337,31 @@
   function UserUnactive(id){
     event.preventDefault();  //this is importent
     var csrf_token = $('meta[name="csrf-token"]').attr('content');
-    $("#loading").html("Loading...");
+    //$("#loading").html("Loading...");
     $.ajax({
         type : "GET",       
         url : '/user-unactive/'+ id,
+        data : {"_token": csrf_token}, //csrf token is must be use
+        success : function(data) {
+          if(data.success){ 
+            table1.ajax.reload( null, false ); 
+            toastr.warning(data.success);               
+          }
+          if(data.errors){
+            toastr.info(data.errors);                 
+          }
+        }
+      }); 
+  }
+
+
+  function UserVerify(id){
+    event.preventDefault();  //this is importent
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
+    //$("#loading").html("Loading...");
+    $.ajax({
+        type : "GET",       
+        url : '/user-verify/'+ id,
         data : {"_token": csrf_token}, //csrf token is must be use
         success : function(data) {
           if(data.success){ 

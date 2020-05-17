@@ -8,9 +8,9 @@ DB::listen(function($sql) {
 //print_r( RoleId() );
 //echo \Config::get('constants.CommonFilesPath'); //get constants from app/config/constants.php
 
-use Illuminate\Support\Facades\Route;
-use App\Mail\UserNotification;
-use App\Mail\ContactUsMail;
+//use Illuminate\Support\Facades\Route;
+
+//use App\Mail\ContactUsMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,11 +28,7 @@ Route::get('/', function () {
     return view('welcome'); 
    // return view('auth.login'); //redirect to login page    
 });
-Route::get('email-check', function () {
-    return view('emails.user_acknowledge'); 
-   // return view('auth.login'); //redirect to login page    
-});
-Route::get('email-1', function () {
+Route::get('email-chek', function () {
   //return view('emails.contact_us_email'); 
   return new ContactUsMail();
   //return new UserNotification();
@@ -65,6 +61,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 
     Route::get('dashboard', 'Admin\AdminController@index')->name('dashboard');
 
+    Route::get('/user-verify/{user_id}', 'Admin\AuthManagement\UserController@user_verify');
     Route::get('/user-unactive/{user_id}', 'Admin\AuthManagement\UserController@user_unactive');
     Route::get('/user-active/{user_id}', 'Admin\AuthManagement\UserController@user_active');
     Route::resource('user', 'Admin\AuthManagement\UserController');
@@ -80,7 +77,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 
 
 
-//Public Link
+//Website Routes Link
 Route::get('contact-us', 'Website\ContactUsController@index')->name('contact-us');
 Route::post('send-message-query', 'Website\ContactUsController@sendMessageQuery')->name('send-message-query');
 

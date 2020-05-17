@@ -20,15 +20,17 @@
     <p class="login-box-msg">{{ __('Reset Password') }}</p>
     
 
-    @if(Session::has('success_pass_reset'))
+    @if(Session::has('success'))
       <div class="alert alert-danger mt-2 text-center ml-0 mr-0">
-            <span> {{ Session::get('success_pass_reset') }} </span>
+            <span> {{ Session::get('success') }} </span>
             @php
-                Session::forget('success_pass_reset');
-                //Session::put('success_pass_reset');
+                Session::forget('success');
+                //Session::put('success');
             @endphp
         </div>
       @endif
+
+
 
       <form method="POST" action="{{ route('password.update') }}">
       	@csrf

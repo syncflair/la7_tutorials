@@ -68,19 +68,19 @@ class LoginController extends Controller
         if (Auth::attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ])) {            
             Auth::logout();
             //return abort(401, 'You Account is not active, Please contact with Authority ');
-            Session::put('status_message','You Account is not active, Please contact with Authority');
+            Session::put('error','You Account is not active, Please contact with Authority');
             return redirect()->back();  
         }
         if (Auth::attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 3 ])) {
             Auth::logout();
             //return abort(401, 'Your Account is Pending now. Please contact with Authority');
-            Session::put('status_message','Your Account is Pending now. Please contact with Authority'); 
+            Session::put('error','Your Account is Pending now. Please contact with Authority'); 
             return redirect()->back();  
         }
         if (Auth::attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 4 ])) {
             Auth::logout();
             //return abort(401, 'Your Account is Block now, Please contact with Authority');
-            Session::put('status_message','Your Account is Block now, Please contact with Authority'); 
+            Session::put('error','Your Account is Block now, Please contact with Authority'); 
             return redirect()->back(); 
         }
         

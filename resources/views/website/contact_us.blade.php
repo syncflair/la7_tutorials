@@ -14,15 +14,8 @@
 	    <div class="card-body login-card-body-">
 	      <p class="text-center">{{ __('Contact Us') }}</p>
 
-	      	@if(Session::has('success'))
-	      	<div class="alert alert-danger mt-2 text-center ml-0 mr-0">
-		          <span> {{ Session::get('success') }} </span>
-		          @php
-		              Session::forget('success');
-		              //Session::put('success');
-		          @endphp
-		      </div>
-		   	@endif 
+	      	<!-- Display Success or Error Message-->
+		   	@include('commonParts.message_display')
 
 
 	      <form method="POST" action="{{ url('send-message-query') }}">
@@ -61,7 +54,7 @@
 	          <textarea class="form-control" rows="5" name="visitor_message" placeholder="{{ __('Your Message') }}"></textarea>
 	          <div class="input-group-append">
 	            <div class="input-group-text">
-	              <span class="fas fa-lock"></span>
+	              <span class="fas fa-envelope"></span>
 	            </div>
 	          </div>	          	 
 	        </div>

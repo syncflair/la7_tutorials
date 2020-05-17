@@ -89,8 +89,8 @@ class ProfileController extends Controller
          $validator = \Validator::make($request->all(), [
             'name' => 'required|min:3|max:80', 
             'email' => 'required|email|unique:users,email,'.$id,  //Email check with existing user from DB 
-            'role_id' => 'required', 
-            'status_id' => 'required', 
+            //'role_id' => 'required', 
+            //'status_id' => 'required', 
             'password' => 'nullable|sometimes|min:6|max:30',  //regex:/[@$!%*#?&]/  //confirmed
             'confirm_password' => 'sometimes|same:password',
             //'password' => 'nullable|min:6|max:30',  //regex:/[@$!%*#?&]/  //confirmed
@@ -104,8 +104,8 @@ class ProfileController extends Controller
             $data =array();
             $data['name']=$request->name;
             $data['email']=$request->email;
-            $data['role_id']=$request->role_id;
-            $data['status_id']=$request->status_id; 
+            //$data['role_id']=$request->role_id;
+            //$data['status_id']=$request->status_id; 
 
             if($request->password == null ){
                 $existing_user_password = User::select('password')->where('id', $request->id)->first(); 

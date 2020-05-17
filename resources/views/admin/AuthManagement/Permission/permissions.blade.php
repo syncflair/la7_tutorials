@@ -54,7 +54,9 @@
                   //Session::put('success');
               @endphp
           </div>
-        @endif 
+        @endif
+       <!-- Display Success or Error Message-->
+        
         
       		<!-- Data row -->
         <div class="row mt-3 mb-4">

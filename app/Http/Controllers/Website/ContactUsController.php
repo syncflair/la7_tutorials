@@ -38,8 +38,9 @@ class ContactUsController extends Controller
 
         Mail::to('admin@sorboraho.com')->send(new ContactUsMail($data));
         return back()->with('success', 'Your email send successfully');
-
         //Session::put('success','Permission added successfully'); //massage after insert
+
+
         //return Redirect::to('permission'); //*/   
     	//return back()->with('success', 'Your email send successfully');
     	//return reditect()->back();

@@ -16,15 +16,11 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">{{ __('Login') }}</p>
 
-      @if(Session::has('status_message'))
-      <div class="alert alert-danger mt-2 text-center ml-0 mr-0">
-	          <span> {{ Session::get('status_message') }} </span>
-	          @php
-	              Session::forget('status_message');
-	              //Session::put('status_message');
-	          @endphp
-	      </div>
-	   	@endif 
+      
+      <!--Display message-->
+      @include('commonParts.message_display')
+
+
 
       <form method="POST" action="{{ route('login') }}">
          @csrf

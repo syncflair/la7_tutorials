@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Config; //use for get constant velue without - \C
 
 use App\Mail\UserNotification;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Carbon;
 
 class UserController extends Controller
 {
@@ -49,18 +50,32 @@ class UserController extends Controller
                 $actionData = '';
 
                 if( @GetAuthUserRolePermission()->user->edit != null ) {
-                    if($users_data->status_id == 1){
-                        $actionData .= '<a onclick="UserUnactive('.$users_data->id.')" class="btn btn-danger- btn-flat btn-sm" data-toggle="tooltip" data-placement="right" title="Click to Unactive" >  <i class="far fa-thumbs-down danger"></i>  </a>';
-                    }elseif($users_data->status_id == 2 || $users_data->status_id == 3 || $users_data->status_id == 4 ){
-                        $actionData .= '<a onclick="UserActive('.$users_data->id.')" class="use-tooltip btn btn-success- btn-flat btn-sm" data-toggle="tooltip" data-placement="left" title="Click to Active" >   <i class="far fa-thumbs-up success"></i>  </a>';
+                    if( $users_data->id != Auth::user()->id ){ 
+                        if($users_data->status_id == 1){                        
+                            $actionData .= '<a onclick="UserUnactive('.$users_data->id.')" class="btn btn-danger- btn-flat btn-sm" data-toggle="tooltip" data-placement="right" title="Click to Unactive" >  <i class="far fa-thumbs-down danger"></i>  </a>';
+                        }elseif($users_data->status_id == 2 || $users_data->status_id == 3 || $users_data->status_id == 4 ){
+                            $actionData .= '<a onclick="UserActive('.$users_data->id.')" class="use-tooltip btn btn-success- btn-flat btn-sm" data-toggle="tooltip" data-placement="left" title="Click to Active" >   <i class="far fa-thumbs-up success"></i>  </a>';
+                        }
+                    }
+                }
+
+                if( @GetAuthUserRolePermission()->user->edit != null ) {
+                    if( $users_data->id != Auth::user()->id ){ 
+                        if($users_data->email_verified_at != null ){                       
+                            $actionData .= '<a class="btn btn-danger- btn-flat btn-sm" data-toggle="tooltip" data-placement="right" title="Verified User" >  <i class="fas fa-user-check success"></i>  </a>';
+                        }elseif($users_data->email_verified_at == null || $users_data->status_id == 3 || $users_data->status_id == 4 ){
+                            $actionData .= '<a onclick="UserVerify('.$users_data->id.')" class="use-tooltip btn btn-success- btn-flat btn-sm" data-toggle="tooltip" data-placement="left" title="Click to Verify User" > <i class="fas fa-user-times warning"></i> </a>';
+                        }
                     }
                 }
 
                 if( @GetAuthUserRolePermission()->user->view != null ) {
-                    $actionData .= '
-                    <a onclick="ShowUser('.$users_data->id.')"  class="btn  btn-primary- btn-flat btn-sm">
-                        <i class="fas fa-eye info"></i>
-                    </a>';
+                    if( $users_data->id != Auth::user()->id ){ 
+                        $actionData .= '
+                        <a onclick="ShowUser('.$users_data->id.')"  class="btn  btn-primary- btn-flat btn-sm">
+                            <i class="fas fa-eye info"></i>
+                        </a>';
+                    }
                 }
 
                 
@@ -72,7 +87,8 @@ class UserController extends Controller
                 }
 
                 if( @GetAuthUserRolePermission()->user->delete != null ) {
-                    if( $users_data->id != Auth::user()->id ){                                
+                   // if( $users_data->id != Auth::user()->id ){ 
+                    if( Auth::user()->role_id != 1){                                 
                         $actionData .= '
                         <a onclick="UserDelete('.$users_data->id.')" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
                             <i class="far fa-trash-alt red"></i>
@@ -318,6 +334,19 @@ class UserController extends Controller
         return response()->json(['success'=> $user->name.' is Unactive Now']);
 
     }
+
+
+     public function user_verify($id){
+        $user = User::find($id);
+        $user->email_verified_at = now();
+        $user->save();
+
+        //\Mail::to($user->email)->send(new userAcknowledge($id)); //for verification email send
+        Mail::to($user->email)->send(new UserNotification($user)); //for verification email send
+        return response()->json(['success'=> $user->name.' is verifyed Now']);
+
+    }
+
 
    /* 'email_verified_at' => $this->freshTimestamp(),*/
 

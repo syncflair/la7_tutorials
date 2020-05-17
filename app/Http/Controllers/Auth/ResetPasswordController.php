@@ -43,7 +43,7 @@ class ResetPasswordController extends Controller
    protected function redirectTo()
     {       
         //Auth::logout();
-        Session::put('status_message','Your password reset is successful . Please login');    
+        Session::put('success','Your password reset is successful . Please login');    
         return route('login');
     } //*/
 

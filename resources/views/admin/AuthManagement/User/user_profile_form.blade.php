@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="form-group row">
+  <!-- <div class="form-group row">
     <label for="inputName2" class="col-sm-2 col-form-label">Role</label>
     <div class="col-sm-10">
     	<select class="form-control" id="role_id" name="role_id" required->
@@ -34,9 +34,9 @@
        	</select>
        	<span class="danger error_message" id="role_id_error"> </span>
     </div>
-  </div>
+  </div> -->
 
-  <div class="form-group row">
+  <!-- <div class="form-group row">
     <label for="inputExperience" class="col-sm-2 col-form-label">Status</label>
     <div class="col-sm-10">
       <select class="form-control" id="status_id" name="status_id" required->
@@ -47,7 +47,7 @@
        </select>
        <span class="danger error_message" id="status_id_error"> </span>
     </div>
-  </div>
+  </div> -->
 
   <div class="form-group row">
     <label for="inputSkills" class="col-sm-2 col-form-label">Password</label>
