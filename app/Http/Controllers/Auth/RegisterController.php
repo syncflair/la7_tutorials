@@ -9,6 +9,12 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Session;
+
 class RegisterController extends Controller
 {
     /*
@@ -34,18 +40,46 @@ class RegisterController extends Controller
 
 
     //my Custome Code. OverWrite redirectTo
-   /* protected function redirectTo()
-    {
-        if (auth()->user()->role_id == 1) {
-            //1 is Admin
-            return route('dashboard');
-
-        }
-
-        elseif (auth()->user()->role_id == 2) {
-            return route('home');
-        }
+   protected function redirectTo()
+    {       
+        //Auth::logout();
+        Session::put('success','Your registration is successful !. We send a confirmation email to your account. Please confirmed your verivication.');
+        //return '/register';
+        //return route('register');
+        return '/confirmation';
     } //*/
+
+
+
+     /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    //get from vendor\laravel\ui\auth-backend\RegistersUser.php and overwrite this function to prevent default login after retistration. and update redirectTo() function
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        //$this->guard()->login($user); //Comment this from auto login after registration.
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+                    ? new Response('', 201)
+                    : redirect($this->redirectPath());
+    }
+
+
+
+
+
+
 
 
     /**

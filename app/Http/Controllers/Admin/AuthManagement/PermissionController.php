@@ -42,19 +42,30 @@ class PermissionController extends Controller
 
             //pass data to dataTable
             return DataTables::of($permession_data)
-                ->addColumn('action', function($permession_data){                    
-                    $ActionData = '<a onclick="PermissionShow('.$permession_data->id.')"  class="btn  btn-primary- btn-flat btn-sm">
-                            <i class="fas fa-eye info"></i>
-                        </a>
-                        <a onclick="PermissionEdit('.$permession_data->id.')" href="';
+                ->addColumn('action', function($permession_data){  
+                    $ActionData = '';
+
+                    if( @GetAuthUserRolePermission()->permission->view != null ){                 
+                        $ActionData = '<a onclick="PermissionShow('.$permession_data->id.')"  class="btn  btn-primary- btn-flat btn-sm">
+                                <i class="fas fa-eye info"></i>
+                            </a>';
+                    }
+
+                    if( @GetAuthUserRolePermission()->permission->edit != null ){   
+                    $ActionData  .='<a onclick="PermissionEdit('.$permession_data->id.')" href="';
                     $ActionData .=   route('permission.edit', $permession_data->id);
                     $ActionData  .='" class="btn  btn-primary- btn-flat btn-sm">
                             <i class="fas fa-edit primary "></i>
-                        </a>
+                        </a>';
+                    }
+
+                    if( @GetAuthUserRolePermission()->permission->delete != null ){   
+                    $ActionData  .='
                         <a onclick="PermissionDelete('.$permession_data->id.')" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
                             <i class="far fa-trash-alt red"></i>
                         </a>';   
-
+                    }
+                    
                     return $ActionData;            
               
             })->editColumn('permission', function($permession_data){
@@ -65,7 +76,11 @@ class PermissionController extends Controller
                 } 
                 return $PermissionModels; 
                 
-            })->rawColumns(['action','permission'])->make(true);       
+            })->editColumn('updated_at', function($permession_data){                
+                return DateFormate($permession_data->updated_at); //get form helper
+                //return \Carbon\Carbon::parse($permession_data->updated_at)->format('d/m/Y');
+                //return date('d-m-Y', strtotime($permession_data->updated_at));                
+            })->rawColumns(['action','permission','updated_at'])->make(true);       
 
        }//*/ /*endif*/
 
@@ -153,9 +168,9 @@ class PermissionController extends Controller
         $data['role_id'] = $request->role_id;
         $data['permission'] = json_encode($request->permission); //insert by using json_encode()
 
-        Permission::create($data); //*/           
+        Permission::whereId($id)->update($data); //*/           
         //return back()->with('success', 'Permission added successfully.'); //return to same page with message
-        Session::put('success','Permission added successfully'); //massage after insert
+        Session::put('success','Permission update successfully'); //massage after insert
         return Redirect::to('permission'); //*/    
     }
 
@@ -167,6 +182,12 @@ class PermissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $data = Permission::findOrFail($id)->delete();        
+        if($data){
+            return response()->json(['success'=> 'Permission deleted']);
+        }else{
+            return response()->json(['errors'=> 'Something is wrong..']);
+        }//*/
     }
 }

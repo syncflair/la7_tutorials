@@ -18,36 +18,54 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body text-center">
-      <p class="login-box-msg">@if(!empty(@Auth::user()->name)) Dear, @endif {{  @Auth::user()->name }}</p>
 
-							
+    @if(Session::has('success'))
 
-		<div><!--Laravel Code-->
-			<div class="card-header">{{ __('Verify Your Email Address First As New Registration') }}</div>
+      <p class="login-box-msg"> Registration Successful</p>
 
-            <div class="card-body">
-                @if (session('resent'))
-                    <div class="alert alert-success" role="alert">
-                        {{ __('A fresh verification link has been sent to your email address.') }}
-                    </div>
-                @endif
+      	<!--<div class="alert alert-success mt-2 mb-2 text-center ml-0 mr-0"></div>-->
 
-                {{ __('Before proceeding, please check your email for a verification link.') }}
-                {{ __('If you did not receive the email') }},
-                <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                    @csrf
-                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline button-color">{{ __('click here to request another') }}</button>.
-                </form>
-            </div><!--Laravel Code-->
-		</div>
+		<!--<div class="card-header"></div>-->
+
+        <div class="card-body">
+            <div class="alert alert-success" role="alert">
+                {{ Session::get('success') }}
+            </div>
+        </div>
+	
+
+		@php
+              Session::forget('success');
+              //Session::put('success');
+          @endphp
+	@else
+
+
+		@php
+			///return abort('401');
+        @endphp
+		
+		<div class="alert alert-danger mt-2 mb-5 text-center ml-0 mr-0">
+	   		<h1> You are not authorized to view this page. </h1>
+	    </div>
+
+	@endif 
+
 
 
 
       <p class="mb-1">
             <a class="btn- btn-link-" href="/">
                 {{ __('Go to Home') }}
+            </a>   
+        <!--<a href="forgot-password.html">I forgot my password</a>-->
+      </p>
+      <p class="mb-1">
+      	@if (Route::has('login'))
+            <a class="btn- btn-link-" href="{{ route('login') }}">
+                {{ __('Login') }}
             </a>
-   
+        @endif
         <!--<a href="forgot-password.html">I forgot my password</a>-->
       </p>
       <p class="mb-0">

@@ -16,7 +16,7 @@ class CreatePermissionsTable extends Migration
         Schema::create('permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('role_id'); 
-            $table->string('module_name', 100); /*Use for future*/ 
+            $table->string('sub_module', 100); /*Use for future*/ 
             $table->text('permission'); /*JSON Data will store*/
             //$table->string('guard_name', 100); /*Use for future*/
             //$table->string('object', 55);

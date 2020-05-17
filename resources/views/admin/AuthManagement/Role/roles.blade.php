@@ -23,6 +23,15 @@
           </div><!-- /.col -->
           <div class="col-sm-6 text-right">
               <a href="{{ BackPath() }}" type="button" class="btn btn-flat btn-primary btn-sm">Back</a> 
+              
+              @if( @GetAuthUserRolePermission()->user->page != null )
+              <a href="{{route('user.index')}}" type="button" class="btn btn-primary btn-flat btn-sm"> Users</a>
+              @endif
+
+              @if( @GetAuthUserRolePermission()->permission->page != null )
+              <a href="{{route('permission.index')}}" type="button" class="btn btn-primary btn-flat btn-sm"> Permissions</a>
+              @endif
+
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -72,10 +81,12 @@
           <div class="col-5- col-md-5 col-sm-6 float-sm-right">
             <div class="card card-info- cusotme-card">
               
+
+              @if( @GetAuthUserRolePermission()->role->add != null )
               <div class="card-header pb-0">
                 <h4 id="form_title" class="card-title mb-0">Add Role</h4>
               </div>
-              <!-- /.card-header -->
+              <!-- /.card-header -->             
               <!-- form start -->
               <form role="form" id="role_form" method="POST">
                   
@@ -106,6 +117,11 @@
                   <button type="submit" id="form_button" class="btn btn-primary btn-flat btn-sm">Save</button>
                 </div>
               </form>
+              @else
+                <div class="card-header pb-0 pb-2 warning">
+                  <h4 id="form_title" class="card-title mb-0">You dont have permission to add or edit roles.</h4>
+                </div>
+              @endif 
 
 
             </div>

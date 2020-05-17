@@ -48208,7 +48208,7 @@ body {
 
 .badge-info {
   background-color: #3c8dbc !important;
-  padding: 2px 6px 3px 6px;
+  padding: 4px 6px 3px 6px;
   color: #FFFFFF;
 }
 
@@ -48218,8 +48218,14 @@ body {
   padding: 2px 6px 3px 6px;
 }
 
+.sidebar > .os-padding > .os-viewport > .os-content {
+  padding: 0px 8px 0px 0px !important;
+}
+
 .nav-sidebar > .nav-item > .nav-treeview > .nav-item > .nav-link {
-  padding: 3px 5px 3px 25px;
+  border-radius: unset !important;
+  padding: 3px 5px 3px 20px;
+  color: #FFFFFF !important;
 }
 
 .nav-sidebar > .nav-item > .nav-treeview > .nav-item > .nav-link > i {
@@ -48228,13 +48234,17 @@ body {
 }
 
 .nav-sidebar > .nav-item > .nav-link {
-  padding: 0.5rem 0.5rem !important;
+  border-radius: unset !important;
+  padding: 8px 8px 8px 12px !important;
+  color: #FFFFFF !important;
 }
 
 .nav-sidebar > .nav-item > .nav-treeview > .nav-item > .nav-link:focus,
 .nav-sidebar > .nav-item > .nav-treeview > .nav-item > .nav-link:active,
 .nav-sidebar > .nav-item > .nav-treeview > .nav-item > .nav-link:hover {
   background-color: #1e282c !important;
+  border-left: 4px solid #17a2b8 !important;
+  padding: 3px 5px 3px 16px !important;
 }
 
 /*nav item hover color*/
@@ -48245,6 +48255,8 @@ body {
 .nav-sidebar > .nav-item > .nav-link:focus,
 .nav-sidebar > .nav-item > .nav-link:active {
   background-color: #1e282c !important;
+  border-left: 4px solid #17a2b8 !important;
+  padding: 8px 8px 8px 8px !important;
 }
 
 /*Inside content-wrapper*/

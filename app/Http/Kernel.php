@@ -71,5 +71,6 @@ class Kernel extends HttpKernel
         //'MyRouteMid' => \App\Http\Middleware\MyRouteMiddleware::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'user' => \App\Http\Middleware\UserMiddleware::class,
+        'AuthPermission' => \App\Http\Middleware\AuthPermission::class,
     ];
 }

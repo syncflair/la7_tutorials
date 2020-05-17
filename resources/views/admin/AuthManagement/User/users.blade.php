@@ -23,7 +23,19 @@
           </div><!-- /.col -->
           <div class="col-sm-6 text-right">
               <a href="{{ BackPath() }}" type="button" class="btn btn-flat btn-primary btn-sm">Back</a> 
+
+              @if( @GetAuthUserRolePermission()->role->page != null ) 
+              <a href="{{route('role.index')}}" type="button" class="btn btn-primary btn-flat btn-sm"> Roles</a>
+              @endif
+
+              @if( @GetAuthUserRolePermission()->permission->page != null ) 
+              <a href="{{route('permission.index')}}" type="button" class="btn btn-primary btn-flat btn-sm"> Permissions</a>
+              @endif
+
+              @if( @GetAuthUserRolePermission()->user->add != null ) 
               <a onclick="newUserAdd()" type="button" class="btn btn-primary btn-flat btn-sm"> <i class="fas fa-plus"></i> Add New User</a>
+              @endif
+
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -77,6 +89,8 @@
     </section>
     <!-- /.content -->
 
+
+    <div id="loading"></div>
     @include('admin.AuthManagement.User.user_form_modal') <!--Bootstrap Contact form include here-->
 
 @endsection
@@ -95,24 +109,27 @@
   var table1 = $('#users_table').DataTable({    
     processing:true,
     serverSide:true,
+    responsive: true,
     info:false,
+    //bFilter: false,
+    //bLengthChange: false,
     ajax:{ url: "{{ route('user.index') }}" },
     columns: [
-          {data:'id', name:'id'},
-          {data:'avatar', name:'avatar',
+          {data:'id'},
+          {data:'avatar',
               render: function(data, type, full, meta){
                 if(data!= null){
                   return '<img src="'+data+'"  class="img-thumbnail" style="width:35px; height:35px;" />';
                 }else{
-                  return '<img src="{{URL::to('/FilesStorage/CommonFiles/no-img.png')}}"  class="img-thumbnail" style="width:35px; height:35px;" />';
+                  return '<img src="{{asset('/FilesStorage/CommonFiles/no-img.png')}}"  class="img-thumbnail" style="width:35px; height:35px;" />';
                 }
               },  orderable: false, searchable: false
           },
-          {data:'name', name:'name'},
-          {data:'email', name:'email'},
-          {data:'role_name', name:'role_name' , orderable: false, searchable: false },
-          {data:'us_name', name:'status', orderable: false, searchable: false },
-          {data:'action', name:'action', orderable: false, searchable: false }        
+          {data:'name'},
+          {data:'email'},
+          {data:'role_name', orderable: false, searchable: false },
+          {data:'us_name', orderable: false, searchable: false },
+          {data:'action', orderable: false, searchable: false }        
         ]
   });
 
@@ -293,6 +310,48 @@
   function ShowUser(id){
     //info, success, warning or error
     toastr.success('Show details of user '+ id);
+  }
+
+
+  function UserActive(id){
+    event.preventDefault();  //this is importent
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
+
+    $.ajax({
+        type : "GET",       
+        url : '/user-active/'+ id,
+        data : {"_token": csrf_token}, //csrf token is must be use
+        success : function(data) {
+          if(data.success){ 
+            table1.ajax.reload( null, false ); 
+            toastr.success(data.success);               
+          }
+          if(data.errors){
+            toastr.info(data.errors);                 
+          }
+        }
+      });        
+  }
+
+
+  function UserUnactive(id){
+    event.preventDefault();  //this is importent
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
+    $("#loading").html("Loading...");
+    $.ajax({
+        type : "GET",       
+        url : '/user-unactive/'+ id,
+        data : {"_token": csrf_token}, //csrf token is must be use
+        success : function(data) {
+          if(data.success){ 
+            table1.ajax.reload( null, false ); 
+            toastr.warning(data.success);               
+          }
+          if(data.errors){
+            toastr.info(data.errors);                 
+          }
+        }
+      }); 
   }
 
   

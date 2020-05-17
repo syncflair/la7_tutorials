@@ -6,6 +6,7 @@
 	<!--Extra CSS-->
    <style type="text/css">
     #permission_table > tbody > tr > td:last-child{ text-align: right;  } /*Datatables style  */
+    #permission_table>tbody>tr>td>span{margin:1px;}
   </style>
 @endsection 
 
@@ -23,7 +24,18 @@
           </div><!-- /.col -->
           <div class="col-sm-6 text-right">
               <a href="{{ BackPath() }}" type="button" class="btn btn-flat btn-primary btn-sm">Back</a> 
+
+              @if( @GetAuthUserRolePermission()->user->page != null ) 
+              <a href="{{route('user.index')}}" type="button" class="btn btn-primary btn-flat btn-sm"> Users</a>
+              @endif
+
+              @if( @GetAuthUserRolePermission()->role->page != null ) 
+              <a href="{{route('role.index')}}" type="button" class="btn btn-primary btn-flat btn-sm"> Roles</a>
+              @endif
+
+              @if( @GetAuthUserRolePermission()->permission->add != null ) 
               <a href="{{route('permission.create')}}" type="button" class="btn btn-primary btn-flat btn-sm"> <i class="fas fa-plus"></i> Add Permission</a>
+              @endif
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -60,9 +72,10 @@
                 <table id="permission_table" class="table table-sm table-striped" style="width:100%">
                   <thead>                  
                     <tr>
-                      <th style="width: 5%">#</th>
+                      <th style="width: 4%">#</th>
                       <th style="width: 10%">Role</th>
-                      <th style="width: 70%">Permission Module</th>
+                      <th style="width: 64%">Permission Module</th>
+                      <th style="width: 7%">UpdateAt</th>
                       <th style="width: 15%; text-align: right;">Action</th>
                     </tr>
                   </thead>
@@ -115,9 +128,56 @@
           {data:'id', name:'id'},
           {data:'role_name', name:'role_name' , orderable: false, searchable: false },
           {data:'permission', name:'permission'},
+          {data:'updated_at', name:'updated_at' , orderable: false, searchable: false },
           {data:'action', name:'action', orderable: false, searchable: false }        
         ]
   }); //*/
+
+
+  //Delete Function
+  function PermissionDelete(id){
+    event.preventDefault();  //this is importent
+
+    var csrf_token = $('meta[name="csrf-token"]').attr('content');
+    var id = id; //alert('deleteData '+id);
+    
+    var urlTo = "{{ route('permission.destroy', ':id') }}" 
+    urlTo = urlTo.replace(':id', id ); //resource rout not work without this 
+
+    Swal.fire({
+      title: 'Are you sure to Delete?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',  
+      confirmButtonText: 'Yes, delete it!'
+    }).then( (result) => {
+
+      if ( result.value ) {
+
+        $.ajax({
+          type : "DELETE", //'_method': 'DELETE' not require in data section       
+          url : urlTo,
+          data : {"_token": csrf_token}, //csrf token is must be use
+          success : function(data) {
+            if(data.success){ //alert(data.success);
+              //table1.ajax.reload();
+              table1.ajax.reload( null, false ); 
+              toastr.info(data.success);               
+            }
+            if(data.errors){
+              toastr.info(data.errors);                 
+            }
+          }
+        }); 
+
+      }else{
+        toastr.info( 'Your data is safe!');
+      }
+    })
+  }
+
 
 
 

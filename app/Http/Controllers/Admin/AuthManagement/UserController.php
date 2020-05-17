@@ -9,9 +9,12 @@ use Yajra\DataTables\DataTables;
 use Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str; //for str::random
-use Validator; //for vlidation
+use Illuminate\Support\Facades\Validator; //for vlidation
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Config; //use for get constant velue without - \Config::get('constants.UserFliesPath');
+
+use App\Mail\UserNotification;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -41,20 +44,42 @@ class UserController extends Controller
 
         //pass data to dataTable
         return DataTables::of($users_data)
-            ->addColumn('action', function($users_data){
-                $actionData = '
+            ->addColumn('action', function($users_data){  
+                          
+                $actionData = '';
+
+                if( @GetAuthUserRolePermission()->user->edit != null ) {
+                    if($users_data->status_id == 1){
+                        $actionData .= '<a onclick="UserUnactive('.$users_data->id.')" class="btn btn-danger- btn-flat btn-sm" data-toggle="tooltip" data-placement="right" title="Click to Unactive" >  <i class="far fa-thumbs-down danger"></i>  </a>';
+                    }elseif($users_data->status_id == 2 || $users_data->status_id == 3 || $users_data->status_id == 4 ){
+                        $actionData .= '<a onclick="UserActive('.$users_data->id.')" class="use-tooltip btn btn-success- btn-flat btn-sm" data-toggle="tooltip" data-placement="left" title="Click to Active" >   <i class="far fa-thumbs-up success"></i>  </a>';
+                    }
+                }
+
+                if( @GetAuthUserRolePermission()->user->view != null ) {
+                    $actionData .= '
                     <a onclick="ShowUser('.$users_data->id.')"  class="btn  btn-primary- btn-flat btn-sm">
                         <i class="fas fa-eye info"></i>
-                    </a>
+                    </a>';
+                }
+
+                
+                if( @GetAuthUserRolePermission()->user->edit != null ) {
+                    $actionData .= '
                     <a onclick="UserEdit('.$users_data->id.')" class="btn  btn-primary- btn-flat btn-sm">
                         <i class="fas fa-edit primary "></i>
                     </a>'; 
+                }
+
+                if( @GetAuthUserRolePermission()->user->delete != null ) {
                     if( $users_data->id != Auth::user()->id ){                                
-                    $actionData .= '
-                    <a onclick="UserDelete('.$users_data->id.')" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
-                        <i class="far fa-trash-alt red"></i>
-                    </a>';
+                        $actionData .= '
+                        <a onclick="UserDelete('.$users_data->id.')" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
+                            <i class="far fa-trash-alt red"></i>
+                        </a>';
                     }
+                }
+
                 return $actionData;
             })->editColumn('us_name', function($users_data){
                 if($users_data->us_name == 'Active'){
@@ -65,8 +90,6 @@ class UserController extends Controller
                     return "<span class='blue'>".$users_data->us_name."</span>";
                 }elseif($users_data->us_name == 'Block'){
                     return "<span class='orange'>".$users_data->us_name."</span>";
-                }elseif($users_data->us_name == 'Unverified'){
-                    return "<span class='yellow'>".$users_data->us_name."</span>";
                 }
             })
             ->rawColumns(['action','us_name'])->make(true);       
@@ -101,7 +124,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email', 
             'role_id' => 'required', 
             'status_id' => 'required', 
-            'password' => 'required|min:6|max:30',  //regex:/[@$!%*#?&]/  //confirmed
+            'password' => 'required|min:8|max:30',  //regex:/[@$!%*#?&]/  //confirmed
             'confirm_password' => 'required|same:password',
             'avatar' => 'file|max:1024|mimes:jpeg,png,jpg,gif,svg',
         ]);
@@ -129,16 +152,25 @@ class UserController extends Controller
                 //$request['avatar'] = $upload_path.$new_image_name;
                 $data['avatar'] = $upload_path.$new_image_name;
                 
-                User::create($data); //*/
-                //User::create($request->all()); //*/
+                $user = User::create($data); //*/
+                //User::create($request->all()); //*/  
+
+                $user->sendEmailVerificationNotification(); //for verification email send         
+
                 return response()->json(['success'=>'User inserted successfully ']);
+                //\Mail::to($user->email)->send(new VerificationEmail($user)); //for verification email send
                               
             }else{
                 $data['avatar'] = null;
                 //$request['avatar'] = null;
-                User::create($data); //*/
-                //User::create($request->all()); //*/
+                $user = User::create($data); //*/
+                //User::create($request->all()); //*/  
+
+                $user->sendEmailVerificationNotification();  ////for verification email send
+
                 return response()->json(['success'=>'User inserted successfully Without Image']);
+               // \Mail::to($user->email)->send(new VerificationEmail($user)); //for verification email send
+                
             }            
         }
     }
@@ -261,4 +293,33 @@ class UserController extends Controller
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
     }
+
+
+
+    public function user_active($id){
+
+        $user = User::find($id);
+        $user->status_id = 1;
+        $user->save();
+
+        //\Mail::to($user->email)->send(new userAcknowledge($user)); //for verification email send
+        Mail::to($user->email)->send(new UserNotification($user)); //for verification email send
+        return response()->json(['success'=> $user->name.' is Active Now']);
+
+    }
+
+    public function user_unactive($id){
+        $user = User::find($id);
+        $user->status_id = 2;
+        $user->save();
+
+        //\Mail::to($user->email)->send(new userAcknowledge($id)); //for verification email send
+        Mail::to($user->email)->send(new UserNotification($user)); //for verification email send
+        return response()->json(['success'=> $user->name.' is Unactive Now']);
+
+    }
+
+   /* 'email_verified_at' => $this->freshTimestamp(),*/
+
+
 }

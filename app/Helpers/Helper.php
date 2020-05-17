@@ -12,6 +12,11 @@ function TodayDate(){
 	return date('Y-m-d');
 }
 
+function DateFormate($date){
+	//return $date('Y-m-d');
+	return \Carbon\Carbon::parse($date)->format('d M y');
+}
+
 function GetUserName(){
 	 $user = User::first();
 	return $user->name;

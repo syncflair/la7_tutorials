@@ -22,11 +22,11 @@ function GetAuthUserRolePermission(){
   //dd($json_data_decode->role->add);
 
   //Use like that
-  //GetAuthRolePermission()->role->page; 
-  //GetAuthRolePermission()->role->add; 
-  //GetAuthRolePermission()->role->edit;   
-  //GetAuthRolePermission()->role->delete; 
-  //GetAuthRolePermission()->role->view; 
+  //GetAuthUserRolePermission()->role->page; 
+  //GetAuthUserRolePermission()->role->add; 
+  //GetAuthUserRolePermission()->role->edit;   
+  //GetAuthUserRolePermission()->role->delete; 
+  //GetAuthUserRolePermission()->role->view; 
 }
 
 //Show Auth User Name

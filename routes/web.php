@@ -9,6 +9,8 @@ DB::listen(function($sql) {
 //echo \Config::get('constants.CommonFilesPath'); //get constants from app/config/constants.php
 
 use Illuminate\Support\Facades\Route;
+use App\Mail\UserNotification;
+use App\Mail\ContactUsMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,28 +28,47 @@ Route::get('/', function () {
     return view('welcome'); 
    // return view('auth.login'); //redirect to login page    
 });
-Route::get('/NotFound', function () {
-    return view('errors.404_master_dashboard'); 
+Route::get('email-check', function () {
+    return view('emails.user_acknowledge'); 
+   // return view('auth.login'); //redirect to login page    
+});
+Route::get('email-1', function () {
+  //return view('emails.contact_us_email'); 
+  return new ContactUsMail();
+  //return new UserNotification();
+   // return view('emails.user_notification'); 
    // return view('auth.login'); //redirect to login page    
 });
 
 
 
-Auth::routes();
+
+
+
+//Auth::routes(); //Default Laravel
 //Auth::routes(['register' => false ]); //disable Register route. No one can register to this site any more.
+Auth::routes([
+  //'register' => false,  
+  //'reset' => false,
+  'verify' => true
+]);//*/
 
 
-Route::group(['middleware'=>['user','auth'] ], function(){
+Route::group(['middleware'=>['user','auth','AuthPermission','verified'] ], function(){
 
     Route::get('home', 'HomeController@index')->name('home');
 
 });
 
 
-Route::group(['middleware'=>['admin','auth'] ], function() {
+Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], function() {
 
     Route::get('dashboard', 'Admin\AdminController@index')->name('dashboard');
+
+    Route::get('/user-unactive/{user_id}', 'Admin\AuthManagement\UserController@user_unactive');
+    Route::get('/user-active/{user_id}', 'Admin\AuthManagement\UserController@user_active');
     Route::resource('user', 'Admin\AuthManagement\UserController');
+
     Route::resource('profile', 'Admin\AuthManagement\ProfileController');
 
     Route::get('/role-unactive/{role_id}', 'Admin\AuthManagement\RoleController@role_unactive');
@@ -58,27 +79,10 @@ Route::group(['middleware'=>['admin','auth'] ], function() {
 });
 
 
-//Route::get('/home', 'HomeController@index')->name('home')->middleware('MyAuth');
-//Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard')->middleware('MyAuth');
-//Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
 
-//group route with middleware
-/*Route::group(['middleware' => 'MyAdmin'], function() {
-   //route here
-   Route::get('/home', 'HomeController@index')->name('home');
-   Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
-});//*/
-
-
-//group route with prefix and Middleware
-/*Route::group(['prefix' =>'admin', 'middleware' => 'MyAuth'], function() {
-   //route here
-});*/
-
-//group route with prefix and multiple middleware
-/*Route::group(['prefix' =>'admin', 'middleware' => ['MyAuth', 'middlewareTwo']], function() {
-   //route here
-});*/
+//Public Link
+Route::get('contact-us', 'Website\ContactUsController@index')->name('contact-us');
+Route::post('send-message-query', 'Website\ContactUsController@sendMessageQuery')->name('send-message-query');
 
 
 

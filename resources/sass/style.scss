@@ -62,16 +62,19 @@ body{
 .main-sidebar> .sidebar{height: calc(100vh - (1.5rem + 1px)) !important;} /*Sidebar Height*/
 .main-sidebar .brand-link{ background-color: #367fa9 !important; color:#FFFFFF;}
 .elevation-4{ box-shadow: none !important;}
-.badge-info{background-color: #3c8dbc !important; padding: 2px 6px 3px 6px; color:#FFFFFF; }
+.badge-info{background-color: #3c8dbc !important; padding: 4px 6px 3px 6px; color:#FFFFFF; }
 .badge-green { color: #fff;  background-color: #00a65a !important; padding: 2px 6px 3px 6px; }
 
-.nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link{padding: 3px 5px 3px 25px;}
+
+.sidebar > .os-padding > .os-viewport > .os-content { padding: 0px 8px 0px 0px !important;}
+.nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link{ border-radius: unset !important; padding: 3px 5px 3px 20px; color:#FFFFFF !important;}
 .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link > i{font-size:11px !important; color:#FFFFFF;}
 
-.nav-sidebar > .nav-item > .nav-link{padding: 0.5rem 0.5rem !important;}
-.nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:focus, .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:active, .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:hover{background-color: #1e282c !important;}
+.nav-sidebar > .nav-item > .nav-link{ border-radius: unset !important; padding: 8px 8px 8px 12px !important; color:#FFFFFF !important;}
+
+.nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:focus, .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:active, .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:hover{background-color: #1e282c !important; border-left:4px solid #17a2b8 !important; padding: 3px 5px 3px 16px !important;}
 /*nav item hover color*/
-.nav-sidebar > .nav-item.menu-open > .nav-link, .nav-sidebar > .nav-item:hover > .nav-link, .nav-sidebar > .nav-item > .nav-link:hover, .nav-sidebar > .nav-item > .nav-link:focus, .nav-sidebar > .nav-item > .nav-link:active{ background-color: #1e282c !important;}
+.nav-sidebar > .nav-item.menu-open > .nav-link, .nav-sidebar > .nav-item:hover > .nav-link, .nav-sidebar > .nav-item > .nav-link:hover, .nav-sidebar > .nav-item > .nav-link:focus, .nav-sidebar > .nav-item > .nav-link:active{ background-color: #1e282c !important; border-left:4px solid #17a2b8 !important; padding: 8px 8px 8px 8px !important;}
 
 
 

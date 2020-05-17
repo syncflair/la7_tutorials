@@ -10,7 +10,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-2 pb-2 mb-1 d-flex">
+      <div class="user-panel pl-2 mt-2 pb-2 mb-1 d-flex">
         <div class="image">
           @if(!empty( UserAvatar() ))
             <img src="{{asset( UserAvatar() ) }}" class="img-circle elevation-2" alt="User Image">
@@ -29,9 +29,7 @@
         
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           
-          
-
-         
+                   
           <li class="nav-item">
             <a href="{{URL::to('/dashboard')}}" class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
