@@ -20,6 +20,7 @@
   <div class="content-wrapper">
 
     	@yield('content')
+      <router-view></router-view>
     	
   </div>
   <!-- /.content-wrapper -->

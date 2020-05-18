@@ -48224,7 +48224,7 @@ body {
 
 .nav-sidebar > .nav-item > .nav-treeview > .nav-item > .nav-link {
   border-radius: unset !important;
-  padding: 3px 5px 3px 20px;
+  padding: 3px 5px 3px 25px;
   color: #FFFFFF !important;
 }
 
@@ -48235,7 +48235,7 @@ body {
 
 .nav-sidebar > .nav-item > .nav-link {
   border-radius: unset !important;
-  padding: 8px 8px 8px 12px !important;
+  padding: 8px 8px 8px 17px !important;
   color: #FFFFFF !important;
 }
 
@@ -48244,7 +48244,7 @@ body {
 .nav-sidebar > .nav-item > .nav-treeview > .nav-item > .nav-link:hover {
   background-color: #1e282c !important;
   border-left: 4px solid #17a2b8 !important;
-  padding: 3px 5px 3px 16px !important;
+  padding: 3px 5px 3px 21px !important;
 }
 
 /*nav item hover color*/
@@ -48256,7 +48256,7 @@ body {
 .nav-sidebar > .nav-item > .nav-link:active {
   background-color: #1e282c !important;
   border-left: 4px solid #17a2b8 !important;
-  padding: 8px 8px 8px 8px !important;
+  padding: 8px 8px 8px 13px !important;
 }
 
 /*Inside content-wrapper*/
@@ -48409,7 +48409,7 @@ body {
 /*Custome Breadcrumbs*/
 
 .breadcrumb > .breadcrumb-item > a > .fas {
-  font-size: 16px !important;
+  font-size: 20px !important;
 }
 
 .breadcrumb > .breadcrumb-item > a {

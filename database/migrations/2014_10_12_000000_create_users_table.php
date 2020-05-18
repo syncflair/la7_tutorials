@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             //$table->integer('role_id')->default(0);  unsignedInteger 
             //$table->integer('role_id')->default(14);            
             $table->unsignedInteger('role_id')->default(14); 
-            $table->unsignedInteger('status_id')->default(5); //5 Not Verified
+            $table->unsignedInteger('status_id')->default(4); //5 Not Verified
             $table->string('avatar')->nullable();            
             $table->rememberToken();
             $table->timestamps();

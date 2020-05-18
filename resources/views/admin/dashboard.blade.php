@@ -33,6 +33,13 @@
     <!-- Main content -->
     <section class="content">      
       <div class="container-fluid">
+
+         <!-- Vue Js Component -->
+        <div class="row">
+          <example-component></example-component> 
+        </div>
+
+
         
         <!-- Small boxes (Stat box) -->
         <div class="row">
@@ -180,6 +187,8 @@
 
         </div>
         <!-- /.row -->
+
+
 
 
         <!-- Main row -->

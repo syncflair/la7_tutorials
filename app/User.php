@@ -52,6 +52,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Models\UserStatus::class);
     }
 
+    //A User Has Many Products (hasMany())
+    public function product(){
+        //return $this->hasMany('App\Models\Product');
+        return $this->hasMany(Models\Product::class);  
+    }
+
 
     
 }

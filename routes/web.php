@@ -44,9 +44,9 @@ Route::get('email-chek', function () {
 //Auth::routes(); //Default Laravel
 //Auth::routes(['register' => false ]); //disable Register route. No one can register to this site any more.
 Auth::routes([
-  //'register' => false,  
-  //'reset' => false,
-  'verify' => true
+  //'register' => false,  //disable Register route. No one can register to this site any more.
+  //'reset' => false, //disable password Reset function. No one can reset password to this site any more.
+  'verify' => true  //Enable Email verification function.
 ]);//*/
 
 
@@ -73,6 +73,11 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('role', 'Admin\AuthManagement\RoleController');
 
     Route::resource('permission', 'Admin\AuthManagement\PermissionController');
+
+    Route::resource('category', 'Admin\Category\CategoryController');
+    Route::resource('product', 'Admin\Product\ProductController');
+
+
 });
 
 

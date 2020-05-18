@@ -67,14 +67,14 @@ body{
 
 
 .sidebar > .os-padding > .os-viewport > .os-content { padding: 0px 8px 0px 0px !important;}
-.nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link{ border-radius: unset !important; padding: 3px 5px 3px 20px; color:#FFFFFF !important;}
+.nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link{ border-radius: unset !important; padding: 3px 5px 3px 25px; color:#FFFFFF !important;}
 .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link > i{font-size:11px !important; color:#FFFFFF;}
 
-.nav-sidebar > .nav-item > .nav-link{ border-radius: unset !important; padding: 8px 8px 8px 12px !important; color:#FFFFFF !important;}
+.nav-sidebar > .nav-item > .nav-link{ border-radius: unset !important; padding: 8px 8px 8px 17px !important; color:#FFFFFF !important;}
 
-.nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:focus, .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:active, .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:hover{background-color: #1e282c !important; border-left:4px solid #17a2b8 !important; padding: 3px 5px 3px 16px !important;}
+.nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:focus, .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:active, .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:hover{background-color: #1e282c !important; border-left:4px solid #17a2b8 !important; padding: 3px 5px 3px 21px !important;}
 /*nav item hover color*/
-.nav-sidebar > .nav-item.menu-open > .nav-link, .nav-sidebar > .nav-item:hover > .nav-link, .nav-sidebar > .nav-item > .nav-link:hover, .nav-sidebar > .nav-item > .nav-link:focus, .nav-sidebar > .nav-item > .nav-link:active{ background-color: #1e282c !important; border-left:4px solid #17a2b8 !important; padding: 8px 8px 8px 8px !important;}
+.nav-sidebar > .nav-item.menu-open > .nav-link, .nav-sidebar > .nav-item:hover > .nav-link, .nav-sidebar > .nav-item > .nav-link:hover, .nav-sidebar > .nav-item > .nav-link:focus, .nav-sidebar > .nav-item > .nav-link:active{ background-color: #1e282c !important; border-left:4px solid #17a2b8 !important; padding: 8px 8px 8px 13px !important;}
 
 
 
@@ -139,7 +139,7 @@ body{
 .cusotme-card >form > .card-footer{background-color:unset !important; border-top:none !important; }
 
 /*Custome Breadcrumbs*/
-.breadcrumb >.breadcrumb-item > a >.fas{font-size:16px !important;}
+.breadcrumb >.breadcrumb-item > a >.fas{font-size:20px !important;}
 .breadcrumb >.breadcrumb-item > a{font-size:14px !important; font-weight:400;}
 
 /*Bootstrap Modal */

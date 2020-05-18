@@ -15,6 +15,9 @@ try {
 
     require('bootstrap');
 
+    //require('cookie');
+
+
 	//for Datatables
     //require('datatables.net');
     require('datatables.net-bs4');

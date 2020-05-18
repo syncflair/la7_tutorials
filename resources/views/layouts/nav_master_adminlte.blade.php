@@ -1,11 +1,11 @@
-<!-- Navbar -->
+
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
 
       <!--Taggle Link-->
       <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        <a class="nav-link" data-widget="pushmenu" id="pushmenu_toggle" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
 
       <!--Sales Link-->
@@ -279,4 +279,4 @@
 
     </ul>
   </nav>
-<!-- /.navbar -->
+<!-- /.navbar

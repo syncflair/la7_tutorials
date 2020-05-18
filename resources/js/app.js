@@ -8,8 +8,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-Vue.config.productionTip = false //turn on production mode Remove when upload to public
+/*Import & Use Vue Router*/ 
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
+//Vue.config.productionTip = false //turn on production mode Remove when upload to public
 
 /** SweetAlert2 & Toast **/
 import Swal from 'sweetalert2' //import sweetAlert2
@@ -47,7 +50,18 @@ window.toastr = toastr;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
+
+//Import Vue Routers form VueRouters.js file
+import {routes} from './VueRouters' //import VueRouters (Customize)
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
+//Use vue router
+const router = new VueRouter({
+  routes, // short for `routes: routes`
+  mode: 'history', //history mode - remove # (hash) from url
+  //mode: 'hash', //hash mode = use # (hash) to url (Default mode)
+})
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -57,4 +71,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    router, //use Vue router from globally
 });
