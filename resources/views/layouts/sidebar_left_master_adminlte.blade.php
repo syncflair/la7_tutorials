@@ -50,21 +50,21 @@
           </li>
 
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <router-link to="/category" class="nav-link">
               <i class="nav-icon fas fa-boxes"></i>
               <p>
                 Categoris
               </p>
-            </a>
+            </router-link>
           </li>
 
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <router-link to="/product" class="nav-link">
               <i class="nav-icon fas fa-boxes"></i>
               <p>
                 Items
               </p>
-            </a>
+            </router-link>
           </li>
 
           <li class="nav-item has-treeview">

@@ -54,6 +54,8 @@ window.toastr = toastr;
 //Import Vue Routers form VueRouters.js file
 import {routes} from './VueRouters' //import VueRouters (Customize)
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('router-view-admin-master', require('./components/Admin/AdminMaster.vue').default);
+
 
 //Use vue router
 const router = new VueRouter({

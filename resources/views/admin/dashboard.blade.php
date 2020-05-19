@@ -8,6 +8,9 @@
 
 @section('content')
 
+<!-- Vue display here -->
+<router-view></router-view>
+
 
 <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -34,13 +37,7 @@
     <section class="content">      
       <div class="container-fluid">
 
-         <!-- Vue Js Component -->
-        <div class="row">
-          <example-component></example-component> 
-        </div>
-
-
-        
+          
         <!-- Small boxes (Stat box) -->
         <div class="row">
 
