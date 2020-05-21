@@ -1,45 +1,77 @@
-<?php 
+<template>
+<!-- Main content -->
+<section class="content"> 
+<!-- container-fluid -->     
+<div class="container-fluid">   
+<vue-headful title="Title from vue-headful"/>       
+<!-- Card section -->    
+<div class="card vue-card">
 
-Schema::create('categories', function (Blueprint $table) {
-            $table->bigIncrements('id');    
-            $table->unsignedInteger('parent_id')->nullable()->default(null);                   
-            $table->string('cat_name', 50); 
-            $table->string('cat_slag', 50)->unique();
-            $table->string('cat_desc',100)->nullable();
-            $table->softDeletes('deleted_at', 0);  
-            $table->timestamps();
+    <!-- Card Header -->
+    <div class="card-header">            
+        <div class="row">
+            <div class="col-md-6">
+                <ol class="breadcrumb float-sm-left">
+                    <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item"><a>Category</a></li>
+                </ol>
+            </div>
+           <div class="col-md-6 text-right">Navigation</div>
+        </div>
+    </div><!-- /Card Header -->
 
-            $table->foreign('parent_id')->references('id')->on('categories')->onUpdate('cascade')->onDelete(null);  
-            //$table->primary(['id', 'parent_id']);
-        });
 
+    <!-- Card Body -->
+    <div class="card-body">
+        <!--Row -->
+        <div class="row">
+            <!-- Table -->
+            <div class="col-md-8 col-sm-7">
 
+              <!-- vue-card-item -->
+              <div class="card vue-card-item">
+                <!--<div class="card-header">Title</div>-->
+                <div class="card-body">
+                  <CategoryList></CategoryList>
+                </div>
+              </div><!--/vue-card-item -->
 
-Schema::create('join_category_product', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('cat_id')->nullable();
-            $table->unsignedBigInteger('product_id')->nullable();
+            </div><!--/Table -->
 
-            $table->foreign('cat_id')->references('id')->on('categories')->onDelete('cascade');            
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->timestamps();
-        });
+            <!--Form Area-->
+           <div class="col-md-4 col-sm-5 text-right-">  
 
-Schema::create('products', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('pro_name', 150); 
-            $table->string('pro_slug', 150)->unique();
-            $table->string('pro_code', 50)->nullable(); 
-            $table->text('pro_desc')->nullable(); 
-            $table->float('pro_price', 8, 2)->nullable();
-            $table->integer('pro_qty')->nullable();
-            $table->string('pro_image', 250)->nullable();
-            $table->boolean('is_enabled')->default(true); // the "is_enabled" attribute            
-            $table->unsignedBigInteger('user_id');
-            $table->softDeletes('deleted_at', 0);                
-            $table->timestamps();
+              <!-- vue-card-item -->
+              <div class="card vue-card-item">
+                <div class="card-header"><h4>Add Category</h4></div>
+                <div class="card-body card-body-custome">
+                  <CategoryAdd></CategoryAdd>
+                </div>
+              </div><!-- /vue-card-item -->
 
-            $table->foreign('user_id')->references('id')->on('users');
-            //$table->primary(['id']);
-            //$table->primary(['id']);
-        });
+           </div><!--/Form Area-->
+
+        </div><!--/Row -->
+
+    </div><!-- /Card Body -->
+
+</div><!-- /Card section --> 
+
+</div><!-- /container-fluid --> 
+</section><!-- Main content -->
+</template>
+
+<script>
+  import CategoryList from './CategoryList.vue'
+  import CategoryAdd from './CategoryAdd.vue'
+
+    export default {
+        mounted() {
+            console.log('Component mounted.')
+        },
+        components:{
+          CategoryList,
+          CategoryAdd,
+        },
+    }
+</script>

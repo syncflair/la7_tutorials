@@ -16,7 +16,7 @@ class Category extends Model
 
 
     protected $fillable = [
-        'cat_name','cat_slag', 'parent_id', 'cat_desc'
+        'cat_name','cat_slug', 'parent_id', 'cat_desc', 'is_enabled'
     ];
 
 

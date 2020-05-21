@@ -16,7 +16,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+       $category = Category::latest()->paginate(10);
+       //$category = Category::get();
+        return $category;
+       //return response()->json($category);
+      //return response()->json(['success'=>'Category Created successfully.']);
+        //return ['message'=>'Return data is done'];
+        //return 'Index--';
     }
 
     /**
@@ -27,6 +33,7 @@ class CategoryController extends Controller
     public function create()
     {
         //
+        return 'create';
     }
 
     /**
@@ -37,7 +44,18 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'cat_name' => 'required|min:2|max:40|unique:categories,cat_name',
+            'cat_slug' => 'required',
+        ]);
+
+        $data =array();
+        $data['cat_name']=$request->cat_name;
+        $data['cat_slug']=$request->cat_slug;
+
+        Category::create($data); 
+       
+        return response()->json(['success'=>'Category Created successfully.']);
     }
 
     /**
@@ -48,7 +66,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        return 'Show';
     }
 
     /**
@@ -59,7 +77,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+       
     }
 
     /**
@@ -71,7 +89,21 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'cat_name' => 'required|min:2|max:40|unique:categories,cat_name,'.$id,
+            'cat_slug' => 'required|unique:categories,cat_slug,'.$id,
+        ]);
+
+        $data =array();
+        $data['cat_name']=$request->cat_name;
+        $data['cat_slug']=$request->cat_slug;
+
+
+        Category::whereId($id)->update($data); 
+        //$category = Category::findOrFail($id); 
+        //$category->update($data); 
+        
+        return response()->json(['success'=>'Category Update successfully.']);
     }
 
     /**
@@ -82,6 +114,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+       
+        $data = Category::findOrFail($id)->delete();        
+        if($data){
+            return response()->json(['success'=> 'Record is successfully deleted']);
+        }else{
+            return response()->json(['errors'=> 'Something is wrong..']);
+        }//*/
     }
 }

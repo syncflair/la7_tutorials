@@ -6,11 +6,29 @@
 
 require('./bootstrap');
 
+/*axios*/
+window.axios = require('axios');
+//import axios from 'axios';
+//window.axios = axios;
+//axios.defaults.baseURL = 'http://127.0.0.1:8000'
+
+/*Vue*/
 window.Vue = require('vue');
+
+/*Moment - Format Dates*/
+import moment from 'moment'
+
+/*VueProgressBar*/
+import VueProgressBar from 'vue-progressbar'
+const options = { color: '#bffaf3', failedColor: '#874b4b', thickness: '5px',
+  transition: { speed: '0.2s', opacity: '0.6s', termination: 300 },
+  autoRevert: true, location: 'top', inverse: false }
+Vue.use(VueProgressBar, options)
 
 /*Import & Use Vue Router*/ 
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
+
 
 //Vue.config.productionTip = false //turn on production mode Remove when upload to public
 
@@ -37,8 +55,6 @@ import toastr from 'toastr'
 window.toastr = toastr;
 /**End Toastr **/
 
-
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -53,7 +69,7 @@ window.toastr = toastr;
 
 //Import Vue Routers form VueRouters.js file
 import {routes} from './VueRouters' //import VueRouters (Customize)
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('router-view-admin-master', require('./components/Admin/AdminMaster.vue').default);
 
 
@@ -63,6 +79,31 @@ const router = new VueRouter({
   mode: 'history', //history mode - remove # (hash) from url
   //mode: 'hash', //hash mode = use # (hash) to url (Default mode)
 })
+
+/*vform*/
+import { Form, HasError, AlertError } from 'vform'
+window.Form = Form;
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
+
+/*Global VueJs Filter*/
+Vue.filter('upText', function(text){
+  //return text.toLowerCase()
+  //return text.toUpperCase();
+  return text.charAt(0).toUpperCase() + text.slice(1)
+  //return text[0].toUpperCase() + text.slice(1);
+});
+
+/*Global VueJs Filter for date using moment js that import at the top*/
+Vue.filter('formatDate', function(data){
+  return moment(data).format('Do MMMM YYYY');
+});
+
+
+/*Register Fire as Globally event to use from any where from apps*/
+const Fire = new Vue();
+window.Fire = Fire; 
 
 
 /**
@@ -74,4 +115,14 @@ const router = new VueRouter({
 const app = new Vue({
     el: '#app',
     router, //use Vue router from globally
+    
+    watch: { //for title
+      '$route':{
+        handler: (to, from) => {
+          document.title = to.meta.title || 'Sorboraho'
+        },
+         immediate: true,
+      }
+    },
+
 });

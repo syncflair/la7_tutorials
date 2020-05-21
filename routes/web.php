@@ -24,17 +24,6 @@ DB::listen(function($sql) {
 */
 
 
-Route::get('/', function () {
-    return view('welcome'); 
-   // return view('auth.login'); //redirect to login page    
-});
-Route::get('email-chek', function () {
-  //return view('emails.contact_us_email'); 
-  return new ContactUsMail();
-  //return new UserNotification();
-   // return view('emails.user_notification'); 
-   // return view('auth.login'); //redirect to login page    
-});
 
 
 
@@ -49,15 +38,28 @@ Auth::routes([
   'verify' => true  //Enable Email verification function.
 ]);//*/
 
-
-Route::group(['middleware'=>['user','auth','AuthPermission','verified'] ], function(){
-
-    Route::get('home', 'HomeController@index')->name('home');
-
-});
-
-
 Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], function() {
+
+  // Route::fallback(function() {
+  //     return response()->json(['message' => 'Not Found!'], 404);
+  // });
+ 
+
+  
+  /*Vue Route*/
+    Route::resource('spa/category', 'Admin\Category\CategoryController@index');
+    Route::resource('spa/category', 'Admin\Category\CategoryController');
+    Route::resource('product', 'Admin\Product\ProductController');
+
+    // Vue: single page application (SPA)- Anything that not match that redirect to dashboard. combine vue route and laravel rourte. Best way place this route to last of the line 
+   // Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '([A-z\d-\/_.]+)?' );    
+    //Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '.*' ); 
+    Route::get('/spa/{path?}', function () {
+      return view('admin.dashboard');  
+    })->where('path', '([\spa\A-z\d-\/_.]+)?' ); 
+  /*End Vue Route*/
+   
+
 
     Route::get('dashboard', 'Admin\AdminController@index')->name('dashboard');
 
@@ -74,9 +76,14 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 
     Route::resource('permission', 'Admin\AuthManagement\PermissionController');
 
-    Route::resource('category', 'Admin\Category\CategoryController');
-    Route::resource('product', 'Admin\Product\ProductController');
+    
 
+
+});
+
+Route::group(['middleware'=>['user','auth','AuthPermission','verified'] ], function(){
+
+    Route::get('home', 'HomeController@index')->name('home');
 
 });
 
@@ -87,4 +94,17 @@ Route::get('contact-us', 'Website\ContactUsController@index')->name('contact-us'
 Route::post('send-message-query', 'Website\ContactUsController@sendMessageQuery')->name('send-message-query');
 
 
+
+
+Route::get('/', function () {
+    return view('welcome'); 
+   // return view('auth.login'); //redirect to login page    
+});
+Route::get('email-chek', function () {
+  //return view('emails.contact_us_email'); 
+  return new ContactUsMail();
+  //return new UserNotification();
+   // return view('emails.user_notification'); 
+   // return view('auth.login'); //redirect to login page    
+});
 

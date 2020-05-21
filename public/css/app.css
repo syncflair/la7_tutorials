@@ -48449,3 +48449,89 @@ body {
   border-top: unset !important;
 }
 
+/*Style for Vue - Single Page Appication (SPA)*/
+
+.vue-card {
+  border: unset !important;
+  border-radius: unset !important;
+  box-shadow: unset !important;
+  background-color: unset !important;
+}
+
+.vue-card > .card-header {
+  border-bottom: unset !important;
+  padding: 10px 0px 10px 0px !important;
+  background-color: unset !important;
+}
+
+.vue-card > .card-body {
+  padding: unset !important;
+  /*border:1px solid rgba(0, 0, 0, 0.105);*/
+}
+
+.vue-card .breadcrumb {
+  background-color: unset !important;
+  padding: unset !important;
+  margin-bottom: unset !important;
+}
+
+.vue-card-item {
+  /*border-radius:unset !important;*/
+  box-shadow: unset !important;
+  border: 1px solid rgba(0, 0, 0, 0.105);
+  /*border:unset !important;*/
+}
+
+.vue-card-item > .card-header {
+  border-bottom: unset !important;
+  padding: 10px 10px 0px 10px !important;
+  background-color: unset !important;
+}
+
+.vue-card-item > .card-header > h4 {
+  background: orange;
+  position: relative;
+  display: inline;
+  top: -23px;
+  padding: 3px 6px 3px 6px;
+  border-radius: 1px;
+  font-size: 16px !important;
+  color: #fff;
+}
+
+.vue-card-item > .card-body {
+  padding: 10px 10px 10px 10px !important;
+}
+
+.vue-card-item > .card-body-custome {
+  margin-top: -30px;
+}
+
+/*Title Box Design*/
+
+.titleBox {
+  border: 1px solid rgba(0, 0, 0, 0.105) !important;
+  border-radius: 3px;
+}
+
+.titleText {
+  position: relative;
+  top: -0.9em;
+  margin-left: 1em;
+  display: inline;
+  background-color: white;
+  padding: 2px 5px 2px 5px;
+}
+
+.TitelBoxInput {
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
+
+/*--/Title Box Design*/
+
+label:not(.form-check-label):not(.custom-file-label) {
+  font-weight: normal !important;
+  margin-bottom: 0px !important;
+}
+

@@ -5,11 +5,23 @@
 <section class="content">      
 <div class="container-fluid">   
         
-    <div class="card">
+    <div class="card vue-card">
 
-        <div class="card-header">Example Component</div>
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-6">
+              <ol class="breadcrumb float-sm-left">
+                <li class="breadcrumb-item active">Dashboard</li>
+              </ol>
+            </div>
+            <div class="col-md-6 text-right">Navigation</div>
+          </div>
+        </div>
+
+
         <div class="card-body">
 
+            <!--Stat box-->
             <div class="row">
             <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -40,20 +52,101 @@
                   <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
+            </div> <!-- /Stat box -->
+
+
+            <!-- Small boxes -->
+            <div class="row">
+
+              <div class="col-md-12"><br>
+                <h3 class="m-0 text-dark">Bank & Cash</h3><br>
+              </div><!-- /.col -->
+
+              <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-money-bill-alt"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text success">Bank Balance</span>
+                    <span class="info-box-number success">
+                      200000
+                      <small>tk</small>
+                    </span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div> 
+
+              <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-money-bill-alt"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text success">Cash In Hand</span>
+                    <span class="info-box-number success">
+                      70000
+                      <small>tk</small>
+                    </span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>
+
+              <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                  <span class="info-box-icon bg-success elevation-1"><i class="fas fa-money-check-alt"></i></span>
+                  <div class="info-box-content">
+                    <span class="info-box-text success">Cheques</span>
+                    <span class="info-box-number success">Received(2) 4000 <small>tk</small> </span>
+                    <span class="info-box-number danger">Paid(1) 3000 <small>tk</small> </span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>  
+
+              <div class="col-12 col-sm-6 col-md-3">
+                <div class="info-box">
+                  <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-hand-holding-usd"></i></span>
+
+                  <div class="info-box-content">
+                    <span class="info-box-text danger">Loan</span>
+                    <span class="info-box-number danger">
+                      130000
+                      <small>tk</small>
+                    </span>
+                  </div>
+                  <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+              </div>    
+
             </div>
+            <!-- /.Small boxes -->
 
         </div>
     </div>
-
-
+   
+<testData></testData>
+<testData2></testData2>
 </div>
 </section><!-- Main content -->
 </template>
 
 <script>
+    import testData from './test.vue'
+    import testData2 from './test2.vue'
+
+
     export default {
         mounted() {
             console.log('Component mounted.')
+        },
+        components:{
+          testData,
+          testData2,
         }
     }
 </script>

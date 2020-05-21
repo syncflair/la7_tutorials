@@ -10,6 +10,7 @@
    .mycheckbox{width: 18px; position: relative; height: 18px; display: block;}
 
    .form-head{color:gray; border-bottom: 1px solid pink}
+   
    /*Title Box Design*/
    .titleBox{border:1px solid pink; border-radius: 3px;}
    .titleText{position:relative; top:-0.9em; margin-left:1em; display:inline; background-color:white; padding:2px 5px 2px 5px; }

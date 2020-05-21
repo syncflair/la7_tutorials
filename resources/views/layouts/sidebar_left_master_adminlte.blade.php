@@ -40,17 +40,17 @@
           </li>
 
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
+            <router-link to="/spa/parties" class="nav-link">
               <i class="nav-icon fas fa-user-friends"></i>
               <p>
                 Parties
                 <span class="right badge badge-danger">New</span>
               </p>
-            </a>
+            </router-link>
           </li>
 
           <li class="nav-item">
-            <router-link to="/category" class="nav-link">
+            <router-link to="/spa/category" class="nav-link">
               <i class="nav-icon fas fa-boxes"></i>
               <p>
                 Categoris
@@ -59,7 +59,7 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/product" class="nav-link">
+            <router-link to="/spa/product" class="nav-link">
               <i class="nav-icon fas fa-boxes"></i>
               <p>
                 Items

@@ -10,17 +10,17 @@
                 <div class="col-md-6">
                     <ol class="breadcrumb float-sm-left">
                         <li class="breadcrumb-item active">Dashboard</li>
-                        <li class="breadcrumb-item"><a>Product</a></li>
+                        <li class="breadcrumb-item"><a>Parties</a></li>
                     </ol>
                 </div>
-                <div class="col-md-6 text-right">Navigation</div>
-              </div>
+               <div class="col-md-6 text-right">Navigation</div>
+            </div>
         </div>
 
 
         <div class="card-body">
 
-            Product
+            Parties
 
         </div>
     </div>
