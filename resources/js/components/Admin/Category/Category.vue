@@ -26,13 +26,26 @@
         <div class="row">
             <!-- Table -->
             <div class="col-md-8 col-sm-7">
-
               <!-- vue-card-item -->
               <div class="card vue-card-item">
-                <!--<div class="card-header">Title</div>-->
+                <div class="card-header">
+                  <div class="row">
+                    <div class="col-md-8 col-sm-6">Category List</div>
+                    <div class="col-md-4 col-sm-6 text-right">
+
+                      <div class="input-group input-control-sm">
+                        <input v-model="searchText" @keyup="searchit" class="form-control form-control-sm form-control-navbar" type="text" name="" placeholder="Search..." aria-label="Search">
+                        <div class="input-group-append">
+                          <button class="btn btn-navbar btn-sm border" @click="searchit"><i class="fas fa-search blue"></i></button>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div><!--/card-header-->
                 <div class="card-body">
                   <!-- <CategoryList v-bind:categories="categories"></CategoryList> -->
-
+               
                   <table class="table table-striped table-sm">
                     <thead>
                       <tr>
@@ -44,18 +57,23 @@
                         <th style="width: 20%; text-align:right;">Action</th>
                       </tr>
                     </thead>
+
                     <tbody>
-                      <tr v-for="category in categories" :key="category.id">
+                      <tr v-for="category in categories.data" :key="category.id">
                         <td>{{category.id}}</td>
-                        <td>{{category.cat_name}}</td>
-                        <td>{{category.cat_slug | upText }}</td>
-                        <td>
-                          {{category.is_enabled}}
-                        </td>
+                        <td><p v-bind:title="category.cat_slug">{{category.cat_name | upText}}</p></td>
+                        <td>{{category.cat_slug  }}</td>
+
+                        <td v-show="category.is_enabled == 1" class="green"> Active </td>
+                        <td v-show="category.is_enabled == 0" class="red text-bold"> Inactive </td>
+
                         <td>{{category.updated_at | formatDate }}</td>
 
                         <td class="text-right">
-                          <a  class="btn btn-danger- btn-flat btn-sm" data-toggle="tooltip" data-placement="right" title="Click to Unactive">  <i class="far fa-thumbs-down danger"></i>  </a>
+                          <a @click="unactiveCat(category.id)" v-show="category.is_enabled == 1" class="btn btn-flat btn-sm" title="Click to Unactive">  <i class="far fa-thumbs-down red"></i></a>
+
+                          <a @click="activeCat(category.id)" v-show="category.is_enabled == 0" class="btn btn-flat btn-sm" title="Click to Active">  <i class="far fa-thumbs-up green"></i></a>
+
                           <a @click="editCategory(category)" class="btn  btn-primary- btn-flat btn-sm">
                               <i class="fas fa-edit primary "></i>
                           </a> 
@@ -70,6 +88,22 @@
                   </table>
 
                 </div>
+
+                <div class="card-footer">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <span> Total: {{ countCategory }}</span>
+                    </div>
+                    <div class="col-md-6">
+                      <!-- <pagination :data="categories" @pagination-change-page="getResults"></pagination> -->
+                      <pagination :data="categories" @pagination-change-page="getResults" align="right" size="small">
+                          <span slot="prev-nav">&lt; Previous</span>
+                          <span slot="next-nav">Next &gt;</span>
+                      </pagination>
+                    </div>
+                  </div>
+                </div>
+
               </div><!--/vue-card-item -->
 
             </div><!--/Table -->
@@ -84,24 +118,38 @@
                 <div class="card-body card-body-custome">
 
                     <form @submit.prevent=" editMode ? updateCategory() : storeCategory() " >
+
                       <div class="card--">
                         <div class="form-group">
                           <label for="exampleInputEmail1">Name</label>
-                            <input v-model="form.cat_name" type="text" name="cat_name" class="form-control" :class="{ 'is-invalid': form.errors.has('cat_name') }" placeholder="Enter name">
+                            <input v-model="form.cat_name" type="text" ref="cat_name" name="cat_name" class="form-control" :class="{ 'is-invalid': form.errors.has('cat_name') }" placeholder="Enter name">
                           <has-error :form="form" field="cat_name"></has-error>
+                          <!-- {{ form.cat_name }} -->
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                           <label for="exampleInputEmail1">Slug</label>
 
                           <input v-model="form.cat_slug" type="text" name="cat_slug" class="form-control" :class="{ 'is-invalid': form.errors.has('cat_slug') }" placeholder="Enter slug">
                           <has-error :form="form" field="cat_slug"></has-error>
+                        </div> -->
+
+
+                        <div class="form-group">
+                          <label>Select Parent</label>
+
+                          <select v-model="form.parent_id" name="parent_id" class="form-control">
+                              <option value=""> Select Parent </option>
+                              <option v-for="parentCat in parentCategories" :key="parentCat.id" v-bind:value="parentCat.id">
+                                {{parentCat.cat_name}}
+                              </option>
+                          </select>
                         </div>
 
 
                         <div class="form-check">
-                          <input type="checkbox" class="form-check-input" name="is_enabled" id="exampleCheck1">
-                          <label class="form-check-label" for="exampleCheck1" >Is Active</label>
+                          <input v-model="form.is_enabled" type="checkbox" class="form-check-input" name="is_enabled" id="checkbox" value="1">
+                          <label class="form-check-label" for="checkbox" >Is Active</label>
                         </div>
 
                         <div class="form-group mt-2">
@@ -111,7 +159,8 @@
                           <button v-show="!editMode" type="submit" class="btn btn-primary btn-flat btn-sm">Submit</button>
                         </div>
 
-                      </div>                
+                      </div> 
+
                     </form>
 
 
@@ -137,13 +186,19 @@
 
   export default {
     name: "Category",
+    
     data () {
       return {
-        editMode: false,
-        categories: [], //this is an object
+        searchText:'', //v-model="search" in input tag
+        editMode: false, //Use this for add edit using the same form
+        parentCategories: '', // 
+        countCategory: '', //user for count
+        categories: {}, //this is an object
+
         // Create a new form instance
         form: new Form({
           id: '',
+          parent_id: '',
           cat_name: '',
           cat_slug: '',
           is_enabled: '',
@@ -152,19 +207,58 @@
       }
     },
 
-    methods: {      
+
+    methods: { 
+
+      //Searchit function using lodash. call searchit function every 1 secound when call the function
+      searchit: _.debounce( () => {
+        FireEvent.$emit('searching');
+      },500 ),
+      // searchit(){
+      //   FireEvent.$emit('searching');
+      // },
+
+      //function for pagination // Our method to GET results from a Laravel endpoint
+      getResults(page = 1) {
+        axios.get('/spa/category?page=' + page)
+          .then( (response) => {
+            this.categories = response.data;
+          });
+      }, 
+
+      parentCategory() {
+        axios.get('/spa/parent-category')
+          .then( (response) => {
+            this.parentCategories = response.data;
+          });
+      }, 
+
       fetchCategory(){
         this.$Progress.start(); //using progress-bar package
         //axios.get('http://127.0.0.1:8000/spa/category')
-        this.form.get('http://127.0.0.1:8000/spa/category')
+        this.form.get('/spa/category')
           .then( ( response ) => {
 
-              this.categories = response.data.data;
+            this.categories = response.data; // is an object... use when pagination
+              //this.categories = response.data.data; //is an object... default 
 
              this.$Progress.finish(); 
           })
-          .catch( (errors) => {  console.log(errors); }
-        )
+          .catch( (errors) => {  
+            //console.log(errors); 
+            this.$Progress.fail(); 
+            toastr.warning('Something is wrong!');
+          })
+      },
+
+      countTotalCategory(){
+        axios.get('/spa/count-category')
+          .then( ( response ) => {
+              this.countCategory = response.data;   //for total count show  
+          })
+          .catch( (errors) => {  
+            toastr.warning('Something is wrong!');
+          })
       },
 
       // Submit the form via a POST request
@@ -174,15 +268,18 @@
         this.form.post('/spa/category')
           .then(({ data }) => { 
 
-            Fire.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
+            FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
 
             toastr.success(data.success);             
             this.$Progress.finish();  
             this.form.reset();  //reset from after submit
             this.form.clear();
+
+            this.$refs.cat_name.focus(); //ret focus to first input filed. ref="" tag must be use
           })
           .catch( () => {
             this.$Progress.fail();
+            toastr.warning('Something is wrong!');
           })            
       },
 
@@ -205,7 +302,7 @@
         this.form.put('/spa/category/'+this.form.id)
           .then(({ data }) => { 
 
-            Fire.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
+            FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
                        
             this.$Progress.finish(); 
             toastr.success(data.success);   
@@ -214,9 +311,12 @@
             this.form.clear();
 
             this.editMode = false;
+
+            this.$refs.cat_name.focus(); //ret focus to first input filed. ref="" tag must be use
           })
           .catch( () => {
             this.$Progress.fail();
+            toastr.warning('Something is wrong!');
           }) 
 
 
@@ -241,7 +341,7 @@
                 .then( ({data}) => {
 
                   if(data.success){                  
-                    Fire.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update               
+                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update               
                     toastr.warning(data.success); 
                   }   
                   if(data.errors){
@@ -249,28 +349,74 @@
                   }
 
                 })                          
-                .catch(() => { })
+                .catch(() => {
+                  toastr.warning('Something is wrong!');
+                })
             }else{
               toastr.info( 'Your data is safe!');
             }
 
           })
-          .catch(() => {
+      }, //end Swal
 
+      unactiveCat(id){
+       // alert(id);
+        this.form.get('/spa/unactive-category/'+id)
+          .then( ({data}) => {
+            if(data.success){                  
+              FireEvent.$emit('AfterChange'); //this will reload data after create or update               
+              toastr.warning(data.success); 
+            } 
+          })                          
+          .catch(() => {
+            toastr.warning('Something is wrong!');
           })
-        }//end Swal
-      }, 
+      },
+
+      activeCat(id){
+        this.form.get('/spa/active-category/'+id)
+          .then( ({data}) => {
+            if(data.success){                  
+              FireEvent.$emit('AfterChange'); //this will reload data after create or update               
+              toastr.success(data.success); 
+            } 
+          })                          
+          .catch(() => {
+            toastr.warning('Something is wrong!');
+          })
+      },
+
+
+    }, /*--/method--*/
+
 
     // mounted() {
     //     //console.log('Component mounted.')
     // },
     created(){
-      /*Load when page called*/
-      this.fetchCategory(); 
+      
+      this.fetchCategory(); /*fetch category when Load page and also call from other FireEvent*/
+      this.countTotalCategory(); /*Count total category When Load page*/
+      this.parentCategory(); //get parent category only
 
-      /*Call Fire $on event when create or update data named as AfterChange*/
-      Fire.$on('AfterChange', () => {
-        this.fetchCategory(); 
+      //Call Searching FireEvent
+      FireEvent.$on('searching', () => {
+        let query = this.searchText;
+        axios.get('/spa/search-category?q='+query)
+        //this.form.get('/spa/search-category?q='+query)
+          .then( ( response ) => {
+              this.categories = response.data; // is an object... use when pagination
+          })
+          .catch(() => {
+
+          })
+      });
+
+      /*Call FireEvent $on event when create or update data named as AfterChange*/
+      FireEvent.$on('AfterChange', () => {
+        this.fetchCategory();
+        this.countTotalCategory(); /*Count total category When Load page*/
+        this.parentCategory(); //get parent category only
       });
 
       /*Load every 10 seconds (ES 6 version) but having performence issue */      

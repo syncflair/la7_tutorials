@@ -43,21 +43,36 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
   // Route::fallback(function() {
   //     return response()->json(['message' => 'Not Found!'], 404);
   // });
- 
+
 
   
   /*Vue Route*/
-    Route::resource('spa/category', 'Admin\Category\CategoryController@index');
-    Route::resource('spa/category', 'Admin\Category\CategoryController');
-    Route::resource('product', 'Admin\Product\ProductController');
+    Route::get('spa/unactive-category/{id}', 'Admin\Category\CategoryController@unactiveCategory');
+    Route::get('spa/active-category/{id}', 'Admin\Category\CategoryController@activeCategory');
+    Route::get('spa/search-category', 'Admin\Category\CategoryController@searchCategory');
+    Route::get('spa/parent-category', 'Admin\Category\CategoryController@getParentCategory');
+    Route::get('spa/count-category', 'Admin\Category\CategoryController@countCategory');
+    Route::resource('spa/category', 'Admin\Category\CategoryController', 
+      ['except' => ['edit', 'show', 'create'] ] ); 
+
+    Route::get('spa/unactive-product/{id}', 'Admin\Product\ProductController@unactiveProduct');
+    Route::get('spa/active-product/{id}', 'Admin\Product\ProductController@activeProduct');
+    Route::get('spa/search-product', 'Admin\Product\ProductController@searchProduct'); 
+    Route::get('spa/count-product', 'Admin\product\ProductController@countProduct');   
+    Route::resource('spa/product', 'Admin\Product\ProductController', 
+        ['except'=>['edit','show','create','store','update'] ]);
 
     // Vue: single page application (SPA)- Anything that not match that redirect to dashboard. combine vue route and laravel rourte. Best way place this route to last of the line 
    // Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '([A-z\d-\/_.]+)?' );    
     //Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '.*' ); 
-    Route::get('/spa/{path?}', function () {
-      return view('admin.dashboard');  
-    })->where('path', '([\spa\A-z\d-\/_.]+)?' ); 
+    
   /*End Vue Route*/
+
+    Route::get('/spa/{path?}', function () {
+      return view('admin.dashboard');
+      //return response()->view('admin.dashboard');
+      //return redirect('admin.dashboard');  
+    })->where(['path' => '([A-z\d-/_.]+)?'] );  //[-a-z0-9_\s]+
    
 
 

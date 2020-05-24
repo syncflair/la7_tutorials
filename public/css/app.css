@@ -48507,6 +48507,11 @@ body {
   margin-top: -30px;
 }
 
+.vue-card-item > .card-footer {
+  background-color: unset !important;
+  border-top: unset !important;
+}
+
 /*Title Box Design*/
 
 .titleBox {
@@ -48533,5 +48538,11 @@ body {
 label:not(.form-check-label):not(.custom-file-label) {
   font-weight: normal !important;
   margin-bottom: 0px !important;
+}
+
+/*Bootstrap table style*/
+
+.vue-card-item .card-body .table td {
+  border-top: unset !important;
 }
 

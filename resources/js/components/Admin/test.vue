@@ -1,6 +1,3 @@
 <template>
-
-<h2>Test of load other component</h2>
-
+    <h1>Import Component</h1>
 </template>
-

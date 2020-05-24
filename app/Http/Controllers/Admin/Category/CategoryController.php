@@ -16,13 +16,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-       $category = Category::latest()->paginate(10);
+       $category = Category::orderBy('id', 'DESC')->paginate(10);
        //$category = Category::get();
-        return $category;
-       //return response()->json($category);
-      //return response()->json(['success'=>'Category Created successfully.']);
-        //return ['message'=>'Return data is done'];
-        //return 'Index--';
+        //return $category;
+        return response()->json($category);
+        //return response($category->jsonSerialize(), Response::HTTP_OK);
+        //return response($category->jsonSerialize(), Response::HTTP_CREATED);
     }
 
     /**
@@ -32,8 +31,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
-        return 'create';
+        
     }
 
     /**
@@ -46,12 +44,20 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'cat_name' => 'required|min:2|max:40|unique:categories,cat_name',
-            'cat_slug' => 'required',
+            //'cat_slug' => 'required',
         ]);
 
         $data =array();
+        $data['parent_id']=$request->parent_id;
         $data['cat_name']=$request->cat_name;
-        $data['cat_slug']=$request->cat_slug;
+        //$data['cat_slug']=$request->cat_slug;
+        $data['cat_slug']= slug_generator($request->cat_name);//slug_generator get from helper
+        
+        if($request->is_enabled == NULL){
+            $data['is_enabled'] = 0;
+        }else{
+           $data['is_enabled']=$request->is_enabled; 
+        }
 
         Category::create($data); 
        
@@ -66,7 +72,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        return 'Show';
+       
     }
 
     /**
@@ -91,12 +97,22 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'cat_name' => 'required|min:2|max:40|unique:categories,cat_name,'.$id,
-            'cat_slug' => 'required|unique:categories,cat_slug,'.$id,
+            //'cat_slug' => 'required|unique:categories,cat_slug,'.$id,
         ]);
 
         $data =array();
+        $data['parent_id']=$request->parent_id;
         $data['cat_name']=$request->cat_name;
-        $data['cat_slug']=$request->cat_slug;
+        //$data['cat_slug']=$request->cat_slug;
+        $data['cat_slug']= slug_generator($request->cat_name);//slug_generator get from helper
+
+        
+
+        if($request->is_enabled == NULL){
+            $data['is_enabled'] = 0;
+        }else{
+           $data['is_enabled']=$request->is_enabled; 
+        }
 
 
         Category::whereId($id)->update($data); 
@@ -122,4 +138,52 @@ class CategoryController extends Controller
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
     }
+
+    public function searchCategory(Request $request){
+        //$search = $request->q;
+
+        if($search = \Request::get('q')){
+            $searchResult = Category::where(function($query) use ($search){
+                $query->where('cat_name','LIKE','%'.$search.'%')
+                        ->orWhere('cat_slug','LIKE','%'.$search.'%')
+                        ->orWhere('is_enabled','LIKE','%'.$search.'%');
+                        //->orWhere('updated_at','LIKE','%'.$search.'%');
+            })->paginate(10);
+        }else{
+            $searchResult = Category::latest()->paginate(10);
+        }
+
+        return $searchResult;
+
+    }
+
+    public function countCategory(){
+            $count = Category::select('id')->get();
+            return $count = $count->count();
+    }
+
+    public function unactiveCategory($id){       
+        $category = Category::find($id);
+        $category->is_enabled = 0;
+        $category->save();
+
+        return response()->json(['success'=> 'Category Inactive Now']);
+    }
+
+    public function activeCategory($id){
+        $category = Category::find($id);
+        $category->is_enabled = 1;
+        $category->save();
+
+        return response()->json(['success'=> 'Category Active Now']);
+    }
+
+    public function getParentCategory(){
+        $parentCategory = Category::whereNull('parent_id')
+                           ->select('id','cat_name')
+                           ->get();
+        return $parentCategory;
+    }
+
+
 }

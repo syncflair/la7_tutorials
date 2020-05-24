@@ -6,31 +6,44 @@
 
 require('./bootstrap');
 
-/*axios*/
-window.axios = require('axios');
-//import axios from 'axios';
-//window.axios = axios;
-//axios.defaults.baseURL = 'http://127.0.0.1:8000'
-
 /*Vue*/
 window.Vue = require('vue');
+Vue.config.productionTip = false //turn on production mode Remove when upload to public
 
-/*Moment - Format Dates*/
-import moment from 'moment'
-
-/*VueProgressBar*/
-import VueProgressBar from 'vue-progressbar'
-const options = { color: '#bffaf3', failedColor: '#874b4b', thickness: '5px',
-  transition: { speed: '0.2s', opacity: '0.6s', termination: 300 },
-  autoRevert: true, location: 'top', inverse: false }
-Vue.use(VueProgressBar, options)
+/*axios*/
+window.axios = require('axios');
+//axios.defaults.baseURL = 'http://127.0.0.1:8000'
 
 /*Import & Use Vue Router*/ 
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 
-//Vue.config.productionTip = false //turn on production mode Remove when upload to public
+//Import Vue Routers form VueRouters.js file
+import {routes} from './VueRouters' //import VueRouters (Customize)
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//Vue.component('router-view-admin-master', require('./components/Admin/AdminMaster.vue').default);
+
+//Use vue router
+const router = new VueRouter({
+  routes, // short for `routes: routes`
+  mode: 'history', //history mode - remove # (hash) from url
+  //mode: 'hash', //hash mode = use # (hash) to url (Default mode)
+})
+
+//pagination
+Vue.component('pagination', require('laravel-vue-pagination'));
+
+
+/*Moment - Format Dates*/
+import moment from 'moment'
+
+/*VueProgressBar*/
+import VueProgressBar from 'vue-progressbar'
+const options = { color: '#28a745', failedColor: '#dc3545', thickness: '4px',
+  transition: { speed: '0.2s', opacity: '0.6s', termination: 300 },
+  autoRevert: true, location: 'top', inverse: false }
+Vue.use(VueProgressBar, options)
 
 /** SweetAlert2 & Toast **/
 import Swal from 'sweetalert2' //import sweetAlert2
@@ -67,18 +80,7 @@ window.toastr = toastr;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
-//Import Vue Routers form VueRouters.js file
-import {routes} from './VueRouters' //import VueRouters (Customize)
-//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('router-view-admin-master', require('./components/Admin/AdminMaster.vue').default);
 
-
-//Use vue router
-const router = new VueRouter({
-  routes, // short for `routes: routes`
-  mode: 'history', //history mode - remove # (hash) from url
-  //mode: 'hash', //hash mode = use # (hash) to url (Default mode)
-})
 
 /*vform*/
 import { Form, HasError, AlertError } from 'vform'
@@ -97,13 +99,13 @@ Vue.filter('upText', function(text){
 
 /*Global VueJs Filter for date using moment js that import at the top*/
 Vue.filter('formatDate', function(data){
-  return moment(data).format('Do MMMM YYYY');
+  return moment(data).format('Do MMMM YY');
 });
 
 
 /*Register Fire as Globally event to use from any where from apps*/
-const Fire = new Vue();
-window.Fire = Fire; 
+const FireEvent = new Vue();
+window.FireEvent = FireEvent; 
 
 
 /**
@@ -124,5 +126,11 @@ const app = new Vue({
          immediate: true,
       }
     },
+
+    /*Global print function. add this @click.prevent="printMe" to any link that you want to print*/
+    printMe(){
+      window.print();
+    }
+
 
 });

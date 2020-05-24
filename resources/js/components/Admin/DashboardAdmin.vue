@@ -130,14 +130,13 @@
     </div>
    
 <testData></testData>
-<testData2></testData2>
+
 </div>
 </section><!-- Main content -->
 </template>
 
 <script>
     import testData from './test.vue'
-    import testData2 from './test2.vue'
 
 
     export default {
@@ -146,7 +145,6 @@
         },
         components:{
           testData,
-          testData2,
         }
     }
 </script>
