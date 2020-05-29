@@ -1,5 +1,8 @@
 /*Style for Vue - Single Page Appication (SPA)*/
 
+
+
+
 //Main vue-card
 .vue-card{border:unset !important; border-radius:unset !important; box-shadow:unset !important; background-color:unset !important;}
 .vue-card > .card-header{border-bottom:unset !important; padding: 10px 0px 10px 0px !important; background-color:unset !important;}
@@ -38,4 +41,10 @@ label:not(.form-check-label):not(.custom-file-label){font-weight:normal !importa
 /*Bootstrap table style*/
 .vue-card-item .card-body .table td {border-top:unset !important;}
 
+/*Autocomplete search style*/
+.serach-autocomplete{position: absolute; z-index: 1000; background: #fff; border:1px solid rgba(0, 0, 0, 0.105);  width: 89%; text-align: left; padding-left: 8px;}
+.serach-autocomplete p{margin-bottom:0px !important;}
+
+/*table Style*/
+.focusImgOnHover:focus{ height:60px !important; width:60px !important;}
 

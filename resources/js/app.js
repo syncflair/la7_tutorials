@@ -11,7 +11,7 @@ window.Vue = require('vue');
 Vue.config.productionTip = false //turn on production mode Remove when upload to public
 
 /*axios*/
-window.axios = require('axios');
+//window.axios = require('axios');
 //axios.defaults.baseURL = 'http://127.0.0.1:8000'
 
 /*Import & Use Vue Router*/ 
@@ -80,8 +80,6 @@ window.toastr = toastr;
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
-
-
 /*vform*/
 import { Form, HasError, AlertError } from 'vform'
 window.Form = Form;
@@ -123,7 +121,7 @@ const app = new Vue({
         handler: (to, from) => {
           document.title = to.meta.title || 'Sorboraho'
         },
-         immediate: true,
+         //immediate: true,
       }
     },
 

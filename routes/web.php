@@ -2,7 +2,8 @@
 
 /*Enable Query Log to check raw sql query*/
 DB::listen(function($sql) {
-   //print_r($sql->sql);   
+   //print_r($sql->sql); 
+   //dd($sql->sql);
     //print_r($sql->time);
 });
 //print_r( RoleId() );
@@ -68,11 +69,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     
   /*End Vue Route*/
 
-    Route::get('/spa/{path?}', function () {
-      return view('admin.dashboard');
-      //return response()->view('admin.dashboard');
-      //return redirect('admin.dashboard');  
-    })->where(['path' => '([A-z\d-/_.]+)?'] );  //[-a-z0-9_\s]+
+    
    
 
 
@@ -123,3 +120,12 @@ Route::get('email-chek', function () {
    // return view('auth.login'); //redirect to login page    
 });
 
+
+Route::get('/spa/{anypath}', function () {
+  //Route::get('/{path}/{path1}', function () {
+      return view('admin.dashboard');
+      //return response()->view('admin.dashboard');
+      //return redirect('admin.dashboard');  
+    })->where('anypath', '[\/\w\.-]*');//->where(['path' => '([A-z\d-/_.]+)?'] );  //[-a-z0-9_\s]+ //
+
+//Route::fallback('Admin\AdminController@index');

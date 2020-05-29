@@ -181,6 +181,9 @@ return [
         /*My Custom Helper Provider*/
         App\Providers\HelperServiceProvider::class,
 
+        /*Intervention Image*/
+        Intervention\Image\ImageServiceProvider::class,
+
     ],
 
     /*
@@ -236,6 +239,9 @@ return [
         'DataTables' => Yajra\DataTables\Facades\DataTables::class, /*Yajra Datatable*/
 
         'MyHelper' => App\Helpers\Helper::class, //My Custom Helper
+
+        /*Intervention Image*/
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

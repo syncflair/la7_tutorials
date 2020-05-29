@@ -43,7 +43,6 @@ function CustomeBreadcrumbs(){
 function slug_generator($string){
 	$string = str_replace(' ', '-', $string);
 	$string = preg_replace('/[^A-Za-z0-9\-]/', '', $string);
-
 	return strtolower(preg_replace('/-+/', '-', $string));
 
 }

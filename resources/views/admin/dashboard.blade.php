@@ -8,7 +8,7 @@
 
 @section('content')
 
-<!-- Vue display here -->
+<!-- Vue display here :key="$route.fullPath"--> 
 <router-view></router-view>
 <!-- Vue progress bar display here -->
 <vue-progress-bar></vue-progress-bar>

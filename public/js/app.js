@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "js/chunks/" + ({}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -101078,57 +101078,64 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routes", function() { return routes; });
 /*define All Vue Routers her*/
-// import Category from './components/Admin/Category/category.vue'
-var Dashboard = function Dashboard() {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/Admin/DashboardAdmin.vue */ "./resources/js/components/Admin/DashboardAdmin.vue"));
-};
-
-var Parties = function Parties() {
-  return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/Admin/Client/Parties.vue */ "./resources/js/components/Admin/Client/Parties.vue"));
-};
-
-var Category = function Category() {
-  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./components/Admin/Category/category.vue */ "./resources/js/components/Admin/Category/category.vue"));
-};
-
-var Product = function Product() {
-  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./components/Admin/Product/product.vue */ "./resources/js/components/Admin/Product/product.vue"));
-}; //const NotFound = () => import('./components/Admin/NotFound.vue')
+// import Dashboard from './components/Admin/DashboardAdmin.vue';
+// import Parties from './components/Admin/Client/Parties.vue';
+// import Category from './components/Admin/Category/Category.vue';
+// import Product from './components/Admin/Product/Product.vue';
+// const Dashboard = () => import('./components/Admin/DashboardAdmin.vue')
+//const Parties = () => import('./components/Admin/Client/Parties.vue')
+//const Category = () => import('./components/Admin/Category/Category.vue')
+//const Product = () => import('./components/Admin/Product/Product.vue')
+//const NotFound = () => import('./components/Admin/NotFound.vue')
 //const routes = [
-
-
-var routes = [{
+var routes = [//{ path: '/dashboard', component: Dashboard, meta: { title: 'Dashboard'} },
+{
   path: '/dashboard',
-  component: Dashboard,
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./components/Admin/DashboardAdmin.vue */ "./resources/js/components/Admin/DashboardAdmin.vue"));
+  },
   meta: {
     title: 'Dashboard'
   }
 }, {
   path: '/spa/dashboard',
-  component: Dashboard,
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./components/Admin/DashboardAdmin.vue */ "./resources/js/components/Admin/DashboardAdmin.vue"));
+  },
   meta: {
     title: 'Dashboard'
   }
 }, {
   path: '/spa/parties',
-  component: Parties,
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/Admin/Client/Parties.vue */ "./resources/js/components/Admin/Client/Parties.vue"));
+  },
   meta: {
     title: 'Parties'
   }
 }, {
   path: '/spa/category',
-  component: Category,
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/Admin/Category/Category.vue */ "./resources/js/components/Admin/Category/Category.vue"));
+  },
   meta: {
     title: 'Category'
   }
 }, {
   path: '/spa/product',
-  component: Product,
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/Admin/Product/Product.vue */ "./resources/js/components/Admin/Product/Product.vue"));
+  },
   meta: {
     title: 'Product'
   }
-} //{ path: '*', component: NotFound, meta: { title: 'NotFound'} },
-];
+} // { path: '/dashboard', component: () => import(/* webpackChunkName: "dashboard" */ './components/Admin/DashboardAdmin.vue'), meta: { title: 'Dashboard'} },
+// { path: '/spa/dashboard', component: () => import(/* webpackChunkName: "dashboard" */'./components/Admin/DashboardAdmin.vue'), meta: { title: 'Dashboard'} },
+// { path: '/spa/parties', component: () => import( webpackChunkName: "parties" './components/Admin/Client/Parties.vue'), meta: { title: 'Parties'} },
+// { path: '/spa/category', component: () => import(/* webpackChunkName: "category" */'./components/Admin/Category/Category.vue'), meta: { title: 'Category'} },
+// { path: '/spa/product', component: () => import(/* webpackChunkName: "product" */'./components/Admin/Product/Product.vue'), meta: { title: 'Product'} },
+//{ path: '*', component: NotFound, meta: { title: 'NotFound'} },
+]; // /* webpackChunkName: "dashboard" */ -- for create split chunks js file for vuer
 
 /***/ }),
 
@@ -101166,8 +101173,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.config.productionTip = false; //turn on production mode Remove when upload to public
 
 /*axios*/
-
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); //axios.defaults.baseURL = 'http://127.0.0.1:8000'
+//window.axios = require('axios');
+//axios.defaults.baseURL = 'http://127.0.0.1:8000'
 
 /*Import & Use Vue Router*/
 
@@ -101282,8 +101289,8 @@ var app = new Vue({
     '$route': {
       handler: function handler(to, from) {
         document.title = to.meta.title || 'Sorboraho';
-      },
-      immediate: true
+      } //immediate: true,
+
     }
   },
 
@@ -101376,15 +101383,27 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/sass/websiteCSS/main.scss":
+/*!*********************************************!*\
+  !*** ./resources/sass/websiteCSS/main.scss ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/*!***************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/websiteCSS/main.scss ***!
+  \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\xampp\htdocs\laravel\la7_tutorials\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel\la7_tutorials\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\laravel\la7_tutorials\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel\la7_tutorials\resources\sass\websiteCSS\main.scss */"./resources/sass/websiteCSS/main.scss");
 
 
 /***/ })

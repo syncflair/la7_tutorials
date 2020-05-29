@@ -84,22 +84,38 @@
 	<!-- show Category Sub Category -->
 	<div class="col-md-6 offset-md-3">
 	<h3>Category</h3>
+
 		<ul><!-- Here sub_category is function in Category Model -->
-		@foreach( \App\Models\Category::with('sub_category')->where('parent_id', null)->get() as $category )
-			@if($category->sub_category->count() > 0)
-				<li>{{ $category->cat_name }}</li>
+		@foreach( \App\Models\Category::whereNull('parent_id')->with('childrenCategories')->where('is_enabled', '1')->get() as $category)
+			
+				<li>{{ $category->cat_name }}</li> <!--Fist Level-->
 
-				@foreach($category->sub_category as $sub_category )
+				@if($category->childrenCategories->count() > 0)
 					<ul>
-						<li> {{ $sub_category->cat_name }}</li>
-					</ul>
-				@endforeach
+						@foreach($category->childrenCategories as $childCategory )
 
-			@else
-				<li>{{ $category->cat_name }}</li>
-			@endif
+							<li> {{ $childCategory->cat_name }}</li> <!--Secound Level-->
+
+							@if($childCategory->childrenCategories->count() > 0)
+								
+								<ul>
+									@foreach($childCategory->childrenCategories as $subChildCategory )
+
+										<li> {{ $subChildCategory->cat_name }} </li> <!--Third Level-->
+										
+									@endforeach
+								</ul>
+
+							@endif
+
+						@endforeach
+					</ul>
+				@endif
+
 		@endforeach
 		</ul>
+
+		
 
 	</div>
 
