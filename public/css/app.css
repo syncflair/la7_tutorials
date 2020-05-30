@@ -48004,6 +48004,58 @@ button.toast-close-button {
   }
 }
 
+/*BG Color */
+
+.bg-primary {
+  background-color: #007bff !important;
+}
+
+.bg-info {
+  background-color: #17a2b8 !important;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+}
+
+.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+.bg-yellow {
+  background-color: #f39c12 !important;
+}
+
+/*Color*/
+
+.primary {
+  color: #007bff !important;
+}
+
+.info {
+  color: #17a2b8 !important;
+}
+
+.success {
+  color: #28a745 !important;
+}
+
+.warning {
+  color: #ffc107 !important;
+}
+
+.danger {
+  color: #dc3545 !important;
+}
+
+.yellow {
+  color: #f39c12 !important;
+}
+
 body {
   zoom: 0.9 !important;
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -48293,58 +48345,6 @@ body {
   color: #000000;
 }
 
-/*BG Color */
-
-.bg-primary {
-  background-color: #007bff !important;
-}
-
-.bg-info {
-  background-color: #17a2b8 !important;
-}
-
-.bg-success {
-  background-color: #28a745 !important;
-}
-
-.bg-warning {
-  background-color: #ffc107 !important;
-}
-
-.bg-danger {
-  background-color: #dc3545 !important;
-}
-
-.bg-yellow {
-  background-color: #f39c12 !important;
-}
-
-/*Color*/
-
-.primary {
-  color: #007bff !important;
-}
-
-.info {
-  color: #17a2b8 !important;
-}
-
-.success {
-  color: #28a745 !important;
-}
-
-.warning {
-  color: #ffc107 !important;
-}
-
-.danger {
-  color: #dc3545 !important;
-}
-
-.yellow {
-  color: #f39c12 !important;
-}
-
 /*Info-box Style*/
 
 .info-box {
@@ -48376,8 +48376,9 @@ body {
 /*btn text color*/
 
 .cusotme-card {
-  box-shadow: unset !important;
   border: unset !important;
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0.125), 0 3px 7px rgba(0, 0, 0, 0.2);
+  /*box-shadow:unset !important;*/
 }
 
 .cusotme-card > .card-header {
@@ -48438,6 +48439,13 @@ body {
   border-top: unset !important;
 }
 
+/*Bootstrap Table */
+
+.table th,
+.table td {
+  border-top: unset !important;
+}
+
 /*Style for Vue - Single Page Appication (SPA)*/
 
 .vue-card {
@@ -48465,10 +48473,9 @@ body {
 }
 
 .vue-card-item {
-  /*border-radius:unset !important;*/
-  box-shadow: unset !important;
-  border: 1px solid rgba(0, 0, 0, 0.105);
-  /*border:unset !important;*/
+  /*border-radius:unset !important; box-shadow:unset !important; border:1px solid rgba(0, 0, 0, 0.105);*/
+  box-shadow: 0 0 0px rgba(0, 0, 0, 0.125), 0 3px 7px rgba(0, 0, 0, 0.2);
+  border: unset !important;
 }
 
 .vue-card-item > .card-header {

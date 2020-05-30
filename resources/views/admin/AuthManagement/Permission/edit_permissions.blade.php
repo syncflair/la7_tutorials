@@ -58,11 +58,16 @@
     <section class="content">      
       <div class="container-fluid">
 
-        <div class="form-body mt-3">
-          <div class="col-md-10 offset-1 pt-2 pb-5">
-          		<h3 class="form-head pt-0 mb-3"> Edit Permissions </h3>
-      		  @include('admin.AuthManagement.Permission.edit_permissions_form')
+        <div class="card cusotme-card mt-2 mb-4">
+          <div class="card-head"></div>
+
+          <div class="card-body mt-3">
+            <div class="col-md-10 offset-1 pt-2 pb-5">
+            		<h3 class="form-head pt-0 mb-3"> Edit Permissions </h3>
+        		  @include('admin.AuthManagement.Permission.edit_permissions_form')
+            </div>
           </div>
+
         </div>
 
       </div><!-- /.container-fluid -->

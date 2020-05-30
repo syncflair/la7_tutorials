@@ -21,32 +21,12 @@ mix.js('resources/js/app.js', 'public/js')
 //move vue chunks file to js/chunks folder. By default this will generated in Public folder 
 mix.webpackConfig({
     output: {
-        chunkFilename: 'js/chunks/[name].js',//replace with your path
+        //chunkFilename: 'js/chunks/[name].[chunkhash].js',//replace with your path
+        chunkFilename: mix.inProduction() ? 'js/chunks/production/[name].[chunkhash].js' : 'js/chunks/[name].js'
     },
 });
 
 
-// // Override mix internal webpack output configuration
 
-// mix.config.webpackConfig.output = {
-//    //chunkFilename: 'js/[name].bundle.js',
-//    publicPath: 'chunk/',
-// };
-
-/*mix.webpackConfig(webpack => {
-	return {
-		output: {
-			publicPath: 'js/',
-			//filename: '[name].js',
-			//chunkFilename: 'js/[name].js',
-		},
-	};
-});//*/
-
-// mix.webpackConfig({
-//     output: {
-//         chunkFilename: 'js/[name].[chunkhash].js',
-//     },
-// });
 
 

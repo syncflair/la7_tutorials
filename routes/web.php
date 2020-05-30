@@ -8,10 +8,20 @@ DB::listen(function($sql) {
 });
 //print_r( RoleId() );
 //echo \Config::get('constants.CommonFilesPath'); //get constants from app/config/constants.php
-
 //use Illuminate\Support\Facades\Route;
-
 //use App\Mail\ContactUsMail;
+
+Route::get('/', function () {
+    return view('welcome'); 
+   // return view('auth.login'); //redirect to login page    
+});
+Route::get('email-chek', function () {
+  //return view('emails.contact_us_email'); 
+  return new ContactUsMail();
+  //return new UserNotification();
+   // return view('emails.user_notification'); 
+   // return view('auth.login'); //redirect to login page    
+});
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +35,6 @@ DB::listen(function($sql) {
 */
 
 
-
-
-
-
-
-
 //Auth::routes(); //Default Laravel
 //Auth::routes(['register' => false ]); //disable Register route. No one can register to this site any more.
 Auth::routes([
@@ -39,15 +43,15 @@ Auth::routes([
   'verify' => true  //Enable Email verification function.
 ]);//*/
 
+
+/**************************************** Admin middleware *****************************************************/
 Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], function() {
 
   // Route::fallback(function() {
   //     return response()->json(['message' => 'Not Found!'], 404);
   // });
 
-
-  
-  /*Vue Route*/
+    /*********************************************Vue Route****************************************************/
     Route::get('spa/unactive-category/{id}', 'Admin\Category\CategoryController@unactiveCategory');
     Route::get('spa/active-category/{id}', 'Admin\Category\CategoryController@activeCategory');
     Route::get('spa/search-category', 'Admin\Category\CategoryController@searchCategory');
@@ -61,13 +65,8 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::get('spa/search-product', 'Admin\Product\ProductController@searchProduct'); 
     Route::get('spa/count-product', 'Admin\product\ProductController@countProduct');   
     Route::resource('spa/product', 'Admin\Product\ProductController', 
-        ['except'=>['edit','show','create','store','update'] ]);
-
-    // Vue: single page application (SPA)- Anything that not match that redirect to dashboard. combine vue route and laravel rourte. Best way place this route to last of the line 
-   // Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '([A-z\d-\/_.]+)?' );    
-    //Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '.*' ); 
-    
-  /*End Vue Route*/
+        ['except'=>['edit','show','create','store','update'] ]);   
+    /**********************************************End Vue Route *************************************************/
 
     
    
@@ -88,44 +87,30 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 
     Route::resource('permission', 'Admin\AuthManagement\PermissionController');
 
-    
-
-
 });
+/**************************************** End Admin middleware *****************************************************/
 
+/**************************************** User middleware *****************************************************/
 Route::group(['middleware'=>['user','auth','AuthPermission','verified'] ], function(){
 
     Route::get('home', 'HomeController@index')->name('home');
 
 });
+/****************************************end User middleware **************************************************/
 
 
 
-//Website Routes Link
+/****************************************Website Routes Link *****************************************************/
 Route::get('contact-us', 'Website\ContactUsController@index')->name('contact-us');
 Route::post('send-message-query', 'Website\ContactUsController@sendMessageQuery')->name('send-message-query');
 
+/****************************************End Website Routes Link *************************************************/
 
 
 
-Route::get('/', function () {
-    return view('welcome'); 
-   // return view('auth.login'); //redirect to login page    
-});
-Route::get('email-chek', function () {
-  //return view('emails.contact_us_email'); 
-  return new ContactUsMail();
-  //return new UserNotification();
-   // return view('emails.user_notification'); 
-   // return view('auth.login'); //redirect to login page    
-});
 
-
+// Vue: single page application (SPA)- Any route that not match that redirect to dashboard. combine vue route and laravel rourte. Best way place this route to last of the line    
+//Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '.*' ); 
 Route::get('/spa/{anypath}', function () {
-  //Route::get('/{path}/{path1}', function () {
-      return view('admin.dashboard');
-      //return response()->view('admin.dashboard');
-      //return redirect('admin.dashboard');  
-    })->where('anypath', '[\/\w\.-]*');//->where(['path' => '([A-z\d-/_.]+)?'] );  //[-a-z0-9_\s]+ //
-
-//Route::fallback('Admin\AdminController@index');
+      return view('admin.dashboard'); 
+    })->where(['path' => '([A-z\d-/_.]+)?'] );

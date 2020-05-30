@@ -31,8 +31,9 @@
           
                    
           <li class="nav-item">
-            <a href="{{URL::to('/dashboard')}}" class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
+            <!-- {{ Request::is('dashboard*') ? 'active' : '' }} -->
+            <a href="{{URL::to('/dashboard')}}" class="nav-link ">
+              <i class="nav-icon fas fa-tachometer-alt"></i> 
               <p>
                 Dashboard
               </p>
@@ -40,7 +41,8 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/spa/parties" class="nav-link">
+             <router-link :to="{name: 'Parties', params:{} }" class="nav-link">
+            <!-- <router-link to="/spa/Parties" class="nav-link">            -->
               <i class="nav-icon fas fa-user-friends"></i>
               <p>
                 Parties
@@ -50,21 +52,46 @@
           </li>
 
           <li class="nav-item">
-            <router-link to="/spa/category" class="nav-link">
+            <router-link to="/spa/Categories" class="nav-link">
               <i class="nav-icon fas fa-boxes"></i>
               <p>
-                Categoris
+                Category
               </p>
             </router-link>
           </li>
 
           <li class="nav-item">
-            <router-link to="/spa/product" class="nav-link">
+            <router-link to="/spa/Items" class="nav-link">
               <i class="nav-icon fas fa-boxes"></i>
               <p>
                 Items
               </p>
             </router-link>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <!--<i class="nav-icon fas fa-chart-pie"></i>-->
+              <i class="nav-icon fas fa-boxes blue"></i>
+              <p>
+                Vue Components
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to="/spa/multiComponent" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Multi Components</p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <a  class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Child</p>
+                </a>
+              </li>
+            </ul>
           </li>
 
           <li class="nav-item has-treeview">

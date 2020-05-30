@@ -126,9 +126,9 @@ const app = new Vue({
     },
 
     /*Global print function. add this @click.prevent="printMe" to any link that you want to print*/
-    printMe(){
-      window.print();
-    }
+    // printMe(){
+    //   window.print();
+    // }
 
 
 });

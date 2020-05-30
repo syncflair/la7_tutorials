@@ -1,3 +1,19 @@
+/*BG Color */
+.bg-primary{background-color: #007bff !important;}
+.bg-info{background-color: #17a2b8 !important;}
+.bg-success{background-color: #28a745 !important;}
+.bg-warning{background-color: #ffc107 !important;}
+.bg-danger{background-color: #dc3545 !important;}
+.bg-yellow{background-color: #f39c12 !important;}
+
+/*Color*/
+.primary{color: #007bff !important;}
+.info{color: #17a2b8 !important;}
+.success{color: #28a745 !important;}
+.warning{color: #ffc107 !important;}
+.danger{color: #dc3545 !important;}
+.yellow{color: #f39c12 !important;}
+
 body{
     zoom: 0.9 !important;   
 
@@ -99,24 +115,6 @@ body{
 .main-footer{    border-top: 1px solid #d2d6de; color: #000000;}
 
 
-/*BG Color */
-.bg-primary{background-color: #007bff !important;}
-.bg-info{background-color: #17a2b8 !important;}
-.bg-success{background-color: #28a745 !important;}
-.bg-warning{background-color: #ffc107 !important;}
-.bg-danger{background-color: #dc3545 !important;}
-.bg-yellow{background-color: #f39c12 !important;}
-
-/*Color*/
-.primary{color: #007bff !important;}
-.info{color: #17a2b8 !important;}
-.success{color: #28a745 !important;}
-.warning{color: #ffc107 !important;}
-.danger{color: #dc3545 !important;}
-.yellow{color: #f39c12 !important;}
-
-
-
 /*Info-box Style*/
 .info-box{padding:0;}
 .info-box .info-box-icon{width:95px;border-radius:unset; box-shadow:unset;}
@@ -128,7 +126,7 @@ body{
 
 .btn { color: #ffffff !important; } /*btn text color*/
 
-.cusotme-card {box-shadow:unset !important; border:unset !important;}
+.cusotme-card { border:unset !important; box-shadow: 0 0 0px rgba(0, 0, 0, 0.125), 0 3px 7px rgba(0, 0, 0, 0.2); /*box-shadow:unset !important;*/}
 .cusotme-card > .card-header{background-color:unset; border-bottom:none !important; }
 .cusotme-card > .card-footer{background-color:unset !important; border-top:none !important; }
 .cusotme-card >form > .card-footer{background-color:unset !important; border-top:none !important; }
@@ -146,6 +144,8 @@ body{
 .modal-header{border-bottom: unset !important;}
 .modal-footer{ border-top: unset !important;}
 
+/*Bootstrap Table */
+.table th, .table td{border-top:unset !important;}
 
 
 

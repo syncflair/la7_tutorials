@@ -222,7 +222,7 @@
 </template>
 
 <script>
-  import CategoryList from './CategoryList.vue'
+  //import CategoryList from './CategoryList.vue'
 
   export default {
     name: "Category",
@@ -515,7 +515,7 @@
     },
 
     components:{
-      CategoryList,
+      //CategoryList,
     },
 
   } /*--/export default--*/

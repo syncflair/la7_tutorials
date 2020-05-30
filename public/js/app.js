@@ -101079,20 +101079,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routes", function() { return routes; });
 /*define All Vue Routers her*/
 // import Dashboard from './components/Admin/DashboardAdmin.vue';
-// import Parties from './components/Admin/Client/Parties.vue';
-// import Category from './components/Admin/Category/Category.vue';
-// import Product from './components/Admin/Product/Product.vue';
 // const Dashboard = () => import('./components/Admin/DashboardAdmin.vue')
 //const Parties = () => import('./components/Admin/Client/Parties.vue')
-//const Category = () => import('./components/Admin/Category/Category.vue')
-//const Product = () => import('./components/Admin/Product/Product.vue')
 //const NotFound = () => import('./components/Admin/NotFound.vue')
 //const routes = [
 var routes = [//{ path: '/dashboard', component: Dashboard, meta: { title: 'Dashboard'} },
 {
   path: '/dashboard',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./components/Admin/DashboardAdmin.vue */ "./resources/js/components/Admin/DashboardAdmin.vue"));
+    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/Admin/DashboardAdmin.vue */ "./resources/js/components/Admin/DashboardAdmin.vue"));
   },
   meta: {
     title: 'Dashboard'
@@ -101100,42 +101095,63 @@ var routes = [//{ path: '/dashboard', component: Dashboard, meta: { title: 'Dash
 }, {
   path: '/spa/dashboard',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./components/Admin/DashboardAdmin.vue */ "./resources/js/components/Admin/DashboardAdmin.vue"));
+    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/Admin/DashboardAdmin.vue */ "./resources/js/components/Admin/DashboardAdmin.vue"));
   },
   meta: {
     title: 'Dashboard'
   }
 }, {
-  path: '/spa/parties',
+  path: '/spa/Parties',
+  name: 'Parties',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/Admin/Client/Parties.vue */ "./resources/js/components/Admin/Client/Parties.vue"));
+    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/Admin/Client/Parties.vue */ "./resources/js/components/Admin/Client/Parties.vue"));
   },
   meta: {
     title: 'Parties'
   }
 }, {
-  path: '/spa/category',
+  path: '/spa/Categories',
+  name: 'Categories',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/Admin/Category/Category.vue */ "./resources/js/components/Admin/Category/Category.vue"));
+    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/Admin/Category/Categories.vue */ "./resources/js/components/Admin/Category/Categories.vue"));
   },
   meta: {
     title: 'Category'
   }
 }, {
-  path: '/spa/product',
+  path: '/spa/Items',
+  name: 'Items',
   component: function component() {
-    return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/Admin/Product/Product.vue */ "./resources/js/components/Admin/Product/Product.vue"));
+    return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./components/Admin/Product/Items.vue */ "./resources/js/components/Admin/Product/Items.vue"));
   },
   meta: {
     title: 'Product'
   }
-} // { path: '/dashboard', component: () => import(/* webpackChunkName: "dashboard" */ './components/Admin/DashboardAdmin.vue'), meta: { title: 'Dashboard'} },
+}, {
+  path: '/spa/multiComponent',
+  name: 'multiComponent',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./components/Admin/MultiComponent/multiComponent.vue */ "./resources/js/components/Admin/MultiComponent/multiComponent.vue"));
+  },
+  meta: {
+    title: 'Component Communication'
+  }
+}, {
+  path: '/spa/*',
+  component: function component() {
+    return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./components/Admin/NotFound.vue */ "./resources/js/components/Admin/NotFound.vue"));
+  },
+  meta: {
+    title: 'NotFound'
+  }
+}
+/*/ -- for create split chunks js file name for vuer*/
+// { path: '/dashboard', component: () => import(/* webpackChunkName: "dashboard" */ './components/Admin/DashboardAdmin.vue'), meta: { title: 'Dashboard'} },
 // { path: '/spa/dashboard', component: () => import(/* webpackChunkName: "dashboard" */'./components/Admin/DashboardAdmin.vue'), meta: { title: 'Dashboard'} },
 // { path: '/spa/parties', component: () => import( webpackChunkName: "parties" './components/Admin/Client/Parties.vue'), meta: { title: 'Parties'} },
 // { path: '/spa/category', component: () => import(/* webpackChunkName: "category" */'./components/Admin/Category/Category.vue'), meta: { title: 'Category'} },
 // { path: '/spa/product', component: () => import(/* webpackChunkName: "product" */'./components/Admin/Product/Product.vue'), meta: { title: 'Product'} },
-//{ path: '*', component: NotFound, meta: { title: 'NotFound'} },
-]; // /* webpackChunkName: "dashboard" */ -- for create split chunks js file for vuer
+];
 
 /***/ }),
 
@@ -101292,12 +101308,12 @@ var app = new Vue({
       } //immediate: true,
 
     }
-  },
-
-  /*Global print function. add this @click.prevent="printMe" to any link that you want to print*/
-  printMe: function printMe() {
-    window.print();
   }
+  /*Global print function. add this @click.prevent="printMe" to any link that you want to print*/
+  // printMe(){
+  //   window.print();
+  // }
+
 });
 
 /***/ }),
