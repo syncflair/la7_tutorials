@@ -128,23 +128,16 @@
 
         </div>
     </div>
-   
-<testData></testData>
+
 
 </div>
 </section><!-- Main content -->
 </template>
 
 <script>
-    import testData from './test.vue'
-
-
     export default {
         mounted() {
-            console.log('Component mounted.')
-        },
-        components:{
-          testData,
+            //console.log('Component mounted.')
         }
     }
 </script>

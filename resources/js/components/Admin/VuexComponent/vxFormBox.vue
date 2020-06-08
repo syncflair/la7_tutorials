@@ -8,7 +8,7 @@
     <div v-show="editMode" class="card-header"><h4>Update Category</h4></div>
 
     <div class="card-body card-body-custome">
-
+       	
         <form @submit.prevent=" editMode ? updateCategory() : storeCategory() " >
          <!--  <form @submit.prevent="storeCategory()" > -->
 
@@ -31,14 +31,16 @@
         </form>
 
     </div>
+
   </div><!-- /vue-card-item -->
 
 
 </template>
 
 <script>
+  import { mapState } from 'vuex' //for user MapState
     export default {
-      name: "formBox",
+      name: "vxFormBox",
       data () {
         return {
         editMode: false, //Use this for add edit using the same form
@@ -51,7 +53,12 @@
           })
         }
       },
+      computed: {
+         ...mapState( 
+             'CategoryStore', ['pagination']
 
+          )
+      },
       methods:{
 
         // Submit the form via a POST request
@@ -62,7 +69,8 @@
           .then(({ data }) => { 
 
             if(data.success){ 
-              FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
+              this.$store.dispatch('CategoryStore/fetchCategory', this.pagination.per_page);
+
               toastr.success(data.success);             
               this.$Progress.finish();  
               this.form.reset();  //reset from after submit
@@ -101,7 +109,8 @@
             .then(({ data }) => { 
 
               if(data.success){ 
-               FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
+                this.$store.dispatch('CategoryStore/fetchCategory', this.pagination.per_page);
+                //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
                            
                 this.$Progress.finish(); 
                 toastr.success(data.success);               
@@ -136,9 +145,7 @@
 
 
       },
-
-      mounted() {
-          //console.log('Component mounted.')
-      }
+    
     }
+   
 </script>

@@ -10,33 +10,8 @@ require('./bootstrap');
 window.Vue = require('vue');
 Vue.config.productionTip = false //turn on production mode Remove when upload to public
 
-/*axios*/
-//window.axios = require('axios');
-//axios.defaults.baseURL = 'http://127.0.0.1:8000'
-
-/*Import & Use Vue Router*/ 
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
-
-
-//Import Vue Routers form VueRouters.js file
-import {routes} from './VueRouters' //import VueRouters (Customize)
-//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-//Vue.component('router-view-admin-master', require('./components/Admin/AdminMaster.vue').default);
-
-//Use vue router
-const router = new VueRouter({
-  routes, // short for `routes: routes`
-  mode: 'history', //history mode - remove # (hash) from url
-  //mode: 'hash', //hash mode = use # (hash) to url (Default mode)
-})
-
-//pagination
-Vue.component('pagination', require('laravel-vue-pagination'));
-
-
-/*Moment - Format Dates*/
-import moment from 'moment'
+/*Vuetify (not install now)*/
+//import vuetify from './VueVuetify'
 
 /*VueProgressBar*/
 import VueProgressBar from 'vue-progressbar'
@@ -44,6 +19,42 @@ const options = { color: '#28a745', failedColor: '#dc3545', thickness: '4px',
   transition: { speed: '0.2s', opacity: '0.6s', termination: 300 },
   autoRevert: true, location: 'top', inverse: false }
 Vue.use(VueProgressBar, options)
+
+
+/*Vuex*/
+import store from './VueVuex'
+
+/*Import & Use Vue Router*/ 
+  // import VueRouter from 'vue-router'
+  // Vue.use(VueRouter)
+
+  //Import Vue Routers form VueRouters.js file
+  //import {routes} from './VueRouters' //import VueRouters (Customize)
+  import router from './VueRouters' //import VueRouters (Customize)
+
+  //Use vue router
+  // const router = new VueRouter({
+  //   routes, // short for `routes: routes`
+  //   mode: 'history', //history mode - remove # (hash) from url
+  //   //mode: 'hash', //hash mode = use # (hash) to url (Default mode)
+  // })
+/*Import & Use Vue Router*/ 
+
+
+//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+//Vue.component('router-view-admin-master', require('./components/Admin/AdminMaster.vue').default);
+//Global Components
+Vue.component('adminwrapper', require('./components/Admin/AdminWrapper.vue').default);
+Vue.component('pagination-app', require('./components/Admin/GlobalComponents/pagination-app.vue').default);
+//import adminwrapper from './components/Admin/AdminWrapper.vue'; //
+import counttest from './components/Admin/MultiComponent/countTest.vue';
+
+//pagination
+Vue.component('pagination', require('laravel-vue-pagination'));
+
+
+/*Moment JS - Format Dates*/
+import moment from 'moment'
 
 /** SweetAlert2 & Toast **/
 import Swal from 'sweetalert2' //import sweetAlert2
@@ -106,6 +117,10 @@ const FireEvent = new Vue();
 window.FireEvent = FireEvent; 
 
 
+
+
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -115,7 +130,7 @@ window.FireEvent = FireEvent;
 const app = new Vue({
     el: '#app',
     router, //use Vue router from globally
-    
+    store,
     watch: { //for title
       '$route':{
         handler: (to, from) => {
@@ -126,9 +141,14 @@ const app = new Vue({
     },
 
     /*Global print function. add this @click.prevent="printMe" to any link that you want to print*/
-    // printMe(){
-    //   window.print();
-    // }
+    printMe(){
+      window.print();
+    },
+
+    /*// Register components as globaly ....*/
+    components: { 
+      counttest, 
+    }, 
 
 
 });

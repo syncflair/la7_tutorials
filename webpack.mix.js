@@ -22,7 +22,8 @@ mix.js('resources/js/app.js', 'public/js')
 mix.webpackConfig({
     output: {
         //chunkFilename: 'js/chunks/[name].[chunkhash].js',//replace with your path
-        chunkFilename: mix.inProduction() ? 'js/chunks/production/[name].[chunkhash].js' : 'js/chunks/[name].js'
+        //chunkFilename: mix.inProduction() ? 'js/chunks/production/[name].[chunkhash].js' : 'js/chunks/[name].js'
+        chunkFilename: mix.inProduction() ? 'js/chunks/[name].[chunkhash].js' : 'js/chunks/[name].js'
     },
 });
 

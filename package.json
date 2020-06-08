@@ -26,13 +26,13 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.13.0",
         "admin-lte": "^3.0.4",
-        "cookie": "^0.4.1",
         "laravel-vue-pagination": "^2.3.1",
         "moment": "^2.26.0",
         "sweetalert2": "^9.10.12",
         "toastr": "^2.1.4",
         "vform": "^1.0.1",
         "vue-progressbar": "^0.7.5",
-        "vue-router": "^3.1.6"
+        "vue-router": "^3.1.6",
+        "vuex": "^3.4.0"
     }
 }

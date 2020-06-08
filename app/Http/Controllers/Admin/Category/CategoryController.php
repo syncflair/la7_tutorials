@@ -35,7 +35,7 @@ class CategoryController extends Controller
             //->where('categories.parent_id', Null)
             //->groupBy('categories.parent_id')
             //->orderBy('categories.cat_name');
-            ->paginate(100);
+            ->paginate(10);
        
         return response()->json($category);
         //$category = Category::get();

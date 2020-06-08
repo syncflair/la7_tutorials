@@ -86,10 +86,10 @@
                 </router-link>
               </li>
               <li class="nav-item">
-                <a  class="nav-link">
+                <router-link to="/spa/vuexComponent"  class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Child</p>
-                </a>
+                  <p>Components whit Vuex</p>
+                </router-link>
               </li>
             </ul>
           </li>
@@ -494,6 +494,12 @@
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
+
+
+
     </div>
     <!-- /.sidebar -->
+
+
+   
   </aside>

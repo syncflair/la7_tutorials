@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["searchBox"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/MultiComponent/searchBox.vue?vue&type=script&lang=js&":
 /*!*****************************************************************************************************************************************************************************************!*\
@@ -41,8 +41,7 @@ __webpack_require__.r(__webpack_exports__);
       FireEvent.$emit('searching', this.searchText); //alert(this.searchText)
     }
   },
-  mounted: function mounted() {
-    console.log('Component mounted.');
+  mounted: function mounted() {//console.log('Component mounted.')
   }
 });
 

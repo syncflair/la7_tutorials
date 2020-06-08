@@ -69,12 +69,14 @@ body{
 .user-panel a, .user-panel span{  color: #FFFFFF !important;  } 
 .user-panel .fas { font-size: 10px !important }
 
-.main-sidebar{ background-color: #222d32; overflow-x: hidden;} /*Sidebar Background Color*/
+
+.main-sidebar{/* background-color: #222d32;*/ overflow-x: hidden;} /*Sidebar Background Color*/
 .main-sidebar> .sidebar{height: calc(100vh - (1.5rem + 1px)) !important;} /*Sidebar Height*/
 .main-sidebar .brand-link{ background-color: #367fa9 !important; color:#FFFFFF;}
 .elevation-4{ box-shadow: none !important;}
 .badge-info{background-color: #3c8dbc !important; padding: 4px 6px 3px 6px; color:#FFFFFF; }
 .badge-green { color: #fff;  background-color: #00a65a !important; padding: 2px 6px 3px 6px; }
+//.main-sidebar > .sidebar{height:97% !important; }
 
 
 .sidebar > .os-padding > .os-viewport > .os-content { padding: 0px 8px 0px 0px !important;}
@@ -145,7 +147,10 @@ body{
 .modal-footer{ border-top: unset !important;}
 
 /*Bootstrap Table */
-.table th, .table td{border-top:unset !important;}
+.table{border:1px solid #dee2e6 !important;}
+.table > thead{ } /*For background*/
+.table th, .table td{border-top:unset !important; border-left:1px solid #dee2e6 !important;}
+.table-striped tbody tr:hover{background-color: rgba(0, 0, 0, 0.09);}
 
 
 

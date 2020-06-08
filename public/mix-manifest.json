@@ -2,5 +2,15 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/main.css": "/css/main.css",
-    "/js/main.js": "/js/main.js"
+    "/js/main.js": "/js/main.js",
+    "/js/chunks/Categories.js": "/js/chunks/Categories.js",
+    "/js/chunks/Dashboard.js": "/js/chunks/Dashboard.js",
+    "/js/chunks/Items.js": "/js/chunks/Items.js",
+    "/js/chunks/Multicomponent.js": "/js/chunks/Multicomponent.js",
+    "/js/chunks/NotFound.js": "/js/chunks/NotFound.js",
+    "/js/chunks/Parties.js": "/js/chunks/Parties.js",
+    "/js/chunks/VuexComponent.js": "/js/chunks/VuexComponent.js",
+    "/js/chunks/formBox.js": "/js/chunks/formBox.js",
+    "/js/chunks/searchBox.js": "/js/chunks/searchBox.js",
+    "/js/chunks/vendors~NotFound.js": "/js/chunks/vendors~NotFound.js"
 }

@@ -3,16 +3,24 @@
 // Fonts
 //@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic');
 
+
 // Variables
 @import 'variables';
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+//Admin LTE
 @import '~admin-lte/dist/css/adminlte.css';
+
 
 //jquery ui
 //@import '~jquery-ui/themes/base/all.css';
+
+//vuetify (not install now)
+//@import '~vuetify/dist/vuetify.min.css';
+//@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900");
+//@import url("https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css");
 
 
 //Datatables
@@ -31,7 +39,7 @@
 @import '~overlayscrollbars/css/OverlayScrollbars.css';
 
 // iCheck
-@import '~icheck-bootstrap/icheck-bootstrap.css';
+//@import '~icheck-bootstrap/icheck-bootstrap.css';
 
 //Toastr
 @import "toastr";
@@ -39,3 +47,5 @@
 //inport My Custome css
 @import 'style.scss';
 @import 'vue_style.scss';
+
+

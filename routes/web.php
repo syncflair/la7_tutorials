@@ -66,6 +66,12 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::get('spa/count-product', 'Admin\product\ProductController@countProduct');   
     Route::resource('spa/product', 'Admin\Product\ProductController', 
         ['except'=>['edit','show','create','store','update'] ]);   
+
+
+    //testing route
+    Route::get('spa/searchCategoryData', 'Admin\MultiComponent\MultiComponentController@searchCategoryData');
+    Route::get('spa/getCatList/{id}', 'Admin\MultiComponent\MultiComponentController@CategoryListById');
+    Route::resource('spa/MultiComponent', 'Admin\MultiComponent\MultiComponentController'); 
     /**********************************************End Vue Route *************************************************/
 
     
@@ -86,6 +92,14 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('role', 'Admin\AuthManagement\RoleController');
 
     Route::resource('permission', 'Admin\AuthManagement\PermissionController');
+
+
+
+    // Vue: single page application (SPA)- Any route that not match that redirect to dashboard. combine vue route and laravel rourte. Best way place this route to last of the line    
+    //Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '.*' ); 
+    Route::get('/spa/{anypath}', function () {
+      return view('admin.dashboard'); 
+    })->where(['anypath' => '([A-z\d-/_.]+)?'] );
 
 });
 /**************************************** End Admin middleware *****************************************************/
@@ -111,6 +125,11 @@ Route::post('send-message-query', 'Website\ContactUsController@sendMessageQuery'
 
 // Vue: single page application (SPA)- Any route that not match that redirect to dashboard. combine vue route and laravel rourte. Best way place this route to last of the line    
 //Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '.*' ); 
-Route::get('/spa/{anypath}', function () {
-      return view('admin.dashboard'); 
-    })->where(['path' => '([A-z\d-/_.]+)?'] );
+// Route::get('/spa/{anypath}', function () {
+//       return view('admin.dashboard'); 
+//     })->where(['path' => '([A-z\d-/_.]+)?'] );
+
+// Route::get('/spa/{path}', function () {
+//       //return view('admin.dashboard'); 
+//     abort(403);
+// })->where(['path' => '.*' ] );

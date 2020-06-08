@@ -258,7 +258,7 @@
       //   //this.NoIconUrl = require('FilesStorage/CommonFiles/no-img.png');
       // },
 
-      //Searchit function using lodash. call searchit function every 1 secound when call the function
+      //Searchit function using lodash. call searchit function every 300 mili secound when call the function
       searchit: _.debounce( () => {
         FireEvent.$emit('searching');
       },300 ),
@@ -279,6 +279,8 @@
           .then( (response) => {
             this.parentCategories = response.data;
           });
+
+          //this.parentCategories = categories;
       }, 
 
       fetchCategory(){
@@ -442,7 +444,7 @@
             }
 
           })
-      }, //end Swal
+      }, //end delete
 
       unactiveCat(id){
        // alert(id);
