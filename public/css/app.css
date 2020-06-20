@@ -47870,14 +47870,10 @@ body {
   padding: 2px 6px 3px 6px;
 }
 
+/*Nav SideBar Style*/
+
 .sidebar > .os-padding > .os-viewport > .os-content {
   padding: 0px 8px 0px 0px !important;
-}
-
-.nav-sidebar > .nav-item > .nav-treeview > .nav-item > .nav-link {
-  border-radius: unset !important;
-  padding: 3px 5px 3px 25px;
-  color: #FFFFFF !important;
 }
 
 .nav-sidebar > .nav-item > .nav-treeview > .nav-item > .nav-link > i {
@@ -47885,9 +47881,36 @@ body {
   color: #FFFFFF;
 }
 
+/*Nav sidebar*/
+
 .nav-sidebar > .nav-item > .nav-link {
   border-radius: unset !important;
   padding: 8px 8px 8px 17px !important;
+  color: #FFFFFF !important;
+}
+
+.nav-sidebar > .nav-item > .nav-link:focus,
+.nav-sidebar > .nav-item > .nav-link:hover,
+.nav-sidebar > .nav-item > .nav-link:active,
+.nav-sidebar > .menu-open > .nav-link:focus,
+.nav-sidebar > .menu-open > .nav-link:hover {
+  background-color: #1e282c !important;
+  border-left: 4px solid #17a2b8 !important;
+  padding: 8px 8px 8px 13px !important;
+}
+
+.nav-sidebar > .nav-item > .router-link-active,
+.nav-sidebar > .menu-open > .router-link-active {
+  background-color: #1e282c !important;
+  border-left: 4px solid #17a2b8 !important;
+  padding: 8px 8px 8px 13px !important;
+}
+
+/*Nav Sidebar - TreeView*/
+
+.nav-sidebar > .nav-item > .nav-treeview > .nav-item > .nav-link {
+  border-radius: unset !important;
+  padding: 3px 5px 3px 25px;
   color: #FFFFFF !important;
 }
 
@@ -47899,16 +47922,12 @@ body {
   padding: 3px 5px 3px 21px !important;
 }
 
-/*nav item hover color*/
+/*Active TreeView*/
 
-.nav-sidebar > .nav-item.menu-open > .nav-link,
-.nav-sidebar > .nav-item:hover > .nav-link,
-.nav-sidebar > .nav-item > .nav-link:hover,
-.nav-sidebar > .nav-item > .nav-link:focus,
-.nav-sidebar > .nav-item > .nav-link:active {
+.nav-sidebar > .nav-treeview > .nav-item > .router-link-active {
   background-color: #1e282c !important;
   border-left: 4px solid #17a2b8 !important;
-  padding: 8px 8px 8px 13px !important;
+  padding: 3px 5px 3px 21px !important;
 }
 
 /*Inside content-wrapper*/
@@ -48058,14 +48077,68 @@ body {
 
 /*For background*/
 
+.table thead th {
+  border-bottom: 1px solid #dee2e6 !important;
+}
+
 .table th,
 .table td {
   border-top: unset !important;
-  border-left: 1px solid #dee2e6 !important;
 }
 
 .table-striped tbody tr:hover {
   background-color: rgba(0, 0, 0, 0.09);
+}
+
+.control-sidebar,
+.control-sidebar::before {
+  width: 25% !important;
+  overflow-y: scroll;
+}
+
+@media (max-width: 576px) {
+  .control-sidebar,
+  .control-sidebar::before {
+    width: 100% !important;
+  }
+
+  .main-footer {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: 1032;
+  }
+}
+
+@media (max-width: 768px) {
+  .control-sidebar,
+  .control-sidebar::before {
+    width: 100% !important;
+  }
+
+  .main-footer {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: 1032;
+  }
+}
+
+@media (max-width: 992px) {
+  .control-sidebar,
+  .control-sidebar::before {
+    width: 100% !important;
+  }
+
+  .main-footer {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    z-index: 1032;
+  }
 }
 
 /*Style for Vue - Single Page Appication (SPA)*/

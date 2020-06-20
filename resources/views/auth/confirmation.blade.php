@@ -46,8 +46,15 @@
         @endphp
 		
 		<div class="alert alert-danger mt-2 mb-5 text-center ml-0 mr-0">
-	   		<h1> You are not authorized to view this page. </h1>
-	    </div>
+      @if(Session::has('success'))
+	   		<!--Display message-->
+        @include('commonParts.message_display')
+      @else
+         <script>window.location = "/en";</script>
+        <?php exit; ?>
+      @endif
+
+	 </div>
 
 	@endif 
 

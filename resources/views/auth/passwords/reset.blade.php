@@ -96,7 +96,7 @@
 
       <br/>
       <a href="/" class="text-center">Back to Home</a> Or
-      <a href="{{ route('login') }}" class="text-center">Login</a>
+      <a href="{{ route('login'}}" class="text-center">Login</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

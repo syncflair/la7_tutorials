@@ -50,33 +50,30 @@
 
       
      
-      <li class="nav-item d-none d-sm-inline-block">
+     <!--  <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link"><i class="fas fa-users-cog top-fa-size "></i> HRM</a>
       </li>
 
       <li class="nav-item nav-item-btn">
         <a type="button" class="btn btn-block btn-sm btn-outline-success-"> 
-          <!--<i class="nav-icon fas fa-file-invoice-dollar -success"></i>--> 
           <i class="fas fa-plus"></i>
            Sale</a>
       </li>
 
       <li class="nav-item nav-item-btn">
         <a type="button" class="btn btn-block btn-sm btn-outline-success-"> 
-          <!--<i class="nav-icon fas fa-cart-plus -warning"></i>  -->
           <i class="fas fa-plus"></i> Purchase</a>
       </li>
 
 
       <li class="nav-item nav-item-btn">
         <a type="button" class="btn btn-block btn-sm btn-outline-success-"> 
-          <!--<i class="nav-icon fas fa-hand-holding-usd --danger"></i>-->
           <i class="fas fa-plus"></i> Expences</a>
       </li>
 
       <li class="nav-item nav-item-btn">
         <a type="button" onclick="click_me()" class="btn btn-block btn-sm"> <i class="fas fa-plus"></i>  Click </a>
-      </li>
+      </li> -->
 
 
 
@@ -269,7 +266,7 @@
                       {{ __('Logout') }}
                   </a>
 
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  <form id="logout-form" action="{{ route('logout')}}" method="POST" style="display: none;">
                       @csrf
                   </form>
               </div>

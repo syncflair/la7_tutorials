@@ -87,8 +87,8 @@ class UserController extends Controller
                 }
 
                 if( @GetAuthUserRolePermission()->user->delete != null ) {
-                   // if( $users_data->id != Auth::user()->id ){ 
-                    if( Auth::user()->role_id != 1){                                 
+                    if( $users_data->id != Auth::user()->id ){ 
+                    //if( Auth::user()->role_id != 1){                                 
                         $actionData .= '
                         <a onclick="UserDelete('.$users_data->id.')" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
                             <i class="far fa-trash-alt red"></i>

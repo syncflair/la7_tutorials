@@ -20,15 +20,20 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('contact-us') }}">{{ __('Contact Us') }}</a>
+                                <a class="nav-link" href="{{ route('contact-us', app()->getLocale() ) }}">{{ __('Contact Us') }}</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('auth-check', app()->getLocale() ) }}">{{ __('Authentication') }}</a>
+                            </li>
+                            
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login' ) }}">{{ __('Login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register' ) }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -38,7 +43,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{url('/dashboard')}}" >
+                                    <a class="dropdown-item" href="{{url('/dashboard' )}}" >
                                         My Account
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -47,7 +52,7 @@
                                         {{ __('Logout') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{route('logout')}}" method="POST" style="display:none;">
+                                    <form id="logout-form" action="{{route('logout' )}}" method="POST" style="display:none;">
                                         @csrf
                                     </form>
                                 </div>
@@ -55,5 +60,34 @@
                         @endguest
                     </ul>
                 </div>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
+                    <!-- Authentication Links -->
+                        @php $locale = session()->get('locale'); @endphp
+
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                @switch($locale)
+                                    @case('en')
+                                    <img src="{{asset('FilesStorage/CommonFiles/en_lang.png')}}" width="30px" height="20x"> English
+                                    @break
+                                    @case('bn')
+                                    <img src="{{asset('FilesStorage/CommonFiles/bn_lang.png')}}" width="30px" height="20x"> Bangla
+                                    @break
+                                    
+                                    @default
+                                    <img src="{{asset('FilesStorage/CommonFiles/en_lang.png')}}" width="30px" height="20x"> English
+                                @endswitch
+
+                                <span class="caret"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ URL::to('/en') }}"><img src="{{asset('FilesStorage/CommonFiles/en_lang.png')}}" width="30px" height="20x"> English</a>
+                                <a class="dropdown-item" href="{{ URL::to('/bn') }}"><img src="{{asset('FilesStorage/CommonFiles/bn_lang.png')}}" width="30px" height="20x"> Bangla</a>
+                            </div>
+                        </li>
+                </ul>
+
             </div>
         </nav>

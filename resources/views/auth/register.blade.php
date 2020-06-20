@@ -23,7 +23,7 @@
       <!--Display message-->
       @include('commonParts.message_display')
 
-      <form method="POST" action="{{ route('register') }}">
+      <form method="POST" action="{{ route('register')}}">
       	@csrf
 
         <div class="input-group mb-3">

@@ -86,22 +86,22 @@
 	<h3>Category</h3>
 
 		<ul><!-- Here sub_category is function in Category Model -->
-		@foreach( \App\Models\Category::whereNull('parent_id')->with('childrenCategories')->where('is_enabled', '1')->get() as $category)
+		@foreach( \App\Models\Category::whereNull('parent_id')->with('childrenCategories')->where('is_enabled', '1')->get() as $key => $category)
 			
-				<li>{{ $category->cat_name }}</li> <!--Fist Level-->
+				<li>{{ $category->cat_name }} </li> <!--Fist Level-->
 
 				@if($category->childrenCategories->count() > 0)
 					<ul>
 						@foreach($category->childrenCategories as $childCategory )
 
-							<li> {{ $childCategory->cat_name }}</li> <!--Secound Level-->
+							<li> {{ $childCategory->cat_name }} </li> <!--Secound Level-->
 
 							@if($childCategory->childrenCategories->count() > 0)
 								
 								<ul>
 									@foreach($childCategory->childrenCategories as $subChildCategory )
 
-										<li> {{ $subChildCategory->cat_name }} </li> <!--Third Level-->
+										<li> {{ $subChildCategory->cat_name }}  ( {{ $subChildCategory->count() }} )</li> <!--Third Level-->
 										
 									@endforeach
 								</ul>

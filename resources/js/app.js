@@ -46,6 +46,7 @@ import store from './VueVuex'
 //Global Components
 Vue.component('adminwrapper', require('./components/Admin/AdminWrapper.vue').default);
 Vue.component('pagination-app', require('./components/Admin/GlobalComponents/pagination-app.vue').default);
+Vue.component('switch-app', require('./components/Admin/GlobalComponents/switch-app.vue').default);
 //import adminwrapper from './components/Admin/AdminWrapper.vue'; //
 import counttest from './components/Admin/MultiComponent/countTest.vue';
 

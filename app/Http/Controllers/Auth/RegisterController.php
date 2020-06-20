@@ -44,9 +44,8 @@ class RegisterController extends Controller
     {       
         //Auth::logout();
         Session::put('success','Your registration is successful !. We send a confirmation email to your account. Please confirmed your verivication.');
-        return '/register';
-        //return '/confirmation';
-
+        //return '/register';
+        return '/confirmation';
         //return route('register');        
         //return back();
     } //*/

@@ -118,7 +118,7 @@
                 this.editMode = false; 
                 this.$refs.cat_name.focus(); //ret focus to first input filed. ref="cat_name" tag must be use
               }
-              if(data.errors){s
+              if(data.errors){
                 toastr.danger(data.errors); 
               }
             })

@@ -11,6 +11,6 @@
     "/js/chunks/Parties.js": "/js/chunks/Parties.js",
     "/js/chunks/VuexComponent.js": "/js/chunks/VuexComponent.js",
     "/js/chunks/formBox.js": "/js/chunks/formBox.js",
-    "/js/chunks/searchBox.js": "/js/chunks/searchBox.js",
-    "/js/chunks/vendors~NotFound.js": "/js/chunks/vendors~NotFound.js"
+    "/js/chunks/formComponent.js": "/js/chunks/formComponent.js",
+    "/js/chunks/searchBox.js": "/js/chunks/searchBox.js"
 }

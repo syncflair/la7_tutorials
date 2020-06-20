@@ -126,7 +126,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {},
   mounted: function mounted() {//console.log('Component mounted.')
-  }
+  },
+  created: function created() {}
 });
 
 /***/ }),
@@ -301,6 +302,127 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapGatters
 
  //for user MapState
@@ -308,13 +430,68 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "vxDataList",
   data: function data() {
-    return {// perPage: 0,        
+    return {
+      ///editing: false,
+      // cat_name: '',
+      // perPage: 0,
+      inputs: [{
+        name: '',
+        email: '',
+        phone: ''
+      }]
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('CategoryStore', ['vuexTest', 'categories', 'pagination'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('CategoryStore', ['vuexTest', 'categories', 'pagination', 'testQuery'])),
+  //this is for v-focus
+  directives: {
+    focus: {
+      // directive definition
+      inserted: function inserted(el) {
+        el.focus();
+      }
+    },
+    update: function update(el) {
+      Vue.nextTick(function () {
+        el.focus();
+      });
+    }
+  },
   methods: {
+    add: function add(index) {
+      this.inputs.push({
+        name: ''
+      });
+    },
+    remove: function remove(index) {
+      this.inputs.splice(index, 1);
+    },
+    updateDataFromTable: function updateDataFromTable(data) {
+      var _this = this;
+
+      this.$Progress.start();
+      axios.put('/spa/MultiComponent/' + data.id, data).then(function (_ref) {
+        var data = _ref.data;
+
+        if (data.success) {
+          _this.$Progress.finish();
+
+          _this.$store.dispatch('CategoryStore/fetchCategory', _this.pagination.per_page);
+
+          toastr.success(data.success);
+        }
+
+        if (data.errors) {
+          s;
+          toastr.danger(data.errors);
+        }
+      })["catch"](function () {
+        toastr.warning('Something is wrong!');
+      });
+    },
     fetchData: function fetchData() {
-      this.$store.dispatch('CategoryStore/fetchCategory', this.pagination.per_page); //console.log(this.pagination.total);
+      this.$Progress.start();
+      this.$store.dispatch('CategoryStore/fetchCategory', this.pagination.per_page);
+      this.$Progress.finish(); //console.log(this.pagination.total);
     },
     listCategory: function listCategory(id) {
       this.$Progress.start();
@@ -331,7 +508,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       FireEvent.$emit('fillEditCategory', data);
     },
     deleteCategory: function deleteCategory(id) {
-      var _this = this;
+      var _this2 = this;
 
       Swal.fire({
         title: 'Are you sure to Delete?',
@@ -343,11 +520,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]('/spa/MultiComponent/' + id).then(function (_ref) {
-            var data = _ref.data;
+          axios["delete"]('/spa/MultiComponent/' + id).then(function (_ref2) {
+            var data = _ref2.data;
 
             if (data.success) {
-              _this.$store.dispatch('CategoryStore/fetchCategory', _this.pagination.per_page);
+              _this2.$store.dispatch('CategoryStore/fetchCategory', _this2.pagination.per_page);
 
               toastr.warning(data.success);
             }
@@ -365,13 +542,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
-    this.$store.dispatch('CategoryStore/fetchCategory'); //call this function at first loading from Action with Modules namespace       
+    this.$store.dispatch('CategoryStore/fetchCategory'); //call this function at first loading from Action with Modules namespace    
 
+    this.$store.dispatch('CategoryStore/testQuery');
     FireEvent.$on('changPerPage', function (data) {
       //alert(data) 
-      _this2.$store.dispatch('CategoryStore/fetchCategory', data); // this.$store.dispatch('CategoryStore/fetchCategoryPerPage', data );
+      _this3.$store.dispatch('CategoryStore/fetchCategory', data); // this.$store.dispatch('CategoryStore/fetchCategoryPerPage', data );
 
     });
   },
@@ -526,7 +704,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
 
         if (data.errors) {
-          s;
           toastr.danger(data.errors);
         }
       })["catch"](function () {
@@ -833,71 +1010,165 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.categories.data, function(category, index) {
-            return _c("tr", { key: category.id }, [
-              _c("td", [_vm._v(" " + _vm._s(category.id) + " ")]),
-              _vm._v(" "),
-              _c("td", [_vm._v(" " + _vm._s(category.cat_name))]),
-              _vm._v(" "),
-              _c("td", { staticClass: "text-right" }, [
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn  btn-primary- btn-flat btn-sm",
-                    attrs: { title: "Single View" },
-                    on: {
-                      click: function($event) {
-                        return _vm.viewCategory(category)
-                      }
+          [
+            _vm._l(_vm.categories.data, function(category, index) {
+              return _c(
+                "tr",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value:
+                        _vm.categories.data && _vm.categories.data.length > 0,
+                      expression:
+                        "categories.data && categories.data.length > 0"
                     }
-                  },
-                  [_c("i", { staticClass: "fas fa-eye primary " })]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
+                  ],
+                  key: category.id
+                },
+                [
+                  _c("td", [_vm._v(" " + _vm._s(category.id))]),
+                  _vm._v(" "),
+                  _c("td", [
+                    category.cat_slug === true
+                      ? _c("span", [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: category.cat_name,
+                                expression: "category.cat_name"
+                              },
+                              { name: "focus", rawName: "v-focus" }
+                            ],
+                            staticClass: "form-control form-control-sm",
+                            attrs: { type: "text", name: "cat_name" },
+                            domProps: { value: category.cat_name },
+                            on: {
+                              blur: function($event) {
+                                category.cat_slug = false
+                              },
+                              keydown: function($event) {
+                                if (
+                                  !$event.type.indexOf("key") &&
+                                  _vm._k(
+                                    $event.keyCode,
+                                    "enter",
+                                    13,
+                                    $event.key,
+                                    "Enter"
+                                  )
+                                ) {
+                                  return null
+                                }
+                                category.cat_slug = false
+                                _vm.updateDataFromTable(category)
+                              },
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  category,
+                                  "cat_name",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      : _c(
+                          "span",
+                          {
+                            on: {
+                              click: function($event) {
+                                category.cat_slug = true
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(category.cat_name))]
+                        )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-right" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn  btn-primary- btn-flat btn-sm",
+                        attrs: { title: "Single View" },
+                        on: {
+                          click: function($event) {
+                            return _vm.viewCategory(category)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-eye primary " })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn  btn-primary- btn-flat btn-sm",
+                        attrs: { title: "List View" },
+                        on: {
+                          click: function($event) {
+                            return _vm.listCategory(category.id)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-list primary " })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn  btn-primary- btn-flat btn-sm",
+                        on: {
+                          click: function($event) {
+                            return _vm.editCategory(category)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-edit primary " })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "btn btn-block- btn-danger- btn-flat btn-sm",
+                        attrs: { id: "delete" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteCategory(category.id)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "far fa-trash-alt red" })]
+                    )
+                  ])
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _c(
+              "tr",
+              {
+                directives: [
                   {
-                    staticClass: "btn  btn-primary- btn-flat btn-sm",
-                    attrs: { title: "List View" },
-                    on: {
-                      click: function($event) {
-                        return _vm.listCategory(category.id)
-                      }
-                    }
-                  },
-                  [_c("i", { staticClass: "fas fa-list primary " })]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn  btn-primary- btn-flat btn-sm",
-                    on: {
-                      click: function($event) {
-                        return _vm.editCategory(category)
-                      }
-                    }
-                  },
-                  [_c("i", { staticClass: "fas fa-edit primary " })]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-block- btn-danger- btn-flat btn-sm",
-                    attrs: { id: "delete" },
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteCategory(category.id)
-                      }
-                    }
-                  },
-                  [_c("i", { staticClass: "far fa-trash-alt red" })]
-                )
-              ])
-            ])
-          }),
-          0
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.categories.data && !_vm.categories.data.length,
+                    expression: "categories.data && !categories.data.length"
+                  }
+                ]
+              },
+              [_vm._m(2)]
+            )
+          ],
+          2
         )
       ])
     ]),
@@ -915,12 +1186,437 @@ var render = function() {
                 }
               }
             })
-          : _vm._e(),
-        _vm._v(" "),
-        _vm._m(2)
+          : _vm._e()
       ],
       1
-    )
+    ),
+    _vm._v(" "),
+    _c(
+      "table",
+      { staticClass: "table table-striped table-sm" },
+      [
+        _vm._l(_vm.testQuery, function(parent) {
+          return [
+            _c("tr", [
+              _c("td", { attrs: { width: "3%" } }, [
+                _vm._v(" " + _vm._s(parent.id) + " ")
+              ]),
+              _vm._v(" "),
+              _c("td", [
+                parent.cat_slug === true
+                  ? _c("span", [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: parent.cat_name,
+                            expression: "parent.cat_name"
+                          },
+                          { name: "focus", rawName: "v-focus" }
+                        ],
+                        staticClass: "form-control form-control-sm",
+                        attrs: { type: "text", name: "cat_name" },
+                        domProps: { value: parent.cat_name },
+                        on: {
+                          blur: function($event) {
+                            parent.cat_slug = false
+                          },
+                          keydown: function($event) {
+                            if (
+                              !$event.type.indexOf("key") &&
+                              _vm._k(
+                                $event.keyCode,
+                                "enter",
+                                13,
+                                $event.key,
+                                "Enter"
+                              )
+                            ) {
+                              return null
+                            }
+                            parent.cat_slug = false
+                            _vm.updateDataFromTable(parent)
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(parent, "cat_name", $event.target.value)
+                          }
+                        }
+                      })
+                    ])
+                  : _c(
+                      "span",
+                      {
+                        staticStyle: { "font-weight": "700" },
+                        on: {
+                          click: function($event) {
+                            parent.cat_slug = true
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(parent.cat_name))]
+                    )
+              ]),
+              _vm._v(" "),
+              _c("td", { staticClass: "text-right" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn  btn-primary- btn-flat btn-sm",
+                    attrs: { title: "Single View" },
+                    on: {
+                      click: function($event) {
+                        return _vm.viewCategory(parent)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-eye primary " })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn  btn-primary- btn-flat btn-sm",
+                    attrs: { title: "List View" },
+                    on: {
+                      click: function($event) {
+                        return _vm.listCategory(parent.id)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-list primary " })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn  btn-primary- btn-flat btn-sm",
+                    on: {
+                      click: function($event) {
+                        return _vm.editCategory(parent)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "fas fa-edit primary " })]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-block- btn-danger- btn-flat btn-sm",
+                    attrs: { id: "delete" },
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteCategory(parent.id)
+                      }
+                    }
+                  },
+                  [_c("i", { staticClass: "far fa-trash-alt red" })]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._l(parent.children_categories, function(children) {
+              return parent.children_categories.length > 0
+                ? [
+                    _c("tr", [
+                      _c("td", { attrs: { width: "3%" } }, [
+                        _vm._v(" " + _vm._s(children.id) + " ")
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticStyle: { "padding-left": "15px" } }, [
+                        _vm._v(" - " + _vm._s(children.cat_name))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", { staticClass: "text-right" }, [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn  btn-primary- btn-flat btn-sm",
+                            attrs: { title: "Single View" },
+                            on: {
+                              click: function($event) {
+                                return _vm.viewCategory(children)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-eye primary " })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn  btn-primary- btn-flat btn-sm",
+                            attrs: { title: "List View" },
+                            on: {
+                              click: function($event) {
+                                return _vm.listCategory(children.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-list primary " })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn  btn-primary- btn-flat btn-sm",
+                            on: {
+                              click: function($event) {
+                                return _vm.editCategory(children)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-edit primary " })]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "btn btn-block- btn-danger- btn-flat btn-sm",
+                            attrs: { id: "delete" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteCategory(children.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "far fa-trash-alt red" })]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(children.categories, function(sub_children) {
+                      return children.categories.length > 0
+                        ? [
+                            _c("tr", [
+                              _c("td", { attrs: { width: "3%" } }, [
+                                _vm._v(" " + _vm._s(sub_children.id) + " ")
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "td",
+                                { staticStyle: { "padding-left": "30px" } },
+                                [_vm._v(" -- " + _vm._s(sub_children.cat_name))]
+                              ),
+                              _vm._v(" "),
+                              _c("td", { staticClass: "text-right" }, [
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "btn  btn-primary- btn-flat btn-sm",
+                                    attrs: { title: "Single View" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.viewCategory(sub_children)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-eye primary "
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "btn  btn-primary- btn-flat btn-sm",
+                                    attrs: { title: "List View" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.listCategory(sub_children.id)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-list primary "
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "btn  btn-primary- btn-flat btn-sm",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.editCategory(sub_children)
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "fas fa-edit primary "
+                                    })
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass:
+                                      "btn btn-block- btn-danger- btn-flat btn-sm",
+                                    attrs: { id: "delete" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.deleteCategory(
+                                          sub_children.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("i", {
+                                      staticClass: "far fa-trash-alt red"
+                                    })
+                                  ]
+                                )
+                              ])
+                            ])
+                          ]
+                        : _vm._e()
+                    })
+                  ]
+                : _vm._e()
+            })
+          ]
+        })
+      ],
+      2
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-10 offset-md-1 pt-5 pb-5" }, [
+        _c(
+          "table",
+          { staticClass: "table-sm table table-striped" },
+          _vm._l(_vm.inputs, function(input, k) {
+            return _c("div", { key: k, staticClass: "form-group" }, [
+              _c("tr", [
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: input.name,
+                        expression: "input.name"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "text", placeholder: "Name" },
+                    domProps: { value: input.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(input, "name", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: input.email,
+                        expression: "input.email"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "text", placeholder: "Email" },
+                    domProps: { value: input.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(input, "email", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: input.phone,
+                        expression: "input.phone"
+                      }
+                    ],
+                    staticClass: "form-control form-control-sm",
+                    attrs: { type: "text", placeholder: "Phone" },
+                    domProps: { value: input.phone },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(input, "phone", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c("i", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: k || (!k && _vm.inputs.length > 1),
+                        expression: "k || ( !k && inputs.length > 1)"
+                      }
+                    ],
+                    staticClass: "fas fa-minus-square",
+                    on: {
+                      click: function($event) {
+                        return _vm.remove(k)
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("i", {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: k == _vm.inputs.length - 1,
+                        expression: "k == inputs.length-1"
+                      }
+                    ],
+                    staticClass: "fas fa-plus-square",
+                    on: {
+                      click: function($event) {
+                        return _vm.add(k)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ])
+          }),
+          0
+        )
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -958,10 +1654,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" }, [_c("span")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" })
+    return _c("td", { attrs: { colspan: "6" } }, [
+      _c(
+        "div",
+        {
+          staticClass: "alert alert-danger text-center red mb-0",
+          attrs: { role: "alert" }
+        },
+        [_vm._v("Sorry : No data found.")]
+      )
     ])
   }
 ]

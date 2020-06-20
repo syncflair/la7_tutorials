@@ -11,10 +11,11 @@ DB::listen(function($sql) {
 //use Illuminate\Support\Facades\Route;
 //use App\Mail\ContactUsMail;
 
-Route::get('/', function () {
-    return view('welcome'); 
-   // return view('auth.login'); //redirect to login page    
-});
+// Route::get('/', function () {
+//     App::setLocale('bn');
+//     return view('welcome'); 
+//    // return view('auth.login'); //redirect to login page    
+// });
 Route::get('email-chek', function () {
   //return view('emails.contact_us_email'); 
   return new ContactUsMail();
@@ -35,6 +36,10 @@ Route::get('email-chek', function () {
 */
 
 
+
+
+Route::get('confirmation', function () { return view('auth.confirmation'); });
+/**************************************** Auth routes *************************************************/
 //Auth::routes(); //Default Laravel
 //Auth::routes(['register' => false ]); //disable Register route. No one can register to this site any more.
 Auth::routes([
@@ -69,6 +74,8 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 
 
     //testing route
+    Route::post('spa/save-multi-field', 'Admin\MultiComponent\MultiComponentController@saveMultiField');
+    Route::get('spa/testQuery', 'Admin\MultiComponent\MultiComponentController@testQuery');
     Route::get('spa/searchCategoryData', 'Admin\MultiComponent\MultiComponentController@searchCategoryData');
     Route::get('spa/getCatList/{id}', 'Admin\MultiComponent\MultiComponentController@CategoryListById');
     Route::resource('spa/MultiComponent', 'Admin\MultiComponent\MultiComponentController'); 
@@ -114,22 +121,43 @@ Route::group(['middleware'=>['user','auth','AuthPermission','verified'] ], funct
 
 
 
+
+
 /****************************************Website Routes Link *****************************************************/
-Route::get('contact-us', 'Website\ContactUsController@index')->name('contact-us');
+
+
+
+// Route::get('/', function () { 
+//   if(session()->has('locale')){
+//     App::setLocale(session('locale'));
+//     return view('welcome'); 
+//   }else{
+//     session()->put('locale', 'en');
+//     return view('welcome');
+//   }   
+// });
+// Route::get('/', function () {
+//     return redirect(app()->getLocale());
+// });
+Route::redirect('/','/en');
+Route::group(['prefix'=>'{locale}', 'where'=>['locale' => '[a-zA-Z]{2}'], 'middleware'=>'SetLanguage'], function(){
+//Route::group(['prefix' => '{locale}'], function(){
+  
+  Route::get('/', function () {
+    //App::setLocale('bn'); //app()->getLocale()
+    return view('welcome');    
+  });
+
+  Route::get('/contact-us', 'Website\ContactUsController@index')->name('contact-us');
+  Route::get('/auth-check', 'Website\AuthCheckController@index')->name('auth-check');
+  Route::fallback(function(){ return 'No data'; });
+
+});
+
+//Route::get('/{locale}', 'SetLanguageController@index'); //use this route after localization middleware
+
 Route::post('send-message-query', 'Website\ContactUsController@sendMessageQuery')->name('send-message-query');
 
 /****************************************End Website Routes Link *************************************************/
 
 
-
-
-// Vue: single page application (SPA)- Any route that not match that redirect to dashboard. combine vue route and laravel rourte. Best way place this route to last of the line    
-//Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '.*' ); 
-// Route::get('/spa/{anypath}', function () {
-//       return view('admin.dashboard'); 
-//     })->where(['path' => '([A-z\d-/_.]+)?'] );
-
-// Route::get('/spa/{path}', function () {
-//       //return view('admin.dashboard'); 
-//     abort(403);
-// })->where(['path' => '.*' ] );

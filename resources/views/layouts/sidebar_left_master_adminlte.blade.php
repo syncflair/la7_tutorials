@@ -32,7 +32,7 @@
                    
           <li class="nav-item">
             <!-- {{ Request::is('dashboard*') ? 'active' : '' }} -->
-            <a href="{{URL::to('/dashboard')}}" class="nav-link ">
+            <a href="{{URL::to('/dashboard')}}" class="nav-link {{Request::is('dashboard*') ? 'router-link-active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i> 
               <p>
                 Dashboard
@@ -89,6 +89,12 @@
                 <router-link to="/spa/vuexComponent"  class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Components whit Vuex</p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/spa/FormComponent"  class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>FormComponent Vuex</p>
                 </router-link>
               </li>
             </ul>

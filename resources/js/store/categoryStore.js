@@ -5,7 +5,7 @@ const CategoryStore ={
 	state: () => ({
 	    //accessable from any where 
 	    	vuexTest: 'This is first test message',
-	    	searchText: '',
+	    	//searchText: '',
 	    	categories: {},
 	    	pagination: { 
 	    		current_page: 1,	    		
@@ -13,6 +13,8 @@ const CategoryStore ={
 	    	},
 	    	categoryList: '',
 	    	viewCategoryData:'',
+	    	testQuery: {},
+	    	autoSearchData: {},
 	  }),
 	
 	// state: {
@@ -32,22 +34,26 @@ const CategoryStore ={
 	    pagination: state => {
 	      return state.pagination
 	    },
+
+	    testQuery: state => {
+	      return state.testQuery
+	    },
     }, /*end getters*/
 
 
     mutations: {
     	//return data to state
-    	fetchCategoryData(state, categories) {
+    	FETCH_CATEGORY_DATA(state, categories) {
     		return state.categories = categories;    		             
         },
 
-        fetchPagination(state, pagination){
+        FATCH_PAGINATION(state, pagination){
         	return state.pagination = pagination;  
         },
-        categoryListMutation(state, data){
+        CATEGORY_LIST(state, data){
         	return state.categoryList = data;  
         },
-        viewCategoryMutation(state, data){
+        VIEW_CATEGORY(state, data){
         	return state.viewCategoryData = data;
         },
 
@@ -62,6 +68,16 @@ const CategoryStore ={
         // getResultsData(state, categoriesData) {
         //     return state.categories = categoriesData
         // },
+
+        TEST_QUERY(state, data){
+        	return state.testQuery = data;        	
+        },
+
+        AUTO_SEARCH_DATA(state, data){
+        	return state.autoSearchData = data;  
+        }
+
+
 
     },/*end Mutations*/
 
@@ -80,8 +96,8 @@ const CategoryStore ={
 
 		  axios.get('/spa/MultiComponent?page=' + context.state.pagination.current_page +'&perPage=' + perPageVelue)
 		  .then( (response) => {
-		    context.commit('fetchCategoryData', response.data);
-		    context.commit('fetchPagination', response.data) //for pagination
+		    context.commit('FETCH_CATEGORY_DATA', response.data);
+		    context.commit('FATCH_PAGINATION', response.data) //for pagination
 		    //console.log(response.data);
 		  })
 		  .catch( () => {  
@@ -90,11 +106,25 @@ const CategoryStore ={
 		},
 
 		searching(context, payload){        
-	        let query = payload;
-	        axios.get('/spa/searchCategoryData?q='+query)
-	        //this.form.get('/spa/search-category?q='+query)
+	        let query = payload.key1; let query2 = payload.key2; //alert(query2);
+	        axios.get('/spa/searchCategoryData?page='+ 
+	        			context.state.pagination.current_page + '&perPage=' +
+	        			context.state.pagination.per_page + 
+	        			'&q='+query)
+	        //axios.get('/spa/searchCategoryData?q='+query)
 	        .then( ( response ) => {
-	          		context.commit('fetchCategoryData', response.data);
+	          		context.commit('FETCH_CATEGORY_DATA', response.data);
+	                //this.categories = response.data; // is an object... use when pagination	                                      
+	        }).catch(() => { })	
+		},
+
+		AutoCompleteSearch(context, payload){  
+			let query = payload.key1;  
+	        //let query2 = payload.key2; 
+	        axios.get('/spa/searchCategoryData?&q='+ query)
+	        //axios.get('/spa/searchCategoryData?q='+query)
+	        .then( ( response ) => {
+	          		context.commit('AUTO_SEARCH_DATA', response.data.data);
 	                //this.categories = response.data; // is an object... use when pagination	                                      
 	        }).catch(() => { })	
 		},
@@ -103,11 +133,11 @@ const CategoryStore ={
 			let id = payload;
 			axios.get('/spa/getCatList/'+id)
 	          .then( ( response) => {
-	               context.commit('categoryListMutation', response.data);  
+	               context.commit('CATEGORY_LIST', response.data);  
 	          }).catch(() => { })
 		},		
 		viewCategory(context, payload){
-			context.commit('viewCategoryMutation', payload);  			
+			context.commit('VIEW_CATEGORY', payload); 						
 		},
 
 
@@ -124,6 +154,13 @@ const CategoryStore ={
 		//     commit('getResultsData', response.data)
 		//   });
 		// }, 
+
+		testQuery(context, payload){
+			axios.get('/spa/testQuery')
+	          .then( ( response) => {
+	               context.commit('TEST_QUERY', response.data); 
+	          }).catch(() => { })
+		},	
 
     } /*end actions*/
 

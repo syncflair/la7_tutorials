@@ -124,5 +124,9 @@
             //console.log('Component mounted.')
         },
 
+        created(){
+        	
+        }
+
     }
 </script>

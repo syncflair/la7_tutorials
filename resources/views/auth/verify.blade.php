@@ -34,7 +34,7 @@
 
                 {{ __('Before proceeding, please check your email for a verification link.') }}
                 {{ __('If you did not receive the email') }},
-                <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                <form class="d-inline" method="POST" action="{{ route('verification.resend' ) }}">
                     @csrf
                     <button type="submit" class="btn btn-link p-0 m-0 align-baseline button-color">{{ __('click here to request another') }}</button>.
                 </form>
@@ -52,7 +52,7 @@
       </p>
       <p class="mb-0">
       	@if (Route::has('register'))
-            <a class="nav-link- text-center" href="{{ route('register') }}">{{ __('Register a new membership') }}</a>      
+            <a class="nav-link- text-center" href="{{ route('register' ) }}">{{ __('Register a new membership') }}</a>      
         @endif
         <!--<a href="register.html" class="text-center">Register a new membership</a>-->
       </p>

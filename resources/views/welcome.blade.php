@@ -6,7 +6,11 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Welcome TO Laravel 7</div>
+                <div class="card-header">{{ __('home.welcome')}}</div>
+
+               
+
+                <!-- <div class="card-header">{{ trans_choice('home.welcome', 1)}}</div> -->
 
                 <!--<div class="card-body">
                     @if (session('status'))
