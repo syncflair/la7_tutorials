@@ -10,7 +10,12 @@
     "/js/chunks/NotFound.js": "/js/chunks/NotFound.js",
     "/js/chunks/Parties.js": "/js/chunks/Parties.js",
     "/js/chunks/VuexComponent.js": "/js/chunks/VuexComponent.js",
+    "/js/chunks/adminwrapper.js": "/js/chunks/adminwrapper.js",
     "/js/chunks/formBox.js": "/js/chunks/formBox.js",
     "/js/chunks/formComponent.js": "/js/chunks/formComponent.js",
-    "/js/chunks/searchBox.js": "/js/chunks/searchBox.js"
+    "/js/chunks/multi-select-app.js": "/js/chunks/multi-select-app.js",
+    "/js/chunks/pagination-app.js": "/js/chunks/pagination-app.js",
+    "/js/chunks/searchBox.js": "/js/chunks/searchBox.js",
+    "/js/chunks/switch-app.js": "/js/chunks/switch-app.js",
+    "/js/chunks/vendors~NotFound~formComponent~multi-select-app~switch-app.js": "/js/chunks/vendors~NotFound~formComponent~multi-select-app~switch-app.js"
 }

@@ -50,6 +50,7 @@
 
 <script>
     export default {
+    	name: "pagination-app",
         //props:['pagination', 'offset'],
 
         props: {

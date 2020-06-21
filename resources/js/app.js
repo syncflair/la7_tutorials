@@ -42,12 +42,12 @@ import store from './VueVuex'
 
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-//Vue.component('router-view-admin-master', require('./components/Admin/AdminMaster.vue').default);
 //Global Components
-Vue.component('adminwrapper', require('./components/Admin/AdminWrapper.vue').default);
-Vue.component('pagination-app', require('./components/Admin/GlobalComponents/pagination-app.vue').default);
-Vue.component('switch-app', require('./components/Admin/GlobalComponents/switch-app.vue').default);
-//import adminwrapper from './components/Admin/AdminWrapper.vue'; //
+Vue.component('adminwrapper', () => import(/* webpackChunkName: "adminwrapper" */'./components/Admin/AdminWrapper.vue'));
+Vue.component('pagination-app', () => import(/* webpackChunkName: "pagination-app" */'./components/Admin/GlobalComponents/pagination-app.vue'));
+Vue.component('switch-app', () => import(/* webpackChunkName: "switch-app" */'./components/Admin/GlobalComponents/switch-app.vue'));
+Vue.component('multi-select-app', () => import(/* webpackChunkName: "multi-select-app" */'./components/Admin/GlobalComponents/multi-select-app.vue'));
+
 import counttest from './components/Admin/MultiComponent/countTest.vue';
 
 //pagination

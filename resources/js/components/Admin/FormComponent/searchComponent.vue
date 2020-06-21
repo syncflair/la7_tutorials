@@ -15,7 +15,7 @@
 
 	<div class="col-md-6">	
 
-		<div class="autoCompleteSearch ">	
+	<div class="autoCompleteSearch ">	
 	  <div class="input-group input-control-sm searchBox" v-on:blur="visible = false" tabindex="-1" >                      
         <input  type="text" ref="searchText" class="form-control form-control-sm form-control-navbar"
         	
@@ -55,7 +55,7 @@
 	    </ul> 
       </div>
 
-      </div>
+    </div>
 
 	</div>
 

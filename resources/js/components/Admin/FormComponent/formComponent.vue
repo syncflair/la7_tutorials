@@ -23,11 +23,9 @@
 	<div class="card-body">
 
 		<!-- {{VuexTest}} -->
-		
-
 		<div class="row">
 			<div class="col-md-8">
-				<div class="row pb-5">
+				<div class="row pb-2">
 					<div class="col-md-4">Serach App</div>
 					<div class="col-md-8">					
 						<SearchComponent/>
@@ -35,15 +33,34 @@
 				</div>
 
 
-				<div class="row pt-5 pb-5">
-					<div class="col-md-12">					
-						<swithc-app></switch-app>
-					</div>				
+				<div class="row pt-2 pb-1">
+					<div class="col-md-4">	
+						<!-- Normal Code-->
+						<!-- <switch-app :switch-value="switchValue" @changeSwithValue="switchValue=!switchValue"/> -->
+						<!-- Advance code with V-model -->
+						<div><switch-app v-model="switchValue"/>  
+						{{ switchValue }} </div>
+					</div>
+					<div class="col-md-4">					
+						<div><switch-app v-model="switch1"/>  
+						{{ switch1 }} </div>
+					</div>
+					<div class="col-md-4">					
+						<div><switch-app v-model="switch2"/>  
+						{{ switch2 }} </div>
+					</div>					
 				</div>	
 
 				<div class="row pt-5 pb-5">
-					<div class="col-md-12">					
-						<MultiSelect></MultiSelect>
+					<div class="col-md-12">	
+						{{selectedItem}}				
+						<multi-select-app
+							:options="Options" 
+							:filterBy="filterBy"
+							:place-holder="placeHolder"
+							:value-property="valueProperty"
+							v-model="selectedItem"
+						/>
 					</div>				
 				</div>	
 
@@ -69,9 +86,6 @@
 			</div>
 		</div> -->
 
-		
-	
-
 	</div><!--/ Card Body -->
 
 </div><!--/ Card section -->
@@ -82,21 +96,40 @@
 <script>
 	import { mapState } from 'vuex' //for user MapState
 
-
 	import DataList from './DataList.vue'	
 	import FormBoxOne from './FormBoxOne.vue'
 	import FormBoxTwo from './FormBoxTwo.vue'
 	import FormBoxThree from './FormBoxThree.vue'
 	import SearchComponent from './SearchComponent.vue'
-	import MultiSelect from './multiSelect.vue'
-
 
     export default {
-    	//name: "vuexComponent",
+    	name: "formComponent",
+    	data(){
+    		return{
+    			//for global switch component
+    			switchValue: false, switch1: true, switch2: false,
+
+    			//For Multiselect 
+    			filterBy:'cat_name',
+    			placeHolder:'Select Category',
+    			valueProperty: 'id',
+    			Options:[
+    				{'id':1, 'cat_name':'Electronic'},
+    				{'id':2, 'cat_name':'Lifestyle'},
+    				{'id':3, 'cat_name':'Home Applience'},
+    				{'id':4, 'cat_name':'Vehicle'},
+    				{'id':5, 'cat_name':'Agriculture'},
+    				{'id':6, 'cat_name':'TV'},
+    				{'id':7, 'cat_name':'Refregerator'},
+    				{'id':8, 'cat_name':'AC'}
+    			],
+    			selectedItem:[3, 5],
+    		}
+    	},
 
     	computed: {
     		...mapState( 
-             'CategoryStore', ['autoSearchData','pagination']
+             'CategoryStore', ['categories','autoSearchData','pagination']
           	)
     	},  	
 
@@ -106,7 +139,6 @@
 	      FormBoxTwo,
 	      FormBoxThree,
 	      SearchComponent,
-	      MultiSelect,
 	    },
 
 	    methods:{    	
@@ -120,7 +152,10 @@
 
         created(){
         	
-        	
+        	FireEvent.$on('AutoCompleteSearch', (data) => {
+        		//alert(data);
+	            this.$store.dispatch('CategoryStore/AutoCompleteSearch', {key1: data, key2: 'ta'}); 
+	        });
         }
 
     }
