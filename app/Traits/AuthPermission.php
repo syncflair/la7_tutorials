@@ -1,4 +1,4 @@
-<?php
+<?php /*My Custome Middleware for permissions*/
 
 namespace App\Traits;
 

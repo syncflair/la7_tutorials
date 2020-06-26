@@ -40,6 +40,8 @@
             </a>
           </li>
 
+          
+
           <li class="nav-item">
              <router-link :to="{name: 'Parties', params:{} }" class="nav-link">
             <!-- <router-link to="/spa/Parties" class="nav-link">            -->
@@ -68,6 +70,7 @@
               </p>
             </router-link>
           </li>
+
 
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -297,6 +300,37 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <router-link to="/spa/OrganizationInfo" class="nav-link">
+                  <!-- <i class="nav-icon fas fa-boxes"></i> -->
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Organization Info
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/BranchInfo" class="nav-link">
+                  <!-- <i class="nav-icon fas fa-boxes"></i> -->
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Branch Info
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/CurrencyMarster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Currency
+                  </p>
+                </router-link>
+              </li>
+
+
               <li class="nav-item">
                 <a href="pages/forms/general.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

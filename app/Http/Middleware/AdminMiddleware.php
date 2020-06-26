@@ -1,4 +1,4 @@
-<?php
+<?php /*My Custome Middleware for redirect to admin dashboard*/
 
 namespace App\Http\Middleware;
 

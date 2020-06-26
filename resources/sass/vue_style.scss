@@ -11,8 +11,11 @@
 
 //vue-card-item
 .vue-card-item{/*border-radius:unset !important; box-shadow:unset !important; border:1px solid rgba(0, 0, 0, 0.105);*/ 
-	box-shadow: 0 0 0px rgba(0, 0, 0, 0.125), 0 3px 7px rgba(0, 0, 0, 0.2);  border:unset !important;}
-.vue-card-item > .card-header{border-bottom:unset !important; padding: 10px 10px 0px 10px !important; background-color:unset !important;}
+	box-shadow: 0 0 0px rgba(0, 0, 0, 0.125), 0 3px 7px rgba(0, 0, 0, 0.2);  /*border:unset !important;*/ }
+.vue-card-item > .card-header{
+    border-bottom:unset !important; 
+    padding: 10px 10px 0px 10px !important; 
+    background-color:unset !important;}
 .vue-card-item > .card-header > h4 {
     background: orange; 
     position: relative;

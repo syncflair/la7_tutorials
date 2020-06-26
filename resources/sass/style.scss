@@ -14,6 +14,10 @@
 .danger{color: #dc3545 !important;}
 .yellow{color: #f39c12 !important;}
 
+/*Some customize class*/
+.pointer{cursor:pointer;}
+.border-lef-style {border-left: 15px solid #17a2b8 !important;}
+
 body{
     zoom: 0.9 !important;   
 
@@ -83,7 +87,7 @@ body{
 
 /*Nav SideBar Style*/
 
-
+.nav-sidebar .nav-link > .right, .nav-sidebar .nav-link > p > .right {  top: 0.9rem; }
 .sidebar > .os-padding > .os-viewport > .os-content { padding: 0px 8px 0px 0px !important;}
 .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link > i{font-size:11px !important; color:#FFFFFF;}
 

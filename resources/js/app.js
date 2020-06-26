@@ -47,6 +47,8 @@ Vue.component('adminwrapper', () => import(/* webpackChunkName: "adminwrapper" *
 Vue.component('pagination-app', () => import(/* webpackChunkName: "pagination-app" */'./components/Admin/GlobalComponents/pagination-app.vue'));
 Vue.component('switch-app', () => import(/* webpackChunkName: "switch-app" */'./components/Admin/GlobalComponents/switch-app.vue'));
 Vue.component('multi-select-app', () => import(/* webpackChunkName: "multi-select-app" */'./components/Admin/GlobalComponents/multi-select-app.vue'));
+Vue.component('auto-complete-app', () => import(/* webpackChunkName: "auto-complete-app" */'./components/Admin/GlobalComponents/auto-complete-app.vue'));
+
 
 import counttest from './components/Admin/MultiComponent/countTest.vue';
 
@@ -79,6 +81,17 @@ window.Toast = Toast; //use Toast from globaly
 import toastr from 'toastr'
 window.toastr = toastr;
 /**End Toastr **/
+
+/**V-tooltip**/
+import VTooltip from 'v-tooltip'
+Vue.use(VTooltip)
+//Vue.config.productionTip = false;
+
+//   Vue.directive('tooltip', VTooltip)
+//   Vue.directive('close-popover', VClosePopover)
+// Vue.component('v-popover', VPopover)
+/*End v-tooltip*/
+
 
 /**
  * The following block of code may be used to automatically register your

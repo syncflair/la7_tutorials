@@ -96,6 +96,7 @@ class RoleController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'name' => 'required|min:3|max:20', 
+            'role_desc' => 'max:100', 
         ]);
 
         if($validator->fails()){
@@ -104,6 +105,7 @@ class RoleController extends Controller
 
             $role = New Role;
             $role->name =$request->name; 
+            $role->role_desc = $request->role_desc;
             $role->save();
 
             return response()->json(['success'=>'Role inserted successfully']);
@@ -143,6 +145,7 @@ class RoleController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'name' => 'required|min:3|max:20', 
+            'role_desc' => 'max:100', 
         ]);
 
         if($validator->fails()){
@@ -151,6 +154,7 @@ class RoleController extends Controller
 
             $role = Role::find($id);
             $role->name = $request->name;
+            $role->role_desc = $request->role_desc;
             $role->save();
 
             return response()->json(['success'=>'Role Updated successfully']);

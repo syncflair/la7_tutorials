@@ -1,4 +1,4 @@
-<?php
+<?php /*My Custome Middleware for language*/
 
 namespace App\Http\Middleware;
 

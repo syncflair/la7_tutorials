@@ -158,6 +158,7 @@
 
 	        ToggleItem(){
 	        	this.visible = !this.visible;
+	        	//this.visible = true;
 	        	this.autoQuery = '';
 	        	
 	        	//document.getElementById('autoSearchField').focus();

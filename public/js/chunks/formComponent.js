@@ -864,6 +864,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import { VTooltip, VPopover, VClosePopover } from 'v-tooltip'
+// Vue.config.productionTip = false;
  //for user MapState
 
 
@@ -908,7 +926,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'id': 8,
         'cat_name': 'AC'
       }],
-      selectedItem: [3, 5]
+      selectedItem: [3, 5],
+      messageTooltip: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s'
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('CategoryStore', ['categories', 'autoSearchData', 'pagination'])),
@@ -1991,12 +2010,68 @@ var render = function() {
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-8" }, [
               _c("div", { staticClass: "row pb-2" }, [
-                _c("div", { staticClass: "col-md-4" }, [_vm._v("Serach App")]),
+                _c("div", { staticClass: "col-md-4" }, [_vm._v("Serach App ")]),
                 _vm._v(" "),
                 _c(
                   "div",
                   { staticClass: "col-md-8" },
                   [_c("SearchComponent")],
+                  1
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row pb-2" }, [
+                _c("div", { staticClass: "col-md-4" }, [
+                  _vm._v("Auto Complete App\r\n\r\n\t\t\t\t\t\t"),
+                  _c(
+                    "button",
+                    {
+                      directives: [
+                        {
+                          name: "tooltip",
+                          rawName: "v-tooltip.auto",
+                          value: {
+                            content: _vm.messageTooltip,
+                            classes: "info"
+                          },
+                          expression:
+                            "{content: messageTooltip, classes:'info'}",
+                          modifiers: { auto: true }
+                        }
+                      ]
+                    },
+                    [_vm._v("Hover me")]
+                  ),
+                  _vm._v(" "),
+                  _c("i", {
+                    directives: [
+                      {
+                        name: "tooltip",
+                        rawName: "v-tooltip.auto",
+                        value: {
+                          content: "this is test Tooltip",
+                          classes: "info"
+                        },
+                        expression:
+                          "{content: 'this is test Tooltip', classes:'info'}",
+                        modifiers: { auto: true }
+                      }
+                    ],
+                    staticClass: "fas fa-info-circle pointer"
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-md-8" },
+                  [
+                    _c("auto-complete-app", {
+                      attrs: {
+                        options: _vm.autoSearchData,
+                        filterBy: _vm.filterBy
+                      }
+                    })
+                  ],
                   1
                 )
               ]),

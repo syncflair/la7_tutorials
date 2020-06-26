@@ -26,9 +26,23 @@
 		<div class="row">
 			<div class="col-md-8">
 				<div class="row pb-2">
-					<div class="col-md-4">Serach App</div>
+					<div class="col-md-4">Serach App </div>
 					<div class="col-md-8">					
 						<SearchComponent/>
+					</div>				
+				</div>
+
+				<div class="row pb-2">
+					<div class="col-md-4">Auto Complete App
+
+						<button v-tooltip.auto="{content: messageTooltip, classes:'info'}">Hover me</button>
+						<i class="fas fa-info-circle pointer" v-tooltip.auto="{content: 'this is test Tooltip', classes:'info'}" ></i>
+					</div>
+					<div class="col-md-8">					
+						<auto-complete-app
+						:options="autoSearchData" 
+						:filterBy="filterBy"
+						/>
 					</div>				
 				</div>
 
@@ -88,12 +102,18 @@
 
 	</div><!--/ Card Body -->
 
+
+
 </div><!--/ Card section -->
 </div><!--/ container-fluid --> 
 </section><!-- Main content -->
 </template>
 
 <script>
+	// import { VTooltip, VPopover, VClosePopover } from 'v-tooltip'
+	// Vue.config.productionTip = false;
+
+
 	import { mapState } from 'vuex' //for user MapState
 
 	import DataList from './DataList.vue'	
@@ -101,6 +121,9 @@
 	import FormBoxTwo from './FormBoxTwo.vue'
 	import FormBoxThree from './FormBoxThree.vue'
 	import SearchComponent from './SearchComponent.vue'
+
+
+
 
     export default {
     	name: "formComponent",
@@ -124,6 +147,7 @@
     				{'id':8, 'cat_name':'AC'}
     			],
     			selectedItem:[3, 5],
+    			messageTooltip: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s',
     		}
     	},
 
@@ -160,3 +184,7 @@
 
     }
 </script>
+
+<style>
+
+</style>

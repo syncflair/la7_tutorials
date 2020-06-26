@@ -180,7 +180,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       FireEvent.$emit('AutoCompleteSearch', e.target.value); //this.$store.dispatch('CategoryStore/searching', this.searchText); 
     }, 200),
     ToggleItem: function ToggleItem() {
-      this.visible = !this.visible;
+      this.visible = !this.visible; //this.visible = true;
+
       this.autoQuery = ''; //document.getElementById('autoSearchField').focus();
       //this.$refs.autoSearchField.focus();
       // setTimeout(() => {

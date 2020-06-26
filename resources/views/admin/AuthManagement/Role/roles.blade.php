@@ -104,7 +104,12 @@
                     <!--<label  for="role_name">Add Role</label>-->
                     <input type="text" id="name" class="form-control" name="name" id="name" placeholder="Enter role">
                     <span class="danger" id="name_error"> </span>
-                </div>
+                  </div>
+
+                  <div class="form-group">
+                    <textarea id="role_desc" class="form-control" name="role_desc" placeholder="Description"> </textarea>
+                    <span class="danger" id="role_desc_error"> </span>
+                  </div>
                   
                   <!--<div class="form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -197,6 +202,9 @@
             if(data.errors){              
               if(data.errors.name){ $( '#name_error' ).html( data.errors.name ); }
               if(!data.errors.name){ $( '#name_error' ).html( '' ); }
+
+              if(data.errors.role_desc){ $( '#role_desc_error' ).html( data.errors.role_desc ); }
+              if(!data.errors.role_desc){ $( '#role_desc_error' ).html( '' ); }
             }
             if(data.success){            
               $('#name').val(0);
@@ -235,7 +243,10 @@
              if(data.errors)
             {
               if(data.errors.name){ $( '#name_error' ).html( data.errors.name ); }
-              if(!data.errors.name){ $( '#name_error' ).html( '' ); }                  
+              if(!data.errors.name){ $( '#name_error' ).html( '' ); }  
+
+              if(data.errors.role_desc){ $( '#role_desc_error' ).html( data.errors.role_desc ); }
+              if(!data.errors.role_desc){ $( '#role_desc_error' ).html( '' ); }                
             }
             if(data.success){
 
@@ -283,6 +294,7 @@
 
         $('#id').val(data.id);
         $('#name').val(data.name);
+         $('#role_desc').val(data.role_desc);
                      
       }
     });

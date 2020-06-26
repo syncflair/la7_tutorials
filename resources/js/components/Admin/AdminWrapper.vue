@@ -9,7 +9,9 @@
 </template>
 
 <script>
+
     export default {
+        name: "Admin-Wrapper",
         mounted() {
             //console.log('Component mounted.')
         }

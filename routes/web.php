@@ -24,19 +24,6 @@ Route::get('email-chek', function () {
    // return view('auth.login'); //redirect to login page    
 });
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
 
 Route::get('confirmation', function () { return view('auth.confirmation'); });
 /**************************************** Auth routes *************************************************/
@@ -51,12 +38,30 @@ Auth::routes([
 
 /**************************************** Admin middleware *****************************************************/
 Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], function() {
-
   // Route::fallback(function() {
   //     return response()->json(['message' => 'Not Found!'], 404);
   // });
+  Route::get('dashboard', 'Admin\AdminController@index')->name('dashboard');
+  Route::get('/user-verify/{user_id}', 'Admin\AuthManagement\UserController@user_verify');
+  Route::get('/user-unactive/{user_id}', 'Admin\AuthManagement\UserController@user_unactive');
+  Route::get('/user-active/{user_id}', 'Admin\AuthManagement\UserController@user_active');
+  Route::resource('user', 'Admin\AuthManagement\UserController');
+  Route::resource('profile', 'Admin\AuthManagement\ProfileController');
+  Route::get('/role-unactive/{role_id}', 'Admin\AuthManagement\RoleController@role_unactive');
+  Route::get('/role-active/{role_id}', 'Admin\AuthManagement\RoleController@role_active');  
+  Route::resource('role', 'Admin\AuthManagement\RoleController');
+  Route::resource('permission', 'Admin\AuthManagement\PermissionController');
 
     /*********************************************Vue Route****************************************************/
+
+
+    Route::resource('spa/OrgInfo', 'Admin\Settings\OrganizationInfoController', 
+      ['except'=>['index','create','store','show','destroy'] ]);
+    Route::resource('spa/Branch-Info', 'Admin\Settings\BranchInfoController');
+    Route::resource('spa/Currency-Info', 'Admin\Settings\CurrencyController');
+
+
+
     Route::get('spa/unactive-category/{id}', 'Admin\Category\CategoryController@unactiveCategory');
     Route::get('spa/active-category/{id}', 'Admin\Category\CategoryController@activeCategory');
     Route::get('spa/search-category', 'Admin\Category\CategoryController@searchCategory');
@@ -82,25 +87,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     /**********************************************End Vue Route *************************************************/
 
     
-   
-
-
-    Route::get('dashboard', 'Admin\AdminController@index')->name('dashboard');
-
-    Route::get('/user-verify/{user_id}', 'Admin\AuthManagement\UserController@user_verify');
-    Route::get('/user-unactive/{user_id}', 'Admin\AuthManagement\UserController@user_unactive');
-    Route::get('/user-active/{user_id}', 'Admin\AuthManagement\UserController@user_active');
-    Route::resource('user', 'Admin\AuthManagement\UserController');
-
-    Route::resource('profile', 'Admin\AuthManagement\ProfileController');
-
-    Route::get('/role-unactive/{role_id}', 'Admin\AuthManagement\RoleController@role_unactive');
-    Route::get('/role-active/{role_id}', 'Admin\AuthManagement\RoleController@role_active');  
-    Route::resource('role', 'Admin\AuthManagement\RoleController');
-
-    Route::resource('permission', 'Admin\AuthManagement\PermissionController');
-
-
+ 
 
     // Vue: single page application (SPA)- Any route that not match that redirect to dashboard. combine vue route and laravel rourte. Best way place this route to last of the line    
     //Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '.*' ); 
