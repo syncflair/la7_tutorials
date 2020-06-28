@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin\Settings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Settings\BranchInfo;
+use App\Models\Settings\LengthUnit;
 
-class BranchInfoController extends Controller
+
+class LengthUnitController extends Controller
 {
+
      /**
      * Create a new controller instance.
      *
@@ -26,7 +28,7 @@ class BranchInfoController extends Controller
      */
     public function index()
     {
-        $data = BranchInfo::get();
+        $data = LengthUnit::get();
         return response()->json($data);
     }
 
@@ -49,23 +51,17 @@ class BranchInfoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'branch_name' => 'required|min:3|max:100',
+            'length_title' => 'required|min:3|max:40',
+            'length_unit' => 'required|min:1|max:8',
         ]);
 
         $data =array();
-        $data['org_id']= 1; //1 is organization id
-        $data['branch_name']=$request->branch_name;
-        $data['branch_code']=$request->branch_code;
-        $data['branch_desc']=$request->branch_desc;
-        $data['branch_address']=$request->branch_address;
-        $data['branch_email']=$request->branch_email;
-        $data['branch_phone']=$request->branch_phone;
-        $data['zone']=$request->zone;
-        $data['city']=$request->city;
-        $data['state']=$request->state;
-        $data['country']=$request->country;
+        $data['length_title']=$request->length_title;
+        $data['length_unit']=$request->length_unit;
+        $data['length_value']=$request->length_value;
+        $data['length_desc']=$request->length_desc;
 
-        $data['created_by']= \Auth::user()->id;         
+        $data['updated_by']= \Auth::user()->id;         
         
         if($request->is_enabled == NULL){
             $data['is_enabled'] = 0;
@@ -73,8 +69,8 @@ class BranchInfoController extends Controller
            $data['is_enabled']=$request->is_enabled; 
         }
 
-        BranchInfo::create($data);        
-        return response()->json(['success'=>'Branch Created successfully.']); 
+        LengthUnit::create($data);        
+        return response()->json(['success'=>'Length Unit Created successfully.']); 
     }
 
     /**
@@ -109,21 +105,15 @@ class BranchInfoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'branch_name' => 'required|min:3|max:100',
+            'length_title' => 'required|min:3|max:40|unique:length_units,length_title,'.$id,
+            'length_unit' => 'required|min:1|max:8|unique:length_units,length_unit,'.$id,
         ]);
 
         $data =array();
-        $data['org_id']= 1; //1 is organization id
-        $data['branch_name']=$request->branch_name;
-        $data['branch_code']=$request->branch_code;
-        $data['branch_desc']=$request->branch_desc;
-        $data['branch_address']=$request->branch_address;
-        $data['branch_email']=$request->branch_email;
-        $data['branch_phone']=$request->branch_phone;
-        $data['zone']=$request->zone;
-        $data['city']=$request->city;
-        $data['state']=$request->state;
-        $data['country']=$request->country;
+        $data['length_title']=$request->length_title;
+        $data['length_unit']=$request->length_unit;
+        $data['length_value']=$request->length_value;
+        $data['length_desc']=$request->length_desc;
 
         $data['updated_by']= \Auth::user()->id;         
         
@@ -133,8 +123,8 @@ class BranchInfoController extends Controller
            $data['is_enabled']=$request->is_enabled; 
         }
 
-        BranchInfo::whereId($id)->update($data);         
-        return response()->json(['success'=>'Branch Updated successfully.']); 
+        LengthUnit::whereId($id)->update($data);         
+        return response()->json(['success'=>'Length Unit Updated successfully.']); 
     }
 
     /**
@@ -145,7 +135,7 @@ class BranchInfoController extends Controller
      */
     public function destroy($id)
     {
-         $data = BranchInfo::findOrFail($id)->delete();        
+        $data = LengthUnit::findOrFail($id)->delete();        
         if($data){
             return response()->json(['success'=> 'Record is successfully deleted']);
         }else{

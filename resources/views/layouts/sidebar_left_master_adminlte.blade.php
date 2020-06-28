@@ -330,6 +330,42 @@
                 </router-link>
               </li>
 
+              <li class="nav-item">
+                <router-link to="/spa/LanguageMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Language
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/LengthUnit" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Length Units
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/WeightUnit" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Weight Units
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/PackageUnit" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Package Units
+                  </p>
+                </router-link>
+              </li>
+
 
               <li class="nav-item">
                 <a href="pages/forms/general.html" class="nav-link">

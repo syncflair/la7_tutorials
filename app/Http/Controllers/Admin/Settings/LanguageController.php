@@ -5,13 +5,12 @@ namespace App\Http\Controllers\Admin\Settings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Settings\Currency;
+use App\Models\Settings\Language;
 use Illuminate\Support\Str; //for str::random
 use Illuminate\Support\Facades\File; //for file management
 
-class CurrencyController extends Controller
+class LanguageController extends Controller
 {
-
      /**
      * Create a new controller instance.
      *
@@ -29,7 +28,7 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        $data = Currency::get();
+        $data = Language::get();
         return response()->json($data);
     }
 
@@ -52,15 +51,13 @@ class CurrencyController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'currency_name' => 'required|min:3|max:40',
-            'currency_code' => 'required|min:2|max:8',
+            'lang_name' => 'required|min:3|max:40',
+            'lang_code' => 'required|min:2|max:8',
         ]);
 
         $data =array();
-        $data['currency_name']=$request->currency_name;
-        $data['currency_code']=$request->currency_code;
-        $data['currency_value']=$request->currency_value;
-        //$data['currency_icon']=$request->currency_icon;
+        $data['lang_name']=$request->lang_name;
+        $data['lang_code']=$request->lang_code;
 
         $data['created_by']= \Auth::user()->id;         
         
@@ -71,7 +68,7 @@ class CurrencyController extends Controller
         }
 
 
-        $image = $request->currency_icon;
+        $image = $request->lang_icon;
 
         if($image){
             //return $imageSize =getimagesize($image);
@@ -85,7 +82,7 @@ class CurrencyController extends Controller
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
-                    ->resize(20, 20)
+                    ->resize(40, 40)
                    // ->text('SHORBORAHO', 140, 190)
                     // ->text('SHORBORAHO', 140, 190, function($font) {
                     //     //$font->file('/backend/fonts/FontAwesome.otf');
@@ -98,20 +95,17 @@ class CurrencyController extends Controller
                     //->text('foo', 0, 0, function($font) {  $font->color(array(255, 255, 255, 0.5)); })
                     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
 
-                $data['currency_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                $data['lang_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
 
-                Currency::create($data);        
-                return response()->json(['success'=>'Currency Created successfully']); 
+                Language::create($data);        
+                return response()->json(['success'=>'Language Created successfully']); 
             }//end image type check
         }else{
-            $data['currency_icon'] = null;
+            $data['lang_icon'] = null;
 
-            Currency::create($data);        
-            return response()->json(['success'=>'Currency Created successfully.']); 
+            Language::create($data);        
+            return response()->json(['success'=>'Language Created successfully.']); 
         }
-
-            
-      
     }
 
     /**
@@ -146,15 +140,13 @@ class CurrencyController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'currency_name' => 'required|min:3|max:40|unique:currencies,currency_name,'.$id,
-            'currency_code' => 'required|min:2|max:8|unique:currencies,currency_code,'.$id,
+            'lang_name' => 'required|min:3|max:40|unique:languages,lang_name,'.$id,
+            'lang_code' => 'required|min:2|max:8|unique:languages,lang_code,'.$id,
         ]);
 
         $data =array();
-        $data['currency_name']=$request->currency_name;
-        $data['currency_code']=$request->currency_code;
-        $data['currency_value']=$request->currency_value;
-        //$data['currency_icon']=$request->currency_icon;
+        $data['lang_name']=$request->lang_name;
+        $data['lang_code']=$request->lang_code;
 
         $data['updated_by']= \Auth::user()->id;         
         
@@ -164,7 +156,7 @@ class CurrencyController extends Controller
            $data['is_enabled']=$request->is_enabled; 
         }
 
-        $image = $request->currency_icon;        
+        $image = $request->lang_icon;        
 
         //if(strlen($image) > 150){ /*php function*/
         if( Str::length($image) > 150){ /*larvel helper function*/
@@ -176,30 +168,30 @@ class CurrencyController extends Controller
             }else{
 
                 //query for existing image
-                $existing_image = Currency::select('currency_icon')->where('id', $id)->first();                   
-                if(!empty($existing_image->currency_icon)) {
-                    File::delete($existing_image->currency_icon); //delete file //use Illuminate\Support\Facades\File; at top
+                $existing_image = Language::select('lang_icon')->where('id', $id)->first();                   
+                if(!empty($existing_image->lang_icon)) {
+                    File::delete($existing_image->lang_icon); //delete file //use Illuminate\Support\Facades\File; at top
                 }//else{echo 'Empty';}  
 
                 //new name generate from base64 file
                 $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
-                    ->resize(20, 20)
+                    ->resize(40, 40)
                    // ->text('SHORBORAHO', 140, 190)
                     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
 
-                $data['currency_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                $data['lang_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
 
-                Currency::whereId($id)->update($data);      
+                Language::whereId($id)->update($data);      
                 return response()->json(['success'=>'Update successfull.']);
             }//end image type check
         }else{
-            $existing_image = Currency::select('currency_icon')->where('id', $id)->first();
-            $data['currency_icon'] = $existing_image->currency_icon;
+            $existing_image = Language::select('lang_icon')->where('id', $id)->first();
+            $data['lang_icon'] = $existing_image->lang_icon;
 
-            Currency::whereId($id)->update($data);         
-            return response()->json(['success'=>'Currency Updated successfully.']); 
+            Language::whereId($id)->update($data);         
+            return response()->json(['success'=>'Language Updated successfully.']); 
         }
     }
 
@@ -212,13 +204,13 @@ class CurrencyController extends Controller
     public function destroy($id)
     {
         //query for existing image
-        $existing_image = Currency::select('currency_icon')->where('id', $id)->first();                   
-        if( File::exists($existing_image->currency_icon) ) {  
-            File::delete($existing_image->currency_icon); 
+        $existing_image = Language::select('lang_icon')->where('id', $id)->first();                   
+        if( File::exists($existing_image->lang_icon) ) {  
+            File::delete($existing_image->lang_icon); 
             //delete file //use Illuminate\Support\Facades\File; at top
         }
 
-        $data = Currency::findOrFail($id)->delete();        
+        $data = Language::findOrFail($id)->delete();        
         if($data){
             return response()->json(['success'=> 'Record is successfully deleted']);
         }else{

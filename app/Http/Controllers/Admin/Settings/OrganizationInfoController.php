@@ -5,12 +5,23 @@ namespace App\Http\Controllers\Admin\Settings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\OrganizationInfo;
+use App\Models\Settings\OrganizationInfo;
 use Illuminate\Support\Str; //for str::random
 use Illuminate\Support\Facades\File; //for file management
 
 class OrganizationInfoController extends Controller
 {
+
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *

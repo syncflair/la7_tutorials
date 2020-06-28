@@ -57,8 +57,18 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 
     Route::resource('spa/OrgInfo', 'Admin\Settings\OrganizationInfoController', 
       ['except'=>['index','create','store','show','destroy'] ]);
-    Route::resource('spa/Branch-Info', 'Admin\Settings\BranchInfoController');
-    Route::resource('spa/Currency-Info', 'Admin\Settings\CurrencyController');
+    Route::resource('spa/Branch-Info', 'Admin\Settings\BranchInfoController', 
+      ['except'=>['create','show','edit'] ]);
+    Route::resource('spa/Currency-Info', 'Admin\Settings\CurrencyController', 
+      ['except'=>['create','show','edit'] ]);
+    Route::resource('spa/Language-Info', 'Admin\Settings\LanguageController', 
+      ['except'=>['create','show','edit'] ]);
+    Route::resource('spa/LengthUnit-Info', 'Admin\Settings\LengthUnitController', 
+      ['except'=>['create','show','edit'] ]);
+    Route::resource('spa/WeightUnit-Info', 'Admin\Settings\WeightUnitController', 
+      ['except'=>['create','show','edit'] ]);
+    Route::resource('spa/PackageUnit-Info', 'Admin\Settings\PackageUnitController', 
+      ['except'=>['create','show','edit'] ]);
 
 
 

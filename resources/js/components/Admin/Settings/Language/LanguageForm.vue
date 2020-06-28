@@ -2,13 +2,13 @@
 <span>
 		
 	<!-- Modal -->
-<div class="modal fade" id="currencyModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" >
+<div class="modal fade" id="LanguageModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" >
   <div class="modal-dialog modal-lg-" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="">
-        	<span v-show="!editMode">Add Currency</span>
-        	<span v-show="editMode">Update Currency</span>
+        	<span v-show="!editMode">Add Language</span>
+        	<span v-show="editMode">Update Language</span>
         </h5>
         <button @click="ClearForm()" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -23,22 +23,16 @@
 	          	<div class="col-md-12 col-sm-12">
 
 	          		<div class="form-group">
-	                  <label>Currency Name *</label>
-	                    <input v-model="form.currency_name" type="text" ref="currency_name" name="currency_name" class="form-control" :class="{ 'is-invalid': form.errors.has('currency_name') }" placeholder="Currency Name">
-	                  <has-error :form="form" field="currency_name"></has-error>
+	                  <label>Language Name *</label>
+	                    <input v-model="form.lang_name" type="text" ref="lang_name" name="lang_name" class="form-control" :class="{ 'is-invalid': form.errors.has('lang_name') }" placeholder="Language Name">
+	                  <has-error :form="form" field="lang_name"></has-error>
 	                </div>
 	               
                   	<div class="form-group">
-                      <label>Currency Code</label>
-                        <input v-model="form.currency_code" type="text" ref="currency_code" name="currency_code" class="form-control" :class="{ 'is-invalid': form.errors.has('currency_code') }" placeholder="Enter currency code">
-                      <has-error :form="form" field="currency_code"></has-error>
+                      <label>Language Code</label>
+                        <input v-model="form.lang_code" type="text" ref="lang_code" name="lang_code" class="form-control" :class="{ 'is-invalid': form.errors.has('lang_code') }" placeholder="Enter Language code">
+                      <has-error :form="form" field="lang_code"></has-error>
                     </div>	
-
-                    <div class="form-group">
-                      <label>Currency Value (1$)</label>
-                        <input v-model="form.currency_value" type="text" ref="currency_value" name="currency_value" class="form-control" :class="{ 'is-invalid': form.errors.has('currency_value') }" placeholder="Enter currency value">
-                      <has-error :form="form" field="currency_value"></has-error>
-                    </div>
 
 	                
 
@@ -47,17 +41,11 @@
                       <label class="form-check-label" for="checkbox" >Is Active</label>
                     </div>
 
-                    <!-- <div class="form-group">
-                      <label>Icon (FontAwesome)</label>
-                        <input v-model="form.currency_icon" type="text" ref="currency_icon" name="currency_icon" class="form-control" :class="{ 'is-invalid': form.errors.has('currency_icon') }" placeholder="Font Awesome Icon">
-                      <has-error :form="form" field="currency_icon"></has-error>
-                    </div> -->
-
                     <div class="row pt-3">
                       <div class="col-md-9">
                         <div class="form-group">
-                          <label for="currency_icon">Image</label>
-                          <input @change="onImageChange" type="file" ref="currency_icon" name="currency_icon" class="form-control" />
+                          <label for="lang_icon">Image</label>
+                          <input @change="onImageChange" type="file" ref="lang_icon" name="lang_icon" class="form-control" />
                           <!-- @change="updateCatImg" -->
                         </div>
                       </div>
@@ -68,10 +56,10 @@
                         </span>
                         
                         <span v-else>
-                         <img v-if="form.currency_icon == 'undefined'" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
-                         <img v-if="form.currency_icon === '' " :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
-                         <img v-else-if="form.currency_icon === null" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
-                          <img v-else-if="form.currency_icon != '' " :src="'../'+form.currency_icon" class="img-fluid img-thumbnail focusImgOnHover" style="width:65px;height:65px;">
+                         <img v-if="form.lang_icon == 'undefined'" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
+                         <img v-if="form.lang_icon === '' " :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
+                         <img v-else-if="form.lang_icon === null" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
+                          <img v-else-if="form.lang_icon != '' " :src="'../'+form.lang_icon" class="img-fluid img-thumbnail focusImgOnHover" style="width:65px;height:65px;">
                         </span>                        
                         
                       </div>
@@ -112,10 +100,9 @@
 	        // Create a new form instance
 	        form: new Form({
 	          id: '',
-	          currency_name: '',
-	          currency_code: '',
-	          currency_value: '',
-	          currency_icon: '',
+	          lang_name: '',
+	          lang_code: '',
+	          lang_icon: '',
 	          is_enabled: '',	          
 	        })
 	      }
@@ -134,38 +121,38 @@
 		        }else{          
 		          reader.onloadend = (file) => {
 		            //console.log(reader.result);
-		            this.form.currency_icon = reader.result; //push base64 to logo veriable
+		            this.form.lang_icon = reader.result; //push base64 to logo veriable
 		          };          
 		          reader.readAsDataURL(file);
 		        }
 		      },
 
-	    	addCurrency(){
+	    	addLanguage(){
 	    		this.editMode = false;
 	    		this.form.reset();	    		
 	    		setTimeout(() => {
-	    			this.$refs.currency_name.focus(); 
+	    			this.$refs.lang_name.focus(); 
                 }, 600);
 	    	},
 
-	    	editCurrency(data){
+	    	editLanguage(data){
 	    		this.editMode = true;
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
-	    		//this.$refs.currency_name.focus();    		
+	    		this.$refs.lang_name.focus();    		
 	    	},
 	    	ClearForm(){
 	    		this.editMode = false;
 		        this.form.reset();  //reset from after submit
 		        this.form.clear(); 
-		        //this.$refs.currency_name.focus()
+		        //this.$refs.lang_name.focus()
 	    	},
 
 	    	// Submit the form via a POST request
 			storeFormData() {  
 			  this.$Progress.start(); //using progress-bar package
 
-			  this.form.post('/spa/Currency-Info')
+			  this.form.post('/spa/Language-Info')
 			  .then(({ data }) => { 
 
 			    if(data.success){ 
@@ -173,9 +160,9 @@
 			      toastr.success(data.success);             
 			      this.$Progress.finish();  
 			      this.form.reset();  //reset from after submit
-			      this.$refs.currency_icon.value = ''; //clear file input tag 
+			      this.$refs.lang_icon.value = ''; //clear file input tag 
 			      this.ShowOnChangeImage = null;
-			      $('#currencyModal').modal('hide');			      
+			      $('#LanguageModal').modal('hide');			      
 			    }
 			    if(data.errors){
 			      toastr.warning(data.errors); 
@@ -191,7 +178,7 @@
 				//console.log('Update is working!'); 
 				this.$Progress.start(); //using progress-bar package
 
-				this.form.put('/spa/Currency-Info/'+this.form.id)
+				this.form.put('/spa/Language-Info/'+this.form.id)
 				  .then(({ data }) => { 
 
 				    if(data.success){ 
@@ -201,10 +188,10 @@
 				      toastr.success(data.success);               
 				      this.form.reset();  //reset from after submit
 				      this.editMode = false; 
-				      this.$refs.currency_icon.value = ''; //clear file input tag 
+				      this.$refs.lang_icon.value = ''; //clear file input tag 
 				      this.ShowOnChangeImage = null;
-				     $('#currencyModal').modal('hide');
-				    //  this.$refs.currency_name.focus(); 
+				     $('#LanguageModal').modal('hide');
+				    //  this.$refs.lang_name.focus(); 
 				    
 				    }
 				    if(data.errors){
@@ -221,14 +208,14 @@
 	    },
 
 	    created(){
-	    	FireEvent.$on('editCurrency', (data) => {
+	    	FireEvent.$on('editLanguage', (data) => {
               //alert(data.id);
               //this.form.fill(data);   //this is also work
-              this.editCurrency(data);
+              this.editLanguage(data);
             });
 
-            FireEvent.$on('addCurrency', () => {
-              this.addCurrency();
+            FireEvent.$on('addLanguage', () => {
+              this.addLanguage();
             });
 	    }
 

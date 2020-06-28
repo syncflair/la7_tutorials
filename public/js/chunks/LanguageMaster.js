@@ -1,26 +1,14 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["CurrencyMarster"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["LanguageMaster"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Language/LanguageForm.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Settings/Language/LanguageForm.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -122,10 +110,9 @@ __webpack_require__.r(__webpack_exports__);
       // Create a new form instance
       form: new Form({
         id: '',
-        currency_name: '',
-        currency_code: '',
-        currency_value: '',
-        currency_icon: '',
+        lang_name: '',
+        lang_code: '',
+        lang_icon: '',
         is_enabled: ''
       })
     };
@@ -148,31 +135,32 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         reader.onloadend = function (file) {
           //console.log(reader.result);
-          _this.form.currency_icon = reader.result; //push base64 to logo veriable
+          _this.form.lang_icon = reader.result; //push base64 to logo veriable
         };
 
         reader.readAsDataURL(file);
       }
     },
-    addCurrency: function addCurrency() {
+    addLanguage: function addLanguage() {
       var _this2 = this;
 
       this.editMode = false;
       this.form.reset();
       setTimeout(function () {
-        _this2.$refs.currency_name.focus();
+        _this2.$refs.lang_name.focus();
       }, 600);
     },
-    editCurrency: function editCurrency(data) {
+    editLanguage: function editLanguage(data) {
       this.editMode = true;
       this.form.reset();
-      this.form.fill(data); //this.$refs.currency_name.focus();    		
+      this.form.fill(data);
+      this.$refs.lang_name.focus();
     },
     ClearForm: function ClearForm() {
       this.editMode = false;
       this.form.reset(); //reset from after submit
 
-      this.form.clear(); //this.$refs.currency_name.focus()
+      this.form.clear(); //this.$refs.lang_name.focus()
     },
     // Submit the form via a POST request
     storeFormData: function storeFormData() {
@@ -180,7 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.post('/spa/Currency-Info').then(function (_ref) {
+      this.form.post('/spa/Language-Info').then(function (_ref) {
         var data = _ref.data;
 
         if (data.success) {
@@ -193,10 +181,10 @@ __webpack_require__.r(__webpack_exports__);
           _this3.form.reset(); //reset from after submit
 
 
-          _this3.$refs.currency_icon.value = ''; //clear file input tag 
+          _this3.$refs.lang_icon.value = ''; //clear file input tag 
 
           _this3.ShowOnChangeImage = null;
-          $('#currencyModal').modal('hide');
+          $('#LanguageModal').modal('hide');
         }
 
         if (data.errors) {
@@ -214,7 +202,7 @@ __webpack_require__.r(__webpack_exports__);
       //console.log('Update is working!'); 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.put('/spa/Currency-Info/' + this.form.id).then(function (_ref2) {
+      this.form.put('/spa/Language-Info/' + this.form.id).then(function (_ref2) {
         var data = _ref2.data;
 
         if (data.success) {
@@ -228,10 +216,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
           _this4.editMode = false;
-          _this4.$refs.currency_icon.value = ''; //clear file input tag 
+          _this4.$refs.lang_icon.value = ''; //clear file input tag 
 
           _this4.ShowOnChangeImage = null;
-          $('#currencyModal').modal('hide'); //  this.$refs.currency_name.focus(); 
+          $('#LanguageModal').modal('hide'); //  this.$refs.lang_name.focus(); 
         }
 
         if (data.errors) {
@@ -247,22 +235,22 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this5 = this;
 
-    FireEvent.$on('editCurrency', function (data) {
+    FireEvent.$on('editLanguage', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this5.editCurrency(data);
+      _this5.editLanguage(data);
     });
-    FireEvent.$on('addCurrency', function () {
-      _this5.addCurrency();
+    FireEvent.$on('addLanguage', function () {
+      _this5.addLanguage();
     });
   }
 }); //End Exprot Default
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Currency/CurrencyList.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Language/LanguageList.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Settings/Currency/CurrencyList.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Settings/Language/LanguageList.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -348,24 +336,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "CurrencyList",
+  name: "LanguageList",
   data: function data() {
     return {
       NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
-      Currencies: {} // perPage: 0,                 
+      Languages: {} // perPage: 0,                 
 
     };
   },
   computed: {},
   methods: {
-    fetchCurrencies: function fetchCurrencies() {
+    fetchLanguage: function fetchLanguage() {
       var _this = this;
 
       this.$Progress.start(); //using progress-bar package
 
-      axios.get('/spa/Currency-Info').then(function (response) {
-        _this.Currencies = response.data; // is an object... use when pagination
-        //this.Currencies = response.data.data; //is an object... default 
+      axios.get('/spa/Language-Info').then(function (response) {
+        _this.Languages = response.data; // is an object... use when pagination
+        //this.Languages = response.data.data; //is an object... default 
         //console.log(response.data); 
 
         _this.$Progress.finish();
@@ -376,12 +364,12 @@ __webpack_require__.r(__webpack_exports__);
         toastr.warning('Something is wrong!');
       });
     },
-    addCurrency: function addCurrency() {
-      FireEvent.$emit('addCurrency');
+    addLanguage: function addLanguage() {
+      FireEvent.$emit('addLanguage');
     },
-    editCurrency: function editCurrency(data) {
+    editLanguage: function editLanguage(data) {
       //alert(data.id);
-      FireEvent.$emit('editCurrency', data);
+      FireEvent.$emit('editLanguage', data);
     },
     DeleteData: function DeleteData(id) {
       Swal.fire({
@@ -394,7 +382,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]('/spa/Currency-Info/' + id).then(function (_ref) {
+          axios["delete"]('/spa/Language-Info/' + id).then(function (_ref) {
             var data = _ref.data;
 
             if (data.success) {
@@ -419,30 +407,30 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this2 = this;
 
-    this.fetchCurrencies();
+    this.fetchLanguage();
     FireEvent.$on('AfterChange', function () {
-      _this2.fetchCurrencies();
+      _this2.fetchLanguage();
     });
   },
   mounted: function mounted() {//console.log(this.categories)    
-    //this.fetchCurrencies();  
+    //this.fetchLanguage();  
   }
 });
 /*End export default*/
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Language/LanguageMaster.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Settings/Language/LanguageMaster.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CurrencyList_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CurrencyList.vue */ "./resources/js/components/Admin/Settings/Currency/CurrencyList.vue");
-/* harmony import */ var _CurrencyForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CurrencyForm.vue */ "./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue");
+/* harmony import */ var _LanguageList_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LanguageList.vue */ "./resources/js/components/Admin/Settings/Language/LanguageList.vue");
+/* harmony import */ var _LanguageForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LanguageForm.vue */ "./resources/js/components/Admin/Settings/Language/LanguageForm.vue");
 //
 //
 //
@@ -490,8 +478,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CurrencyMaster",
   components: {
-    CurrencyList: _CurrencyList_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    CurrencyForm: _CurrencyForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    LanguageList: _LanguageList_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    LanguageForm: _LanguageForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {};
@@ -504,9 +492,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue?vue&type=template&id=6e2f1f12&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Language/LanguageForm.vue?vue&type=template&id=c3f2021c&":
 /*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue?vue&type=template&id=6e2f1f12& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Settings/Language/LanguageForm.vue?vue&type=template&id=c3f2021c& ***!
   \***************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -525,7 +513,7 @@ var render = function() {
       {
         staticClass: "modal fade",
         attrs: {
-          id: "currencyModal",
+          id: "LanguageModal",
           tabindex: "-1",
           role: "dialog",
           "aria-labelledby": "",
@@ -556,7 +544,7 @@ var render = function() {
                         }
                       ]
                     },
-                    [_vm._v("Add Currency")]
+                    [_vm._v("Add Language")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -571,7 +559,7 @@ var render = function() {
                         }
                       ]
                     },
-                    [_vm._v("Update Currency")]
+                    [_vm._v("Update Language")]
                   )
                 ]),
                 _vm._v(" "),
@@ -617,30 +605,28 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
-                              _c("label", [_vm._v("Currency Name *")]),
+                              _c("label", [_vm._v("Language Name *")]),
                               _vm._v(" "),
                               _c("input", {
                                 directives: [
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: _vm.form.currency_name,
-                                    expression: "form.currency_name"
+                                    value: _vm.form.lang_name,
+                                    expression: "form.lang_name"
                                   }
                                 ],
-                                ref: "currency_name",
+                                ref: "lang_name",
                                 staticClass: "form-control",
                                 class: {
-                                  "is-invalid": _vm.form.errors.has(
-                                    "currency_name"
-                                  )
+                                  "is-invalid": _vm.form.errors.has("lang_name")
                                 },
                                 attrs: {
                                   type: "text",
-                                  name: "currency_name",
-                                  placeholder: "Currency Name"
+                                  name: "lang_name",
+                                  placeholder: "Language Name"
                                 },
-                                domProps: { value: _vm.form.currency_name },
+                                domProps: { value: _vm.form.lang_name },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
@@ -648,7 +634,7 @@ var render = function() {
                                     }
                                     _vm.$set(
                                       _vm.form,
-                                      "currency_name",
+                                      "lang_name",
                                       $event.target.value
                                     )
                                   }
@@ -656,10 +642,7 @@ var render = function() {
                               }),
                               _vm._v(" "),
                               _c("has-error", {
-                                attrs: {
-                                  form: _vm.form,
-                                  field: "currency_name"
-                                }
+                                attrs: { form: _vm.form, field: "lang_name" }
                               })
                             ],
                             1
@@ -669,30 +652,28 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
-                              _c("label", [_vm._v("Currency Code")]),
+                              _c("label", [_vm._v("Language Code")]),
                               _vm._v(" "),
                               _c("input", {
                                 directives: [
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: _vm.form.currency_code,
-                                    expression: "form.currency_code"
+                                    value: _vm.form.lang_code,
+                                    expression: "form.lang_code"
                                   }
                                 ],
-                                ref: "currency_code",
+                                ref: "lang_code",
                                 staticClass: "form-control",
                                 class: {
-                                  "is-invalid": _vm.form.errors.has(
-                                    "currency_code"
-                                  )
+                                  "is-invalid": _vm.form.errors.has("lang_code")
                                 },
                                 attrs: {
                                   type: "text",
-                                  name: "currency_code",
-                                  placeholder: "Enter currency code"
+                                  name: "lang_code",
+                                  placeholder: "Enter Language code"
                                 },
-                                domProps: { value: _vm.form.currency_code },
+                                domProps: { value: _vm.form.lang_code },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
@@ -700,7 +681,7 @@ var render = function() {
                                     }
                                     _vm.$set(
                                       _vm.form,
-                                      "currency_code",
+                                      "lang_code",
                                       $event.target.value
                                     )
                                   }
@@ -708,62 +689,7 @@ var render = function() {
                               }),
                               _vm._v(" "),
                               _c("has-error", {
-                                attrs: {
-                                  form: _vm.form,
-                                  field: "currency_code"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("Currency Value (1$)")]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.currency_value,
-                                    expression: "form.currency_value"
-                                  }
-                                ],
-                                ref: "currency_value",
-                                staticClass: "form-control",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has(
-                                    "currency_value"
-                                  )
-                                },
-                                attrs: {
-                                  type: "text",
-                                  name: "currency_value",
-                                  placeholder: "Enter currency value"
-                                },
-                                domProps: { value: _vm.form.currency_value },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "currency_value",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: {
-                                  form: _vm.form,
-                                  field: "currency_value"
-                                }
+                                attrs: { form: _vm.form, field: "lang_code" }
                               })
                             ],
                             1
@@ -836,19 +762,14 @@ var render = function() {
                           _c("div", { staticClass: "row pt-3" }, [
                             _c("div", { staticClass: "col-md-9" }, [
                               _c("div", { staticClass: "form-group" }, [
-                                _c(
-                                  "label",
-                                  { attrs: { for: "currency_icon" } },
-                                  [_vm._v("Image")]
-                                ),
+                                _c("label", { attrs: { for: "lang_icon" } }, [
+                                  _vm._v("Image")
+                                ]),
                                 _vm._v(" "),
                                 _c("input", {
-                                  ref: "currency_icon",
+                                  ref: "lang_icon",
                                   staticClass: "form-control",
-                                  attrs: {
-                                    type: "file",
-                                    name: "currency_icon"
-                                  },
+                                  attrs: { type: "file", name: "lang_icon" },
                                   on: { change: _vm.onImageChange }
                                 })
                               ])
@@ -870,7 +791,7 @@ var render = function() {
                                       : _vm._e()
                                   ])
                                 : _c("span", [
-                                    _vm.form.currency_icon == "undefined"
+                                    _vm.form.lang_icon == "undefined"
                                       ? _c("img", {
                                           staticClass:
                                             "img-fluid img-thumbnail",
@@ -882,7 +803,7 @@ var render = function() {
                                         })
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    _vm.form.currency_icon === ""
+                                    _vm.form.lang_icon === ""
                                       ? _c("img", {
                                           staticClass:
                                             "img-fluid img-thumbnail",
@@ -892,7 +813,7 @@ var render = function() {
                                           },
                                           attrs: { src: "../" + _vm.NoIconUrl }
                                         })
-                                      : _vm.form.currency_icon === null
+                                      : _vm.form.lang_icon === null
                                       ? _c("img", {
                                           staticClass:
                                             "img-fluid img-thumbnail",
@@ -902,7 +823,7 @@ var render = function() {
                                           },
                                           attrs: { src: "../" + _vm.NoIconUrl }
                                         })
-                                      : _vm.form.currency_icon != ""
+                                      : _vm.form.lang_icon != ""
                                       ? _c("img", {
                                           staticClass:
                                             "img-fluid img-thumbnail focusImgOnHover",
@@ -911,7 +832,7 @@ var render = function() {
                                             height: "65px"
                                           },
                                           attrs: {
-                                            src: "../" + _vm.form.currency_icon
+                                            src: "../" + _vm.form.lang_icon
                                           }
                                         })
                                       : _vm._e()
@@ -994,9 +915,9 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Currency/CurrencyList.vue?vue&type=template&id=bbaf7428&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Language/LanguageList.vue?vue&type=template&id=5bffb468&":
 /*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Settings/Currency/CurrencyList.vue?vue&type=template&id=bbaf7428& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Settings/Language/LanguageList.vue?vue&type=template&id=5bffb468& ***!
   \***************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -1013,7 +934,7 @@ var render = function() {
     _c("div", { staticClass: "card-header" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-8 col-sm-6 col-6" }, [
-          _vm._v("Currency List")
+          _vm._v("Language List")
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-4 col-sm-6 col-6 text-right" }, [
@@ -1023,9 +944,9 @@ var render = function() {
               staticClass: "btn btn-primary btn-flat btn-sm",
               attrs: {
                 "data-toggle": "modal",
-                "data-target": "#currencyModal"
+                "data-target": "#LanguageModal"
               },
-              on: { click: _vm.addCurrency }
+              on: { click: _vm.addLanguage }
             },
             [_c("i", { staticClass: "icon fas fa-plus" }), _vm._v(" Add New")]
           )
@@ -1040,48 +961,43 @@ var render = function() {
         _c(
           "tbody",
           [
-            _vm._l(_vm.Currencies, function(currency, index) {
+            _vm._l(_vm.Languages, function(language, index) {
               return _c("tr", { key: index }, [
                 _c("td", { attrs: { scope: "col" } }, [
-                  _vm._v(" " + _vm._s(currency.currency_name) + " ")
+                  _vm._v(" " + _vm._s(language.lang_name) + " ")
                 ]),
                 _vm._v(" "),
+                _c("td", [_vm._v(" " + _vm._s(language.lang_code) + " ")]),
+                _vm._v(" "),
                 _c("td", [
-                  _vm._v(
-                    " " +
-                      _vm._s(currency.currency_code) +
-                      " / \r\n                "
-                  ),
-                  currency.currency_icon != null
+                  language.lang_icon != null
                     ? _c("span", [
                         _c("img", {
                           attrs: {
-                            src: "../" + currency.currency_icon,
-                            height: "15px",
-                            width: "15px"
+                            src: "../" + language.lang_icon,
+                            height: "20px",
+                            width: "20px"
                           }
                         })
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  currency.currency_icon === null
+                  language.lang_icon === null
                     ? _c("span", [
                         _c("img", {
                           attrs: {
                             src: "../" + _vm.NoIconUrl,
-                            height: "15px",
-                            width: "15px"
+                            height: "20px",
+                            width: "20px"
                           }
                         })
                       ])
                     : _vm._e()
                 ]),
                 _vm._v(" "),
-                _c("td", [_vm._v(" " + _vm._s(currency.currency_value) + " ")]),
-                _vm._v(" "),
                 _c("td", [
                   _vm._v(
-                    _vm._s(_vm._f("formatDate")(currency.updated_at)) + " "
+                    _vm._s(_vm._f("formatDate")(language.updated_at)) + " "
                   )
                 ]),
                 _vm._v(" "),
@@ -1093,8 +1009,8 @@ var render = function() {
                         {
                           name: "show",
                           rawName: "v-show",
-                          value: currency.is_enabled === 1,
-                          expression: "currency.is_enabled === 1"
+                          value: language.is_enabled === 1,
+                          expression: "language.is_enabled === 1"
                         }
                       ],
                       staticClass: "green"
@@ -1109,8 +1025,8 @@ var render = function() {
                         {
                           name: "show",
                           rawName: "v-show",
-                          value: currency.is_enabled === 0,
-                          expression: "currency.is_enabled === 0"
+                          value: language.is_enabled === 0,
+                          expression: "language.is_enabled === 0"
                         }
                       ],
                       staticClass: "red text-bold"
@@ -1126,11 +1042,11 @@ var render = function() {
                       staticClass: "btn btn-primary- btn-flat btn-sm",
                       attrs: {
                         "data-toggle": "modal",
-                        "data-target": "#currencyModal"
+                        "data-target": "#LanguageModal"
                       },
                       on: {
                         click: function($event) {
-                          return _vm.editCurrency(currency)
+                          return _vm.editLanguage(language)
                         }
                       }
                     },
@@ -1144,7 +1060,7 @@ var render = function() {
                       attrs: { id: "delete" },
                       on: {
                         click: function($event) {
-                          return _vm.DeleteData(currency.id)
+                          return _vm.DeleteData(language.id)
                         }
                       }
                     },
@@ -1161,8 +1077,8 @@ var render = function() {
                   {
                     name: "show",
                     rawName: "v-show",
-                    value: _vm.Currencies.data && !_vm.Currencies.length,
-                    expression: "Currencies.data && !Currencies.length"
+                    value: _vm.Languages.data && !_vm.Languages.length,
+                    expression: "Languages.data && !Languages.length"
                   }
                 ]
               },
@@ -1185,15 +1101,15 @@ var staticRenderFns = [
     return _c("thead", [
       _c("tr", [
         _c("th", { staticStyle: { width: "20%" }, attrs: { scope: "col" } }, [
-          _vm._v("Currency Title")
+          _vm._v("Language Title")
         ]),
         _vm._v(" "),
         _c("th", { staticStyle: { width: "15%" }, attrs: { scope: "col" } }, [
           _vm._v("Code")
         ]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "20%" }, attrs: { scope: "col" } }, [
-          _vm._v("Value (Equal to 1$)")
+        _c("th", { staticStyle: { width: "15%" }, attrs: { scope: "col" } }, [
+          _vm._v("Icon")
         ]),
         _vm._v(" "),
         _c("th", { staticStyle: { width: "20%" }, attrs: { scope: "col" } }, [
@@ -1237,10 +1153,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue?vue&type=template&id=86767764&":
-/*!******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue?vue&type=template&id=86767764& ***!
-  \******************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Language/LanguageMaster.vue?vue&type=template&id=02361010&":
+/*!*****************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Settings/Language/LanguageMaster.vue?vue&type=template&id=02361010& ***!
+  \*****************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1262,11 +1178,11 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "card-body" }, [
             _c("div", { staticClass: "row mt-2 mb-3" }, [
-              _c("div", { staticClass: "col-md-12" }, [_c("CurrencyList")], 1)
+              _c("div", { staticClass: "col-md-12" }, [_c("LanguageList")], 1)
             ])
           ]),
           _vm._v(" "),
-          _c("CurrencyForm")
+          _c("LanguageForm")
         ],
         1
       )
@@ -1281,7 +1197,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-6 col-6 text-left" }, [
-          _c("h5", [_vm._v("Currency")])
+          _c("h5", [_vm._v("Language")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6 col-6 text-right" }, [
@@ -1291,7 +1207,7 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("li", { staticClass: "breadcrumb-item" }, [
-              _c("a", [_vm._v("Currency")])
+              _c("a", [_vm._v("Language")])
             ])
           ])
         ])
@@ -1305,17 +1221,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue":
+/***/ "./resources/js/components/Admin/Settings/Language/LanguageForm.vue":
 /*!**************************************************************************!*\
-  !*** ./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue ***!
+  !*** ./resources/js/components/Admin/Settings/Language/LanguageForm.vue ***!
   \**************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CurrencyForm_vue_vue_type_template_id_6e2f1f12___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CurrencyForm.vue?vue&type=template&id=6e2f1f12& */ "./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue?vue&type=template&id=6e2f1f12&");
-/* harmony import */ var _CurrencyForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CurrencyForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _LanguageForm_vue_vue_type_template_id_c3f2021c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LanguageForm.vue?vue&type=template&id=c3f2021c& */ "./resources/js/components/Admin/Settings/Language/LanguageForm.vue?vue&type=template&id=c3f2021c&");
+/* harmony import */ var _LanguageForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LanguageForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Settings/Language/LanguageForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1325,9 +1241,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _CurrencyForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CurrencyForm_vue_vue_type_template_id_6e2f1f12___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CurrencyForm_vue_vue_type_template_id_6e2f1f12___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _LanguageForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LanguageForm_vue_vue_type_template_id_c3f2021c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _LanguageForm_vue_vue_type_template_id_c3f2021c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1337,54 +1253,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Admin/Settings/Currency/CurrencyForm.vue"
+component.options.__file = "resources/js/components/Admin/Settings/Language/LanguageForm.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/components/Admin/Settings/Language/LanguageForm.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/components/Admin/Settings/Language/LanguageForm.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CurrencyForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./LanguageForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Language/LanguageForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue?vue&type=template&id=6e2f1f12&":
+/***/ "./resources/js/components/Admin/Settings/Language/LanguageForm.vue?vue&type=template&id=c3f2021c&":
 /*!*********************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue?vue&type=template&id=6e2f1f12& ***!
+  !*** ./resources/js/components/Admin/Settings/Language/LanguageForm.vue?vue&type=template&id=c3f2021c& ***!
   \*********************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyForm_vue_vue_type_template_id_6e2f1f12___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CurrencyForm.vue?vue&type=template&id=6e2f1f12& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Currency/CurrencyForm.vue?vue&type=template&id=6e2f1f12&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyForm_vue_vue_type_template_id_6e2f1f12___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageForm_vue_vue_type_template_id_c3f2021c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./LanguageForm.vue?vue&type=template&id=c3f2021c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Language/LanguageForm.vue?vue&type=template&id=c3f2021c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageForm_vue_vue_type_template_id_c3f2021c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyForm_vue_vue_type_template_id_6e2f1f12___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageForm_vue_vue_type_template_id_c3f2021c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Settings/Currency/CurrencyList.vue":
+/***/ "./resources/js/components/Admin/Settings/Language/LanguageList.vue":
 /*!**************************************************************************!*\
-  !*** ./resources/js/components/Admin/Settings/Currency/CurrencyList.vue ***!
+  !*** ./resources/js/components/Admin/Settings/Language/LanguageList.vue ***!
   \**************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CurrencyList_vue_vue_type_template_id_bbaf7428___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CurrencyList.vue?vue&type=template&id=bbaf7428& */ "./resources/js/components/Admin/Settings/Currency/CurrencyList.vue?vue&type=template&id=bbaf7428&");
-/* harmony import */ var _CurrencyList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CurrencyList.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Settings/Currency/CurrencyList.vue?vue&type=script&lang=js&");
+/* harmony import */ var _LanguageList_vue_vue_type_template_id_5bffb468___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LanguageList.vue?vue&type=template&id=5bffb468& */ "./resources/js/components/Admin/Settings/Language/LanguageList.vue?vue&type=template&id=5bffb468&");
+/* harmony import */ var _LanguageList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LanguageList.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Settings/Language/LanguageList.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1394,9 +1310,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _CurrencyList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CurrencyList_vue_vue_type_template_id_bbaf7428___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CurrencyList_vue_vue_type_template_id_bbaf7428___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _LanguageList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LanguageList_vue_vue_type_template_id_5bffb468___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _LanguageList_vue_vue_type_template_id_5bffb468___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1406,54 +1322,54 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Admin/Settings/Currency/CurrencyList.vue"
+component.options.__file = "resources/js/components/Admin/Settings/Language/LanguageList.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Settings/Currency/CurrencyList.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/components/Admin/Settings/Language/LanguageList.vue?vue&type=script&lang=js&":
 /*!***************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Settings/Currency/CurrencyList.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/components/Admin/Settings/Language/LanguageList.vue?vue&type=script&lang=js& ***!
   \***************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CurrencyList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Currency/CurrencyList.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./LanguageList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Language/LanguageList.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Settings/Currency/CurrencyList.vue?vue&type=template&id=bbaf7428&":
+/***/ "./resources/js/components/Admin/Settings/Language/LanguageList.vue?vue&type=template&id=5bffb468&":
 /*!*********************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Settings/Currency/CurrencyList.vue?vue&type=template&id=bbaf7428& ***!
+  !*** ./resources/js/components/Admin/Settings/Language/LanguageList.vue?vue&type=template&id=5bffb468& ***!
   \*********************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyList_vue_vue_type_template_id_bbaf7428___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CurrencyList.vue?vue&type=template&id=bbaf7428& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Currency/CurrencyList.vue?vue&type=template&id=bbaf7428&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyList_vue_vue_type_template_id_bbaf7428___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageList_vue_vue_type_template_id_5bffb468___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./LanguageList.vue?vue&type=template&id=5bffb468& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Language/LanguageList.vue?vue&type=template&id=5bffb468&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageList_vue_vue_type_template_id_5bffb468___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyList_vue_vue_type_template_id_bbaf7428___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageList_vue_vue_type_template_id_5bffb468___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue ***!
-  \*****************************************************************************/
+/***/ "./resources/js/components/Admin/Settings/Language/LanguageMaster.vue":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Admin/Settings/Language/LanguageMaster.vue ***!
+  \****************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CurrencyMarster_vue_vue_type_template_id_86767764___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CurrencyMarster.vue?vue&type=template&id=86767764& */ "./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue?vue&type=template&id=86767764&");
-/* harmony import */ var _CurrencyMarster_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CurrencyMarster.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue?vue&type=script&lang=js&");
+/* harmony import */ var _LanguageMaster_vue_vue_type_template_id_02361010___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LanguageMaster.vue?vue&type=template&id=02361010& */ "./resources/js/components/Admin/Settings/Language/LanguageMaster.vue?vue&type=template&id=02361010&");
+/* harmony import */ var _LanguageMaster_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LanguageMaster.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Settings/Language/LanguageMaster.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1463,9 +1379,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _CurrencyMarster_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CurrencyMarster_vue_vue_type_template_id_86767764___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CurrencyMarster_vue_vue_type_template_id_86767764___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _LanguageMaster_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _LanguageMaster_vue_vue_type_template_id_02361010___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _LanguageMaster_vue_vue_type_template_id_02361010___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1475,38 +1391,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue"
+component.options.__file = "resources/js/components/Admin/Settings/Language/LanguageMaster.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************/
+/***/ "./resources/js/components/Admin/Settings/Language/LanguageMaster.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Settings/Language/LanguageMaster.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyMarster_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CurrencyMarster.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyMarster_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageMaster_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./LanguageMaster.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Language/LanguageMaster.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageMaster_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue?vue&type=template&id=86767764&":
-/*!************************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue?vue&type=template&id=86767764& ***!
-  \************************************************************************************************************/
+/***/ "./resources/js/components/Admin/Settings/Language/LanguageMaster.vue?vue&type=template&id=02361010&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Settings/Language/LanguageMaster.vue?vue&type=template&id=02361010& ***!
+  \***********************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyMarster_vue_vue_type_template_id_86767764___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CurrencyMarster.vue?vue&type=template&id=86767764& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue?vue&type=template&id=86767764&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyMarster_vue_vue_type_template_id_86767764___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageMaster_vue_vue_type_template_id_02361010___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./LanguageMaster.vue?vue&type=template&id=02361010& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Settings/Language/LanguageMaster.vue?vue&type=template&id=02361010&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageMaster_vue_vue_type_template_id_02361010___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CurrencyMarster_vue_vue_type_template_id_86767764___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_LanguageMaster_vue_vue_type_template_id_02361010___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

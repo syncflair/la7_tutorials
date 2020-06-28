@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Settings;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Currency extends Model
+class PackageUnit extends Model
 {
-     /**
+    /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'currencies';
+    protected $table = 'package_units';
 
     protected $guarded = []; 
 }

@@ -2,9 +2,9 @@
 <div class="card vue-card-item">
     <div class="card-header">
       <div class="row">
-        <div class="col-md-8 col-sm-6 col-6">Currency List</div>
+        <div class="col-md-8 col-sm-6 col-6">Length Unit List</div>
         <div class="col-md-4 col-sm-6 col-6 text-right">
-        	<a @click="addCurrency" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#currencyModal"> <i class="icon fas fa-plus"></i> Add New</a>
+        	<a @click="addLengthUnit" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#LengthUnitModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>
     </div><!--/card-header-->
@@ -13,47 +13,44 @@
         <thead>
           <tr>
             <!-- <th style="">#</th> -->
-            <th style="width: 20%;" scope="col">Currency Title</th>
-            <th style="width: 15%;" scope="col">Code</th>             
-            <th style="width: 20%;" scope="col">Value (Equal to 1$)</th>
-            <th style="width: 20%;" scope="col">Updated At</th>
+            <th style="width: 20%;" scope="col">Length Title</th>
+            <th style="width: 15%;" scope="col">Unit</th>             
+            <th style="width: 20%;" scope="col">Value</th>
+            <th style="width: 20%;" scope="col">Details</th>
             <th style="width: 8%;" scope="col">Status</th>
             <th style="width: 15%; text-align:right;" scope="col">Action</th>
           </tr>
         </thead>
 
         <tbody>
-          <!-- :key="currency.id" -->
-          <tr v-for="(currency, index) in Currencies" :key="index">
+          <!-- :key="LengthUnit.id" -->
+          <tr v-for="(length, index) in LengthUnits" :key="index">
             <!-- <td > id</td> -->
-            <td scope="col"> {{ currency.currency_name }} </td>
-            <td> {{ currency.currency_code }} / 
-                <span v-if="currency.currency_icon != null"> 
-                  <img :src="'../'+currency.currency_icon" height="15px" width="15px"> 
-                </span>
-                <span v-if="currency.currency_icon === null"> <img :src="'../'+NoIconUrl" height="15px" width="15px"> </span>
-            </td> 
-            <td > {{currency.currency_value}} </td>
-            <td >{{ currency.updated_at | formatDate }} </td>
+            <td scope="col"> {{ length.length_title }} </td>
+            <td> {{ length.length_unit }} </td> 
+            <td > {{length.length_value}} </td>
+            <td > {{length.length_desc}} </td>
+
+            <!-- <td >{{ length.updated_at | formatDate }} </td> -->
 
             <td>
-            	<span v-show="currency.is_enabled === 1" class="green"> Active</span>
-            	<span v-show="currency.is_enabled === 0" class="red text-bold"> Inactive</span>
+            	<span v-show="length.is_enabled === 1" class="green"> Active</span>
+            	<span v-show="length.is_enabled === 0" class="red text-bold"> Inactive</span>
             </td>
 
 
             <td class="text-right">    
-              <a @click="editCurrency(currency)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#currencyModal">
+              <a @click="editLengthUnit(length)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#LengthUnitModal">
                   <i class="fas fa-edit primary "></i>
               </a> 
-              <a @click="DeleteData(currency.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
+              <a @click="DeleteData(length.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
                  <i class="far fa-trash-alt red"></i>
               </a>
             </td>
 
           </tr>
 
-          <tr v-show="Currencies.data && !Currencies.length">
+          <tr v-show="LengthUnits.data && !LengthUnits.length">
             <td colspan="6">
               <div class="alert alert-danger text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
@@ -79,12 +76,11 @@
 <script>
  
     export default {
-      name: "CurrencyList",
+      name: "LengthUnitList",
 
       data(){
         return {
-          NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
-        	Currencies: {}, 
+        	LengthUnits: {}, 
          // perPage: 0,                 
         }
       },
@@ -93,14 +89,14 @@
       },
 
       methods:{
-      	fetchCurrencies(){
+      	fetchLengthUnit(){
 	        this.$Progress.start(); //using progress-bar package
 
-	        axios.get('/spa/Currency-Info')
+	        axios.get('/spa/LengthUnit-Info')
 	          .then( ( response ) => {
 
-	            this.Currencies = response.data; // is an object... use when pagination
-	              //this.Currencies = response.data.data; //is an object... default 
+	            this.LengthUnits = response.data; // is an object... use when pagination
+	              //this.LengthUn = response.data.data; //is an object... default 
 	            //console.log(response.data); 
 	            this.$Progress.finish(); 
 	          })
@@ -111,13 +107,13 @@
 	          })
 	    },
 
-	    addCurrency(){
-	    	FireEvent.$emit('addCurrency');
+	    addLengthUnit(){
+	    	FireEvent.$emit('addLengthUnit');
 	    },
 
-	    editCurrency(data){
+	    editLengthUnit(data){
 	    	//alert(data.id);
-	    	FireEvent.$emit('editCurrency', data);
+	    	FireEvent.$emit('editLengthUnit', data);
 	    },
 
 	    DeleteData(id){
@@ -132,7 +128,7 @@
 	          }).then( (result) => {
 
 	            if ( result.value ) {  
-	              axios.delete('/spa/Currency-Info/'+id)
+	              axios.delete('/spa/LengthUnit-Info/'+id)
 	                .then( ({data}) => {
 
 	                  if(data.success){                  
@@ -158,16 +154,16 @@
       },
 
       created(){ 
-      		this.fetchCurrencies();
+      		this.fetchLengthUnit();
 
       		FireEvent.$on('AfterChange', () => {
-		        this.fetchCurrencies();
+		        this.fetchLengthUnit();
 		    });
       },
 
       mounted() {
         //console.log(this.categories)    
-        //this.fetchCurrencies();  
+        //this.fetchLengthUnit();  
       },
 
     }/*End export default*/

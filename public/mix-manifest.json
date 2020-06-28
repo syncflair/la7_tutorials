@@ -8,11 +8,14 @@
     "/js/chunks/CurrencyMarster.js": "/js/chunks/CurrencyMarster.js",
     "/js/chunks/Dashboard.js": "/js/chunks/Dashboard.js",
     "/js/chunks/Items.js": "/js/chunks/Items.js",
+    "/js/chunks/LanguageMaster.js": "/js/chunks/LanguageMaster.js",
+    "/js/chunks/LengthUnit.js": "/js/chunks/LengthUnit.js",
     "/js/chunks/Multicomponent.js": "/js/chunks/Multicomponent.js",
     "/js/chunks/NotFound.js": "/js/chunks/NotFound.js",
     "/js/chunks/OrganizationInfo.js": "/js/chunks/OrganizationInfo.js",
     "/js/chunks/Parties.js": "/js/chunks/Parties.js",
     "/js/chunks/VuexComponent.js": "/js/chunks/VuexComponent.js",
+    "/js/chunks/WeightUnit.js": "/js/chunks/WeightUnit.js",
     "/js/chunks/adminwrapper.js": "/js/chunks/adminwrapper.js",
     "/js/chunks/auto-complete-app.js": "/js/chunks/auto-complete-app.js",
     "/js/chunks/formBox.js": "/js/chunks/formBox.js",
@@ -21,5 +24,6 @@
     "/js/chunks/pagination-app.js": "/js/chunks/pagination-app.js",
     "/js/chunks/searchBox.js": "/js/chunks/searchBox.js",
     "/js/chunks/switch-app.js": "/js/chunks/switch-app.js",
-    "/js/chunks/vendors~NotFound~auto-complete-app~formComponent~multi-select-app~switch-app.js": "/js/chunks/vendors~NotFound~auto-complete-app~formComponent~multi-select-app~switch-app.js"
+    "/js/chunks/vendors~NotFound~auto-complete-app~formComponent~multi-select-app~switch-app.js": "/js/chunks/vendors~NotFound~auto-complete-app~formComponent~multi-select-app~switch-app.js",
+    "/js/chunks/PackageUnit.js": "/js/chunks/PackageUnit.js"
 }

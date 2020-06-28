@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/chunks/" + ({"BranchInfo":"BranchInfo","Categories":"Categories","CurrencyMarster":"CurrencyMarster","Dashboard":"Dashboard","Items":"Items","Multicomponent":"Multicomponent","OrganizationInfo":"OrganizationInfo","Parties":"Parties","VuexComponent":"VuexComponent","adminwrapper":"adminwrapper","pagination-app":"pagination-app","vendors~NotFound~auto-complete-app~formComponent~multi-select-app~switch-app":"vendors~NotFound~auto-complete-app~formComponent~multi-select-app~switch-app","NotFound":"NotFound","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","formBox":"formBox","searchBox":"searchBox"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "js/chunks/" + ({"BranchInfo":"BranchInfo","Categories":"Categories","CurrencyMarster":"CurrencyMarster","Dashboard":"Dashboard","Items":"Items","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","Multicomponent":"Multicomponent","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","Parties":"Parties","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","adminwrapper":"adminwrapper","pagination-app":"pagination-app","vendors~NotFound~auto-complete-app~formComponent~multi-select-app~switch-app":"vendors~NotFound~auto-complete-app~formComponent~multi-select-app~switch-app","NotFound":"NotFound","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","formBox":"formBox","searchBox":"searchBox"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -107824,6 +107824,42 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Currency Master'
+  }
+}, {
+  path: '/spa/LanguageMaster',
+  name: 'LanguageMaster',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | LanguageMaster */ "LanguageMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/Language/LanguageMaster.vue */ "./resources/js/components/Admin/Settings/Language/LanguageMaster.vue"));
+  },
+  meta: {
+    title: 'Language Master'
+  }
+}, {
+  path: '/spa/LengthUnit',
+  name: 'LengthUnit',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | LengthUnit */ "LengthUnit").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/LengthUnit/LengthUnit.vue */ "./resources/js/components/Admin/Settings/LengthUnit/LengthUnit.vue"));
+  },
+  meta: {
+    title: 'Lenght Unit Master'
+  }
+}, {
+  path: '/spa/WeightUnit',
+  name: 'WeightUnit',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | WeightUnit */ "WeightUnit").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/WeightUnit/WeightUnit.vue */ "./resources/js/components/Admin/Settings/WeightUnit/WeightUnit.vue"));
+  },
+  meta: {
+    title: 'Weight Unit Master'
+  }
+}, {
+  path: '/spa/PackageUnit',
+  name: 'PackageUnit',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | PackageUnit */ "PackageUnit").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/PackageUnit/PackageUnit.vue */ "./resources/js/components/Admin/Settings/PackageUnit/PackageUnit.vue"));
+  },
+  meta: {
+    title: 'Package Unit Master'
   }
 }, {
   path: '/spa/*',

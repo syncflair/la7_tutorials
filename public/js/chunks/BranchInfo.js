@@ -168,9 +168,13 @@ __webpack_require__.r(__webpack_exports__);
   //end data
   methods: {
     addBranch: function addBranch() {
+      var _this = this;
+
       this.editMode = false;
       this.form.reset();
-      this.$refs.branch_name.focus();
+      setTimeout(function () {
+        _this.$refs.branch_name.focus();
+      }, 600);
     },
     editBranch: function editBranch(data) {
       this.editMode = true;
@@ -186,7 +190,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Submit the form via a POST request
     storeFormData: function storeFormData() {
-      var _this = this;
+      var _this2 = this;
 
       this.$Progress.start(); //using progress-bar package
 
@@ -198,44 +202,12 @@ __webpack_require__.r(__webpack_exports__);
 
           toastr.success(data.success);
 
-          _this.$Progress.finish();
-
-          _this.form.reset(); //reset from after submit
-
-
-          $('#branchModal').modal('hide');
-        }
-
-        if (data.errors) {
-          toastr.warning(data.errors);
-        }
-      })["catch"](function () {
-        _this.$Progress.fail();
-
-        toastr.warning('Something is wrong!');
-      });
-    },
-    updateFormData: function updateFormData() {
-      var _this2 = this;
-
-      //console.log('Update is working!'); 
-      this.$Progress.start(); //using progress-bar package
-
-      this.form.put('/spa/Branch-Info/' + this.form.id).then(function (_ref2) {
-        var data = _ref2.data;
-
-        if (data.success) {
-          FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
-
           _this2.$Progress.finish();
-
-          toastr.success(data.success);
 
           _this2.form.reset(); //reset from after submit
 
 
-          _this2.editMode = false;
-          $('#branchModal').modal('hide'); //  this.$refs.branch_name.focus(); //ret focus to first input filed. ref="cat_name" tag must be use
+          $('#branchModal').modal('hide');
         }
 
         if (data.errors) {
@@ -246,18 +218,50 @@ __webpack_require__.r(__webpack_exports__);
 
         toastr.warning('Something is wrong!');
       });
+    },
+    updateFormData: function updateFormData() {
+      var _this3 = this;
+
+      //console.log('Update is working!'); 
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.put('/spa/Branch-Info/' + this.form.id).then(function (_ref2) {
+        var data = _ref2.data;
+
+        if (data.success) {
+          FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
+
+          _this3.$Progress.finish();
+
+          toastr.success(data.success);
+
+          _this3.form.reset(); //reset from after submit
+
+
+          _this3.editMode = false;
+          $('#branchModal').modal('hide'); //  this.$refs.branch_name.focus(); //ret focus to first input filed. ref="cat_name" tag must be use
+        }
+
+        if (data.errors) {
+          toastr.warning(data.errors);
+        }
+      })["catch"](function () {
+        _this3.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     FireEvent.$on('editBranch', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this3.editBranch(data);
+      _this4.editBranch(data);
     });
     FireEvent.$on('addBranch', function () {
-      _this3.addBranch();
+      _this4.addBranch();
     });
   }
 }); //End Exprot Default
@@ -583,7 +587,27 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _vm._m(0)
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.ClearForm()
+                      }
+                    }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c(
@@ -1247,25 +1271,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

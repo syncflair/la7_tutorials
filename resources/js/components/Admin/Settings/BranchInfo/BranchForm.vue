@@ -10,7 +10,7 @@
         	<span v-show="!editMode">Add Branch</span>
         	<span v-show="editMode">Update Branch</span>
         </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button @click="ClearForm()" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -160,8 +160,10 @@
 	    methods:{
 	    	addBranch(){
 	    		this.editMode = false;
-	    		this.form.reset();
-	    		this.$refs.branch_name.focus(); 
+	    		this.form.reset();	    		
+	    		setTimeout(() => {
+	    			this.$refs.branch_name.focus(); 
+                }, 600);
 	    	},
 
 	    	editBranch(data){

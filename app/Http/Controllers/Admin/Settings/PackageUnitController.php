@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin\Settings;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Settings\Currency;
+use App\Models\Settings\PackageUnit;
 use Illuminate\Support\Str; //for str::random
 use Illuminate\Support\Facades\File; //for file management
 
-class CurrencyController extends Controller
+class PackageUnitController extends Controller
 {
+    
 
      /**
      * Create a new controller instance.
@@ -21,7 +22,7 @@ class CurrencyController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +30,7 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        $data = Currency::get();
+        $data = PackageUnit::get();
         return response()->json($data);
     }
 
@@ -52,15 +53,14 @@ class CurrencyController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'currency_name' => 'required|min:3|max:40',
-            'currency_code' => 'required|min:2|max:8',
+            'package_title' => 'required|min:3|max:40',
+            'package_unit' => 'required|min:2|max:10',
         ]);
 
         $data =array();
-        $data['currency_name']=$request->currency_name;
-        $data['currency_code']=$request->currency_code;
-        $data['currency_value']=$request->currency_value;
-        //$data['currency_icon']=$request->currency_icon;
+        $data['package_title']=$request->package_title;
+        $data['package_unit']=$request->package_unit;
+        $data['package_desc']=$request->package_desc;
 
         $data['created_by']= \Auth::user()->id;         
         
@@ -71,7 +71,7 @@ class CurrencyController extends Controller
         }
 
 
-        $image = $request->currency_icon;
+        $image = $request->package_icon;
 
         if($image){
             //return $imageSize =getimagesize($image);
@@ -86,32 +86,19 @@ class CurrencyController extends Controller
                 \Image::make($image)
                     //->fit(200, 200)
                     ->resize(20, 20)
-                   // ->text('SHORBORAHO', 140, 190)
-                    // ->text('SHORBORAHO', 140, 190, function($font) {
-                    //     //$font->file('/backend/fonts/FontAwesome.otf');
-                    //     $font->size(12);
-                    //     $font->color('#fdf6e3');
-                    //     $font->align('center');
-                    //     $font->valign('top');
-                    //     $font->angle(45);
-                    // })
-                    //->text('foo', 0, 0, function($font) {  $font->color(array(255, 255, 255, 0.5)); })
                     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
 
-                $data['currency_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                $data['package_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
 
-                Currency::create($data);        
-                return response()->json(['success'=>'Currency Created successfully']); 
+                PackageUnit::create($data);        
+                return response()->json(['success'=>'PackageUnit Created successfully']); 
             }//end image type check
         }else{
-            $data['currency_icon'] = null;
+            $data['package_icon'] = null;
 
-            Currency::create($data);        
-            return response()->json(['success'=>'Currency Created successfully.']); 
+            PackageUnit::create($data);        
+            return response()->json(['success'=>'PackageUnit Created successfully.']); 
         }
-
-            
-      
     }
 
     /**
@@ -146,15 +133,14 @@ class CurrencyController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'currency_name' => 'required|min:3|max:40|unique:currencies,currency_name,'.$id,
-            'currency_code' => 'required|min:2|max:8|unique:currencies,currency_code,'.$id,
+            'package_title' => 'required|min:3|max:40|unique:package_units,package_title,'.$id,
+            'package_unit' => 'required|min:2|max:10|unique:package_units,package_unit,'.$id,
         ]);
 
         $data =array();
-        $data['currency_name']=$request->currency_name;
-        $data['currency_code']=$request->currency_code;
-        $data['currency_value']=$request->currency_value;
-        //$data['currency_icon']=$request->currency_icon;
+        $data['package_title']=$request->package_title;
+        $data['package_unit']=$request->package_unit;
+        $data['package_desc']=$request->package_desc;
 
         $data['updated_by']= \Auth::user()->id;         
         
@@ -164,7 +150,7 @@ class CurrencyController extends Controller
            $data['is_enabled']=$request->is_enabled; 
         }
 
-        $image = $request->currency_icon;        
+        $image = $request->package_icon;        
 
         //if(strlen($image) > 150){ /*php function*/
         if( Str::length($image) > 150){ /*larvel helper function*/
@@ -176,9 +162,9 @@ class CurrencyController extends Controller
             }else{
 
                 //query for existing image
-                $existing_image = Currency::select('currency_icon')->where('id', $id)->first();                   
-                if(!empty($existing_image->currency_icon)) {
-                    File::delete($existing_image->currency_icon); //delete file //use Illuminate\Support\Facades\File; at top
+                $existing_image = PackageUnit::select('package_icon')->where('id', $id)->first();                   
+                if(!empty($existing_image->package_icon)) {
+                    File::delete($existing_image->package_icon); //delete file //use Illuminate\Support\Facades\File; at top
                 }//else{echo 'Empty';}  
 
                 //new name generate from base64 file
@@ -189,17 +175,17 @@ class CurrencyController extends Controller
                    // ->text('SHORBORAHO', 140, 190)
                     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
 
-                $data['currency_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                $data['package_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
 
-                Currency::whereId($id)->update($data);      
+                PackageUnit::whereId($id)->update($data);      
                 return response()->json(['success'=>'Update successfull.']);
             }//end image type check
         }else{
-            $existing_image = Currency::select('currency_icon')->where('id', $id)->first();
-            $data['currency_icon'] = $existing_image->currency_icon;
+            $existing_image = PackageUnit::select('package_icon')->where('id', $id)->first();
+            $data['package_icon'] = $existing_image->package_icon;
 
-            Currency::whereId($id)->update($data);         
-            return response()->json(['success'=>'Currency Updated successfully.']); 
+            PackageUnit::whereId($id)->update($data);         
+            return response()->json(['success'=>'Package Unit Updated successfully.']); 
         }
     }
 
@@ -212,17 +198,18 @@ class CurrencyController extends Controller
     public function destroy($id)
     {
         //query for existing image
-        $existing_image = Currency::select('currency_icon')->where('id', $id)->first();                   
-        if( File::exists($existing_image->currency_icon) ) {  
-            File::delete($existing_image->currency_icon); 
+        $existing_image = PackageUnit::select('package_icon')->where('id', $id)->first();                   
+        if( File::exists($existing_image->package_icon) ) {  
+            File::delete($existing_image->package_icon); 
             //delete file //use Illuminate\Support\Facades\File; at top
         }
 
-        $data = Currency::findOrFail($id)->delete();        
+        $data = PackageUnit::findOrFail($id)->delete();        
         if($data){
             return response()->json(['success'=> 'Record is successfully deleted']);
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
+
     }
 }

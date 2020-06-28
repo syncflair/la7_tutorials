@@ -2,9 +2,9 @@
 <div class="card vue-card-item">
     <div class="card-header">
       <div class="row">
-        <div class="col-md-8 col-sm-6 col-6">Currency List</div>
+        <div class="col-md-8 col-sm-6 col-6">Language List</div>
         <div class="col-md-4 col-sm-6 col-6 text-right">
-        	<a @click="addCurrency" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#currencyModal"> <i class="icon fas fa-plus"></i> Add New</a>
+        	<a @click="addLanguage" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#LanguageModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>
     </div><!--/card-header-->
@@ -13,9 +13,9 @@
         <thead>
           <tr>
             <!-- <th style="">#</th> -->
-            <th style="width: 20%;" scope="col">Currency Title</th>
-            <th style="width: 15%;" scope="col">Code</th>             
-            <th style="width: 20%;" scope="col">Value (Equal to 1$)</th>
+            <th style="width: 20%;" scope="col">Language Title</th>
+            <th style="width: 15%;" scope="col">Code</th> 
+            <th style="width: 15%;" scope="col">Icon</th> 
             <th style="width: 20%;" scope="col">Updated At</th>
             <th style="width: 8%;" scope="col">Status</th>
             <th style="width: 15%; text-align:right;" scope="col">Action</th>
@@ -23,37 +23,37 @@
         </thead>
 
         <tbody>
-          <!-- :key="currency.id" -->
-          <tr v-for="(currency, index) in Currencies" :key="index">
+          <!-- :key="Language.id" -->
+          <tr v-for="(language, index) in Languages" :key="index">
             <!-- <td > id</td> -->
-            <td scope="col"> {{ currency.currency_name }} </td>
-            <td> {{ currency.currency_code }} / 
-                <span v-if="currency.currency_icon != null"> 
-                  <img :src="'../'+currency.currency_icon" height="15px" width="15px"> 
+            <td scope="col"> {{ language.lang_name }} </td>
+            <td> {{ language.lang_code }} </td>             
+            <td >  
+                <span v-if="language.lang_icon != null"> 
+                  <img :src="'../'+language.lang_icon" height="20px" width="20px"> 
                 </span>
-                <span v-if="currency.currency_icon === null"> <img :src="'../'+NoIconUrl" height="15px" width="15px"> </span>
-            </td> 
-            <td > {{currency.currency_value}} </td>
-            <td >{{ currency.updated_at | formatDate }} </td>
+                <span v-if="language.lang_icon === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
+            </td>
+            <td >{{ language.updated_at | formatDate }} </td>
 
             <td>
-            	<span v-show="currency.is_enabled === 1" class="green"> Active</span>
-            	<span v-show="currency.is_enabled === 0" class="red text-bold"> Inactive</span>
+            	<span v-show="language.is_enabled === 1" class="green"> Active</span>
+            	<span v-show="language.is_enabled === 0" class="red text-bold"> Inactive</span>
             </td>
 
 
             <td class="text-right">    
-              <a @click="editCurrency(currency)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#currencyModal">
+              <a @click="editLanguage(language)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#LanguageModal">
                   <i class="fas fa-edit primary "></i>
               </a> 
-              <a @click="DeleteData(currency.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
+              <a @click="DeleteData(language.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
                  <i class="far fa-trash-alt red"></i>
               </a>
             </td>
 
           </tr>
 
-          <tr v-show="Currencies.data && !Currencies.length">
+          <tr v-show="Languages.data && !Languages.length">
             <td colspan="6">
               <div class="alert alert-danger text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
@@ -79,12 +79,12 @@
 <script>
  
     export default {
-      name: "CurrencyList",
+      name: "LanguageList",
 
       data(){
         return {
           NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
-        	Currencies: {}, 
+        	Languages: {}, 
          // perPage: 0,                 
         }
       },
@@ -93,14 +93,14 @@
       },
 
       methods:{
-      	fetchCurrencies(){
+      	fetchLanguage(){
 	        this.$Progress.start(); //using progress-bar package
 
-	        axios.get('/spa/Currency-Info')
+	        axios.get('/spa/Language-Info')
 	          .then( ( response ) => {
 
-	            this.Currencies = response.data; // is an object... use when pagination
-	              //this.Currencies = response.data.data; //is an object... default 
+	            this.Languages = response.data; // is an object... use when pagination
+	              //this.Languages = response.data.data; //is an object... default 
 	            //console.log(response.data); 
 	            this.$Progress.finish(); 
 	          })
@@ -111,13 +111,13 @@
 	          })
 	    },
 
-	    addCurrency(){
-	    	FireEvent.$emit('addCurrency');
+	    addLanguage(){
+	    	FireEvent.$emit('addLanguage');
 	    },
 
-	    editCurrency(data){
+	    editLanguage(data){
 	    	//alert(data.id);
-	    	FireEvent.$emit('editCurrency', data);
+	    	FireEvent.$emit('editLanguage', data);
 	    },
 
 	    DeleteData(id){
@@ -132,7 +132,7 @@
 	          }).then( (result) => {
 
 	            if ( result.value ) {  
-	              axios.delete('/spa/Currency-Info/'+id)
+	              axios.delete('/spa/Language-Info/'+id)
 	                .then( ({data}) => {
 
 	                  if(data.success){                  
@@ -158,16 +158,16 @@
       },
 
       created(){ 
-      		this.fetchCurrencies();
+      		this.fetchLanguage();
 
       		FireEvent.$on('AfterChange', () => {
-		        this.fetchCurrencies();
+		        this.fetchLanguage();
 		    });
       },
 
       mounted() {
         //console.log(this.categories)    
-        //this.fetchCurrencies();  
+        //this.fetchLanguage();  
       },
 
     }/*End export default*/
