@@ -1,4 +1,4 @@
-<?php /*My Custome Middleware for redirect to User dashboard*/
+<?php
 
 namespace App\Http\Middleware;
 
@@ -6,10 +6,8 @@ use Closure;
 
 use Illuminate\Support\Facades\Auth;
 
-class UserMiddleware
+class AdminPackagingMiddleware
 {
-
-
     /**
      * Handle an incoming request.
      *
@@ -19,8 +17,6 @@ class UserMiddleware
      */
     public function handle($request, Closure $next)
     {
-        
-
         /**
          * Handle an incoming request.
          *
@@ -30,7 +26,7 @@ class UserMiddleware
          */
        
        //my Custome Code
-        if (Auth::check() && Auth::user()->role->id ==14) { /*User = 14*/
+        if (Auth::check() && Auth::user()->role->id ==11) { /*User = 11*/
             return $next($request);
 
         }else{
@@ -38,6 +34,5 @@ class UserMiddleware
         }
         
     }
-
 
 }

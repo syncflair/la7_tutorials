@@ -71,10 +71,21 @@ class Kernel extends HttpKernel
 
 
         //my Custome
-        //'MyRouteMid' => \App\Http\Middleware\MyRouteMiddleware::class,
-        'admin' => \App\Http\Middleware\AdminMiddleware::class,
-        'user' => \App\Http\Middleware\UserMiddleware::class,
+        //'MyRouteMid' => \App\Http\Middleware\MyRouteMiddleware::class,       
         'AuthPermission' => \App\Http\Middleware\AuthPermission::class,
         'SetLanguage' => \App\Http\Middleware\SetLanguage::class,
+
+        'admin' => \App\Http\Middleware\AdminMiddleware::class, //Super Admin 
+        
+        'AdminDelivery' => \App\Http\Middleware\AdminDeliveryMiddleware::class,
+        'AdminStore' => \App\Http\Middleware\AdminStoreMiddleware::class,
+        'AdminOrder' => \App\Http\Middleware\AdminOrderMiddleware::class,
+        'AdminPackaging' => \App\Http\Middleware\AdminPackagingMiddleware::class,
+        'AdminSales' => \App\Http\Middleware\AdminSalesMiddleware::class,
+        'AdminPurchase' => \App\Http\Middleware\AdminPurchaseMiddleware::class,
+        'AdminSupervisor' => \App\Http\Middleware\AdminSupervisorMiddleware::class,
+
+
+
     ];
 }

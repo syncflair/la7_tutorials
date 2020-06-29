@@ -9,11 +9,11 @@
     | #php artisan config:cache 
     |--------------------------------------------------------------------------
     | use Illuminate\Support\Facades\Config;  //use top of controller
-    | - Config::get(‘constants.consttant-name');
-    | --Config::get(‘constants.options.option-name');
+    | - Config::get(‘constants.consttant_name');
+    | --Config::get(‘constants.options.option_name');
     | OR (without using use Illuminate\Support\Facades\Config; )
     | - \Config::get(‘constants.CommonFilePath');
-    | -\Config::get(‘constants.options.option-name');
+    | -\Config::get(‘constants.options.option_name');
     |-----------------------------------------------------------------------
     */
 

@@ -2,19 +2,17 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+//use Illuminate\Database\Eloquent\Model;
+//use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-
-//'implements MustVerifyEmail' add to user class to enable email verification after user registration 
-
-class User extends Authenticatable implements MustVerifyEmail
+class Client extends Authenticatable
 {
     use Notifiable;
 
 
-    
+    protected $guard = 'client'; //custome....
 
     /**
      * The attributes that are mass assignable.
@@ -22,7 +20,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'status_id','avatar'
+        'name', 'email', 'username', 'phone', 'password', 'client_type_id', 'status_id','avatar'
     ];
 
     /**
@@ -45,22 +43,15 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
     //My Custome Relation --  user belong to this Role 
-    public function role(){
+    public function clientType(){
         //return $this->belongsTo('App\Models\Role');
-        return $this->belongsTo(Models\Role::class);
+        return $this->belongsTo(Models\ClientType::class);
     }
 
     public function UserStatus(){
         //return $this->belongsTo('App\Models\UserStatus');
         return $this->belongsTo(Models\UserStatus::class);
     }
-
-    //A User Has Many Products (hasMany())
-    public function product(){
-        //return $this->hasMany('App\Models\Product');
-        return $this->hasMany(Models\Product::class);  
-    }
-
 
     
 }

@@ -41,10 +41,31 @@ class LoginController extends Controller
         //if (auth()->user()->role_id == 1) { /*Compare with single role id*/
         if (auth()->user()->role_id == in_array(auth()->user()->role_id, RoleId() )) { /*Compare with multiple role id. RoleId come from AuthRolePermissionHelper.php */
             return route('dashboard');
+        }        
+        elseif (auth()->user()->role_id == 7) { /*Sales = 7*/
+            return route('dashboard-sales');
         }
-        elseif (auth()->user()->role_id == 14) { /*User = 14*/
-            return route('home');
+        elseif (auth()->user()->role_id == 8) { /*Purchase = 8*/
+            return route('dashboard-purchase');
         }
+        elseif (auth()->user()->role_id == 9) { /*Store = 9*/
+            return route('dashboard-store');
+        }
+        elseif (auth()->user()->role_id == 10) { /*Order = 10*/
+            return route('dashboard-order');
+        }
+        elseif (auth()->user()->role_id == 11) { /*Packaging = 11*/
+            return route('dashboard-packaging');
+        }
+        elseif (auth()->user()->role_id == 13) { /*Delivery = 13*/
+            return route('dashboard-delivery');
+        }
+        elseif (auth()->user()->role_id == 14) { /*Supervisor = 14*/
+            return route('dashboard-supervisor');
+        }
+
+
+        
     }
 
 
@@ -95,5 +116,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('guest:client')->except('logout'); //for clients
     }
 }

@@ -34,13 +34,33 @@ class RedirectIfAuthenticated
         //if (Auth::guard($guard)->check() && Auth::user()->role->id==1) { /*Compare with single role id*/
         if (Auth::guard($guard)->check() && Auth::user()->role->id == in_array(Auth::user()->role->id, RoleId() ) ) { /*Compare with multiple role id. RoleId come from AuthRolePermissionHelper.php*/
             return redirect()->route('dashboard');
-        } elseif (Auth::guard($guard)->check() && Auth::user()->role->id==14){ /*User = 14*/
-            return redirect()->route('home');
-        } else {
+        }        
+        elseif (Auth::guard($guard)->check() && Auth::user()->role->id==7){ /*Sales = 7*/
+            return redirect()->route('dashboard-sales');
+        }
+        elseif (Auth::guard($guard)->check() && Auth::user()->role->id==8){ /*Purchase = 8*/
+            return redirect()->route('dashboard-purchase');
+        }
+        elseif (Auth::guard($guard)->check() && Auth::user()->role->id==9){ /*Store = 9*/
+            return redirect()->route('dashboard-store');
+        }
+        elseif (Auth::guard($guard)->check() && Auth::user()->role->id==10){ /*Order = 10*/
+            return redirect()->route('dashboard-order');
+        }
+        elseif (Auth::guard($guard)->check() && Auth::user()->role->id==11){ /*Packaging = 11*/
+            return redirect()->route('dashboard-packaging');
+        }
+        elseif (Auth::guard($guard)->check() && Auth::user()->role->id==13){ /*Delivery = 13*/
+            return redirect()->route('dashboard-delivery');
+        }
+        elseif (Auth::guard($guard)->check() && Auth::user()->role->id==14){ /*Supervisor = 14*/
+            return redirect()->route('dashboard-supervisor');
+        }
+        else {
             return $next($request);
         }
 
     }
 
 
-}
+}   

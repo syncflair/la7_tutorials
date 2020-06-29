@@ -10,7 +10,7 @@ use Illuminate\Support\Str; //for str::random
 //$RoleId = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 );
 //print_r($RoleId);
 function RoleId(){
-	return $RoleId = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 );
+	return $RoleId = array(1, 2, 3, 4, 5, 6 );
 }
 
 

@@ -108,15 +108,61 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 });
 /**************************************** End Admin middleware *****************************************************/
 
-/**************************************** User middleware *****************************************************/
-Route::group(['middleware'=>['user','auth','AuthPermission','verified'] ], function(){
+/**************************************** Admin Supervisor middleware *************************************************/
+Route::group(['middleware'=>['AdminSupervisor','auth','verified'] ], function(){
 
-    Route::get('home', 'HomeController@index')->name('home');
+    Route::get('dashboard-supervisor', 'AdminSupervisor\AdminSupervisorController@index')->name('dashboard-supervisor');
 
 });
-/****************************************end User middleware **************************************************/
+/****************************************end Admin Supervisor middleware ***********************************************/
 
+/**************************************** Admin Delivery middleware ***************************************************/
+Route::group(['middleware'=>['AdminDelivery','auth','verified'] ], function(){
 
+    Route::get('dashboard-delivery', 'AdminDelivery\AdminDeliveryController@index')->name('dashboard-delivery');
+
+});
+/****************************************end Admin Delivery middleware ***********************************************/
+
+/**************************************** Admin Store middleware ***************************************************/
+Route::group(['middleware'=>['AdminStore','auth','verified'] ], function(){
+
+    Route::get('dashboard-store', 'AdminStore\AdminStoreController@index')->name('dashboard-store');
+
+});
+/****************************************end Admin Store middleware ***********************************************/
+
+/**************************************** Admin Order middleware ***************************************************/
+Route::group(['middleware'=>['AdminOrder','auth','verified'] ], function(){
+
+    Route::get('dashboard-order', 'AdminOrder\AdminOrderController@index')->name('dashboard-order');
+
+});
+/****************************************end Admin Order middleware ***********************************************/
+
+/**************************************** Admin Packaging middleware ***************************************************/
+Route::group(['middleware'=>['AdminPackaging','auth','verified'] ], function(){
+
+    Route::get('dashboard-packaging', 'AdminPackaging\AdminPackagingController@index')->name('dashboard-packaging');
+
+});
+/****************************************end Admin Packaging middleware ***********************************************/
+
+/**************************************** Admin Sales middleware ***************************************************/
+Route::group(['middleware'=>['AdminSales','auth','verified'] ], function(){
+
+    Route::get('dashboard-sales', 'AdminSales\AdminSalesController@index')->name('dashboard-sales');
+
+});
+/****************************************end Admin Sales middleware ***********************************************/
+
+/**************************************** Admin Purchase middleware ***************************************************/
+Route::group(['middleware'=>['AdminPurchase','auth','verified'] ], function(){
+
+    Route::get('dashboard-purchase', 'AdminPurchase\AdminPurchaseController@index')->name('dashboard-purchase');
+
+});
+/****************************************end Admin Sales middleware ***********************************************/
 
 
 
