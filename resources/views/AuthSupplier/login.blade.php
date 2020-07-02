@@ -1,5 +1,5 @@
 @extends('layouts.auth_master_adminlte')
-@section('title') {{ ucfirst(\Request::segment(1)) }} @endsection
+@section('title', 'Supplier Login')  
 
 @section('style')
  <style type="text/css">
@@ -14,15 +14,15 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">{{ __('Login') }}</p>
+      <p class="login-box-msg">{{ __('Supplier Login') }}</p>
 
       
       <!--Display message-->
       @include('commonParts.message_display')
 
 
-      <form method="POST" action="{{ route('login') }}">
-
+      <!-- <form method="POST" action="{{ route('login') }}"> -->
+        <form method="POST" action="{{ route('supplier.login') }}">
          @csrf
 
         <div class="input-group mb-3">
@@ -59,7 +59,7 @@
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="remember" name="remember" checked="{{ old('remember') ? 'checked' : '' }}" >
+              <input type="checkbox" id="remember">
               <label for="remember">
                 {{ __('Remember Me') }}
               </label>
@@ -73,7 +73,7 @@
         </div>
       </form>
 
-      <div class="social-auth-links text-center mb-3">
+      <!-- <div class="social-auth-links text-center mb-3">
         <p>- OR -</p>
         <a href="#" class="btn btn-block btn-primary">
           <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
@@ -81,23 +81,23 @@
         <a href="#" class="btn btn-block btn-danger">
           <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
         </a>
-      </div>
+      </div> -->
       <!-- /.social-auth-links -->
 
       <p class="mb-1">
       	@if (Route::has('password.request'))
-            <a class="btn- btn-link-" href="{{ route('password.request') }}">
+            <a class="btn- btn-link-" href="{{ route('supplier.password.request') }}">
                 {{ __('I forgot my password') }}
             </a>
         @endif
         <!--<a href="forgot-password.html">I forgot my password</a>-->
       </p>
-      <p class="mb-0">
+      <!-- <p class="mb-0">
       	@if (Route::has('register'))
             <a class="nav-link- text-center" href="{{ route('register') }}">{{ __('Register a new membership') }}</a>      
         @endif
-        <!--<a href="register.html" class="text-center">Register a new membership</a>-->
-      </p>
+        <a href="register.html" class="text-center">Register a new membership</a>
+      </p> -->
     </div>
     <!-- /.login-card-body -->
   </div>

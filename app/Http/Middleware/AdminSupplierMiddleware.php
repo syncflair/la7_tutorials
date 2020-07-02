@@ -6,7 +6,7 @@ use Closure;
 
 use Illuminate\Support\Facades\Auth;
 
-class AdminStoreMiddleware
+class AdminSupplierMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,23 +16,15 @@ class AdminStoreMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {
-        
-
-        /**
-         * Handle an incoming request.
-         *
-         * @param  \Illuminate\Http\Request  $request
-         * @param  \Closure  $next
-         * @return mixed
-         */
-       
+    {       
        //my Custome Code
-        if (Auth::check() && Auth::user()->role->id ==9) { /*Store = 14*/
+        /*client type = 2 for supplier*/        
+        //if (Auth::guard('client')->check() && Auth::guard('client')->user()->clientType->id ==2) { 
+        if (Auth::guard('supplier')->check()) { 
             return $next($request);
 
         }else{
-            return redirect()->route('login');
+            return redirect()->route('supplier.login');
         }
         
     }

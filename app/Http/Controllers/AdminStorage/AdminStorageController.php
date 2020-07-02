@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\AdminStorage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class AdminStorageController extends Controller
 {
-    /**
+     /**
      * Create a new controller instance.
      *
      * @return void
@@ -18,12 +18,9 @@ class UserController extends Controller
     }
 
 
-   /* public function index()
+    public function index()
     {
-        return view('home');
-    }*/
+        return view('AdminStorage.DashboardStorage');
+    }
 
-
-
-    /*Its for Visitor users. for future use*/
 }

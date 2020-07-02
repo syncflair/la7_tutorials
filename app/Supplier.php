@@ -6,14 +6,15 @@ namespace App;
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Notifications\ClientResetPasswordNotification;
+use App\Notifications\SupplierResetPasswordNotification;
 
-class Client extends Authenticatable
+
+class Supplier extends Authenticatable
 {
     use Notifiable;
 
 
-    protected $guard = 'client'; //custome....
+    protected $guard = 'supplier'; //custome....
 
     /**
      * The attributes that are mass assignable.
@@ -21,8 +22,9 @@ class Client extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'username', 'phone', 'password', 'client_type_id', 'status_id','avatar'
+        'name', 'email', 'phone', 'password', 'supplier_type', 'status_id','avatar','supplier_desc','supplier_address','created_by','updated_by'
     ];
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -43,19 +45,14 @@ class Client extends Authenticatable
     ];
 
 
-    //My Custome Relation --  user belong to this Role 
-    public function clientType(){
-        //return $this->belongsTo('App\Models\Role');
-        return $this->belongsTo(Models\ClientType::class);
-    }
-
+ 
     public function UserStatus(){
         //return $this->belongsTo('App\Models\UserStatus');
         return $this->belongsTo(Models\UserStatus::class);
     }
 
 
-    /**
+     /**
      * Send the password reset notification.
      *
      * @param  string  $token
@@ -65,8 +62,6 @@ class Client extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         //$this->notify(new ResetPasswordNotification($token)); //default 
-        $this->notify(new ClientResetPasswordNotification($token)); //default 
+        $this->notify(new SupplierResetPasswordNotification($token)); //default 
     }
-
-    
 }

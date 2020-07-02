@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientsTable extends Migration
+class CreateSuppliersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,22 @@ class CreateClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('suppliers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->string('username')->unique();
+            //$table->string('username')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');          
-            $table->unsignedInteger('client_type_id')->default(1); 
+            $table->string('password'); 
+            $table->enum('supplier_type', ['Person', 'Organization']);
             $table->unsignedInteger('status_id')->default(1); //5 Not Verified
+            $table->string('supplier_desc')->nullable();
+            $table->string('supplier_address')->nullable();
             $table->string('avatar')->nullable();            
             $table->rememberToken();
+            $table->unsignedBigInteger('created_by')->nullable()->comment('Created by User');  
+            $table->unsignedBigInteger('updated_by')->nullable()->comment('Updated by User'); 
             $table->timestamps();
         });
     }
@@ -36,6 +40,6 @@ class CreateClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('suppliers');
     }
 }

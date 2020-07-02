@@ -39,15 +39,34 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],        
+
+        'api' => [
+            'driver' => 'token',
+            'provider' => 'users',
+            'hash' => false,
         ],
+
         'client' => [
             'driver' => 'session',
             'provider' => 'clients',
         ],
 
-        'api' => [
+        'client-api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'clients',
+            'hash' => false,
+        ],
+
+
+        'supplier' => [
+            'driver' => 'session',
+            'provider' => 'suppliers',
+        ],
+
+        'supplier-api' => [
+            'driver' => 'token',
+            'provider' => 'suppliers',
             'hash' => false,
         ],
     ],
@@ -79,6 +98,10 @@ return [
             'model' => App\Client::class,
         ],
 
+        'suppliers' => [
+            'driver' => 'eloquent',
+            'model' => App\Supplier::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -103,6 +126,20 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60, //it make 15 to sercurity purpos later
+            'throttle' => 60,
+        ],
+
+        'clients' => [
+            'provider' => 'clients',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'suppliers' => [
+            'provider' => 'suppliers',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

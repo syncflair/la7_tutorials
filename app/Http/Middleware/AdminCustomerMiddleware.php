@@ -6,7 +6,7 @@ use Closure;
 
 use Illuminate\Support\Facades\Auth;
 
-class AdminOrderMiddleware
+class AdminCustomerMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,15 +16,15 @@ class AdminOrderMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {       
+    {
        //my Custome Code
-        if (Auth::check() && Auth::user()->role->id ==10) { /*Order = 10*/
+         /*client type = 1 for customer*/
+        //if (Auth::guard('client')->check() && Auth::guard('client')->user()->clientType->id ==1) {
+        if (Auth::guard('client')->check() ) {
             return $next($request);
-
         }else{
-            return redirect()->route('login');
+            return redirect()->route('client.login');
         }
         
     }
-
 }

@@ -10,17 +10,22 @@
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }} 
+                            {{ session('status') }}
                         </div>
                     @endif
+                        {{ Auth::user() }}
 
-                    {{Auth::guard('client')->user()}}
+
+                    Storage Management Dashboard
+
+                     
+                       @foreach (session()->all(); as $value) 
+                          echo $value.'<br>'
+                       
+
+                    @endforeach
 
 
-          
-
-                        
-                    Customer Dashboard
                 </div>
             </div>
         </div>

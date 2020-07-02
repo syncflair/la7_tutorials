@@ -17,7 +17,7 @@
     <div class="card-body register-card-body">
 
      
-    <p class="login-box-msg">{{ __('Reset Password') }}</p>
+    <p class="login-box-msg">{{ __('Client Reset Password') }}</p>
     
 
     @if(Session::has('success'))
@@ -25,13 +25,15 @@
             <span> {{ Session::get('success') }} </span>
             @php
                 Session::forget('success');
+                //Session::put('success');
             @endphp
         </div>
       @endif
 
 
 
-      <form method="POST" action="{{ route('password.update') }}">
+      <!-- <form method="POST" action="{{ route('client.password.request') }}"> -->
+      <form method="POST" action="{{ route('client.password.update') }}">
       	@csrf
       	
       	<input type="hidden" name="token" value="{{ $token }}">
@@ -95,7 +97,7 @@
 
       <br/>
       <a href="/" class="text-center">Back to Home</a> Or
-      <a href="{{ route('login') }}" class="text-center"> Login </a>
+      <a href="{{ route('client.login') }}" class="text-center">Login</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

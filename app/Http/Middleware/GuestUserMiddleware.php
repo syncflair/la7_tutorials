@@ -3,10 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
 use Illuminate\Support\Facades\Auth;
 
-class AdminOrderMiddleware
+class GuestUserMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,9 +15,10 @@ class AdminOrderMiddleware
      * @return mixed
      */
     public function handle($request, Closure $next)
-    {       
+    {
+       
        //my Custome Code
-        if (Auth::check() && Auth::user()->role->id ==10) { /*Order = 10*/
+        if (Auth::check() && Auth::user()->role->id ==17) { /*GuestUser = 14*/
             return $next($request);
 
         }else{
@@ -26,5 +26,4 @@ class AdminOrderMiddleware
         }
         
     }
-
 }

@@ -2,8 +2,14 @@
 
 namespace App\Exceptions;
 
+
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Support\Arr;
+
+use Illuminate\Support\Facades\Auth;
+
 
 class Handler extends ExceptionHandler
 {
@@ -70,4 +76,32 @@ class Handler extends ExceptionHandler
 
         return parent::render($request, $exception);
     }//*/
+
+
+    //my custome for multiAuth redirect login route
+    protected function unauthenticated($request, AuthenticationException $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+        //$guard = array_get($exception->$guards(), 0); //return string, get from auth guard like 'web' or 'client'
+        $guard = Arr::get($exception->guards(), 0);
+        switch ($guard) {
+            case 'client':
+                $login = 'client.login';
+                break;
+
+            case 'supplier':
+                $login = 'supplier.login';
+                break;
+
+            default:
+                $login = 'login';
+                break;
+        }
+
+        
+        return redirect()->guest(route($login)); //redirect dynamicaly
+    }
 }

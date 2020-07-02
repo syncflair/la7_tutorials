@@ -29,20 +29,6 @@ class ConfirmPasswordController extends Controller
     //protected $redirectTo = RouteServiceProvider::HOME;
     //protected $redirectTo = RouteServiceProvider::DASHBOARD;
 
-    //my Custome Code. OverWrite redirectTo
-   /* protected function redirectTo()
-    {
-        if (auth()->user()->role_id == 1) {
-            //1 is Admin
-            return route('dashboard');
-
-        }
-
-        elseif (auth()->user()->role_id == 2) {
-            return route('home');
-        }
-    }//*/
-
     /**
      * Create a new controller instance.
      *

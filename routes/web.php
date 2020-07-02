@@ -24,8 +24,41 @@ Route::get('email-chek', function () {
    // return view('auth.login'); //redirect to login page    
 });
 
+//Clients Route
+Route::get('client/login', 'AuthClient\LoginController@showLoginForm')->name('client.login');
+Route::post('client/login', 'AuthClient\LoginController@login')->name('client.login');
+Route::get('client/register', 'AuthClient\RegisterController@showRegisterForm');
+Route::post('client/register', 'AuthClient\RegisterController@register');
+// Password Reset Routes for clients
+Route::get('client/password/reset','AuthClient\ForgotPasswordController@showLinkRequestForm')->name('client.password.request');
+Route::post('client/password/email','AuthClient\ForgotPasswordController@sendResetLinkEmail')->name('client.password.email');
+Route::get('client/password/reset/{token}','AuthClient\ResetPasswordController@showResetForm')->name('client.password.reset');
+Route::post('client/password/reset','AuthClient\ResetPasswordController@reset')->name('client.password.update');
 
-Route::get('confirmation', function () { return view('auth.confirmation'); });
+//Suppliers Route
+Route::get('supplier/login', 'AuthSupplier\LoginController@showLoginForm')->name('supplier.login');
+Route::post('supplier/login', 'AuthSupplier\LoginController@login')->name('supplier.login');
+// Password Reset Routes for clients
+Route::get('supplier/password/reset','AuthSupplier\ForgotPasswordController@showLinkRequestForm')->name('supplier.password.request');
+Route::post('supplier/password/email','AuthSupplier\ForgotPasswordController@sendResetLinkEmail')->name('supplier.password.email');
+Route::get('supplier/password/reset/{token}','AuthSupplier\ResetPasswordController@showResetForm')->name('supplier.password.reset');
+Route::post('supplier/password/reset','AuthSupplier\ResetPasswordController@reset')->name('supplier.password.update');
+
+
+Route::group(['middleware'=>['AdminCustomer','auth:client'] ], function(){
+   Route::get('/dashboard-customer', 'AdminCustomer\AdminCustomerController@index')->name('dashboard-customer');
+   Route::post('client/logout', 'AuthClient\LoginController@logout')->name('client.logout');
+});
+
+Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
+    Route::get('/dashboard-supplier', 'AdminSupplier\AdminSupplierController@index')->name('dashboard-supplier');
+    Route::post('supplier/logout', 'AuthSupplier\LoginController@logout')->name('supplier.logout');
+});
+
+
+
+
+Route::get('confirmation', function () { return view('auth.confirmation'); });  //confirmation page
 /**************************************** Auth routes *************************************************/
 //Auth::routes(); //Default Laravel
 //Auth::routes(['register' => false ]); //disable Register route. No one can register to this site any more.
@@ -125,9 +158,9 @@ Route::group(['middleware'=>['AdminDelivery','auth','verified'] ], function(){
 /****************************************end Admin Delivery middleware ***********************************************/
 
 /**************************************** Admin Store middleware ***************************************************/
-Route::group(['middleware'=>['AdminStore','auth','verified'] ], function(){
+Route::group(['middleware'=>['AdminStorage','auth','verified'] ], function(){
 
-    Route::get('dashboard-store', 'AdminStore\AdminStoreController@index')->name('dashboard-store');
+    Route::get('dashboard-storage', 'AdminStorage\AdminStorageController@index')->name('dashboard-storage');
 
 });
 /****************************************end Admin Store middleware ***********************************************/
@@ -164,9 +197,20 @@ Route::group(['middleware'=>['AdminPurchase','auth','verified'] ], function(){
 });
 /****************************************end Admin Sales middleware ***********************************************/
 
+/**************************************** Guest User middleware ***************************************************/
+Route::group(['middleware'=>['GuestUser','auth','verified'] ], function(){
 
+    Route::get('dashboard-guest-user', 'GuestUser\GuestUserController@index')->name('dashboard-guest-user');
+
+});
+/****************************************end Admin Sales middleware ***********************************************/
 
 /****************************************Website Routes Link *****************************************************/
+
+
+
+
+
 
 
 

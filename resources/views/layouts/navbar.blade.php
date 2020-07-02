@@ -28,6 +28,11 @@
                             </li>
                             
                         @guest
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('client.login' ) }}">{{ __('Customer') }}</a>
+                            </li>
+                          
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login' ) }}">{{ __('Login') }}</a>
                             </li>
@@ -40,21 +45,60 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
+                                    <!-- {{ Auth::guard('client')->check() }} -->
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{url('/dashboard' )}}" >
-                                        My Account
-                                    </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit(); ">
-                                        {{ __('Logout') }}
-                                    </a>
 
-                                    <form id="logout-form" action="{{route('logout' )}}" method="POST" style="display:none;">
-                                        @csrf
-                                    </form>
+                                    @if(Auth::guard('client')->check() )
+                                            <a class="dropdown-item" href="{{url('/dashboard-customer' )}}" >
+                                                My Account
+                                            </a>
+                                    @elseif( Auth::guard('supplier')->check())
+                                        <a class="dropdown-item" href="{{url('/dashboard-supplier' )}}" >
+                                            My Account
+                                        </a>
+                                    @elseif(Auth::guard()->check())
+                                        <a class="dropdown-item" href="{{url('/dashboard' )}}" >
+                                            My Account
+                                        </a>
+                                    @endif
+
+
+
+                                    @if(Auth::guard('client')->check())
+                                        <a class="dropdown-item" href="{{ route('client.logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit(); ">
+                                            {{ __('Client Logout') }}
+                                        </a>
+                                   
+                                        <form id="logout-form" action="{{route('client.logout' )}}" method="POST" style="display:none;">
+                                            @csrf
+                                        </form>
+                                    @elseif(Auth::guard('supplier')->check())
+                                        <a class="dropdown-item" href="{{ route('supplier.logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit(); ">
+                                            {{ __('Supplier Logout') }}
+                                        </a>
+                                   
+                                        <form id="logout-form" action="{{route('supplier.logout' )}}" method="POST" style="display:none;">
+                                            @csrf
+                                        </form>
+                                    @elseif(Auth::guard()->check())
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit(); ">
+                                            {{ __('Logout') }}
+                                        </a>
+                                   
+                                        <form id="logout-form" action="{{route('logout' )}}" method="POST" style="display:none;">
+                                            @csrf
+                                        </form>
+                                    @endif
+
+
                                 </div>
                             </li>
                         @endguest

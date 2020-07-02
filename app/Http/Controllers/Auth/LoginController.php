@@ -27,6 +27,8 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+
+   
     /**
      * Where to redirect users after login.
      *
@@ -48,8 +50,8 @@ class LoginController extends Controller
         elseif (auth()->user()->role_id == 8) { /*Purchase = 8*/
             return route('dashboard-purchase');
         }
-        elseif (auth()->user()->role_id == 9) { /*Store = 9*/
-            return route('dashboard-store');
+        elseif (auth()->user()->role_id == 9) { /*Storage = 9*/
+            return route('dashboard-storage');
         }
         elseif (auth()->user()->role_id == 10) { /*Order = 10*/
             return route('dashboard-order');
@@ -64,8 +66,11 @@ class LoginController extends Controller
             return route('dashboard-supervisor');
         }
 
+        //this is guest user that only for verification check
+        elseif (auth()->user()->role_id == 17) { /*Supervisor = 17*/
+            return route('dashboard-guest-user');
+        }
 
-        
     }
 
 
@@ -84,7 +89,7 @@ class LoginController extends Controller
 
         if (Auth::attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 1 ])) {
             // Authentication passed...
-            return redirect()->intended('dashboard');
+            return redirect()->intended('dashboard'); //if not this route this will redirect using middleware
         }
         if (Auth::attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ])) {            
             Auth::logout();
@@ -104,6 +109,13 @@ class LoginController extends Controller
             Session::put('error','Your Account is Block now, Please contact with Authority'); 
             return redirect()->back(); 
         }
+
+        // if (Auth::attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'role_id'=> 17 ])) {
+        //     Auth::logout();
+        //     //return abort(401, 'Your Account is Block now, Please contact with Authority');
+        //     Session::put('error','Please Verify email.'); 
+        //     return redirect()->back(); 
+        // }
         
     }//*/
 
@@ -116,6 +128,25 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->middleware('guest:client')->except('logout'); //for clients
+    }
+
+
+    public function logout(Request $request)
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        // $request->session()->regenerateToken();
+
+        // if ($response = $this->loggedOut($request)) {
+        //     return $response;
+        // }
+
+        // return $request->wantsJson()
+        //     ? new Response('', 204)
+        //     : redirect('/');
+
+        return redirect('/login');
     }
 }

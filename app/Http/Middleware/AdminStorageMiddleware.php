@@ -6,7 +6,7 @@ use Closure;
 
 use Illuminate\Support\Facades\Auth;
 
-class AdminOrderMiddleware
+class AdminStorageMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class AdminOrderMiddleware
     public function handle($request, Closure $next)
     {       
        //my Custome Code
-        if (Auth::check() && Auth::user()->role->id ==10) { /*Order = 10*/
+        if (Auth::check() && Auth::user()->role->id ==9) { /*Store = 14*/
             return $next($request);
 
         }else{
@@ -26,5 +26,4 @@ class AdminOrderMiddleware
         }
         
     }
-
 }

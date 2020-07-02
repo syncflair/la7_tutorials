@@ -78,13 +78,16 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminMiddleware::class, //Super Admin 
         
         'AdminDelivery' => \App\Http\Middleware\AdminDeliveryMiddleware::class,
-        'AdminStore' => \App\Http\Middleware\AdminStoreMiddleware::class,
+        'AdminStorage' => \App\Http\Middleware\AdminStorageMiddleware::class,
         'AdminOrder' => \App\Http\Middleware\AdminOrderMiddleware::class,
         'AdminPackaging' => \App\Http\Middleware\AdminPackagingMiddleware::class,
         'AdminSales' => \App\Http\Middleware\AdminSalesMiddleware::class,
         'AdminPurchase' => \App\Http\Middleware\AdminPurchaseMiddleware::class,
         'AdminSupervisor' => \App\Http\Middleware\AdminSupervisorMiddleware::class,
 
+        'AdminCustomer' => \App\Http\Middleware\AdminCustomerMiddleware::class,
+        'AdminSupplier' => \App\Http\Middleware\AdminSupplierMiddleware::class,
+        'GuestUser' => \App\Http\Middleware\GuestUserMiddleware::class,
 
 
     ];

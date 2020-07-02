@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\AdminStore;
+namespace App\Http\Controllers\GuestUser;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AdminStoreController extends Controller
+class GuestUserController extends Controller
 {
-     /**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -20,7 +20,10 @@ class AdminStoreController extends Controller
 
     public function index()
     {
-        return view('AdminStore.DashboardStore');
+        return view('GuestUser.DashboardGuestUser');
     }
 
+
+
+    /*Its for Visitor users. for future use*/
 }

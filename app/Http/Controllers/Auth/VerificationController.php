@@ -31,13 +31,16 @@ class VerificationController extends Controller
 
     protected function redirectTo()    
     {
+
+        return route('dashboard'); 
         //if (auth()->user()->role_id == 1) { /*Compare with single role id*/
-        if (auth()->user()->role_id == in_array(auth()->user()->role_id, RoleId() )) { /*Compare with multiple role id. RoleId come from AuthRolePermissionHelper.php */
-            return route('dashboard');
-        }
-        elseif (auth()->user()->role_id == 14) { /*User = 14*/
-            return route('home');
-        }
+        /*Compare with multiple role id. RoleId come from AuthRolePermissionHelper.php */
+        // if (auth()->user()->role_id == in_array(auth()->user()->role_id, RoleId() )) { 
+        //     return route('dashboard');
+        // }
+        // elseif (auth()->user()->role_id == 17) { /*User = 14*/
+        //     return route('home');
+        // }
     }//*/
 
     
