@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -82859,10 +82859,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/main_js/VueRouters.js":
-/*!********************************************!*\
-  !*** ./resources/js/main_js/VueRouters.js ***!
-  \********************************************/
+/***/ "./resources/js/website_js/VueRouters.js":
+/*!***********************************************!*\
+  !*** ./resources/js/website_js/VueRouters.js ***!
+  \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -82900,10 +82900,10 @@ var routes = [] //export const routes = [
 
 /***/ }),
 
-/***/ "./resources/js/main_js/VueVuex.js":
-/*!*****************************************!*\
-  !*** ./resources/js/main_js/VueVuex.js ***!
-  \*****************************************/
+/***/ "./resources/js/website_js/VueVuex.js":
+/*!********************************************!*\
+  !*** ./resources/js/website_js/VueVuex.js ***!
+  \********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -82928,10 +82928,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 /***/ }),
 
-/***/ "./resources/js/main_js/main.js":
-/*!**************************************!*\
-  !*** ./resources/js/main_js/main.js ***!
-  \**************************************/
+/***/ "./resources/js/website_js/w_main.js":
+/*!*******************************************!*\
+  !*** ./resources/js/website_js/w_main.js ***!
+  \*******************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -82939,8 +82939,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-progressbar */ "./node_modules/vue-progressbar/dist/vue-progressbar.js");
 /* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_progressbar__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _VueVuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VueVuex */ "./resources/js/main_js/VueVuex.js");
-/* harmony import */ var _VueRouters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VueRouters */ "./resources/js/main_js/VueRouters.js");
+/* harmony import */ var _VueVuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VueVuex */ "./resources/js/website_js/VueVuex.js");
+/* harmony import */ var _VueRouters__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VueRouters */ "./resources/js/website_js/VueRouters.js");
 /* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.common.js");
 /* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vform__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var toastr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! toastr */ "./node_modules/toastr/toastr.js");
@@ -83039,14 +83039,14 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 1:
-/*!********************************************!*\
-  !*** multi ./resources/js/main_js/main.js ***!
-  \********************************************/
+/***/ 2:
+/*!*************************************************!*\
+  !*** multi ./resources/js/website_js/w_main.js ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel\la7_tutorials\resources\js\main_js\main.js */"./resources/js/main_js/main.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel\la7_tutorials\resources\js\website_js\w_main.js */"./resources/js/website_js/w_main.js");
 
 
 /***/ })

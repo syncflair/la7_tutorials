@@ -14,6 +14,7 @@
     | OR (without using use Illuminate\Support\Facades\Config; )
     | - \Config::get(‘constants.CommonFilePath');
     | -\Config::get(‘constants.options.option_name');
+    | -\Config::get(‘constants.SORBORAHO_URL');
     |-----------------------------------------------------------------------
     */
 
@@ -26,7 +27,7 @@ return [
     */
     'CommonFilesPath' => 'FilesStorage/CommonFiles/',
 	'UserFliesPath' => 'FilesStorage/Backend/Users/',
-	
+    'SORBORAHO_URL' => 'https://sorboraho.com',	
 
     'options' => [
         'option_a' => 'valu_a',

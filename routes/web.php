@@ -209,7 +209,8 @@ Route::group(['middleware'=>['GuestUser','auth','verified'] ], function(){
 
 
 
-
+Route::get('/supplier', function () { return view('layouts.AdminSupplierLayout.master_template'); });
+Route::get('/customer', function () { return view('layouts.AdminCustomerLayout.master_template'); });
 
 
 
@@ -230,6 +231,8 @@ Route::redirect('/','/en');
 Route::group(['prefix'=>'{locale}', 'where'=>['locale' => '[a-zA-Z]{2}'], 'middleware'=>'SetLanguage'], function(){
 //Route::group(['prefix' => '{locale}'], function(){
   
+  
+
   Route::get('/', function () {
     //App::setLocale('bn'); //app()->getLocale()
     return view('welcome');    

@@ -49,18 +49,10 @@ class RegisterController extends Controller
 
     //my Custome Code. OverWrite redirectTo
    protected function redirectTo()
-    {       
-        //Auth::logout();
-        //Session::put('success','Your registration is successful !. We send a confirmation email to your account. Please confirmed your verivication.');
-        //return '/register';
-        //return '/confirmation';
-        //return route('register');        
-        //return back();
-
+    {               
         Session::put('success','Your registration is successful . Please login');  
         return route('client.login');
     } //*/
-
 
 
      /**
@@ -87,12 +79,6 @@ class RegisterController extends Controller
                     ? new Response('', 201)
                     : redirect($this->redirectPath());
     }
-
-
-
-
-
-
 
 
     /**

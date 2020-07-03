@@ -22104,7 +22104,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! DataTables 1
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.5.0
+ * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -22114,7 +22114,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2020-04-10T15:07Z
+ * Date: 2020-05-04T22:49Z
  */
 ( function( global, factory ) {
 
@@ -22252,7 +22252,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.5.0",
+	version = "3.5.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -26349,7 +26349,7 @@ Data.prototype = {
 
 		// If not, create one
 		if ( !value ) {
-			value = Object.create( null );
+			value = {};
 
 			// We can accept data for non-element nodes in modern browsers,
 			// but we should not, see #8335.
@@ -108460,6 +108460,17 @@ var CategoryStore = {
 
 /***/ }),
 
+/***/ "./resources/sass/admin_childs_css/ac_style.scss":
+/*!*******************************************************!*\
+  !*** ./resources/sass/admin_childs_css/ac_style.scss ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -108471,10 +108482,32 @@ var CategoryStore = {
 
 /***/ }),
 
-/***/ "./resources/sass/websiteCSS/main.scss":
-/*!*********************************************!*\
-  !*** ./resources/sass/websiteCSS/main.scss ***!
-  \*********************************************/
+/***/ "./resources/sass/auth_user_css/au_style.scss":
+/*!****************************************************!*\
+  !*** ./resources/sass/auth_user_css/au_style.scss ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/main_css/main.scss":
+/*!*******************************************!*\
+  !*** ./resources/sass/main_css/main.scss ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ "./resources/sass/website_css/w_style.scss":
+/*!*************************************************!*\
+  !*** ./resources/sass/website_css/w_style.scss ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -108483,15 +108516,18 @@ var CategoryStore = {
 /***/ }),
 
 /***/ 0:
-/*!***************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/websiteCSS/main.scss ***!
-  \***************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/main_css/main.scss ./resources/sass/auth_user_css/au_style.scss ./resources/sass/admin_childs_css/ac_style.scss ./resources/sass/website_css/w_style.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! C:\xampp\htdocs\laravel\la7_tutorials\resources\js\app.js */"./resources/js/app.js");
 __webpack_require__(/*! C:\xampp\htdocs\laravel\la7_tutorials\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel\la7_tutorials\resources\sass\websiteCSS\main.scss */"./resources/sass/websiteCSS/main.scss");
+__webpack_require__(/*! C:\xampp\htdocs\laravel\la7_tutorials\resources\sass\main_css\main.scss */"./resources/sass/main_css/main.scss");
+__webpack_require__(/*! C:\xampp\htdocs\laravel\la7_tutorials\resources\sass\auth_user_css\au_style.scss */"./resources/sass/auth_user_css/au_style.scss");
+__webpack_require__(/*! C:\xampp\htdocs\laravel\la7_tutorials\resources\sass\admin_childs_css\ac_style.scss */"./resources/sass/admin_childs_css/ac_style.scss");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\laravel\la7_tutorials\resources\sass\website_css\w_style.scss */"./resources/sass/website_css/w_style.scss");
 
 
 /***/ })

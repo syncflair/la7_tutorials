@@ -15464,14 +15464,3 @@ a.text-dark:focus {
   color: #6cb2eb !important;
 }
 
-.LogoTextStyle {
-  color: #ffffff;
-  font-weight: bold;
-  padding: 5px;
-  border: 1px solid #f0f0f0;
-  border-radius: 5px;
-  background-color: orangered;
-  text-align: center;
-  margin-bottom: 0;
-}
-
