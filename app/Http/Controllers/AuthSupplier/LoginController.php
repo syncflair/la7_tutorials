@@ -32,14 +32,35 @@ class LoginController extends Controller
         return view('AuthSupplier.login');
     }
 
+     //login using email or phone
+    public function username()
+    {
+        //return 'phone'; //use only phone
+
+        $login = request()->input('username');
+        if(is_numeric($login)){
+            $field = 'phone';
+        }
+        elseif (filter_var($login, FILTER_VALIDATE_EMAIL)) {
+            $field = 'email';
+        }
+        // else {
+        //     $field = 'username';
+        // }
+        request()->merge([$field => $login]);
+        return $field;
+    } 
+
     protected function validateLogin(Request $request)
     {
     	$this->validate($request, [
-            'email'   => 'required|email',
+            //'email'   => 'required|email',
+            'username'   => 'required',
             'password' => 'required|min:6'
         ],
     	[
-    		'email.required' => 'The Supplier email field is required.',
+    		//'email.required' => 'The Supplier email field is required.',
+            'username.required' => 'The Email or Phone field is required.',
     	]);
     }
 
@@ -63,26 +84,25 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        //$credentials =  ['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 1 ];
-         //$credentials = $request->only('email', 'password');
-
-        if (Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 1 ])) {
+        
+        if ( Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 1 ]) OR Auth::guard('supplier')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 1 ])) {
             // Authentication passed...
            return redirect()->intended('dashboard-supplier'); //if not this route this will redirect using middleware
         }
-        if (Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ])) {            
+
+        if ( Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ]) OR Auth::guard('supplier')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ]) ) {            
             Auth::guard('supplier')->logout();
             //return abort(401, 'You Account is not active, Please contact with Authority ');
             Session::put('error','You Account is not active, Please contact with Authority');
             return redirect()->back();  
         }
-        if (Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 3 ])) {
+        if ( Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 3 ]) OR Auth::guard('supplier')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 3 ]) ) {
             Auth::guard('supplier')->logout();
             //return abort(401, 'Your Account is Pending now. Please contact with Authority');
             Session::put('error','Your Account is Pending now. Please contact with Authority'); 
             return redirect()->back();  
         }
-        if (Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 4 ])) {
+        if ( Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 4 ]) OR Auth::guard('supplier')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 4 ]) ) {
             Auth::guard('supplier')->logout();
             //return abort(401, 'Your Account is Block now, Please contact with Authority');
             Session::put('error','Your Account is Block now, Please contact with Authority'); 
@@ -102,7 +122,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:supplier')->except('logout'); //for clients
+        $this->middleware('guest:supplier')->except('logout'); //for suppliers
     }
 
     public function logout(Request $request)
@@ -131,6 +151,38 @@ class LoginController extends Controller
      */
     protected function guard()
     {
-        return Auth::guard('supplier'); // this guard route to client table using default login
+        return Auth::guard('supplier'); // this guard route to supplier table using default login
     }
+
+
+
+   // protected function authenticated(Request $request, $user)
+    // {
+    //     //$credentials =  ['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 1 ];
+    //      //$credentials = $request->only('email', 'password');
+
+    //     if (Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 1 ])) {
+    //         // Authentication passed...
+    //        return redirect()->intended('dashboard-supplier'); //if not this route this will redirect using middleware
+    //     }
+    //     if (Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ])) {            
+    //         Auth::guard('supplier')->logout();
+    //         //return abort(401, 'You Account is not active, Please contact with Authority ');
+    //         Session::put('error','You Account is not active, Please contact with Authority');
+    //         return redirect()->back();  
+    //     }
+    //     if (Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 3 ])) {
+    //         Auth::guard('supplier')->logout();
+    //         //return abort(401, 'Your Account is Pending now. Please contact with Authority');
+    //         Session::put('error','Your Account is Pending now. Please contact with Authority'); 
+    //         return redirect()->back();  
+    //     }
+    //     if (Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 4 ])) {
+    //         Auth::guard('supplier')->logout();
+    //         //return abort(401, 'Your Account is Block now, Please contact with Authority');
+    //         Session::put('error','Your Account is Block now, Please contact with Authority'); 
+    //         return redirect()->back(); 
+    //     }
+        
+    // }//*/
 }

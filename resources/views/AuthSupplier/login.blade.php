@@ -9,7 +9,7 @@
 @section('content')
 <div class="login-box" id="app">
   <div class="login-logo orange">
-    SHORBORAHO
+    SORBORAHO
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -25,8 +25,7 @@
         <form method="POST" action="{{ route('supplier.login') }}">
          @csrf
 
-        <div class="input-group mb-3">
-          <!--<input type="email" class="form-control" placeholder="Email">-->
+        <!-- <div class="input-group mb-3">
           <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required- autocomplete="email" placeholder="{{ __('E-Mail Address') }}" autofocus>          
           <div class="input-group-append">
             <div class="input-group-text">
@@ -39,6 +38,21 @@
 	                {{ $message }}
 	            </span>
 	        @enderror
+        </div> -->
+
+        <div class="input-group mb-3">
+          <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required- autocomplete="username" placeholder="{{ __('E-Mail or Phone') }}" autofocus>          
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+
+            @error('username')
+              <span class="invalid-feedback" role="alert">
+                  {{ $message }}
+              </span>
+          @enderror
         </div>
 
         <div class="input-group mb-3">
@@ -59,7 +73,7 @@
         <div class="row">
           <div class="col-8">
             <div class="icheck-primary">
-              <input type="checkbox" id="remember">
+              <input type="checkbox" id="remember" name="remember" checked="{{ old('remember') ? 'checked' : '' }}">   
               <label for="remember">
                 {{ __('Remember Me') }}
               </label>

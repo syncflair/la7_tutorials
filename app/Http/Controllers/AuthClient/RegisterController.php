@@ -44,19 +44,22 @@ class RegisterController extends Controller
      */
     //protected $redirectTo = RouteServiceProvider::HOME;
     //protected $redirectTo = RouteServiceProvider::DASHBOARD;
-    protected $redirectTo = 'dashboard-customer'; 
+    //protected $redirectTo = 'dashboard-customer'; 
 
 
     //my Custome Code. OverWrite redirectTo
-   // protected function redirectTo()
-   //  {       
-   //      //Auth::logout();
-   //      Session::put('success','Your registration is successful !. We send a confirmation email to your account. Please confirmed your verivication.');
-   //      //return '/register';
-   //      return '/confirmation';
-   //      //return route('register');        
-   //      //return back();
-   //  } //*/
+   protected function redirectTo()
+    {       
+        //Auth::logout();
+        //Session::put('success','Your registration is successful !. We send a confirmation email to your account. Please confirmed your verivication.');
+        //return '/register';
+        //return '/confirmation';
+        //return route('register');        
+        //return back();
+
+        Session::put('success','Your registration is successful . Please login');  
+        return route('client.login');
+    } //*/
 
 
 
@@ -113,9 +116,12 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:clients'],
+            'phone' => ['required', 'numeric','regex:/^01[1|3-9]\d{8}$/', 'unique:clients'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-    }
+    } 
+    //regex:^(?:\+?88|88)?01[1|3-9]\d{8}$ //validate with +8801, 8801, 01 
+    //regex:^?01[1|3-9]\d{8}$ //validate only with 01, 1 or 3 to 9, max 11 number
 
     /**
      * Create a new user instance after a valid registration.
@@ -128,6 +134,7 @@ class RegisterController extends Controller
         return Client::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
     }

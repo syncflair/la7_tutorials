@@ -9,7 +9,7 @@
 @section('content')
 <div class="login-box" id="app">
   <div class="login-logo orange">
-    SHORBORAHO
+    SORBORAHO
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -109,7 +109,7 @@
       </p>
       <p class="mb-0">
       	@if (Route::has('register'))
-            <a class="nav-link- text-center" href="{{ route('register') }}">{{ __('Register a new membership') }}</a>      
+            <a class="nav-link- text-center" href="{{ route('client.register') }}">{{ __('Register a new membership') }}</a>      
         @endif
         <!--<a href="register.html" class="text-center">Register a new membership</a>-->
       </p>

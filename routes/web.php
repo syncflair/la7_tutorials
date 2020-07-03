@@ -27,8 +27,8 @@ Route::get('email-chek', function () {
 //Clients Route
 Route::get('client/login', 'AuthClient\LoginController@showLoginForm')->name('client.login');
 Route::post('client/login', 'AuthClient\LoginController@login')->name('client.login');
-Route::get('client/register', 'AuthClient\RegisterController@showRegisterForm');
-Route::post('client/register', 'AuthClient\RegisterController@register');
+Route::get('client/register', 'AuthClient\RegisterController@showRegisterForm')->name('client.register');
+Route::post('client/register', 'AuthClient\RegisterController@register')->name('client.register');
 // Password Reset Routes for clients
 Route::get('client/password/reset','AuthClient\ForgotPasswordController@showLinkRequestForm')->name('client.password.request');
 Route::post('client/password/email','AuthClient\ForgotPasswordController@sendResetLinkEmail')->name('client.password.email');

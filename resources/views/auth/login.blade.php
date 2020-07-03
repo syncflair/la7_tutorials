@@ -9,7 +9,7 @@
 @section('content')
 <div class="login-box" id="app">
   <div class="login-logo orange">
-    SHORBORAHO
+    SORBORAHO
   </div>
   <!-- /.login-logo -->
   <div class="card">

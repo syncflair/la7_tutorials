@@ -32,6 +32,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('client.login' ) }}">{{ __('Customer') }}</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('supplier.login' ) }}">{{ __('Supplier') }}</a>
+                            </li>
                           
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login' ) }}">{{ __('Login') }}</a>
@@ -54,11 +58,13 @@
                                             <a class="dropdown-item" href="{{url('/dashboard-customer' )}}" >
                                                 My Account
                                             </a>
-                                    @elseif( Auth::guard('supplier')->check())
+                                    @endif
+                                    @if( Auth::guard('supplier')->check())
                                         <a class="dropdown-item" href="{{url('/dashboard-supplier' )}}" >
                                             My Account
                                         </a>
-                                    @elseif(Auth::guard()->check())
+                                    @endif
+                                    @if(Auth::guard()->check())
                                         <a class="dropdown-item" href="{{url('/dashboard' )}}" >
                                             My Account
                                         </a>
@@ -76,7 +82,8 @@
                                         <form id="logout-form" action="{{route('client.logout' )}}" method="POST" style="display:none;">
                                             @csrf
                                         </form>
-                                    @elseif(Auth::guard('supplier')->check())
+                                    @endif
+                                    @if(Auth::guard('supplier')->check())
                                         <a class="dropdown-item" href="{{ route('supplier.logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit(); ">
@@ -86,7 +93,8 @@
                                         <form id="logout-form" action="{{route('supplier.logout' )}}" method="POST" style="display:none;">
                                             @csrf
                                         </form>
-                                    @elseif(Auth::guard()->check())
+                                    @endif
+                                    @if(Auth::guard()->check())
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit(); ">
