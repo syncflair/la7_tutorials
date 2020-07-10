@@ -31,8 +31,8 @@ class RedirectIfAuthenticated
     {
         
         switch ($guard) {
-            case 'client':
-                    if (Auth::guard('client')->check() ){
+            case 'customer':
+                    if (Auth::guard('customer')->check() ){
                          return redirect()->route('dashboard-customer');
                     }
                 break;
@@ -77,11 +77,11 @@ class RedirectIfAuthenticated
         return $next($request);
 
 
-        // if($guard == "client"){
-        //    // For Clients Table user 
-        //     if (Auth::guard($guard)->check() &&  Auth::guard('client')->user()->clientType->id ==1 ){
+        // if($guard == "customer"){
+        //    // For customers Table user 
+        //     if (Auth::guard($guard)->check() &&  Auth::guard('customer')->user()->customerType->id ==1 ){
         //          return redirect()->route('dashboard-customer');
-        //     }elseif(Auth::guard($guard)->check() &&  Auth::guard('client')->user()->clientType->id ==2 ){
+        //     }elseif(Auth::guard($guard)->check() &&  Auth::guard('customer')->user()->customerType->id ==2 ){
         //          return redirect()->route('dashboard-supplier');
         //     }                
         //     return $next($request);

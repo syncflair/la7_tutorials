@@ -1,13 +1,16 @@
 <template>
   <div class="row">
-	<div class="col-md-4 pl-0">
+	<div class="col-md-3 pl-0">
 		<span><strong>Total: </strong>{{ this.pagination.total }} </span>
-		<span><strong>Page: </strong> {{pagination.current_page}} of {{pagination.last_page}}</span>
+		<span v-show="this.pagination.total != 0"><strong>From: </strong>{{ this.pagination.from }} </span> 
+		<span v-show="this.pagination.total != 0"><strong>to </strong>{{ this.pagination.to }} </span>
+
+		<!-- <span><strong>Page: </strong> {{pagination.current_page}} of {{pagination.last_page}}</span> -->
 	</div>
 
 	<div class="col-md-2 pl-0 pr-0">
 		<div class="input-group input-control-sm">
-		  <label>Per Page:</label>
+		  <label><strong>Per Page: </strong></label>
 	      <select class="form-control form-control-sm" v-model="pagination.per_page" @change="onChange($event)">
 	      	<option value="10">10</option>
 	        <option value="15">15</option>
@@ -16,11 +19,17 @@
 	        <option value="50">50</option>
 	        <option value="100">100</option>
 	        <option value="250">250</option>
+	        <option value="500">500</option>
+	        <option value="1000">1000</option>
 	      </select>
 		</div>
 	</div>
 
-	<div class="col-md-6 pr-0">
+	<div class="col-md-2 pl-2 text-right">
+		<span><strong>Page: </strong> {{pagination.current_page}} of {{pagination.last_page}}</span>
+	</div>
+
+	<div class="col-md-5 pr-0">
 	    <nav aria-label="...">
 	        <ul class="pagination pagination-sm justify-content-center- float-right">
 	            <li class="page-item" :class="{ disabled: pagination.current_page <= 1 }">
@@ -74,13 +83,14 @@
                     page = this.pagination.last_page;
                 }
                 this.pagination.current_page = page;
-                this.$emit('paginate');
+                this.$emit('paginate'); //call data by changing page
             },
 
             onChange(event){
             	//alert(event.target.value)
            		//this.$emit('changPerPage', event.target.value);
-           		FireEvent.$emit('changPerPage', event.target.value);           		
+           		FireEvent.$emit('changPerPage', event.target.value); 
+           		//this event use to fetch data with per page value, call from data list component        		
             }
 
         },

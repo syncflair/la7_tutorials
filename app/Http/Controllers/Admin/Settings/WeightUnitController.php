@@ -50,8 +50,8 @@ class WeightUnitController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'weight_title' => 'required|min:3|max:40',
-            'weight_unit' => 'required|min:1|max:8',
+            'weight_title' => 'required|min:3|max:40|unique:weight_units,weight_title',
+            'weight_unit' => 'required|min:1|max:8|unique:weight_units,weight_unit',
         ]);
 
         $data =array();

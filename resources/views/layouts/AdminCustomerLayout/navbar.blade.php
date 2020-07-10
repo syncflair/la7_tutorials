@@ -129,7 +129,7 @@
         </li>
 
         <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ Auth::user()->name }} </a>
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ Auth::guard('customer')->user()->name }} </a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               <!-- <li><a href="#" class="dropdown-item"> </a></li> -->
               <li><a href="#" class="dropdown-item"><i class="far fa-user-circle"></i> My Account</a></li>
@@ -144,14 +144,14 @@
               <li class="dropdown-divider"></li>
               <li>
                 <!-- <a href="#" class="dropdown-item"><i class="fas fa-sign-out-alt red"></i> Logout</a> -->
-                @if(Auth::guard('client')->check())
-                    <a class="dropdown-item" href="{{ route('client.logout') }}"
+                @if(Auth::guard('customer')->check())
+                    <a class="dropdown-item" href="{{ route('customer.logout') }}"
                        onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit(); ">
                         <i class="fas fa-sign-out-alt red"></i>
                         {{ __('Logout') }}
                     </a>               
-                    <form id="logout-form" action="{{route('client.logout' )}}" method="POST" style="display:none;">
+                    <form id="logout-form" action="{{route('customer.logout' )}}" method="POST" style="display:none;">
                         @csrf
                     </form>
                 @endif

@@ -85,11 +85,11 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        //$guard = array_get($exception->$guards(), 0); //return string, get from auth guard like 'web' or 'client'
+        //$guard = array_get($exception->$guards(), 0); //return string, get from auth guard like 'web' or 'customer'
         $guard = Arr::get($exception->guards(), 0);
         switch ($guard) {
-            case 'client':
-                $login = 'client.login';
+            case 'customer':
+                $login = 'customer.login';
                 break;
 
             case 'supplier':

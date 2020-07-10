@@ -1,5 +1,7 @@
 @extends('layouts.AdminSupplierLayout.master_template')
-@section('title', 'Dashboard')
+@section('title')
+  Dashboard | {{ Auth::guard('supplier')->user()->name}}
+@endsection
 
 @section('extra_css')
     <!--Extra CSS-->
@@ -104,7 +106,7 @@
         <div class="row">
         <div class="col-md-8 offset-2">
         <div class="card">
-            <div class="card-header">Your may have interest to this product </div>
+            <div class="card-header">Data</div>
 
             <div class="card-body">
                 @if (session('status'))
@@ -112,7 +114,7 @@
                         {{ session('status') }} 
                     </div>
                 @endif
-                {{Auth::guard('client')->user()}}
+                {{Auth::guard('supplier')->user()}}
                       
                 Customer Dashboard
             </div>

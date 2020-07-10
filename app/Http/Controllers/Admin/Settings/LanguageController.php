@@ -51,8 +51,8 @@ class LanguageController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'lang_name' => 'required|min:3|max:40',
-            'lang_code' => 'required|min:2|max:8',
+            'lang_name' => 'required|min:3|max:40|unique:languages,lang_name',
+            'lang_code' => 'required|min:2|max:8|unique:languages,lang_code',
         ]);
 
         $data =array();

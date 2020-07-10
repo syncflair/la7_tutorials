@@ -59,6 +59,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "pagination-app",
   //props:['pagination', 'offset'],
@@ -82,12 +91,12 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.pagination.current_page = page;
-      this.$emit('paginate');
+      this.$emit('paginate'); //call data by changing page
     },
     onChange: function onChange(event) {
       //alert(event.target.value)
       //this.$emit('changPerPage', event.target.value);
-      FireEvent.$emit('changPerPage', event.target.value);
+      FireEvent.$emit('changPerPage', event.target.value); //this event use to fetch data with per page value, call from data list component        		
     }
   },
   computed: {
@@ -133,26 +142,52 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-md-4 pl-0" }, [
+    _c("div", { staticClass: "col-md-3 pl-0" }, [
       _c("span", [
         _c("strong", [_vm._v("Total: ")]),
         _vm._v(_vm._s(this.pagination.total) + " ")
       ]),
       _vm._v(" "),
-      _c("span", [
-        _c("strong", [_vm._v("Page: ")]),
-        _vm._v(
-          " " +
-            _vm._s(_vm.pagination.current_page) +
-            " of " +
-            _vm._s(_vm.pagination.last_page)
-        )
-      ])
+      _c(
+        "span",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: this.pagination.total != 0,
+              expression: "this.pagination.total != 0"
+            }
+          ]
+        },
+        [
+          _c("strong", [_vm._v("From: ")]),
+          _vm._v(_vm._s(this.pagination.from) + " ")
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "span",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: this.pagination.total != 0,
+              expression: "this.pagination.total != 0"
+            }
+          ]
+        },
+        [
+          _c("strong", [_vm._v("to ")]),
+          _vm._v(_vm._s(this.pagination.to) + " ")
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-md-2 pl-0 pr-0" }, [
       _c("div", { staticClass: "input-group input-control-sm" }, [
-        _c("label", [_vm._v("Per Page:")]),
+        _vm._m(0),
         _vm._v(" "),
         _c(
           "select",
@@ -202,13 +237,29 @@ var render = function() {
             _vm._v(" "),
             _c("option", { attrs: { value: "100" } }, [_vm._v("100")]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "250" } }, [_vm._v("250")])
+            _c("option", { attrs: { value: "250" } }, [_vm._v("250")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "500" } }, [_vm._v("500")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "1000" } }, [_vm._v("1000")])
           ]
         )
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-6 pr-0" }, [
+    _c("div", { staticClass: "col-md-2 pl-2 text-right" }, [
+      _c("span", [
+        _c("strong", [_vm._v("Page: ")]),
+        _vm._v(
+          " " +
+            _vm._s(_vm.pagination.current_page) +
+            " of " +
+            _vm._s(_vm.pagination.last_page)
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-md-5 pr-0" }, [
       _c("nav", { attrs: { "aria-label": "..." } }, [
         _c(
           "ul",
@@ -354,7 +405,14 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [_c("strong", [_vm._v("Per Page: ")])])
+  }
+]
 render._withStripped = true
 
 

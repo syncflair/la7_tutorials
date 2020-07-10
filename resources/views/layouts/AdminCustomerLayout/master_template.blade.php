@@ -19,7 +19,7 @@
   <!-- /.content-wrapper -->
 
   <!-- Control Sidebar -->
-  @include('layouts.AdminCustomerLayout.aside_left') 
+  @include('layouts.AdminCustomerLayout.aside_right') 
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->

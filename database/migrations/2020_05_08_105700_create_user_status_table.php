@@ -17,6 +17,8 @@ class CreateUserStatusTable extends Migration
             $table->bigIncrements('id');
             $table->string('us_name', 30)->unique();
             $table->string('us_desc', 100);
+            $table->unsignedBigInteger('created_by')->nullable()->comment('Created by User');  
+            $table->unsignedBigInteger('updated_by')->nullable()->comment('Updated by User'); 
             $table->timestamps();
         });
     }

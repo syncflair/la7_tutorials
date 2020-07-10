@@ -104,7 +104,7 @@ class UserController extends Controller
                     return "<span class='red'>".$users_data->us_name."</span>";
                 }elseif($users_data->us_name == 'Pending'){
                     return "<span class='blue'>".$users_data->us_name."</span>";
-                }elseif($users_data->us_name == 'Block'){
+                }elseif($users_data->us_name == 'Not Verified'){
                     return "<span class='orange'>".$users_data->us_name."</span>";
                 }
             })

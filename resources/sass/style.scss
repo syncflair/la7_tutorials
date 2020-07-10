@@ -1,3 +1,27 @@
+@import 'admin_lte_css.scss';
+
+// iCheck
+//@import '~icheck-bootstrap/icheck-bootstrap.css';
+
+//Datatables
+@import '~datatables.net-bs4/css/dataTables.bootstrap4.css';
+//@import '~datatables.net-responsive-bs4/css/responsive.bootstrap4.css';
+
+//Toastr
+@import "toastr";
+
+// Variables
+@import 'variables';
+
+//inport My Custome css
+@import 'vue_style.scss';
+@import 'v-tooltip.scss';
+
+
+
+
+
+
 /*BG Color */
 .bg-primary{background-color: #007bff !important;}
 .bg-info{background-color: #17a2b8 !important;}
@@ -33,7 +57,10 @@ body{
 /*Nav Nav-bar*/
 .navbar{ //padding: 8px 8px !important
 }
-.navbar-expand{background-color: #3c8dbc; padding: 0 !important;}
+.navbar-expand{ 
+    background-color: #3c8dbc; 
+    padding: 0 !important;
+}
 .navbar-light .navbar-nav .nav-link{ color:#FFFFFF; 
     height: auto;
     padding: 15px 15px !important; 
@@ -76,7 +103,10 @@ body{
 
 .main-sidebar{/* background-color: #222d32;*/ overflow-x: hidden;} /*Sidebar Background Color*/
 .main-sidebar> .sidebar{height: calc(100vh - (1.5rem + 1px)) !important;} /*Sidebar Height*/
-.main-sidebar .brand-link{ background-color: #367fa9 !important; color:#FFFFFF;}
+.main-sidebar .brand-link{ 
+    //background-color: #367fa9 !important; 
+    color:#FFFFFF;
+}
 .elevation-4{ box-shadow: none !important;}
 .badge-info{background-color: #3c8dbc !important; padding: 4px 6px 3px 6px; color:#FFFFFF; }
 .badge-green { color: #fff;  background-color: #00a65a !important; padding: 2px 6px 3px 6px; }
@@ -93,16 +123,20 @@ body{
 
 /*Nav sidebar*/
 .nav-sidebar > .nav-item > .nav-link{ 
-    border-radius: unset !important; padding: 8px 8px 8px 17px !important; color:#FFFFFF !important;
+    border-radius: unset !important; padding: 8px 8px 8px 17px !important; //color:#FFFFFF !important;
 }
 
 .nav-sidebar > .nav-item > .nav-link:focus, .nav-sidebar > .nav-item > .nav-link:hover,
 .nav-sidebar > .nav-item > .nav-link:active,
-.nav-sidebar > .menu-open > .nav-link:focus, .nav-sidebar > .menu-open > .nav-link:hover{
+.nav-sidebar > .menu-open > .nav-link:focus, 
+.nav-sidebar > .menu-open > .nav-link:hover, .nav-sidebar > .menu-open > .nav-link:active{
     background-color: #1e282c !important; 
-    border-left:4px solid #17a2b8 !important; padding: 8px 8px 8px 13px !important;
+    border-left:4px solid #17a2b8 !important; 
+    padding: 8px 8px 8px 13px !important;
 }
-.nav-sidebar > .nav-item > .router-link-active, .nav-sidebar > .menu-open > .router-link-active{
+
+.nav-sidebar > .nav-item > .router-link-active,
+.nav-sidebar > .menu-open > .nav-link:active{
     background-color: #1e282c !important; 
     border-left:4px solid #17a2b8 !important; 
     padding: 8px 8px 8px 13px !important;
@@ -110,18 +144,21 @@ body{
 
 /*Nav Sidebar - TreeView*/
 .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link{ 
-    border-radius: unset !important; padding: 3px 5px 3px 25px; color:#FFFFFF !important;}
+    border-radius: unset !important; padding: 3px 5px 3px 25px; //color:#FFFFFF !important;
+}
 .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:focus,
 .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:active,
 .nav-sidebar > .nav-item > .nav-treeview> .nav-item > .nav-link:hover{
     background-color: #1e282c !important; 
     border-left:4px solid #17a2b8 !important; 
     padding: 3px 5px 3px 21px !important;}
+
 /*Active TreeView*/
-.nav-sidebar > .nav-treeview > .nav-item > .router-link-active{
+.nav-sidebar > .nav-item > .nav-treeview > .nav-item > .router-link-active{
     background-color: #1e282c !important; 
     border-left:4px solid #17a2b8 !important; 
     padding: 3px 5px 3px 21px !important;
+    color:#ffffff;
 }
 
 
@@ -186,12 +223,17 @@ body{
 .table{border:1px solid #dee2e6 !important;}
 .table > thead{ } /*For background*/
 .table thead th{border-bottom:1px solid #dee2e6 !important;}
-.table th, .table td{border-top:unset !important;}
+.table th, .table td{border-top:unset !important; border-left: 1px solid #dee2e6;}
 //.table th, .table td{border-top:unset !important; border-left:1px solid #dee2e6 !important;}
 //.table th:first-child, .table td:first-child{border-left:unset !important;}
 .table-striped tbody tr:hover{background-color: rgba(0, 0, 0, 0.09);}
 
 
+//sortable title style for table
+.sortable-title{
+    cursor:pointer;
+    text-decoration: underline;
+}
 
 
 

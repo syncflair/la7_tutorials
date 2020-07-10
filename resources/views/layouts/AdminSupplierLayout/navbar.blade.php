@@ -128,8 +128,9 @@
               class="fas fa-th-large"></i></a>
         </li>
 
+        
         <li class="nav-item dropdown">
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ Auth::user()->name }} </a>
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ Auth::guard('supplier')->user()->name }} </a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
               <!-- <li><a href="#" class="dropdown-item"> </a></li> -->
               <li><a href="#" class="dropdown-item"><i class="far fa-user-circle"></i> My Account</a></li>

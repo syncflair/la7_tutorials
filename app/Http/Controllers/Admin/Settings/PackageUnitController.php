@@ -53,8 +53,8 @@ class PackageUnitController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'package_title' => 'required|min:3|max:40',
-            'package_unit' => 'required|min:2|max:10',
+            'package_title' => 'required|min:3|max:40|unique:package_units,package_title',
+            'package_unit' => 'required|min:2|max:10|unique:package_units,package_unit',
         ]);
 
         $data =array();

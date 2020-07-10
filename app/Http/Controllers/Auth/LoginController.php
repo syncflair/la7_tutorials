@@ -106,7 +106,7 @@ class LoginController extends Controller
         if (Auth::attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 4 ])) {
             Auth::logout();
             //return abort(401, 'Your Account is Block now, Please contact with Authority');
-            Session::put('error','Your Account is Block now, Please contact with Authority'); 
+            Session::put('error','Your Account is Not Verified, Please verify from email or contact with Authority'); 
             return redirect()->back(); 
         }
 

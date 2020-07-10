@@ -10,10 +10,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta http-equiv="x-ua-compatible" content="ie=edge">
 
   <title>@yield('title')</title>
- <!-- Styles -->  
-  <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+ 
+  <!-- Styles -->  
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/au_style.css') }}" rel="stylesheet">
 
+  @yield('extra_css')
 
-  @yield('extra_css')	
 </head>

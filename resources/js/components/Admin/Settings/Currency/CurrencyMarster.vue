@@ -13,6 +13,7 @@
             <div class="col-md-6 col-6 text-right">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item active">Settings</li>
                     <li class="breadcrumb-item"><a>Currency</a></li>
                 </ol>
             </div>           

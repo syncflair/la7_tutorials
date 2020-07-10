@@ -1,5 +1,7 @@
 @extends('layouts.AdminCustomerLayout.master_template')
-@section('title', 'Dashboard')
+@section('title')
+  Dashboard | {{ Auth::guard('customer')->user()->name }}
+@endsection
 
 @section('extra_css')
     <!--Extra CSS-->
@@ -112,7 +114,7 @@
                         {{ session('status') }} 
                     </div>
                 @endif
-                {{Auth::guard('client')->user()}}
+                {{Auth::guard('customer')->user()}}
                       
                 Customer Dashboard
             </div>

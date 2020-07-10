@@ -5,6 +5,8 @@ use App\Models\Role;
 use App\Models\UserStatus;
 use Illuminate\Support\Str; //for str::random
 
+use App\Models\Settings\OrganizationInfo;
+
 
 //All of this role id can access in Master Dashboard
 //$RoleId = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 );
@@ -70,6 +72,13 @@ function UploadImageFile($imageFile, $uploadPath, $NewImageName = Null ){
   }
 }
 
+
+//Company Name
+function OrganizationInformation(){
+  //return $AuthUserId = Auth::user()->id;
+   $OrgInfo = OrganizationInfo::where('id', 1 )->select('org_name', 'org_logo','org_url')->first();
+   return $OrgInfo;//->org_name;
+}
 
 
 

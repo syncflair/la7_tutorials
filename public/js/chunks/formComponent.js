@@ -880,6 +880,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 // import { VTooltip, VPopover, VClosePopover } from 'v-tooltip'
 // Vue.config.productionTip = false;
  //for user MapState
@@ -2022,43 +2023,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "row pb-2" }, [
                 _c("div", { staticClass: "col-md-4" }, [
-                  _vm._v("Auto Complete App\r\n\r\n\t\t\t\t\t\t"),
-                  _c(
-                    "button",
-                    {
-                      directives: [
-                        {
-                          name: "tooltip",
-                          rawName: "v-tooltip.auto",
-                          value: {
-                            content: _vm.messageTooltip,
-                            classes: "info"
-                          },
-                          expression:
-                            "{content: messageTooltip, classes:'info'}",
-                          modifiers: { auto: true }
-                        }
-                      ]
-                    },
-                    [_vm._v("Hover me")]
-                  ),
-                  _vm._v(" "),
-                  _c("i", {
-                    directives: [
-                      {
-                        name: "tooltip",
-                        rawName: "v-tooltip.auto",
-                        value: {
-                          content: "this is test Tooltip",
-                          classes: "info"
-                        },
-                        expression:
-                          "{content: 'this is test Tooltip', classes:'info'}",
-                        modifiers: { auto: true }
-                      }
-                    ],
-                    staticClass: "fas fa-info-circle pointer"
-                  })
+                  _vm._v("Auto Complete App\r\n\r\n\t\t\t\t\t\t")
                 ]),
                 _vm._v(" "),
                 _c(

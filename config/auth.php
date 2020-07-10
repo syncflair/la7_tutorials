@@ -47,14 +47,14 @@ return [
             'hash' => false,
         ],
 
-        'client' => [
+        'customer' => [
             'driver' => 'session',
-            'provider' => 'clients',
+            'provider' => 'customers',
         ],
 
-        'client-api' => [
+        'customer-api' => [
             'driver' => 'token',
-            'provider' => 'clients',
+            'provider' => 'customers',
             'hash' => false,
         ],
 
@@ -93,9 +93,10 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-        'clients' => [
+
+        'customers' => [
             'driver' => 'eloquent',
-            'model' => App\Client::class,
+            'model' => App\Customer::class,
         ],
 
         'suppliers' => [
@@ -131,8 +132,8 @@ return [
             'throttle' => 60,
         ],
 
-        'clients' => [
-            'provider' => 'clients',
+        'customers' => [
+            'provider' => 'customers',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

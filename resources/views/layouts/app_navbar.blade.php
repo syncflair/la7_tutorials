@@ -30,7 +30,7 @@
                         @guest
                             
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('client.login' ) }}">{{ __('Customer') }}</a>
+                                <a class="nav-link" href="{{ route('customer.login' ) }}">{{ __('Customer') }}</a>
                             </li>
 
                             <li class="nav-item">
@@ -49,12 +49,12 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
-                                    <!-- {{ Auth::guard('client')->check() }} -->
+                                    <!-- {{ Auth::guard('customer')->check() }} -->
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 
-                                    @if(Auth::guard('client')->check() )
+                                    @if(Auth::guard('customer')->check() )
                                             <a class="dropdown-item" href="{{url('/dashboard-customer' )}}" >
                                                 My Account
                                             </a>
@@ -72,14 +72,14 @@
 
 
 
-                                    @if(Auth::guard('client')->check())
-                                        <a class="dropdown-item" href="{{ route('client.logout') }}"
+                                    @if(Auth::guard('customer')->check())
+                                        <a class="dropdown-item" href="{{ route('customer.logout') }}"
                                            onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit(); ">
-                                            {{ __('Client Logout') }}
+                                            {{ __('customer Logout') }}
                                         </a>
                                    
-                                        <form id="logout-form" action="{{route('client.logout' )}}" method="POST" style="display:none;">
+                                        <form id="logout-form" action="{{route('customer.logout' )}}" method="POST" style="display:none;">
                                             @csrf
                                         </form>
                                     @endif

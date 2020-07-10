@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Validation\ValidationException;
+
 //use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request; //custome 
 use Session;
@@ -32,6 +34,23 @@ class LoginController extends Controller
         return view('AuthSupplier.login');
     }
 
+
+     /**
+     * Get the failed login response instance.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+     //These credentials do not match our records. message display
+    protected function sendFailedLoginResponse(Request $request)
+    {
+        throw ValidationException::withMessages([
+            'username' => [trans('auth.failed')],
+        ]);
+    }
+
      //login using email or phone
     public function username()
     {
@@ -44,9 +63,10 @@ class LoginController extends Controller
         elseif (filter_var($login, FILTER_VALIDATE_EMAIL)) {
             $field = 'email';
         }
-        // else {
-        //     $field = 'username';
-        // }
+        else {
+            //$field = 'username';
+            $field = 'email';            
+        }
         request()->merge([$field => $login]);
         return $field;
     } 
@@ -99,13 +119,13 @@ class LoginController extends Controller
         if ( Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 3 ]) OR Auth::guard('supplier')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 3 ]) ) {
             Auth::guard('supplier')->logout();
             //return abort(401, 'Your Account is Pending now. Please contact with Authority');
-            Session::put('error','Your Account is Pending now. Please contact with Authority'); 
+            Session::put('error','Your Account is Pending now, Please contact with Authority'); 
             return redirect()->back();  
         }
         if ( Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 4 ]) OR Auth::guard('supplier')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 4 ]) ) {
             Auth::guard('supplier')->logout();
             //return abort(401, 'Your Account is Block now, Please contact with Authority');
-            Session::put('error','Your Account is Block now, Please contact with Authority'); 
+            Session::put('error','Your Account is Not Verified, Please verify from email or contact with Authority'); 
             return redirect()->back(); 
         }
         

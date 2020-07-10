@@ -24,30 +24,35 @@ Route::get('email-chek', function () {
    // return view('auth.login'); //redirect to login page    
 });
 
-//Clients Route
-Route::get('client/login', 'AuthClient\LoginController@showLoginForm')->name('client.login');
-Route::post('client/login', 'AuthClient\LoginController@login')->name('client.login');
-Route::get('client/register', 'AuthClient\RegisterController@showRegisterForm')->name('client.register');
-Route::post('client/register', 'AuthClient\RegisterController@register')->name('client.register');
-// Password Reset Routes for clients
-Route::get('client/password/reset','AuthClient\ForgotPasswordController@showLinkRequestForm')->name('client.password.request');
-Route::post('client/password/email','AuthClient\ForgotPasswordController@sendResetLinkEmail')->name('client.password.email');
-Route::get('client/password/reset/{token}','AuthClient\ResetPasswordController@showResetForm')->name('client.password.reset');
-Route::post('client/password/reset','AuthClient\ResetPasswordController@reset')->name('client.password.update');
+Route::get('email-temp', function () {
+   return view('layouts.EmailLayoutConfirmation.email_master');  
+});
+
+//customers Route
+Route::get('customer/login', 'AuthCustomer\LoginController@showLoginForm')->name('customer.login');
+Route::post('customer/login', 'AuthCustomer\LoginController@login')->name('customer.login');
+Route::get('customer/register', 'AuthCustomer\RegisterController@showRegisterForm')->name('customer.register');
+Route::post('customer/register', 'AuthCustomer\RegisterController@register')->name('customer.register');
+Route::get('/customer/verify/{token}', 'AuthCustomer\RegisterController@verifyUser'); //customer verification route 
+// Password Reset Routes for customers
+Route::get('customer/password/reset','AuthCustomer\ForgotPasswordController@showLinkRequestForm')->name('customer.password.request');
+Route::post('customer/password/email','AuthCustomer\ForgotPasswordController@sendResetLinkEmail')->name('customer.password.email');
+Route::get('customer/password/reset/{token}','AuthCustomer\ResetPasswordController@showResetForm')->name('customer.password.reset');
+Route::post('customer/password/reset','AuthCustomer\ResetPasswordController@reset')->name('customer.password.update');
 
 //Suppliers Route
 Route::get('supplier/login', 'AuthSupplier\LoginController@showLoginForm')->name('supplier.login');
 Route::post('supplier/login', 'AuthSupplier\LoginController@login')->name('supplier.login');
-// Password Reset Routes for clients
+// Password Reset Routes for customers
 Route::get('supplier/password/reset','AuthSupplier\ForgotPasswordController@showLinkRequestForm')->name('supplier.password.request');
 Route::post('supplier/password/email','AuthSupplier\ForgotPasswordController@sendResetLinkEmail')->name('supplier.password.email');
 Route::get('supplier/password/reset/{token}','AuthSupplier\ResetPasswordController@showResetForm')->name('supplier.password.reset');
 Route::post('supplier/password/reset','AuthSupplier\ResetPasswordController@reset')->name('supplier.password.update');
 
 
-Route::group(['middleware'=>['AdminCustomer','auth:client'] ], function(){
+Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
    Route::get('/dashboard-customer', 'AdminCustomer\AdminCustomerController@index')->name('dashboard-customer');
-   Route::post('client/logout', 'AuthClient\LoginController@logout')->name('client.logout');
+   Route::post('customer/logout', 'AuthCustomer\LoginController@logout')->name('customer.logout');
 });
 
 Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
@@ -60,6 +65,7 @@ Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
 
 Route::get('confirmation', function () { return view('auth.confirmation'); });  //confirmation page
 /**************************************** Auth routes *************************************************/
+//Route::get('login123', 'Auth\LoginController@showLoginForm')->name('login');
 //Auth::routes(); //Default Laravel
 //Auth::routes(['register' => false ]); //disable Register route. No one can register to this site any more.
 Auth::routes([
@@ -71,6 +77,7 @@ Auth::routes([
 
 /**************************************** Admin middleware *****************************************************/
 Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], function() {
+
   // Route::fallback(function() {
   //     return response()->json(['message' => 'Not Found!'], 404);
   // });
@@ -86,8 +93,25 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
   Route::resource('permission', 'Admin\AuthManagement\PermissionController');
 
     /*********************************************Vue Route****************************************************/
+    
+
+    //Customer control Route For Admin Dashboard
+    Route::get('spa/searchCustomerData', 'Admin\Customer\CustomerController@search'); //search
+    Route::post('spa/customer-change-notify/{id}/{notifyValue}', 'Admin\Customer\CustomerController@ChangeNotify');
+    Route::post('spa/customer-verify-by-admin/{id}', 'Admin\Customer\CustomerController@verifiedByUser');
+    Route::resource('spa/customer-Info', 'Admin\Customer\CustomerController',
+      ['except'=>['create','show','edit'] ]);
+
+    //Supplier control Route For Admin Dashboard
+    // Route::resource('spa/supplier-Info', 'Admin\Supplier\SupplierController',
+    //  ['except'=>['create','show','edit'] ]);
 
 
+
+
+    //Settings Rute
+    Route::resource('spa/user-status-info', 'Admin\Settings\UserStatusController',
+      ['except'=>['create','show','edit'] ]);
     Route::resource('spa/OrgInfo', 'Admin\Settings\OrganizationInfoController', 
       ['except'=>['index','create','store','show','destroy'] ]);
     Route::resource('spa/Branch-Info', 'Admin\Settings\BranchInfoController', 
@@ -102,9 +126,15 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
       ['except'=>['create','show','edit'] ]);
     Route::resource('spa/PackageUnit-Info', 'Admin\Settings\PackageUnitController', 
       ['except'=>['create','show','edit'] ]);
+    Route::resource('spa/VatRate-Info', 'Admin\Settings\VatRateController', 
+      ['except'=>['create','show','edit'] ]);
+    Route::get('spa/searchCountryData', 'Admin\Settings\CountryController@search'); //search
+    Route::resource('spa/Country-Info', 'Admin\Settings\CountryController', 
+      ['except'=>['create','show','edit'] ]);
 
 
 
+    //Start Demo
     Route::get('spa/unactive-category/{id}', 'Admin\Category\CategoryController@unactiveCategory');
     Route::get('spa/active-category/{id}', 'Admin\Category\CategoryController@activeCategory');
     Route::get('spa/search-category', 'Admin\Category\CategoryController@searchCategory');
@@ -120,16 +150,14 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/product', 'Admin\Product\ProductController', 
         ['except'=>['edit','show','create','store','update'] ]);   
 
-
     //testing route
     Route::post('spa/save-multi-field', 'Admin\MultiComponent\MultiComponentController@saveMultiField');
     Route::get('spa/testQuery', 'Admin\MultiComponent\MultiComponentController@testQuery');
     Route::get('spa/searchCategoryData', 'Admin\MultiComponent\MultiComponentController@searchCategoryData');
     Route::get('spa/getCatList/{id}', 'Admin\MultiComponent\MultiComponentController@CategoryListById');
     Route::resource('spa/MultiComponent', 'Admin\MultiComponent\MultiComponentController'); 
-    /**********************************************End Vue Route *************************************************/
-
-    
+    //End Deomo
+    /**********************************************End Vue Route *************************************************/   
  
 
     // Vue: single page application (SPA)- Any route that not match that redirect to dashboard. combine vue route and laravel rourte. Best way place this route to last of the line    
@@ -209,8 +237,8 @@ Route::group(['middleware'=>['GuestUser','auth','verified'] ], function(){
 
 
 
-Route::get('/supplier', function () { return view('layouts.AdminSupplierLayout.master_template'); });
-Route::get('/customer', function () { return view('layouts.AdminCustomerLayout.master_template'); });
+// Route::get('/supplier', function () { return view('layouts.AdminSupplierLayout.master_template'); });
+// Route::get('/customer', function () { return view('layouts.AdminCustomerLayout.master_template'); });
 
 
 

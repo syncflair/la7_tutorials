@@ -51,8 +51,8 @@ class LengthUnitController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'length_title' => 'required|min:3|max:40',
-            'length_unit' => 'required|min:1|max:8',
+            'length_title' => 'required|min:3|max:40|unique:length_units,length_title',
+            'length_unit' => 'required|min:1|max:8|unique:length_units,length_unit',
         ]);
 
         $data =array();

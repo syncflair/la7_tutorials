@@ -10,8 +10,6 @@ require('./bootstrap');
 window.Vue = require('vue');
 Vue.config.productionTip = false //turn on production mode Remove when upload to public
 
-/*Vuetify (not install now)*/
-//import vuetify from './VueVuetify'
 
 /*VueProgressBar*/
 import VueProgressBar from 'vue-progressbar'
@@ -48,6 +46,7 @@ Vue.component('pagination-app', () => import(/* webpackChunkName: "pagination-ap
 Vue.component('switch-app', () => import(/* webpackChunkName: "switch-app" */'./components/Admin/GlobalComponents/switch-app.vue'));
 Vue.component('multi-select-app', () => import(/* webpackChunkName: "multi-select-app" */'./components/Admin/GlobalComponents/multi-select-app.vue'));
 Vue.component('auto-complete-app', () => import(/* webpackChunkName: "auto-complete-app" */'./components/Admin/GlobalComponents/auto-complete-app.vue'));
+Vue.component('search-app-one', () => import(/* webpackChunkName: "search-app-one" */'./components/Admin/GlobalComponents/search-app-one.vue'));
 
 
 import counttest from './components/Admin/MultiComponent/countTest.vue';

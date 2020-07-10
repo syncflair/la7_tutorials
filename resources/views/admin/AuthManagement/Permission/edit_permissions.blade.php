@@ -1,4 +1,4 @@
-@extends('layouts.master_adminlte')
+@extends('layouts.AdminLayout.master_adminlte')
 @section('title') Edit {{ ucfirst(\Request::segment(1)) }} @endsection
 
 @section('extra_css')

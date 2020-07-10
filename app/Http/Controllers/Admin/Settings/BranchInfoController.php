@@ -49,7 +49,7 @@ class BranchInfoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'branch_name' => 'required|min:3|max:100',
+            'branch_name' => 'required|min:3|max:100|unique:branch_info,branch_name',
         ]);
 
         $data =array();
@@ -109,7 +109,7 @@ class BranchInfoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'branch_name' => 'required|min:3|max:100',
+            'branch_name' => 'required|min:3|max:100|unique:branch_info,branch_name,'.$id,
         ]);
 
         $data =array();

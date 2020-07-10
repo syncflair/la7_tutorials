@@ -130,7 +130,7 @@ class OrganizationInfoController extends Controller
                 //save image using intervention image
                 \Image::make($image)
                     ->resize(200, 200)
-                    ->text('SHORBORAHO', 140, 190)
+                    //->text('SHORBORAHO', 140, 190)
                     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
 
                 $data['org_logo'] = 'FilesStorage/Backend/Settings/'.$imageName;

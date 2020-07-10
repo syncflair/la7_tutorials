@@ -18,12 +18,12 @@ class AdminCustomerMiddleware
     public function handle($request, Closure $next)
     {
        //my Custome Code
-         /*client type = 1 for customer*/
-        //if (Auth::guard('client')->check() && Auth::guard('client')->user()->clientType->id ==1) {
-        if (Auth::guard('client')->check() ) {
+         /*customer type = 1 for customer*/
+        //if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->customerType->id ==1) {
+        if (Auth::guard('customer')->check() ) {
             return $next($request);
         }else{
-            return redirect()->route('client.login');
+            return redirect()->route('customer.login');
         }
         
     }

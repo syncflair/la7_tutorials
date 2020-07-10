@@ -2,9 +2,9 @@
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{{ URL::to('/dashboard') }}" class="brand-link">
-      <img src="{{ asset('backend/AdminLTE/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="{{ asset('FilesStorage/CommonFiles/favicon.png') }}" alt="Sorboraho Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light orange">SORBORAHO</span>
+      <span class="brand-text font-weight-light orange"> {{ OrganizationInformation()->org_name }}</span>
     </a>
 
     <!-- Sidebar -->
@@ -13,7 +13,7 @@
       <div class="user-panel pl-2 mt-2 pb-2 mb-1 d-flex">
         <div class="image">
           @if(!empty( UserAvatar() ))
-            <img src="{{asset( UserAvatar() ) }}" class="img-circle elevation-2" alt="User Image">
+            <img src="{{asset( UserAvatar() ) }}" class="img-circle elevation-2" alt="User Image">           
           @else
             <img src="{{asset('FilesStorage/CommonFiles/avatar.png')}}" class="img-circle elevation-2" alt="User Image">
           @endif
@@ -33,43 +33,205 @@
           <li class="nav-item">
             <!-- {{ Request::is('dashboard*') ? 'active' : '' }} -->
             <a href="{{URL::to('/dashboard')}}" class="nav-link {{Request::is('dashboard*') ? 'router-link-active' : '' }}">
-              <i class="nav-icon fas fa-tachometer-alt"></i> 
+              <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
           </li>
 
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+             <i class="nav-icon fas fa-tags"></i>
+              <p>
+                Catalog
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">6</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <router-link to="/spa/Products" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Products
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/Categories" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Category
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/Category-demo" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Category Demo
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/reviews" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Reviews
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/spa/GiftVoucher" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Gift Vouchers
+                  </p>
+                </router-link>
+              </li>
+
+            </ul>
+          </li><!--/Catalog-->
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-cart-plus"></i>
+              <p>
+                Sales
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">6</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to="/spa/orders" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Orders
+                  </p>
+                </router-link>
+              </li>
+
+
+              <li class="nav-item">
+                <router-link to="/spa/completed-orders" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Completed Orders
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/delivery-line" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Delivery Line
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/returns" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    returns
+                  </p>
+                </router-link>
+              </li>
+
+              
+            </ul>
+          </li><!--/Sales-->
+
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-store-alt"></i>
+              <p>
+                Purchase
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">6</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <router-link to="/spa/Purchase" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    PUrchase
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/Store" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Store
+                  </p>
+                </router-link>
+              </li>
+
+            </ul>
+          </li><!--/Purchase-->
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
+                Customers
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">6</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <router-link to="/spa/Customers" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Customers
+                  </p>
+                </router-link>
+              </li>
+
+            </ul>
+          </li><!--/customer-->
+
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user-friends info-"></i>
+              <p>
+                Suppliers
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">6</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <router-link :to="{name: 'Suppliers', params:{} }" class="nav-link">
+                <!-- <router-link to="/spa/Parties" class="nav-link">            -->
+                  <i class="nav-icon fas fa-user-friends"></i>
+                  <p>
+                    Suppliers
+                    <span class="right badge badge-danger">New</span>
+                  </p>
+                </router-link>
+              </li>
+
+            </ul>
+          </li> <!--/Suppliers-->         
+
           
-
-          <li class="nav-item">
-             <router-link :to="{name: 'Parties', params:{} }" class="nav-link">
-            <!-- <router-link to="/spa/Parties" class="nav-link">            -->
-              <i class="nav-icon fas fa-user-friends"></i>
-              <p>
-                Parties
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </router-link>
-          </li>
-
-          <li class="nav-item">
-            <router-link to="/spa/Categories" class="nav-link">
-              <i class="nav-icon fas fa-boxes"></i>
-              <p>
-                Category
-              </p>
-            </router-link>
-          </li>
-
-          <li class="nav-item">
-            <router-link to="/spa/Items" class="nav-link">
-              <i class="nav-icon fas fa-boxes"></i>
-              <p>
-                Items
-              </p>
-            </router-link>
-          </li>
 
 
           <li class="nav-item has-treeview">
@@ -103,57 +265,9 @@
             </ul>
           </li>
 
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <!--<i class="nav-icon fas fa-copy"></i>-->
-              <i class="nav-icon fas fa-file-invoice-dollar info"></i>
-              <p>
-                Sale
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Sales Invoice</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Quotation</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Payment In</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Sales order</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Delivery Challan</p>
-                </a>
-              </li>
+          
 
-              <li class="nav-item">
-                <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Sales Return</p>
-                </a>
-              </li>
 
-            </ul>
-          </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <!--<i class="nav-icon fas fa-chart-pie"></i>-->
@@ -300,6 +414,27 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+              
+             <!--  <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-cogs yellow"></i>
+                  <p>
+                    Localization
+                    <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <router-link to="/spa/OrganizationInfo" class="nav-link">
+                      <i class="nav-icon fas fa-info-circle"></i>
+                      <p>
+                        Organization Info
+                      </p>
+                    </router-link>
+                  </li>
+                </ul>
+              </li> -->
+
 
               <li class="nav-item">
                 <router-link to="/spa/OrganizationInfo" class="nav-link">
@@ -366,25 +501,35 @@
                 </router-link>
               </li>
 
+              <li class="nav-item">
+                <router-link to="/spa/UserStatus" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    User Status
+                  </p>
+                </router-link>
+              </li>
 
               <li class="nav-item">
-                <a href="pages/forms/general.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Generel</p>
-                </a>
+                <router-link to="/spa/VatRate" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Vat Rate
+                  </p>
+                </router-link>
               </li>
+
               <li class="nav-item">
-                <a href="pages/forms/advanced.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Item</p>
-                </a>
+                <router-link to="/spa/CountryMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Country
+                  </p>
+                </router-link>
               </li>
-              <li class="nav-item">
-                <a href="pages/forms/editors.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Prefix</p>
-                </a>
-              </li>
+
+
+             
             </ul>
           </li>
 

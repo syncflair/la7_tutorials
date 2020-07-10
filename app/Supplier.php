@@ -22,7 +22,7 @@ class Supplier extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'password', 'supplier_type', 'status_id','avatar','supplier_desc','supplier_address','created_by','updated_by'
+        'name', 'email', 'phone', 'password', 'supplier_type', 'status_id','avatar','supplier_desc','supplier_address','created_by','updated_by', 'email_verification_code','phone_verification_code'
     ];
 
 
@@ -48,7 +48,7 @@ class Supplier extends Authenticatable
  
     public function UserStatus(){
         //return $this->belongsTo('App\Models\UserStatus');
-        return $this->belongsTo(Models\UserStatus::class);
+        return $this->belongsTo(Models\Settings\UserStatus::class);
     }
 
 

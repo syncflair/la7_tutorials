@@ -35,8 +35,9 @@
 				<div class="row pb-2">
 					<div class="col-md-4">Auto Complete App
 
-						<button v-tooltip.auto="{content: messageTooltip, classes:'info'}">Hover me</button>
-						<i class="fas fa-info-circle pointer" v-tooltip.auto="{content: 'this is test Tooltip', classes:'info'}" ></i>
+						<!-- <button v-tooltip.auto="{content: messageTooltip, classes:'info'}">Hover me</button>
+						<i class="fas fa-info-circle pointer" v-tooltip.auto="{content: 'this is test Tooltip', classes:'info'}" ></i> -->
+						
 					</div>
 					<div class="col-md-8">					
 						<auto-complete-app

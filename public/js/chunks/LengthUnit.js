@@ -53,6 +53,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -499,6 +500,10 @@ var staticRenderFns = [
           _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
             _c("li", { staticClass: "breadcrumb-item active" }, [
               _vm._v("Dashboard")
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "breadcrumb-item active" }, [
+              _vm._v("Settings")
             ]),
             _vm._v(" "),
             _c("li", { staticClass: "breadcrumb-item" }, [

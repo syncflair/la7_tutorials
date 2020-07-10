@@ -16,10 +16,10 @@ class CreateCountriesTable extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('country_name',100)->unique();
-            $table->string('iso_2',5)->nullable();
-            $table->string('iso_3',5)->nullable();
-            $table->string('phone_code',5)->nullable();
-            $table->string('currency',10)->nullable();
+            $table->string('iso_2',5)->unique()->nullable();
+            $table->string('iso_3',5)->unique()->nullable();
+            $table->string('phone_code',5)->unique()->nullable();
+            $table->string('currency',10)->unique()->nullable();
             $table->string('country_flag',255)->nullable();            
             $table->unsignedBigInteger('created_by')->nullable()->comment('Created by User');  
             $table->unsignedBigInteger('updated_by')->nullable()->comment('Updated by User'); 

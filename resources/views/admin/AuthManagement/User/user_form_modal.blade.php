@@ -60,7 +60,7 @@
 		            <div class="col-sm-10">
 		              <select class="form-control" id="status_id" name="status_id" required->
 		              	<option value="">Select Status ..</option>
-		              	@foreach( \App\Models\UserStatus::all() as $UserStatus)	                  
+		              	@foreach( \App\Models\Settings\UserStatus::all() as $UserStatus)	                  
 		                  <option value="{{ $UserStatus->id }}">{{ $UserStatus->us_name }} </option>
 		                  <!--<option value="{{ $UserStatus->id }}" @if($UserStatus->id == @$user->status_id) selected @endif>{{ $UserStatus->us_name }} </option>-->
 		                 @endforeach
