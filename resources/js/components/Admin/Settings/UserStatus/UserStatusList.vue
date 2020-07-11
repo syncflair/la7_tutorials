@@ -9,7 +9,7 @@
       </div>
     </div><!--/card-header-->
     <div class="card-body">   
-      <table class="table table-striped table-sm">
+      <table class="table table-striped table-sm table-responsive-">
         <thead>
           <tr>
             <!-- <th style="">#</th> -->
@@ -22,7 +22,7 @@
         <tbody>
           <tr v-for="(u_status, index) in UserStatus" :key="index">
             <!-- <td > id</td> -->
-            <td scope="col"> {{ u_status.us_name }} </td>
+            <td scope="col" class="text-bold green"> {{ u_status.us_name }} </td>
              
             <td > {{u_status.us_desc}} </td>
 

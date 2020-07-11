@@ -20,9 +20,17 @@ class VatRateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = VatRate::get();
+
+        if(!empty($request->perPage)){
+            $perPage = $request->perPage;
+        }else{
+            $perPage = 20;
+        }
+
+        $data = VatRate::paginate($perPage);
+        //$data = VatRate::All();
         return response()->json($data);
     }
 
@@ -67,8 +75,6 @@ class VatRateController extends Controller
 
         VatRate::create($data);         
         return response()->json(['success'=>'Vat Rate added successfully.']); 
-
-
     }
 
     /**
@@ -142,5 +148,39 @@ class VatRateController extends Controller
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
+    }
+
+    public function search(Request $request){
+
+        if(!empty($request->perPage)){
+            $perPage = $request->perPage;
+        }else{
+            $perPage = 50;
+        }
+
+        $searchKey = $request->q;
+        $searchOption = $request->so;
+
+        if(!empty($searchKey) && empty($searchOption)){
+        //if($search = \Request::get('q')){
+            $searchResult = VatRate::where(function($query) use ($searchKey){
+                $query->where('vat_name','LIKE','%'.$searchKey.'%')
+                        ->orWhere('.vat_code','LIKE','%'.$searchKey.'%')
+                        ->orWhere('vat_rate','LIKE','%'.$searchKey.'%')
+                        ->orWhere('vat_type','LIKE','%'.$searchKey.'%');
+            })->paginate($perPage);
+
+        }elseif(!empty($searchKey) && !empty($searchOption)){
+            $searchResult = VatRate::where(function($query) use ($searchKey, $searchOption){
+                $query->where( $searchOption,'LIKE','%'.$searchKey.'%');
+            })->paginate($perPage);
+            
+        }else{
+            //$searchResult = VatRate::latest()->paginate(10);
+            $searchResult = VatRate::paginate($perPage);
+        }
+
+        //return $searchResult;
+        return response()->json($searchResult);
     }
 }

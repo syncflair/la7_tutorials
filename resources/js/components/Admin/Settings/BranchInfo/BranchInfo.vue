@@ -9,8 +9,8 @@
     <!-- Card Header -->
     <div class="card-header">            
         <div class="row">
-        	<div class="col-md-6 col-6 text-left"><h5>Branch Information</h5></div>
-            <div class="col-md-6 col-6 text-right">
+        	<div class="col-md-6 col-sm-6 text-left"><h5>Branch Information</h5></div>
+            <div class="col-md-6 col-sm-6 text-right">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item active">Dashboard</li>
                     <li class="breadcrumb-item active">Settings</li>
@@ -42,8 +42,10 @@
 </template>
 
 <script>
-	import BranchList from './BranchList.vue'
-	import BranchForm from './BranchForm.vue'
+	// import BranchList from './BranchList.vue'
+	// import BranchForm from './BranchForm.vue'
+    const BranchList = () => import( /* webpackChunkName: "BranchList-com" */ './BranchList') 
+    const BranchForm = () => import( /* webpackChunkName: "BranchForm-com" */ './BranchForm')
 
 	export default {
 	    name: "BranchInfo",

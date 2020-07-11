@@ -108,12 +108,17 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 
 
 
+    //Accounting
+    Route::get('spa/searcChartOfAccountsData', 'Admin\Accounting\ChartOfAccountsController@search'); //search
+    Route::resource('spa/ChartOfAccounts-Info', 'Admin\Accounting\ChartOfAccountsController', 
+      ['except'=>['create','show','edit'] ]);
 
     //Settings Rute
     Route::resource('spa/user-status-info', 'Admin\Settings\UserStatusController',
       ['except'=>['create','show','edit'] ]);
     Route::resource('spa/OrgInfo', 'Admin\Settings\OrganizationInfoController', 
       ['except'=>['index','create','store','show','destroy'] ]);
+    Route::get('spa/searhBaranchInfoData', 'Admin\Settings\BranchInfoController@search'); //search
     Route::resource('spa/Branch-Info', 'Admin\Settings\BranchInfoController', 
       ['except'=>['create','show','edit'] ]);
     Route::resource('spa/Currency-Info', 'Admin\Settings\CurrencyController', 
@@ -126,7 +131,13 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
       ['except'=>['create','show','edit'] ]);
     Route::resource('spa/PackageUnit-Info', 'Admin\Settings\PackageUnitController', 
       ['except'=>['create','show','edit'] ]);
+    Route::get('spa/searchVatRateData', 'Admin\Settings\VatRateController@search'); //search
     Route::resource('spa/VatRate-Info', 'Admin\Settings\VatRateController', 
+      ['except'=>['create','show','edit'] ]);
+    Route::get('spa/searchStatusMasterData', 'Admin\Settings\StatusMasterController@search'); //search
+    Route::resource('spa/StatusMaster-Info', 'Admin\Settings\StatusMasterController', 
+      ['except'=>['create','show','edit'] ]);
+    Route::resource('spa/PaymentMethod-Info', 'Admin\Settings\PaymentMethodController', 
       ['except'=>['create','show','edit'] ]);
     Route::get('spa/searchCountryData', 'Admin\Settings\CountryController@search'); //search
     Route::resource('spa/Country-Info', 'Admin\Settings\CountryController', 

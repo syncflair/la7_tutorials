@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/chunks/" + ({"BranchInfo":"BranchInfo","Categories":"Categories","Category-demo":"Category-demo","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","Customers":"Customers","Dashboard":"Dashboard","GiftVoucher":"GiftVoucher","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","Multicomponent":"Multicomponent","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","Products":"Products","Purchase":"Purchase","Returns":"Returns","Reviews":"Reviews","Store":"Store","Suppliers":"Suppliers","UserStatus":"UserStatus","VatRate":"VatRate","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","adminwrapper":"adminwrapper","pagination-app":"pagination-app","vendors~NotFound~auto-complete-app~formComponent~multi-select-app~search-app-one~switch-app":"vendors~NotFound~auto-complete-app~formComponent~multi-select-app~search-app-one~switch-app","NotFound":"NotFound","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","search-app-one":"search-app-one","switch-app":"switch-app","formBox":"formBox","searchBox":"searchBox"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "js/chunks/" + ({"BranchInfo":"BranchInfo","Categories":"Categories","Category-demo":"Category-demo","ChartOfAccounts":"ChartOfAccounts","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","Customers":"Customers","Dashboard":"Dashboard","GiftVoucher":"GiftVoucher","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","Multicomponent":"Multicomponent","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","PaymentMethod":"PaymentMethod","Products":"Products","Purchase":"Purchase","Returns":"Returns","Reviews":"Reviews","StatusMaster":"StatusMaster","Store":"Store","Suppliers":"Suppliers","UserStatus":"UserStatus","VatRate":"VatRate","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","adminwrapper":"adminwrapper","pagination-app":"pagination-app","vendors~NotFound~auto-complete-app~formComponent~multi-select-app~search-app-one~switch-app":"vendors~NotFound~auto-complete-app~formComponent~multi-select-app~search-app-one~switch-app","NotFound":"NotFound","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","search-app-one":"search-app-one","switch-app":"switch-app","BranchForm-com":"BranchForm-com","BranchList-com":"BranchList-com","ChartOfAccountsForm-com":"ChartOfAccountsForm-com","ChartOfAccountsList-com":"ChartOfAccountsList-com","CountryForm-com":"CountryForm-com","CountryList-com":"CountryList-com","CurrencyForm-com":"CurrencyForm-com","CurrencyList-com":"CurrencyList-com","LanguageForm-com":"LanguageForm-com","LanguageList-com":"LanguageList-com","LengthUnitForm-com":"LengthUnitForm-com","LengthUnitList-com":"LengthUnitList-com","formBox":"formBox","searchBox":"searchBox","PackageUnitForm-com":"PackageUnitForm-com","PackageUnitList-com":"PackageUnitList-com","PaymentMethodForm-com":"PaymentMethodForm-com","PaymentMethodList-com":"PaymentMethodList-com","StatusMasterForm-com":"StatusMasterForm-com","StatusMasterList-com":"StatusMasterList-com","UserStatusForm-com":"UserStatusForm-com","UserStatusList-com":"UserStatusList-com","VatRateForm-com":"VatRateForm-com","VatRateList-com":"VatRateList-com","WeightUnitForm-com":"WeightUnitForm-com","WeightUnitList-com":"WeightUnitList-com"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -107875,6 +107875,16 @@ var routes = [//export const routes = [
   meta: {
     title: 'Vuex Form Component'
   }
+}, //Accounting
+{
+  path: '/spa/ChartOfAccounts',
+  name: 'ChartOfAccounts',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | ChartOfAccounts */ "ChartOfAccounts").then(__webpack_require__.bind(null, /*! ./components/Admin/Accounting/COA/ChartOfAccounts.vue */ "./resources/js/components/Admin/Accounting/COA/ChartOfAccounts.vue"));
+  },
+  meta: {
+    title: 'Chart Of Accounts'
+  }
 }, //settings
 {
   path: '/spa/OrganizationInfo',
@@ -107958,6 +107968,24 @@ var routes = [//export const routes = [
     title: 'User Status Master'
   }
 }, {
+  path: '/spa/StatusMaster',
+  name: 'StatusMaster',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | StatusMaster */ "StatusMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/StatusMaster/StatusMaster.vue */ "./resources/js/components/Admin/Settings/StatusMaster/StatusMaster.vue"));
+  },
+  meta: {
+    title: 'Status  Master'
+  }
+}, {
+  path: '/spa/PaymentMethod',
+  name: 'PaymentMethod',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | PaymentMethod */ "PaymentMethod").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/PaymentMethod/PaymentMethod.vue */ "./resources/js/components/Admin/Settings/PaymentMethod/PaymentMethod.vue"));
+  },
+  meta: {
+    title: 'Payment Method Master'
+  }
+}, {
   path: '/spa/CountryMaster',
   name: 'CountryMaster',
   component: function component() {
@@ -108002,8 +108030,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_CategoryStore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/CategoryStore */ "./resources/js/store/CategoryStore.js");
 /* harmony import */ var _store_ProductStore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/ProductStore */ "./resources/js/store/ProductStore.js");
 /* harmony import */ var _store_PartieStore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/PartieStore */ "./resources/js/store/PartieStore.js");
-/* harmony import */ var _store_CountryStore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/CountryStore */ "./resources/js/store/CountryStore.js");
-/* harmony import */ var _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store/CustomerForAdminStore */ "./resources/js/store/CustomerForAdminStore.js");
+/* harmony import */ var _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/CustomerForAdminStore */ "./resources/js/store/CustomerForAdminStore.js");
+/* harmony import */ var _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store/ChartOfAccounts */ "./resources/js/store/ChartOfAccounts.js");
+/* harmony import */ var _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store/BranchInfoStore */ "./resources/js/store/BranchInfoStore.js");
+/* harmony import */ var _store_CountryStore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store/CountryStore */ "./resources/js/store/CountryStore.js");
+/* harmony import */ var _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./store/VatRatesStore */ "./resources/js/store/VatRatesStore.js");
+/* harmony import */ var _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./store/StatusMasterStore */ "./resources/js/store/StatusMasterStore.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]); //import all Modules here from store folder
@@ -108011,6 +108043,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 //const commonStoreForAll = () => import( /* webpackChunkName: "commonStoreForAll-VX" */ './store/commonStoreForAll') 
 
 
+
+
+
+ //Accounting
+
+ //Settings
 
 
 
@@ -108022,8 +108060,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     CategoryStore: _store_CategoryStore__WEBPACK_IMPORTED_MODULE_3__["default"],
     ProductStore: _store_ProductStore__WEBPACK_IMPORTED_MODULE_4__["default"],
     PartieStore: _store_PartieStore__WEBPACK_IMPORTED_MODULE_5__["default"],
-    CountryStore: _store_CountryStore__WEBPACK_IMPORTED_MODULE_6__["default"],
-    CustomerForAdminStore: _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_7__["default"]
+    CustomerForAdminStore: _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_6__["default"],
+    //Accounting
+    ChartOfAccounts: _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_7__["default"],
+    //Settings
+    BranchInfoStore: _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_8__["default"],
+    CountryStore: _store_CountryStore__WEBPACK_IMPORTED_MODULE_9__["default"],
+    VatRatesStore: _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_10__["default"],
+    StatusMasterStore: _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_11__["default"]
   }
 }));
 
@@ -108368,6 +108412,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/store/BranchInfoStore.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/BranchInfoStore.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var BranchInfoStore = {
+  namespaced: true,
+  state: function state() {
+    return {
+      //accessable from any where 
+      branches: {},
+      pagination: {
+        current_page: 1,
+        per_page: 0
+      },
+      autoCompleteData: {}
+    };
+  },
+
+  /*end state*/
+  getters: {},
+
+  /*end getters*/
+  mutations: {
+    //return data to state
+    FETCH_DATA: function FETCH_DATA(state, branches) {
+      return state.branches = branches;
+    },
+    FATCH_PAGINATION: function FATCH_PAGINATION(state, pagination) {
+      return state.pagination = pagination;
+    },
+    AUTO_COMPLETE_DATA: function AUTO_COMPLETE_DATA(state, data) {
+      return state.autoCompleteData = data;
+    }
+  },
+
+  /*end Mutations*/
+  actions: {
+    fetchData: function fetchData(context, payload) {
+      var perPageVelue;
+
+      if (!payload) {
+        perPageVelue = 10;
+      } else {
+        perPageVelue = payload;
+      }
+
+      axios.get('/spa/Branch-Info?page=' + context.state.pagination.current_page + '&perPage=' + perPageVelue).then(function (response) {
+        context.commit('FETCH_DATA', response.data.data); //use for only show data
+
+        context.commit('FATCH_PAGINATION', response.data); //for pagination
+        //console.log(response.data);
+      })["catch"](function () {//toastr.warning('Something is wrong!');
+      });
+    },
+    //For Search
+    searching: function searching(context, payload) {
+      var searchKey = payload.search_key;
+      var searchOption = payload.search_option; //alert(query2);
+
+      axios.get('/spa/searhBaranchInfoData?page=' + context.state.pagination.current_page + '&perPage=' + context.state.pagination.per_page + '&q=' + searchKey + '&so=' + searchOption) //axios.get('/spa/searhBaranchInfoData?q='+query)
+      .then(function (response) {
+        context.commit('FETCH_DATA', response.data.data);
+        context.commit('FATCH_PAGINATION', response.data); //for pagination                                       
+      })["catch"](function () {});
+    },
+    //For Search
+    AutoCompleteSearch: function AutoCompleteSearch(context, payload) {
+      var query = payload; //let query2 = payload.key2; 
+
+      axios.get('/spa/searhBaranchInfoData?&q=' + query) //axios.get('/spa/searhBaranchInfoData?q='+query)
+      .then(function (response) {
+        context.commit('AUTO_COMPLETE_DATA', response.data.data); //this.categories = response.data; // is an object... use when pagination                                         
+      })["catch"](function () {});
+    }
+  }
+  /*end actions*/
+
+};
+/* harmony default export */ __webpack_exports__["default"] = (BranchInfoStore);
+
+/***/ }),
+
 /***/ "./resources/js/store/CategoryStore.js":
 /*!*********************************************!*\
   !*** ./resources/js/store/CategoryStore.js ***!
@@ -108515,6 +108646,96 @@ var CategoryStore = {
 
 };
 /* harmony default export */ __webpack_exports__["default"] = (CategoryStore);
+
+/***/ }),
+
+/***/ "./resources/js/store/ChartOfAccounts.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/ChartOfAccounts.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var ChartOfAccounts = {
+  namespaced: true,
+  state: function state() {
+    return {
+      //accessable from any where 
+      ChartOfAccounts: {},
+      pagination: {
+        current_page: 1,
+        per_page: 0
+      },
+      autoCompleteData: {}
+    };
+  },
+
+  /*end state*/
+  getters: {},
+
+  /*end getters*/
+  mutations: {
+    //return data to state
+    FETCH_DATA: function FETCH_DATA(state, ChartOfAccounts) {
+      return state.ChartOfAccounts = ChartOfAccounts;
+    } // FATCH_PAGINATION(state, pagination){
+    //     return state.pagination = pagination;  
+    // },
+    // AUTO_COMPLETE_DATA(state, data){
+    //     return state.autoCompleteData = data;  
+    // }
+
+  },
+
+  /*end Mutations*/
+  actions: {
+    fetchData: function fetchData(context, payload) {
+      var perPageVelue;
+
+      if (!payload) {
+        perPageVelue = 10;
+      } else {
+        perPageVelue = payload;
+      }
+
+      axios.get('/spa/ChartOfAccounts-Info?page=' + context.state.pagination.current_page + '&perPage=' + perPageVelue).then(function (response) {
+        context.commit('FETCH_DATA', response.data); //use for only show data
+        //context.commit('FATCH_PAGINATION', response.data) //for pagination
+        //console.log(response.data);
+      })["catch"](function () {//toastr.warning('Something is wrong!');
+      });
+    } // //For Search
+    // searching(context, payload){        
+    //     let searchKey = payload.search_key; let searchOption = payload.search_option; //alert(query2);
+    //     axios.get('/spa/searcChartOfAccountsData?page='+ 
+    //                 context.state.pagination.current_page + '&perPage=' +
+    //                 context.state.pagination.per_page + 
+    //                 '&q='+searchKey+'&so='+searchOption)
+    //     //axios.get('/spa/searcCartOfAccountsData?q='+query)
+    //     .then( ( response ) => {
+    //             context.commit('FETCH_DATA', response.data.data);
+    //             context.commit('FATCH_PAGINATION', response.data) //for pagination                                       
+    //     }).catch(() => { }) 
+    // },
+    // //For Search
+    // AutoCompleteSearch(context, payload){  
+    //     let query = payload;  
+    //     //let query2 = payload.key2; 
+    //     axios.get('/spa/searcChartOfAccountsData?&q='+ query)
+    //     //axios.get('/spa/searcCartOfAccountsData?q='+query)
+    //     .then( ( response ) => {
+    //             context.commit('AUTO_COMPLETE_DATA', response.data.data);
+    //             //this.categories = response.data; // is an object... use when pagination                                         
+    //     }).catch(() => { }) 
+    // },
+
+  }
+  /*end actions*/
+
+};
+/* harmony default export */ __webpack_exports__["default"] = (ChartOfAccounts);
 
 /***/ }),
 
@@ -108754,6 +108975,180 @@ var ProductStore = {
 
 };
 /* harmony default export */ __webpack_exports__["default"] = (ProductStore);
+
+/***/ }),
+
+/***/ "./resources/js/store/StatusMasterStore.js":
+/*!*************************************************!*\
+  !*** ./resources/js/store/StatusMasterStore.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var StatusMasterStore = {
+  namespaced: true,
+  state: function state() {
+    return {
+      //accessable from any where 
+      StatusMaster: {},
+      pagination: {
+        current_page: 1,
+        per_page: 0
+      },
+      autoCompleteData: {}
+    };
+  },
+
+  /*end state*/
+  getters: {},
+
+  /*end getters*/
+  mutations: {
+    //return data to state
+    FETCH_DATA: function FETCH_DATA(state, StatusMaster) {
+      return state.StatusMaster = StatusMaster;
+    },
+    FATCH_PAGINATION: function FATCH_PAGINATION(state, pagination) {
+      return state.pagination = pagination;
+    },
+    AUTO_COMPLETE_DATA: function AUTO_COMPLETE_DATA(state, data) {
+      return state.autoCompleteData = data;
+    }
+  },
+
+  /*end Mutations*/
+  actions: {
+    fetchData: function fetchData(context, payload) {
+      var perPageVelue;
+
+      if (!payload) {
+        perPageVelue = 10;
+      } else {
+        perPageVelue = payload;
+      }
+
+      axios.get('/spa/StatusMaster-Info?page=' + context.state.pagination.current_page + '&perPage=' + perPageVelue).then(function (response) {
+        context.commit('FETCH_DATA', response.data.data); //use for only show data
+
+        context.commit('FATCH_PAGINATION', response.data); //for pagination
+        //console.log(response.data);
+      })["catch"](function () {//toastr.warning('Something is wrong!');
+      });
+    },
+    //For Search
+    searching: function searching(context, payload) {
+      var searchKey = payload.search_key;
+      var searchOption = payload.search_option; //alert(query2);
+
+      axios.get('/spa/searchStatusMasterData?page=' + context.state.pagination.current_page + '&perPage=' + context.state.pagination.per_page + '&q=' + searchKey + '&so=' + searchOption) //axios.get('/spa/searchStatusMasterData?q='+query)
+      .then(function (response) {
+        context.commit('FETCH_DATA', response.data.data);
+        context.commit('FATCH_PAGINATION', response.data); //for pagination                                       
+      })["catch"](function () {});
+    },
+    //For Search
+    AutoCompleteSearch: function AutoCompleteSearch(context, payload) {
+      var query = payload; //let query2 = payload.key2; 
+
+      axios.get('/spa/searchStatusMasterData?&q=' + query) //axios.get('/spa/searchStatusMasterData?q='+query)
+      .then(function (response) {
+        context.commit('AUTO_COMPLETE_DATA', response.data.data); //this.categories = response.data; // is an object... use when pagination                                         
+      })["catch"](function () {});
+    }
+  }
+  /*end actions*/
+
+};
+/* harmony default export */ __webpack_exports__["default"] = (StatusMasterStore);
+
+/***/ }),
+
+/***/ "./resources/js/store/VatRatesStore.js":
+/*!*********************************************!*\
+  !*** ./resources/js/store/VatRatesStore.js ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var VatRatesStore = {
+  namespaced: true,
+  state: function state() {
+    return {
+      //accessable from any where 
+      VatRates: {},
+      pagination: {
+        current_page: 1,
+        per_page: 0
+      },
+      autoCompleteData: {}
+    };
+  },
+
+  /*end state*/
+  getters: {},
+
+  /*end getters*/
+  mutations: {
+    //return data to state
+    FETCH_DATA: function FETCH_DATA(state, VatRates) {
+      return state.VatRates = VatRates;
+    },
+    FATCH_PAGINATION: function FATCH_PAGINATION(state, pagination) {
+      return state.pagination = pagination;
+    },
+    AUTO_COMPLETE_DATA: function AUTO_COMPLETE_DATA(state, data) {
+      return state.autoCompleteData = data;
+    }
+  },
+
+  /*end Mutations*/
+  actions: {
+    fetchData: function fetchData(context, payload) {
+      var perPageVelue;
+
+      if (!payload) {
+        perPageVelue = 10;
+      } else {
+        perPageVelue = payload;
+      }
+
+      axios.get('/spa/VatRate-Info?page=' + context.state.pagination.current_page + '&perPage=' + perPageVelue).then(function (response) {
+        context.commit('FETCH_DATA', response.data.data); //use for only show data
+
+        context.commit('FATCH_PAGINATION', response.data); //for pagination
+        //console.log(response.data);
+      })["catch"](function () {//toastr.warning('Something is wrong!');
+      });
+    },
+    //For Search
+    searching: function searching(context, payload) {
+      var searchKey = payload.search_key;
+      var searchOption = payload.search_option; //alert(query2);
+
+      axios.get('/spa/searchVatRateData?page=' + context.state.pagination.current_page + '&perPage=' + context.state.pagination.per_page + '&q=' + searchKey + '&so=' + searchOption) //axios.get('/spa/searchVatRateData?q='+query)
+      .then(function (response) {
+        context.commit('FETCH_DATA', response.data.data);
+        context.commit('FATCH_PAGINATION', response.data); //for pagination                                       
+      })["catch"](function () {});
+    },
+    //For Search
+    AutoCompleteSearch: function AutoCompleteSearch(context, payload) {
+      var query = payload; //let query2 = payload.key2; 
+
+      axios.get('/spa/searchVatRateData?&q=' + query) //axios.get('/spa/searchVatRateData?q='+query)
+      .then(function (response) {
+        context.commit('AUTO_COMPLETE_DATA', response.data.data); //this.categories = response.data; // is an object... use when pagination                                         
+      })["catch"](function () {});
+    }
+  }
+  /*end actions*/
+
+};
+/* harmony default export */ __webpack_exports__["default"] = (VatRatesStore);
 
 /***/ }),
 

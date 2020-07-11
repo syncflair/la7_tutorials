@@ -1336,7 +1336,7 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-md-5 col-sm" },
+          { staticClass: "col-md-5 col-sm-9" },
           [
             _c("search-app-one", {
               attrs: {
@@ -1350,7 +1350,7 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-7 col-sm text-right" }, [
+        _c("div", { staticClass: "col-md-7 col-sm-3 text-right" }, [
           _c(
             "a",
             {
@@ -1368,327 +1368,338 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
-      _c("table", { staticClass: "table table-striped table-sm" }, [
-        _c("thead", [
-          _c("tr", [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "th",
-              {
-                staticClass: "sortable-title",
-                staticStyle: { width: "20%" },
-                attrs: { scope: "col" },
-                on: {
-                  click: function($event) {
-                    return _vm.sort("name")
-                  }
-                }
-              },
-              [_vm._v("Name")]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              {
-                staticClass: "sortable-title",
-                staticStyle: { width: "20%" },
-                attrs: { scope: "col" },
-                on: {
-                  click: function($event) {
-                    return _vm.sort("email")
-                  }
-                }
-              },
-              [_vm._v("Email")]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              {
-                staticClass: "sortable-title",
-                staticStyle: { width: "7%" },
-                attrs: { scope: "col" },
-                on: {
-                  click: function($event) {
-                    return _vm.sort("phone")
-                  }
-                }
-              },
-              [_vm._v("Phone")]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              {
-                staticClass: "sortable-title",
-                staticStyle: { width: "5%" },
-                attrs: { scope: "col" },
-                on: {
-                  click: function($event) {
-                    return _vm.sort("phone")
-                  }
-                }
-              },
-              [_vm._v("Group")]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              {
-                staticClass: "sortable-title",
-                staticStyle: { width: "3%" },
-                attrs: { scope: "col" },
-                on: {
-                  click: function($event) {
-                    return _vm.sort("phone")
-                  }
-                }
-              },
-              [_vm._v("Status")]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticStyle: { width: "3%" }, attrs: { scope: "col" } },
-              [_vm._v("Nofify")]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              { staticStyle: { width: "7%" }, attrs: { scope: "col" } },
-              [_vm._v("Date")]
-            ),
-            _vm._v(" "),
-            _c(
-              "th",
-              {
-                staticStyle: { width: "10%", "text-align": "right" },
-                attrs: { scope: "col" }
-              },
-              [_vm._v("Action")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          [
-            _vm._l(_vm.sortedCustomers, function(customer, index) {
-              return _c("tr", { key: index }, [
-                _vm._m(1, true),
-                _vm._v(" "),
-                _c("td", { attrs: { scope: "col" } }, [
-                  _vm._v(" " + _vm._s(customer.name) + " ")
-                ]),
-                _vm._v(" "),
-                _c("td", [_vm._v(" " + _vm._s(customer.email) + " ")]),
-                _vm._v(" "),
-                _c("td", [_vm._v(" " + _vm._s(customer.phone) + " ")]),
-                _vm._v(" "),
-                _c("td", [_vm._v(" " + _vm._s(customer.customer_group) + " ")]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "center" } }, [
-                  _c(
-                    "span",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: customer.status_id === 1,
-                          expression: "customer.status_id === 1"
-                        }
-                      ],
-                      attrs: { title: "Active Customer" }
-                    },
-                    [_c("i", { staticClass: "fas fa-user-check green" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: customer.status_id === 2,
-                          expression: "customer.status_id === 2"
-                        }
-                      ],
-                      attrs: { title: "Inactive Customer" }
-                    },
-                    [_c("i", { staticClass: "fas fa-user-times yellow" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: customer.status_id === 3,
-                          expression: "customer.status_id === 3"
-                        }
-                      ],
-                      attrs: { title: "Panding Customer" }
-                    },
-                    [_c("i", { staticClass: "fas fa-user-lock red" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: customer.status_id === 4,
-                          expression: "customer.status_id === 4"
-                        }
-                      ],
-                      attrs: {
-                        title: "Not Verified Customer, Click to verify"
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.verifyByUser(customer.id)
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "fas fa-user-secret red pointer" })]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", { staticStyle: { "text-align": "center" } }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: customer.enable_notify,
-                        expression: "customer.enable_notify"
-                      }
-                    ],
-                    attrs: {
-                      type: "checkbox",
-                      name: "enable_notify",
-                      value: "1"
-                    },
-                    domProps: {
-                      checked: Array.isArray(customer.enable_notify)
-                        ? _vm._i(customer.enable_notify, "1") > -1
-                        : customer.enable_notify
-                    },
-                    on: {
-                      click: function($event) {
-                        return _vm.ChangeNotify(customer.id, $event)
-                      },
-                      change: function($event) {
-                        var $$a = customer.enable_notify,
-                          $$el = $event.target,
-                          $$c = $$el.checked ? true : false
-                        if (Array.isArray($$a)) {
-                          var $$v = "1",
-                            $$i = _vm._i($$a, $$v)
-                          if ($$el.checked) {
-                            $$i < 0 &&
-                              _vm.$set(
-                                customer,
-                                "enable_notify",
-                                $$a.concat([$$v])
-                              )
-                          } else {
-                            $$i > -1 &&
-                              _vm.$set(
-                                customer,
-                                "enable_notify",
-                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                              )
-                          }
-                        } else {
-                          _vm.$set(customer, "enable_notify", $$c)
-                        }
-                      }
+      _c(
+        "table",
+        { staticClass: "table table-striped table-sm table-responsive" },
+        [
+          _c("thead", [
+            _c("tr", [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "th",
+                {
+                  staticClass: "sortable-title",
+                  staticStyle: { width: "20%" },
+                  attrs: { scope: "col" },
+                  on: {
+                    click: function($event) {
+                      return _vm.sort("name")
                     }
-                  })
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _vm._v(
-                    " " +
-                      _vm._s(_vm._f("formatDate")(customer.created_at)) +
-                      " "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", { staticClass: "text-right" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-flat btn-sm",
-                      on: {
-                        click: function($event) {
-                          return _vm.ViewDetails()
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "fas fa-eye primary" })]
-                  ),
+                  }
+                },
+                [_vm._v("Name")]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                {
+                  staticClass: "sortable-title",
+                  staticStyle: { width: "20%" },
+                  attrs: { scope: "col" },
+                  on: {
+                    click: function($event) {
+                      return _vm.sort("email")
+                    }
+                  }
+                },
+                [_vm._v("Email")]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                {
+                  staticClass: "sortable-title",
+                  staticStyle: { width: "7%" },
+                  attrs: { scope: "col" },
+                  on: {
+                    click: function($event) {
+                      return _vm.sort("phone")
+                    }
+                  }
+                },
+                [_vm._v("Phone")]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                {
+                  staticClass: "sortable-title",
+                  staticStyle: { width: "5%" },
+                  attrs: { scope: "col" },
+                  on: {
+                    click: function($event) {
+                      return _vm.sort("phone")
+                    }
+                  }
+                },
+                [_vm._v("Group")]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                {
+                  staticClass: "sortable-title",
+                  staticStyle: { width: "3%" },
+                  attrs: { scope: "col" },
+                  on: {
+                    click: function($event) {
+                      return _vm.sort("phone")
+                    }
+                  }
+                },
+                [_vm._v("Status")]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticStyle: { width: "3%" }, attrs: { scope: "col" } },
+                [_vm._v("Nofify")]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticStyle: { width: "7%" }, attrs: { scope: "col" } },
+                [_vm._v("Date")]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                {
+                  staticStyle: { width: "10%", "text-align": "right" },
+                  attrs: { scope: "col" }
+                },
+                [_vm._v("Action")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "tbody",
+            [
+              _vm._l(_vm.sortedCustomers, function(customer, index) {
+                return _c("tr", { key: index }, [
+                  _vm._m(1, true),
                   _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-primary- btn-flat btn-sm",
+                  _c("td", { attrs: { scope: "col" } }, [
+                    _vm._v(" " + _vm._s(customer.name) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(customer.email) + " ")]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" " + _vm._s(customer.phone) + " ")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(" " + _vm._s(customer.customer_group) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "center" } }, [
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: customer.status_id === 1,
+                            expression: "customer.status_id === 1"
+                          }
+                        ],
+                        attrs: { title: "Active Customer" }
+                      },
+                      [_c("i", { staticClass: "fas fa-user-check green" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: customer.status_id === 2,
+                            expression: "customer.status_id === 2"
+                          }
+                        ],
+                        attrs: { title: "Inactive Customer" }
+                      },
+                      [_c("i", { staticClass: "fas fa-user-times yellow" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: customer.status_id === 3,
+                            expression: "customer.status_id === 3"
+                          }
+                        ],
+                        attrs: { title: "Panding Customer" }
+                      },
+                      [_c("i", { staticClass: "fas fa-user-lock red" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: customer.status_id === 4,
+                            expression: "customer.status_id === 4"
+                          }
+                        ],
+                        attrs: {
+                          title: "Not Verified Customer, Click to verify"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.verifyByUser(customer.id)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fas fa-user-secret red pointer"
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticStyle: { "text-align": "center" } }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: customer.enable_notify,
+                          expression: "customer.enable_notify"
+                        }
+                      ],
                       attrs: {
-                        "data-toggle": "modal",
-                        "data-target": "#customerModal"
+                        type: "checkbox",
+                        name: "enable_notify",
+                        value: "1"
+                      },
+                      domProps: {
+                        checked: Array.isArray(customer.enable_notify)
+                          ? _vm._i(customer.enable_notify, "1") > -1
+                          : customer.enable_notify
                       },
                       on: {
                         click: function($event) {
-                          return _vm.editCustomer(customer)
+                          return _vm.ChangeNotify(customer.id, $event)
+                        },
+                        change: function($event) {
+                          var $$a = customer.enable_notify,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = "1",
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  customer,
+                                  "enable_notify",
+                                  $$a.concat([$$v])
+                                )
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  customer,
+                                  "enable_notify",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
+                          } else {
+                            _vm.$set(customer, "enable_notify", $$c)
+                          }
                         }
                       }
-                    },
-                    [_c("i", { staticClass: "fas fa-edit primary " })]
-                  ),
+                    })
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-block- btn-danger- btn-flat btn-sm",
-                      attrs: { id: "delete" },
-                      on: {
-                        click: function($event) {
-                          return _vm.DeleteData(customer.id)
+                  _c("td", [
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm._f("formatDate")(customer.created_at)) +
+                        " "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { staticClass: "text-right" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-flat btn-sm",
+                        on: {
+                          click: function($event) {
+                            return _vm.ViewDetails()
+                          }
                         }
-                      }
-                    },
-                    [_c("i", { staticClass: "far fa-trash-alt red" })]
-                  )
+                      },
+                      [_c("i", { staticClass: "fas fa-eye primary" })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-primary- btn-flat btn-sm",
+                        attrs: {
+                          "data-toggle": "modal",
+                          "data-target": "#customerModal"
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.editCustomer(customer)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "fas fa-edit primary " })]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass:
+                          "btn btn-block- btn-danger- btn-flat btn-sm",
+                        attrs: { id: "delete" },
+                        on: {
+                          click: function($event) {
+                            return _vm.DeleteData(customer.id)
+                          }
+                        }
+                      },
+                      [_c("i", { staticClass: "far fa-trash-alt red" })]
+                    )
+                  ])
                 ])
-              ])
-            }),
-            _vm._v(" "),
-            _c(
-              "tr",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.customers && !_vm.customers.length,
-                    expression: "customers && !customers.length"
-                  }
-                ]
-              },
-              [_vm._m(2)]
-            )
-          ],
-          2
-        )
-      ])
+              }),
+              _vm._v(" "),
+              _c(
+                "tr",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.customers && !_vm.customers.length,
+                      expression: "customers && !customers.length"
+                    }
+                  ]
+                },
+                [_vm._m(2)]
+              )
+            ],
+            2
+          )
+        ]
+      )
     ]),
     _vm._v(" "),
     _c(
@@ -1792,11 +1803,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6 col-6 text-left" }, [
+        _c("div", { staticClass: "col-md-6 col-sm-6 text-left" }, [
           _c("h5", [_vm._v("Customer")])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6 col-6 text-right" }, [
+        _c("div", { staticClass: "col-md-6 col-sm-6 text-right" }, [
           _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
             _c("li", { staticClass: "breadcrumb-item active" }, [
               _vm._v("Dashboard")

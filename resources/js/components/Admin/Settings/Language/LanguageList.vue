@@ -9,7 +9,7 @@
       </div>
     </div><!--/card-header-->
     <div class="card-body">   
-      <table class="table table-striped table-sm">
+      <table class="table table-striped table-sm table-responsive-">
         <thead>
           <tr>
             <!-- <th style="">#</th> -->

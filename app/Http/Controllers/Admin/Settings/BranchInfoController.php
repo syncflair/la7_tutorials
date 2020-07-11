@@ -24,9 +24,17 @@ class BranchInfoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = BranchInfo::get();
+        
+        if(!empty($request->perPage)){
+            $perPage = $request->perPage;
+        }else{
+            $perPage = 20;
+        }
+
+        $data = BranchInfo::paginate($perPage);
+        //$data = BranchInfo::All();
         return response()->json($data);
     }
 
@@ -145,11 +153,43 @@ class BranchInfoController extends Controller
      */
     public function destroy($id)
     {
-         $data = BranchInfo::findOrFail($id)->delete();        
+        $data = BranchInfo::findOrFail($id)->delete();        
         if($data){
             return response()->json(['success'=> 'Record is successfully deleted']);
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
+    }
+
+    public function search(Request $request){
+
+        if(!empty($request->perPage)){
+            $perPage = $request->perPage;
+        }else{
+            $perPage = 50;
+        }
+
+        $searchKey = $request->q;
+        $searchOption = $request->so;
+
+        if(!empty($searchKey) && empty($searchOption)){
+        //if($search = \Request::get('q')){
+            $searchResult = BranchInfo::where(function($query) use ($searchKey){
+                $query->where('branch_name','LIKE','%'.$searchKey.'%')
+                        ->orWhere('.branch_code','LIKE','%'.$searchKey.'%');
+            })->paginate($perPage);
+
+        }elseif(!empty($searchKey) && !empty($searchOption)){
+            $searchResult = BranchInfo::where(function($query) use ($searchKey, $searchOption){
+                $query->where( $searchOption,'LIKE','%'.$searchKey.'%');
+            })->paginate($perPage);
+            
+        }else{
+            //$searchResult = BranchInfo::latest()->paginate(10);
+            $searchResult = BranchInfo::paginate($perPage);
+        }
+
+        //return $searchResult;
+        return response()->json($searchResult);
     }
 }

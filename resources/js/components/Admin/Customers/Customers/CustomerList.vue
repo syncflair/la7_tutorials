@@ -2,7 +2,7 @@
 <div class="card vue-card-item">
     <div class="card-header">      
       <div class="row">
-        <div class="col-md-5 col-sm">
+        <div class="col-md-5 col-sm-9">
           <!-- Customer List -->
           <search-app-one 
             :SearchByOptions="SearchByOptions"
@@ -11,13 +11,13 @@
             :pagination="pagination"
           ></search-app-one>
         </div>
-        <div class="col-md-7 col-sm text-right">
+        <div class="col-md-7 col-sm-3 text-right">
         	<a @click="addCustomer" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#customerModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>
     </div><!--/card-header-->
     <div class="card-body">   
-      <table class="table table-striped table-sm">
+      <table class="table table-striped table-sm table-responsive">
         <thead>
           <tr>
             <!-- <th style="">#</th> -->

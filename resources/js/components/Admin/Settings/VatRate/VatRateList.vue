@@ -2,14 +2,22 @@
 <div class="card vue-card-item">
     <div class="card-header">
       <div class="row">
-        <div class="col-md-8 col-sm-6 col-6">Vate Rates</div>
-        <div class="col-md-4 col-sm-6 col-6 text-right">
+        <div class="col-md-5 col-sm-6 col-6 col-6">
+          <!-- Vate Rates -->
+          <search-app-one 
+            :SearchByOptions="SearchByOptions"
+            :filterBy="filterBy"
+            :autoCompleteData="autoCompleteData"
+            :pagination="pagination"
+          ></search-app-one>
+        </div>
+        <div class="col-md-7 col-sm-6 col-6 col-6 text-right">
         	<a @click="addVatRate" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#VatRateModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>
     </div><!--/card-header-->
     <div class="card-body">   
-      <table class="table table-striped table-sm">
+      <table class="table table-striped table-sm table-responsive-">
         <thead>
           <tr>
             <!-- <th style="">#</th> -->
@@ -24,7 +32,7 @@
 
         <tbody>
           <!-- :key="vatRateUnit.id" -->
-          <tr v-for="(vatRate, index) in VateRates" :key="index">
+          <tr v-for="(vatRate, index) in VatRates" :key="index">
             <!-- <td > id</td> -->
             <td scope="col"> {{ vatRate.vat_name }} </td>
             <td> {{ vatRate.vat_code }} </td> 
@@ -54,9 +62,9 @@
 
           </tr>
 
-          <tr v-show="VateRates.data && !VateRates.vatRate">
+          <tr v-show="VatRates && !VatRates.length">
             <td colspan="6">
-              <div class="alert alert-danger text-center red mb-0" role="alert" >Sorry : No data found.</div>
+              <div class="alert alert-warning text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
           </tr>
 
@@ -66,61 +74,70 @@
     </div>
 
     <div class="card-footer">      
-      <!-- <pagination-app 
+      <pagination-app 
           v-if="pagination.last_page >= 1"  
           :pagination="pagination"
           :offset="5"
           @paginate="fetchData()"
-      ></pagination-app> -->
+      ></pagination-app>
     </div>
 
 </div><!--/vue-card-item -->
 </template>
 
 <script>
- 
+    import { mapState } from 'vuex' //for user MapState
+
     export default {
       name: "VatRateList",
 
       data(){
         return {
-        	VateRates: {}, 
-         // perPage: 0,                 
+          filterBy:'vat_name', // this is use for which field use for auto search, default
+          SearchByOptions:[
+            {'field_name':'vat_name', 'show_name':'Title'},
+            {'field_name':'vat_code', 'show_name':'Vat Code'},
+            {'field_name':'vat_rate', 'show_name':'Vat Rate'},
+            {'field_name':'vat_type', 'show_name':'Vat Type'}
+          ],                 
         }
       },
 
       computed: {
+        ...mapState( 
+             'VatRatesStore', ['VatRates', 'pagination','autoCompleteData']
+          ),
       },
 
       methods:{
-      	fetchVatRate(){
-	        this.$Progress.start(); //using progress-bar package
+      	// fetchVatRate(){
+	      //   this.$Progress.start(); //using progress-bar package
 
-	        axios.get('/spa/VatRate-Info')
-	          .then( ( response ) => {
+	      //   axios.get('/spa/VatRate-Info')
+	      //     .then( ( response ) => {
 
-	            this.VateRates = response.data; // is an object... use when pagination
-	              //this.vatRateUn = response.data.data; //is an object... default 
-	            //console.log(response.data); 
-	            this.$Progress.finish(); 
-	          })
-	          .catch( (errors) => {  
-	            //console.log(errors); 
-	            this.$Progress.fail(); 
-	            toastr.warning('Something is wrong!');
-	          })
-	    },
+	      //       this.VatRates = response.data; // is an object... use when pagination
+	      //         //this.vatRateUn = response.data.data; //is an object... default 
+	      //       //console.log(response.data); 
+	      //       this.$Progress.finish(); 
+	      //     })
+	      //     .catch( (errors) => {  
+	      //       //console.log(errors); 
+	      //       this.$Progress.fail(); 
+	      //       toastr.warning('Something is wrong!');
+	      //     })
+  	    // },
 
-	    addVatRate(){
-	    	FireEvent.$emit('addVatRate');
-	    },
+  	    addVatRate(){
+  	    	FireEvent.$emit('addVatRate');
+  	    },
 
-	    editVatRate(data){
-	    	//alert(data.id);
-	    	FireEvent.$emit('editVatRate', data);
-	    },
+  	    editVatRate(data){
+  	    	//alert(data.id);
+  	    	FireEvent.$emit('editVatRate', data);
+  	    },
 
-	    DeleteData(id){
+  	    DeleteData(id){
 	        Swal.fire({
 	            title: 'Are you sure to Delete?',
 	            text: "You won't be able to revert this!",
@@ -153,16 +170,46 @@
 
 	          })
 	      }, //end delete
+
+        //Function call from Pagination-app.vue
+        fetchData(){
+          //this function call from Pagination-app component
+          this.$Progress.start();
+          this.$store.dispatch('VatRatesStore/fetchData', this.pagination.per_page);
+          this.$Progress.finish();
+          //console.log(this.pagination.total);
+        },
        
       
       },
 
       created(){ 
-      		this.fetchVatRate();
+      		this.$store.dispatch('VatRatesStore/fetchData'); //call this function at first loading from Action with Modules namespace 
 
-      		FireEvent.$on('AfterChange', () => {
-		        this.fetchVatRate();
-		    });
+          FireEvent.$on('AfterChange', () => {
+              this.$Progress.start();
+              this.$store.dispatch('VatRatesStore/fetchData', this.pagination.per_page);
+              this.$Progress.finish();
+          });
+
+          //this event call from Pagination-app component for change number of data show per page
+          FireEvent.$on('changPerPage', (data) => {
+             this.$store.dispatch('VatRatesStore/fetchData',data);
+          });
+
+
+          //This is come from search-app-one.vue file for serch data
+          FireEvent.$on('searchData', (data) => {
+             //alert(data.search_key+'-'+data.search_option);
+             this.$store.dispatch('VatRatesStore/searching', data ); 
+          });
+          //This is come from search-app-one.vue file for Auto Complete data
+          FireEvent.$on('AutoCompleteSearch', (data) => {
+              //alert(data);
+              if(data != ''){
+                this.$store.dispatch('VatRatesStore/AutoCompleteSearch', data ); 
+              }
+          });
       },
 
       mounted() {

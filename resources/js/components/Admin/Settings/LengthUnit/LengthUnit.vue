@@ -9,8 +9,8 @@
     <!-- Card Header -->
     <div class="card-header">            
         <div class="row">
-        	<div class="col-md-6 col-6 text-left"><h5>Length Units</h5></div>
-            <div class="col-md-6 col-6 text-right">
+        	<div class="col-md-6 col-sm-6 text-left"><h5>Length Units</h5></div>
+            <div class="col-md-6 col-sm-6 text-right">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item active">Dashboard</li>
                     <li class="breadcrumb-item active">Settings</li>
@@ -42,11 +42,13 @@
 </template>
 
 <script>
-	import LengthUnitList from './LengthUnitList.vue'
-	import LengthUnitForm from './LengthUnitForm.vue'
+	// import LengthUnitList from './LengthUnitList.vue'
+	// import LengthUnitForm from './LengthUnitForm.vue'
+    const LengthUnitList = () => import( /* webpackChunkName: "LengthUnitList-com" */ './LengthUnitList') 
+    const LengthUnitForm = () => import( /* webpackChunkName: "LengthUnitForm-com" */ './LengthUnitForm')
 
 	export default {
-	    name: "CurrencyMaster",
+	    name: "LenghtUnitMaster",
 	    
 	    components:{ 
 	    	LengthUnitList, LengthUnitForm,

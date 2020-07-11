@@ -319,11 +319,20 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-university success"></i>
               <p>
-                Bank & Cash 
+                Accounting <!-- Bank & Cash  -->
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to="/spa/chartOfAccounts" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Chart Of Accounts
+                  </p>
+                </router-link>
+              </li>
+
               <li class="nav-item">
                 <a href="pages/UI/general.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -515,6 +524,24 @@
                   <i class="nav-icon fas fa-info-circle"></i>
                   <p>
                     Vat Rate
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/StatusMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Status Master
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/PaymentMethod" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Payment Method
                   </p>
                 </router-link>
               </li>

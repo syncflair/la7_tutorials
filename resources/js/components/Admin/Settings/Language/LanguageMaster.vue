@@ -9,8 +9,8 @@
     <!-- Card Header -->
     <div class="card-header">            
         <div class="row">
-        	<div class="col-md-6 col-6 text-left"><h5>Language</h5></div>
-            <div class="col-md-6 col-6 text-right">
+        	<div class="col-md-6 col-sm-6 text-left"><h5>Language</h5></div>
+            <div class="col-md-6 col-sm-6 text-right">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item active">Dashboard</li>
                     <li class="breadcrumb-item active">Settings</li>
@@ -42,11 +42,13 @@
 </template>
 
 <script>
-	import LanguageList from './LanguageList.vue'
-	import LanguageForm from './LanguageForm.vue'
+	// import LanguageList from './LanguageList.vue'
+	// import LanguageForm from './LanguageForm.vue'
+    const LanguageList = () => import( /* webpackChunkName: "LanguageList-com" */ './LanguageList') 
+    const LanguageForm = () => import( /* webpackChunkName: "LanguageForm-com" */ './LanguageForm') 
 
 	export default {
-	    name: "CurrencyMaster",
+	    name: "LanguageMaster",
 	    
 	    components:{ 
 	    	LanguageList, LanguageForm,

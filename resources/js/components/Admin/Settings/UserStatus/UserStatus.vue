@@ -9,8 +9,8 @@
     <!-- Card Header -->
     <div class="card-header">            
         <div class="row">
-        	<div class="col-md-6 col-6 text-left"><h5>User Status (Don't Add Or Update)</h5></div>
-            <div class="col-md-6 col-6 text-right">
+        	<div class="col-md-6 col-sm-6 text-left"><h5>User Status <strong class="red">(Don't Add Or Update here)</strong></h5></div>
+            <div class="col-md-6 col-sm-6 text-right">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item active">Dashboard</li>
                     <li class="breadcrumb-item active">Settings</li>
@@ -42,8 +42,10 @@
 </template>
 
 <script>
-	import UserStatusList from './UserStatusList.vue'
-	import UserStatusForm from './UserStatusForm.vue'
+	// import UserStatusList from './UserStatusList.vue'
+	// import UserStatusForm from './UserStatusForm.vue'
+    const UserStatusList = () => import( /* webpackChunkName: "UserStatusList-com" */ './UserStatusList') 
+    const UserStatusForm = () => import( /* webpackChunkName: "UserStatusForm-com" */ './UserStatusForm')
 
 	export default {
 	    name: "UserStatusMaster",

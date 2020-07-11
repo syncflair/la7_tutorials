@@ -9,8 +9,8 @@
     <!-- Card Header -->
     <div class="card-header">            
         <div class="row">
-        	<div class="col-md-6 col-6 text-left"><h5>Vat Rates</h5></div>
-            <div class="col-md-6 col-6 text-right">
+        	<div class="col-md-6 col-sm-6 text-left"><h5>Vat Rates</h5></div>
+            <div class="col-md-6 col-sm-6 text-right">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item active">Dashboard</li>
                     <li class="breadcrumb-item active">Settings</li>
@@ -42,8 +42,10 @@
 </template>
 
 <script>
-	import VatRateList from './VatRateList.vue'
-	import VatRateForm from './VatRateForm.vue'
+	// import VatRateList from './VatRateList.vue'
+	// import VatRateForm from './VatRateForm.vue'
+    const VatRateList = () => import( /* webpackChunkName: "VatRateList-com" */ './VatRateList') 
+    const VatRateForm = () => import( /* webpackChunkName: "VatRateForm-com" */ './VatRateForm')
 
 	export default {
 	    name: "VatRateMaster",

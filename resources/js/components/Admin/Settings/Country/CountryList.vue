@@ -18,7 +18,7 @@
       </div>
     </div><!--/card-header-->
     <div class="card-body">   
-      <table class="table table-striped table-sm">
+      <table class="table table-striped table-sm table-responsive-">
         <thead>
           <tr>           
             <th style="width: 6%;" scope="col">Flag</th>
@@ -101,8 +101,6 @@
             {'field_name':'iso_2', 'show_name':'ISO 2'},
             {'field_name':'iso_3', 'show_name':'ISO 3'}
           ],
-
-
         }
       },
 
