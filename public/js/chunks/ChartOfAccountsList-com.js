@@ -242,11 +242,11 @@ var render = function() {
   return _c("div", { staticClass: "card vue-card-item" }, [
     _c("div", { staticClass: "card-header" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-6 col-xs-9" }, [
+        _c("div", { staticClass: "col-6" }, [
           _vm._v("\r\n          Chart Of Accounts\r\n          ")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-6 col-xs-3 text-right" }, [
+        _c("div", { staticClass: "col-6 text-right" }, [
           _c(
             "a",
             {
@@ -555,23 +555,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "card-footer" },
-      [
-        _vm.pagination.last_page >= 1
-          ? _c("pagination-app", {
-              attrs: { pagination: _vm.pagination, offset: 5 },
-              on: {
-                paginate: function($event) {
-                  return _vm.fetchData()
-                }
-              }
-            })
-          : _vm._e()
-      ],
-      1
-    )
+    _c("div", { staticClass: "card-footer" })
   ])
 }
 var staticRenderFns = [

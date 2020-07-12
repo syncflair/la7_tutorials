@@ -271,7 +271,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-md-6 col-6" }, [
+    _c("div", { staticClass: "col-6" }, [
       _c("div", { staticClass: "select-option" }, [
         _c(
           "select",
@@ -325,7 +325,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-6 col-6" }, [
+    _c("div", { staticClass: "col-6" }, [
       _c("div", { staticClass: "autoCompleteSearch " }, [
         _c(
           "div",

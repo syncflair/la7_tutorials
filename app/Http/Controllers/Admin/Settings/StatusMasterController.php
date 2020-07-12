@@ -14,7 +14,7 @@ class StatusMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         if(!empty($request->perPage)){
             $perPage = $request->perPage;
@@ -155,7 +155,7 @@ class StatusMasterController extends Controller
         //if($search = \Request::get('q')){
             $searchResult = StatusMaster::where(function($query) use ($searchKey){
                 $query->where('status_name','LIKE','%'.$searchKey.'%')
-                        ->orWhere('.status_slug','LIKE','%'.$searchKey.'%')
+                        ->orWhere('status_slug','LIKE','%'.$searchKey.'%')
                         ->orWhere('status_type','LIKE','%'.$searchKey.'%');
             })->paginate($perPage);
 

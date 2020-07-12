@@ -2,8 +2,8 @@
 <div class="card vue-card-item">
     <div class="card-header">
       <div class="row">
-        <div class="col-md-8 col-sm-6 col-6">Currency List</div>
-        <div class="col-md-4 col-sm-6 col-6 text-right">
+        <div class="col-6 ">Currency List</div>
+        <div class="col-6 text-right">
         	<a @click="addCurrency" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#currencyModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>

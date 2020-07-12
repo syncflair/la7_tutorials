@@ -233,7 +233,7 @@ class CountryController extends Controller
         //if($search = \Request::get('q')){
             $searchResult = Country::where(function($query) use ($searchKey){
                 $query->where('country_name','LIKE','%'.$searchKey.'%')
-                        ->orWhere('.phone_code','LIKE','%'.$searchKey.'%')
+                        ->orWhere('phone_code','LIKE','%'.$searchKey.'%')
                         ->orWhere('iso_2','LIKE','%'.$searchKey.'%')
                         ->orWhere('iso_3','LIKE','%'.$searchKey.'%');
             })->paginate($perPage);
@@ -248,9 +248,17 @@ class CountryController extends Controller
             $searchResult = Country::paginate($perPage);
         }
 
-        return $searchResult;
+        //return $searchResult;
+        return response()->json($searchResult);
     }
 
+    //return country list without pagination
+    public function GetCountry(){
+        //this is for commonStoreForAll Store
+        $data = Country::get();
+        //$data = Country::All();
+        return response()->json($data);
+    }
 
 
 }

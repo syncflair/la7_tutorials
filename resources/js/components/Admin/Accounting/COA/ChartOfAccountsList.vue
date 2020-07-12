@@ -2,7 +2,7 @@
 <div class="card vue-card-item">
     <div class="card-header">
       <div class="row">
-        <div class="col-6 col-xs-9">
+        <div class="col-6">
           Chart Of Accounts
           <!-- <search-app-one 
             :SearchByOptions="SearchByOptions"
@@ -12,7 +12,7 @@
           ></search-app-one> -->
 
         </div>
-        <div class="col-6 col-xs-3 text-right">
+        <div class="col-6 text-right">
         	<a @click="addChartOfAccouts" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#ChartOfAccountsModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>
@@ -91,12 +91,12 @@
     </div>
 
     <div class="card-footer">      
-      <pagination-app 
+      <!-- <pagination-app 
           v-if="pagination.last_page >= 1"  
           :pagination="pagination"
           :offset="5"
           @paginate="fetchData()"
-      ></pagination-app>
+      ></pagination-app> -->
     </div>
 
 </div><!--/vue-card-item -->

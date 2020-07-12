@@ -555,6 +555,33 @@
                 </router-link>
               </li>
 
+              <li class="nav-item">
+                <router-link to="/spa/DivisionMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Division
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/DistrictMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    District
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/DistrictZoneMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Zone / Area
+                  </p>
+                </router-link>
+              </li>
+
 
              
             </ul>

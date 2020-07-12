@@ -87,9 +87,9 @@
 	                          <img v-else-if="form.country_flag != '' " :src="'../'+form.country_flag" class="img-fluid img-thumbnail focusImgOnHover" style="width:65px;height:65px;">
 	                        </span>                        
 	                        
-	                      </div>
-	                      
+	                      </div>	                      
 	                    </div>
+	                    
 		          	</div>	          	                     	
 	          	</div><!-- row inside form -->
 	            

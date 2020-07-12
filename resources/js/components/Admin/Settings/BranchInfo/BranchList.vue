@@ -2,7 +2,7 @@
 <div class="card vue-card-item">
     <div class="card-header">
       <div class="row">
-        <div class="col-6 col-xs-9">
+        <div class="col-md-6 col-sm-9">
           <!-- Branch List -->
           <search-app-one 
             :SearchByOptions="SearchByOptions"
@@ -12,7 +12,7 @@
           ></search-app-one>
 
         </div>
-        <div class="col-6 col-xs-3 text-right">
+        <div class="col-md-6 col-sm-3 text-right">
         	<a @click="addBranch" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#branchModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>

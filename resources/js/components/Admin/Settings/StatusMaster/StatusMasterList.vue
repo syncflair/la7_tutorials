@@ -2,7 +2,7 @@
 <div class="card vue-card-item">
     <div class="card-header">
       <div class="row">
-        <div class="col-md-5 col-sm-6 col-6 col-6">
+        <div class="col-md-6 col-sm-9">
           <!-- Vate Rates -->
           <search-app-one 
             :SearchByOptions="SearchByOptions"
@@ -11,7 +11,7 @@
             :pagination="pagination"
           ></search-app-one>
         </div>
-        <div class="col-md-7 col-sm-6 col-6 col-6 text-right">
+        <div class="col-md-6 col-sm-3 text-right">
         	<a @click="addStatusMaster" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#StatusMasterModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>

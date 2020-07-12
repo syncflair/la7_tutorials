@@ -122,11 +122,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6 col-sm-6 text-left" }, [
+        _c("div", { staticClass: "col-md-6 col-sm-6 col-xs-12 text-left" }, [
           _c("h5", [_vm._v("Branch Information")])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6 col-sm-6 text-right" }, [
+        _c("div", { staticClass: "col-md-6 col-sm-6 col-xs-12 text-right" }, [
           _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
             _c("li", { staticClass: "breadcrumb-item active" }, [
               _vm._v("Dashboard")

@@ -142,7 +142,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-md-3 col-sm-2 col-xs-2  pl-0" }, [
+    _c("div", { staticClass: "col-md-2 col-sm-2 col-xs-6 pl-0" }, [
       _c("span", [
         _c("strong", [_vm._v("Total: ")]),
         _vm._v(_vm._s(this.pagination.total) + " ")
@@ -185,7 +185,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-2 col-sm-2 col-xs-2  pl-0 pr-0" }, [
+    _c("div", { staticClass: "col-md-3 col-sm-3 col-xs-6  pl-0 pr-0" }, [
       _c("div", { staticClass: "input-group input-control-sm" }, [
         _vm._m(0),
         _vm._v(" "),
@@ -247,7 +247,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-2 col-sm-2 col-xs-2  pl-2 text-right" }, [
+    _c("div", { staticClass: "col-md-2 col-sm-2 col-xs-6  pl-2 text-right" }, [
       _c("span", [
         _c("strong", [_vm._v("Page: ")]),
         _vm._v(
@@ -259,7 +259,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-5 col-sm-6 col-xs-6 pr-0" }, [
+    _c("div", { staticClass: "col-md-5 col-sm-5 col-xs-6 pr-0" }, [
       _c("nav", { attrs: { "aria-label": "..." } }, [
         _c(
           "ul",

@@ -186,11 +186,9 @@ var render = function() {
   return _c("div", { staticClass: "card vue-card-item" }, [
     _c("div", { staticClass: "card-header" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-8 col-sm-6 col-6" }, [
-          _vm._v("Weight Unit List")
-        ]),
+        _c("div", { staticClass: "col-6" }, [_vm._v("Weight Unit List")]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-4 col-sm-6 col-6 text-right" }, [
+        _c("div", { staticClass: "ccol-6 text-right" }, [
           _c(
             "a",
             {

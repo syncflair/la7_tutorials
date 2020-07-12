@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-	<div class="col-md-6 col-6">	
+	<div class="col-6">	
 
 		<div class="select-option">
 			<select class="form-control form-control-sm" v-model="selectOption">
@@ -14,7 +14,7 @@
 
 	</div>
 
-	<div class="col-md-6 col-6">	
+	<div class="col-6">	
 
 	<div class="autoCompleteSearch ">	
 	  <div class="input-group input-control-sm searchBox" v-on:blur="visible = false" tabindex="-1" >                      

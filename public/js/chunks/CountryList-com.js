@@ -246,7 +246,7 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-md-5 col-sm-6 col-6" },
+          { staticClass: "col-md-6 col-sm-9" },
           [
             _c("search-app-one", {
               attrs: {
@@ -260,7 +260,7 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-7 col-sm-6 col-6 text-right" }, [
+        _c("div", { staticClass: "col-md-6 col-sm-3 text-right" }, [
           _c(
             "a",
             {

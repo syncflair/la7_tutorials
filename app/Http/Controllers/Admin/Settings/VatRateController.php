@@ -165,7 +165,7 @@ class VatRateController extends Controller
         //if($search = \Request::get('q')){
             $searchResult = VatRate::where(function($query) use ($searchKey){
                 $query->where('vat_name','LIKE','%'.$searchKey.'%')
-                        ->orWhere('.vat_code','LIKE','%'.$searchKey.'%')
+                        ->orWhere('vat_code','LIKE','%'.$searchKey.'%')
                         ->orWhere('vat_rate','LIKE','%'.$searchKey.'%')
                         ->orWhere('vat_type','LIKE','%'.$searchKey.'%');
             })->paginate($perPage);

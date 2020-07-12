@@ -2,8 +2,8 @@
 <div class="card vue-card-item">
     <div class="card-header">
       <div class="row">
-        <div class="col-md-8 col-sm-6 col-6">User Status</div>
-        <div class="col-md-4 col-sm-6 col-6 text-right">
+        <div class="col-6">User Status</div>
+        <div class="col-6 text-right">
         	<a @click="addUserStatus" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#UserStatusModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>

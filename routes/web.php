@@ -106,6 +106,11 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     // Route::resource('spa/supplier-Info', 'Admin\Supplier\SupplierController',
     //  ['except'=>['create','show','edit'] ]);
 
+    //Catalog
+    //Route::get('spa/searcCategoryMasterData', 'Admin\Catalog\CategoryController@search'); //search
+    Route::resource('spa/CategoryMaster-Info', 'Admin\Catalog\CategoryController', 
+      ['except'=>['create','show','edit'] ]);
+
 
 
     //Accounting
@@ -139,8 +144,24 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
       ['except'=>['create','show','edit'] ]);
     Route::resource('spa/PaymentMethod-Info', 'Admin\Settings\PaymentMethodController', 
       ['except'=>['create','show','edit'] ]);
+
     Route::get('spa/searchCountryData', 'Admin\Settings\CountryController@search'); //search
+    Route::get('spa/Country-Info/GetCountry', 'Admin\Settings\CountryController@GetCountry'); //for commonStoreForAll store
     Route::resource('spa/Country-Info', 'Admin\Settings\CountryController', 
+      ['except'=>['create','show','edit'] ]);
+    
+    Route::get('spa/searchDivisionData', 'Admin\Settings\DivisionController@search'); //search
+    Route::get('spa/Division-Info/GetDivision', 'Admin\Settings\DivisionController@GetDivision'); //for commonStoreForAll store
+    Route::resource('spa/Division-Info', 'Admin\Settings\DivisionController', 
+      ['except'=>['create','show','edit'] ]);
+
+    Route::get('spa/searchDistrictData', 'Admin\Settings\DistrictController@search'); //search
+    Route::get('spa/District-Info/GetDistrict', 'Admin\Settings\DistrictController@GetDistrict'); //for commonStoreForAll store
+    Route::resource('spa/District-Info', 'Admin\Settings\DistrictController', 
+      ['except'=>['create','show','edit'] ]);
+    Route::get('spa/searchDistrictZoneData', 'Admin\Settings\DistrictZoneController@search'); //search
+    Route::get('spa/DistrictZone-Info/GetDistrictZone', 'Admin\Settings\DistrictZoneController@GetDistrictZone'); //for commonStoreForAll store
+    Route::resource('spa/DistrictZone-Info', 'Admin\Settings\DistrictZoneController', 
       ['except'=>['create','show','edit'] ]);
 
 
