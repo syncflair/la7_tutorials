@@ -18,18 +18,36 @@ function RoleId(){
 
 //Use for Check Role Permission for Logged-in user 
 function GetAuthUserRolePermission(){
-  @$AuthenticateUserRolePermission = auth()->user()->role->permission->permission;
-  $json_data_decode = json_decode($AuthenticateUserRolePermission);  
-  return $json_data_decode;
+   $AuthenticateUserRolePermission = auth()->user()->role->permission->permission;
+   $json_data_decode = json_decode($AuthenticateUserRolePermission);  
+   return $json_data_decode;
   //dd($json_data_decode->role->add);
 
   //Use like that
-  //GetAuthUserRolePermission()->role->page; 
-  //GetAuthUserRolePermission()->role->add; 
-  //GetAuthUserRolePermission()->role->edit;   
-  //GetAuthUserRolePermission()->role->delete; 
   //GetAuthUserRolePermission()->role->view; 
+  //GetAuthUserRolePermission()->role->read; 
+  //GetAuthUserRolePermission()->role->write;   
+  //GetAuthUserRolePermission()->role->update; 
+  //GetAuthUserRolePermission()->role->delete; 
 }
+
+//module like user, role, permission, sales, store, Report, customer, Supplier
+// function isPermittedToPage($Module){
+//   return @GetAuthUserRolePermission()->$Module->view != false ? true : false ;
+// }
+// function isPermittedToAdd($Module){
+//   return @GetAuthUserRolePermission()->$Module->read != false ? true : false ;
+// }
+// function isPermittedToEdit($Module){
+//   return @GetAuthUserRolePermission()->$Module->write != false ? true : false ;
+// }
+// function isPermittedToView($Module){
+//   return @GetAuthUserRolePermission()->$Module->update != false ? true : false ;
+// }
+// function isPermittedToDelete($Module){  
+//   return @GetAuthUserRolePermission()->$Module->delete != false ? true : false ;
+// }
+
 
 //Show Auth User Name
 function RoleName(){

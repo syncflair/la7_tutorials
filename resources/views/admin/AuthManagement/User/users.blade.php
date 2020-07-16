@@ -18,23 +18,27 @@
         <div class="row">
           <div class="col-sm-6">
            <!-- <h4 class="m-0 text-dark">Users</h4>-->
-            {{ CustomeBreadcrumbs() }}
-            
+          
+            {{ CustomeBreadcrumbs() }}  <!--Get form Helper-->
+
+          <!-- {{ auth()->user()->role->permission->permission }} -->
+        
+   
           </div><!-- /.col -->
           <div class="col-sm-6 text-right">
               <a href="{{ BackPath() }}" type="button" class="btn btn-flat btn-primary btn-sm">Back</a> 
 
-              @if( @GetAuthUserRolePermission()->role->page != null ) 
+              
               <a href="{{route('role.index')}}" type="button" class="btn btn-primary btn-flat btn-sm"> Roles</a>
-              @endif
+              
 
-              @if( @GetAuthUserRolePermission()->permission->page != null ) 
+              
               <a href="{{route('permission.index')}}" type="button" class="btn btn-primary btn-flat btn-sm"> Permissions</a>
-              @endif
+             
 
-              @if( @GetAuthUserRolePermission()->user->add != null ) 
+              
               <a onclick="newUserAdd()" type="button" class="btn btn-primary btn-flat btn-sm"> <i class="fas fa-plus"></i> Add New User</a>
-              @endif
+              
 
           </div><!-- /.col -->
         </div><!-- /.row -->

@@ -14,13 +14,13 @@ class Role extends Model
 
     //My Custome Relation - A Role Has Many User (hasMany())
     public function user(){
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\User', 'role_id');
         //return $this->hasMany(User::class);  
     }
 
     //My Custome Relation - A Role Has Many User (hasMany())
     public function permission(){
-        return $this->hasOne('App\Models\Permission');
+        return $this->hasOne('App\Models\Permission','role_id');
         //return $this->hasMany('App\Models\Permission');
         //return $this->hasMany(Permission::class);  
     }

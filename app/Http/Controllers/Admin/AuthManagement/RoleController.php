@@ -37,28 +37,28 @@ class RoleController extends Controller
              
                 $actionData = ''; 
 
-                if( @GetAuthUserRolePermission()->role->edit != null ) {
+                //if( @GetAuthUserRolePermission()->role->edit != null ) {
                     if($roles_data->is_enabled == 1){
                         $actionData .= '<a onclick="RoleUnactive('.$roles_data->id.')" class="btn btn-danger- btn-flat btn-sm" data-toggle="tooltip" data-placement="right" title="Click to Unactive" >  <i class="far fa-thumbs-down danger"></i>  </a>';
                     }elseif($roles_data->is_enabled == 0){
                         $actionData .= '<a onclick="RoleActive('.$roles_data->id.')" class="use-tooltip btn btn-success- btn-flat btn-sm" data-toggle="tooltip" data-placement="left" title="Click to Active" >   <i class="far fa-thumbs-up success"></i>  </a>';
                     }
-                }
+                //}
 
-                if( @GetAuthUserRolePermission()->role->edit != null ) {
+                //if( @GetAuthUserRolePermission()->role->edit != null ) {
                     $actionData .= '
                     <a onclick="RoleEdit('.$roles_data->id.')" class="btn  btn-primary- btn-flat btn-sm">
                         <i class="fas fa-edit primary "></i>
                     </a>';
-                }
+                //}
 
-                if( @GetAuthUserRolePermission()->role->edit != null ) {
+                //if( @GetAuthUserRolePermission()->role->edit != null ) {
                     if($roles_data->id != Auth::user()->role_id ){
                         $actionData .= ' <a onclick="RoleDelete('.$roles_data->id.')" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete" >
                             <i class="far fa-trash-alt red"></i>
                         </a>';               
                     }
-                }
+                //}
 
                 return $actionData;
 

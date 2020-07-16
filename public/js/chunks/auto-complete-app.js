@@ -54,7 +54,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "auto-complete-app",
-  //props:['options','filterBy','placeholder'], //get from parent component
+  //get from parent component
   props: {
     options: {
       //type: Object,

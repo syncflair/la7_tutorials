@@ -18,10 +18,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Admin-Wrapper",
-  mounted: function mounted() {//console.log('Component mounted.')
+  //Get props form views/admin/dashboard.blade.php
+  props: ['user', 'permissions'],
+  data: function data() {
+    return {};
+  },
+  methods: {},
+  created: function created() {
+    //direct commit (mutations) to resources/js/store/commonStoreForAll.js
+    this.$store.commit('commonStoreForAll/AUTH_USER', this.user);
+    this.$store.commit('commonStoreForAll/AUTH_PERMISSIONS', this.permissions);
+  },
+  mounted: function mounted() {//console.log(this.user)
+    //console.log(this.myName)
+    //console.log()
   }
 });
 

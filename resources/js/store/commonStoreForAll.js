@@ -4,6 +4,8 @@ const commonStoreForAll ={
 	
 	state: () => ({
 	    //accessable from any where 
+      authUser: {},
+      authPermissions:{},
 	    userStatus: {}, //get data from user_status table
 	    Countries:{},
       Divisions:{}, 
@@ -17,6 +19,11 @@ const commonStoreForAll ={
 
 
   mutations: {
+      //commit from resources/js/components/admin/AdminWrapper.vue
+      AUTH_USER(state, data) { return state.authUser = data; },
+      AUTH_PERMISSIONS(state, data){ return state.authPermissions = data;},
+
+
     	FETCH_USER_STATUS(state, data) { return state.userStatus = data; },
 
       FETCH_COUNTRY_DATA(state, Countries) { return state.Countries = Countries; },

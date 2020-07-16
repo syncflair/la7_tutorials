@@ -76,11 +76,14 @@ Auth::routes([
 
 
 /**************************************** Admin middleware *****************************************************/
+//Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], function() {
 Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], function() {
+//Route::group(['middleware'=>['admin','auth','verified'] ], function() {
 
   // Route::fallback(function() {
   //     return response()->json(['message' => 'Not Found!'], 404);
   // });
+  //Ajax Query User Role Permission Route
   Route::get('dashboard', 'Admin\AdminController@index')->name('dashboard');
   Route::get('/user-verify/{user_id}', 'Admin\AuthManagement\UserController@user_verify');
   Route::get('/user-unactive/{user_id}', 'Admin\AuthManagement\UserController@user_unactive');
@@ -94,6 +97,13 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 
     /*********************************************Vue Route****************************************************/
     
+    //Admin Users Role Permission Control Route
+    Route::resource('spa/Users-Info', 'Admin\AuthManagement\UsersController');
+    Route::get('spa/searchUsersData', 'Admin\AuthManagement\UsersController@search'); //search
+    Route::resource('spa/Roles-Info', 'Admin\AuthManagement\RolesController',
+      ['except'=>['create','show','edit'] ]);
+    Route::resource('spa/Permissions-Info', 'Admin\AuthManagement\PermissionsController');
+
 
     //Customer control Route For Admin Dashboard
     Route::get('spa/searchCustomerData', 'Admin\Customer\CustomerController@search'); //search
@@ -164,6 +174,8 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/DistrictZone-Info', 'Admin\Settings\DistrictZoneController', 
       ['except'=>['create','show','edit'] ]);
 
+     Route::resource('spa/Department-Info', 'Admin\Settings\DepartmentController');
+
 
 
     //Start Demo
@@ -191,7 +203,6 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     //End Deomo
     /**********************************************End Vue Route *************************************************/   
  
-
     // Vue: single page application (SPA)- Any route that not match that redirect to dashboard. combine vue route and laravel rourte. Best way place this route to last of the line    
     //Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '.*' ); 
     Route::get('/spa/{anypath}', function () {

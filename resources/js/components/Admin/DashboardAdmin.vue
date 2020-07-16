@@ -1,6 +1,5 @@
 <template>
 
-
 <!-- Main content -->
 <section class="content">      
 <div class="container-fluid">   
@@ -11,7 +10,7 @@
           <div class="row">
             <div class="col-md-6">
               <ol class="breadcrumb float-sm-left">
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item active">Dashboard </li>
               </ol>
             </div>
             <div class="col-md-6 text-right">Navigation</div>
@@ -129,15 +128,51 @@
         </div>
     </div>
 
+    {{authPermissionsData}}<br>
+    <!-- {{ isViewPermitted('user')}} -->
+
+    <h2 v-show="authPermissionsData.BranchInfo.view === true"> This Permission check</h2>
 
 </div>
 </section><!-- Main content -->
 </template>
 
 <script>
+
+    import { mapState } from 'vuex' //for user MapState
+
     export default {
+        data(){
+          return {
+            module:'role'
+          }
+        },
+
+        computed: {
+          ...mapState( 
+            'commonStoreForAll', ['authUser','authPermissions']
+          ),
+
+          // purmission_object:function(){
+          //   let array_data = JSON.parse(this.authUser.role.permission.permission);
+
+          //     if(array_data.user.add === null){
+          //         return 0
+          //     }else{
+          //       return 1
+          //     }
+          // }
+        },
+
+        methods:{
+
+        },
+
         mounted() {
-            //console.log('Component mounted.')
+          //console.log(JSON.parse(this.authPermissions.permission).BranchInfo.delete);
+          console.log(JSON.parse(this.authPermissions.permission));
+          //console.log(this.authPermissions.permission['BranchInfo']['delete']);
+
         }
     }
 </script>

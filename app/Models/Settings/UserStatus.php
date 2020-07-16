@@ -30,7 +30,7 @@ class UserStatus extends Model
 
 
     public function user(){
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\User', 'status_id');
         //return $this->hasMany(User::class);  
     }
 

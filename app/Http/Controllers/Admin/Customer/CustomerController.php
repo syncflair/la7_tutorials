@@ -26,8 +26,7 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-
-        if(!empty($request->perPage)){
+       if(!empty($request->perPage)){
             $perPage = $request->perPage;
        }else{
             $perPage = 10;

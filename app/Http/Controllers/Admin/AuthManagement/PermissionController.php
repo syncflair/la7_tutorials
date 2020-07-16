@@ -45,26 +45,26 @@ class PermissionController extends Controller
                 ->addColumn('action', function($permession_data){  
                     $ActionData = '';
 
-                    if( @GetAuthUserRolePermission()->permission->view != null ){                 
+                    //if( @GetAuthUserRolePermission()->permission->view != null ){                 
                         $ActionData = '<a onclick="PermissionShow('.$permession_data->id.')"  class="btn  btn-primary- btn-flat btn-sm">
                                 <i class="fas fa-eye info"></i>
                             </a>';
-                    }
+                   // }
 
-                    if( @GetAuthUserRolePermission()->permission->edit != null ){   
+                   // if( @GetAuthUserRolePermission()->permission->edit != null ){   
                     $ActionData  .='<a onclick="PermissionEdit('.$permession_data->id.')" href="';
                     $ActionData .=   route('permission.edit', $permession_data->id);
                     $ActionData  .='" class="btn  btn-primary- btn-flat btn-sm">
                             <i class="fas fa-edit primary "></i>
                         </a>';
-                    }
+                   // }
 
-                    if( @GetAuthUserRolePermission()->permission->delete != null ){   
+                   // if( @GetAuthUserRolePermission()->permission->delete != null ){   
                     $ActionData  .='
                         <a onclick="PermissionDelete('.$permession_data->id.')" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
                             <i class="far fa-trash-alt red"></i>
                         </a>';   
-                    }
+                   // }
                     
                     return $ActionData;            
               
@@ -120,7 +120,10 @@ class PermissionController extends Controller
         //return back()->with('success', 'Permission added successfully.'); //return to same page with message
         Session::put('success','Permission added successfully'); //massage after insert
         return Redirect::to('permission'); //*/       
+
+
     }
+
 
     /**
      * Display the specified resource.

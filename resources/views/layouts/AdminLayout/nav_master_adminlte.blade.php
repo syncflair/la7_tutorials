@@ -15,26 +15,26 @@
         </a>
         
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-left">
-
-          @if( @GetAuthUserRolePermission()->user->page != null ) 
+          
+          <!-- @if( @GetAuthUserRolePermission()->user->page != null )  -->
           <a href="{{route('user.index')}}" class="dropdown-item {{ Request::is('user*') ? 'active' : '' }}">
             <i class="fas fa-envelope mr-2"></i> User
           </a>
-          @endif
+          <!-- @endif -->
 
-          @if( @GetAuthUserRolePermission()->role->page != null ) 
+          <!-- @if( @GetAuthUserRolePermission()->role->page != null )  -->
           <div class="dropdown-divider"></div>
           <a href="{{route('role.index')}}" class="dropdown-item {{ Request::is('role*') ? 'active' : '' }}">
             <i class="fas fa-users mr-2"></i> Role
           </a>
-          @endif
+          <!-- @endif -->
 
-          @if( @GetAuthUserRolePermission()->permission->page != null ) 
+          <!-- @if( @GetAuthUserRolePermission()->permission->page != null )  -->
           <div class="dropdown-divider"></div>
           <a href="{{route('permission.index')}}" class="dropdown-item {{ Request::is('permission*') ? 'active' : '' }}">
             <i class="fas fa-file mr-2"></i> Permission
           </a>
-          @endif
+          <!-- @endif -->
 
         
           <div class="dropdown-divider"></div>

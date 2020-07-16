@@ -9,7 +9,21 @@
 @section('content')
 
 <!-- Router-view passing through admin wrapper component -->
-<adminwrapper></adminwrapper>
+<adminwrapper 
+	:user="{{Auth::user()}}" 
+	:permissions="{{ \App\Models\Permission::where(['id' => Auth::user()->role->id ])->first() }}" 
+></adminwrapper>
+
+<!-- :permissions="{{ \App\Models\Permission::where(['id' => Auth::user()->role->id ])->first() }} " -->
+
+
+<!-- {{Auth::user()->role->id}} -->
+<!-- {{ GetAuthUserRolePermission()->role->read }} -->
+
+
+
+
+<!-- {{ \App\Models\Permission::where(['id' => Auth::user()->role->id ])->first() }}  -->
 
 
 @endsection

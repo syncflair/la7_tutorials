@@ -32494,6 +32494,40 @@ label:not(.form-check-label):not(.custom-file-label) {
   border-left: 15px solid #17a2b8 !important;
 }
 
+/*Scrool Bar Style*/
+
+/* width */
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/**/
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/*888*/
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #17a2b8;
+}
+
+/*555*/
+
+/*End Scrool Bar Style*/
+
 body {
   zoom: 0.9 !important;
   font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;

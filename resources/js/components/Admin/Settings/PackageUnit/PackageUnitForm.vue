@@ -36,7 +36,7 @@
 
                     <div class="form-group">
                       <label>Package Details</label>
-                        <input v-model="form.package_desc" type="text" ref="package_desc" name="package_desc" class="form-control" :class="{ 'is-invalid': form.errors.has('package_desc') }" placeholder="Enter Package value">
+                        <input v-model="form.package_desc" type="text" ref="package_desc" name="package_desc" class="form-control" :class="{ 'is-invalid': form.errors.has('package_desc') }" placeholder="Enter Package details">
                       <has-error :form="form" field="package_desc"></has-error>
                     </div>	                
 

@@ -487,7 +487,7 @@ var render = function() {
                                 attrs: {
                                   type: "text",
                                   name: "package_desc",
-                                  placeholder: "Enter Package value"
+                                  placeholder: "Enter Package details"
                                 },
                                 domProps: { value: _vm.form.package_desc },
                                 on: {

@@ -186,6 +186,47 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>
+                User Management
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">6</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+                <router-link to="/spa/UserMaster" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Users
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/RoleMaster" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Role
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/PermissionMaster" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Permission
+                  </p>
+                </router-link>
+              </li>
+
+            </ul>
+          </li><!--/customer-->
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-users"></i>
+              <p>
                 Customers
                 <i class="fas fa-angle-left right"></i>
                 <span class="badge badge-info right">6</span>
@@ -405,12 +446,12 @@
 
 
           <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon far fa-chart-bar orange"></i>
+            <router-link to="/spa/ReportMaster" class="nav-link">
+              <i class="nav-icon fas fa-info-circle"></i>
               <p>
                 Reports
               </p>
-            </a>
+            </router-link>
           </li>
 
           
@@ -455,6 +496,7 @@
                 </router-link>
               </li>
 
+              <!-- @if(GetAuthUserRolePermission()->BranchInfo->view == true) -->
               <li class="nav-item">
                 <router-link to="/spa/BranchInfo" class="nav-link">
                   <!-- <i class="nav-icon fas fa-boxes"></i> -->
@@ -464,6 +506,7 @@
                   </p>
                 </router-link>
               </li>
+              <!-- @endif -->
 
               <li class="nav-item">
                 <router-link to="/spa/CurrencyMarster" class="nav-link">
@@ -542,6 +585,15 @@
                   <i class="nav-icon fas fa-info-circle"></i>
                   <p>
                     Payment Method
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/DepartmentMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Departments
                   </p>
                 </router-link>
               </li>

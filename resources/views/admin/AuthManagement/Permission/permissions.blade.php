@@ -25,17 +25,17 @@
           <div class="col-sm-6 text-right">
               <a href="{{ BackPath() }}" type="button" class="btn btn-flat btn-primary btn-sm">Back</a> 
 
-              @if( @GetAuthUserRolePermission()->user->page != null ) 
+              <!-- @if( @GetAuthUserRolePermission()->user->page != null )  -->
               <a href="{{route('user.index')}}" type="button" class="btn btn-primary btn-flat btn-sm"> Users</a>
-              @endif
+              <!-- @endif -->
 
-              @if( @GetAuthUserRolePermission()->role->page != null ) 
+              <!-- @if( @GetAuthUserRolePermission()->role->page != null )  -->
               <a href="{{route('role.index')}}" type="button" class="btn btn-primary btn-flat btn-sm"> Roles</a>
-              @endif
+              <!-- @endif -->
 
-              @if( @GetAuthUserRolePermission()->permission->add != null ) 
+              <!-- @if( @GetAuthUserRolePermission()->permission->add != null )  -->
               <a href="{{route('permission.create')}}" type="button" class="btn btn-primary btn-flat btn-sm"> <i class="fas fa-plus"></i> Add Permission</a>
-              @endif
+              <!-- @endif -->
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->

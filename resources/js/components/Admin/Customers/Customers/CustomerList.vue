@@ -25,8 +25,8 @@
             <th style="width: 20%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
             <th style="width: 20%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>             
             <th style="width: 7%;" scope="col" @click="sort('phone')" class="sortable-title">Phone</th>
-            <th style="width: 5%;" scope="col" @click="sort('phone')" class="sortable-title">Group</th>
-            <th style="width: 3%;" scope="col" @click="sort('phone')" class="sortable-title">Status</th>
+            <th style="width: 5%;" scope="col" @click="sort('customer_group')" class="sortable-title">Group</th>
+            <th style="width: 3%;" scope="col" @click="sort('us_name')" class="sortable-title">Status</th>
             <th style="width: 3%;" scope="col">Nofify</th>
             <th style="width: 7%;" scope="col">Date</th>
             <th style="width: 10%; text-align:right;" scope="col">Action</th>

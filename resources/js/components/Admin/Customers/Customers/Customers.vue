@@ -41,8 +41,10 @@
 </template>
 
 <script>
-    import CustomerList from './CustomerList.vue'
-    import CustomerForm from './CustomerForm.vue'
+    // import CustomerList from './CustomerList.vue'
+    // import CustomerForm from './CustomerForm.vue'
+    const CustomerList = () => import( /* webpackChunkName: "CustomerList-com" */ './CustomerList') 
+    const CustomerForm = () => import( /* webpackChunkName: "CustomerForm-com" */ './CustomerForm')
 
     export default {
         name: "CustomerForAdmim",

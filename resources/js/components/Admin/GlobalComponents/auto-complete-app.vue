@@ -44,7 +44,7 @@
 
     export default {
        	name: "auto-complete-app",
-       	//props:['options','filterBy','placeholder'], //get from parent component
+       	//get from parent component
        	props: {
        	  options:{
        	  	//type: Object,

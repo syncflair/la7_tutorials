@@ -9,6 +9,13 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -145,8 +152,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+ //for user MapState
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {//console.log('Component mounted.')
+  data: function data() {
+    return {
+      module: 'role'
+    };
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'authPermissions'])),
+  methods: {},
+  mounted: function mounted() {
+    //console.log(JSON.parse(this.authPermissions.permission).BranchInfo.delete);
+    console.log(JSON.parse(this.authPermissions.permission)); //console.log(this.authPermissions.permission['BranchInfo']['delete']);
   }
 });
 
@@ -167,183 +188,198 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("section", { staticClass: "content" }, [
+    _c("div", { staticClass: "container-fluid" }, [
+      _vm._m(0),
+      _vm._v("\r\n\r\n    " + _vm._s(_vm.authPermissionsData)),
+      _c("br"),
+      _vm._v(" "),
+      _c(
+        "h2",
+        {
+          directives: [
+            {
+              name: "show",
+              rawName: "v-show",
+              value: _vm.authPermissionsData.BranchInfo.view === true,
+              expression: "authPermissionsData.BranchInfo.view === true"
+            }
+          ]
+        },
+        [_vm._v(" This Permission check")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", { staticClass: "content" }, [
-      _c("div", { staticClass: "container-fluid" }, [
-        _c("div", { staticClass: "card vue-card" }, [
-          _c("div", { staticClass: "card-header" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-6" }, [
-                _c("ol", { staticClass: "breadcrumb float-sm-left" }, [
-                  _c("li", { staticClass: "breadcrumb-item active" }, [
-                    _vm._v("Dashboard")
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-6 text-right" }, [
-                _vm._v("Navigation")
+    return _c("div", { staticClass: "card vue-card" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-left" }, [
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Dashboard ")
               ])
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-3 col-6" }, [
-                _c("div", { staticClass: "small-box bg-info" }, [
-                  _c("div", { staticClass: "inner" }, [
-                    _c("h3", [_vm._v("4500 "), _c("small", [_vm._v("tk")])]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("Sales")])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "icon" }, [
-                    _c("i", { staticClass: "ion ion-bag" })
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    { staticClass: "small-box-footer", attrs: { href: "#" } },
-                    [
-                      _vm._v("More info "),
-                      _c("i", { staticClass: "fas fa-arrow-circle-right" })
-                    ]
-                  )
-                ])
+          _c("div", { staticClass: "col-md-6 text-right" }, [
+            _vm._v("Navigation")
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-lg-3 col-6" }, [
+            _c("div", { staticClass: "small-box bg-info" }, [
+              _c("div", { staticClass: "inner" }, [
+                _c("h3", [_vm._v("4500 "), _c("small", [_vm._v("tk")])]),
+                _vm._v(" "),
+                _c("p", [_vm._v("Sales")])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-lg-3 col-6" }, [
-                _c("div", { staticClass: "small-box bg-info" }, [
-                  _c("div", { staticClass: "inner" }, [
-                    _c("h3", [_vm._v("4500 "), _c("small", [_vm._v("tk")])]),
-                    _vm._v(" "),
-                    _c("p", [_vm._v("Sales")])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "icon" }, [
-                    _c("i", { staticClass: "ion ion-bag" })
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    { staticClass: "small-box-footer", attrs: { href: "#" } },
-                    [
-                      _vm._v("More info "),
-                      _c("i", { staticClass: "fas fa-arrow-circle-right" })
-                    ]
-                  )
+              _c("div", { staticClass: "icon" }, [
+                _c("i", { staticClass: "ion ion-bag" })
+              ]),
+              _vm._v(" "),
+              _c(
+                "a",
+                { staticClass: "small-box-footer", attrs: { href: "#" } },
+                [
+                  _vm._v("More info "),
+                  _c("i", { staticClass: "fas fa-arrow-circle-right" })
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-3 col-6" }, [
+            _c("div", { staticClass: "small-box bg-info" }, [
+              _c("div", { staticClass: "inner" }, [
+                _c("h3", [_vm._v("4500 "), _c("small", [_vm._v("tk")])]),
+                _vm._v(" "),
+                _c("p", [_vm._v("Sales")])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "icon" }, [
+                _c("i", { staticClass: "ion ion-bag" })
+              ]),
+              _vm._v(" "),
+              _c(
+                "a",
+                { staticClass: "small-box-footer", attrs: { href: "#" } },
+                [
+                  _vm._v("More info "),
+                  _c("i", { staticClass: "fas fa-arrow-circle-right" })
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("br"),
+            _vm._v(" "),
+            _c("h3", { staticClass: "m-0 text-dark" }, [_vm._v("Bank & Cash")]),
+            _c("br")
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+            _c("div", { staticClass: "info-box" }, [
+              _c(
+                "span",
+                { staticClass: "info-box-icon bg-success elevation-1" },
+                [_c("i", { staticClass: "fas fa-money-bill-alt" })]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "info-box-content" }, [
+                _c("span", { staticClass: "info-box-text success" }, [
+                  _vm._v("Bank Balance")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "info-box-number success" }, [
+                  _vm._v(
+                    "\r\n                      200000\r\n                      "
+                  ),
+                  _c("small", [_vm._v("tk")])
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-12" }, [
-                _c("br"),
-                _vm._v(" "),
-                _c("h3", { staticClass: "m-0 text-dark" }, [
-                  _vm._v("Bank & Cash")
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+            _c("div", { staticClass: "info-box" }, [
+              _c(
+                "span",
+                { staticClass: "info-box-icon bg-success elevation-1" },
+                [_c("i", { staticClass: "fas fa-money-bill-alt" })]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "info-box-content" }, [
+                _c("span", { staticClass: "info-box-text success" }, [
+                  _vm._v("Cash In Hand")
                 ]),
-                _c("br")
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-                _c("div", { staticClass: "info-box" }, [
-                  _c(
-                    "span",
-                    { staticClass: "info-box-icon bg-success elevation-1" },
-                    [_c("i", { staticClass: "fas fa-money-bill-alt" })]
+                _vm._v(" "),
+                _c("span", { staticClass: "info-box-number success" }, [
+                  _vm._v(
+                    "\r\n                      70000\r\n                      "
                   ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "info-box-content" }, [
-                    _c("span", { staticClass: "info-box-text success" }, [
-                      _vm._v("Bank Balance")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "info-box-number success" }, [
-                      _vm._v(
-                        "\r\n                      200000\r\n                      "
-                      ),
-                      _c("small", [_vm._v("tk")])
-                    ])
-                  ])
+                  _c("small", [_vm._v("tk")])
                 ])
-              ]),
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+            _c("div", { staticClass: "info-box" }, [
+              _c(
+                "span",
+                { staticClass: "info-box-icon bg-success elevation-1" },
+                [_c("i", { staticClass: "fas fa-money-check-alt" })]
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-                _c("div", { staticClass: "info-box" }, [
-                  _c(
-                    "span",
-                    { staticClass: "info-box-icon bg-success elevation-1" },
-                    [_c("i", { staticClass: "fas fa-money-bill-alt" })]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "info-box-content" }, [
-                    _c("span", { staticClass: "info-box-text success" }, [
-                      _vm._v("Cash In Hand")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "info-box-number success" }, [
-                      _vm._v(
-                        "\r\n                      70000\r\n                      "
-                      ),
-                      _c("small", [_vm._v("tk")])
-                    ])
-                  ])
+              _c("div", { staticClass: "info-box-content" }, [
+                _c("span", { staticClass: "info-box-text success" }, [
+                  _vm._v("Cheques")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "info-box-number success" }, [
+                  _vm._v("Received(2) 4000 "),
+                  _c("small", [_vm._v("tk")])
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "info-box-number danger" }, [
+                  _vm._v("Paid(1) 3000 "),
+                  _c("small", [_vm._v("tk")])
                 ])
-              ]),
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
+            _c("div", { staticClass: "info-box" }, [
+              _c(
+                "span",
+                { staticClass: "info-box-icon bg-danger elevation-1" },
+                [_c("i", { staticClass: "fas fa-hand-holding-usd" })]
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-                _c("div", { staticClass: "info-box" }, [
-                  _c(
-                    "span",
-                    { staticClass: "info-box-icon bg-success elevation-1" },
-                    [_c("i", { staticClass: "fas fa-money-check-alt" })]
+              _c("div", { staticClass: "info-box-content" }, [
+                _c("span", { staticClass: "info-box-text danger" }, [
+                  _vm._v("Loan")
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "info-box-number danger" }, [
+                  _vm._v(
+                    "\r\n                      130000\r\n                      "
                   ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "info-box-content" }, [
-                    _c("span", { staticClass: "info-box-text success" }, [
-                      _vm._v("Cheques")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "info-box-number success" }, [
-                      _vm._v("Received(2) 4000 "),
-                      _c("small", [_vm._v("tk")])
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "info-box-number danger" }, [
-                      _vm._v("Paid(1) 3000 "),
-                      _c("small", [_vm._v("tk")])
-                    ])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-12 col-sm-6 col-md-3" }, [
-                _c("div", { staticClass: "info-box" }, [
-                  _c(
-                    "span",
-                    { staticClass: "info-box-icon bg-danger elevation-1" },
-                    [_c("i", { staticClass: "fas fa-hand-holding-usd" })]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "info-box-content" }, [
-                    _c("span", { staticClass: "info-box-text danger" }, [
-                      _vm._v("Loan")
-                    ]),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "info-box-number danger" }, [
-                      _vm._v(
-                        "\r\n                      130000\r\n                      "
-                      ),
-                      _c("small", [_vm._v("tk")])
-                    ])
-                  ])
+                  _c("small", [_vm._v("tk")])
                 ])
               ])
             ])

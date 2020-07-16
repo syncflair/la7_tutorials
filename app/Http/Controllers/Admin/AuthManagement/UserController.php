@@ -49,7 +49,7 @@ class UserController extends Controller
                           
                 $actionData = '';
 
-                if( @GetAuthUserRolePermission()->user->edit != null ) {
+               // if( @GetAuthUserRolePermission()->user->edit != null ) {
                     if( $users_data->id != Auth::user()->id ){ 
                         if($users_data->status_id == 1){                        
                             $actionData .= '<a onclick="UserUnactive('.$users_data->id.')" class="btn btn-danger- btn-flat btn-sm" data-toggle="tooltip" data-placement="right" title="Click to Unactive" >  <i class="far fa-thumbs-down danger"></i>  </a>';
@@ -57,9 +57,9 @@ class UserController extends Controller
                             $actionData .= '<a onclick="UserActive('.$users_data->id.')" class="use-tooltip btn btn-success- btn-flat btn-sm" data-toggle="tooltip" data-placement="left" title="Click to Active" >   <i class="far fa-thumbs-up success"></i>  </a>';
                         }
                     }
-                }
+                //}
 
-                if( @GetAuthUserRolePermission()->user->edit != null ) {
+                //if( @GetAuthUserRolePermission()->user->edit != null ) {
                     if( $users_data->id != Auth::user()->id ){ 
                         if($users_data->email_verified_at != null ){                       
                             $actionData .= '<a class="btn btn-danger- btn-flat btn-sm" data-toggle="tooltip" data-placement="right" title="Verified User" >  <i class="fas fa-user-check success"></i>  </a>';
@@ -67,26 +67,26 @@ class UserController extends Controller
                             $actionData .= '<a onclick="UserVerify('.$users_data->id.')" class="use-tooltip btn btn-success- btn-flat btn-sm" data-toggle="tooltip" data-placement="left" title="Click to Verify User" > <i class="fas fa-user-times warning"></i> </a>';
                         }
                     }
-                }
+                //}
 
-                if( @GetAuthUserRolePermission()->user->view != null ) {
+                //if( @GetAuthUserRolePermission()->user->view != null ) {
                     if( $users_data->id != Auth::user()->id ){ 
                         $actionData .= '
                         <a onclick="ShowUser('.$users_data->id.')"  class="btn  btn-primary- btn-flat btn-sm">
                             <i class="fas fa-eye info"></i>
                         </a>';
                     }
-                }
+                //}
 
                 
-                if( @GetAuthUserRolePermission()->user->edit != null ) {
+                //if( @GetAuthUserRolePermission()->user->edit != null ) {
                     $actionData .= '
                     <a onclick="UserEdit('.$users_data->id.')" class="btn  btn-primary- btn-flat btn-sm">
                         <i class="fas fa-edit primary "></i>
                     </a>'; 
-                }
+               // }
 
-                if( @GetAuthUserRolePermission()->user->delete != null ) {
+               // if( @GetAuthUserRolePermission()->user->delete != null ) {
                     if( $users_data->id != Auth::user()->id ){ 
                     //if( Auth::user()->role_id != 1){                                 
                         $actionData .= '
@@ -94,7 +94,7 @@ class UserController extends Controller
                             <i class="far fa-trash-alt red"></i>
                         </a>';
                     }
-                }
+               // }
 
                 return $actionData;
             })->editColumn('us_name', function($users_data){

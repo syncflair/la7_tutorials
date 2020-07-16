@@ -22,6 +22,7 @@ class Permission extends Model
 
     //My Custome Relation - A Role Has Many User (hasMany())
     public function role(){
+        //return $this->hasOne('App\Models\Role');
         return $this->belongsTo('App\Models\Role');
         //return $this->hasMany(User::Permission);  
     }
