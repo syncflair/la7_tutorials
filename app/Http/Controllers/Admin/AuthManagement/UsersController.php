@@ -5,13 +5,30 @@ namespace App\Http\Controllers\Admin\AuthManagement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Mail;
 use App\User;
 //use App\Mail\UserRegisterByAdminMail;
+use Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str; //for str::random
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Config; //use for get constant velue without - \Config::get('constants.UserFliesPath');
+
+use App\Mail\UserNotification;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Carbon;
 
 class UsersController extends Controller
 {
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,7 +65,71 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:3|max:80', 
+            'email' => 'required|email|unique:users,email', 
+            'role_id' => 'required', 
+            'status_id' => 'required', 
+            'password' => 'required|min:8|max:30',   //confirmed
+            'password_confirmation' => 'required|same:password',
+            //'avatar' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,PNG',
+
+            //'password_confirmation' => ['sometimes','same:password'],
+        ]);
+       
+        $data =array();
+        $data['name']=$request->name;
+        $data['email']=$request->email;
+        $data['role_id']=$request->role_id;
+        $data['status_id']=$request->status_id;
+        
+        $data['password'] = Hash::make($request->password); //make hash password
+        //$request['password'] = Hash::make($request->password); //make hash password
+        //unset($request['confirm_password']); //unset confirm_password from send to database
+
+        $image = $request->avatar;
+
+        if($image){
+            //return $imageSize =getimagesize($image);
+            $imageExt = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
+                return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
+            }else{               
+
+                //new name generate from base64 file
+                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                //save image using intervention image
+                \Image::make($image)
+                    //->fit(200, 200)
+                    ->resize(40, 40)
+                   // ->text('SHORBORAHO', 140, 190)
+                    ->save(public_path('FilesStorage/Backend/Users/').$imageName);
+
+
+                $data['avatar'] = 'FilesStorage/Backend/Users/'.$imageName;
+
+                $user = User::create($data); 
+
+                if($request->status_id != 1){ //if user status is assigned to active than mail not send
+                    $user->sendEmailVerificationNotification(); //for verification email send 
+                }
+
+                return response()->json(['success'=>'User inserted successfully ']);
+            }//end image type check                         
+        }else{
+            $data['avatar'] = null;
+            //$request['avatar'] = null;
+            $user = User::create($data); 
+
+            if($request->status_id != 1){ //if user status is assigned to active than mail not send
+                $user->sendEmailVerificationNotification();  ////for verification email send
+            }
+
+            return response()->json(['success'=>'User inserted successfully Without Image']);
+           // \Mail::to($user->email)->send(new VerificationEmail($user)); //for verification email send
+            
+        }            
+    
     }
 
     /**
@@ -82,7 +163,72 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:3|max:80', 
+            'email' => 'required|email|unique:users,email,'.$id, 
+            'role_id' => 'required', 
+            'status_id' => 'required', 
+            'password' => 'nullable|sometimes|min:8|max:30',   //confirmed
+            'password_confirmation' => 'sometimes|same:password',
+            //'avatar' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,PNG',
+        ]);
+       
+         //existing password query
+        $existing_user_password = User::select('password')->where('id', $request->id)->first(); 
+        $existing_password = $existing_user_password->password;
+
+        $data =array();
+        $data['name']=$request->name;
+        $data['email']=$request->email;
+        $data['role_id']=$request->role_id;
+        $data['status_id']=$request->status_id;     
+        
+        $data['password'] = $request->password == null ? $existing_password : Hash::make($request->password);
+        //$request['password'] = Hash::make($request->password); //make hash password
+        //unset($request['confirm_password']); //unset confirm_password from send to database
+
+        $image = $request->avatar;
+
+        if( Str::length($image) > 150){ /*larvel helper function*/
+            //return $imageSize =getimagesize($image);
+            $imageExt = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
+                return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
+            }else{
+
+                 //query for existing image
+                $existing_image = User::select('avatar')->where('id', $id)->first();                   
+                if(!empty($existing_image->avatar)) {
+                    File::delete($existing_image->avatar); //delete file //use Illuminate\Support\Facades\File; at top
+                }//else{echo 'Empty';}  
+
+
+                //new name generate from base64 file
+                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                //save image using intervention image
+                \Image::make($image)
+                    //->fit(200, 200)
+                    ->resize(40, 40)
+                   // ->text('SHORBORAHO', 140, 190)
+                    ->save(public_path('FilesStorage/Backend/Users/').$imageName);
+
+
+                $data['avatar'] = 'FilesStorage/Backend/Users/'.$imageName;
+
+                $user = User::whereId($request->id)->update($data);        
+
+                return response()->json(['success'=>'User Update successfully ']);
+            }//end image type check                         
+        }else{
+            $existing_image = User::select('avatar')->where('id', $request->id)->first();
+            $data['avatar'] = $existing_image->avatar;
+
+            $user = User::whereId($request->id)->update($data); 
+
+            return response()->json(['success'=>'User Update successfully Without Image']);
+           // \Mail::to($user->email)->send(new VerificationEmail($user)); //for verification email send
+            
+        } 
     }
 
     /**
@@ -93,7 +239,19 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //query for existing image
+        $existing_image = User::select('avatar')->where('id', $id)->first();                   
+        if( File::exists($existing_image->avatar) ) {  
+            File::delete($existing_image->avatar); 
+            //delete file //use Illuminate\Support\Facades\File; at top
+        }
+
+        $data = User::findOrFail($id)->delete();        
+        if($data){
+            return response()->json(['success'=> 'Record is successfully deleted']);
+        }else{
+            return response()->json(['errors'=> 'Something is wrong..']);
+        }//*/
     }
 
 
@@ -144,4 +302,33 @@ class UsersController extends Controller
         //return $searchResult;
         return response()->json($searchResult);
     }
+
+    public function verify_by_admin($id){
+        $user = User::find($id);
+        $user->email_verified_at = now();
+        $user->status_id = 1 ; 
+        $user->save();
+
+        //\Mail::to($user->email)->send(new userAcknowledge($id)); //for verification email send
+        Mail::to($user->email)->send(new UserNotification($user)); //for verification email send
+        return response()->json(['success'=> $user->name.' is verifyed Now']);
+    }
+
+    public function inactive_user($id){
+        $data = User::find($id);
+        $data->status_id = 2; 
+        $data->save();
+        //Mail::to($user->email)->send(new UserNotification($user)); //for verification email send
+        return response()->json(['success'=> 'Inactive User']);
+    }
+
+    public function active_user($id){
+        $data = User::find($id);
+        $data->status_id = 1; 
+        $data->save();
+        //Mail::to($user->email)->send(new UserNotification($user)); //for verification email send
+        return response()->json(['success'=> 'Active User']);
+    }
+
+    
 }

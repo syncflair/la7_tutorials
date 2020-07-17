@@ -124,4 +124,12 @@ class RolesController extends Controller
             return response()->json(['errors'=> 'Something is wrong..']);
         }
     }
+
+    //return role only for admin (1 to 6) list without pagination
+    public function GetRoles(){
+        //this is for commonStoreForAll Store
+       // $data = Role::take(6)->get(); //take() is the limit of query
+        $data = Role::get(); 
+        return response()->json($data);
+    }
 }

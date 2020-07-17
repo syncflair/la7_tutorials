@@ -298,3 +298,42 @@ body{
 
 
 
+/*Style for search-app-one*/
+    .autoCompleteSearch{
+        position: relative;
+    }
+    .popOver{
+        position: absolute;
+        width: 100%;
+        z-index: 1;
+        background: #fff;
+        border: 1px solid #dee2e6;
+    }
+    .popOver > input{
+        //pointer-events: none;
+        //outline: none;
+    }
+    .optionList{
+        min-height: 1px;
+        max-height: 250px;
+        overflow-y: scroll;
+        padding: 0px;
+    }
+    .optionList > li{
+        list-style: none;
+        padding: 3px 10px;      
+    }
+    .optionList > li:hover{
+        background: #dee2e6;
+        cursor: pointer;
+    }
+    .optionList > .selected{
+        background: #fd7e14;
+        color: #fff;
+    }
+    .optionList > .selected:hover{
+        background: #fd7e14;
+        color: #fff;
+        cursor: pointer;
+    }
+/*end Style for search-app-one*/

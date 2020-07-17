@@ -3,12 +3,12 @@
 		
 	<!-- Modal -->
 <div class="modal fade" id="FormModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" >
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header pb-1">
         <h5 class="modal-title" id="">
-        	<span v-show="!editMode">Add user (Credential)</span>
-        	<span v-show="editMode">Update user (Credential)</span>
+        	<span v-show="!editMode">Add supplier (Credential)</span>
+        	<span v-show="editMode">Update supplier (Credential)</span>
         </h5>
         <button @click="ClearForm()" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -20,12 +20,12 @@
 
 	          <div class="card--"><!-- row inside form -->
 	          	<div class="row">
-	          	<div class="col-md-7 col-sm-6">
+	          	<div class="col-md-5 col-sm-6">
 
 	          		<div class="form-group row">
 			            <label for="name" class="col-sm-3 col-form-label">Name *</label>
 			            <div class="col-sm-9">
-			              <input v-model="form.name" type="text" ref="name" name="name" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('name') }" placeholder="User Name">
+			              <input v-model="form.name" type="text" ref="name" name="name" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('name') }" placeholder="supplier Name">
 	                  	  <has-error :form="form" field="name"></has-error>
 			            </div>
 			        </div>
@@ -33,21 +33,36 @@
 	          		<div class="form-group row">
 			            <label for="email" class="col-sm-3 col-form-label">Email *</label>
 			            <div class="col-sm-9">
-			              <input v-model="form.email" type="text" ref="email" name="email" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('email') }" placeholder="User email">
+			              <input v-model="form.email" type="text" ref="email" name="email" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('email') }" placeholder="supplier email">
 	                  	  <has-error :form="form" field="email"></has-error>
 			            </div>
 			        </div>
 
 			        <div class="form-group row">
-			            <label for="role" class="col-sm-3 col-form-label">Role *</label>
+			            <label for="phone" class="col-sm-3 col-form-label">Phone *</label>
 			            <div class="col-sm-9">
-			              <select v-model="form.role_id" class="form-control form-control-sm" id="role_id" name="role_id" :class="{ 'is-invalid': form.errors.has('role_id') }" >
-			              	  <option disabled value="">Select role ..</option>                
-			                  <option v-for="role in adminRoles" v-bind:value="role.id">
-			                  	{{role.name}}
+			            	<div class="input-group input-group-sm mb-3">	                      
+			                  <div class="input-group-prepend">
+			                    <span class="input-group-text"><!-- <i class="fas fa-envelope"></i> --> +88 </span>
+			                  </div>
+
+			                  <input v-model="form.phone" type="number" ref="phone" name="phone" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('phone') }" placeholder="Enter phone number">	 
+			                  <has-error :form="form" field="phone"></has-error>                     
+			                </div> 
+			            </div>
+			        </div>
+
+
+			        <div class="form-group row">
+			            <label for="supplier_type" class="col-sm-3 col-form-label">Supplier Type *</label>
+			            <div class="col-sm-9">
+				            <select v-model="form.supplier_type" class="form-control form-control-sm" id="supplier_type" name="supplier_type" :class="{ 'is-invalid': form.errors.has('supplier_type') }" >
+			              	  <option disabled value="">Select supplier type ..</option>                
+			                  <option v-for="s_type in supplierTypes" v-bind:value="s_type.name">
+			                  	{{s_type.name}}
 			                  </option>			                  
-			               </select>
-			               <has-error :form="form" field="role_id"></has-error>	
+			                </select>
+			                <has-error :form="form" field="supplier_type"></has-error>			             
 			            </div>
 			        </div>
 
@@ -81,6 +96,26 @@
 	          	</div>
 
 	          	<div class="col-md-5 col-sm-6">
+
+	          		<div class="form-group row">
+			            <label for="supplier_desc" class="col-sm-3 col-form-label">Details</label>
+			            <div class="col-sm-9">
+                        	<textarea v-model="form.supplier_desc" ref="supplier_desc" name="supplier_desc" class="form-control" :class="{ 'is-invalid': form.errors.has('supplier_desc') }" placeholder="Supplier details"></textarea>
+                      		<has-error :form="form" field="supplier_desc"></has-error>
+			            </div>
+			        </div>
+
+			        <div class="form-group row">
+			            <label for="supplier_address" class="col-sm-3 col-form-label">Address</label>
+			            <div class="col-sm-9">
+                        	<textarea v-model="form.supplier_address" ref="supplier_address" name="supplier_address" class="form-control" :class="{ 'is-invalid': form.errors.has('supplier_address') }" placeholder="Address"> </textarea>
+                      		<has-error :form="form" field="supplier_address"></has-error>
+			            </div>
+			        </div>
+
+	          	</div>
+
+	          	<div class="col-md-2 col-sm-6">
 
 	          		<div class="row">
                     	<div class="col-md-12 text-center">
@@ -138,13 +173,18 @@
 	import { mapState } from 'vuex' //for user MapState
 
 	export default {
-		name: "UserMasterForm",
+		name: "SupplierMasterForm",
 
 		data () {
 	      return {
 	      	NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
 	        ShowOnChangeImage:null,	 
-	        editMode: false, //Use this for add edit using the same form   
+	        editMode: false, //Use this for add edit using the same form 
+
+	        supplierTypes: [
+			      { name: 'Person' },
+			      { name: 'Organization' },
+			    ],  
 
 	        // Create a new form instance
 	        form: new Form({
@@ -153,16 +193,16 @@
 	          email: '',
 	          password: '',
 	          password_confirmation:'',
-	          role_id:'',
 	          status_id: '',
+	          supplier_type:'',
 	          avatar: '',	          
 	        })
 	      }
 	    },//end data
 
 	    computed: {
-	        ...mapState( 'usersAdminStore', ['pagination'] ),
-	        ...mapState( 'commonStoreForAll', ['userStatus','adminRoles'] ) /*userStatus get form commonSotreForAll*/	        
+	        ...mapState( 'SupplierForAdminStore', ['pagination'] ),
+	        ...mapState( 'commonStoreForAll', ['userStatus'] ) /*userStatus get form commonSotreForAll*/	        
       	},
 
 	    methods:{
@@ -214,8 +254,8 @@
 			storeFormData() {  
 			  this.$Progress.start(); //using progress-bar package
 
-			  //this.form.post('/spa/Users-Info')
-			  this.form.post('/spa/Users-Info')
+			  //this.form.post('/spa/supplier-Info')
+			  this.form.post('/spa/supplier-Info')
 			  .then(({ data }) => { 
 
 			    if(data.success){ 
@@ -241,7 +281,7 @@
 				//console.log('Update is working!'); 
 				this.$Progress.start(); //using progress-bar package
 
-				this.form.put('/spa/Users-Info/'+this.form.id)
+				this.form.put('/spa/supplier-Info/'+this.form.id)
 				  .then(({ data }) => { 
 
 				    if(data.success){ 
@@ -273,11 +313,10 @@
 
 	    created(){
 	    	this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
-	    	this.$store.dispatch('commonStoreForAll/fetchRoles'); //get user role for admin (1 to 6)
 
             FireEvent.$on('AfterChange', () => {
 		        this.$Progress.start();
-          		this.$store.dispatch('usersAdminStore/fetchCustomer', this.pagination.per_page);
+          		this.$store.dispatch('SupplierForAdminStore/fetchData', this.pagination.per_page);
           		this.$Progress.finish();
             });
 

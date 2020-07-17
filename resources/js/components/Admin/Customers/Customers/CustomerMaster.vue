@@ -24,13 +24,13 @@
         <!--Row -->
         <div class="row mt-2 mb-3">
             <div class="col-md-12">
-                <CustomerList></CustomerList>
+                <CustomerMasterList></CustomerMasterList>
             </div>
         </div><!--/Row -->
     </div><!-- /Card Body -->
 
     <!-- PopUp Modal -->
-    <CustomerForm></CustomerForm>
+    <CustomerMasterForm></CustomerMasterForm>
 
 
 
@@ -41,16 +41,16 @@
 </template>
 
 <script>
-    // import CustomerList from './CustomerList.vue'
-    // import CustomerForm from './CustomerForm.vue'
-    const CustomerList = () => import( /* webpackChunkName: "CustomerList-com" */ './CustomerList') 
-    const CustomerForm = () => import( /* webpackChunkName: "CustomerForm-com" */ './CustomerForm')
+    // import CustomerMasterList from './CustomerMasterList.vue'
+    // import CustomerMasterForm from './CustomerMasterForm.vue'
+    const CustomerMasterList = () => import( /* webpackChunkName: "CustomerMasterList-com" */ './CustomerMasterList') 
+    const CustomerMasterForm = () => import( /* webpackChunkName: "CustomerMasterForm-com" */ './CustomerMasterForm')
 
     export default {
-        name: "CustomerForAdmim",
+        name: "CustomerMasterForAdmim",
         
         components:{ 
-            CustomerList, CustomerForm,
+            CustomerMasterList, CustomerMasterForm,
         },  
 
         data () {

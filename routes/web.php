@@ -100,21 +100,32 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     //Admin Users Role Permission Control Route
     Route::resource('spa/Users-Info', 'Admin\AuthManagement\UsersController');
     Route::get('spa/searchUsersData', 'Admin\AuthManagement\UsersController@search'); //search
+    Route::post('spa/Users-Info/verify-by-admin/{id}', 'Admin\AuthManagement\UsersController@verify_by_admin');
+    Route::post('spa/Users-Info/active-user/{id}', 'Admin\AuthManagement\UsersController@active_user');
+    Route::post('spa/Users-Info/inactive-user/{id}', 'Admin\AuthManagement\UsersController@inactive_user');
     Route::resource('spa/Roles-Info', 'Admin\AuthManagement\RolesController',
       ['except'=>['create','show','edit'] ]);
+    Route::get('spa/Role-Info/GetRoles', 'Admin\AuthManagement\RolesController@GetRoles');//commonStoreForAll store
     Route::resource('spa/Permissions-Info', 'Admin\AuthManagement\PermissionsController');
 
 
     //Customer control Route For Admin Dashboard
     Route::get('spa/searchCustomerData', 'Admin\Customer\CustomerController@search'); //search
     Route::post('spa/customer-change-notify/{id}/{notifyValue}', 'Admin\Customer\CustomerController@ChangeNotify');
-    Route::post('spa/customer-verify-by-admin/{id}', 'Admin\Customer\CustomerController@verifiedByUser');
+    Route::post('spa/customer-verify-by-admin/{id}', 'Admin\Customer\CustomerController@verifiedByAdmin');
+    Route::post('spa/customer-Info/active-customer/{id}', 'Admin\Customer\CustomerController@active_customer');
+    Route::post('spa/customer-Info/inactive-customer/{id}', 'Admin\Customer\CustomerController@inactive_customer');
     Route::resource('spa/customer-Info', 'Admin\Customer\CustomerController',
       ['except'=>['create','show','edit'] ]);
 
     //Supplier control Route For Admin Dashboard
-    // Route::resource('spa/supplier-Info', 'Admin\Supplier\SupplierController',
-    //  ['except'=>['create','show','edit'] ]);
+    Route::get('spa/searchSupplierData', 'Admin\Supplier\SupplierController@search'); //search
+    Route::post('spa/supplier-change-notify/{id}/{notifyValue}', 'Admin\Supplier\SupplierController@ChangeNotify');
+    Route::post('spa/supplier-verify-by-admin/{id}', 'Admin\Supplier\SupplierController@verifiedByAdmin');
+    Route::post('spa/supplier-Info/active-supplier/{id}', 'Admin\Supplier\SupplierController@active_supplier');
+    Route::post('spa/supplier-Info/inactive-supplier/{id}', 'Admin\Supplier\SupplierController@inactive_supplier');
+    Route::resource('spa/supplier-Info', 'Admin\Supplier\SupplierController',
+     ['except'=>['create','show','edit'] ]);
 
     //Catalog
     //Route::get('spa/searcCategoryMasterData', 'Admin\Catalog\CategoryController@search'); //search

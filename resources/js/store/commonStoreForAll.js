@@ -6,6 +6,7 @@ const commonStoreForAll ={
 	    //accessable from any where 
       authUser: {},
       authPermissions:{},
+      adminRoles:{},
 	    userStatus: {}, //get data from user_status table
 	    Countries:{},
       Divisions:{}, 
@@ -22,18 +23,15 @@ const commonStoreForAll ={
       //commit from resources/js/components/admin/AdminWrapper.vue
       AUTH_USER(state, data) { return state.authUser = data; },
       AUTH_PERMISSIONS(state, data){ return state.authPermissions = data;},
+      //End Commit
 
-
+      //get from action
+      FETCH_ROLES(state, data){return state.adminRoles = data;}, 
     	FETCH_USER_STATUS(state, data) { return state.userStatus = data; },
-
       FETCH_COUNTRY_DATA(state, Countries) { return state.Countries = Countries; },
-
       FETCH_DIVISION_DATA(state, Divisions) { return state.Divisions = Divisions; },
-
       FETCH_DISTRICT_DATA(state, Districts) { return state.Districts = Districts; },
-
       FETCH_DISTRICT_ZONE_DATA(state, Dist_Zones) { return state.Dist_Zones = Dist_Zones; },
-
 
   },/*end Mutations*/
 
@@ -50,6 +48,13 @@ const commonStoreForAll ={
         axios.get('/spa/Country-Info/GetCountry')
         .then( (response) => {
           context.commit('FETCH_COUNTRY_DATA', response.data); //use for only show data
+        }).catch( () => { })
+      },
+
+      fetchRoles(context){ //return role 1 to 6
+        axios.get('/spa/Role-Info/GetRoles')
+        .then( (response) => {
+          context.commit('FETCH_ROLES', response.data); //use for only show data
         }).catch( () => { })
       },
 

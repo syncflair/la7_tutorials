@@ -19,9 +19,14 @@
 
 <!-- {{Auth::user()->role->id}} -->
 <!-- {{ GetAuthUserRolePermission()->role->read }} -->
+@php
+$data = ["title" => ["name" => "bony", "email" => "bony@gmail.com"], "desc" => "test test test"];
+print_r($data);
 
-
-
+	
+@endphp
+{{$data['desc']}}
+{{$data['title']['name']}}
 
 <!-- {{ \App\Models\Permission::where(['id' => Auth::user()->role->id ])->first() }}  -->
 

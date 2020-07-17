@@ -29,8 +29,8 @@
 	                </div>
 
                     <div class="form-group">
-                      <label>detailsls</label>
-                        <input v-model="form.role_desc" type="text" ref="role_desc" name="role_desc" class="form-control" :class="{ 'is-invalid': form.errors.has('role_desc') }" placeholder="Enter details">
+                      <label >Details</label>
+                        <textarea v-model="form.role_desc" ref="role_desc" name="role_desc" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('role_desc') }" placeholder="Role details"></textarea>
                       <has-error :form="form" field="role_desc"></has-error>
                     </div>	                
 

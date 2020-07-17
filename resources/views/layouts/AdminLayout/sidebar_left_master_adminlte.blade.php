@@ -235,7 +235,7 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                <router-link to="/spa/Customers" class="nav-link">
+                <router-link to="/spa/CustomerMaster" class="nav-link">
                   <i class="nav-icon fas fa-boxes"></i>
                   <p>
                     Customers
@@ -259,7 +259,7 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                <router-link :to="{name: 'Suppliers', params:{} }" class="nav-link">
+                <router-link :to="{name: 'SupplierMaster', params:{} }" class="nav-link">
                 <!-- <router-link to="/spa/Parties" class="nav-link">            -->
                   <i class="nav-icon fas fa-user-friends"></i>
                   <p>

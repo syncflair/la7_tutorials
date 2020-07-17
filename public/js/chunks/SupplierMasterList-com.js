@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["UserMasterList-com"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["SupplierMasterList-com"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -112,22 +112,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
- //for user MapState 
+ //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "UserMasterList",
+  name: "supplierMasterListForAdmin",
   data: function data() {
     return {
-      NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
       // use for sortable
       currentSort: 'name',
       currentSortDir: 'asc',
@@ -141,20 +131,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'field_name': 'email',
         'show_name': 'Email'
       }, {
-        'field_name': 'us_name',
-        'show_name': 'User Status'
+        'field_name': 'phone',
+        'show_name': 'Phone'
       }, {
-        'field_name': 'role_name',
-        'show_name': 'User Role'
+        'field_name': 'supplier_type',
+        'show_name': 'Supplier Type'
       }]
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('usersAdminStore', ['users', 'pagination', 'autoCompleteData']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('SupplierForAdminStore', ['suppliers', 'pagination', 'autoCompleteData']), {
     // use for sortable
-    sortedObjects: function sortedObjects() {
+    sortedSuppliers: function sortedSuppliers() {
       var _this = this;
 
-      var fo = Object.values(this.users).sort(function (a, b) {
+      var fo = Object.values(this.suppliers).sort(function (a, b) {
         var modifier = 1;
         if (_this.currentSortDir === 'desc') modifier = -1;
         if (a[_this.currentSort] < b[_this.currentSort]) return -1 * modifier;
@@ -164,7 +154,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return fo;
     }
   }),
-  //end computed
   methods: {
     // use for sortable
     sort: function sort(s) {
@@ -174,12 +163,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.currentSort = s;
     },
-    inactiveUser: function inactiveUser(id) {
+    ChangeNotify: function ChangeNotify(id, event) {
       var _this2 = this;
 
       this.$Progress.start();
+      axios.post('/spa/supplier-change-notify/' + id + '/' + event.target.checked).then(function (_ref) {
+        var data = _ref.data;
+
+        //console.log(data);
+        if (data.success) {
+          FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update             
+
+          _this2.$Progress.finish();
+
+          toastr.success(data.success);
+        }
+      })["catch"](function () {
+        _this2.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
+    },
+    inactiveSupplier: function inactiveSupplier(id) {
+      var _this3 = this;
+
+      this.$Progress.start();
       Swal.fire({
-        title: 'Are you sure to Inactive this User?',
+        title: 'Are you sure to Active this supplier?',
         // text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
@@ -188,44 +198,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, Inactive!'
       }).then(function (result) {
         if (result.value) {
-          axios.post('/spa/Users-Info/inactive-user/' + id).then(function (_ref) {
-            var data = _ref.data;
-
-            //console.log(data);
-            if (data.success) {
-              FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
-
-              _this2.$Progress.finish();
-
-              toastr.success(data.success);
-            }
-          })["catch"](function () {
-            _this2.$Progress.fail();
-
-            toastr.warning('Something is wrong!');
-          });
-        } else {
-          _this2.$Progress.finish();
-
-          toastr.info('Your action canceled!');
-        }
-      });
-    },
-    activeUser: function activeUser(id) {
-      var _this3 = this;
-
-      this.$Progress.start();
-      Swal.fire({
-        title: 'Are you sure to Active this User?',
-        // text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Active!'
-      }).then(function (result) {
-        if (result.value) {
-          axios.post('/spa/Users-Info/active-user/' + id).then(function (_ref2) {
+          axios.post('/spa/supplier-Info/inactive-supplier/' + id).then(function (_ref2) {
             var data = _ref2.data;
 
             //console.log(data);
@@ -234,7 +207,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
               _this3.$Progress.finish();
 
-              toastr.success(data.success);
+              toastr.warning(data.success);
             }
           })["catch"](function () {
             _this3.$Progress.fail();
@@ -248,26 +221,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    verifyByUser: function verifyByUser(id) {
+    activeSupplier: function activeSupplier(id) {
       var _this4 = this;
 
       this.$Progress.start();
       Swal.fire({
-        title: 'Are you sure to Verify this user?',
+        title: 'Are you sure to Active this user?',
         // text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Verified!'
+        confirmButtonText: 'Yes, Active!'
       }).then(function (result) {
         if (result.value) {
-          axios.post('/spa/Users-Info/verify-by-admin/' + id).then(function (_ref3) {
+          axios.post('/spa/supplier-Info/active-supplier/' + id).then(function (_ref3) {
             var data = _ref3.data;
 
             //console.log(data);
             if (data.success) {
-              FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update  
+              FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
 
               _this4.$Progress.finish();
 
@@ -285,24 +258,61 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
+    verifyByUser: function verifyByUser(id) {
+      var _this5 = this;
+
+      this.$Progress.start();
+      Swal.fire({
+        title: 'Are you sure to Verify this user?',
+        // text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Verified!'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post('/spa/supplier-verify-by-admin/' + id).then(function (_ref4) {
+            var data = _ref4.data;
+
+            //console.log(data);
+            if (data.success) {
+              FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
+
+              _this5.$Progress.finish();
+
+              toastr.success(data.success);
+            }
+          })["catch"](function () {
+            _this5.$Progress.fail();
+
+            toastr.warning('Something is wrong!');
+          });
+        } else {
+          _this5.$Progress.finish();
+
+          toastr.info('Your action canceled!');
+        }
+      });
+    },
     fetchData: function fetchData() {
       //this function call from Pagination-app component
       this.$Progress.start();
-      this.$store.dispatch('usersAdminStore/fetchData', this.pagination.per_page);
+      this.$store.dispatch('SupplierForAdminStore/fetchData', this.pagination.per_page);
       this.$Progress.finish(); //console.log(this.pagination.total);
     },
     ViewDetails: function ViewDetails() {
       alert('ok');
     },
     addData: function addData() {
-      FireEvent.$emit('addData'); //call to form components
+      FireEvent.$emit('addData');
     },
     editData: function editData(data) {
       //alert(data.id);
-      FireEvent.$emit('editData', data); //call to form components
+      FireEvent.$emit('editData', data);
     },
     DeleteData: function DeleteData(id) {
-      var _this5 = this;
+      var _this6 = this;
 
       this.$Progress.start();
       Swal.fire({
@@ -315,13 +325,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]('/spa/Users-Info/' + id).then(function (_ref4) {
-            var data = _ref4.data;
+          axios["delete"]('/spa/supplier-Info/' + id).then(function (_ref5) {
+            var data = _ref5.data;
 
             if (data.success) {
-              FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update     
+              FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update               
 
-              _this5.$Progress.finish();
+              _this6.$Progress.finish();
 
               toastr.warning(data.success);
             }
@@ -330,12 +340,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               toastr.warning(data.errors);
             }
           })["catch"](function () {
-            _this5.$Progress.fail();
+            _this6.$Progress.fail();
 
             toastr.warning('Something is wrong!');
           });
         } else {
-          _this5.$Progress.finish();
+          _this6.$Progress.finish();
 
           toastr.info('Your data is safe!');
         }
@@ -344,31 +354,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   },
   created: function created() {
-    var _this6 = this;
+    var _this7 = this;
 
-    this.$store.dispatch('usersAdminStore/fetchData'); //call this function at first loading from Action with Modules namespace 
+    this.$store.dispatch('SupplierForAdminStore/fetchData'); //call this function at first loading from Action with Modules namespace 
 
     FireEvent.$on('AfterChange', function () {
-      _this6.$Progress.start();
+      _this7.$Progress.start();
 
-      _this6.$store.dispatch('usersAdminStore/fetchData', _this6.pagination.per_page);
+      _this7.$store.dispatch('SupplierForAdminStore/fetchData', _this7.pagination.per_page);
 
-      _this6.$Progress.finish();
+      _this7.$Progress.finish();
     }); //this event call from Pagination-app component for change number of data show per page
 
     FireEvent.$on('changPerPage', function (data) {
-      _this6.$store.dispatch('usersAdminStore/fetchData', data);
+      _this7.$store.dispatch('SupplierForAdminStore/fetchData', data);
     }); //This is come from search-app-one.vue file for serch data
 
     FireEvent.$on('searchData', function (data) {
       //alert(data.search_key+'-'+data.search_option);
-      _this6.$store.dispatch('usersAdminStore/searching', data);
+      _this7.$store.dispatch('SupplierForAdminStore/searching', data);
     }); //This is come from search-app-one.vue file for Auto Complete data
 
     FireEvent.$on('AutoCompleteSearch', function (data) {
       //alert(data);
       if (data != '') {
-        _this6.$store.dispatch('usersAdminStore/AutoCompleteSearch', data);
+        _this7.$store.dispatch('SupplierForAdminStore/AutoCompleteSearch', data);
       }
     });
   },
@@ -379,10 +389,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue?vue&type=template&id=b3167d78&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue?vue&type=template&id=b3167d78& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue?vue&type=template&id=6943b432&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue?vue&type=template&id=6943b432& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -438,12 +448,6 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "th",
-                { staticStyle: { width: "5%" }, attrs: { scope: "col" } },
-                [_vm._v("Avatar")]
-              ),
-              _vm._v(" "),
-              _c(
-                "th",
                 {
                   staticClass: "sortable-title",
                   staticStyle: { width: "20%" },
@@ -476,15 +480,30 @@ var render = function() {
                 "th",
                 {
                   staticClass: "sortable-title",
+                  staticStyle: { width: "7%" },
+                  attrs: { scope: "col" },
+                  on: {
+                    click: function($event) {
+                      return _vm.sort("phone")
+                    }
+                  }
+                },
+                [_vm._v("Phone")]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                {
+                  staticClass: "sortable-title",
                   staticStyle: { width: "5%" },
                   attrs: { scope: "col" },
                   on: {
                     click: function($event) {
-                      return _vm.sort("role_name")
+                      return _vm.sort("supplier_type")
                     }
                   }
                 },
-                [_vm._v("Role")]
+                [_vm._v("Type")]
               ),
               _vm._v(" "),
               _c(
@@ -495,7 +514,7 @@ var render = function() {
                   attrs: { scope: "col" },
                   on: {
                     click: function($event) {
-                      return _vm.sort("phone")
+                      return _vm.sort("us_name")
                     }
                   }
                 },
@@ -510,7 +529,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "th",
-                { staticStyle: { width: "8%" }, attrs: { scope: "col" } },
+                { staticStyle: { width: "7%" }, attrs: { scope: "col" } },
                 [_vm._v("Date")]
               ),
               _vm._v(" "),
@@ -528,43 +547,21 @@ var render = function() {
           _c(
             "tbody",
             [
-              _vm._l(_vm.sortedObjects, function(user, index) {
+              _vm._l(_vm.sortedSuppliers, function(supplier, index) {
                 return _c("tr", { key: index }, [
                   _vm._m(1, true),
                   _vm._v(" "),
-                  _c("td", [
-                    user.avatar != null
-                      ? _c("span", [
-                          _c("img", {
-                            attrs: {
-                              src: "../" + user.avatar,
-                              height: "20px",
-                              width: "20px"
-                            }
-                          })
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    user.avatar === null
-                      ? _c("span", [
-                          _c("img", {
-                            attrs: {
-                              src: "../" + _vm.NoIconUrl,
-                              height: "20px",
-                              width: "20px"
-                            }
-                          })
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
                   _c("td", { attrs: { scope: "col" } }, [
-                    _vm._v(" " + _vm._s(user.name) + " ")
+                    _vm._v(" " + _vm._s(supplier.name) + " ")
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(user.email) + " ")]),
+                  _c("td", [_vm._v(" " + _vm._s(supplier.email) + " ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(user["role"]["name"]) + " ")]),
+                  _c("td", [_vm._v(" " + _vm._s(supplier.phone) + " ")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(" " + _vm._s(supplier.supplier_type) + " ")
+                  ]),
                   _vm._v(" "),
                   _c("td", { staticStyle: { "text-align": "center" } }, [
                     _c(
@@ -574,14 +571,14 @@ var render = function() {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: user.status_id === 1,
-                            expression: "user.status_id === 1"
+                            value: supplier.status_id === 1,
+                            expression: "supplier.status_id === 1"
                           }
                         ],
-                        attrs: { title: "Active user, Click to Inactive" },
+                        attrs: { title: "Active supplier, Click to inactive" },
                         on: {
                           click: function($event) {
-                            return _vm.inactiveUser(user.id)
+                            return _vm.inactiveSupplier(supplier.id)
                           }
                         }
                       },
@@ -599,21 +596,20 @@ var render = function() {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: user.status_id === 2,
-                            expression: "user.status_id === 2"
+                            value: supplier.status_id === 2,
+                            expression: "supplier.status_id === 2"
                           }
                         ],
-                        attrs: { title: "Inactive user, Click to active" },
+                        attrs: { title: "Inactive supplier, Click to active" },
                         on: {
                           click: function($event) {
-                            return _vm.activeUser(user.id)
+                            return _vm.activeSupplier(supplier.id)
                           }
                         }
                       },
                       [
                         _c("i", {
-                          staticClass: "fas fa-user-times yellow pointer",
-                          staticStyle: { "font-size": "18px !important" }
+                          staticClass: "fas fa-user-times yellow pointer"
                         })
                       ]
                     ),
@@ -625,23 +621,18 @@ var render = function() {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: user.status_id === 3,
-                            expression: "user.status_id === 3"
+                            value: supplier.status_id === 3,
+                            expression: "supplier.status_id === 3"
                           }
                         ],
-                        attrs: { title: "Panding user, Click to active" },
+                        attrs: { title: "Panding supplier, Click to active" },
                         on: {
                           click: function($event) {
-                            return _vm.activeUser(user.id)
+                            return _vm.activeSupplier(supplier.id)
                           }
                         }
                       },
-                      [
-                        _c("i", {
-                          staticClass: "fas fa-user-lock red pointer",
-                          staticStyle: { "font-size": "18px !important" }
-                        })
-                      ]
+                      [_c("i", { staticClass: "fas fa-user-lock red pointer" })]
                     ),
                     _vm._v(" "),
                     _c(
@@ -651,14 +642,16 @@ var render = function() {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: user.status_id === 4,
-                            expression: "user.status_id === 4"
+                            value: supplier.status_id === 4,
+                            expression: "supplier.status_id === 4"
                           }
                         ],
-                        attrs: { title: "Not Verified user, Click to verify" },
+                        attrs: {
+                          title: "Not Verified supplier, Click to verify"
+                        },
                         on: {
                           click: function($event) {
-                            return _vm.verifyByUser(user.id)
+                            return _vm.verifyByUser(supplier.id)
                           }
                         }
                       },
@@ -672,15 +665,65 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", { staticStyle: { "text-align": "center" } }, [
-                    _vm._v("\r\n              data\r\n              ")
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: supplier.enable_notify,
+                          expression: "supplier.enable_notify"
+                        }
+                      ],
+                      attrs: {
+                        type: "checkbox",
+                        name: "enable_notify",
+                        value: "1"
+                      },
+                      domProps: {
+                        checked: Array.isArray(supplier.enable_notify)
+                          ? _vm._i(supplier.enable_notify, "1") > -1
+                          : supplier.enable_notify
+                      },
+                      on: {
+                        click: function($event) {
+                          return _vm.ChangeNotify(supplier.id, $event)
+                        },
+                        change: function($event) {
+                          var $$a = supplier.enable_notify,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = "1",
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  supplier,
+                                  "enable_notify",
+                                  $$a.concat([$$v])
+                                )
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  supplier,
+                                  "enable_notify",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
+                          } else {
+                            _vm.$set(supplier, "enable_notify", $$c)
+                          }
+                        }
+                      }
+                    })
                   ]),
                   _vm._v(" "),
                   _c("td", [
-                    _c("small", [
-                      _vm._v(
-                        " " + _vm._s(_vm._f("formatDate")(user.created_at))
-                      )
-                    ])
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm._f("formatDate")(supplier.created_at)) +
+                        " "
+                    )
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-right" }, [
@@ -707,7 +750,7 @@ var render = function() {
                         },
                         on: {
                           click: function($event) {
-                            return _vm.editData(user)
+                            return _vm.editData(supplier)
                           }
                         }
                       },
@@ -722,7 +765,7 @@ var render = function() {
                         attrs: { id: "delete" },
                         on: {
                           click: function($event) {
-                            return _vm.DeleteData(user.id)
+                            return _vm.DeleteData(supplier.id)
                           }
                         }
                       },
@@ -739,8 +782,8 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: _vm.users && !_vm.users.length,
-                      expression: "users && !users.length"
+                      value: _vm.suppliers && !_vm.suppliers.length,
+                      expression: "suppliers && !suppliers.length"
                     }
                   ]
                 },
@@ -811,17 +854,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue":
-/*!**************************************************************************!*\
-  !*** ./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue ***!
-  \**************************************************************************/
+/***/ "./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue ***!
+  \**********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _UserMasterList_vue_vue_type_template_id_b3167d78___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserMasterList.vue?vue&type=template&id=b3167d78& */ "./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue?vue&type=template&id=b3167d78&");
-/* harmony import */ var _UserMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserMasterList.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue?vue&type=script&lang=js&");
+/* harmony import */ var _SupplierMasterList_vue_vue_type_template_id_6943b432___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SupplierMasterList.vue?vue&type=template&id=6943b432& */ "./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue?vue&type=template&id=6943b432&");
+/* harmony import */ var _SupplierMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SupplierMasterList.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -831,9 +874,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _UserMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _UserMasterList_vue_vue_type_template_id_b3167d78___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _UserMasterList_vue_vue_type_template_id_b3167d78___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SupplierMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SupplierMasterList_vue_vue_type_template_id_6943b432___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SupplierMasterList_vue_vue_type_template_id_6943b432___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -843,38 +886,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Admin/AdminUsers/User/UserMasterList.vue"
+component.options.__file = "resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************/
+/***/ "./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./UserMasterList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SupplierMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SupplierMasterList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SupplierMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue?vue&type=template&id=b3167d78&":
-/*!*********************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue?vue&type=template&id=b3167d78& ***!
-  \*********************************************************************************************************/
+/***/ "./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue?vue&type=template&id=6943b432&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue?vue&type=template&id=6943b432& ***!
+  \*****************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserMasterList_vue_vue_type_template_id_b3167d78___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./UserMasterList.vue?vue&type=template&id=b3167d78& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminUsers/User/UserMasterList.vue?vue&type=template&id=b3167d78&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserMasterList_vue_vue_type_template_id_b3167d78___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SupplierMasterList_vue_vue_type_template_id_6943b432___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SupplierMasterList.vue?vue&type=template&id=6943b432& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterList.vue?vue&type=template&id=6943b432&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SupplierMasterList_vue_vue_type_template_id_6943b432___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserMasterList_vue_vue_type_template_id_b3167d78___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SupplierMasterList_vue_vue_type_template_id_6943b432___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

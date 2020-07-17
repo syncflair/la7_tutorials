@@ -350,9 +350,9 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
-                              _c("label", [_vm._v("detailsls")]),
+                              _c("label", [_vm._v("Details")]),
                               _vm._v(" "),
-                              _c("input", {
+                              _c("textarea", {
                                 directives: [
                                   {
                                     name: "model",
@@ -362,14 +362,13 @@ var render = function() {
                                   }
                                 ],
                                 ref: "role_desc",
-                                staticClass: "form-control",
+                                staticClass: "form-control form-control-sm",
                                 class: {
                                   "is-invalid": _vm.form.errors.has("role_desc")
                                 },
                                 attrs: {
-                                  type: "text",
                                   name: "role_desc",
-                                  placeholder: "Enter details"
+                                  placeholder: "Role details"
                                 },
                                 domProps: { value: _vm.form.role_desc },
                                 on: {

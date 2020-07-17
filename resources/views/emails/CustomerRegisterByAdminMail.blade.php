@@ -15,7 +15,7 @@
     
    
 
-    <p class="mt-20 mb-20">
+    <p class="mt-10 mb-10">
     	<strong>Congratulation</strong>, You are registered by sorboraho.com admin. Your Login credential details bellow: <br>
     </p>
 

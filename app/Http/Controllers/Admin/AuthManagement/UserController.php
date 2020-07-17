@@ -344,7 +344,6 @@ class UserController extends Controller
         //\Mail::to($user->email)->send(new userAcknowledge($id)); //for verification email send
         Mail::to($user->email)->send(new UserNotification($user)); //for verification email send
         return response()->json(['success'=> $user->name.' is verifyed Now']);
-
     }
 
 

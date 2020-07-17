@@ -1,29 +1,45 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Welcome Email</title>
-  </head>
-  <body>
 
-    <h2 >Hello,  <strong>{{$email_data['name']}}</strong></h2>
+@extends('layouts.EmailLayoutConfirmation.email_master')
+@section('title')
+  Register
+@endsection
+
+
+@section('extra_css')
+  <!--Extra CSS-->
+@endsection 
+
+@section('content')
+
+  <h2 >Hello,  <strong>{{$email_data['name']}}</strong></h2>
     
+   
 
-    <p style="margin-bottom: 15px; margin-top: 15px;">
-    Your registered email-id is {{$email_data['email']}} , Please click on the below link to verify your email account
+    <p class="mt-10 mb-10">
+      <strong>Congratulation</strong>, You are registered to sorboraho.com. Please Confirm your verification link: <br>
     </p>
 
-    <div>
-      <a href="{{ url('customer/verify', $email_data['email_verification_code'] )}}">Verify Email</a>
-
-      <span> {{$email_data['email_verification_code']}}</span>
-    </div>
-
+      <div  style="padding-left: 20px; margin-top: 10px; margin-bottom: 10px;">
+        <table class="table">
+          <tr>
+            <td>
+              <a href="{{ url('customer/verify', $email_data['email_verification_code'] )}}">Verify Email</a>
+            </td>
+          </tr>
+        </table>
+      </div>
 
     
-    <div style="margin-bottom: 15px; margin-top: 15px;">
-      <span> Best regards </span><br>
-      <h3 style="color:#f6993f; font-weight: 800;"> Sorboraho.com</h3>
+    <div >
+      <a class="btn btn-default link-style"  target="_blank" href="{{ url('customer/login') }}">Login</a> here      
     </div>
 
-  </body>
-</html>
+
+
+@endsection
+
+@section('extra_script')
+  <!--Extra Script-->
+@endsection 
+
+

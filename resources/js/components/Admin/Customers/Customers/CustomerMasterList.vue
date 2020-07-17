@@ -46,11 +46,11 @@
           	<td > {{ customer.customer_group }} </td> 
             
             <td style="text-align:center;">
-            	<span v-show="customer.status_id === 1" title="Active Customer"><i class="fas fa-user-check green"></i></span>
-            	<span v-show="customer.status_id === 2" title="Inactive Customer"> <i class="fas fa-user-times yellow"></i></span>
-            	<span v-show="customer.status_id === 3" title="Panding Customer"> <i class="fas fa-user-lock red"></i></span>
+            	<span @click="inactiveCustomer(customer.id)" v-show="customer.status_id === 1" title="Active Customer, Click to inactive"><i class="fas fa-user-check green pointer"></i></span>
+            	<span @click="activeCustomer(customer.id)" v-show="customer.status_id === 2" title="Inactive Customer, Click to active"> <i class="fas fa-user-times yellow pointer"></i></span>
+            	<span @click="activeCustomer(customer.id)" v-show="customer.status_id === 3" title="Panding Customer, Click to active"> <i class="fas fa-user-lock red pointer"></i></span>
             	<span @click="verifyByUser(customer.id)" v-show="customer.status_id === 4" title="Not Verified Customer, Click to verify">
-                  <i class="fas fa-user-secret red pointer" ></i>
+                  <i class="fas fa-user-secret red pointer" style="font-size:22px !important;" ></i>
               </span>
             </td>
              <td style="text-align:center;">
@@ -102,7 +102,7 @@
     import { mapState } from 'vuex' //for user MapState
  
     export default {
-      name: "customerList",
+      name: "customerMasterListForAdmin",
 
       data(){
         return { 
@@ -126,7 +126,6 @@
           ...mapState( 
              'CustomerForAdminStore', ['customers', 'pagination','autoCompleteData']
           ),
-
            // use for sortable
           sortedCustomers() {
             let fo = Object.values(this.customers).sort((a,b) => {
@@ -152,37 +151,131 @@
         },
 
         ChangeNotify(id, event){
+          this.$Progress.start();
           axios.post('/spa/customer-change-notify/'+id+'/'+event.target.checked)
             .then( ({data}) => {
               //console.log(data);
               if(data.success){                  
-                FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update               
+                FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update             
+                this.$Progress.finish();    
                 toastr.success(data.success);                 
               } 
             })                          
             .catch(() => {
+              this.$Progress.fail();
               toastr.warning('Something is wrong!');
             })
         },
 
+        inactiveCustomer(id){
+          this.$Progress.start();
+          Swal.fire({
+              title: 'Are you sure to Active this Customer?',
+             // text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',  
+              confirmButtonText: 'Yes, Inactive!'
+          }).then( (result) => {
+            
+              if ( result.value ) {  
+                
+                axios.post('/spa/customer-Info/inactive-customer/'+id)
+                .then( ({data}) => {
+                  //console.log(data);
+                  if(data.success){                  
+                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
+                    this.$Progress.finish();                
+                    toastr.warning(data.success);                                   
+                  } 
+                })                          
+                .catch(() => {
+                  this.$Progress.fail();
+                  toastr.warning('Something is wrong!');
+                })
+
+              }else{
+                this.$Progress.finish();  
+                toastr.info( 'Your action canceled!');
+              }
+          })
+        },
+
+        activeCustomer(id){
+          this.$Progress.start();
+          Swal.fire({
+              title: 'Are you sure to Active this Customer?',
+             // text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',  
+              confirmButtonText: 'Yes, Active!'
+          }).then( (result) => {
+            
+              if ( result.value ) {  
+                
+                axios.post('/spa/customer-Info/active-customer/'+id)
+                .then( ({data}) => {
+                  //console.log(data);
+                  if(data.success){                  
+                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
+                    this.$Progress.finish();                
+                    toastr.success(data.success);                                   
+                  } 
+                })                          
+                .catch(() => {
+                  this.$Progress.fail();
+                  toastr.warning('Something is wrong!');
+                })
+
+              }else{
+                this.$Progress.finish();  
+                toastr.info( 'Your action canceled!');
+              }
+          })
+        },
+
         verifyByUser(id){
-          axios.post('/spa/customer-verify-by-admin/'+id)
-            .then( ({data}) => {
-              //console.log(data);
-              if(data.success){                  
-                FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update               
-                toastr.success(data.success);                 
-              } 
-            })                          
-            .catch(() => {
-              toastr.warning('Something is wrong!');
-            })
+          this.$Progress.start();
+          Swal.fire({
+              title: 'Are you sure to Verify this user?',
+             // text: "You won't be able to revert this!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',  
+              confirmButtonText: 'Yes, Verified!'
+          }).then( (result) => {
+
+              if ( result.value ) {  
+                
+                axios.post('/spa/customer-verify-by-admin/'+id)
+                .then( ({data}) => {
+                  //console.log(data);
+                  if(data.success){                  
+                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
+                    this.$Progress.finish();                
+                    toastr.success(data.success);                                   
+                  } 
+                })                          
+                .catch(() => {
+                  this.$Progress.fail();
+                  toastr.warning('Something is wrong!');
+                })
+
+              }else{
+                this.$Progress.finish();  
+                toastr.info( 'Your action canceled!');
+              }
+          })          
         },
 
         fetchData(){
           //this function call from Pagination-app component
           this.$Progress.start();
-          this.$store.dispatch('CustomerForAdminStore/fetchCustomer', this.pagination.per_page);
+          this.$store.dispatch('CustomerForAdminStore/fetchData', this.pagination.per_page);
           this.$Progress.finish();
           //console.log(this.pagination.total);
         },
@@ -201,6 +294,7 @@
   	    },
 
 	      DeleteData(id){
+          this.$Progress.start();
 	        Swal.fire({
 	            title: 'Are you sure to Delete?',
 	            text: "You won't be able to revert this!",
@@ -217,6 +311,7 @@
 
 	                  if(data.success){                  
 	                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update               
+                      this.$Progress.finish();
 	                    toastr.warning(data.success); 
 	                  }   
 	                  if(data.errors){
@@ -225,9 +320,11 @@
 
 	                })                          
 	                .catch(() => {
+                    this.$Progress.fail();
 	                  toastr.warning('Something is wrong!');
 	                })
 	            }else{
+                this.$Progress.finish();  
 	              toastr.info( 'Your data is safe!');
 	            }
 
@@ -239,18 +336,18 @@
 
       created(){ 
 
-          this.$store.dispatch('CustomerForAdminStore/fetchCustomer'); //call this function at first loading from Action with Modules namespace 
+          this.$store.dispatch('CustomerForAdminStore/fetchData'); //call this function at first loading from Action with Modules namespace 
 
 
           FireEvent.$on('AfterChange', () => {
               this.$Progress.start();
-              this.$store.dispatch('CustomerForAdminStore/fetchCustomer', this.pagination.per_page);
+              this.$store.dispatch('CustomerForAdminStore/fetchData', this.pagination.per_page);
               this.$Progress.finish();
           }); 
 
           //this event call from Pagination-app component for change number of data show per page
           FireEvent.$on('changPerPage', (data) => {
-            this.$store.dispatch('CustomerForAdminStore/fetchCustomer',data);
+            this.$store.dispatch('CustomerForAdminStore/fetchData',data);
           });
 
 

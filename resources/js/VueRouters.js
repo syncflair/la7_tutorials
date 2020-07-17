@@ -44,10 +44,10 @@ const routes = [
 
 
 	//Customers
-	{ path: '/spa/Customers', name: 'Customers', component: () => import( /* webpackChunkName: "Customers" */ './components/Admin/Customers/Customers/Customers.vue'), meta: { title: 'Customers'} },
+	{ path: '/spa/CustomerMaster', name: 'CustomerMaster', component: () => import( /* webpackChunkName: "CustomerMaster" */ './components/Admin/Customers/Customers/CustomerMaster.vue'), meta: { title: 'Customer Master'} },
 
 	//Suppliers
-	{ path: '/spa/Suppliers', name: 'Suppliers', component: () => import( /* webpackChunkName: "Suppliers" */ './components/Admin/Suppliers/Suppliers/Suppliers.vue'), meta: { title: 'Suppliers'} },
+	{ path: '/spa/SupplierMaster', name: 'SupplierMaster', component: () => import( /* webpackChunkName: "SupplierMaster" */ './components/Admin/Suppliers/Suppliers/SupplierMaster.vue'), meta: { title: 'Supplier Master'} },
 	
 
 	//Test-link

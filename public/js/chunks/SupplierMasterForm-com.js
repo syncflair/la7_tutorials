@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["UserMasterForm-com"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["SupplierMasterForm-com"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -151,16 +151,56 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "UserMasterForm",
+  name: "SupplierMasterForm",
   data: function data() {
     return {
       NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
       ShowOnChangeImage: null,
       editMode: false,
-      //Use this for add edit using the same form   
+      //Use this for add edit using the same form 
+      supplierTypes: [{
+        name: 'Person'
+      }, {
+        name: 'Organization'
+      }],
       // Create a new form instance
       form: new Form({
         id: '',
@@ -168,14 +208,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         email: '',
         password: '',
         password_confirmation: '',
-        role_id: '',
         status_id: '',
+        supplier_type: '',
         avatar: ''
       })
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('usersAdminStore', ['pagination']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'adminRoles'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('SupplierForAdminStore', ['pagination']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus'])),
   methods: {
     //Make image as base64 
     onImageChange: function onImageChange(e) {
@@ -228,9 +268,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this3 = this;
 
       this.$Progress.start(); //using progress-bar package
-      //this.form.post('/spa/Users-Info')
+      //this.form.post('/spa/supplier-Info')
 
-      this.form.post('/spa/Users-Info').then(function (_ref) {
+      this.form.post('/spa/supplier-Info').then(function (_ref) {
         var data = _ref.data;
 
         if (data.success) {
@@ -264,7 +304,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //console.log('Update is working!'); 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.put('/spa/Users-Info/' + this.form.id).then(function (_ref2) {
+      this.form.put('/spa/supplier-Info/' + this.form.id).then(function (_ref2) {
         var data = _ref2.data;
 
         if (data.success) {
@@ -299,12 +339,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
 
-    this.$store.dispatch('commonStoreForAll/fetchRoles'); //get user role for admin (1 to 6)
-
     FireEvent.$on('AfterChange', function () {
       _this5.$Progress.start();
 
-      _this5.$store.dispatch('usersAdminStore/fetchCustomer', _this5.pagination.per_page);
+      _this5.$store.dispatch('SupplierForAdminStore/fetchData', _this5.pagination.per_page);
 
       _this5.$Progress.finish();
     }); //this event call from CustomerList component
@@ -323,10 +361,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue?vue&type=template&id=727b9a6a&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue?vue&type=template&id=727b9a6a& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=template&id=d13601e6&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=template&id=d13601e6& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -355,7 +393,7 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          { staticClass: "modal-dialog modal-xl", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header pb-1" }, [
@@ -372,7 +410,7 @@ var render = function() {
                         }
                       ]
                     },
-                    [_vm._v("Add user (Credential)")]
+                    [_vm._v("Add supplier (Credential)")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -387,7 +425,7 @@ var render = function() {
                         }
                       ]
                     },
-                    [_vm._v("Update user (Credential)")]
+                    [_vm._v("Update supplier (Credential)")]
                   )
                 ]),
                 _vm._v(" "),
@@ -428,7 +466,7 @@ var render = function() {
                   _c("div", { staticClass: "modal-body pt-1" }, [
                     _c("div", { staticClass: "card--" }, [
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-7 col-sm-6" }, [
+                        _c("div", { staticClass: "col-md-5 col-sm-6" }, [
                           _c("div", { staticClass: "form-group row" }, [
                             _c(
                               "label",
@@ -460,7 +498,7 @@ var render = function() {
                                   attrs: {
                                     type: "text",
                                     name: "name",
-                                    placeholder: "User Name"
+                                    placeholder: "supplier Name"
                                   },
                                   domProps: { value: _vm.form.name },
                                   on: {
@@ -516,7 +554,7 @@ var render = function() {
                                   attrs: {
                                     type: "text",
                                     name: "email",
-                                    placeholder: "User email"
+                                    placeholder: "supplier email"
                                   },
                                   domProps: { value: _vm.form.email },
                                   on: {
@@ -546,9 +584,71 @@ var render = function() {
                               "label",
                               {
                                 staticClass: "col-sm-3 col-form-label",
-                                attrs: { for: "role" }
+                                attrs: { for: "phone" }
                               },
-                              [_vm._v("Role *")]
+                              [_vm._v("Phone *")]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-sm-9" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass: "input-group input-group-sm mb-3"
+                                },
+                                [
+                                  _vm._m(0),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.phone,
+                                        expression: "form.phone"
+                                      }
+                                    ],
+                                    ref: "phone",
+                                    staticClass: "form-control form-control-sm",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has("phone")
+                                    },
+                                    attrs: {
+                                      type: "number",
+                                      name: "phone",
+                                      placeholder: "Enter phone number"
+                                    },
+                                    domProps: { value: _vm.form.phone },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "phone",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: { form: _vm.form, field: "phone" }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group row" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-3 col-form-label",
+                                attrs: { for: "supplier_type" }
+                              },
+                              [_vm._v("Supplier Type *")]
                             ),
                             _vm._v(" "),
                             _c(
@@ -562,17 +662,20 @@ var render = function() {
                                       {
                                         name: "model",
                                         rawName: "v-model",
-                                        value: _vm.form.role_id,
-                                        expression: "form.role_id"
+                                        value: _vm.form.supplier_type,
+                                        expression: "form.supplier_type"
                                       }
                                     ],
                                     staticClass: "form-control form-control-sm",
                                     class: {
                                       "is-invalid": _vm.form.errors.has(
-                                        "role_id"
+                                        "supplier_type"
                                       )
                                     },
-                                    attrs: { id: "role_id", name: "role_id" },
+                                    attrs: {
+                                      id: "supplier_type",
+                                      name: "supplier_type"
+                                    },
                                     on: {
                                       change: function($event) {
                                         var $$selectedVal = Array.prototype.filter
@@ -588,7 +691,7 @@ var render = function() {
                                           })
                                         _vm.$set(
                                           _vm.form,
-                                          "role_id",
+                                          "supplier_type",
                                           $event.target.multiple
                                             ? $$selectedVal
                                             : $$selectedVal[0]
@@ -600,17 +703,17 @@ var render = function() {
                                     _c(
                                       "option",
                                       { attrs: { disabled: "", value: "" } },
-                                      [_vm._v("Select role ..")]
+                                      [_vm._v("Select supplier type ..")]
                                     ),
                                     _vm._v(" "),
-                                    _vm._l(_vm.adminRoles, function(role) {
+                                    _vm._l(_vm.supplierTypes, function(s_type) {
                                       return _c(
                                         "option",
-                                        { domProps: { value: role.id } },
+                                        { domProps: { value: s_type.name } },
                                         [
                                           _vm._v(
                                             "\r\n\t\t\t                  \t" +
-                                              _vm._s(role.name) +
+                                              _vm._s(s_type.name) +
                                               "\r\n\t\t\t                  "
                                           )
                                         ]
@@ -621,7 +724,10 @@ var render = function() {
                                 ),
                                 _vm._v(" "),
                                 _c("has-error", {
-                                  attrs: { form: _vm.form, field: "role_id" }
+                                  attrs: {
+                                    form: _vm.form,
+                                    field: "supplier_type"
+                                  }
                                 })
                               ],
                               1
@@ -854,6 +960,130 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-5 col-sm-6" }, [
+                          _c("div", { staticClass: "form-group row" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-3 col-form-label",
+                                attrs: { for: "supplier_desc" }
+                              },
+                              [_vm._v("Details")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-9" },
+                              [
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.supplier_desc,
+                                      expression: "form.supplier_desc"
+                                    }
+                                  ],
+                                  ref: "supplier_desc",
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "supplier_desc"
+                                    )
+                                  },
+                                  attrs: {
+                                    name: "supplier_desc",
+                                    placeholder: "Supplier details"
+                                  },
+                                  domProps: { value: _vm.form.supplier_desc },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "supplier_desc",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: {
+                                    form: _vm.form,
+                                    field: "supplier_desc"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group row" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-3 col-form-label",
+                                attrs: { for: "supplier_address" }
+                              },
+                              [_vm._v("Address")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-9" },
+                              [
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.supplier_address,
+                                      expression: "form.supplier_address"
+                                    }
+                                  ],
+                                  ref: "supplier_address",
+                                  staticClass: "form-control",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "supplier_address"
+                                    )
+                                  },
+                                  attrs: {
+                                    name: "supplier_address",
+                                    placeholder: "Address"
+                                  },
+                                  domProps: {
+                                    value: _vm.form.supplier_address
+                                  },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "supplier_address",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: {
+                                    form: _vm.form,
+                                    field: "supplier_address"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-2 col-sm-6" }, [
                           _c("div", { staticClass: "row" }, [
                             _c(
                               "div",
@@ -1017,25 +1247,35 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [_vm._v(" +88 ")])
+    ])
+  }
+]
 render._withStripped = true
 
 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue":
-/*!**************************************************************************!*\
-  !*** ./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue ***!
-  \**************************************************************************/
-/*! exports provided: default */
+/***/ "./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue ***!
+  \**********************************************************************************/
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _UserMasterForm_vue_vue_type_template_id_727b9a6a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserMasterForm.vue?vue&type=template&id=727b9a6a& */ "./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue?vue&type=template&id=727b9a6a&");
-/* harmony import */ var _UserMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserMasterForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _SupplierMasterForm_vue_vue_type_template_id_d13601e6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SupplierMasterForm.vue?vue&type=template&id=d13601e6& */ "./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=template&id=d13601e6&");
+/* harmony import */ var _SupplierMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SupplierMasterForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=script&lang=js&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _SupplierMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _SupplierMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1044,9 +1284,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _UserMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _UserMasterForm_vue_vue_type_template_id_727b9a6a___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _UserMasterForm_vue_vue_type_template_id_727b9a6a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _SupplierMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _SupplierMasterForm_vue_vue_type_template_id_d13601e6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _SupplierMasterForm_vue_vue_type_template_id_d13601e6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1056,38 +1296,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue"
+component.options.__file = "resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************/
-/*! exports provided: default */
+/***/ "./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./UserMasterForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SupplierMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SupplierMasterForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_SupplierMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue?vue&type=template&id=727b9a6a&":
-/*!*********************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue?vue&type=template&id=727b9a6a& ***!
-  \*********************************************************************************************************/
+/***/ "./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=template&id=d13601e6&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=template&id=d13601e6& ***!
+  \*****************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserMasterForm_vue_vue_type_template_id_727b9a6a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./UserMasterForm.vue?vue&type=template&id=727b9a6a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/AdminUsers/User/UserMasterForm.vue?vue&type=template&id=727b9a6a&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserMasterForm_vue_vue_type_template_id_727b9a6a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SupplierMasterForm_vue_vue_type_template_id_d13601e6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./SupplierMasterForm.vue?vue&type=template&id=d13601e6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=template&id=d13601e6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SupplierMasterForm_vue_vue_type_template_id_d13601e6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserMasterForm_vue_vue_type_template_id_727b9a6a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_SupplierMasterForm_vue_vue_type_template_id_d13601e6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

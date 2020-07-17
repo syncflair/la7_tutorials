@@ -1,9 +1,9 @@
 </div><!--content-wrapper-->
 
 <footer class="main-footer mt-20-">
-	<div class="social-contant text-center mb-20">
-		<p><small>Find us on social network</small></p>
-		<div>
+	<div class="social-contant text-center mb-5">
+		<div class="pt-5 mb-5"><small>Find us on social network</small></div>
+		<div class="pt-5">
 			<table class="table-social">
 				<tr>
 					<td> <a href="https://facebook.com/sorborahobd"><img class="img-size" src="{{asset('FilesStorage/CommonFiles/facebook.png') }}"></a></td>
@@ -17,7 +17,7 @@
 
     <!-- Default to the left -->
     <div class="text-center">
-    	<small>Copyright &copy; 2014-2019 <a href="https://sorboraho.com">Sorboraho</a>. All rights reserved.  </small>  	
+    	<small>Copyright &copy; 2020 <a href="https://sorboraho.com">Sorboraho</a>. All rights reserved.  </small>  	
     </div>
 </footer>
 

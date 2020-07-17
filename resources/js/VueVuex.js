@@ -12,6 +12,7 @@ import CategoryStore from './store/CategoryStore'
 import ProductStore from './store/ProductStore'
 import PartieStore from './store/PartieStore'
 import CustomerForAdminStore from './store/CustomerForAdminStore'
+import SupplierForAdminStore from './store/SupplierForAdminStore'
 //user Management
 import usersAdminStore from './store/usersAdminStore'
 //Catalog
@@ -35,8 +36,11 @@ export default new Vuex.Store({
 		commonStoreForAll,
     	CategoryStore,
     	ProductStore,
-    	PartieStore,    	
+    	PartieStore,    
+        //customer	
     	CustomerForAdminStore,
+        //Suppliers
+        SupplierForAdminStore,
 
         //user management
         usersAdminStore,

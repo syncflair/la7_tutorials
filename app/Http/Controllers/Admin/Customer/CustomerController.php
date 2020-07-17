@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Facades\Hash;
 use App\Mail\CustomerRegisterByAdminMail;
+use App\Mail\CustomerNotificationMail;
 use Illuminate\Support\Facades\Mail;
 use App\Customer;
 
@@ -177,20 +178,7 @@ class CustomerController extends Controller
         return response()->json(['success'=>'Notification Updated successfully.']); 
 
     }
-
-
-    public function verifiedByUser(Request $request){
-        //return $notifyValue = ($request->notifyValue == "true") ? 1 : 0 ;
-      
-        $data =array();
-        $data['status_id'] = 1 ;  
-        $data['email_verification_code'] = null;
-        $data['verified_by']  = \Auth::user()->id; 
-        $data['updated_by']  = \Auth::user()->id;      
-
-        Customer::whereId($request->id)->update($data);         
-        return response()->json(['success'=>'Customer verified now.']); 
-    }
+   
 
     public function search(Request $request){
 
@@ -236,6 +224,53 @@ class CustomerController extends Controller
         }
         //return $searchResult;
         return response()->json($searchResult);
+    }//end search
+
+
+     public function verifiedByAdmin(Request $request){
+        //return $notifyValue = ($request->notifyValue == "true") ? 1 : 0 ;
+
+        $data = Customer::find($request->id);
+        $data->status_id = 1; 
+        $data->email_verification_code = null; 
+        $data->verified_by = \Auth::user()->id; 
+        $data->updated_by = \Auth::user()->id; 
+        $data->save();
+
+        if($data){           
+            $data = ["userInfo" => $data, "tag" => "varify"];
+            Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));
+
+            return response()->json(['success'=> 'Customer verified now']);
+        }
+    }
+
+
+    public function inactive_customer($id){
+        $data = Customer::find($id);
+        $data->status_id = 2; 
+        $data->save();
+
+        if($data){           
+            $data = ["userInfo" => $data, "tag" => "inactive"];
+            Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));
+
+            return response()->json(['success'=> 'Inactive Customer']);
+        }
+         
+    }
+
+    public function active_customer($id){
+        $data = Customer::find($id);
+        $data->status_id = 1; 
+        $data->save();
+
+        if($data){           
+            $data = ["userInfo" => $data, "tag" => "active"];
+            Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));
+
+            return response()->json(['success'=> 'Active Customer']);
+        }
     }
 
 

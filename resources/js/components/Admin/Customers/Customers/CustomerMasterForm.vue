@@ -121,6 +121,7 @@
 	import { mapState } from 'vuex' //for user MapState
 
 	export default {
+		name: "customerMasterFormForAdmin",
 		 data () {
 	      return {
 	        editMode: false, //Use this for add edit using the same form   
@@ -237,7 +238,7 @@
 
             FireEvent.$on('AfterChange', () => {
 		        this.$Progress.start();
-          		this.$store.dispatch('CustomerForAdminStore/fetchCustomer', this.pagination.per_page);
+          		this.$store.dispatch('CustomerForAdminStore/fetchData', this.pagination.per_page);
           		this.$Progress.finish();
             });
 

@@ -3,7 +3,6 @@
     <div class="card-header">      
       <div class="row">
         <div class="col-md-5 col-sm-9">
-          <!-- user List -->
           <search-app-one 
             :SearchByOptions="SearchByOptions"
             :filterBy="filterBy"
@@ -22,62 +21,54 @@
           <tr>
             <!-- <th style="">#</th> -->
             <th style="width: 2%;" scope="col"><input type="checkbox" name=""></th>
-            <th style="width: 5%;" scope="col">Avatar</th>
             <th style="width: 20%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
-            <th style="width: 20%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>  
-            <th style="width: 5%;" scope="col" @click="sort('role_name')" class="sortable-title">Role</th>
-            <th style="width: 3%;" scope="col" @click="sort('phone')" class="sortable-title">Status</th>
+            <th style="width: 20%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>             
+            <th style="width: 7%;" scope="col" @click="sort('phone')" class="sortable-title">Phone</th>
+            <th style="width: 5%;" scope="col" @click="sort('supplier_type')" class="sortable-title">Type</th>
+            <th style="width: 3%;" scope="col" @click="sort('us_name')" class="sortable-title">Status</th>
             <th style="width: 3%;" scope="col">Nofify</th>
-            <th style="width: 8%;" scope="col">Date</th>
+            <th style="width: 7%;" scope="col">Date</th>
             <th style="width: 10%; text-align:right;" scope="col">Action</th>
           </tr>
         </thead>
 
         <tbody>
-          <!-- :key="user.id" -->
-          <!-- <tr v-for="(user, index) in users.data" :key="index"> -->
-          <tr v-for="(user, index) in sortedObjects" :key="index">
+          <tr v-for="(supplier, index) in sortedSuppliers" :key="index">
 
             <!-- <td > id</td> -->
             <td scope="col"> <input type="checkbox" name=""></td>
-            <td> 
-                <span v-if="user.avatar != null"> 
-                  <img :src="'../'+user.avatar" height="20px" width="20px"> 
-                </span>
-                <span v-if="user.avatar === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
-            </td> 
-            <td scope="col"> {{ user.name }} </td>
-            <td > {{ user.email }} </td>          
-          	<td > {{ user['role']['name'] }} </td> 
+            <td scope="col"> {{ supplier.name }} </td>
+            <td > {{ supplier.email }} </td> 
+            <td > {{ supplier.phone }} </td>          
+          	<td > {{ supplier.supplier_type }} </td> 
             
             <td style="text-align:center;">
-            	<span @click="inactiveUser(user.id)" v-show="user.status_id === 1" title="Active user, Click to Inactive"><i class="fas fa-user-check green pointer"></i></span>
-            	<span @click="activeUser(user.id)" v-show="user.status_id === 2" title="Inactive user, Click to active"> <i class="fas fa-user-times yellow pointer" style="font-size:18px !important;"></i></span>
-            	<span @click="activeUser(user.id)" v-show="user.status_id === 3" title="Panding user, Click to active"> <i class="fas fa-user-lock red pointer" style="font-size:18px !important;"></i></span>
-            	<span @click="verifyByUser(user.id)" v-show="user.status_id === 4" title="Not Verified user, Click to verify">
+            	<span @click="inactiveSupplier(supplier.id)" v-show="supplier.status_id === 1" title="Active supplier, Click to inactive"><i class="fas fa-user-check green pointer"></i></span>
+            	<span @click="activeSupplier(supplier.id)" v-show="supplier.status_id === 2" title="Inactive supplier, Click to active"> <i class="fas fa-user-times yellow pointer"></i></span>
+            	<span @click="activeSupplier(supplier.id)" v-show="supplier.status_id === 3" title="Panding supplier, Click to active"> <i class="fas fa-user-lock red pointer"></i></span>
+            	<span @click="verifyByUser(supplier.id)" v-show="supplier.status_id === 4" title="Not Verified supplier, Click to verify">
                   <i class="fas fa-user-secret red pointer" style="font-size:22px !important;" ></i>
               </span>
             </td>
              <td style="text-align:center;">
-              data
-              <!-- <input type="checkbox" @click="ChangeNotify(user.id, $event)" name="enable_notify" value="1" v-model="user.enable_notify"  /> -->
+              <input type="checkbox" @click="ChangeNotify(supplier.id, $event)" name="enable_notify" value="1" v-model="supplier.enable_notify"  />
             </td>
-            <td ><small> {{ user.created_at | formatDate }}</small> </td> 
+            <td > {{ supplier.created_at | formatDate }} </td> 
 
 
             <td class="text-right">  
               <a @click="ViewDetails()" class="btn btn-flat btn-sm"> <i class="fas fa-eye primary"></i> </a>   
-              <a @click="editData(user)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
+              <a @click="editData(supplier)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
                   <i class="fas fa-edit primary "></i>
               </a> 
-              <a @click="DeleteData(user.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
+              <a @click="DeleteData(supplier.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
                  <i class="far fa-trash-alt red"></i>
               </a>
             </td>
 
           </tr>
 
-          <tr v-show="users && !users.length">
+          <tr v-show="suppliers && !suppliers.length">
             <td colspan="9">
               <div class="alert alert-warning text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
@@ -105,13 +96,13 @@
 
 <script>
 
-    import { mapState } from 'vuex' //for user MapState 
+    import { mapState } from 'vuex' //for user MapState
+ 
     export default {
-      name: "UserMasterList",
+      name: "supplierMasterListForAdmin",
+
       data(){
         return { 
-          NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
-
           // use for sortable
           currentSort:'name',
           currentSortDir:'asc',
@@ -121,29 +112,30 @@
           SearchByOptions:[
             {'field_name':'name', 'show_name':'Name'},
             {'field_name':'email', 'show_name':'Email'},
-            {'field_name':'us_name', 'show_name':'User Status'},
-            {'field_name':'role_name', 'show_name':'User Role'},
+            {'field_name':'phone', 'show_name':'Phone'},
+            {'field_name':'supplier_type', 'show_name':'Supplier Type'},
           ],             
         }
       },
 
       computed: {
           ...mapState( 
-             'usersAdminStore', ['users', 'pagination','autoCompleteData']
+             'SupplierForAdminStore', ['suppliers', 'pagination','autoCompleteData']
           ),
-
            // use for sortable
-          sortedObjects() {
-            let fo = Object.values(this.users).sort((a,b) => {
+          sortedSuppliers() {
+            let fo = Object.values(this.suppliers).sort((a,b) => {
               let modifier = 1;
               if(this.currentSortDir === 'desc') modifier = -1;
               if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
               if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
               return 0;
             });
+
             return fo;
           }
-      }, //end computed
+
+      },
 
       methods:{
         // use for sortable
@@ -154,10 +146,27 @@
           this.currentSort = s;
         },
 
-        inactiveUser(id){
+        ChangeNotify(id, event){
+          this.$Progress.start();
+          axios.post('/spa/supplier-change-notify/'+id+'/'+event.target.checked)
+            .then( ({data}) => {
+              //console.log(data);
+              if(data.success){                  
+                FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update             
+                this.$Progress.finish();    
+                toastr.success(data.success);                 
+              } 
+            })                          
+            .catch(() => {
+              this.$Progress.fail();
+              toastr.warning('Something is wrong!');
+            })
+        },
+
+        inactiveSupplier(id){
           this.$Progress.start();
           Swal.fire({
-              title: 'Are you sure to Inactive this User?',
+              title: 'Are you sure to Active this supplier?',
              // text: "You won't be able to revert this!",
               icon: 'warning',
               showCancelButton: true,
@@ -168,13 +177,13 @@
             
               if ( result.value ) {  
                 
-                axios.post('/spa/Users-Info/inactive-user/'+id)
+                axios.post('/spa/supplier-Info/inactive-supplier/'+id)
                 .then( ({data}) => {
                   //console.log(data);
                   if(data.success){                  
                     FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
                     this.$Progress.finish();                
-                    toastr.success(data.success);                                   
+                    toastr.warning(data.success);                                   
                   } 
                 })                          
                 .catch(() => {
@@ -189,10 +198,10 @@
           })
         },
 
-        activeUser(id){
+        activeSupplier(id){
           this.$Progress.start();
           Swal.fire({
-              title: 'Are you sure to Active this User?',
+              title: 'Are you sure to Active this user?',
              // text: "You won't be able to revert this!",
               icon: 'warning',
               showCancelButton: true,
@@ -203,7 +212,7 @@
             
               if ( result.value ) {  
                 
-                axios.post('/spa/Users-Info/active-user/'+id)
+                axios.post('/spa/supplier-Info/active-supplier/'+id)
                 .then( ({data}) => {
                   //console.log(data);
                   if(data.success){                  
@@ -234,17 +243,17 @@
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',  
               confirmButtonText: 'Yes, Verified!'
-            }).then( (result) => {
+          }).then( (result) => {
 
               if ( result.value ) {  
                 
-                axios.post('/spa/Users-Info/verify-by-admin/'+id)
+                axios.post('/spa/supplier-verify-by-admin/'+id)
                 .then( ({data}) => {
                   //console.log(data);
                   if(data.success){                  
-                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update  
-                    this.$Progress.finish();               
-                    toastr.success(data.success);                 
+                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
+                    this.$Progress.finish();                
+                    toastr.success(data.success);                                   
                   } 
                 })                          
                 .catch(() => {
@@ -256,15 +265,13 @@
                 this.$Progress.finish();  
                 toastr.info( 'Your action canceled!');
               }
-
-            })
-
+          })          
         },
 
         fetchData(){
           //this function call from Pagination-app component
           this.$Progress.start();
-          this.$store.dispatch('usersAdminStore/fetchData', this.pagination.per_page);
+          this.$store.dispatch('SupplierForAdminStore/fetchData', this.pagination.per_page);
           this.$Progress.finish();
           //console.log(this.pagination.total);
         },
@@ -274,12 +281,12 @@
         },
 
   	    addData(){
-  	    	FireEvent.$emit('addData'); //call to form components
+  	    	FireEvent.$emit('addData');
   	    },
 
   	    editData(data){
   	    	//alert(data.id);
-  	    	FireEvent.$emit('editData', data); //call to form components
+  	    	FireEvent.$emit('editData', data);
   	    },
 
 	      DeleteData(id){
@@ -295,13 +302,12 @@
 	          }).then( (result) => {
 
 	            if ( result.value ) {  
-
-	              axios.delete('/spa/Users-Info/'+id)
+	              axios.delete('/spa/supplier-Info/'+id)
 	                .then( ({data}) => {
 
 	                  if(data.success){                  
-	                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update     
-                      this.$Progress.finish();            
+	                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update               
+                      this.$Progress.finish();
 	                    toastr.warning(data.success); 
 	                  }   
 	                  if(data.errors){
@@ -326,31 +332,31 @@
 
       created(){ 
 
-          this.$store.dispatch('usersAdminStore/fetchData'); //call this function at first loading from Action with Modules namespace 
+          this.$store.dispatch('SupplierForAdminStore/fetchData'); //call this function at first loading from Action with Modules namespace 
 
 
           FireEvent.$on('AfterChange', () => {
               this.$Progress.start();
-              this.$store.dispatch('usersAdminStore/fetchData', this.pagination.per_page);
+              this.$store.dispatch('SupplierForAdminStore/fetchData', this.pagination.per_page);
               this.$Progress.finish();
           }); 
 
           //this event call from Pagination-app component for change number of data show per page
           FireEvent.$on('changPerPage', (data) => {
-            this.$store.dispatch('usersAdminStore/fetchData',data);
+            this.$store.dispatch('SupplierForAdminStore/fetchData',data);
           });
 
 
           //This is come from search-app-one.vue file for serch data
           FireEvent.$on('searchData', (data) => {
              //alert(data.search_key+'-'+data.search_option);
-             this.$store.dispatch('usersAdminStore/searching', data ); 
+             this.$store.dispatch('SupplierForAdminStore/searching', data ); 
           });
           //This is come from search-app-one.vue file for Auto Complete data
           FireEvent.$on('AutoCompleteSearch', (data) => {
               //alert(data);
               if(data != ''){
-                this.$store.dispatch('usersAdminStore/AutoCompleteSearch', data ); 
+                this.$store.dispatch('SupplierForAdminStore/AutoCompleteSearch', data ); 
               }
           });
       },
