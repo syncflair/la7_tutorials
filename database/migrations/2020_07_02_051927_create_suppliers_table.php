@@ -27,10 +27,13 @@ class CreateSuppliersTable extends Migration
             $table->unsignedInteger('status_id')->default(1); //5 Not Verified
             $table->string('supplier_desc')->nullable();
             $table->string('supplier_address')->nullable();
-            $table->string('avatar')->nullable();            
+            $table->unsignedInteger('dist_zone_id')->nullable(); 
+            $table->boolean('enable_notify')->default(false);
+            $table->string('avatar')->nullable();  
             $table->rememberToken();
             $table->unsignedBigInteger('created_by')->nullable()->comment('Created by User');  
             $table->unsignedBigInteger('updated_by')->nullable()->comment('Updated by User'); 
+            $table->unsignedBigInteger('verified_by')->nullable()->comment('Verified by User'); 
             $table->timestamps();
         });
     }

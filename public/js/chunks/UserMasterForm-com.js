@@ -222,6 +222,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.form.reset(); //reset from after submit
 
       this.form.clear(); //this.$refs.name.focus()
+
+      this.$refs.avatar.value = ''; //clear file input tag 
+
+      this.ShowOnChangeImage = null;
     },
     // Submit the form via a POST request
     storeFormData: function storeFormData() {

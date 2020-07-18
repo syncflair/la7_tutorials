@@ -418,10 +418,20 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/tables/simple.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Employee</p>
-                </a>
+                <router-link to="/spa/EmployeeMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Employee
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/spa/JobTitleMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Job Title
+                  </p>
+                </router-link>
               </li>
               <li class="nav-item">
                 <a href="pages/tables/data.html" class="nav-link">

@@ -112,12 +112,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "supplierMasterListForAdmin",
   data: function data() {
     return {
+      NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
       // use for sortable
       currentSort: 'name',
       currentSortDir: 'asc',
@@ -448,9 +471,15 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "th",
+                { staticStyle: { width: "3%" }, attrs: { scope: "col" } },
+                [_vm._v("Img")]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
                 {
                   staticClass: "sortable-title",
-                  staticStyle: { width: "20%" },
+                  staticStyle: { width: "15%" },
                   attrs: { scope: "col" },
                   on: {
                     click: function($event) {
@@ -465,7 +494,7 @@ var render = function() {
                 "th",
                 {
                   staticClass: "sortable-title",
-                  staticStyle: { width: "20%" },
+                  staticStyle: { width: "15%" },
                   attrs: { scope: "col" },
                   on: {
                     click: function($event) {
@@ -508,16 +537,19 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "th",
-                {
-                  staticClass: "sortable-title",
-                  staticStyle: { width: "3%" },
-                  attrs: { scope: "col" },
-                  on: {
-                    click: function($event) {
-                      return _vm.sort("us_name")
-                    }
-                  }
-                },
+                { staticStyle: { width: "15%" }, attrs: { scope: "col" } },
+                [_vm._v("Address")]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticStyle: { width: "7%" }, attrs: { scope: "col" } },
+                [_vm._v("Date")]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                { staticStyle: { width: "3%" }, attrs: { scope: "col" } },
                 [_vm._v("Status")]
               ),
               _vm._v(" "),
@@ -525,12 +557,6 @@ var render = function() {
                 "th",
                 { staticStyle: { width: "3%" }, attrs: { scope: "col" } },
                 [_vm._v("Nofify")]
-              ),
-              _vm._v(" "),
-              _c(
-                "th",
-                { staticStyle: { width: "7%" }, attrs: { scope: "col" } },
-                [_vm._v("Date")]
               ),
               _vm._v(" "),
               _c(
@@ -551,6 +577,32 @@ var render = function() {
                 return _c("tr", { key: index }, [
                   _vm._m(1, true),
                   _vm._v(" "),
+                  _c("td", [
+                    supplier.avatar != null
+                      ? _c("span", [
+                          _c("img", {
+                            attrs: {
+                              src: "../" + supplier.avatar,
+                              height: "20px",
+                              width: "20px"
+                            }
+                          })
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    supplier.avatar === null
+                      ? _c("span", [
+                          _c("img", {
+                            attrs: {
+                              src: "../" + _vm.NoIconUrl,
+                              height: "20px",
+                              width: "20px"
+                            }
+                          })
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
                   _c("td", { attrs: { scope: "col" } }, [
                     _vm._v(" " + _vm._s(supplier.name) + " ")
                   ]),
@@ -561,6 +613,53 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(" " + _vm._s(supplier.supplier_type) + " ")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("small", [
+                      _c(
+                        "span",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: supplier.supplier_address != null,
+                              expression: "supplier.supplier_address != null"
+                            }
+                          ]
+                        },
+                        [_vm._v(_vm._s(supplier.supplier_address) + ", ")]
+                      ),
+                      _vm._v(
+                        "\r\n              " +
+                          _vm._s(supplier.belongs_to_district_zone.zone_name) +
+                          ",\r\n              " +
+                          _vm._s(
+                            supplier.belongs_to_district_zone
+                              .belongs_to_district.district_name
+                          ) +
+                          ",\r\n              " +
+                          _vm._s(
+                            supplier.belongs_to_district_zone
+                              .belongs_to_district.belongs_to_division
+                              .division_name
+                          ) +
+                          ",\r\n              " +
+                          _vm._s(
+                            supplier.belongs_to_district_zone
+                              .belongs_to_district.belongs_to_division
+                              .belongs_to_country.country_name
+                          ) +
+                          "\r\n              "
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _c("small", [
+                      _vm._v(_vm._s(_vm._f("formatDate")(supplier.created_at)))
+                    ])
                   ]),
                   _vm._v(" "),
                   _c("td", { staticStyle: { "text-align": "center" } }, [
@@ -718,14 +817,6 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c("td", [
-                    _vm._v(
-                      " " +
-                        _vm._s(_vm._f("formatDate")(supplier.created_at)) +
-                        " "
-                    )
-                  ]),
-                  _vm._v(" "),
                   _c("td", { staticClass: "text-right" }, [
                     _c(
                       "a",
@@ -836,7 +927,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "9" } }, [
+    return _c("td", { attrs: { colspan: "11" } }, [
       _c(
         "div",
         {

@@ -21,13 +21,15 @@
           <tr>
             <!-- <th style="">#</th> -->
             <th style="width: 2%;" scope="col"><input type="checkbox" name=""></th>
-            <th style="width: 20%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
-            <th style="width: 20%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>             
+            <th style="width: 3%;" scope="col">Img</th>
+            <th style="width: 15%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
+            <th style="width: 15%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>             
             <th style="width: 7%;" scope="col" @click="sort('phone')" class="sortable-title">Phone</th>
             <th style="width: 5%;" scope="col" @click="sort('supplier_type')" class="sortable-title">Type</th>
-            <th style="width: 3%;" scope="col" @click="sort('us_name')" class="sortable-title">Status</th>
-            <th style="width: 3%;" scope="col">Nofify</th>
+            <th style="width: 15%;" scope="col">Address</th>
             <th style="width: 7%;" scope="col">Date</th>
+            <th style="width: 3%;" scope="col">Status</th>
+            <th style="width: 3%;" scope="col">Nofify</th>            
             <th style="width: 10%; text-align:right;" scope="col">Action</th>
           </tr>
         </thead>
@@ -37,10 +39,30 @@
 
             <!-- <td > id</td> -->
             <td scope="col"> <input type="checkbox" name=""></td>
+
+            <td> 
+                <span v-if="supplier.avatar != null"> 
+                  <img :src="'../'+supplier.avatar" height="20px" width="20px"> 
+                </span>
+                <span v-if="supplier.avatar === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
+            </td> 
+
             <td scope="col"> {{ supplier.name }} </td>
             <td > {{ supplier.email }} </td> 
             <td > {{ supplier.phone }} </td>          
           	<td > {{ supplier.supplier_type }} </td> 
+
+            <td > 
+              <small>
+              <span v-show="supplier.supplier_address != null">{{ supplier.supplier_address }}, </span>
+              {{ supplier.belongs_to_district_zone.zone_name }},
+              {{ supplier.belongs_to_district_zone.belongs_to_district.district_name }},
+              {{ supplier.belongs_to_district_zone.belongs_to_district.belongs_to_division.division_name }},
+              {{ supplier.belongs_to_district_zone.belongs_to_district.belongs_to_division.belongs_to_country.country_name }}
+              </small>
+            </td> 
+
+            <td > <small>{{ supplier.created_at | formatDate }}</small> </td>
             
             <td style="text-align:center;">
             	<span @click="inactiveSupplier(supplier.id)" v-show="supplier.status_id === 1" title="Active supplier, Click to inactive"><i class="fas fa-user-check green pointer"></i></span>
@@ -53,8 +75,8 @@
              <td style="text-align:center;">
               <input type="checkbox" @click="ChangeNotify(supplier.id, $event)" name="enable_notify" value="1" v-model="supplier.enable_notify"  />
             </td>
-            <td > {{ supplier.created_at | formatDate }} </td> 
 
+             
 
             <td class="text-right">  
               <a @click="ViewDetails()" class="btn btn-flat btn-sm"> <i class="fas fa-eye primary"></i> </a>   
@@ -69,7 +91,7 @@
           </tr>
 
           <tr v-show="suppliers && !suppliers.length">
-            <td colspan="9">
+            <td colspan="11">
               <div class="alert alert-warning text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
           </tr>
@@ -103,6 +125,8 @@
 
       data(){
         return { 
+          NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
+
           // use for sortable
           currentSort:'name',
           currentSortDir:'asc',

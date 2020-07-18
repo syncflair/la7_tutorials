@@ -109,6 +109,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -344,332 +354,393 @@ var render = function() {
                     _c("div", { staticClass: "card--" }, [
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-md-12 col-sm-12" }, [
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("Zone Name *")]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.zone_name,
-                                    expression: "form.zone_name"
-                                  }
-                                ],
-                                ref: "zone_name",
-                                staticClass: "form-control form-control-sm",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has("zone_name")
-                                },
-                                attrs: {
-                                  type: "text",
-                                  name: "zone_name",
-                                  placeholder: "Zone Name"
-                                },
-                                domProps: { value: _vm.form.zone_name },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "zone_name",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: { form: _vm.form, field: "zone_name" }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("Zone Name (BN)")]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.zone_name_lang,
-                                    expression: "form.zone_name_lang"
-                                  }
-                                ],
-                                ref: "zone_name_lang",
-                                staticClass: "form-control  form-control-sm",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has(
-                                    "zone_name_lang"
-                                  )
-                                },
-                                attrs: {
-                                  type: "text",
-                                  name: "zone_name_lang",
-                                  placeholder: "Enter Zone Name (BN) "
-                                },
-                                domProps: { value: _vm.form.zone_name_lang },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "zone_name_lang",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: {
-                                  form: _vm.form,
-                                  field: "zone_name_lang"
-                                }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("Zip Code")]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.zip_code,
-                                    expression: "form.zip_code"
-                                  }
-                                ],
-                                ref: "zip_code",
-                                staticClass: "form-control form-control-sm",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has("zip_code")
-                                },
-                                attrs: {
-                                  type: "text",
-                                  name: "zip_code",
-                                  placeholder: "Zip Code"
-                                },
-                                domProps: { value: _vm.form.zip_code },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "zip_code",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: { form: _vm.form, field: "zip_code" }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", { attrs: { for: "role_id" } }, [
-                                _vm._v("District*")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "select",
-                                {
+                          _c("div", { staticClass: "form-group row" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-3 col-form-label",
+                                attrs: { for: "zone_name" }
+                              },
+                              [_vm._v("Zone Name *")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-9" },
+                              [
+                                _c("input", {
                                   directives: [
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.form.district_id,
-                                      expression: "form.district_id"
+                                      value: _vm.form.zone_name,
+                                      expression: "form.zone_name"
                                     }
                                   ],
+                                  ref: "zone_name",
                                   staticClass: "form-control form-control-sm",
                                   class: {
                                     "is-invalid": _vm.form.errors.has(
-                                      "district_id"
+                                      "zone_name"
                                     )
                                   },
                                   attrs: {
-                                    id: "district_id",
-                                    name: "district_id"
+                                    type: "text",
+                                    name: "zone_name",
+                                    placeholder: "Zone Name"
                                   },
+                                  domProps: { value: _vm.form.zone_name },
                                   on: {
-                                    change: function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
                                       _vm.$set(
                                         _vm.form,
-                                        "district_id",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
+                                        "zone_name",
+                                        $event.target.value
                                       )
                                     }
                                   }
-                                },
-                                [
-                                  _c(
-                                    "option",
-                                    { attrs: { disabled: "", value: "" } },
-                                    [_vm._v("Select District ..")]
-                                  ),
-                                  _vm._v(" "),
-                                  _vm._l(_vm.Districts, function(district) {
-                                    return _c(
-                                      "option",
-                                      { domProps: { value: district.id } },
-                                      [
-                                        _vm._v(
-                                          "\r\n\t\t                  \t" +
-                                            _vm._s(district.district_name) +
-                                            "\r\n\t\t                  "
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "zone_name" }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group row" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-3 col-form-label",
+                                attrs: { for: "" }
+                              },
+                              [_vm._v("Zone Name (BN)")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-9" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.zone_name_lang,
+                                      expression: "form.zone_name_lang"
+                                    }
+                                  ],
+                                  ref: "zone_name_lang",
+                                  staticClass: "form-control  form-control-sm",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "zone_name_lang"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "zone_name_lang",
+                                    placeholder: "Enter Zone Name (BN) "
+                                  },
+                                  domProps: { value: _vm.form.zone_name_lang },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "zone_name_lang",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: {
+                                    form: _vm.form,
+                                    field: "zone_name_lang"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group row" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-3 col-form-label",
+                                attrs: { for: "" }
+                              },
+                              [_vm._v("Zip Code")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-9" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.zip_code,
+                                      expression: "form.zip_code"
+                                    }
+                                  ],
+                                  ref: "zip_code",
+                                  staticClass: "form-control form-control-sm",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "zip_code"
+                                    )
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "zip_code",
+                                    placeholder: "Zip Code"
+                                  },
+                                  domProps: { value: _vm.form.zip_code },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "zip_code",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "zip_code" }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group row" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-3 col-form-label",
+                                attrs: { for: "" }
+                              },
+                              [_vm._v("District*")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-9" },
+                              [
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.district_id,
+                                        expression: "form.district_id"
+                                      }
+                                    ],
+                                    staticClass: "form-control form-control-sm",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has(
+                                        "district_id"
+                                      )
+                                    },
+                                    attrs: {
+                                      id: "district_id",
+                                      name: "district_id"
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "district_id",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
                                         )
-                                      ]
-                                    )
-                                  })
-                                ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: { form: _vm.form, field: "district_id" }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("Police station")]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.police_station,
-                                    expression: "form.police_station"
-                                  }
-                                ],
-                                ref: "police_station",
-                                staticClass: "form-control form-control-sm",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has(
-                                    "police_station"
-                                  )
-                                },
-                                attrs: {
-                                  type: "text",
-                                  name: "police_station",
-                                  placeholder: "Police station"
-                                },
-                                domProps: { value: _vm.form.police_station },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
+                                      }
                                     }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "police_station",
-                                      $event.target.value
-                                    )
+                                  },
+                                  [
+                                    _c(
+                                      "option",
+                                      { attrs: { disabled: "", value: "" } },
+                                      [_vm._v("Select District ..")]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.Districts, function(district) {
+                                      return _c(
+                                        "option",
+                                        { domProps: { value: district.id } },
+                                        [
+                                          _vm._v(
+                                            "\r\n\t\t\t                  \t" +
+                                              _vm._s(district.district_name) +
+                                              "\r\n\t\t\t                  "
+                                          )
+                                        ]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: {
+                                    form: _vm.form,
+                                    field: "district_id"
                                   }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: {
-                                  form: _vm.form,
-                                  field: "police_station"
-                                }
-                              })
-                            ],
-                            1
-                          ),
+                                })
+                              ],
+                              1
+                            )
+                          ]),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("Details")]),
-                              _vm._v(" "),
-                              _c("textarea", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.zone_desc,
-                                    expression: "form.zone_desc"
-                                  }
-                                ],
-                                ref: "zone_desc",
-                                staticClass: "form-control form-control-sm",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has("zone_desc")
-                                },
-                                attrs: {
-                                  name: "zone_desc",
-                                  placeholder: "Length details"
-                                },
-                                domProps: { value: _vm.form.zone_desc },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
+                          _c("div", { staticClass: "form-group row" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-3 col-form-label",
+                                attrs: { for: "" }
+                              },
+                              [_vm._v("Police Station")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-9" },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.police_station,
+                                      expression: "form.police_station"
                                     }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "zone_desc",
-                                      $event.target.value
+                                  ],
+                                  ref: "police_station",
+                                  staticClass: "form-control form-control-sm",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "police_station"
                                     )
+                                  },
+                                  attrs: {
+                                    type: "text",
+                                    name: "police_station",
+                                    placeholder: "Police station"
+                                  },
+                                  domProps: { value: _vm.form.police_station },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "police_station",
+                                        $event.target.value
+                                      )
+                                    }
                                   }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: { form: _vm.form, field: "zone_desc" }
-                              })
-                            ],
-                            1
-                          )
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: {
+                                    form: _vm.form,
+                                    field: "police_station"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group row" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-3 col-form-label",
+                                attrs: { for: "" }
+                              },
+                              [_vm._v("Details")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-9" },
+                              [
+                                _c("textarea", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.zone_desc,
+                                      expression: "form.zone_desc"
+                                    }
+                                  ],
+                                  ref: "zone_desc",
+                                  staticClass: "form-control form-control-sm",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "zone_desc"
+                                    )
+                                  },
+                                  attrs: {
+                                    name: "zone_desc",
+                                    placeholder: "Length details"
+                                  },
+                                  domProps: { value: _vm.form.zone_desc },
+                                  on: {
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.$set(
+                                        _vm.form,
+                                        "zone_desc",
+                                        $event.target.value
+                                      )
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: { form: _vm.form, field: "zone_desc" }
+                                })
+                              ],
+                              1
+                            )
+                          ])
                         ])
                       ])
                     ])

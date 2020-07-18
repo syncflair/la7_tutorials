@@ -186,6 +186,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -206,16 +217,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         id: '',
         name: '',
         email: '',
+        phone: '',
         password: '',
         password_confirmation: '',
         status_id: '',
         supplier_type: '',
+        supplier_desc: '',
+        supplier_address: '',
+        dist_zone_id: '',
         avatar: ''
       })
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('SupplierForAdminStore', ['pagination']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('SupplierForAdminStore', ['pagination']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'Dist_Zones'])),
   methods: {
     //Make image as base64 
     onImageChange: function onImageChange(e) {
@@ -262,6 +277,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.form.reset(); //reset from after submit
 
       this.form.clear(); //this.$refs.name.focus()
+
+      this.$refs.avatar.value = ''; //clear file input tag 
+
+      this.ShowOnChangeImage = null;
     },
     // Submit the form via a POST request
     storeFormData: function storeFormData() {
@@ -338,6 +357,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this5 = this;
 
     this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
+
+    this.$store.dispatch('commonStoreForAll/fetchDistrictZoneList'); //get user status
 
     FireEvent.$on('AfterChange', function () {
       _this5.$Progress.start();
@@ -1080,6 +1101,103 @@ var render = function() {
                               ],
                               1
                             )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group row" }, [
+                            _c(
+                              "label",
+                              {
+                                staticClass: "col-sm-3 col-form-label",
+                                attrs: { for: "dist_zone_id" }
+                              },
+                              [_vm._v("Zone / Area")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "col-sm-9" },
+                              [
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.dist_zone_id,
+                                        expression: "form.dist_zone_id"
+                                      }
+                                    ],
+                                    staticClass: "form-control form-control-sm",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has(
+                                        "dist_zone_id"
+                                      )
+                                    },
+                                    attrs: {
+                                      id: "dist_zone_id",
+                                      name: "dist_zone_id"
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form,
+                                          "dist_zone_id",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c(
+                                      "option",
+                                      { attrs: { disabled: "", value: "" } },
+                                      [_vm._v("Select zone / Area ..")]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.Dist_Zones, function(zone) {
+                                      return _c(
+                                        "option",
+                                        {
+                                          key: zone.id,
+                                          domProps: { value: zone.id }
+                                        },
+                                        [
+                                          _vm._v(
+                                            _vm._s(zone.zone_name) +
+                                              " (" +
+                                              _vm._s(zone.zip_code) +
+                                              ")"
+                                          )
+                                        ]
+                                      )
+                                    })
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: {
+                                    form: _vm.form,
+                                    field: "dist_zone_id"
+                                  }
+                                })
+                              ],
+                              1
+                            )
                           ])
                         ]),
                         _vm._v(" "),
@@ -1267,15 +1385,14 @@ render._withStripped = true
 /*!**********************************************************************************!*\
   !*** ./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue ***!
   \**********************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _SupplierMasterForm_vue_vue_type_template_id_d13601e6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./SupplierMasterForm.vue?vue&type=template&id=d13601e6& */ "./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=template&id=d13601e6&");
 /* harmony import */ var _SupplierMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SupplierMasterForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _SupplierMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _SupplierMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -1305,7 +1422,7 @@ component.options.__file = "resources/js/components/Admin/Suppliers/Suppliers/Su
 /*!***********************************************************************************************************!*\
   !*** ./resources/js/components/Admin/Suppliers/Suppliers/SupplierMasterForm.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

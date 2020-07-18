@@ -113,6 +113,17 @@
 			            </div>
 			        </div>
 
+			        <div class="form-group row">
+			            <label for="dist_zone_id" class="col-sm-3 col-form-label">Zone / Area</label>
+			            <div class="col-sm-9">
+                        	<select v-model="form.dist_zone_id" class="form-control form-control-sm" id="dist_zone_id" name="dist_zone_id" :class="{ 'is-invalid': form.errors.has('dist_zone_id') }" >
+			              	<option disabled value="">Select zone / Area ..</option>                
+			                <option v-for="zone in Dist_Zones" :key="zone.id" v-bind:value="zone.id">{{zone.zone_name}} ({{zone.zip_code}})</option>			                  
+			              </select>
+			              <has-error :form="form" field="dist_zone_id"></has-error>
+			            </div>
+			        </div>
+
 	          	</div>
 
 	          	<div class="col-md-2 col-sm-6">
@@ -191,10 +202,14 @@
 	          id: '',
 	          name: '',
 	          email: '',
+	          phone: '',
 	          password: '',
 	          password_confirmation:'',
 	          status_id: '',
 	          supplier_type:'',
+	          supplier_desc:'',
+	          supplier_address:'',
+	          dist_zone_id: '',
 	          avatar: '',	          
 	        })
 	      }
@@ -202,7 +217,7 @@
 
 	    computed: {
 	        ...mapState( 'SupplierForAdminStore', ['pagination'] ),
-	        ...mapState( 'commonStoreForAll', ['userStatus'] ) /*userStatus get form commonSotreForAll*/	        
+	        ...mapState( 'commonStoreForAll', ['userStatus','Dist_Zones'] ) /*userStatus get form commonSotreForAll*/	        
       	},
 
 	    methods:{
@@ -248,6 +263,8 @@
 		        this.form.reset();  //reset from after submit
 		        this.form.clear(); 
 		        //this.$refs.name.focus()
+		        this.$refs.avatar.value = ''; //clear file input tag 
+			    this.ShowOnChangeImage = null;
 	    	},
 
 	    	// Submit the form via a POST request
@@ -313,6 +330,7 @@
 
 	    created(){
 	    	this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
+	    	this.$store.dispatch('commonStoreForAll/fetchDistrictZoneList'); //get user status
 
             FireEvent.$on('AfterChange', () => {
 		        this.$Progress.start();

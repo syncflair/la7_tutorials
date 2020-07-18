@@ -135,8 +135,16 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 
 
     //Accounting
-    Route::get('spa/searcChartOfAccountsData', 'Admin\Accounting\ChartOfAccountsController@search'); //search
+    Route::get('spa/searchChartOfAccountsData', 'Admin\Accounting\ChartOfAccountsController@search'); //search
     Route::resource('spa/ChartOfAccounts-Info', 'Admin\Accounting\ChartOfAccountsController', 
+      ['except'=>['create','show','edit'] ]);
+
+    //HRM
+    Route::get('spa/searchEmployeeData', 'Admin\HRM\EmployeeController@search'); //search
+    Route::resource('spa/Employee-Info', 'Admin\HRM\EmployeeController', 
+      ['except'=>['create','show','edit'] ]);
+    Route::get('spa/JobTitle-Info/GetJobTitles', 'Admin\HRM\JobTitleController@GetJobTitles'); //for commonStoreForAll store
+    Route::resource('spa/JobTitle-Info', 'Admin\HRM\JobTitleController', 
       ['except'=>['create','show','edit'] ]);
 
     //Settings Rute

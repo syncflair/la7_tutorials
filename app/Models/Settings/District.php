@@ -17,14 +17,21 @@ class District extends Model
 
 
 
+
+    //District belongsTo Division
+    // public function belongsToDivision(){
+    //     return $this->belongsTo(Division::class, 'division_id');
+    // }
+    public function belongsToDivision(){
+        return $this->belongsTo(Division::class, 'division_id');
+    }
+
     //District hasMany DistrictZone
     public function hasManyDistrictZone()
     {
        return $this->hasMany(DistrictZone::class, 'district_id');
     }
 
-    //District belongsTo Division
-    public function belongsToDivision(){
-        return $this->belongsTo(Division::class, 'division_id');
-    }
+    
+
 }

@@ -16,8 +16,7 @@ class Country extends Model
     protected $guarded = []; 
 
     //Country hasMany Division
-    public function hasManyDivision()
-    {
+    public function hasManyDivision(){
        return $this->hasMany(Division::class, 'country_id');
     }
 }

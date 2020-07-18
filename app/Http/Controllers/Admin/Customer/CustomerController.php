@@ -78,12 +78,12 @@ class CustomerController extends Controller
             'created_by' => \Auth::user()->id, 
         ]);
 
-        if($customer != null){
-           Mail::to($customer->email)->send(new CustomerRegisterByAdminMail( $request->all() )); //for verification email send to customer
+        if($customer != null){           
+            $data = ["userInfo" => $request->all(), "tag" => "register"];
+            Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));
+            
             return response()->json(['success'=>'Customer Created successfully.']); 
-        }
-
-    
+        }   
     }
 
     /**

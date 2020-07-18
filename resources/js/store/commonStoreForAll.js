@@ -8,6 +8,7 @@ const commonStoreForAll ={
       authPermissions:{},
       adminRoles:{},
 	    userStatus: {}, //get data from user_status table
+      jobTitles:{},
 	    Countries:{},
       Divisions:{}, 
       Districts:{},
@@ -27,6 +28,7 @@ const commonStoreForAll ={
 
       //get from action
       FETCH_ROLES(state, data){return state.adminRoles = data;}, 
+      FETCH_JOB_TITLE(state, data){return state.jobTitles = data;}, 
     	FETCH_USER_STATUS(state, data) { return state.userStatus = data; },
       FETCH_COUNTRY_DATA(state, Countries) { return state.Countries = Countries; },
       FETCH_DIVISION_DATA(state, Divisions) { return state.Divisions = Divisions; },
@@ -44,10 +46,10 @@ const commonStoreForAll ={
   		  }).catch( () => { })
   		},
 
-		  fetchCountryList(context){
-        axios.get('/spa/Country-Info/GetCountry')
+      fetchJobTitles(context){ //return role 1 to 6
+        axios.get('/spa/JobTitle-Info/GetJobTitles')
         .then( (response) => {
-          context.commit('FETCH_COUNTRY_DATA', response.data); //use for only show data
+          context.commit('FETCH_JOB_TITLE', response.data); //use for only show data
         }).catch( () => { })
       },
 
@@ -57,6 +59,13 @@ const commonStoreForAll ={
           context.commit('FETCH_ROLES', response.data); //use for only show data
         }).catch( () => { })
       },
+
+		  fetchCountryList(context){
+        axios.get('/spa/Country-Info/GetCountry')
+        .then( (response) => {
+          context.commit('FETCH_COUNTRY_DATA', response.data); //use for only show data
+        }).catch( () => { })
+      },      
 
       fetchDivisionList(context){
         axios.get('/spa/Division-Info/GetDivision')

@@ -20,4 +20,8 @@ class DistrictZone extends Model
     public function belongsToDistrict(){
         return $this->belongsTo(District::class, 'district_id');
     }
+
+    public function hasManySupplier(){
+        return $this->hasMany(App\Supplier::class, 'dist_zone_id');
+    }
 }

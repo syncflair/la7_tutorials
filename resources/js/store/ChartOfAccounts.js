@@ -58,7 +58,7 @@ const ChartOfAccounts ={
         // //For Search
         // searching(context, payload){        
         //     let searchKey = payload.search_key; let searchOption = payload.search_option; //alert(query2);
-        //     axios.get('/spa/searcChartOfAccountsData?page='+ 
+        //     axios.get('/spa/searchChartOfAccountsData?page='+ 
         //                 context.state.pagination.current_page + '&perPage=' +
         //                 context.state.pagination.per_page + 
         //                 '&q='+searchKey+'&so='+searchOption)
@@ -73,7 +73,7 @@ const ChartOfAccounts ={
         // AutoCompleteSearch(context, payload){  
         //     let query = payload;  
         //     //let query2 = payload.key2; 
-        //     axios.get('/spa/searcChartOfAccountsData?&q='+ query)
+        //     axios.get('/spa/searchChartOfAccountsData?&q='+ query)
         //     //axios.get('/spa/searcCartOfAccountsData?q='+query)
         //     .then( ( response ) => {
         //             context.commit('AUTO_COMPLETE_DATA', response.data.data);

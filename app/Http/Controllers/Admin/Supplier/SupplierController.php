@@ -7,10 +7,14 @@ use Illuminate\Http\Request;
 
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str; //for str::random
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Carbon;
 //use App\Mail\SupplierRegisterByAdminMail;
-//use App\Mail\SupplierNotificationMail;
+use App\Mail\SupplierNotificationMail;
 use Illuminate\Support\Facades\Mail;
 use App\Supplier;
+
 
 
 class SupplierController extends Controller
@@ -33,7 +37,8 @@ class SupplierController extends Controller
             $perPage = 10;
        }
 
-        $data = Supplier::paginate($perPage);
+        $data = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry')
+                ->paginate($perPage);
 
         return response()->json($data);
     }
@@ -56,7 +61,85 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:3|max:80', 
+            'email' => 'required|email|unique:suppliers,email', 
+            'phone' => ['numeric','regex:/^01[1|3-9]\d{8}$/', 'unique:suppliers,phone'], //right way to use preg_match
+            'supplier_type' => 'required', 
+            'status_id' => 'required', 
+            'password' => 'required|min:8|max:30',   //confirmed
+            'password_confirmation' => 'required|same:password',
+            //'avatar' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,PNG',
+            //'password_confirmation' => ['sometimes','same:password'],
+        ],
+        [
+            'status_id.required' => 'The User Status field is required.',
+        ]);
+       
+        $data =array();
+        $data['name']=$request->name;
+        $data['email']=$request->email;
+        $data['phone']=$request->phone;
+        $data['supplier_type']=$request->supplier_type;
+        $data['status_id']=$request->status_id;        
+        $data['supplier_desc']=$request->supplier_desc;        
+        $data['supplier_address']=$request->supplier_address;  
+        $data['dist_zone_id']=$request->dist_zone_id;      
+        $data['password'] = Hash::make($request->password); //make hash password
+
+        $image = $request->avatar;
+
+        if($image){
+            //return $imageSize =getimagesize($image);
+            $imageExt = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
+                return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
+            }else{               
+
+                //new name generate from base64 file
+                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                //save image using intervention image
+                \Image::make($image)
+                    //->fit(200, 200)
+                    //->resize(40, 40)
+                   // ->text('SHORBORAHO', 140, 190)
+                    ->save(public_path('FilesStorage/Backend/Suppliers/').$imageName);
+
+
+                $data['avatar'] = 'FilesStorage/Backend/Suppliers/'.$imageName;
+
+                $supplier = Supplier::create($data); 
+
+                // if($request->status_id != 1){ //if supplier status is assigned to active than mail not send
+                //     $supplier->sendEmailVerificationNotification(); //for verification email send 
+                // }
+
+                if($supplier){           
+                    $data = ["userInfo" => $request->all(), "tag" => "register"];
+                    Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
+
+                    return response()->json(['success'=>'Supplier inserted successfully ']);
+                }
+
+                
+            }//end image type check                         
+        }else{
+            $data['avatar'] = null;
+            //$request['avatar'] = null;
+            $supplier = Supplier::create($data); 
+
+            // if($request->status_id != 1){ //if supplier status is assigned to active than mail not send
+            //     $supplier->sendEmailVerificationNotification();  ////for verification email send
+            // }
+
+            if($supplier){           
+                $data = ["userInfo" => $request->all(), "tag" => "register"];
+                Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
+
+                return response()->json(['success'=>'Supplier inserted successfully Without Image']);
+            }
+            
+        } 
     }
 
     /**
@@ -90,7 +173,77 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|min:3|max:80', 
+            'email' => 'required|email|unique:suppliers,email,'.$id, 
+            'phone' => ['numeric','regex:/^01[1|3-9]\d{8}$/', 'unique:suppliers,phone,'.$id ], //right way to use preg_match
+            'supplier_type' => 'required', 
+            'status_id' => 'required', 
+            'password' => 'nullable|sometimes|min:8|max:30',   //confirmed
+            'password_confirmation' => 'sometimes|same:password',
+            //'avatar' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,PNG',
+        ],
+        [
+            'status_id.required' => 'The User Status field is required.',
+        ]);
+       
+         //existing password query
+        $existing_user_password = Supplier::select('password')->where('id', $request->id)->first(); 
+        $existing_password = $existing_user_password->password;
+
+        $data =array();
+        $data['name']=$request->name;
+        $data['email']=$request->email;
+        $data['phone']=$request->phone;
+        $data['supplier_type']=$request->supplier_type;
+        $data['status_id']=$request->status_id; 
+        $data['supplier_desc']=$request->supplier_desc;        
+        $data['supplier_address']=$request->supplier_address;   
+        $data['dist_zone_id']=$request->dist_zone_id;               
+        $data['password'] = $request->password == null ? $existing_password : Hash::make($request->password);
+
+        $image = $request->avatar;
+
+        if( Str::length($image) > 150){ /*larvel helper function*/
+            //return $imageSize =getimagesize($image);
+            $imageExt = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
+                return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
+            }else{
+
+                 //query for existing image
+                $existing_image = Supplier::select('avatar')->where('id', $id)->first();                   
+                if(!empty($existing_image->avatar)) {
+                    File::delete($existing_image->avatar); //delete file //use Illuminate\Support\Facades\File; at top
+                }//else{echo 'Empty';}  
+
+
+                //new name generate from base64 file
+                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                //save image using intervention image
+                \Image::make($image)
+                    //->fit(200, 200)
+                    //->resize(40, 40)
+                   // ->text('SHORBORAHO', 140, 190)
+                    ->save(public_path('FilesStorage/Backend/Suppliers/').$imageName);
+
+
+                $data['avatar'] = 'FilesStorage/Backend/Suppliers/'.$imageName;
+
+                $supplier = Supplier::whereId($request->id)->update($data);        
+
+                return response()->json(['success'=>'Supplier Update successfully ']);
+            }//end image type check                         
+        }else{
+            $existing_image = Supplier::select('avatar')->where('id', $request->id)->first();
+            $data['avatar'] = $existing_image->avatar;
+
+            $supplier = Supplier::whereId($request->id)->update($data); 
+
+            return response()->json(['success'=>'Supplier Update successfully Without Image']);
+           // \Mail::to($supplier->email)->send(new VerificationEmail($supplier)); //for verification email send
+            
+        } 
     }
 
     /**
@@ -101,6 +254,13 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
+        //query for existing image
+        $existing_image = Supplier::select('avatar')->where('id', $id)->first();                   
+        if( File::exists($existing_image->avatar) ) {  
+            File::delete($existing_image->avatar); 
+            //delete file //use Illuminate\Support\Facades\File; at top
+        }
+
         $data = Supplier::findOrFail($id)->delete();        
         if($data){
             return response()->json(['success'=> 'Record is successfully deleted']);
@@ -122,7 +282,8 @@ class SupplierController extends Controller
 
         if(!empty($searchKey) && empty($searchOption)){
         //if($search = \Request::get('q')){
-            $searchResult = Supplier::where(function($query) use ($searchKey){
+            $searchResult = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry')
+                ->where(function($query) use ($searchKey){
                 $query->where('suppliers.name','LIKE','%'.$searchKey.'%')
                         ->orWhere('suppliers.email','LIKE','%'.$searchKey.'%')
                         ->orWhere('suppliers.phone','LIKE','%'.$searchKey.'%')
@@ -135,7 +296,8 @@ class SupplierController extends Controller
             ->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){
-            $searchResult = Supplier::where(function($query) use ($searchKey, $searchOption){
+            $searchResult = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry')
+            ->where(function($query) use ($searchKey, $searchOption){
                 if($searchOption == 'us_name'){
                     $query->where( 'user_status.'.$searchOption,'LIKE','%'.$searchKey.'%');
                 }else{
@@ -148,13 +310,70 @@ class SupplierController extends Controller
             
         }else{
             //$searchResult = Supplier::latest()->paginate(10);
-            $searchResult = Supplier::paginate($perPage);
+            $searchResult = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry')
+                    ->paginate($perPage);
         }
         //return $searchResult;
         return response()->json($searchResult);
     }//end search
 
+     public function ChangeNotify(Request $request){
+        //return $notifyValue = ($request->notifyValue == "true") ? 1 : 0 ;      
+        $data =array();
+        $data['enable_notify'] = ($request->notifyValue == "true") ? 1 : 0 ;  
+        $data['updated_by']  = \Auth::user()->id;      
 
+        Supplier::whereId($request->id)->update($data);         
+        return response()->json(['success'=>'Notification Updated successfully.']); 
+    }
+
+
+
+    public function verifiedByAdmin(Request $request){
+        //return $notifyValue = ($request->notifyValue == "true") ? 1 : 0 ;
+
+        $data = Supplier::find($request->id);
+        $data->status_id = 1; 
+        $data->email_verification_code = null; 
+        $data->verified_by = \Auth::user()->id; 
+        $data->updated_by = \Auth::user()->id; 
+        $data->save();
+
+        if($data){           
+            $data = ["userInfo" => $data, "tag" => "varify"];
+            Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
+
+            return response()->json(['success'=> 'Supplier verified now']);
+        }
+    }
+
+
+    public function inactive_supplier($id){
+        $data = Supplier::find($id);
+        $data->status_id = 2; 
+        $data->save();
+
+        if($data){           
+            $data = ["userInfo" => $data, "tag" => "inactive"];
+            Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
+
+            return response()->json(['success'=> 'Inactive Supplier']);
+        }
+         
+    }
+
+    public function active_supplier($id){
+        $data = Supplier::find($id);
+        $data->status_id = 1; 
+        $data->save();
+
+        if($data){           
+            $data = ["userInfo" => $data, "tag" => "active"];
+            Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
+
+            return response()->json(['success'=> 'Active Supplier']);
+        }  
+    }
 
 
 }

@@ -51,6 +51,11 @@ class Supplier extends Authenticatable
         return $this->belongsTo(Models\Settings\UserStatus::class);
     }
 
+    //Supplier belongsTo District_zone
+    public function belongsToDistrictZone(){
+        return $this->belongsTo(Models\Settings\DistrictZone::class, 'dist_zone_id');
+    }
+
 
      /**
      * Send the password reset notification.

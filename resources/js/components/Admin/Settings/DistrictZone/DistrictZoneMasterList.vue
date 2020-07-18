@@ -53,7 +53,7 @@
           </tr>
 
           <tr v-show="DistrictZones && !DistrictZones.length">
-            <td colspan="6">
+            <td colspan="7">
               <div class="alert alert-warning text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
           </tr>

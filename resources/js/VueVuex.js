@@ -20,6 +20,8 @@ import CategoryMasterStore from './store/CategoryMasterStore'
 
 //Accounting
 import ChartOfAccounts from './store/ChartOfAccounts'
+//HRM
+import EmployeeMasterStore from './store/EmployeeMasterStore'
 //Settings
 import BranchInfoStore from './store/BranchInfoStore'
 import CountryStore from './store/CountryStore'
@@ -49,6 +51,8 @@ export default new Vuex.Store({
 
         //Accounting
         ChartOfAccounts,
+        //HRM
+        EmployeeMasterStore,
 
     	//Settings
         BranchInfoStore, CountryStore, VatRatesStore, StatusMasterStore, 

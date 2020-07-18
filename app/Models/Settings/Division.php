@@ -16,15 +16,16 @@ class Division extends Model
     protected $guarded = []; 
 
 
+    //Division belongsTo Country
+    public function belongsToCountry(){
+        return $this->belongsTo(Country::class, 'country_id');
+    }
+
     //Division hasMany District
     public function hasManyDistrict()
     {
        return $this->hasMany(District::class, 'division_id');
     }
 
-    //Division belongsTo Country
-    public function belongsToCountry(){
-        //return $this->belongsTo('App\Models\Settings\Country', 'country_id');
-        return $this->belongsTo(Country::class, 'country_id');
-    }
+    
 }

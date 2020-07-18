@@ -405,7 +405,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "6" } }, [
+    return _c("td", { attrs: { colspan: "7" } }, [
       _c(
         "div",
         {

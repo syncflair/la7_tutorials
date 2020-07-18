@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class CustomerRegisterByAdminMail extends Mailable
+class SupplierNotificationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,9 +31,10 @@ class CustomerRegisterByAdminMail extends Mailable
     public function build()
     {
         //return $this->view('view.name');
+
         return $this
             ->from('info@sorboraho.com')
             ->subject('Welcome to Sorboraho.com')
-            ->view('emails.CustomerRegisterByAdminMail', ['email_data' => $this->email_data]);
+            ->view('emails.SupplierNotificationMail', ['email_data' => $this->email_data]);
     }
 }
