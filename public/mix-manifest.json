@@ -40,7 +40,13 @@
     "/js/chunks/DivisionMaster.js": "/js/chunks/DivisionMaster.js",
     "/js/chunks/DivisionMasterList-com.js": "/js/chunks/DivisionMasterList-com.js",
     "/js/chunks/DivisionMasterform-com.js": "/js/chunks/DivisionMasterform-com.js",
+    "/js/chunks/EmployeeMaster.js": "/js/chunks/EmployeeMaster.js",
+    "/js/chunks/EmployeeMasterForm.js": "/js/chunks/EmployeeMasterForm.js",
+    "/js/chunks/EmployeeMasterList.js": "/js/chunks/EmployeeMasterList.js",
     "/js/chunks/GiftVoucher.js": "/js/chunks/GiftVoucher.js",
+    "/js/chunks/JobTitleMaster.js": "/js/chunks/JobTitleMaster.js",
+    "/js/chunks/JobTitleMasterForm-com.js": "/js/chunks/JobTitleMasterForm-com.js",
+    "/js/chunks/JobTitleMasterList-com.js": "/js/chunks/JobTitleMasterList-com.js",
     "/js/chunks/LanguageForm-com.js": "/js/chunks/LanguageForm-com.js",
     "/js/chunks/LanguageList-com.js": "/js/chunks/LanguageList-com.js",
     "/js/chunks/LanguageMaster.js": "/js/chunks/LanguageMaster.js",
@@ -102,11 +108,5 @@
     "/js/chunks/search-app-one.js": "/js/chunks/search-app-one.js",
     "/js/chunks/searchBox.js": "/js/chunks/searchBox.js",
     "/js/chunks/switch-app.js": "/js/chunks/switch-app.js",
-    "/js/chunks/JobTitleMaster.js": "/js/chunks/JobTitleMaster.js",
-    "/js/chunks/vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098.js": "/js/chunks/vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098.js",
-    "/js/chunks/EmployeeMaster.js": "/js/chunks/EmployeeMaster.js",
-    "/js/chunks/JobTitleMasterList-com.js": "/js/chunks/JobTitleMasterList-com.js",
-    "/js/chunks/JobTitleMasterForm-com.js": "/js/chunks/JobTitleMasterForm-com.js",
-    "/js/chunks/EmployeeMasterForm-com.js": "/js/chunks/EmployeeMasterForm-com.js",
-    "/js/chunks/EmployeeMasterList-com.js": "/js/chunks/EmployeeMasterList-com.js"
+    "/js/chunks/vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098.js": "/js/chunks/vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098.js"
 }

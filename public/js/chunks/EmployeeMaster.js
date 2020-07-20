@@ -51,19 +51,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var EmployeeMasterList = function EmployeeMasterList() {
-  return __webpack_require__.e(/*! import() | EmployeeMasterList-com */ "EmployeeMasterList-com").then(__webpack_require__.bind(null, /*! ./EmployeeMasterList */ "./resources/js/components/Admin/HRM/Employee/EmployeeMasterList.vue"));
-};
-
-var EmployeeMasterForm = function EmployeeMasterForm() {
-  return __webpack_require__.e(/*! import() | EmployeeMasterForm-com */ "EmployeeMasterForm-com").then(__webpack_require__.bind(null, /*! ./EmployeeMasterForm */ "./resources/js/components/Admin/HRM/Employee/EmployeeMasterForm.vue"));
-};
-
+//
+//
+//
+// const EmployeeMasterList = () => import( /* webpackChunkName: "EmployeeMasterList-com" */ './EmployeeMasterList') 
+// const EmployeeMasterForm = () => import( /* webpackChunkName: "EmployeeMasterForm-com" */ './EmployeeMasterForm')
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "EmployeeMasterInfo",
-  components: {
-    EmployeeMasterList: EmployeeMasterList,
-    EmployeeMasterForm: EmployeeMasterForm
+  components: {// EmployeeMasterList, EmployeeMasterForm,
   },
   data: function data() {
     return {};
@@ -93,27 +88,24 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "content" }, [
     _c("div", { staticClass: "container-fluid" }, [
-      _c(
-        "div",
-        { staticClass: "card vue-card" },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c("div", { staticClass: "row mt-2 mb-3" }, [
-              _c(
-                "div",
-                { staticClass: "col-md-12" },
-                [_c("EmployeeMasterList")],
-                1
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("EmployeeMasterForm")
-        ],
-        1
-      )
+      _c("div", { staticClass: "card vue-card" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "row mt-2 mb-3" }, [
+            _c(
+              "div",
+              { staticClass: "col-md-12" },
+              [
+                _c("router-view", {
+                  attrs: { default: "{name: 'EmployeeMasterList'}" }
+                })
+              ],
+              1
+            )
+          ])
+        ])
+      ])
     ])
   ])
 }
@@ -130,6 +122,10 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6 col-sm-6 text-right" }, [
           _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+            _c("li", { staticClass: "breadcrumb-item active" }, [
+              _vm._v("Dashboard")
+            ]),
+            _vm._v(" "),
             _c("li", { staticClass: "breadcrumb-item active" }, [
               _vm._v("HRM")
             ]),

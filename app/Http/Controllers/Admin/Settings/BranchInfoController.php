@@ -192,4 +192,13 @@ class BranchInfoController extends Controller
         //return $searchResult;
         return response()->json($searchResult);
     }
+
+
+    //return division list without pagination
+    public function getBranches(){
+        //this is for commonStoreForAll Store
+        $data = BranchInfo::get();
+        return response()->json($data);
+    }
+
 }

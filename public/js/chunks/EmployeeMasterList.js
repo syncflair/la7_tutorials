@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["EmployeeMasterList-com"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["EmployeeMasterList"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/HRM/Employee/EmployeeMasterList.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************!*\
@@ -129,6 +129,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -137,10 +151,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
       // use for sortable
-      currentSort: 'name',
+      currentSort: 'emp_name',
       currentSortDir: 'asc',
       //User for search
-      filterBy: 'name',
+      filterBy: 'emp_name',
       // this is use for which field use for auto search, default
       SearchByOptions: [{
         'field_name': 'emp_name',
@@ -154,6 +168,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         'field_name': 'emp_gender',
         'show_name': 'Gender'
+      }, {
+        'field_name': 'us_name',
+        'show_name': 'Status'
       }]
     };
   },
@@ -441,17 +458,24 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-7 col-sm-3 text-right" }, [
-          _c(
-            "a",
-            {
-              staticClass: "btn btn-primary btn-flat btn-sm",
-              attrs: { "data-toggle": "modal", "data-target": "#FormModal" },
-              on: { click: _vm.addData }
-            },
-            [_c("i", { staticClass: "icon fas fa-plus" }), _vm._v(" Add New")]
-          )
-        ])
+        _c(
+          "div",
+          { staticClass: "col-md-7 col-sm-3 text-right" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn btn-primary btn-flat btn-sm",
+                attrs: { to: "/spa/EmployeeMasterForm" }
+              },
+              [
+                _c("i", { staticClass: "icon fas fa-plus" }),
+                _vm._v(" Add New\r\n\t        ")
+              ]
+            )
+          ],
+          1
+        )
       ])
     ]),
     _vm._v(" "),
@@ -515,37 +539,24 @@ var render = function() {
                 [_vm._v("Phone")]
               ),
               _vm._v(" "),
+              _c("th", { staticStyle: { width: "6%" } }, [_vm._v("Branch")]),
+              _vm._v(" "),
               _c(
                 "th",
-                {
-                  staticClass: "sortable-title",
-                  staticStyle: { width: "5%" },
-                  attrs: { scope: "col" },
-                  on: {
-                    click: function($event) {
-                      return _vm.sort("emp_gender")
-                    }
-                  }
-                },
-                [_vm._v("Gender")]
+                { staticStyle: { width: "10%" }, attrs: { scope: "col" } },
+                [_vm._v("Job Title")]
               ),
               _vm._v(" "),
               _c(
                 "th",
-                { staticStyle: { width: "15%" }, attrs: { scope: "col" } },
-                [_vm._v("Address")]
+                { staticStyle: { width: "5%" }, attrs: { scope: "col" } },
+                [_vm._v("Assign TO")]
               ),
               _vm._v(" "),
               _c(
                 "th",
-                { staticStyle: { width: "7%" }, attrs: { scope: "col" } },
-                [_vm._v("DOB")]
-              ),
-              _vm._v(" "),
-              _c(
-                "th",
-                { staticStyle: { width: "7%" }, attrs: { scope: "col" } },
-                [_vm._v("Join Date")]
+                { staticStyle: { width: "10%" }, attrs: { scope: "col" } },
+                [_vm._v("Dept")]
               ),
               _vm._v(" "),
               _c(
@@ -599,34 +610,62 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", { attrs: { scope: "col" } }, [
-                    _vm._v(" " + _vm._s(employee.name) + " ")
+                    _vm._v(" " + _vm._s(employee.emp_name) + " ")
                   ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" " + _vm._s(employee.emp_email) + " ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" " + _vm._s(employee.emp_phone) + " ")]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(employee.emp_gender) + " ")]),
-                  _vm._v(" "),
                   _c("td", [
-                    _c("small", [
-                      _vm._v(_vm._s(employee.emp_Present_address) + " ")
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c("small", [
-                      _vm._v(_vm._s(_vm._f("formatDate")(employee.emp_dob)))
-                    ])
+                    _vm._v(
+                      " " +
+                        _vm._s(employee["belongs_to_branch"]["branch_name"]) +
+                        " "
+                    )
                   ]),
                   _vm._v(" "),
                   _c("td", [
                     _c("small", [
                       _vm._v(
-                        _vm._s(_vm._f("formatDate")(employee.emp_hire_date))
+                        _vm._s(
+                          employee["belongs_to_job_title"]["job_title_name"]
+                        ) + " "
                       )
                     ])
                   ]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(" ok ")]),
+                  _vm._v(" "),
+                  _c(
+                    "td",
+                    _vm._l(employee.departments, function(dept) {
+                      return _c(
+                        "small",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: employee.departments != null,
+                              expression: "employee.departments != null"
+                            }
+                          ]
+                        },
+                        [
+                          _c(
+                            "span",
+                            {
+                              staticClass:
+                                "btn btn-primary btn-flat btn-sm mb-1"
+                            },
+                            [_vm._v(_vm._s(dept.dept_name) + " ")]
+                          )
+                        ]
+                      )
+                    }),
+                    0
+                  ),
                   _vm._v(" "),
                   _c("td", { staticStyle: { "text-align": "center" } }, [
                     _c(
@@ -729,106 +768,54 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("td", { staticStyle: { "text-align": "center" } }, [
-                    _c("input", {
-                      directives: [
+                  _c(
+                    "td",
+                    { staticClass: "text-right" },
+                    [
+                      _c(
+                        "a",
                         {
-                          name: "model",
-                          rawName: "v-model",
-                          value: employee.enable_notify,
-                          expression: "employee.enable_notify"
-                        }
-                      ],
-                      attrs: {
-                        type: "checkbox",
-                        name: "enable_notify",
-                        value: "1"
-                      },
-                      domProps: {
-                        checked: Array.isArray(employee.enable_notify)
-                          ? _vm._i(employee.enable_notify, "1") > -1
-                          : employee.enable_notify
-                      },
-                      on: {
-                        click: function($event) {
-                          return _vm.ChangeNotify(employee.id, $event)
-                        },
-                        change: function($event) {
-                          var $$a = employee.enable_notify,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = "1",
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                _vm.$set(
-                                  employee,
-                                  "enable_notify",
-                                  $$a.concat([$$v])
-                                )
-                            } else {
-                              $$i > -1 &&
-                                _vm.$set(
-                                  employee,
-                                  "enable_notify",
-                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                )
+                          staticClass: "btn btn-flat btn-sm",
+                          on: {
+                            click: function($event) {
+                              return _vm.ViewDetails()
                             }
-                          } else {
-                            _vm.$set(employee, "enable_notify", $$c)
                           }
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-right" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-flat btn-sm",
-                        on: {
-                          click: function($event) {
-                            return _vm.ViewDetails()
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-eye primary" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-primary- btn-flat btn-sm",
-                        attrs: {
-                          "data-toggle": "modal",
-                          "data-target": "#FormModal"
                         },
-                        on: {
-                          click: function($event) {
-                            return _vm.editData(employee)
+                        [_c("i", { staticClass: "fas fa-eye primary" })]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-primary- btn-flat btn-sm",
+                          attrs: {
+                            to: {
+                              name: "EmployeeMasterForm",
+                              params: { data: employee }
+                            }
                           }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-edit primary " })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "btn btn-block- btn-danger- btn-flat btn-sm",
-                        attrs: { id: "delete" },
-                        on: {
-                          click: function($event) {
-                            return _vm.DeleteData(employee.id)
+                        },
+                        [_c("i", { staticClass: "fas fa-edit primary " })]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass:
+                            "btn btn-block- btn-danger- btn-flat btn-sm",
+                          attrs: { id: "delete" },
+                          on: {
+                            click: function($event) {
+                              return _vm.DeleteData(employee.id)
+                            }
                           }
-                        }
-                      },
-                      [_c("i", { staticClass: "far fa-trash-alt red" })]
-                    )
-                  ])
+                        },
+                        [_c("i", { staticClass: "far fa-trash-alt red" })]
+                      )
+                    ],
+                    1
+                  )
                 ])
               }),
               _vm._v(" "),
@@ -893,7 +880,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "11" } }, [
+    return _c("td", { attrs: { colspan: "12" } }, [
       _c(
         "div",
         {
@@ -915,15 +902,14 @@ render._withStripped = true
 /*!***************************************************************************!*\
   !*** ./resources/js/components/Admin/HRM/Employee/EmployeeMasterList.vue ***!
   \***************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EmployeeMasterList_vue_vue_type_template_id_a253dd70___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EmployeeMasterList.vue?vue&type=template&id=a253dd70& */ "./resources/js/components/Admin/HRM/Employee/EmployeeMasterList.vue?vue&type=template&id=a253dd70&");
 /* harmony import */ var _EmployeeMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./EmployeeMasterList.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/HRM/Employee/EmployeeMasterList.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _EmployeeMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _EmployeeMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -953,7 +939,7 @@ component.options.__file = "resources/js/components/Admin/HRM/Employee/EmployeeM
 /*!****************************************************************************************************!*\
   !*** ./resources/js/components/Admin/HRM/Employee/EmployeeMasterList.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

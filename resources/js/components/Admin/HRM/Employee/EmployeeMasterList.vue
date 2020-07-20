@@ -11,7 +11,10 @@
           ></search-app-one>
         </div>
         <div class="col-md-7 col-sm-3 text-right">
-        	<a @click="addData" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#FormModal"> <i class="icon fas fa-plus"></i> Add New</a>
+          <!-- <router-link :to="{name: 'EmployeeMasterForm', params: { id: id} }" class="btn btn-primary btn-flat btn-sm">  -->
+	        <router-link to="/spa/EmployeeMasterForm" class="btn btn-primary btn-flat btn-sm"> 
+	        	<i class="icon fas fa-plus"></i> Add New
+	        </router-link>
         </div>
       </div>
     </div><!--/card-header-->
@@ -25,11 +28,12 @@
             <th style="width: 15%;" scope="col" @click="sort('emp_name')" class="sortable-title">Name</th>
             <th style="width: 15%;" scope="col" @click="sort('emp_email')" class="sortable-title">Email</th>             
             <th style="width: 7%;" scope="col" @click="sort('emp_phone')" class="sortable-title">Phone</th>
-            <th style="width: 5%;" scope="col" @click="sort('emp_gender')" class="sortable-title">Gender</th>
-            <th style="width: 15%;" scope="col">Address</th>
-            <th style="width: 7%;" scope="col">DOB</th>
-            <th style="width: 7%;" scope="col">Join Date</th>
+            <th style="width: 6%;" >Branch</th>
+            <th style="width: 10%;" scope="col">Job Title</th>
+            <th style="width: 5%;" scope="col">Assign TO</th>
+            <th style="width: 10%;" scope="col">Dept</th>
             <th style="width: 3%;" scope="col">Status</th>           
+            <!-- <th style="width: 3%;" scope="col">Verify</th>            -->
             <th style="width: 10%; text-align:right;" scope="col">Action</th>
           </tr>
         </thead>
@@ -47,17 +51,21 @@
                 <span v-if="employee.avatar === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
             </td> 
 
-            <td scope="col"> {{ employee.name }} </td>
+            <td scope="col"> {{ employee.emp_name }} </td>
             <td > {{ employee.emp_email }} </td> 
             <td > {{ employee.emp_phone }} </td>          
-          	<td > {{ employee.emp_gender }} </td> 
+          	<td > {{ employee['belongs_to_branch']['branch_name'] }} </td> 
 
             <td > 
-              <small>{{ employee.emp_Present_address }} </small>
+              <small>{{ employee['belongs_to_job_title']['job_title_name'] }} </small>
             </td> 
+            <td > ok </td> 
 
-            <td > <small>{{ employee.emp_dob | formatDate }}</small> </td>
-            <td > <small>{{ employee.emp_hire_date | formatDate }}</small> </td>
+            <td > <small v-show="employee.departments != null" v-for="dept in employee.departments"> 
+                        <span class="btn btn-primary btn-flat btn-sm mb-1">{{dept.dept_name}} </span>
+                  </small>
+            </td>
+            <!-- <td > <small>{{ employee.emp_hire_date | formatDate }}</small> </td> -->
             
             <td style="text-align:center;">
             	<span @click="inactiveEmployee(employee.id)" v-show="employee.status_id === 1" title="Active employee, Click to inactive"><i class="fas fa-user-check green pointer"></i></span>
@@ -67,17 +75,23 @@
                   <i class="fas fa-user-secret red pointer" style="font-size:22px !important;" ></i>
               </span>
             </td>
-             <td style="text-align:center;">
+             <!-- <td style="text-align:center;">
               <input type="checkbox" @click="ChangeNotify(employee.id, $event)" name="enable_notify" value="1" v-model="employee.enable_notify"  />
-            </td>
+            </td> -->
 
              
 
             <td class="text-right">  
               <a @click="ViewDetails()" class="btn btn-flat btn-sm"> <i class="fas fa-eye primary"></i> </a>   
-              <a @click="editData(employee)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
+              
+              <!-- <a @click="editData(employee)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
                   <i class="fas fa-edit primary "></i>
-              </a> 
+              </a> -->
+
+              <router-link :to="{ name: 'EmployeeMasterForm', params: { data:employee } }" class="btn btn-primary- btn-flat btn-sm">
+                  <i class="fas fa-edit primary "></i>
+              </router-link>
+
               <a @click="DeleteData(employee.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
                  <i class="far fa-trash-alt red"></i>
               </a>
@@ -86,7 +100,7 @@
           </tr>
 
           <tr v-show="employees && !employees.length">
-            <td colspan="11">
+            <td colspan="12">
               <div class="alert alert-warning text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
           </tr>
@@ -123,16 +137,18 @@
           NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
 
           // use for sortable
-          currentSort:'name',
+          currentSort:'emp_name',
           currentSortDir:'asc',
 
           //User for search
-          filterBy:'name', // this is use for which field use for auto search, default
+          filterBy:'emp_name', // this is use for which field use for auto search, default
           SearchByOptions:[
             {'field_name':'emp_name', 'show_name':'Name'},
             {'field_name':'emp_email', 'show_name':'Email'},
             {'field_name':'emp_phone', 'show_name':'Phone'},
             {'field_name':'emp_gender', 'show_name':'Gender'},
+            {'field_name':'us_name', 'show_name':'Status'},
+
           ],             
         }
       },

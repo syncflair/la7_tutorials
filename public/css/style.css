@@ -32870,6 +32870,8 @@ body {
 
 /*btn text color*/
 
+/*.btn-sm, .btn-group-sm > .btn{ padding: 0.3rem 0.3rem !important;}*/
+
 .cusotme-card {
   border: unset !important;
   box-shadow: 0 0 0px rgba(0, 0, 0, 0.125), 0 3px 7px rgba(0, 0, 0, 0.2);
@@ -33012,6 +33014,16 @@ body {
   }
 }
 
+/*Bootstrap Style Overwrite for input focus*/
+
+.form-control:focus,
+form .form-control:focus {
+  border-color: #fd7e14;
+  box-shadow: none;
+}
+
+/*End Bootstrap Style Overwrite for input focus*/
+
 /*Style for search-app-one*/
 
 .autoCompleteSearch {
@@ -33024,6 +33036,13 @@ body {
   z-index: 1;
   background: #fff;
   border: 1px solid #dee2e6;
+}
+
+.popOver > input {
+  width: 95%;
+  margin: 5px;
+  border-right: 1px solid #dee2e6;
+  /*Extra style*/
 }
 
 .optionList {
@@ -33055,4 +33074,28 @@ body {
 }
 
 /*end Style for search-app-one*/
+
+/*style Form Title*/
+
+.form-group > label {
+  margin: 0px 10px !important;
+  background: #ffffff !important;
+  padding: 0px 2px 0px 2px !important;
+  z-index: 99;
+}
+
+.form-group > input {
+  margin-top: -12px !important;
+}
+
+.form-group > select {
+  margin-top: -12px !important;
+}
+
+.form-group > textarea {
+  margin-top: -12px !important;
+  overflow-y: scroll;
+}
+
+/*end style Form Title*/
 

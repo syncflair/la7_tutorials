@@ -438,7 +438,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "th",
-                { staticStyle: { width: "5%" }, attrs: { scope: "col" } },
+                { staticStyle: { width: "3%" }, attrs: { scope: "col" } },
                 [_vm._v("Avatar")]
               ),
               _vm._v(" "),

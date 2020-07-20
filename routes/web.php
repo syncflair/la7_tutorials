@@ -153,6 +153,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/OrgInfo', 'Admin\Settings\OrganizationInfoController', 
       ['except'=>['index','create','store','show','destroy'] ]);
     Route::get('spa/searhBaranchInfoData', 'Admin\Settings\BranchInfoController@search'); //search
+    Route::get('spa/Branch-Info/getBranches', 'Admin\Settings\BranchInfoController@getBranches'); //for commonStoreForAll store
     Route::resource('spa/Branch-Info', 'Admin\Settings\BranchInfoController', 
       ['except'=>['create','show','edit'] ]);
     Route::resource('spa/Currency-Info', 'Admin\Settings\CurrencyController', 

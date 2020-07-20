@@ -14,4 +14,11 @@ class Department extends Model
     protected $table = 'departments';
 
     protected $guarded = []; 
+
+
+    public function Employees(){
+        // return $this->belongsToMany('App\Models\HRM\Employee', 'department_employee');
+        return $this->belongsToMany('App\Models\HRM\Employee', 'department_employee', 'department_id', 'employee_id');
+        //return $this->belongsToMany(App\Models\HRM\Employee::class, 'department_employee', 'department_id', 'employee_id');
+    }
 }

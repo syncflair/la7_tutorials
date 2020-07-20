@@ -24,4 +24,11 @@ class BranchInfo extends Model
         //return $this->hasOne('App\Models\BranchInfo');
         return $this->hasOne(OrganizationInfo::class);  
     }
+
+
+    //Branch hasMany employee
+    public function hasManyEmployee()
+    {
+        return $this->hasMany('App\Models\HRM\Employee', 'branch_id');
+    }
 }

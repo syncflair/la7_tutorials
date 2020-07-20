@@ -317,7 +317,9 @@ class SupplierController extends Controller
         return response()->json($searchResult);
     }//end search
 
-     public function ChangeNotify(Request $request){
+
+
+    public function ChangeNotify(Request $request){
         //return $notifyValue = ($request->notifyValue == "true") ? 1 : 0 ;      
         $data =array();
         $data['enable_notify'] = ($request->notifyValue == "true") ? 1 : 0 ;  

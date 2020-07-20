@@ -85,7 +85,7 @@
        	  	//type: Object,
        	  	required: true,
        	  },
-       	  value:{
+       	  value:{ //data come form selectedItem
 	      	default: () => [],
 	      },
 	      filterBy: {

@@ -22,7 +22,7 @@
           <tr>
             <!-- <th style="">#</th> -->
             <th style="width: 2%;" scope="col"><input type="checkbox" name=""></th>
-            <th style="width: 5%;" scope="col">Avatar</th>
+            <th style="width: 3%;" scope="col">Avatar</th>
             <th style="width: 20%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
             <th style="width: 20%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>  
             <th style="width: 5%;" scope="col" @click="sort('role_name')" class="sortable-title">Role</th>

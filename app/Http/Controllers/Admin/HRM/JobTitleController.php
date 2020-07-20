@@ -131,4 +131,12 @@ class JobTitleController extends Controller
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
     }
+
+
+
+    function GetJobTitles(){
+        //this is for commonStoreForAll Store
+        $data = JobTitle::get();
+        return response()->json($data);
+    }
 }

@@ -114,6 +114,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       required: true
     },
     value: {
+      //data come form selectedItem
       "default": function _default() {
         return [];
       }

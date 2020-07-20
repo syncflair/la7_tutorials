@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateJoinEmployeeDepartmentTable extends Migration
+class CreateDepartmentEmployeeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateJoinEmployeeDepartmentTable extends Migration
      */
     public function up()
     {
-        Schema::create('join_employee_department', function (Blueprint $table) {
+        Schema::create('department_employee', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('emp_id')->comment('employee id');
-            $table->unsignedBigInteger('dept_id')->comment('department id');
+            $table->unsignedBigInteger('employee_id');
+            $table->unsignedBigInteger('department_id');
             $table->date('from_date', 50)->nullable(); 
             $table->date('to_date', 50)->nullable();             
             $table->timestamps();
-            $table->foreign('emp_id')->references('id')->on('employees')->onDelete('cascade');            
-            $table->foreign('dept_id')->references('id')->on('departments')->onDelete('cascade');
+            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');            
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateJoinEmployeeDepartmentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('join_employee_department');
+        Schema::dropIfExists('department_employee');
     }
 }

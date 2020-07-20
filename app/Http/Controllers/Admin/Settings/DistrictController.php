@@ -176,7 +176,6 @@ class DistrictController extends Controller
     public function GetDistrict(){
         //this is for commonStoreForAll Store
         $data = District::get();
-        //$data = District::All();
         return response()->json($data);
     }
 

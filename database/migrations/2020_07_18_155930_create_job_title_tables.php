@@ -14,7 +14,7 @@ class CreateJobTitleTables extends Migration
     public function up()
     {
         Schema::create('job_titles', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('job_title_name', 80); 
             $table->string('job_title_desc', 150)->nullable();
             $table->boolean('is_enabled')->default(true); 
