@@ -8,6 +8,8 @@ const commonStoreForAll ={
       authPermissions:{},
       adminRoles:{},
       branches:{},
+      allDepertments:{},
+      autoSearchDepartments:{},
 	    userStatus: {}, //get data from user_status table
       jobTitles:{},
 	    Countries:{},
@@ -30,12 +32,18 @@ const commonStoreForAll ={
       //get from action
       FETCH_ROLES(state, data){return state.adminRoles = data;}, 
       FETCH_BRANCHES(state, data){return state.branches = data;},       
+      FETCH_DEPARTMENTS(state, data){return state.allDepertments = data;},       
       FETCH_JOB_TITLE(state, data){return state.jobTitles = data;}, 
     	FETCH_USER_STATUS(state, data) { return state.userStatus = data; },
       FETCH_COUNTRY_DATA(state, Countries) { return state.Countries = Countries; },
       FETCH_DIVISION_DATA(state, Divisions) { return state.Divisions = Divisions; },
       FETCH_DISTRICT_DATA(state, Districts) { return state.Districts = Districts; },
       FETCH_DISTRICT_ZONE_DATA(state, Dist_Zones) { return state.Dist_Zones = Dist_Zones; },
+
+      //#####################################Search ###########################################
+      AUTO_COMPLETE_DATA_FOR_DEPARTMENTS(state, data){return state.autoSearchDepartments = data;},       
+
+
 
   },/*end Mutations*/
 
@@ -69,6 +77,13 @@ const commonStoreForAll ={
         }).catch( () => { })
       },
 
+      fetchDepartments(context){ //return role 1 to 6
+        axios.get('/spa/Department-Info/getDetartments')
+        .then( (response) => {
+          context.commit('FETCH_DEPARTMENTS', response.data); //use for only show data
+        }).catch( () => { })
+      },
+
 		  fetchCountryList(context){
         axios.get('/spa/Country-Info/GetCountry')
         .then( (response) => {
@@ -97,6 +112,15 @@ const commonStoreForAll ={
         }).catch( () => { })
       },
 
+
+      //############################################# Search ############################################
+      AutoCompleteSearchForDepartment(context, payload){  
+          let query = payload;  
+          axios.get('/spa/searchDepartmentData?&q='+ query)
+          .then( ( response ) => {
+              context.commit('AUTO_COMPLETE_DATA_FOR_DEPARTMENTS', response.data);                                        
+          }).catch(() => { }) 
+      },
 
 
   } /*end actions*/

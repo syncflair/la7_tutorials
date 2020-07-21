@@ -583,6 +583,7 @@ var render = function() {
                           _c("img", {
                             attrs: {
                               src: "../" + supplier.avatar,
+                              loading: "lazy",
                               height: "20px",
                               width: "20px"
                             }

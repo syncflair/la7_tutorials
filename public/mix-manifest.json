@@ -104,6 +104,7 @@
     "/js/chunks/formBox.js": "/js/chunks/formBox.js",
     "/js/chunks/formComponent.js": "/js/chunks/formComponent.js",
     "/js/chunks/multi-select-app.js": "/js/chunks/multi-select-app.js",
+    "/js/chunks/multi-select-app-one-global.js": "/js/chunks/multi-select-app-one-global.js",
     "/js/chunks/pagination-app.js": "/js/chunks/pagination-app.js",
     "/js/chunks/search-app-one.js": "/js/chunks/search-app-one.js",
     "/js/chunks/searchBox.js": "/js/chunks/searchBox.js",

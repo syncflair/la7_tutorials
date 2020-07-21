@@ -143,4 +143,29 @@ class DepartmentController extends Controller
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
     }
+
+    //return division list without pagination
+    public function getDetartments(){
+        //this is for commonStoreForAll Store
+        $data = Department::get();
+        return response()->json($data);
+    }
+
+
+    public function autoSearch(Request $request){
+
+        $searchKey = $request->q;
+
+        if(!empty($searchKey)){
+        //if($search = \Request::get('q')){
+            $searchResult = Department::where(function($query) use ($searchKey){
+                $query->where('dept_name','LIKE','%'.$searchKey.'%')
+                        ->orWhere('dept_desc','LIKE','%'.$searchKey.'%');
+            })->get();            
+        }else{
+            $searchResult = Department::get();
+        }
+
+        return response()->json($searchResult);
+    }
 }

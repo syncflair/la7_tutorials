@@ -73,8 +73,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 //import { mapState } from 'vuex' //for user MapState
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "search-app-one",

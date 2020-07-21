@@ -589,6 +589,7 @@ var render = function() {
                           _c("img", {
                             attrs: {
                               src: "../" + employee.avatar,
+                              loading: "lazy",
                               height: "20px",
                               width: "20px"
                             }

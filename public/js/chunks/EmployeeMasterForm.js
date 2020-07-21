@@ -293,6 +293,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -308,7 +327,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         name: 'Female'
       }],
-      options: {},
+      //form multiselect app
+      placeHolder: 'Select departments',
+      filterBy: 'dept_name',
+      valueProperty: 'id',
       // Create a new form instance
       form: new Form({
         id: '',
@@ -333,12 +355,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         emp_experience: '',
         emp_previous_job_history: '',
         emp_permanent_address: '',
-        departments: [1, 2]
+        departments: []
       })
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'jobTitles', 'branches'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'jobTitles', 'branches', 'allDepertments', 'autoSearchDepartments'])),
   methods: {
     //Make image as base64 
     onImageChange: function onImageChange(e) {
@@ -464,13 +486,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {
+    var _this4 = this;
+
     this.fillForm();
     this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
 
     this.$store.dispatch('commonStoreForAll/fetchJobTitles'); //get job title
 
     this.$store.dispatch('commonStoreForAll/fetchBranches'); //get job title
-    //console.log(this.form);
+
+    this.$store.dispatch('commonStoreForAll/fetchDepartments'); //fetchDepartments
+
+    FireEvent.$on('AutoCompleteSearchForDepartment', function (data) {
+      _this4.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data);
+    }); //console.log(this.form);
   }
 }); //end export Default
 
@@ -695,7 +724,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-4" }, [
+                    _c("div", { staticClass: "col-6" }, [
                       _c(
                         "div",
                         { staticClass: "form-group" },
@@ -770,56 +799,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-4" }, [
-                      _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c("label", [_vm._v("Join Date")]),
-                          _vm._v(" "),
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.emp_hire_date,
-                                expression: "form.emp_hire_date"
-                              }
-                            ],
-                            ref: "emp_hire_date",
-                            staticClass: "form-control",
-                            class: {
-                              "is-invalid": _vm.form.errors.has("emp_hire_date")
-                            },
-                            attrs: {
-                              type: "date",
-                              name: "emp_hire_date",
-                              placeholder: "Join Date"
-                            },
-                            domProps: { value: _vm.form.emp_hire_date },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.form,
-                                  "emp_hire_date",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "emp_hire_date" }
-                          })
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-4" }, [
+                    _c("div", { staticClass: "col-6" }, [
                       _c(
                         "div",
                         { staticClass: "form-group" },
@@ -896,33 +876,33 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-6" }, [
+                    _c("div", { staticClass: "col-md-3 col-sm-6" }, [
                       _c(
                         "div",
                         { staticClass: "form-group" },
                         [
-                          _c("label", [_vm._v("Date of birth *")]),
+                          _c("label", [_vm._v("Join Date")]),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.form.emp_dob,
-                                expression: "form.emp_dob"
+                                value: _vm.form.emp_hire_date,
+                                expression: "form.emp_hire_date"
                               }
                             ],
-                            ref: "emp_dob",
+                            ref: "emp_hire_date",
                             staticClass: "form-control",
                             class: {
-                              "is-invalid": _vm.form.errors.has("emp_dob")
+                              "is-invalid": _vm.form.errors.has("emp_hire_date")
                             },
                             attrs: {
                               type: "date",
-                              name: "emp_dob",
-                              placeholder: "Date of birth"
+                              name: "emp_hire_date",
+                              placeholder: "Join Date"
                             },
-                            domProps: { value: _vm.form.emp_dob },
+                            domProps: { value: _vm.form.emp_hire_date },
                             on: {
                               input: function($event) {
                                 if ($event.target.composing) {
@@ -930,7 +910,7 @@ var render = function() {
                                 }
                                 _vm.$set(
                                   _vm.form,
-                                  "emp_dob",
+                                  "emp_hire_date",
                                   $event.target.value
                                 )
                               }
@@ -938,85 +918,38 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("has-error", {
-                            attrs: { form: _vm.form, field: "emp_dob" }
+                            attrs: { form: _vm.form, field: "emp_hire_date" }
                           })
                         ],
                         1
                       )
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-6" }, [
+                    _c("div", { staticClass: "col-md-9 col-sm-6" }, [
                       _c(
                         "div",
-                        { staticClass: "form-group" },
+                        {
+                          staticClass: "form-group",
+                          staticStyle: { "margin-top": "-12px" }
+                        },
                         [
-                          _c("label", { attrs: { for: "role_id" } }, [
-                            _vm._v("Gender *")
-                          ]),
+                          _c("label", [_vm._v("Select Department")]),
                           _vm._v(" "),
-                          _c(
-                            "select",
-                            {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.emp_gender,
-                                  expression: "form.emp_gender"
-                                }
-                              ],
-                              staticClass: "form-control form-control-sm-",
-                              class: {
-                                "is-invalid": _vm.form.errors.has("emp_gender")
-                              },
-                              attrs: { id: "emp_gender", name: "emp_gender" },
-                              on: {
-                                change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.form,
-                                    "emp_gender",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
-                                }
-                              }
+                          _c("multi-select-app-one", {
+                            attrs: {
+                              options: _vm.allDepertments,
+                              autoSearchOptions: _vm.autoSearchDepartments,
+                              filterBy: _vm.filterBy,
+                              "place-holder": _vm.placeHolder,
+                              "value-property": _vm.valueProperty
                             },
-                            [
-                              _c(
-                                "option",
-                                { attrs: { disabled: "", value: "" } },
-                                [_vm._v("Select Gender ..")]
-                              ),
-                              _vm._v(" "),
-                              _vm._l(_vm.genders, function(gender) {
-                                return _c(
-                                  "option",
-                                  { domProps: { value: gender.name } },
-                                  [
-                                    _vm._v(
-                                      "\r\n\t\t\t\t                  \t" +
-                                        _vm._s(gender.name) +
-                                        "\r\n\t\t\t\t                  "
-                                    )
-                                  ]
-                                )
-                              })
-                            ],
-                            2
-                          ),
-                          _vm._v(" "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "emp_gender" }
+                            model: {
+                              value: _vm.form.departments,
+                              callback: function($$v) {
+                                _vm.$set(_vm.form, "departments", $$v)
+                              },
+                              expression: "form.departments"
+                            }
                           })
                         ],
                         1
@@ -1105,7 +1038,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-6" }, [
+                _c("div", { staticClass: "col-md-3 col-sm-6" }, [
                   _c(
                     "div",
                     { staticClass: "form-group" },
@@ -1150,7 +1083,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-6" }, [
+                _c("div", { staticClass: "col-md-3 col-sm-6" }, [
                   _c(
                     "div",
                     {
@@ -1207,6 +1140,124 @@ var render = function() {
                         1
                       )
                     ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-3 col-sm-6" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c("label", [_vm._v("Date of birth *")]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.emp_dob,
+                            expression: "form.emp_dob"
+                          }
+                        ],
+                        ref: "emp_dob",
+                        staticClass: "form-control",
+                        class: { "is-invalid": _vm.form.errors.has("emp_dob") },
+                        attrs: {
+                          type: "date",
+                          name: "emp_dob",
+                          placeholder: "Date of birth"
+                        },
+                        domProps: { value: _vm.form.emp_dob },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "emp_dob", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("has-error", {
+                        attrs: { form: _vm.form, field: "emp_dob" }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-3 col-sm-6" }, [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c("label", { attrs: { for: "role_id" } }, [
+                        _vm._v("Gender *")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.emp_gender,
+                              expression: "form.emp_gender"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm-",
+                          class: {
+                            "is-invalid": _vm.form.errors.has("emp_gender")
+                          },
+                          attrs: { id: "emp_gender", name: "emp_gender" },
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.$set(
+                                _vm.form,
+                                "emp_gender",
+                                $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              )
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { disabled: "", value: "" } }, [
+                            _vm._v("Select Gender ..")
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.genders, function(gender) {
+                            return _c(
+                              "option",
+                              { domProps: { value: gender.name } },
+                              [
+                                _vm._v(
+                                  "\r\n\t\t                  \t" +
+                                    _vm._s(gender.name) +
+                                    "\r\n\t\t                  "
+                                )
+                              ]
+                            )
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
+                      _c("has-error", {
+                        attrs: { form: _vm.form, field: "emp_gender" }
+                      })
+                    ],
+                    1
                   )
                 ])
               ]),

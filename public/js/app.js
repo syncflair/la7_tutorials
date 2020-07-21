@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/chunks/" + ({"BranchInfo":"BranchInfo","CashFlowReportMaster":"CashFlowReportMaster","Category-demo":"Category-demo","CategoryMaster":"CategoryMaster","ChartOfAccounts":"ChartOfAccounts","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","CustomerMaster":"CustomerMaster","Dashboard":"Dashboard","DepartmentMaster":"DepartmentMaster","DistrictMaster":"DistrictMaster","DistrictZoneMaster":"DistrictZoneMaster","DivisionMaster":"DivisionMaster","EmployeeMaster":"EmployeeMaster","EmployeeMasterForm":"EmployeeMasterForm","EmployeeMasterList":"EmployeeMasterList","GiftVoucher":"GiftVoucher","JobTitleMaster":"JobTitleMaster","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","LoanReportMaster":"LoanReportMaster","Multicomponent":"Multicomponent","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","PaymentMethod":"PaymentMethod","PermissionMaster":"PermissionMaster","Products":"Products","Purchase":"Purchase","Returns":"Returns","Reviews":"Reviews","RoleMaster":"RoleMaster","SalesReportMaster":"SalesReportMaster","StatusMaster":"StatusMaster","StockReportMaster":"StockReportMaster","Store":"Store","SupplierMaster":"SupplierMaster","SuppliersReportMaster":"SuppliersReportMaster","UserMaster":"UserMaster","UserStatus":"UserStatus","VatRate":"VatRate","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","adminwrapper":"adminwrapper","pagination-app":"pagination-app","search-app-one":"search-app-one","vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098":"vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098","NotFound":"NotFound","ReportMaster":"ReportMaster","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","BranchForm-com":"BranchForm-com","BranchList-com":"BranchList-com","CategoryMasterForm-com":"CategoryMasterForm-com","CategoryMasterList-com":"CategoryMasterList-com","ChartOfAccountsForm-com":"ChartOfAccountsForm-com","ChartOfAccountsList-com":"ChartOfAccountsList-com","CountryForm-com":"CountryForm-com","CountryList-com":"CountryList-com","CurrencyForm-com":"CurrencyForm-com","CurrencyList-com":"CurrencyList-com","CustomerMasterForm-com":"CustomerMasterForm-com","CustomerMasterList-com":"CustomerMasterList-com","DepartmentMaserForm-com":"DepartmentMaserForm-com","DepartmentMasterList-com":"DepartmentMasterList-com","DistrictMasterList-com":"DistrictMasterList-com","DistrictMasterform-com":"DistrictMasterform-com","DistrictZoneMasterForm-com":"DistrictZoneMasterForm-com","DistrictZoneMasterList-com":"DistrictZoneMasterList-com","DivisionMasterList-com":"DivisionMasterList-com","DivisionMasterform-com":"DivisionMasterform-com","JobTitleMasterForm-com":"JobTitleMasterForm-com","JobTitleMasterList-com":"JobTitleMasterList-com","LanguageForm-com":"LanguageForm-com","LanguageList-com":"LanguageList-com","LengthUnitForm-com":"LengthUnitForm-com","LengthUnitList-com":"LengthUnitList-com","formBox":"formBox","searchBox":"searchBox","PackageUnitForm-com":"PackageUnitForm-com","PackageUnitList-com":"PackageUnitList-com","PaymentMethodForm-com":"PaymentMethodForm-com","PaymentMethodList-com":"PaymentMethodList-com","PermissionAddForm-com":"PermissionAddForm-com","RoleAdminMasterForm-com":"RoleAdminMasterForm-com","RoleAdminMasterList-com":"RoleAdminMasterList-com","StatusMasterForm-com":"StatusMasterForm-com","StatusMasterList-com":"StatusMasterList-com","SupplierMasterForm-com":"SupplierMasterForm-com","SupplierMasterList-com":"SupplierMasterList-com","UserMasterForm-com":"UserMasterForm-com","UserMasterList-com":"UserMasterList-com","UserStatusForm-com":"UserStatusForm-com","UserStatusList-com":"UserStatusList-com","VatRateForm-com":"VatRateForm-com","VatRateList-com":"VatRateList-com","WeightUnitForm-com":"WeightUnitForm-com","WeightUnitList-com":"WeightUnitList-com","ReportMasterContent-com":"ReportMasterContent-com","ReportMasterNav-com":"ReportMasterNav-com"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "js/chunks/" + ({"BranchInfo":"BranchInfo","CashFlowReportMaster":"CashFlowReportMaster","Category-demo":"Category-demo","CategoryMaster":"CategoryMaster","ChartOfAccounts":"ChartOfAccounts","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","CustomerMaster":"CustomerMaster","Dashboard":"Dashboard","DepartmentMaster":"DepartmentMaster","DistrictMaster":"DistrictMaster","DistrictZoneMaster":"DistrictZoneMaster","DivisionMaster":"DivisionMaster","EmployeeMaster":"EmployeeMaster","EmployeeMasterForm":"EmployeeMasterForm","EmployeeMasterList":"EmployeeMasterList","GiftVoucher":"GiftVoucher","JobTitleMaster":"JobTitleMaster","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","LoanReportMaster":"LoanReportMaster","Multicomponent":"Multicomponent","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","PaymentMethod":"PaymentMethod","PermissionMaster":"PermissionMaster","Products":"Products","Purchase":"Purchase","Returns":"Returns","Reviews":"Reviews","RoleMaster":"RoleMaster","SalesReportMaster":"SalesReportMaster","StatusMaster":"StatusMaster","StockReportMaster":"StockReportMaster","Store":"Store","SupplierMaster":"SupplierMaster","SuppliersReportMaster":"SuppliersReportMaster","UserMaster":"UserMaster","UserStatus":"UserStatus","VatRate":"VatRate","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","adminwrapper":"adminwrapper","multi-select-app-one-global":"multi-select-app-one-global","pagination-app":"pagination-app","search-app-one":"search-app-one","vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098":"vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098","NotFound":"NotFound","ReportMaster":"ReportMaster","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","BranchForm-com":"BranchForm-com","BranchList-com":"BranchList-com","CategoryMasterForm-com":"CategoryMasterForm-com","CategoryMasterList-com":"CategoryMasterList-com","ChartOfAccountsForm-com":"ChartOfAccountsForm-com","ChartOfAccountsList-com":"ChartOfAccountsList-com","CountryForm-com":"CountryForm-com","CountryList-com":"CountryList-com","CurrencyForm-com":"CurrencyForm-com","CurrencyList-com":"CurrencyList-com","CustomerMasterForm-com":"CustomerMasterForm-com","CustomerMasterList-com":"CustomerMasterList-com","DepartmentMaserForm-com":"DepartmentMaserForm-com","DepartmentMasterList-com":"DepartmentMasterList-com","DistrictMasterList-com":"DistrictMasterList-com","DistrictMasterform-com":"DistrictMasterform-com","DistrictZoneMasterForm-com":"DistrictZoneMasterForm-com","DistrictZoneMasterList-com":"DistrictZoneMasterList-com","DivisionMasterList-com":"DivisionMasterList-com","DivisionMasterform-com":"DivisionMasterform-com","JobTitleMasterForm-com":"JobTitleMasterForm-com","JobTitleMasterList-com":"JobTitleMasterList-com","LanguageForm-com":"LanguageForm-com","LanguageList-com":"LanguageList-com","LengthUnitForm-com":"LengthUnitForm-com","LengthUnitList-com":"LengthUnitList-com","formBox":"formBox","searchBox":"searchBox","PackageUnitForm-com":"PackageUnitForm-com","PackageUnitList-com":"PackageUnitList-com","PaymentMethodForm-com":"PaymentMethodForm-com","PaymentMethodList-com":"PaymentMethodList-com","PermissionAddForm-com":"PermissionAddForm-com","RoleAdminMasterForm-com":"RoleAdminMasterForm-com","RoleAdminMasterList-com":"RoleAdminMasterList-com","StatusMasterForm-com":"StatusMasterForm-com","StatusMasterList-com":"StatusMasterList-com","SupplierMasterForm-com":"SupplierMasterForm-com","SupplierMasterList-com":"SupplierMasterList-com","UserMasterForm-com":"UserMasterForm-com","UserMasterList-com":"UserMasterList-com","UserStatusForm-com":"UserStatusForm-com","UserStatusList-com":"UserStatusList-com","VatRateForm-com":"VatRateForm-com","VatRateList-com":"VatRateList-com","WeightUnitForm-com":"WeightUnitForm-com","WeightUnitList-com":"WeightUnitList-com","ReportMasterContent-com":"ReportMasterContent-com","ReportMasterNav-com":"ReportMasterNav-com"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -108330,6 +108330,9 @@ Vue.component('switch-app', function () {
 Vue.component('multi-select-app', function () {
   return Promise.all(/*! import() | multi-select-app */[__webpack_require__.e("vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098"), __webpack_require__.e("multi-select-app")]).then(__webpack_require__.bind(null, /*! ./components/Admin/GlobalComponents/multi-select-app.vue */ "./resources/js/components/Admin/GlobalComponents/multi-select-app.vue"));
 });
+Vue.component('multi-select-app-one', function () {
+  return __webpack_require__.e(/*! import() | multi-select-app-one-global */ "multi-select-app-one-global").then(__webpack_require__.bind(null, /*! ./components/Admin/GlobalComponents/multi-select-app-one.vue */ "./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue"));
+});
 Vue.component('auto-complete-app', function () {
   return Promise.all(/*! import() | auto-complete-app */[__webpack_require__.e("vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098"), __webpack_require__.e("auto-complete-app")]).then(__webpack_require__.bind(null, /*! ./components/Admin/GlobalComponents/auto-complete-app.vue */ "./resources/js/components/Admin/GlobalComponents/auto-complete-app.vue"));
 });
@@ -109936,6 +109939,8 @@ var commonStoreForAll = {
       authPermissions: {},
       adminRoles: {},
       branches: {},
+      allDepertments: {},
+      autoSearchDepartments: {},
       userStatus: {},
       //get data from user_status table
       jobTitles: {},
@@ -109967,6 +109972,9 @@ var commonStoreForAll = {
     FETCH_BRANCHES: function FETCH_BRANCHES(state, data) {
       return state.branches = data;
     },
+    FETCH_DEPARTMENTS: function FETCH_DEPARTMENTS(state, data) {
+      return state.allDepertments = data;
+    },
     FETCH_JOB_TITLE: function FETCH_JOB_TITLE(state, data) {
       return state.jobTitles = data;
     },
@@ -109984,6 +109992,10 @@ var commonStoreForAll = {
     },
     FETCH_DISTRICT_ZONE_DATA: function FETCH_DISTRICT_ZONE_DATA(state, Dist_Zones) {
       return state.Dist_Zones = Dist_Zones;
+    },
+    //#####################################Search ###########################################
+    AUTO_COMPLETE_DATA_FOR_DEPARTMENTS: function AUTO_COMPLETE_DATA_FOR_DEPARTMENTS(state, data) {
+      return state.autoSearchDepartments = data;
     }
   },
 
@@ -110012,6 +110024,12 @@ var commonStoreForAll = {
         context.commit('FETCH_BRANCHES', response.data); //use for only show data
       })["catch"](function () {});
     },
+    fetchDepartments: function fetchDepartments(context) {
+      //return role 1 to 6
+      axios.get('/spa/Department-Info/getDetartments').then(function (response) {
+        context.commit('FETCH_DEPARTMENTS', response.data); //use for only show data
+      })["catch"](function () {});
+    },
     fetchCountryList: function fetchCountryList(context) {
       axios.get('/spa/Country-Info/GetCountry').then(function (response) {
         context.commit('FETCH_COUNTRY_DATA', response.data); //use for only show data
@@ -110030,6 +110048,13 @@ var commonStoreForAll = {
     fetchDistrictZoneList: function fetchDistrictZoneList(context) {
       axios.get('/spa/DistrictZone-Info/GetDistrictZone').then(function (response) {
         context.commit('FETCH_DISTRICT_ZONE_DATA', response.data); //use for only show data
+      })["catch"](function () {});
+    },
+    //############################################# Search ############################################
+    AutoCompleteSearchForDepartment: function AutoCompleteSearchForDepartment(context, payload) {
+      var query = payload;
+      axios.get('/spa/searchDepartmentData?&q=' + query).then(function (response) {
+        context.commit('AUTO_COMPLETE_DATA_FOR_DEPARTMENTS', response.data);
       })["catch"](function () {});
     }
   }

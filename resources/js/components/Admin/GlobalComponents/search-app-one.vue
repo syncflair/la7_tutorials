@@ -41,9 +41,7 @@
        		@keydown.enter="selectItem"
      	 	placeholder="Start typing...">
 
-     	 <ul v-show="listVisible === true"      	 	
-     	 	ref="optionList" 
-     	 	class="optionList dropdown-menu-">
+     	 <ul v-show="listVisible === true" ref="optionList" class="optionList dropdown-menu-">
 
 	        <li v-if="autoQuery === '' ? listVisible = false : listVisible = true" 
 	        	v-for="(item, index) in autoCompleteData" 
@@ -140,14 +138,12 @@
 		            FireEvent.$emit('searchData', {search_key: SearchKey, search_option: this.selectOption}); 
 	          	}
 
-
         		if(this.selectedItem){
         			this.searchText = this.selectedItem[this.filterBy]; //push autosearch value to searchText
         			this.selectedItem = null; //null after enter 
         		}else{
         			return; //return this.searchText;
-        		}
-        		
+        		}        		
         	},
 
         	autoSearch: _.debounce( (e) => {        		

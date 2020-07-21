@@ -1,7 +1,7 @@
 <template>
   <div class="row">	
-	<div class="col-md-6 offset-md-3">
-      <h5>Multi Select</h5>      
+	<div class="col-md-12 offset-md-3-">
+      <!-- <h5>Multi Select</h5>       -->
   
 	  <div class="my-multiselect" ref="parentBox" 
 	  		@click="ToggleItem" 
@@ -185,6 +185,11 @@
         		//this.value.splice(key, 1);
         		NewValue.splice(existIndex, 1);
 				this.$emit('input', NewValue)
+
+				setTimeout(() => {   
+	        		this.fixTop();
+		        }, 50);
+		        
 				toastr.warning('Removed!');
         	},
 	        itemClicked(index){
@@ -284,8 +289,8 @@
 	.my-multiselect{
 		background: #ffffff;
 		position: relative;
-		padding: 6px 6px; 
-		margin:8px 0;
+		padding: 0px 3px; 
+		margin:10px 0px 0px 0px;
 		display: inline-block;
 		display: flex;
 		flex-wrap: wrap;
@@ -310,7 +315,7 @@
 	}
 	.selected-item{
 		border: 1px solid #ced4da;
-	    padding: 4px;
+	    padding: 1px 4px 1px 4px;
 	    border-radius: 4px;
 	    margin: 2px 3px 2px 3px;
     	list-style: none;

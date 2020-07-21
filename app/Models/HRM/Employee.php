@@ -18,7 +18,8 @@ class Employee extends Model
 
     public function Departments(){
         // return $this->belongsToMany('App\Models\Settings\Department', 'department_employee');
-       return $this->belongsToMany('App\Models\Settings\Department', 'department_employee', 'employee_id', 'department_id');
+       return $this->belongsToMany('App\Models\Settings\Department', 'department_employee', 'employee_id', 'department_id')
+                ->withTimestamps();
        //return $this->belongsToMany(App\Models\Settings\Department::class, 'department_employee', 'employee_id', 'department_id'); /
 
        //->withTimestamps(); //for update time 

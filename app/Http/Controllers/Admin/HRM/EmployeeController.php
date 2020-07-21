@@ -120,28 +120,22 @@ class EmployeeController extends Controller
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
-                    //->resize(40, 40)
+                    ->resize(150, 150) 
                    // ->text('SHORBORAHO', 140, 190)
                     ->save(public_path('FilesStorage/Backend/Employees/').$imageName);
 
 
                 $data['avatar'] = 'FilesStorage/Backend/Employees/'.$imageName;
 
-                $employee = Employee::create($data); 
+                // $employee = Employee::create($data); 
 
-                return response()->json(['success'=>'Employee inserted successfully ']);
+                // return response()->json(['success'=>'Employee inserted successfully ']);
                 
             }//end image type check                         
         }else{
             $data['avatar'] = null;
-            $employee = Employee::create($data); 
-           
-            if($employee){
-                //if( !$request->departments->isEmpty() ){
-                     //insert join data in department_employee table, Department() is define inside Employee model
-                    $employee->Departments()->attach($request->departments);
-                //}
-            }
+            //$employee = Employee::create($data); 
+            //$employee->Departments()->attach($request->departments);
 
             // $j_data = [];
             // foreach($request->departments as $value)
@@ -155,10 +149,14 @@ class EmployeeController extends Controller
             // DepartmentEmployee::insert($insert); 
             
             //$lastInsertedId= $employee->id;
-            return response()->json(['success'=>'Employee inserted successfully Without Image']);
+           // return response()->json(['success'=>'Employee inserted successfully Without Image']);
           
         }
 
+        $employee = Employee::create($data); 
+        $employee->Departments()->attach($request->departments);
+
+        return response()->json(['success'=>'Employee inserted successfully ']);
     }
 
     /**
@@ -258,31 +256,35 @@ class EmployeeController extends Controller
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
-                    //->resize(40, 40)
+                    ->resize(250, 250)
                    // ->text('SHORBORAHO', 140, 190)
                     ->save(public_path('FilesStorage/Backend/Employees/').$imageName);
 
 
                 $data['avatar'] = 'FilesStorage/Backend/Employees/'.$imageName;
 
-                $employee = Employee::whereId($request->id)->update($data);        
-
-                return response()->json(['success'=>'Employee Update successfully ']);
+                // $employee = Employee::whereId($request->id)->update($data);
+                // return response()->json(['success'=>'Employee Update successfully ']);
             }//end image type check                         
         }else{
             $existing_image = Employee::select('avatar')->where('id', $request->id)->first();
             $data['avatar'] = $existing_image->avatar;
 
             // $employee = Employee::whereId($request->id)->update($data); 
-            $employee = Employee::find($request->id)->update($data);
-            $abcd = Employee::find($request->id); 
-
-            $abcd->Departments()->sync($request->departments);
-
-            return response()->json(['success'=>'Employee Update successfully Without Image']);
+            // $employee = Employee::find($request->id)->update($data);
+            // $abcd = Employee::find($request->id); 
+            // $abcd->Departments()->sync($request->departments);
+            // return response()->json(['success'=>'Employee Update successfully Without Image']);
            // \Mail::to($employee->email)->send(new VerificationEmail($employee)); //for verification email send            
         }
+
+
+        $employee = Employee::find($request->id)->update($data);
+        $abcd = Employee::find($request->id); 
+        $abcd->Departments()->sync($request->departments); //update department_employee
+        return response()->json(['success'=>'Employee Update successfully']);
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -320,7 +322,8 @@ class EmployeeController extends Controller
 
         if(!empty($searchKey) && empty($searchOption)){
         //if($search = \Request::get('q')){
-            $searchResult = Employee::where(function($query) use ($searchKey){
+            $searchResult = Employee::with('Departments','belongsToBranch', 'belongsToJobTitle')
+                ->where(function($query) use ($searchKey){
                 $query->where('employees.emp_name','LIKE','%'.$searchKey.'%')
                         ->orWhere('employees.emp_email','LIKE','%'.$searchKey.'%')
                         ->orWhere('employees.emp_phone','LIKE','%'.$searchKey.'%')
@@ -334,19 +337,20 @@ class EmployeeController extends Controller
             ->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){
-            $searchResult = Employee::where(function($query) use ($searchKey, $searchOption){
-                if($searchOption == 'us_name'){
-                    $query->where( 'user_status.'.$searchOption,'LIKE','%'.$searchKey.'%');
-                }else{
-                    $query->where( 'employees.'.$searchOption,'LIKE','%'.$searchKey.'%');
-                }                
-            })
+            $searchResult = Employee::with('Departments','belongsToBranch', 'belongsToJobTitle')
+                ->where(function($query) use ($searchKey, $searchOption){
+                    if($searchOption == 'us_name'){
+                        $query->where( 'user_status.'.$searchOption,'LIKE','%'.$searchKey.'%');
+                    }else{
+                        $query->where( 'employees.'.$searchOption,'LIKE','%'.$searchKey.'%');
+                    }                
+                })
             ->select('employees.*','user_status.us_name')
             ->join('user_status', 'employees.status_id','=', 'user_status.id')
             ->paginate($perPage);
             
         }else{
-            $searchResult = Employee::paginate($perPage);
+            $searchResult = Employee::with('Departments','belongsToBranch', 'belongsToJobTitle')->paginate($perPage);
         }
         //return $searchResult;
         return response()->json($searchResult);

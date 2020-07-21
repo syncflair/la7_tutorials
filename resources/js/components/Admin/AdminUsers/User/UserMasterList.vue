@@ -42,7 +42,7 @@
             <td scope="col"> <input type="checkbox" name=""></td>
             <td> 
                 <span v-if="user.avatar != null"> 
-                  <img :src="'../'+user.avatar" height="20px" width="20px"> 
+                  <img :src="'../'+user.avatar" loading="lazy" height="20px" width="20px"> 
                 </span>
                 <span v-if="user.avatar === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
             </td> 

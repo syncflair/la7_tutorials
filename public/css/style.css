@@ -33058,22 +33058,150 @@ form .form-control:focus {
 }
 
 .optionList > li:hover {
-  background: #dee2e6;
+  background: #6c757d;
   cursor: pointer;
 }
 
 .optionList > .selected {
-  background: #fd7e14;
+  background: #6c757d;
   color: #fff;
 }
 
 .optionList > .selected:hover {
-  background: #fd7e14;
+  background: #6c757d;
   color: #fff;
   cursor: pointer;
 }
 
 /*end Style for search-app-one*/
+
+/*Style for multi-select-app-one*/
+
+.my-multiselect {
+  background: #ffffff;
+  position: relative;
+  padding: 0px 3px;
+  margin: 12px 0px 0px 0px;
+  display: inline-block;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #ced4da;
+  border-radius: 0.2rem;
+  box-sizing: border-box;
+}
+
+.my-multiselect:focus {
+  outline: none;
+}
+
+.selected-item-box {
+  background: #ffffff;
+  min-height: 36px;
+  display: inline-table;
+}
+
+.selected-item-box > ul {
+  margin-bottom: 0px !important;
+  padding-left: 0px !important;
+}
+
+.selected-item {
+  border: 1px solid #ced4da;
+  padding: 1px 4px 1px 4px;
+  border-radius: 4px;
+  margin: 2px 3px 2px 3px;
+  list-style: none;
+  float: left;
+}
+
+.selected-item > i {
+  color: red;
+  cursor: pointer;
+  padding-left: 5px;
+}
+
+.popOverBox {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  background: #ffffff;
+  border: 1px solid #dee2e6;
+  display: inline-table;
+}
+
+.popOverBox > input {
+  width: 98%;
+  margin: 5px;
+  border-right: 1px solid #dee2e6;
+  /*Extra style*/
+}
+
+.selected {
+  background: #6c757d;
+  color: #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.optionList {
+  min-height: 1px;
+  max-height: 250px;
+  overflow-y: scroll;
+  padding: 0px;
+}
+
+.optionList > li {
+  list-style: none;
+  padding: 3px 10px;
+}
+
+.optionList > li > div {
+  float: left;
+}
+
+.optionList > li:hover {
+  background: #dee2e6;
+  cursor: pointer;
+}
+
+.optionList > .selected {
+  background: #6c757d;
+  color: #fff;
+}
+
+.optionList > .selected:hover {
+  background: #6c757d;
+  color: #fff;
+  cursor: pointer;
+}
+
+.selected > .checkbox {
+  border: 1px solid #ffffff;
+}
+
+.checkbox {
+  width: 22px;
+  height: 22px;
+  border: 1px solid #969696;
+  margin-right: 7px;
+  position: relative;
+}
+
+.checkbox-after {
+  width: 11px;
+  height: 6px;
+  border-left: 3px solid white;
+  border-bottom: 2px solid white;
+  content: "";
+  z-index: 9999;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 3px;
+  top: 4px;
+}
+
+/*End Style for multi-select-app-one*/
 
 /*style Form Title*/
 
@@ -33089,6 +33217,10 @@ form .form-control:focus {
 }
 
 .form-group > select {
+  margin-top: -12px !important;
+}
+
+.form-group > .multi-select-app-one {
   margin-top: -12px !important;
 }
 

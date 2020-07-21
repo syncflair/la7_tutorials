@@ -46,7 +46,7 @@
 
             <td> 
                 <span v-if="employee.avatar != null"> 
-                  <img :src="'../'+employee.avatar" height="20px" width="20px"> 
+                  <img :src="'../'+employee.avatar" loading="lazy" height="20px" width="20px"> 
                 </span>
                 <span v-if="employee.avatar === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
             </td> 
@@ -381,7 +381,6 @@
             this.$store.dispatch('EmployeeMasterStore/fetchData',data);
           });
 
-
           //This is come from search-app-one.vue file for serch data
           FireEvent.$on('searchData', (data) => {
              //alert(data.search_key+'-'+data.search_option);
@@ -394,6 +393,7 @@
                 this.$store.dispatch('EmployeeMasterStore/AutoCompleteSearch', data ); 
               }
           });
+
       },
 
       mounted() {

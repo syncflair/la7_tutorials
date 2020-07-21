@@ -198,6 +198,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       e.stopImmediatePropagation(); //$(this).off("blur");
     },
     removeSelectItem: function removeSelectItem(key) {
+      var _this2 = this;
+
       //alert(key);
       var SelectedValue = this.FormatedOptions[key][this.valueProperty];
 
@@ -210,6 +212,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       NewValue.splice(existIndex, 1);
       this.$emit('input', NewValue);
+      setTimeout(function () {
+        _this2.fixTop();
+      }, 50);
       toastr.warning('Removed!');
     },
     itemClicked: function itemClicked(index) {
@@ -219,7 +224,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.selectItem(index);
     },
     selectItem: function selectItem(index) {
-      var _this2 = this;
+      var _this3 = this;
 
       //console.log(this.FormatedOptions[index]);
       //this.selectedItem = this.autoSearchData[this.selected];
@@ -244,11 +249,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$emit('input', NewValue); //but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
 
       setTimeout(function () {
-        _this2.fixTop();
+        _this3.fixTop();
       }, 50); //this.visible = false;	        
     },
     onChangeSelect: function onChangeSelect(event) {
-      var _this3 = this;
+      var _this4 = this;
 
       var index = event.target.selectedIndex;
       var id = event.target.value; //console.log(event.target.selectedIndex);
@@ -273,7 +278,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$emit('input', NewValue); //but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
 
       setTimeout(function () {
-        _this3.fixTop();
+        _this4.fixTop();
       }, 50);
     },
     up: function up() {
@@ -316,7 +321,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.my-multiselect{\n\t\tbackground: #ffffff;\n\t\tposition: relative;\n\t\tpadding: 6px 6px; \n\t\tmargin:8px 0;\n\t\tdisplay: inline-block;\n\t\tdisplay: flex;\n\t\tflex-wrap: wrap;\n\t\tborder: 1px solid #ced4da;\n\t    border-radius: 0.2rem;\n\t    box-sizing: border-box;\n\t    //min-height: 33px;\n\t    //max-width: 222px;\t    \n\t    //line-height: 1.5;\n}\n.my-multiselect:focus{\n\t\toutline: none;\n}\n.selected-item-box{\n\t\tbackground: #ffffff;\n\t\tmin-height: 40px;\n\t\tdisplay: inline-table;\n}\n.selected-item-box > ul{\n\t\tmargin-bottom: 0px !important; \n\t\tpadding-left: 0px !important;\n}\n.selected-item{\n\t\tborder: 1px solid #ced4da;\n\t    padding: 4px;\n\t    border-radius: 4px;\n\t    margin: 2px 3px 2px 3px;\n    \tlist-style: none;\n\t\tfloat: left;\n}\n.selected-item > i{\n\t\tcolor:red;\n\t\tcursor: pointer;\n\t\tpadding-left: 5px;\n}\n.popOverBox{\n\t\tposition: absolute;\n\t\twidth: 100%;\n\t\tleft:0;\n\t\tright: 0;\n\t\tz-index:3;\n\t\tbackground: #ffffff;\n\t\tborder: 1px solid #dee2e6;\n\t\t//display: flex;\n\t\tdisplay: inline-table;\n\t\t//flex-direction: column;\n\t\t//top:33.75px;\n}\n.selected{\n\t\tbackground: #fd7e14;\n\t\tcolor: #fff;\n\t\tborder-bottom: 1px solid #fff;\n}\n.optionList{\n\t\tmin-height: 1px;\n\t\tmax-height: 250px;\n\t\toverflow-y: scroll;\n\t\tpadding: 0px;\n}\n.optionList > li{\n\t\tlist-style: none;\n\t\tpadding: 3px 10px;\n}\n.optionList > li > div{ float: left;\n}\n.optionList > li:hover{\n\t\tbackground: #dee2e6;\n\t\tcursor: pointer;\n}\n.optionList > .selected{\n\t\tbackground: #fd7e14;\n\t\tcolor: #fff;\n}\n.optionList > .selected:hover{\n\t\tbackground: #fd7e14;\n\t\tcolor: #fff;\n\t\tcursor: pointer;\n}\n.checkbox{\n\t\twidth: 22px; height: 22px;border: 1px solid #969696; margin-right: 7px; position: relative;\n\t\t//background: #000;\n}\n.checkbox-after{\n\t\twidth: 11px; height: 6px;\n\t\tborder-left: 3px solid rgb(255,255, 255);\n\t\tborder-bottom: 2px solid rgb(255, 255, 255);\n\t\tcontent: \"\";\n\t\tz-index: 9999;position: absolute; transform: rotate(-45deg);\n\t\tleft:3px;\n\t\ttop: 4px;\n}\n", ""]);
+exports.push([module.i, "\n.my-multiselect{\n\t\tbackground: #ffffff;\n\t\tposition: relative;\n\t\tpadding: 0px 3px; \n\t\tmargin:10px 0px 0px 0px;\n\t\tdisplay: inline-block;\n\t\tdisplay: flex;\n\t\tflex-wrap: wrap;\n\t\tborder: 1px solid #ced4da;\n\t    border-radius: 0.2rem;\n\t    box-sizing: border-box;\n\t    //min-height: 33px;\n\t    //max-width: 222px;\t    \n\t    //line-height: 1.5;\n}\n.my-multiselect:focus{\n\t\toutline: none;\n}\n.selected-item-box{\n\t\tbackground: #ffffff;\n\t\tmin-height: 40px;\n\t\tdisplay: inline-table;\n}\n.selected-item-box > ul{\n\t\tmargin-bottom: 0px !important; \n\t\tpadding-left: 0px !important;\n}\n.selected-item{\n\t\tborder: 1px solid #ced4da;\n\t    padding: 1px 4px 1px 4px;\n\t    border-radius: 4px;\n\t    margin: 2px 3px 2px 3px;\n    \tlist-style: none;\n\t\tfloat: left;\n}\n.selected-item > i{\n\t\tcolor:red;\n\t\tcursor: pointer;\n\t\tpadding-left: 5px;\n}\n.popOverBox{\n\t\tposition: absolute;\n\t\twidth: 100%;\n\t\tleft:0;\n\t\tright: 0;\n\t\tz-index:3;\n\t\tbackground: #ffffff;\n\t\tborder: 1px solid #dee2e6;\n\t\t//display: flex;\n\t\tdisplay: inline-table;\n\t\t//flex-direction: column;\n\t\t//top:33.75px;\n}\n.selected{\n\t\tbackground: #fd7e14;\n\t\tcolor: #fff;\n\t\tborder-bottom: 1px solid #fff;\n}\n.optionList{\n\t\tmin-height: 1px;\n\t\tmax-height: 250px;\n\t\toverflow-y: scroll;\n\t\tpadding: 0px;\n}\n.optionList > li{\n\t\tlist-style: none;\n\t\tpadding: 3px 10px;\n}\n.optionList > li > div{ float: left;\n}\n.optionList > li:hover{\n\t\tbackground: #dee2e6;\n\t\tcursor: pointer;\n}\n.optionList > .selected{\n\t\tbackground: #fd7e14;\n\t\tcolor: #fff;\n}\n.optionList > .selected:hover{\n\t\tbackground: #fd7e14;\n\t\tcolor: #fff;\n\t\tcursor: pointer;\n}\n.checkbox{\n\t\twidth: 22px; height: 22px;border: 1px solid #969696; margin-right: 7px; position: relative;\n\t\t//background: #000;\n}\n.checkbox-after{\n\t\twidth: 11px; height: 6px;\n\t\tborder-left: 3px solid rgb(255,255, 255);\n\t\tborder-bottom: 2px solid rgb(255, 255, 255);\n\t\tcontent: \"\";\n\t\tz-index: 9999;position: absolute; transform: rotate(-45deg);\n\t\tleft:3px;\n\t\ttop: 4px;\n}\n", ""]);
 
 // exports
 
@@ -369,9 +374,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-md-6 offset-md-3" }, [
-      _c("h5", [_vm._v("Multi Select")]),
-      _vm._v(" "),
+    _c("div", { staticClass: "col-md-12 offset-md-3-" }, [
       _c(
         "div",
         {

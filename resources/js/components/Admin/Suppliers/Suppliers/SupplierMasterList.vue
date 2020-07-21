@@ -42,7 +42,7 @@
 
             <td> 
                 <span v-if="supplier.avatar != null"> 
-                  <img :src="'../'+supplier.avatar" height="20px" width="20px"> 
+                  <img :src="'../'+supplier.avatar" loading="lazy" height="20px" width="20px"> 
                 </span>
                 <span v-if="supplier.avatar === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
             </td> 

@@ -193,8 +193,9 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::get('spa/DistrictZone-Info/GetDistrictZone', 'Admin\Settings\DistrictZoneController@GetDistrictZone'); //for commonStoreForAll store
     Route::resource('spa/DistrictZone-Info', 'Admin\Settings\DistrictZoneController', 
       ['except'=>['create','show','edit'] ]);
-
-     Route::resource('spa/Department-Info', 'Admin\Settings\DepartmentController');
+    Route::get('spa/searchDepartmentData', 'Admin\Settings\DepartmentController@autoSearch'); //search
+    Route::get('spa/Department-Info/getDetartments', 'Admin\Settings\DepartmentController@getDetartments');//commonStoreForAll store
+    Route::resource('spa/Department-Info', 'Admin\Settings\DepartmentController');
 
 
 
