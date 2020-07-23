@@ -9,6 +9,8 @@ use App\Models\Catalog\Category;
 use Illuminate\Support\Str; //for str::random
 use Illuminate\Support\Facades\File; //for file management
 
+use Illuminate\Support\Facades\DB; //for database transection
+
 class CategoryController extends Controller
 {
    
@@ -35,7 +37,7 @@ class CategoryController extends Controller
         //     $perPage = 20;
         // }
         //$data = Catgory::whereNull('parent_id')->with('childCOAS')->where('is_enabled', '1')->get(); //FOR PUBLIC
-        $data = Category::whereNull('parent_id')->with('child_category')->get(); //for admin
+        $data = Category::whereNull('parent_id')->with('child_category','lang_translation')->get(); //for admin
         // $data = Catgory::paginate($perPage);
 
         return response()->json($data);
@@ -59,11 +61,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request->cat_img;
+        //return $request->lang_translation;
 
         $this->validate($request, [
             'cat_name' => 'required|min:2|max:40|unique:categories,cat_name',
             //'cat_slug' => 'required',
+            //'*.category_name' => 'required|min:2|max:40',
         ]);
 
         $data =array();
@@ -107,18 +110,28 @@ class CategoryController extends Controller
                     //->text('foo', 0, 0, function($font) {  $font->color(array(255, 255, 255, 0.5)); })
                     ->save(public_path('FilesStorage/Backend/Category/').$imageName);
 
-
                 $data['cat_img'] = 'FilesStorage/Backend/Category/'.$imageName;
 
-                Category::create($data);        
-                return response()->json(['success'=>'Category Created successfully']); 
             }//end image type check
         }else{
-            $data['cat_img'] = null;
-
-            Category::create($data);        
-            return response()->json(['success'=>'Category Created successfully.']); 
+            $data['cat_img'] = null;            
         }
+
+
+        try{
+            DB::beginTransaction();
+
+            $category = Category::create($data);   
+            $category->languageTranslation()->attach($request->lang_translation); 
+
+            DB::commit();
+        }catch(\Exception $e){
+            logger($e->getMessage());
+            DB::rollBack();
+            return response()->json(['errors'=> $e->getMessage() ], 500); 
+        }
+        
+        return response()->json(['success'=>'Category Created.'], 200); 
     }
 
     /**
@@ -198,21 +211,28 @@ class CategoryController extends Controller
 
                 $data['cat_img'] = 'FilesStorage/Backend/Category/'.$imageName;
 
-                Category::whereId($id)->update($data); 
-                //$category = Category::findOrFail($id); 
-                //$category->update($data);             
-                return response()->json(['success'=>'Category Update successfully.']);
             }//end image type check
         }else{
             $existing_image = Category::select('cat_img')->where('id', $id)->first();
             $data['cat_img'] = $existing_image->cat_img;
+        }
+
+
+        try{
+            DB::beginTransaction();
 
             Category::whereId($id)->update($data); 
-            //$category = Category::findOrFail($id); 
-            //$category->update($data); 
-            
-            return response()->json(['success'=>'Category Update successfully.']);
+            $category = Category::find($id); 
+            $category->languageTranslation()->sync($request->lang_translation);
+
+            DB::commit();
+        }catch(\Exception $e){
+            logger($e->getMessage());
+            DB::rollBack();
+            return response()->json(['errors'=> $e->getMessage() ], 500); 
         }
+
+        return response()->json(['success'=>'Category Update.'], 200);
     }
 
     /**
@@ -232,7 +252,7 @@ class CategoryController extends Controller
        
         $data = Category::findOrFail($id)->delete();        
         if($data){
-            return response()->json(['success'=> 'Record is successfully deleted']);
+            return response()->json(['success'=> 'Record deleted']);
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/

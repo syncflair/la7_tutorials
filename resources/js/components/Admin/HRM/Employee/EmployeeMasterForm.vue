@@ -305,14 +305,14 @@
         ShowOnChangeImage:null,
         editMode: false, //Use this for add edit using the same form   
         genders: [
-	      { name: 'Male' },
-	      { name: 'Female'},
-		],      
+  	      { name: 'Male' },
+  	      { name: 'Female'},
+		    ],      
 
-		//form multiselect app
-		placeHolder:'Select departments',
-		filterBy:'dept_name',
-		valueProperty: 'id',
+    		//form multiselect app
+    		placeHolder:'Select departments',
+    		filterBy:'dept_name',
+    		valueProperty: 'id',
 
         // Create a new form instance
         form: new Form({
@@ -348,6 +348,7 @@
     	/*userStatus get form commonSotreForAll*/	
         ...mapState( 'commonStoreForAll', ['userStatus','jobTitles','branches','allDepertments','autoSearchDepartments'] )
 
+        
   	},
 
   	methods:{
@@ -455,7 +456,7 @@
     	this.$store.dispatch('commonStoreForAll/fetchBranches'); //get job title
     	this.$store.dispatch('commonStoreForAll/fetchDepartments');//fetchDepartments
 
-		FireEvent.$on('AutoCompleteSearchForDepartment', (data) => {
+		  FireEvent.$on('AutoCompleteSearchForDepartment', (data) => {
 	        this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data ); 
 	    });
 

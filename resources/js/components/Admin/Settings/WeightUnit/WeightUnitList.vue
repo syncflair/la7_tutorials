@@ -3,8 +3,9 @@
     <div class="card-header">
       <div class="row">
         <div class="col-6">Weight Unit List</div>
-        <div class="ccol-6 text-right">
-        	<a @click="addWeightUnit" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#WeightUnitModal"> <i class="icon fas fa-plus"></i> Add New</a>
+        <div class="col-6 text-right">
+        	<a @click="addWeightUnit" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#WeightUnitModal"> 
+            <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>
     </div><!--/card-header-->

@@ -235,7 +235,7 @@ var render = function() {
                       ? _c("span", [
                           _c("img", {
                             attrs: {
-                              src: "../" + _vm.package.package_icon,
+                              src: "../" + pacakge_unit.package_icon,
                               height: "30px",
                               width: "30px"
                             }

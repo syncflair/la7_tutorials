@@ -19,8 +19,8 @@
       <table class="table table-striped table-sm table-responsive">
         <thead>
           <tr>
-            <!-- <th style="">#</th> -->
-            <th style="width: 2%;" scope="col"><input type="checkbox" name=""></th>
+            <th style="width: 2%;" scope="col"><input type="checkbox" v-model="selectAllCheckbox" @click="selectCheckbox"></th>
+            
             <th style="width: 3%;" scope="col">Img</th>
             <th style="width: 15%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
             <th style="width: 15%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>             
@@ -36,10 +36,7 @@
 
         <tbody>
           <tr v-for="(supplier, index) in sortedSuppliers" :key="index">
-
-            <!-- <td > id</td> -->
-            <td scope="col"> <input type="checkbox" name=""></td>
-
+            <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="supplier.id"></td>
             <td> 
                 <span v-if="supplier.avatar != null"> 
                   <img :src="'../'+supplier.avatar" loading="lazy" height="20px" width="20px"> 
@@ -53,12 +50,12 @@
           	<td > {{ supplier.supplier_type }} </td> 
 
             <td > 
-              <small>
+              <small v-if="supplier.dist_zone_id != null">
               <span v-show="supplier.supplier_address != null">{{ supplier.supplier_address }}, </span>
-              {{ supplier.belongs_to_district_zone.zone_name }},
-              {{ supplier.belongs_to_district_zone.belongs_to_district.district_name }},
-              {{ supplier.belongs_to_district_zone.belongs_to_district.belongs_to_division.division_name }},
-              {{ supplier.belongs_to_district_zone.belongs_to_district.belongs_to_division.belongs_to_country.country_name }}
+                {{ supplier.belongs_to_district_zone.zone_name }},
+                {{ supplier.belongs_to_district_zone.belongs_to_district.district_name }},
+                {{ supplier.belongs_to_district_zone.belongs_to_district.belongs_to_division.division_name }},
+                {{ supplier.belongs_to_district_zone.belongs_to_district.belongs_to_division.belongs_to_country.country_name }}
               </small>
             </td> 
 
@@ -127,6 +124,10 @@
         return { 
           NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
 
+          //checkbox selecting data
+          selectAllCheckbox: false,
+          selectedCheckbox: [],
+
           // use for sortable
           currentSort:'name',
           currentSortDir:'asc',
@@ -162,6 +163,16 @@
       },
 
       methods:{
+        //checkbox select
+        selectCheckbox(){
+          this.selectedCheckbox = [];
+          if(!this.selectAllCheckbox){
+            for(let i in this.suppliers){
+              this.selectedCheckbox.push(this.suppliers[i].id); //all id push into selectedCheckbox array
+            }
+          }
+        },
+
         // use for sortable
         sort(s){
           if(s === this.currentSort) {

@@ -88,17 +88,14 @@ class PackageUnitController extends Controller
                     ->resize(20, 20)
                     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
 
-                $data['package_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
-
-                PackageUnit::create($data);        
-                return response()->json(['success'=>'PackageUnit Created successfully']); 
+                $data['package_icon'] = 'FilesStorage/Backend/Settings/'.$imageName; 
             }//end image type check
         }else{
             $data['package_icon'] = null;
-
-            PackageUnit::create($data);        
-            return response()->json(['success'=>'PackageUnit Created successfully.']); 
         }
+
+        PackageUnit::create($data);        
+        return response()->json(['success'=>'Package Unit Created.']); 
     }
 
     /**
@@ -176,17 +173,14 @@ class PackageUnitController extends Controller
                     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
 
                 $data['package_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
-
-                PackageUnit::whereId($id)->update($data);      
-                return response()->json(['success'=>'Update successfull.']);
             }//end image type check
         }else{
             $existing_image = PackageUnit::select('package_icon')->where('id', $id)->first();
-            $data['package_icon'] = $existing_image->package_icon;
-
-            PackageUnit::whereId($id)->update($data);         
-            return response()->json(['success'=>'Package Unit Updated successfully.']); 
+            $data['package_icon'] = $existing_image->package_icon;            
         }
+
+        PackageUnit::whereId($id)->update($data);         
+        return response()->json(['success'=>'Package Unit Updated.']); 
     }
 
     /**
@@ -206,7 +200,7 @@ class PackageUnitController extends Controller
 
         $data = PackageUnit::findOrFail($id)->delete();        
         if($data){
-            return response()->json(['success'=> 'Record is successfully deleted']);
+            return response()->json(['success'=> 'Record deleted']);
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/

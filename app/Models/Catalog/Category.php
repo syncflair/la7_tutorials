@@ -38,14 +38,31 @@ class Category extends Model
 
     public function sub_child_category()
     {
-       return $this->hasMany(Category::class,'parent_id');
+       return $this->hasMany(Category::class,'parent_id')->with('lang_translation');
     }
 
     public function child_category()
     {
-       //return $this->hasMany(Category::class, 'parent_id')->with('sub_child_category')->where('is_enabled', 1); //for publick
-       return $this->hasMany(Category::class, 'parent_id')->with('sub_child_category'); //for admin
+       //return $this->hasMany(Category::class, 'parent_id')->with('sub_child_category')->where('is_enabled', 1); //for public
+    
+       return $this->hasMany(Category::class, 'parent_id')->with('sub_child_category','lang_translation'); //for admin
         /*where('is_enabled', 1) - is for all sub-category*/
+    }
+
+
+    //this function for query 
+    public function lang_translation(){
+        return $this->hasMany(CategoryLanguageTranslation::class,'category_id');
+            //->select('language_id', 'lang_code','category_name', 'category_desc');
+    }
+
+
+    //this function for insert update data to join (pivot) table
+    public function languageTranslation(){
+        // return $this->belongsToMany('App\Models\Settings\Department', 'department_employee');
+       return $this->belongsToMany('App\Models\Settings\Language', 'category_language_translation', 'category_id', 'language_id')
+            ->withPivot('lang_code', 'category_name','category_desc')
+            ->withTimestamps();
     }
 
 

@@ -54,6 +54,7 @@ class CurrencyController extends Controller
         $this->validate($request, [
             'currency_name' => 'required|min:3|max:40|unique:currencies,currency_name',
             'currency_code' => 'required|min:2|max:8|unique:currencies,currency_code',
+            'currency_value' => 'regex:/^[0-9]+(\.[0-9]{1,2})?$/',
         ]);
 
         $data =array();
@@ -99,19 +100,15 @@ class CurrencyController extends Controller
                     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
 
                 $data['currency_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
-
-                Currency::create($data);        
-                return response()->json(['success'=>'Currency Created successfully']); 
+                
             }//end image type check
         }else{
             $data['currency_icon'] = null;
-
-            Currency::create($data);        
-            return response()->json(['success'=>'Currency Created successfully.']); 
         }
 
-            
-      
+        Currency::create($data);        
+        return response()->json(['success'=>'Currency Created']); 
+     
     }
 
     /**
@@ -148,6 +145,7 @@ class CurrencyController extends Controller
         $this->validate($request, [
             'currency_name' => 'required|min:3|max:40|unique:currencies,currency_name,'.$id,
             'currency_code' => 'required|min:2|max:8|unique:currencies,currency_code,'.$id,
+            'currency_value' => 'regex:/^[0-9]+(\.[0-9]{1,2})?$/', 
         ]);
 
         $data =array();
@@ -191,16 +189,14 @@ class CurrencyController extends Controller
 
                 $data['currency_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
 
-                Currency::whereId($id)->update($data);      
-                return response()->json(['success'=>'Update successfull.']);
             }//end image type check
         }else{
             $existing_image = Currency::select('currency_icon')->where('id', $id)->first();
-            $data['currency_icon'] = $existing_image->currency_icon;
-
-            Currency::whereId($id)->update($data);         
-            return response()->json(['success'=>'Currency Updated successfully.']); 
+            $data['currency_icon'] = $existing_image->currency_icon;            
         }
+
+        Currency::whereId($id)->update($data);         
+        return response()->json(['success'=>'Currency Updated.']); 
     }
 
     /**
@@ -220,7 +216,7 @@ class CurrencyController extends Controller
 
         $data = Currency::findOrFail($id)->delete();        
         if($data){
-            return response()->json(['success'=> 'Record is successfully deleted']);
+            return response()->json(['success'=> 'Record deleted']);
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/

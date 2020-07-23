@@ -20,8 +20,7 @@
       <table class="table table-striped table-sm table-responsive">
         <thead>
           <tr>
-            <!-- <th style="">#</th> -->
-            <th style="width: 2%;" scope="col"><input type="checkbox" name=""></th>
+            <th style="width: 2%;" scope="col"><input type="checkbox" v-model="selectAllCheckbox" @click="selectCheckbox"></th>
             <th style="width: 3%;" scope="col">Avatar</th>
             <th style="width: 20%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
             <th style="width: 20%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>  
@@ -38,8 +37,8 @@
           <!-- <tr v-for="(user, index) in users.data" :key="index"> -->
           <tr v-for="(user, index) in sortedObjects" :key="index">
 
-            <!-- <td > id</td> -->
-            <td scope="col"> <input type="checkbox" name=""></td>
+            
+            <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="user.id"></td>
             <td> 
                 <span v-if="user.avatar != null"> 
                   <img :src="'../'+user.avatar" loading="lazy" height="20px" width="20px"> 
@@ -112,6 +111,10 @@
         return { 
           NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
 
+          //checkbox selecting data
+          selectAllCheckbox: false,
+          selectedCheckbox: [],
+
           // use for sortable
           currentSort:'name',
           currentSortDir:'asc',
@@ -146,6 +149,16 @@
       }, //end computed
 
       methods:{
+        //checkbox select
+        selectCheckbox(){
+          this.selectedCheckbox = [];
+          if(!this.selectAllCheckbox){
+            for(let i in this.users){
+              this.selectedCheckbox.push(this.users[i].id); //all id push into selectedCheckbox array
+            }
+          }
+        },
+
         // use for sortable
         sort(s){
           if(s === this.currentSort) {

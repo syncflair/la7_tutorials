@@ -105,41 +105,23 @@ class SupplierController extends Controller
                    // ->text('SHORBORAHO', 140, 190)
                     ->save(public_path('FilesStorage/Backend/Suppliers/').$imageName);
 
-
                 $data['avatar'] = 'FilesStorage/Backend/Suppliers/'.$imageName;
-
-                $supplier = Supplier::create($data); 
-
-                // if($request->status_id != 1){ //if supplier status is assigned to active than mail not send
-                //     $supplier->sendEmailVerificationNotification(); //for verification email send 
-                // }
-
-                if($supplier){           
-                    $data = ["userInfo" => $request->all(), "tag" => "register"];
-                    Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
-
-                    return response()->json(['success'=>'Supplier inserted successfully ']);
-                }
-
                 
             }//end image type check                         
         }else{
             $data['avatar'] = null;
-            //$request['avatar'] = null;
-            $supplier = Supplier::create($data); 
-
-            // if($request->status_id != 1){ //if supplier status is assigned to active than mail not send
-            //     $supplier->sendEmailVerificationNotification();  ////for verification email send
-            // }
-
-            if($supplier){           
-                $data = ["userInfo" => $request->all(), "tag" => "register"];
-                Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
-
-                return response()->json(['success'=>'Supplier inserted successfully Without Image']);
-            }
             
         } 
+
+        $supplier = Supplier::create($data); 
+
+        if($supplier){           
+            $data = ["userInfo" => $request->all(), "tag" => "register"];
+            Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
+
+            return response()->json(['success'=>'Supplier inserted successfully Without Image']);
+        }
+            
     }
 
     /**
@@ -230,20 +212,15 @@ class SupplierController extends Controller
 
                 $data['avatar'] = 'FilesStorage/Backend/Suppliers/'.$imageName;
 
-                $supplier = Supplier::whereId($request->id)->update($data);        
-
-                return response()->json(['success'=>'Supplier Update successfully ']);
             }//end image type check                         
         }else{
             $existing_image = Supplier::select('avatar')->where('id', $request->id)->first();
-            $data['avatar'] = $existing_image->avatar;
-
-            $supplier = Supplier::whereId($request->id)->update($data); 
-
-            return response()->json(['success'=>'Supplier Update successfully Without Image']);
-           // \Mail::to($supplier->email)->send(new VerificationEmail($supplier)); //for verification email send
-            
+            $data['avatar'] = $existing_image->avatar;            
         } 
+
+        $supplier = Supplier::whereId($request->id)->update($data);
+        return response()->json(['success'=>'Supplier Updated']);
+       // \Mail::to($supplier->email)->send(new VerificationEmail($supplier)); //for verification email send
     }
 
     /**
@@ -263,7 +240,7 @@ class SupplierController extends Controller
 
         $data = Supplier::findOrFail($id)->delete();        
         if($data){
-            return response()->json(['success'=> 'Record is successfully deleted']);
+            return response()->json(['success'=> 'Record deleted']);
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
@@ -326,7 +303,7 @@ class SupplierController extends Controller
         $data['updated_by']  = \Auth::user()->id;      
 
         Supplier::whereId($request->id)->update($data);         
-        return response()->json(['success'=>'Notification Updated successfully.']); 
+        return response()->json(['success'=>'Notification Updated.']); 
     }
 
 

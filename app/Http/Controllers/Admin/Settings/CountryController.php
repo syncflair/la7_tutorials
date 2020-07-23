@@ -61,10 +61,10 @@ class CountryController extends Controller
     {
         $this->validate($request, [
             'country_name' => 'required|min:3|max:40|unique:countries,country_name',
-            // 'iso_2' => 'max:8|unique:countries,iso_2',
-            // 'iso_3' => 'max:8|unique:countries,iso_3',
-            // 'phone_code' => 'max:8|unique:countries,phone_code',
-            // 'currency' => 'max:8|unique:countries,currency',
+            'iso_2' => 'max:5|unique:countries,iso_2',
+            'iso_3' => 'max:5|unique:countries,iso_3',
+            'phone_code' => 'max:5|unique:countries,phone_code',
+            'currency' => 'max:10|unique:countries,currency',
         ]);
 
         $data =array();
@@ -96,15 +96,17 @@ class CountryController extends Controller
 
                 $data['country_flag'] = 'FilesStorage/Backend/Settings/'.$imageName;
 
-                Country::create($data);        
-                return response()->json(['success'=>'Country Created successfully']); 
+                // Country::create($data);        
+                // return response()->json(['success'=>'Country Created successfully']); 
             }//end image type check
         }else{
-            $data['country_flag'] = null;
-
-            Country::create($data);        
-            return response()->json(['success'=>'Country Created successfully.']); 
+            $data['country_flag'] = null;            
         }
+
+        Country::create($data);        
+        return response()->json(['success'=>'Country Created successfully.']); 
+
+
     }
 
     /**
@@ -140,10 +142,10 @@ class CountryController extends Controller
     {
         $this->validate($request, [
             'country_name' => 'required|min:3|max:40|unique:countries,country_name,'.$id,
-            // 'iso_2' => 'max:8|unique:countries,iso_2,'.$id,
-            // 'iso_3' => 'max:8|unique:countries,iso_3,'.$id,
-            // 'phone_code' => 'max:8|unique:countries,phone_code,'.$id,
-            // 'currency' => 'max:8|unique:countries,currency,'.$id,
+            'iso_2' => 'max:5|unique:countries,iso_2,'.$id,
+            'iso_3' => 'max:5|unique:countries,iso_3,'.$id,
+            'phone_code' => 'max:5|unique:countries,phone_code,'.$id,
+            'currency' => 'max:10|unique:countries,currency,'.$id,
         ]);
 
         $data =array();
@@ -182,16 +184,19 @@ class CountryController extends Controller
 
                 $data['country_flag'] = 'FilesStorage/Backend/Settings/'.$imageName;
 
-                Country::whereId($id)->update($data);      
-                return response()->json(['success'=>'Update successfull.']);
+                // Country::whereId($id)->update($data);      
+                // return response()->json(['success'=>'Update successfull.']);
             }//end image type check
         }else{
             $existing_image = Country::select('country_flag')->where('id', $id)->first();
-            $data['country_flag'] = $existing_image->country_flag;
+            $data['country_flag'] = $existing_image->country_flag;  
 
-            Country::whereId($id)->update($data);         
-            return response()->json(['success'=>'Country Updated successfully.']); 
+            // Country::whereId($id)->update($data);         
+            // return response()->json(['success'=>'Country Updated successfully.']);           
         }
+
+        Country::whereId($id)->update($data);         
+        return response()->json(['success'=>'Country Updated successfully.']); 
     }
 
     /**
@@ -211,7 +216,7 @@ class CountryController extends Controller
 
         $data = Country::findOrFail($id)->delete();        
         if($data){
-            return response()->json(['success'=> 'Record is successfully deleted']);
+            return response()->json(['success'=> 'Record deleted']);
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/

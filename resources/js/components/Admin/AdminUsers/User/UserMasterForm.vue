@@ -279,7 +279,7 @@
 
             FireEvent.$on('AfterChange', () => {
 		        this.$Progress.start();
-          		this.$store.dispatch('usersAdminStore/fetchCustomer', this.pagination.per_page);
+          		this.$store.dispatch('usersAdminStore/fetchData', this.pagination.per_page);
           		this.$Progress.finish();
             });
 

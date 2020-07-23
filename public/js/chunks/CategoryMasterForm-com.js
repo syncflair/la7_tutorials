@@ -134,6 +134,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -151,13 +182,34 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         cat_desc: '',
         parent_id: '',
         is_enabled: '',
-        cat_img: ''
+        cat_img: '',
+        // lang_translation: [{
+        // 	lang_code: '',
+        // 	category_name: '',
+        // 	category_desc: '',
+        // }],
+        lang_translation: []
       })
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('CategoryMasterStore', ['Categories'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('CategoryMasterStore', ['Categories']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['allLanguages'])),
+  watch: {},
   methods: {
+    pushToLanguageTranslationArray: function pushToLanguageTranslationArray() {
+      // for(let i in this.allLanguages){
+      // //this.allLanguages[i].id
+      //       this.form.lang_translation.push({ language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, category_name: '', category_desc: '' }); 
+      //     }
+      for (var i = 0; i < this.allLanguages.length; i++) {
+        this.form.lang_translation.push({
+          language_id: this.allLanguages[i].id,
+          lang_code: this.allLanguages[i].lang_code,
+          category_name: '',
+          category_desc: ''
+        });
+      }
+    },
     onImageChange: function onImageChange(e) {
       var _this = this;
 
@@ -194,6 +246,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.form.reset();
       this.form.fill(data);
       this.$refs.cat_name.focus();
+      console.log(data);
     },
     ClearForm: function ClearForm() {
       this.editMode = false;
@@ -205,11 +258,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     storeFormData: function storeFormData() {
       var _this3 = this;
 
+      //console.log(this.form); 
       this.$Progress.start(); //using progress-bar package
 
       this.form.post('/spa/CategoryMaster-Info').then(function (_ref) {
         var data = _ref.data;
 
+        //console.log(data);
         if (data.success) {
           FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
 
@@ -268,6 +323,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     var _this5 = this;
 
+    //this.pushToLanguageTranslationArray();
+    this.$store.dispatch('commonStoreForAll/fetchLanguages'); //get all language
+
     FireEvent.$on('editCategory', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
@@ -275,7 +333,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     });
     FireEvent.$on('addCategory', function () {
       _this5.addCategory();
+
+      _this5.pushToLanguageTranslationArray();
     });
+  },
+  mounted: function mounted() {//console.log(this.form.lang_translation);
   }
 }); //End Exprot Default
 
@@ -313,10 +375,7 @@ var render = function() {
       [
         _c(
           "div",
-          {
-            staticClass: "modal-dialog modal-lg-",
-            attrs: { role: "document" }
-          },
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header \tpb-1" }, [
@@ -389,7 +448,7 @@ var render = function() {
                   _c("div", { staticClass: "modal-body pt-1 " }, [
                     _c("div", { staticClass: "card--" }, [
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-12 col-sm-12" }, [
+                        _c("div", { staticClass: "col-md-4 col-sm-12" }, [
                           _c(
                             "div",
                             { staticClass: "form-group" },
@@ -441,7 +500,7 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
-                              _c("label", [_vm._v("Category (bn) *")]),
+                              _c("label", [_vm._v("Category (bn)")]),
                               _vm._v(" "),
                               _c("input", {
                                 directives: [
@@ -772,8 +831,191 @@ var render = function() {
                                   ])
                             ])
                           ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-8 col-sm-12" }, [
+                          _c(
+                            "table",
+                            _vm._l(_vm.form.lang_translation, function(
+                              ct,
+                              index
+                            ) {
+                              return _c("span", { key: index }, [
+                                _c("tr", [
+                                  _c("td", [
+                                    _c("span", [_vm._v(_vm._s(ct.lang_code))])
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: ct.language_id,
+                                          expression: "ct.language_id"
+                                        }
+                                      ],
+                                      attrs: {
+                                        type: "hidden",
+                                        name: "language_id[]"
+                                      },
+                                      domProps: { value: ct.language_id },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            ct,
+                                            "language_id",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: ct.lang_code,
+                                          expression: "ct.lang_code"
+                                        }
+                                      ],
+                                      attrs: {
+                                        type: "hidden",
+                                        name: "lang_code[]"
+                                      },
+                                      domProps: { value: ct.lang_code },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            ct,
+                                            "lang_code",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "form-group" },
+                                      [
+                                        _c(
+                                          "label",
+                                          { attrs: { for: "cat_img" } },
+                                          [
+                                            _vm._v(
+                                              "Category " + _vm._s(ct.lang_code)
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: ct.category_name,
+                                              expression: "ct.category_name"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          class: {
+                                            "is-invalid": _vm.form.errors.has(
+                                              "category_name"
+                                            )
+                                          },
+                                          attrs: {
+                                            type: "text",
+                                            name: "category_name[]"
+                                          },
+                                          domProps: { value: ct.category_name },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                ct,
+                                                "category_name",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("has-error", {
+                                          attrs: {
+                                            form: _vm.form,
+                                            field: "category_name"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("td", [
+                                    _c("div", { staticClass: "form-group" }, [
+                                      _c(
+                                        "label",
+                                        { attrs: { for: "cat_img" } },
+                                        [
+                                          _vm._v(
+                                            "Detials " + _vm._s(ct.lang_code)
+                                          )
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: ct.category_desc,
+                                            expression: "ct.category_desc"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        attrs: {
+                                          type: "text",
+                                          name: "category_desc[]"
+                                        },
+                                        domProps: { value: ct.category_desc },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              ct,
+                                              "category_desc",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      })
+                                    ])
+                                  ])
+                                ])
+                              ])
+                            }),
+                            0
+                          )
                         ])
-                      ])
+                      ]),
+                      _vm._v(
+                        "\t            \r\n" +
+                          _vm._s(_vm.form.lang_translation) +
+                          "\r\n\t          "
+                      )
                     ])
                   ]),
                   _vm._v(" "),
@@ -827,7 +1069,7 @@ var render = function() {
                               }
                             ]
                           },
-                          [_vm._v("Update")]
+                          [_vm._v("Update ")]
                         )
                       ]
                     )

@@ -20,8 +20,8 @@
       <table class="table table-striped table-sm table-responsive">
         <thead>
           <tr>
-            <!-- <th style="">#</th> -->
-            <th style="width: 2%;" scope="col"><input type="checkbox" name=""></th>
+            <th style="width: 2%;" scope="col"><input type="checkbox" v-model="selectAllCheckbox" @click="selectCheckbox"></th>
+            
             <th style="width: 20%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
             <th style="width: 20%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>             
             <th style="width: 7%;" scope="col" @click="sort('phone')" class="sortable-title">Phone</th>
@@ -38,8 +38,8 @@
           <!-- <tr v-for="(customer, index) in customers.data" :key="index"> -->
           <tr v-for="(customer, index) in sortedCustomers" :key="index">
 
-            <!-- <td > id</td> -->
-            <td scope="col"> <input type="checkbox" name=""></td>
+            <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="customer.id"></td>
+            
             <td scope="col"> {{ customer.name }} </td>
             <td > {{ customer.email }} </td> 
             <td > {{ customer.phone }} </td>          
@@ -106,6 +106,10 @@
 
       data(){
         return { 
+          //checkbox selecting data
+          selectAllCheckbox: false,
+          selectedCheckbox: [],
+
           // use for sortable
           currentSort:'name',
           currentSortDir:'asc',
@@ -142,6 +146,16 @@
       },
 
       methods:{
+        //checkbox select
+        selectCheckbox(){
+          this.selectedCheckbox = [];
+          if(!this.selectAllCheckbox){
+            for(let i in this.customers){
+              this.selectedCheckbox.push(this.customers[i].id); //all id push into selectedCheckbox array
+            }
+          }
+        },
+
         // use for sortable
         sort(s){
           if(s === this.currentSort) {

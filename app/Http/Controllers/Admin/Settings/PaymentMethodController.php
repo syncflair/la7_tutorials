@@ -85,16 +85,14 @@ class PaymentMethodController extends Controller
                     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
 
                 $data['payment_method_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
-
-                PaymentMethod::create($data);        
-                return response()->json(['success'=>'Payment Method Created successfully']); 
+                
             }//end image type check
         }else{
             $data['payment_method_icon'] = null;
-
-            PaymentMethod::create($data);        
-            return response()->json(['success'=>'Payment Method Created successfully.']); 
         }
+
+        PaymentMethod::create($data);        
+        return response()->json(['success'=>'Payment Method Created']); 
     }
 
     /**
@@ -170,17 +168,14 @@ class PaymentMethodController extends Controller
                     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
 
                 $data['payment_method_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
-
-                PaymentMethod::whereId($id)->update($data);      
-                return response()->json(['success'=>'Update successfull.']);
             }//end image type check
         }else{
             $existing_image = PaymentMethod::select('payment_method_icon')->where('id', $id)->first();
-            $data['payment_method_icon'] = $existing_image->payment_method_icon;
-
-            PaymentMethod::whereId($id)->update($data);         
-            return response()->json(['success'=>'Payment Method Updated successfully.']); 
+            $data['payment_method_icon'] = $existing_image->payment_method_icon;           
         }
+
+        PaymentMethod::whereId($id)->update($data);         
+        return response()->json(['success'=>'Payment Method Updated.']); 
     }
 
     /**
@@ -200,7 +195,7 @@ class PaymentMethodController extends Controller
 
         $data = PaymentMethod::findOrFail($id)->delete();        
         if($data){
-            return response()->json(['success'=> 'Record is successfully deleted']);
+            return response()->json(['success'=> 'Record deleted']);
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/

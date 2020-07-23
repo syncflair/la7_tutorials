@@ -137,6 +137,8 @@
           :offset="5"
           @paginate="fetchData()"
       ></pagination-app> -->
+
+
     </div>
 
 </div><!--/vue-card-item -->
@@ -156,17 +158,18 @@
           filterBy:'cat_name', // this is use for which field use for auto search, default
           SearchByOptions:[
             {'field_name':'cat_name', 'show_name':'Name'},
-          ],                  
+          ],              
         }
       },
 
       computed: {
-        ...mapState( 
-             'CategoryMasterStore', ['Categories', 'pagination','autoCompleteData']
-          ),
+        ...mapState( 'CategoryMasterStore', ['Categories', 'pagination','autoCompleteData'] ),
+        // ...mapState( 'commonStoreForAll', ['allLanguages'] ),
+
       },
 
       methods:{
+
       	ViewDetails(id){
           alert(id);
         },
@@ -227,6 +230,8 @@
       },
 
       created(){ 
+        
+
       	  this.$store.dispatch('CategoryMasterStore/fetchData'); //call this function at first loading from Action with Modules namespace 
 
 	      FireEvent.$on('AfterChange', () => {
@@ -256,7 +261,7 @@
       },
 
       mounted() {
-        //console.log()  
+        //console.log() 
       },
 
     }/*End export default*/

@@ -82,7 +82,7 @@ class CustomerController extends Controller
             $data = ["userInfo" => $request->all(), "tag" => "register"];
             Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));
             
-            return response()->json(['success'=>'Customer Created successfully.']); 
+            return response()->json(['success'=>'Customer Created.']); 
         }   
     }
 
@@ -146,7 +146,7 @@ class CustomerController extends Controller
 
         if($customer != null){
            //Mail::to($customer->email)->send(new CustomerRegisterVerificationMail($customer)); //for verification email send to customer
-            return response()->json(['success'=>'Customer update successfully.']); 
+            return response()->json(['success'=>'Customer update.']); 
         }
     }
 
@@ -160,7 +160,7 @@ class CustomerController extends Controller
     {
         $data = Customer::findOrFail($id)->delete();        
         if($data){
-            return response()->json(['success'=> 'Record is successfully deleted']);
+            return response()->json(['success'=> 'Record deleted']);
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
@@ -175,7 +175,7 @@ class CustomerController extends Controller
         $data['updated_by']  = \Auth::user()->id;      
 
         Customer::whereId($request->id)->update($data);         
-        return response()->json(['success'=>'Notification Updated successfully.']); 
+        return response()->json(['success'=>'Notification Updated.']); 
 
     }
    

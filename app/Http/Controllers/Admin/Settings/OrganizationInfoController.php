@@ -134,20 +134,15 @@ class OrganizationInfoController extends Controller
                     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
 
                 $data['org_logo'] = 'FilesStorage/Backend/Settings/'.$imageName;
-
-                OrganizationInfo::whereId($id)->update($data);      
-                return response()->json(['success'=>'Update successfull.']);
+                
             }//end image type check
         }else{
             $existing_image = OrganizationInfo::select('org_logo')->where('id', $id)->first();
             $data['org_logo'] = $existing_image->org_logo;
-
-            OrganizationInfo::whereId($id)->update($data); 
-            //$OrganizationInfo = OrganizationInfo::findOrFail($id); 
-            //$OrganizationInfo->update($data); 
-            
-            return response()->json(['success'=>'Update successfull.']);
         }
+
+        OrganizationInfo::whereId($id)->update($data);      
+        return response()->json(['success'=>'Update successfull.']);
     }
 
     /**

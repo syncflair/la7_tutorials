@@ -109939,6 +109939,7 @@ var commonStoreForAll = {
       authPermissions: {},
       adminRoles: {},
       branches: {},
+      allLanguages: {},
       allDepertments: {},
       autoSearchDepartments: {},
       userStatus: {},
@@ -109971,6 +109972,9 @@ var commonStoreForAll = {
     },
     FETCH_BRANCHES: function FETCH_BRANCHES(state, data) {
       return state.branches = data;
+    },
+    FETCH_LANGUAGES: function FETCH_LANGUAGES(state, data) {
+      return state.allLanguages = data;
     },
     FETCH_DEPARTMENTS: function FETCH_DEPARTMENTS(state, data) {
       return state.allDepertments = data;
@@ -110022,6 +110026,12 @@ var commonStoreForAll = {
       //return role 1 to 6
       axios.get('/spa/Branch-Info/getBranches').then(function (response) {
         context.commit('FETCH_BRANCHES', response.data); //use for only show data
+      })["catch"](function () {});
+    },
+    fetchLanguages: function fetchLanguages(context) {
+      //return role 1 to 6
+      axios.get('/spa/Language-Info/getLanguages').then(function (response) {
+        context.commit('FETCH_LANGUAGES', response.data); //use for only show data
       })["catch"](function () {});
     },
     fetchDepartments: function fetchDepartments(context) {

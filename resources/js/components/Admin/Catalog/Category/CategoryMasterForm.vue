@@ -3,7 +3,7 @@
 		
 	<!-- Modal -->
 <div class="modal fade" id="CategoryModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" >
-  <div class="modal-dialog modal-lg-" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header 	pb-1">
         <h5 class="modal-title" id="">
@@ -20,7 +20,7 @@
 
 	          <div class="card--"><!-- row inside form -->
 	          	<div class="row">
-	          	<div class="col-md-12 col-sm-12">
+	          	<div class="col-md-4 col-sm-12">
 
 	          		<div class="form-group">
 	                  <label>Category </label>
@@ -29,7 +29,7 @@
 	                </div>
 
 	                <div class="form-group">
-	                  <label>Category (bn) *</label>
+	                  <label>Category (bn)</label>
 	                    <input v-model="form.cat_name_lang" type="text" ref="cat_name_lang" name="cat_name_lang" class="form-control" :class="{ 'is-invalid': form.errors.has('cat_name_lang') }" placeholder="Category BN">
 	                  <has-error :form="form" field="cat_name_lang"></has-error>
 	                </div>
@@ -90,12 +90,42 @@
                       </div>	                      
                     </div>
 
+	          	</div>
+
+	          	<div class="col-md-8 col-sm-12">
+	          		<!-- <a @click="pushToLanguageTranslationArray" class="pointer">click</a> -->
+	          	  <table>
+	          	  	<!-- allLanguages -->
+	          	  	<span v-for="(ct, index) in form.lang_translation" :key="index">	 
+	          	  	<!-- <tr><td>{{ index }} </td><td>{{ct}}</td></tr> -->                 
+
+	          		<tr >
+	          		  <td><span>{{ct.lang_code}}</span></td>
+	          		  <td>
+	          		  	<input v-model="ct.language_id" type="hidden" name="language_id[]">
+	          		  	<input v-model="ct.lang_code" type="hidden" name="lang_code[]">
+
+	          		  	<div class="form-group">	          		  	  
+	          		  	  <label for="cat_img">Category {{ct.lang_code}}</label>
+	                  	  <input v-model="ct.category_name" type="text" class="form-control" name="category_name[]" :class="{ 'is-invalid': form.errors.has('category_name') }">
+	                  	  <has-error :form="form" field="category_name"></has-error>
+		                </div>
+	            	  </td>
+	            	  <td>
+	            	  	<div class="form-group">
+	            	  		<label for="cat_img">Detials {{ct.lang_code}}</label>
+	                  		<input v-model="ct.category_desc" type="text" class="form-control" name="category_desc[]">
+		                </div>
+	            	  </td>
+	          		</tr>
+
+	          		</span>
+	          	  </table>
 
 	          	</div>
-	                                	
-	          	</div><!-- row inside form -->
-	            
-
+	                                
+	          	</div><!-- row inside form -->	            
+{{form.lang_translation}}
 	          </div> 
 	       
 	      </div><!--modal Body-->      
@@ -103,7 +133,7 @@
 	        <button @click="ClearForm()" type="button" class="btn btn-danger btn-flat btn-sm close-form" data-dismiss="modal">Close</button>
 	        <button type="submit" class="btn btn-primary btn-flat btn-sm">
 	        	<span v-show="!editMode">Save</span>
-	        	<span v-show="editMode">Update</span>
+	        	<span v-show="editMode">Update </span>
 	    	</button>
 	      </div><!--modal-footer-->
   	  </form><!-- </form> -->
@@ -112,6 +142,7 @@
     </div>
   </div>
 </div>
+
 
 
 </span>	
@@ -135,18 +166,40 @@
 	          cat_desc: '',
 	          parent_id: '',
 	          is_enabled: '',
-	          cat_img:''	          
+	          cat_img:'',
+
+	          // lang_translation: [{
+	          // 	lang_code: '',
+	          // 	category_name: '',
+	          // 	category_desc: '',
+	          // }],
+	          lang_translation: [],
+
 	        })
 	      }
 	    },//end data
 
 	    computed: {
-	        ...mapState( 
-	             'CategoryMasterStore', ['Categories']
-	        ),
-	      },
+	        ...mapState( 'CategoryMasterStore', ['Categories'] ),
+	        ...mapState( 'commonStoreForAll', ['allLanguages'] ),	     
+	    },
+
+	    watch: {
+	    	
+	    },	    
 
 	    methods:{
+	    	pushToLanguageTranslationArray(){
+	    	  	// for(let i in this.allLanguages){
+	    	  	// //this.allLanguages[i].id
+		        //       this.form.lang_translation.push({ language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, category_name: '', category_desc: '' }); 
+		        //     }
+
+	            for (var i = 0; i < this.allLanguages.length; i++) {
+	              this.form.lang_translation.push({ language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, category_name: '', category_desc: '' }); 
+	            }
+	    	},
+
 	    	onImageChange(e){
 		        //let file = e.target.files || e.dataTransfer.files;
 		        let file = e.target.files[0];        
@@ -177,7 +230,8 @@
 	    		this.editMode = true;
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
-	    		this.$refs.cat_name.focus();    		
+	    		this.$refs.cat_name.focus();    
+	    		console.log(data);		
 	    	},
 	    	ClearForm(){
 	    		this.editMode = false;
@@ -187,12 +241,14 @@
 	    	},
 
 	    	// Submit the form via a POST request
-			storeFormData() {  
+			storeFormData() { 
+			  //console.log(this.form); 
 			  this.$Progress.start(); //using progress-bar package
 
 			  this.form.post('/spa/CategoryMaster-Info')
 			  .then(({ data }) => { 
 
+			  	//console.log(data);
 			    if(data.success){ 
 			      FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
 			      toastr.success(data.success);             
@@ -243,6 +299,10 @@
 	    },
 
 	    created(){
+	    	//this.pushToLanguageTranslationArray();
+	    	
+    		this.$store.dispatch('commonStoreForAll/fetchLanguages'); //get all language
+
 	    	FireEvent.$on('editCategory', (data) => {
               //alert(data.id);
               //this.form.fill(data);   //this is also work
@@ -251,7 +311,12 @@
 
             FireEvent.$on('addCategory', () => {
               this.addCategory();
+              this.pushToLanguageTranslationArray();
             });
+	    },
+
+	    mounted() {
+	    	//console.log(this.form.lang_translation);
 	    }
 
 	}//End Exprot Default

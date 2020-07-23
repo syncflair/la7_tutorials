@@ -2,23 +2,78 @@
 
 namespace App\Http\Controllers\Admin\AuthManagement;
 
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Models\Role;
+use Yajra\DataTables\DataTables;
+use Auth;
 
 class RolesController extends Controller
 {
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = Role::get();
+        if( $request->ajax() ){
+        $roles_data = Role::latest()->get();
 
-        return response()->json($data);
+        //pass data to dataTable
+        return DataTables::of($roles_data)
+            ->addColumn('action', function($roles_data){
+             
+                $actionData = ''; 
+
+                //if( @GetAuthUserRolePermission()->role->edit != null ) {
+                    if($roles_data->is_enabled == 1){
+                        $actionData .= '<a onclick="RoleUnactive('.$roles_data->id.')" class="btn btn-danger- btn-flat btn-sm" data-toggle="tooltip" data-placement="right" title="Click to Unactive" >  <i class="far fa-thumbs-down danger"></i>  </a>';
+                    }elseif($roles_data->is_enabled == 0){
+                        $actionData .= '<a onclick="RoleActive('.$roles_data->id.')" class="use-tooltip btn btn-success- btn-flat btn-sm" data-toggle="tooltip" data-placement="left" title="Click to Active" >   <i class="far fa-thumbs-up success"></i>  </a>';
+                    }
+                //}
+
+                //if( @GetAuthUserRolePermission()->role->edit != null ) {
+                    $actionData .= '
+                    <a onclick="RoleEdit('.$roles_data->id.')" class="btn  btn-primary- btn-flat btn-sm">
+                        <i class="fas fa-edit primary "></i>
+                    </a>';
+                //}
+
+                //if( @GetAuthUserRolePermission()->role->edit != null ) {
+                    if($roles_data->id != Auth::user()->role_id ){
+                        $actionData .= ' <a onclick="RoleDelete('.$roles_data->id.')" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete" >
+                            <i class="far fa-trash-alt red"></i>
+                        </a>';               
+                    }
+                //}
+
+                return $actionData;
+
+            })->editColumn('is_enabled', function($roles_data){
+                if($roles_data->is_enabled == 1){
+                    return '<span class="btn btn-flat btn-success btn-sm">Active</span>';
+                }elseif($roles_data->is_enabled == 0){
+                    return '<span class="btn btn-flat btn-danger btn-sm">Unactive</span>';
+                }
+
+            })->rawColumns(['action','is_enabled'])->make(true);       
+
+       }/*endif*/
+
+        return view('admin.AuthManagement.Role.roles');
     }
 
     /**
@@ -39,24 +94,22 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required|min:3|max:20|unique:roles,name', 
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|min:3|max:20', 
             'role_desc' => 'max:100', 
         ]);
 
-        $data =array();
-        $data['name']=$request->name;
-        $data['role_desc']=$request->role_desc;
+        if($validator->fails()){
+            return response()->json(['errors'=>$validator->errors()]);
+        }elseif($validator->passes()){
 
-        if($request->is_enabled == NULL){
-            $data['is_enabled'] = 0;
-        }else{
-           $data['is_enabled']=$request->is_enabled; 
-        }        
+            $role = New Role;
+            $role->name =$request->name; 
+            $role->role_desc = $request->role_desc;
+            $role->save();
 
-        Role::create($data);  
-        return response()->json(['success'=>'Role inserted successfully']);
-        
+            return response()->json(['success'=>'Role inserted successfully']);
+        }
     }
 
     /**
@@ -78,7 +131,7 @@ class RolesController extends Controller
      */
     public function edit($id)
     {
-        //
+        return Role::find($id);
     }
 
     /**
@@ -90,23 +143,22 @@ class RolesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required|min:3|max:20|unique:roles,name,'.$id, 
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|min:3|max:20', 
             'role_desc' => 'max:100', 
         ]);
 
-        $data =array();
-        $data['name']=$request->name;
-        $data['role_desc']=$request->role_desc;
+        if($validator->fails()){
+            return response()->json(['errors'=>$validator->errors()]);
+        }elseif($validator->passes()){
 
-        if($request->is_enabled == NULL){
-            $data['is_enabled'] = 0;
-        }else{
-           $data['is_enabled']=$request->is_enabled; 
-        } 
+            $role = Role::find($id);
+            $role->name = $request->name;
+            $role->role_desc = $request->role_desc;
+            $role->save();
 
-        Role::whereId($id)->update($data);         
-        return response()->json(['success'=>'Role Updated successfully.']); 
+            return response()->json(['success'=>'Role Updated successfully']);
+        }
     }
 
     /**
@@ -125,11 +177,28 @@ class RolesController extends Controller
         }
     }
 
-    //return role only for admin (1 to 6) list without pagination
-    public function GetRoles(){
-        //this is for commonStoreForAll Store
-       // $data = Role::take(6)->get(); //take() is the limit of query
-        $data = Role::get(); 
-        return response()->json($data);
+
+    public function role_active($id){
+
+        $role = Role::find($id);
+        $role->is_enabled = 1;
+        $role->save();
+
+        return response()->json(['success'=> $role->name.' is Active Now']);
+
+        /*Role::where('active', 1)
+          ->where('destination', 'San Diego')
+          ->update(['delayed' => 1]);*/
     }
+
+    public function role_unactive($id){
+        $role = Role::find($id);
+        $role->is_enabled = 0;
+        $role->save();
+
+        return response()->json(['success'=> $role->name.' is Unactive Now']);
+
+    }
+
+
 }

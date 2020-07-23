@@ -8,6 +8,7 @@ const commonStoreForAll ={
       authPermissions:{},
       adminRoles:{},
       branches:{},
+      allLanguages:{},
       allDepertments:{},
       autoSearchDepartments:{},
 	    userStatus: {}, //get data from user_status table
@@ -32,6 +33,7 @@ const commonStoreForAll ={
       //get from action
       FETCH_ROLES(state, data){return state.adminRoles = data;}, 
       FETCH_BRANCHES(state, data){return state.branches = data;},       
+      FETCH_LANGUAGES(state, data){return state.allLanguages = data;},       
       FETCH_DEPARTMENTS(state, data){return state.allDepertments = data;},       
       FETCH_JOB_TITLE(state, data){return state.jobTitles = data;}, 
     	FETCH_USER_STATUS(state, data) { return state.userStatus = data; },
@@ -74,6 +76,13 @@ const commonStoreForAll ={
         axios.get('/spa/Branch-Info/getBranches')
         .then( (response) => {
           context.commit('FETCH_BRANCHES', response.data); //use for only show data
+        }).catch( () => { })
+      },
+
+      fetchLanguages(context){ //return role 1 to 6
+        axios.get('/spa/Language-Info/getLanguages')
+        .then( (response) => {
+          context.commit('FETCH_LANGUAGES', response.data); //use for only show data
         }).catch( () => { })
       },
 

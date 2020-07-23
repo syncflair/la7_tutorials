@@ -308,7 +308,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     FireEvent.$on('AfterChange', function () {
       _this5.$Progress.start();
 
-      _this5.$store.dispatch('usersAdminStore/fetchCustomer', _this5.pagination.per_page);
+      _this5.$store.dispatch('usersAdminStore/fetchData', _this5.pagination.per_page);
 
       _this5.$Progress.finish();
     }); //this event call from CustomerList component

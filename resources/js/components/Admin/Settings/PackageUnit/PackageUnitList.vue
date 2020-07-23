@@ -31,7 +31,7 @@
             <td > {{pacakge_unit.package_desc}} </td>
             <td >
                <span v-if="pacakge_unit.package_icon != null"> 
-                  <img :src="'../'+package.package_icon" height="30px" width="30px"> 
+                  <img :src="'../'+pacakge_unit.package_icon" height="30px" width="30px"> 
                 </span>
                 <span v-if="pacakge_unit.package_icon === null"> <img :src="'../'+NoIconUrl" height="30px" width="30px"> </span>
             </td>

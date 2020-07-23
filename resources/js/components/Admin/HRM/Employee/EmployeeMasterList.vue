@@ -23,7 +23,7 @@
         <thead>
           <tr>
             <!-- <th style="">#</th> -->
-            <th style="width: 2%;" scope="col"><input type="checkbox" name=""></th>
+            <th style="width: 2%;" scope="col"><input type="checkbox" v-model="selectAllCheckbox" @click="selectCheckbox"></th>
             <th style="width: 3%;" scope="col">Img</th>
             <th style="width: 15%;" scope="col" @click="sort('emp_name')" class="sortable-title">Name</th>
             <th style="width: 15%;" scope="col" @click="sort('emp_email')" class="sortable-title">Email</th>             
@@ -42,7 +42,7 @@
           <tr v-for="(employee, index) in sortedemployees" :key="index">
 
             <!-- <td > id</td> -->
-            <td scope="col"> <input type="checkbox" name=""></td>
+            <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="employee.id"></td>
 
             <td> 
                 <span v-if="employee.avatar != null"> 
@@ -135,6 +135,9 @@
       data(){
         return { 
           NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
+          //checkbox selecting data
+          selectAllCheckbox: false,
+          selectedCheckbox: [],
 
           // use for sortable
           currentSort:'emp_name',
@@ -148,8 +151,9 @@
             {'field_name':'emp_phone', 'show_name':'Phone'},
             {'field_name':'emp_gender', 'show_name':'Gender'},
             {'field_name':'us_name', 'show_name':'Status'},
+          ],     
 
-          ],             
+                  
         }
       },
 
@@ -166,13 +170,21 @@
               if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
               return 0;
             });
-
             return fo;
           }
-
       },
 
       methods:{
+        //checkbox select
+        selectCheckbox(){
+          this.selectedCheckbox = [];
+          if(!this.selectAllCheckbox){
+            for(let i in this.employees){
+              this.selectedCheckbox.push(this.employees[i].id); //all id push into selectedCheckbox array
+            }
+          }
+        },
+
         // use for sortable
         sort(s){
           if(s === this.currentSort) {

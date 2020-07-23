@@ -160,6 +160,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -255,7 +257,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //     }
     // });
   },
-  mounted: function mounted() {//console.log()  
+  mounted: function mounted() {//console.log() 
   }
 });
 /*End export default*/

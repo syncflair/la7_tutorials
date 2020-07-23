@@ -53,7 +53,7 @@ class LanguageController extends Controller
     {
         $this->validate($request, [
             'lang_name' => 'required|min:3|max:40|unique:languages,lang_name',
-            'lang_code' => 'required|min:2|max:8|unique:languages,lang_code',
+            'lang_code' => 'required|min:2|max:5|unique:languages,lang_code',
         ]);
 
         $data =array();
@@ -96,17 +96,14 @@ class LanguageController extends Controller
                     //->text('foo', 0, 0, function($font) {  $font->color(array(255, 255, 255, 0.5)); })
                     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
 
-                $data['lang_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
-
-                Language::create($data);        
-                return response()->json(['success'=>'Language Created successfully']); 
+                $data['lang_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;                
             }//end image type check
         }else{
             $data['lang_icon'] = null;
-
-            Language::create($data);        
-            return response()->json(['success'=>'Language Created successfully.']); 
         }
+
+        Language::create($data);        
+        return response()->json(['success'=>'Language Created']); 
     }
 
     /**
@@ -142,7 +139,7 @@ class LanguageController extends Controller
     {
         $this->validate($request, [
             'lang_name' => 'required|min:3|max:40|unique:languages,lang_name,'.$id,
-            'lang_code' => 'required|min:2|max:8|unique:languages,lang_code,'.$id,
+            'lang_code' => 'required|min:2|max:5|unique:languages,lang_code,'.$id,
         ]);
 
         $data =array();
@@ -183,17 +180,14 @@ class LanguageController extends Controller
                     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
 
                 $data['lang_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
-
-                Language::whereId($id)->update($data);      
-                return response()->json(['success'=>'Update successfull.']);
             }//end image type check
         }else{
             $existing_image = Language::select('lang_icon')->where('id', $id)->first();
             $data['lang_icon'] = $existing_image->lang_icon;
-
-            Language::whereId($id)->update($data);         
-            return response()->json(['success'=>'Language Updated successfully.']); 
         }
+
+        Language::whereId($id)->update($data);         
+        return response()->json(['success'=>'Language Updated.']); 
     }
 
     /**
@@ -213,9 +207,17 @@ class LanguageController extends Controller
 
         $data = Language::findOrFail($id)->delete();        
         if($data){
-            return response()->json(['success'=> 'Record is successfully deleted']);
+            return response()->json(['success'=> 'Record deleted']);
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
     }
+
+    //return division list without pagination
+    public function getLanguages(){
+        //this is for commonStoreForAll Store
+        $data = Language::get();
+        return response()->json($data);
+    }
+
 }

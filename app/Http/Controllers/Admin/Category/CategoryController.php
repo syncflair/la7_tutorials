@@ -72,11 +72,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-       // return $request->cat_img;
+         //return $request->all();
 
         $this->validate($request, [
             'cat_name' => 'required|min:2|max:40|unique:categories,cat_name',
-            //'cat_slug' => 'required',
+            //'cat_slug' => 'required',            
         ]);
 
         $data =array();
@@ -120,18 +120,14 @@ class CategoryController extends Controller
                     //->text('foo', 0, 0, function($font) {  $font->color(array(255, 255, 255, 0.5)); })
                     ->save(public_path('FilesStorage/Backend/Category/').$imageName);
 
-
                 $data['cat_img'] = 'FilesStorage/Backend/Category/'.$imageName;
-
-                Category::create($data);        
-                return response()->json(['success'=>'Category Created successfully']); 
             }//end image type check
         }else{
-            $data['cat_img'] = null;
-
-            Category::create($data);        
-            return response()->json(['success'=>'Category Created successfully.']); 
+            $data['cat_img'] = null;            
         }
+
+        Category::create($data);        
+        return response()->json(['success'=>'Category Created.']); 
               
     }
 
@@ -210,24 +206,17 @@ class CategoryController extends Controller
                     ->text('SHORBORAHO', 140, 190)
                     ->save(public_path('FilesStorage/Backend/Category/').$imageName);
 
-                $data['cat_img'] = 'FilesStorage/Backend/Category/'.$imageName;
-
-                Category::whereId($id)->update($data); 
-                //$category = Category::findOrFail($id); 
-                //$category->update($data);             
-                return response()->json(['success'=>'Category Update successfully.']);
+                $data['cat_img'] = 'FilesStorage/Backend/Category/'.$imageName;                
             }//end image type check
         }else{
             $existing_image = Category::select('cat_img')->where('id', $id)->first();
-            $data['cat_img'] = $existing_image->cat_img;
-
-            Category::whereId($id)->update($data); 
-            //$category = Category::findOrFail($id); 
-            //$category->update($data); 
-            
-            return response()->json(['success'=>'Category Update successfully.']);
+            $data['cat_img'] = $existing_image->cat_img;           
         }
-       
+        
+        Category::whereId($id)->update($data); 
+        //$category = Category::findOrFail($id); 
+        //$category->update($data);         
+        return response()->json(['success'=>'Category Update.']);
       
     }
 

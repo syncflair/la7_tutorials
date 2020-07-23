@@ -85,28 +85,28 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
   // });
   //Ajax Query User Role Permission Route
   Route::get('dashboard', 'Admin\AdminController@index')->name('dashboard');
-  Route::get('/user-verify/{user_id}', 'Admin\AuthManagement\UserController@user_verify');
-  Route::get('/user-unactive/{user_id}', 'Admin\AuthManagement\UserController@user_unactive');
-  Route::get('/user-active/{user_id}', 'Admin\AuthManagement\UserController@user_active');
-  Route::resource('user', 'Admin\AuthManagement\UserController');
+  Route::get('/user-verify/{user_id}', 'Admin\AuthManagement\UsersController@user_verify');
+  Route::get('/user-unactive/{user_id}', 'Admin\AuthManagement\UsersController@user_unactive');
+  Route::get('/user-active/{user_id}', 'Admin\AuthManagement\UsersController@user_active');
+  Route::resource('user', 'Admin\AuthManagement\UsersController');
   Route::resource('profile', 'Admin\AuthManagement\ProfileController');
-  Route::get('/role-unactive/{role_id}', 'Admin\AuthManagement\RoleController@role_unactive');
-  Route::get('/role-active/{role_id}', 'Admin\AuthManagement\RoleController@role_active');  
-  Route::resource('role', 'Admin\AuthManagement\RoleController');
-  Route::resource('permission', 'Admin\AuthManagement\PermissionController');
+  Route::get('/role-unactive/{role_id}', 'Admin\AuthManagement\RolesController@role_unactive');
+  Route::get('/role-active/{role_id}', 'Admin\AuthManagement\RolesController@role_active');  
+  Route::resource('role', 'Admin\AuthManagement\RolesController');
+  Route::resource('permission', 'Admin\AuthManagement\PermissionsController');
 
     /*********************************************Vue Route****************************************************/
     
     //Admin Users Role Permission Control Route
-    Route::resource('spa/Users-Info', 'Admin\AuthManagement\UsersController');
-    Route::get('spa/searchUsersData', 'Admin\AuthManagement\UsersController@search'); //search
-    Route::post('spa/Users-Info/verify-by-admin/{id}', 'Admin\AuthManagement\UsersController@verify_by_admin');
-    Route::post('spa/Users-Info/active-user/{id}', 'Admin\AuthManagement\UsersController@active_user');
-    Route::post('spa/Users-Info/inactive-user/{id}', 'Admin\AuthManagement\UsersController@inactive_user');
-    Route::resource('spa/Roles-Info', 'Admin\AuthManagement\RolesController',
+    Route::resource('spa/Users-Info', 'Admin\AuthManagement\UserController');
+    Route::get('spa/searchUsersData', 'Admin\AuthManagement\UserController@search'); //search
+    Route::post('spa/Users-Info/verify-by-admin/{id}', 'Admin\AuthManagement\UserController@verify_by_admin');
+    Route::post('spa/Users-Info/active-user/{id}', 'Admin\AuthManagement\UserController@active_user');
+    Route::post('spa/Users-Info/inactive-user/{id}', 'Admin\AuthManagement\UserController@inactive_user');
+    Route::resource('spa/Roles-Info', 'Admin\AuthManagement\RoleController',
       ['except'=>['create','show','edit'] ]);
-    Route::get('spa/Role-Info/GetRoles', 'Admin\AuthManagement\RolesController@GetRoles');//commonStoreForAll store
-    Route::resource('spa/Permissions-Info', 'Admin\AuthManagement\PermissionsController');
+    Route::get('spa/Role-Info/GetRoles', 'Admin\AuthManagement\RoleController@GetRoles');//commonStoreForAll store
+    Route::resource('spa/Permissions-Info', 'Admin\AuthManagement\PermissionController');
 
 
     //Customer control Route For Admin Dashboard
@@ -158,6 +158,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
       ['except'=>['create','show','edit'] ]);
     Route::resource('spa/Currency-Info', 'Admin\Settings\CurrencyController', 
       ['except'=>['create','show','edit'] ]);
+    Route::get('spa/Language-Info/getLanguages', 'Admin\Settings\LanguageController@getLanguages');//commonStoreForAll store
     Route::resource('spa/Language-Info', 'Admin\Settings\LanguageController', 
       ['except'=>['create','show','edit'] ]);
     Route::resource('spa/LengthUnit-Info', 'Admin\Settings\LengthUnitController', 
