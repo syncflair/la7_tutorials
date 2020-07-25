@@ -22,9 +22,9 @@
         <thead>
           <tr>
             <th style="width: 3%;" scope="col">Img</th> 
-            <th style="width: 33%;" scope="col">Name</th>
+            <th style="width: 43%;" scope="col">Name</th>
             <th style="width: 15%;" scope="col">Parent</th>             
-            <th style="width: 30%;" scope="col">Details</th>
+            <th style="width: 20%;" scope="col">Details</th>
             <th style="width: 4%;" scope="col">Status</th>
             <th style="width: 10%; text-align:right;" scope="col">Action</th>
           </tr>
@@ -39,7 +39,11 @@
            	  </td>
               <td scope="col"> 
                 {{ category.cat_name }} 
-                <span v-show="category.cat_name_lang !=null"> ({{category.cat_name_lang}})</span>
+                <!-- <span v-show="category.cat_name_lang !=null"> ({{category.cat_name_lang}})</span> -->
+                <span v-for="(language, i) in category.lang_translation">
+                  <span>( {{ language['category_name'] }} ) </span>
+                </span>
+
               </td> 
               <td scope="col">
                  <span v-show="category.parent_id === null" class="red text-bold"> Parent </span>
@@ -67,7 +71,10 @@
 	           	</td>           
                 <td scope="col" > 
                   <span class="pl-2"> - {{ c_category.cat_name }} </span> 
-                  <span v-show="c_category.cat_name_lang !=null"> ({{c_category.cat_name_lang}})</span>
+                  <!-- <span v-show="c_category.cat_name_lang !=null"> ({{c_category.cat_name_lang}})</span> -->
+                  <span v-for="(language, i) in c_category.lang_translation">
+                    <span>( {{ language['category_name'] }} ) </span>
+                  </span>
                 </td> 
                 <td scope="col">
                    <span v-show="c_category.parent_id != null"> {{category.cat_name }} </span> 
@@ -94,7 +101,10 @@
 		           	</td>           
 	                <td scope="col" > 
                     <span class="pl-4"> -- {{ sc_category.cat_name }} </span>
-                    <span v-show="sc_category.cat_name_lang !=null"> ({{sc_category.cat_name_lang}})</span>
+                    <!-- <span v-show="sc_category.cat_name_lang !=null"> ({{sc_category.cat_name_lang}})</span> -->
+                    <span v-for="(language, i) in sc_category.lang_translation">
+                      <span>( {{ language['category_name'] }} ) </span>
+                    </span>
                   </td> 
 	                <td scope="col">
 	                   <span v-show="sc_category.parent_id != null"> - {{c_category.cat_name }} </span> 

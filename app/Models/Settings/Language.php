@@ -17,8 +17,8 @@ class Language extends Model
 
     public function categoryTranslation(){
         // return $this->belongsToMany('App\Models\Settings\Department', 'department_employee');
-       return $this->belongsToMany('App\Models\Catalog\Category', 'category_language_translation', 'language_id', 'category_id');       
-            // ->withPivot('lang_code', 'cat_name','cat_desc')
+       return $this->belongsToMany('App\Models\Catalog\Category', 'category_language_translation', 'language_id', 'category_id')      
+            ->withPivot('lang_code', 'category_name','category_desc');
             // ->withTimestamps();
     }
 }

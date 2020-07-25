@@ -165,6 +165,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -178,7 +182,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       form: new Form({
         id: '',
         cat_name: '',
-        cat_name_lang: '',
+        //cat_name_lang: '',
         cat_desc: '',
         parent_id: '',
         is_enabled: '',
@@ -296,6 +300,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.form.put('/spa/CategoryMaster-Info/' + this.form.id).then(function (_ref2) {
         var data = _ref2.data;
 
+        //console.log(data); 
         if (data.success) {
           FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
 
@@ -448,7 +453,7 @@ var render = function() {
                   _c("div", { staticClass: "modal-body pt-1 " }, [
                     _c("div", { staticClass: "card--" }, [
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-4 col-sm-12" }, [
+                        _c("div", { staticClass: "col-md-5 col-sm-12" }, [
                           _c(
                             "div",
                             { staticClass: "form-group" },
@@ -491,58 +496,6 @@ var render = function() {
                               _vm._v(" "),
                               _c("has-error", {
                                 attrs: { form: _vm.form, field: "cat_name" }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("Category (bn)")]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.cat_name_lang,
-                                    expression: "form.cat_name_lang"
-                                  }
-                                ],
-                                ref: "cat_name_lang",
-                                staticClass: "form-control",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has(
-                                    "cat_name_lang"
-                                  )
-                                },
-                                attrs: {
-                                  type: "text",
-                                  name: "cat_name_lang",
-                                  placeholder: "Category BN"
-                                },
-                                domProps: { value: _vm.form.cat_name_lang },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "cat_name_lang",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: {
-                                  form: _vm.form,
-                                  field: "cat_name_lang"
-                                }
                               })
                             ],
                             1
@@ -833,7 +786,7 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "col-md-8 col-sm-12" }, [
+                        _c("div", { staticClass: "col-md-7 col-sm-12" }, [
                           _c(
                             "table",
                             _vm._l(_vm.form.lang_translation, function(
@@ -842,10 +795,26 @@ var render = function() {
                             ) {
                               return _c("span", { key: index }, [
                                 _c("tr", [
-                                  _c("td", [
-                                    _c("span", [_vm._v(_vm._s(ct.lang_code))])
-                                  ]),
-                                  _vm._v(" "),
+                                  _c(
+                                    "th",
+                                    {
+                                      staticStyle: { background: "#20c997" },
+                                      attrs: { colspan: "2" }
+                                    },
+                                    [
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "alert- alert-warning- text-center mb-0"
+                                        },
+                                        [_vm._v(_vm._s(ct.lang_code))]
+                                      )
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("tr", [
                                   _c("td", [
                                     _c("input", {
                                       directives: [
@@ -1010,12 +979,7 @@ var render = function() {
                             0
                           )
                         ])
-                      ]),
-                      _vm._v(
-                        "\t            \r\n" +
-                          _vm._s(_vm.form.lang_translation) +
-                          "\r\n\t          "
-                      )
+                      ])
                     ])
                   ]),
                   _vm._v(" "),

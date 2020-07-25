@@ -61,7 +61,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //return $request->lang_translation;
+        //return $request->all();
 
         $this->validate($request, [
             'cat_name' => 'required|min:2|max:40|unique:categories,cat_name',
@@ -72,7 +72,7 @@ class CategoryController extends Controller
         $data =array();
         $data['parent_id']=$request->parent_id;
         $data['cat_name']=$request->cat_name;
-        $data['cat_name_lang']=$request->cat_name_lang;
+        //$data['cat_name_lang']=$request->cat_name_lang;
         $data['cat_slug']= slug_generator($request->cat_name);//slug_generator get from helper
         $data['cat_desc']=$request->cat_desc;
         $data['created_by']= \Auth::user()->id;         
@@ -165,6 +165,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        //return $request->all();
         $this->validate($request, [
             'cat_name' => 'required|min:2|max:40|unique:categories,cat_name,'.$id,
             //'cat_slug' => 'required|unique:categories,cat_slug,'.$id,
@@ -173,7 +175,7 @@ class CategoryController extends Controller
         $data =array();
         $data['parent_id']=$request->parent_id;
         $data['cat_name']=$request->cat_name;
-        $data['cat_name_lang']=$request->cat_name_lang;
+        // $data['cat_name_lang']=$request->cat_name_lang;
         $data['cat_slug']= slug_generator($request->cat_name);//slug_generator get from helper 
         $data['cat_desc']=$request->cat_desc;  
         $data['updated_by']= \Auth::user()->id; 
@@ -221,9 +223,18 @@ class CategoryController extends Controller
         try{
             DB::beginTransaction();
 
-            Category::whereId($id)->update($data); 
-            $category = Category::find($id); 
-            $category->languageTranslation()->sync($request->lang_translation);
+            //Category::whereId($id)->update($data); 
+            $category = Category::find($id)->update($data); 
+            $category = Category::find($request->id);            
+
+            foreach($request->lang_translation as $key => $object){
+                $arrays[$object['language_id']] =  (array) $object;
+                //convert to array like
+                //[1 => ['fields' => 'data'], 2 => ['fields' => 'data'] ]
+            }
+            //dd($arrays);
+            $category->languageTranslation()->sync($arrays);
+
 
             DB::commit();
         }catch(\Exception $e){
@@ -233,6 +244,7 @@ class CategoryController extends Controller
         }
 
         return response()->json(['success'=>'Category Update.'], 200);
+
     }
 
     /**

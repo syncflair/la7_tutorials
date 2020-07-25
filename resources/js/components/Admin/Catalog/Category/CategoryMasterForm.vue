@@ -20,7 +20,7 @@
 
 	          <div class="card--"><!-- row inside form -->
 	          	<div class="row">
-	          	<div class="col-md-4 col-sm-12">
+	          	<div class="col-md-5 col-sm-12">
 
 	          		<div class="form-group">
 	                  <label>Category </label>
@@ -28,11 +28,11 @@
 	                  <has-error :form="form" field="cat_name"></has-error>
 	                </div>
 
-	                <div class="form-group">
+	                <!-- <div class="form-group">
 	                  <label>Category (bn)</label>
 	                    <input v-model="form.cat_name_lang" type="text" ref="cat_name_lang" name="cat_name_lang" class="form-control" :class="{ 'is-invalid': form.errors.has('cat_name_lang') }" placeholder="Category BN">
 	                  <has-error :form="form" field="cat_name_lang"></has-error>
-	                </div>
+	                </div> -->
 
                     <div class="form-group">
                       <label>Select Parent</label>
@@ -92,15 +92,17 @@
 
 	          	</div>
 
-	          	<div class="col-md-8 col-sm-12">
+	          	<div class="col-md-7 col-sm-12">
 	          		<!-- <a @click="pushToLanguageTranslationArray" class="pointer">click</a> -->
 	          	  <table>
 	          	  	<!-- allLanguages -->
 	          	  	<span v-for="(ct, index) in form.lang_translation" :key="index">	 
 	          	  	<!-- <tr><td>{{ index }} </td><td>{{ct}}</td></tr> -->                 
 
+	          	  	<tr>
+	          	  	  <th colspan="2" style="background: #20c997;"><div class="alert- alert-warning- text-center mb-0">{{ct.lang_code}}</div></th>
+	          	  	</tr>
 	          		<tr >
-	          		  <td><span>{{ct.lang_code}}</span></td>
 	          		  <td>
 	          		  	<input v-model="ct.language_id" type="hidden" name="language_id[]">
 	          		  	<input v-model="ct.lang_code" type="hidden" name="lang_code[]">
@@ -124,8 +126,9 @@
 
 	          	</div>
 	                                
-	          	</div><!-- row inside form -->	            
-{{form.lang_translation}}
+	          	</div><!-- row inside form -->	 
+
+
 	          </div> 
 	       
 	      </div><!--modal Body-->      
@@ -138,6 +141,7 @@
 	      </div><!--modal-footer-->
   	  </form><!-- </form> -->
 
+  	  <!-- {{form.lang_translation}} -->
 
     </div>
   </div>
@@ -162,7 +166,7 @@
 	        form: new Form({
 	          id: '',
 	          cat_name: '',
-	          cat_name_lang: '',
+	          //cat_name_lang: '',
 	          cat_desc: '',
 	          parent_id: '',
 	          is_enabled: '',
@@ -196,7 +200,7 @@
 		        //     }
 
 	            for (var i = 0; i < this.allLanguages.length; i++) {
-	              this.form.lang_translation.push({ language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, category_name: '', category_desc: '' }); 
+	              this.form.lang_translation.push( { language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, category_name: '', category_desc: '' } ); 
 	            }
 	    	},
 
@@ -272,9 +276,9 @@
 
 				this.form.put('/spa/CategoryMaster-Info/'+this.form.id)
 				  .then(({ data }) => { 
-
+				  	//console.log(data); 
 				    if(data.success){ 
-				     FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
+				      FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
 				                 
 				      this.$Progress.finish(); 
 				      toastr.success(data.success);               

@@ -162,6 +162,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -338,27 +348,31 @@ var render = function() {
                         : _vm._e()
                     ]),
                     _vm._v(" "),
-                    _c("td", { attrs: { scope: "col" } }, [
-                      _vm._v(
-                        " \r\n                " +
-                          _vm._s(category.cat_name) +
-                          " \r\n                "
-                      ),
-                      _c(
-                        "span",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: category.cat_name_lang != null,
-                              expression: "category.cat_name_lang !=null"
-                            }
-                          ]
-                        },
-                        [_vm._v(" (" + _vm._s(category.cat_name_lang) + ")")]
-                      )
-                    ]),
+                    _c(
+                      "td",
+                      { attrs: { scope: "col" } },
+                      [
+                        _vm._v(
+                          " \r\n                " +
+                            _vm._s(category.cat_name) +
+                            " \r\n                "
+                        ),
+                        _vm._v(" "),
+                        _vm._l(category.lang_translation, function(
+                          language,
+                          i
+                        ) {
+                          return _c("span", [
+                            _c("span", [
+                              _vm._v(
+                                "( " + _vm._s(language["category_name"]) + " ) "
+                              )
+                            ])
+                          ])
+                        })
+                      ],
+                      2
+                    ),
                     _vm._v(" "),
                     _c("td", { attrs: { scope: "col" } }, [
                       _c(
@@ -505,35 +519,33 @@ var render = function() {
                                 : _vm._e()
                             ]),
                             _vm._v(" "),
-                            _c("td", { attrs: { scope: "col" } }, [
-                              _c("span", { staticClass: "pl-2" }, [
-                                _vm._v(
-                                  " - " + _vm._s(c_category.cat_name) + " "
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                {
-                                  directives: [
-                                    {
-                                      name: "show",
-                                      rawName: "v-show",
-                                      value: c_category.cat_name_lang != null,
-                                      expression:
-                                        "c_category.cat_name_lang !=null"
-                                    }
-                                  ]
-                                },
-                                [
+                            _c(
+                              "td",
+                              { attrs: { scope: "col" } },
+                              [
+                                _c("span", { staticClass: "pl-2" }, [
                                   _vm._v(
-                                    " (" +
-                                      _vm._s(c_category.cat_name_lang) +
-                                      ")"
+                                    " - " + _vm._s(c_category.cat_name) + " "
                                   )
-                                ]
-                              )
-                            ]),
+                                ]),
+                                _vm._v(" "),
+                                _vm._l(c_category.lang_translation, function(
+                                  language,
+                                  i
+                                ) {
+                                  return _c("span", [
+                                    _c("span", [
+                                      _vm._v(
+                                        "( " +
+                                          _vm._s(language["category_name"]) +
+                                          " ) "
+                                      )
+                                    ])
+                                  ])
+                                })
+                              ],
+                              2
+                            ),
                             _vm._v(" "),
                             _c("td", { attrs: { scope: "col" } }, [
                               _c(
@@ -675,41 +687,37 @@ var render = function() {
                                         : _vm._e()
                                     ]),
                                     _vm._v(" "),
-                                    _c("td", { attrs: { scope: "col" } }, [
-                                      _c("span", { staticClass: "pl-4" }, [
-                                        _vm._v(
-                                          " -- " +
-                                            _vm._s(sc_category.cat_name) +
-                                            " "
-                                        )
-                                      ]),
-                                      _vm._v(" "),
-                                      _c(
-                                        "span",
-                                        {
-                                          directives: [
-                                            {
-                                              name: "show",
-                                              rawName: "v-show",
-                                              value:
-                                                sc_category.cat_name_lang !=
-                                                null,
-                                              expression:
-                                                "sc_category.cat_name_lang !=null"
-                                            }
-                                          ]
-                                        },
-                                        [
+                                    _c(
+                                      "td",
+                                      { attrs: { scope: "col" } },
+                                      [
+                                        _c("span", { staticClass: "pl-4" }, [
                                           _vm._v(
-                                            " (" +
-                                              _vm._s(
-                                                sc_category.cat_name_lang
-                                              ) +
-                                              ")"
+                                            " -- " +
+                                              _vm._s(sc_category.cat_name) +
+                                              " "
                                           )
-                                        ]
-                                      )
-                                    ]),
+                                        ]),
+                                        _vm._v(" "),
+                                        _vm._l(
+                                          sc_category.lang_translation,
+                                          function(language, i) {
+                                            return _c("span", [
+                                              _c("span", [
+                                                _vm._v(
+                                                  "( " +
+                                                    _vm._s(
+                                                      language["category_name"]
+                                                    ) +
+                                                    " ) "
+                                                )
+                                              ])
+                                            ])
+                                          }
+                                        )
+                                      ],
+                                      2
+                                    ),
                                     _vm._v(" "),
                                     _c("td", { attrs: { scope: "col" } }, [
                                       _c(
@@ -890,7 +898,7 @@ var staticRenderFns = [
           _vm._v("Img")
         ]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "33%" }, attrs: { scope: "col" } }, [
+        _c("th", { staticStyle: { width: "43%" }, attrs: { scope: "col" } }, [
           _vm._v("Name")
         ]),
         _vm._v(" "),
@@ -898,7 +906,7 @@ var staticRenderFns = [
           _vm._v("Parent")
         ]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "30%" }, attrs: { scope: "col" } }, [
+        _c("th", { staticStyle: { width: "20%" }, attrs: { scope: "col" } }, [
           _vm._v("Details")
         ]),
         _vm._v(" "),
