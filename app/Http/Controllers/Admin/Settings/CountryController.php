@@ -64,7 +64,7 @@ class CountryController extends Controller
             'iso_2' => 'max:5|unique:countries,iso_2',
             'iso_3' => 'max:5|unique:countries,iso_3',
             'phone_code' => 'max:5|unique:countries,phone_code',
-            'currency' => 'max:10|unique:countries,currency',
+            //'currency' => 'max:10|unique:countries,currency',
         ]);
 
         $data =array();
@@ -145,7 +145,7 @@ class CountryController extends Controller
             'iso_2' => 'max:5|unique:countries,iso_2,'.$id,
             'iso_3' => 'max:5|unique:countries,iso_3,'.$id,
             'phone_code' => 'max:5|unique:countries,phone_code,'.$id,
-            'currency' => 'max:10|unique:countries,currency,'.$id,
+            //'currency' => 'max:10|unique:countries,currency,'.$id,
         ]);
 
         $data =array();

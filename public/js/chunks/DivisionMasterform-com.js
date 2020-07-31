@@ -540,7 +540,7 @@ var render = function() {
                                 },
                                 attrs: {
                                   name: "division_desc",
-                                  placeholder: "Length details"
+                                  placeholder: "Details"
                                 },
                                 domProps: { value: _vm.form.division_desc },
                                 on: {

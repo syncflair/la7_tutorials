@@ -254,8 +254,8 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: _vm.UserStatus.data && !_vm.UserStatus.u_status,
-                      expression: "UserStatus.data && !UserStatus.u_status"
+                      value: _vm.UserStatus && !_vm.UserStatus.length,
+                      expression: "UserStatus && !UserStatus.length"
                     }
                   ]
                 },
@@ -305,7 +305,7 @@ var staticRenderFns = [
       _c(
         "div",
         {
-          staticClass: "alert alert-danger text-center red mb-0",
+          staticClass: "alert alert-warning text-center red mb-0",
           attrs: { role: "alert" }
         },
         [_vm._v("Sorry : No data found.")]

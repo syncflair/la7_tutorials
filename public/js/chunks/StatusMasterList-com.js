@@ -125,12 +125,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('StatusMasterStore', ['StatusMaster', 'pagination', 'autoCompleteData'])),
   methods: {
-    addStatusMaster: function addStatusMaster() {
-      FireEvent.$emit('addStatusMaster');
+    addData: function addData() {
+      FireEvent.$emit('addData');
     },
-    editStatusMaster: function editStatusMaster(data) {
+    editData: function editData(data) {
       //alert(data.id);
-      FireEvent.$emit('editStatusMaster', data);
+      FireEvent.$emit('editData', data);
     },
     DeleteData: function DeleteData(id) {
       Swal.fire({
@@ -247,11 +247,8 @@ var render = function() {
             "a",
             {
               staticClass: "btn btn-primary btn-flat btn-sm",
-              attrs: {
-                "data-toggle": "modal",
-                "data-target": "#StatusMasterModal"
-              },
-              on: { click: _vm.addStatusMaster }
+              attrs: { "data-toggle": "modal", "data-target": "#formModal" },
+              on: { click: _vm.addData }
             },
             [_c("i", { staticClass: "icon fas fa-plus" }), _vm._v(" Add New")]
           )
@@ -326,11 +323,11 @@ var render = function() {
                         staticClass: "btn btn-primary- btn-flat btn-sm",
                         attrs: {
                           "data-toggle": "modal",
-                          "data-target": "#StatusMasterModal"
+                          "data-target": "#formModal"
                         },
                         on: {
                           click: function($event) {
-                            return _vm.editStatusMaster(m_status)
+                            return _vm.editData(m_status)
                           }
                         }
                       },

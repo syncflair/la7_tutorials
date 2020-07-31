@@ -32,7 +32,7 @@ class StatusMasterController extends Controller
             $perPage = 20;
         }
 
-        $data = StatusMaster::paginate($perPage);
+        $data = StatusMaster::orderBy('status_type', 'ASC')->paginate($perPage);
         //$data = StatusMaster::All();
         return response()->json($data);
     }
@@ -167,19 +167,31 @@ class StatusMasterController extends Controller
                 $query->where('status_name','LIKE','%'.$searchKey.'%')
                         ->orWhere('status_slug','LIKE','%'.$searchKey.'%')
                         ->orWhere('status_type','LIKE','%'.$searchKey.'%');
-            })->paginate($perPage);
+            })->orderBy('status_type', 'ASC')->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){
             $searchResult = StatusMaster::where(function($query) use ($searchKey, $searchOption){
                 $query->where( $searchOption,'LIKE','%'.$searchKey.'%');
-            })->paginate($perPage);
+            })->orderBy('status_type', 'ASC')->paginate($perPage);
             
         }else{
             //$searchResult = StatusMaster::latest()->paginate(10);
-            $searchResult = StatusMaster::paginate($perPage);
+            $searchResult = StatusMaster::orderBy('status_type', 'ASC')->paginate($perPage);
         }
 
         //return $searchResult;
         return response()->json($searchResult);
     }
+
+
+     //Get all status
+    public function getAllStatus(Request $request){
+        //this is for commonStoreForAll Store
+        $key = $request->q;
+        $data = StatusMaster::where('status_type', '=', $key )
+                ->select('id','status_name',)
+                ->get();
+        return response()->json($data);
+    }
+
 }

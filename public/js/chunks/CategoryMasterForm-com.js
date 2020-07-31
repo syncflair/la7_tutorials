@@ -786,7 +786,7 @@ var render = function() {
                           ])
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "col-md-7 col-sm-12" }, [
+                        _c("div", { staticClass: "col-md-7 col-sm-12 mt-3" }, [
                           _c(
                             "table",
                             _vm._l(_vm.form.lang_translation, function(
@@ -798,7 +798,9 @@ var render = function() {
                                   _c(
                                     "th",
                                     {
-                                      staticStyle: { background: "#20c997" },
+                                      staticStyle: {
+                                        background: "rgba(0, 0, 0, 0.06)"
+                                      },
                                       attrs: { colspan: "2" }
                                     },
                                     [

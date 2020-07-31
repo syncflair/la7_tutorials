@@ -72,7 +72,7 @@
 			        <div class="form-group row">
 			            <label for="" class="col-sm-3 col-form-label">Details</label>
 			            <div class="col-sm-9">
-			            	<textarea v-model="form.zone_desc" ref="zone_desc" name="zone_desc" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('zone_desc') }" placeholder="Length details"></textarea>
+			            	<textarea v-model="form.zone_desc" ref="zone_desc" name="zone_desc" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('zone_desc') }" placeholder="Details"></textarea>
                       		<has-error :form="form" field="zone_desc"></has-error>
 			            </div>
 			        </div>	              

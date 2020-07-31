@@ -9,7 +9,7 @@ Vue.use(Vuex)
 //const commonStoreForAll = () => import( /* webpackChunkName: "commonStoreForAll-VX" */ './store/commonStoreForAll') 
 import commonStoreForAll from './store/commonStoreForAll' 
 import CategoryStore from './store/CategoryStore'
-import ProductStore from './store/ProductStore'
+import ProductMasterStore from './store/ProductMasterStore'
 import PartieStore from './store/PartieStore'
 import CustomerForAdminStore from './store/CustomerForAdminStore'
 import SupplierForAdminStore from './store/SupplierForAdminStore'
@@ -17,6 +17,8 @@ import SupplierForAdminStore from './store/SupplierForAdminStore'
 import usersAdminStore from './store/usersAdminStore'
 //Catalog
 import CategoryMasterStore from './store/CategoryMasterStore'
+import SpecificationMasterStore from './store/SpecificationMasterStore'
+import AttributeValueMasterStore from './store/AttributeValueMasterStore'
 
 //Accounting
 import ChartOfAccounts from './store/ChartOfAccounts'
@@ -32,12 +34,14 @@ import DistrictMasterStore from './store/DistrictMasterStore'
 import DistrictZoneMasterStore from './store/DistrictZoneMasterStore'
 
 
+
+
 export default new Vuex.Store({
 
 	modules: {
 		commonStoreForAll,
     	CategoryStore,
-    	ProductStore,
+    	ProductMasterStore,
     	PartieStore,    
         //customer	
     	CustomerForAdminStore,
@@ -47,7 +51,7 @@ export default new Vuex.Store({
         //user management
         usersAdminStore,
         //Catalog
-        CategoryMasterStore,
+        CategoryMasterStore, SpecificationMasterStore, AttributeValueMasterStore,
 
         //Accounting
         ChartOfAccounts,

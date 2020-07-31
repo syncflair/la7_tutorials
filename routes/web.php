@@ -132,6 +132,20 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/CategoryMaster-Info', 'Admin\Catalog\CategoryController', 
       ['except'=>['create','show','edit'] ]);
 
+    Route::get('spa/searchProductData', 'Admin\Catalog\ProductController@search'); //search    
+    Route::resource('spa/Product-Info', 'Admin\Catalog\ProductController', 
+        ['except'=>['create','edit','show'] ]);
+
+    Route::get('spa/Attribute-Info/GetAttributes', 'Admin\Catalog\AttributeController@GetAttributes');//for commonStoreForAll store       
+    Route::resource('spa/Attribute-Info', 'Admin\Catalog\AttributeController', 
+        ['except'=>['create','edit','show'] ]);
+    Route::get('spa/searchAttributeValueData', 'Admin\Catalog\AttributeValueController@search'); //search     
+    Route::resource('spa/AttributeValue-Info', 'Admin\Catalog\AttributeValueController', 
+        ['except'=>['create','edit','show'] ]);
+    Route::get('spa/searchSpecificationData', 'Admin\Catalog\SpecificationController@search'); //search 
+    Route::resource('spa/Specification-Info', 'Admin\Catalog\SpecificationController', 
+        ['except'=>['create','edit','show'] ]);
+
 
 
     //Accounting
@@ -170,6 +184,8 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::get('spa/searchVatRateData', 'Admin\Settings\VatRateController@search'); //search
     Route::resource('spa/VatRate-Info', 'Admin\Settings\VatRateController', 
       ['except'=>['create','show','edit'] ]);
+
+    Route::get('spa/StatusMaster-Info/getAllStatus', 'Admin\Settings\StatusMasterController@getAllStatus');//commonStoreForAll store    
     Route::get('spa/searchStatusMasterData', 'Admin\Settings\StatusMasterController@search'); //search
     Route::resource('spa/StatusMaster-Info', 'Admin\Settings\StatusMasterController', 
       ['except'=>['create','show','edit'] ]);
@@ -209,12 +225,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/category', 'Admin\Category\CategoryController', 
       ['except' => ['edit', 'show', 'create'] ] ); 
 
-    Route::get('spa/unactive-product/{id}', 'Admin\Product\ProductController@unactiveProduct');
-    Route::get('spa/active-product/{id}', 'Admin\Product\ProductController@activeProduct');
-    Route::get('spa/search-product', 'Admin\Product\ProductController@searchProduct'); 
-    Route::get('spa/count-product', 'Admin\product\ProductController@countProduct');   
-    Route::resource('spa/product', 'Admin\Product\ProductController', 
-        ['except'=>['edit','show','create','store','update'] ]);   
+    
 
     //testing route
     Route::post('spa/save-multi-field', 'Admin\MultiComponent\MultiComponentController@saveMultiField');
@@ -226,10 +237,12 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     /**********************************************End Vue Route *************************************************/   
  
     // Vue: single page application (SPA)- Any route that not match that redirect to dashboard. combine vue route and laravel rourte. Best way place this route to last of the line    
-    //Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '.*' ); 
+    //Route::get('/spa/{path}', 'Admin\AdminController@index')->where('path', '.*' );  
     Route::get('/spa/{anypath}', function () {
       return view('admin.dashboard'); 
-    })->where(['anypath' => '([A-z\d-/_.]+)?'] );
+    //})->where(['anypath' => '([A-z\d-/_.]+)?' ]);
+    })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
+    //})->where('anypath', '.*' ); 
 
 });
 /**************************************** End Admin middleware *****************************************************/

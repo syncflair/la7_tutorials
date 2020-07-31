@@ -50,7 +50,7 @@
           </tr>
 
           <tr v-show="Divisions && !Divisions.length">
-            <td colspan="6">
+            <td colspan="5">
               <div class="alert alert-warning text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
           </tr>

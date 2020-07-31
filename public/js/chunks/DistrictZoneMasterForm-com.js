@@ -717,7 +717,7 @@ var render = function() {
                                   },
                                   attrs: {
                                     name: "zone_desc",
-                                    placeholder: "Length details"
+                                    placeholder: "Details"
                                   },
                                   domProps: { value: _vm.form.zone_desc },
                                   on: {

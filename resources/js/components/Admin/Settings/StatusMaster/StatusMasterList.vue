@@ -12,7 +12,7 @@
           ></search-app-one>
         </div>
         <div class="col-md-6 col-sm-3 text-right">
-        	<a @click="addStatusMaster" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#StatusMasterModal"> <i class="icon fas fa-plus"></i> Add New</a>
+        	<a @click="addData" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#formModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>
     </div><!--/card-header-->
@@ -52,7 +52,7 @@
 
 
             <td class="text-right">    
-              <a @click="editStatusMaster(m_status)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#StatusMasterModal">
+              <a @click="editData(m_status)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#formModal">
                   <i class="fas fa-edit primary "></i>
               </a> 
               <a @click="DeleteData(m_status.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
@@ -110,13 +110,13 @@
 
       methods:{
 
-  	    addStatusMaster(){
-  	    	FireEvent.$emit('addStatusMaster');
+  	    addData(){
+  	    	FireEvent.$emit('addData');
   	    },
 
-  	    editStatusMaster(data){
+  	    editData(data){
   	    	//alert(data.id);
-  	    	FireEvent.$emit('editStatusMaster', data);
+  	    	FireEvent.$emit('editData', data);
   	    },
 
   	    DeleteData(id){

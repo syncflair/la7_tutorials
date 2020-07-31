@@ -48,7 +48,7 @@
 
                     <div class="form-group">
                       <label >Details</label>
-                        <textarea v-model="form.district_desc" ref="district_desc" name="district_desc" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('district_desc') }" placeholder="Length details"></textarea>
+                        <textarea v-model="form.district_desc" ref="district_desc" name="district_desc" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('district_desc') }" placeholder="Details"></textarea>
                       <has-error :form="form" field="district_desc"></has-error>
                     </div>
              

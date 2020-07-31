@@ -107,6 +107,8 @@ __webpack_require__.r(__webpack_exports__);
         name: 'Shipping'
       }, {
         name: 'Payment'
+      }, {
+        name: 'Product'
       }],
       // Create a new form instance
       form: new Form({
@@ -121,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   //end data
   methods: {
-    addStatusMaster: function addStatusMaster() {
+    addData: function addData() {
       var _this = this;
 
       this.editMode = false;
@@ -130,7 +132,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.$refs.status_name.focus();
       }, 600);
     },
-    editStatusMaster: function editStatusMaster(data) {
+    editData: function editData(data) {
       this.editMode = true;
       this.form.reset();
       this.form.fill(data); //this.$refs.status_name.focus();    		
@@ -160,7 +162,7 @@ __webpack_require__.r(__webpack_exports__);
           _this2.form.reset(); //reset from after submit
 
 
-          $('#StatusMasterModal').modal('hide');
+          $('#formModal').modal('hide');
         }
 
         if (data.errors) {
@@ -192,7 +194,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
           _this3.editMode = false;
-          $('#StatusMasterModal').modal('hide'); //  this.$refs.status_name.focus(); 
+          $('#formModal').modal('hide'); //  this.$refs.status_name.focus(); 
         }
 
         if (data.errors) {
@@ -208,13 +210,13 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this4 = this;
 
-    FireEvent.$on('editStatusMaster', function (data) {
+    FireEvent.$on('editData', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this4.editStatusMaster(data);
+      _this4.editData(data);
     });
-    FireEvent.$on('addStatusMaster', function () {
-      _this4.addStatusMaster();
+    FireEvent.$on('addData', function () {
+      _this4.addData();
     });
   }
 }); //End Exprot Default
@@ -242,7 +244,7 @@ var render = function() {
       {
         staticClass: "modal fade",
         attrs: {
-          id: "StatusMasterModal",
+          id: "formModal",
           tabindex: "-1",
           role: "dialog",
           "aria-labelledby": "",

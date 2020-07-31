@@ -63,7 +63,7 @@ var StatusMasterForm = function StatusMasterForm() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "VatRateMaster",
+  name: "StatusMasterInfo",
   components: {
     StatusMasterList: StatusMasterList,
     StatusMasterForm: StatusMasterForm

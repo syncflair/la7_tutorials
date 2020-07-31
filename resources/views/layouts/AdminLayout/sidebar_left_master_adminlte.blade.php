@@ -52,7 +52,7 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                <router-link to="/spa/Products" class="nav-link">
+                <router-link to="/spa/ProductMaster" class="nav-link">
                   <i class="nav-icon fas fa-boxes"></i>
                   <p>
                     Products
@@ -68,6 +68,33 @@
                   </p>
                 </router-link>
               </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/AttirbuteMaster" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Attributs
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/spa/AttributeValueMaster" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Attribut Values
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/SpecificationMaster" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Spacifications
+                  </p>
+                </router-link>
+              </li>
+
 
               <li class="nav-item">
                 <router-link to="/spa/Category-demo" class="nav-link">

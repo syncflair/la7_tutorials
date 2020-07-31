@@ -53,9 +53,9 @@
 
           </tr>
 
-          <tr v-show="Currencies.data && !Currencies.length">
+          <tr v-show="Currencies && !Currencies.length">
             <td colspan="6">
-              <div class="alert alert-danger text-center red mb-0" role="alert" >Sorry : No data found.</div>
+              <div class="alert alert-warning text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
           </tr>
 

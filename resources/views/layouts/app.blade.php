@@ -10,6 +10,8 @@
     <!--<title>{{ config('app.name', 'Laravel') }}</title>-->
     <title>@yield('title')</title>
 
+    <link rel="icon" href="{{asset('/FilesStorage/CommonFiles/favicon.png')}}" sizes="16x16" type="image/png">
+
     <!-- Scripts -->
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
     <script src="{{ asset('js/app.js') }}" defer></script>

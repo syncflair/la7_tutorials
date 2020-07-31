@@ -48,7 +48,7 @@
     const StatusMasterForm = () => import( /* webpackChunkName: "StatusMasterForm-com" */ './StatusMasterForm')
 
 	export default {
-	    name: "VatRateMaster",
+	    name: "StatusMasterInfo",
 	    
 	    components:{ 
 	    	StatusMasterList, StatusMasterForm,

@@ -11,12 +11,14 @@ const commonStoreForAll ={
       allLanguages:{},
       allDepertments:{},
       autoSearchDepartments:{},
-	    userStatus: {}, //get data from user_status table
+      userStatus: {}, //get data from user_status table
+	    AllStatus: {}, //get status for order, payment, purchase, porduct
       jobTitles:{},
 	    Countries:{},
       Divisions:{}, 
       Districts:{},
       Dist_Zones:{},
+      attributes:{},      
 	}),/*end state*/
 
   getters: {
@@ -36,11 +38,13 @@ const commonStoreForAll ={
       FETCH_LANGUAGES(state, data){return state.allLanguages = data;},       
       FETCH_DEPARTMENTS(state, data){return state.allDepertments = data;},       
       FETCH_JOB_TITLE(state, data){return state.jobTitles = data;}, 
-    	FETCH_USER_STATUS(state, data) { return state.userStatus = data; },
+      FETCH_USER_STATUS(state, data) { return state.userStatus = data; },
+    	FETCH_ALL_STATUS(state, data) { return state.AllStatus = data; },
       FETCH_COUNTRY_DATA(state, Countries) { return state.Countries = Countries; },
       FETCH_DIVISION_DATA(state, Divisions) { return state.Divisions = Divisions; },
       FETCH_DISTRICT_DATA(state, Districts) { return state.Districts = Districts; },
       FETCH_DISTRICT_ZONE_DATA(state, Dist_Zones) { return state.Dist_Zones = Dist_Zones; },
+      FETCH_ATTRIBUTE_DATA(state, attributes) { return state.attributes = attributes; },
 
       //#####################################Search ###########################################
       AUTO_COMPLETE_DATA_FOR_DEPARTMENTS(state, data){return state.autoSearchDepartments = data;},       
@@ -49,14 +53,23 @@ const commonStoreForAll ={
 
   },/*end Mutations*/
 
-  actions: {
-    	userStatus(context){
-  		  axios.get('/spa/user-status-info')
-  		  .then( (response) => {
-  		    context.commit('FETCH_USER_STATUS', response.data);
-  		    //console.log(response.data);
-  		  }).catch( () => { })
-  		},
+  actions: {    	
+
+      userStatus(context){
+        axios.get('/spa/user-status-info')
+        .then( (response) => {
+          context.commit('FETCH_USER_STATUS', response.data);
+          //console.log(response.data);
+        }).catch( () => { })
+      },
+
+      AllStatus(context, payload){
+        let query = payload;  
+        axios.get('/spa/StatusMaster-Info/getAllStatus?&q='+query)
+        .then( (response) => {
+          context.commit('FETCH_ALL_STATUS', response.data);
+        }).catch( () => { })
+      },      
 
       fetchJobTitles(context){ //return role 1 to 6
         axios.get('/spa/JobTitle-Info/GetJobTitles')
@@ -121,6 +134,13 @@ const commonStoreForAll ={
         }).catch( () => { })
       },
 
+      fetchAttributeList(context){
+        axios.get('/spa/Attribute-Info/GetAttributes')
+        .then( (response) => {
+          context.commit('FETCH_ATTRIBUTE_DATA', response.data);
+        }).catch( () => { })
+      },
+
 
       //############################################# Search ############################################
       AutoCompleteSearchForDepartment(context, payload){  
@@ -130,6 +150,9 @@ const commonStoreForAll ={
               context.commit('AUTO_COMPLETE_DATA_FOR_DEPARTMENTS', response.data);                                        
           }).catch(() => { }) 
       },
+
+
+      
 
 
   } /*end actions*/

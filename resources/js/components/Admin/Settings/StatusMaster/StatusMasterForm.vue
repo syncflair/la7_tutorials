@@ -2,7 +2,7 @@
 <span>
 		
 	<!-- Modal -->
-<div class="modal fade" id="StatusMasterModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" >
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" >
   <div class="modal-dialog modal-lg-" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -94,6 +94,7 @@
 			      { name: 'Stock' },
 			      { name: 'Shipping' },
 			      { name: 'Payment' },
+			      { name: 'Product' },
 			    ],  
 
 	        // Create a new form instance
@@ -110,7 +111,7 @@
 
 	    methods:{
 
-	    	addStatusMaster(){
+	    	addData(){
 	    		this.editMode = false;
 	    		this.form.reset();
 	    		setTimeout(() => {
@@ -118,7 +119,7 @@
                 }, 600);
 	    	},
 
-	    	editStatusMaster(data){
+	    	editData(data){
 	    		this.editMode = true;
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
@@ -143,7 +144,7 @@
 			      toastr.success(data.success);             
 			      this.$Progress.finish();  
 			      this.form.reset();  //reset from after submit
-			      $('#StatusMasterModal').modal('hide');			      
+			      $('#formModal').modal('hide');			      
 			    }
 			    if(data.errors){
 			      toastr.warning(data.errors); 
@@ -169,7 +170,7 @@
 				      toastr.success(data.success);               
 				      this.form.reset();  //reset from after submit
 				      this.editMode = false; 
-				     $('#StatusMasterModal').modal('hide');
+				     $('#formModal').modal('hide');
 				    //  this.$refs.status_name.focus(); 
 				    
 				    }
@@ -186,14 +187,14 @@
 	    },
 
 	    created(){
-	    	FireEvent.$on('editStatusMaster', (data) => {
+	    	FireEvent.$on('editData', (data) => {
               //alert(data.id);
               //this.form.fill(data);   //this is also work
-              this.editStatusMaster(data);
+              this.editData(data);
             });
 
-            FireEvent.$on('addStatusMaster', () => {
-              this.addStatusMaster();
+            FireEvent.$on('addData', () => {
+              this.addData();
             });
 	    }
 

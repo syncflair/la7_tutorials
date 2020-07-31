@@ -540,7 +540,7 @@ var render = function() {
                                 },
                                 attrs: {
                                   name: "district_desc",
-                                  placeholder: "Length details"
+                                  placeholder: "Details"
                                 },
                                 domProps: { value: _vm.form.district_desc },
                                 on: {

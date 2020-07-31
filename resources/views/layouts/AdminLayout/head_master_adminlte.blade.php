@@ -8,10 +8,13 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>@yield('title')</title>
-	
+
+	<!-- <link rel="icon" href="{{asset('/FilesStorage/CommonFiles/s_favicon.ico')}}"> -->
+	<link rel="icon" href="{{asset('/FilesStorage/CommonFiles/favicon.png')}}" sizes="16x16" type="image/png">
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="csrf-token" content="{{csrf_token()}}">
+
 
 	<!-- Styles -->  
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet"><!--comon style-->

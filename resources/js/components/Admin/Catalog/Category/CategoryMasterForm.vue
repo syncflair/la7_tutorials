@@ -92,7 +92,7 @@
 
 	          	</div>
 
-	          	<div class="col-md-7 col-sm-12">
+	          	<div class="col-md-7 col-sm-12 mt-3">
 	          		<!-- <a @click="pushToLanguageTranslationArray" class="pointer">click</a> -->
 	          	  <table>
 	          	  	<!-- allLanguages -->
@@ -100,7 +100,7 @@
 	          	  	<!-- <tr><td>{{ index }} </td><td>{{ct}}</td></tr> -->                 
 
 	          	  	<tr>
-	          	  	  <th colspan="2" style="background: #20c997;"><div class="alert- alert-warning- text-center mb-0">{{ct.lang_code}}</div></th>
+	          	  	  <th colspan="2" style="background: rgba(0, 0, 0, 0.06);"><div class="alert- alert-warning- text-center mb-0">{{ct.lang_code}}</div></th>
 	          	  	</tr>
 	          		<tr >
 	          		  <td>
@@ -198,10 +198,11 @@
 	    	  	// //this.allLanguages[i].id
 		        //       this.form.lang_translation.push({ language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, category_name: '', category_desc: '' }); 
 		        //     }
-
+		        
 	            for (var i = 0; i < this.allLanguages.length; i++) {
 	              this.form.lang_translation.push( { language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, category_name: '', category_desc: '' } ); 
 	            }
+		        
 	    	},
 
 	    	onImageChange(e){
