@@ -82,7 +82,7 @@ class CurrencyController extends Controller
             }else{
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->currency_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
@@ -97,9 +97,8 @@ class CurrencyController extends Controller
                     //     $font->angle(45);
                     // })
                     //->text('foo', 0, 0, function($font) {  $font->color(array(255, 255, 255, 0.5)); })
-                    ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
-
-                $data['currency_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                    ->save(storage_path('app/public/settings/').$imageName);
+                $data['currency_icon'] = 'storage/settings/'.$imageName;
                 
             }//end image type check
         }else{
@@ -180,14 +179,13 @@ class CurrencyController extends Controller
                 }//else{echo 'Empty';}  
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->currency_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     ->resize(20, 20)
                    // ->text('SHORBORAHO', 140, 190)
-                    ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
-
-                $data['currency_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                    ->save(storage_path('app/public/settings/').$imageName);
+                $data['currency_icon'] = 'storage/settings/'.$imageName;
 
             }//end image type check
         }else{

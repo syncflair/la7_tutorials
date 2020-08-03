@@ -79,7 +79,7 @@ class LanguageController extends Controller
             }else{
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->lang_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
@@ -93,10 +93,9 @@ class LanguageController extends Controller
                     //     $font->valign('top');
                     //     $font->angle(45);
                     // })
-                    //->text('foo', 0, 0, function($font) {  $font->color(array(255, 255, 255, 0.5)); })
-                    ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
-
-                $data['lang_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;                
+                    //->text('foo', 0, 0, function($font) {  $font->color(array(255, 255, 255, 0.5)); }) ;
+                    ->save(storage_path('app/public/settings/').$imageName);
+                $data['lang_icon'] = 'storage/settings/'.$imageName;            
             }//end image type check
         }else{
             $data['lang_icon'] = null;
@@ -172,14 +171,13 @@ class LanguageController extends Controller
                 }//else{echo 'Empty';}  
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->lang_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     ->resize(40, 40)
                    // ->text('SHORBORAHO', 140, 190)
-                    ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
-
-                $data['lang_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                    ->save(storage_path('app/public/settings/').$imageName);
+                $data['lang_icon'] = 'storage/settings/'.$imageName;  
             }//end image type check
         }else{
             $existing_image = Language::select('lang_icon')->where('id', $id)->first();

@@ -97,15 +97,14 @@ class SupplierController extends Controller
             }else{               
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
                     //->resize(40, 40)
                    // ->text('SHORBORAHO', 140, 190)
-                    ->save(public_path('FilesStorage/Backend/Suppliers/').$imageName);
-
-                $data['avatar'] = 'FilesStorage/Backend/Suppliers/'.$imageName;
+                    ->save(storage_path('app/public/suppliers/').$imageName);
+                $data['avatar'] = 'storage/suppliers/'.$imageName;
                 
             }//end image type check                         
         }else{
@@ -201,16 +200,14 @@ class SupplierController extends Controller
 
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
                     //->resize(40, 40)
                    // ->text('SHORBORAHO', 140, 190)
-                    ->save(public_path('FilesStorage/Backend/Suppliers/').$imageName);
-
-
-                $data['avatar'] = 'FilesStorage/Backend/Suppliers/'.$imageName;
+                    ->save(storage_path('app/public/suppliers/').$imageName);
+                $data['avatar'] = 'storage/suppliers/'.$imageName;
 
             }//end image type check                         
         }else{

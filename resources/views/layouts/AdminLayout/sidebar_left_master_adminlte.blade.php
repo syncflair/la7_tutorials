@@ -95,6 +95,15 @@
                 </router-link>
               </li>
 
+              <li class="nav-item">
+                <router-link to="/spa/BrandMaster" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Brands
+                  </p>
+                </router-link>
+              </li>
+
 
               <li class="nav-item">
                 <router-link to="/spa/Category-demo" class="nav-link">

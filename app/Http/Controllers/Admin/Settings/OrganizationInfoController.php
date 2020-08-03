@@ -126,14 +126,15 @@ class OrganizationInfoController extends Controller
                 }//else{echo 'Empty';}  
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->org_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     ->resize(200, 200)
                     //->text('SHORBORAHO', 140, 190)
-                    ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
-
-                $data['org_logo'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                //     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
+                // $data['org_logo'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                ->save(storage_path('app/public/settings/').$imageName);
+                $data['org_logo'] = 'storage/settings/'.$imageName;
                 
             }//end image type check
         }else{

@@ -97,16 +97,16 @@ class UserController extends Controller
             }else{               
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
                     ->resize(40, 40)
                    // ->text('SHORBORAHO', 140, 190)
-                    ->save(public_path('FilesStorage/Backend/Users/').$imageName);
-
-
-                $data['avatar'] = 'FilesStorage/Backend/Users/'.$imageName;
+                //     ->save(public_path('FilesStorage/Backend/Users/').$imageName);
+                // $data['avatar'] = 'FilesStorage/Backend/Users/'.$imageName;
+                    ->save(storage_path('app/public/users/').$imageName);
+                $data['avatar'] = 'storage/users/'.$imageName;
 
             }//end image type check                         
         }else{
@@ -195,15 +195,14 @@ class UserController extends Controller
 
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
                     ->resize(40, 40)
                    // ->text('SHORBORAHO', 140, 190)
-                    ->save(public_path('FilesStorage/Backend/Users/').$imageName);
-
-                $data['avatar'] = 'FilesStorage/Backend/Users/'.$imageName;
+                    ->save(storage_path('app/public/users/').$imageName);
+                $data['avatar'] = 'storage/users/'.$imageName;
 
             }//end image type check                         
         }else{

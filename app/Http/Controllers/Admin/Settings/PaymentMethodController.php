@@ -77,14 +77,13 @@ class PaymentMethodController extends Controller
             }else{
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->payment_method).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
                     //->resize(40, 40)
-                    ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
-
-                $data['payment_method_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                    ->save(storage_path('app/public/settings/').$imageName);
+                $data['payment_method_icon'] = 'storage/settings/'.$imageName; 
                 
             }//end image type check
         }else{
@@ -160,14 +159,13 @@ class PaymentMethodController extends Controller
                 }//else{echo 'Empty';}  
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->payment_method).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     //->resize(20, 20)
                    // ->text('SHORBORAHO', 140, 190)
-                    ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
-
-                $data['payment_method_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                    ->save(storage_path('app/public/settings/').$imageName);
+                $data['payment_method_icon'] = 'storage/settings/'.$imageName; 
             }//end image type check
         }else{
             $existing_image = PaymentMethod::select('payment_method_icon')->where('id', $id)->first();

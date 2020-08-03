@@ -116,16 +116,14 @@ class EmployeeController extends Controller
             }else{               
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->emp_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
                     ->resize(150, 150) 
                    // ->text('SHORBORAHO', 140, 190)
-                    ->save(public_path('FilesStorage/Backend/Employees/').$imageName);
-
-
-                $data['avatar'] = 'FilesStorage/Backend/Employees/'.$imageName;
+                    ->save(storage_path('app/public/employees/').$imageName);
+                $data['avatar'] = 'storage/employees/'.$imageName;
 
                 // $employee = Employee::create($data); 
 
@@ -252,16 +250,14 @@ class EmployeeController extends Controller
 
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->emp_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
                     ->resize(250, 250)
                    // ->text('SHORBORAHO', 140, 190)
-                    ->save(public_path('FilesStorage/Backend/Employees/').$imageName);
-
-
-                $data['avatar'] = 'FilesStorage/Backend/Employees/'.$imageName;
+                    ->save(storage_path('app/public/employees/').$imageName);
+                $data['avatar'] = 'storage/employees/'.$imageName;
 
                 // $employee = Employee::whereId($request->id)->update($data);
                 // return response()->json(['success'=>'Employee Update successfully ']);

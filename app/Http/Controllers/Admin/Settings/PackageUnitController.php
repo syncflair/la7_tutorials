@@ -81,14 +81,13 @@ class PackageUnitController extends Controller
             }else{
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->package_title).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
                     ->resize(20, 20)
-                    ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
-
-                $data['package_icon'] = 'FilesStorage/Backend/Settings/'.$imageName; 
+                    ->save(storage_path('app/public/settings/').$imageName);
+                $data['package_icon'] = 'storage/settings/'.$imageName;  
             }//end image type check
         }else{
             $data['package_icon'] = null;
@@ -165,14 +164,13 @@ class PackageUnitController extends Controller
                 }//else{echo 'Empty';}  
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->package_title).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     ->resize(20, 20)
                    // ->text('SHORBORAHO', 140, 190)
-                    ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
-
-                $data['package_icon'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                    ->save(storage_path('app/public/settings/').$imageName);
+                $data['package_icon'] = 'storage/settings/'.$imageName; 
             }//end image type check
         }else{
             $existing_image = PackageUnit::select('package_icon')->where('id', $id)->first();

@@ -146,6 +146,10 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/Specification-Info', 'Admin\Catalog\SpecificationController', 
         ['except'=>['create','edit','show'] ]);
 
+    Route::get('spa/searchBrandData', 'Admin\Catalog\BrandController@search'); //search     
+    Route::resource('spa/Brand-Info', 'Admin\Catalog\BrandController', 
+        ['except'=>['create','edit','show'] ]);
+
 
 
     //Accounting

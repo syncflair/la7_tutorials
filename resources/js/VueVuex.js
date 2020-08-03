@@ -19,6 +19,7 @@ import usersAdminStore from './store/usersAdminStore'
 import CategoryMasterStore from './store/CategoryMasterStore'
 import SpecificationMasterStore from './store/SpecificationMasterStore'
 import AttributeValueMasterStore from './store/AttributeValueMasterStore'
+import BrandMasterStore from './store/BrandMasterStore'
 
 //Accounting
 import ChartOfAccounts from './store/ChartOfAccounts'
@@ -51,7 +52,7 @@ export default new Vuex.Store({
         //user management
         usersAdminStore,
         //Catalog
-        CategoryMasterStore, SpecificationMasterStore, AttributeValueMasterStore,
+        CategoryMasterStore, SpecificationMasterStore, AttributeValueMasterStore, BrandMasterStore,
 
         //Accounting
         ChartOfAccounts,

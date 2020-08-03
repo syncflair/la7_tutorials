@@ -86,15 +86,15 @@ class CountryController extends Controller
             }else{
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->country_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     //->fit(200, 200)
                     ->resize(40, 40)
                    // ->text('SHORBORAHO', 140, 190)
-                    ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
-
-                $data['country_flag'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                    // ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
+                ->save(storage_path('app/public/settings/').$imageName);
+                $data['country_flag'] = 'storage/settings/'.$imageName;
 
                 // Country::create($data);        
                 // return response()->json(['success'=>'Country Created successfully']); 
@@ -104,7 +104,7 @@ class CountryController extends Controller
         }
 
         Country::create($data);        
-        return response()->json(['success'=>'Country Created successfully.']); 
+        return response()->json(['success'=>'Country Created.']); 
 
 
     }
@@ -175,14 +175,14 @@ class CountryController extends Controller
                 }//else{echo 'Empty';}  
 
                 //new name generate from base64 file
-                $imageName = Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->country_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
                 //save image using intervention image
                 \Image::make($image)
                     ->resize(20, 20)
                    // ->text('SHORBORAHO', 140, 190)
-                    ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
-
-                $data['country_flag'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                    // ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
+                    ->save(storage_path('app/public/settings/').$imageName);
+                $data['country_flag'] = 'storage/settings/'.$imageName;
 
                 // Country::whereId($id)->update($data);      
                 // return response()->json(['success'=>'Update successfull.']);
@@ -196,7 +196,7 @@ class CountryController extends Controller
         }
 
         Country::whereId($id)->update($data);         
-        return response()->json(['success'=>'Country Updated successfully.']); 
+        return response()->json(['success'=>'Country Updated.']); 
     }
 
     /**
