@@ -103,10 +103,16 @@
                         <has-error :form="form" field="product_name"></has-error>
                     </div>
                   
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="cat_img">Detials {{pt.lang_code}}</label>
                       <textarea v-model="pt.product_desc" ref="product_desc" name="product_desc[]" class="form-control"  placeholder="Details"> </textarea>
+                    </div> -->
+
+                    <div class="form-group">
+                      <label for="cat_img">Detials {{pt.lang_code}}</label>
+                      <vue-editor v-model="pt.product_desc"  name="product_desc[]" placeholder="Product Details"> </vue-editor>
                     </div>
+
                   </td>
                 </tr>
               </table>

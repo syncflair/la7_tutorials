@@ -31,7 +31,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
        if(!empty($request->perPage)){
             $perPage = $request->perPage;
@@ -69,6 +69,11 @@ class ProductController extends Controller
             'sys_pro_name' => 'required|min:2|max:40|unique:products,sys_pro_name',
             'pro_type' => 'required',
             //'*.category_name' => 'required|min:2|max:40',
+        ],[
+            'sys_pro_name.required' => 'The System Product Name field is required.',
+            'sys_pro_name.unique' => 'The System Product Name already existing or taken.',
+
+            'pro_type.required' => 'The field is required.',
         ]);
 
         $data =array();

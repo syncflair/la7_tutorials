@@ -10,6 +10,7 @@ use Illuminate\Support\Str; //for str::random
 use Illuminate\Support\Facades\File; //for file management
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Config; //that for call constants
 
 class BrandController extends Controller
 {
@@ -65,6 +66,7 @@ class BrandController extends Controller
 
         $data =array();
         $data['brand_name']=$request->brand_name;
+        $data['brand_url']=$request->brand_url;
         $data['brand_desc']=$request->brand_desc;
 
         $data['created_by']= \Auth::user()->id;  
@@ -75,50 +77,52 @@ class BrandController extends Controller
            $data['is_enabled']=$request->is_enabled; 
         }       
         
-        $image = $request->brand_img;
-
-        $imgPath = $request->file('brand_img');
-        //$contents = file_get_contents($request->brand_img->path());
-
+        $image_64 = $request->brand_img;
+        //$imgPath = $request->file('brand_img');
         //dd($image);
 
-
-        if($image){
+        if($image_64){
             //return $imageSize =getimagesize($image);
-            $imageExt = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            $imageExt = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
             if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
                 return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
             }else{
 
                 //new name generate from base64 file
-                $imageName = slug_generator($request->brand_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-                // if($imageExt == 'jpeg'){ $imageExt = 'jpg'; }
-                // $imageName = Str::random(40).'.' .$imageExt;
-                //dd($imageName);
-
+                $imageName = slug_generator($request->brand_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
 
                 //save image using intervention image
-                \Image::make($image)
-                    //->fit(200, 200)
-                    ->resize(200, 120)
-                   // ->text('SHORBORAHO', 140, 190)
-                    ->save(storage_path('app/public/brand/').$imageName);
-                $data['brand_img'] = 'storage/brand/'.$imageName;
+                // \Image::make($image)
+                //     //->fit(200, 200)
+                //     ->resize(200, 120)
+                //    // ->text('SHORBORAHO', 140, 190)
+                //     ->save(storage_path('app/public/brand/').$imageName);
+                //$data['brand_img'] = 'storage/brand/'.$imageName;
                 //\Image::make($image)->save(storage_path('app/public/Brand/'.$imageName)) ;
-
-                //$contents = file_get_contents($request->photo->path());
-                
-
-                //dd($imageFile);
                 
                 //$request->brand_img->store($imageName, 'public');
                 //$request->brand_img->store($imageName, 'public', $imageName);
 
+             
+                //dd($image);
 
+                $replace = substr($image_64, 0, strpos($image_64, ',')+1); 
+                $image = str_replace($replace, '', $image_64); 
+                $image = str_replace(' ', '+', $image);                 
 
-                // $image = str_replace('data:image/png;base64,', '', $image);
-                // $image = str_replace(' ', '+', $image);
-                // Storage::disk('public')->put('brand/'.$imageName, base64_decode($image));
+                Storage::disk('s3')->put('brand/'.$imageName, base64_decode($image) );
+
+                // \Image::make($image_64)
+                //     //->fit(200, 200)
+                //     ->resize(200, 120)
+                //    // ->text('SHORBORAHO', 140, 190)
+                //     ->save(storage_path('app/public/brand/').$imageName);
+                //$s3_url = 'https://sorboraho.s3-ap-southeast-1.amazonaws.com/brand/';
+
+                //s3_url_brand get from constants file 
+                $data['brand_img'] = Config::get('constants.s3_url_brand').$imageName;
+                // $data['brand_img'] = 'storage/brand/'.$imageName;
+
 
             }//end image type check
         }else{
@@ -166,6 +170,7 @@ class BrandController extends Controller
 
         $data =array();
         $data['brand_name']=$request->brand_name;
+        $data['brand_url']=$request->brand_url;
         $data['brand_desc']=$request->brand_desc;
 
         $data['updated_by']= \Auth::user()->id; 
@@ -176,31 +181,52 @@ class BrandController extends Controller
            $data['is_enabled']=$request->is_enabled; 
         }        
 
-        $image = $request->brand_img;        
+        $image_64 = $request->brand_img;        
 
         //if(strlen($image) > 150){ /*php function*/
-        if( Str::length($image) > 150){ /*larvel helper function*/
+        if( Str::length($image_64) > 150){ /*larvel helper function*/
 
             //return $imageSize =getimagesize($image);
-            $imageExt = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            $imageExt = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
             if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
                 return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
             }else{
 
                 //query for existing image
-                $existing_image = Brand::select('brand_img')->where('id', $id)->first();                   
-                if(!empty($existing_image->brand_img)) {
-                    File::delete($existing_image->brand_img); //delete file //use Illuminate\Support\Facades\File; at top
-                }//else{echo 'Empty';}  
+                $existing_image = Brand::select('brand_img')->where('id', $id)->first(); 
+                if($existing_image->brand_img != null){            
+                    $parts = parse_url($existing_image->brand_img); 
+                    $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+                    Storage::disk('s3')->delete($parts); //dd($parts);
+                }  
+
+                // if(!empty($existing_image->brand_img)) {
+                //     File::delete($existing_image->brand_img); //delete file //use Illuminate\Support\Facades\File; at top
+                // }//else{echo 'Empty';}  
+
+
 
                 //new name generate from base64 file
-                $imageName = slug_generator($request->brand_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->brand_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
                 //save image using intervention image
-                \Image::make($image)
-                    ->resize(200, 120)
-                   // ->text('SHORBORAHO', 140, 190)
-                    ->save(storage_path('app/public/brand/').$imageName);
-                $data['brand_img'] = 'storage/brand/'.$imageName;
+                // \Image::make($image)
+                //     ->resize(200, 120)
+                //    // ->text('SHORBORAHO', 140, 190)
+                //     ->save(storage_path('app/public/brand/').$imageName);
+                // $data['brand_img'] = 'storage/brand/'.$imageName;
+
+
+                $replace = substr($image_64, 0, strpos($image_64, ',')+1); 
+                $image = str_replace($replace, '', $image_64); 
+                $image = str_replace(' ', '+', $image);                
+
+                Storage::disk('s3')->put('brand/'.$imageName, base64_decode($image) );
+
+                //s3_url_brand get from constants file 
+                $data['brand_img'] = Config::get('constants.s3_url_brand').$imageName;
+
+
+
             }//end image type check
         }else{
             $existing_image = Brand::select('brand_img')->where('id', $id)->first();
@@ -220,11 +246,18 @@ class BrandController extends Controller
     public function destroy($id)
     {
         //query for existing image
-        $existing_image = Brand::select('brand_img')->where('id', $id)->first();                   
-        if( File::exists($existing_image->brand_img) ) {  
-            File::delete($existing_image->brand_img); 
-            //delete file //use Illuminate\Support\Facades\File; at top
-        }
+        $existing_image = Brand::select('brand_img')->where('id', $id)->first();
+        if($existing_image->brand_img != null){            
+            $parts = parse_url($existing_image->brand_img); 
+            $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+            Storage::disk('s3')->delete($parts);
+            //dd($parts);
+        }                         
+        // if( File::exists($existing_image->brand_img) ) {  
+        //     File::delete($existing_image->brand_img); 
+        //     //delete file //use Illuminate\Support\Facades\File; at top            
+        // }
+        
 
         $data = Brand::findOrFail($id)->delete();        
         if($data){

@@ -305,13 +305,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1556,6 +1549,76 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "emp_Present_address" } }, [
+                  _vm._v("Present Address")
+                ]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.emp_Present_address,
+                      expression: "form.emp_Present_address"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    name: "emp_Present_address",
+                    placeholder: "Present Address"
+                  },
+                  domProps: { value: _vm.form.emp_Present_address },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "emp_Present_address",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "emp_permanent_address" } }, [
+                  _vm._v("Permanent Address")
+                ]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.emp_permanent_address,
+                      expression: "form.emp_permanent_address"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    name: "emp_permanent_address",
+                    placeholder: "Permanent Address"
+                  },
+                  domProps: { value: _vm.form.emp_permanent_address },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "emp_permanent_address",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
               _c(
                 "div",
                 { staticClass: "form-group" },
@@ -1564,35 +1627,19 @@ var render = function() {
                     _vm._v("Details")
                   ]),
                   _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.emp_desc,
-                        expression: "form.emp_desc"
-                      }
-                    ],
-                    ref: "emp_desc",
-                    staticClass: "form-control",
-                    class: { "is-invalid": _vm.form.errors.has("emp_desc") },
+                  _c("vue-editor", {
+                    staticClass: "form-control-",
                     attrs: {
                       name: "emp_desc",
                       placeholder: "Employee Details"
                     },
-                    domProps: { value: _vm.form.emp_desc },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.form, "emp_desc", $event.target.value)
-                      }
+                    model: {
+                      value: _vm.form.emp_desc,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "emp_desc", $$v)
+                      },
+                      expression: "form.emp_desc"
                     }
-                  }),
-                  _vm._v(" "),
-                  _c("has-error", {
-                    attrs: { form: _vm.form, field: "emp_desc" }
                   })
                 ],
                 1
@@ -1606,41 +1653,19 @@ var render = function() {
                     _vm._v("Qualification")
                   ]),
                   _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.emp_qualification,
-                        expression: "form.emp_qualification"
-                      }
-                    ],
-                    ref: "emp_qualification",
-                    staticClass: "form-control",
-                    class: {
-                      "is-invalid": _vm.form.errors.has("emp_qualification")
-                    },
+                  _c("vue-editor", {
+                    staticClass: "form-control-",
                     attrs: {
                       name: "emp_qualification",
                       placeholder: "Qualification"
                     },
-                    domProps: { value: _vm.form.emp_qualification },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form,
-                          "emp_qualification",
-                          $event.target.value
-                        )
-                      }
+                    model: {
+                      value: _vm.form.emp_qualification,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "emp_qualification", $$v)
+                      },
+                      expression: "form.emp_qualification"
                     }
-                  }),
-                  _vm._v(" "),
-                  _c("has-error", {
-                    attrs: { form: _vm.form, field: "emp_qualification" }
                   })
                 ],
                 1
@@ -1654,41 +1679,19 @@ var render = function() {
                     _vm._v("Experience")
                   ]),
                   _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.emp_experience,
-                        expression: "form.emp_experience"
-                      }
-                    ],
-                    ref: "emp_experience",
-                    staticClass: "form-control",
-                    class: {
-                      "is-invalid": _vm.form.errors.has("emp_experience")
-                    },
+                  _c("vue-editor", {
+                    staticClass: "form-control-",
                     attrs: {
                       name: "emp_experience",
                       placeholder: "Experience"
                     },
-                    domProps: { value: _vm.form.emp_experience },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form,
-                          "emp_experience",
-                          $event.target.value
-                        )
-                      }
+                    model: {
+                      value: _vm.form.emp_experience,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "emp_experience", $$v)
+                      },
+                      expression: "form.emp_experience"
                     }
-                  }),
-                  _vm._v(" "),
-                  _c("has-error", {
-                    attrs: { form: _vm.form, field: "emp_experience" }
                   })
                 ],
                 1
@@ -1702,139 +1705,19 @@ var render = function() {
                     _vm._v("Previous Job History")
                   ]),
                   _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.emp_previous_job_history,
-                        expression: "form.emp_previous_job_history"
-                      }
-                    ],
-                    ref: "emp_previous_job_history",
-                    staticClass: "form-control",
-                    class: {
-                      "is-invalid": _vm.form.errors.has(
-                        "emp_previous_job_history"
-                      )
-                    },
+                  _c("vue-editor", {
+                    staticClass: "form-control-",
                     attrs: {
                       name: "emp_previous_job_history",
                       placeholder: "Job History"
                     },
-                    domProps: { value: _vm.form.emp_previous_job_history },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form,
-                          "emp_previous_job_history",
-                          $event.target.value
-                        )
-                      }
+                    model: {
+                      value: _vm.form.emp_previous_job_history,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "emp_previous_job_history", $$v)
+                      },
+                      expression: "form.emp_previous_job_history"
                     }
-                  }),
-                  _vm._v(" "),
-                  _c("has-error", {
-                    attrs: { form: _vm.form, field: "emp_previous_job_history" }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "form-group" },
-                [
-                  _c("label", { attrs: { for: "emp_Present_address" } }, [
-                    _vm._v("Present Address")
-                  ]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.emp_Present_address,
-                        expression: "form.emp_Present_address"
-                      }
-                    ],
-                    ref: "emp_Present_address",
-                    staticClass: "form-control",
-                    class: {
-                      "is-invalid": _vm.form.errors.has("emp_Present_address")
-                    },
-                    attrs: {
-                      name: "emp_Present_address",
-                      placeholder: "Present Address"
-                    },
-                    domProps: { value: _vm.form.emp_Present_address },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form,
-                          "emp_Present_address",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("has-error", {
-                    attrs: { form: _vm.form, field: "emp_Present_address" }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "form-group" },
-                [
-                  _c("label", { attrs: { for: "emp_permanent_address" } }, [
-                    _vm._v("Permanent Address")
-                  ]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.emp_permanent_address,
-                        expression: "form.emp_permanent_address"
-                      }
-                    ],
-                    ref: "emp_permanent_address",
-                    staticClass: "form-control",
-                    class: {
-                      "is-invalid": _vm.form.errors.has("emp_permanent_address")
-                    },
-                    attrs: {
-                      name: "emp_permanent_address",
-                      placeholder: "Permanent Address"
-                    },
-                    domProps: { value: _vm.form.emp_permanent_address },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.form,
-                          "emp_permanent_address",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("has-error", {
-                    attrs: { form: _vm.form, field: "emp_permanent_address" }
                   })
                 ],
                 1

@@ -593,6 +593,12 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "th",
+                { staticStyle: { width: "4%" }, attrs: { scope: "col" } },
+                [_vm._v("Stock")]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
                 {
                   staticClass: "sortable-title",
                   staticStyle: { width: "5%" },
@@ -604,12 +610,6 @@ var render = function() {
                   }
                 },
                 [_vm._v("price ")]
-              ),
-              _vm._v(" "),
-              _c(
-                "th",
-                { staticStyle: { width: "4%" }, attrs: { scope: "col" } },
-                [_vm._v("Stock")]
               ),
               _vm._v(" "),
               _c(
@@ -705,22 +705,8 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { attrs: { scope: "col" } }, [
                     _vm._v(
-                      " " +
-                        _vm._s(product.sys_pro_name) +
-                        " - \r\n              "
-                    ),
-                    _c("span", [
-                      _vm._v(
-                        _vm._s(product["pro_translation"][0]["product_name"]) +
-                          ","
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("span", [
-                      _vm._v(
-                        _vm._s(product["pro_translation"][1]["product_name"])
-                      )
-                    ])
+                      " " + _vm._s(product.sys_pro_name) + " \r\n              "
+                    )
                   ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" " + _vm._s(product.brand_id) + " ")]),
@@ -735,51 +721,6 @@ var render = function() {
                     product.pro_qty === null
                       ? _c("small", { staticStyle: { color: "red" } }, [
                           _vm._v(" No Qty ")
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    product.pro_sale_price
-                      ? _c("span", [
-                          _c(
-                            "span",
-                            {
-                              staticStyle: {
-                                "text-decoration": "line-through"
-                              },
-                              attrs: { title: "Main Price" }
-                            },
-                            [_vm._v(" " + _vm._s(product.pro_price) + " ")]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "span",
-                            {
-                              staticStyle: {
-                                "font-weight": "600",
-                                color: "green"
-                              },
-                              attrs: { title: "Sale Price" }
-                            },
-                            [_vm._v(" " + _vm._s(product.pro_sale_price) + " ")]
-                          )
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    !product.pro_sale_price
-                      ? _c("span", [
-                          _c(
-                            "span",
-                            {
-                              staticStyle: {
-                                "font-weight": "600",
-                                color: "green"
-                              },
-                              attrs: { title: "Main Price" }
-                            },
-                            [_vm._v(" " + _vm._s(product.pro_price) + " ")]
-                          )
                         ])
                       : _vm._e()
                   ]),
@@ -838,6 +779,51 @@ var render = function() {
                           )
                         : _vm._e()
                     ])
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    product.pro_sale_price
+                      ? _c("span", [
+                          _c(
+                            "span",
+                            {
+                              staticStyle: {
+                                "text-decoration": "line-through"
+                              },
+                              attrs: { title: "Main Price" }
+                            },
+                            [_vm._v(" " + _vm._s(product.pro_price) + " ")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticStyle: {
+                                "font-weight": "600",
+                                color: "green"
+                              },
+                              attrs: { title: "Sale Price" }
+                            },
+                            [_vm._v(" " + _vm._s(product.pro_sale_price) + " ")]
+                          )
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !product.pro_sale_price
+                      ? _c("span", [
+                          _c(
+                            "span",
+                            {
+                              staticStyle: {
+                                "font-weight": "600",
+                                color: "green"
+                              },
+                              attrs: { title: "Main Price" }
+                            },
+                            [_vm._v(" " + _vm._s(product.pro_price) + " ")]
+                          )
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("td", [

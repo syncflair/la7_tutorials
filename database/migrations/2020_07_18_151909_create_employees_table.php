@@ -29,13 +29,14 @@ class CreateEmployeesTable extends Migration
             $table->string('emp_nid', 50)->nullable();
             $table->string('emp_passport', 50)->nullable();
             $table->string('emp_driving_license', 50)->nullable();
-            
-            $table->string('emp_desc', 250)->nullable(); 
-            $table->string('emp_qualification', 250)->nullable(); 
-            $table->string('emp_experience', 250)->nullable();
-            $table->string('emp_previous_job_history', 250)->nullable();              
             $table->string('emp_permanent_address', 250)->nullable(); 
             $table->string('emp_Present_address', 250)->nullable();
+
+            $table->text('emp_desc')->nullable(); 
+            $table->text('emp_qualification')->nullable(); 
+            $table->text('emp_experience')->nullable();
+            $table->text('emp_previous_job_history')->nullable();              
+            
 
             $table->date('emp_hire_date', 50)->nullable(); 
             $table->date('emp_quit_date', 50)->nullable(); 

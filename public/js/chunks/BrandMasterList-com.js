@@ -99,6 +99,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -263,7 +264,7 @@ var render = function() {
                       ? _c("span", [
                           _c("img", {
                             attrs: {
-                              src: "../" + brand.brand_img,
+                              src: brand.brand_img,
                               height: "20px",
                               width: "20px"
                             }
@@ -288,7 +289,11 @@ var render = function() {
                     _vm._v(" " + _vm._s(brand.brand_name) + " ")
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(brand.vat_desc) + " ")]),
+                  _c("td", [
+                    _c("span", {
+                      domProps: { innerHTML: _vm._s(brand.brand_desc) }
+                    })
+                  ]),
                   _vm._v(" "),
                   _c("td", [
                     _c(

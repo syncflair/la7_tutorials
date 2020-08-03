@@ -3,7 +3,7 @@
 		
 	<!-- Modal -->
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" >
-  <div class="modal-dialog modal-lg-" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="">
@@ -22,18 +22,38 @@
 	          	<div class="row">
 	          	<div class="col-md-12 col-sm-12">
 
-	          		<div class="form-group">
-	                  <label>Brand Name *</label>
-	                    <input v-model="form.brand_name" type="text" ref="brand_name" name="brand_name" class="form-control" :class="{ 'is-invalid': form.errors.has('brand_name') }" placeholder="Brand Name">
-	                  <has-error :form="form" field="brand_name"></has-error>
+	                <div class="row">
+	                	<div class="col-md-4">	                		
+	                		<div class="form-group">
+			                  <label>Brand Name *</label>
+			                    <input v-model="form.brand_name" type="text" ref="brand_name" name="brand_name" class="form-control" :class="{ 'is-invalid': form.errors.has('brand_name') }" placeholder="Brand Name">
+			                  <has-error :form="form" field="brand_name"></has-error>
+			                </div>
+	                	</div>
+	                	<div class="col-md-8">
+	                		<div class="form-group">
+			                  <label>Brand URL</label>
+			                    <input v-model="form.brand_url" type="text" ref="brand_url" name="brand_url" class="form-control" :class="{ 'is-invalid': form.errors.has('brand_url') }" placeholder="Brand URL">
+			                  <has-error :form="form" field="brand_url"></has-error>
+			                </div>
+	                	</div>
 	                </div>
 	               
 
-	               <div class="form-group">
+	                <!-- <div class="form-group">
 	                  <label for="brand_desc">Details</label>
 	                    <textarea v-model="form.brand_desc" ref="brand_desc" name="brand_desc" class="form-control" :class="{ 'is-invalid': form.errors.has('brand_desc') }" placeholder="Details"></textarea>
 	                  <has-error :form="form" field="brand_desc"></has-error>
+	                </div> -->
+
+	                <div class="form-group">
+	                  <label for="brand_desc">Details 2</label>
+	                  <vue-editor v-model="form.brand_desc" name="brand_desc"></vue-editor>
 	                </div>
+
+	                
+
+
 
 	                <div class="form-check">
                       <input v-model="form.is_enabled" type="checkbox" class="form-check-input" name="is_enabled" id="checkbox" value="1">
@@ -59,7 +79,8 @@
                          <img v-if="form.brand_img == 'undefined'" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
                          <img v-if="form.brand_img === '' " :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
                          <img v-else-if="form.brand_img === null" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
-                          <img v-else-if="form.brand_img != '' " :src="'../'+form.brand_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:65px;height:65px;">
+                         <img v-else-if="form.brand_img != '' " :src="form.brand_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:65px;height:65px;">
+                          <!-- <img v-else-if="form.brand_img != '' " :src="'../'+form.brand_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:65px;height:65px;"> -->
                         </span>                        
                         
                       </div>
@@ -101,6 +122,7 @@
 	        form: new Form({
 	          id: '',
 	          brand_name: '',
+	          brand_url: '',
 	          brand_desc: '',
 	          brand_img: '',
 	          is_enabled: '',	          

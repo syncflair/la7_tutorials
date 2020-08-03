@@ -32,12 +32,13 @@
           <tr v-for="(brand, index) in Brands" :key="index">
             <td> 
                 <span v-if="brand.brand_img != null"> 
-                  <img :src="'../'+brand.brand_img" height="20px" width="20px"> 
+                  <!-- <img :src="'../'+brand.brand_img" height="20px" width="20px"> --> <!--For local storage--> 
+                  <img :src="brand.brand_img" height="20px" width="20px"> <!--For as3-->
                 </span>
                 <span v-if="brand.brand_img === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
             </td> 
             <td scope="col"> {{ brand.brand_name }} </td>
-            <td > {{brand.vat_desc}} </td>
+            <td> <span v-html="brand.brand_desc"></span> </td>
 
             <!-- <td >{{ brand.updated_at | formatDate }} </td> -->
 

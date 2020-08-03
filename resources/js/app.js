@@ -59,6 +59,10 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 /*Moment JS - Format Dates*/
 import moment from 'moment'
 
+/**Vue 2 Editor**/
+import Vue2Editor from 'vue2-editor'
+Vue.use(Vue2Editor)
+
 /** SweetAlert2 & Toast **/
 import Swal from 'sweetalert2' //import sweetAlert2
 window.Swal = Swal; //use sweetAlert2 from globaly

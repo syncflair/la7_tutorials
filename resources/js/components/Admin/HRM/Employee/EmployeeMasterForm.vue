@@ -221,51 +221,44 @@
             	</div>
             </div>
 
-            
-
-   	  	
+             	  	
 
    	  		<!-- <div class="row">
             	<div class="col-6"></div>
             	<div class="col-6"></div>
             </div> -->
+            <div class="form-group">
+                <label for="emp_Present_address">Present Address</label>
+                <textarea v-model="form.emp_Present_address" class="form-control" name="emp_Present_address" placeholder="Present Address"> </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="emp_permanent_address">Permanent Address</label>
+                <textarea v-model="form.emp_permanent_address" class="form-control"  name="emp_permanent_address" placeholder="Permanent Address"> </textarea>
+            </div>
    	  		
 
             <div class="form-group">
 	            <label for="emp_desc">Details</label>
-            	<textarea v-model="form.emp_desc" ref="emp_desc" name="emp_desc" class="form-control" :class="{ 'is-invalid': form.errors.has('emp_desc') }" placeholder="Employee Details"> </textarea>
-          		<has-error :form="form" field="emp_desc"></has-error>
-	        </div>
+            	<vue-editor v-model="form.emp_desc" name="emp_desc" class="form-control-" placeholder="Employee Details"> </vue-editor>
+  	        </div>
 
-	        <div class="form-group">
+  	        <div class="form-group">
 	            <label for="emp_qualification">Qualification</label>
-            	<textarea v-model="form.emp_qualification" ref="emp_qualification" name="emp_qualification" class="form-control" :class="{ 'is-invalid': form.errors.has('emp_qualification') }" placeholder="Qualification"> </textarea>
-          		<has-error :form="form" field="emp_qualification"></has-error>
-	        </div>
+            	<vue-editor v-model="form.emp_qualification" name="emp_qualification" class="form-control-"  placeholder="Qualification"> </vue-editor>
+  	        </div>
 
-	        <div class="form-group">
-	            <label for="emp_experience">Experience</label>
-            	<textarea v-model="form.emp_experience" ref="emp_experience" name="emp_experience" class="form-control" :class="{ 'is-invalid': form.errors.has('emp_experience') }" placeholder="Experience"> </textarea>
-          		<has-error :form="form" field="emp_experience"></has-error>
-	        </div>
+  	        <div class="form-group">
+  	            <label for="emp_experience">Experience</label>
+              	<vue-editor v-model="form.emp_experience" name="emp_experience" class="form-control-" placeholder="Experience"> </vue-editor>
+  	        </div>
 
-	        <div class="form-group">
-	            <label for="emp_previous_job_history">Previous Job History</label>
-            	<textarea v-model="form.emp_previous_job_history" ref="emp_previous_job_history" name="emp_previous_job_history" class="form-control" :class="{ 'is-invalid': form.errors.has('emp_previous_job_history') }" placeholder="Job History"> </textarea>
-          		<has-error :form="form" field="emp_previous_job_history"></has-error>
-	        </div>
+  	        <div class="form-group">
+  	            <label for="emp_previous_job_history">Previous Job History</label>
+              	<vue-editor v-model="form.emp_previous_job_history" class="form-control-" name="emp_previous_job_history"  placeholder="Job History"> </vue-editor>
+  	        </div>
 
-	        <div class="form-group">
-	            <label for="emp_Present_address">Present Address</label>
-            	<textarea v-model="form.emp_Present_address" ref="emp_Present_address" name="emp_Present_address" class="form-control" :class="{ 'is-invalid': form.errors.has('emp_Present_address') }" placeholder="Present Address"> </textarea>
-          		<has-error :form="form" field="emp_Present_address"></has-error>
-	        </div>
-
-	        <div class="form-group">
-	            <label for="emp_permanent_address">Permanent Address</label>
-            	<textarea v-model="form.emp_permanent_address" ref="emp_permanent_address" name="emp_permanent_address" class="form-control" :class="{ 'is-invalid': form.errors.has('emp_permanent_address') }" placeholder="Permanent Address"> </textarea>
-          		<has-error :form="form" field="emp_permanent_address"></has-error>
-	        </div>
+  	        
   	  		
 
    	  	</div>

@@ -260,6 +260,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -999,42 +1005,25 @@ var render = function() {
                                                 ]
                                               ),
                                               _vm._v(" "),
-                                              _c("textarea", {
-                                                directives: [
-                                                  {
-                                                    name: "model",
-                                                    rawName: "v-model",
-                                                    value: pt.product_desc,
-                                                    expression:
-                                                      "pt.product_desc"
-                                                  }
-                                                ],
-                                                ref: "product_desc",
-                                                refInFor: true,
-                                                staticClass: "form-control",
+                                              _c("vue-editor", {
                                                 attrs: {
                                                   name: "product_desc[]",
-                                                  placeholder: "Details"
+                                                  placeholder: "Product Details"
                                                 },
-                                                domProps: {
-                                                  value: pt.product_desc
-                                                },
-                                                on: {
-                                                  input: function($event) {
-                                                    if (
-                                                      $event.target.composing
-                                                    ) {
-                                                      return
-                                                    }
+                                                model: {
+                                                  value: pt.product_desc,
+                                                  callback: function($$v) {
                                                     _vm.$set(
                                                       pt,
                                                       "product_desc",
-                                                      $event.target.value
+                                                      $$v
                                                     )
-                                                  }
+                                                  },
+                                                  expression: "pt.product_desc"
                                                 }
                                               })
-                                            ]
+                                            ],
+                                            1
                                           )
                                         ])
                                       ])

@@ -29,9 +29,9 @@
                         
             <th style="width: 7%;" scope="col" @click="sort('brand_id')" class="sortable-title">Brand</th>
             <th style="width: 6%;" >Category</th>
-            <th style="width: 2%;" scope="col">Qty </th>
-            <th style="width: 5%;" scope="col" @click="sort('pro_price')" class="sortable-title">price </th> 
+            <th style="width: 2%;" scope="col">Qty </th>            
             <th style="width: 4%;" scope="col">Stock</th>
+            <th style="width: 5%;" scope="col" @click="sort('pro_price')" class="sortable-title">price </th> 
             <th style="width: 3%;" scope="col">Status</th>           
             <!-- <th style="width: 3%;" scope="col">Verify</th>            -->
             <th style="width: 10%; text-align:right;" scope="col">Action</th>
@@ -51,9 +51,9 @@
                 <span v-if="product.pro_image === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
             </td> 
 
-            <td scope="col"> {{ product.sys_pro_name }} - 
-              <span>{{product['pro_translation'][0]['product_name']}},</span>
-              <span>{{product['pro_translation'][1]['product_name']}}</span>
+            <td scope="col"> {{ product.sys_pro_name }} 
+              <!-- <span>{{product['pro_translation'][0]['product_name']}},</span>
+              <span>{{product['pro_translation'][1]['product_name']}}</span> -->
             </td>
              
             <td > {{ product.brand_id }} </td>          
@@ -62,8 +62,16 @@
             <td > 
               <span style="font-weight:bold"> {{ product.pro_qty }} </span>
               <small v-if="product.pro_qty === null" style="color:red;"> No Qty </small>
-            </td> 
-            <!--  -->
+            </td>             
+            <td>
+              <small>
+                <span v-if="product.pro_qty > 5" style="color:green; font-weight:500;"> Available</span>              
+                <span v-if="product.pro_qty <= 5 && product.pro_qty > 0" style="color:red; font-weight:500;"> Low Stock</span>
+                <span v-if="product.pro_qty === 0" style="color:red; font-weight:bold;"> Out of Stock</span>
+                <span v-if="product.pro_qty === null" style="color:red; font-weight:bold;">Update</span>
+              </small>
+            </td>
+
             <td >             
               <span v-if="product.pro_sale_price">
                   <span style="text-decoration: line-through;" title="Main Price"> {{ product.pro_price }} </span>
@@ -72,14 +80,6 @@
               <span v-if="!product.pro_sale_price">
                   <span style="font-weight:600; color:green;" title="Main Price"> {{ product.pro_price }} </span>                  
               </span>
-            </td>
-            <td>
-              <small>
-                <span v-if="product.pro_qty > 5" style="color:green; font-weight:500;"> Available</span>              
-                <span v-if="product.pro_qty <= 5 && product.pro_qty > 0" style="color:red; font-weight:500;"> Low Stock</span>
-                <span v-if="product.pro_qty === 0" style="color:red; font-weight:bold;"> Out of Stock</span>
-                <span v-if="product.pro_qty === null" style="color:red; font-weight:bold;">Update</span>
-              </small>
             </td> 
 
             <!-- <td > <small>{{ product.emp_hire_date | formatDate }}</small> </td> -->

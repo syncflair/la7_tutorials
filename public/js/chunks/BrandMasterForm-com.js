@@ -100,6 +100,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -111,6 +132,7 @@ __webpack_require__.r(__webpack_exports__);
       form: new Form({
         id: '',
         brand_name: '',
+        brand_url: '',
         brand_desc: '',
         brand_img: '',
         is_enabled: ''
@@ -282,10 +304,7 @@ var render = function() {
       [
         _c(
           "div",
-          {
-            staticClass: "modal-dialog modal-lg-",
-            attrs: { role: "document" }
-          },
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
@@ -360,100 +379,133 @@ var render = function() {
                     _c("div", { staticClass: "card--" }, [
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-md-12 col-sm-12" }, [
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("Brand Name *")]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.brand_name,
-                                    expression: "form.brand_name"
-                                  }
-                                ],
-                                ref: "brand_name",
-                                staticClass: "form-control",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has(
-                                    "brand_name"
-                                  )
-                                },
-                                attrs: {
-                                  type: "text",
-                                  name: "brand_name",
-                                  placeholder: "Brand Name"
-                                },
-                                domProps: { value: _vm.form.brand_name },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-4" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c("label", [_vm._v("Brand Name *")]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.brand_name,
+                                        expression: "form.brand_name"
+                                      }
+                                    ],
+                                    ref: "brand_name",
+                                    staticClass: "form-control",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has(
+                                        "brand_name"
+                                      )
+                                    },
+                                    attrs: {
+                                      type: "text",
+                                      name: "brand_name",
+                                      placeholder: "Brand Name"
+                                    },
+                                    domProps: { value: _vm.form.brand_name },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "brand_name",
+                                          $event.target.value
+                                        )
+                                      }
                                     }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "brand_name",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: { form: _vm.form, field: "brand_name" }
-                              })
-                            ],
-                            1
-                          ),
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.form,
+                                      field: "brand_name"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-8" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c("label", [_vm._v("Brand URL")]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.brand_url,
+                                        expression: "form.brand_url"
+                                      }
+                                    ],
+                                    ref: "brand_url",
+                                    staticClass: "form-control",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has(
+                                        "brand_url"
+                                      )
+                                    },
+                                    attrs: {
+                                      type: "text",
+                                      name: "brand_url",
+                                      placeholder: "Brand URL"
+                                    },
+                                    domProps: { value: _vm.form.brand_url },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "brand_url",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.form,
+                                      field: "brand_url"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ]),
                           _vm._v(" "),
                           _c(
                             "div",
                             { staticClass: "form-group" },
                             [
                               _c("label", { attrs: { for: "brand_desc" } }, [
-                                _vm._v("Details")
+                                _vm._v("Details 2")
                               ]),
                               _vm._v(" "),
-                              _c("textarea", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.brand_desc,
-                                    expression: "form.brand_desc"
-                                  }
-                                ],
-                                ref: "brand_desc",
-                                staticClass: "form-control",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has(
-                                    "brand_desc"
-                                  )
-                                },
-                                attrs: {
-                                  name: "brand_desc",
-                                  placeholder: "Details"
-                                },
-                                domProps: { value: _vm.form.brand_desc },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "brand_desc",
-                                      $event.target.value
-                                    )
-                                  }
+                              _c("vue-editor", {
+                                attrs: { name: "brand_desc" },
+                                model: {
+                                  value: _vm.form.brand_desc,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.form, "brand_desc", $$v)
+                                  },
+                                  expression: "form.brand_desc"
                                 }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: { form: _vm.form, field: "brand_desc" }
                               })
                             ],
                             1
@@ -595,9 +647,7 @@ var render = function() {
                                             width: "65px",
                                             height: "65px"
                                           },
-                                          attrs: {
-                                            src: "../" + _vm.form.brand_img
-                                          }
+                                          attrs: { src: _vm.form.brand_img }
                                         })
                                       : _vm._e()
                                   ])
