@@ -26,12 +26,14 @@
                   </td>
                 </tr> 
 
-                <tr v-if="errors" ><td colspan="6">                  
-                  <!-- Display error, key is from  -->
-                  <span class="alert- alert-danger- text-center- red m-0-" role="alert">
-                      {{ errors[key+'.cat_name'] }}
-                  </span>
-                </td></tr> 
+                <tr v-if="errors" >
+                  <td colspan="6">                  
+                    <!-- Display error, key is from  -->
+                    <span class="alert- alert-danger- text-center- red m-0-" role="alert">
+                        {{ errors[key+'.cat_name'] }}
+                    </span>
+                  </td>
+                </tr> 
 
           </span>
 

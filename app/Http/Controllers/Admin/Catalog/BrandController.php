@@ -119,8 +119,8 @@ class BrandController extends Controller
                 //     ->save(storage_path('app/public/brand/').$imageName);
                 //$s3_url = 'https://sorboraho.s3-ap-southeast-1.amazonaws.com/brand/';
 
-                //s3_url_brand get from constants file 
-                $data['brand_img'] = Config::get('constants.s3_url_brand').$imageName;
+                //s3_url get from constants file 
+                $data['brand_img'] = Config::get('constants.s3_url').'brand/'.$imageName;
                 // $data['brand_img'] = 'storage/brand/'.$imageName;
 
 
@@ -222,8 +222,8 @@ class BrandController extends Controller
 
                 Storage::disk('s3')->put('brand/'.$imageName, base64_decode($image) );
 
-                //s3_url_brand get from constants file 
-                $data['brand_img'] = Config::get('constants.s3_url_brand').$imageName;
+                //s3_url get from constants file 
+                $data['brand_img'] = Config::get('constants.s3_url').'brand/'.$imageName;
 
 
 
@@ -303,7 +303,7 @@ class BrandController extends Controller
 
 
     //return Brand list without pagination
-    public function GetBrands(){
+    public function getBrands(){
         //this is for commonStoreForAll Store
         $data = Brand::get();
         return response()->json($data);

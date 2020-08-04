@@ -181,9 +181,9 @@ class AttributeValueController extends Controller
 
 
     //return AttributeValue list without pagination
-    public function GetAttributeValues(){
+    public function GetAttributeValue(){
         //this is for commonStoreForAll Store
-        $data = AttributeValue::get();
+        $data = AttributeValue::where('is_enabled', '1')->get();
         return response()->json($data);
     }
 

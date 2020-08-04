@@ -124935,7 +124935,12 @@ var commonStoreForAll = {
       Divisions: {},
       Districts: {},
       Dist_Zones: {},
-      attributes: {}
+      AllAttributes: {},
+      AllAttributeValues: {},
+      AllBrands: {},
+      AllCategory: {},
+      autoSearchCategories: {},
+      AllSpecifications: {}
     };
   },
 
@@ -124987,12 +124992,27 @@ var commonStoreForAll = {
     FETCH_DISTRICT_ZONE_DATA: function FETCH_DISTRICT_ZONE_DATA(state, Dist_Zones) {
       return state.Dist_Zones = Dist_Zones;
     },
-    FETCH_ATTRIBUTE_DATA: function FETCH_ATTRIBUTE_DATA(state, attributes) {
-      return state.attributes = attributes;
+    FETCH_ATTRIBUTE_DATA: function FETCH_ATTRIBUTE_DATA(state, data) {
+      return state.AllAttributes = data;
+    },
+    FETCH_ATTRIBUTE_VALUE_DATA: function FETCH_ATTRIBUTE_VALUE_DATA(state, data) {
+      return state.AllAttributeValues = data;
+    },
+    FETCH_BRAND_DATA: function FETCH_BRAND_DATA(state, data) {
+      return state.AllBrands = data;
+    },
+    FETCH_CATEGORY_DATA: function FETCH_CATEGORY_DATA(state, data) {
+      return state.AllCategory = data;
+    },
+    FETCH_SPECIFICATION_DATA: function FETCH_SPECIFICATION_DATA(state, data) {
+      return state.AllSpecifications = data;
     },
     //#####################################Search ###########################################
     AUTO_COMPLETE_DATA_FOR_DEPARTMENTS: function AUTO_COMPLETE_DATA_FOR_DEPARTMENTS(state, data) {
       return state.autoSearchDepartments = data;
+    },
+    AUTO_COMPLETE_DATA_FOR_CATEGORIES: function AUTO_COMPLETE_DATA_FOR_CATEGORIES(state, data) {
+      return state.autoSearchCategories = data;
     }
   },
 
@@ -125000,7 +125020,7 @@ var commonStoreForAll = {
   actions: {
     userStatus: function userStatus(context) {
       axios.get('/spa/user-status-info').then(function (response) {
-        context.commit('FETCH_USER_STATUS', response.data); //console.log(response.data);
+        context.commit('FETCH_USER_STATUS', response.data);
       })["catch"](function () {});
     },
     AllStatus: function AllStatus(context, payload) {
@@ -125010,7 +125030,6 @@ var commonStoreForAll = {
       })["catch"](function () {});
     },
     fetchJobTitles: function fetchJobTitles(context) {
-      //return role 1 to 6
       axios.get('/spa/JobTitle-Info/GetJobTitles').then(function (response) {
         context.commit('FETCH_JOB_TITLE', response.data); //use for only show data
       })["catch"](function () {});
@@ -125022,19 +125041,16 @@ var commonStoreForAll = {
       })["catch"](function () {});
     },
     fetchBranches: function fetchBranches(context) {
-      //return role 1 to 6
       axios.get('/spa/Branch-Info/getBranches').then(function (response) {
         context.commit('FETCH_BRANCHES', response.data); //use for only show data
       })["catch"](function () {});
     },
     fetchLanguages: function fetchLanguages(context) {
-      //return role 1 to 6
       axios.get('/spa/Language-Info/getLanguages').then(function (response) {
         context.commit('FETCH_LANGUAGES', response.data); //use for only show data
       })["catch"](function () {});
     },
     fetchDepartments: function fetchDepartments(context) {
-      //return role 1 to 6
       axios.get('/spa/Department-Info/getDetartments').then(function (response) {
         context.commit('FETCH_DEPARTMENTS', response.data); //use for only show data
       })["catch"](function () {});
@@ -125064,11 +125080,37 @@ var commonStoreForAll = {
         context.commit('FETCH_ATTRIBUTE_DATA', response.data);
       })["catch"](function () {});
     },
+    fetchAttributeValue: function fetchAttributeValue(context) {
+      axios.get('/spa/AttributeValue-Info/GetAttributeValue').then(function (response) {
+        context.commit('FETCH_ATTRIBUTE_VALUE_DATA', response.data);
+      })["catch"](function () {});
+    },
+    fetchBrands: function fetchBrands(context) {
+      axios.get('/spa/Brand-Info/getBrands').then(function (response) {
+        context.commit('FETCH_BRAND_DATA', response.data);
+      })["catch"](function () {});
+    },
+    fetchCategory: function fetchCategory(context) {
+      axios.get('/spa/CategoryMaster-Info/getCategory').then(function (response) {
+        context.commit('FETCH_CATEGORY_DATA', response.data); //use for only show data
+      })["catch"](function () {});
+    },
+    fetchSpecifications: function fetchSpecifications(context) {
+      axios.get('/spa/Specification-Info/getSpecification').then(function (response) {
+        context.commit('FETCH_SPECIFICATION_DATA', response.data);
+      })["catch"](function () {});
+    },
     //############################################# Search ############################################
     AutoCompleteSearchForDepartment: function AutoCompleteSearchForDepartment(context, payload) {
       var query = payload;
       axios.get('/spa/searchDepartmentData?&q=' + query).then(function (response) {
         context.commit('AUTO_COMPLETE_DATA_FOR_DEPARTMENTS', response.data);
+      })["catch"](function () {});
+    },
+    AutoCompleteSearchForCategory: function AutoCompleteSearchForCategory(context, payload) {
+      var query = payload;
+      axios.get('/spa/AutoCompleteCategoryData?&q=' + query).then(function (response) {
+        context.commit('AUTO_COMPLETE_DATA_FOR_CATEGORIES', response.data);
       })["catch"](function () {});
     }
   }

@@ -27,7 +27,7 @@
             <th style="width: 3%;" scope="col">Img</th>
             <th style="width: 15%;" scope="col" @click="sort('sys_pro_name')" class="sortable-title">Name</th>
                         
-            <th style="width: 7%;" scope="col" @click="sort('brand_id')" class="sortable-title">Brand</th>
+            <th style="width: 5%;" scope="col" @click="sort('brand_id')" class="sortable-title">Brand</th>
             <th style="width: 6%;" >Category</th>
             <th style="width: 2%;" scope="col">Qty </th>            
             <th style="width: 4%;" scope="col">Stock</th>
@@ -56,7 +56,11 @@
               <span>{{product['pro_translation'][1]['product_name']}}</span> -->
             </td>
              
-            <td > {{ product.brand_id }} </td>          
+            <td > 
+              <span v-if="product['belongs_to_brand'] != null"> {{ product['belongs_to_brand']['brand_name'] }} </span>
+              <span v-if="product['belongs_to_brand'] === null" class="red text-bold"> No Brand </span>
+            </td>   
+                   
           	<td > category </td> 
 
             <td > 

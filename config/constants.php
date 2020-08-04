@@ -25,11 +25,7 @@ return [
     | FileStorage Directory Constant
     |-------------------------------------------------------------------------
     */
-    's3_url_brand' => 'https://sorboraho.s3-ap-southeast-1.amazonaws.com/brand/',
-    's3_url_product' => 'https://sorboraho.s3-ap-southeast-1.amazonaws.com/product/',
-    's3_url_employee' => 'https://sorboraho.s3-ap-southeast-1.amazonaws.com/employee/',
-    's3_url_supplier' => 'https://sorboraho.s3-ap-southeast-1.amazonaws.com/supplier/',
-    's3_url_user' => 'https://sorboraho.s3-ap-southeast-1.amazonaws.com/user/',
+    's3_url' => 'https://sorboraho.s3-ap-southeast-1.amazonaws.com/',
 
 
     'CommonFilesPath' => 'FilesStorage/CommonFiles/',

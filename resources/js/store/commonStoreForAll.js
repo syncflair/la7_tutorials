@@ -18,7 +18,13 @@ const commonStoreForAll ={
       Divisions:{}, 
       Districts:{},
       Dist_Zones:{},
-      attributes:{},      
+      AllAttributes:{}, 
+      AllAttributeValues:{},
+      AllBrands:{},   
+      AllCategory:{},
+      autoSearchCategories:{},  
+      AllSpecifications:{},
+      
 	}),/*end state*/
 
   getters: {
@@ -44,24 +50,27 @@ const commonStoreForAll ={
       FETCH_DIVISION_DATA(state, Divisions) { return state.Divisions = Divisions; },
       FETCH_DISTRICT_DATA(state, Districts) { return state.Districts = Districts; },
       FETCH_DISTRICT_ZONE_DATA(state, Dist_Zones) { return state.Dist_Zones = Dist_Zones; },
-      FETCH_ATTRIBUTE_DATA(state, attributes) { return state.attributes = attributes; },
-
+      FETCH_ATTRIBUTE_DATA(state, data) { return state.AllAttributes = data; },
+      FETCH_ATTRIBUTE_VALUE_DATA(state, data) { return state.AllAttributeValues = data; },
+      FETCH_BRAND_DATA(state, data) { return state.AllBrands = data; },
+      FETCH_CATEGORY_DATA(state, data) { return state.AllCategory = data; },
+      FETCH_SPECIFICATION_DATA(state, data) { return state.AllSpecifications = data; },
       //#####################################Search ###########################################
       AUTO_COMPLETE_DATA_FOR_DEPARTMENTS(state, data){return state.autoSearchDepartments = data;},       
+      AUTO_COMPLETE_DATA_FOR_CATEGORIES(state, data){return state.autoSearchCategories = data;},       
 
 
 
   },/*end Mutations*/
 
-  actions: {    	
+  actions: {         
 
       userStatus(context){
         axios.get('/spa/user-status-info')
         .then( (response) => {
           context.commit('FETCH_USER_STATUS', response.data);
-          //console.log(response.data);
         }).catch( () => { })
-      },
+      },      
 
       AllStatus(context, payload){
         let query = payload;  
@@ -71,7 +80,7 @@ const commonStoreForAll ={
         }).catch( () => { })
       },      
 
-      fetchJobTitles(context){ //return role 1 to 6
+      fetchJobTitles(context){ 
         axios.get('/spa/JobTitle-Info/GetJobTitles')
         .then( (response) => {
           context.commit('FETCH_JOB_TITLE', response.data); //use for only show data
@@ -85,21 +94,21 @@ const commonStoreForAll ={
         }).catch( () => { })
       },
 
-      fetchBranches(context){ //return role 1 to 6
+      fetchBranches(context){ 
         axios.get('/spa/Branch-Info/getBranches')
         .then( (response) => {
           context.commit('FETCH_BRANCHES', response.data); //use for only show data
         }).catch( () => { })
       },
 
-      fetchLanguages(context){ //return role 1 to 6
+      fetchLanguages(context){ 
         axios.get('/spa/Language-Info/getLanguages')
         .then( (response) => {
           context.commit('FETCH_LANGUAGES', response.data); //use for only show data
         }).catch( () => { })
       },
 
-      fetchDepartments(context){ //return role 1 to 6
+      fetchDepartments(context){ 
         axios.get('/spa/Department-Info/getDetartments')
         .then( (response) => {
           context.commit('FETCH_DEPARTMENTS', response.data); //use for only show data
@@ -141,6 +150,34 @@ const commonStoreForAll ={
         }).catch( () => { })
       },
 
+      fetchAttributeValue(context){
+        axios.get('/spa/AttributeValue-Info/GetAttributeValue')
+        .then( (response) => {
+          context.commit('FETCH_ATTRIBUTE_VALUE_DATA', response.data);
+        }).catch( () => { })
+      },
+
+      fetchBrands(context){
+        axios.get('/spa/Brand-Info/getBrands')
+        .then( (response) => {
+          context.commit('FETCH_BRAND_DATA', response.data);
+        }).catch( () => { })
+      },
+
+      fetchCategory(context){ 
+        axios.get('/spa/CategoryMaster-Info/getCategory')
+        .then( (response) => {
+          context.commit('FETCH_CATEGORY_DATA', response.data); //use for only show data
+        }).catch( () => { })
+      },
+
+      fetchSpecifications(context){
+        axios.get('/spa/Specification-Info/getSpecification')
+        .then( (response) => {
+          context.commit('FETCH_SPECIFICATION_DATA', response.data);
+        }).catch( () => { })
+      },
+
 
       //############################################# Search ############################################
       AutoCompleteSearchForDepartment(context, payload){  
@@ -148,6 +185,14 @@ const commonStoreForAll ={
           axios.get('/spa/searchDepartmentData?&q='+ query)
           .then( ( response ) => {
               context.commit('AUTO_COMPLETE_DATA_FOR_DEPARTMENTS', response.data);                                        
+          }).catch(() => { }) 
+      },
+
+      AutoCompleteSearchForCategory(context, payload){  
+          let query = payload;  
+          axios.get('/spa/AutoCompleteCategoryData?&q='+ query)
+          .then( ( response ) => {
+              context.commit('AUTO_COMPLETE_DATA_FOR_CATEGORIES', response.data);                                        
           }).catch(() => { }) 
       },
 

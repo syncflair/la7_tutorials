@@ -176,10 +176,10 @@ class SpecificationController extends Controller
     }
 
 
-     //Get all status
-    public function getSpecifications(){
+    //Get only enabled specification
+    public function getSpecification(){
         //this is for commonStoreForAll Store
-        $data = Specification::get();
+        $data = Specification::where('is_enabled', '1')->get();
         return response()->json($data);
     }
 

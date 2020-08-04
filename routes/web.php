@@ -128,7 +128,8 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
      ['except'=>['create','show','edit'] ]);
 
     //Catalog
-    //Route::get('spa/searcCategoryMasterData', 'Admin\Catalog\CategoryController@search'); //search
+    Route::get('spa/AutoCompleteCategoryData', 'Admin\Catalog\CategoryController@autoCompleteSearch'); //search
+    Route::get('spa/CategoryMaster-Info/getCategory', 'Admin\Catalog\CategoryController@getCategory');//for commonStoreForAll store    
     Route::resource('spa/CategoryMaster-Info', 'Admin\Catalog\CategoryController', 
       ['except'=>['create','show','edit'] ]);
 
@@ -139,13 +140,17 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::get('spa/Attribute-Info/GetAttributes', 'Admin\Catalog\AttributeController@GetAttributes');//for commonStoreForAll store       
     Route::resource('spa/Attribute-Info', 'Admin\Catalog\AttributeController', 
         ['except'=>['create','edit','show'] ]);
+    Route::get('spa/AttributeValue-Info/GetAttributeValue', 'Admin\Catalog\AttributeValueController@GetAttributeValue');//commonStoreForAll store
     Route::get('spa/searchAttributeValueData', 'Admin\Catalog\AttributeValueController@search'); //search     
     Route::resource('spa/AttributeValue-Info', 'Admin\Catalog\AttributeValueController', 
         ['except'=>['create','edit','show'] ]);
+
+    Route::get('spa/Specification-Info/getSpecification', 'Admin\Catalog\SpecificationController@getSpecification'); //search 
     Route::get('spa/searchSpecificationData', 'Admin\Catalog\SpecificationController@search'); //search 
     Route::resource('spa/Specification-Info', 'Admin\Catalog\SpecificationController', 
         ['except'=>['create','edit','show'] ]);
 
+    Route::get('spa/Brand-Info/getBrands', 'Admin\Catalog\BrandController@getBrands');//for commonStoreForAll store  
     Route::get('spa/searchBrandData', 'Admin\Catalog\BrandController@search'); //search     
     Route::resource('spa/Brand-Info', 'Admin\Catalog\BrandController', 
         ['except'=>['create','edit','show'] ]);
@@ -211,7 +216,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/District-Info', 'Admin\Settings\DistrictController', 
       ['except'=>['create','show','edit'] ]);
     Route::get('spa/searchDistrictZoneData', 'Admin\Settings\DistrictZoneController@search'); //search
-    Route::get('spa/DistrictZone-Info/GetDistrictZone', 'Admin\Settings\DistrictZoneController@GetDistrictZone'); //for commonStoreForAll store
+    Route::get('spa/DistrictZone-Info/GetDistrictZone', 'Admin\Settings\DistrictZoneController@GetDistrictZone');//commonStoreForAll store
     Route::resource('spa/DistrictZone-Info', 'Admin\Settings\DistrictZoneController', 
       ['except'=>['create','show','edit'] ]);
     Route::get('spa/searchDepartmentData', 'Admin\Settings\DepartmentController@autoSearch'); //search

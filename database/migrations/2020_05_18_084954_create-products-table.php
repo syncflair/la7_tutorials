@@ -31,7 +31,7 @@ class CreateProductsTable extends Migration
             //$table->text('pro_desc')->nullable(); 
             $table->json('pro_category')->nullable()->comment('JSON Multiple Category id');            
             $table->json('pro_attributes')->nullable()->comment('JSON color, size, lenght');
-            $table->json('pro_features')->nullable()->comment('JSON product features');
+            $table->json('pro_specification')->nullable()->comment('JSON product Specification');
             $table->json('related_products')->nullable()->comment('JSON related products list');
             $table->float('pro_price', 10, 2)->nullable();
             $table->float('pro_sale_price', 10, 2)->nullable();

@@ -77,20 +77,20 @@
 		            	<div class="col-md-9 col-sm-6">            		
 		            		<div class="form-group" style="margin-top: -12px;">
 				              <label>Select Department</label>
-				            	<!-- <auto-complete-app
-								:options="allDepertments" 
-								:filterBy="filterBy"
-								/> -->
+  				            <!-- <auto-complete-app
+      								:options="allDepertments" 
+      								:filterBy="filterBy"
+      								/> -->
 
-								<multi-select-app-one
-									:options="allDepertments"
-									:autoSearchOptions="autoSearchDepartments" 
-									:filterBy="filterBy"
-									:place-holder="placeHolder"
-									:value-property="valueProperty"
-									v-model="form.departments" 
-								/>
-							</div>
+      								<multi-select-app-one
+      									:options="allDepertments"
+      									:autoSearchOptions="autoSearchDepartments" 
+      									:filterBy="filterBy"
+      									:place-holder="placeHolder"
+      									:value-property="valueProperty"
+      									v-model="form.departments" 
+      								/>
+      							</div>
 
 		            	</div>
 		            </div> 
@@ -449,7 +449,8 @@
     	this.$store.dispatch('commonStoreForAll/fetchBranches'); //get job title
     	this.$store.dispatch('commonStoreForAll/fetchDepartments');//fetchDepartments
 
-		  FireEvent.$on('AutoCompleteSearchForDepartment', (data) => {
+      //call from multi-select-app-one.vue
+		  FireEvent.$on('AutoCompleteSearchForData', (data) => {
 	        this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data ); 
 	    });
 

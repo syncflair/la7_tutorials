@@ -103,7 +103,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['attributes'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['AllAttributes'])),
   methods: {
     addData: function addData() {
       var _this = this;
@@ -428,7 +428,9 @@ var render = function() {
                                     [_vm._v("Select Attribute ..")]
                                   ),
                                   _vm._v(" "),
-                                  _vm._l(_vm.attributes, function(attribute) {
+                                  _vm._l(_vm.AllAttributes, function(
+                                    attribute
+                                  ) {
                                     return _c(
                                       "option",
                                       { domProps: { value: attribute.id } },

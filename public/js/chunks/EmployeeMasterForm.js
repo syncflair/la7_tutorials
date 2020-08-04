@@ -489,8 +489,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$store.dispatch('commonStoreForAll/fetchBranches'); //get job title
 
     this.$store.dispatch('commonStoreForAll/fetchDepartments'); //fetchDepartments
+    //call from multi-select-app-one.vue
 
-    FireEvent.$on('AutoCompleteSearchForDepartment', function (data) {
+    FireEvent.$on('AutoCompleteSearchForData', function (data) {
       _this4.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data);
     }); //console.log(this.form);
   }

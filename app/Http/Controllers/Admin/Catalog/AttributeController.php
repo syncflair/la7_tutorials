@@ -138,7 +138,7 @@ class AttributeController extends Controller
     //return Attribute list without pagination
     public function GetAttributes(){
         //this is for commonStoreForAll Store
-        $data = Attribute::get();
+        $data = Attribute::where('is_enabled', '1')->select('id','attribute_name')->get();
         return response()->json($data);
     }
 }

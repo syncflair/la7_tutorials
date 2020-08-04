@@ -32946,6 +32946,7 @@ body {
 
 .table thead th {
   border-bottom: 1px solid #dee2e6 !important;
+  color: #007bff;
 }
 
 .table th,
@@ -33112,6 +33113,7 @@ form .form-control:focus {
   margin: 2px 3px 2px 3px;
   list-style: none;
   float: left;
+  background: #ced4da;
 }
 
 .selected-item > i {

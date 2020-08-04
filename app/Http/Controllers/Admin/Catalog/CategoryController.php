@@ -271,4 +271,32 @@ class CategoryController extends Controller
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
     }
+
+
+    //return Brand list without pagination
+    public function getCategory(){
+        //this is for commonStoreForAll Store
+        $data = Category::
+                //where('is_enabled', '=', 1 )
+                where('is_enabled', '1')
+                ->get();
+        return response()->json($data);
+    }
+
+    public function autoCompleteSearch(Request $request){
+
+        $searchKey = $request->q;
+
+        if(!empty($searchKey)){
+        //if($search = \Request::get('q')){
+            $searchResult = Category::where(function($query) use ($searchKey){
+                $query->where('cat_name','LIKE','%'.$searchKey.'%')
+                        ->orWhere('cat_desc','LIKE','%'.$searchKey.'%');
+            })->get();            
+        }else{
+            $searchResult = Category::get();
+        }
+
+        return response()->json($searchResult);
+    }
 }

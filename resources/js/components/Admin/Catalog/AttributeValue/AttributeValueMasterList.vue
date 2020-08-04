@@ -22,7 +22,8 @@
           <tr>
             <!-- <th style="">#</th> -->
             <th style="width: 25%;" scope="col">Attribute Value</th>           
-            <th style="width: 15%;" scope="col">Attribute</th>
+            <th style="width: 25%;" scope="col">Attribute</th>
+            <th style="width: 15%;" scope="col">Status</th>
             <th style="width: 10%; text-align:right;" scope="col">Action</th>
           </tr>
         </thead>
@@ -32,6 +33,11 @@
             <!-- <td > id</td> -->
             <td scope="col"> {{ av.attribute_value }} </td>
             <td > {{ av['belongs_to_attribute']['attribute_name'] }}</td>
+
+            <td>
+              <span v-show="av.is_enabled === 1" class="green"> Active</span>
+              <span v-show="av.is_enabled === 0" class="red text-bold"> Inactive</span>
+            </td>
 
             <td class="text-right">    
               <a @click="editData(av)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#formModal">

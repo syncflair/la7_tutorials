@@ -129,8 +129,10 @@
           	FormatedOptions() {
           		let fo = Object.values(this.autoSearchOptions).map( option => {
           		//let fo = this.options.map( option => {
-          			let checked = this.value.some(v => v === option[this.valueProperty]);
-          			return { ...option, checked: checked};
+          			//if(option.length > 0){
+	          			let checked = this.value.some(v => v === option[this.valueProperty]);
+	          			return { ...option, checked: checked};
+	          		//}
           		});
           		return fo;
 
@@ -145,7 +147,9 @@
 		    selectedOptions() {
           		let fo = Object.values(this.options).filter( data => {
           		//let fo = this.options.map( option => {
-          			return this.value.includes(data.id)
+          			//if(data.length > 0){
+          				return this.value.includes(data.id)
+          			//}
           		});
           		return fo;
           	}
@@ -161,11 +165,11 @@
 
         	// autoSearch: _.debounce( (e) => {        		
 	        // 	//alert(e.target.value)
-	        //   	FireEvent.$emit('AutoCompleteSearchForDepartment', e.target.value );	          
+	        //   	FireEvent.$emit('AutoCompleteSearchForData', e.target.value );	          
 	        // },200 ),
 	        autoSearch(e){
 	        	if(e.target.value != ''){
-	        		FireEvent.$emit('AutoCompleteSearchForDepartment', e.target.value );
+	        		FireEvent.$emit('AutoCompleteSearchForData', e.target.value );
 	        	}
 	        	// else{
 	        	// 	//this.autoSearchOptions = [] //dont do this because it's props
@@ -326,7 +330,7 @@
 
 	    },
 	    mounted(){
-	    	this.fixTop();
+	    	//this.fixTop();
 	    }
         
         

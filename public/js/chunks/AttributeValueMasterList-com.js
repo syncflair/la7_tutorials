@@ -85,6 +85,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -254,6 +260,40 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
+                  _c("td", [
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: av.is_enabled === 1,
+                            expression: "av.is_enabled === 1"
+                          }
+                        ],
+                        staticClass: "green"
+                      },
+                      [_vm._v(" Active")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: av.is_enabled === 0,
+                            expression: "av.is_enabled === 0"
+                          }
+                        ],
+                        staticClass: "red text-bold"
+                      },
+                      [_vm._v(" Inactive")]
+                    )
+                  ]),
+                  _vm._v(" "),
                   _c("td", { staticClass: "text-right" }, [
                     _c(
                       "a",
@@ -341,8 +381,12 @@ var staticRenderFns = [
           _vm._v("Attribute Value")
         ]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "15%" }, attrs: { scope: "col" } }, [
+        _c("th", { staticStyle: { width: "25%" }, attrs: { scope: "col" } }, [
           _vm._v("Attribute")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "15%" }, attrs: { scope: "col" } }, [
+          _vm._v("Status")
         ]),
         _vm._v(" "),
         _c(

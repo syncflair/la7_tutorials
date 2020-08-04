@@ -32,7 +32,7 @@
 			          <label for="role_id"">Attribute *</label>
 		              <select v-model="form.attribute_id" class="form-control form-control-sm" id="attribute_id" name="attribute_id" :class="{ 'is-invalid': form.errors.has('attribute_id') }" >
 		              	  <option disabled value="">Select Attribute ..</option>                
-		                  <option v-for="attribute in attributes" v-bind:value="attribute.id">
+		                  <option v-for="attribute in AllAttributes" v-bind:value="attribute.id">
 		                  	{{attribute.attribute_name}}
 		                  </option>			                  
 		               </select>
@@ -88,7 +88,7 @@
 
 	    computed: {
 	        ...mapState( 
-	             'commonStoreForAll', ['attributes']
+	             'commonStoreForAll', ['AllAttributes']
 	          ),
 	    },
 

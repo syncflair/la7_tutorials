@@ -157,13 +157,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var fo = Object.values(this.autoSearchOptions).map(function (option) {
         //let fo = this.options.map( option => {
+        //if(option.length > 0){
         var checked = _this.value.some(function (v) {
           return v === option[_this.valueProperty];
         });
 
         return _objectSpread({}, option, {
           checked: checked
-        });
+        }); //}
       });
       return fo; // this.$emit('change', this.query);
       // if (this.query == '') {
@@ -177,7 +178,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var fo = Object.values(this.options).filter(function (data) {
         //let fo = this.options.map( option => {
-        return _this2.value.includes(data.id);
+        //if(data.length > 0){
+        return _this2.value.includes(data.id); //}
       });
       return fo;
     }
@@ -188,11 +190,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     // autoSearch: _.debounce( (e) => {        		
     // 	//alert(e.target.value)
-    //   	FireEvent.$emit('AutoCompleteSearchForDepartment', e.target.value );	          
+    //   	FireEvent.$emit('AutoCompleteSearchForData', e.target.value );	          
     // },200 ),
     autoSearch: function autoSearch(e) {
       if (e.target.value != '') {
-        FireEvent.$emit('AutoCompleteSearchForDepartment', e.target.value);
+        FireEvent.$emit('AutoCompleteSearchForData', e.target.value);
       } // else{
       // 	//this.autoSearchOptions = [] //dont do this because it's props
       // 	//FireEvent.$emit('EmptyAutoSerchData'); //go to parent and empty the array
@@ -341,8 +343,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {},
-  mounted: function mounted() {
-    this.fixTop();
+  mounted: function mounted() {//this.fixTop();
   }
 });
 

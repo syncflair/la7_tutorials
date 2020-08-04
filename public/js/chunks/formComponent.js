@@ -278,6 +278,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1387,9 +1389,9 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                    " +
+                          "\n                      " +
                             _vm._s(_vm.errors[key + ".cat_name"]) +
-                            "\n                "
+                            "\n                  "
                         )
                       ]
                     )
