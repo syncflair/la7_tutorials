@@ -125080,8 +125080,9 @@ var commonStoreForAll = {
         context.commit('FETCH_ATTRIBUTE_DATA', response.data);
       })["catch"](function () {});
     },
-    fetchAttributeValue: function fetchAttributeValue(context) {
-      axios.get('/spa/AttributeValue-Info/GetAttributeValue').then(function (response) {
+    fetchAttributeValue: function fetchAttributeValue(context, payload) {
+      var query = payload;
+      axios.get('/spa/AttributeValue-Info/GetAttributeValue?&q=' + query).then(function (response) {
         context.commit('FETCH_ATTRIBUTE_VALUE_DATA', response.data);
       })["catch"](function () {});
     },

@@ -181,10 +181,27 @@ class AttributeValueController extends Controller
 
 
     //return AttributeValue list without pagination
-    public function GetAttributeValue(){
+    public function GetAttributeValue(Request $request){
         //this is for commonStoreForAll Store
-        $data = AttributeValue::where('is_enabled', '1')->get();
+        $key = $request->q;
+        //dd($key);
+        //$data = AttributeValue::where('is_enabled', '1')->get();
+        $data = AttributeValue::
+                    //where('attribute_id', '=', $key)
+                    where('is_enabled', '1')
+                    ->get();
         return response()->json($data);
     }
+
+    // //Get all status
+    // public function getAllStatus(Request $request){
+    //     //this is for commonStoreForAll Store
+    //     $key = $request->q;
+    //     $data = StatusMaster::where('status_type', '=', $key )
+    //             ->select('id','status_name',)
+    //             ->get();
+    //     return response()->json($data);
+    // }
+    
 
 }

@@ -35,6 +35,7 @@ class CreateProductsTable extends Migration
             $table->json('related_products')->nullable()->comment('JSON related products list');
             $table->float('pro_price', 10, 2)->nullable();
             $table->float('pro_sale_price', 10, 2)->nullable();
+            $table->integer('pro_reward_points')->nullable();
             $table->integer('pro_qty')->nullable();
 
             $table->string('pro_image', 250)->nullable()->comment('Feature Image');

@@ -184,7 +184,12 @@
                   <input v-model="form.pro_sale_price" type="text" ref="pro_sale_price" name="pro_sale_price" class="form-control" placeholder="Product Sale price">
               </div> 
             </div>
-            <div class="col-md-2"></div>
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>Reward Points</label>
+                  <input v-model="form.pro_reward_points" type="number" ref="pro_reward_points" name="pro_reward_points" class="form-control" placeholder="Product reward points">
+              </div> 
+            </div>
             <div class="col-md-2"></div>
             <div class="col-md-2"></div>
           </div> 
@@ -294,33 +299,65 @@
           <div class="row">
             <div class="col-md-12" style="border:1px solid rgba(0, 0, 0, 0.06); background: rgba(0, 0, 0, 0.06)">      
               <span v-for="(attrib, key) in AllAttributes">
-                    {{attrib.attribute_name}} 
-                   <input type="checkbox" @click="generateAttribute(attrib.attribute_name, key, $event)" />
-              </span>        <!-- v-model="attrib.attribute_name"  -->             
+                {{attrib.attribute_name}} 
+                <input type="checkbox" v-model="attrib.checked" :ref="attrib.attribute_name" @click="add_attribute(attrib.id, attrib.attribute_name, key, $event)" />
+                <!-- v-model="attrib.checked" v-model="attrib.id"  -->
+              </span> 
+              {{selectedAllAttributeValues}}         
             </div>
           </div>
 
-          <div class="row">
+          <div class="row mt-4">
             <div class="col-md-12">
-              {{form.pro_attributes}}
-              <!-- <span v-for="pa in form.pro_attributes"> {{pa.data}}</span> -->
-              }
+
+              <div class="card" v-for="(pa, key) in form.pro_attributes">
+                <h5 class="card-header">
+                  {{pa.attribute}} <!-- {{pa.attrib_id}}  -->
+                  <button class="btn btn-sm btn-danger" @click.prevent="remove_attribute(key, pa.attribute)" title="Remove">
+                    <i class="far fa-times-circle"></i> </button>
+                </h5>
+
+                <div class="card-body">
+                  <table class="table-sm table table-striped">
+                    <tr class="mb-2">
+                      <th width="15%">Attribute Value</th>
+                      <th width="15%">Quantity</th>
+                      <th width="15%">Price</th>
+                      <th width="15%">Priority</th>
+                      <th width="10%">Stock Update</th>
+                      <th width="15%">Action</th>
+                    </tr>
+                    <tr v-for="(av, key) in pa.values"> <!-- values: [ { attribute_value: "", quantity: "", price: "", priority:"" }] -->
+                      <td>
+                        <select v-model="av.attribute_value" class="form-control" id="" name="attribute_value" >
+                          <option disabled value="">Select value ..</option>                
+                          <option v-for="aav in AllAttributeValues" v-bind:value="aav.attribute_value">{{aav.attribute_value}}</option> 
+                        </select>
+                        <!-- <input type="text" class="form-control" v-model="av.attribute_value" name="attribute_value" placeholder="values">   -->
+                      </td>
+                      <td>
+                        <input type="number" class="form-control" v-model="av.quantity" name="quantity" placeholder="values">  
+                      </td>
+                      <td>
+                        <input type="number" class="form-control" v-model="av.price" name="price" placeholder="values">  
+                      </td>
+                      <td>
+                        <input type="text" class="form-control" v-model="av.priority" name="priority" placeholder="priority">  
+                      </td>
+                      <td>ok</td>
+                      <td>
+                        <div class="form-group-">
+                          <button class="btn btn-sm btn-danger" @click.prevent="remove_attribute_property(key, pa.attribute)" v-show="key || ( !key && pa.values.length > 1)"><i class="fas fa-minus-square"></i> Remove</button>
+                          <button class="btn btn-sm btn-success" @click.prevent="add_attribute_property(key, pa.attribute)" v-show="key == pa.values.length-1"><i class="fas fa-plus-square"></i> Add </button> 
+                        </div>                   
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div> 
+
             </div>
           </div>
-
-          <!-- <div class="row">
-            <div class="col-md-12">
-              <table class="table-sm table table-striped">
-                <tr class="mb-2">
-                  <th width="25%">Specification Name</th>
-                  <th width="45%">Details</th>
-                  <th width="15%">Serial No</th>
-                  <th width="15%">Action</th>
-                </tr>
-
-              </table>
-            </div>
-          </div> -->
 
         </div><!--End tab-body-three-->
         <div class="tab-pane fade" id="tabs-body-four" role="tabpanel" aria-labelledby="tabs-four">
@@ -508,7 +545,8 @@
           pro_qty:'',
           pro_price:'',
           pro_sale_price:'',
-          pro_image:'',
+          pro_reward_points:'',
+          //pro_image:'',
           is_enabled:'',
 
           pro_category:[],
@@ -527,7 +565,24 @@
     computed: {
     	/*userStatus get form commonSotreForAll*/	
         ...mapState( 'commonStoreForAll', ['allLanguages','AllStatus','AllBrands','AllCategory','autoSearchCategories','AllSpecifications','AllAttributes','AllAttributeValues'] ),        
-        //...mapState( 'ProductMasterStore', ['AllProducts','autoSearchProducts'] ),        
+        //...mapState( 'ProductMasterStore', ['AllProducts','autoSearchProducts'] ),  
+
+        selectedAllAttributeValues() {
+          let fo = Object.values(this.AllAttributeValues).map( av => {
+          //let fo = this.options.map( option => {
+            //if(option.length > 0){
+              // if(this.pro_attributes != null){
+              //   return this.pro_attributes.some(v => v === option['attrib_id']);
+              // }
+              if(this.pro_attributes != null){
+                return this.pro_attributes.some(v => v['attrib_id'] === av['attribute_id_id']);
+              }
+              
+            //}
+          });
+          return fo;
+        }
+
   	}, //end Computed
 
   	methods:{
@@ -545,34 +600,50 @@
       add_discount() {
          this.form.pro_discount.push({ customer_group: '', discount_qty: '', discount_price:'', discount_priority:'',     discount_start_date:'', discount_end_date:'' });
       },
-      remove_discount(index) {
-          this.form.pro_discount.splice(index, 1);
+      remove_discount(index) { 
+        this.form.pro_discount.splice(index, 1);
       },
       //###################################### End Discount Function ############################################
 
       //###################################### End Attribute Function ############################################
-      generateAttribute(data, key, event){
-          //console.log(data+'='+event.target.checked);
-          if(event.target.checked === true){
-            //console.log(data);
-            var data = this.data
-            this.form.pro_attributes.push({ 
-              data:[
-                {attribute_vale:'', quantity: '', price:'', priority:''}
-              ] 
-            });
-          }else{
-            //console.log('No '+data);
-            this.form.pro_attributes.splice(key, 1);
-          }
+      add_attribute(id, data, key, event){
+        //console.log(data+'='+event.target.checked);
+        if(event.target.checked === true){       
+          const arrayData = { checked:true, attrib_id:id, attribute:data,  values: [ { attribute_value:"", quantity:"", price:"", priority:"" } ] };
+          this.form.pro_attributes.push( arrayData );
+          // this.$store.dispatch('commonStoreForAll/fetchAttributeValue', id); //get all Attribute Value
+        }else{
+          //this.form.pro_attributes.splice(key, 1); //not working properly
+          let i = this.form.pro_attributes.map(data => data.attrib_id).indexOf(id) // find index of your object
+          this.form.pro_attributes.splice(i, 1) // remove it from array
+        }
       },
+
+      remove_attribute(key, attribute){
+        this.form.pro_attributes.splice(key, 1);
+        // this.$refs.attribute.checked = false;
+        //alert(attribute );
+      },
+
+      add_attribute_property(key, data){ // add attribute velue inside attribute    
+        // this.form.pro_attributes.push( { attribute_value:"", quantity:"", price:"", priority:"" } );
+        const result = this.form.pro_attributes.find( ({ attribute }) => attribute === data );
+        result.values.push({ attribute_value:"", quantity:"", price:"", priority:"" });
+        //console.log(result);
+        //console.log(this.form.pro_attributes);
+      },
+
+      remove_attribute_property(key, attribute){ // remove attribute velue from inside attribute 
+        const result = this.form.pro_attributes.find( ({ attribute }) => attribute === attribute );
+        result.values.splice(key, 1);        
+      },
+      
       //###################################### End Attribute Function ############################################
 
       pushToLanguageTranslationArray(){   
             // for(let i in this.allLanguages){
             //   this.form.pro_translation.push({ language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, product_name: '', product_desc: '' }); 
-            // }
-          
+            // }          
             for (var i = 0; i < this.allLanguages.length; i++) {
               this.form.pro_translation.push( { language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, product_name: '', product_desc: '' } ); 
             }       
@@ -671,6 +742,9 @@
       		if(this.$route.params.data.pro_category === null){
       			this.form.pro_category = [];
       		}
+          if(this.$route.params.data.pro_attributes === null){
+            this.form.pro_attributes = [];
+          }
           //   else{
   	    	// 	 // this.form.departments = Object.values(this.$route.params.data.departments).filter(
   	    	// 	 this.form.departments = Object.values(this.$route.params.data.departments).map(

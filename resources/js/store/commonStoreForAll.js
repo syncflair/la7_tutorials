@@ -78,7 +78,7 @@ const commonStoreForAll ={
         .then( (response) => {
           context.commit('FETCH_ALL_STATUS', response.data);
         }).catch( () => { })
-      },      
+      },  
 
       fetchJobTitles(context){ 
         axios.get('/spa/JobTitle-Info/GetJobTitles')
@@ -150,12 +150,13 @@ const commonStoreForAll ={
         }).catch( () => { })
       },
 
-      fetchAttributeValue(context){
-        axios.get('/spa/AttributeValue-Info/GetAttributeValue')
+      fetchAttributeValue(context, payload){
+        let query = payload;
+        axios.get('/spa/AttributeValue-Info/GetAttributeValue?&q='+query)
         .then( (response) => {
           context.commit('FETCH_ATTRIBUTE_VALUE_DATA', response.data);
         }).catch( () => { })
-      },
+      }, 
 
       fetchBrands(context){
         axios.get('/spa/Brand-Info/getBrands')

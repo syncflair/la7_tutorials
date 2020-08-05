@@ -476,6 +476,43 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -526,7 +563,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         pro_qty: '',
         pro_price: '',
         pro_sale_price: '',
-        pro_image: '',
+        pro_reward_points: '',
+        //pro_image:'',
         is_enabled: '',
         pro_category: [],
         pro_attributes: [],
@@ -552,7 +590,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['allLanguages', 'AllStatus', 'AllBrands', 'AllCategory', 'autoSearchCategories', 'AllSpecifications', 'AllAttributes', 'AllAttributeValues'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['allLanguages', 'AllStatus', 'AllBrands', 'AllCategory', 'autoSearchCategories', 'AllSpecifications', 'AllAttributes', 'AllAttributeValues']), {
+    //...mapState( 'ProductMasterStore', ['AllProducts','autoSearchProducts'] ),  
+    selectedAllAttributeValues: function selectedAllAttributeValues() {
+      var _this = this;
+
+      var fo = Object.values(this.AllAttributeValues).map(function (av) {
+        //let fo = this.options.map( option => {
+        //if(option.length > 0){
+        // if(this.pro_attributes != null){
+        //   return this.pro_attributes.some(v => v === option['attrib_id']);
+        // }
+        if (_this.pro_attributes != null) {
+          return _this.pro_attributes.some(function (v) {
+            return v['attrib_id'] === av['attribute_id_id'];
+          });
+        } //}
+
+      });
+      return fo;
+    }
+  }),
   //end Computed
   methods: {
     //###################################### Specification Function ################################################
@@ -582,29 +640,62 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //###################################### End Discount Function ############################################
     //###################################### End Attribute Function ############################################
-    generateAttribute: function generateAttribute(data, key, event) {
+    add_attribute: function add_attribute(id, data, key, event) {
       //console.log(data+'='+event.target.checked);
       if (event.target.checked === true) {
-        //console.log(data);
-        var data = this.data;
-        this.form.pro_attributes.push({
-          data: [{
-            attribute_vale: '',
-            quantity: '',
-            price: '',
-            priority: ''
+        var arrayData = {
+          checked: true,
+          attrib_id: id,
+          attribute: data,
+          values: [{
+            attribute_value: "",
+            quantity: "",
+            price: "",
+            priority: ""
           }]
-        });
+        };
+        this.form.pro_attributes.push(arrayData); // this.$store.dispatch('commonStoreForAll/fetchAttributeValue', id); //get all Attribute Value
       } else {
-        //console.log('No '+data);
-        this.form.pro_attributes.splice(key, 1);
+        //this.form.pro_attributes.splice(key, 1); //not working properly
+        var i = this.form.pro_attributes.map(function (data) {
+          return data.attrib_id;
+        }).indexOf(id); // find index of your object
+
+        this.form.pro_attributes.splice(i, 1); // remove it from array
       }
+    },
+    remove_attribute: function remove_attribute(key, attribute) {
+      this.form.pro_attributes.splice(key, 1); // this.$refs.attribute.checked = false;
+      //alert(attribute );
+    },
+    add_attribute_property: function add_attribute_property(key, data) {
+      // add attribute velue inside attribute    
+      // this.form.pro_attributes.push( { attribute_value:"", quantity:"", price:"", priority:"" } );
+      var result = this.form.pro_attributes.find(function (_ref) {
+        var attribute = _ref.attribute;
+        return attribute === data;
+      });
+      result.values.push({
+        attribute_value: "",
+        quantity: "",
+        price: "",
+        priority: ""
+      }); //console.log(result);
+      //console.log(this.form.pro_attributes);
+    },
+    remove_attribute_property: function remove_attribute_property(key, attribute) {
+      // remove attribute velue from inside attribute 
+      var result = this.form.pro_attributes.find(function (_ref2) {
+        var attribute = _ref2.attribute;
+        return attribute === attribute;
+      });
+      result.values.splice(key, 1);
     },
     //###################################### End Attribute Function ############################################
     pushToLanguageTranslationArray: function pushToLanguageTranslationArray() {
       // for(let i in this.allLanguages){
       //   this.form.pro_translation.push({ language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, product_name: '', product_desc: '' }); 
-      // }
+      // }          
       for (var i = 0; i < this.allLanguages.length; i++) {
         this.form.pro_translation.push({
           language_id: this.allLanguages[i].id,
@@ -616,7 +707,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     //Make image as base64 
     onImageChange: function onImageChange(e) {
-      var _this = this;
+      var _this2 = this;
 
       //let file = e.target.files || e.dataTransfer.files;
       var file = e.target.files[0]; //console.log(file);
@@ -631,7 +722,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       } else {
         reader.onloadend = function (file) {
           //console.log(reader.result);
-          _this.form.avatar = reader.result; //push base64 to logo veriable
+          _this2.form.avatar = reader.result; //push base64 to logo veriable
         };
 
         reader.readAsDataURL(file);
@@ -639,68 +730,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     // Submit the form via a POST request
     storeFormData: function storeFormData() {
-      var _this2 = this;
+      var _this3 = this;
 
       //console.log(this.form); 
       this.$Progress.start(); //using progress-bar package
       //this.form.post('/spa/Product-Info')
 
-      this.form.post('/spa/Product-Info').then(function (_ref) {
-        var data = _ref.data;
+      this.form.post('/spa/Product-Info').then(function (_ref3) {
+        var data = _ref3.data;
         console.log(data);
 
         if (data.success) {
           //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
           toastr.success(data.success);
 
-          _this2.$Progress.finish();
+          _this3.$Progress.finish();
 
-          _this2.form.reset(); //reset from after submit	
+          _this3.form.reset(); //reset from after submit	
           // this.$refs.avatar.value = ''; //clear file input tag 
           //this.ShowOnChangeImage = null;
 
 
-          _this2.$router.push({
-            path: '/spa/ProductMaster'
-          }); //route after successfule submit	      
-
-        }
-
-        if (data.errors) {
-          _this2.$Progress.fail();
-
-          toastr.warning(data.errors);
-        }
-      })["catch"](function () {
-        _this2.$Progress.fail();
-
-        toastr.warning('Something is wrong!');
-      });
-    },
-    updateFormData: function updateFormData() {
-      var _this3 = this;
-
-      //console.log(this.form); 
-      this.$Progress.start(); //using progress-bar package
-
-      this.form.put('/spa/Product-Info/' + this.form.id).then(function (_ref2) {
-        var data = _ref2.data;
-
-        if (data.success) {
-          //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update         
-          _this3.$Progress.finish();
-
-          toastr.success(data.success);
-
-          _this3.form.reset(); //reset from after submit
-
-
-          _this3.editMode = false; // this.$refs.avatar.value = ''; //clear file input tag 
-          // this.ShowOnChangeImage = null;
-
           _this3.$router.push({
             path: '/spa/ProductMaster'
-          }); //route after successfule submit
+          }); //route after successfule submit	      
 
         }
 
@@ -711,6 +764,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       })["catch"](function () {
         _this3.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
+    },
+    updateFormData: function updateFormData() {
+      var _this4 = this;
+
+      //console.log(this.form); 
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.put('/spa/Product-Info/' + this.form.id).then(function (_ref4) {
+        var data = _ref4.data;
+
+        if (data.success) {
+          //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update         
+          _this4.$Progress.finish();
+
+          toastr.success(data.success);
+
+          _this4.form.reset(); //reset from after submit
+
+
+          _this4.editMode = false; // this.$refs.avatar.value = ''; //clear file input tag 
+          // this.ShowOnChangeImage = null;
+
+          _this4.$router.push({
+            path: '/spa/ProductMaster'
+          }); //route after successfule submit
+
+        }
+
+        if (data.errors) {
+          _this4.$Progress.fail();
+
+          toastr.warning(data.errors);
+        }
+      })["catch"](function () {
+        _this4.$Progress.fail();
 
         toastr.warning('Something is wrong!');
       });
@@ -743,6 +834,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         if (this.$route.params.data.pro_category === null) {
           this.form.pro_category = [];
+        }
+
+        if (this.$route.params.data.pro_attributes === null) {
+          this.form.pro_attributes = [];
         } //   else{
         // 	 // this.form.departments = Object.values(this.$route.params.data.departments).filter(
         // 	 this.form.departments = Object.values(this.$route.params.data.departments).map(
@@ -758,7 +853,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   //end Methods
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.fillForm();
     this.$store.dispatch('commonStoreForAll/AllStatus', 'Product'); //get status with "Product" keyword
@@ -777,12 +872,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //call from multi-select-app-one.vue
 
     FireEvent.$on('AutoCompleteSearchForData', function (data) {
-      _this4.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data);
+      _this5.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data);
     });
 
     if (this.editMode === false) {
       setTimeout(function () {
-        _this4.pushToLanguageTranslationArray();
+        _this5.pushToLanguageTranslationArray();
       }, 2000);
     } //console.log(this.form);
 
@@ -1691,7 +1786,44 @@ var render = function() {
                                 ])
                               ]),
                               _vm._v(" "),
-                              _c("div", { staticClass: "col-md-2" }),
+                              _c("div", { staticClass: "col-md-2" }, [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("label", [_vm._v("Reward Points")]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.pro_reward_points,
+                                        expression: "form.pro_reward_points"
+                                      }
+                                    ],
+                                    ref: "pro_reward_points",
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "number",
+                                      name: "pro_reward_points",
+                                      placeholder: "Product reward points"
+                                    },
+                                    domProps: {
+                                      value: _vm.form.pro_reward_points
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "pro_reward_points",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "col-md-2" }),
                               _vm._v(" "),
@@ -1850,43 +1982,430 @@ var render = function() {
                                     background: "rgba(0, 0, 0, 0.06)"
                                   }
                                 },
-                                _vm._l(_vm.AllAttributes, function(
-                                  attrib,
+                                [
+                                  _vm._l(_vm.AllAttributes, function(
+                                    attrib,
+                                    key
+                                  ) {
+                                    return _c("span", [
+                                      _vm._v(
+                                        "\r\n                " +
+                                          _vm._s(attrib.attribute_name) +
+                                          " \r\n                "
+                                      ),
+                                      _c("input", {
+                                        directives: [
+                                          {
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: attrib.checked,
+                                            expression: "attrib.checked"
+                                          }
+                                        ],
+                                        ref: attrib.attribute_name,
+                                        refInFor: true,
+                                        attrs: { type: "checkbox" },
+                                        domProps: {
+                                          checked: Array.isArray(attrib.checked)
+                                            ? _vm._i(attrib.checked, null) > -1
+                                            : attrib.checked
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.add_attribute(
+                                              attrib.id,
+                                              attrib.attribute_name,
+                                              key,
+                                              $event
+                                            )
+                                          },
+                                          change: function($event) {
+                                            var $$a = attrib.checked,
+                                              $$el = $event.target,
+                                              $$c = $$el.checked ? true : false
+                                            if (Array.isArray($$a)) {
+                                              var $$v = null,
+                                                $$i = _vm._i($$a, $$v)
+                                              if ($$el.checked) {
+                                                $$i < 0 &&
+                                                  _vm.$set(
+                                                    attrib,
+                                                    "checked",
+                                                    $$a.concat([$$v])
+                                                  )
+                                              } else {
+                                                $$i > -1 &&
+                                                  _vm.$set(
+                                                    attrib,
+                                                    "checked",
+                                                    $$a
+                                                      .slice(0, $$i)
+                                                      .concat(
+                                                        $$a.slice($$i + 1)
+                                                      )
+                                                  )
+                                              }
+                                            } else {
+                                              _vm.$set(attrib, "checked", $$c)
+                                            }
+                                          }
+                                        }
+                                      })
+                                    ])
+                                  }),
+                                  _vm._v(
+                                    " \r\n              " +
+                                      _vm._s(_vm.selectedAllAttributeValues) +
+                                      "         \r\n            "
+                                  )
+                                ],
+                                2
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row mt-4" }, [
+                              _c(
+                                "div",
+                                { staticClass: "col-md-12" },
+                                _vm._l(_vm.form.pro_attributes, function(
+                                  pa,
                                   key
                                 ) {
-                                  return _c("span", [
-                                    _vm._v(
-                                      "\r\n                    " +
-                                        _vm._s(attrib.attribute_name) +
-                                        " \r\n                   "
-                                    ),
-                                    _c("input", {
-                                      attrs: { type: "checkbox" },
-                                      on: {
-                                        click: function($event) {
-                                          return _vm.generateAttribute(
-                                            attrib.attribute_name,
-                                            key,
-                                            $event
-                                          )
-                                        }
-                                      }
-                                    })
+                                  return _c("div", { staticClass: "card" }, [
+                                    _c("h5", { staticClass: "card-header" }, [
+                                      _vm._v(
+                                        "\r\n                  " +
+                                          _vm._s(pa.attribute) +
+                                          " "
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "button",
+                                        {
+                                          staticClass: "btn btn-sm btn-danger",
+                                          attrs: { title: "Remove" },
+                                          on: {
+                                            click: function($event) {
+                                              $event.preventDefault()
+                                              return _vm.remove_attribute(
+                                                key,
+                                                pa.attribute
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "far fa-times-circle"
+                                          })
+                                        ]
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("div", { staticClass: "card-body" }, [
+                                      _c(
+                                        "table",
+                                        {
+                                          staticClass:
+                                            "table-sm table table-striped"
+                                        },
+                                        [
+                                          _vm._m(5, true),
+                                          _vm._v(" "),
+                                          _vm._l(pa.values, function(av, key) {
+                                            return _c("tr", [
+                                              _c("td", [
+                                                _c(
+                                                  "select",
+                                                  {
+                                                    directives: [
+                                                      {
+                                                        name: "model",
+                                                        rawName: "v-model",
+                                                        value:
+                                                          av.attribute_value,
+                                                        expression:
+                                                          "av.attribute_value"
+                                                      }
+                                                    ],
+                                                    staticClass: "form-control",
+                                                    attrs: {
+                                                      id: "",
+                                                      name: "attribute_value"
+                                                    },
+                                                    on: {
+                                                      change: function($event) {
+                                                        var $$selectedVal = Array.prototype.filter
+                                                          .call(
+                                                            $event.target
+                                                              .options,
+                                                            function(o) {
+                                                              return o.selected
+                                                            }
+                                                          )
+                                                          .map(function(o) {
+                                                            var val =
+                                                              "_value" in o
+                                                                ? o._value
+                                                                : o.value
+                                                            return val
+                                                          })
+                                                        _vm.$set(
+                                                          av,
+                                                          "attribute_value",
+                                                          $event.target.multiple
+                                                            ? $$selectedVal
+                                                            : $$selectedVal[0]
+                                                        )
+                                                      }
+                                                    }
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "option",
+                                                      {
+                                                        attrs: {
+                                                          disabled: "",
+                                                          value: ""
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "Select value .."
+                                                        )
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _vm._l(
+                                                      _vm.AllAttributeValues,
+                                                      function(aav) {
+                                                        return _c(
+                                                          "option",
+                                                          {
+                                                            domProps: {
+                                                              value:
+                                                                aav.attribute_value
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                aav.attribute_value
+                                                              )
+                                                            )
+                                                          ]
+                                                        )
+                                                      }
+                                                    )
+                                                  ],
+                                                  2
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: av.quantity,
+                                                      expression: "av.quantity"
+                                                    }
+                                                  ],
+                                                  staticClass: "form-control",
+                                                  attrs: {
+                                                    type: "number",
+                                                    name: "quantity",
+                                                    placeholder: "values"
+                                                  },
+                                                  domProps: {
+                                                    value: av.quantity
+                                                  },
+                                                  on: {
+                                                    input: function($event) {
+                                                      if (
+                                                        $event.target.composing
+                                                      ) {
+                                                        return
+                                                      }
+                                                      _vm.$set(
+                                                        av,
+                                                        "quantity",
+                                                        $event.target.value
+                                                      )
+                                                    }
+                                                  }
+                                                })
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: av.price,
+                                                      expression: "av.price"
+                                                    }
+                                                  ],
+                                                  staticClass: "form-control",
+                                                  attrs: {
+                                                    type: "number",
+                                                    name: "price",
+                                                    placeholder: "values"
+                                                  },
+                                                  domProps: { value: av.price },
+                                                  on: {
+                                                    input: function($event) {
+                                                      if (
+                                                        $event.target.composing
+                                                      ) {
+                                                        return
+                                                      }
+                                                      _vm.$set(
+                                                        av,
+                                                        "price",
+                                                        $event.target.value
+                                                      )
+                                                    }
+                                                  }
+                                                })
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: av.priority,
+                                                      expression: "av.priority"
+                                                    }
+                                                  ],
+                                                  staticClass: "form-control",
+                                                  attrs: {
+                                                    type: "text",
+                                                    name: "priority",
+                                                    placeholder: "priority"
+                                                  },
+                                                  domProps: {
+                                                    value: av.priority
+                                                  },
+                                                  on: {
+                                                    input: function($event) {
+                                                      if (
+                                                        $event.target.composing
+                                                      ) {
+                                                        return
+                                                      }
+                                                      _vm.$set(
+                                                        av,
+                                                        "priority",
+                                                        $event.target.value
+                                                      )
+                                                    }
+                                                  }
+                                                })
+                                              ]),
+                                              _vm._v(" "),
+                                              _c("td", [_vm._v("ok")]),
+                                              _vm._v(" "),
+                                              _c("td", [
+                                                _c(
+                                                  "div",
+                                                  {
+                                                    staticClass: "form-group-"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "button",
+                                                      {
+                                                        directives: [
+                                                          {
+                                                            name: "show",
+                                                            rawName: "v-show",
+                                                            value:
+                                                              key ||
+                                                              (!key &&
+                                                                pa.values
+                                                                  .length > 1),
+                                                            expression:
+                                                              "key || ( !key && pa.values.length > 1)"
+                                                          }
+                                                        ],
+                                                        staticClass:
+                                                          "btn btn-sm btn-danger",
+                                                        on: {
+                                                          click: function(
+                                                            $event
+                                                          ) {
+                                                            $event.preventDefault()
+                                                            return _vm.remove_attribute_property(
+                                                              key,
+                                                              pa.attribute
+                                                            )
+                                                          }
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("i", {
+                                                          staticClass:
+                                                            "fas fa-minus-square"
+                                                        }),
+                                                        _vm._v(" Remove")
+                                                      ]
+                                                    ),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "button",
+                                                      {
+                                                        directives: [
+                                                          {
+                                                            name: "show",
+                                                            rawName: "v-show",
+                                                            value:
+                                                              key ==
+                                                              pa.values.length -
+                                                                1,
+                                                            expression:
+                                                              "key == pa.values.length-1"
+                                                          }
+                                                        ],
+                                                        staticClass:
+                                                          "btn btn-sm btn-success",
+                                                        on: {
+                                                          click: function(
+                                                            $event
+                                                          ) {
+                                                            $event.preventDefault()
+                                                            return _vm.add_attribute_property(
+                                                              key,
+                                                              pa.attribute
+                                                            )
+                                                          }
+                                                        }
+                                                      },
+                                                      [
+                                                        _c("i", {
+                                                          staticClass:
+                                                            "fas fa-plus-square"
+                                                        }),
+                                                        _vm._v(" Add ")
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ])
+                                            ])
+                                          })
+                                        ],
+                                        2
+                                      )
+                                    ])
                                   ])
                                 }),
                                 0
                               )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "row" }, [
-                              _c("div", { staticClass: "col-md-12" }, [
-                                _vm._v(
-                                  "\r\n              " +
-                                    _vm._s(_vm.form.pro_attributes) +
-                                    "\r\n              "
-                                ),
-                                _vm._v("\r\n              }\r\n            ")
-                              ])
                             ])
                           ]
                         ),
@@ -1910,7 +2429,7 @@ var render = function() {
                                     staticClass: "table-sm table table-striped"
                                   },
                                   [
-                                    _vm._m(5),
+                                    _vm._m(6),
                                     _vm._v(" "),
                                     _vm._l(_vm.form.pro_specification, function(
                                       input,
@@ -2177,7 +2696,7 @@ var render = function() {
                                     staticClass: "table-sm table table-striped"
                                   },
                                   [
-                                    _vm._m(6),
+                                    _vm._m(7),
                                     _vm._v(" "),
                                     _vm._l(_vm.form.pro_discount, function(
                                       input,
@@ -2833,6 +3352,24 @@ var staticRenderFns = [
           ])
         ])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", { staticClass: "mb-2" }, [
+      _c("th", { attrs: { width: "15%" } }, [_vm._v("Attribute Value")]),
+      _vm._v(" "),
+      _c("th", { attrs: { width: "15%" } }, [_vm._v("Quantity")]),
+      _vm._v(" "),
+      _c("th", { attrs: { width: "15%" } }, [_vm._v("Price")]),
+      _vm._v(" "),
+      _c("th", { attrs: { width: "15%" } }, [_vm._v("Priority")]),
+      _vm._v(" "),
+      _c("th", { attrs: { width: "10%" } }, [_vm._v("Stock Update")]),
+      _vm._v(" "),
+      _c("th", { attrs: { width: "15%" } }, [_vm._v("Action")])
     ])
   },
   function() {

@@ -90,6 +90,7 @@ class ProductController extends Controller
         $data['brand_id']=$request->brand_id;
         $data['pro_price']=$request->pro_price;
         $data['pro_sale_price']=$request->pro_sale_price;
+        $data['pro_reward_points']=$request->pro_reward_points;
         $data['pro_qty']=$request->pro_qty;  
         $data['pro_translation'] =$request->pro_translation;        
         $data['pro_category'] =$request->pro_category;
@@ -178,6 +179,7 @@ class ProductController extends Controller
                 'pro_qty' => $request->pro_qty,
                 'pro_price' => $request->pro_price,
                 'pro_sale_price' => $request->pro_sale_price,
+                'pro_reward_points' =>$request->pro_reward_points,
                 'brand_id' => $request->brand_id, 
                 'pro_translation' => $request->pro_translation,
                 'pro_category' => $request->pro_category,

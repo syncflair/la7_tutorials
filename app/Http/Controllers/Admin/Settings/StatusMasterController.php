@@ -184,7 +184,7 @@ class StatusMasterController extends Controller
     }
 
 
-     //Get all status
+    //Get all status
     public function getAllStatus(Request $request){
         //this is for commonStoreForAll Store
         $key = $request->q;
