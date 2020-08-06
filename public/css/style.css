@@ -33233,3 +33233,123 @@ form .form-control:focus {
 
 /*end style Form Title*/
 
+/*style for product image upload*/
+
+.uploader {
+  width: 100%;
+  background: #2196F3;
+  color: #fff;
+  padding: 15px 15px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px dashed #fff;
+  font-size: 20px;
+  position: relative;
+}
+
+.uploader.dragging {
+  background: #fff;
+  color: #2196F3;
+  border: 1px dashed #2196F3;
+}
+
+.uploader.dragging .file-input label {
+  background: #2196F3;
+  color: #fff;
+}
+
+.uploader i {
+  font-size: 85px;
+}
+
+.uploader .file-input {
+  width: 200px;
+  margin: auto;
+  height: 68px;
+  position: relative;
+}
+
+.uploader .file-input label,
+.uploader .file-input input {
+  background: #fff;
+  color: #2196F3;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 7px;
+  cursor: pointer;
+}
+
+.uploader .file-input input {
+  opacity: 0;
+  z-index: -2;
+}
+
+.uploader .images-preview {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.uploader .images-preview .img-wrapper {
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  justify-content: space-between;
+  background: #fff;
+  box-shadow: 5px 5px 20px #3e3737;
+}
+
+.uploader .images-preview .img-wrapper img {
+  max-height: 105px;
+}
+
+.uploader .images-preview .details {
+  font-size: 12px;
+  background: #fff;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  padding: 3px 6px;
+}
+
+.uploader .images-preview .details .name {
+  overflow: hidden;
+  height: 18px;
+}
+
+.uploader .upload-control {
+  position: absolute;
+  width: 100%;
+  background: #fff;
+  top: 0;
+  left: 0;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  padding: 10px;
+  padding-bottom: 4px;
+  text-align: right;
+}
+
+.uploader .upload-control button,
+.uploader .upload-control label {
+  background: #2196F3;
+  border: 2px solid #03A9F4;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.uploader .upload-control label {
+  padding: 2px 5px;
+  margin-right: 10px;
+}
+
+/*End style for product image upload*/
+

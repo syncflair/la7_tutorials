@@ -303,7 +303,10 @@
                 <input type="checkbox" v-model="attrib.checked" :ref="attrib.attribute_name" @click="add_attribute(attrib.id, attrib.attribute_name, key, $event)" />
                 <!-- v-model="attrib.checked" v-model="attrib.id"  -->
               </span> 
-              {{selectedAllAttributeValues}}         
+              <!-- {{AllAttributes['has_many_attribute_value']}}          -->
+              <!-- <span v-for="abc in AllAttributes">
+                {{abc.attribute_name}}{{abc.has_many_attribute_value}}
+              </span> -->
             </div>
           </div>
 
@@ -324,7 +327,7 @@
                       <th width="15%">Quantity</th>
                       <th width="15%">Price</th>
                       <th width="15%">Priority</th>
-                      <th width="10%">Stock Update</th>
+                      <th width="10%">Subtrack Stock</th>
                       <th width="15%">Action</th>
                     </tr>
                     <tr v-for="(av, key) in pa.values"> <!-- values: [ { attribute_value: "", quantity: "", price: "", priority:"" }] -->
@@ -332,7 +335,7 @@
                         <select v-model="av.attribute_value" class="form-control" id="" name="attribute_value" >
                           <option disabled value="">Select value ..</option>                
                           <option v-for="aav in AllAttributeValues" v-bind:value="aav.attribute_value">{{aav.attribute_value}}</option> 
-                        </select>
+                        </select> <!-- AllAttributeValues selectedAllAttributeValues-->
                         <!-- <input type="text" class="form-control" v-model="av.attribute_value" name="attribute_value" placeholder="values">   -->
                       </td>
                       <td>
@@ -344,7 +347,9 @@
                       <td>
                         <input type="text" class="form-control" v-model="av.priority" name="priority" placeholder="priority">  
                       </td>
-                      <td>ok</td>
+                      <td>
+                        <input type="checkbox" v-model="av.subtract_stock" name="subtract_stock" />
+                      </td>
                       <td>
                         <div class="form-group-">
                           <button class="btn btn-sm btn-danger" @click.prevent="remove_attribute_property(key, pa.attribute)" v-show="key || ( !key && pa.values.length > 1)"><i class="fas fa-minus-square"></i> Remove</button>
@@ -460,7 +465,77 @@
 
         </div><!--End tab-body-five-->
         <div class="tab-pane fade" id="tabs-body-six" role="tabpanel" aria-labelledby="tabs-six">
-           Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis. 
+          
+
+          <div  v-if="form.has_many_image.length" class="row mt-2 mb-4" style="background:#2196F3; margin: 5px 0px 0px 5px; padding: 10px; border-radius: 5px;">
+            <div class="col-md-12">
+              <div class="row">
+                <div v-for="(mi, key) in form.has_many_image" class="col-md-3">
+                  <img :src="mi.image_url" @click="deleteImage(mi.product_id)" class="rounded float-left" :alt="mi.image_alt" height="100px" width="100px">
+                </div>
+              </div>              
+            </div>
+          </div>
+
+
+          <div class="uploader"
+            @dragenter="OnDragEnter"
+            @dragleave="OnDragLeave"
+            @dragover.prevent
+            @drop="onDrop"
+            :class="{ dragging: isDragging }">
+
+            <!-- <div class="row upload-control">
+              <div class="col-md-8 offset-2">
+                <div style="//padding: 20px; //background: rgba(0, 0, 0, 0.06);">
+                  <div class="input-group"> 
+                    <input type="text" :value="getFilesName()"  readonly class="form-control" placeholder="Choose your images">
+                    <span class="input-group-btn">
+                      <button @click.prevent="showFilePicker" class="btn btn-default" type="button">
+                        <i class="fas fa-paperclip blue"></i>
+                      </button>
+                    </span>
+                  </div>
+                  <input @change="OnFileChange" type="file" name="" ref="image_file_link" multiple style="display: none;" >
+                </div>
+              </div>
+            </div> -->
+
+            <div>
+            <!-- <div v-show="!form.pro_images.length"> -->
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p class="mb-0">Drag your images here</p>
+              <p class="mb-0">OR</p>
+              <div class="file-input">
+                  <label for="file">Select files</label>
+                  <input type="file" id="file" @change="OnFileChange" multiple>
+              </div>
+              <!-- <div style=" //padding: 20px; //background: rgba(0, 0, 0, 0.06);">
+                <div class="input-group"> 
+                  <input type="text" :value="getFilesName()"  readonly class="form-control" placeholder="Choose your images">
+                  <span class="input-group-btn" style="margin-top: -3px;">
+                    <button @click.prevent="showFilePicker" class="btn btn-default" type="button">
+                      <i class="fas fa-paperclip" style="color:blue !important;"></i>
+                    </button>
+                  </span>
+                </div>
+                <input @change="OnFileChange" type="file" name="" ref="image_file_link" multiple style="display: none;" >
+              </div> -->
+            </div>
+
+            <div class="images-preview">
+            <!-- <div class="images-preview" v-show="form.pro_images.length "> -->
+                <div class="img-wrapper" v-for="(image, index) in form.pro_images" :key="index">
+                    <img :src="image" :alt="`Image Uplaoder ${index}`">
+                    <!-- <div class="details">
+                        <span class="name" v-text="form.pro_images[index].name"></span>
+                        <span class="size" v-text="getFileSize(form.pro_images[index].size)"></span>
+                    </div> -->
+                </div>
+            </div>
+
+          </div><!-- end uploader -->
+
         </div><!--End tab-body-six-->
       </div>
     </div>
@@ -503,7 +578,7 @@
     data () {
       return {
         NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
-        ShowOnChangeImage:null,
+
         editMode: false, //Use this for add edit using the same form   
         productTypes: [
   	      { name: 'General' },
@@ -526,6 +601,11 @@
         placeHolder_pro:'Search Product',
         filterBy_pro:'sys_pro_name',
         valueProperty_pro: 'id',
+
+        //for images manipulation
+        show_image_files_name: [], //use only to show image name in text field
+        isDragging: false, 
+        dragCount: 0,
 
         // Create a new form instance
         form: new Form({
@@ -555,9 +635,11 @@
           pro_discount:[ { customer_group:'', discount_qty:'', discount_price:'', discount_priority:'', discount_start_date:'',           discount_end_date:'', } ],
           related_products:[],
           pro_translation: [],
+          pro_images:[],
           //pro_suppliers:[],
           //pro_shops:[],
-          multi_image:[],
+          //multi_image:[],
+          has_many_image:[],
         })
       }
     },//end data
@@ -568,24 +650,85 @@
         //...mapState( 'ProductMasterStore', ['AllProducts','autoSearchProducts'] ),  
 
         selectedAllAttributeValues() {
-          let fo = Object.values(this.AllAttributeValues).map( av => {
-          //let fo = this.options.map( option => {
-            //if(option.length > 0){
-              // if(this.pro_attributes != null){
-              //   return this.pro_attributes.some(v => v === option['attrib_id']);
-              // }
-              if(this.pro_attributes != null){
-                return this.pro_attributes.some(v => v['attrib_id'] === av['attribute_id_id']);
-              }
-              
-            //}
-          });
-          return fo;
+          // let fo = Object.values(this.AllAttributes).filter( av => {
+          // // let fo = Object.values(this.AllAttributeValues).filter( av => {
+          //   const result = av.find( ({ d }) => d.id === data );
+          //       return av;
+          //       //return this.form.pro_attributes.some(v => v['attrib_id'] === av['id']);
+          //       // return this.form.pro_attributes.some(v => v['attrib_id'] === av['attribute_id']);
+          // });
+          // return fo;
+
+          // let fo = Object.values(this.AllAttributes).find( av => {
+          // // let fo = Object.values(this.AllAttributeValues).filter( av => {
+          //   //const result = av.find( ({ d }) => d.id === data );
+          //       //return av;
+          // return this.form.pro_attributes.some(v => v['attrib_id'] === av['id']);
+          //       // return this.form.pro_attributes.some(v => v['attrib_id'] === av['attribute_id']);
+          // });
+          // return fo;
         }
 
   	}, //end Computed
 
   	methods:{
+      //###################################### Images Function ################################################
+      showFilePicker(){ //chlick input file (hidden) showFilePicker click.
+        this.$refs.image_file_link.click();
+      },
+      OnFileChange(e){
+        //this.form.pro_images = e.target.files[0]; //for single file 
+        // this.form.pro_images = e.target.files; 
+        this.show_image_files_name = e.target.files; //this is for only show image name to input box using getFilesName()
+        let files = e.target.files;  
+        //const files = e.target.files;
+        Array.from(files).forEach(file => this.converBase64(file));
+        console.log(this.form.pro_images);
+      },
+      converBase64(file){ //Make image as base64         
+        let reader = new FileReader();
+        reader.onload = (e) => this.form.pro_images.push(e.target.result); //push base64 to imge
+        reader.readAsDataURL(file);
+      },
+      OnDragEnter(e) {
+        e.preventDefault();
+        this.dragCount++;
+        this.isDragging = true;
+        return false;
+      },
+      OnDragLeave(e) {
+        e.preventDefault();
+        this.dragCount--;
+        if (this.dragCount <= 0)  this.isDragging = false;
+      },
+      onDrop(e){
+        e.preventDefault();
+        e.stopPropagation();
+        this.isDragging = false;
+        const files = e.dataTransfer.files;
+        Array.from(files).forEach(file => this.converBase64(file));
+      },
+      getFileSize(size) { 
+        const fSExt = ['Bytes', 'KB', 'MB', 'GB'];
+        let i = 0;
+        while(size > 900) { size /= 1024; i++; }
+        return `${(Math.round(size * 100) / 100)} ${fSExt[i]}`;
+      },
+
+      getFilesName(){ //show name to showFilePicker input field
+        let filesName = []
+        if(this.show_image_files_name.length > 0){
+        // if(this.form.pro_images.length > 0){
+          for(let file of this.show_image_files_name){
+          // for(let file of this.form.pro_images){
+            filesName.push(file.name);
+          }
+        }
+        return filesName.join(", "); //this code basically join the selected files name separated by comma.
+      },
+
+      //###################################### End Images Function ################################################
+
       //###################################### Specification Function ################################################
       add_specificaton() {
          this.form.pro_specification.push({ specification_name: '', specification_desc: '' });
@@ -609,8 +752,10 @@
       add_attribute(id, data, key, event){
         //console.log(data+'='+event.target.checked);
         if(event.target.checked === true){       
-          const arrayData = { checked:true, attrib_id:id, attribute:data,  values: [ { attribute_value:"", quantity:"", price:"", priority:"" } ] };
+          const arrayData = { checked:false, attrib_id:id, attribute:data,  values: [ { attribute_value:"", quantity:"", price:"", priority:"", subtract_stock: false } ] };
           this.form.pro_attributes.push( arrayData );
+
+          //this.$store.dispatch('commonStoreForAll/fetchAttributeList'); //get all Attribute
           // this.$store.dispatch('commonStoreForAll/fetchAttributeValue', id); //get all Attribute Value
         }else{
           //this.form.pro_attributes.splice(key, 1); //not working properly
@@ -628,7 +773,7 @@
       add_attribute_property(key, data){ // add attribute velue inside attribute    
         // this.form.pro_attributes.push( { attribute_value:"", quantity:"", price:"", priority:"" } );
         const result = this.form.pro_attributes.find( ({ attribute }) => attribute === data );
-        result.values.push({ attribute_value:"", quantity:"", price:"", priority:"" });
+        result.values.push({ attribute_value:"", quantity:"", price:"", priority:"", subtract_stock: false });
         //console.log(result);
         //console.log(this.form.pro_attributes);
       },
@@ -650,24 +795,7 @@
                        
         },
 
-    	//Make image as base64 
-	    onImageChange(e){
-	        //let file = e.target.files || e.dataTransfer.files;
-	        let file = e.target.files[0];        
-	        //console.log(file);
-	        this.ShowOnChangeImage = URL.createObjectURL(file); //display image in form when select image
-	        let reader = new FileReader();
-	        //let vm = this;
-	        if(file['size'] > 512000 ){  //512Kb = 512000Byte
-	          toastr.warning('Please select file size within 500kb');
-	        }else{          
-	          reader.onloadend = (file) => {
-	            //console.log(reader.result);
-	            this.form.avatar = reader.result; //push base64 to logo veriable
-	          };          
-	          reader.readAsDataURL(file);
-	        }
-	    },
+    	
 
 	    // Submit the form via a POST request
   		storeFormData() {  
@@ -745,6 +873,11 @@
           if(this.$route.params.data.pro_attributes === null){
             this.form.pro_attributes = [];
           }
+          if(this.$route.params.data.has_many_image){
+            this.form.pro_images = [];
+          }
+
+          
           //   else{
   	    	// 	 // this.form.departments = Object.values(this.$route.params.data.departments).filter(
   	    	// 	 this.form.departments = Object.values(this.$route.params.data.departments).map(
@@ -793,5 +926,6 @@
 
    
 </script>
+
 
 

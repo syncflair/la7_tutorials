@@ -10,12 +10,93 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _createForOfIteratorHelper(o) { if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (o = _unsupportedIterableToArray(o))) { var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var it, normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -520,7 +601,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
-      ShowOnChangeImage: null,
       editMode: false,
       //Use this for add edit using the same form   
       productTypes: [{
@@ -545,6 +625,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       placeHolder_pro: 'Search Product',
       filterBy_pro: 'sys_pro_name',
       valueProperty_pro: 'id',
+      //for images manipulation
+      show_image_files_name: [],
+      //use only to show image name in text field
+      isDragging: false,
+      dragCount: 0,
       // Create a new form instance
       form: new Form({
         id: '',
@@ -583,36 +668,127 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }],
         related_products: [],
         pro_translation: [],
+        pro_images: [],
         //pro_suppliers:[],
         //pro_shops:[],
-        multi_image: []
+        //multi_image:[],
+        has_many_image: []
       })
     };
   },
   //end data
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['allLanguages', 'AllStatus', 'AllBrands', 'AllCategory', 'autoSearchCategories', 'AllSpecifications', 'AllAttributes', 'AllAttributeValues']), {
     //...mapState( 'ProductMasterStore', ['AllProducts','autoSearchProducts'] ),  
-    selectedAllAttributeValues: function selectedAllAttributeValues() {
-      var _this = this;
-
-      var fo = Object.values(this.AllAttributeValues).map(function (av) {
-        //let fo = this.options.map( option => {
-        //if(option.length > 0){
-        // if(this.pro_attributes != null){
-        //   return this.pro_attributes.some(v => v === option['attrib_id']);
-        // }
-        if (_this.pro_attributes != null) {
-          return _this.pro_attributes.some(function (v) {
-            return v['attrib_id'] === av['attribute_id_id'];
-          });
-        } //}
-
-      });
-      return fo;
+    selectedAllAttributeValues: function selectedAllAttributeValues() {// let fo = Object.values(this.AllAttributes).filter( av => {
+      // // let fo = Object.values(this.AllAttributeValues).filter( av => {
+      //   const result = av.find( ({ d }) => d.id === data );
+      //       return av;
+      //       //return this.form.pro_attributes.some(v => v['attrib_id'] === av['id']);
+      //       // return this.form.pro_attributes.some(v => v['attrib_id'] === av['attribute_id']);
+      // });
+      // return fo;
+      // let fo = Object.values(this.AllAttributes).find( av => {
+      // // let fo = Object.values(this.AllAttributeValues).filter( av => {
+      //   //const result = av.find( ({ d }) => d.id === data );
+      //       //return av;
+      // return this.form.pro_attributes.some(v => v['attrib_id'] === av['id']);
+      //       // return this.form.pro_attributes.some(v => v['attrib_id'] === av['attribute_id']);
+      // });
+      // return fo;
     }
   }),
   //end Computed
   methods: {
+    //###################################### Images Function ################################################
+    showFilePicker: function showFilePicker() {
+      //chlick input file (hidden) showFilePicker click.
+      this.$refs.image_file_link.click();
+    },
+    OnFileChange: function OnFileChange(e) {
+      var _this = this;
+
+      //this.form.pro_images = e.target.files[0]; //for single file 
+      // this.form.pro_images = e.target.files; 
+      this.show_image_files_name = e.target.files; //this is for only show image name to input box using getFilesName()
+
+      var files = e.target.files; //const files = e.target.files;
+
+      Array.from(files).forEach(function (file) {
+        return _this.converBase64(file);
+      });
+      console.log(this.form.pro_images);
+    },
+    converBase64: function converBase64(file) {
+      var _this2 = this;
+
+      //Make image as base64         
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+        return _this2.form.pro_images.push(e.target.result);
+      }; //push base64 to imge
+
+
+      reader.readAsDataURL(file);
+    },
+    OnDragEnter: function OnDragEnter(e) {
+      e.preventDefault();
+      this.dragCount++;
+      this.isDragging = true;
+      return false;
+    },
+    OnDragLeave: function OnDragLeave(e) {
+      e.preventDefault();
+      this.dragCount--;
+      if (this.dragCount <= 0) this.isDragging = false;
+    },
+    onDrop: function onDrop(e) {
+      var _this3 = this;
+
+      e.preventDefault();
+      e.stopPropagation();
+      this.isDragging = false;
+      var files = e.dataTransfer.files;
+      Array.from(files).forEach(function (file) {
+        return _this3.converBase64(file);
+      });
+    },
+    getFileSize: function getFileSize(size) {
+      var fSExt = ['Bytes', 'KB', 'MB', 'GB'];
+      var i = 0;
+
+      while (size > 900) {
+        size /= 1024;
+        i++;
+      }
+
+      return "".concat(Math.round(size * 100) / 100, " ").concat(fSExt[i]);
+    },
+    getFilesName: function getFilesName() {
+      //show name to showFilePicker input field
+      var filesName = [];
+
+      if (this.show_image_files_name.length > 0) {
+        // if(this.form.pro_images.length > 0){
+        var _iterator = _createForOfIteratorHelper(this.show_image_files_name),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var file = _step.value;
+            // for(let file of this.form.pro_images){
+            filesName.push(file.name);
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+
+      return filesName.join(", "); //this code basically join the selected files name separated by comma.
+    },
+    //###################################### End Images Function ################################################
     //###################################### Specification Function ################################################
     add_specificaton: function add_specificaton() {
       this.form.pro_specification.push({
@@ -644,17 +820,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //console.log(data+'='+event.target.checked);
       if (event.target.checked === true) {
         var arrayData = {
-          checked: true,
+          checked: false,
           attrib_id: id,
           attribute: data,
           values: [{
             attribute_value: "",
             quantity: "",
             price: "",
-            priority: ""
+            priority: "",
+            subtract_stock: false
           }]
         };
-        this.form.pro_attributes.push(arrayData); // this.$store.dispatch('commonStoreForAll/fetchAttributeValue', id); //get all Attribute Value
+        this.form.pro_attributes.push(arrayData); //this.$store.dispatch('commonStoreForAll/fetchAttributeList'); //get all Attribute
+        // this.$store.dispatch('commonStoreForAll/fetchAttributeValue', id); //get all Attribute Value
       } else {
         //this.form.pro_attributes.splice(key, 1); //not working properly
         var i = this.form.pro_attributes.map(function (data) {
@@ -679,7 +857,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         attribute_value: "",
         quantity: "",
         price: "",
-        priority: ""
+        priority: "",
+        subtract_stock: false
       }); //console.log(result);
       //console.log(this.form.pro_attributes);
     },
@@ -705,32 +884,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       }
     },
-    //Make image as base64 
-    onImageChange: function onImageChange(e) {
-      var _this2 = this;
-
-      //let file = e.target.files || e.dataTransfer.files;
-      var file = e.target.files[0]; //console.log(file);
-
-      this.ShowOnChangeImage = URL.createObjectURL(file); //display image in form when select image
-
-      var reader = new FileReader(); //let vm = this;
-
-      if (file['size'] > 512000) {
-        //512Kb = 512000Byte
-        toastr.warning('Please select file size within 500kb');
-      } else {
-        reader.onloadend = function (file) {
-          //console.log(reader.result);
-          _this2.form.avatar = reader.result; //push base64 to logo veriable
-        };
-
-        reader.readAsDataURL(file);
-      }
-    },
     // Submit the form via a POST request
     storeFormData: function storeFormData() {
-      var _this3 = this;
+      var _this4 = this;
 
       //console.log(this.form); 
       this.$Progress.start(); //using progress-bar package
@@ -744,54 +900,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
           toastr.success(data.success);
 
-          _this3.$Progress.finish();
+          _this4.$Progress.finish();
 
-          _this3.form.reset(); //reset from after submit	
+          _this4.form.reset(); //reset from after submit	
           // this.$refs.avatar.value = ''; //clear file input tag 
           //this.ShowOnChangeImage = null;
 
 
-          _this3.$router.push({
-            path: '/spa/ProductMaster'
-          }); //route after successfule submit	      
-
-        }
-
-        if (data.errors) {
-          _this3.$Progress.fail();
-
-          toastr.warning(data.errors);
-        }
-      })["catch"](function () {
-        _this3.$Progress.fail();
-
-        toastr.warning('Something is wrong!');
-      });
-    },
-    updateFormData: function updateFormData() {
-      var _this4 = this;
-
-      //console.log(this.form); 
-      this.$Progress.start(); //using progress-bar package
-
-      this.form.put('/spa/Product-Info/' + this.form.id).then(function (_ref4) {
-        var data = _ref4.data;
-
-        if (data.success) {
-          //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update         
-          _this4.$Progress.finish();
-
-          toastr.success(data.success);
-
-          _this4.form.reset(); //reset from after submit
-
-
-          _this4.editMode = false; // this.$refs.avatar.value = ''; //clear file input tag 
-          // this.ShowOnChangeImage = null;
-
           _this4.$router.push({
             path: '/spa/ProductMaster'
-          }); //route after successfule submit
+          }); //route after successfule submit	      
 
         }
 
@@ -802,6 +920,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       })["catch"](function () {
         _this4.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
+    },
+    updateFormData: function updateFormData() {
+      var _this5 = this;
+
+      //console.log(this.form); 
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.put('/spa/Product-Info/' + this.form.id).then(function (_ref4) {
+        var data = _ref4.data;
+
+        if (data.success) {
+          //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update         
+          _this5.$Progress.finish();
+
+          toastr.success(data.success);
+
+          _this5.form.reset(); //reset from after submit
+
+
+          _this5.editMode = false; // this.$refs.avatar.value = ''; //clear file input tag 
+          // this.ShowOnChangeImage = null;
+
+          _this5.$router.push({
+            path: '/spa/ProductMaster'
+          }); //route after successfule submit
+
+        }
+
+        if (data.errors) {
+          _this5.$Progress.fail();
+
+          toastr.warning(data.errors);
+        }
+      })["catch"](function () {
+        _this5.$Progress.fail();
 
         toastr.warning('Something is wrong!');
       });
@@ -838,6 +994,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         if (this.$route.params.data.pro_attributes === null) {
           this.form.pro_attributes = [];
+        }
+
+        if (this.$route.params.data.has_many_image) {
+          this.form.pro_images = [];
         } //   else{
         // 	 // this.form.departments = Object.values(this.$route.params.data.departments).filter(
         // 	 this.form.departments = Object.values(this.$route.params.data.departments).map(
@@ -853,7 +1013,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   //end Methods
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.fillForm();
     this.$store.dispatch('commonStoreForAll/AllStatus', 'Product'); //get status with "Product" keyword
@@ -872,12 +1032,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //call from multi-select-app-one.vue
 
     FireEvent.$on('AutoCompleteSearchForData', function (data) {
-      _this5.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data);
+      _this6.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data);
     });
 
     if (this.editMode === false) {
       setTimeout(function () {
-        _this5.pushToLanguageTranslationArray();
+        _this6.pushToLanguageTranslationArray();
       }, 2000);
     } //console.log(this.form);
 
@@ -1982,84 +2142,75 @@ var render = function() {
                                     background: "rgba(0, 0, 0, 0.06)"
                                   }
                                 },
-                                [
-                                  _vm._l(_vm.AllAttributes, function(
-                                    attrib,
-                                    key
-                                  ) {
-                                    return _c("span", [
-                                      _vm._v(
-                                        "\r\n                " +
-                                          _vm._s(attrib.attribute_name) +
-                                          " \r\n                "
-                                      ),
-                                      _c("input", {
-                                        directives: [
-                                          {
-                                            name: "model",
-                                            rawName: "v-model",
-                                            value: attrib.checked,
-                                            expression: "attrib.checked"
-                                          }
-                                        ],
-                                        ref: attrib.attribute_name,
-                                        refInFor: true,
-                                        attrs: { type: "checkbox" },
-                                        domProps: {
-                                          checked: Array.isArray(attrib.checked)
-                                            ? _vm._i(attrib.checked, null) > -1
-                                            : attrib.checked
+                                _vm._l(_vm.AllAttributes, function(
+                                  attrib,
+                                  key
+                                ) {
+                                  return _c("span", [
+                                    _vm._v(
+                                      "\r\n                " +
+                                        _vm._s(attrib.attribute_name) +
+                                        " \r\n                "
+                                    ),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: attrib.checked,
+                                          expression: "attrib.checked"
+                                        }
+                                      ],
+                                      ref: attrib.attribute_name,
+                                      refInFor: true,
+                                      attrs: { type: "checkbox" },
+                                      domProps: {
+                                        checked: Array.isArray(attrib.checked)
+                                          ? _vm._i(attrib.checked, null) > -1
+                                          : attrib.checked
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.add_attribute(
+                                            attrib.id,
+                                            attrib.attribute_name,
+                                            key,
+                                            $event
+                                          )
                                         },
-                                        on: {
-                                          click: function($event) {
-                                            return _vm.add_attribute(
-                                              attrib.id,
-                                              attrib.attribute_name,
-                                              key,
-                                              $event
-                                            )
-                                          },
-                                          change: function($event) {
-                                            var $$a = attrib.checked,
-                                              $$el = $event.target,
-                                              $$c = $$el.checked ? true : false
-                                            if (Array.isArray($$a)) {
-                                              var $$v = null,
-                                                $$i = _vm._i($$a, $$v)
-                                              if ($$el.checked) {
-                                                $$i < 0 &&
-                                                  _vm.$set(
-                                                    attrib,
-                                                    "checked",
-                                                    $$a.concat([$$v])
-                                                  )
-                                              } else {
-                                                $$i > -1 &&
-                                                  _vm.$set(
-                                                    attrib,
-                                                    "checked",
-                                                    $$a
-                                                      .slice(0, $$i)
-                                                      .concat(
-                                                        $$a.slice($$i + 1)
-                                                      )
-                                                  )
-                                              }
+                                        change: function($event) {
+                                          var $$a = attrib.checked,
+                                            $$el = $event.target,
+                                            $$c = $$el.checked ? true : false
+                                          if (Array.isArray($$a)) {
+                                            var $$v = null,
+                                              $$i = _vm._i($$a, $$v)
+                                            if ($$el.checked) {
+                                              $$i < 0 &&
+                                                _vm.$set(
+                                                  attrib,
+                                                  "checked",
+                                                  $$a.concat([$$v])
+                                                )
                                             } else {
-                                              _vm.$set(attrib, "checked", $$c)
+                                              $$i > -1 &&
+                                                _vm.$set(
+                                                  attrib,
+                                                  "checked",
+                                                  $$a
+                                                    .slice(0, $$i)
+                                                    .concat($$a.slice($$i + 1))
+                                                )
                                             }
+                                          } else {
+                                            _vm.$set(attrib, "checked", $$c)
                                           }
                                         }
-                                      })
-                                    ])
-                                  }),
-                                  _vm._v(
-                                    " \r\n              " +
-                                      _vm._s(_vm.selectedAllAttributeValues) +
-                                      "         \r\n            "
-                                  )
-                                ],
-                                2
+                                      }
+                                    })
+                                  ])
+                                }),
+                                0
                               )
                             ]),
                             _vm._v(" "),
@@ -2308,7 +2459,74 @@ var render = function() {
                                                 })
                                               ]),
                                               _vm._v(" "),
-                                              _c("td", [_vm._v("ok")]),
+                                              _c("td", [
+                                                _c("input", {
+                                                  directives: [
+                                                    {
+                                                      name: "model",
+                                                      rawName: "v-model",
+                                                      value: av.subtract_stock,
+                                                      expression:
+                                                        "av.subtract_stock"
+                                                    }
+                                                  ],
+                                                  attrs: {
+                                                    type: "checkbox",
+                                                    name: "subtract_stock"
+                                                  },
+                                                  domProps: {
+                                                    checked: Array.isArray(
+                                                      av.subtract_stock
+                                                    )
+                                                      ? _vm._i(
+                                                          av.subtract_stock,
+                                                          null
+                                                        ) > -1
+                                                      : av.subtract_stock
+                                                  },
+                                                  on: {
+                                                    change: function($event) {
+                                                      var $$a =
+                                                          av.subtract_stock,
+                                                        $$el = $event.target,
+                                                        $$c = $$el.checked
+                                                          ? true
+                                                          : false
+                                                      if (Array.isArray($$a)) {
+                                                        var $$v = null,
+                                                          $$i = _vm._i($$a, $$v)
+                                                        if ($$el.checked) {
+                                                          $$i < 0 &&
+                                                            _vm.$set(
+                                                              av,
+                                                              "subtract_stock",
+                                                              $$a.concat([$$v])
+                                                            )
+                                                        } else {
+                                                          $$i > -1 &&
+                                                            _vm.$set(
+                                                              av,
+                                                              "subtract_stock",
+                                                              $$a
+                                                                .slice(0, $$i)
+                                                                .concat(
+                                                                  $$a.slice(
+                                                                    $$i + 1
+                                                                  )
+                                                                )
+                                                            )
+                                                        }
+                                                      } else {
+                                                        _vm.$set(
+                                                          av,
+                                                          "subtract_stock",
+                                                          $$c
+                                                        )
+                                                      }
+                                                    }
+                                                  }
+                                                })
+                                              ]),
                                               _vm._v(" "),
                                               _c("td", [
                                                 _c(
@@ -3112,8 +3330,128 @@ var render = function() {
                             }
                           },
                           [
-                            _vm._v(
-                              "\r\n           Pellentesque vestibulum commodo nibh nec blandit. Maecenas neque magna, iaculis tempus turpis ac, ornare sodales tellus. Mauris eget blandit dolor. Quisque tincidunt venenatis vulputate. Morbi euismod molestie tristique. Vestibulum consectetur dolor a vestibulum pharetra. Donec interdum placerat urna nec pharetra. Etiam eget dapibus orci, eget aliquet urna. Nunc at consequat diam. Nunc et felis ut nisl commodo dignissim. In hac habitasse platea dictumst. Praesent imperdiet accumsan ex sit amet facilisis. \r\n        "
+                            _vm.form.has_many_image.length
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass: "row mt-2 mb-4",
+                                    staticStyle: {
+                                      background: "#2196F3",
+                                      margin: "5px 0px 0px 5px",
+                                      padding: "10px",
+                                      "border-radius": "5px"
+                                    }
+                                  },
+                                  [
+                                    _c("div", { staticClass: "col-md-12" }, [
+                                      _c(
+                                        "div",
+                                        { staticClass: "row" },
+                                        _vm._l(
+                                          _vm.form.has_many_image,
+                                          function(mi, key) {
+                                            return _c(
+                                              "div",
+                                              { staticClass: "col-md-3" },
+                                              [
+                                                _c("img", {
+                                                  staticClass:
+                                                    "rounded float-left",
+                                                  attrs: {
+                                                    src: mi.image_url,
+                                                    alt: mi.image_alt,
+                                                    height: "100px",
+                                                    width: "100px"
+                                                  },
+                                                  on: {
+                                                    click: function($event) {
+                                                      return _vm.deleteImage(
+                                                        mi.product_id
+                                                      )
+                                                    }
+                                                  }
+                                                })
+                                              ]
+                                            )
+                                          }
+                                        ),
+                                        0
+                                      )
+                                    ])
+                                  ]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "uploader",
+                                class: { dragging: _vm.isDragging },
+                                on: {
+                                  dragenter: _vm.OnDragEnter,
+                                  dragleave: _vm.OnDragLeave,
+                                  dragover: function($event) {
+                                    $event.preventDefault()
+                                  },
+                                  drop: _vm.onDrop
+                                }
+                              },
+                              [
+                                _c("div", [
+                                  _c("i", {
+                                    staticClass: "fas fa-cloud-upload-alt"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "mb-0" }, [
+                                    _vm._v("Drag your images here")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("p", { staticClass: "mb-0" }, [
+                                    _vm._v("OR")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "file-input" }, [
+                                    _c("label", { attrs: { for: "file" } }, [
+                                      _vm._v("Select files")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      attrs: {
+                                        type: "file",
+                                        id: "file",
+                                        multiple: ""
+                                      },
+                                      on: { change: _vm.OnFileChange }
+                                    })
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "images-preview" },
+                                  _vm._l(_vm.form.pro_images, function(
+                                    image,
+                                    index
+                                  ) {
+                                    return _c(
+                                      "div",
+                                      {
+                                        key: index,
+                                        staticClass: "img-wrapper"
+                                      },
+                                      [
+                                        _c("img", {
+                                          attrs: {
+                                            src: image,
+                                            alt: "Image Uplaoder " + index
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  }),
+                                  0
+                                )
+                              ]
                             )
                           ]
                         )
@@ -3367,7 +3705,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", { attrs: { width: "15%" } }, [_vm._v("Priority")]),
       _vm._v(" "),
-      _c("th", { attrs: { width: "10%" } }, [_vm._v("Stock Update")]),
+      _c("th", { attrs: { width: "10%" } }, [_vm._v("Subtrack Stock")]),
       _vm._v(" "),
       _c("th", { attrs: { width: "15%" } }, [_vm._v("Action")])
     ])

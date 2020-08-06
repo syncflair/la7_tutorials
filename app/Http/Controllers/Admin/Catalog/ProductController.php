@@ -40,7 +40,7 @@ class ProductController extends Controller
             $perPage = 10;
        }
 
-       $data = Product::with('belongsToStatusMaster','belongsToBrand')->paginate($perPage);
+       $data = Product::with('belongsToStatusMaster','belongsToBrand','hasManyImage')->paginate($perPage);
        return response()->json($data);
        Log::info($data);
     }
@@ -94,10 +94,11 @@ class ProductController extends Controller
         $data['pro_qty']=$request->pro_qty;  
         $data['pro_translation'] =$request->pro_translation;        
         $data['pro_category'] =$request->pro_category;
+        $data['pro_attributes'] =$request->pro_attributes;
         $data['pro_specification'] =$request->pro_specification;
         $data['pro_discount'] =$request->pro_discount;
-
-
+        //$data['pro_images'] =$request->pro_images;
+        
         $data['created_by']= \Auth::user()->id;         
         
         if($request->is_enabled == NULL){
@@ -183,6 +184,7 @@ class ProductController extends Controller
                 'brand_id' => $request->brand_id, 
                 'pro_translation' => $request->pro_translation,
                 'pro_category' => $request->pro_category,
+                'pro_attributes' => $request->pro_attributes,
                 'pro_specification' => $request->pro_specification,
                 'pro_discount' => $request->pro_discount,                
            ]);
@@ -233,7 +235,7 @@ class ProductController extends Controller
 
         if(!empty($searchKey) && empty($searchOption)){
         //if($search = \Request::get('q')){
-            $searchResult = Product::with('belongsToStatusMaster','belongsToBrand')
+            $searchResult = Product::with('belongsToStatusMaster','belongsToBrand','hasManyImage')
                 ->where(function($query) use ($searchKey){
                 $query->where('products.sys_pro_name','LIKE','%'.$searchKey.'%')
                         ->orWhere('products.pro_price','LIKE','%'.$searchKey.'%')
@@ -245,7 +247,7 @@ class ProductController extends Controller
             ->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){
-            $searchResult = Product::with('belongsToStatusMaster','belongsToBrand')
+            $searchResult = Product::with('belongsToStatusMaster','belongsToBrand','hasManyImage')
                 ->where(function($query) use ($searchKey, $searchOption){
                     if($searchOption == 'status_name'){
                         $query->where( 'status_master.'.$searchOption,'LIKE','%'.$searchKey.'%');
@@ -258,7 +260,7 @@ class ProductController extends Controller
             ->paginate($perPage);
             
         }else{
-            $searchResult = Product::with('belongsToStatusMaster','belongsToBrand')->paginate($perPage);
+            $searchResult = Product::with('belongsToStatusMaster','belongsToBrand','hasManyImage')->paginate($perPage);
         }
         //return $searchResult;
         return response()->json($searchResult);
