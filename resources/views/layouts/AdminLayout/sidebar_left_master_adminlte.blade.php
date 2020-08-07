@@ -279,6 +279,15 @@
                 </router-link>
               </li>
 
+              <li class="nav-item">
+                <router-link to="/spa/CustomerGroupMaster" class="nav-link">
+                  <i class="nav-icon fas fa-boxes"></i>
+                  <p>
+                    Customer Group
+                  </p>
+                </router-link>
+              </li>
+
             </ul>
           </li><!--/customer-->
 

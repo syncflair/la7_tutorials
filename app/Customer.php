@@ -44,9 +44,15 @@ class Customer extends Authenticatable
 
 
     //My Custome Relation --  user belong to this Role 
-    public function customerType(){
-        //return $this->belongsTo('App\Models\Role');
-        return $this->belongsTo(Models\CustomeType::class);
+    // public function customerType(){
+    //     //return $this->belongsTo('App\Models\Role');
+    //     return $this->belongsTo(Models\CustomeType::class);
+    // }
+
+    //customer belongs to customer group
+    public function belongsToCustomerGroup(){
+        //return $this->belongsTo('App\Models\Customer\CustomerGroup', 'customer_group_id');
+        return $this->belongsTo(Models\Custome\CustomerGroup::class, 'customer_group_id');
     }
 
     public function UserStatus(){

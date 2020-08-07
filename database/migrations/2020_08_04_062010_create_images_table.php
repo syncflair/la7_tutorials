@@ -17,8 +17,8 @@ class CreateImagesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('product_id'); 
             $table->string('image_url',255);
-            $table->string('image_alt',255);
-            $table->string('image_caption',255);
+            $table->string('image_alt',255)->nullable();
+            $table->string('image_caption',255)->nullable();
             $table->timestamps();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });

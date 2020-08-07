@@ -39,7 +39,7 @@ class CreateProductsTable extends Migration
             $table->integer('pro_qty')->nullable();
 
             $table->string('pro_image', 250)->nullable()->comment('Feature Image');
-            $table->json('multi_image')->nullable()->comment('JSON Multi image link');
+            $table->json('pro_images')->nullable()->comment('JSON Multi image link');
             
             $table->boolean('is_enabled')->default(true); // the "is_enabled" attribute   
                    

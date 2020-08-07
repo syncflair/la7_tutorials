@@ -77,19 +77,17 @@ class BrandController extends Controller
            $data['is_enabled']=$request->is_enabled; 
         }       
         
-        $image_64 = $request->brand_img;
-        //$imgPath = $request->file('brand_img');
-        //dd($image);
+        $image_base64 = $request->brand_img;
 
-        if($image_64){
+        if($image_base64){
             //return $imageSize =getimagesize($image);
-            $imageExt = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
+            $imageExt = explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
             if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
                 return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
             }else{
 
                 //new name generate from base64 file
-                $imageName = slug_generator($request->brand_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
+                $imageName = slug_generator($request->brand_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
 
                 //save image using intervention image
                 // \Image::make($image)
@@ -106,22 +104,22 @@ class BrandController extends Controller
              
                 //dd($image);
 
-                $replace = substr($image_64, 0, strpos($image_64, ',')+1); 
-                $image = str_replace($replace, '', $image_64); 
+                $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
+                $image = str_replace($replace, '', $image_base64); 
                 $image = str_replace(' ', '+', $image);                 
 
-                Storage::disk('s3')->put('brand/'.$imageName, base64_decode($image) );
+                Storage::disk('s3')->put('brand/'.$imageName, base64_decode($image) ); //for s3
+                //Storage::disk('public')->put('brand/'.$imageName, base64_decode($image) );//for local storage
 
-                // \Image::make($image_64)
+                // \Image::make($image_base64)
                 //     //->fit(200, 200)
                 //     ->resize(200, 120)
                 //    // ->text('SHORBORAHO', 140, 190)
                 //     ->save(storage_path('app/public/brand/').$imageName);
-                //$s3_url = 'https://sorboraho.s3-ap-southeast-1.amazonaws.com/brand/';
 
                 //s3_url get from constants file 
-                $data['brand_img'] = Config::get('constants.s3_url').'brand/'.$imageName;
-                // $data['brand_img'] = 'storage/brand/'.$imageName;
+                $data['brand_img'] = Config::get('constants.s3_url').'brand/'.$imageName; //for s3
+                // $data['brand_img'] = 'storage/brand/'.$imageName; //for public storage
 
 
             }//end image type check
@@ -181,13 +179,13 @@ class BrandController extends Controller
            $data['is_enabled']=$request->is_enabled; 
         }        
 
-        $image_64 = $request->brand_img;        
+        $image_base64 = $request->brand_img;        
 
         //if(strlen($image) > 150){ /*php function*/
-        if( Str::length($image_64) > 150){ /*larvel helper function*/
+        if( Str::length($image_base64) > 150){ /*larvel helper function*/
 
             //return $imageSize =getimagesize($image);
-            $imageExt = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
+            $imageExt = explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
             if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
                 return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
             }else{
@@ -207,7 +205,7 @@ class BrandController extends Controller
 
 
                 //new name generate from base64 file
-                $imageName = slug_generator($request->brand_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
+                $imageName = slug_generator($request->brand_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
                 //save image using intervention image
                 // \Image::make($image)
                 //     ->resize(200, 120)
@@ -216,14 +214,15 @@ class BrandController extends Controller
                 // $data['brand_img'] = 'storage/brand/'.$imageName;
 
 
-                $replace = substr($image_64, 0, strpos($image_64, ',')+1); 
-                $image = str_replace($replace, '', $image_64); 
-                $image = str_replace(' ', '+', $image);                
-
-                Storage::disk('s3')->put('brand/'.$imageName, base64_decode($image) );
+                $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
+                $image = str_replace($replace, '', $image_base64); 
+                $image = str_replace(' ', '+', $image);      
+                Storage::disk('s3')->put('brand/'.$imageName, base64_decode($image) ); //for s3
+                //Storage::disk('s3')->put('brand/'.$imageName, base64_decode($image) );//for public storage
 
                 //s3_url get from constants file 
                 $data['brand_img'] = Config::get('constants.s3_url').'brand/'.$imageName;
+                // $data['brand_img'] = 'storage/brand/'.$imageName; //for public storage
 
 
 
@@ -252,7 +251,8 @@ class BrandController extends Controller
             $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
             Storage::disk('s3')->delete($parts);
             //dd($parts);
-        }                         
+        } 
+        //delete single image from public storage                        
         // if( File::exists($existing_image->brand_img) ) {  
         //     File::delete($existing_image->brand_img); 
         //     //delete file //use Illuminate\Support\Facades\File; at top            

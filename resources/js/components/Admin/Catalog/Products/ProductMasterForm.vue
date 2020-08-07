@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-7 col-sm-3 text-right">
         	<router-link to="/spa/ProductMaster" class="btn btn-primary btn-flat btn-sm"> 
-        		<i class="fas fa-user-tie"></i> Products
+        		<i class="fas fa-list"></i> All Products
         	</router-link>
         </div>
       </div>
@@ -468,10 +468,15 @@
           
 
           <div  v-if="form.has_many_image.length" class="row mt-2 mb-4" style="background:#2196F3; margin: 5px 0px 0px 5px; padding: 10px; border-radius: 5px;">
-            <div class="col-md-12">
-              <div class="row">
-                <div v-for="(mi, key) in form.has_many_image" class="col-md-3">
-                  <img :src="mi.image_url" @click="deleteImage(mi.product_id)" class="rounded float-left" :alt="mi.image_alt" height="100px" width="100px">
+            <div class="col-md-10 offset-1">             
+                <div class="row align-center">
+                <div v-for="(mi, index) in form.has_many_image" class="col-md-2">
+
+                  <span>
+                    <i @click="deleteImage(mi.id, index)" class="far fa-times-circle" style="cursor: pointer; background: #fff; padding: 4px 2px 2px 2px;   color: red; border-radius: 10px; margin-left: -10px;" title="click to Delete"></i>
+                    <!-- <img :src="'../'+mi.image_url"  class="rounded float-left" :alt="mi.image_alt" height="100px" width="100px">                     -->
+                    <img :src="mi.image_url"  class="rounded float-left" :alt="mi.image_alt" height="100px" width="100px">                    
+                  </span>
                 </div>
               </div>              
             </div>
@@ -525,13 +530,13 @@
 
             <div class="images-preview">
             <!-- <div class="images-preview" v-show="form.pro_images.length "> -->
-                <div class="img-wrapper" v-for="(image, index) in form.pro_images" :key="index">
-                    <img :src="image" :alt="`Image Uplaoder ${index}`">
-                    <!-- <div class="details">
-                        <span class="name" v-text="form.pro_images[index].name"></span>
-                        <span class="size" v-text="getFileSize(form.pro_images[index].size)"></span>
-                    </div> -->
-                </div>
+              <div class="img-wrapper" v-for="(image, index) in form.pro_images" :key="index">
+                <img :src="image" :alt="`Image Uplaoder ${index}`" @click="removeImage(index)" class="pointer" title="Click To Remove">
+                  <!-- <div class="details">
+                      <span class="name" v-text="form.pro_images[index].name"></span>
+                      <span class="size" v-text="getFileSize(form.pro_images[index].size)"></span>
+                  </div> -->
+              </div>
             </div>
 
           </div><!-- end uploader -->
@@ -639,7 +644,7 @@
           //pro_suppliers:[],
           //pro_shops:[],
           //multi_image:[],
-          has_many_image:[],
+          has_many_image:[], //only for get image from database
         })
       }
     },//end data
@@ -655,15 +660,6 @@
           //   const result = av.find( ({ d }) => d.id === data );
           //       return av;
           //       //return this.form.pro_attributes.some(v => v['attrib_id'] === av['id']);
-          //       // return this.form.pro_attributes.some(v => v['attrib_id'] === av['attribute_id']);
-          // });
-          // return fo;
-
-          // let fo = Object.values(this.AllAttributes).find( av => {
-          // // let fo = Object.values(this.AllAttributeValues).filter( av => {
-          //   //const result = av.find( ({ d }) => d.id === data );
-          //       //return av;
-          // return this.form.pro_attributes.some(v => v['attrib_id'] === av['id']);
           //       // return this.form.pro_attributes.some(v => v['attrib_id'] === av['attribute_id']);
           // });
           // return fo;
@@ -708,6 +704,11 @@
         const files = e.dataTransfer.files;
         Array.from(files).forEach(file => this.converBase64(file));
       },
+      removeImage(index){
+        this.form.pro_images.splice(index, 1);
+        //console.log(this.form.pro_images);
+      },
+
       getFileSize(size) { 
         const fSExt = ['Bytes', 'KB', 'MB', 'GB'];
         let i = 0;
@@ -726,6 +727,7 @@
         }
         return filesName.join(", "); //this code basically join the selected files name separated by comma.
       },
+
 
       //###################################### End Images Function ################################################
 
@@ -853,6 +855,20 @@
   			  }) 
   		},
 
+      deleteImage(imageId, index){ //delete Single Image
+        this.$Progress.start(); //using progress-bar package        
+        //console.log(this.form.has_many_image);
+        axios.post('/spa/Product-DeleteImage/'+imageId)
+          .then(({ data }) => {
+              this.form.has_many_image.splice(index, 1);
+              this.$Progress.finish(); 
+              toastr.success(data.success);
+           })
+          .catch(() => {
+            this.$Progress.fail();
+            toastr.warning('Something is wrong!');
+          });
+      },
 
       fillForm(){
       	if(this.$route.params.data != null){

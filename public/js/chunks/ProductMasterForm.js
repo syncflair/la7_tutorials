@@ -594,6 +594,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -672,7 +677,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //pro_suppliers:[],
         //pro_shops:[],
         //multi_image:[],
-        has_many_image: []
+        has_many_image: [] //only for get image from database
+
       })
     };
   },
@@ -684,14 +690,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //   const result = av.find( ({ d }) => d.id === data );
       //       return av;
       //       //return this.form.pro_attributes.some(v => v['attrib_id'] === av['id']);
-      //       // return this.form.pro_attributes.some(v => v['attrib_id'] === av['attribute_id']);
-      // });
-      // return fo;
-      // let fo = Object.values(this.AllAttributes).find( av => {
-      // // let fo = Object.values(this.AllAttributeValues).filter( av => {
-      //   //const result = av.find( ({ d }) => d.id === data );
-      //       //return av;
-      // return this.form.pro_attributes.some(v => v['attrib_id'] === av['id']);
       //       // return this.form.pro_attributes.some(v => v['attrib_id'] === av['attribute_id']);
       // });
       // return fo;
@@ -752,6 +750,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       Array.from(files).forEach(function (file) {
         return _this3.converBase64(file);
       });
+    },
+    removeImage: function removeImage(index) {
+      this.form.pro_images.splice(index, 1); //console.log(this.form.pro_images);
     },
     getFileSize: function getFileSize(size) {
       var fSExt = ['Bytes', 'KB', 'MB', 'GB'];
@@ -962,6 +963,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         toastr.warning('Something is wrong!');
       });
     },
+    deleteImage: function deleteImage(imageId, index) {
+      var _this6 = this;
+
+      //delete Single Image
+      this.$Progress.start(); //using progress-bar package        
+      //console.log(this.form.has_many_image);
+
+      axios.post('/spa/Product-DeleteImage/' + imageId).then(function (_ref5) {
+        var data = _ref5.data;
+
+        _this6.form.has_many_image.splice(index, 1);
+
+        _this6.$Progress.finish();
+
+        toastr.success(data.success);
+      })["catch"](function () {
+        _this6.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
+    },
     fillForm: function fillForm() {
       if (this.$route.params.data != null) {
         this.editMode = true;
@@ -1013,7 +1035,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   //end Methods
   created: function created() {
-    var _this6 = this;
+    var _this7 = this;
 
     this.fillForm();
     this.$store.dispatch('commonStoreForAll/AllStatus', 'Product'); //get status with "Product" keyword
@@ -1032,12 +1054,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //call from multi-select-app-one.vue
 
     FireEvent.$on('AutoCompleteSearchForData', function (data) {
-      _this6.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data);
+      _this7.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data);
     });
 
     if (this.editMode === false) {
       setTimeout(function () {
-        _this6.pushToLanguageTranslationArray();
+        _this7.pushToLanguageTranslationArray();
       }, 2000);
     } //console.log(this.form);
 
@@ -1111,8 +1133,8 @@ var render = function() {
                 attrs: { to: "/spa/ProductMaster" }
               },
               [
-                _c("i", { staticClass: "fas fa-user-tie" }),
-                _vm._v(" Products\r\n        \t")
+                _c("i", { staticClass: "fas fa-list" }),
+                _vm._v(" All Products\r\n        \t")
               ]
             )
           ],
@@ -3343,41 +3365,67 @@ var render = function() {
                                     }
                                   },
                                   [
-                                    _c("div", { staticClass: "col-md-12" }, [
-                                      _c(
-                                        "div",
-                                        { staticClass: "row" },
-                                        _vm._l(
-                                          _vm.form.has_many_image,
-                                          function(mi, key) {
-                                            return _c(
-                                              "div",
-                                              { staticClass: "col-md-3" },
-                                              [
-                                                _c("img", {
-                                                  staticClass:
-                                                    "rounded float-left",
-                                                  attrs: {
-                                                    src: mi.image_url,
-                                                    alt: mi.image_alt,
-                                                    height: "100px",
-                                                    width: "100px"
-                                                  },
-                                                  on: {
-                                                    click: function($event) {
-                                                      return _vm.deleteImage(
-                                                        mi.product_id
-                                                      )
-                                                    }
-                                                  }
-                                                })
-                                              ]
-                                            )
-                                          }
-                                        ),
-                                        0
-                                      )
-                                    ])
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-md-10 offset-1" },
+                                      [
+                                        _c(
+                                          "div",
+                                          { staticClass: "row align-center" },
+                                          _vm._l(
+                                            _vm.form.has_many_image,
+                                            function(mi, index) {
+                                              return _c(
+                                                "div",
+                                                { staticClass: "col-md-2" },
+                                                [
+                                                  _c("span", [
+                                                    _c("i", {
+                                                      staticClass:
+                                                        "far fa-times-circle",
+                                                      staticStyle: {
+                                                        cursor: "pointer",
+                                                        background: "#fff",
+                                                        padding:
+                                                          "4px 2px 2px 2px",
+                                                        color: "red",
+                                                        "border-radius": "10px",
+                                                        "margin-left": "-10px"
+                                                      },
+                                                      attrs: {
+                                                        title: "click to Delete"
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          return _vm.deleteImage(
+                                                            mi.id,
+                                                            index
+                                                          )
+                                                        }
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c("img", {
+                                                      staticClass:
+                                                        "rounded float-left",
+                                                      attrs: {
+                                                        src: mi.image_url,
+                                                        alt: mi.image_alt,
+                                                        height: "100px",
+                                                        width: "100px"
+                                                      }
+                                                    })
+                                                  ])
+                                                ]
+                                              )
+                                            }
+                                          ),
+                                          0
+                                        )
+                                      ]
+                                    )
                                   ]
                                 )
                               : _vm._e(),
@@ -3441,9 +3489,16 @@ var render = function() {
                                       },
                                       [
                                         _c("img", {
+                                          staticClass: "pointer",
                                           attrs: {
                                             src: image,
-                                            alt: "Image Uplaoder " + index
+                                            alt: "Image Uplaoder " + index,
+                                            title: "Click To Remove"
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.removeImage(index)
+                                            }
                                           }
                                         })
                                       ]

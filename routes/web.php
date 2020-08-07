@@ -118,6 +118,11 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/customer-Info', 'Admin\Customer\CustomerController',
       ['except'=>['create','show','edit'] ]);
 
+    Route::resource('spa/customerGroup-Info', 'Admin\Customer\CustomerGroupController',
+      ['except'=>['create','show','edit'] ]);
+
+
+
     //Supplier control Route For Admin Dashboard
     Route::get('spa/searchSupplierData', 'Admin\Supplier\SupplierController@search'); //search
     Route::post('spa/supplier-change-notify/{id}/{notifyValue}', 'Admin\Supplier\SupplierController@ChangeNotify');
@@ -133,6 +138,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/CategoryMaster-Info', 'Admin\Catalog\CategoryController', 
       ['except'=>['create','show','edit'] ]);
 
+    Route::post('spa/Product-DeleteImage/{id}', 'Admin\Catalog\ProductController@DeleteImage');
     Route::get('spa/searchProductData', 'Admin\Catalog\ProductController@search'); //search    
     Route::resource('spa/Product-Info', 'Admin\Catalog\ProductController', 
         ['except'=>['create','edit','show'] ]);
