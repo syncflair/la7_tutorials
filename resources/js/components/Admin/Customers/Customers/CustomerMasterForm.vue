@@ -65,7 +65,7 @@
 
 	          	<div class="col-md-5 col-sm-6">
 
-	          		<div class="form-group">
+	          		<!-- <div class="form-group">
 			          <label for="role_id"">Customer Group *</label>
 		              <select v-model="form.customer_group" class="form-control form-control-sm" id="customer_group" name="customer_group" :class="{ 'is-invalid': form.errors.has('customer_group') }" >
 		              	  <option disabled value="">Select customer Group ..</option>                
@@ -74,6 +74,17 @@
 		                  </option>			                  
 		               </select>
 		               <has-error :form="form" field="customer_group"></has-error>			                      
+			        </div> -->
+
+			        <div class="form-group">
+			          <label for="role_id"">Customer Group *</label>
+		              <select v-model="form.customer_group_id" class="form-control form-control-sm" id="customer_group_id" name="customer_group_id" :class="{ 'is-invalid': form.errors.has('customer_group_id') }" >
+		              	  <option disabled value="">Select customer Group</option>                
+		                  <option v-for="c_group in allCustomerGroups" v-bind:value="c_group.id">
+		                  	{{c_group.group_name}}
+		                  </option>			                  
+		               </select>
+		               <has-error :form="form" field="customer_group_id"></has-error>			                      
 			        </div>
 
 			        <div class="form-group">
@@ -125,10 +136,10 @@
 		 data () {
 	      return {
 	        editMode: false, //Use this for add edit using the same form   
-	        CustomerGroups: [
-			      { name: 'Default' },
-			      { name: 'Wholesale' },
-			    ],
+	      //   CustomerGroups: [
+			    //   { name: 'Default' },
+			    //   { name: 'Wholesale' },
+			    // ],
 
 	        // Create a new form instance
 	        form: new Form({
@@ -138,8 +149,9 @@
 	          phone: '',
 	          password: '',
 	          password_confirmation:'',
-	          customer_group:'',
+	          //customer_group:'',
 	          status_id: '',
+	          customer_group_id:'',
 	          enable_notify: '',
 	          
 	        })
@@ -148,7 +160,7 @@
 
 	    computed: {
 	        ...mapState( 'CustomerForAdminStore', ['pagination'] ),
-	        ...mapState( 'commonStoreForAll', ['userStatus'] ) /*userStatus get form commonSotreForAll*/	        
+	        ...mapState( 'commonStoreForAll', ['userStatus','allCustomerGroups'] ) 	        
       	},
 
 	    methods:{
@@ -235,6 +247,7 @@
 
 	    created(){
 	    	this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
+	    	this.$store.dispatch('commonStoreForAll/fetchCustomerGroups'); //get customer Groups
 
             FireEvent.$on('AfterChange', () => {
 		        this.$Progress.start();

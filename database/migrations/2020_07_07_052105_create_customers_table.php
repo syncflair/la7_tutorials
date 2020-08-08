@@ -23,7 +23,8 @@ class CreateCustomersTable extends Migration
             $table->string('email_verification_code', 225)->nullable()->comment('Custom Email Verification Code');
             $table->string('phone_verification_code', 10)->nullable()->comment('Custom phone Verification Code');
             $table->string('password');  
-            $table->enum('customer_group', ['Default', 'Wholesale']);        
+           // $table->enum('customer_group', ['Default', 'Wholesale']); 
+            $table->unsignedInteger('customer_group_id'); 
             $table->unsignedInteger('customer_type_id')->default(1); 
             $table->unsignedInteger('status_id')->default(4); //4 Not Verified
             $table->boolean('enable_notify')->default(false);

@@ -43,7 +43,10 @@
             <td scope="col"> {{ customer.name }} </td>
             <td > {{ customer.email }} </td> 
             <td > {{ customer.phone }} </td>          
-          	<td > {{ customer.customer_group }} </td> 
+            <td > 
+              <span v-if="customer.customer_group_id != 0"> {{ customer.belongs_to_customer_group.group_name }} </span> 
+            </td> 
+          	<!-- <td > {{ customer.customer_group }} </td>  -->
             
             <td style="text-align:center;">
             	<span @click="inactiveCustomer(customer.id)" v-show="customer.status_id === 1" title="Active Customer, Click to inactive"><i class="fas fa-user-check green pointer"></i></span>

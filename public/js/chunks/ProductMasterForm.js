@@ -599,6 +599,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -617,19 +623,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         name: 'Downloadable'
       }],
-      CustomerGroups: [{
-        name: 'Default'
-      }, {
-        name: 'Wholesale'
-      }],
+      // CustomerGroups: [
+      //   { name: 'Default' },
+      //   { name: 'Wholesale' },
+      // ],    
       //form multiselect app for category
       placeHolder: 'Search Category',
       filterBy: 'cat_name',
       valueProperty: 'id',
-      //multiselect app for category
-      placeHolder_pro: 'Search Product',
-      filterBy_pro: 'sys_pro_name',
-      valueProperty_pro: 'id',
+      //multiselect app for Supplier
+      placeHolder_supp: 'Search Supplier or Shop',
+      filterBy_supp: 'name',
+      valueProperty_supp: 'id',
       //for images manipulation
       show_image_files_name: [],
       //use only to show image name in text field
@@ -674,7 +679,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         related_products: [],
         pro_translation: [],
         pro_images: [],
-        //pro_suppliers:[],
+        pro_suppliers: [],
         //pro_shops:[],
         //multi_image:[],
         has_many_image: [] //only for get image from database
@@ -683,7 +688,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['allLanguages', 'AllStatus', 'AllBrands', 'AllCategory', 'autoSearchCategories', 'AllSpecifications', 'AllAttributes', 'AllAttributeValues']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['allLanguages', 'AllStatus', 'AllBrands', 'AllCategory', 'autoSearchCategories', 'AllSpecifications', 'AllAttributes', 'AllAttributeValues', 'allCustomerGroups', 'autoSearchSuppliers']), {
     //...mapState( 'ProductMasterStore', ['AllProducts','autoSearchProducts'] ),  
     selectedAllAttributeValues: function selectedAllAttributeValues() {// let fo = Object.values(this.AllAttributes).filter( av => {
       // // let fo = Object.values(this.AllAttributeValues).filter( av => {
@@ -1051,10 +1056,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$store.dispatch('commonStoreForAll/fetchAttributeList'); //get all Attribute
 
     this.$store.dispatch('commonStoreForAll/fetchAttributeValue'); //get all Attribute Value
+
+    this.$store.dispatch('commonStoreForAll/fetchCustomerGroups'); //get all customer Group
     //call from multi-select-app-one.vue
 
-    FireEvent.$on('AutoCompleteSearchForData', function (data) {
+    FireEvent.$on('AutoCompleteSearchForDataOne', function (data) {
       _this7.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data);
+    });
+    FireEvent.$on('AutoCompleteSearchForDataTwo', function (data) {
+      _this7.$store.dispatch('commonStoreForAll/AutoCompleteSearchForSuppliers', data);
     });
 
     if (this.editMode === false) {
@@ -2133,13 +2143,54 @@ var render = function() {
                               ])
                             ]),
                             _vm._v(" "),
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-md-12" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c(
+                                      "label",
+                                      {
+                                        staticStyle: {
+                                          "margin-left": "0px !important"
+                                        }
+                                      },
+                                      [_vm._v("Select Supplier")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("multi-select-app-two", {
+                                      attrs: {
+                                        options: _vm.form.pro_suppliers,
+                                        autoSearchOptions:
+                                          _vm.autoSearchSuppliers,
+                                        filterBy: _vm.filterBy_supp,
+                                        "place-holder": _vm.placeHolder_supp,
+                                        "value-property": _vm.valueProperty_supp
+                                      },
+                                      model: {
+                                        value: _vm.form.pro_suppliers,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.form,
+                                            "pro_suppliers",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "form.pro_suppliers"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
                             _vm._m(1),
                             _vm._v(" "),
                             _vm._m(2),
                             _vm._v(" "),
-                            _vm._m(3),
-                            _vm._v(" "),
-                            _vm._m(4)
+                            _vm._m(3)
                           ]
                         ),
                         _vm._v(" "),
@@ -2283,7 +2334,7 @@ var render = function() {
                                             "table-sm table table-striped"
                                         },
                                         [
-                                          _vm._m(5, true),
+                                          _vm._m(4, true),
                                           _vm._v(" "),
                                           _vm._l(pa.values, function(av, key) {
                                             return _c("tr", [
@@ -2669,7 +2720,7 @@ var render = function() {
                                     staticClass: "table-sm table table-striped"
                                   },
                                   [
-                                    _vm._m(6),
+                                    _vm._m(5),
                                     _vm._v(" "),
                                     _vm._l(_vm.form.pro_specification, function(
                                       input,
@@ -2936,7 +2987,7 @@ var render = function() {
                                     staticClass: "table-sm table table-striped"
                                   },
                                   [
-                                    _vm._m(7),
+                                    _vm._m(6),
                                     _vm._v(" "),
                                     _vm._l(_vm.form.pro_discount, function(
                                       input,
@@ -3009,18 +3060,20 @@ var render = function() {
                                                   ),
                                                   _vm._v(" "),
                                                   _vm._l(
-                                                    _vm.CustomerGroups,
+                                                    _vm.allCustomerGroups,
                                                     function(cg) {
                                                       return _c(
                                                         "option",
                                                         {
                                                           domProps: {
-                                                            value: cg.name
+                                                            value: cg.id
                                                           }
                                                         },
                                                         [
                                                           _vm._v(
-                                                            _vm._s(cg.name)
+                                                            _vm._s(
+                                                              cg.group_name
+                                                            )
                                                           )
                                                         ]
                                                       )
@@ -3689,20 +3742,6 @@ var staticRenderFns = [
           ])
         ]
       )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { staticStyle: { "margin-left": "0px !important" } }, [
-            _vm._v("Select Supplier")
-          ])
-        ])
-      ])
     ])
   },
   function() {

@@ -231,14 +231,14 @@
             <div class="col-md-12">
               <div class="form-group" style="">
                 <label style="margin-left: 0px !important;">Select Supplier</label>
-                <!-- <multi-select-app-one
-                  :options="AllCategory"
-                  :autoSearchOptions="autoSearchCategories" 
-                  :filterBy="filterBy"
-                  :place-holder="placeHolder"
-                  :value-property="valueProperty"
-                  v-model="form.pro_category" 
-                /> -->
+                <multi-select-app-two
+                  :options="form.pro_suppliers"
+                  :autoSearchOptions="autoSearchSuppliers" 
+                  :filterBy="filterBy_supp"
+                  :place-holder="placeHolder_supp"
+                  :value-property="valueProperty_supp"
+                  v-model="form.pro_suppliers" 
+                />
               </div>
             </div>
           </div>
@@ -419,10 +419,16 @@
 
                 <tr v-for="(input, key) in form.pro_discount" :key="key">
                   <td >
-                    <div class="form-group-">
+                    <!-- <div class="form-group-">
                       <select v-model="input.customer_group" class="form-control" id="" name="customer_group" >
                             <option disabled value="">Select customer group ..</option>                
                             <option v-for="cg in CustomerGroups" v-bind:value="cg.name">{{cg.name}}</option> 
+                      </select>
+                    </div> -->
+                    <div class="form-group-">
+                      <select v-model="input.customer_group" class="form-control" id="" name="customer_group" >
+                            <option disabled value="">Select customer group ..</option>                
+                            <option v-for="cg in allCustomerGroups" v-bind:value="cg.id">{{cg.group_name}}</option> 
                       </select>
                     </div>
                   </td>
@@ -592,20 +598,20 @@
   	      { name: 'Downloadable'},
 		    ],  
 
-        CustomerGroups: [
-          { name: 'Default' },
-          { name: 'Wholesale' },
-        ],    
+        // CustomerGroups: [
+        //   { name: 'Default' },
+        //   { name: 'Wholesale' },
+        // ],    
 
     		//form multiselect app for category
     		placeHolder:'Search Category',
     		filterBy:'cat_name',
     		valueProperty: 'id',
 
-        //multiselect app for category
-        placeHolder_pro:'Search Product',
-        filterBy_pro:'sys_pro_name',
-        valueProperty_pro: 'id',
+        //multiselect app for Supplier
+        placeHolder_supp:'Search Supplier or Shop',
+        filterBy_supp:'name',
+        valueProperty_supp: 'id',
 
         //for images manipulation
         show_image_files_name: [], //use only to show image name in text field
@@ -641,7 +647,7 @@
           related_products:[],
           pro_translation: [],
           pro_images:[],
-          //pro_suppliers:[],
+          pro_suppliers:[],
           //pro_shops:[],
           //multi_image:[],
           has_many_image:[], //only for get image from database
@@ -651,7 +657,7 @@
 
     computed: {
     	/*userStatus get form commonSotreForAll*/	
-        ...mapState( 'commonStoreForAll', ['allLanguages','AllStatus','AllBrands','AllCategory','autoSearchCategories','AllSpecifications','AllAttributes','AllAttributeValues'] ),        
+        ...mapState( 'commonStoreForAll', ['allLanguages','AllStatus','AllBrands','AllCategory','autoSearchCategories','AllSpecifications','AllAttributes','AllAttributeValues','allCustomerGroups','autoSearchSuppliers'] ),        
         //...mapState( 'ProductMasterStore', ['AllProducts','autoSearchProducts'] ),  
 
         selectedAllAttributeValues() {
@@ -918,12 +924,16 @@
       this.$store.dispatch('commonStoreForAll/fetchSpecifications'); //get all Specification
       this.$store.dispatch('commonStoreForAll/fetchAttributeList'); //get all Attribute
       this.$store.dispatch('commonStoreForAll/fetchAttributeValue'); //get all Attribute Value
+      this.$store.dispatch('commonStoreForAll/fetchCustomerGroups'); //get all customer Group
 
 
       //call from multi-select-app-one.vue
-		  FireEvent.$on('AutoCompleteSearchForData', (data) => {
-	        this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data ); 
+		  FireEvent.$on('AutoCompleteSearchForDataOne', (data) => {
+          this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data ); 
 	    });
+      FireEvent.$on('AutoCompleteSearchForDataTwo', (data) => {
+          this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForSuppliers', data ); 
+      });
 
       if( this.editMode === false){
           setTimeout(() => {

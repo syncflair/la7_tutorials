@@ -131,6 +131,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -578,7 +584,7 @@ var render = function() {
                 "th",
                 {
                   staticClass: "sortable-title",
-                  staticStyle: { width: "5%" },
+                  staticStyle: { width: "10%" },
                   attrs: { scope: "col" },
                   on: {
                     click: function($event) {
@@ -586,7 +592,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("Type")]
+                [_vm._v("Type / Shop")]
               ),
               _vm._v(" "),
               _c(
@@ -707,7 +713,19 @@ var render = function() {
                   _c("td", [_vm._v(" " + _vm._s(supplier.phone) + " ")]),
                   _vm._v(" "),
                   _c("td", [
-                    _vm._v(" " + _vm._s(supplier.supplier_type) + " ")
+                    _c("small", [_vm._v(_vm._s(supplier.supplier_type) + " ")]),
+                    _vm._v(" "),
+                    supplier.brand_shop_id != null
+                      ? _c("small", [
+                          _vm._v(
+                            " \r\n                ( " +
+                              _vm._s(
+                                supplier.belongs_to_brand_shop.brand_shop_title
+                              ) +
+                              " )\r\n              "
+                          )
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("td", [

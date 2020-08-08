@@ -75,11 +75,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -305,125 +300,104 @@ var render = function() {
                     _c("div", { staticClass: "card--" }, [
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-md-12 col-sm-12" }, [
-                          _c("div", { staticClass: "form-group row" }, [
-                            _c(
-                              "label",
-                              {
-                                staticClass: "col-sm-3 col-form-label",
-                                attrs: { for: "job_title_name" }
-                              },
-                              [_vm._v("Job Title")]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "col-sm-9" },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.job_title_name,
-                                      expression: "form.job_title_name"
+                          _c(
+                            "div",
+                            { staticClass: "form-group row" },
+                            [
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "col-form-label",
+                                  attrs: { for: "job_title_name" }
+                                },
+                                [_vm._v("Job Title")]
+                              ),
+                              _vm._v(" "),
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.job_title_name,
+                                    expression: "form.job_title_name"
+                                  }
+                                ],
+                                ref: "job_title_name",
+                                staticClass: "form-control form-control-sm-",
+                                class: {
+                                  "is-invalid": _vm.form.errors.has(
+                                    "job_title_name"
+                                  )
+                                },
+                                attrs: {
+                                  type: "text",
+                                  name: "job_title_name",
+                                  placeholder: "Job Title"
+                                },
+                                domProps: { value: _vm.form.job_title_name },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
                                     }
-                                  ],
-                                  ref: "job_title_name",
-                                  staticClass: "form-control form-control-sm",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "job_title_name"
+                                    _vm.$set(
+                                      _vm.form,
+                                      "job_title_name",
+                                      $event.target.value
                                     )
-                                  },
-                                  attrs: {
-                                    type: "text",
-                                    name: "job_title_name",
-                                    placeholder: "Job Title"
-                                  },
-                                  domProps: { value: _vm.form.job_title_name },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "job_title_name",
-                                        $event.target.value
-                                      )
-                                    }
                                   }
-                                }),
-                                _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: {
-                                    form: _vm.form,
-                                    field: "job_title_name"
-                                  }
-                                })
-                              ],
-                              1
-                            )
-                          ]),
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: {
+                                  form: _vm.form,
+                                  field: "job_title_name"
+                                }
+                              })
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group row" }, [
                             _c(
                               "label",
                               {
-                                staticClass: "col-sm-3 col-form-label",
+                                staticClass: "col-form-label",
                                 attrs: { for: "job_title_desc" }
                               },
                               [_vm._v("Details")]
                             ),
                             _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "col-sm-9" },
-                              [
-                                _c("textarea", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.job_title_desc,
-                                      expression: "form.job_title_desc"
-                                    }
-                                  ],
-                                  ref: "job_title_desc",
-                                  staticClass: "form-control form-control-sm",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "job_title_desc"
-                                    )
-                                  },
-                                  attrs: {
-                                    name: "job_title_desc",
-                                    placeholder: "Job Title details"
-                                  },
-                                  domProps: { value: _vm.form.job_title_desc },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
-                                      }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "job_title_desc",
-                                        $event.target.value
-                                      )
-                                    }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: {
-                                    form: _vm.form,
-                                    field: "job_title_desc"
-                                  }
-                                })
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.job_title_desc,
+                                  expression: "form.job_title_desc"
+                                }
                               ],
-                              1
-                            )
+                              ref: "job_title_desc",
+                              staticClass: "form-control form-control-sm-",
+                              attrs: {
+                                name: "job_title_desc",
+                                placeholder: "Job Title details"
+                              },
+                              domProps: { value: _vm.form.job_title_desc },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "job_title_desc",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-check" }, [

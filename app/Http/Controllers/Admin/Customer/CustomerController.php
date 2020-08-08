@@ -30,10 +30,10 @@ class CustomerController extends Controller
        if(!empty($request->perPage)){
             $perPage = $request->perPage;
        }else{
-            $perPage = 10;
+            $perPage = 100;
        }
 
-        $data = Customer::paginate($perPage);
+        $data = Customer::with('belongsToCustomerGroup')->paginate($perPage);
 
         return response()->json($data);
     }
@@ -62,9 +62,13 @@ class CustomerController extends Controller
             //'phone' => 'numeric|regex:/^01[1|3-9]\d{8}$/|unique:customers,phone', //this formate will not work
             'phone' => ['numeric','regex:/^01[1|3-9]\d{8}$/', 'unique:customers,phone'], //right way to use preg_match
             'status_id' => ['required','numeric'], 
-            'customer_group' => ['required'],
+            //'customer_group' => ['required'],
+            'customer_group_id' => ['required'],
             'password' => ['required','min:8','max:50'],  //regex:/[@$!%*#?&]/  //confirmed
             'password_confirmation' => ['sometimes','same:password'],
+        ],
+        [
+            'customer_group_id.required' => 'Customer Group is required',
         ]);
 
         $customer = Customer::create([
@@ -73,7 +77,8 @@ class CustomerController extends Controller
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
             'status_id' => $request->status_id,
-            'customer_group' => $request->customer_group,
+            'customer_group_id' => $request->customer_group_id,
+            //'customer_group' => $request->customer_group,
             'enable_notify' => $request->enable_notify == NULL ? 0 : $request->enable_notify,
             'created_by' => \Auth::user()->id, 
         ]);
@@ -123,9 +128,13 @@ class CustomerController extends Controller
             //'phone' => 'numeric|regex:/^01[1|3-9]\d{8}$/|unique:customers,phone,'.$id, //this formate will not work
             'phone' => ['numeric','regex:/^01[1|3-9]\d{8}$/', 'unique:customers,phone,'.$id ], //right way to use preg_match
             'status_id' => ['required','numeric'], 
-            'customer_group' => ['required'],
+            //'customer_group' => ['required'],
+            'customer_group_id' => ['required'],
             'password' => ['nullable','sometimes','min:8','max:50'],  //regex:/[@$!%*#?&]/  //confirmed
             'password_confirmation' => ['sometimes','same:password'],
+        ],
+        [
+            'customer_group_id.required' => 'Customer Group is required',
         ]);
 
         //existing password query
@@ -139,7 +148,8 @@ class CustomerController extends Controller
         $customer->phone = $request->phone;
         $customer->password = $request->password == null ? $existing_password : Hash::make($request->password);
         $customer->status_id = $request->status_id;
-        $customer->customer_group = $request->customer_group;
+        $customer->customer_group_id = $request->customer_group_id;
+        //$customer->customer_group = $request->customer_group;
         $customer->enable_notify = $request->enable_notify == NULL ? 0 : $request->enable_notify;
         $customer->updated_by = \Auth::user()->id; 
         $customer->save();
@@ -185,7 +195,7 @@ class CustomerController extends Controller
         if(!empty($request->perPage)){
             $perPage = $request->perPage;
         }else{
-            $perPage = 50;
+            $perPage = 100;
         }
 
         $searchKey = $request->q;
@@ -193,7 +203,7 @@ class CustomerController extends Controller
 
         if(!empty($searchKey) && empty($searchOption)){
         //if($search = \Request::get('q')){
-            $searchResult = Customer::where(function($query) use ($searchKey){
+            $searchResult = Customer::with('belongsToCustomerGroup')->where(function($query) use ($searchKey){
                 $query->where('customers.name','LIKE','%'.$searchKey.'%')
                         ->orWhere('customers.email','LIKE','%'.$searchKey.'%')
                         ->orWhere('customers.phone','LIKE','%'.$searchKey.'%')
@@ -206,7 +216,7 @@ class CustomerController extends Controller
             ->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){
-            $searchResult = Customer::where(function($query) use ($searchKey, $searchOption){
+            $searchResult = Customer::with('belongsToCustomerGroup')->where(function($query) use ($searchKey, $searchOption){
                 if($searchOption == 'us_name'){
                     $query->where( 'user_status.'.$searchOption,'LIKE','%'.$searchKey.'%');
                 }else{
@@ -220,7 +230,7 @@ class CustomerController extends Controller
             
         }else{
             //$searchResult = Customer::latest()->paginate(10);
-            $searchResult = Customer::paginate($perPage);
+            $searchResult = Customer::with('belongsToCustomerGroup')->paginate($perPage);
         }
         //return $searchResult;
         return response()->json($searchResult);

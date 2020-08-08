@@ -134,6 +134,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -142,11 +153,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       editMode: false,
       //Use this for add edit using the same form   
-      CustomerGroups: [{
-        name: 'Default'
-      }, {
-        name: 'Wholesale'
-      }],
+      //   CustomerGroups: [
+      //   { name: 'Default' },
+      //   { name: 'Wholesale' },
+      // ],
       // Create a new form instance
       form: new Form({
         id: '',
@@ -155,14 +165,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         phone: '',
         password: '',
         password_confirmation: '',
-        customer_group: '',
+        //customer_group:'',
         status_id: '',
+        customer_group_id: '',
         enable_notify: ''
       })
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('CustomerForAdminStore', ['pagination']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('CustomerForAdminStore', ['pagination']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'allCustomerGroups'])),
   methods: {
     //this event call from CustomerList component
     addCustomer: function addCustomer() {
@@ -256,6 +267,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     var _this4 = this;
 
     this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
+
+    this.$store.dispatch('commonStoreForAll/fetchCustomerGroups'); //get customer Groups
 
     FireEvent.$on('AfterChange', function () {
       _this4.$Progress.start();
@@ -666,19 +679,19 @@ var render = function() {
                                     {
                                       name: "model",
                                       rawName: "v-model",
-                                      value: _vm.form.customer_group,
-                                      expression: "form.customer_group"
+                                      value: _vm.form.customer_group_id,
+                                      expression: "form.customer_group_id"
                                     }
                                   ],
                                   staticClass: "form-control form-control-sm",
                                   class: {
                                     "is-invalid": _vm.form.errors.has(
-                                      "customer_group"
+                                      "customer_group_id"
                                     )
                                   },
                                   attrs: {
-                                    id: "customer_group",
-                                    name: "customer_group"
+                                    id: "customer_group_id",
+                                    name: "customer_group_id"
                                   },
                                   on: {
                                     change: function($event) {
@@ -695,7 +708,7 @@ var render = function() {
                                         })
                                       _vm.$set(
                                         _vm.form,
-                                        "customer_group",
+                                        "customer_group_id",
                                         $event.target.multiple
                                           ? $$selectedVal
                                           : $$selectedVal[0]
@@ -707,17 +720,19 @@ var render = function() {
                                   _c(
                                     "option",
                                     { attrs: { disabled: "", value: "" } },
-                                    [_vm._v("Select customer Group ..")]
+                                    [_vm._v("Select customer Group")]
                                   ),
                                   _vm._v(" "),
-                                  _vm._l(_vm.CustomerGroups, function(c_group) {
+                                  _vm._l(_vm.allCustomerGroups, function(
+                                    c_group
+                                  ) {
                                     return _c(
                                       "option",
-                                      { domProps: { value: c_group.name } },
+                                      { domProps: { value: c_group.id } },
                                       [
                                         _vm._v(
                                           "\r\n\t\t                  \t" +
-                                            _vm._s(c_group.name) +
+                                            _vm._s(c_group.group_name) +
                                             "\r\n\t\t                  "
                                         )
                                       ]
@@ -730,7 +745,7 @@ var render = function() {
                               _c("has-error", {
                                 attrs: {
                                   form: _vm.form,
-                                  field: "customer_group"
+                                  field: "customer_group_id"
                                 }
                               })
                             ],

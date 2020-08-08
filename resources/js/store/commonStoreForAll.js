@@ -13,17 +13,21 @@ const commonStoreForAll ={
       autoSearchDepartments:{},
       userStatus: {}, //get data from user_status table
 	    AllStatus: {}, //get status for order, payment, purchase, porduct
-      jobTitles:{},
+      jobTitles:{},      
 	    Countries:{},
       Divisions:{}, 
       Districts:{},
       Dist_Zones:{},
       AllAttributes:{}, 
       AllAttributeValues:{},
-      AllBrands:{},   
+      AllBrands:{},  
+      allBrandShops:{}, 
       AllCategory:{},
-      autoSearchCategories:{},  
+      autoSearchCategories:{}, 
+      autoSearchSuppliers:{}, 
       AllSpecifications:{},
+      allCustomerGroups:{},
+      
       
 	}),/*end state*/
 
@@ -53,11 +57,15 @@ const commonStoreForAll ={
       FETCH_ATTRIBUTE_DATA(state, data) { return state.AllAttributes = data; },
       FETCH_ATTRIBUTE_VALUE_DATA(state, data) { return state.AllAttributeValues = data; },
       FETCH_BRAND_DATA(state, data) { return state.AllBrands = data; },
+      FETCH_BRAND_SHOP_DATA(state, data) { return state.allBrandShops = data; },
       FETCH_CATEGORY_DATA(state, data) { return state.AllCategory = data; },
       FETCH_SPECIFICATION_DATA(state, data) { return state.AllSpecifications = data; },
+      FETCH_CUSTOMER_GROUPS_DATA(state, data) { return state.allCustomerGroups = data; },
+      
       //#####################################Search ###########################################
       AUTO_COMPLETE_DATA_FOR_DEPARTMENTS(state, data){return state.autoSearchDepartments = data;},       
       AUTO_COMPLETE_DATA_FOR_CATEGORIES(state, data){return state.autoSearchCategories = data;},       
+      AUTO_COMPLETE_DATA_FOR_SUPPLIERS(state, data){return state.autoSearchSuppliers = data;},       
 
 
 
@@ -165,6 +173,13 @@ const commonStoreForAll ={
         }).catch( () => { })
       },
 
+      fetchBrandShops(context){
+        axios.get('/spa/BrandShop-Info/getBrandShops')
+        .then( (response) => {
+          context.commit('FETCH_BRAND_SHOP_DATA', response.data);
+        }).catch( () => { })
+      },
+
       fetchCategory(context){ 
         axios.get('/spa/CategoryMaster-Info/getCategory')
         .then( (response) => {
@@ -176,6 +191,13 @@ const commonStoreForAll ={
         axios.get('/spa/Specification-Info/getSpecification')
         .then( (response) => {
           context.commit('FETCH_SPECIFICATION_DATA', response.data);
+        }).catch( () => { })
+      },
+
+      fetchCustomerGroups(context){
+        axios.get('/spa/customerGroup-Info/getCustomerGroup')
+        .then( (response) => {
+          context.commit('FETCH_CUSTOMER_GROUPS_DATA', response.data);
         }).catch( () => { })
       },
 
@@ -194,6 +216,14 @@ const commonStoreForAll ={
           axios.get('/spa/AutoCompleteCategoryData?&q='+ query)
           .then( ( response ) => {
               context.commit('AUTO_COMPLETE_DATA_FOR_CATEGORIES', response.data);                                        
+          }).catch(() => { }) 
+      },
+
+      AutoCompleteSearchForSuppliers(context, payload){  
+          let query = payload;  
+          axios.get('/spa/AutoCompleteSupplierData?&q='+ query)
+          .then( ( response ) => {
+              context.commit('AUTO_COMPLETE_DATA_FOR_SUPPLIERS', response.data);                                        
           }).catch(() => { }) 
       },
 

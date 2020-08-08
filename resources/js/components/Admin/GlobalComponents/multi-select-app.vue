@@ -286,7 +286,7 @@
 </script>
 	
 <style>
-	.my-multiselect{
+	/*.my-multiselect{
 		background: #ffffff;
 		position: relative;
 		padding: 0px 3px; 
@@ -384,5 +384,5 @@
 		z-index: 9999;position: absolute; transform: rotate(-45deg);
 		left:3px;
 		top: 4px;
-	}
+	}*/
 </style>

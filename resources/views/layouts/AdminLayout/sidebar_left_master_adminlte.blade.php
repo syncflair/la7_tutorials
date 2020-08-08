@@ -314,6 +314,16 @@
                 </router-link>
               </li>
 
+              <li class="nav-item">
+                <router-link to="/spa/BrandShopMaster" class="nav-link">
+                  <!-- <i class="nav-icon fas fa-user-friends"></i> -->
+                   <i class="nav-icon fas fa-store-alt"></i>
+                  <p>
+                    Brand Shops
+                  </p>
+                </router-link>
+              </li>
+
             </ul>
           </li> <!--/Suppliers-->         
 

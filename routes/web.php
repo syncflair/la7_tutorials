@@ -118,12 +118,14 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/customer-Info', 'Admin\Customer\CustomerController',
       ['except'=>['create','show','edit'] ]);
 
+    Route::get('spa/customerGroup-Info/getCustomerGroup', 'Admin\Customer\CustomerGroupController@getCustomerGroup');//commonStoreForAll store  
     Route::resource('spa/customerGroup-Info', 'Admin\Customer\CustomerGroupController',
       ['except'=>['create','show','edit'] ]);
 
 
 
     //Supplier control Route For Admin Dashboard
+    Route::get('spa/AutoCompleteSupplierData', 'Admin\Supplier\SupplierController@search'); //search
     Route::get('spa/searchSupplierData', 'Admin\Supplier\SupplierController@search'); //search
     Route::post('spa/supplier-change-notify/{id}/{notifyValue}', 'Admin\Supplier\SupplierController@ChangeNotify');
     Route::post('spa/supplier-verify-by-admin/{id}', 'Admin\Supplier\SupplierController@verifiedByAdmin');
@@ -131,6 +133,11 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::post('spa/supplier-Info/inactive-supplier/{id}', 'Admin\Supplier\SupplierController@inactive_supplier');
     Route::resource('spa/supplier-Info', 'Admin\Supplier\SupplierController',
      ['except'=>['create','show','edit'] ]);
+
+    Route::get('spa/searchBrandShopData', 'Admin\Supplier\BrandShopController@search'); //search
+    Route::get('spa/BrandShop-Info/getBrandShops', 'Admin\Supplier\BrandShopController@getBrandShops');//commonStoreForAll store 
+    Route::resource('spa/BrandShop-Info', 'Admin\Supplier\BrandShopController',
+      ['except'=>['create','show','edit'] ]);
 
     //Catalog
     Route::get('spa/AutoCompleteCategoryData', 'Admin\Catalog\CategoryController@autoCompleteSearch'); //search

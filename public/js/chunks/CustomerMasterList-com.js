@@ -115,6 +115,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -666,7 +669,17 @@ var render = function() {
                   _c("td", [_vm._v(" " + _vm._s(customer.phone) + " ")]),
                   _vm._v(" "),
                   _c("td", [
-                    _vm._v(" " + _vm._s(customer.customer_group) + " ")
+                    customer.customer_group_id != 0
+                      ? _c("span", [
+                          _vm._v(
+                            " " +
+                              _vm._s(
+                                customer.belongs_to_customer_group.group_name
+                              ) +
+                              " "
+                          )
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("td", { staticStyle: { "text-align": "center" } }, [

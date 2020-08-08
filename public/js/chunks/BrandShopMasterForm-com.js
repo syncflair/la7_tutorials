@@ -1,14 +1,15 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["CustomerGroupMasterForm-com"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["BrandShopMasterForm-com"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
 //
 //
 //
@@ -100,7 +101,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "CustomerGroupMasterForm",
   data: function data() {
     return {
       NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
@@ -110,10 +110,10 @@ __webpack_require__.r(__webpack_exports__);
       // Create a new form instance
       form: new Form({
         id: '',
-        group_name: '',
-        group_desc: '',
-        cg_img: '',
-        is_enabled: ''
+        brand_shop_title: '',
+        brand_shop_desc: '',
+        is_enabled: '',
+        bs_img: ''
       })
     };
   },
@@ -135,7 +135,7 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         reader.onloadend = function (file) {
           //console.log(reader.result);
-          _this.form.cg_img = reader.result; //push base64 to logo veriable
+          _this.form.bs_img = reader.result; //push base64 to logo veriable
         };
 
         reader.readAsDataURL(file);
@@ -147,30 +147,29 @@ __webpack_require__.r(__webpack_exports__);
       this.editMode = false;
       this.form.reset();
       setTimeout(function () {
-        _this2.$refs.group_name.focus();
+        _this2.$refs.brand_shop_title.focus();
       }, 600);
     },
     editData: function editData(data) {
       this.editMode = true;
       this.form.reset();
-      this.form.fill(data); //this.$refs.group_name.focus();    		
+      this.form.fill(data); //this.$refs.brand_shop_title.focus();    		
     },
     ClearForm: function ClearForm() {
       this.editMode = false;
       this.form.reset(); //reset from after submit
 
-      this.form.clear(); //this.$refs.group_name.focus()
+      this.form.clear(); //this.$refs.brand_shop_title.focus()
     },
     // Submit the form via a POST request
     storeFormData: function storeFormData() {
       var _this3 = this;
 
-      this.$Progress.start(); //using progress-bar Customer Group
+      this.$Progress.start(); //using progress-bar package
 
-      this.form.post('/spa/customerGroup-Info').then(function (_ref) {
+      this.form.post('/spa/BrandShop-Info').then(function (_ref) {
         var data = _ref.data;
 
-        //alert('ok');
         if (data.success) {
           FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
 
@@ -181,7 +180,7 @@ __webpack_require__.r(__webpack_exports__);
           _this3.form.reset(); //reset from after submit
 
 
-          _this3.$refs.cg_img.value = ''; //clear file input tag 
+          _this3.$refs.bs_img.value = ''; //clear file input tag 
 
           _this3.ShowOnChangeImage = null;
           $('#formModal').modal('hide');
@@ -200,9 +199,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this4 = this;
 
       //console.log('Update is working!'); 
-      this.$Progress.start(); //using progress-bar Customer Group
+      this.$Progress.start(); //using progress-bar package
 
-      this.form.put('/spa/customerGroup-Info/' + this.form.id).then(function (_ref2) {
+      this.form.put('/spa/BrandShop-Info/' + this.form.id).then(function (_ref2) {
         var data = _ref2.data;
 
         if (data.success) {
@@ -216,10 +215,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
           _this4.editMode = false;
-          _this4.$refs.cg_img.value = ''; //clear file input tag 
+          _this4.$refs.bs_img.value = ''; //clear file input tag 
 
           _this4.ShowOnChangeImage = null;
-          $('#formModal').modal('hide'); //  this.$refs.group_name.focus(); 
+          $('#formModal').modal('hide'); //  this.$refs.brand_shop_title.focus(); 
         }
 
         if (data.errors) {
@@ -248,10 +247,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue?vue&type=template&id=34023d64&":
-/*!********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue?vue&type=template&id=34023d64& ***!
-  \********************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue?vue&type=template&id=bf43c124&":
+/*!************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue?vue&type=template&id=bf43c124& ***!
+  \************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -280,10 +279,7 @@ var render = function() {
       [
         _c(
           "div",
-          {
-            staticClass: "modal-dialog modal-lg-",
-            attrs: { role: "document" }
-          },
+          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
@@ -300,7 +296,7 @@ var render = function() {
                         }
                       ]
                     },
-                    [_vm._v("Add Customer Group")]
+                    [_vm._v("Add Brand Shop")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -315,7 +311,7 @@ var render = function() {
                         }
                       ]
                     },
-                    [_vm._v("Update Customer Group")]
+                    [_vm._v("Update Brand Shop")]
                   )
                 ]),
                 _vm._v(" "),
@@ -361,30 +357,30 @@ var render = function() {
                             "div",
                             { staticClass: "form-group" },
                             [
-                              _c("label", [_vm._v("Group Name*")]),
+                              _c("label", [_vm._v("Brand Shop Name *")]),
                               _vm._v(" "),
                               _c("input", {
                                 directives: [
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: _vm.form.group_name,
-                                    expression: "form.group_name"
+                                    value: _vm.form.brand_shop_title,
+                                    expression: "form.brand_shop_title"
                                   }
                                 ],
-                                ref: "group_name",
-                                staticClass: "form-control",
+                                ref: "brand_shop_title",
+                                staticClass: "form-control form-control-sm",
                                 class: {
                                   "is-invalid": _vm.form.errors.has(
-                                    "group_name"
+                                    "brand_shop_title"
                                   )
                                 },
                                 attrs: {
                                   type: "text",
-                                  name: "group_name",
-                                  placeholder: "Customer Group Name"
+                                  name: "brand_shop_title",
+                                  placeholder: "Brand Shop Name"
                                 },
-                                domProps: { value: _vm.form.group_name },
+                                domProps: { value: _vm.form.brand_shop_title },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
@@ -392,7 +388,7 @@ var render = function() {
                                     }
                                     _vm.$set(
                                       _vm.form,
-                                      "group_name",
+                                      "brand_shop_title",
                                       $event.target.value
                                     )
                                   }
@@ -400,45 +396,38 @@ var render = function() {
                               }),
                               _vm._v(" "),
                               _c("has-error", {
-                                attrs: { form: _vm.form, field: "group_name" }
+                                attrs: {
+                                  form: _vm.form,
+                                  field: "brand_shop_title"
+                                }
                               })
                             ],
                             1
                           ),
                           _vm._v(" "),
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", [_vm._v("Details")]),
-                            _vm._v(" "),
-                            _c("textarea", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.group_desc,
-                                  expression: "form.group_desc"
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("label", [_vm._v("Details")]),
+                              _vm._v(" "),
+                              _c("vue-editor", {
+                                staticClass: "form-control-",
+                                attrs: {
+                                  name: "brand_shop_desc",
+                                  placeholder: "Details"
+                                },
+                                model: {
+                                  value: _vm.form.brand_shop_desc,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.form, "brand_shop_desc", $$v)
+                                  },
+                                  expression: "form.brand_shop_desc"
                                 }
-                              ],
-                              ref: "group_desc",
-                              staticClass: "form-control",
-                              attrs: {
-                                name: "group_desc",
-                                placeholder: "Details"
-                              },
-                              domProps: { value: _vm.form.group_desc },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.form,
-                                    "group_desc",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            })
-                          ]),
+                              })
+                            ],
+                            1
+                          ),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-check" }, [
                             _c("input", {
@@ -507,14 +496,14 @@ var render = function() {
                           _c("div", { staticClass: "row pt-3" }, [
                             _c("div", { staticClass: "col-md-9" }, [
                               _c("div", { staticClass: "form-group" }, [
-                                _c("label", { attrs: { for: "cg_img" } }, [
+                                _c("label", { attrs: { for: "bs_img" } }, [
                                   _vm._v("Image")
                                 ]),
                                 _vm._v(" "),
                                 _c("input", {
-                                  ref: "cg_img",
+                                  ref: "bs_img",
                                   staticClass: "form-control",
-                                  attrs: { type: "file", name: "cg_img" },
+                                  attrs: { type: "file", name: "bs_img" },
                                   on: { change: _vm.onImageChange }
                                 })
                               ])
@@ -536,7 +525,7 @@ var render = function() {
                                       : _vm._e()
                                   ])
                                 : _c("span", [
-                                    _vm.form.cg_img == "undefined"
+                                    _vm.form.bs_img == "undefined"
                                       ? _c("img", {
                                           staticClass:
                                             "img-fluid img-thumbnail",
@@ -548,7 +537,7 @@ var render = function() {
                                         })
                                       : _vm._e(),
                                     _vm._v(" "),
-                                    _vm.form.cg_img === ""
+                                    _vm.form.bs_img === ""
                                       ? _c("img", {
                                           staticClass:
                                             "img-fluid img-thumbnail",
@@ -558,7 +547,7 @@ var render = function() {
                                           },
                                           attrs: { src: "../" + _vm.NoIconUrl }
                                         })
-                                      : _vm.form.cg_img === null
+                                      : _vm.form.bs_img === null
                                       ? _c("img", {
                                           staticClass:
                                             "img-fluid img-thumbnail",
@@ -568,7 +557,7 @@ var render = function() {
                                           },
                                           attrs: { src: "../" + _vm.NoIconUrl }
                                         })
-                                      : _vm.form.cg_img != ""
+                                      : _vm.form.bs_img != ""
                                       ? _c("img", {
                                           staticClass:
                                             "img-fluid img-thumbnail focusImgOnHover",
@@ -576,7 +565,7 @@ var render = function() {
                                             width: "65px",
                                             height: "65px"
                                           },
-                                          attrs: { src: _vm.form.cg_img }
+                                          attrs: { src: _vm.form.bs_img }
                                         })
                                       : _vm._e()
                                   ])
@@ -658,17 +647,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue ***!
-  \*******************************************************************************************/
+/***/ "./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue ***!
+  \***********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _CustomerGroupMasterForm_vue_vue_type_template_id_34023d64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CustomerGroupMasterForm.vue?vue&type=template&id=34023d64& */ "./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue?vue&type=template&id=34023d64&");
-/* harmony import */ var _CustomerGroupMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CustomerGroupMasterForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _BrandShopMasterForm_vue_vue_type_template_id_bf43c124___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BrandShopMasterForm.vue?vue&type=template&id=bf43c124& */ "./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue?vue&type=template&id=bf43c124&");
+/* harmony import */ var _BrandShopMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BrandShopMasterForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -678,9 +667,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _CustomerGroupMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _CustomerGroupMasterForm_vue_vue_type_template_id_34023d64___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _CustomerGroupMasterForm_vue_vue_type_template_id_34023d64___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _BrandShopMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BrandShopMasterForm_vue_vue_type_template_id_bf43c124___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BrandShopMasterForm_vue_vue_type_template_id_bf43c124___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -690,38 +679,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue"
+component.options.__file = "resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue?vue&type=script&lang=js&":
-/*!********************************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue?vue&type=script&lang=js& ***!
-  \********************************************************************************************************************/
+/***/ "./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerGroupMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CustomerGroupMasterForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerGroupMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BrandShopMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BrandShopMasterForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BrandShopMasterForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue?vue&type=template&id=34023d64&":
-/*!**************************************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue?vue&type=template&id=34023d64& ***!
-  \**************************************************************************************************************************/
+/***/ "./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue?vue&type=template&id=bf43c124&":
+/*!******************************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue?vue&type=template&id=bf43c124& ***!
+  \******************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerGroupMasterForm_vue_vue_type_template_id_34023d64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./CustomerGroupMasterForm.vue?vue&type=template&id=34023d64& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMasterForm.vue?vue&type=template&id=34023d64&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerGroupMasterForm_vue_vue_type_template_id_34023d64___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BrandShopMasterForm_vue_vue_type_template_id_bf43c124___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BrandShopMasterForm.vue?vue&type=template&id=bf43c124& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMasterForm.vue?vue&type=template&id=bf43c124&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BrandShopMasterForm_vue_vue_type_template_id_bf43c124___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CustomerGroupMasterForm_vue_vue_type_template_id_34023d64___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BrandShopMasterForm_vue_vue_type_template_id_bf43c124___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

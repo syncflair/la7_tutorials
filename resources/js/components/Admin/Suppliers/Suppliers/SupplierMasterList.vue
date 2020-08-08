@@ -25,7 +25,7 @@
             <th style="width: 15%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
             <th style="width: 15%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>             
             <th style="width: 7%;" scope="col" @click="sort('phone')" class="sortable-title">Phone</th>
-            <th style="width: 5%;" scope="col" @click="sort('supplier_type')" class="sortable-title">Type</th>
+            <th style="width: 10%;" scope="col" @click="sort('supplier_type')" class="sortable-title">Type / Shop</th>
             <th style="width: 15%;" scope="col">Address</th>
             <th style="width: 7%;" scope="col">Date</th>
             <th style="width: 3%;" scope="col">Status</th>
@@ -40,6 +40,7 @@
             <td> 
                 <span v-if="supplier.avatar != null"> 
                   <img :src="'../'+supplier.avatar" loading="lazy" height="20px" width="20px"> 
+                  <!-- <img :src="supplier.avatar" loading="lazy" height="20px" width="20px">  -->
                 </span>
                 <span v-if="supplier.avatar === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
             </td> 
@@ -47,7 +48,12 @@
             <td scope="col"> {{ supplier.name }} </td>
             <td > {{ supplier.email }} </td> 
             <td > {{ supplier.phone }} </td>          
-          	<td > {{ supplier.supplier_type }} </td> 
+          	<td > 
+              <small>{{ supplier.supplier_type }} </small>
+              <small v-if="supplier.brand_shop_id != null"> 
+                ( {{supplier.belongs_to_brand_shop.brand_shop_title }} )
+              </small>
+            </td> 
 
             <td > 
               <small v-if="supplier.dist_zone_id != null">

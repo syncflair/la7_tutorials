@@ -78,7 +78,7 @@
 
 	//import { mapState } from 'vuex' //for user MapState
     export default {
-       	name: "multi-select-app-one",
+       	name: "multi-select-app-two",
        	//props:['options','filterBy','placeHolder'], //get from parent component
        	props: {
        	 //get all data
@@ -170,7 +170,7 @@
 	        // },200 ),
 	        autoSearch(e){
 	        	if(e.target.value != ''){
-	        		FireEvent.$emit('AutoCompleteSearchForDataOne', e.target.value );
+	        		FireEvent.$emit('AutoCompleteSearchForDataTwo', e.target.value );
 	        	}
 	        	// else{
 	        	// 	//this.autoSearchOptions = [] //dont do this because it's props

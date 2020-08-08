@@ -24,19 +24,14 @@
 
 	          		
 	                <div class="form-group row">
-			            <label for="job_title_name" class="col-sm-3 col-form-label">Job Title</label>
-			            <div class="col-sm-9">
-			            	<input v-model="form.job_title_name" type="text" ref="job_title_name" name="job_title_name" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('job_title_name') }" placeholder="Job Title">
-	                  		<has-error :form="form" field="job_title_name"></has-error>
-			            </div>
+			            <label for="job_title_name" class="col-form-label">Job Title</label>
+		            	<input v-model="form.job_title_name" type="text" ref="job_title_name" name="job_title_name" class="form-control form-control-sm-" :class="{ 'is-invalid': form.errors.has('job_title_name') }" placeholder="Job Title">
+                  		<has-error :form="form" field="job_title_name"></has-error>
 			        </div>
 
 			         <div class="form-group row">
-			            <label for="job_title_desc" class="col-sm-3 col-form-label">Details</label>
-			            <div class="col-sm-9">
-			            	<textarea v-model="form.job_title_desc" ref="job_title_desc" name="job_title_desc" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('job_title_desc') }" placeholder="Job Title details"></textarea>
-                      		<has-error :form="form" field="job_title_desc"></has-error>
-			            </div>
+			            <label for="job_title_desc" class="col-form-label">Details</label>
+			            <textarea v-model="form.job_title_desc" ref="job_title_desc" name="job_title_desc" class="form-control form-control-sm-" placeholder="Job Title details"></textarea>
 			        </div>
 
                     <div class="form-check">

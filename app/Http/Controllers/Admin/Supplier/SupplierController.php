@@ -34,10 +34,10 @@ class SupplierController extends Controller
        if(!empty($request->perPage)){
             $perPage = $request->perPage;
        }else{
-            $perPage = 10;
+            $perPage = 100;
        }
 
-        $data = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry')
+        $data = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry','belongsToBrandShop')
                 ->paginate($perPage);
 
         return response()->json($data);
@@ -61,6 +61,7 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
+        //return $request->all();
         $this->validate($request, [
             'name' => 'required|min:3|max:80', 
             'email' => 'required|email|unique:suppliers,email', 
@@ -81,6 +82,7 @@ class SupplierController extends Controller
         $data['email']=$request->email;
         $data['phone']=$request->phone;
         $data['supplier_type']=$request->supplier_type;
+        $data['brand_shop_id']=$request->brand_shop_id;       
         $data['status_id']=$request->status_id;        
         $data['supplier_desc']=$request->supplier_desc;        
         $data['supplier_address']=$request->supplier_address;  
@@ -177,6 +179,7 @@ class SupplierController extends Controller
         $data['email']=$request->email;
         $data['phone']=$request->phone;
         $data['supplier_type']=$request->supplier_type;
+        $data['brand_shop_id']=$request->brand_shop_id;
         $data['status_id']=$request->status_id; 
         $data['supplier_desc']=$request->supplier_desc;        
         $data['supplier_address']=$request->supplier_address;   
@@ -248,7 +251,7 @@ class SupplierController extends Controller
         if(!empty($request->perPage)){
             $perPage = $request->perPage;
         }else{
-            $perPage = 50;
+            $perPage = 100;
         }
 
         $searchKey = $request->q;
@@ -256,7 +259,7 @@ class SupplierController extends Controller
 
         if(!empty($searchKey) && empty($searchOption)){
         //if($search = \Request::get('q')){
-            $searchResult = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry')
+            $searchResult = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry','belongsToBrandShop')
                 ->where(function($query) use ($searchKey){
                 $query->where('suppliers.name','LIKE','%'.$searchKey.'%')
                         ->orWhere('suppliers.email','LIKE','%'.$searchKey.'%')
@@ -270,7 +273,7 @@ class SupplierController extends Controller
             ->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){
-            $searchResult = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry')
+            $searchResult = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry','belongsToBrandShop')
             ->where(function($query) use ($searchKey, $searchOption){
                 if($searchOption == 'us_name'){
                     $query->where( 'user_status.'.$searchOption,'LIKE','%'.$searchKey.'%');
@@ -284,7 +287,7 @@ class SupplierController extends Controller
             
         }else{
             //$searchResult = Supplier::latest()->paginate(10);
-            $searchResult = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry')
+            $searchResult = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry','belongsToBrandShop')
                     ->paginate($perPage);
         }
         //return $searchResult;

@@ -33079,6 +33079,7 @@ form .form-control:focus {
 /*Style for multi-select-app-one*/
 
 .my-multiselect {
+  cursor: pointer;
   background: #ffffff;
   position: relative;
   padding: 0px 3px;

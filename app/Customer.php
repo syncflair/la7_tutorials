@@ -21,7 +21,7 @@ class Customer extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'username', 'phone', 'password', 'customer_type_id', 'status_id','avatar','email_verification_code','phone_verification_code','customer_group','created_by','updated_by','verified_by'
+        'name', 'email', 'username', 'phone', 'password', 'customer_type_id', 'status_id','avatar','email_verification_code','phone_verification_code','customer_group','created_by','updated_by','verified_by','customer_group_id'
     ];
 
     /**
@@ -52,7 +52,7 @@ class Customer extends Authenticatable
     //customer belongs to customer group
     public function belongsToCustomerGroup(){
         //return $this->belongsTo('App\Models\Customer\CustomerGroup', 'customer_group_id');
-        return $this->belongsTo(Models\Custome\CustomerGroup::class, 'customer_group_id');
+        return $this->belongsTo(Models\Customer\CustomerGroup::class, 'customer_group_id');
     }
 
     public function UserStatus(){

@@ -29,7 +29,7 @@ class Product extends Model
         'pro_specification' => 'array',        
         //'related_products' => 'array',        
         'pro_discount' => 'array',        
-        //'pro_suppliers' => 'array',        
+        'pro_suppliers' => 'array',        
         //'pro_shops' => 'array',        
         //'multi_image' => 'array',        
     ];

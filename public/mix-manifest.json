@@ -19,6 +19,9 @@
     "/js/chunks/BrandMaster.js": "/js/chunks/BrandMaster.js",
     "/js/chunks/BrandMasterForm-com.js": "/js/chunks/BrandMasterForm-com.js",
     "/js/chunks/BrandMasterList-com.js": "/js/chunks/BrandMasterList-com.js",
+    "/js/chunks/BrandShopMaster.js": "/js/chunks/BrandShopMaster.js",
+    "/js/chunks/BrandShopMasterForm-com.js": "/js/chunks/BrandShopMasterForm-com.js",
+    "/js/chunks/BrandShopMasterList-com.js": "/js/chunks/BrandShopMasterList-com.js",
     "/js/chunks/CashFlowReportMaster.js": "/js/chunks/CashFlowReportMaster.js",
     "/js/chunks/Category-demo.js": "/js/chunks/Category-demo.js",
     "/js/chunks/CategoryMaster.js": "/js/chunks/CategoryMaster.js",
@@ -33,6 +36,9 @@
     "/js/chunks/CurrencyForm-com.js": "/js/chunks/CurrencyForm-com.js",
     "/js/chunks/CurrencyList-com.js": "/js/chunks/CurrencyList-com.js",
     "/js/chunks/CurrencyMarster.js": "/js/chunks/CurrencyMarster.js",
+    "/js/chunks/CustomerGroupMaster.js": "/js/chunks/CustomerGroupMaster.js",
+    "/js/chunks/CustomerGroupMasterForm-com.js": "/js/chunks/CustomerGroupMasterForm-com.js",
+    "/js/chunks/CustomerGroupMasterList-com.js": "/js/chunks/CustomerGroupMasterList-com.js",
     "/js/chunks/CustomerMaster.js": "/js/chunks/CustomerMaster.js",
     "/js/chunks/CustomerMasterForm-com.js": "/js/chunks/CustomerMasterForm-com.js",
     "/js/chunks/CustomerMasterList-com.js": "/js/chunks/CustomerMasterList-com.js",
@@ -124,7 +130,5 @@
     "/js/chunks/searchBox.js": "/js/chunks/searchBox.js",
     "/js/chunks/switch-app.js": "/js/chunks/switch-app.js",
     "/js/chunks/vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098.js": "/js/chunks/vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098.js",
-    "/js/chunks/CustomerGroupMaster.js": "/js/chunks/CustomerGroupMaster.js",
-    "/js/chunks/CustomerGroupMasterForm-com.js": "/js/chunks/CustomerGroupMasterForm-com.js",
-    "/js/chunks/CustomerGroupMasterList-com.js": "/js/chunks/CustomerGroupMasterList-com.js"
+    "/js/chunks/multi-select-app-two-global.js": "/js/chunks/multi-select-app-two-global.js"
 }

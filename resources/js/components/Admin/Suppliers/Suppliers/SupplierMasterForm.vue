@@ -22,106 +22,106 @@
 	          	<div class="row">
 	          	<div class="col-md-5 col-sm-6">
 
-	          		<div class="form-group row">
-			            <label for="name" class="col-sm-3 col-form-label">Name *</label>
-			            <div class="col-sm-9">
-			              <input v-model="form.name" type="text" ref="name" name="name" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('name') }" placeholder="supplier Name">
+	          		<div class="form-group">
+			            <label for="name">Name *</label>
+			              <input v-model="form.name" type="text" ref="name" name="name" class="form-control form-control-sm-" :class="{ 'is-invalid': form.errors.has('name') }" placeholder="supplier Name">
 	                  	  <has-error :form="form" field="name"></has-error>
-			            </div>
 			        </div>
 
-	          		<div class="form-group row">
-			            <label for="email" class="col-sm-3 col-form-label">Email *</label>
-			            <div class="col-sm-9">
-			              <input v-model="form.email" type="text" ref="email" name="email" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('email') }" placeholder="supplier email">
+	          		<div class="form-group">
+			            <label for="email">Email *</label>
+			              <input v-model="form.email" type="text" ref="email" name="email" class="form-control form-control-sm-" :class="{ 'is-invalid': form.errors.has('email') }" placeholder="supplier email">
 	                  	  <has-error :form="form" field="email"></has-error>
-			            </div>
 			        </div>
 
-			        <div class="form-group row">
-			            <label for="phone" class="col-sm-3 col-form-label">Phone *</label>
-			            <div class="col-sm-9">
-			            	<div class="input-group input-group-sm mb-3">	                      
-			                  <div class="input-group-prepend">
-			                    <span class="input-group-text"><!-- <i class="fas fa-envelope"></i> --> +88 </span>
-			                  </div>
+			        <div class="form-group">
+			            <label for="phone" >Phone *</label>
+			            <div class="input-group input-group-sm mb-3">	                      
+		                  <div class="input-group-prepend">
+		                    <span class="input-group-text"><!-- <i class="fas fa-envelope"></i> --> +88 </span>
+		                  </div>
 
-			                  <input v-model="form.phone" type="number" ref="phone" name="phone" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('phone') }" placeholder="Enter phone number">	 
-			                  <has-error :form="form" field="phone"></has-error>                     
-			                </div> 
-			            </div>
+		                  <input v-model="form.phone" type="number" ref="phone" name="phone" class="form-control form-control-sm-" :class="{ 'is-invalid': form.errors.has('phone') }" placeholder="Enter phone number">	 
+		                  <has-error :form="form" field="phone"></has-error>                     
+		                </div> 
 			        </div>
 
-
-			        <div class="form-group row">
-			            <label for="supplier_type" class="col-sm-3 col-form-label">Supplier Type *</label>
-			            <div class="col-sm-9">
-				            <select v-model="form.supplier_type" class="form-control form-control-sm" id="supplier_type" name="supplier_type" :class="{ 'is-invalid': form.errors.has('supplier_type') }" >
-			              	  <option disabled value="">Select supplier type ..</option>                
+			        <div class="row">
+			          <div class="col-md-5">
+			          	<div class="form-group">
+				            <label for="supplier_type">Supplier Type *</label>
+				            <select v-model="form.supplier_type" class="form-control form-control-sm-" id="supplier_type" name="supplier_type" :class="{ 'is-invalid': form.errors.has('supplier_type') }" >
+			              	  <option disabled value="">Suppliers type ..</option>                
 			                  <option v-for="s_type in supplierTypes" v-bind:value="s_type.name">
 			                  	{{s_type.name}}
 			                  </option>			                  
 			                </select>
-			                <has-error :form="form" field="supplier_type"></has-error>			             
-			            </div>
+			                <has-error :form="form" field="supplier_type"></has-error>
+				        </div>
+			          </div>
+
+			          <div class="col-md-7">
+			          	<div class="form-group">
+				            <label for="brand_shop_id">Brand Shop</label>
+				            <select v-model="form.brand_shop_id" class="form-control" id="brand_shop_id" name="brand_shop_id" >
+			              	  <option disabled value="">Select Brand Shop ..</option>
+			              	  <option v-bind:value="null">No Brand Shop (Null) </option>                
+			                  <option v-for="bs in allBrandShops" :key="bs.id" v-bind:value="bs.id">{{bs.brand_shop_title}}</option>           
+			                </select>	
+				        </div>
+			          </div>			        	
 			        </div>
 
-			        <div class="form-group row">
-			            <label for="user_status" class="col-sm-3 col-form-label">User Status *</label>
-			            <div class="col-sm-9">
-			              <select v-model="form.status_id" class="form-control form-control-sm" id="status_id" name="status_id" :class="{ 'is-invalid': form.errors.has('status_id') }" >
-			              	<option disabled value="">Select user Status ..</option>                
-			                <option v-for="u_status in userStatus" :key="u_status.id" v-bind:value="u_status.id">{{u_status.us_name}}</option>			                  
-			              </select>
-			              <has-error :form="form" field="status_id"></has-error>
-			            </div>
+			        <div class="form-group">
+			          <label for="user_status">User Status *</label>
+		              <select v-model="form.status_id" class="form-control" id="status_id" name="status_id" :class="{ 'is-invalid': form.errors.has('status_id') }" >
+		              	<option disabled value="">Select user Status ..</option>                
+		                <option v-for="u_status in userStatus" :key="u_status.id" v-bind:value="u_status.id">{{u_status.us_name}}</option>     
+		              </select>
+		              <has-error :form="form" field="status_id"></has-error>
 			        </div>
 
-			        <div class="form-group row">
-			            <label for="password" class="col-sm-3 col-form-label">Password  <span v-show="editMode === false"> * </span></label>
-			            <div class="col-sm-9">
-			              	<input v-model="form.password" type="password" ref="password" name="password" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('password') }" placeholder="Password">
+			        <div class="row">
+		        	  <div class="col-md-6">
+		        	  	<div class="form-group">
+				            <label for="password">Password  <span v-show="editMode === false"> * </span></label>
+			              	<input v-model="form.password" type="password" ref="password" name="password" class="form-control form-control-sm-" :class="{ 'is-invalid': form.errors.has('password') }" placeholder="Password">
                       		<has-error :form="form" field="password"></has-error>
-			            </div>
-			        </div>
-
-			        <div class="form-group row">
-			            <label for="password_confirmation" class="col-sm-3 col-form-label">Password Confirm</label>
-			            <div class="col-sm-9">
-			              	<input v-model="form.password_confirmation" type="password" ref="password_confirmation" name="password_confirmation" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" placeholder="Confirm Password">
+				        </div>
+		        	  </div>			        	
+		        	  <div class="col-md-6">
+		        	  	<div class="form-group">
+				            <label for="password_confirmation">Password Confirm</label>
+			              	<input v-model="form.password_confirmation" type="password" ref="password_confirmation" name="password_confirmation" class="form-control form-control-sm-" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" placeholder="Confirm Password">
                       		<has-error :form="form" field="password_confirmation"></has-error>
-			            </div>
+				        </div>
+		        	  </div>
 			        </div>
+			        
 
 	          	</div>
 
 	          	<div class="col-md-5 col-sm-6">
 
-	          		<div class="form-group row">
-			            <label for="supplier_desc" class="col-sm-3 col-form-label">Details</label>
-			            <div class="col-sm-9">
-                        	<textarea v-model="form.supplier_desc" ref="supplier_desc" name="supplier_desc" class="form-control" :class="{ 'is-invalid': form.errors.has('supplier_desc') }" placeholder="Supplier details"></textarea>
-                      		<has-error :form="form" field="supplier_desc"></has-error>
-			            </div>
+
+
+			        <div class="form-group">
+			            <label for="supplier_address">Address</label>
+                        <textarea v-model="form.supplier_address" name="supplier_address" class="form-control" placeholder="Address"> </textarea>
 			        </div>
 
-			        <div class="form-group row">
-			            <label for="supplier_address" class="col-sm-3 col-form-label">Address</label>
-			            <div class="col-sm-9">
-                        	<textarea v-model="form.supplier_address" ref="supplier_address" name="supplier_address" class="form-control" :class="{ 'is-invalid': form.errors.has('supplier_address') }" placeholder="Address"> </textarea>
-                      		<has-error :form="form" field="supplier_address"></has-error>
-			            </div>
-			        </div>
-
-			        <div class="form-group row">
-			            <label for="dist_zone_id" class="col-sm-3 col-form-label">Zone / Area</label>
-			            <div class="col-sm-9">
-                        	<select v-model="form.dist_zone_id" class="form-control form-control-sm" id="dist_zone_id" name="dist_zone_id" :class="{ 'is-invalid': form.errors.has('dist_zone_id') }" >
+			        <div class="form-group">
+			            <label for="dist_zone_id">Zone / Area</label>
+                        	<select v-model="form.dist_zone_id" class="form-control form-control-sm-" id="dist_zone_id" name="dist_zone_id" >
 			              	<option disabled value="">Select zone / Area ..</option>                
 			                <option v-for="zone in Dist_Zones" :key="zone.id" v-bind:value="zone.id">{{zone.zone_name}} ({{zone.zip_code}})</option>			                  
 			              </select>
-			              <has-error :form="form" field="dist_zone_id"></has-error>
-			            </div>
+			        </div>
+
+			        <div class="form-group">
+			            <label for="supplier_desc">Details</label>
+                        <!-- <textarea v-model="form.supplier_desc" name="supplier_desc" class="form-control" placeholder="Supplier details"></textarea> -->
+                        <vue-editor v-model="form.supplier_desc" name="supplier_desc" class="form-control-"  placeholder="Suppliyer Details"> </vue-editor>
 			        </div>
 
 	          	</div>
@@ -161,7 +161,7 @@
 	        </div> 
 	       
 	      </div><!--modal Body-->      
-	      <div class="modal-footer">
+	      <div class="modal-footer pt-0">
 	        <button @click="ClearForm()" type="button" class="btn btn-danger btn-flat btn-sm close-form" data-dismiss="modal">Close</button>
 	        <button type="submit" class="btn btn-primary btn-flat btn-sm">
 	        	<span v-show="!editMode">Save</span>
@@ -195,6 +195,7 @@
 	        supplierTypes: [
 			      { name: 'Person' },
 			      { name: 'Organization' },
+			      { name: 'Shop' },
 			    ],  
 
 	        // Create a new form instance
@@ -207,6 +208,7 @@
 	          password_confirmation:'',
 	          status_id: '',
 	          supplier_type:'',
+	          brand_shop_id:'',
 	          supplier_desc:'',
 	          supplier_address:'',
 	          dist_zone_id: '',
@@ -217,7 +219,7 @@
 
 	    computed: {
 	        ...mapState( 'SupplierForAdminStore', ['pagination'] ),
-	        ...mapState( 'commonStoreForAll', ['userStatus','Dist_Zones'] ) /*userStatus get form commonSotreForAll*/	        
+	        ...mapState( 'commonStoreForAll', ['allBrandShops','userStatus','Dist_Zones'] ) /*userStatus get form commonSotreForAll*/	        
       	},
 
 	    methods:{
@@ -330,6 +332,7 @@
 
 	    created(){
 	    	this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
+	    	this.$store.dispatch('commonStoreForAll/fetchBrandShops'); //get user status
 	    	this.$store.dispatch('commonStoreForAll/fetchDistrictZoneList'); //get user status
 
             FireEvent.$on('AfterChange', () => {
