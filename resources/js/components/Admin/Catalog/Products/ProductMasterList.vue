@@ -39,7 +39,7 @@
         </thead>
 
         <tbody>
-          <tr v-for="(product, index) in sortedProducts" :key="index">
+          <tr v-for="(product, index) in sortedProducts " :key="index">
 
             <!-- <td > id</td> -->
             <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="product.id"></td>

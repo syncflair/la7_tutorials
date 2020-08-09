@@ -125,7 +125,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 
 
     //Supplier control Route For Admin Dashboard
-    Route::get('spa/AutoCompleteSupplierData', 'Admin\Supplier\SupplierController@search'); //search
+    Route::get('spa/AutoCompleteSupplierData', 'Admin\Supplier\SupplierController@AutoCompleteSupplierForStore'); //commonStoreForAll store
     Route::get('spa/searchSupplierData', 'Admin\Supplier\SupplierController@search'); //search
     Route::post('spa/supplier-change-notify/{id}/{notifyValue}', 'Admin\Supplier\SupplierController@ChangeNotify');
     Route::post('spa/supplier-verify-by-admin/{id}', 'Admin\Supplier\SupplierController@verifiedByAdmin');
@@ -140,13 +140,17 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
       ['except'=>['create','show','edit'] ]);
 
     //Catalog
-    Route::get('spa/AutoCompleteCategoryData', 'Admin\Catalog\CategoryController@autoCompleteSearch'); //search
+    Route::get('spa/AutoCompleteCategoryData', 'Admin\Catalog\CategoryController@autoCompleteCategoryForStore');//commonStoreForAll
     Route::get('spa/CategoryMaster-Info/getCategory', 'Admin\Catalog\CategoryController@getCategory');//for commonStoreForAll store    
     Route::resource('spa/CategoryMaster-Info', 'Admin\Catalog\CategoryController', 
       ['except'=>['create','show','edit'] ]);
 
+    Route::post('spa/Product-getCategoryList/', 'Admin\Catalog\ProductController@selectedCategoryList');
+    Route::post('spa/Product-getSupplierList/', 'Admin\Catalog\ProductController@selectedSupplierList');
+    Route::post('spa/Product-getProductList/', 'Admin\Catalog\ProductController@selectedProductList');
+    Route::get('spa/AutoCompleteProductData', 'Admin\Catalog\ProductController@AutoCompleteProductForStore'); //search 
     Route::post('spa/Product-DeleteImage/{id}', 'Admin\Catalog\ProductController@DeleteImage');
-    Route::get('spa/searchProductData', 'Admin\Catalog\ProductController@search'); //search    
+    Route::get('spa/searchProductData', 'Admin\Catalog\ProductController@search'); //search      
     Route::resource('spa/Product-Info', 'Admin\Catalog\ProductController', 
         ['except'=>['create','edit','show'] ]);
 

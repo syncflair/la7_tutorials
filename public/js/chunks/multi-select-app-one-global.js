@@ -195,7 +195,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     // },200 ),
     autoSearch: function autoSearch(e) {
       if (e.target.value != '') {
-        FireEvent.$emit('AutoCompleteSearchForDataOne', e.target.value);
+        //FireEvent.$emit('AutoCompleteSearchForDataOne', e.target.value );
+        this.$emit('AutoCompleteSearchForData', e.target.value);
       } // else{
       // 	//this.autoSearchOptions = [] //dont do this because it's props
       // 	//FireEvent.$emit('EmptyAutoSerchData'); //go to parent and empty the array
@@ -277,6 +278,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.$emit('input', NewValue); //but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
 
+      this.$emit('getAllDataListByIds');
       setTimeout(function () {
         _this5.fixTop();
       }, 50); //this.visible = false;	        
@@ -561,9 +563,7 @@ var render = function() {
             ]
           )
         ]
-      ),
-      _vm._v(" "),
-      _vm._v("\n\t" + _vm._s(_vm.FormatedOptions) + "\n\t")
+      )
     ])
   ])
 }

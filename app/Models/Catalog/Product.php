@@ -27,7 +27,7 @@ class Product extends Model
         'pro_category' => 'array',
         'pro_attributes' => 'array',
         'pro_specification' => 'array',        
-        //'related_products' => 'array',        
+        'related_products' => 'array',        
         'pro_discount' => 'array',        
         'pro_suppliers' => 'array',        
         //'pro_shops' => 'array',        

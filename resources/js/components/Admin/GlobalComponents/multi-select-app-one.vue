@@ -67,7 +67,7 @@
       <!-- {{value}} -->
       <!-- {{selectedOptions}} -->
 	<!-- {{options}}       -->
-	{{FormatedOptions}}
+	<!-- {{FormatedOptions}} -->
 	<!-- {{valueProperty}} -->
 
 	</div>
@@ -170,7 +170,8 @@
 	        // },200 ),
 	        autoSearch(e){
 	        	if(e.target.value != ''){
-	        		FireEvent.$emit('AutoCompleteSearchForDataOne', e.target.value );
+	        		//FireEvent.$emit('AutoCompleteSearchForDataOne', e.target.value );
+	        		this.$emit('AutoCompleteSearchForData', e.target.value );
 	        	}
 	        	// else{
 	        	// 	//this.autoSearchOptions = [] //dont do this because it's props
@@ -245,6 +246,7 @@
 	        	}
 	        	//this.value.push(SelectedValue); //this is also work	        	
 	        	this.$emit('input', NewValue)//but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
+	        	this.$emit('getAllDataListByIds');
 	        		        	
 	        	setTimeout(() => {   
 	        		this.fixTop();

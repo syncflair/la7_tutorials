@@ -195,7 +195,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     // },200 ),
     autoSearch: function autoSearch(e) {
       if (e.target.value != '') {
-        FireEvent.$emit('AutoCompleteSearchForDataTwo', e.target.value);
+        //FireEvent.$emit('AutoCompleteSearchForDataTwo', e.target.value );
+        this.$emit('AutoCompleteSearchForData', e.target.value);
       } // else{
       // 	//this.autoSearchOptions = [] //dont do this because it's props
       // 	//FireEvent.$emit('EmptyAutoSerchData'); //go to parent and empty the array
@@ -259,6 +260,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       //console.log(this.FormatedOptions[index]);
       //this.selectedItem = this.autoSearchData[this.selected];
+      //let SelectedValue = { id: this.FormatedOptions[this.selected][this.valueProperty], name: this.FormatedOptions[this.selected][this.filterBy], checked:true };
       var SelectedValue = this.FormatedOptions[this.selected][this.valueProperty];
 
       var NewValue = _toConsumableArray(this.value); //spred oparetor
@@ -563,7 +565,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm._v("\n\t" + _vm._s(_vm.FormatedOptions) + "\n\t")
+      _vm._v("\n      " + _vm._s(_vm.selectedOptions) + "\n\t")
     ])
   ])
 }

@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-md-5 col-sm-9">
         	<span v-show="!editMode">New Product</span>
-        	<span v-show="editMode">Update Product</span>
+        	<span v-show="editMode"> Update - {{form.sys_pro_name}}</span>
         </div>
         <div class="col-md-7 col-sm-3 text-right">
         	<router-link to="/spa/ProductMaster" class="btn btn-primary btn-flat btn-sm"> 
@@ -216,8 +216,10 @@
               <div class="form-group" style="">
                 <label style="margin-left: 0px !important;">Select Category</label>
                 <multi-select-app-one
-                  :options="AllCategory"
-                  :autoSearchOptions="autoSearchCategories" 
+                  :options="selectedCategoryList"
+                  @getAllDataListByIds="getSelectedListByIdsForCategory"
+                  :autoSearchOptions="autoSearchCategories"
+                  @AutoCompleteSearchForData="AutoCompleteSearchForDataCategory"                   
                   :filterBy="filterBy"
                   :place-holder="placeHolder"
                   :value-property="valueProperty"
@@ -231,13 +233,15 @@
             <div class="col-md-12">
               <div class="form-group" style="">
                 <label style="margin-left: 0px !important;">Select Supplier</label>
-                <multi-select-app-two
-                  :options="form.pro_suppliers"
+                <multi-select-app-one
+                  :options="selectedSupplierList"
+                  @getAllDataListByIds="getSelectedListByIdsForSupplier"
                   :autoSearchOptions="autoSearchSuppliers" 
+                  @AutoCompleteSearchForData="AutoCompleteSearchForDataSuppliyer"
                   :filterBy="filterBy_supp"
                   :place-holder="placeHolder_supp"
                   :value-property="valueProperty_supp"
-                  v-model="form.pro_suppliers" 
+                  v-model="form.pro_suppliers"                   
                 />
               </div>
             </div>
@@ -246,50 +250,36 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group" style="">
-                <label style="margin-left: 0px !important;">Select Shop</label>
-                <!-- <multi-select-app-one
-                  :options="AllCategory"
-                  :autoSearchOptions="autoSearchCategories" 
-                  :filterBy="filterBy"
-                  :place-holder="placeHolder"
-                  :value-property="valueProperty"
-                  v-model="form.pro_category" 
-                /> -->
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group" style="">
                 <label style="margin-left: 0px !important;">Related Product</label>
-                <!-- <multi-select-app-one
-                  :options="AllCategory"
-                  :autoSearchOptions="autoSearchCategories" 
-                  :filterBy="filterBy"
-                  :place-holder="placeHolder"
-                  :value-property="valueProperty"
-                  v-model="form.pro_category" 
-                /> -->
+                <multi-select-app-one
+                  :options="selectedProductList"
+                  @getAllDataListByIds="getSelectedListByIdsForProduct"
+                  :autoSearchOptions="autoSearchProducts"
+                  @AutoCompleteSearchForData="AutoCompleteSearchForDataProduct"
+                  :filterBy="filterBy_product"
+                  :place-holder="placeHolder_product"
+                  :value-property="valueProperty_product"
+                  v-model="form.related_products"                   
+                />
               </div>
             </div>
           </div>
 
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-md-12">
               <div class="form-group" style="">
                 <label style="margin-left: 0px !important;">Downloadable Link</label>
-                <!-- <multi-select-app-one
+                <multi-select-app-one
                   :options="AllCategory"
                   :autoSearchOptions="autoSearchCategories" 
                   :filterBy="filterBy"
                   :place-holder="placeHolder"
                   :value-property="valueProperty"
                   v-model="form.pro_category" 
-                /> -->
+                />
               </div>
             </div>
-          </div>
+          </div> -->
 
 
 
@@ -613,6 +603,11 @@
         filterBy_supp:'name',
         valueProperty_supp: 'id',
 
+        //multiselect app for related product
+        placeHolder_product:'Search related products',
+        filterBy_product:'sys_pro_name',
+        valueProperty_product: 'id',
+
         //for images manipulation
         show_image_files_name: [], //use only to show image name in text field
         isDragging: false, 
@@ -654,10 +649,14 @@
         })
       }
     },//end data
+    watch:{
+    
+    },
 
     computed: {
     	/*userStatus get form commonSotreForAll*/	
-        ...mapState( 'commonStoreForAll', ['allLanguages','AllStatus','AllBrands','AllCategory','autoSearchCategories','AllSpecifications','AllAttributes','AllAttributeValues','allCustomerGroups','autoSearchSuppliers'] ),        
+        ...mapState( 'ProductMasterStore', ['selectedCategoryList','selectedSupplierList','selectedProductList','autoSearchProducts'] ),
+        ...mapState( 'commonStoreForAll', ['allLanguages','AllStatus','AllBrands','autoSearchCategories','AllSpecifications','AllAttributes','AllAttributeValues','allCustomerGroups','autoSearchSuppliers'] ),        
         //...mapState( 'ProductMasterStore', ['AllProducts','autoSearchProducts'] ),  
 
         selectedAllAttributeValues() {
@@ -813,7 +812,7 @@
   		  //this.form.post('/spa/Product-Info')
   		  this.form.post('/spa/Product-Info')
   		  .then(({ data }) => { 
-  		    console.log(data);
+  		    //console.log(data);
           if(data.success){ 
   		      //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
   		      toastr.success(data.success);             
@@ -889,27 +888,37 @@
           if(this.$route.params.data.pro_discount === null){
             this.form.pro_discount = [ { customer_group:'', discount_qty:'', discount_price:'', discount_priority:'', discount_start_date:'', discount_end_date:'',} ];
           } 
-      		if(this.$route.params.data.pro_category === null){
-      			this.form.pro_category = [];
-      		}
-          if(this.$route.params.data.pro_attributes === null){
-            this.form.pro_attributes = [];
-          }
-          if(this.$route.params.data.has_many_image){
-            this.form.pro_images = [];
-          }
-
-          
-          //   else{
-  	    	// 	 // this.form.departments = Object.values(this.$route.params.data.departments).filter(
-  	    	// 	 this.form.departments = Object.values(this.$route.params.data.departments).map(
-          //  		 		item => {	
-          //  		 			//return item['id'];
-          //  		 			 return item.id;
-          //  		 		}
-  	      //   		 );
-      	  // }	    	
+      		if(this.$route.params.data.pro_category === null){ this.form.pro_category = []; }
+          if(this.$route.params.data.pro_suppliers === null){ this.form.pro_suppliers = []; }
+          if(this.$route.params.data.pro_suppliers === null){ this.form.pro_suppliers = []; }
+          if(this.$route.params.data.related_products === null){ this.form.related_products = []; }
+          if(this.$route.params.data.has_many_image){ this.form.pro_images = []; }
+    	
       	}
+        //for multiselect
+        this.$store.dispatch('ProductMasterStore/fetchSelectedCategoryList', this.form.pro_category);
+        this.$store.dispatch('ProductMasterStore/fetchSelectedSupplierList', this.form.pro_suppliers);
+        this.$store.dispatch('ProductMasterStore/fetchSelectedProductList', this.form.related_products);
+      },
+
+      //all method comming from multiselect apps
+      AutoCompleteSearchForDataCategory(data){
+        this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data ); 
+      },
+      AutoCompleteSearchForDataSuppliyer(data){
+        this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForSuppliers', data ); 
+      },
+      AutoCompleteSearchForDataProduct(data){
+        this.$store.dispatch('ProductMasterStore/AutoCompleteSearchForProduct', data ); 
+      },
+      getSelectedListByIdsForSupplier(){
+        this.$store.dispatch('ProductMasterStore/fetchSelectedSupplierList', this.form.pro_suppliers);
+      },
+      getSelectedListByIdsForCategory(){
+        this.$store.dispatch('ProductMasterStore/fetchSelectedCategoryList', this.form.pro_category);
+      },
+      getSelectedListByIdsForProduct(){
+        this.$store.dispatch('ProductMasterStore/fetchSelectedProductList', this.form.related_products);        
       },
 
     }, //end Methods
@@ -917,10 +926,9 @@
   	created(){
   		this.fillForm();
     	this.$store.dispatch('commonStoreForAll/AllStatus', 'Product'); //get status with "Product" keyword
-
       this.$store.dispatch('commonStoreForAll/fetchLanguages'); //get all language
       this.$store.dispatch('commonStoreForAll/fetchBrands'); //get all brands
-      this.$store.dispatch('commonStoreForAll/fetchCategory'); //get all category
+      //this.$store.dispatch('commonStoreForAll/fetchCategory'); //get all category
       this.$store.dispatch('commonStoreForAll/fetchSpecifications'); //get all Specification
       this.$store.dispatch('commonStoreForAll/fetchAttributeList'); //get all Attribute
       this.$store.dispatch('commonStoreForAll/fetchAttributeValue'); //get all Attribute Value
@@ -928,12 +936,12 @@
 
 
       //call from multi-select-app-one.vue
-		  FireEvent.$on('AutoCompleteSearchForDataOne', (data) => {
-          this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data ); 
-	    });
-      FireEvent.$on('AutoCompleteSearchForDataTwo', (data) => {
-          this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForSuppliers', data ); 
-      });
+		  // FireEvent.$on('AutoCompleteSearchForDataOne', (data) => {
+    //       //this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data ); 
+	   //  });
+      // FireEvent.$on('AutoCompleteSearchForDataTwo', (data) => {
+      //     this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForSuppliers', data ); 
+      // });
 
       if( this.editMode === false){
           setTimeout(() => {
@@ -944,6 +952,7 @@
     }, //end Created
 
     mounted() {
+      
       //console.log(this.form.pro_translation);        
       //console.log(this.form.pro_translation);
     }

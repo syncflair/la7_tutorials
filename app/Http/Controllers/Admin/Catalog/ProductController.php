@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Models\Catalog\Product;
 use App\Models\Catalog\Image;
+use App\Supplier;
+use App\Models\Catalog\Category;
+
 use Illuminate\Support\Str; //for str::random
 //use Illuminate\Support\Facades\File; //for file management  (Public Storage)
 
@@ -43,9 +46,12 @@ class ProductController extends Controller
             $perPage = 100;
        }
 
-       $data = Product::with('belongsToStatusMaster','belongsToBrand','hasManyImage')->paginate($perPage);
+       $data = Product::with('belongsToStatusMaster','belongsToBrand','hasManyImage')
+                        // ->select('products.*')
+                        ->orderBy('id', 'DESC')
+                        ->paginate($perPage);
        return response()->json($data);
-       Log::info($data);
+       //Log::info($data);
     }
 
     /**
@@ -97,6 +103,8 @@ class ProductController extends Controller
         $data['pro_qty']=$request->pro_qty;  
         $data['pro_translation'] =$request->pro_translation;        
         $data['pro_category'] =$request->pro_category;
+        $data['related_products'] =$request->related_products;
+        $data['pro_suppliers'] =$request->pro_suppliers;
         $data['pro_attributes'] =$request->pro_attributes;
         $data['pro_specification'] =$request->pro_specification;
         $data['pro_discount'] =$request->pro_discount;
@@ -208,8 +216,10 @@ class ProductController extends Controller
         $data['pro_sale_price']=$request->pro_sale_price;
         $data['pro_reward_points']=$request->pro_reward_points;
         $data['pro_qty']=$request->pro_qty;  
-        $data['pro_translation'] =$request->pro_translation;        
+        $data['pro_translation'] =$request->pro_translation; 
+        $data['related_products'] =$request->related_products;       
         $data['pro_category'] =$request->pro_category;
+        $data['pro_suppliers'] =$request->pro_suppliers;
         $data['pro_attributes'] =$request->pro_attributes;
         $data['pro_specification'] =$request->pro_specification;
         $data['pro_discount'] =$request->pro_discount;
@@ -395,5 +405,61 @@ class ProductController extends Controller
         }
         //return $searchResult;
         return response()->json($searchResult);
+    }//end search  
+
+    //auto complete product search
+    public function AutoCompleteProductForStore(Request $request){
+        $searchKey = $request->q;
+        if(!empty($searchKey)){
+        //if($search = \Request::get('q')){
+            $searchResult = Product::where(function($query) use ($searchKey){
+                $query->where('sys_pro_name','LIKE','%'.$searchKey.'%')
+                        ->orWhere('pro_price','LIKE','%'.$searchKey.'%');
+            })
+            ->select('id','sys_pro_name')
+            ->limit(200)
+            ->get();
+        }
+        return response()->json($searchResult);
+    }
+
+    //selected Product list for multiselect option
+    public function selectedProductList(Request $request){
+
+        $searchKey = $request->q != null ? $request->q : $request->q = [];
+        $searchResult = Product::whereIn('id', $searchKey)
+                        ->select('id','sys_pro_name')
+                        ->get(); //Model::whereIn('id', [1, 2, 3])->get();
+       // $searchResult = Supplier::findMany([1, 2, 3]); //Model::findMany([1, 2, 3]);
+        return response()->json($searchResult);
     }//end search
+
+
+    //selected supplier list for multiselect option
+    public function selectedSupplierList(Request $request){
+       $searchKey = $request->q;
+        $searchResult = Supplier::whereIn('id', $searchKey)
+                        ->select('id','name')
+                        ->get(); //Model::whereIn('id', [1, 2, 3])->get();
+       // $searchResult = Supplier::findMany([1, 2, 3]); //Model::findMany([1, 2, 3]);
+        return response()->json($searchResult);
+    }//end search
+
+
+    //selected Category list for multiselect option
+    public function selectedCategoryList(Request $request){
+        $searchKey = $request->q;
+        $searchResult = Category::whereIn('id', $searchKey)
+                        ->select('id','cat_name')
+                        ->get(); //Model::whereIn('id', [1, 2, 3])->get();
+       // $searchResult = Supplier::findMany([1, 2, 3]); //Model::findMany([1, 2, 3]);
+        return response()->json($searchResult);
+    }//end search
+
+
+
+
+
+    
+
 }

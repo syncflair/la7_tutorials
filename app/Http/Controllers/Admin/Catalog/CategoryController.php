@@ -283,10 +283,9 @@ class CategoryController extends Controller
         return response()->json($data);
     }
 
-    public function autoCompleteSearch(Request $request){
-
+    //auto complete serarch for category
+    public function autoCompleteCategoryForStore(Request $request){
         $searchKey = $request->q;
-
         if(!empty($searchKey)){
         //if($search = \Request::get('q')){
             $searchResult = Category::where(function($query) use ($searchKey){
@@ -296,7 +295,6 @@ class CategoryController extends Controller
         }else{
             $searchResult = Category::get();
         }
-
         return response()->json($searchResult);
     }
 }

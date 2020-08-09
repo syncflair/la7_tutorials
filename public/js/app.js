@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/chunks/" + ({"AttirbuteMaster":"AttirbuteMaster","AttributeValueMaster":"AttributeValueMaster","BranchInfo":"BranchInfo","BrandMaster":"BrandMaster","BrandShopMaster":"BrandShopMaster","CashFlowReportMaster":"CashFlowReportMaster","Category-demo":"Category-demo","CategoryMaster":"CategoryMaster","ChartOfAccounts":"ChartOfAccounts","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","CustomerGroupMaster":"CustomerGroupMaster","CustomerMaster":"CustomerMaster","Dashboard":"Dashboard","DepartmentMaster":"DepartmentMaster","DistrictMaster":"DistrictMaster","DistrictZoneMaster":"DistrictZoneMaster","DivisionMaster":"DivisionMaster","EmployeeMaster":"EmployeeMaster","EmployeeMasterForm":"EmployeeMasterForm","EmployeeMasterList":"EmployeeMasterList","GiftVoucher":"GiftVoucher","JobTitleMaster":"JobTitleMaster","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","LoanReportMaster":"LoanReportMaster","Multicomponent":"Multicomponent","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","PaymentMethod":"PaymentMethod","PermissionMaster":"PermissionMaster","ProductMaster":"ProductMaster","ProductMasterForm":"ProductMasterForm","ProductMasterList":"ProductMasterList","Purchase":"Purchase","Returns":"Returns","Reviews":"Reviews","RoleMaster":"RoleMaster","SalesReportMaster":"SalesReportMaster","SpecificationMaster":"SpecificationMaster","StatusMaster":"StatusMaster","StockReportMaster":"StockReportMaster","Store":"Store","SupplierMaster":"SupplierMaster","SuppliersReportMaster":"SuppliersReportMaster","UserMaster":"UserMaster","UserStatus":"UserStatus","VatRate":"VatRate","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","adminwrapper":"adminwrapper","multi-select-app-one-global":"multi-select-app-one-global","multi-select-app-two-global":"multi-select-app-two-global","pagination-app":"pagination-app","search-app-one":"search-app-one","vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098":"vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098","NotFound":"NotFound","ReportMaster":"ReportMaster","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","AttributeMasterForm-com":"AttributeMasterForm-com","AttributeMasterList-com":"AttributeMasterList-com","AttributeValueMasterForm-com":"AttributeValueMasterForm-com","AttributeValueMasterList-com":"AttributeValueMasterList-com","BranchForm-com":"BranchForm-com","BranchList-com":"BranchList-com","BrandMasterForm-com":"BrandMasterForm-com","BrandMasterList-com":"BrandMasterList-com","BrandShopMasterForm-com":"BrandShopMasterForm-com","BrandShopMasterList-com":"BrandShopMasterList-com","CategoryMasterForm-com":"CategoryMasterForm-com","CategoryMasterList-com":"CategoryMasterList-com","ChartOfAccountsForm-com":"ChartOfAccountsForm-com","ChartOfAccountsList-com":"ChartOfAccountsList-com","CountryForm-com":"CountryForm-com","CountryList-com":"CountryList-com","CurrencyForm-com":"CurrencyForm-com","CurrencyList-com":"CurrencyList-com","CustomerGroupMasterForm-com":"CustomerGroupMasterForm-com","CustomerGroupMasterList-com":"CustomerGroupMasterList-com","CustomerMasterForm-com":"CustomerMasterForm-com","CustomerMasterList-com":"CustomerMasterList-com","DepartmentMaserForm-com":"DepartmentMaserForm-com","DepartmentMasterList-com":"DepartmentMasterList-com","DistrictMasterList-com":"DistrictMasterList-com","DistrictMasterform-com":"DistrictMasterform-com","DistrictZoneMasterForm-com":"DistrictZoneMasterForm-com","DistrictZoneMasterList-com":"DistrictZoneMasterList-com","DivisionMasterList-com":"DivisionMasterList-com","DivisionMasterform-com":"DivisionMasterform-com","JobTitleMasterForm-com":"JobTitleMasterForm-com","JobTitleMasterList-com":"JobTitleMasterList-com","LanguageForm-com":"LanguageForm-com","LanguageList-com":"LanguageList-com","LengthUnitForm-com":"LengthUnitForm-com","LengthUnitList-com":"LengthUnitList-com","formBox":"formBox","searchBox":"searchBox","PackageUnitForm-com":"PackageUnitForm-com","PackageUnitList-com":"PackageUnitList-com","PaymentMethodForm-com":"PaymentMethodForm-com","PaymentMethodList-com":"PaymentMethodList-com","PermissionAddForm-com":"PermissionAddForm-com","RoleAdminMasterForm-com":"RoleAdminMasterForm-com","RoleAdminMasterList-com":"RoleAdminMasterList-com","SpecificationMasterForm-com":"SpecificationMasterForm-com","SpecificationMasterList-com":"SpecificationMasterList-com","StatusMasterForm-com":"StatusMasterForm-com","StatusMasterList-com":"StatusMasterList-com","SupplierMasterForm-com":"SupplierMasterForm-com","SupplierMasterList-com":"SupplierMasterList-com","UserMasterForm-com":"UserMasterForm-com","UserMasterList-com":"UserMasterList-com","UserStatusForm-com":"UserStatusForm-com","UserStatusList-com":"UserStatusList-com","VatRateForm-com":"VatRateForm-com","VatRateList-com":"VatRateList-com","WeightUnitForm-com":"WeightUnitForm-com","WeightUnitList-com":"WeightUnitList-com","ReportMasterContent-com":"ReportMasterContent-com","ReportMasterNav-com":"ReportMasterNav-com"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "js/chunks/" + ({"AttirbuteMaster":"AttirbuteMaster","AttributeValueMaster":"AttributeValueMaster","BranchInfo":"BranchInfo","BrandMaster":"BrandMaster","BrandShopMaster":"BrandShopMaster","CashFlowReportMaster":"CashFlowReportMaster","Category-demo":"Category-demo","CategoryMaster":"CategoryMaster","ChartOfAccounts":"ChartOfAccounts","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","CustomerGroupMaster":"CustomerGroupMaster","CustomerMaster":"CustomerMaster","Dashboard":"Dashboard","DepartmentMaster":"DepartmentMaster","DistrictMaster":"DistrictMaster","DistrictZoneMaster":"DistrictZoneMaster","DivisionMaster":"DivisionMaster","EmployeeMaster":"EmployeeMaster","EmployeeMasterForm":"EmployeeMasterForm","EmployeeMasterList":"EmployeeMasterList","GiftVoucher":"GiftVoucher","JobTitleMaster":"JobTitleMaster","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","LoanReportMaster":"LoanReportMaster","Multicomponent":"Multicomponent","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","PaymentMethod":"PaymentMethod","PermissionMaster":"PermissionMaster","ProductMaster":"ProductMaster","ProductMasterForm":"ProductMasterForm","ProductMasterList":"ProductMasterList","Purchase":"Purchase","Returns":"Returns","Reviews":"Reviews","RoleMaster":"RoleMaster","SalesReportMaster":"SalesReportMaster","SpecificationMaster":"SpecificationMaster","StatusMaster":"StatusMaster","StockReportMaster":"StockReportMaster","Store":"Store","SupplierMaster":"SupplierMaster","SuppliersReportMaster":"SuppliersReportMaster","UserMaster":"UserMaster","UserStatus":"UserStatus","VatRate":"VatRate","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","adminwrapper":"adminwrapper","multi-select-app-one-global":"multi-select-app-one-global","pagination-app":"pagination-app","search-app-one":"search-app-one","vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098":"vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098","NotFound":"NotFound","ReportMaster":"ReportMaster","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","AttributeMasterForm-com":"AttributeMasterForm-com","AttributeMasterList-com":"AttributeMasterList-com","AttributeValueMasterForm-com":"AttributeValueMasterForm-com","AttributeValueMasterList-com":"AttributeValueMasterList-com","BranchForm-com":"BranchForm-com","BranchList-com":"BranchList-com","BrandMasterForm-com":"BrandMasterForm-com","BrandMasterList-com":"BrandMasterList-com","BrandShopMasterForm-com":"BrandShopMasterForm-com","BrandShopMasterList-com":"BrandShopMasterList-com","CategoryMasterForm-com":"CategoryMasterForm-com","CategoryMasterList-com":"CategoryMasterList-com","ChartOfAccountsForm-com":"ChartOfAccountsForm-com","ChartOfAccountsList-com":"ChartOfAccountsList-com","CountryForm-com":"CountryForm-com","CountryList-com":"CountryList-com","CurrencyForm-com":"CurrencyForm-com","CurrencyList-com":"CurrencyList-com","CustomerGroupMasterForm-com":"CustomerGroupMasterForm-com","CustomerGroupMasterList-com":"CustomerGroupMasterList-com","CustomerMasterForm-com":"CustomerMasterForm-com","CustomerMasterList-com":"CustomerMasterList-com","DepartmentMaserForm-com":"DepartmentMaserForm-com","DepartmentMasterList-com":"DepartmentMasterList-com","DistrictMasterList-com":"DistrictMasterList-com","DistrictMasterform-com":"DistrictMasterform-com","DistrictZoneMasterForm-com":"DistrictZoneMasterForm-com","DistrictZoneMasterList-com":"DistrictZoneMasterList-com","DivisionMasterList-com":"DivisionMasterList-com","DivisionMasterform-com":"DivisionMasterform-com","JobTitleMasterForm-com":"JobTitleMasterForm-com","JobTitleMasterList-com":"JobTitleMasterList-com","LanguageForm-com":"LanguageForm-com","LanguageList-com":"LanguageList-com","LengthUnitForm-com":"LengthUnitForm-com","LengthUnitList-com":"LengthUnitList-com","formBox":"formBox","searchBox":"searchBox","PackageUnitForm-com":"PackageUnitForm-com","PackageUnitList-com":"PackageUnitList-com","PaymentMethodForm-com":"PaymentMethodForm-com","PaymentMethodList-com":"PaymentMethodList-com","PermissionAddForm-com":"PermissionAddForm-com","RoleAdminMasterForm-com":"RoleAdminMasterForm-com","RoleAdminMasterList-com":"RoleAdminMasterList-com","SpecificationMasterForm-com":"SpecificationMasterForm-com","SpecificationMasterList-com":"SpecificationMasterList-com","StatusMasterForm-com":"StatusMasterForm-com","StatusMasterList-com":"StatusMasterList-com","SupplierMasterForm-com":"SupplierMasterForm-com","SupplierMasterList-com":"SupplierMasterList-com","UserMasterForm-com":"UserMasterForm-com","UserMasterList-com":"UserMasterList-com","UserStatusForm-com":"UserStatusForm-com","UserStatusList-com":"UserStatusList-com","VatRateForm-com":"VatRateForm-com","VatRateList-com":"VatRateList-com","WeightUnitForm-com":"WeightUnitForm-com","WeightUnitList-com":"WeightUnitList-com","ReportMasterContent-com":"ReportMasterContent-com","ReportMasterNav-com":"ReportMasterNav-com"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -123017,9 +123017,6 @@ Vue.component('multi-select-app', function () {
 Vue.component('multi-select-app-one', function () {
   return __webpack_require__.e(/*! import() | multi-select-app-one-global */ "multi-select-app-one-global").then(__webpack_require__.bind(null, /*! ./components/Admin/GlobalComponents/multi-select-app-one.vue */ "./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue"));
 });
-Vue.component('multi-select-app-two', function () {
-  return __webpack_require__.e(/*! import() | multi-select-app-two-global */ "multi-select-app-two-global").then(__webpack_require__.bind(null, /*! ./components/Admin/GlobalComponents/multi-select-app-two.vue */ "./resources/js/components/Admin/GlobalComponents/multi-select-app-two.vue"));
-});
 Vue.component('auto-complete-app', function () {
   return Promise.all(/*! import() | auto-complete-app */[__webpack_require__.e("vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098"), __webpack_require__.e("auto-complete-app")]).then(__webpack_require__.bind(null, /*! ./components/Admin/GlobalComponents/auto-complete-app.vue */ "./resources/js/components/Admin/GlobalComponents/auto-complete-app.vue"));
 });
@@ -124602,7 +124599,12 @@ var ProductMasterStore = {
         current_page: 1,
         per_page: 0
       },
-      autoCompleteData: {}
+      autoCompleteData: {},
+      //for multiselect option
+      autoSearchProducts: {},
+      selectedProductList: [],
+      selectedSupplierList: [],
+      selectedCategoryList: []
     };
   },
 
@@ -124612,14 +124614,27 @@ var ProductMasterStore = {
   /*end getters*/
   mutations: {
     //return data to state
-    FETCH_DATA: function FETCH_DATA(state, products) {
-      return state.products = products;
+    FETCH_DATA: function FETCH_DATA(state, data) {
+      return state.products = data;
     },
-    FATCH_PAGINATION: function FATCH_PAGINATION(state, pagination) {
-      return state.pagination = pagination;
+    FATCH_PAGINATION: function FATCH_PAGINATION(state, data) {
+      return state.pagination = data;
     },
     AUTO_COMPLETE_DATA: function AUTO_COMPLETE_DATA(state, data) {
       return state.autoCompleteData = data;
+    },
+    //for multiselect
+    AUTO_COMPLETE_DATA_FOR_PRODUCT: function AUTO_COMPLETE_DATA_FOR_PRODUCT(state, data) {
+      return state.autoSearchProducts = data;
+    },
+    SELECTED_PRODUCT_LIST: function SELECTED_PRODUCT_LIST(state, data) {
+      return state.selectedProductList = data;
+    },
+    SELECTED_SUPPLIER_LIST: function SELECTED_SUPPLIER_LIST(state, data) {
+      return state.selectedSupplierList = data;
+    },
+    SELECTED_CATEGORY_LIST: function SELECTED_CATEGORY_LIST(state, data) {
+      return state.selectedCategoryList = data;
     }
   },
 
@@ -124660,6 +124675,42 @@ var ProductMasterStore = {
       axios.get('/spa/searchProductData?&q=' + query) //axios.get('/spa/searchProductData?q='+query)
       .then(function (response) {
         context.commit('AUTO_COMPLETE_DATA', response.data.data); //this.categories = response.data; // is an object... use when pagination                                         
+      })["catch"](function () {});
+    },
+    //For selected Category
+    fetchSelectedCategoryList: function fetchSelectedCategoryList(context, payload) {
+      //use axios.post instead of axios.get , becouse is contaion array  
+      axios.post('/spa/Product-getCategoryList/', {
+        q: payload
+      }).then(function (response) {
+        context.commit('SELECTED_CATEGORY_LIST', response.data);
+      })["catch"](function () {});
+    },
+    //For selected Supplier
+    fetchSelectedSupplierList: function fetchSelectedSupplierList(context, payload) {
+      //use axios.post instead of axios.get , becouse is contaion array    
+      axios.post('/spa/Product-getSupplierList/', {
+        q: payload
+      }).then(function (response) {
+        //console.log(response); 
+        context.commit('SELECTED_SUPPLIER_LIST', response.data);
+      })["catch"](function () {});
+    },
+    //For selected product
+    fetchSelectedProductList: function fetchSelectedProductList(context, payload) {
+      //use axios.post instead of axios.get , becouse is contaion array    
+      axios.post('/spa/Product-getProductList/', {
+        q: payload
+      }).then(function (response) {
+        context.commit('SELECTED_PRODUCT_LIST', response.data);
+      })["catch"](function () {});
+    },
+    //auto complete search for product
+    AutoCompleteSearchForProduct: function AutoCompleteSearchForProduct(context, payload) {
+      var query = payload;
+      axios.get('/spa/AutoCompleteProductData?&q=' + query).then(function (response) {
+        //console.log(response.data);
+        context.commit('AUTO_COMPLETE_DATA_FOR_PRODUCT', response.data);
       })["catch"](function () {});
     }
   }

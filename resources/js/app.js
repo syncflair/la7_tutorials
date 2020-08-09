@@ -46,7 +46,6 @@ Vue.component('pagination-app', () => import(/* webpackChunkName: "pagination-ap
 Vue.component('switch-app', () => import(/* webpackChunkName: "switch-app" */'./components/Admin/GlobalComponents/switch-app.vue'));
 Vue.component('multi-select-app', () => import(/* webpackChunkName: "multi-select-app" */'./components/Admin/GlobalComponents/multi-select-app.vue'));
 Vue.component('multi-select-app-one', () => import(/* webpackChunkName: "multi-select-app-one-global" */'./components/Admin/GlobalComponents/multi-select-app-one.vue'));
-Vue.component('multi-select-app-two', () => import(/* webpackChunkName: "multi-select-app-two-global" */'./components/Admin/GlobalComponents/multi-select-app-two.vue'));
 Vue.component('auto-complete-app', () => import(/* webpackChunkName: "auto-complete-app" */'./components/Admin/GlobalComponents/auto-complete-app.vue'));
 Vue.component('search-app-one', () => import(/* webpackChunkName: "search-app-one" */'./components/Admin/GlobalComponents/search-app-one.vue'));
 

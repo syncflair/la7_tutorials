@@ -354,5 +354,25 @@ class SupplierController extends Controller
         }  
     }
 
+    //Auto complete supplier search
+    public function AutoCompleteSupplierForStore(Request $request){
+        $searchKey = $request->q;
+        if(!empty($searchKey) ){
+        //if($search = \Request::get('q')){
+            $searchResult = Supplier::where(function($query) use ($searchKey){
+                $query->where('suppliers.name','LIKE','%'.$searchKey.'%')
+                        ->orWhere('suppliers.email','LIKE','%'.$searchKey.'%')
+                        ->orWhere('suppliers.supplier_type','LIKE','%'.$searchKey.'%')
+                        ->orWhere('user_status.us_name','LIKE','%'.$searchKey.'%');
+            })
+            ->select('suppliers.id','suppliers.name','user_status.us_name')
+            ->join('user_status', 'suppliers.status_id','=', 'user_status.id')
+            ->limit(200)
+            ->get();
+        }
+        //return $searchResult;
+        return response()->json($searchResult);
+    }//end search
+
 
 }
