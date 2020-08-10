@@ -3483,8 +3483,8 @@ var render = function() {
                                   {
                                     staticClass: "row mt-2 mb-4",
                                     staticStyle: {
-                                      background: "#2196F3",
-                                      margin: "5px 0px 0px 5px",
+                                      "/*background": "#2196F3",
+                                      "*/ margin": "5px 0px 0px 5px",
                                       padding: "10px",
                                       "border-radius": "5px"
                                     }
@@ -3537,6 +3537,7 @@ var render = function() {
                                                         "rounded float-left",
                                                       attrs: {
                                                         src: mi.image_url,
+                                                        loading: "lazy",
                                                         alt: mi.image_alt,
                                                         height: "100px",
                                                         width: "100px"

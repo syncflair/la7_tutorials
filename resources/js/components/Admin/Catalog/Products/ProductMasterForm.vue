@@ -463,7 +463,7 @@
         <div class="tab-pane fade" id="tabs-body-six" role="tabpanel" aria-labelledby="tabs-six">
           
 
-          <div  v-if="form.has_many_image.length" class="row mt-2 mb-4" style="background:#2196F3; margin: 5px 0px 0px 5px; padding: 10px; border-radius: 5px;">
+          <div  v-if="form.has_many_image.length" class="row mt-2 mb-4" style="/*background:#2196F3;*/ margin: 5px 0px 0px 5px; padding: 10px; border-radius: 5px;">
             <div class="col-md-10 offset-1">             
                 <div class="row align-center">
                 <div v-for="(mi, index) in form.has_many_image" class="col-md-2">
@@ -471,7 +471,7 @@
                   <span>
                     <i @click="deleteImage(mi.id, index)" class="far fa-times-circle" style="cursor: pointer; background: #fff; padding: 4px 2px 2px 2px;   color: red; border-radius: 10px; margin-left: -10px;" title="click to Delete"></i>
                     <!-- <img :src="'../'+mi.image_url"  class="rounded float-left" :alt="mi.image_alt" height="100px" width="100px">                     -->
-                    <img :src="mi.image_url"  class="rounded float-left" :alt="mi.image_alt" height="100px" width="100px">                    
+                    <img :src="mi.image_url" loading="lazy" class="rounded float-left" :alt="mi.image_alt" height="100px" width="100px">                    
                   </span>
                 </div>
               </div>              

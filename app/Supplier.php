@@ -56,6 +56,12 @@ class Supplier extends Authenticatable
         return $this->belongsTo(Models\Settings\DistrictZone::class, 'dist_zone_id');
     }
 
+    //Supplier belongs to vendor
+    public function belongsToVendor(){
+        //return $this->belongsTo('App\Models\Supplier\BrandShop', 'brand_shop_id');
+        return $this->belongsTo(Models\Supplier\Vendor::class, 'vendor_id');
+    }
+
     //Supplier belongs to Brand Shop
     public function belongsToBrandShop(){
         //return $this->belongsTo('App\Models\Supplier\BrandShop', 'brand_shop_id');

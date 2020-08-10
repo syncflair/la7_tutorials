@@ -139,6 +139,13 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/BrandShop-Info', 'Admin\Supplier\BrandShopController',
       ['except'=>['create','show','edit'] ]);
 
+    Route::post('spa/Vendor-Info/change-notify/{id}/{notifyValue}', 'Admin\Supplier\VendorController@ChangeNotify');
+    Route::post('spa/Vendor-Info/active-vendor/{id}', 'Admin\Supplier\VendorController@activeVendor');
+    Route::post('spa/Vendor-Info/inactive-vendor/{id}', 'Admin\Supplier\VendorController@inactiveVendor');
+    Route::get('spa/searchVendorData', 'Admin\Supplier\VendorController@search'); //search
+    Route::resource('spa/Vendor-Info', 'Admin\Supplier\VendorController',
+      ['except'=>['create','show','edit'] ]);
+
     //Catalog
     Route::get('spa/AutoCompleteCategoryData', 'Admin\Catalog\CategoryController@autoCompleteCategoryForStore');//commonStoreForAll
     Route::get('spa/CategoryMaster-Info/getCategory', 'Admin\Catalog\CategoryController@getCategory');//for commonStoreForAll store    
@@ -259,6 +266,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::get('spa/searchCategoryData', 'Admin\MultiComponent\MultiComponentController@searchCategoryData');
     Route::get('spa/getCatList/{id}', 'Admin\MultiComponent\MultiComponentController@CategoryListById');
     Route::resource('spa/MultiComponent', 'Admin\MultiComponent\MultiComponentController'); 
+    Route::get('spa/getMultiProductList/{id}', 'Admin\Catalog\ProductController@getMultiProductList');
     //End Deomo
     /**********************************************End Vue Route *************************************************/   
  

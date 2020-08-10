@@ -112,10 +112,10 @@
 
 			        <div class="form-group">
 			            <label for="dist_zone_id">Zone / Area</label>
-                        	<select v-model="form.dist_zone_id" class="form-control form-control-sm-" id="dist_zone_id" name="dist_zone_id" >
+                        <select v-model="form.dist_zone_id" class="form-control form-control-sm-" id="dist_zone_id" name="dist_zone_id" >
 			              	<option disabled value="">Select zone / Area ..</option>                
 			                <option v-for="zone in Dist_Zones" :key="zone.id" v-bind:value="zone.id">{{zone.zone_name}} ({{zone.zip_code}})</option>			                  
-			              </select>
+			            </select>
 			        </div>
 
 			        <div class="form-group">
@@ -249,7 +249,7 @@
 	    		this.form.reset();	    		
 	    		setTimeout(() => {
 	    			this.$refs.name.focus(); 
-                }, 600);
+                }, 200);
 	    	},
 
 	    	//this event call from CustomerList component
@@ -257,7 +257,9 @@
 	    		this.editMode = true;
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
-	    		this.$refs.name.focus();    		
+	    		setTimeout(() => {
+	    			this.$refs.name.focus(); 
+                }, 200);    		
 	    	},
 
 	    	ClearForm(){

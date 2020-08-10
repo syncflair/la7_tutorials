@@ -266,14 +266,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.form.reset();
       setTimeout(function () {
         _this2.$refs.name.focus();
-      }, 600);
+      }, 200);
     },
     //this event call from CustomerList component
     editData: function editData(data) {
+      var _this3 = this;
+
       this.editMode = true;
       this.form.reset();
       this.form.fill(data);
-      this.$refs.name.focus();
+      setTimeout(function () {
+        _this3.$refs.name.focus();
+      }, 200);
     },
     ClearForm: function ClearForm() {
       this.editMode = false;
@@ -287,7 +291,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     // Submit the form via a POST request
     storeFormData: function storeFormData() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.$Progress.start(); //using progress-bar package
       //this.form.post('/spa/supplier-Info')
@@ -300,50 +304,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           toastr.success(data.success);
 
-          _this3.$Progress.finish();
-
-          _this3.form.reset(); //reset from after submit
-
-
-          _this3.$refs.avatar.value = ''; //clear file input tag 
-
-          _this3.ShowOnChangeImage = null;
-          $('#FormModal').modal('hide');
-        }
-
-        if (data.errors) {
-          toastr.warning(data.errors);
-        }
-      })["catch"](function () {
-        _this3.$Progress.fail();
-
-        toastr.warning('Something is wrong!');
-      });
-    },
-    updateFormData: function updateFormData() {
-      var _this4 = this;
-
-      //console.log('Update is working!'); 
-      this.$Progress.start(); //using progress-bar package
-
-      this.form.put('/spa/supplier-Info/' + this.form.id).then(function (_ref2) {
-        var data = _ref2.data;
-
-        if (data.success) {
-          FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
-
           _this4.$Progress.finish();
-
-          toastr.success(data.success);
 
           _this4.form.reset(); //reset from after submit
 
 
-          _this4.editMode = false;
           _this4.$refs.avatar.value = ''; //clear file input tag 
 
           _this4.ShowOnChangeImage = null;
-          $('#FormModal').modal('hide'); //  this.$refs.name.focus(); //ret focus to first input filed. ref="cat_name" tag must be use
+          $('#FormModal').modal('hide');
         }
 
         if (data.errors) {
@@ -354,10 +323,45 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         toastr.warning('Something is wrong!');
       });
+    },
+    updateFormData: function updateFormData() {
+      var _this5 = this;
+
+      //console.log('Update is working!'); 
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.put('/spa/supplier-Info/' + this.form.id).then(function (_ref2) {
+        var data = _ref2.data;
+
+        if (data.success) {
+          FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
+
+          _this5.$Progress.finish();
+
+          toastr.success(data.success);
+
+          _this5.form.reset(); //reset from after submit
+
+
+          _this5.editMode = false;
+          _this5.$refs.avatar.value = ''; //clear file input tag 
+
+          _this5.ShowOnChangeImage = null;
+          $('#FormModal').modal('hide'); //  this.$refs.name.focus(); //ret focus to first input filed. ref="cat_name" tag must be use
+        }
+
+        if (data.errors) {
+          toastr.warning(data.errors);
+        }
+      })["catch"](function () {
+        _this5.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
 
@@ -366,21 +370,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$store.dispatch('commonStoreForAll/fetchDistrictZoneList'); //get user status
 
     FireEvent.$on('AfterChange', function () {
-      _this5.$Progress.start();
+      _this6.$Progress.start();
 
-      _this5.$store.dispatch('SupplierForAdminStore/fetchData', _this5.pagination.per_page);
+      _this6.$store.dispatch('SupplierForAdminStore/fetchData', _this6.pagination.per_page);
 
-      _this5.$Progress.finish();
+      _this6.$Progress.finish();
     }); //this event call from CustomerList component
 
     FireEvent.$on('editData', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this5.editData(data);
+      _this6.editData(data);
     }); //this event call from CustomerList component
 
     FireEvent.$on('addData', function () {
-      _this5.addData();
+      _this6.addData();
     });
   }
 }); //End Exprot Default

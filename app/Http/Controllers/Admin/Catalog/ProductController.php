@@ -457,8 +457,14 @@ class ProductController extends Controller
     }//end search
 
 
-
-
+    //this is test function for product for multiComponent 
+    public function getMultiProductList(Request $request){
+        //return $request->id;
+        $id = $request->id;
+        # Get all the user who has Vue in skills
+        $result = Product::with('belongsToStatusMaster','belongsToBrand','hasManyImage')->where('pro_category', 'LIKE',  '%'.$id.'%')->get();
+        return response()->json($result);
+    }
 
     
 

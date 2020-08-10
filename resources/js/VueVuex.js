@@ -16,6 +16,7 @@ import CustomerForAdminStore from './store/CustomerForAdminStore'
 //supplier
 import SupplierForAdminStore from './store/SupplierForAdminStore'
 import BrandShopMasterStore from './store/BrandShopMasterStore'
+import VendorMasterStore from './store/VendorMasterStore'
 //user Management
 import usersAdminStore from './store/usersAdminStore'
 //Catalog
@@ -50,7 +51,7 @@ export default new Vuex.Store({
         //customer	
     	CustomerForAdminStore,
         //Suppliers
-        SupplierForAdminStore, BrandShopMasterStore,
+        SupplierForAdminStore, BrandShopMasterStore, VendorMasterStore,
 
         //user management
         usersAdminStore,

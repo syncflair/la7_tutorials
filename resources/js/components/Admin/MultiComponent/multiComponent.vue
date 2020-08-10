@@ -48,14 +48,25 @@
 					<formBox></formBox>					
 				</div></div>
 
+				<div class="row mt-0">
+					<div class="col-md-12">		
+						<ProductListMultiComponent></ProductListMultiComponent>
+						<!-- <childCategory :listCategoryId="listCategoryId"></childCategory> -->
+					</div>
+				</div>
+
 				<div class="row mt-0"><div class="col-md-12">
 					<viewCategory :viewCategoryData="viewCategoryData"></viewCategory>
 				</div></div>
 
-				<div class="row mt-0"><div class="col-md-12">		
-					<childCategory></childCategory>
-					<!-- <childCategory :listCategoryId="listCategoryId"></childCategory> -->
-				</div></div>
+				<div class="row mt-0">
+					<div class="col-md-12">		
+						<childCategory></childCategory>
+						<!-- <childCategory :listCategoryId="listCategoryId"></childCategory> -->
+					</div>
+				</div>
+
+				
 
 			</div>
 		</div>
@@ -80,6 +91,7 @@
 	import viewCategory from './viewCategory.vue'
 	import countCategory from './countCategory.vue'
 	import childCategory from './childCategory.vue'
+	import ProductListMultiComponent from './ProductListMultiComponent.vue'
 
 	//import searchBox from './searchBox.vue'
 	//import formBox from './formBox.vue'
@@ -212,7 +224,7 @@
 	      dataList,	      
 	      viewCategory,
 	      countCategory,
-	      childCategory,
+	      childCategory, ProductListMultiComponent,
 	      //load component by ES6 rule. lazy loading
 	      searchBox: () => import(/* webpackChunkName: "searchBox" */'./searchBox'),
 	      formBox: () => import(/* webpackChunkName: "formBox" */'./formBox'),

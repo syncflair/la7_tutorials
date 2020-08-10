@@ -218,7 +218,7 @@ class BrandController extends Controller
                 $image = str_replace($replace, '', $image_base64); 
                 $image = str_replace(' ', '+', $image);      
                 Storage::disk('s3')->put('brand/'.$imageName, base64_decode($image) ); //for s3
-                //Storage::disk('s3')->put('brand/'.$imageName, base64_decode($image) );//for public storage
+                //Storage::disk('public')->put('brand/'.$imageName, base64_decode($image) );//for public storage
 
                 //s3_url get from constants file 
                 $data['brand_img'] = Config::get('constants.s3_url').'brand/'.$imageName;

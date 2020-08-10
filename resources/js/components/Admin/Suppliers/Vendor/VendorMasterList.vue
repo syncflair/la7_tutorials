@@ -11,7 +11,10 @@
           ></search-app-one>
         </div>
         <div class="col-md-7 col-sm-3 text-right">
-        	<a @click="addData" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#FormModal"> <i class="icon fas fa-plus"></i> Add New</a>
+          <!-- <router-link :to="{name: 'VendorMasterForm', params: { id: id} }" class="btn btn-primary btn-flat btn-sm">  -->
+	        <router-link to="/spa/VendorMasterForm" class="btn btn-primary btn-flat btn-sm"> 
+	        	<i class="icon fas fa-plus"></i> Add New
+	        </router-link>
         </div>
       </div>
     </div><!--/card-header-->
@@ -19,82 +22,83 @@
       <table class="table table-striped table-sm table-responsive">
         <thead>
           <tr>
+            <!-- <th style="">#</th> -->
             <th style="width: 2%;" scope="col"><input type="checkbox" v-model="selectAllCheckbox" @click="selectCheckbox"></th>
-            
             <th style="width: 3%;" scope="col">Img</th>
-            <th style="width: 15%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
-            <th style="width: 15%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>             
-            <th style="width: 7%;" scope="col" @click="sort('phone')" class="sortable-title">Phone</th>
-            <th style="width: 10%;" scope="col" @click="sort('supplier_type')" class="sortable-title">Type / Shop</th>
-            <th style="width: 15%;" scope="col">Address</th>
-            <th style="width: 7%;" scope="col">Date</th>
-            <th style="width: 3%;" scope="col">Status</th>
-            <th style="width: 3%;" scope="col">Nofify</th>            
+            <th style="width: 15%;" scope="col" @click="sort('vendor_name')" class="sortable-title">Vendor Name</th>
+            <th style="width: 15%;" scope="col" @click="sort('vendor_email')" class="sortable-title">Email</th>             
+            <th style="width: 15%;" scope="col" @click="sort('vendor_phone')" class="sortable-title">Phone</th>
+            <th style="width: 10%;" >Type / Shop</th>
+            <th style="width: 10%;" scope="col">Assign TO</th>
+            <th style="width: 5%;" scope="col">Status</th>           
+            <th style="width: 3%;" scope="col">Notify</th>           
             <th style="width: 10%; text-align:right;" scope="col">Action</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr v-for="(supplier, index) in sortedSuppliers" :key="index">
-            <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="supplier.id"></td>
+          <tr v-for="(vendor, index) in sortedDatalist" :key="index">
+
+            <!-- <td > id</td> -->
+            <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="vendor.id"></td>
+
             <td> 
-                <span v-if="supplier.avatar != null"> 
-                  <img :src="'../'+supplier.avatar" loading="lazy" height="20px" width="20px"> 
-                  <!-- <img :src="supplier.avatar" loading="lazy" height="20px" width="20px">  -->
+                <span v-if="vendor.vendor_img != null"> 
+                  <img :src="'../'+vendor.vendor_img" loading="lazy" height="20px" width="20px"> 
                 </span>
-                <span v-if="supplier.avatar === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
+                <span v-if="vendor.vendor_img === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
             </td> 
 
-            <td scope="col"> {{ supplier.name }} </td>
-            <td > {{ supplier.email }} </td> 
-            <td > {{ supplier.phone }} </td>          
+            <td scope="col"> {{ vendor.vendor_name }} </td>
+            <td > {{ vendor.vendor_email }} </td> 
+            <td > {{ vendor.vendor_phone }} </td>          
           	<td > 
-              <small>{{ supplier.supplier_type }} </small>
-              <small v-if="supplier.brand_shop_id != null"> 
-                ( {{supplier.belongs_to_brand_shop.brand_shop_title }} )
+              <small>{{ vendor.vendor_type }} </small>
+              <small v-if="vendor.brand_shop_id != null"> 
+                ( {{vendor.belongs_to_brand_shop.brand_shop_title }} )
               </small>
             </td> 
 
-            <td > 
-              <small v-if="supplier.dist_zone_id != null">
-              <span v-show="supplier.supplier_address != null">{{ supplier.supplier_address }}, </span>
-                {{ supplier.belongs_to_district_zone.zone_name }},
-                {{ supplier.belongs_to_district_zone.belongs_to_district.district_name }},
-                {{ supplier.belongs_to_district_zone.belongs_to_district.belongs_to_division.division_name }},
-                {{ supplier.belongs_to_district_zone.belongs_to_district.belongs_to_division.belongs_to_country.country_name }}
-              </small>
-            </td> 
+            <td>ok</td> 
 
-            <td > <small>{{ supplier.created_at | formatDate }}</small> </td>
+
+            <!-- <td > <small>{{ vendor.emp_hire_date | formatDate }}</small> </td> -->
             
             <td style="text-align:center;">
-              <span @click="inactiveSupplier(supplier.id)" v-show="supplier.status_id === 1" title="Active supplier, Click to inactive"><i class="fas fa-user-check green pointer"></i></span>
-              <span @click="activeSupplier(supplier.id)" v-show="supplier.status_id === 2" title="Inactive supplier, Click to active"> <i class="fas fa-user-times yellow pointer"></i></span>
-              <span @click="activeSupplier(supplier.id)" v-show="supplier.status_id === 3" title="Panding supplier, Click to active"> <i class="fas fa-user-lock red pointer"></i></span>
-              <span @click="verifyByUser(supplier.id)" v-show="supplier.status_id === 4" title="Not Verified supplier, Click to verify">
+              <span @click="inactiveVendor(vendor.id)" v-show="vendor.status_id === 1" title="Active vendor, Click to inactive"><i class="fas fa-user-check green pointer"></i></span>
+              <span @click="activeVendor(vendor.id)" v-show="vendor.status_id === 2" title="Inactive vendor, Click to active"> <i class="fas fa-user-times yellow pointer"></i></span>
+              <span @click="activeVendor(vendor.id)" v-show="vendor.status_id === 3" title="Panding vendor, Click to active"> <i class="fas fa-user-lock red pointer"></i></span>
+              <span @click="activeVendor(vendor.id)" v-show="vendor.status_id === 4" title="Not Verified vendor, Click to verify">
                   <i class="fas fa-user-secret red pointer" style="font-size:22px !important;" ></i>
               </span>
             </td>
-             <td style="text-align:center;">
-              <input type="checkbox" @click="ChangeNotify(supplier.id, $event)" name="enable_notify" value="1" v-model="supplier.enable_notify"  />
+
+            <td style="text-align:center;">
+              <input type="checkbox" @click="ChangeNotify(vendor.id, $event)" name="enable_notify" value="1" v-model="vendor.enable_notify"  />
             </td>
 
              
 
             <td class="text-right">  
               <a @click="ViewDetails()" class="btn btn-flat btn-sm"> <i class="fas fa-eye primary"></i> </a>   
-              <a @click="editData(supplier)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
+              
+              <!-- <a @click="editData(vendor)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
                   <i class="fas fa-edit primary "></i>
-              </a> 
-              <a @click="DeleteData(supplier.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
+              </a> -->
+
+              <router-link :to="{ name: 'VendorMasterForm', params: { data:vendor } }" class="btn btn-primary- btn-flat btn-sm">
+                  <i class="fas fa-edit primary "></i>
+              </router-link>
+
+              <a @click="DeleteData(vendor.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
                  <i class="far fa-trash-alt red"></i>
               </a>
             </td>
 
           </tr>
 
-          <tr v-show="suppliers && !suppliers.length">
-            <td colspan="11">
+          <tr v-show="vendors && !vendors.length">
+            <td colspan="12">
               <div class="alert alert-warning text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
           </tr>
@@ -124,48 +128,46 @@
     import { mapState } from 'vuex' //for user MapState
  
     export default {
-      name: "supplierMasterListForAdmin",
+      name: "VendorMasterList",
 
       data(){
         return { 
           NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
-
           //checkbox selecting data
           selectAllCheckbox: false,
           selectedCheckbox: [],
 
           // use for sortable
-          currentSort:'name',
-          currentSortDir:'asc',
+          currentSort:'vendor_name',
+          currentSortDir:'desc', //asc
 
           //User for search
-          filterBy:'name', // this is use for which field use for auto search, default
+          filterBy:'vendor_name', // this is use for which field use for auto search, default
           SearchByOptions:[
-            {'field_name':'name', 'show_name':'Name'},
-            {'field_name':'email', 'show_name':'Email'},
-            {'field_name':'phone', 'show_name':'Phone'},
-            {'field_name':'supplier_type', 'show_name':'Supplier Type'},
-          ],             
+            {'field_name':'vendor_name', 'show_name':'Name'},
+            {'field_name':'vendor_email', 'show_name':'Email'},
+            {'field_name':'vendor_phone', 'show_name':'Phone'},
+          ],     
+
+                  
         }
       },
 
       computed: {
           ...mapState( 
-             'SupplierForAdminStore', ['suppliers', 'pagination','autoCompleteData']
+             'VendorMasterStore', ['vendors', 'pagination','autoCompleteData']
           ),
            // use for sortable
-          sortedSuppliers() {
-            let fo = Object.values(this.suppliers).sort((a,b) => {
+          sortedDatalist() {
+            let fo = Object.values(this.vendors).sort((a,b) => {
               let modifier = 1;
               if(this.currentSortDir === 'desc') modifier = -1;
               if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
               if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
               return 0;
             });
-
             return fo;
           }
-
       },
 
       methods:{
@@ -173,8 +175,8 @@
         selectCheckbox(){
           this.selectedCheckbox = [];
           if(!this.selectAllCheckbox){
-            for(let i in this.suppliers){
-              this.selectedCheckbox.push(this.suppliers[i].id); //all id push into selectedCheckbox array
+            for(let i in this.vendors){
+              this.selectedCheckbox.push(this.vendors[i].id); //all id push into selectedCheckbox array
             }
           }
         },
@@ -189,7 +191,7 @@
 
         ChangeNotify(id, event){
           this.$Progress.start();
-          axios.post('/spa/supplier-change-notify/'+id+'/'+event.target.checked)
+          axios.post('/spa/Vendor-Info/change-notify/'+id+'/'+event.target.checked)
             .then( ({data}) => {
               //console.log(data);
               if(data.success){                  
@@ -204,10 +206,10 @@
             })
         },
 
-        inactiveSupplier(id){
+        inactiveVendor(id){
           this.$Progress.start();
           Swal.fire({
-              title: 'Are you sure to InActive this supplier?',
+              title: 'Are you sure to InActive this Vendor?',
              // text: "You won't be able to revert this!",
               icon: 'warning',
               showCancelButton: true,
@@ -218,7 +220,7 @@
             
               if ( result.value ) {  
                 
-                axios.post('/spa/supplier-Info/inactive-supplier/'+id)
+                axios.post('/spa/Vendor-Info/inactive-vendor/'+id)
                 .then( ({data}) => {
                   //console.log(data);
                   if(data.success){                  
@@ -239,7 +241,7 @@
           })
         },
 
-        activeSupplier(id){
+        activeVendor(id){
           this.$Progress.start();
           Swal.fire({
               title: 'Are you sure to Active this user?',
@@ -253,7 +255,7 @@
             
               if ( result.value ) {  
                 
-                axios.post('/spa/supplier-Info/active-supplier/'+id)
+                axios.post('/spa/Vendor-Info/active-vendor/'+id)
                 .then( ({data}) => {
                   //console.log(data);
                   if(data.success){                  
@@ -274,45 +276,12 @@
           })
         },
 
-        verifyByUser(id){
-          this.$Progress.start();
-          Swal.fire({
-              title: 'Are you sure to Verify this user?',
-             // text: "You won't be able to revert this!",
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',  
-              confirmButtonText: 'Yes, Verified!'
-          }).then( (result) => {
 
-              if ( result.value ) {  
-                
-                axios.post('/spa/supplier-verify-by-admin/'+id)
-                .then( ({data}) => {
-                  //console.log(data);
-                  if(data.success){                  
-                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
-                    this.$Progress.finish();                
-                    toastr.success(data.success);                                   
-                  } 
-                })                          
-                .catch(() => {
-                  this.$Progress.fail();
-                  toastr.warning('Something is wrong!');
-                })
-
-              }else{
-                this.$Progress.finish();  
-                toastr.info( 'Your action canceled!');
-              }
-          })          
-        },
 
         fetchData(){
           //this function call from Pagination-app component
           this.$Progress.start();
-          this.$store.dispatch('SupplierForAdminStore/fetchData', this.pagination.per_page);
+          this.$store.dispatch('VendorMasterStore/fetchData', this.pagination.per_page);
           this.$Progress.finish();
           //console.log(this.pagination.total);
         },
@@ -343,7 +312,7 @@
 	          }).then( (result) => {
 
 	            if ( result.value ) {  
-	              axios.delete('/spa/supplier-Info/'+id)
+	              axios.delete('/spa/Vendor-Info/'+id)
 	                .then( ({data}) => {
 
 	                  if(data.success){                  
@@ -373,33 +342,33 @@
 
       created(){ 
 
-          this.$store.dispatch('SupplierForAdminStore/fetchData'); //call this function at first loading from Action with Modules namespace 
+          this.$store.dispatch('VendorMasterStore/fetchData'); //call this function at first loading from Action with Modules namespace 
 
 
           FireEvent.$on('AfterChange', () => {
               this.$Progress.start();
-              this.$store.dispatch('SupplierForAdminStore/fetchData', this.pagination.per_page);
+              this.$store.dispatch('VendorMasterStore/fetchData', this.pagination.per_page);
               this.$Progress.finish();
           }); 
 
           //this event call from Pagination-app component for change number of data show per page
           FireEvent.$on('changPerPage', (data) => {
-            this.$store.dispatch('SupplierForAdminStore/fetchData',data);
+            this.$store.dispatch('VendorMasterStore/fetchData',data);
           });
-
 
           //This is come from search-app-one.vue file for serch data
           FireEvent.$on('searchData', (data) => {
              //alert(data.search_key+'-'+data.search_option);
-             this.$store.dispatch('SupplierForAdminStore/searching', data ); 
+             this.$store.dispatch('VendorMasterStore/searching', data ); 
           });
           //This is come from search-app-one.vue file for Auto Complete data
           FireEvent.$on('AutoCompleteSearch', (data) => {
               //alert(data);
               if(data != ''){
-                this.$store.dispatch('SupplierForAdminStore/AutoCompleteSearch', data ); 
+                this.$store.dispatch('VendorMasterStore/AutoCompleteSearch', data ); 
               }
           });
+
       },
 
       mounted() {
