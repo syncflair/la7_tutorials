@@ -115,6 +115,9 @@
     "/js/chunks/VatRate.js": "/js/chunks/VatRate.js",
     "/js/chunks/VatRateForm-com.js": "/js/chunks/VatRateForm-com.js",
     "/js/chunks/VatRateList-com.js": "/js/chunks/VatRateList-com.js",
+    "/js/chunks/VendorMaster.js": "/js/chunks/VendorMaster.js",
+    "/js/chunks/VendorMasterForm.js": "/js/chunks/VendorMasterForm.js",
+    "/js/chunks/VendorMasterList.js": "/js/chunks/VendorMasterList.js",
     "/js/chunks/VuexComponent.js": "/js/chunks/VuexComponent.js",
     "/js/chunks/WeightUnit.js": "/js/chunks/WeightUnit.js",
     "/js/chunks/WeightUnitForm-com.js": "/js/chunks/WeightUnitForm-com.js",
@@ -128,10 +131,7 @@
     "/js/chunks/pagination-app.js": "/js/chunks/pagination-app.js",
     "/js/chunks/search-app-one.js": "/js/chunks/search-app-one.js",
     "/js/chunks/searchBox.js": "/js/chunks/searchBox.js",
+    "/js/chunks/single-select-app-one-global.js": "/js/chunks/single-select-app-one-global.js",
     "/js/chunks/switch-app.js": "/js/chunks/switch-app.js",
-    "/js/chunks/vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098.js": "/js/chunks/vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098.js",
-    "/js/chunks/VendorMaster.js": "/js/chunks/VendorMaster.js",
-    "/js/chunks/vendors~auto-complete-app~multi-select-app~switch-app.js": "/js/chunks/vendors~auto-complete-app~multi-select-app~switch-app.js",
-    "/js/chunks/VendorMasterForm.js": "/js/chunks/VendorMasterForm.js",
-    "/js/chunks/VendorMasterList.js": "/js/chunks/VendorMasterList.js"
+    "/js/chunks/vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098.js": "/js/chunks/vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098.js"
 }

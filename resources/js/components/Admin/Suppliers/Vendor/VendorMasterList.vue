@@ -26,11 +26,13 @@
             <th style="width: 2%;" scope="col"><input type="checkbox" v-model="selectAllCheckbox" @click="selectCheckbox"></th>
             <th style="width: 3%;" scope="col">Img</th>
             <th style="width: 15%;" scope="col" @click="sort('vendor_name')" class="sortable-title">Vendor Name</th>
-            <th style="width: 15%;" scope="col" @click="sort('vendor_email')" class="sortable-title">Email</th>             
-            <th style="width: 15%;" scope="col" @click="sort('vendor_phone')" class="sortable-title">Phone</th>
-            <th style="width: 10%;" >Type / Shop</th>
-            <th style="width: 10%;" scope="col">Assign TO</th>
-            <th style="width: 5%;" scope="col">Status</th>           
+            <th style="width: 15%;" scope="col"> 
+              <span @click="sort('vendor_email')" class="sortable-title">Email</span> / 
+              <span @click="sort('vendor_phone')" class="sortable-title">Phone</span>
+            </th>
+            <th style="width: 20%;" >Type (Brand Shop)</th>
+            <th style="width: 15%;" scope="col">Assign to supplier user</th>
+            <th style="width: 4%;" scope="col">Status</th>           
             <th style="width: 3%;" scope="col">Notify</th>           
             <th style="width: 10%; text-align:right;" scope="col">Action</th>
           </tr>
@@ -44,14 +46,17 @@
 
             <td> 
                 <span v-if="vendor.vendor_img != null"> 
-                  <img :src="'../'+vendor.vendor_img" loading="lazy" height="20px" width="20px"> 
+                  <!-- <img :src="'../'+vendor.vendor_img" loading="lazy" height="20px" width="20px">  -->
+                  <img :src="vendor.vendor_img" loading="lazy" height="20px" width="20px"> 
                 </span>
                 <span v-if="vendor.vendor_img === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
             </td> 
 
             <td scope="col"> {{ vendor.vendor_name }} </td>
-            <td > {{ vendor.vendor_email }} </td> 
-            <td > {{ vendor.vendor_phone }} </td>          
+            <td > 
+              <span>{{ vendor.vendor_email }} </span>
+              <span>{{ vendor.vendor_phone }} </span>              
+            </td>          
           	<td > 
               <small>{{ vendor.vendor_type }} </small>
               <small v-if="vendor.brand_shop_id != null"> 
@@ -59,7 +64,15 @@
               </small>
             </td> 
 
-            <td>ok</td> 
+            <td>
+              <small v-if="vendor.has_many_supplier.length > 0" v-for="vs in vendor.has_many_supplier">{{vs.name}} <br></small>
+
+            </td> 
+
+            <!-- {{ supplier.belongs_to_district_zone.zone_name }},
+                {{ supplier.belongs_to_district_zone.belongs_to_district.district_name }},
+                {{ supplier.belongs_to_district_zone.belongs_to_district.belongs_to_division.division_name }},
+                {{ supplier.belongs_to_district_zone.belongs_to_district.belongs_to_division.belongs_to_country.country_name }} -->
 
 
             <!-- <td > <small>{{ vendor.emp_hire_date | formatDate }}</small> </td> -->

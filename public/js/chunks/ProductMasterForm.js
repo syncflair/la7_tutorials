@@ -618,15 +618,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //   { name: 'Wholesale' },
       // ],    
       //form multiselect app for category
-      placeHolder: 'Search Category',
+      placeHolder: 'Select multiple Category',
       filterBy: 'cat_name',
       valueProperty: 'id',
       //multiselect app for Supplier
-      placeHolder_supp: 'Search Supplier or Shop',
+      placeHolder_supp: 'Select multiple Supplier or Shop',
       filterBy_supp: 'name',
       valueProperty_supp: 'id',
       //multiselect app for related product
-      placeHolder_product: 'Search related products',
+      placeHolder_product: 'Select multiple related products',
       filterBy_product: 'sys_pro_name',
       valueProperty_product: 'id',
       //for images manipulation

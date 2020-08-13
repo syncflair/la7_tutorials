@@ -1,32 +1,21 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["multi-select-app-one-global"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["single-select-app-one-global"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -121,10 +110,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       required: true
     },
     //get only selectedItem
+    //value:{ 
+    //	default: () => [],
+    //},
     value: {
-      "default": function _default() {
-        return [];
-      }
+      //type: Number,
+      required: true
     },
     //filter by data field name
     filterBy: {
@@ -144,10 +135,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       optionTopHeight: '38.75px',
-      //'33.75px',
+      //33.75 
       selectOption: '',
       itemListHeight: 38.75,
-      //33.75,
+      //33.75
       selectedItem: null,
       searchText: '',
       autoQuery: '',
@@ -161,30 +152,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       var fo = Object.values(this.autoSearchOptions).map(function (option) {
-        //let fo = this.options.map( option => {
-        //if(option.length > 0){
-        var checked = _this.value.some(function (v) {
-          return v === option[_this.valueProperty];
-        });
-
+        var checked = _this.value === option[_this.valueProperty];
         return _objectSpread({}, option, {
           checked: checked
-        }); //}
+        });
       });
-      return fo; // this.$emit('change', this.query);
-      // if (this.query == '') {
-      //   return [];
-      // }
-      // return this.autoSearchData.filter( (item) => item[this.filterby].toLowerCase().includes(this.query.toLowerCase()) )
-      //return this.autoSearchData.filter( (item) => item[this.filterby].toLowerCase() )
+      return fo;
     },
     selectedOptions: function selectedOptions() {
       var _this2 = this;
 
       var fo = Object.values(this.options).filter(function (data) {
-        //let fo = this.options.map( option => {
-        //if(data.length > 0){
-        return _this2.value.includes(data.id); //}
+        return _this2.value === data.id; //options match with value
       });
       return fo;
     }
@@ -201,12 +180,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (e.target.value != '') {
         //FireEvent.$emit('AutoCompleteSearchForDataOne', e.target.value );
         this.$emit('AutoCompleteSearchForData', e.target.value);
-      } // else{
-      // 	//this.autoSearchOptions = [] //dont do this because it's props
-      // 	//FireEvent.$emit('EmptyAutoSerchData'); //go to parent and empty the array
-      // 	this.listVisible =  false;
-      // }
-
+      }
     },
     ToggleItem: function ToggleItem() {
       var _this3 = this;
@@ -216,119 +190,49 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.autoQuery = '';
       setTimeout(function () {
         _this3.$refs.autoSearchField.focus();
-      }, 50); //document.getElementById('autoSearchField').focus();
-      //this.$refs.autoSearchField.focus();
-      // setTimeout(() => {
-      //   this.$refs.autoSearchField.focus();
-      // }, 50);
-      //      this.$nextTick(() => {
-      //   let editButtonRef = this.$refs.autoSearchField;
-      //   editButtonRef.focus();
-      // });
+      }, 50); //console.log(this.optionTopHeight);
     },
     preventClose: function preventClose(e) {
       //e.stopPropagation(); //
       e.stopImmediatePropagation(); //$(this).off("blur");
     },
     removeSelectItem: function removeSelectItem(key) {
-      var _this4 = this;
-
-      //alert(key);
-      // let SelectedValue = this.FormatedOptions[key][this.valueProperty];
-      var SelectedValue = this.selectedOptions[key][this.valueProperty];
-
-      var NewValue = _toConsumableArray(this.value); //spred oparetor
-
-
-      var existIndex = this.value.findIndex(function (v) {
-        return v === SelectedValue;
-      }); //this.value.splice(key, 1);
-
-      NewValue.splice(existIndex, 1);
+      var NewValue = '';
       this.$emit('input', NewValue); //auto syncronize with v-model array in parent component
-
-      setTimeout(function () {
-        _this4.fixTop();
-      }, 50); //toastr.warning('Removed!');
+      //toastr.warning('Removed!');
     },
-    itemClicked: function itemClicked(index) {
+    itemClicked: function itemClicked(index, id) {
       //console.log(this.autoSearchData[index]['cat_name']);
       //console.log(this.autoSearchData[index]);
-      this.selected = index; //alert(this.selected);
+      this.selected = index; //alert(id);
       //this.selectItem(index);
 
       this.selectItem(); //get index value atometically and pass through usign this.selected ....
     },
     selectItem: function selectItem() {
-      var _this5 = this;
+      var _this4 = this;
 
-      //console.log(this.FormatedOptions[index]);
-      //this.selectedItem = this.autoSearchData[this.selected];
       var SelectedValue = this.FormatedOptions[this.selected][this.valueProperty];
+      var NewValue = this.value; //spred oparetor
 
-      var NewValue = _toConsumableArray(this.value); //spred oparetor
+      var existIndex = this.value === SelectedValue;
 
-
-      var existIndex = this.value.findIndex(function (v) {
-        return v === SelectedValue;
-      });
-
-      if (existIndex === -1) {
-        NewValue.push(SelectedValue); //toastr.success('Added!');
+      if (existIndex) {
+        this.$emit('input', SelectedValue); //but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
+        //console.log(this.value);
+        //toastr.success('Added!');
       } else {
-        NewValue.splice(existIndex, 1); //toastr.warning('Removed!');
+        this.$emit('input', SelectedValue); //but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
+        //toastr.warning('Removed!');
       } //this.value.push(SelectedValue); //this is also work	        	
+      //this.$emit('input', NewValue)
 
-
-      this.$emit('input', NewValue); //but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
 
       this.$emit('getAllDataListByIds');
       setTimeout(function () {
-        _this5.fixTop();
+        _this4.fixTop();
       }, 50); //this.visible = false;	        
     },
-    // selectItem(index) {
-    // 	//console.log(this.FormatedOptions[index]);
-    // 	//this.selectedItem = this.autoSearchData[this.selected];
-    // 	let SelectedValue = this.FormatedOptions[index][this.valueProperty];
-    // 	let NewValue = [...this.value]; //spred oparetor
-    // 	let existIndex = this.value.findIndex(v => v === SelectedValue);
-    // 	if(existIndex === -1){
-    // 		NewValue.push(SelectedValue);
-    // 		toastr.success('Added!');
-    // 	}
-    // 	else{
-    // 		NewValue.splice(existIndex, 1);
-    // 		toastr.warning('Removed!');
-    // 	}
-    // 	//this.value.push(SelectedValue); //this is also work	        	
-    // 	this.$emit('input', NewValue)//but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
-    // 	setTimeout(() => {   
-    // 		this.fixTop();
-    //  }, 50);
-    //  //this.visible = false;	        
-    // },
-    //this is for selected option
-    // onChangeSelect(event){
-    // 	let index = event.target.selectedIndex;
-    // 	let id = event.target.value;
-    // 	//console.log(event.target.selectedIndex);
-    // 	let SelectedValue = this.FormatedOptions[index][this.valueProperty];
-    // 	let NewValue = [...this.value]; //spred oparetor
-    // 	let existIndex = this.value.findIndex(v => v === SelectedValue);
-    // 	if(existIndex === -1){
-    // 		NewValue.push(SelectedValue);
-    // 	}
-    // 	else{
-    // 		//NewValue.splice(existIndex, 1);
-    // 		toastr.warning('Already Selected this one!');
-    // 	}
-    // 	//this.value.push(SelectedValue); //this is also work	        	
-    // 	this.$emit('input', NewValue)//but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
-    // 	setTimeout(() => {   
-    // 		this.fixTop();
-    //  }, 50);
-    // },
     up: function up() {
       if (this.selected === 0) {
         return;
@@ -352,15 +256,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   created: function created() {},
   mounted: function mounted() {//this.fixTop();
+    //console.log(this.value);
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue?vue&type=template&id=42f1dfb8&":
-/*!**********************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue?vue&type=template&id=42f1dfb8& ***!
-  \**********************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue?vue&type=template&id=4cba2d63&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue?vue&type=template&id=4cba2d63& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -379,6 +284,7 @@ var render = function() {
         {
           ref: "parentBox",
           staticClass: "my-multiselect",
+          staticStyle: { "margin-top": "0px" },
           attrs: { title: "click to open autocomplete option and also close" },
           on: {
             click: _vm.ToggleItem,
@@ -411,7 +317,11 @@ var render = function() {
                     _vm._l(_vm.selectedOptions, function(option, key) {
                       return _c(
                         "li",
-                        { key: key, staticClass: "selected-item" },
+                        {
+                          key: key,
+                          staticClass: "selected-item",
+                          staticStyle: { width: "100%" }
+                        },
                         [
                           _vm._v(
                             "\n\t        \t\t" +
@@ -551,7 +461,7 @@ var render = function() {
                           },
                           on: {
                             click: function($event) {
-                              _vm.itemClicked(index)
+                              _vm.itemClicked(index, option.id)
                               _vm.preventClose($event)
                             }
                           }
@@ -585,17 +495,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue ***!
-  \*********************************************************************************/
+/***/ "./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue ***!
+  \**********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _multi_select_app_one_vue_vue_type_template_id_42f1dfb8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./multi-select-app-one.vue?vue&type=template&id=42f1dfb8& */ "./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue?vue&type=template&id=42f1dfb8&");
-/* harmony import */ var _multi_select_app_one_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./multi-select-app-one.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue?vue&type=script&lang=js&");
+/* harmony import */ var _single_select_app_one_vue_vue_type_template_id_4cba2d63___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./single-select-app-one.vue?vue&type=template&id=4cba2d63& */ "./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue?vue&type=template&id=4cba2d63&");
+/* harmony import */ var _single_select_app_one_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./single-select-app-one.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -605,9 +515,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _multi_select_app_one_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _multi_select_app_one_vue_vue_type_template_id_42f1dfb8___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _multi_select_app_one_vue_vue_type_template_id_42f1dfb8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _single_select_app_one_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _single_select_app_one_vue_vue_type_template_id_4cba2d63___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _single_select_app_one_vue_vue_type_template_id_4cba2d63___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -617,38 +527,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue"
+component.options.__file = "resources/js/components/Admin/GlobalComponents/single-select-app-one.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************/
+/***/ "./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_multi_select_app_one_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./multi-select-app-one.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_multi_select_app_one_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_single_select_app_one_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./single-select-app-one.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_single_select_app_one_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue?vue&type=template&id=42f1dfb8&":
-/*!****************************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue?vue&type=template&id=42f1dfb8& ***!
-  \****************************************************************************************************************/
+/***/ "./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue?vue&type=template&id=4cba2d63&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue?vue&type=template&id=4cba2d63& ***!
+  \*****************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_multi_select_app_one_vue_vue_type_template_id_42f1dfb8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./multi-select-app-one.vue?vue&type=template&id=42f1dfb8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/GlobalComponents/multi-select-app-one.vue?vue&type=template&id=42f1dfb8&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_multi_select_app_one_vue_vue_type_template_id_42f1dfb8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_single_select_app_one_vue_vue_type_template_id_4cba2d63___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./single-select-app-one.vue?vue&type=template&id=4cba2d63& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/GlobalComponents/single-select-app-one.vue?vue&type=template&id=4cba2d63&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_single_select_app_one_vue_vue_type_template_id_4cba2d63___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_multi_select_app_one_vue_vue_type_template_id_42f1dfb8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_single_select_app_one_vue_vue_type_template_id_4cba2d63___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

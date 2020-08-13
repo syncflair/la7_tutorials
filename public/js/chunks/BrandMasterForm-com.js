@@ -164,13 +164,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     addData: function addData() {
-      var _this2 = this;
-
       this.editMode = false;
-      this.form.reset();
-      setTimeout(function () {
-        _this2.$refs.brand_name.focus();
-      }, 600);
+      this.form.reset(); // setTimeout(() => {
+      // 	this.$refs.brand_name.focus(); 
+      //          }, 200);
     },
     editData: function editData(data) {
       this.editMode = true;
@@ -185,7 +182,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Submit the form via a POST request
     storeFormData: function storeFormData() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.$Progress.start(); //using progress-bar package
       // const config = {
@@ -200,14 +197,14 @@ __webpack_require__.r(__webpack_exports__);
 
           toastr.success(data.success);
 
-          _this3.$Progress.finish();
+          _this2.$Progress.finish();
 
-          _this3.form.reset(); //reset from after submit
+          _this2.form.reset(); //reset from after submit
 
 
-          _this3.$refs.brand_img.value = ''; //clear file input tag 
+          _this2.$refs.brand_img.value = ''; //clear file input tag 
 
-          _this3.ShowOnChangeImage = null;
+          _this2.ShowOnChangeImage = null;
           $('#formModal').modal('hide');
         }
 
@@ -215,13 +212,13 @@ __webpack_require__.r(__webpack_exports__);
           toastr.warning(data.errors);
         }
       })["catch"](function () {
-        _this3.$Progress.fail();
+        _this2.$Progress.fail();
 
         toastr.warning('Something is wrong!');
       });
     },
     updateFormData: function updateFormData() {
-      var _this4 = this;
+      var _this3 = this;
 
       //console.log('Update is working!'); 
       this.$Progress.start(); //using progress-bar package
@@ -232,17 +229,17 @@ __webpack_require__.r(__webpack_exports__);
         if (data.success) {
           FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
 
-          _this4.$Progress.finish();
+          _this3.$Progress.finish();
 
           toastr.success(data.success);
 
-          _this4.form.reset(); //reset from after submit
+          _this3.form.reset(); //reset from after submit
 
 
-          _this4.editMode = false;
-          _this4.$refs.brand_img.value = ''; //clear file input tag 
+          _this3.editMode = false;
+          _this3.$refs.brand_img.value = ''; //clear file input tag 
 
-          _this4.ShowOnChangeImage = null;
+          _this3.ShowOnChangeImage = null;
           $('#formModal').modal('hide'); //  this.$refs.brand_name.focus(); 
         }
 
@@ -250,22 +247,22 @@ __webpack_require__.r(__webpack_exports__);
           toastr.warning(data.errors);
         }
       })["catch"](function () {
-        _this4.$Progress.fail();
+        _this3.$Progress.fail();
 
         toastr.warning('Something is wrong!');
       });
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this4 = this;
 
     FireEvent.$on('editData', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this5.editData(data);
+      _this4.editData(data);
     });
     FireEvent.$on('addData', function () {
-      _this5.addData();
+      _this4.addData();
     });
   }
 }); //End Exprot Default

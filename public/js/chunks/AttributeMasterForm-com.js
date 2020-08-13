@@ -94,13 +94,10 @@ __webpack_require__.r(__webpack_exports__);
   //end data
   methods: {
     addData: function addData() {
-      var _this = this;
-
       this.editMode = false;
-      this.form.reset();
-      setTimeout(function () {
-        _this.$refs.attribute_name.focus();
-      }, 600);
+      this.form.reset(); // setTimeout(() => {
+      // 	this.$refs.attribute_name.focus(); 
+      //          }, 600);
     },
     editData: function editData(data) {
       this.editMode = true;
@@ -115,7 +112,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     // Submit the form via a POST request
     storeFormData: function storeFormData() {
-      var _this2 = this;
+      var _this = this;
 
       this.$Progress.start(); //using progress-bar package
 
@@ -127,9 +124,9 @@ __webpack_require__.r(__webpack_exports__);
 
           toastr.success(data.success);
 
-          _this2.$Progress.finish();
+          _this.$Progress.finish();
 
-          _this2.form.reset(); //reset from after submit
+          _this.form.reset(); //reset from after submit
 
 
           $('#formModal').modal('hide');
@@ -139,13 +136,13 @@ __webpack_require__.r(__webpack_exports__);
           toastr.warning(data.errors);
         }
       })["catch"](function () {
-        _this2.$Progress.fail();
+        _this.$Progress.fail();
 
         toastr.warning('Something is wrong!');
       });
     },
     updateFormData: function updateFormData() {
-      var _this3 = this;
+      var _this2 = this;
 
       //console.log('Update is working!'); 
       this.$Progress.start(); //using progress-bar package
@@ -156,14 +153,14 @@ __webpack_require__.r(__webpack_exports__);
         if (data.success) {
           FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
 
-          _this3.$Progress.finish();
+          _this2.$Progress.finish();
 
           toastr.success(data.success);
 
-          _this3.form.reset(); //reset from after submit
+          _this2.form.reset(); //reset from after submit
 
 
-          _this3.editMode = false;
+          _this2.editMode = false;
           $('#formModal').modal('hide'); //  this.$refs.attribute_name.focus(); 
         }
 
@@ -171,22 +168,22 @@ __webpack_require__.r(__webpack_exports__);
           toastr.warning(data.errors);
         }
       })["catch"](function () {
-        _this3.$Progress.fail();
+        _this2.$Progress.fail();
 
         toastr.warning('Something is wrong!');
       });
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this3 = this;
 
     FireEvent.$on('editData', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this4.editData(data);
+      _this3.editData(data);
     });
     FireEvent.$on('addData', function () {
-      _this4.addData();
+      _this3.addData();
     });
   }
 }); //End Exprot Default

@@ -124,19 +124,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -163,8 +150,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'field_name': 'phone',
         'show_name': 'Phone'
       }, {
-        'field_name': 'supplier_type',
-        'show_name': 'Supplier Type'
+        'field_name': 'vendor_id',
+        'show_name': 'Vendor'
       }]
     };
   },
@@ -584,21 +571,15 @@ var render = function() {
                 "th",
                 {
                   staticClass: "sortable-title",
-                  staticStyle: { width: "10%" },
+                  staticStyle: { width: "20%" },
                   attrs: { scope: "col" },
                   on: {
                     click: function($event) {
-                      return _vm.sort("supplier_type")
+                      return _vm.sort("vendor_id")
                     }
                   }
                 },
-                [_vm._v("Type / Shop")]
-              ),
-              _vm._v(" "),
-              _c(
-                "th",
-                { staticStyle: { width: "15%" }, attrs: { scope: "col" } },
-                [_vm._v("Address")]
+                [_vm._v("Vendor (address)")]
               ),
               _vm._v(" "),
               _c(
@@ -682,7 +663,7 @@ var render = function() {
                       ? _c("span", [
                           _c("img", {
                             attrs: {
-                              src: "../" + supplier.avatar,
+                              src: supplier.avatar,
                               loading: "lazy",
                               height: "20px",
                               width: "20px"
@@ -713,65 +694,24 @@ var render = function() {
                   _c("td", [_vm._v(" " + _vm._s(supplier.phone) + " ")]),
                   _vm._v(" "),
                   _c("td", [
-                    _c("small", [_vm._v(_vm._s(supplier.supplier_type) + " ")]),
+                    _c("span", [
+                      _vm._v(_vm._s(supplier.belongs_to_vendor.vendor_name))
+                    ]),
                     _vm._v(" "),
-                    supplier.brand_shop_id != null
-                      ? _c("small", [
-                          _vm._v(
-                            " \r\n                ( " +
-                              _vm._s(
-                                supplier.belongs_to_brand_shop.brand_shop_title
-                              ) +
-                              " )\r\n              "
-                          )
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    supplier.dist_zone_id != null
-                      ? _c("small", [
-                          _c(
-                            "span",
-                            {
-                              directives: [
-                                {
-                                  name: "show",
-                                  rawName: "v-show",
-                                  value: supplier.supplier_address != null,
-                                  expression:
-                                    "supplier.supplier_address != null"
-                                }
-                              ]
-                            },
-                            [_vm._v(_vm._s(supplier.supplier_address) + ", ")]
-                          ),
-                          _vm._v(
-                            "\r\n                " +
-                              _vm._s(
-                                supplier.belongs_to_district_zone.zone_name
-                              ) +
-                              ",\r\n                " +
-                              _vm._s(
-                                supplier.belongs_to_district_zone
-                                  .belongs_to_district.district_name
-                              ) +
-                              ",\r\n                " +
-                              _vm._s(
-                                supplier.belongs_to_district_zone
-                                  .belongs_to_district.belongs_to_division
-                                  .division_name
-                              ) +
-                              ",\r\n                " +
-                              _vm._s(
-                                supplier.belongs_to_district_zone
-                                  .belongs_to_district.belongs_to_division
-                                  .belongs_to_country.country_name
-                              ) +
-                              "\r\n              "
-                          )
-                        ])
-                      : _vm._e()
+                    _c(
+                      "small",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: supplier.supplier_address != null,
+                            expression: "supplier.supplier_address != null"
+                          }
+                        ]
+                      },
+                      [_vm._v(" - " + _vm._s(supplier.supplier_address) + ", ")]
+                    )
                   ]),
                   _vm._v(" "),
                   _c("td", [

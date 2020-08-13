@@ -83,19 +83,16 @@ class BrandShopController extends Controller
                 $imageName = slug_generator($request->brand_shop_title).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
 
                 //save image using intervention image
-                // \Image::make($image)
-                //     //->fit(200, 200)
-                //     ->resize(20, 20)
-                //     ->save(storage_path('app/public/settings/').$imageName);
-                // $data['bs_img'] = 'storage/settings/'.$imageName; 
-
-                //Decode Base64
                 $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
                 $image = str_replace($replace, '', $image_base64); 
-                $image = str_replace(' ', '+', $image);                 
+                $image = str_replace(' ', '+', $image);
+                $image = base64_decode($image); 
+                $resized_image = \Image::make($image)->resize(200, 120)
+                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                    ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);                 
 
-                Storage::disk('s3')->put('BrandShop/'.$imageName, base64_decode($image) ); //for s3
-                //Storage::disk('public')->put('BrandShop/'.$imageName, base64_decode($image) );//for local storage 
+                Storage::disk('s3')->put('BrandShop/'.$imageName, $resized_image ); //for s3
+                //Storage::disk('public')->put('BrandShop/'.$imageName, $resized_image );//for local storage 
 
                 $data['bs_img']=Config::get('constants.s3_url').'BrandShop/'.$imageName;//s3_url get from constants file 
                 //$data['bs_img'] = 'storage/BrandShop/'.$imageName; //for public storage
@@ -184,20 +181,17 @@ class BrandShopController extends Controller
                 //new name generate from base64 file
                 $imageName = slug_generator($request->brand_shop_title).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
 
-                // //save image using intervention image
-                // \Image::make($image)
-                //     ->resize(20, 20)
-                //    // ->text('SHORBORAHO', 140, 190)
-                //     ->save(storage_path('app/public/settings/').$imageName);
-                // $data['bs_img'] = 'storage/settings/'.$imageName; 
-
-                 //Decode Base64
+                //save image using intervention image
                 $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
                 $image = str_replace($replace, '', $image_base64); 
-                $image = str_replace(' ', '+', $image);                 
+                $image = str_replace(' ', '+', $image);
+                $image = base64_decode($image); 
+                $resized_image = \Image::make($image)->resize(200, 120)
+                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                    ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);                
 
-                Storage::disk('s3')->put('BrandShop/'.$imageName, base64_decode($image) ); //for s3
-                //Storage::disk('public')->put('BrandShop/'.$imageName, base64_decode($image) );//for local storage 
+                Storage::disk('s3')->put('BrandShop/'.$imageName, $resized_image ); //for s3
+                //Storage::disk('public')->put('BrandShop/'.$imageName, $resized_image );//for local storage 
 
 
                 $data['bs_img']=Config::get('constants.s3_url').'BrandShop/'.$imageName;//s3_url get from constants file 
@@ -286,6 +280,33 @@ class BrandShopController extends Controller
         $data = BrandShop::where('is_enabled', '=', '1')->get();
         return response()->json($data);
     }
+
+
+    //search for auto complete (from Vendor)
+    public function autoCompleteSearch(Request $request){
+        $searchKey = $request->q;
+
+        if(!empty($searchKey) ){
+            $searchResult = BrandShop::where(function($query) use ($searchKey){
+                $query->where('brand_shop_title','LIKE','%'.$searchKey.'%')
+                        ->orWhere('brand_shop_desc','LIKE','%'.$searchKey.'%');
+            })->select('id', 'brand_shop_title')->get();
+
+        }
+        //return $searchResult;
+        return response()->json($searchResult);
+    }
+
+    //selected Brand Shop (for Vendor)
+    public function getSelectedBrandShop(Request $request){
+        $searchKey = $request->q;
+        //$searchResult = BrandShop::whereIn('id', $searchKey)
+        $searchResult = BrandShop::where('id', $searchKey)
+                        ->select('id','brand_shop_title')
+                        ->get(); //Model::whereIn('id', [1, 2, 3])->get();
+       // $searchResult = Supplier::findMany([1, 2, 3]); //Model::findMany([1, 2, 3]);
+        return response()->json($searchResult);
+    }//end search
 
 
 }

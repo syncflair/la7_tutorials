@@ -87,9 +87,9 @@
 	    	addData(){
 	    		this.editMode = false;
 	    		this.form.reset();
-	    		setTimeout(() => {
-	    			this.$refs.attribute_name.focus(); 
-                }, 600);
+	    		// setTimeout(() => {
+	    		// 	this.$refs.attribute_name.focus(); 
+       //          }, 600);
 	    	},
 
 	    	editData(data){

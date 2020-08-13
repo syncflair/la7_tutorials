@@ -152,9 +152,9 @@
 	    	addData(){
 	    		this.editMode = false;
 	    		this.form.reset();	    		
-	    		setTimeout(() => {
-	    			this.$refs.brand_name.focus(); 
-                }, 600);
+	    		// setTimeout(() => {
+	    		// 	this.$refs.brand_name.focus(); 
+       //          }, 200);
 	    	},
 
 	    	editData(data){

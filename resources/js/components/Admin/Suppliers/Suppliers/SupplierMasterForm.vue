@@ -8,7 +8,7 @@
       <div class="modal-header pb-1">
         <h5 class="modal-title" id="">
         	<span v-show="!editMode">Add supplier (Credential)</span>
-        	<span v-show="editMode">Update supplier (Credential)</span>
+        	<span v-show="editMode">Update - {{form.name}}</span>
         </h5>
         <button @click="ClearForm()" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -36,7 +36,7 @@
 
 			        <div class="form-group">
 			            <label for="phone" >Phone *</label>
-			            <div class="input-group input-group-sm mb-3">	                      
+			            <div class="input-group input-group-sm- mb-3">	                      
 		                  <div class="input-group-prepend">
 		                    <span class="input-group-text"><!-- <i class="fas fa-envelope"></i> --> +88 </span>
 		                  </div>
@@ -46,32 +46,7 @@
 		                </div> 
 			        </div>
 
-			        <div class="row">
-			          <div class="col-md-5">
-			          	<div class="form-group">
-				            <label for="supplier_type">Supplier Type *</label>
-				            <select v-model="form.supplier_type" class="form-control form-control-sm-" id="supplier_type" name="supplier_type" :class="{ 'is-invalid': form.errors.has('supplier_type') }" >
-			              	  <option disabled value="">Suppliers type ..</option>                
-			                  <option v-for="s_type in supplierTypes" v-bind:value="s_type.name">
-			                  	{{s_type.name}}
-			                  </option>			                  
-			                </select>
-			                <has-error :form="form" field="supplier_type"></has-error>
-				        </div>
-			          </div>
-
-			          <div class="col-md-7">
-			          	<div class="form-group">
-				            <label for="brand_shop_id">Brand Shop</label>
-				            <select v-model="form.brand_shop_id" class="form-control" id="brand_shop_id" name="brand_shop_id" >
-			              	  <option disabled value="">Select Brand Shop ..</option>
-			              	  <option v-bind:value="null">No Brand Shop (Null) </option>                
-			                  <option v-for="bs in allBrandShops" :key="bs.id" v-bind:value="bs.id">{{bs.brand_shop_title}}</option>           
-			                </select>	
-				        </div>
-			          </div>			        	
-			        </div>
-
+			     
 			        <div class="form-group">
 			          <label for="user_status">User Status *</label>
 		              <select v-model="form.status_id" class="form-control" id="status_id" name="status_id" :class="{ 'is-invalid': form.errors.has('status_id') }" >
@@ -97,13 +72,38 @@
 				        </div>
 		        	  </div>
 			        </div>
+
+			        <div class="row">
+			        	<div class="col-md-12">
+			        		<div class="form-check">
+		                      <input v-model="form.is_allow_to_modify" type="checkbox" class="form-check-input" name="is_enabled" id="checkbox" value="1">
+		                      <label class="form-check-label" for="checkbox" >Is this user permited to modify products</label>
+		                    </div>
+			        	</div>
+			        	<!-- <div class="col-md-10"></div> -->
+			    	</div>
 			        
 
 	          	</div>
 
 	          	<div class="col-md-5 col-sm-6">
 
-
+	          		<div class="form-group">
+			            <label for="vendor_id">Select Vendor *</label>
+                        <single-select-app-one                           
+	                      :options="selectedVendor"
+	                      @getAllDataListByIds="getSelectedDataByIdsForVendor"
+	                      :autoSearchOptions="autoSearchVendor"
+	                      @AutoCompleteSearchForData="AutoCompleteSearchForDataVendor"                   
+	                      :filterBy="filterBy"
+	                      :place-holder="placeHolder"
+	                      :value-property="valueProperty"
+	                      v-model="form.vendor_id"
+	                      style="margin-top: 10px !important;" 
+	                      :class="{ 'is-invalid': form.errors.has('vendor_id') }"
+	                    />
+	                    <has-error :form="form" field="vendor_id"></has-error>
+			        </div>
 
 			        <div class="form-group">
 			            <label for="supplier_address">Address</label>
@@ -111,17 +111,9 @@
 			        </div>
 
 			        <div class="form-group">
-			            <label for="dist_zone_id">Zone / Area</label>
-                        <select v-model="form.dist_zone_id" class="form-control form-control-sm-" id="dist_zone_id" name="dist_zone_id" >
-			              	<option disabled value="">Select zone / Area ..</option>                
-			                <option v-for="zone in Dist_Zones" :key="zone.id" v-bind:value="zone.id">{{zone.zone_name}} ({{zone.zip_code}})</option>			                  
-			            </select>
-			        </div>
-
-			        <div class="form-group">
 			            <label for="supplier_desc">Details</label>
-                        <!-- <textarea v-model="form.supplier_desc" name="supplier_desc" class="form-control" placeholder="Supplier details"></textarea> -->
-                        <vue-editor v-model="form.supplier_desc" name="supplier_desc" class="form-control-"  placeholder="Suppliyer Details"> </vue-editor>
+                        <textarea v-model="form.supplier_desc" name="supplier_desc" class="form-control" placeholder="Supplier details"></textarea>
+                        <!-- <vue-editor v-model="form.supplier_desc" name="supplier_desc" class="form-control-"  placeholder="Suppliyer Details"> </vue-editor> -->
 			        </div>
 
 	          	</div>
@@ -138,7 +130,8 @@
                              <img v-if="form.avatar == 'undefined'" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:150px;">
                              <img v-if="form.avatar === '' " :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:150px;">
                              <img v-else-if="form.avatar === null" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:150px;">
-                              <img v-else-if="form.avatar != '' " :src="'../'+form.avatar" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:150px;">
+                              <!-- <img v-else-if="form.avatar != '' " :src="'../'+form.avatar" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:150px;"> -->
+                              <img v-else-if="form.avatar != '' " :src="form.avatar" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:150px;">
                             </span> 
                             <!-- <img :src="'../'+NoIconUrl"> -->
                     	</div>
@@ -192,11 +185,10 @@
 	        ShowOnChangeImage:null,	 
 	        editMode: false, //Use this for add edit using the same form 
 
-	        supplierTypes: [
-			      { name: 'Person' },
-			      { name: 'Organization' },
-			      { name: 'Shop' },
-			    ],  
+	      	//For Single select app
+    		placeHolder:'Select Vendor',
+    		filterBy:'vendor_name',
+    		valueProperty: 'id', 
 
 	        // Create a new form instance
 	        form: new Form({
@@ -207,19 +199,18 @@
 	          password: '',
 	          password_confirmation:'',
 	          status_id: '',
-	          supplier_type:'',
-	          brand_shop_id:'',
+	          vendor_id: '',
+	          is_allow_to_modify: '',
 	          supplier_desc:'',
 	          supplier_address:'',
-	          dist_zone_id: '',
 	          avatar: '',	          
 	        })
 	      }
 	    },//end data
 
 	    computed: {
-	        ...mapState( 'SupplierForAdminStore', ['pagination'] ),
-	        ...mapState( 'commonStoreForAll', ['allBrandShops','userStatus','Dist_Zones'] ) /*userStatus get form commonSotreForAll*/	        
+	        ...mapState( 'SupplierForAdminStore', ['pagination', 'selectedVendor', 'autoSearchVendor'] ),
+	        ...mapState( 'commonStoreForAll', ['userStatus'] ) /*userStatus get form commonSotreForAll*/	        
       	},
 
 	    methods:{
@@ -259,7 +250,9 @@
 	    		this.form.fill(data); 	 
 	    		setTimeout(() => {
 	    			this.$refs.name.focus(); 
-                }, 200);    		
+                }, 200);  
+
+                this.$store.dispatch('SupplierForAdminStore/fetchSelectedVendor', this.form.vendor_id);  		
 	    	},
 
 	    	ClearForm(){
@@ -327,15 +320,21 @@
 				    this.$Progress.fail();
 				    toastr.warning('Something is wrong!');
 				  }) 
+
 			},
+
+			AutoCompleteSearchForDataVendor(data){
+		        this.$store.dispatch('SupplierForAdminStore/AutoCompleteSearchForDataVendor', data ); 
+		    },
+		    getSelectedDataByIdsForVendor(data){
+		        this.$store.dispatch('SupplierForAdminStore/fetchSelectedVendor', this.form.vendor_id);
+		    },
 
 
 	    },
 
 	    created(){
 	    	this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
-	    	this.$store.dispatch('commonStoreForAll/fetchBrandShops'); //get user status
-	    	this.$store.dispatch('commonStoreForAll/fetchDistrictZoneList'); //get user status
 
             FireEvent.$on('AfterChange', () => {
 		        this.$Progress.start();

@@ -10,6 +10,11 @@ const SupplierForAdminStore ={
             per_page: 0,
         },
         autoCompleteData: {},
+
+        //for Vendor autocomplete
+        autoSearchVendor: {},
+        selectedVendor:[],
+
     }),/*end state*/
 
     getters: {
@@ -18,17 +23,15 @@ const SupplierForAdminStore ={
 
     mutations: {
         //return data to state
-        FETCH_DATA(state, suppliers) {
-            return state.suppliers = suppliers;                        
-        },
+        FETCH_DATA(state, suppliers) {  return state.suppliers = suppliers; },
 
-        FATCH_PAGINATION(state, pagination){
-            return state.pagination = pagination;  
-        },
+        FATCH_PAGINATION(state, pagination){ return state.pagination = pagination; },
         
-        AUTO_COMPLETE_DATA(state, data){
-            return state.autoCompleteData = data;  
-        }
+        AUTO_COMPLETE_DATA(state, data){ return state.autoCompleteData = data; },
+
+        AUTO_COMPLETE_DATA_FOR_VENDOR(state, data){ return state.autoSearchVendor = data; },
+
+        SELECTED_VENDOR(state, data){ return state.selectedVendor = data; }
 
     },/*end Mutations*/
 
@@ -37,7 +40,7 @@ const SupplierForAdminStore ={
         fetchData(context, payload){
             let perPageVelue ;
             if(!payload){
-                perPageVelue = 10
+                perPageVelue = 100
             }else{
                 perPageVelue = payload
             }
@@ -76,6 +79,23 @@ const SupplierForAdminStore ={
             .then( ( response ) => {
                     context.commit('AUTO_COMPLETE_DATA', response.data.data);
                     //this.categories = response.data; // is an object... use when pagination                                         
+            }).catch(() => { }) 
+        },
+
+        AutoCompleteSearchForDataVendor(context, payload){  
+          let query = payload;  
+          axios.get('/spa/AutoCompleteVendorData?&q='+ query)
+          .then( ( response ) => {
+              context.commit('AUTO_COMPLETE_DATA_FOR_VENDOR', response.data);                                        
+          }).catch(() => { }) 
+        },
+
+        //For selected Brand Shop
+        fetchSelectedVendor(context, payload){  
+            //use axios.post instead of axios.get , becouse is contaion array  
+            axios.post('/spa/getSelectedVendor/', {q: payload})
+            .then( ( response ) => {
+                    context.commit('SELECTED_VENDOR', response.data);                                       
             }).catch(() => { }) 
         },
 

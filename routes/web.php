@@ -134,11 +134,16 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/supplier-Info', 'Admin\Supplier\SupplierController',
      ['except'=>['create','show','edit'] ]);
 
+    Route::post('spa/getSelectedBrandShop/', 'Admin\Supplier\BrandShopController@getSelectedBrandShop');
+    Route::get('spa/AutoCompleteBrandShopData', 'Admin\Supplier\BrandShopController@autoCompleteSearch'); //search
     Route::get('spa/searchBrandShopData', 'Admin\Supplier\BrandShopController@search'); //search
     Route::get('spa/BrandShop-Info/getBrandShops', 'Admin\Supplier\BrandShopController@getBrandShops');//commonStoreForAll store 
     Route::resource('spa/BrandShop-Info', 'Admin\Supplier\BrandShopController',
       ['except'=>['create','show','edit'] ]);
 
+
+    Route::post('spa/getSelectedVendor/', 'Admin\Supplier\VendorController@getSelectedVendor');
+    Route::get('spa/AutoCompleteVendorData', 'Admin\Supplier\VendorController@autoCompleteSearch'); //search
     Route::post('spa/Vendor-Info/change-notify/{id}/{notifyValue}', 'Admin\Supplier\VendorController@ChangeNotify');
     Route::post('spa/Vendor-Info/active-vendor/{id}', 'Admin\Supplier\VendorController@activeVendor');
     Route::post('spa/Vendor-Info/inactive-vendor/{id}', 'Admin\Supplier\VendorController@inactiveVendor');

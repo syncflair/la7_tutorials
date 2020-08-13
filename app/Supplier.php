@@ -58,8 +58,8 @@ class Supplier extends Authenticatable
 
     //Supplier belongs to vendor
     public function belongsToVendor(){
-        //return $this->belongsTo('App\Models\Supplier\BrandShop', 'brand_shop_id');
-        return $this->belongsTo(Models\Supplier\Vendor::class, 'vendor_id');
+        return $this->belongsTo('App\Models\Supplier\Vendor', 'vendor_id')->select('id','vendor_name');
+        //return $this->belongsTo(Models\Supplier\Vendor::class, 'vendor_id');
     }
 
     //Supplier belongs to Brand Shop

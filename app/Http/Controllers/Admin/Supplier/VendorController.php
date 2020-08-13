@@ -33,7 +33,7 @@ class VendorController extends Controller
        }else{
             $perPage = 100;
        }
-
+//$data = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry')
         $data = Vendor::with('hasManySupplier','UserStatus','belongsToBrandShop')
                 ->paginate($perPage);
 
@@ -100,37 +100,20 @@ class VendorController extends Controller
                 $imageName = slug_generator($request->vendor_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
 
                 //save image using intervention image
-                // \Image::make($image)
-                //     //->fit(200, 200)
-                //     ->resize(200, 120)
-                //    // ->text('SHORBORAHO', 140, 190)
-                //     ->save(storage_path('app/public/vendor/').$imageName);
-                //$data['vendor_img'] = 'storage/vendor/'.$imageName;
-                //\Image::make($image)->save(storage_path('app/public/vendor/'.$imageName)) ;
-                
-                //$request->vendor_img->store($imageName, 'public');
-                //$request->vendor_img->store($imageName, 'public', $imageName);
-
-             
-                //dd($image);
-
                 $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
                 $image = str_replace($replace, '', $image_base64); 
-                $image = str_replace(' ', '+', $image);                 
-
-                //Storage::disk('s3')->put('vendor/'.$imageName, base64_decode($image) ); //for s3
-                Storage::disk('public')->put('vendor/'.$imageName, base64_decode($image) );//for local storage
-
-                // \Image::make($image_base64)
-                //     //->fit(200, 200)
-                //     ->resize(200, 120)
-                //    // ->text('SHORBORAHO', 140, 190)
-                //     ->save(storage_path('app/public/vendor/').$imageName);
+                $image = str_replace(' ', '+', $image);
+                $image = base64_decode($image); 
+                $resized_image = \Image::make($image)->resize(200, 120)
+                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                    ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);     
+                            
+                Storage::disk('s3')->put('vendor/'.$imageName, $resized_image ); //for s3
+                //Storage::disk('public')->put('vendor/'.$imageName, $resized_image );//for public storage
 
                 //s3_url get from constants file 
-                //$data['vendor_img'] = Config::get('constants.s3_url').'vendor/'.$imageName; //for s3
-                $data['vendor_img'] = 'storage/vendor/'.$imageName; //for public storage
-
+                $data['vendor_img'] = Config::get('constants.s3_url').'vendor/'.$imageName;
+                //$data['vendor_img'] = 'storage/vendor/'.$imageName; //for public storage
 
             }//end image type check
         }else{
@@ -215,39 +198,34 @@ class VendorController extends Controller
                 //query for existing image
                 $existing_image = Vendor::select('vendor_img')->where('id', $id)->first(); 
                 
-                // if($existing_image->vendor_img != null){            
-                //     $parts = parse_url($existing_image->vendor_img); 
-                //     $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
-                //     Storage::disk('s3')->delete($parts); //dd($parts);
-                // }  
+                if($existing_image->vendor_img != null){            
+                    $parts = parse_url($existing_image->vendor_img); 
+                    $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+                    Storage::disk('s3')->delete($parts); //dd($parts);
+                }  
 
-                if(!empty($existing_image->vendor_img)) {
-                    File::delete($existing_image->vendor_img); //delete file //use Illuminate\Support\Facades\File; at top
-                }//else{echo 'Empty';}  
-
-
+                // if(!empty($existing_image->vendor_img)) {
+                //     File::delete($existing_image->vendor_img); //delete file //use Illuminate\Support\Facades\File; at top
+                // }//else{echo 'Empty';}  
 
                 //new name generate from base64 file
                 $imageName = slug_generator($request->vendor_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
-                //save image using intervention image
-                // \Image::make($image)
-                //     ->resize(200, 120)
-                //    // ->text('SHORBORAHO', 140, 190)
-                //     ->save(storage_path('app/public/vendor/').$imageName);
-                // $data['vendor_img'] = 'storage/vendor/'.$imageName;
-
+                
 
                 $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
                 $image = str_replace($replace, '', $image_base64); 
-                $image = str_replace(' ', '+', $image);      
-                //Storage::disk('s3')->put('vendor/'.$imageName, base64_decode($image) ); //for s3
-                Storage::disk('public')->put('vendor/'.$imageName, base64_decode($image) );//for public storage
+                $image = str_replace(' ', '+', $image);
+                $image = base64_decode($image); 
+                $resized_image = \Image::make($image)->resize(200, 120)
+                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                    ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);     
+                            
+                Storage::disk('s3')->put('vendor/'.$imageName, $resized_image ); //for s3
+                //Storage::disk('public')->put('vendor/'.$imageName, $resized_image );//for public storage
 
                 //s3_url get from constants file 
-                //$data['vendor_img'] = Config::get('constants.s3_url').'vendor/'.$imageName;
-                $data['vendor_img'] = 'storage/vendor/'.$imageName; //for public storage
-
-
+                $data['vendor_img'] = Config::get('constants.s3_url').'vendor/'.$imageName;
+                //$data['vendor_img'] = 'storage/vendor/'.$imageName; //for public storage
 
             }//end image type check
         }else{
@@ -270,18 +248,18 @@ class VendorController extends Controller
         //query for existing image
         $existing_image = Vendor::select('vendor_img')->where('id', $id)->first();
         
-        // if($existing_image->vendor_img != null){            
-        //     $parts = parse_url($existing_image->vendor_img); 
-        //     $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
-        //     Storage::disk('s3')->delete($parts);
-        //     //dd($parts);
-        // } 
+        //Delete from s3
+        if($existing_image->vendor_img != null){            
+            $parts = parse_url($existing_image->vendor_img); 
+            $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+            Storage::disk('s3')->delete($parts); //dd($parts);
+        } 
         
         //delete single image from public storage                        
-        if( File::exists($existing_image->vendor_img) ) {  
-            File::delete($existing_image->vendor_img); 
-            //delete file //use Illuminate\Support\Facades\File; at top            
-        }
+        // if( File::exists($existing_image->vendor_img) ) {  
+        //     File::delete($existing_image->vendor_img); 
+        //     //delete file //use Illuminate\Support\Facades\File; at top            
+        // }
         
 
         $data = Vendor::findOrFail($id)->delete();        
@@ -363,6 +341,33 @@ class VendorController extends Controller
 
         return response()->json(['success'=> 'Active Vendor']);  
     }
+
+
+    //search for auto complete (from Supplier)
+    public function autoCompleteSearch(Request $request){
+        $searchKey = $request->q;
+
+        if(!empty($searchKey) ){
+            $searchResult = Vendor::where(function($query) use ($searchKey){
+                $query->where('vendor_name','LIKE','%'.$searchKey.'%')
+                        ->orWhere('vendor_desc','LIKE','%'.$searchKey.'%');
+            })->select('id', 'vendor_name')->get();
+
+        }
+        //return $searchResult;
+        return response()->json($searchResult);
+    }
+
+    //selected Brand Shop (for Supplier)
+    public function getSelectedVendor(Request $request){
+        $searchKey = $request->q;
+        //$searchResult = Vendor::whereIn('id', $searchKey)
+        $searchResult = Vendor::where('id', $searchKey)
+                        ->select('id','vendor_name')
+                        ->get(); //Model::whereIn('id', [1, 2, 3])->get();
+       // $searchResult = Supplier::findMany([1, 2, 3]); //Model::findMany([1, 2, 3]);
+        return response()->json($searchResult);
+    }//end search
 
 
 }

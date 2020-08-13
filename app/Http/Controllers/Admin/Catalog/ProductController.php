@@ -129,19 +129,24 @@ class ProductController extends Controller
 
 
            if($image_base64){
-              foreach ($image_base64 as $image_64) {
-                $imageExt = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
+              foreach ($image_base64 as $image_base64) {
+                $imageExt = explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
                 if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
                     return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
                 }else{
-                    $imageName = slug_generator($request->sys_pro_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
+                    $imageName = slug_generator($request->sys_pro_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
 
-                    $replace = substr($image_64, 0, strpos($image_64, ',')+1); 
-                    $image = str_replace($replace, '', $image_64); 
-                    $image = str_replace(' ', '+', $image);                 
+                    //save image using intervention image
+                    $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
+                    $image = str_replace($replace, '', $image_base64); 
+                    $image = str_replace(' ', '+', $image);
+                    $image = base64_decode($image); 
+                    $resized_image = \Image::make($image)->resize(400, 520)
+                        //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                        ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);                 
 
-                    Storage::disk('s3')->put('products/'.$imageName, base64_decode($image) );// s3
-                    //Storage::disk('public')->put('products/'.$imageName, base64_decode($image) );//storage
+                    Storage::disk('s3')->put('products/'.$imageName, $resized_image );// s3
+                    //Storage::disk('public')->put('products/'.$imageName, $resized_image );//storage
                     Image::create([
                         'product_id' => $product->id,
                         //'image_url' => 'storage/products/'.$imageName, //for storage
@@ -242,20 +247,25 @@ class ProductController extends Controller
 
             if($image_base64){
               
-              foreach ($image_base64 as $image_64) { 
-                $imageExt = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
+              foreach ($image_base64 as $image_base64) { 
+                $imageExt = explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
                 if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
                     return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
                 }else{
 
-                    $imageName = slug_generator($request->sys_pro_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];
+                    $imageName = slug_generator($request->sys_pro_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
 
-                    $replace = substr($image_64, 0, strpos($image_64, ',')+1); 
-                    $image = str_replace($replace, '', $image_64); 
-                    $image = str_replace(' ', '+', $image);                 
+                    //save image using intervention image
+                    $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
+                    $image = str_replace($replace, '', $image_base64); 
+                    $image = str_replace(' ', '+', $image);
+                    $image = base64_decode($image); 
+                    $resized_image = \Image::make($image)->resize(400, 520)
+                        //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                        ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);                 
 
-                    Storage::disk('s3')->put('products/'.$imageName, base64_decode($image) );// s3
-                    //Storage::disk('public')->put('products/'.$imageName, base64_decode($image) );//storage
+                    Storage::disk('s3')->put('products/'.$imageName, $resized_image );// s3
+                    //Storage::disk('public')->put('products/'.$imageName, $resized_image );//storage
                     Image::create([
                         'product_id' => $id,
                         //'image_url' => 'storage/products/'.$imageName, //for storage

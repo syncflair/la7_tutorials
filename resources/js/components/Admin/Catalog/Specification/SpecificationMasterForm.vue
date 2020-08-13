@@ -94,9 +94,9 @@
 	    	addData(){
 	    		this.editMode = false;
 	    		this.form.reset();
-	    		setTimeout(() => {
-	    			this.$refs.specification_name.focus(); 
-                }, 600);
+	    		// setTimeout(() => {
+	    		// 	this.$refs.specification_name.focus(); 
+       //          }, 600);
 	    	},
 
 	    	editData(data){

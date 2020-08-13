@@ -190,13 +190,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -207,13 +200,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ShowOnChangeImage: null,
       editMode: false,
       //Use this for add edit using the same form 
-      supplierTypes: [{
-        name: 'Person'
-      }, {
-        name: 'Organization'
-      }, {
-        name: 'Shop'
-      }],
+      //For Single select app
+      placeHolder: 'Select Vendor',
+      filterBy: 'vendor_name',
+      valueProperty: 'id',
       // Create a new form instance
       form: new Form({
         id: '',
@@ -223,17 +213,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         password: '',
         password_confirmation: '',
         status_id: '',
-        supplier_type: '',
-        brand_shop_id: '',
+        vendor_id: '',
+        is_allow_to_modify: '',
         supplier_desc: '',
         supplier_address: '',
-        dist_zone_id: '',
         avatar: ''
       })
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('SupplierForAdminStore', ['pagination']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['allBrandShops', 'userStatus', 'Dist_Zones'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('SupplierForAdminStore', ['pagination', 'selectedVendor', 'autoSearchVendor']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus'])),
   methods: {
     //Make image as base64 
     onImageChange: function onImageChange(e) {
@@ -278,6 +267,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       setTimeout(function () {
         _this3.$refs.name.focus();
       }, 200);
+      this.$store.dispatch('SupplierForAdminStore/fetchSelectedVendor', this.form.vendor_id);
     },
     ClearForm: function ClearForm() {
       this.editMode = false;
@@ -358,16 +348,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         toastr.warning('Something is wrong!');
       });
+    },
+    AutoCompleteSearchForDataVendor: function AutoCompleteSearchForDataVendor(data) {
+      this.$store.dispatch('SupplierForAdminStore/AutoCompleteSearchForDataVendor', data);
+    },
+    getSelectedDataByIdsForVendor: function getSelectedDataByIdsForVendor(data) {
+      this.$store.dispatch('SupplierForAdminStore/fetchSelectedVendor', this.form.vendor_id);
     }
   },
   created: function created() {
     var _this6 = this;
 
     this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
-
-    this.$store.dispatch('commonStoreForAll/fetchBrandShops'); //get user status
-
-    this.$store.dispatch('commonStoreForAll/fetchDistrictZoneList'); //get user status
 
     FireEvent.$on('AfterChange', function () {
       _this6.$Progress.start();
@@ -455,7 +447,7 @@ var render = function() {
                         }
                       ]
                     },
-                    [_vm._v("Update supplier (Credential)")]
+                    [_vm._v("Update - " + _vm._s(_vm.form.name))]
                   )
                 ]),
                 _vm._v(" "),
@@ -603,7 +595,7 @@ var render = function() {
                             _c(
                               "div",
                               {
-                                staticClass: "input-group input-group-sm mb-3"
+                                staticClass: "input-group input-group-sm- mb-3"
                               },
                               [
                                 _vm._m(0),
@@ -648,180 +640,6 @@ var render = function() {
                               ],
                               1
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-md-5" }, [
-                              _c(
-                                "div",
-                                { staticClass: "form-group" },
-                                [
-                                  _c(
-                                    "label",
-                                    { attrs: { for: "supplier_type" } },
-                                    [_vm._v("Supplier Type *")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.supplier_type,
-                                          expression: "form.supplier_type"
-                                        }
-                                      ],
-                                      staticClass:
-                                        "form-control form-control-sm-",
-                                      class: {
-                                        "is-invalid": _vm.form.errors.has(
-                                          "supplier_type"
-                                        )
-                                      },
-                                      attrs: {
-                                        id: "supplier_type",
-                                        name: "supplier_type"
-                                      },
-                                      on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.$set(
-                                            _vm.form,
-                                            "supplier_type",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
-                                          )
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        { attrs: { disabled: "", value: "" } },
-                                        [_vm._v("Suppliers type ..")]
-                                      ),
-                                      _vm._v(" "),
-                                      _vm._l(_vm.supplierTypes, function(
-                                        s_type
-                                      ) {
-                                        return _c(
-                                          "option",
-                                          { domProps: { value: s_type.name } },
-                                          [
-                                            _vm._v(
-                                              "\r\n\t\t\t                  \t" +
-                                                _vm._s(s_type.name) +
-                                                "\r\n\t\t\t                  "
-                                            )
-                                          ]
-                                        )
-                                      })
-                                    ],
-                                    2
-                                  ),
-                                  _vm._v(" "),
-                                  _c("has-error", {
-                                    attrs: {
-                                      form: _vm.form,
-                                      field: "supplier_type"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-7" }, [
-                              _c("div", { staticClass: "form-group" }, [
-                                _c(
-                                  "label",
-                                  { attrs: { for: "brand_shop_id" } },
-                                  [_vm._v("Brand Shop")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "select",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.form.brand_shop_id,
-                                        expression: "form.brand_shop_id"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    attrs: {
-                                      id: "brand_shop_id",
-                                      name: "brand_shop_id"
-                                    },
-                                    on: {
-                                      change: function($event) {
-                                        var $$selectedVal = Array.prototype.filter
-                                          .call($event.target.options, function(
-                                            o
-                                          ) {
-                                            return o.selected
-                                          })
-                                          .map(function(o) {
-                                            var val =
-                                              "_value" in o ? o._value : o.value
-                                            return val
-                                          })
-                                        _vm.$set(
-                                          _vm.form,
-                                          "brand_shop_id",
-                                          $event.target.multiple
-                                            ? $$selectedVal
-                                            : $$selectedVal[0]
-                                        )
-                                      }
-                                    }
-                                  },
-                                  [
-                                    _c(
-                                      "option",
-                                      { attrs: { disabled: "", value: "" } },
-                                      [_vm._v("Select Brand Shop ..")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "option",
-                                      { domProps: { value: null } },
-                                      [_vm._v("No Brand Shop (Null) ")]
-                                    ),
-                                    _vm._v(" "),
-                                    _vm._l(_vm.allBrandShops, function(bs) {
-                                      return _c(
-                                        "option",
-                                        {
-                                          key: bs.id,
-                                          domProps: { value: bs.id }
-                                        },
-                                        [_vm._v(_vm._s(bs.brand_shop_title))]
-                                      )
-                                    })
-                                  ],
-                                  2
-                                )
-                              ])
-                            ])
                           ]),
                           _vm._v(" "),
                           _c(
@@ -1030,10 +848,135 @@ var render = function() {
                                 1
                               )
                             ])
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c("div", { staticClass: "form-check" }, [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.form.is_allow_to_modify,
+                                      expression: "form.is_allow_to_modify"
+                                    }
+                                  ],
+                                  staticClass: "form-check-input",
+                                  attrs: {
+                                    type: "checkbox",
+                                    name: "is_enabled",
+                                    id: "checkbox",
+                                    value: "1"
+                                  },
+                                  domProps: {
+                                    checked: Array.isArray(
+                                      _vm.form.is_allow_to_modify
+                                    )
+                                      ? _vm._i(
+                                          _vm.form.is_allow_to_modify,
+                                          "1"
+                                        ) > -1
+                                      : _vm.form.is_allow_to_modify
+                                  },
+                                  on: {
+                                    change: function($event) {
+                                      var $$a = _vm.form.is_allow_to_modify,
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = "1",
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            _vm.$set(
+                                              _vm.form,
+                                              "is_allow_to_modify",
+                                              $$a.concat([$$v])
+                                            )
+                                        } else {
+                                          $$i > -1 &&
+                                            _vm.$set(
+                                              _vm.form,
+                                              "is_allow_to_modify",
+                                              $$a
+                                                .slice(0, $$i)
+                                                .concat($$a.slice($$i + 1))
+                                            )
+                                        }
+                                      } else {
+                                        _vm.$set(
+                                          _vm.form,
+                                          "is_allow_to_modify",
+                                          $$c
+                                        )
+                                      }
+                                    }
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "label",
+                                  {
+                                    staticClass: "form-check-label",
+                                    attrs: { for: "checkbox" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "Is this user permited to modify products"
+                                    )
+                                  ]
+                                )
+                              ])
+                            ])
                           ])
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-5 col-sm-6" }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group" },
+                            [
+                              _c("label", { attrs: { for: "vendor_id" } }, [
+                                _vm._v("Select Vendor *")
+                              ]),
+                              _vm._v(" "),
+                              _c("single-select-app-one", {
+                                class: {
+                                  "is-invalid": _vm.form.errors.has("vendor_id")
+                                },
+                                staticStyle: {
+                                  "margin-top": "10px !important"
+                                },
+                                attrs: {
+                                  options: _vm.selectedVendor,
+                                  autoSearchOptions: _vm.autoSearchVendor,
+                                  filterBy: _vm.filterBy,
+                                  "place-holder": _vm.placeHolder,
+                                  "value-property": _vm.valueProperty
+                                },
+                                on: {
+                                  getAllDataListByIds:
+                                    _vm.getSelectedDataByIdsForVendor,
+                                  AutoCompleteSearchForData:
+                                    _vm.AutoCompleteSearchForDataVendor
+                                },
+                                model: {
+                                  value: _vm.form.vendor_id,
+                                  callback: function($$v) {
+                                    _vm.$set(_vm.form, "vendor_id", $$v)
+                                  },
+                                  expression: "form.vendor_id"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.form, field: "vendor_id" }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
                             _c(
                               "label",
@@ -1072,101 +1015,39 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "dist_zone_id" } }, [
-                              _vm._v("Zone / Area")
+                            _c("label", { attrs: { for: "supplier_desc" } }, [
+                              _vm._v("Details")
                             ]),
                             _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.dist_zone_id,
-                                    expression: "form.dist_zone_id"
-                                  }
-                                ],
-                                staticClass: "form-control form-control-sm-",
-                                attrs: {
-                                  id: "dist_zone_id",
-                                  name: "dist_zone_id"
-                                },
-                                on: {
-                                  change: function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.$set(
-                                      _vm.form,
-                                      "dist_zone_id",
-                                      $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
-                                    )
-                                  }
-                                }
-                              },
-                              [
-                                _c(
-                                  "option",
-                                  { attrs: { disabled: "", value: "" } },
-                                  [_vm._v("Select zone / Area ..")]
-                                ),
-                                _vm._v(" "),
-                                _vm._l(_vm.Dist_Zones, function(zone) {
-                                  return _c(
-                                    "option",
-                                    {
-                                      key: zone.id,
-                                      domProps: { value: zone.id }
-                                    },
-                                    [
-                                      _vm._v(
-                                        _vm._s(zone.zone_name) +
-                                          " (" +
-                                          _vm._s(zone.zip_code) +
-                                          ")"
-                                      )
-                                    ]
-                                  )
-                                })
-                              ],
-                              2
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", { attrs: { for: "supplier_desc" } }, [
-                                _vm._v("Details")
-                              ]),
-                              _vm._v(" "),
-                              _c("vue-editor", {
-                                staticClass: "form-control-",
-                                attrs: {
-                                  name: "supplier_desc",
-                                  placeholder: "Suppliyer Details"
-                                },
-                                model: {
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
                                   value: _vm.form.supplier_desc,
-                                  callback: function($$v) {
-                                    _vm.$set(_vm.form, "supplier_desc", $$v)
-                                  },
                                   expression: "form.supplier_desc"
                                 }
-                              })
-                            ],
-                            1
-                          )
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                name: "supplier_desc",
+                                placeholder: "Supplier details"
+                              },
+                              domProps: { value: _vm.form.supplier_desc },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "supplier_desc",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
                         ]),
                         _vm._v(" "),
                         _c("div", { staticClass: "col-md-2 col-sm-6" }, [
@@ -1238,9 +1119,7 @@ var render = function() {
                                               width: "150px",
                                               height: "150px"
                                             },
-                                            attrs: {
-                                              src: "../" + _vm.form.avatar
-                                            }
+                                            attrs: { src: _vm.form.avatar }
                                           })
                                         : _vm._e()
                                     ])

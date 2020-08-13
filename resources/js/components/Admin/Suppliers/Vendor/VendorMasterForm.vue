@@ -4,11 +4,11 @@
       <div class="row">
         <div class="col-md-5 col-sm-6">
         	<span v-show="!editMode">New Vendor</span>
-        	<span v-show="editMode">Update Vendor</span>
+        	<span v-show="editMode">Update - {{form.vendor_name}}</span>
         </div>
         <div class="col-md-7 col-sm-6 text-right">
         	<router-link to="/spa/VendorMaster" class="btn btn-primary btn-flat btn-sm"> 
-        		<i class="fas fa-user-tie"></i> Vendor
+        		<i class="fas fa-user-tie"></i> Vendor List
         	</router-link>
         </div>
       </div>
@@ -101,7 +101,7 @@
                   </div> 
                 </div>
 
-                <div class="row form-group">
+                <!-- <div class="row form-group">
                   <div class="col-sm-2 text-right">
                     <label class="pt-2">Brand Shop</label>                      
                   </div>
@@ -111,6 +111,24 @@
                         <option v-bind:value="null">No Brand Shop (Null) </option>                
                         <option v-for="bs in allBrandShops" :key="bs.id" v-bind:value="bs.id">{{bs.brand_shop_title}}</option> 
                       </select> 
+                  </div> 
+                </div> -->
+
+                <div class="row form-group">
+                  <div class="col-sm-2 text-right">
+                    <label class="pt-2">Brand Shop</label>                      
+                  </div>
+                  <div class="col-sm-10">
+                    <single-select-app-one
+                      :options="selectedBrandShop"
+                      @getAllDataListByIds="getSelectedDataByIdsForBrandShop"
+                      :autoSearchOptions="autoSearchBrandShop"
+                      @AutoCompleteSearchForData="AutoCompleteSearchForDataBrandShop"                   
+                      :filterBy="filterBy"
+                      :place-holder="placeHolder"
+                      :value-property="valueProperty"
+                      v-model="form.brand_shop_id" 
+                    />
                   </div> 
                 </div>
 
@@ -158,7 +176,8 @@
                              <img v-if="form.vendor_img == 'undefined'" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:130px;">
                              <img v-if="form.vendor_img === '' " :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:130px;">
                              <img v-else-if="form.vendor_img === null" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:130px;">
-                              <img v-else-if="form.vendor_img != '' " :src="'../'+form.vendor_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:130px;">
+                              <!-- <img v-else-if="form.vendor_img != '' " :src="'../'+form.vendor_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:130px;"> -->
+                              <img v-else-if="form.vendor_img != '' " :src="form.vendor_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:130px;">
                             </span> 
                             <!-- <img :src="'../'+NoIconUrl"> -->
                     	</div>
@@ -206,7 +225,7 @@
 <script>
   import { mapState } from 'vuex' //for user MapState
   export default {
-    name: "EmployeeMasterForm",
+    name: "VendorMasterForm",
     
     data () {
       return {
@@ -219,9 +238,9 @@
             { name: 'Shop' },
           ],      
 
-    		//form multiselect app
-    		placeHolder:'Select departments',
-    		filterBy:'dept_name',
+    		//form Single app
+    		placeHolder:'Select Brand Shop',
+    		filterBy:'brand_shop_title',
     		valueProperty: 'id',
 
         // Create a new form instance
@@ -246,9 +265,8 @@
 
     computed: {
     	/*userStatus get form commonSotreForAll*/	
-        ...mapState( 'commonStoreForAll', ['userStatus','branches','Dist_Zones','allBrandShops'] )
-
-        
+        ...mapState( 'commonStoreForAll', ['userStatus','branches','Dist_Zones'] ),
+        ...mapState( 'VendorMasterStore', ['autoSearchBrandShop','selectedBrandShop'] ),        
   	},
 
   	methods:{
@@ -272,59 +290,59 @@
 	    },
 
 	    // Submit the form via a POST request
-		storeFormData() {  
-		  //console.log(this.form); 
-		  this.$Progress.start(); //using progress-bar package
+  		storeFormData() {  
+  		  //console.log(this.form); 
+  		  this.$Progress.start(); //using progress-bar package
 
-		  //this.form.post('/spa/Vendor-Info')
-		  this.form.post('/spa/Vendor-Info')
-		  .then(({ data }) => { 
-		    if(data.success){ 
-		      //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
-		      toastr.success(data.success);             
-		      this.$Progress.finish();  
-		      this.form.reset();  //reset from after submit	
-		      this.$refs.vendor_img.value = ''; //clear file input tag 
-			  this.ShowOnChangeImage = null;
-			  this.$router.push({ path : '/spa/VendorMaster' });	 //route after successfule submit	      
-		    }
-		    if(data.errors){
-		      this.$Progress.fail();
-		      toastr.warning(data.errors); 
-		    }
-		  })
-		  .catch( () => {
-		    this.$Progress.fail();
-		    toastr.warning('Something is wrong!');
-		  })            
-		},
+  		  //this.form.post('/spa/Vendor-Info')
+  		  this.form.post('/spa/Vendor-Info')
+  		  .then(({ data }) => { 
+  		    if(data.success){ 
+  		      //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
+  		      toastr.success(data.success);             
+  		      this.$Progress.finish();  
+  		      this.form.reset();  //reset from after submit	
+  		      this.$refs.vendor_img.value = ''; //clear file input tag 
+  			  this.ShowOnChangeImage = null;
+  			  this.$router.push({ path : '/spa/VendorMaster' });	 //route after successfule submit	      
+  		    }
+  		    if(data.errors){
+  		      this.$Progress.fail();
+  		      toastr.warning(data.errors); 
+  		    }
+  		  })
+  		  .catch( () => {
+  		    this.$Progress.fail();
+  		    toastr.warning('Something is wrong!');
+  		  })            
+  		},
 
-		updateFormData(){         
-			//console.log(this.form); 
-			this.$Progress.start(); //using progress-bar package
+  		updateFormData(){         
+  			//console.log(this.form); 
+  			this.$Progress.start(); //using progress-bar package
 
-			this.form.put('/spa/Vendor-Info/'+this.form.id)
-			  .then(({ data }) => { 
-			    if(data.success){ 
-			      //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update         
-			      this.$Progress.finish(); 
-			      toastr.success(data.success);               
-			      this.form.reset();  //reset from after submit
-			      this.editMode = false; 
-			      this.$refs.vendor_img.value = ''; //clear file input tag 
-			  	  this.ShowOnChangeImage = null;
-			  	  this.$router.push({ path : '/spa/VendorMaster' });	 //route after successfule submit
-			    }
-			    if(data.errors){
-			      this.$Progress.fail();
-			      toastr.warning(data.errors); 
-			    }
-			  })
-			  .catch( () => {
-			    this.$Progress.fail();
-			    toastr.warning('Something is wrong!');
-			  }) 
-		},
+  			this.form.put('/spa/Vendor-Info/'+this.form.id)
+  			  .then(({ data }) => { 
+  			    if(data.success){ 
+  			      //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update         
+  			      this.$Progress.finish(); 
+  			      toastr.success(data.success);               
+  			      this.form.reset();  //reset from after submit
+  			      this.editMode = false; 
+  			      this.$refs.vendor_img.value = ''; //clear file input tag 
+  			  	  this.ShowOnChangeImage = null;
+  			  	  this.$router.push({ path : '/spa/VendorMaster' });	 //route after successfule submit
+  			    }
+  			    if(data.errors){
+  			      this.$Progress.fail();
+  			      toastr.warning(data.errors); 
+  			    }
+  			  })
+  			  .catch( () => {
+  			    this.$Progress.fail();
+  			    toastr.warning('Something is wrong!');
+  			  }) 
+  		},
 
 
 	    fillForm(){
@@ -333,15 +351,28 @@
 	    		this.form.reset(); 
 	    		this.form.fill(this.$route.params.data);
 	    		//this.form.departments = this.$route.params.data.departments; //pass the array
-	    		//this.$refs.vendor_name.focus();     		   	
+	    		//this.$refs.vendor_name.focus();  
+          if(this.$route.params.data.brand_shop_id === null){ this.form.brand_shop_id = ''; }   		   	
 	    	}
-	    }
+        //load selected brand shop
+        this.$store.dispatch('VendorMasterStore/fetchSelectedBrandShop', this.form.brand_shop_id);
+	    },
+
+      AutoCompleteSearchForDataBrandShop(data){
+        this.$store.dispatch('VendorMasterStore/AutoCompleteSearchForDataBrandShop', data ); 
+      },
+      getSelectedDataByIdsForBrandShop(data){
+        this.$store.dispatch('VendorMasterStore/fetchSelectedBrandShop', this.form.brand_shop_id);
+      },
+
+
+
 	},
 
   	created(){
   		this.fillForm();
     	this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
-      this.$store.dispatch('commonStoreForAll/fetchBrandShops'); //get user status
+      //this.$store.dispatch('commonStoreForAll/fetchBrandShops'); //get user status
       this.$store.dispatch('commonStoreForAll/fetchDistrictZoneList'); //get user status
     	this.$store.dispatch('commonStoreForAll/fetchBranches'); //get job title
 

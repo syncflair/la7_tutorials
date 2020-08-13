@@ -15,6 +15,8 @@ use App\Mail\SupplierNotificationMail;
 use Illuminate\Support\Facades\Mail;
 use App\Supplier;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Config; //that for call constants form app/config
 
 
 class SupplierController extends Controller
@@ -37,7 +39,8 @@ class SupplierController extends Controller
             $perPage = 100;
        }
 
-        $data = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry','belongsToBrandShop')
+    
+        $data = Supplier::with('belongsToVendor')
                 ->paginate($perPage);
 
         return response()->json($data);
@@ -66,7 +69,7 @@ class SupplierController extends Controller
             'name' => 'required|min:3|max:80', 
             'email' => 'required|email|unique:suppliers,email', 
             'phone' => ['numeric','regex:/^01[1|3-9]\d{8}$/', 'unique:suppliers,phone'], //right way to use preg_match
-            'supplier_type' => 'required', 
+            'vendor_id' => 'required', 
             'status_id' => 'required', 
             'password' => 'required|min:8|max:30',   //confirmed
             'password_confirmation' => 'required|same:password',
@@ -75,43 +78,58 @@ class SupplierController extends Controller
         ],
         [
             'status_id.required' => 'The User Status field is required.',
+            'vendor_id.required' => 'Please Select Vendor.',
         ]);
        
         $data =array();
         $data['name']=$request->name;
         $data['email']=$request->email;
         $data['phone']=$request->phone;
-        $data['supplier_type']=$request->supplier_type;
-        $data['brand_shop_id']=$request->brand_shop_id;       
+        $data['vendor_id']=$request->vendor_id;       
         $data['status_id']=$request->status_id;        
         $data['supplier_desc']=$request->supplier_desc;        
-        $data['supplier_address']=$request->supplier_address;  
-        $data['dist_zone_id']=$request->dist_zone_id;      
+        $data['supplier_address']=$request->supplier_address;       
         $data['password'] = Hash::make($request->password); //make hash password
 
-        $image = $request->avatar;
+        $data['created_by']= \Auth::user()->id;  
 
-        if($image){
+        if($request->is_allow_to_modify == NULL){ 
+            $data['is_allow_to_modify'] = 0;
+        }else{
+           $data['is_allow_to_modify']=$request->is_allow_to_modify; 
+        }
+
+        $image_base64 = $request->avatar;
+
+        if($image_base64){
             //return $imageSize =getimagesize($image);
-            $imageExt = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            $imageExt = explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
             if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
                 return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
-            }else{               
+            }else{    
 
                 //new name generate from base64 file
-                $imageName = slug_generator($request->name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
+
                 //save image using intervention image
-                \Image::make($image)
-                    //->fit(200, 200)
-                    //->resize(40, 40)
-                   // ->text('SHORBORAHO', 140, 190)
-                    ->save(storage_path('app/public/suppliers/').$imageName);
-                $data['avatar'] = 'storage/suppliers/'.$imageName;
+                $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
+                $image = str_replace($replace, '', $image_base64); 
+                $image = str_replace(' ', '+', $image);
+                $image = base64_decode($image); 
+                $resized_image = \Image::make($image)->resize(200, 120)
+                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                    ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);     
+                            
+                Storage::disk('s3')->put('suppliers/'.$imageName, $resized_image ); //for s3
+                //Storage::disk('public')->put('suppliers/'.$imageName, $resized_image );//for public storage
+
+                //s3_url get from constants file 
+                $data['avatar'] = Config::get('constants.s3_url').'suppliers/'.$imageName;
+                //$data['avatar'] = 'storage/suppliers/'.$imageName; //for public storage
                 
             }//end image type check                         
         }else{
-            $data['avatar'] = null;
-            
+            $data['avatar'] = null;            
         } 
 
         $supplier = Supplier::create($data); 
@@ -120,7 +138,7 @@ class SupplierController extends Controller
             $data = ["userInfo" => $request->all(), "tag" => "register"];
             Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
 
-            return response()->json(['success'=>'Supplier inserted successfully Without Image']);
+            return response()->json(['success'=>'Supplier inserted']);
         }
             
     }
@@ -160,7 +178,7 @@ class SupplierController extends Controller
             'name' => 'required|min:3|max:80', 
             'email' => 'required|email|unique:suppliers,email,'.$id, 
             'phone' => ['numeric','regex:/^01[1|3-9]\d{8}$/', 'unique:suppliers,phone,'.$id ], //right way to use preg_match
-            'supplier_type' => 'required', 
+            'vendor_id' => 'required', 
             'status_id' => 'required', 
             'password' => 'nullable|sometimes|min:8|max:30',   //confirmed
             'password_confirmation' => 'sometimes|same:password',
@@ -168,6 +186,7 @@ class SupplierController extends Controller
         ],
         [
             'status_id.required' => 'The User Status field is required.',
+            'vendor_id.required' => 'Please Select Vendor.',
         ]);
        
          //existing password query
@@ -178,39 +197,60 @@ class SupplierController extends Controller
         $data['name']=$request->name;
         $data['email']=$request->email;
         $data['phone']=$request->phone;
-        $data['supplier_type']=$request->supplier_type;
-        $data['brand_shop_id']=$request->brand_shop_id;
+        $data['vendor_id']=$request->vendor_id;
         $data['status_id']=$request->status_id; 
         $data['supplier_desc']=$request->supplier_desc;        
-        $data['supplier_address']=$request->supplier_address;   
-        $data['dist_zone_id']=$request->dist_zone_id;               
+        $data['supplier_address']=$request->supplier_address;                 
         $data['password'] = $request->password == null ? $existing_password : Hash::make($request->password);
 
-        $image = $request->avatar;
+        $data['updated_by']= \Auth::user()->id; 
 
-        if( Str::length($image) > 150){ /*larvel helper function*/
+        if($request->is_allow_to_modify == NULL){ 
+            $data['is_allow_to_modify'] = 0;
+        }else{
+           $data['is_allow_to_modify']=$request->is_allow_to_modify; 
+        } 
+
+        $image_base64 = $request->avatar;
+
+        if( Str::length($image_base64) > 150){ /*larvel helper function*/
             //return $imageSize =getimagesize($image);
-            $imageExt = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            $imageExt = explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
             if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
                 return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
             }else{
 
-                 //query for existing image
-                $existing_image = Supplier::select('avatar')->where('id', $id)->first();                   
-                if(!empty($existing_image->avatar)) {
-                    File::delete($existing_image->avatar); //delete file //use Illuminate\Support\Facades\File; at top
-                }//else{echo 'Empty';}  
+                //query for existing image
+                $existing_image = Supplier::select('avatar')->where('id', $id)->first(); 
+                
+                if($existing_image->avatar != null){            
+                    $parts = parse_url($existing_image->avatar); 
+                    $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+                    Storage::disk('s3')->delete($parts); //dd($parts);
+                }  
 
+                // if(!empty($existing_image->avatar)) {
+                //     File::delete($existing_image->avatar); //delete file //use Illuminate\Support\Facades\File; at top
+                // }//else{echo 'Empty';}  
 
                 //new name generate from base64 file
-                $imageName = slug_generator($request->name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-                //save image using intervention image
-                \Image::make($image)
-                    //->fit(200, 200)
-                    //->resize(40, 40)
-                   // ->text('SHORBORAHO', 140, 190)
-                    ->save(storage_path('app/public/suppliers/').$imageName);
-                $data['avatar'] = 'storage/suppliers/'.$imageName;
+                $imageName = slug_generator($request->name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
+                
+
+                $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
+                $image = str_replace($replace, '', $image_base64); 
+                $image = str_replace(' ', '+', $image);
+                $image = base64_decode($image); 
+                $resized_image = \Image::make($image)->resize(200, 120)
+                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                    ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);     
+                            
+                Storage::disk('s3')->put('suppliers/'.$imageName, $resized_image ); //for s3
+                //Storage::disk('public')->put('suppliers/'.$imageName, $resized_image );//for public storage
+
+                //s3_url get from constants file 
+                $data['avatar'] = Config::get('constants.s3_url').'suppliers/'.$imageName;
+                //$data['avatar'] = 'storage/suppliers/'.$imageName; //for public storage
 
             }//end image type check                         
         }else{
@@ -233,10 +273,19 @@ class SupplierController extends Controller
     {
         //query for existing image
         $existing_image = Supplier::select('avatar')->where('id', $id)->first();                   
-        if( File::exists($existing_image->avatar) ) {  
-            File::delete($existing_image->avatar); 
-            //delete file //use Illuminate\Support\Facades\File; at top
-        }
+     
+        //Delete from s3
+        if($existing_image->avatar != null){            
+            $parts = parse_url($existing_image->avatar); 
+            $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+            Storage::disk('s3')->delete($parts); //dd($parts);
+        } 
+        
+        //delete single image from public storage                        
+        // if( File::exists($existing_image->avatar) ) {  
+        //     File::delete($existing_image->avatar); 
+        //     //delete file //use Illuminate\Support\Facades\File; at top            
+        // }
 
         $data = Supplier::findOrFail($id)->delete();        
         if($data){
@@ -259,12 +308,12 @@ class SupplierController extends Controller
 
         if(!empty($searchKey) && empty($searchOption)){
         //if($search = \Request::get('q')){
-            $searchResult = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry','belongsToBrandShop')
+            $searchResult = Supplier::with('belongsToBrandShop')
                 ->where(function($query) use ($searchKey){
                 $query->where('suppliers.name','LIKE','%'.$searchKey.'%')
                         ->orWhere('suppliers.email','LIKE','%'.$searchKey.'%')
                         ->orWhere('suppliers.phone','LIKE','%'.$searchKey.'%')
-                        ->orWhere('suppliers.supplier_type','LIKE','%'.$searchKey.'%')
+                        ->orWhere('suppliers.vendor_id','LIKE','%'.$searchKey.'%')
                         ->orWhere('suppliers.created_at','LIKE','%'.$searchKey.'%')
                         ->orWhere('user_status.us_name','LIKE','%'.$searchKey.'%');
             })
@@ -273,7 +322,7 @@ class SupplierController extends Controller
             ->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){
-            $searchResult = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry','belongsToBrandShop')
+            $searchResult = Supplier::with('belongsToBrandShop')
             ->where(function($query) use ($searchKey, $searchOption){
                 if($searchOption == 'us_name'){
                     $query->where( 'user_status.'.$searchOption,'LIKE','%'.$searchKey.'%');
@@ -287,7 +336,7 @@ class SupplierController extends Controller
             
         }else{
             //$searchResult = Supplier::latest()->paginate(10);
-            $searchResult = Supplier::with('belongsToDistrictZone.belongsToDistrict.belongsToDivision.belongsToCountry','belongsToBrandShop')
+            $searchResult = Supplier::with('belongsToBrandShop')
                     ->paginate($perPage);
         }
         //return $searchResult;
@@ -362,7 +411,6 @@ class SupplierController extends Controller
             $searchResult = Supplier::where(function($query) use ($searchKey){
                 $query->where('suppliers.name','LIKE','%'.$searchKey.'%')
                         ->orWhere('suppliers.email','LIKE','%'.$searchKey.'%')
-                        ->orWhere('suppliers.supplier_type','LIKE','%'.$searchKey.'%')
                         ->orWhere('user_status.us_name','LIKE','%'.$searchKey.'%');
             })
             ->select('suppliers.id','suppliers.name','user_status.us_name')

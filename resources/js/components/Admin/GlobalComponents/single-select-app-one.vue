@@ -6,7 +6,8 @@
 	  <div class="my-multiselect" ref="parentBox" 
 	  		@click="ToggleItem" 
 	  		v-on:blur="visible = false;" 	
-	  		title="click to open autocomplete option and also close"  		
+	  		title="click to open autocomplete option and also close"
+	  		style="margin-top:0px;"  		
 	  >	
 
 	    <!-- v-model="selectedItem ? selectedItem[filterBy] : searchText " tabindex="-1"-->
@@ -16,7 +17,7 @@
 	        </span>
           	<ul v-if="selectedOptions.length > 0">
 	        	<!-- <li v-show="option.checked" class="selected-item" v-for="(option, key) in FormatedOptions" :key="key"> -->	        	
-	        	<li class="selected-item" v-for="(option, key) in selectedOptions" :key="key">
+	        	<li style="width: 100%;" class="selected-item" v-for="(option, key) in selectedOptions" :key="key" >
 	        		{{ option[filterBy] }} 
 	        		<i @click="preventClose($event); removeSelectItem(key);" class="far fa-times-circle"></i>
 	        		<!-- <span v-show="!option.checked"> {{ this.placeHolder }} </span> -->
@@ -49,10 +50,10 @@
 				<!-- @keydown.enter="selectItem(index)" -->
 			 <ul v-show="listVisible === true" ref="optionList" class="optionList dropdown-menu-">
 			    	<!-- :key="option[filterBy]" -->
-			    <li 
+			    <li
 			    	v-if="autoQuery === '' ? listVisible = false : listVisible = true"
 			    	v-for="(option, index) in FormatedOptions" :key="index"
-			    	@click="itemClicked(index); preventClose($event);" 			    	
+			    	@click="itemClicked(index, option.id); preventClose($event);" 			    	
 			    	:class="{'selected' : (selected === index) || option.checked}"
 			    >	       	
 			    		<div class="checkbox">
@@ -94,8 +95,12 @@
        	  	required: true,
        	  },
        	  //get only selectedItem
-       	  value:{ 
-	      	default: () => [],
+       	  //value:{ 
+	      //	default: () => [],
+	      //},
+	      value:{ 
+	      	//type: Number,
+	      	required: true
 	      },
 	      //filter by data field name
 	      filterBy: {
@@ -114,9 +119,9 @@
 	    },
     	data (){      
 	        return {
-	        	optionTopHeight: '38.75px',  //'33.75px',
+	        	optionTopHeight: '38.75px', //33.75 
 	        	selectOption: '',
-	        	itemListHeight: 38.75, //33.75,
+	        	itemListHeight: 38.75, //33.75
 	        	selectedItem: null,
 	        	searchText: '',
 	        	autoQuery: '',
@@ -131,28 +136,15 @@
 
           	FormatedOptions() {
           		let fo = Object.values(this.autoSearchOptions).map( option => {
-          		//let fo = this.options.map( option => {
-          			//if(option.length > 0){
-	          			let checked = this.value.some(v => v === option[this.valueProperty]);
-	          			return { ...option, checked: checked};
-	          		//}
+          			let checked = this.value === option[this.valueProperty];
+          			return { ...option, checked: checked};
           		});
           		return fo;
-
-		        // this.$emit('change', this.query);
-		        // if (this.query == '') {
-		        //   return [];
-		        // }
-		        // return this.autoSearchData.filter( (item) => item[this.filterby].toLowerCase().includes(this.query.toLowerCase()) )
-		        //return this.autoSearchData.filter( (item) => item[this.filterby].toLowerCase() )
 		    },
 
 		    selectedOptions() {
           		let fo = Object.values(this.options).filter( data => {
-          		//let fo = this.options.map( option => {
-          			//if(data.length > 0){
-          				return this.value.includes(data.id)
-          			//}
+          				return this.value === data.id; //options match with value
           		});
           		return fo;
           	}
@@ -175,11 +167,6 @@
 	        		//FireEvent.$emit('AutoCompleteSearchForDataOne', e.target.value );
 	        		this.$emit('AutoCompleteSearchForData', e.target.value );
 	        	}
-	        	// else{
-	        	// 	//this.autoSearchOptions = [] //dont do this because it's props
-	        	// 	//FireEvent.$emit('EmptyAutoSerchData'); //go to parent and empty the array
-	        	// 	this.listVisible =  false;
-	        	// }
 	        },
 
 	        ToggleItem(){
@@ -190,16 +177,7 @@
 	        	setTimeout(() => {
 		          this.$refs.autoSearchField.focus();
 		        }, 50);
-	        	
-	        	//document.getElementById('autoSearchField').focus();
-	        	//this.$refs.autoSearchField.focus();
-	        	// setTimeout(() => {
-		        //   this.$refs.autoSearchField.focus();
-		        // }, 50);
-		    //      this.$nextTick(() => {
-				  //   let editButtonRef = this.$refs.autoSearchField;
-				  //   editButtonRef.focus();
-				  // });
+		        //console.log(this.optionTopHeight);
 	        },
 	        preventClose(e){
 	        	//e.stopPropagation(); //
@@ -207,47 +185,33 @@
   				//$(this).off("blur");
 	        },
 	        removeSelectItem(key){ 
-        		//alert(key);
-        		// let SelectedValue = this.FormatedOptions[key][this.valueProperty];
-        		let SelectedValue = this.selectedOptions[key][this.valueProperty]; 
-        		let NewValue = [...this.value]; //spred oparetor
-        		
-	        	let existIndex = this.value.findIndex(v => v === SelectedValue);
-        		//this.value.splice(key, 1);
-        		NewValue.splice(existIndex, 1);
-				this.$emit('input', NewValue) //auto syncronize with v-model array in parent component
-
-				setTimeout(() => {   
-	        		this.fixTop();
-		        }, 50);
-
+	        	let NewValue = '';
+        		this.$emit('input', NewValue) //auto syncronize with v-model array in parent component
 				//toastr.warning('Removed!');
         	},
-	        itemClicked(index){
+	        itemClicked(index, id){
 	        	//console.log(this.autoSearchData[index]['cat_name']);
 	        	//console.log(this.autoSearchData[index]);
-	        	this.selected = index; //alert(this.selected);
+	        	this.selected = index; //alert(id);
 	        	//this.selectItem(index);
 	        	this.selectItem(); //get index value atometically and pass through usign this.selected ....
 	        },
 
 	        selectItem() {
-	        	//console.log(this.FormatedOptions[index]);
-	        	//this.selectedItem = this.autoSearchData[this.selected];
 	        	let SelectedValue = this.FormatedOptions[this.selected][this.valueProperty];
-	        	let NewValue = [...this.value]; //spred oparetor
-
-	        	let existIndex = this.value.findIndex(v => v === SelectedValue);
-	        	if(existIndex === -1){
-	        		NewValue.push(SelectedValue);
+	        	let NewValue = this.value; //spred oparetor
+	        	let existIndex = this.value === SelectedValue;
+	        	if(existIndex){
+	        		this.$emit('input', SelectedValue);//but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
+	        		//console.log(this.value);
 	        		//toastr.success('Added!');
 	        	}
 	        	else{
-	        		NewValue.splice(existIndex, 1);
+	        		this.$emit('input', SelectedValue);//but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
 	        		//toastr.warning('Removed!');
 	        	}
 	        	//this.value.push(SelectedValue); //this is also work	        	
-	        	this.$emit('input', NewValue)//but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
+	        	//this.$emit('input', NewValue)
 	        	this.$emit('getAllDataListByIds');
 	        		        	
 	        	setTimeout(() => {   
@@ -255,57 +219,7 @@
 		        }, 50);
 		        //this.visible = false;	        
 	        },
-
-	        // selectItem(index) {
-	        // 	//console.log(this.FormatedOptions[index]);
-	        // 	//this.selectedItem = this.autoSearchData[this.selected];
-	        // 	let SelectedValue = this.FormatedOptions[index][this.valueProperty];
-	        // 	let NewValue = [...this.value]; //spred oparetor
-
-	        // 	let existIndex = this.value.findIndex(v => v === SelectedValue);
-	        // 	if(existIndex === -1){
-	        // 		NewValue.push(SelectedValue);
-	        // 		toastr.success('Added!');
-	        // 	}
-	        // 	else{
-	        // 		NewValue.splice(existIndex, 1);
-	        // 		toastr.warning('Removed!');
-	        // 	}
-	        // 	//this.value.push(SelectedValue); //this is also work	        	
-	        // 	this.$emit('input', NewValue)//but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
-
 	        
-	        		        	
-	        // 	setTimeout(() => {   
-	        // 		this.fixTop();
-		       //  }, 50);
-		       //  //this.visible = false;	        
-	        // },
-
-	        //this is for selected option
-	        // onChangeSelect(event){
-	        // 	let index = event.target.selectedIndex;
-	        // 	let id = event.target.value;
-        	// 	//console.log(event.target.selectedIndex);
-        	// 	let SelectedValue = this.FormatedOptions[index][this.valueProperty];
-	        // 	let NewValue = [...this.value]; //spred oparetor
-
-	        // 	let existIndex = this.value.findIndex(v => v === SelectedValue);
-	        // 	if(existIndex === -1){
-	        // 		NewValue.push(SelectedValue);
-	        // 	}
-	        // 	else{
-	        // 		//NewValue.splice(existIndex, 1);
-	        // 		toastr.warning('Already Selected this one!');
-	        // 	}
-	        // 	//this.value.push(SelectedValue); //this is also work	        	
-	        // 	this.$emit('input', NewValue)//but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
-	        		        	
-	        // 	setTimeout(() => {   
-	        // 		this.fixTop();
-		       //  }, 50);
-        	// },
-
 
 	        up(){
 	        	if(this.selected === 0){
@@ -337,6 +251,7 @@
 	    },
 	    mounted(){
 	    	//this.fixTop();
+	    	//console.log(this.value);
 	    }
         
         

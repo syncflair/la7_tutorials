@@ -221,10 +221,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "EmployeeMasterForm",
+  name: "VendorMasterForm",
   data: function data() {
     return {
       NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
@@ -238,9 +257,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         name: 'Shop'
       }],
-      //form multiselect app
-      placeHolder: 'Select departments',
-      filterBy: 'dept_name',
+      //form Single app
+      placeHolder: 'Select Brand Shop',
+      filterBy: 'brand_shop_title',
       valueProperty: 'id',
       // Create a new form instance
       form: new Form({
@@ -261,7 +280,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'branches', 'Dist_Zones', 'allBrandShops'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'branches', 'Dist_Zones']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('VendorMasterStore', ['autoSearchBrandShop', 'selectedBrandShop'])),
   methods: {
     //Make image as base64 
     onImageChange: function onImageChange(e) {
@@ -372,15 +391,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.editMode = true;
         this.form.reset();
         this.form.fill(this.$route.params.data); //this.form.departments = this.$route.params.data.departments; //pass the array
-        //this.$refs.vendor_name.focus();     		   	
-      }
+        //this.$refs.vendor_name.focus();  
+
+        if (this.$route.params.data.brand_shop_id === null) {
+          this.form.brand_shop_id = '';
+        }
+      } //load selected brand shop
+
+
+      this.$store.dispatch('VendorMasterStore/fetchSelectedBrandShop', this.form.brand_shop_id);
+    },
+    AutoCompleteSearchForDataBrandShop: function AutoCompleteSearchForDataBrandShop(data) {
+      this.$store.dispatch('VendorMasterStore/AutoCompleteSearchForDataBrandShop', data);
+    },
+    getSelectedDataByIdsForBrandShop: function getSelectedDataByIdsForBrandShop(data) {
+      this.$store.dispatch('VendorMasterStore/fetchSelectedBrandShop', this.form.brand_shop_id);
     }
   },
   created: function created() {
     this.fillForm();
     this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
-
-    this.$store.dispatch('commonStoreForAll/fetchBrandShops'); //get user status
+    //this.$store.dispatch('commonStoreForAll/fetchBrandShops'); //get user status
 
     this.$store.dispatch('commonStoreForAll/fetchDistrictZoneList'); //get user status
 
@@ -437,7 +468,7 @@ var render = function() {
                 }
               ]
             },
-            [_vm._v("Update Vendor")]
+            [_vm._v("Update - " + _vm._s(_vm.form.vendor_name))]
           )
         ]),
         _vm._v(" "),
@@ -453,7 +484,7 @@ var render = function() {
               },
               [
                 _c("i", { staticClass: "fas fa-user-tie" }),
-                _vm._v(" Vendor\r\n        \t")
+                _vm._v(" Vendor List\r\n        \t")
               ]
             )
           ],
@@ -779,60 +810,35 @@ var render = function() {
                   _c("div", { staticClass: "row form-group" }, [
                     _vm._m(6),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-sm-10" }, [
-                      _c(
-                        "select",
-                        {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.brand_shop_id,
-                              expression: "form.brand_shop_id"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { id: "brand_shop_id", name: "brand_shop_id" },
+                    _c(
+                      "div",
+                      { staticClass: "col-sm-10" },
+                      [
+                        _c("single-select-app-one", {
+                          attrs: {
+                            options: _vm.selectedBrandShop,
+                            autoSearchOptions: _vm.autoSearchBrandShop,
+                            filterBy: _vm.filterBy,
+                            "place-holder": _vm.placeHolder,
+                            "value-property": _vm.valueProperty
+                          },
                           on: {
-                            change: function($event) {
-                              var $$selectedVal = Array.prototype.filter
-                                .call($event.target.options, function(o) {
-                                  return o.selected
-                                })
-                                .map(function(o) {
-                                  var val = "_value" in o ? o._value : o.value
-                                  return val
-                                })
-                              _vm.$set(
-                                _vm.form,
-                                "brand_shop_id",
-                                $event.target.multiple
-                                  ? $$selectedVal
-                                  : $$selectedVal[0]
-                              )
-                            }
+                            getAllDataListByIds:
+                              _vm.getSelectedDataByIdsForBrandShop,
+                            AutoCompleteSearchForData:
+                              _vm.AutoCompleteSearchForDataBrandShop
+                          },
+                          model: {
+                            value: _vm.form.brand_shop_id,
+                            callback: function($$v) {
+                              _vm.$set(_vm.form, "brand_shop_id", $$v)
+                            },
+                            expression: "form.brand_shop_id"
                           }
-                        },
-                        [
-                          _c("option", { attrs: { disabled: "", value: "" } }, [
-                            _vm._v("Select Brand Shop ..")
-                          ]),
-                          _vm._v(" "),
-                          _c("option", { domProps: { value: null } }, [
-                            _vm._v("No Brand Shop (Null) ")
-                          ]),
-                          _vm._v(" "),
-                          _vm._l(_vm.allBrandShops, function(bs) {
-                            return _c(
-                              "option",
-                              { key: bs.id, domProps: { value: bs.id } },
-                              [_vm._v(_vm._s(bs.brand_shop_title))]
-                            )
-                          })
-                        ],
-                        2
-                      )
-                    ])
+                        })
+                      ],
+                      1
+                    )
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row form-group" }, [
@@ -1014,7 +1020,7 @@ var render = function() {
                                     width: "150px",
                                     height: "130px"
                                   },
-                                  attrs: { src: "../" + _vm.form.vendor_img }
+                                  attrs: { src: _vm.form.vendor_img }
                                 })
                               : _vm._e()
                           ])

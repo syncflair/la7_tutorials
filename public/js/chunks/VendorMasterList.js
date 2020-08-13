@@ -141,6 +141,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -524,47 +537,49 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "th",
-                {
-                  staticClass: "sortable-title",
-                  staticStyle: { width: "15%" },
-                  attrs: { scope: "col" },
-                  on: {
-                    click: function($event) {
-                      return _vm.sort("vendor_email")
-                    }
-                  }
-                },
-                [_vm._v("Email")]
+                { staticStyle: { width: "15%" }, attrs: { scope: "col" } },
+                [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "sortable-title",
+                      on: {
+                        click: function($event) {
+                          return _vm.sort("vendor_email")
+                        }
+                      }
+                    },
+                    [_vm._v("Email")]
+                  ),
+                  _vm._v(" / \r\n              "),
+                  _c(
+                    "span",
+                    {
+                      staticClass: "sortable-title",
+                      on: {
+                        click: function($event) {
+                          return _vm.sort("vendor_phone")
+                        }
+                      }
+                    },
+                    [_vm._v("Phone")]
+                  )
+                ]
               ),
               _vm._v(" "),
-              _c(
-                "th",
-                {
-                  staticClass: "sortable-title",
-                  staticStyle: { width: "15%" },
-                  attrs: { scope: "col" },
-                  on: {
-                    click: function($event) {
-                      return _vm.sort("vendor_phone")
-                    }
-                  }
-                },
-                [_vm._v("Phone")]
-              ),
-              _vm._v(" "),
-              _c("th", { staticStyle: { width: "10%" } }, [
-                _vm._v("Type / Shop")
+              _c("th", { staticStyle: { width: "20%" } }, [
+                _vm._v("Type (Brand Shop)")
               ]),
               _vm._v(" "),
               _c(
                 "th",
-                { staticStyle: { width: "10%" }, attrs: { scope: "col" } },
-                [_vm._v("Assign TO")]
+                { staticStyle: { width: "15%" }, attrs: { scope: "col" } },
+                [_vm._v("Assign to supplier user")]
               ),
               _vm._v(" "),
               _c(
                 "th",
-                { staticStyle: { width: "5%" }, attrs: { scope: "col" } },
+                { staticStyle: { width: "4%" }, attrs: { scope: "col" } },
                 [_vm._v("Status")]
               ),
               _vm._v(" "),
@@ -637,7 +652,7 @@ var render = function() {
                       ? _c("span", [
                           _c("img", {
                             attrs: {
-                              src: "../" + vendor.vendor_img,
+                              src: vendor.vendor_img,
                               loading: "lazy",
                               height: "20px",
                               width: "20px"
@@ -663,9 +678,11 @@ var render = function() {
                     _vm._v(" " + _vm._s(vendor.vendor_name) + " ")
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(vendor.vendor_email) + " ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(vendor.vendor_phone) + " ")]),
+                  _c("td", [
+                    _c("span", [_vm._v(_vm._s(vendor.vendor_email) + " ")]),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(vendor.vendor_phone) + " ")])
+                  ]),
                   _vm._v(" "),
                   _c("td", [
                     _c("small", [_vm._v(_vm._s(vendor.vendor_type) + " ")]),
@@ -683,7 +700,15 @@ var render = function() {
                       : _vm._e()
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v("ok")]),
+                  _c(
+                    "td",
+                    _vm._l(vendor.has_many_supplier, function(vs) {
+                      return vendor.has_many_supplier.length > 0
+                        ? _c("small", [_vm._v(_vm._s(vs.name) + " "), _c("br")])
+                        : _vm._e()
+                    }),
+                    0
+                  ),
                   _vm._v(" "),
                   _c("td", { staticStyle: { "text-align": "center" } }, [
                     _c(

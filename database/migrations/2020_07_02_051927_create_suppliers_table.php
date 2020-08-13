@@ -22,13 +22,12 @@ class CreateSuppliersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('email_verification_code', 225)->nullable()->comment('Custom Email Verification Code');
             $table->string('phone_verification_code', 10)->nullable()->comment('Custom phone Verification Code');
-            $table->string('password'); 
-            $table->enum('supplier_type', ['Person','Organization','Shop']);
+            $table->string('password');            
             $table->unsignedInteger('status_id')->default(1); //5 Not Verified
-            $table->unsignedInteger('brand_shop_id')->nullable()->comment('Brand Shop');
+            $table->unsignedInteger('vendor_id')->comment('Supplier BelongsTO Vendor');  
+            $table->boolean('is_allow_to_modify')->default(true);          
             $table->string('supplier_desc')->nullable();
             $table->string('supplier_address')->nullable();
-            $table->unsignedInteger('dist_zone_id')->nullable(); 
             $table->boolean('enable_notify')->default(false);
             $table->string('avatar')->nullable();  
             $table->rememberToken();

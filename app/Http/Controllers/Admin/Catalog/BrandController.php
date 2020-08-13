@@ -90,32 +90,16 @@ class BrandController extends Controller
                 $imageName = slug_generator($request->brand_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
 
                 //save image using intervention image
-                // \Image::make($image)
-                //     //->fit(200, 200)
-                //     ->resize(200, 120)
-                //    // ->text('SHORBORAHO', 140, 190)
-                //     ->save(storage_path('app/public/brand/').$imageName);
-                //$data['brand_img'] = 'storage/brand/'.$imageName;
-                //\Image::make($image)->save(storage_path('app/public/Brand/'.$imageName)) ;
-                
-                //$request->brand_img->store($imageName, 'public');
-                //$request->brand_img->store($imageName, 'public', $imageName);
-
-             
-                //dd($image);
-
                 $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
                 $image = str_replace($replace, '', $image_base64); 
-                $image = str_replace(' ', '+', $image);                 
+                $image = str_replace(' ', '+', $image);
+                $image = base64_decode($image); 
+                $resized_image = \Image::make($image)->resize(200, 120)
+                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                    ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);                  
 
-                Storage::disk('s3')->put('brand/'.$imageName, base64_decode($image) ); //for s3
-                //Storage::disk('public')->put('brand/'.$imageName, base64_decode($image) );//for local storage
-
-                // \Image::make($image_base64)
-                //     //->fit(200, 200)
-                //     ->resize(200, 120)
-                //    // ->text('SHORBORAHO', 140, 190)
-                //     ->save(storage_path('app/public/brand/').$imageName);
+                Storage::disk('s3')->put('brand/'.$imageName, $resized_image ); //for s3
+                //Storage::disk('public')->put('brand/'.$imageName, $resized_image );//for local storage
 
                 //s3_url get from constants file 
                 $data['brand_img'] = Config::get('constants.s3_url').'brand/'.$imageName; //for s3
@@ -206,19 +190,18 @@ class BrandController extends Controller
 
                 //new name generate from base64 file
                 $imageName = slug_generator($request->brand_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
+                
                 //save image using intervention image
-                // \Image::make($image)
-                //     ->resize(200, 120)
-                //    // ->text('SHORBORAHO', 140, 190)
-                //     ->save(storage_path('app/public/brand/').$imageName);
-                // $data['brand_img'] = 'storage/brand/'.$imageName;
-
-
                 $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
                 $image = str_replace($replace, '', $image_base64); 
-                $image = str_replace(' ', '+', $image);      
-                Storage::disk('s3')->put('brand/'.$imageName, base64_decode($image) ); //for s3
-                //Storage::disk('public')->put('brand/'.$imageName, base64_decode($image) );//for public storage
+                $image = str_replace(' ', '+', $image);
+                $image = base64_decode($image); 
+                $resized_image = \Image::make($image)->resize(200, 120)
+                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                    ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100); 
+                        
+                Storage::disk('s3')->put('brand/'.$imageName, $resized_image ); //for s3
+                //Storage::disk('public')->put('brand/'.$imageName, $resized_image );//for public storage
 
                 //s3_url get from constants file 
                 $data['brand_img'] = Config::get('constants.s3_url').'brand/'.$imageName;

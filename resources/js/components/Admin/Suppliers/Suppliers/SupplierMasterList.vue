@@ -25,8 +25,7 @@
             <th style="width: 15%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
             <th style="width: 15%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>             
             <th style="width: 7%;" scope="col" @click="sort('phone')" class="sortable-title">Phone</th>
-            <th style="width: 10%;" scope="col" @click="sort('supplier_type')" class="sortable-title">Type / Shop</th>
-            <th style="width: 15%;" scope="col">Address</th>
+            <th style="width: 20%;" scope="col" @click="sort('vendor_id')" class="sortable-title">Vendor (address)</th>
             <th style="width: 7%;" scope="col">Date</th>
             <th style="width: 3%;" scope="col">Status</th>
             <th style="width: 3%;" scope="col">Nofify</th>            
@@ -39,8 +38,8 @@
             <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="supplier.id"></td>
             <td> 
                 <span v-if="supplier.avatar != null"> 
-                  <img :src="'../'+supplier.avatar" loading="lazy" height="20px" width="20px"> 
-                  <!-- <img :src="supplier.avatar" loading="lazy" height="20px" width="20px">  -->
+                  <!-- <img :src="'../'+supplier.avatar" loading="lazy" height="20px" width="20px">  -->
+                  <img :src="supplier.avatar" loading="lazy" height="20px" width="20px"> 
                 </span>
                 <span v-if="supplier.avatar === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
             </td> 
@@ -49,20 +48,8 @@
             <td > {{ supplier.email }} </td> 
             <td > {{ supplier.phone }} </td>          
           	<td > 
-              <small>{{ supplier.supplier_type }} </small>
-              <small v-if="supplier.brand_shop_id != null"> 
-                ( {{supplier.belongs_to_brand_shop.brand_shop_title }} )
-              </small>
-            </td> 
-
-            <td > 
-              <small v-if="supplier.dist_zone_id != null">
-              <span v-show="supplier.supplier_address != null">{{ supplier.supplier_address }}, </span>
-                {{ supplier.belongs_to_district_zone.zone_name }},
-                {{ supplier.belongs_to_district_zone.belongs_to_district.district_name }},
-                {{ supplier.belongs_to_district_zone.belongs_to_district.belongs_to_division.division_name }},
-                {{ supplier.belongs_to_district_zone.belongs_to_district.belongs_to_division.belongs_to_country.country_name }}
-              </small>
+              <span>{{supplier.belongs_to_vendor.vendor_name}}</span>
+              <small v-show="supplier.supplier_address != null"> - {{ supplier.supplier_address }}, </small>
             </td> 
 
             <td > <small>{{ supplier.created_at | formatDate }}</small> </td>
@@ -144,7 +131,7 @@
             {'field_name':'name', 'show_name':'Name'},
             {'field_name':'email', 'show_name':'Email'},
             {'field_name':'phone', 'show_name':'Phone'},
-            {'field_name':'supplier_type', 'show_name':'Supplier Type'},
+            {'field_name':'vendor_id', 'show_name':'Vendor'},
           ],             
         }
       },
