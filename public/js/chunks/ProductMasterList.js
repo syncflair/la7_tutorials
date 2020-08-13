@@ -152,6 +152,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -355,6 +356,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$store.dispatch('ProductMasterStore/fetchData', this.pagination.per_page);
       this.$Progress.finish(); //console.log(this.pagination.total);
     },
+    reloadThis: function reloadThis() {
+      this.fetchData();
+    },
     ViewDetails: function ViewDetails() {
       alert('ok');
     },
@@ -481,6 +485,16 @@ var render = function() {
           "div",
           { staticClass: "col-md-7 col-sm-3 text-right" },
           [
+            _c(
+              "a",
+              {
+                staticClass: "btn btn-primary btn-flat btn-sm",
+                attrs: { title: "reload" },
+                on: { click: _vm.reloadThis }
+              },
+              [_c("i", { staticClass: "fas fa-sync-alt" })]
+            ),
+            _vm._v(" "),
             _c(
               "router-link",
               {

@@ -10,6 +10,11 @@ const EmployeeMasterStore ={
             per_page: 0,
         },
         autoCompleteData: {},
+
+        //for brand shop autocomplete
+        autoSearchDepartments: {},
+        selectedDepartmentList:[],
+
     }),/*end state*/
 
     getters: {
@@ -18,17 +23,12 @@ const EmployeeMasterStore ={
 
     mutations: {
         //return data to state
-        FETCH_DATA(state, employees) {
-            return state.employees = employees;                        
-        },
+        FETCH_DATA(state, employees) { return state.employees = employees; },
+        FATCH_PAGINATION(state, pagination){ return state.pagination = pagination; },        
+        AUTO_COMPLETE_DATA(state, data){ return state.autoCompleteData = data; },
 
-        FATCH_PAGINATION(state, pagination){
-            return state.pagination = pagination;  
-        },
-        
-        AUTO_COMPLETE_DATA(state, data){
-            return state.autoCompleteData = data;  
-        }
+        AUTO_COMPLETE_DATA_FOR_DEPARTMENT(state, data){ return state.autoSearchDepartments = data; },
+        SELECTED_DEPARTMENT(state, data){ return state.selectedDepartmentList = data; },
 
     },/*end Mutations*/
 
@@ -37,7 +37,7 @@ const EmployeeMasterStore ={
         fetchData(context, payload){
             let perPageVelue ;
             if(!payload){
-                perPageVelue = 10
+                perPageVelue = 100
             }else{
                 perPageVelue = payload
             }
@@ -76,6 +76,23 @@ const EmployeeMasterStore ={
             .then( ( response ) => {
                     context.commit('AUTO_COMPLETE_DATA', response.data.data);
                     //this.categories = response.data; // is an object... use when pagination                                         
+            }).catch(() => { }) 
+        },
+
+        AutoCompleteSearchForDataDepartment(context, payload){  
+          let query = payload;  
+          axios.get('/spa/AutoCompleteDepartmentData?&q='+ query)
+          .then( ( response ) => {
+              context.commit('AUTO_COMPLETE_DATA_FOR_DEPARTMENT', response.data);                                        
+          }).catch(() => { }) 
+        },
+
+        //For selected Department List
+        fetchSelectedDepartmentList(context, payload){  
+            //use axios.post instead of axios.get , becouse is contaion array  
+            axios.post('/spa/Department-getSelectedDepartmentList/', {q: payload})
+            .then( ( response ) => {
+                    context.commit('SELECTED_DEPARTMENT', response.data);                                       
             }).catch(() => { }) 
         },
 

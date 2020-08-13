@@ -32947,6 +32947,7 @@ body {
 .table thead th {
   border-bottom: 1px solid #dee2e6 !important;
   color: #007bff;
+  font-weight: normal;
 }
 
 .table th,
@@ -33127,7 +33128,7 @@ form .form-control:focus {
   width: 100%;
   left: 0;
   right: 0;
-  z-index: 3;
+  z-index: 9;
   background: #ffffff;
   border: 1px solid #dee2e6;
   display: inline-table;
@@ -33211,7 +33212,7 @@ form .form-control:focus {
   margin: 0px 10px !important;
   background: #ffffff !important;
   padding: 0px 2px 0px 2px !important;
-  z-index: 99;
+  z-index: 3;
 }
 
 .form-group > input {

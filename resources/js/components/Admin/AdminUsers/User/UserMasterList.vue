@@ -12,6 +12,7 @@
           ></search-app-one>
         </div>
         <div class="col-md-7 col-sm-3 text-right">
+          <a @click="reloadThis" class="btn btn-primary btn-flat btn-sm" title="reload"> <i class="fas fa-sync-alt"></i> </a>
         	<a @click="addData" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#FormModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>
@@ -25,7 +26,8 @@
             <th style="width: 20%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
             <th style="width: 20%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>  
             <th style="width: 5%;" scope="col" @click="sort('role_name')" class="sortable-title">Role</th>
-            <th style="width: 3%;" scope="col" @click="sort('phone')" class="sortable-title">Status</th>
+            <th style="width: 15%;" scope="col" ><small>Assign To employee </small></th>
+            <th style="width: 3%;" scope="col" >Status</th>
             <th style="width: 3%;" scope="col">Nofify</th>
             <th style="width: 8%;" scope="col">Date</th>
             <th style="width: 10%; text-align:right;" scope="col">Action</th>
@@ -41,13 +43,19 @@
             <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="user.id"></td>
             <td> 
                 <span v-if="user.avatar != null"> 
-                  <img :src="'../'+user.avatar" loading="lazy" height="20px" width="20px"> 
+                  <!-- <img :src="'../'+user.avatar" loading="lazy" height="20px" width="20px">  -->
+                  <img :src="user.avatar" loading="lazy" height="20px" width="20px"> 
                 </span>
                 <span v-if="user.avatar === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
             </td> 
             <td scope="col"> {{ user.name }} </td>
             <td > {{ user.email }} </td>          
-          	<td > {{ user['role']['name'] }} </td> 
+            <td > {{ user['role']['name'] }} </td> 
+          	<td >
+              <small v-if="user.employee_id != null">
+                {{ user.belongs_to_employee.emp_name }} 
+              </small> 
+            </td> 
             
             <td style="text-align:center;">
             	<span @click="inactiveUser(user.id)" v-show="user.status_id === 1" title="Active user, Click to Inactive"><i class="fas fa-user-check green pointer"></i></span>
@@ -77,7 +85,7 @@
           </tr>
 
           <tr v-show="users && !users.length">
-            <td colspan="9">
+            <td colspan="10">
               <div class="alert alert-warning text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
           </tr>
@@ -117,6 +125,7 @@
 
           // use for sortable
           currentSort:'name',
+          //currentSortDir:'desc',
           currentSortDir:'asc',
 
           //User for search
@@ -280,6 +289,10 @@
           this.$store.dispatch('usersAdminStore/fetchData', this.pagination.per_page);
           this.$Progress.finish();
           //console.log(this.pagination.total);
+        },
+
+        reloadThis(){
+          this.fetchData();
         },
 
         ViewDetails(){

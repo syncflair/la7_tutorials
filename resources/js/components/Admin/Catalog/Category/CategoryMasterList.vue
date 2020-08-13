@@ -13,6 +13,7 @@
 
         </div>
         <div class="col-6 text-right">
+          <a @click="reloadThis" class="btn btn-primary btn-flat btn-sm" title="reload"> <i class="fas fa-sync-alt"></i> </a>
         	<a @click="addCategory" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#CategoryModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>
@@ -234,6 +235,10 @@
           this.$store.dispatch('CategoryMasterStore/fetchData', this.pagination.per_page);
           this.$Progress.finish();
           //console.log(this.pagination.total);
+        },
+
+        reloadThis(){
+          this.fetchData();
         },
        
       

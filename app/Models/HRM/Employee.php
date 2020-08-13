@@ -35,4 +35,10 @@ class Employee extends Model
     public function belongsToJobTitle(){
         return $this->belongsTo(JobTitle::class, 'job_title_id');
     }
+
+     //Employee shop hasOne Users
+    public function hasOneUser()
+    {
+        return $this->hasOne('App\User', 'employee_id');
+    }
 }

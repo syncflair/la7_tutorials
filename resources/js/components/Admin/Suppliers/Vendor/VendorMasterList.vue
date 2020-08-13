@@ -11,6 +11,7 @@
           ></search-app-one>
         </div>
         <div class="col-md-7 col-sm-3 text-right">
+          <a @click="reloadThis" class="btn btn-primary btn-flat btn-sm" title="reload"> <i class="fas fa-sync-alt"></i> </a>
           <!-- <router-link :to="{name: 'VendorMasterForm', params: { id: id} }" class="btn btn-primary btn-flat btn-sm">  -->
 	        <router-link to="/spa/VendorMasterForm" class="btn btn-primary btn-flat btn-sm"> 
 	        	<i class="icon fas fa-plus"></i> Add New
@@ -297,6 +298,10 @@
           this.$store.dispatch('VendorMasterStore/fetchData', this.pagination.per_page);
           this.$Progress.finish();
           //console.log(this.pagination.total);
+        },
+
+        reloadThis(){
+          this.fetchData();
         },
 
         ViewDetails(){

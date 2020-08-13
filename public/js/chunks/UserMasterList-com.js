@@ -120,6 +120,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -132,6 +140,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       selectedCheckbox: [],
       // use for sortable
       currentSort: 'name',
+      //currentSortDir:'desc',
       currentSortDir: 'asc',
       //User for search
       filterBy: 'name',
@@ -303,6 +312,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$store.dispatch('usersAdminStore/fetchData', this.pagination.per_page);
       this.$Progress.finish(); //console.log(this.pagination.total);
     },
+    reloadThis: function reloadThis() {
+      this.fetchData();
+    },
     ViewDetails: function ViewDetails() {
       alert('ok');
     },
@@ -430,6 +442,16 @@ var render = function() {
             "a",
             {
               staticClass: "btn btn-primary btn-flat btn-sm",
+              attrs: { title: "reload" },
+              on: { click: _vm.reloadThis }
+            },
+            [_c("i", { staticClass: "fas fa-sync-alt" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary btn-flat btn-sm",
               attrs: { "data-toggle": "modal", "data-target": "#FormModal" },
               on: { click: _vm.addData }
             },
@@ -543,18 +565,11 @@ var render = function() {
                 [_vm._v("Role")]
               ),
               _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
               _c(
                 "th",
-                {
-                  staticClass: "sortable-title",
-                  staticStyle: { width: "3%" },
-                  attrs: { scope: "col" },
-                  on: {
-                    click: function($event) {
-                      return _vm.sort("phone")
-                    }
-                  }
-                },
+                { staticStyle: { width: "3%" }, attrs: { scope: "col" } },
                 [_vm._v("Status")]
               ),
               _vm._v(" "),
@@ -633,7 +648,7 @@ var render = function() {
                       ? _c("span", [
                           _c("img", {
                             attrs: {
-                              src: "../" + user.avatar,
+                              src: user.avatar,
                               loading: "lazy",
                               height: "20px",
                               width: "20px"
@@ -662,6 +677,18 @@ var render = function() {
                   _c("td", [_vm._v(" " + _vm._s(user.email) + " ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" " + _vm._s(user["role"]["name"]) + " ")]),
+                  _vm._v(" "),
+                  _c("td", [
+                    user.employee_id != null
+                      ? _c("small", [
+                          _vm._v(
+                            "\r\n                " +
+                              _vm._s(user.belongs_to_employee.emp_name) +
+                              " \r\n              "
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
                   _vm._v(" "),
                   _c("td", { staticStyle: { "text-align": "center" } }, [
                     _c(
@@ -841,7 +868,7 @@ var render = function() {
                     }
                   ]
                 },
-                [_vm._m(0)]
+                [_vm._m(1)]
               )
             ],
             2
@@ -874,7 +901,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "9" } }, [
+    return _c(
+      "th",
+      { staticStyle: { width: "15%" }, attrs: { scope: "col" } },
+      [_c("small", [_vm._v("Assign To employee ")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "10" } }, [
       _c(
         "div",
         {

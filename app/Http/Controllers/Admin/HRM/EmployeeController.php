@@ -14,6 +14,10 @@ use Illuminate\Support\Carbon;
 use App\Models\HRM\Employee;
 use App\Models\HRM\DepartmentEmployee;
 
+use Illuminate\Support\Facades\DB; //for database transection
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Config; //get constant velue without - \Config::get('constants.UserFliesPath'); app/config
+
 class EmployeeController extends Controller
 {
    
@@ -37,10 +41,10 @@ class EmployeeController extends Controller
        if(!empty($request->perPage)){
             $perPage = $request->perPage;
        }else{
-            $perPage = 10;
+            $perPage = 100;
        }
 
-       $data = Employee::with('Departments','belongsToBranch', 'belongsToJobTitle')->paginate($perPage);
+       $data = Employee::with('Departments','belongsToBranch', 'belongsToJobTitle','hasOneUser')->paginate($perPage);
        return response()->json($data);
     }
 
@@ -106,28 +110,33 @@ class EmployeeController extends Controller
         $data['emp_previous_job_history']=$request->supplier_address; 
         $data['emp_permanent_address']=$request->emp_permanent_address; 
 
-        $image = $request->avatar;
+        $image_base64 = $request->avatar;
 
-        if($image){
+        if($image_base64){
             //return $imageSize =getimagesize($image);
-            $imageExt = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            $imageExt = explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
             if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
                 return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
             }else{               
 
-                //new name generate from base64 file
-                $imageName = slug_generator($request->emp_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+               //new name generate from base64 file
+                $imageName = slug_generator($request->emp_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
+
                 //save image using intervention image
-                \Image::make($image)
-                    //->fit(200, 200)
-                    ->resize(150, 150) 
-                   // ->text('SHORBORAHO', 140, 190)
-                    ->save(storage_path('app/public/employees/').$imageName);
-                $data['avatar'] = 'storage/employees/'.$imageName;
+                $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
+                $image = str_replace($replace, '', $image_base64); 
+                $image = str_replace(' ', '+', $image);
+                $image = base64_decode($image); 
+                $resized_image = \Image::make($image)->resize(200, 120)
+                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                    ->insert(Config::get('constants.watermark'))->stream($imageExt, 100);                  
 
-                // $employee = Employee::create($data); 
+                Storage::disk('s3')->put('employees/'.$imageName, $resized_image ); //for s3
+                //Storage::disk('public')->put('employees/'.$imageName, $resized_image );//for local storage
 
-                // return response()->json(['success'=>'Employee inserted successfully ']);
+                //s3_url get from constants file 
+                $data['avatar'] = Config::get('constants.s3_url').'employees/'.$imageName; //for s3
+                // $data['avatar'] = 'storage/employees/'.$imageName; //for public storage
                 
             }//end image type check                         
         }else{
@@ -151,10 +160,20 @@ class EmployeeController extends Controller
           
         }
 
-        $employee = Employee::create($data); 
-        $employee->Departments()->attach($request->departments);
+        try{
+            DB::beginTransaction();
 
-        return response()->json(['success'=>'Employee inserted successfully ']);
+            $employee = Employee::create($data); 
+            $employee->Departments()->attach($request->departments);          
+
+            DB::commit();            
+            return response()->json(['success'=>'Employee inserted']);
+            
+        }catch(\Exception $e){
+            //logger($e->getMessage());
+            DB::rollBack();
+            return response()->json(['errors'=> $e->getMessage() ], 500); 
+        }
     }
 
     /**
@@ -233,52 +252,75 @@ class EmployeeController extends Controller
         $data['emp_previous_job_history']=$request->supplier_address; 
         $data['emp_permanent_address']=$request->emp_permanent_address; 
 
-        $image = $request->avatar;
+        $image_base64 = $request->avatar;
 
-        if( Str::length($image) > 150){ /*larvel helper function*/
+        if( Str::length($image_base64) > 150){ /*larvel helper function*/
             //return $imageSize =getimagesize($image);
-            $imageExt = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            $imageExt = explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
             if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
                 return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
             }else{
 
                  //query for existing image
-                $existing_image = Employee::select('avatar')->where('id', $id)->first();                   
-                if(!empty($existing_image->avatar)) {
-                    File::delete($existing_image->avatar); //delete file //use Illuminate\Support\Facades\File; at top
-                }//else{echo 'Empty';}  
+                $existing_image = Employee::select('avatar')->where('id', $id)->first();  
 
+                if($existing_image->avatar != null){            
+                    $parts = parse_url($existing_image->avatar); 
+                    $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+                    Storage::disk('s3')->delete($parts); //dd($parts);
+                }  
+
+                // if(!empty($existing_image->avatar)) {
+                //     File::delete($existing_image->avatar); //delete file //use Illuminate\Support\Facades\File; at top
+                // }//else{echo 'Empty';}  
 
                 //new name generate from base64 file
-                $imageName = slug_generator($request->emp_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                $imageName = slug_generator($request->emp_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
+                
                 //save image using intervention image
-                \Image::make($image)
-                    //->fit(200, 200)
-                    ->resize(250, 250)
-                   // ->text('SHORBORAHO', 140, 190)
-                    ->save(storage_path('app/public/employees/').$imageName);
-                $data['avatar'] = 'storage/employees/'.$imageName;
+                $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
+                $image = str_replace($replace, '', $image_base64); 
+                $image = str_replace(' ', '+', $image);
+                $image = base64_decode($image); 
+                $resized_image = \Image::make($image)->resize(200, 120)
+                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                    ->insert(Config::get('constants.watermark'))->stream($imageExt, 100);  
+                        
+                Storage::disk('s3')->put('employees/'.$imageName, $resized_image ); //for s3
+                //Storage::disk('public')->put('employees/'.$imageName, $resized_image );//for public storage
 
-                // $employee = Employee::whereId($request->id)->update($data);
-                // return response()->json(['success'=>'Employee Update successfully ']);
+                //s3_url get from constants file 
+                $data['avatar'] = Config::get('constants.s3_url').'employees/'.$imageName;
+                // $data['avatar'] = 'storage/employees/'.$imageName; //for public storage
+
+
+
             }//end image type check                         
         }else{
             $existing_image = Employee::select('avatar')->where('id', $request->id)->first();
             $data['avatar'] = $existing_image->avatar;
-
-            // $employee = Employee::whereId($request->id)->update($data); 
-            // $employee = Employee::find($request->id)->update($data);
-            // $abcd = Employee::find($request->id); 
-            // $abcd->Departments()->sync($request->departments);
             // return response()->json(['success'=>'Employee Update successfully Without Image']);
            // \Mail::to($employee->email)->send(new VerificationEmail($employee)); //for verification email send            
         }
 
 
-        $employee = Employee::find($request->id)->update($data);
-        $abcd = Employee::find($request->id); 
-        $abcd->Departments()->sync($request->departments); //update department_employee
-        return response()->json(['success'=>'Employee Update successfully']);
+        try{
+            DB::beginTransaction();
+
+            $employee = Employee::find($request->id)->update($data);
+            $abcd = Employee::find($request->id); 
+            $abcd->Departments()->sync($request->departments); //update department_employee            
+
+            DB::commit();            
+            return response()->json(['success'=>'Employee Update']);
+
+        }catch(\Exception $e){
+            //logger($e->getMessage());
+            DB::rollBack();
+            return response()->json(['errors'=> $e->getMessage() ], 500); 
+        }
+
+        
     }
 
 
@@ -291,15 +333,53 @@ class EmployeeController extends Controller
     public function destroy($id)
     {
         //query for existing image
-        $existing_image = Employee::select('avatar')->where('id', $id)->first();                   
-        if( File::exists($existing_image->avatar) ) {  
-            File::delete($existing_image->avatar); 
-            //delete file //use Illuminate\Support\Facades\File; at top
-        }
+        $existing_image = Employee::select('avatar')->where('id', $id)->first();   
+
+        if($existing_image->avatar != null){            
+            $parts = parse_url($existing_image->avatar); 
+            $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+            Storage::disk('s3')->delete($parts);
+            //dd($parts);
+        } 
+                        
+        // if( File::exists($existing_image->avatar) ) {  
+        //     File::delete($existing_image->avatar); 
+        //     //delete file //use Illuminate\Support\Facades\File; at top
+        // }
 
         $data = Employee::findOrFail($id)->delete();        
         if($data){
             return response()->json(['success'=> 'Record is successfully deleted']);
+        }else{
+            return response()->json(['errors'=> 'Something is wrong..']);
+        }//*/
+    }
+
+    //delect single image
+    public function DeleteImage($id){
+        //query for existing image
+        $existing_image = Employee::select('avatar')->where('id', $id)->first();                   
+         //for s3
+        if($existing_image->avatar != null){            
+            $parts = parse_url($existing_image->avatar); 
+            $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+            Storage::disk('s3')->delete($parts);
+            //dd($parts);
+        } 
+
+        //delete single image from public storage                                         
+        // if( File::exists($existing_image->avatar) ) {  
+        //     File::delete($existing_image->avatar); 
+        //     //delete file //use Illuminate\Support\Facades\File; at top
+        // }
+      
+        //update image field
+        $data = Employee::find($id);
+        $data->avatar = null; 
+        $data->save();
+
+        if($data){
+            return response()->json(['success'=> 'Image deleted']);
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
@@ -310,7 +390,7 @@ class EmployeeController extends Controller
         if(!empty($request->perPage)){
             $perPage = $request->perPage;
         }else{
-            $perPage = 50;
+            $perPage = 100;
         }
 
         $searchKey = $request->q;
@@ -353,5 +433,30 @@ class EmployeeController extends Controller
     }//end search
 
 
+     //search for auto complete (Request from Customer)
+    public function autoCompleteSearch(Request $request){
+        $searchKey = $request->q;
+
+        if(!empty($searchKey) ){
+            $searchResult = Employee::where(function($query) use ($searchKey){
+                $query->where('emp_name','LIKE','%'.$searchKey.'%')
+                        ->orWhere('emp_email','LIKE','%'.$searchKey.'%')
+                        ->orWhere('emp_phone','LIKE','%'.$searchKey.'%');
+            })->select('id', 'emp_name')->get();
+
+        }
+        //return $searchResult;
+        return response()->json($searchResult);
+    }
+
+    //selected Department (Request from Customer)
+    public function getSelectedEmployee(Request $request){
+        $searchKey = $request->q;
+        //$searchResult = Employee::whereIn('id', $searchKey)
+        $searchResult = Employee::where('id', $searchKey)
+                        ->select('id','emp_name')
+                        ->get(); 
+        return response()->json($searchResult);
+    }//end search
 
 }

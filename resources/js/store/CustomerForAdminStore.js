@@ -10,31 +10,20 @@ const CustomerForAdminStore ={
             per_page: 0,
         },
         autoCompleteData: {},
+
     }),/*end state*/
 
     getters: {
-        customers: state => {
-          return state.customers
-        },
-        pagination: state => {
-          return state.pagination
-        },
+        customers: state => { return state.customers },
+        pagination: state => { return state.pagination },
     }, /*end getters*/
 
 
     mutations: {
         //return data to state
-        FETCH_DATA(state, customers) {
-            return state.customers = customers;                        
-        },
-
-        FATCH_PAGINATION(state, pagination){
-            return state.pagination = pagination;  
-        },
-        
-        AUTO_COMPLETE_DATA(state, data){
-            return state.autoCompleteData = data;  
-        }
+        FETCH_DATA(state, customers) { return state.customers = customers; },
+        FATCH_PAGINATION(state, pagination){ return state.pagination = pagination; },        
+        AUTO_COMPLETE_DATA(state, data){ return state.autoCompleteData = data; },
 
     },/*end Mutations*/
 
@@ -84,6 +73,8 @@ const CustomerForAdminStore ={
                     //this.categories = response.data; // is an object... use when pagination                                         
             }).catch(() => { }) 
         },
+
+        
 
     } /*end actions*/
 

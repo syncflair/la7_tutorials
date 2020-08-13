@@ -122635,6 +122635,9 @@ var routes = [//export const routes = [
     name: 'EmployeeMasterList',
     component: function component() {
       return __webpack_require__.e(/*! import() | EmployeeMasterList */ "EmployeeMasterList").then(__webpack_require__.bind(null, /*! ./components/Admin/HRM/Employee/EmployeeMasterList.vue */ "./resources/js/components/Admin/HRM/Employee/EmployeeMasterList.vue"));
+    },
+    meta: {
+      title: 'Employee List'
     }
   }, //{ path: '/spa/EmployeeMasterList', name: 'EmployeeMasterList', component: () => import(/* webpackChunkName: "EmployeeMasterList" */ './components/Admin/HRM/Employee/EmployeeMasterList.vue'), },
   {
@@ -122642,6 +122645,9 @@ var routes = [//export const routes = [
     name: 'EmployeeMasterForm',
     component: function component() {
       return __webpack_require__.e(/*! import() | EmployeeMasterForm */ "EmployeeMasterForm").then(__webpack_require__.bind(null, /*! ./components/Admin/HRM/Employee/EmployeeMasterForm.vue */ "./resources/js/components/Admin/HRM/Employee/EmployeeMasterForm.vue"));
+    },
+    meta: {
+      title: 'Employee Form'
     }
   } // { path: '*', redirect: '/spa/EmployeeMasterList' }
   ]
@@ -124518,7 +124524,10 @@ var EmployeeMasterStore = {
         current_page: 1,
         per_page: 0
       },
-      autoCompleteData: {}
+      autoCompleteData: {},
+      //for brand shop autocomplete
+      autoSearchDepartments: {},
+      selectedDepartmentList: []
     };
   },
 
@@ -124536,6 +124545,12 @@ var EmployeeMasterStore = {
     },
     AUTO_COMPLETE_DATA: function AUTO_COMPLETE_DATA(state, data) {
       return state.autoCompleteData = data;
+    },
+    AUTO_COMPLETE_DATA_FOR_DEPARTMENT: function AUTO_COMPLETE_DATA_FOR_DEPARTMENT(state, data) {
+      return state.autoSearchDepartments = data;
+    },
+    SELECTED_DEPARTMENT: function SELECTED_DEPARTMENT(state, data) {
+      return state.selectedDepartmentList = data;
     }
   },
 
@@ -124545,7 +124560,7 @@ var EmployeeMasterStore = {
       var perPageVelue;
 
       if (!payload) {
-        perPageVelue = 10;
+        perPageVelue = 100;
       } else {
         perPageVelue = payload;
       }
@@ -124576,6 +124591,21 @@ var EmployeeMasterStore = {
       axios.get('/spa/searchEmployeeData?&q=' + query) //axios.get('/spa/searchEmployeeData?q='+query)
       .then(function (response) {
         context.commit('AUTO_COMPLETE_DATA', response.data.data); //this.categories = response.data; // is an object... use when pagination                                         
+      })["catch"](function () {});
+    },
+    AutoCompleteSearchForDataDepartment: function AutoCompleteSearchForDataDepartment(context, payload) {
+      var query = payload;
+      axios.get('/spa/AutoCompleteDepartmentData?&q=' + query).then(function (response) {
+        context.commit('AUTO_COMPLETE_DATA_FOR_DEPARTMENT', response.data);
+      })["catch"](function () {});
+    },
+    //For selected Department List
+    fetchSelectedDepartmentList: function fetchSelectedDepartmentList(context, payload) {
+      //use axios.post instead of axios.get , becouse is contaion array  
+      axios.post('/spa/Department-getSelectedDepartmentList/', {
+        q: payload
+      }).then(function (response) {
+        context.commit('SELECTED_DEPARTMENT', response.data);
       })["catch"](function () {});
     }
   }
@@ -125503,7 +125533,10 @@ var usersAdminStore = {
         current_page: 1,
         per_page: 0
       },
-      autoCompleteData: {}
+      autoCompleteData: {},
+      //for brand shop autocomplete
+      autoSearchEmployee: {},
+      selectedEmployee: []
     };
   },
 
@@ -125527,6 +125560,12 @@ var usersAdminStore = {
     },
     AUTO_COMPLETE_DATA: function AUTO_COMPLETE_DATA(state, data) {
       return state.autoCompleteData = data;
+    },
+    AUTO_COMPLETE_DATA_FOR_EMPLOYEE: function AUTO_COMPLETE_DATA_FOR_EMPLOYEE(state, data) {
+      return state.autoSearchEmployee = data;
+    },
+    SELECTED_EMPLOYEE: function SELECTED_EMPLOYEE(state, data) {
+      return state.selectedEmployee = data;
     }
   },
 
@@ -125536,7 +125575,7 @@ var usersAdminStore = {
       var perPageVelue;
 
       if (!payload) {
-        perPageVelue = 10;
+        perPageVelue = 100;
       } else {
         perPageVelue = payload;
       }
@@ -125567,6 +125606,21 @@ var usersAdminStore = {
       axios.get('/spa/searchUsersData?&q=' + query) //axios.get('/spa/searchUsersData?q='+query)
       .then(function (response) {
         context.commit('AUTO_COMPLETE_DATA', response.data.data); //this.categories = response.data; // is an object... use when pagination                                         
+      })["catch"](function () {});
+    },
+    AutoCompleteSearchForDataEmployee: function AutoCompleteSearchForDataEmployee(context, payload) {
+      var query = payload;
+      axios.get('/spa/AutoCompleteEmployeeData?&q=' + query).then(function (response) {
+        context.commit('AUTO_COMPLETE_DATA_FOR_EMPLOYEE', response.data);
+      })["catch"](function () {});
+    },
+    //For selected Brand Shop
+    fetchSelectedEmployee: function fetchSelectedEmployee(context, payload) {
+      //use axios.post instead of axios.get , becouse is contaion array  
+      axios.post('/spa/getSelectedEmployee/', {
+        q: payload
+      }).then(function (response) {
+        context.commit('SELECTED_EMPLOYEE', response.data);
       })["catch"](function () {});
     }
   }

@@ -117,8 +117,8 @@ class SupplierController extends Controller
                 $image = str_replace(' ', '+', $image);
                 $image = base64_decode($image); 
                 $resized_image = \Image::make($image)->resize(200, 120)
-                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
-                    ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);     
+                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })    
+                    ->insert(Config::get('constants.watermark'))->stream($imageExt, 100);     
                             
                 Storage::disk('s3')->put('suppliers/'.$imageName, $resized_image ); //for s3
                 //Storage::disk('public')->put('suppliers/'.$imageName, $resized_image );//for public storage
@@ -243,7 +243,7 @@ class SupplierController extends Controller
                 $image = base64_decode($image); 
                 $resized_image = \Image::make($image)->resize(200, 120)
                     //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
-                    ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);     
+                    ->insert(Config::get('constants.watermark'))->stream($imageExt, 100);      
                             
                 Storage::disk('s3')->put('suppliers/'.$imageName, $resized_image ); //for s3
                 //Storage::disk('public')->put('suppliers/'.$imageName, $resized_image );//for public storage

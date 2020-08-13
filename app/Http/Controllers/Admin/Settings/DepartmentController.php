@@ -168,4 +168,30 @@ class DepartmentController extends Controller
 
         return response()->json($searchResult);
     }
+
+
+     //search for auto complete (Request from Employee)
+    public function autoCompleteSearch(Request $request){
+        $searchKey = $request->q;
+
+        if(!empty($searchKey) ){
+            $searchResult = Department::where(function($query) use ($searchKey){
+                $query->where('dept_name','LIKE','%'.$searchKey.'%')
+                        ->orWhere('dept_desc','LIKE','%'.$searchKey.'%');
+            })->select('id', 'dept_name')->get();
+
+        }
+        //return $searchResult;
+        return response()->json($searchResult);
+    }
+
+    //selected Category list for multiselect option
+    public function getSelectedDepartmentList(Request $request){
+        $searchKey = $request->q;
+        $searchResult = Department::whereIn('id', $searchKey)
+                        ->select('id','dept_name')
+                        ->get(); //Model::whereIn('id', [1, 2, 3])->get();
+       // $searchResult = Supplier::findMany([1, 2, 3]); //Model::findMany([1, 2, 3]);
+        return response()->json($searchResult);
+    }//end search
 }

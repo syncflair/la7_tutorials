@@ -231,7 +231,7 @@ body{
 /*Bootstrap Table */
 .table{border:1px solid #dee2e6 !important;}
 .table > thead{ } /*For background*/
-.table thead th{border-bottom:1px solid #dee2e6 !important; color: #007bff;}
+.table thead th{border-bottom:1px solid #dee2e6 !important; color: #007bff; font-weight:normal;}
 .table th, .table td{border-top:unset !important; border-left: 1px solid #dee2e6;}
 //.table th, .table td{border-top:unset !important; border-left:1px solid #dee2e6 !important;}
 //.table th:first-child, .table td:first-child{border-left:unset !important;}
@@ -405,7 +405,7 @@ body{
         width: 100%;
         left:0;
         right: 0;
-        z-index:3;
+        z-index:9;
         background: #ffffff;
         border: 1px solid #dee2e6;
         //display: flex;
@@ -474,10 +474,11 @@ body{
 
 
 /*style Form Title*/    
-    .form-group > label{margin: 0px 10px !important; background: #ffffff !important; padding: 0px 2px 0px 2px !important; z-index:99;}
+    .form-group > label{margin: 0px 10px !important; background: #ffffff !important; padding: 0px 2px 0px 2px !important; z-index:3;}
     .form-group > input{ margin-top: -12px !important; }
     .form-group > select{ margin-top: -12px !important; }
     .form-group > .multi-select-app-one{ margin-top: -12px !important; }
+    //.form-group > .single-select-app-one{ margin-top: -12px !important; }
     .form-group > textarea{ margin-top: -12px !important; overflow-y: scroll; }
 /*end style Form Title*/
 

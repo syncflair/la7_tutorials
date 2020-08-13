@@ -143,7 +143,7 @@ class ProductController extends Controller
                     $image = base64_decode($image); 
                     $resized_image = \Image::make($image)->resize(400, 520)
                         //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
-                        ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);                 
+                        ->insert(Config::get('constants.watermark'))->stream($imageExt, 100);                  
 
                     Storage::disk('s3')->put('products/'.$imageName, $resized_image );// s3
                     //Storage::disk('public')->put('products/'.$imageName, $resized_image );//storage
@@ -262,7 +262,7 @@ class ProductController extends Controller
                     $image = base64_decode($image); 
                     $resized_image = \Image::make($image)->resize(400, 520)
                         //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
-                        ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);                 
+                        ->insert(Config::get('constants.watermark'))->stream($imageExt, 100);                  
 
                     Storage::disk('s3')->put('products/'.$imageName, $resized_image );// s3
                     //Storage::disk('public')->put('products/'.$imageName, $resized_image );//storage

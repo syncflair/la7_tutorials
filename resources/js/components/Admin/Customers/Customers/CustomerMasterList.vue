@@ -12,6 +12,7 @@
           ></search-app-one>
         </div>
         <div class="col-md-7 col-sm-3 text-right">
+          <a @click="reloadThis" class="btn btn-primary btn-flat btn-sm" title="reload"> <i class="fas fa-sync-alt"></i> </a>
         	<a @click="addCustomer" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#customerModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>
@@ -295,6 +296,10 @@
           this.$store.dispatch('CustomerForAdminStore/fetchData', this.pagination.per_page);
           this.$Progress.finish();
           //console.log(this.pagination.total);
+        },
+
+        reloadThis(){
+          this.fetchData();
         },
 
         ViewDetails(){

@@ -690,7 +690,10 @@ var render = function() {
                               }
                             ]
                           },
-                          [_vm._v("Save")]
+                          [
+                            _c("i", { staticClass: "fas fa-save" }),
+                            _vm._v(" Save")
+                          ]
                         ),
                         _vm._v(" "),
                         _c(
@@ -705,7 +708,10 @@ var render = function() {
                               }
                             ]
                           },
-                          [_vm._v("Update")]
+                          [
+                            _c("i", { staticClass: "far fa-edit" }),
+                            _vm._v(" Update")
+                          ]
                         )
                       ]
                     )

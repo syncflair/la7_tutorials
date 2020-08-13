@@ -99,10 +99,12 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     
     //Admin Users Role Permission Control Route
     Route::resource('spa/Users-Info', 'Admin\AuthManagement\UserController');
+    Route::post('spa/Users-Info-DeleteImage/{id}', 'Admin\AuthManagement\UserController@DeleteImage');
     Route::get('spa/searchUsersData', 'Admin\AuthManagement\UserController@search'); //search
     Route::post('spa/Users-Info/verify-by-admin/{id}', 'Admin\AuthManagement\UserController@verify_by_admin');
     Route::post('spa/Users-Info/active-user/{id}', 'Admin\AuthManagement\UserController@active_user');
     Route::post('spa/Users-Info/inactive-user/{id}', 'Admin\AuthManagement\UserController@inactive_user');
+
     Route::resource('spa/Roles-Info', 'Admin\AuthManagement\RoleController',
       ['except'=>['create','show','edit'] ]);
     Route::get('spa/Role-Info/GetRoles', 'Admin\AuthManagement\RoleController@GetRoles');//commonStoreForAll store
@@ -143,7 +145,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 
 
     Route::post('spa/getSelectedVendor/', 'Admin\Supplier\VendorController@getSelectedVendor');
-    Route::get('spa/AutoCompleteVendorData', 'Admin\Supplier\VendorController@autoCompleteSearch'); //search
+    Route::get('spa/AutoCompleteVendorData', 'Admin\Supplier\VendorController@autoCompleteSearch'); //Auto Complete
     Route::post('spa/Vendor-Info/change-notify/{id}/{notifyValue}', 'Admin\Supplier\VendorController@ChangeNotify');
     Route::post('spa/Vendor-Info/active-vendor/{id}', 'Admin\Supplier\VendorController@activeVendor');
     Route::post('spa/Vendor-Info/inactive-vendor/{id}', 'Admin\Supplier\VendorController@inactiveVendor');
@@ -162,7 +164,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::post('spa/Product-getProductList/', 'Admin\Catalog\ProductController@selectedProductList');
     Route::get('spa/AutoCompleteProductData', 'Admin\Catalog\ProductController@AutoCompleteProductForStore'); //search 
     Route::post('spa/Product-DeleteImage/{id}', 'Admin\Catalog\ProductController@DeleteImage');
-    Route::get('spa/searchProductData', 'Admin\Catalog\ProductController@search'); //search      
+    Route::get('spa/searchProductData', 'Admin\Catalog\ProductController@search'); //search          
     Route::resource('spa/Product-Info', 'Admin\Catalog\ProductController', 
         ['except'=>['create','edit','show'] ]);
 
@@ -192,7 +194,10 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
       ['except'=>['create','show','edit'] ]);
 
     //HRM
+    Route::post('spa/getSelectedEmployee/', 'Admin\HRM\EmployeeController@getSelectedEmployee');
+    Route::get('spa/AutoCompleteEmployeeData', 'Admin\HRM\EmployeeController@autoCompleteSearch'); //Auto Complete
     Route::get('spa/searchEmployeeData', 'Admin\HRM\EmployeeController@search'); //search
+    Route::post('spa/Employee-Info-DeleteImage/{id}', 'Admin\HRM\EmployeeController@DeleteImage');
     Route::resource('spa/Employee-Info', 'Admin\HRM\EmployeeController', 
       ['except'=>['create','show','edit'] ]);
     Route::get('spa/JobTitle-Info/GetJobTitles', 'Admin\HRM\JobTitleController@GetJobTitles'); //for commonStoreForAll store
@@ -248,6 +253,9 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::get('spa/DistrictZone-Info/GetDistrictZone', 'Admin\Settings\DistrictZoneController@GetDistrictZone');//commonStoreForAll store
     Route::resource('spa/DistrictZone-Info', 'Admin\Settings\DistrictZoneController', 
       ['except'=>['create','show','edit'] ]);
+
+    Route::post('spa/Department-getSelectedDepartmentList/', 'Admin\Settings\DepartmentController@getSelectedDepartmentList');
+    Route::get('spa/AutoCompleteDepartmentData', 'Admin\Settings\DepartmentController@autoCompleteSearch'); //Auto Complete
     Route::get('spa/searchDepartmentData', 'Admin\Settings\DepartmentController@autoSearch'); //search
     Route::get('spa/Department-Info/getDetartments', 'Admin\Settings\DepartmentController@getDetartments');//commonStoreForAll store
     Route::resource('spa/Department-Info', 'Admin\Settings\DepartmentController');

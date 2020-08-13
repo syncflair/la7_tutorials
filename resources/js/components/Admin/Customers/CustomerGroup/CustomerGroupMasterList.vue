@@ -4,6 +4,7 @@
       <div class="row">
         <div class="col-6">Gustomer Groups</div>
         <div class="col-6 text-right">
+          <a @click="reloadThis" class="btn btn-primary btn-flat btn-sm" title="reload"> <i class="fas fa-sync-alt"></i> </a>
         	<a @click="addData" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#formModal"> 
             <i class="icon fas fa-plus"></i> Add New</a>
         </div>
@@ -106,18 +107,22 @@
 	            this.$Progress.fail(); 
 	            toastr.warning('Something is wrong!');
 	          })
-	    },
+  	    },
 
-	    addData(){
-	    	FireEvent.$emit('addData');
-	    },
+        reloadThis(){
+          this.fetchData();
+        },
 
-	    editData(data){
-	    	//alert(data.id);
-	    	FireEvent.$emit('editData', data);
-	    },
+  	    addData(){
+  	    	FireEvent.$emit('addData');
+  	    },
 
-	    DeleteData(id){
+  	    editData(data){
+  	    	//alert(data.id);
+  	    	FireEvent.$emit('editData', data);
+  	    },
+
+	      DeleteData(id){
 	        Swal.fire({
 	            title: 'Are you sure to Delete?',
 	            text: "You won't be able to revert this!",

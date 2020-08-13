@@ -85,6 +85,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CustomerGroupMasterList",
   data: function data() {
@@ -112,6 +113,9 @@ __webpack_require__.r(__webpack_exports__);
 
         toastr.warning('Something is wrong!');
       });
+    },
+    reloadThis: function reloadThis() {
+      this.fetchData();
     },
     addData: function addData() {
       FireEvent.$emit('addData');
@@ -190,6 +194,16 @@ var render = function() {
         _c("div", { staticClass: "col-6" }, [_vm._v("Gustomer Groups")]),
         _vm._v(" "),
         _c("div", { staticClass: "col-6 text-right" }, [
+          _c(
+            "a",
+            {
+              staticClass: "btn btn-primary btn-flat btn-sm",
+              attrs: { title: "reload" },
+              on: { click: _vm.reloadThis }
+            },
+            [_c("i", { staticClass: "fas fa-sync-alt" })]
+          ),
+          _vm._v(" "),
           _c(
             "a",
             {

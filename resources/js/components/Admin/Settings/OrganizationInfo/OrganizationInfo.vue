@@ -167,7 +167,7 @@
                         
 
                         <div class="form-group mt-2">
-                          <button type="submit" class="btn btn-primary btn-flat btn-sm">Update</button>
+                          <button type="submit" class="btn btn-primary btn-flat btn-sm"> <i class="far fa-edit"></i> Update</button>
 
                         </div>
 

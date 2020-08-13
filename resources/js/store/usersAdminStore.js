@@ -10,6 +10,11 @@ const usersAdminStore ={
             per_page: 0,
         },
         autoCompleteData: {},
+
+        //for brand shop autocomplete
+        autoSearchEmployee: {},
+        selectedEmployee:[],
+
     }),/*end state*/
 
     getters: {
@@ -24,17 +29,12 @@ const usersAdminStore ={
 
     mutations: {
         //return data to state
-        FETCH_DATA(state, users) {
-            return state.users = users;                        
-        },
+        FETCH_DATA(state, users) { return state.users = users; },
+        FATCH_PAGINATION(state, pagination){ return state.pagination = pagination; },        
+        AUTO_COMPLETE_DATA(state, data){ return state.autoCompleteData = data; },
 
-        FATCH_PAGINATION(state, pagination){
-            return state.pagination = pagination;  
-        },
-        
-        AUTO_COMPLETE_DATA(state, data){
-            return state.autoCompleteData = data;  
-        }
+        AUTO_COMPLETE_DATA_FOR_EMPLOYEE(state, data){ return state.autoSearchEmployee = data; },
+        SELECTED_EMPLOYEE(state, data){ return state.selectedEmployee = data; },
 
     },/*end Mutations*/
 
@@ -43,7 +43,7 @@ const usersAdminStore ={
         fetchData(context, payload){
             let perPageVelue ;
             if(!payload){
-                perPageVelue = 10
+                perPageVelue = 100
             }else{
                 perPageVelue = payload
             }
@@ -82,6 +82,23 @@ const usersAdminStore ={
             .then( ( response ) => {
                     context.commit('AUTO_COMPLETE_DATA', response.data.data);
                     //this.categories = response.data; // is an object... use when pagination                                         
+            }).catch(() => { }) 
+        },
+
+        AutoCompleteSearchForDataEmployee(context, payload){  
+          let query = payload;  
+          axios.get('/spa/AutoCompleteEmployeeData?&q='+ query)
+          .then( ( response ) => {
+              context.commit('AUTO_COMPLETE_DATA_FOR_EMPLOYEE', response.data);                                        
+          }).catch(() => { }) 
+        },
+
+        //For selected Brand Shop
+        fetchSelectedEmployee(context, payload){  
+            //use axios.post instead of axios.get , becouse is contaion array  
+            axios.post('/spa/getSelectedEmployee/', {q: payload})
+            .then( ( response ) => {
+                    context.commit('SELECTED_EMPLOYEE', response.data);                                       
             }).catch(() => { }) 
         },
 

@@ -11,6 +11,7 @@
           ></search-app-one>
         </div>
         <div class="col-md-7 col-sm-3 text-right">
+          <a @click="reloadThis" class="btn btn-primary btn-flat btn-sm" title="reload"> <i class="fas fa-sync-alt"></i> </a>
           <!-- <router-link :to="{name: 'EmployeeMasterForm', params: { id: id} }" class="btn btn-primary btn-flat btn-sm">  -->
 	        <router-link to="/spa/EmployeeMasterForm" class="btn btn-primary btn-flat btn-sm"> 
 	        	<i class="icon fas fa-plus"></i> Add New
@@ -30,7 +31,7 @@
             <th style="width: 7%;" scope="col" @click="sort('emp_phone')" class="sortable-title">Phone</th>
             <th style="width: 6%;" >Branch</th>
             <th style="width: 10%;" scope="col">Job Title</th>
-            <th style="width: 5%;" scope="col">Assign TO</th>
+            <th style="width: 15%;" scope="col"> <small>Assign to User</small></th>
             <th style="width: 10%;" scope="col">Dept</th>
             <th style="width: 3%;" scope="col">Status</th>           
             <!-- <th style="width: 3%;" scope="col">Verify</th>            -->
@@ -46,7 +47,8 @@
 
             <td> 
                 <span v-if="employee.avatar != null"> 
-                  <img :src="'../'+employee.avatar" loading="lazy" height="20px" width="20px"> 
+                  <!-- <img :src="'../'+employee.avatar" loading="lazy" height="20px" width="20px">  -->
+                  <img :src="employee.avatar" loading="lazy" height="20px" width="20px"> 
                 </span>
                 <span v-if="employee.avatar === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
             </td> 
@@ -59,10 +61,15 @@
             <td > 
               <small>{{ employee['belongs_to_job_title']['job_title_name'] }} </small>
             </td> 
-            <td > ok </td> 
+            <td > 
+              <small v-if="employee.has_one_user != null">
+                  {{employee.has_one_user.name}}
+              </small>
+            </td> 
 
             <td > <small v-show="employee.departments != null" v-for="dept in employee.departments"> 
-                        <span class="btn btn-primary btn-flat btn-sm mb-1">{{dept.dept_name}} </span>
+                        <!-- <span class="btn btn-primary btn-flat btn-sm mb-1">{{dept.dept_name}} </span> -->
+                      {{ dept.dept_name }}, 
                   </small>
             </td>
             <!-- <td > <small>{{ employee.emp_hire_date | formatDate }}</small> </td> -->
@@ -321,6 +328,10 @@
           this.$store.dispatch('EmployeeMasterStore/fetchData', this.pagination.per_page);
           this.$Progress.finish();
           //console.log(this.pagination.total);
+        },
+
+        reloadThis(){
+          this.fetchData();
         },
 
         ViewDetails(){

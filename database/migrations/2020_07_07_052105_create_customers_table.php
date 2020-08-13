@@ -25,7 +25,7 @@ class CreateCustomersTable extends Migration
             $table->string('password');  
            // $table->enum('customer_group', ['Default', 'Wholesale']); 
             $table->unsignedInteger('customer_group_id'); 
-            $table->unsignedInteger('customer_type_id')->default(1); 
+            $table->unsignedInteger('customer_type_id')->default(1);             
             $table->unsignedInteger('status_id')->default(4); //4 Not Verified
             $table->boolean('enable_notify')->default(false);
             $table->string('avatar')->nullable();            

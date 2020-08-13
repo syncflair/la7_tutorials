@@ -22,7 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'status_id','avatar'
+        'name', 'email', 'password', 'role_id', 'status_id','employee_id','avatar'
     ];
 
     /**
@@ -56,9 +56,15 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     //A User Has Many Products (hasMany())
-    public function product(){
+    public function haseManyProduct(){
         //return $this->hasMany('App\Models\Product');
         return $this->hasMany(Models\Product::class);  
+    }
+
+    //User belongs to Employee
+    public function belongsToEmployee(){
+        return $this->belongsTo('App\Models\HRM\Employee', 'employee_id')->select('id','emp_name');
+        //return $this->belongsTo(Models\Supplier\Vendor::class, 'vendor_id');
     }
 
 

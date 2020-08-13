@@ -305,6 +305,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -313,6 +318,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
       ShowOnChangeImage: null,
+      deleteImageIcon: false,
+      //Delete Image icon if image exist
       editMode: false,
       //Use this for add edit using the same form   
       genders: [{
@@ -353,7 +360,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'jobTitles', 'branches', 'allDepertments', 'autoSearchDepartments'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'jobTitles', 'branches', 'allDepertments', 'autoSearchDepartments']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('EmployeeMasterStore', ['selectedDepartmentList', 'autoSearchDepartments'])),
   methods: {
     //Make image as base64 
     onImageChange: function onImageChange(e) {
@@ -459,6 +466,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         toastr.warning('Something is wrong!');
       });
     },
+    deleteImage: function deleteImage(id) {
+      var _this4 = this;
+
+      this.$Progress.start(); //using progress-bar package        
+      //console.log(this.form.has_many_image);
+
+      axios.post('/spa/Employee-Info-DeleteImage/' + id).then(function (_ref3) {
+        var data = _ref3.data;
+        // this.ShowOnChangeImage = null;
+        _this4.deleteImageIcon = false;
+        _this4.form.avatar = null;
+
+        _this4.$Progress.finish();
+
+        toastr.success(data.success);
+      })["catch"](function () {
+        _this4.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
+    },
     fillForm: function fillForm() {
       if (this.$route.params.data != null) {
         this.editMode = true;
@@ -469,17 +497,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (this.$route.params.data.departments.length === 0) {
           this.form.departments = [];
         } else {
-          // this.form.departments = Object.values(this.$route.params.data.departments).filter(
+          //return only department id from depertment list 
           this.form.departments = Object.values(this.$route.params.data.departments).map(function (item) {
             //return item['id'];
             return item.id;
           });
         }
-      }
+
+        if (this.$route.params.data.avatar != null) {
+          this.deleteImageIcon = true;
+        }
+      } //get department list based on form.departments array ids
+
+
+      this.$store.dispatch('EmployeeMasterStore/fetchSelectedDepartmentList', this.form.departments);
+    },
+    AutoCompleteSearchForDataDepartment: function AutoCompleteSearchForDataDepartment(data) {
+      this.$store.dispatch('EmployeeMasterStore/AutoCompleteSearchForDataDepartment', data);
+    },
+    getSelectedDataByIdsForDepartment: function getSelectedDataByIdsForDepartment(data) {
+      this.$store.dispatch('EmployeeMasterStore/fetchSelectedDepartmentList', this.form.departments);
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.fillForm();
     this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
@@ -492,7 +533,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //call from multi-select-app-one.vue
 
     FireEvent.$on('AutoCompleteSearchForData', function (data) {
-      _this4.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data);
+      _this5.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data);
     }); //console.log(this.form);
   }
 }); //end export Default
@@ -545,7 +586,7 @@ var render = function() {
                 }
               ]
             },
-            [_vm._v("Update Employee")]
+            [_vm._v("Update - " + _vm._s(_vm.form.emp_name))]
           )
         ]),
         _vm._v(" "),
@@ -561,7 +602,7 @@ var render = function() {
               },
               [
                 _c("i", { staticClass: "fas fa-user-tie" }),
-                _vm._v(" Employees\r\n        \t")
+                _vm._v(" Employee List\r\n        \t")
               ]
             )
           ],
@@ -931,11 +972,17 @@ var render = function() {
                           _vm._v(" "),
                           _c("multi-select-app-one", {
                             attrs: {
-                              options: _vm.allDepertments,
+                              options: _vm.selectedDepartmentList,
                               autoSearchOptions: _vm.autoSearchDepartments,
                               filterBy: _vm.filterBy,
                               "place-holder": _vm.placeHolder,
                               "value-property": _vm.valueProperty
+                            },
+                            on: {
+                              getAllDataListByIds:
+                                _vm.getSelectedDataByIdsForDepartment,
+                              AutoCompleteSearchForData:
+                                _vm.AutoCompleteSearchForDataDepartment
                             },
                             model: {
                               value: _vm.form.departments,
@@ -1007,7 +1054,27 @@ var render = function() {
                                     width: "150px",
                                     height: "130px"
                                   },
-                                  attrs: { src: "../" + _vm.form.avatar }
+                                  attrs: { src: _vm.form.avatar }
+                                })
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.deleteImageIcon
+                              ? _c("i", {
+                                  staticClass: "far fa-times-circle",
+                                  staticStyle: {
+                                    cursor: "pointer",
+                                    background: "#fff",
+                                    padding: "4px 2px 2px 2px",
+                                    color: "red",
+                                    "border-radius": "10px",
+                                    "margin-left": "-15px"
+                                  },
+                                  attrs: { title: "click to Delete" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.deleteImage(_vm.form.id)
+                                    }
+                                  }
                                 })
                               : _vm._e()
                           ])
@@ -1747,7 +1814,7 @@ var render = function() {
                         }
                       ]
                     },
-                    [_vm._v("Save")]
+                    [_c("i", { staticClass: "fas fa-save" }), _vm._v(" Save")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -1762,7 +1829,7 @@ var render = function() {
                         }
                       ]
                     },
-                    [_vm._v("Update")]
+                    [_c("i", { staticClass: "far fa-edit" }), _vm._v(" Update")]
                   )
                 ]
               )

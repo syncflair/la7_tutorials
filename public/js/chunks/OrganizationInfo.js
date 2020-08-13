@@ -1159,7 +1159,7 @@ var staticRenderFns = [
           staticClass: "btn btn-primary btn-flat btn-sm",
           attrs: { type: "submit" }
         },
-        [_vm._v("Update")]
+        [_c("i", { staticClass: "far fa-edit" }), _vm._v(" Update")]
       )
     ])
   }

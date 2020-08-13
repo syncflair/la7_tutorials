@@ -135,8 +135,8 @@
 	      <div class="modal-footer">
 	        <button @click="ClearForm()" type="button" class="btn btn-danger btn-flat btn-sm close-form" data-dismiss="modal">Close</button>
 	        <button type="submit" class="btn btn-primary btn-flat btn-sm">
-	        	<span v-show="!editMode">Save</span>
-	        	<span v-show="editMode">Update </span>
+	        	<span v-show="!editMode"> <i class="fas fa-save"></i> Save</span>
+	        	<span v-show="editMode"> <i class="far fa-edit"></i> Update</span>
 	    	</button>
 	      </div><!--modal-footer-->
   	  </form><!-- </form> -->

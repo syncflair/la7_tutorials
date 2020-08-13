@@ -96,7 +96,7 @@ class BrandController extends Controller
                 $image = base64_decode($image); 
                 $resized_image = \Image::make($image)->resize(200, 120)
                     //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
-                    ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100);                  
+                    ->insert(Config::get('constants.watermark'))->stream($imageExt, 100);                  
 
                 Storage::disk('s3')->put('brand/'.$imageName, $resized_image ); //for s3
                 //Storage::disk('public')->put('brand/'.$imageName, $resized_image );//for local storage
@@ -104,7 +104,6 @@ class BrandController extends Controller
                 //s3_url get from constants file 
                 $data['brand_img'] = Config::get('constants.s3_url').'brand/'.$imageName; //for s3
                 // $data['brand_img'] = 'storage/brand/'.$imageName; //for public storage
-
 
             }//end image type check
         }else{
@@ -176,6 +175,7 @@ class BrandController extends Controller
 
                 //query for existing image
                 $existing_image = Brand::select('brand_img')->where('id', $id)->first(); 
+
                 if($existing_image->brand_img != null){            
                     $parts = parse_url($existing_image->brand_img); 
                     $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
@@ -185,8 +185,6 @@ class BrandController extends Controller
                 // if(!empty($existing_image->brand_img)) {
                 //     File::delete($existing_image->brand_img); //delete file //use Illuminate\Support\Facades\File; at top
                 // }//else{echo 'Empty';}  
-
-
 
                 //new name generate from base64 file
                 $imageName = slug_generator($request->brand_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
@@ -198,7 +196,7 @@ class BrandController extends Controller
                 $image = base64_decode($image); 
                 $resized_image = \Image::make($image)->resize(200, 120)
                     //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
-                    ->insert('FilesStorage/CommonFiles/favicon.png')->stream($imageExt, 100); 
+                    ->insert(Config::get('constants.watermark'))->stream($imageExt, 100);  
                         
                 Storage::disk('s3')->put('brand/'.$imageName, $resized_image ); //for s3
                 //Storage::disk('public')->put('brand/'.$imageName, $resized_image );//for public storage
@@ -206,8 +204,6 @@ class BrandController extends Controller
                 //s3_url get from constants file 
                 $data['brand_img'] = Config::get('constants.s3_url').'brand/'.$imageName;
                 // $data['brand_img'] = 'storage/brand/'.$imageName; //for public storage
-
-
 
             }//end image type check
         }else{

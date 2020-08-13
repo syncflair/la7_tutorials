@@ -4,11 +4,11 @@
       <div class="row">
         <div class="col-md-5 col-sm-9">
         	<span v-show="!editMode">New Employee</span>
-        	<span v-show="editMode">Update Employee</span>
+        	<span v-show="editMode">Update - {{form.emp_name}}</span>
         </div>
         <div class="col-md-7 col-sm-3 text-right">
         	<router-link to="/spa/EmployeeMaster" class="btn btn-primary btn-flat btn-sm"> 
-        		<i class="fas fa-user-tie"></i> Employees
+        		<i class="fas fa-user-tie"></i> Employee List
         	</router-link>
         </div>
       </div>
@@ -83,13 +83,15 @@
       								/> -->
 
       								<multi-select-app-one
-      									:options="allDepertments"
-      									:autoSearchOptions="autoSearchDepartments" 
-      									:filterBy="filterBy"
-      									:place-holder="placeHolder"
-      									:value-property="valueProperty"
-      									v-model="form.departments" 
-      								/>
+                        :options="selectedDepartmentList"
+                        @getAllDataListByIds="getSelectedDataByIdsForDepartment"
+                        :autoSearchOptions="autoSearchDepartments"
+                        @AutoCompleteSearchForData="AutoCompleteSearchForDataDepartment"                   
+                        :filterBy="filterBy"
+                        :place-holder="placeHolder"
+                        :value-property="valueProperty"
+                        v-model="form.departments" 
+                      />
       							</div>
 
 		            	</div>
@@ -108,7 +110,10 @@
                              <img v-if="form.avatar == 'undefined'" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:130px;">
                              <img v-if="form.avatar === '' " :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:130px;">
                              <img v-else-if="form.avatar === null" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:130px;">
-                              <img v-else-if="form.avatar != '' " :src="'../'+form.avatar" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:130px;">
+                              <!-- <img v-else-if="form.avatar != '' " :src="'../'+form.avatar" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:130px;"> -->
+                              <img v-else-if="form.avatar != '' " :src="form.avatar" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:130px;">
+
+                              <i v-if="deleteImageIcon" @click="deleteImage(form.id)" class="far fa-times-circle" style="cursor: pointer; background: #fff; padding: 4px 2px 2px 2px;   color: red; border-radius: 10px; margin-left: -15px;" title="click to Delete"></i>
                             </span> 
                             <!-- <img :src="'../'+NoIconUrl"> -->
                     	</div>
@@ -267,8 +272,8 @@
    	  <div class="row mr-4">
    	  	<div class="col-12  text-right">
    	  		<button type="submit" class="btn btn-primary btn-flat btn-sm ">
-	        	<span v-show="!editMode">Save</span>
-	        	<span v-show="editMode">Update</span>
+	        	<span v-show="!editMode"> <i class="fas fa-save"></i> Save</span>
+	        	<span v-show="editMode"> <i class="far fa-edit"></i> Update</span>
 	    	</button>    	  		
    	  	</div>
    	  </div>  	  	
@@ -296,6 +301,7 @@
       return {
         NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
         ShowOnChangeImage:null,
+        deleteImageIcon: false, //Delete Image icon if image exist
         editMode: false, //Use this for add edit using the same form   
         genders: [
   	      { name: 'Male' },
@@ -306,6 +312,8 @@
     		placeHolder:'Select departments',
     		filterBy:'dept_name',
     		valueProperty: 'id',
+
+        
 
         // Create a new form instance
         form: new Form({
@@ -339,7 +347,9 @@
 
     computed: {
     	/*userStatus get form commonSotreForAll*/	
-        ...mapState( 'commonStoreForAll', ['userStatus','jobTitles','branches','allDepertments','autoSearchDepartments'] )
+        ...mapState( 'commonStoreForAll', ['userStatus','jobTitles','branches','allDepertments','autoSearchDepartments'] ),
+        ...mapState( 'EmployeeMasterStore', ['selectedDepartmentList', 'autoSearchDepartments'] ),
+
 
         
   	},
@@ -365,60 +375,76 @@
 	    },
 
 	    // Submit the form via a POST request
-		storeFormData() {  
-		  //console.log(this.form); 
-		  this.$Progress.start(); //using progress-bar package
+  		storeFormData() {  
+  		  //console.log(this.form); 
+  		  this.$Progress.start(); //using progress-bar package
 
-		  //this.form.post('/spa/Employee-Info')
-		  this.form.post('/spa/Employee-Info')
-		  .then(({ data }) => { 
-		    if(data.success){ 
-		      //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
-		      toastr.success(data.success);             
-		      this.$Progress.finish();  
-		      this.form.reset();  //reset from after submit	
-		      this.$refs.avatar.value = ''; //clear file input tag 
-			  this.ShowOnChangeImage = null;
-			  this.$router.push({ path : '/spa/EmployeeMaster' });	 //route after successfule submit	      
-		    }
-		    if(data.errors){
-		      this.$Progress.fail();
-		      toastr.warning(data.errors); 
-		    }
-		  })
-		  .catch( () => {
-		    this.$Progress.fail();
-		    toastr.warning('Something is wrong!');
-		  })            
-		},
+  		  //this.form.post('/spa/Employee-Info')
+  		  this.form.post('/spa/Employee-Info')
+  		  .then(({ data }) => { 
+  		    if(data.success){ 
+  		      //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
+  		      toastr.success(data.success);             
+  		      this.$Progress.finish();  
+  		      this.form.reset();  //reset from after submit	
+  		      this.$refs.avatar.value = ''; //clear file input tag 
+  			  this.ShowOnChangeImage = null;
+  			  this.$router.push({ path : '/spa/EmployeeMaster' });	 //route after successfule submit	      
+  		    }
+  		    if(data.errors){
+  		      this.$Progress.fail();
+  		      toastr.warning(data.errors); 
+  		    }
+  		  })
+  		  .catch( () => {
+  		    this.$Progress.fail();
+  		    toastr.warning('Something is wrong!');
+  		  })            
+  		},
 
-		updateFormData(){         
-			//console.log(this.form); 
-			this.$Progress.start(); //using progress-bar package
+  		updateFormData(){         
+  			//console.log(this.form); 
+  			this.$Progress.start(); //using progress-bar package
 
-			this.form.put('/spa/Employee-Info/'+this.form.id)
-			  .then(({ data }) => { 
-			    if(data.success){ 
-			      //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update         
-			      this.$Progress.finish(); 
-			      toastr.success(data.success);               
-			      this.form.reset();  //reset from after submit
-			      this.editMode = false; 
-			      this.$refs.avatar.value = ''; //clear file input tag 
-			  	  this.ShowOnChangeImage = null;
-			  	  this.$router.push({ path : '/spa/EmployeeMaster' });	 //route after successfule submit
-			    }
-			    if(data.errors){
-			      this.$Progress.fail();
-			      toastr.warning(data.errors); 
-			    }
-			  })
-			  .catch( () => {
-			    this.$Progress.fail();
-			    toastr.warning('Something is wrong!');
-			  }) 
-		},
+  			this.form.put('/spa/Employee-Info/'+this.form.id)
+  			  .then(({ data }) => { 
+  			    if(data.success){ 
+  			      //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update         
+  			      this.$Progress.finish(); 
+  			      toastr.success(data.success);               
+  			      this.form.reset();  //reset from after submit
+  			      this.editMode = false; 
+  			      this.$refs.avatar.value = ''; //clear file input tag 
+  			  	  this.ShowOnChangeImage = null;
+  			  	  this.$router.push({ path : '/spa/EmployeeMaster' });	 //route after successfule submit
+  			    }
+  			    if(data.errors){
+  			      this.$Progress.fail();
+  			      toastr.warning(data.errors); 
+  			    }
+  			  })
+  			  .catch( () => {
+  			    this.$Progress.fail();
+  			    toastr.warning('Something is wrong!');
+  			  }) 
+  		},
 
+      deleteImage(id){ 
+        this.$Progress.start(); //using progress-bar package        
+          //console.log(this.form.has_many_image);
+          axios.post('/spa/Employee-Info-DeleteImage/'+id)
+            .then(({ data }) => {
+                // this.ShowOnChangeImage = null;
+                this.deleteImageIcon = false;
+                this.form.avatar = null;
+                this.$Progress.finish(); 
+                toastr.success(data.success);
+             })
+            .catch(() => {
+              this.$Progress.fail();
+              toastr.warning('Something is wrong!');
+            });
+      },
 
 	    fillForm(){
 	    	if(this.$route.params.data != null){
@@ -430,16 +456,32 @@
 	    		if(this.$route.params.data.departments.length === 0){
 	    			this.form.departments = [];
 	    		}else{
-		    		 // this.form.departments = Object.values(this.$route.params.data.departments).filter(
+		    		 //return only department id from depertment list 
 		    		 this.form.departments = Object.values(this.$route.params.data.departments).map(
 	       		 		item => {	
 	       		 			//return item['id'];
 	       		 			 return item.id;
 	       		 		}
 		       		 );
-	    		}	    	
+	    		}	
+          if(this.$route.params.data.avatar != null){
+            this.deleteImageIcon = true;  
+          }
+            	
 	    	}
-	    }
+         
+        //get department list based on form.departments array ids
+        this.$store.dispatch('EmployeeMasterStore/fetchSelectedDepartmentList', this.form.departments);
+	    },
+
+      AutoCompleteSearchForDataDepartment(data){
+          this.$store.dispatch('EmployeeMasterStore/AutoCompleteSearchForDataDepartment', data ); 
+      },
+      getSelectedDataByIdsForDepartment(data){
+          this.$store.dispatch('EmployeeMasterStore/fetchSelectedDepartmentList', this.form.departments);
+      },
+
+
 	},
 
   	created(){
