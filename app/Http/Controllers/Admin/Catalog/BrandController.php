@@ -287,4 +287,29 @@ class BrandController extends Controller
         $data = Brand::get();
         return response()->json($data);
     }
+
+    //search for auto complete (from Product)
+    public function autoCompleteSearch(Request $request){
+        $searchKey = $request->q;
+
+        if(!empty($searchKey) ){
+            $searchResult = Brand::where(function($query) use ($searchKey){
+                $query->where('brand_name','LIKE','%'.$searchKey.'%')
+                        ->orWhere('brand_desc','LIKE','%'.$searchKey.'%');
+            })->select('id', 'brand_name')->get();
+
+        }
+        //return $searchResult;
+        return response()->json($searchResult);
+    }
+
+    //selected Brand (for Product)
+    public function getSelectedBrand(Request $request){
+        $searchKey = $request->q;
+        $searchResult = Brand::where('id', $searchKey)
+                        ->select('id','brand_name')
+                        ->get(); //Model::whereIn('id', [1, 2, 3])->get();
+       // $searchResult = Supplier::findMany([1, 2, 3]); //Model::findMany([1, 2, 3]);
+        return response()->json($searchResult);
+    }//end search
 }

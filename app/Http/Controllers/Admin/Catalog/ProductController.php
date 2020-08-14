@@ -101,10 +101,12 @@ class ProductController extends Controller
         $data['pro_sale_price']=$request->pro_sale_price;
         $data['pro_reward_points']=$request->pro_reward_points;
         $data['pro_qty']=$request->pro_qty;  
+        $data['pro_delivery_charge']=$request->pro_delivery_charge;  
         $data['pro_translation'] =$request->pro_translation;        
         $data['pro_category'] =$request->pro_category;
         $data['related_products'] =$request->related_products;
-        $data['pro_suppliers'] =$request->pro_suppliers;
+        // $data['pro_suppliers'] =$request->pro_suppliers;
+        $data['pro_vendors'] =$request->pro_vendors;
         $data['pro_attributes'] =$request->pro_attributes;
         $data['pro_specification'] =$request->pro_specification;
         $data['pro_discount'] =$request->pro_discount;
@@ -221,10 +223,12 @@ class ProductController extends Controller
         $data['pro_sale_price']=$request->pro_sale_price;
         $data['pro_reward_points']=$request->pro_reward_points;
         $data['pro_qty']=$request->pro_qty;  
+        $data['pro_delivery_charge']=$request->pro_delivery_charge;  
         $data['pro_translation'] =$request->pro_translation; 
         $data['related_products'] =$request->related_products;       
         $data['pro_category'] =$request->pro_category;
-        $data['pro_suppliers'] =$request->pro_suppliers;
+        // $data['pro_suppliers'] =$request->pro_suppliers;
+        $data['pro_vendors'] =$request->pro_vendors;
         $data['pro_attributes'] =$request->pro_attributes;
         $data['pro_specification'] =$request->pro_specification;
         $data['pro_discount'] =$request->pro_discount;
@@ -395,6 +399,8 @@ class ProductController extends Controller
             })
             ->select('products.*','status_master.status_name')
             ->join('status_master', 'products.status_m_id','=', 'status_master.id')
+            ->join('brands', 'products.brand_id','=', 'brands.id')
+            ->join('categories', 'products.pro_category','=', 'categories.id')
             ->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){
@@ -439,21 +445,20 @@ class ProductController extends Controller
         $searchKey = $request->q != null ? $request->q : $request->q = [];
         $searchResult = Product::whereIn('id', $searchKey)
                         ->select('id','sys_pro_name')
-                        ->get(); //Model::whereIn('id', [1, 2, 3])->get();
-       // $searchResult = Supplier::findMany([1, 2, 3]); //Model::findMany([1, 2, 3]);
+                        ->get(); 
         return response()->json($searchResult);
     }//end search
 
 
-    //selected supplier list for multiselect option
-    public function selectedSupplierList(Request $request){
-       $searchKey = $request->q;
-        $searchResult = Supplier::whereIn('id', $searchKey)
-                        ->select('id','name')
-                        ->get(); //Model::whereIn('id', [1, 2, 3])->get();
-       // $searchResult = Supplier::findMany([1, 2, 3]); //Model::findMany([1, 2, 3]);
-        return response()->json($searchResult);
-    }//end search
+    // //selected supplier list for multiselect option
+    // public function selectedSupplierList(Request $request){
+    //    $searchKey = $request->q;
+    //     $searchResult = Supplier::whereIn('id', $searchKey)
+    //                     ->select('id','name')
+    //                     ->get(); //Model::whereIn('id', [1, 2, 3])->get();
+    //    // $searchResult = Supplier::findMany([1, 2, 3]); //Model::findMany([1, 2, 3]);
+    //     return response()->json($searchResult);
+    // }//end search
 
 
     //selected Category list for multiselect option
@@ -461,13 +466,12 @@ class ProductController extends Controller
         $searchKey = $request->q;
         $searchResult = Category::whereIn('id', $searchKey)
                         ->select('id','cat_name')
-                        ->get(); //Model::whereIn('id', [1, 2, 3])->get();
-       // $searchResult = Supplier::findMany([1, 2, 3]); //Model::findMany([1, 2, 3]);
+                        ->get(); 
         return response()->json($searchResult);
     }//end search
 
 
-    //this is test function for product for multiComponent 
+    //this is test function for get product list by categoy for multiComponent 
     public function getMultiProductList(Request $request){
         //return $request->id;
         $id = $request->id;

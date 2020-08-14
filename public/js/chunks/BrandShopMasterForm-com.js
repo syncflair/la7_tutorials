@@ -100,11 +100,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
       ShowOnChangeImage: null,
+      deleteImageIcon: false,
+      //Delete Image icon if image exist
       editMode: false,
       //Use this for add edit using the same form     
       // Create a new form instance
@@ -153,7 +164,11 @@ __webpack_require__.r(__webpack_exports__);
     editData: function editData(data) {
       this.editMode = true;
       this.form.reset();
-      this.form.fill(data); //this.$refs.brand_shop_title.focus();    		
+      this.form.fill(data); //this.$refs.brand_shop_title.focus(); 
+
+      if (data.bs_img != null) {
+        this.deleteImageIcon = true;
+      }
     },
     ClearForm: function ClearForm() {
       this.editMode = false;
@@ -229,18 +244,37 @@ __webpack_require__.r(__webpack_exports__);
 
         toastr.warning('Something is wrong!');
       });
+    },
+    deleteImage: function deleteImage(id) {
+      var _this5 = this;
+
+      this.$Progress.start();
+      axios.post('/spa/BrandShop-Info-DeleteImage/' + id).then(function (_ref3) {
+        var data = _ref3.data;
+        // this.ShowOnChangeImage = null;
+        _this5.deleteImageIcon = false;
+        _this5.form.bs_img = null;
+
+        _this5.$Progress.finish();
+
+        toastr.success(data.success);
+      })["catch"](function () {
+        _this5.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     FireEvent.$on('editData', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this5.editData(data);
+      _this6.editData(data);
     });
     FireEvent.$on('addData', function () {
-      _this5.addData();
+      _this6.addData();
     });
   }
 }); //End Exprot Default
@@ -352,7 +386,7 @@ var render = function() {
                   _c("div", { staticClass: "modal-body pt-0" }, [
                     _c("div", { staticClass: "card--" }, [
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-12 col-sm-12" }, [
+                        _c("div", { staticClass: "col-md-9 col-sm-12" }, [
                           _c(
                             "div",
                             { staticClass: "form-group" },
@@ -491,10 +525,98 @@ var render = function() {
                               },
                               [_vm._v("Is Active")]
                             )
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-3 col-sm-12" }, [
+                          _c("div", { staticClass: "row pt-3" }, [
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _vm.ShowOnChangeImage != null
+                                ? _c("span", [
+                                    _vm.ShowOnChangeImage != null
+                                      ? _c("img", {
+                                          staticClass:
+                                            "img-fluid img-thumbnail",
+                                          staticStyle: {
+                                            width: "150px",
+                                            height: "auto"
+                                          },
+                                          attrs: { src: _vm.ShowOnChangeImage }
+                                        })
+                                      : _vm._e()
+                                  ])
+                                : _c("span", [
+                                    _vm.form.bs_img == "undefined"
+                                      ? _c("img", {
+                                          staticClass:
+                                            "img-fluid img-thumbnail",
+                                          staticStyle: {
+                                            width: "150px",
+                                            height: "auto"
+                                          },
+                                          attrs: { src: "../" + _vm.NoIconUrl }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.form.bs_img === ""
+                                      ? _c("img", {
+                                          staticClass:
+                                            "img-fluid img-thumbnail",
+                                          staticStyle: {
+                                            width: "150px",
+                                            height: "auto"
+                                          },
+                                          attrs: { src: "../" + _vm.NoIconUrl }
+                                        })
+                                      : _vm.form.bs_img === null
+                                      ? _c("img", {
+                                          staticClass:
+                                            "img-fluid img-thumbnail",
+                                          staticStyle: {
+                                            width: "150px",
+                                            height: "auto"
+                                          },
+                                          attrs: { src: "../" + _vm.NoIconUrl }
+                                        })
+                                      : _vm.form.bs_img != ""
+                                      ? _c("img", {
+                                          staticClass:
+                                            "img-fluid img-thumbnail focusImgOnHover",
+                                          staticStyle: {
+                                            width: "150px",
+                                            height: "auto"
+                                          },
+                                          attrs: { src: _vm.form.bs_img }
+                                        })
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.deleteImageIcon
+                                      ? _c("i", {
+                                          staticClass: "far fa-times-circle",
+                                          staticStyle: {
+                                            cursor: "pointer",
+                                            background: "#fff",
+                                            padding: "4px 2px 2px 2px",
+                                            color: "red",
+                                            "border-radius": "10px",
+                                            "margin-left": "-15px"
+                                          },
+                                          attrs: { title: "click to Delete" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.deleteImage(
+                                                _vm.form.id
+                                              )
+                                            }
+                                          }
+                                        })
+                                      : _vm._e()
+                                  ])
+                            ])
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "row pt-3" }, [
-                            _c("div", { staticClass: "col-md-9" }, [
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-12" }, [
                               _c("div", { staticClass: "form-group" }, [
                                 _c("label", { attrs: { for: "bs_img" } }, [
                                   _vm._v("Image")
@@ -507,68 +629,6 @@ var render = function() {
                                   on: { change: _vm.onImageChange }
                                 })
                               ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-3" }, [
-                              _vm.ShowOnChangeImage != null
-                                ? _c("span", [
-                                    _vm.ShowOnChangeImage != null
-                                      ? _c("img", {
-                                          staticClass:
-                                            "img-fluid img-thumbnail",
-                                          staticStyle: {
-                                            width: "65px",
-                                            height: "65px"
-                                          },
-                                          attrs: { src: _vm.ShowOnChangeImage }
-                                        })
-                                      : _vm._e()
-                                  ])
-                                : _c("span", [
-                                    _vm.form.bs_img == "undefined"
-                                      ? _c("img", {
-                                          staticClass:
-                                            "img-fluid img-thumbnail",
-                                          staticStyle: {
-                                            width: "65px",
-                                            height: "65px"
-                                          },
-                                          attrs: { src: "../" + _vm.NoIconUrl }
-                                        })
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    _vm.form.bs_img === ""
-                                      ? _c("img", {
-                                          staticClass:
-                                            "img-fluid img-thumbnail",
-                                          staticStyle: {
-                                            width: "65px",
-                                            height: "65px"
-                                          },
-                                          attrs: { src: "../" + _vm.NoIconUrl }
-                                        })
-                                      : _vm.form.bs_img === null
-                                      ? _c("img", {
-                                          staticClass:
-                                            "img-fluid img-thumbnail",
-                                          staticStyle: {
-                                            width: "65px",
-                                            height: "65px"
-                                          },
-                                          attrs: { src: "../" + _vm.NoIconUrl }
-                                        })
-                                      : _vm.form.bs_img != ""
-                                      ? _c("img", {
-                                          staticClass:
-                                            "img-fluid img-thumbnail focusImgOnHover",
-                                          staticStyle: {
-                                            width: "65px",
-                                            height: "65px"
-                                          },
-                                          attrs: { src: _vm.form.bs_img }
-                                        })
-                                      : _vm._e()
-                                  ])
                             ])
                           ])
                         ])
@@ -611,7 +671,10 @@ var render = function() {
                               }
                             ]
                           },
-                          [_vm._v("Save")]
+                          [
+                            _c("i", { staticClass: "fas fa-save" }),
+                            _vm._v(" Save")
+                          ]
                         ),
                         _vm._v(" "),
                         _c(
@@ -626,7 +689,10 @@ var render = function() {
                               }
                             ]
                           },
-                          [_vm._v("Update")]
+                          [
+                            _c("i", { staticClass: "far fa-edit" }),
+                            _vm._v(" Update")
+                          ]
                         )
                       ]
                     )

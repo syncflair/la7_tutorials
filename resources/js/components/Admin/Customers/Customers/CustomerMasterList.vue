@@ -124,7 +124,7 @@
             {'field_name':'name', 'show_name':'Name'},
             {'field_name':'email', 'show_name':'Email'},
             {'field_name':'phone', 'show_name':'Phone'},
-            {'field_name':'customer_group', 'show_name':'Group'},
+            {'field_name':'group_name', 'show_name':'Group'},
             {'field_name':'us_name', 'show_name':'Status'},
           ],             
         }

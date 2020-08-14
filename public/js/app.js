@@ -124665,11 +124665,16 @@ var ProductMasterStore = {
         per_page: 0
       },
       autoCompleteData: {},
+      //for Single Select
+      autoSearchBrands: {},
+      selectedBrand: [],
       //for multiselect option
       autoSearchProducts: {},
       selectedProductList: [],
-      selectedSupplierList: [],
-      selectedCategoryList: []
+      //selectedSupplierList:[],
+      selectedCategoryList: [],
+      autoSearchVendors: {},
+      selectedVendorList: []
     };
   },
 
@@ -124688,6 +124693,13 @@ var ProductMasterStore = {
     AUTO_COMPLETE_DATA: function AUTO_COMPLETE_DATA(state, data) {
       return state.autoCompleteData = data;
     },
+    //Single Select 
+    AUTO_COMPLETE_DATA_FOR_BRAND: function AUTO_COMPLETE_DATA_FOR_BRAND(state, data) {
+      return state.autoSearchBrands = data;
+    },
+    SELECTED_BRAND: function SELECTED_BRAND(state, data) {
+      return state.selectedBrand = data;
+    },
     //for multiselect
     AUTO_COMPLETE_DATA_FOR_PRODUCT: function AUTO_COMPLETE_DATA_FOR_PRODUCT(state, data) {
       return state.autoSearchProducts = data;
@@ -124695,11 +124707,15 @@ var ProductMasterStore = {
     SELECTED_PRODUCT_LIST: function SELECTED_PRODUCT_LIST(state, data) {
       return state.selectedProductList = data;
     },
-    SELECTED_SUPPLIER_LIST: function SELECTED_SUPPLIER_LIST(state, data) {
-      return state.selectedSupplierList = data;
-    },
+    //SELECTED_SUPPLIER_LIST(state, data){  return state.selectedSupplierList = data; },
     SELECTED_CATEGORY_LIST: function SELECTED_CATEGORY_LIST(state, data) {
       return state.selectedCategoryList = data;
+    },
+    SELECTED_VENDOR_LIST: function SELECTED_VENDOR_LIST(state, data) {
+      return state.selectedVendorList = data;
+    },
+    AUTO_COMPLETE_DATA_FOR_VENDORS: function AUTO_COMPLETE_DATA_FOR_VENDORS(state, data) {
+      return state.autoSearchVendors = data;
     }
   },
 
@@ -124751,16 +124767,15 @@ var ProductMasterStore = {
         context.commit('SELECTED_CATEGORY_LIST', response.data);
       })["catch"](function () {});
     },
-    //For selected Supplier
-    fetchSelectedSupplierList: function fetchSelectedSupplierList(context, payload) {
-      //use axios.post instead of axios.get , becouse is contaion array    
-      axios.post('/spa/Product-getSupplierList/', {
-        q: payload
-      }).then(function (response) {
-        //console.log(response); 
-        context.commit('SELECTED_SUPPLIER_LIST', response.data);
-      })["catch"](function () {});
-    },
+    // //For selected Supplier
+    // fetchSelectedSupplierList(context, payload){ 
+    //   //use axios.post instead of axios.get , becouse is contaion array    
+    //   axios.post('/spa/Product-getSupplierList/', {q: payload})
+    //     .then( ( response ) => {
+    //             //console.log(response); 
+    //             context.commit('SELECTED_SUPPLIER_LIST', response.data);                                       
+    //     }).catch(() => { }) 
+    // },
     //For selected product
     fetchSelectedProductList: function fetchSelectedProductList(context, payload) {
       //use axios.post instead of axios.get , becouse is contaion array    
@@ -124776,6 +124791,38 @@ var ProductMasterStore = {
       axios.get('/spa/AutoCompleteProductData?&q=' + query).then(function (response) {
         //console.log(response.data);
         context.commit('AUTO_COMPLETE_DATA_FOR_PRODUCT', response.data);
+      })["catch"](function () {});
+    },
+    AutoCompleteSearchForVendors: function AutoCompleteSearchForVendors(context, payload) {
+      var query = payload;
+      axios.get('/spa/AutoCompleteVendorData?&q=' + query).then(function (response) {
+        context.commit('AUTO_COMPLETE_DATA_FOR_VENDORS', response.data);
+      })["catch"](function () {});
+    },
+    //For selected Supplier
+    fetchSelectedVendorList: function fetchSelectedVendorList(context, payload) {
+      //use axios.post instead of axios.get , becouse is contaion array    
+      axios.post('/spa/getSelectedVendorList/', {
+        q: payload
+      }).then(function (response) {
+        //console.log(response); 
+        context.commit('SELECTED_VENDOR_LIST', response.data);
+      })["catch"](function () {});
+    },
+    //For Brands
+    AutoCompleteSearchForDataBrand: function AutoCompleteSearchForDataBrand(context, payload) {
+      var query = payload;
+      axios.get('/spa/AutoCompleteBrandData?&q=' + query).then(function (response) {
+        context.commit('AUTO_COMPLETE_DATA_FOR_BRAND', response.data);
+      })["catch"](function () {});
+    },
+    //For selected Brand Shop
+    fetchSelectedBrand: function fetchSelectedBrand(context, payload) {
+      //use axios.post instead of axios.get , becouse is contaion array  
+      axios.post('/spa/getSelectedBrand/', {
+        q: payload
+      }).then(function (response) {
+        context.commit('SELECTED_BRAND', response.data);
       })["catch"](function () {});
     }
   }

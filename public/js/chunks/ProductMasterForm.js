@@ -595,6 +595,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -613,18 +644,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         name: 'Downloadable'
       }],
-      // CustomerGroups: [
-      //   { name: 'Default' },
-      //   { name: 'Wholesale' },
-      // ],    
+      //Single Select app for Brand
+      placeHolder_brand: 'Select brand',
+      filterBy_brand: 'brand_name',
+      valueProperty_brand: 'id',
       //form multiselect app for category
       placeHolder: 'Select multiple Category',
       filterBy: 'cat_name',
       valueProperty: 'id',
       //multiselect app for Supplier
-      placeHolder_supp: 'Select multiple Supplier or Shop',
-      filterBy_supp: 'name',
-      valueProperty_supp: 'id',
+      // placeHolder_supp:'Select multiple Supplier or Shop', // filterBy_supp:'name',// valueProperty_supp: 'id',
+      //multiselect app for Supplier
+      placeHolder_vendor: 'Select multiple Vendor (Supplier)',
+      filterBy_vendor: 'vendor_name',
+      valueProperty_vendor: 'id',
       //multiselect app for related product
       placeHolder_product: 'Select multiple related products',
       filterBy_product: 'sys_pro_name',
@@ -655,6 +688,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         pro_reward_points: '',
         //pro_image:'',
         is_enabled: '',
+        pro_delivery_charge: '',
         pro_category: [],
         pro_attributes: [],
         pro_specification: [{
@@ -673,7 +707,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         related_products: [],
         pro_translation: [],
         pro_images: [],
-        pro_suppliers: [],
+        //pro_suppliers:[], 
+        pro_vendors: [],
         //pro_shops:[],
         //multi_image:[],
         has_many_image: [] //only for get image from database
@@ -683,18 +718,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   //end data
   watch: {},
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('ProductMasterStore', ['selectedCategoryList', 'selectedSupplierList', 'selectedProductList', 'autoSearchProducts']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['allLanguages', 'AllStatus', 'AllBrands', 'autoSearchCategories', 'AllSpecifications', 'AllAttributes', 'AllAttributeValues', 'allCustomerGroups', 'autoSearchSuppliers']), {
-    //...mapState( 'ProductMasterStore', ['AllProducts','autoSearchProducts'] ),  
-    selectedAllAttributeValues: function selectedAllAttributeValues() {// let fo = Object.values(this.AllAttributes).filter( av => {
-      // // let fo = Object.values(this.AllAttributeValues).filter( av => {
-      //   const result = av.find( ({ d }) => d.id === data );
-      //       return av;
-      //       //return this.form.pro_attributes.some(v => v['attrib_id'] === av['id']);
-      //       // return this.form.pro_attributes.some(v => v['attrib_id'] === av['attribute_id']);
-      // });
-      // return fo;
-    }
-  }),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('ProductMasterStore', [, 'selectedBrand', 'autoSearchBrands', 'selectedVendorList', 'autoSearchVendors', 'selectedCategoryList', 'selectedProductList', 'autoSearchProducts']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['allLanguages', 'AllStatus', 'AllBrands', 'autoSearchCategories', 'AllSpecifications', 'AllAttributes', 'AllAttributeValues', 'allCustomerGroups'])),
   //end Computed
   methods: {
     //###################################### Images Function ################################################
@@ -1022,6 +1046,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           this.form.pro_suppliers = [];
         }
 
+        if (this.$route.params.data.pro_vendors === null) {
+          this.form.pro_vendors = [];
+        }
+
         if (this.$route.params.data.related_products === null) {
           this.form.related_products = [];
         }
@@ -1029,28 +1057,43 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (this.$route.params.data.has_many_image) {
           this.form.pro_images = [];
         }
-      } //for multiselect
+      } //for single Select
 
 
-      this.$store.dispatch('ProductMasterStore/fetchSelectedCategoryList', this.form.pro_category);
-      this.$store.dispatch('ProductMasterStore/fetchSelectedSupplierList', this.form.pro_suppliers);
+      this.$store.dispatch('ProductMasterStore/fetchSelectedBrand', this.form.brand_id); //for multiselect
+
+      this.$store.dispatch('ProductMasterStore/fetchSelectedCategoryList', this.form.pro_category); //this.$store.dispatch('ProductMasterStore/fetchSelectedSupplierList', this.form.pro_suppliers);
+
+      this.$store.dispatch('ProductMasterStore/fetchSelectedVendorList', this.form.pro_vendors);
       this.$store.dispatch('ProductMasterStore/fetchSelectedProductList', this.form.related_products);
+    },
+    AutoCompleteSearchForDataBrand: function AutoCompleteSearchForDataBrand(data) {
+      this.$store.dispatch('ProductMasterStore/AutoCompleteSearchForDataBrand', data);
+    },
+    getSelectedDataByIdsForBrand: function getSelectedDataByIdsForBrand(data) {
+      this.$store.dispatch('ProductMasterStore/fetchSelectedBrand', this.form.brand_id);
     },
     //all method comming from multiselect apps
     AutoCompleteSearchForDataCategory: function AutoCompleteSearchForDataCategory(data) {
       this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data);
     },
-    AutoCompleteSearchForDataSuppliyer: function AutoCompleteSearchForDataSuppliyer(data) {
-      this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForSuppliers', data);
+    getSelectedListByIdsForCategory: function getSelectedListByIdsForCategory() {
+      this.$store.dispatch('ProductMasterStore/fetchSelectedCategoryList', this.form.pro_category);
+    },
+    // AutoCompleteSearchForDataSuppliyer(data){
+    //   this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForSuppliers', data ); 
+    // },
+    // getSelectedListByIdsForSupplier(){
+    //   this.$store.dispatch('ProductMasterStore/fetchSelectedSupplierList', this.form.pro_suppliers);
+    // },
+    AutoCompleteSearchForDataVendor: function AutoCompleteSearchForDataVendor(data) {
+      this.$store.dispatch('ProductMasterStore/AutoCompleteSearchForVendors', data);
+    },
+    getSelectedListByIdsForVendor: function getSelectedListByIdsForVendor() {
+      this.$store.dispatch('ProductMasterStore/fetchSelectedVendorList', this.form.pro_vendors);
     },
     AutoCompleteSearchForDataProduct: function AutoCompleteSearchForDataProduct(data) {
       this.$store.dispatch('ProductMasterStore/AutoCompleteSearchForProduct', data);
-    },
-    getSelectedListByIdsForSupplier: function getSelectedListByIdsForSupplier() {
-      this.$store.dispatch('ProductMasterStore/fetchSelectedSupplierList', this.form.pro_suppliers);
-    },
-    getSelectedListByIdsForCategory: function getSelectedListByIdsForCategory() {
-      this.$store.dispatch('ProductMasterStore/fetchSelectedCategoryList', this.form.pro_category);
     },
     getSelectedListByIdsForProduct: function getSelectedListByIdsForProduct() {
       this.$store.dispatch('ProductMasterStore/fetchSelectedProductList', this.form.related_products);
@@ -1059,6 +1102,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   //end Methods
   created: function created() {
     var _this7 = this;
+
+    if (this.editMode === false) {
+      setTimeout(function () {
+        _this7.pushToLanguageTranslationArray();
+      }, 2300);
+    }
 
     this.fillForm();
     this.$store.dispatch('commonStoreForAll/AllStatus', 'Product'); //get status with "Product" keyword
@@ -1082,13 +1131,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     // FireEvent.$on('AutoCompleteSearchForDataTwo', (data) => {
     //     this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForSuppliers', data ); 
     // });
-
-    if (this.editMode === false) {
-      setTimeout(function () {
-        _this7.pushToLanguageTranslationArray();
-      }, 2000);
-    } //console.log(this.form);
-
+    //this.pushToLanguageTranslationArray();
+    //console.log(this.form);
   },
   //end Created
   mounted: function mounted() {//console.log(this.form.pro_translation);        
@@ -2040,73 +2084,49 @@ var render = function() {
                             _vm._v(" "),
                             _c("div", { staticClass: "row" }, [
                               _c("div", { staticClass: "col-md-3" }, [
-                                _c("div", { staticClass: "form-group" }, [
-                                  _c("label", [_vm._v("Brand")]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "select",
-                                    {
-                                      directives: [
-                                        {
-                                          name: "model",
-                                          rawName: "v-model",
-                                          value: _vm.form.brand_id,
-                                          expression: "form.brand_id"
+                                _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c(
+                                      "label",
+                                      {
+                                        staticStyle: {
+                                          "margin-left": "0px !important"
                                         }
-                                      ],
-                                      staticClass:
-                                        "form-control form-control-sm-",
+                                      },
+                                      [_vm._v("Brand")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("single-select-app-one", {
+                                      staticStyle: {
+                                        "margin-top": "5px !important"
+                                      },
                                       attrs: {
-                                        id: "brand_id",
-                                        name: "brand_id"
+                                        options: _vm.selectedBrand,
+                                        autoSearchOptions: _vm.autoSearchBrands,
+                                        filterBy: _vm.filterBy_brand,
+                                        "place-holder": _vm.placeHolder_brand,
+                                        "value-property":
+                                          _vm.valueProperty_brand
                                       },
                                       on: {
-                                        change: function($event) {
-                                          var $$selectedVal = Array.prototype.filter
-                                            .call(
-                                              $event.target.options,
-                                              function(o) {
-                                                return o.selected
-                                              }
-                                            )
-                                            .map(function(o) {
-                                              var val =
-                                                "_value" in o
-                                                  ? o._value
-                                                  : o.value
-                                              return val
-                                            })
-                                          _vm.$set(
-                                            _vm.form,
-                                            "brand_id",
-                                            $event.target.multiple
-                                              ? $$selectedVal
-                                              : $$selectedVal[0]
-                                          )
-                                        }
+                                        getAllDataListByIds:
+                                          _vm.getSelectedDataByIdsForBrand,
+                                        AutoCompleteSearchForData:
+                                          _vm.AutoCompleteSearchForDataBrand
+                                      },
+                                      model: {
+                                        value: _vm.form.brand_id,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.form, "brand_id", $$v)
+                                        },
+                                        expression: "form.brand_id"
                                       }
-                                    },
-                                    [
-                                      _c(
-                                        "option",
-                                        { attrs: { disabled: "", value: "" } },
-                                        [_vm._v("Select brand ..")]
-                                      ),
-                                      _vm._v(" "),
-                                      _vm._l(_vm.AllBrands, function(brand) {
-                                        return _c(
-                                          "option",
-                                          {
-                                            key: brand.id,
-                                            domProps: { value: brand.id }
-                                          },
-                                          [_vm._v(_vm._s(brand.brand_name))]
-                                        )
-                                      })
-                                    ],
-                                    2
-                                  )
-                                ])
+                                    })
+                                  ],
+                                  1
+                                )
                               ]),
                               _vm._v(" "),
                               _c("div", { staticClass: "col-md-3" }),
@@ -2129,7 +2149,7 @@ var render = function() {
                                           "margin-left": "0px !important"
                                         }
                                       },
-                                      [_vm._v("Select Category")]
+                                      [_vm._v("Category")]
                                     ),
                                     _vm._v(" "),
                                     _c("multi-select-app-one", {
@@ -2178,34 +2198,31 @@ var render = function() {
                                           "margin-left": "0px !important"
                                         }
                                       },
-                                      [_vm._v("Select Supplier")]
+                                      [_vm._v("Vendors / Suppliers")]
                                     ),
                                     _vm._v(" "),
                                     _c("multi-select-app-one", {
                                       attrs: {
-                                        options: _vm.selectedSupplierList,
+                                        options: _vm.selectedVendorList,
                                         autoSearchOptions:
-                                          _vm.autoSearchSuppliers,
-                                        filterBy: _vm.filterBy_supp,
-                                        "place-holder": _vm.placeHolder_supp,
-                                        "value-property": _vm.valueProperty_supp
+                                          _vm.autoSearchVendors,
+                                        filterBy: _vm.filterBy_vendor,
+                                        "place-holder": _vm.placeHolder_vendor,
+                                        "value-property":
+                                          _vm.valueProperty_vendor
                                       },
                                       on: {
                                         getAllDataListByIds:
-                                          _vm.getSelectedListByIdsForSupplier,
+                                          _vm.getSelectedListByIdsForVendor,
                                         AutoCompleteSearchForData:
-                                          _vm.AutoCompleteSearchForDataSuppliyer
+                                          _vm.AutoCompleteSearchForDataVendor
                                       },
                                       model: {
-                                        value: _vm.form.pro_suppliers,
+                                        value: _vm.form.pro_vendors,
                                         callback: function($$v) {
-                                          _vm.$set(
-                                            _vm.form,
-                                            "pro_suppliers",
-                                            $$v
-                                          )
+                                          _vm.$set(_vm.form, "pro_vendors", $$v)
                                         },
-                                        expression: "form.pro_suppliers"
+                                        expression: "form.pro_vendors"
                                       }
                                     })
                                   ],
@@ -2227,7 +2244,7 @@ var render = function() {
                                           "margin-left": "0px !important"
                                         }
                                       },
-                                      [_vm._v("Related Product")]
+                                      [_vm._v("Related Products")]
                                     ),
                                     _vm._v(" "),
                                     _c("multi-select-app-one", {
@@ -3477,6 +3494,61 @@ var render = function() {
                             }
                           },
                           [
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-md-3" }, [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("label", [
+                                    _vm._v("Initial Delivery Charge ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.pro_delivery_charge,
+                                        expression: "form.pro_delivery_charge"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "text",
+                                      name: "pro_delivery_charge",
+                                      placeholder: "Normal Delivery Charge"
+                                    },
+                                    domProps: {
+                                      value: _vm.form.pro_delivery_charge
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "pro_delivery_charge",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              ])
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "tab-pane fade",
+                            attrs: {
+                              id: "tabs-body-seven",
+                              role: "tabpanel",
+                              "aria-labelledby": "tabs-seven"
+                            }
+                          },
+                          [
                             _vm.form.has_many_image.length
                               ? _c(
                                   "div",
@@ -3807,6 +3879,24 @@ var staticRenderFns = [
                   href: "#tabs-body-six",
                   role: "tab",
                   "aria-controls": "tabs-body-six",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Delivery")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "tabs-seven",
+                  "data-toggle": "pill",
+                  href: "#tabs-body-seven",
+                  role: "tab",
+                  "aria-controls": "tabs-body-seven",
                   "aria-selected": "false"
                 }
               },

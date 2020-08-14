@@ -240,6 +240,36 @@ class BrandShopController extends Controller
         }//*/
     }
 
+     //delect single image
+    public function DeleteImage($id){
+        //query for existing image
+        $existing_image = Brandshop::select('bs_img')->where('id', $id)->first();                   
+         //for s3
+        if($existing_image->bs_img != null){            
+            $parts = parse_url($existing_image->bs_img); 
+            $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+            Storage::disk('s3')->delete($parts);
+            //dd($parts);
+        } 
+
+        //delete single image from public storage                                         
+        // if( File::exists($existing_image->bs_img) ) {  
+        //     File::delete($existing_image->bs_img); 
+        //     //delete file //use Illuminate\Support\Facades\File; at top
+        // }
+      
+        //update image field
+        $data = Brandshop::find($id);
+        $data->bs_img = null; 
+        $data->save();
+
+        if($data){
+            return response()->json(['success'=> 'Image deleted']);
+        }else{
+            return response()->json(['errors'=> 'Something is wrong..']);
+        }//*/
+    }
+
 
      //search
     public function search(Request $request){

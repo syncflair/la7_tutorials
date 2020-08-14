@@ -153,6 +153,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -176,9 +178,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         'field_name': 'pro_price',
         'show_name': 'price'
-      }, // {'field_name':'brand_id', 'show_name':'Brand'},
-      // {'field_name':'category_id', 'show_name':'Category'},
-      {
+      }, {
+        'field_name': 'brand_name',
+        'show_name': 'Brand'
+      }, {
+        'field_name': 'cat_name',
+        'show_name': 'Category'
+      }, {
         'field_name': 'status_name',
         'show_name': 'Product Status'
       }]
@@ -747,7 +753,13 @@ var render = function() {
                       : _vm._e()
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" category ")]),
+                  _c("td", [
+                    product.pro_category != null
+                      ? _c("span", [
+                          _vm._v(" " + _vm._s(product.pro_category) + " ")
+                        ])
+                      : _vm._e()
+                  ]),
                   _vm._v(" "),
                   _c("td", [
                     _c("span", { staticStyle: { "font-weight": "bold" } }, [

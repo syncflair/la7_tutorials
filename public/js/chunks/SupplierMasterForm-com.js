@@ -190,6 +190,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -198,6 +200,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
       ShowOnChangeImage: null,
+      deleteImageIcon: false,
+      //Delete Image icon if image exist
       editMode: false,
       //Use this for add edit using the same form 
       //For Single select app
@@ -267,6 +271,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       setTimeout(function () {
         _this3.$refs.name.focus();
       }, 200);
+
+      if (data.avatar != null) {
+        this.deleteImageIcon = true;
+      }
+
       this.$store.dispatch('SupplierForAdminStore/fetchSelectedVendor', this.form.vendor_id);
     },
     ClearForm: function ClearForm() {
@@ -349,6 +358,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         toastr.warning('Something is wrong!');
       });
     },
+    deleteImage: function deleteImage(id) {
+      var _this6 = this;
+
+      this.$Progress.start(); //using progress-bar package        
+      //console.log(this.form.has_many_image);
+
+      axios.post('/spa/Supplier-Info-DeleteImage/' + id).then(function (_ref3) {
+        var data = _ref3.data;
+        // this.ShowOnChangeImage = null;
+        _this6.deleteImageIcon = false;
+        _this6.form.avatar = null;
+
+        _this6.$Progress.finish();
+
+        toastr.success(data.success);
+      })["catch"](function () {
+        _this6.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
+    },
     AutoCompleteSearchForDataVendor: function AutoCompleteSearchForDataVendor(data) {
       this.$store.dispatch('SupplierForAdminStore/AutoCompleteSearchForDataVendor', data);
     },
@@ -357,26 +387,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {
-    var _this6 = this;
+    var _this7 = this;
 
     this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
 
     FireEvent.$on('AfterChange', function () {
-      _this6.$Progress.start();
+      _this7.$Progress.start();
 
-      _this6.$store.dispatch('SupplierForAdminStore/fetchData', _this6.pagination.per_page);
+      _this7.$store.dispatch('SupplierForAdminStore/fetchData', _this7.pagination.per_page);
 
-      _this6.$Progress.finish();
+      _this7.$Progress.finish();
     }); //this event call from CustomerList component
 
     FireEvent.$on('editData', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this6.editData(data);
+      _this7.editData(data);
     }); //this event call from CustomerList component
 
     FireEvent.$on('addData', function () {
-      _this6.addData();
+      _this7.addData();
     });
   }
 }); //End Exprot Default
@@ -1121,6 +1151,28 @@ var render = function() {
                                             },
                                             attrs: { src: _vm.form.avatar }
                                           })
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _vm.deleteImageIcon
+                                        ? _c("i", {
+                                            staticClass: "far fa-times-circle",
+                                            staticStyle: {
+                                              cursor: "pointer",
+                                              background: "#fff",
+                                              padding: "4px 2px 2px 2px",
+                                              color: "red",
+                                              "border-radius": "10px",
+                                              "margin-left": "-15px"
+                                            },
+                                            attrs: { title: "click to Delete" },
+                                            on: {
+                                              click: function($event) {
+                                                return _vm.deleteImage(
+                                                  _vm.form.id
+                                                )
+                                              }
+                                            }
+                                          })
                                         : _vm._e()
                                     ])
                               ]
@@ -1183,7 +1235,10 @@ var render = function() {
                               }
                             ]
                           },
-                          [_vm._v("Save")]
+                          [
+                            _c("i", { staticClass: "fas fa-save" }),
+                            _vm._v(" Save")
+                          ]
                         ),
                         _vm._v(" "),
                         _c(
@@ -1198,7 +1253,10 @@ var render = function() {
                               }
                             ]
                           },
-                          [_vm._v("Update")]
+                          [
+                            _c("i", { staticClass: "far fa-edit" }),
+                            _vm._v(" Update")
+                          ]
                         )
                       ]
                     )

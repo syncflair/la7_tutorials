@@ -62,7 +62,9 @@
               <span v-if="product['belongs_to_brand'] === null" class="red text-bold"> No Brand </span>
             </td>   
                    
-          	<td > category </td> 
+          	<td > 
+              <span v-if="product.pro_category != null"> {{product.pro_category}} </span>
+            </td> 
 
             <td > 
               <span style="font-weight:bold"> {{ product.pro_qty }} </span>
@@ -160,8 +162,8 @@
           SearchByOptions:[
             {'field_name':'sys_pro_name', 'show_name':'Name'},
             {'field_name':'pro_price', 'show_name':'price'},
-            // {'field_name':'brand_id', 'show_name':'Brand'},
-            // {'field_name':'category_id', 'show_name':'Category'},
+            {'field_name':'brand_name', 'show_name':'Brand'},
+            {'field_name':'cat_name', 'show_name':'Category'},
             {'field_name':'status_name', 'show_name':'Product Status'},
           ],     
 
@@ -396,7 +398,6 @@
       created(){ 
 
           this.$store.dispatch('ProductMasterStore/fetchData'); //call this function at first loading from Action with Modules namespace 
-
 
           FireEvent.$on('AfterChange', () => {
               this.$Progress.start();

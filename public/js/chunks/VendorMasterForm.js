@@ -240,6 +240,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -248,6 +250,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
       ShowOnChangeImage: null,
+      deleteImageIcon: false,
+      //Delete Image icon if image exist
       editMode: false,
       //Use this for add edit using the same form   
       VendorTypes: [{
@@ -386,6 +390,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         toastr.warning('Something is wrong!');
       });
     },
+    deleteImage: function deleteImage(id) {
+      var _this4 = this;
+
+      this.$Progress.start();
+      axios.post('/spa/Vendor-Info-DeleteImage/' + id).then(function (_ref3) {
+        var data = _ref3.data;
+        // this.ShowOnChangeImage = null;
+        _this4.deleteImageIcon = false;
+        _this4.form.vendor_img = null;
+
+        _this4.$Progress.finish();
+
+        toastr.success(data.success);
+      })["catch"](function () {
+        _this4.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
+    },
     fillForm: function fillForm() {
       if (this.$route.params.data != null) {
         this.editMode = true;
@@ -395,6 +418,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         if (this.$route.params.data.brand_shop_id === null) {
           this.form.brand_shop_id = '';
+        }
+
+        if (this.$route.params.data.vendor_img != null) {
+          this.deleteImageIcon = true;
         }
       } //load selected brand shop
 
@@ -1022,6 +1049,26 @@ var render = function() {
                                   },
                                   attrs: { src: _vm.form.vendor_img }
                                 })
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.deleteImageIcon
+                              ? _c("i", {
+                                  staticClass: "far fa-times-circle",
+                                  staticStyle: {
+                                    cursor: "pointer",
+                                    background: "#fff",
+                                    padding: "4px 2px 2px 2px",
+                                    color: "red",
+                                    "border-radius": "10px",
+                                    "margin-left": "-15px"
+                                  },
+                                  attrs: { title: "click to Delete" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.deleteImage(_vm.form.id)
+                                    }
+                                  }
+                                })
                               : _vm._e()
                           ])
                     ])
@@ -1067,7 +1114,7 @@ var render = function() {
                         }
                       ]
                     },
-                    [_vm._v("Save")]
+                    [_c("i", { staticClass: "fas fa-save" }), _vm._v(" Save")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -1082,7 +1129,7 @@ var render = function() {
                         }
                       ]
                     },
-                    [_vm._v("Update")]
+                    [_c("i", { staticClass: "far fa-edit" }), _vm._v(" Update")]
                   )
                 ]
               )

@@ -73,6 +73,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 //import { mapState } from 'vuex' //for user MapState
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "search-app-one",
@@ -251,9 +252,7 @@ var render = function() {
             }
           },
           [
-            _c("option", { attrs: { disabled: "", value: "" } }, [
-              _vm._v("Search by...")
-            ]),
+            _c("option", { attrs: { value: "" } }, [_vm._v("Search by...")]),
             _vm._v(" "),
             _vm._l(_vm.SearchByOptions, function(serchOption, index) {
               return _c(

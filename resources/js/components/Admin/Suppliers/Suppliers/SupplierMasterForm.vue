@@ -132,6 +132,8 @@
                              <img v-else-if="form.avatar === null" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:150px;">
                               <!-- <img v-else-if="form.avatar != '' " :src="'../'+form.avatar" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:150px;"> -->
                               <img v-else-if="form.avatar != '' " :src="form.avatar" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:150px;">
+
+                              <i v-if="deleteImageIcon" @click="deleteImage(form.id)" class="far fa-times-circle" style="cursor: pointer; background: #fff; padding: 4px 2px 2px 2px;   color: red; border-radius: 10px; margin-left: -15px;" title="click to Delete"></i>
                             </span> 
                             <!-- <img :src="'../'+NoIconUrl"> -->
                     	</div>
@@ -157,8 +159,8 @@
 	      <div class="modal-footer pt-0">
 	        <button @click="ClearForm()" type="button" class="btn btn-danger btn-flat btn-sm close-form" data-dismiss="modal">Close</button>
 	        <button type="submit" class="btn btn-primary btn-flat btn-sm">
-	        	<span v-show="!editMode">Save</span>
-	        	<span v-show="editMode">Update</span>
+	        	<span v-show="!editMode"> <i class="fas fa-save"></i> Save</span>
+	        	<span v-show="editMode"> <i class="far fa-edit"></i> Update</span>
 	    	</button>
 	      </div><!--modal-footer-->
   	  </form><!-- </form> -->
@@ -183,6 +185,7 @@
 	      return {
 	      	NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
 	        ShowOnChangeImage:null,	 
+	        deleteImageIcon: false, //Delete Image icon if image exist
 	        editMode: false, //Use this for add edit using the same form 
 
 	      	//For Single select app
@@ -250,7 +253,10 @@
 	    		this.form.fill(data); 	 
 	    		setTimeout(() => {
 	    			this.$refs.name.focus(); 
-                }, 200);  
+                }, 200);
+                if(data.avatar != null){
+		            this.deleteImageIcon = true;  
+		        }  
 
                 this.$store.dispatch('SupplierForAdminStore/fetchSelectedVendor', this.form.vendor_id);  		
 	    	},
@@ -320,8 +326,24 @@
 				    this.$Progress.fail();
 				    toastr.warning('Something is wrong!');
 				  }) 
-
 			},
+
+			deleteImage(id){ 
+		        this.$Progress.start(); //using progress-bar package        
+		          //console.log(this.form.has_many_image);
+		          axios.post('/spa/Supplier-Info-DeleteImage/'+id)
+		            .then(({ data }) => {
+		                // this.ShowOnChangeImage = null;
+		                this.deleteImageIcon = false;
+		                this.form.avatar = null;
+		                this.$Progress.finish(); 
+		                toastr.success(data.success);
+		             })
+		            .catch(() => {
+		              this.$Progress.fail();
+		              toastr.warning('Something is wrong!');
+		            });
+		    },
 
 			AutoCompleteSearchForDataVendor(data){
 		        this.$store.dispatch('SupplierForAdminStore/AutoCompleteSearchForDataVendor', data ); 

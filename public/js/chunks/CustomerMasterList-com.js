@@ -144,7 +144,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         'field_name': 'phone',
         'show_name': 'Phone'
       }, {
-        'field_name': 'customer_group',
+        'field_name': 'group_name',
         'show_name': 'Group'
       }, {
         'field_name': 'us_name',

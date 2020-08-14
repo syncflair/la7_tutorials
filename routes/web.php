@@ -133,6 +133,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::post('spa/supplier-verify-by-admin/{id}', 'Admin\Supplier\SupplierController@verifiedByAdmin');
     Route::post('spa/supplier-Info/active-supplier/{id}', 'Admin\Supplier\SupplierController@active_supplier');
     Route::post('spa/supplier-Info/inactive-supplier/{id}', 'Admin\Supplier\SupplierController@inactive_supplier');
+    Route::post('spa/Supplier-Info-DeleteImage/{id}', 'Admin\Supplier\SupplierController@DeleteImage');
     Route::resource('spa/supplier-Info', 'Admin\Supplier\SupplierController',
      ['except'=>['create','show','edit'] ]);
 
@@ -140,16 +141,19 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::get('spa/AutoCompleteBrandShopData', 'Admin\Supplier\BrandShopController@autoCompleteSearch'); //search
     Route::get('spa/searchBrandShopData', 'Admin\Supplier\BrandShopController@search'); //search
     Route::get('spa/BrandShop-Info/getBrandShops', 'Admin\Supplier\BrandShopController@getBrandShops');//commonStoreForAll store 
+    Route::post('spa/BrandShop-Info-DeleteImage/{id}', 'Admin\Supplier\BrandShopController@DeleteImage');
     Route::resource('spa/BrandShop-Info', 'Admin\Supplier\BrandShopController',
       ['except'=>['create','show','edit'] ]);
 
 
-    Route::post('spa/getSelectedVendor/', 'Admin\Supplier\VendorController@getSelectedVendor');
+    Route::post('spa/getSelectedVendorList/', 'Admin\Supplier\VendorController@selectedVendortList');//get multiple data
+    Route::post('spa/getSelectedVendor/', 'Admin\Supplier\VendorController@getSelectedVendor');// get single
     Route::get('spa/AutoCompleteVendorData', 'Admin\Supplier\VendorController@autoCompleteSearch'); //Auto Complete
     Route::post('spa/Vendor-Info/change-notify/{id}/{notifyValue}', 'Admin\Supplier\VendorController@ChangeNotify');
     Route::post('spa/Vendor-Info/active-vendor/{id}', 'Admin\Supplier\VendorController@activeVendor');
     Route::post('spa/Vendor-Info/inactive-vendor/{id}', 'Admin\Supplier\VendorController@inactiveVendor');
     Route::get('spa/searchVendorData', 'Admin\Supplier\VendorController@search'); //search
+    Route::post('spa/Vendor-Info-DeleteImage/{id}', 'Admin\Supplier\VendorController@DeleteImage');
     Route::resource('spa/Vendor-Info', 'Admin\Supplier\VendorController',
       ['except'=>['create','show','edit'] ]);
 
@@ -181,6 +185,8 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/Specification-Info', 'Admin\Catalog\SpecificationController', 
         ['except'=>['create','edit','show'] ]);
 
+    Route::post('spa/getSelectedBrand/', 'Admin\Catalog\BrandController@getSelectedBrand');// get single
+    Route::get('spa/AutoCompleteBrandData', 'Admin\Catalog\BrandController@autoCompleteSearch'); //Auto Complete
     Route::get('spa/Brand-Info/getBrands', 'Admin\Catalog\BrandController@getBrands');//for commonStoreForAll store  
     Route::get('spa/searchBrandData', 'Admin\Catalog\BrandController@search'); //search     
     Route::resource('spa/Brand-Info', 'Admin\Catalog\BrandController', 

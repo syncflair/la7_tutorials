@@ -30,6 +30,7 @@ class Product extends Model
         'related_products' => 'array',        
         'pro_discount' => 'array',        
         'pro_suppliers' => 'array',        
+        'pro_vendors' => 'array',        
         //'pro_shops' => 'array',        
         //'multi_image' => 'array',        
     ];

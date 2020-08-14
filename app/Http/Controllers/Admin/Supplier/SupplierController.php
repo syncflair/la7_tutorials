@@ -295,6 +295,36 @@ class SupplierController extends Controller
         }//*/
     }
 
+
+    public function DeleteImage($id){
+        //query for existing image
+        $existing_image = Supplier::select('avatar')->where('id', $id)->first();                   
+         //for s3
+        if($existing_image->avatar != null){            
+            $parts = parse_url($existing_image->avatar); 
+            $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+            Storage::disk('s3')->delete($parts);
+            //dd($parts);
+        } 
+
+        //delete single image from public storage                                         
+        // if( File::exists($existing_image->avatar) ) {  
+        //     File::delete($existing_image->avatar); 
+        //     //delete file //use Illuminate\Support\Facades\File; at top
+        // }
+      
+        //update image field
+        $data = Supplier::find($id);
+        $data->avatar = null; 
+        $data->save();
+
+        if($data){
+            return response()->json(['success'=> 'Image deleted']);
+        }else{
+            return response()->json(['errors'=> 'Something is wrong..']);
+        }//*/
+    }
+
     public function search(Request $request){
 
         if(!empty($request->perPage)){

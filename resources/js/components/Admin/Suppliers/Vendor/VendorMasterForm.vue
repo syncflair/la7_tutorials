@@ -178,6 +178,8 @@
                              <img v-else-if="form.vendor_img === null" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:130px;">
                               <!-- <img v-else-if="form.vendor_img != '' " :src="'../'+form.vendor_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:130px;"> -->
                               <img v-else-if="form.vendor_img != '' " :src="form.vendor_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:130px;">
+
+                              <i v-if="deleteImageIcon" @click="deleteImage(form.id)" class="far fa-times-circle" style="cursor: pointer; background: #fff; padding: 4px 2px 2px 2px;   color: red; border-radius: 10px; margin-left: -15px;" title="click to Delete"></i>
                             </span> 
                             <!-- <img :src="'../'+NoIconUrl"> -->
                     	</div>
@@ -202,8 +204,8 @@
    	  <div class="row mr-4">
    	  	<div class="col-12  text-right">
    	  		<button type="submit" class="btn btn-primary btn-flat btn-sm ">
-	        	<span v-show="!editMode">Save</span>
-	        	<span v-show="editMode">Update</span>
+	        	<span v-show="!editMode"> <i class="fas fa-save"></i> Save</span>
+            <span v-show="editMode"> <i class="far fa-edit"></i> Update</span>
 	    	</button>    	  		
    	  	</div>
    	  </div>  	  	
@@ -231,6 +233,7 @@
       return {
         NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
         ShowOnChangeImage:null,
+        deleteImageIcon: false, //Delete Image icon if image exist
         editMode: false, //Use this for add edit using the same form   
         VendorTypes: [
             { name: 'Person' },
@@ -344,6 +347,22 @@
   			  }) 
   		},
 
+      deleteImage(id){ 
+        this.$Progress.start();   
+          axios.post('/spa/Vendor-Info-DeleteImage/'+id)
+            .then(({ data }) => {
+                // this.ShowOnChangeImage = null;
+                this.deleteImageIcon = false;
+                this.form.vendor_img = null;
+                this.$Progress.finish(); 
+                toastr.success(data.success);
+             })
+            .catch(() => {
+              this.$Progress.fail();
+              toastr.warning('Something is wrong!');
+            });
+      },
+
 
 	    fillForm(){
 	    	if(this.$route.params.data != null){
@@ -352,8 +371,13 @@
 	    		this.form.fill(this.$route.params.data);
 	    		//this.form.departments = this.$route.params.data.departments; //pass the array
 	    		//this.$refs.vendor_name.focus();  
-          if(this.$route.params.data.brand_shop_id === null){ this.form.brand_shop_id = ''; }   		   	
+          if(this.$route.params.data.brand_shop_id === null){ this.form.brand_shop_id = ''; } 
+
+          if(this.$route.params.data.vendor_img != null){
+            this.deleteImageIcon = true;  
+          } 		   	
 	    	}
+        
         //load selected brand shop
         this.$store.dispatch('VendorMasterStore/fetchSelectedBrandShop', this.form.brand_shop_id);
 	    },

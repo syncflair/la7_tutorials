@@ -4,7 +4,8 @@
 
 		<div class="select-option">
 			<select class="form-control form-control-sm" v-model="selectOption">
-				<option disabled value="">Search by...</option>
+				<option value="">Search by...</option>
+				<!-- <option disabled value="">Search by...</option> -->
 				<option v-for="(serchOption, index) in SearchByOptions" :key="index" :value="serchOption.field_name">
 					{{serchOption.show_name}}
 				</option>

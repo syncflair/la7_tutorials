@@ -270,6 +270,36 @@ class VendorController extends Controller
         }//*/
     }
 
+    //delect single image
+    public function DeleteImage($id){
+        //query for existing image
+        $existing_image = Vendor::select('vendor_img')->where('id', $id)->first();                   
+         //for s3
+        if($existing_image->vendor_img != null){            
+            $parts = parse_url($existing_image->vendor_img); 
+            $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+            Storage::disk('s3')->delete($parts);
+            //dd($parts);
+        } 
+
+        //delete single image from public storage                                         
+        // if( File::exists($existing_image->vendor_img) ) {  
+        //     File::delete($existing_image->vendor_img); 
+        //     //delete file //use Illuminate\Support\Facades\File; at top
+        // }
+      
+        //update image field
+        $data = Vendor::find($id);
+        $data->vendor_img = null; 
+        $data->save();
+
+        if($data){
+            return response()->json(['success'=> 'Image deleted']);
+        }else{
+            return response()->json(['errors'=> 'Something is wrong..']);
+        }//*/
+    }
+
      //search
     public function search(Request $request){
 
@@ -366,6 +396,15 @@ class VendorController extends Controller
                         ->select('id','vendor_name')
                         ->get(); //Model::whereIn('id', [1, 2, 3])->get();
        // $searchResult = Supplier::findMany([1, 2, 3]); //Model::findMany([1, 2, 3]);
+        return response()->json($searchResult);
+    }//end search
+
+     //selected vendor list for multiselect option (for Product)
+    public function selectedVendortList(Request $request){
+       $searchKey = $request->q;
+        $searchResult = Vendor::whereIn('id', $searchKey)
+                        ->select('id','vendor_name')
+                        ->get(); 
         return response()->json($searchResult);
     }//end search
 

@@ -20,7 +20,7 @@
 
 	          <div class="card--"><!-- row inside form -->
 	          	<div class="row">
-		          	<div class="col-md-12 col-sm-12">
+		          	<div class="col-md-9 col-sm-12">
 
 		          		<div class="form-group">
 		                  <label>Brand Shop Name *</label>
@@ -39,33 +39,42 @@
 	                      <input v-model="form.is_enabled" type="checkbox" class="form-check-input" name="is_enabled" id="checkbox" value="1">
 	                      <label class="form-check-label" for="checkbox" >Is Active</label>
 	                    </div>
+	                    
+	                    
+		          	</div>	
 
-	                    <div class="row pt-3">
-	                      <div class="col-md-9">
-	                        <div class="form-group">
-	                          <label for="bs_img">Image</label>
-	                          <input @change="onImageChange" type="file" ref="bs_img" name="bs_img" class="form-control" />
-	                          <!-- @change="updateCatImg" -->
-	                        </div>
-	                      </div>
-	                      <div class="col-md-3">
+		          	<div class="col-md-3 col-sm-12">
 
+		          		<div class="row pt-3">
+	                      <div class="col-md-12">
 	                        <span v-if="ShowOnChangeImage != null">
-	                          <img v-if="ShowOnChangeImage != null" :src="ShowOnChangeImage" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
+	                          <img v-if="ShowOnChangeImage != null" :src="ShowOnChangeImage" class="img-fluid img-thumbnail" style="width:150px;height:auto;">
 	                        </span>
 	                        
 	                        <span v-else>
-	                         <img v-if="form.bs_img == 'undefined'" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
-	                         <img v-if="form.bs_img === '' " :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
-	                         <img v-else-if="form.bs_img === null" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
+	                         <img v-if="form.bs_img == 'undefined'" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:auto;">
+	                         <img v-if="form.bs_img === '' " :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:auto;">
+	                         <img v-else-if="form.bs_img === null" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:auto;">
 	                          <!-- <img v-else-if="form.bs_img != '' " :src="'../'+form.bs_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:65px;height:65px;"> -->
-	                          <img v-else-if="form.bs_img != '' " :src="form.bs_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:65px;height:65px;">
-	                        </span>                        
-	                        
+	                          <img v-else-if="form.bs_img != '' " :src="form.bs_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:auto;">
+
+	                          <i v-if="deleteImageIcon" @click="deleteImage(form.id)" class="far fa-times-circle" style="cursor: pointer; background: #fff; padding: 4px 2px 2px 2px;   color: red; border-radius: 10px; margin-left: -15px;" title="click to Delete"></i>
+	                        </span>       
 	                      </div>	                      
 	                    </div>
-	                    
-		          	</div>	          	                     	
+
+	                    <div class="row">
+		          			<div class="col-md-12">
+		                        <div class="form-group">
+		                          <label for="bs_img">Image</label>
+		                          <input @change="onImageChange" type="file" ref="bs_img" name="bs_img" class="form-control" />
+		                          <!-- @change="updateCatImg" -->
+		                        </div>
+		                    </div>
+		          		</div>
+
+		          	</div>
+
 	          	</div><!-- row inside form -->
 	            
 
@@ -75,8 +84,8 @@
 	      <div class="modal-footer">
 	        <button @click="ClearForm()" type="button" class="btn btn-danger btn-flat btn-sm close-form" data-dismiss="modal">Close</button>
 	        <button type="submit" class="btn btn-primary btn-flat btn-sm">
-	        	<span v-show="!editMode">Save</span>
-	        	<span v-show="editMode">Update</span>
+	        	<span v-show="!editMode"> <i class="fas fa-save"></i> Save</span>
+	        	<span v-show="editMode"> <i class="far fa-edit"></i> Update</span>
 	    	</button>
 	      </div><!--modal-footer-->
   	  </form><!-- </form> -->
@@ -94,7 +103,8 @@
 		 data () {
 	      return {
 	      	NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
-	        ShowOnChangeImage:null,	
+	        ShowOnChangeImage:null,		        
+	        deleteImageIcon: false, //Delete Image icon if image exist
 	        editMode: false, //Use this for add edit using the same form     
 
 	        // Create a new form instance
@@ -139,7 +149,10 @@
 	    		this.editMode = true;
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
-	    		//this.$refs.brand_shop_title.focus();    		
+	    		//this.$refs.brand_shop_title.focus(); 
+	    		if(data.bs_img != null){
+		            this.deleteImageIcon = true;  
+		        }    		
 	    	},
 	    	ClearForm(){
 	    		this.editMode = false;
@@ -203,6 +216,23 @@
 				    toastr.warning('Something is wrong!');
 				  }) 
 			},
+
+			deleteImage(id){ 
+		        this.$Progress.start();   
+		          axios.post('/spa/BrandShop-Info-DeleteImage/'+id)
+		            .then(({ data }) => {
+		                // this.ShowOnChangeImage = null;
+		                this.deleteImageIcon = false;
+		                this.form.bs_img = null;
+		                this.$Progress.finish(); 
+		                toastr.success(data.success);
+		             })
+		            .catch(() => {
+		              this.$Progress.fail();
+		              toastr.warning('Something is wrong!');
+		            });
+            },
+
 
 
 	    },

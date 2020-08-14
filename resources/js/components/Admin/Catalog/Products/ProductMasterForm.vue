@@ -45,7 +45,10 @@
           <a class="nav-link" id="tabs-five" data-toggle="pill" href="#tabs-body-five" role="tab" aria-controls="tabs-body-five" aria-selected="false">Discount</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" id="tabs-six" data-toggle="pill" href="#tabs-body-six" role="tab" aria-controls="tabs-body-six" aria-selected="false">Images</a>
+          <a class="nav-link" id="tabs-six" data-toggle="pill" href="#tabs-body-six" role="tab" aria-controls="tabs-body-six" aria-selected="false">Delivery</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="tabs-seven" data-toggle="pill" href="#tabs-body-seven" role="tab" aria-controls="tabs-body-seven" aria-selected="false">Images</a>
         </li>
       </ul>
     </div>
@@ -197,11 +200,22 @@
           <div class="row">
             <div class="col-md-3">
               <div class="form-group">
-                <label>Brand</label>
-                <select v-model="form.brand_id" class="form-control form-control-sm-" id="brand_id" name="brand_id" >
+                <label style="margin-left: 0px !important;">Brand</label>
+                <!-- <select v-model="form.brand_id" class="form-control form-control-sm-" id="brand_id" name="brand_id" >
                       <option disabled value="">Select brand ..</option>                
                       <option v-for="brand in AllBrands" :key="brand.id" v-bind:value="brand.id">{{brand.brand_name}}</option> 
-                </select>
+                </select> -->
+                <single-select-app-one                           
+                  :options="selectedBrand"
+                  @getAllDataListByIds="getSelectedDataByIdsForBrand"
+                  :autoSearchOptions="autoSearchBrands"
+                  @AutoCompleteSearchForData="AutoCompleteSearchForDataBrand"                   
+                  :filterBy="filterBy_brand"
+                  :place-holder="placeHolder_brand"
+                  :value-property="valueProperty_brand"
+                  v-model="form.brand_id"
+                  style="margin-top: 5px !important;" 
+                />
               </div> 
             </div>
             <div class="col-md-3">
@@ -214,7 +228,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group" style="">
-                <label style="margin-left: 0px !important;">Select Category</label>
+                <label style="margin-left: 0px !important;">Category</label>
                 <multi-select-app-one
                   :options="selectedCategoryList"
                   @getAllDataListByIds="getSelectedListByIdsForCategory"
@@ -229,7 +243,7 @@
             </div>
           </div>
 
-          <div class="row">
+         <!--  <div class="row">
             <div class="col-md-12">
               <div class="form-group" style="">
                 <label style="margin-left: 0px !important;">Select Supplier</label>
@@ -245,12 +259,30 @@
                 />
               </div>
             </div>
+          </div> -->
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group" style="">
+                <label style="margin-left: 0px !important;">Vendors / Suppliers</label>
+                <multi-select-app-one
+                  :options="selectedVendorList"
+                  @getAllDataListByIds="getSelectedListByIdsForVendor"
+                  :autoSearchOptions="autoSearchVendors" 
+                  @AutoCompleteSearchForData="AutoCompleteSearchForDataVendor"
+                  :filterBy="filterBy_vendor"
+                  :place-holder="placeHolder_vendor"
+                  :value-property="valueProperty_vendor"
+                  v-model="form.pro_vendors"                   
+                />
+              </div>
+            </div>
           </div>
 
           <div class="row">
             <div class="col-md-12">
               <div class="form-group" style="">
-                <label style="margin-left: 0px !important;">Related Product</label>
+                <label style="margin-left: 0px !important;">Related Products</label>
                 <multi-select-app-one
                   :options="selectedProductList"
                   @getAllDataListByIds="getSelectedListByIdsForProduct"
@@ -269,14 +301,7 @@
             <div class="col-md-12">
               <div class="form-group" style="">
                 <label style="margin-left: 0px !important;">Downloadable Link</label>
-                <multi-select-app-one
-                  :options="AllCategory"
-                  :autoSearchOptions="autoSearchCategories" 
-                  :filterBy="filterBy"
-                  :place-holder="placeHolder"
-                  :value-property="valueProperty"
-                  v-model="form.pro_category" 
-                />
+              
               </div>
             </div>
           </div> -->
@@ -409,12 +434,6 @@
 
                 <tr v-for="(input, key) in form.pro_discount" :key="key">
                   <td >
-                    <!-- <div class="form-group-">
-                      <select v-model="input.customer_group" class="form-control" id="" name="customer_group" >
-                            <option disabled value="">Select customer group ..</option>                
-                            <option v-for="cg in CustomerGroups" v-bind:value="cg.name">{{cg.name}}</option> 
-                      </select>
-                    </div> -->
                     <div class="form-group-">
                       <select v-model="input.customer_group" class="form-control" id="" name="customer_group" >
                             <option disabled value="">Select customer group ..</option>                
@@ -461,6 +480,18 @@
 
         </div><!--End tab-body-five-->
         <div class="tab-pane fade" id="tabs-body-six" role="tabpanel" aria-labelledby="tabs-six">
+
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <label>Initial Delivery Charge </label>
+                <input v-model="form.pro_delivery_charge" type="text" name="pro_delivery_charge" class="form-control" placeholder="Normal Delivery Charge">
+              </div> 
+            </div>
+          </div>
+
+        </div><!--End tab-body-six-->
+        <div class="tab-pane fade" id="tabs-body-seven" role="tabpanel" aria-labelledby="tabs-seven">
           
 
           <div  v-if="form.has_many_image.length" class="row mt-2 mb-4" style="/*background:#2196F3;*/ margin: 5px 0px 0px 5px; padding: 10px; border-radius: 5px;">
@@ -537,7 +568,7 @@
 
           </div><!-- end uploader -->
 
-        </div><!--End tab-body-six-->
+        </div><!--End tab-body-seven-->
       </div>
     </div>
     <!-- /.card -->
@@ -588,25 +619,20 @@
   	      { name: 'Downloadable'},
 		    ],  
 
-        // CustomerGroups: [
-        //   { name: 'Default' },
-        //   { name: 'Wholesale' },
-        // ],    
+        //Single Select app for Brand
+        placeHolder_brand:'Select brand', filterBy_brand:'brand_name', valueProperty_brand: 'id',   
 
     		//form multiselect app for category
-    		placeHolder:'Select multiple Category',
-    		filterBy:'cat_name',
-    		valueProperty: 'id',
+    		placeHolder:'Select multiple Category', filterBy:'cat_name', valueProperty: 'id',
 
         //multiselect app for Supplier
-        placeHolder_supp:'Select multiple Supplier or Shop',
-        filterBy_supp:'name',
-        valueProperty_supp: 'id',
+        // placeHolder_supp:'Select multiple Supplier or Shop', // filterBy_supp:'name',// valueProperty_supp: 'id',
+
+        //multiselect app for Supplier
+        placeHolder_vendor:'Select multiple Vendor (Supplier)', filterBy_vendor:'vendor_name', valueProperty_vendor: 'id',
 
         //multiselect app for related product
-        placeHolder_product:'Select multiple related products',
-        filterBy_product:'sys_pro_name',
-        valueProperty_product: 'id',
+        placeHolder_product:'Select multiple related products', filterBy_product:'sys_pro_name', valueProperty_product: 'id',
 
         //for images manipulation
         show_image_files_name: [], //use only to show image name in text field
@@ -635,6 +661,9 @@
           //pro_image:'',
           is_enabled:'',
 
+          pro_delivery_charge:'',
+
+
           pro_category:[],
           pro_attributes:[],
           pro_specification:[ { specification_name: '', specification_desc: '', specification_serial:'', } ],          
@@ -642,7 +671,8 @@
           related_products:[],
           pro_translation: [],
           pro_images:[],
-          pro_suppliers:[],
+          //pro_suppliers:[], 
+          pro_vendors:[],
           //pro_shops:[],
           //multi_image:[],
           has_many_image:[], //only for get image from database
@@ -655,20 +685,11 @@
 
     computed: {
     	/*userStatus get form commonSotreForAll*/	
-        ...mapState( 'ProductMasterStore', ['selectedCategoryList','selectedSupplierList','selectedProductList','autoSearchProducts'] ),
-        ...mapState( 'commonStoreForAll', ['allLanguages','AllStatus','AllBrands','autoSearchCategories','AllSpecifications','AllAttributes','AllAttributeValues','allCustomerGroups','autoSearchSuppliers'] ),        
-        //...mapState( 'ProductMasterStore', ['AllProducts','autoSearchProducts'] ),  
+        ...mapState( 'ProductMasterStore', [, 'selectedBrand', 'autoSearchBrands','selectedVendorList','autoSearchVendors','selectedCategoryList','selectedProductList','autoSearchProducts'] ),
+        //selectedSupplierList
 
-        selectedAllAttributeValues() {
-          // let fo = Object.values(this.AllAttributes).filter( av => {
-          // // let fo = Object.values(this.AllAttributeValues).filter( av => {
-          //   const result = av.find( ({ d }) => d.id === data );
-          //       return av;
-          //       //return this.form.pro_attributes.some(v => v['attrib_id'] === av['id']);
-          //       // return this.form.pro_attributes.some(v => v['attrib_id'] === av['attribute_id']);
-          // });
-          // return fo;
-        }
+        ...mapState( 'commonStoreForAll', ['allLanguages','AllStatus','AllBrands','autoSearchCategories','AllSpecifications','AllAttributes','AllAttributeValues','allCustomerGroups'] ),        
+        //autoSearchSuppliers 
 
   	}, //end Computed
 
@@ -891,32 +912,53 @@
       		if(this.$route.params.data.pro_category === null){ this.form.pro_category = []; }
           if(this.$route.params.data.pro_suppliers === null){ this.form.pro_suppliers = []; }
           if(this.$route.params.data.pro_suppliers === null){ this.form.pro_suppliers = []; }
+          if(this.$route.params.data.pro_vendors === null){ this.form.pro_vendors = []; }
           if(this.$route.params.data.related_products === null){ this.form.related_products = []; }
           if(this.$route.params.data.has_many_image){ this.form.pro_images = []; }
     	
       	}
+
+        //for single Select
+        this.$store.dispatch('ProductMasterStore/fetchSelectedBrand', this.form.brand_id);
         //for multiselect
         this.$store.dispatch('ProductMasterStore/fetchSelectedCategoryList', this.form.pro_category);
-        this.$store.dispatch('ProductMasterStore/fetchSelectedSupplierList', this.form.pro_suppliers);
+        //this.$store.dispatch('ProductMasterStore/fetchSelectedSupplierList', this.form.pro_suppliers);
+        this.$store.dispatch('ProductMasterStore/fetchSelectedVendorList', this.form.pro_vendors);
         this.$store.dispatch('ProductMasterStore/fetchSelectedProductList', this.form.related_products);
+      },
+
+      AutoCompleteSearchForDataBrand(data){
+            this.$store.dispatch('ProductMasterStore/AutoCompleteSearchForDataBrand', data ); 
+      },
+      getSelectedDataByIdsForBrand(data){
+          this.$store.dispatch('ProductMasterStore/fetchSelectedBrand', this.form.brand_id);
       },
 
       //all method comming from multiselect apps
       AutoCompleteSearchForDataCategory(data){
         this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data ); 
       },
-      AutoCompleteSearchForDataSuppliyer(data){
-        this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForSuppliers', data ); 
-      },
-      AutoCompleteSearchForDataProduct(data){
-        this.$store.dispatch('ProductMasterStore/AutoCompleteSearchForProduct', data ); 
-      },
-      getSelectedListByIdsForSupplier(){
-        this.$store.dispatch('ProductMasterStore/fetchSelectedSupplierList', this.form.pro_suppliers);
-      },
       getSelectedListByIdsForCategory(){
         this.$store.dispatch('ProductMasterStore/fetchSelectedCategoryList', this.form.pro_category);
       },
+
+      // AutoCompleteSearchForDataSuppliyer(data){
+      //   this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForSuppliers', data ); 
+      // },
+      // getSelectedListByIdsForSupplier(){
+      //   this.$store.dispatch('ProductMasterStore/fetchSelectedSupplierList', this.form.pro_suppliers);
+      // },
+
+      AutoCompleteSearchForDataVendor(data){
+        this.$store.dispatch('ProductMasterStore/AutoCompleteSearchForVendors', data ); 
+      },
+      getSelectedListByIdsForVendor(){
+        this.$store.dispatch('ProductMasterStore/fetchSelectedVendorList', this.form.pro_vendors);
+      },
+
+      AutoCompleteSearchForDataProduct(data){
+        this.$store.dispatch('ProductMasterStore/AutoCompleteSearchForProduct', data ); 
+      },      
       getSelectedListByIdsForProduct(){
         this.$store.dispatch('ProductMasterStore/fetchSelectedProductList', this.form.related_products);        
       },
@@ -924,6 +966,11 @@
     }, //end Methods
 
   	created(){
+      if( this.editMode === false){
+          setTimeout(() => {
+            this.pushToLanguageTranslationArray();
+          }, 2300);
+      }
   		this.fillForm();
     	this.$store.dispatch('commonStoreForAll/AllStatus', 'Product'); //get status with "Product" keyword
       this.$store.dispatch('commonStoreForAll/fetchLanguages'); //get all language
@@ -943,16 +990,12 @@
       //     this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForSuppliers', data ); 
       // });
 
-      if( this.editMode === false){
-          setTimeout(() => {
-            this.pushToLanguageTranslationArray();
-          }, 2000);
-      }
+      
+      //this.pushToLanguageTranslationArray();
     	//console.log(this.form);
     }, //end Created
 
     mounted() {
-      
       //console.log(this.form.pro_translation);        
       //console.log(this.form.pro_translation);
     }

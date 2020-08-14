@@ -199,7 +199,7 @@ class CustomerController extends Controller
         }
 
         $searchKey = $request->q;
-        $searchOption = $request->so;
+        $searchOption = $request->so; 
 
         if(!empty($searchKey) && empty($searchOption)){
         //if($search = \Request::get('q')){
@@ -209,23 +209,28 @@ class CustomerController extends Controller
                         ->orWhere('customers.phone','LIKE','%'.$searchKey.'%')
                         ->orWhere('customers.customer_group','LIKE','%'.$searchKey.'%')
                         ->orWhere('customers.created_at','LIKE','%'.$searchKey.'%')
-                        ->orWhere('user_status.us_name','LIKE','%'.$searchKey.'%');
+                        ->orWhere('user_status.us_name','LIKE','%'.$searchKey.'%')
+                        ->orWhere('customer_groups.group_name','LIKE','%'.$searchKey.'%');
             })
-            ->select('customers.*','user_status.us_name')
+            ->select('customers.*','user_status.us_name','customer_groups.group_name')
             ->join('user_status', 'customers.status_id','=', 'user_status.id')
+            ->join('customer_groups', 'customers.customer_group_id','=', 'customer_groups.id')
             ->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){
             $searchResult = Customer::with('belongsToCustomerGroup')->where(function($query) use ($searchKey, $searchOption){
-                if($searchOption == 'us_name'){
-                    $query->where( 'user_status.'.$searchOption,'LIKE','%'.$searchKey.'%');
-                }else{
+                if($searchOption == 'name' OR $searchOption == 'email' OR $searchOption == 'phone'  ){
                     $query->where( 'customers.'.$searchOption,'LIKE','%'.$searchKey.'%');
+                }elseif($searchOption == 'us_name'){
+                    $query->where( 'user_status.'.$searchOption,'LIKE','%'.$searchKey.'%');
+                }elseif($searchOption == 'group_name'){
+                    $query->where( 'customer_groups.'.$searchOption,'LIKE','%'.$searchKey.'%');
                 }
                 
             })
-            ->select('customers.*','user_status.us_name')
+            ->select('customers.*','user_status.us_name','customer_groups.group_name')
             ->join('user_status', 'customers.status_id','=', 'user_status.id')
+            ->join('customer_groups', 'customers.customer_group_id','=', 'customer_groups.id')
             ->paginate($perPage);
             
         }else{
