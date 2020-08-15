@@ -100,8 +100,6 @@ __webpack_require__.r(__webpack_exports__);
       editMode: false,
       //Use this for add edit using the same form   
       StatusTypes: [{
-        name: 'Order'
-      }, {
         name: 'Stock'
       }, {
         name: 'Shipping'
@@ -109,6 +107,14 @@ __webpack_require__.r(__webpack_exports__);
         name: 'Payment'
       }, {
         name: 'Product'
+      }, {
+        name: 'PruchaseOrder'
+      }, {
+        name: 'PruchaseReturn'
+      }, {
+        name: 'SalesOrder'
+      }, {
+        name: 'SalesReturn'
       }],
       // Create a new form instance
       form: new Form({
@@ -275,7 +281,7 @@ var render = function() {
                         }
                       ]
                     },
-                    [_vm._v("Add Vat Rate")]
+                    [_vm._v("Add Status")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -290,7 +296,7 @@ var render = function() {
                         }
                       ]
                     },
-                    [_vm._v("Update Vat Rate")]
+                    [_vm._v("Update Status")]
                   )
                 ]),
                 _vm._v(" "),

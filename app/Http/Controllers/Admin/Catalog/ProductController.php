@@ -423,7 +423,7 @@ class ProductController extends Controller
         return response()->json($searchResult);
     }//end search  
 
-    //auto complete product search
+    //auto complete product search (from product, Purchase Order, Purchase Return, Sales Order, Sales Return)
     public function AutoCompleteProductForStore(Request $request){
         $searchKey = $request->q;
         if(!empty($searchKey)){
@@ -444,6 +444,15 @@ class ProductController extends Controller
 
         $searchKey = $request->q != null ? $request->q : $request->q = [];
         $searchResult = Product::whereIn('id', $searchKey)
+                        ->select('id','sys_pro_name')
+                        ->get(); 
+        return response()->json($searchResult);
+    }//end search
+
+    //selected Brand Shop (from Purchase Order, Purchase Return, Sales Order, Sales Return)
+    public function getSelectedProduct(Request $request){
+        $searchKey = $request->q;
+        $searchResult = Product::where('id', $searchKey)
                         ->select('id','sys_pro_name')
                         ->get(); 
         return response()->json($searchResult);

@@ -70,6 +70,33 @@ App\Providers\HelperServiceProvider::class,
 
 
 
+//
+//get last record
+$record = RecordModel::latest()->first();
+$expNum = explode('-', $record->invoiceno);
+
+//check first day in a year
+if ( date('l',strtotime(date('Y-01-01'))) ){
+    $nextInvoiceNumber = date('Y').'-0001';
+} else {
+    //increase 1 with last invoice number
+    $nextInvoiceNumber = $expNum[0].'-'. $expNum[1]+1;
+}
+
+function invoiceNumber()
+{
+    $latest = App\Order::latest()->first();
+
+    if (! $latest) {
+        return 'arm0001';
+    }
+
+    $string = preg_replace("/[^0-9\.]/", '', $latest->invoice_number);
+
+    return 'arm' . sprintf('%04d', $string+1);
+}
+
+
 
 
 */

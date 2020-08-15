@@ -105,6 +105,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 //import { mapState } from 'vuex' //for user MapState
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "multi-select-app-one",
@@ -284,51 +286,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.$emit('getAllDataListByIds');
       setTimeout(function () {
+        //this.visible = false; 
         _this5.fixTop();
-      }, 50); //this.visible = false;	        
+      }, 50); //this.visible = false; 
     },
-    // selectItem(index) {
-    // 	//console.log(this.FormatedOptions[index]);
-    // 	//this.selectedItem = this.autoSearchData[this.selected];
-    // 	let SelectedValue = this.FormatedOptions[index][this.valueProperty];
-    // 	let NewValue = [...this.value]; //spred oparetor
-    // 	let existIndex = this.value.findIndex(v => v === SelectedValue);
-    // 	if(existIndex === -1){
-    // 		NewValue.push(SelectedValue);
-    // 		toastr.success('Added!');
-    // 	}
-    // 	else{
-    // 		NewValue.splice(existIndex, 1);
-    // 		toastr.warning('Removed!');
-    // 	}
-    // 	//this.value.push(SelectedValue); //this is also work	        	
-    // 	this.$emit('input', NewValue)//but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
-    // 	setTimeout(() => {   
-    // 		this.fixTop();
-    //  }, 50);
-    //  //this.visible = false;	        
-    // },
-    //this is for selected option
-    // onChangeSelect(event){
-    // 	let index = event.target.selectedIndex;
-    // 	let id = event.target.value;
-    // 	//console.log(event.target.selectedIndex);
-    // 	let SelectedValue = this.FormatedOptions[index][this.valueProperty];
-    // 	let NewValue = [...this.value]; //spred oparetor
-    // 	let existIndex = this.value.findIndex(v => v === SelectedValue);
-    // 	if(existIndex === -1){
-    // 		NewValue.push(SelectedValue);
-    // 	}
-    // 	else{
-    // 		//NewValue.splice(existIndex, 1);
-    // 		toastr.warning('Already Selected this one!');
-    // 	}
-    // 	//this.value.push(SelectedValue); //this is also work	        	
-    // 	this.$emit('input', NewValue)//but emit to push value into array to parent, We dont need to any function in parent for using v-model for value with input keyword
-    // 	setTimeout(() => {   
-    // 		this.fixTop();
-    //  }, 50);
-    // },
     up: function up() {
       if (this.selected === 0) {
         return;
@@ -380,12 +341,7 @@ var render = function() {
           ref: "parentBox",
           staticClass: "my-multiselect",
           attrs: { title: "click to open autocomplete option and also close" },
-          on: {
-            click: _vm.ToggleItem,
-            blur: function($event) {
-              _vm.visible = false
-            }
-          }
+          on: { click: _vm.ToggleItem }
         },
         [
           _c(
@@ -515,6 +471,9 @@ var render = function() {
                   click: function($event) {
                     return _vm.preventClose($event)
                   },
+                  blur: function($event) {
+                    _vm.visible = false
+                  },
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -550,7 +509,7 @@ var render = function() {
                             selected: _vm.selected === index || option.checked
                           },
                           on: {
-                            click: function($event) {
+                            mousedown: function($event) {
                               _vm.itemClicked(index)
                               _vm.preventClose($event)
                             }

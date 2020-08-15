@@ -7,8 +7,8 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="">
-        	<span v-show="!editMode">Add Vat Rate</span>
-        	<span v-show="editMode">Update Vat Rate</span>
+        	<span v-show="!editMode">Add Status</span>
+        	<span v-show="editMode">Update Status</span>
         </h5>
         <button @click="ClearForm()" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -90,11 +90,14 @@
 	        editMode: false, //Use this for add edit using the same form   
 	          
 	        StatusTypes: [
-			      { name: 'Order' },
 			      { name: 'Stock' },
 			      { name: 'Shipping' },
 			      { name: 'Payment' },
 			      { name: 'Product' },
+			      { name: 'PruchaseOrder' },
+			      { name: 'PruchaseReturn' },
+			      { name: 'SalesOrder' },
+			      { name: 'SalesReturn' },
 			    ],  
 
 	        // Create a new form instance

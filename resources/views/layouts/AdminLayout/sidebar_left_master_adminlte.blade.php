@@ -198,10 +198,10 @@
             <ul class="nav nav-treeview">
 
               <li class="nav-item">
-                <router-link to="/spa/Purchase" class="nav-link">
+                <router-link to="/spa/PurchaseOrderMaster" class="nav-link">
                   <i class="nav-icon fas fa-boxes"></i>
                   <p>
-                    PUrchase
+                    Purchase
                   </p>
                 </router-link>
               </li>

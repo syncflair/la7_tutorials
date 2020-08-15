@@ -11,6 +11,8 @@ import commonStoreForAll from './store/commonStoreForAll'
 import CategoryStore from './store/CategoryStore'
 import ProductMasterStore from './store/ProductMasterStore'
 import PartieStore from './store/PartieStore'
+//purchase
+import PurchaseOrderMasterStore from './store/PurchaseOrderMasterStore'
 //customer
 import CustomerForAdminStore from './store/CustomerForAdminStore'
 //supplier
@@ -47,7 +49,9 @@ export default new Vuex.Store({
 		commonStoreForAll,
     	CategoryStore,
     	ProductMasterStore,
-    	PartieStore,    
+    	PartieStore, 
+        //purchase
+        PurchaseOrderMasterStore,
         //customer	
     	CustomerForAdminStore,
         //Suppliers

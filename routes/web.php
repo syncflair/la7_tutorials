@@ -125,7 +125,6 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
       ['except'=>['create','show','edit'] ]);
 
 
-
     //Supplier control Route For Admin Dashboard
     Route::get('spa/AutoCompleteSupplierData', 'Admin\Supplier\SupplierController@AutoCompleteSupplierForStore'); //commonStoreForAll store
     Route::get('spa/searchSupplierData', 'Admin\Supplier\SupplierController@search'); //search
@@ -163,6 +162,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/CategoryMaster-Info', 'Admin\Catalog\CategoryController', 
       ['except'=>['create','show','edit'] ]);
 
+    Route::post('spa/getSelectedProduct/', 'Admin\Catalog\ProductController@getSelectedProduct');// get single
     Route::post('spa/Product-getCategoryList/', 'Admin\Catalog\ProductController@selectedCategoryList');
     Route::post('spa/Product-getSupplierList/', 'Admin\Catalog\ProductController@selectedSupplierList');
     Route::post('spa/Product-getProductList/', 'Admin\Catalog\ProductController@selectedProductList');
@@ -192,6 +192,11 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/Brand-Info', 'Admin\Catalog\BrandController', 
         ['except'=>['create','edit','show'] ]);
 
+
+    //Purchase Order
+    Route::get('spa/searchPurchaseOrderData', 'Admin\Purchase\PurchaseOrderController@search'); //search
+    Route::resource('spa/PurchaseOrder-Info', 'Admin\Purchase\PurchaseOrderController', 
+        ['except'=>['create','edit','show'] ]);
 
 
     //Accounting

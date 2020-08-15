@@ -2,10 +2,9 @@
   <div class="row multi-select-app-one">	
 	<div class="col-md-12 offset-md-3-">
       <!-- <h5>Multi Select</h5>       -->
-      
+      <!-- v-on:blur="visible = false;" -->
 	  <div class="my-multiselect" ref="parentBox" 
-	  		@click="ToggleItem" 
-	  		v-on:blur="visible = false;" 	
+	  		@click="ToggleItem" 	  			
 	  		title="click to open autocomplete option and also close"
 	  		style="margin-top:0px;"  		
 	  >	
@@ -46,14 +45,16 @@
 			 	@keydown.up="up" @keydown.down="down" 
 				@click="preventClose($event)"
 				@keydown.enter.prevent="selectItem"
+				v-on:blur="visible = false;"
 			>
-				<!-- @keydown.enter="selectItem(index)" -->
+				<!-- @click="itemClicked(index, option.id); preventClose($event);" -->
+			<!-- The problem is blur event will be fired first, it will hide the list of selection. Then click event will not be fired. replacing @click with @mousedown event -->
 			 <ul v-show="listVisible === true" ref="optionList" class="optionList dropdown-menu-">
 			    	<!-- :key="option[filterBy]" -->
 			    <li
 			    	v-if="autoQuery === '' ? listVisible = false : listVisible = true"
 			    	v-for="(option, index) in FormatedOptions" :key="index"
-			    	@click="itemClicked(index, option.id); preventClose($event);" 			    	
+			    	@mousedown="itemClicked(index, option.id); preventClose($event);" 			    	
 			    	:class="{'selected' : (selected === index) || option.checked}"
 			    >	       	
 			    		<div class="checkbox">

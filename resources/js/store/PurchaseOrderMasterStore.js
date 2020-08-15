@@ -1,10 +1,11 @@
-const SupplierForAdminStore ={
+
+const PurchaseOrderMasterStore ={
 
 	namespaced: true,
 	
 	state: () => ({
         //accessable from any where 
-        suppliers: {},
+        PurchaseOrders: {},
         pagination: { 
             current_page: 1,                
             per_page: 0,
@@ -15,22 +16,28 @@ const SupplierForAdminStore ={
         autoSearchVendor: {},
         selectedVendor:[],
 
+        //for Product autocomplete
+        autoSearchProduct: {},
+        selectedProduct:[],
+
     }),/*end state*/
 
     getters: {
+      
     }, /*end getters*/
 
 
     mutations: {
         //return data to state
-        FETCH_DATA(state, suppliers) {  return state.suppliers = suppliers; },
-
-        FATCH_PAGINATION(state, pagination){ return state.pagination = pagination; },
-        
+        FETCH_DATA(state, data) { return state.PurchaseOrders = data; },
+        FATCH_PAGINATION(state, data){ return state.pagination = data; },
         AUTO_COMPLETE_DATA(state, data){ return state.autoCompleteData = data; },
 
         AUTO_COMPLETE_DATA_FOR_VENDOR(state, data){ return state.autoSearchVendor = data; },
-        SELECTED_VENDOR(state, data){ return state.selectedVendor = data; }
+        SELECTED_VENDOR(state, data){ return state.selectedVendor = data; },
+
+        AUTO_COMPLETE_DATA_FOR_PRODUCT(state, data){ return state.autoSearchProduct = data; },
+        SELECTED_PRODUCT(state, data){ return state.selectedProduct = data; },
 
     },/*end Mutations*/
 
@@ -44,7 +51,7 @@ const SupplierForAdminStore ={
                 perPageVelue = payload
             }
 
-          axios.get('/spa/supplier-Info?page=' + context.state.pagination.current_page +'&perPage=' + perPageVelue)
+          axios.get('/spa/PurchaseOrder-Info?page=' + context.state.pagination.current_page +'&perPage=' + perPageVelue)
           .then( (response) => {
             context.commit('FETCH_DATA', response.data.data); //use for only show data
             context.commit('FATCH_PAGINATION', response.data) //for pagination
@@ -55,14 +62,15 @@ const SupplierForAdminStore ={
           })
         },
 
+
         //For Search
         searching(context, payload){        
             let searchKey = payload.search_key; let searchOption = payload.search_option; //alert(query2);
-            axios.get('/spa/searchSupplierData?page='+ 
+            axios.get('/spa/searchPurchaseOrderData?page='+ 
                         context.state.pagination.current_page + '&perPage=' +
                         context.state.pagination.per_page + 
                         '&q='+searchKey+'&so='+searchOption)
-            //axios.get('/spa/searchSupplierData?q='+query)
+            //axios.get('/spa/searchCountryData?q='+query)
             .then( ( response ) => {
                     context.commit('FETCH_DATA', response.data.data);
                     context.commit('FATCH_PAGINATION', response.data) //for pagination                                       
@@ -73,8 +81,8 @@ const SupplierForAdminStore ={
         AutoCompleteSearch(context, payload){  
             let query = payload;  
             //let query2 = payload.key2; 
-            axios.get('/spa/searchSupplierData?&q='+ query)
-            //axios.get('/spa/searchSupplierData?q='+query)
+            axios.get('/spa/searchPurchaseOrderData?&q='+ query)
+            //axios.get('/spa/searchCountryData?q='+query)
             .then( ( response ) => {
                     context.commit('AUTO_COMPLETE_DATA', response.data.data);
                     //this.categories = response.data; // is an object... use when pagination                                         
@@ -98,8 +106,26 @@ const SupplierForAdminStore ={
             }).catch(() => { }) 
         },
 
+
+        AutoCompleteSearchForDataProduct(context, payload){  
+          let query = payload;  
+          axios.get('/spa/AutoCompleteProductData?&q='+ query)
+          .then( ( response ) => {
+              context.commit('AUTO_COMPLETE_DATA_FOR_PRODUCT', response.data);                                        
+          }).catch(() => { }) 
+        },
+
+        //For selected Brand Shop
+        fetchSelectedProduct(context, payload){  
+            //use axios.post instead of axios.get , becouse is contaion array  
+            axios.post('/spa/getSelectedProduct/', {q: payload})
+            .then( ( response ) => {
+                    context.commit('SELECTED_PRODUCT', response.data);                                       
+            }).catch(() => { }) 
+        },
+
     } /*end actions*/
 
 }
 
-export default SupplierForAdminStore
+export default PurchaseOrderMasterStore
