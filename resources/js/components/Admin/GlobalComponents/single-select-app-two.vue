@@ -10,15 +10,16 @@
 	  >	
 
 	    <!-- v-model="selectedItem ? selectedItem[filterBy] : searchText " tabindex="-1"-->
-        <div class="selected-item-box form-control form-control-sm form-control-navba">
+        <div class="selected-item-box form-control form-control-sm form-control-navba" style="text-align: left;">
         	<span v-if="selectedOptions.length === 0" >
 	        		{{ this.placeHolder }} 
 	        </span>
           	<ul v-if="selectedOptions.length > 0">
 	        	<!-- <li v-show="option.checked" class="selected-item" v-for="(option, key) in FormatedOptions" :key="key"> -->	        	
-	        	<li style="width: 100%;" class="selected-item" v-for="(option, key) in selectedOptions" :key="key" >
+	        	<li style="width: 97%; background:none !important; text-align: left;" class="selected-item" 
+	        		v-for="(option, key) in selectedOptions" :key="key" >
 	        		{{ option[filterBy] }} 
-	        		<i @click="preventClose($event); removeSelectItem(key);" class="far fa-times-circle"></i>
+	        		<!-- <i @click="preventClose($event); removeSelectItem(key);" class="far fa-times-circle"></i> -->
 	        		<!-- <span v-show="!option.checked"> {{ this.placeHolder }} </span> -->
 	        	</li>
         	</ul>
@@ -37,6 +38,7 @@
 			    </option>
 			</select> -->
 
+			<!-- v-on:blur="visible = false;" -->
 			<input type="text" class="form-control form-control-sm form-control-navbar" autocomplete="off"
 			 	:placeHolder="this.placeHolder" 
 			 	ref="autoSearchField" id="autoSearchField" 
@@ -55,7 +57,7 @@
 			    	v-if="autoQuery === '' ? listVisible = false : listVisible = true"
 			    	v-for="(option, index) in FormatedOptions" :key="index"
 			    	@mousedown="itemClicked(index, option.id); preventClose($event);" 			    	
-			    	:class="{'selected' : (selected === index) || option.checked}"
+			    	:class="{'selected' : (selected === index) || option.checked}"			    	
 			    >	       	
 			    		<div class="checkbox">
 			    			<div v-if="option.checked" class="checkbox-after"></div>
@@ -82,7 +84,7 @@
 
 	//import { mapState } from 'vuex' //for user MapState
     export default {
-       	name: "multi-select-app-one",
+       	name: "multi-select-app-two",
        	//props:['options','filterBy','placeHolder'], //get from parent component
        	props: {
        	 //get all data
@@ -120,9 +122,9 @@
 	    },
     	data (){      
 	        return {
-	        	optionTopHeight: '38.75px', //33.75 
+	        	optionTopHeight: '30px', //33.75 '38.75px'
 	        	selectOption: '',
-	        	itemListHeight: 38.75, //33.75
+	        	itemListHeight: 30, //33.75 38.75
 	        	selectedItem: null,
 	        	searchText: '',
 	        	autoQuery: '',
@@ -155,8 +157,10 @@
         methods: {         	
 
         	fixTop(){
-        		this.optionTopHeight = this.$refs.parentBox.clientHeight + 1 + 'px';
-        		//console.log(this.optionTopHeight);
+        		//if( this.$refs.parentBox.clientHeight != 'undefined'){
+        			this.optionTopHeight = this.$refs.parentBox.clientHeight + 1 + 'px';
+        			//console.log(this.optionTopHeight);
+        		//}
         	}, 
 
         	// autoSearch: _.debounce( (e) => {        		
@@ -172,8 +176,7 @@
 
 	        ToggleItem(){
 	        	this.visible = !this.visible;
-	        	//this.visible = true;
-	        	this.autoQuery = '';
+	        	//this.autoQuery = '';
 
 	        	setTimeout(() => {
 		          this.$refs.autoSearchField.focus();
@@ -213,7 +216,7 @@
 	        	}
 	        	//this.value.push(SelectedValue); //this is also work	        	
 	        	//this.$emit('input', NewValue)
-	        	this.$emit('getAllDataListByIds');
+	        	this.$emit('getAllDataListByIds', SelectedValue, this.selected);
 	        		        	
 	        	setTimeout(() => {   
 	        		this.fixTop();

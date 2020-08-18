@@ -172,8 +172,7 @@
 
 	        ToggleItem(){
 	        	this.visible = !this.visible;
-	        	//this.visible = true;
-	        	this.autoQuery = '';
+	        	//this.autoQuery = '';
 
 	        	setTimeout(() => {
 		          this.$refs.autoSearchField.focus();

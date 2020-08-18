@@ -233,12 +233,35 @@ body{
 .table > thead{ } /*For background*/
 .table thead th{border-bottom:1px solid #dee2e6 !important; color: #007bff; font-weight:normal;}
 .table th, .table td{border-top:unset !important; border-left: 1px solid #dee2e6;}
+.table th{white-space: nowrap;}
+.table td{white-space: nowrap;}
 //.table th, .table td{border-top:unset !important; border-left:1px solid #dee2e6 !important;}
 //.table th:first-child, .table td:first-child{border-left:unset !important;}
 .table-striped tbody tr:hover{background-color: rgba(0, 0, 0, 0.09);}
 
 
-//sortable title style for table
+//###################### remove arrow from Number input ####################
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+//########################## style for Purchase Sales Return form input ###############################
+.style-order-form-input th{
+    background: rgba(0, 0, 0, 0.04);
+}
+.style-order-form-input > tr > td > div > input{
+     padding: 2px 2px !important;
+}
+.style-order-form-input td{padding: 0.3rem 0.1rem 0.3rem 0.1rem;}
+
+//########################## sortable title style for table ###############################
 .sortable-title{
     cursor:pointer;
     text-decoration: underline;
@@ -328,6 +351,8 @@ body{
     .optionList{
         min-height: 1px;
         max-height: 250px;
+        min-width: 300px;
+        max-width: 500px;
         overflow-y: scroll;
         padding: 0px;
     }

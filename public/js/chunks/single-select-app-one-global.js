@@ -186,9 +186,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     ToggleItem: function ToggleItem() {
       var _this3 = this;
 
-      this.visible = !this.visible; //this.visible = true;
+      this.visible = !this.visible; //this.autoQuery = '';
 
-      this.autoQuery = '';
       setTimeout(function () {
         _this3.$refs.autoSearchField.focus();
       }, 50); //console.log(this.optionTopHeight);

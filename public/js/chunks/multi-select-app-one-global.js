@@ -214,8 +214,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this3 = this;
 
       this.visible = !this.visible; //this.visible = true;
+      //this.autoQuery = '';
 
-      this.autoQuery = '';
       setTimeout(function () {
         _this3.$refs.autoSearchField.focus();
       }, 50); //document.getElementById('autoSearchField').focus();

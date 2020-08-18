@@ -124894,7 +124894,7 @@ var PurchaseOrderMasterStore = {
       selectedVendor: [],
       //for Product autocomplete
       autoSearchProduct: {},
-      selectedProduct: []
+      selectedProductList: []
     };
   },
 
@@ -124922,8 +124922,8 @@ var PurchaseOrderMasterStore = {
     AUTO_COMPLETE_DATA_FOR_PRODUCT: function AUTO_COMPLETE_DATA_FOR_PRODUCT(state, data) {
       return state.autoSearchProduct = data;
     },
-    SELECTED_PRODUCT: function SELECTED_PRODUCT(state, data) {
-      return state.selectedProduct = data;
+    SELECTED_PRODUCT_LIST: function SELECTED_PRODUCT_LIST(state, data) {
+      return state.selectedProductList = data;
     }
   },
 
@@ -124987,13 +124987,21 @@ var PurchaseOrderMasterStore = {
         context.commit('AUTO_COMPLETE_DATA_FOR_PRODUCT', response.data);
       })["catch"](function () {});
     },
-    //For selected Brand Shop
-    fetchSelectedProduct: function fetchSelectedProduct(context, payload) {
-      //use axios.post instead of axios.get , becouse is contaion array  
-      axios.post('/spa/getSelectedProduct/', {
+    //For selected product
+    // fetchSelectedProduct(context, payload){  
+    //     //use axios.post instead of axios.get , becouse is contaion array  
+    //     axios.post('/spa/getSelectedProduct/', {q: payload})
+    //     .then( ( response ) => {
+    //             context.commit('SELECTED_PRODUCT', response.data);                                       
+    //     }).catch(() => { }) 
+    // },
+    //For selected product
+    fetchSelectedProductList: function fetchSelectedProductList(context, payload) {
+      //use axios.post instead of axios.get , becouse is contaion array    
+      axios.post('/spa/Product-getProductList/', {
         q: payload
       }).then(function (response) {
-        context.commit('SELECTED_PRODUCT', response.data);
+        context.commit('SELECTED_PRODUCT_LIST', response.data);
       })["catch"](function () {});
     }
   }

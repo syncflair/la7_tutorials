@@ -439,20 +439,11 @@ class ProductController extends Controller
         return response()->json($searchResult);
     }
 
-    //selected Product list for multiselect option
+    //selected Product list for multiselect option also (sengle select from Purchase Order, Purchase Return, Sales Order, Sales Return)
     public function selectedProductList(Request $request){
 
         $searchKey = $request->q != null ? $request->q : $request->q = [];
         $searchResult = Product::whereIn('id', $searchKey)
-                        ->select('id','sys_pro_name')
-                        ->get(); 
-        return response()->json($searchResult);
-    }//end search
-
-    //selected Brand Shop (from Purchase Order, Purchase Return, Sales Order, Sales Return)
-    public function getSelectedProduct(Request $request){
-        $searchKey = $request->q;
-        $searchResult = Product::where('id', $searchKey)
                         ->select('id','sys_pro_name')
                         ->get(); 
         return response()->json($searchResult);

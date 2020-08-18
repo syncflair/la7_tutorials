@@ -18,7 +18,7 @@ const PurchaseOrderMasterStore ={
 
         //for Product autocomplete
         autoSearchProduct: {},
-        selectedProduct:[],
+        selectedProductList:[],
 
     }),/*end state*/
 
@@ -37,7 +37,7 @@ const PurchaseOrderMasterStore ={
         SELECTED_VENDOR(state, data){ return state.selectedVendor = data; },
 
         AUTO_COMPLETE_DATA_FOR_PRODUCT(state, data){ return state.autoSearchProduct = data; },
-        SELECTED_PRODUCT(state, data){ return state.selectedProduct = data; },
+        SELECTED_PRODUCT_LIST(state, data){ return state.selectedProductList = data; },
 
     },/*end Mutations*/
 
@@ -115,14 +115,26 @@ const PurchaseOrderMasterStore ={
           }).catch(() => { }) 
         },
 
-        //For selected Brand Shop
-        fetchSelectedProduct(context, payload){  
-            //use axios.post instead of axios.get , becouse is contaion array  
-            axios.post('/spa/getSelectedProduct/', {q: payload})
-            .then( ( response ) => {
-                    context.commit('SELECTED_PRODUCT', response.data);                                       
+        //For selected product
+        // fetchSelectedProduct(context, payload){  
+        //     //use axios.post instead of axios.get , becouse is contaion array  
+        //     axios.post('/spa/getSelectedProduct/', {q: payload})
+        //     .then( ( response ) => {
+        //             context.commit('SELECTED_PRODUCT', response.data);                                       
+        //     }).catch(() => { }) 
+        // },
+
+        //For selected product
+        fetchSelectedProductList(context, payload){ 
+          //use axios.post instead of axios.get , becouse is contaion array    
+          axios.post('/spa/Product-getProductList/', {q: payload})
+            .then( ( response ) => {                                      
+                    context.commit('SELECTED_PRODUCT_LIST', response.data);                                       
             }).catch(() => { }) 
         },
+
+
+
 
     } /*end actions*/
 

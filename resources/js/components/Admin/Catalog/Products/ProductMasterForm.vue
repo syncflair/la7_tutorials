@@ -331,8 +331,9 @@
               <div class="card" v-for="(pa, key) in form.pro_attributes">
                 <h5 class="card-header">
                   {{pa.attribute}} <!-- {{pa.attrib_id}}  -->
-                  <button class="btn btn-sm btn-danger" @click.prevent="remove_attribute(key, pa.attribute)" title="Remove">
-                    <i class="far fa-times-circle"></i> </button>
+                  <!-- <button class="btn btn-sm btn-danger" @click.prevent="remove_attribute(key, pa.attribute)" title="Remove">
+                    <i class="far fa-times-circle"></i> </button> -->
+                  <i class="far fa-times-circle danger pointer" @click.prevent="remove_attribute(key, pa.attribute)" title="Remove"></i>
                 </h5>
 
                 <div class="card-body">
@@ -347,28 +348,31 @@
                     </tr>
                     <tr v-for="(av, key) in pa.values"> <!-- values: [ { attribute_value: "", quantity: "", price: "", priority:"" }] -->
                       <td>
-                        <select v-model="av.attribute_value" class="form-control" id="" name="attribute_value" >
+                        <select v-model="av.attribute_value" class="form-control form-control-sm"" id="" name="attribute_value" >
                           <option disabled value="">Select value ..</option>                
                           <option v-for="aav in AllAttributeValues" v-bind:value="aav.attribute_value">{{aav.attribute_value}}</option> 
                         </select> <!-- AllAttributeValues selectedAllAttributeValues-->
                         <!-- <input type="text" class="form-control" v-model="av.attribute_value" name="attribute_value" placeholder="values">   -->
                       </td>
                       <td>
-                        <input type="number" class="form-control" v-model="av.quantity" name="quantity" placeholder="values">  
+                        <input type="number" class="form-control form-control-sm" v-model="av.quantity" name="quantity" placeholder="values">  
                       </td>
                       <td>
-                        <input type="number" class="form-control" v-model="av.price" name="price" placeholder="values">  
+                        <input type="number" class="form-control form-control-sm"" v-model="av.price" name="price" placeholder="values">  
                       </td>
                       <td>
-                        <input type="text" class="form-control" v-model="av.priority" name="priority" placeholder="priority">  
+                        <input type="text" class="form-control form-control-sm"" v-model="av.priority" name="priority" placeholder="priority">  
                       </td>
                       <td>
                         <input type="checkbox" v-model="av.subtract_stock" name="subtract_stock" />
                       </td>
                       <td>
                         <div class="form-group-">
-                          <button class="btn btn-sm btn-danger" @click.prevent="remove_attribute_property(key, pa.attribute)" v-show="key || ( !key && pa.values.length > 1)"><i class="fas fa-minus-square"></i> Remove</button>
-                          <button class="btn btn-sm btn-success" @click.prevent="add_attribute_property(key, pa.attribute)" v-show="key == pa.values.length-1"><i class="fas fa-plus-square"></i> Add </button> 
+                          <!-- <button class="btn btn-sm btn-danger" @click.prevent="remove_attribute_property(key, pa.attribute)" v-show="key || ( !key && pa.values.length > 1)"><i class="fas fa-minus-square"></i> Remove</button>
+                          <button class="btn btn-sm btn-success" @click.prevent="add_attribute_property(key, pa.attribute)" v-show="key == pa.values.length-1"><i class="fas fa-plus-square"></i> Add </button>  -->
+
+                          <i class="fas fa-minus-circle danger pointer" @click.prevent="remove_attribute_property(key, pa.attribute)" v-show="key || ( !key && pa.values.length > 1)" title="Remove"></i>
+                          <i class="fas fa-plus-circle green pointer" @click.prevent="add_attribute_property(key, pa.attribute)" v-show="key == pa.values.length-1" title="Add"></i> 
                         </div>                   
                       </td>
                     </tr>
@@ -394,20 +398,24 @@
 
                 <tr v-for="(input, key) in form.pro_specification" :key="key">
                   <td >
-                    <select v-model="input.specification_name" class="form-control" id="" name="specification_name" >
+                    <select v-model="input.specification_name" class="form-control form-control-sm"" id="" name="specification_name" >
                           <option disabled value="">Select specification ..</option>                
                           <option v-for="specification in AllSpecifications" v-bind:value="specification.specification_name">{{specification.specification_name}}</option> 
                     </select>
                   </td>
                   <td>
-                    <input type="text" class="form-control" v-model="input.specification_desc" name="specification_desc" placeholder="Description">  
+                    <input type="text" class="form-control form-control-sm"" v-model="input.specification_desc" name="specification_desc" placeholder="Description">  
                   </td>
                   <td>
-                    <input type="text" class="form-control" v-model="input.specification_serial" name="specification_serial" placeholder="Serial Number"> 
+                    <input type="text" class="form-control form-control-sm"" v-model="input.specification_serial" name="specification_serial" placeholder="Serial Number"> 
                   </td>
                   <td>
-                    <button class="btn btn-sm btn-danger" @click.prevent="remove_specification(key)" v-show="key || ( !key && form.pro_specification.length > 1)"><i class="fas fa-minus-square"></i> Remove</button>
-                    <button class="btn btn-sm btn-success" @click.prevent="add_specificaton(key)" v-show="key == form.pro_specification.length-1"><i class="fas fa-plus-square"></i> Add </button> 
+                    <!-- <button class="btn btn-sm btn-danger" @click.prevent="remove_specification(key)" v-show="key || ( !key && form.pro_specification.length > 1)"><i class="fas fa-minus-square"></i> Remove</button>
+                    <button class="btn btn-sm btn-success" @click.prevent="add_specificaton(key)" v-show="key == form.pro_specification.length-1"><i class="fas fa-plus-square"></i> Add </button>  -->
+
+                    <i class="fas fa-minus-circle danger pointer" @click.prevent="remove_specification(key)" v-show="key || ( !key && form.pro_specification.length > 1)" title="Remove"></i>
+                    <i class="fas fa-plus-circle green pointer" @click.prevent="add_specificaton(key)" v-show="key == form.pro_specification.length-1" title="Add"></i> 
+
                   </td>
                 </tr>
 
@@ -435,7 +443,7 @@
                 <tr v-for="(input, key) in form.pro_discount" :key="key">
                   <td >
                     <div class="form-group-">
-                      <select v-model="input.customer_group" class="form-control" id="" name="customer_group" >
+                      <select v-model="input.customer_group" class="form-control form-control-sm"" id="" name="customer_group" >
                             <option disabled value="">Select customer group ..</option>                
                             <option v-for="cg in allCustomerGroups" v-bind:value="cg.id">{{cg.group_name}}</option> 
                       </select>
@@ -443,33 +451,36 @@
                   </td>
                   <td>
                     <div class="form-group-">
-                      <input type="number" class="form-control" v-model="input.discount_qty" name="discount_qty" placeholder="Quantity">  
+                      <input type="number" class="form-control form-control-sm"" v-model="input.discount_qty" name="discount_qty" placeholder="Quantity">  
                     </div> 
                   </td>
                   <td>
                     <div class="form-group-">
-                      <input type="text" class="form-control" v-model="input.discount_price" name="discount_price" placeholder="Price">  
+                      <input type="text" class="form-control form-control-sm"" v-model="input.discount_price" name="discount_price" placeholder="Price">  
                     </div> 
                   </td>
                   <td>
                     <div class="form-group-">
-                      <input type="text" class="form-control" v-model="input.discount_priority" name="discount_priority" placeholder="Priority">  
+                      <input type="text" class="form-control form-control-sm"" v-model="input.discount_priority" name="discount_priority" placeholder="Priority">  
                     </div> 
                   </td>
                   <td>
                     <div class="form-group-">
-                      <input type="date" class="form-control" v-model="input.discount_start_date" name="discount_start_date" placeholder="Start Date">  
+                      <input type="date" class="form-control form-control-sm"" v-model="input.discount_start_date" name="discount_start_date" placeholder="Start Date">  
                     </div> 
                   </td>
                   <td>
                     <div class="form-group-">
-                      <input type="date" class="form-control" v-model="input.discount_end_date" name="discount_end_date" placeholder="End Date">  
+                      <input type="date" class="form-control form-control-sm"" v-model="input.discount_end_date" name="discount_end_date" placeholder="End Date">  
                     </div> 
                   </td>
                   <td>
                     <div class="form-group-">
-                      <button class="btn btn-sm btn-danger" @click.prevent="remove_discount(key)" v-show="key || ( !key && form.pro_discount.length > 1)"><i class="fas fa-minus-square"></i> Remove</button>
-                      <button class="btn btn-sm btn-success" @click.prevent="add_discount(key)" v-show="key == form.pro_discount.length-1"><i class="fas fa-plus-square"></i> Add </button> 
+                      <!-- <button class="btn btn-sm btn-danger" @click.prevent="remove_discount(key)" v-show="key || ( !key && form.pro_discount.length > 1)"><i class="fas fa-minus-square"></i> Remove</button>
+                      <button class="btn btn-sm btn-success" @click.prevent="add_discount(key)" v-show="key == form.pro_discount.length-1"><i class="fas fa-plus-square"></i> Add </button>  -->
+
+                      <i class="fas fa-minus-circle danger pointer" @click.prevent="remove_discount(key)" v-show="key || ( !key && form.pro_discount.length > 1)" title="Remove"></i>
+                      <i class="fas fa-plus-circle green pointer" @click.prevent="add_discount(key)" v-show="key == form.pro_discount.length-1" title="Add"></i> 
                     </div>                   
                   </td>
                 </tr>

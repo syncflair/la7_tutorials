@@ -95,9 +95,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 //import { mapState } from 'vuex' //for user MapState
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "multi-select-app-one",
+  name: "multi-select-app-two",
   //props:['options','filterBy','placeHolder'], //get from parent component
   props: {
     //get all data
@@ -135,11 +137,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      optionTopHeight: '38.75px',
-      //33.75 
+      optionTopHeight: '30px',
+      //33.75 '38.75px'
       selectOption: '',
-      itemListHeight: 38.75,
-      //33.75
+      itemListHeight: 30,
+      //33.75 38.75
       selectedItem: null,
       searchText: '',
       autoQuery: '',
@@ -171,7 +173,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     fixTop: function fixTop() {
+      //if( this.$refs.parentBox.clientHeight != 'undefined'){
       this.optionTopHeight = this.$refs.parentBox.clientHeight + 1 + 'px'; //console.log(this.optionTopHeight);
+      //}
     },
     // autoSearch: _.debounce( (e) => {        		
     // 	//alert(e.target.value)
@@ -186,9 +190,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     ToggleItem: function ToggleItem() {
       var _this3 = this;
 
-      this.visible = !this.visible; //this.visible = true;
+      this.visible = !this.visible; //this.autoQuery = '';
 
-      this.autoQuery = '';
       setTimeout(function () {
         _this3.$refs.autoSearchField.focus();
       }, 50); //console.log(this.optionTopHeight);
@@ -229,7 +232,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //this.$emit('input', NewValue)
 
 
-      this.$emit('getAllDataListByIds');
+      this.$emit('getAllDataListByIds', SelectedValue, this.selected);
       setTimeout(function () {
         _this4.fixTop();
       }, 50); //this.visible = false;	        
@@ -294,7 +297,8 @@ var render = function() {
             "div",
             {
               staticClass:
-                "selected-item-box form-control form-control-sm form-control-navba"
+                "selected-item-box form-control form-control-sm form-control-navba",
+              staticStyle: { "text-align": "left" }
             },
             [
               _vm.selectedOptions.length === 0
@@ -316,23 +320,18 @@ var render = function() {
                         {
                           key: key,
                           staticClass: "selected-item",
-                          staticStyle: { width: "100%" }
+                          staticStyle: {
+                            width: "97%",
+                            background: "none !important",
+                            "text-align": "left"
+                          }
                         },
                         [
                           _vm._v(
                             "\n\t        \t\t" +
                               _vm._s(option[_vm.filterBy]) +
                               " \n\t        \t\t"
-                          ),
-                          _c("i", {
-                            staticClass: "far fa-times-circle",
-                            on: {
-                              click: function($event) {
-                                _vm.preventClose($event)
-                                _vm.removeSelectItem(key)
-                              }
-                            }
-                          })
+                          )
                         ]
                       )
                     }),

@@ -626,6 +626,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2392,27 +2403,20 @@ var render = function() {
                                           " "
                                       ),
                                       _vm._v(" "),
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass: "btn btn-sm btn-danger",
-                                          attrs: { title: "Remove" },
-                                          on: {
-                                            click: function($event) {
-                                              $event.preventDefault()
-                                              return _vm.remove_attribute(
-                                                key,
-                                                pa.attribute
-                                              )
-                                            }
+                                      _c("i", {
+                                        staticClass:
+                                          "far fa-times-circle danger pointer",
+                                        attrs: { title: "Remove" },
+                                        on: {
+                                          click: function($event) {
+                                            $event.preventDefault()
+                                            return _vm.remove_attribute(
+                                              key,
+                                              pa.attribute
+                                            )
                                           }
-                                        },
-                                        [
-                                          _c("i", {
-                                            staticClass: "far fa-times-circle"
-                                          })
-                                        ]
-                                      )
+                                        }
+                                      })
                                     ]),
                                     _vm._v(" "),
                                     _c("div", { staticClass: "card-body" }, [
@@ -2441,7 +2445,8 @@ var render = function() {
                                                           "av.attribute_value"
                                                       }
                                                     ],
-                                                    staticClass: "form-control",
+                                                    staticClass:
+                                                      "form-control form-control-sm",
                                                     attrs: {
                                                       id: "",
                                                       name: "attribute_value"
@@ -2525,7 +2530,8 @@ var render = function() {
                                                       expression: "av.quantity"
                                                     }
                                                   ],
-                                                  staticClass: "form-control",
+                                                  staticClass:
+                                                    "form-control form-control-sm",
                                                   attrs: {
                                                     type: "number",
                                                     name: "quantity",
@@ -2561,7 +2567,8 @@ var render = function() {
                                                       expression: "av.price"
                                                     }
                                                   ],
-                                                  staticClass: "form-control",
+                                                  staticClass:
+                                                    "form-control form-control-sm",
                                                   attrs: {
                                                     type: "number",
                                                     name: "price",
@@ -2595,7 +2602,8 @@ var render = function() {
                                                       expression: "av.priority"
                                                     }
                                                   ],
-                                                  staticClass: "form-control",
+                                                  staticClass:
+                                                    "form-control form-control-sm",
                                                   attrs: {
                                                     type: "text",
                                                     name: "priority",
@@ -2697,82 +2705,66 @@ var render = function() {
                                                     staticClass: "form-group-"
                                                   },
                                                   [
-                                                    _c(
-                                                      "button",
-                                                      {
-                                                        directives: [
-                                                          {
-                                                            name: "show",
-                                                            rawName: "v-show",
-                                                            value:
-                                                              key ||
-                                                              (!key &&
-                                                                pa.values
-                                                                  .length > 1),
-                                                            expression:
-                                                              "key || ( !key && pa.values.length > 1)"
-                                                          }
-                                                        ],
-                                                        staticClass:
-                                                          "btn btn-sm btn-danger",
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            $event.preventDefault()
-                                                            return _vm.remove_attribute_property(
-                                                              key,
-                                                              pa.attribute
-                                                            )
-                                                          }
+                                                    _c("i", {
+                                                      directives: [
+                                                        {
+                                                          name: "show",
+                                                          rawName: "v-show",
+                                                          value:
+                                                            key ||
+                                                            (!key &&
+                                                              pa.values.length >
+                                                                1),
+                                                          expression:
+                                                            "key || ( !key && pa.values.length > 1)"
                                                         }
+                                                      ],
+                                                      staticClass:
+                                                        "fas fa-minus-circle danger pointer",
+                                                      attrs: {
+                                                        title: "Remove"
                                                       },
-                                                      [
-                                                        _c("i", {
-                                                          staticClass:
-                                                            "fas fa-minus-square"
-                                                        }),
-                                                        _vm._v(" Remove")
-                                                      ]
-                                                    ),
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          $event.preventDefault()
+                                                          return _vm.remove_attribute_property(
+                                                            key,
+                                                            pa.attribute
+                                                          )
+                                                        }
+                                                      }
+                                                    }),
                                                     _vm._v(" "),
-                                                    _c(
-                                                      "button",
-                                                      {
-                                                        directives: [
-                                                          {
-                                                            name: "show",
-                                                            rawName: "v-show",
-                                                            value:
-                                                              key ==
-                                                              pa.values.length -
-                                                                1,
-                                                            expression:
-                                                              "key == pa.values.length-1"
-                                                          }
-                                                        ],
-                                                        staticClass:
-                                                          "btn btn-sm btn-success",
-                                                        on: {
-                                                          click: function(
-                                                            $event
-                                                          ) {
-                                                            $event.preventDefault()
-                                                            return _vm.add_attribute_property(
-                                                              key,
-                                                              pa.attribute
-                                                            )
-                                                          }
+                                                    _c("i", {
+                                                      directives: [
+                                                        {
+                                                          name: "show",
+                                                          rawName: "v-show",
+                                                          value:
+                                                            key ==
+                                                            pa.values.length -
+                                                              1,
+                                                          expression:
+                                                            "key == pa.values.length-1"
                                                         }
-                                                      },
-                                                      [
-                                                        _c("i", {
-                                                          staticClass:
-                                                            "fas fa-plus-square"
-                                                        }),
-                                                        _vm._v(" Add ")
-                                                      ]
-                                                    )
+                                                      ],
+                                                      staticClass:
+                                                        "fas fa-plus-circle green pointer",
+                                                      attrs: { title: "Add" },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          $event.preventDefault()
+                                                          return _vm.add_attribute_property(
+                                                            key,
+                                                            pa.attribute
+                                                          )
+                                                        }
+                                                      }
+                                                    })
                                                   ]
                                                 )
                                               ])
@@ -2830,7 +2822,8 @@ var render = function() {
                                                     "input.specification_name"
                                                 }
                                               ],
-                                              staticClass: "form-control",
+                                              staticClass:
+                                                "form-control form-control-sm",
                                               attrs: {
                                                 id: "",
                                                 name: "specification_name"
@@ -2914,7 +2907,8 @@ var render = function() {
                                                   "input.specification_desc"
                                               }
                                             ],
-                                            staticClass: "form-control",
+                                            staticClass:
+                                              "form-control form-control-sm",
                                             attrs: {
                                               type: "text",
                                               name: "specification_desc",
@@ -2950,7 +2944,8 @@ var render = function() {
                                                   "input.specification_serial"
                                               }
                                             ],
-                                            staticClass: "form-control",
+                                            staticClass:
+                                              "form-control form-control-sm",
                                             attrs: {
                                               type: "text",
                                               name: "specification_serial",
@@ -2975,77 +2970,57 @@ var render = function() {
                                         ]),
                                         _vm._v(" "),
                                         _c("td", [
-                                          _c(
-                                            "button",
-                                            {
-                                              directives: [
-                                                {
-                                                  name: "show",
-                                                  rawName: "v-show",
-                                                  value:
-                                                    key ||
-                                                    (!key &&
-                                                      _vm.form.pro_specification
-                                                        .length > 1),
-                                                  expression:
-                                                    "key || ( !key && form.pro_specification.length > 1)"
-                                                }
-                                              ],
-                                              staticClass:
-                                                "btn btn-sm btn-danger",
-                                              on: {
-                                                click: function($event) {
-                                                  $event.preventDefault()
-                                                  return _vm.remove_specification(
-                                                    key
-                                                  )
-                                                }
-                                              }
-                                            },
-                                            [
-                                              _c("i", {
-                                                staticClass:
-                                                  "fas fa-minus-square"
-                                              }),
-                                              _vm._v(" Remove")
-                                            ]
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "button",
-                                            {
-                                              directives: [
-                                                {
-                                                  name: "show",
-                                                  rawName: "v-show",
-                                                  value:
-                                                    key ==
+                                          _c("i", {
+                                            directives: [
+                                              {
+                                                name: "show",
+                                                rawName: "v-show",
+                                                value:
+                                                  key ||
+                                                  (!key &&
                                                     _vm.form.pro_specification
-                                                      .length -
-                                                      1,
-                                                  expression:
-                                                    "key == form.pro_specification.length-1"
-                                                }
-                                              ],
-                                              staticClass:
-                                                "btn btn-sm btn-success",
-                                              on: {
-                                                click: function($event) {
-                                                  $event.preventDefault()
-                                                  return _vm.add_specificaton(
-                                                    key
-                                                  )
-                                                }
+                                                      .length > 1),
+                                                expression:
+                                                  "key || ( !key && form.pro_specification.length > 1)"
                                               }
-                                            },
-                                            [
-                                              _c("i", {
-                                                staticClass:
-                                                  "fas fa-plus-square"
-                                              }),
-                                              _vm._v(" Add ")
-                                            ]
-                                          )
+                                            ],
+                                            staticClass:
+                                              "fas fa-minus-circle danger pointer",
+                                            attrs: { title: "Remove" },
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                return _vm.remove_specification(
+                                                  key
+                                                )
+                                              }
+                                            }
+                                          }),
+                                          _vm._v(" "),
+                                          _c("i", {
+                                            directives: [
+                                              {
+                                                name: "show",
+                                                rawName: "v-show",
+                                                value:
+                                                  key ==
+                                                  _vm.form.pro_specification
+                                                    .length -
+                                                    1,
+                                                expression:
+                                                  "key == form.pro_specification.length-1"
+                                              }
+                                            ],
+                                            staticClass:
+                                              "fas fa-plus-circle green pointer",
+                                            attrs: { title: "Add" },
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                return _vm.add_specificaton(key)
+                                              }
+                                            }
+                                          })
                                         ])
                                       ])
                                     })
@@ -3101,7 +3076,8 @@ var render = function() {
                                                         "input.customer_group"
                                                     }
                                                   ],
-                                                  staticClass: "form-control",
+                                                  staticClass:
+                                                    "form-control form-control-sm",
                                                   attrs: {
                                                     id: "",
                                                     name: "customer_group"
@@ -3190,7 +3166,8 @@ var render = function() {
                                                       "input.discount_qty"
                                                   }
                                                 ],
-                                                staticClass: "form-control",
+                                                staticClass:
+                                                  "form-control form-control-sm",
                                                 attrs: {
                                                   type: "number",
                                                   name: "discount_qty",
@@ -3233,7 +3210,8 @@ var render = function() {
                                                       "input.discount_price"
                                                   }
                                                 ],
-                                                staticClass: "form-control",
+                                                staticClass:
+                                                  "form-control form-control-sm",
                                                 attrs: {
                                                   type: "text",
                                                   name: "discount_price",
@@ -3277,7 +3255,8 @@ var render = function() {
                                                       "input.discount_priority"
                                                   }
                                                 ],
-                                                staticClass: "form-control",
+                                                staticClass:
+                                                  "form-control form-control-sm",
                                                 attrs: {
                                                   type: "text",
                                                   name: "discount_priority",
@@ -3321,7 +3300,8 @@ var render = function() {
                                                       "input.discount_start_date"
                                                   }
                                                 ],
-                                                staticClass: "form-control",
+                                                staticClass:
+                                                  "form-control form-control-sm",
                                                 attrs: {
                                                   type: "date",
                                                   name: "discount_start_date",
@@ -3366,7 +3346,8 @@ var render = function() {
                                                       "input.discount_end_date"
                                                   }
                                                 ],
-                                                staticClass: "form-control",
+                                                staticClass:
+                                                  "form-control form-control-sm",
                                                 attrs: {
                                                   type: "date",
                                                   name: "discount_end_date",
@@ -3399,77 +3380,57 @@ var render = function() {
                                             "div",
                                             { staticClass: "form-group-" },
                                             [
-                                              _c(
-                                                "button",
-                                                {
-                                                  directives: [
-                                                    {
-                                                      name: "show",
-                                                      rawName: "v-show",
-                                                      value:
-                                                        key ||
-                                                        (!key &&
-                                                          _vm.form.pro_discount
-                                                            .length > 1),
-                                                      expression:
-                                                        "key || ( !key && form.pro_discount.length > 1)"
-                                                    }
-                                                  ],
-                                                  staticClass:
-                                                    "btn btn-sm btn-danger",
-                                                  on: {
-                                                    click: function($event) {
-                                                      $event.preventDefault()
-                                                      return _vm.remove_discount(
-                                                        key
-                                                      )
-                                                    }
-                                                  }
-                                                },
-                                                [
-                                                  _c("i", {
-                                                    staticClass:
-                                                      "fas fa-minus-square"
-                                                  }),
-                                                  _vm._v(" Remove")
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "button",
-                                                {
-                                                  directives: [
-                                                    {
-                                                      name: "show",
-                                                      rawName: "v-show",
-                                                      value:
-                                                        key ==
+                                              _c("i", {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value:
+                                                      key ||
+                                                      (!key &&
                                                         _vm.form.pro_discount
-                                                          .length -
-                                                          1,
-                                                      expression:
-                                                        "key == form.pro_discount.length-1"
-                                                    }
-                                                  ],
-                                                  staticClass:
-                                                    "btn btn-sm btn-success",
-                                                  on: {
-                                                    click: function($event) {
-                                                      $event.preventDefault()
-                                                      return _vm.add_discount(
-                                                        key
-                                                      )
-                                                    }
+                                                          .length > 1),
+                                                    expression:
+                                                      "key || ( !key && form.pro_discount.length > 1)"
                                                   }
-                                                },
-                                                [
-                                                  _c("i", {
-                                                    staticClass:
-                                                      "fas fa-plus-square"
-                                                  }),
-                                                  _vm._v(" Add ")
-                                                ]
-                                              )
+                                                ],
+                                                staticClass:
+                                                  "fas fa-minus-circle danger pointer",
+                                                attrs: { title: "Remove" },
+                                                on: {
+                                                  click: function($event) {
+                                                    $event.preventDefault()
+                                                    return _vm.remove_discount(
+                                                      key
+                                                    )
+                                                  }
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("i", {
+                                                directives: [
+                                                  {
+                                                    name: "show",
+                                                    rawName: "v-show",
+                                                    value:
+                                                      key ==
+                                                      _vm.form.pro_discount
+                                                        .length -
+                                                        1,
+                                                    expression:
+                                                      "key == form.pro_discount.length-1"
+                                                  }
+                                                ],
+                                                staticClass:
+                                                  "fas fa-plus-circle green pointer",
+                                                attrs: { title: "Add" },
+                                                on: {
+                                                  click: function($event) {
+                                                    $event.preventDefault()
+                                                    return _vm.add_discount(key)
+                                                  }
+                                                }
+                                              })
                                             ]
                                           )
                                         ])
