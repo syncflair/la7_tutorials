@@ -45,17 +45,31 @@
 			               <has-error :form="form" field="role_id"></has-error>	
 			        </div>
 
-			        <div class="form-group">
-			            <label>User Status *</label>
-			            <select v-model="form.status_id" class="form-control form-control-sm" id="status_id" name="status_id" :class="{ 'is-invalid': form.errors.has('status_id') }" >
-			              	<option disabled value="">Select user Status ..</option>                
-			                <option v-for="u_status in userStatus" :key="u_status.id" v-bind:value="u_status.id">{{u_status.us_name}}</option>			                  
-			            </select>
-			              <has-error :form="form" field="status_id"></has-error>
+			        <div class="row">
+			          <div class="col-sm-6">
+			          	<div class="form-group">
+				          <label>User Status *</label>
+				          <select v-model="form.status_id" class="form-control form-control-sm" id="status_id" name="status_id" :class="{ 'is-invalid': form.errors.has('status_id') }" >
+				            <option disabled value="">Select user Status ..</option>                
+				            <option v-for="u_status in userStatus" :key="u_status.id" v-bind:value="u_status.id">{{u_status.us_name}}</option>			                  
+				          </select>
+				          <has-error :form="form" field="status_id"></has-error>
+				        </div>
+			          </div>
+			          <div class="col-sm-6">
+			          	<div class="form-group">
+				          <label>Branch *</label>
+				          <select v-model="form.branch_id" class="form-control form-control-sm" id="branch_id" name="branch_id" :class="{ 'is-invalid': form.errors.has('branch_id') }" >
+				           	<option disabled value="">Select user Status ..</option>                
+				            <option v-for="branch in branches" :key="branch.id" v-bind:value="branch.id">{{branch.branch_name}}</option>			                  
+				          </select>
+				          <has-error :form="form" field="branch_id"></has-error>
+				        </div>
+			          </div>
 			        </div>
-
+			        
 			        <div class="form-group">
-			            <label>User Status *</label>
+			            <label>Select Employee </label>
 			            <div>
 			              <single-select-app-one
 		                      :options="selectedEmployee"
@@ -179,6 +193,7 @@
 	          role_id:'',
 	          status_id: '',
 	          employee_id: '',
+	          branch_id: '',
 	          avatar: '',	          
 	        })
 	      }
@@ -186,7 +201,7 @@
 
 	    computed: {
 	        ...mapState( 'usersAdminStore', ['pagination','autoSearchEmployee','selectedEmployee'] ),
-	        ...mapState( 'commonStoreForAll', ['userStatus','adminRoles'] ) /*userStatus get form commonSotreForAll*/	        
+	        ...mapState( 'commonStoreForAll', ['userStatus','adminRoles','branches'] ) /*userStatus get form commonSotreForAll*/	        
       	},
 
 	    methods:{
@@ -327,6 +342,7 @@
 	    created(){
 	    	this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
 	    	this.$store.dispatch('commonStoreForAll/fetchRoles'); //get user role for admin (1 to 6)
+	    	this.$store.dispatch('commonStoreForAll/fetchBranches'); //get Branchs
 
             FireEvent.$on('AfterChange', () => {
 		        this.$Progress.start();

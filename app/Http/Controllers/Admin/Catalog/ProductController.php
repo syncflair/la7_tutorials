@@ -399,8 +399,8 @@ class ProductController extends Controller
             })
             ->select('products.*','status_master.status_name')
             ->join('status_master', 'products.status_m_id','=', 'status_master.id')
-            ->join('brands', 'products.brand_id','=', 'brands.id')
-            ->join('categories', 'products.pro_category','=', 'categories.id')
+            //->join('brands', 'products.brand_id','=', 'brands.id')
+            //->join('categories', 'products.pro_category','=', 'categories.id')
             ->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){

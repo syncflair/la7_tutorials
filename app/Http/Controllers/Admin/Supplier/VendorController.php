@@ -393,7 +393,7 @@ class VendorController extends Controller
         $searchKey = $request->q;
         //$searchResult = Vendor::whereIn('id', $searchKey)
         $searchResult = Vendor::where('id', $searchKey)
-                        ->select('id','vendor_name')
+                        //->select('id','vendor_name')
                         ->get(); //Model::whereIn('id', [1, 2, 3])->get();
        // $searchResult = Supplier::findMany([1, 2, 3]); //Model::findMany([1, 2, 3]);
         return response()->json($searchResult);

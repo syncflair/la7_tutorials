@@ -380,16 +380,74 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "PurchaseOrderForm",
   data: function data() {
     return {
-      NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
-      ShowOnChangeImage: null,
-      deleteImageIcon: false,
-      //Delete Image icon if image exist
+      //NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
+      //ShowOnChangeImage:null,
+      //deleteImageIcon: false, //Delete Image icon if image exist
       editMode: false,
       //Use this for add edit using the same form   
       PaymentTerms: [{
@@ -399,8 +457,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         name: 'Paid'
       }],
+      paymentMethods: [{
+        name: 'Cash'
+      }, {
+        name: 'Bank Transfer'
+      }, {
+        name: 'Cheque'
+      }],
       //For Single select app
-      placeHolder: 'Select Vendor',
+      placeHolder: 'Select Vendor / Supplier',
       filterBy: 'vendor_name',
       valueProperty: 'id',
       //Single select app for product
@@ -412,10 +477,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       // Create a new form instance
       form: new Form({
         id: '',
+        po_invoice: '',
         vendor_id: '',
         po_date: '',
         po_payment_term: '',
-        po_due_date: '',
+        //po_due_date:'', 
+        po_payment_method: '',
+        branch_id: '',
+        status_m_id: '',
+        po_vendor_invoice_no: '',
+        po_details: '',
+        po_discount_fixed: '',
+        po_discount_percent: '',
+        po_tax_fiexd: '',
+        po_tax_percent: '',
+        po_invoice_sub_total: 0.00,
+        po_invoice_total: 0.00,
+        po_paid_amount: '',
+        po_due_amount: 0.00,
+        //po_image:'',
         pur_order_details: [{
           product_id: '',
           batch_no: '',
@@ -434,19 +514,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           vat_percent: '',
           vat_fixed: '',
           pod_line_total: 0.00
-        }],
-        po_payment_method: '',
-        po_details: '',
-        po_discount_fixed: '',
-        po_discount_percent: '',
-        po_paid_amount: 0.00,
-        po_invoice_sub_total: 0.00,
-        po_invoice_total: 0.00
+        }]
       })
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('ProductMasterStore', ['products', 'pagination']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('PurchaseOrderMasterStore', ['selectedVendor', 'autoSearchVendor', 'selectedProductList', 'autoSearchProduct']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('ProductMasterStore', ['products', 'pagination']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['AllStatus', 'branches']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('PurchaseOrderMasterStore', ['selectedVendor', 'autoSearchVendor', 'selectedProductList', 'autoSearchProduct']), {
     // finalAmount(){
     //   let price = 0;
     //   this.orderDetails.forEach(order => {
@@ -463,7 +536,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         price = price + p.pod_line_total;
       });
       this.form.po_invoice_sub_total = price;
-      return price;
+      return price.toFixed(2);
     } // subTotalAmount: function(){
     //       return this.form.pur_order_details.reduce(function(total, item){
     //         // return total + (item.quantity * item.price); 
@@ -484,6 +557,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       handler: function handler(newValue, oldValue) {
         newValue.forEach(function (p) {
           // if(!isNaN(p.vat_percent)){ 
+          //Calculater each order item total
           if (p.discount_fixed != '' && p.discount_percent === '' && p.vat_fixed === '' && p.vat_percent === '') {
             p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * p.discount_fixed;
           } else if (p.discount_fixed === '' && p.discount_percent != '' && p.vat_fixed === '' && p.vat_percent === '') {
@@ -519,13 +593,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     form: {
       handler: function handler(value) {
+        //calculate purchase order total amount
         if (value.po_discount_fixed != '' && value.po_discount_percent === '') {
-          value.po_invoice_total = value.po_invoice_sub_total - value.po_discount_fixed;
+          value.po_invoice_total = (value.po_invoice_sub_total - value.po_discount_fixed).toFixed(2);
         } else if (value.po_discount_fixed === '' && value.po_discount_percent != '') {
           var o_discountPercent = value.po_discount_percent / 100 * value.po_invoice_sub_total;
-          value.po_invoice_total = value.po_invoice_sub_total - o_discountPercent;
+          value.po_invoice_total = (value.po_invoice_sub_total - o_discountPercent).toFixed(2);
         } else {
-          value.po_invoice_total = value.po_invoice_sub_total;
+          value.po_invoice_total = value.po_invoice_sub_total.toFixed(2);
+        } //calculate purchase order due
+
+
+        if (value.po_paid_amount != '') {
+          value.po_due_amount = (value.po_invoice_total - value.po_paid_amount).toFixed(2);
+        } else if (value.po_paid_amount === '' && value.po_invoice_total != 0) {
+          value.po_due_amount = value.po_invoice_total;
+        } else {
+          value.po_due_amount = 0 .toFixed(2);
         }
       },
       deep: true
@@ -533,6 +617,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   //end watch
   methods: {
+    click: function click() {//this.form.po_date = '2017-07-04';
+    },
     //###################################### Purchase Order Details ################################################
     add_order_item: function add_order_item() {
       this.form.pur_order_details.push({
@@ -560,32 +646,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.product_id_list.splice(index, 1); //remove form product_id_list
     },
     //###################################### End Purchase Order Details ################################################
-    //Make image as base64 
-    onImageChange: function onImageChange(e) {
-      var _this = this;
-
-      //let file = e.target.files || e.dataTransfer.files;
-      var file = e.target.files[0]; //console.log(file);
-
-      this.ShowOnChangeImage = URL.createObjectURL(file); //display image in form when select image
-
-      var reader = new FileReader(); //let vm = this;
-
-      if (file['size'] > 512000) {
-        //512Kb = 512000Byte
-        toastr.warning('Please select file size within 500kb');
-      } else {
-        reader.onloadend = function (file) {
-          //console.log(reader.result);
-          _this.form.avatar = reader.result; //push base64 to logo veriable
-        };
-
-        reader.readAsDataURL(file);
-      }
+    //on change branch
+    onChangeBranch: function onChangeBranch(event) {//alert(event.target.value);
+      //console.log(event);
     },
+    //Make image as base64 
+    // onImageChange(e){
+    //     //let file = e.target.files || e.dataTransfer.files;
+    //     let file = e.target.files[0];        
+    //     //console.log(file);
+    //     this.ShowOnChangeImage = URL.createObjectURL(file); //display image in form when select image
+    //     let reader = new FileReader();
+    //     //let vm = this;
+    //     if(file['size'] > 512000 ){  //512Kb = 512000Byte
+    //       toastr.warning('Please select file size within 500kb');
+    //     }else{          
+    //       reader.onloadend = (file) => {
+    //         //console.log(reader.result);
+    //         this.form.avatar = reader.result; //push base64 to logo veriable
+    //       };          
+    //       reader.readAsDataURL(file);
+    //     }
+    // },
     // Submit the form via a POST request
     storeFormData: function storeFormData() {
-      var _this2 = this;
+      var _this = this;
 
       //console.log(this.form); 
       this.$Progress.start(); //using progress-bar package
@@ -598,18 +683,54 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
           toastr.success(data.success);
 
-          _this2.$Progress.finish();
+          _this.$Progress.finish();
 
-          _this2.form.reset(); //reset from after submit	
+          _this.form.reset(); //reset from after submit	
+          //this.$refs.avatar.value = ''; //clear file input tag 
+          //this.ShowOnChangeImage = null;
 
 
-          _this2.$refs.avatar.value = ''; //clear file input tag 
-
-          _this2.ShowOnChangeImage = null;
-
-          _this2.$router.push({
+          _this.$router.push({
             path: '/spa/PurchaseOrderMaster'
           }); //route after successfule submit	      
+
+        }
+
+        if (data.errors) {
+          _this.$Progress.fail();
+
+          toastr.warning(data.errors);
+        }
+      })["catch"](function () {
+        _this.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
+    },
+    updateFormData: function updateFormData() {
+      var _this2 = this;
+
+      //console.log(this.form); 
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.put('/spa/PurchaseOrder-Info/' + this.form.id).then(function (_ref2) {
+        var data = _ref2.data;
+
+        if (data.success) {
+          //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update         
+          _this2.$Progress.finish();
+
+          toastr.success(data.success);
+
+          _this2.form.reset(); //reset from after submit
+
+
+          _this2.editMode = false; //this.$refs.avatar.value = ''; //clear file input tag 
+          //this.ShowOnChangeImage = null;
+
+          _this2.$router.push({
+            path: '/spa/EmployeeMaster'
+          }); //route after successfule submit
 
         }
 
@@ -624,48 +745,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         toastr.warning('Something is wrong!');
       });
     },
-    updateFormData: function updateFormData() {
-      var _this3 = this;
-
-      //console.log(this.form); 
-      this.$Progress.start(); //using progress-bar package
-
-      this.form.put('/spa/PurchaseOrder-Info/' + this.form.id).then(function (_ref2) {
-        var data = _ref2.data;
-
-        if (data.success) {
-          //FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update         
-          _this3.$Progress.finish();
-
-          toastr.success(data.success);
-
-          _this3.form.reset(); //reset from after submit
-
-
-          _this3.editMode = false;
-          _this3.$refs.avatar.value = ''; //clear file input tag 
-
-          _this3.ShowOnChangeImage = null;
-
-          _this3.$router.push({
-            path: '/spa/EmployeeMaster'
-          }); //route after successfule submit
-
-        }
-
-        if (data.errors) {
-          _this3.$Progress.fail();
-
-          toastr.warning(data.errors);
-        }
-      })["catch"](function () {
-        _this3.$Progress.fail();
-
-        toastr.warning('Something is wrong!');
-      });
-    },
     deleteImage: function deleteImage(id) {
-      var _this4 = this;
+      var _this3 = this;
 
       this.$Progress.start(); //using progress-bar package        
       //console.log(this.form.has_many_image);
@@ -673,14 +754,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post('/spa/PurchaseOrder-Info-DeleteImage/' + id).then(function (_ref3) {
         var data = _ref3.data;
         // this.ShowOnChangeImage = null;
-        _this4.deleteImageIcon = false;
-        _this4.form.avatar = null;
+        _this3.deleteImageIcon = false;
+        _this3.form.avatar = null;
 
-        _this4.$Progress.finish();
+        _this3.$Progress.finish();
 
         toastr.success(data.success);
       })["catch"](function () {
-        _this4.$Progress.fail();
+        _this3.$Progress.fail();
 
         toastr.warning('Something is wrong!');
       });
@@ -692,13 +773,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         this.form.fill(this.$route.params.data); //this.form.departments = this.$route.params.data.departments; //pass the array
         //this.$refs.po_invoice.focus();  
 
-        if (this.$route.params.data.departments.length === 0) {
-          this.form.departments = [];
+        if (this.$route.params.data.pur_order_details.length === 0) {
+          this.form.pur_order_details = [];
         } else {
           //return only department id from depertment list 
-          this.form.departments = Object.values(this.$route.params.data.departments).map(function (item) {
+          this.product_id_list = Object.values(this.$route.params.data.pur_order_details).map(function (item) {
             //return item['id'];
-            return item.id;
+            return item.product_id;
           });
         }
 
@@ -744,16 +825,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this4 = this;
 
-    this.$store.dispatch('ProductMasterStore/fetchData', this.pagination.per_page);
-    this.fillForm();
-    this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
+    //Current date show in purhase order date at first load
+    this.form.po_date = new Date().toISOString().substr(0, 10); //this.$store.dispatch('ProductMasterStore/fetchData', this.pagination.per_page);
+
+    this.fillForm(); //this.$store.dispatch('commonStoreForAll/AllStatus', 'Product');
+
+    this.$store.dispatch('commonStoreForAll/AllStatus', 'PurchaseOrder'); //get all status
+
+    this.$store.dispatch('commonStoreForAll/fetchBranches'); //get Branch list
     //call from multi-select-app-one.vue
 
     FireEvent.$on('AutoCompleteSearchForData', function (data) {
-      _this5.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data);
-    }); //console.log(this.form);
+      _this4.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data);
+    }); //console.log(moment().format('LTS'));
+  },
+  mounted: function mounted() {//console.log(moment().format('LTS'))
   }
 }); //end export Default
 
@@ -793,11 +881,14 @@ var render = function() {
             _c("div", { staticClass: "col-md-3" }, [
               _c(
                 "div",
-                { staticClass: "form-group" },
+                { staticClass: "form-group mb-0" },
                 [
                   _c("single-select-app-two", {
                     class: { "is-invalid": _vm.form.errors.has("vendor_id") },
-                    staticStyle: { "margin-top": "10px !important" },
+                    staticStyle: {
+                      "margin-top": "0px !important",
+                      padding: "0px !important"
+                    },
                     attrs: {
                       options: _vm.selectedVendor,
                       autoSearchOptions: _vm.autoSearchVendor,
@@ -824,61 +915,150 @@ var render = function() {
                   })
                 ],
                 1
-              )
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group mt-1 mb-0" }, [
+                _vm.selectedVendor.length != 0
+                  ? _c("div", { staticClass: "ml-1" }, [
+                      _c("p", { staticClass: "mb-0 border-bottom-1" }, [
+                        _c("small", [
+                          _vm._v(
+                            _vm._s(_vm.selectedVendor[0]["vendor_phone"]) +
+                              ", " +
+                              _vm._s(_vm.selectedVendor[0]["vendor_email"])
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "mb-0 border-bottom-1" }, [
+                        _c("small", [
+                          _vm._v(
+                            "Vendor Type: " +
+                              _vm._s(_vm.selectedVendor[0]["vendor_type"])
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "mb-0 border-bottom-1" }, [
+                        _c("small", [
+                          _vm._v(
+                            _vm._s(_vm.selectedVendor[0]["vendor_address"])
+                          )
+                        ])
+                      ])
+                    ])
+                  : _vm._e()
+              ])
             ]),
             _vm._v(" "),
-            _vm._m(0),
+            _c("div", { staticClass: "col-md-3" }, [
+              _vm.authUser.role_id === 1
+                ? _c("div", { staticClass: "row form-group mb-1" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-7" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.branch_id,
+                              expression: "form.branch_id"
+                            }
+                          ],
+                          staticClass: "form-control form-control-sm",
+                          attrs: { name: "branch_id" },
+                          on: {
+                            change: [
+                              function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "branch_id",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              },
+                              function($event) {
+                                return _vm.onChangeBranch($event)
+                              }
+                            ]
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { disabled: "", value: "" } }, [
+                            _vm._v("Select Branch/Store")
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.branches, function(branch) {
+                            return _c(
+                              "option",
+                              {
+                                key: branch.id,
+                                domProps: { value: branch.id }
+                              },
+                              [_vm._v(_vm._s(branch.branch_name))]
+                            )
+                          })
+                        ],
+                        2
+                      )
+                    ])
+                  ])
+                : _vm._e()
+            ]),
             _vm._v(" "),
-            _vm._m(1),
+            _c("div", { staticClass: "col-md-3" }, [
+              _c("div", { staticClass: "row form-group mb-1" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-7" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.po_invoice,
+                        expression: "form.po_invoice"
+                      }
+                    ],
+                    ref: "po_invoice",
+                    staticClass: "form-control form-control-sm",
+                    attrs: {
+                      type: "text",
+                      name: "po_invoice",
+                      readonly: "",
+                      min: "0",
+                      step: ".01",
+                      placeholder: "Ex. PO-20-1"
+                    },
+                    domProps: { value: _vm.form.po_invoice },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "po_invoice", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-3" }, [
               _c("div", { staticClass: "row form-group mb-1" }, [
                 _vm._m(2),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "col-sm-7" },
-                  [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.po_invoice,
-                          expression: "form.po_invoice"
-                        }
-                      ],
-                      ref: "po_invoice",
-                      staticClass: "form-control form-control-sm",
-                      class: {
-                        "is-invalid": _vm.form.errors.has("po_invoice")
-                      },
-                      attrs: {
-                        type: "text",
-                        name: "po_invoice",
-                        placeholder: "Purchase order invoice"
-                      },
-                      domProps: { value: _vm.form.po_invoice },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.form, "po_invoice", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("has-error", {
-                      attrs: { form: _vm.form, field: "po_invoice" }
-                    })
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row form-group mb-1" }, [
-                _vm._m(3),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-7" }, [
                   _c("input", {
@@ -910,7 +1090,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row form-group mb-1" }, [
-                _vm._m(4),
+                _vm._m(3),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -986,40 +1166,128 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row form-group mb-1" }, [
-                _vm._m(5),
+                _vm._m(4),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-7" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.po_due_date,
-                        expression: "form.po_due_date"
-                      }
-                    ],
-                    staticClass: "form-control form-control-sm",
-                    attrs: {
-                      type: "date",
-                      name: "po_due_date",
-                      placeholder: "Due Date"
-                    },
-                    domProps: { value: _vm.form.po_due_date },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.po_payment_method,
+                          expression: "form.po_payment_method"
                         }
-                        _vm.$set(_vm.form, "po_due_date", $event.target.value)
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: { name: "po_payment_method" },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.form,
+                            "po_payment_method",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
                       }
-                    }
-                  })
+                    },
+                    [
+                      _c("option", { attrs: { disabled: "", value: "" } }, [
+                        _vm._v("Payment by ..")
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.paymentMethods, function(pm) {
+                        return _c("option", { domProps: { value: pm.name } }, [
+                          _vm._v(_vm._s(pm.name))
+                        ])
+                      })
+                    ],
+                    2
+                  )
                 ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row form-group mb-1" }, [
+                _vm._m(5),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-sm-7" },
+                  [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.status_m_id,
+                            expression: "form.status_m_id"
+                          }
+                        ],
+                        staticClass: "form-control form-control-sm",
+                        class: {
+                          "is-invalid": _vm.form.errors.has("status_m_id")
+                        },
+                        attrs: { id: "status_m_id", name: "status_m_id" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.form,
+                              "status_m_id",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c("option", { attrs: { value: "" } }, [
+                          _vm._v("Select order Status")
+                        ]),
+                        _vm._v(" "),
+                        _vm._l(_vm.AllStatus, function(as) {
+                          return _c(
+                            "option",
+                            { key: as.id, domProps: { value: as.id } },
+                            [_vm._v(_vm._s(as.status_name))]
+                          )
+                        })
+                      ],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c("has-error", {
+                      attrs: { form: _vm.form, field: "status_m_id" }
+                    })
+                  ],
+                  1
+                )
               ])
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "row mt-4" }, [
+          _c("div", { staticClass: "row mt-3" }, [
             _c("div", { staticClass: "col-md-12" }, [
               _c("div", { staticClass: "table-responsive-" }, [
                 _c(
@@ -1088,6 +1356,11 @@ var render = function() {
                             { staticClass: "form-group-" },
                             [
                               _c("single-select-app-two", {
+                                class: {
+                                  "is-invalid": _vm.form.errors.has(
+                                    "product_id"
+                                  )
+                                },
                                 attrs: {
                                   options: _vm.selectedProductList,
                                   autoSearchOptions: _vm.autoSearchProduct,
@@ -1108,6 +1381,10 @@ var render = function() {
                                   },
                                   expression: "input.product_id"
                                 }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.form, field: "product_id" }
                               })
                             ],
                             1
@@ -1538,8 +1815,8 @@ var render = function() {
                               ],
                               staticClass: "form-control form-control-sm",
                               attrs: {
-                                readonly: "",
                                 type: "number",
+                                readonly: "",
                                 min: "0",
                                 step: ".01"
                               },
@@ -1570,62 +1847,40 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
             _c("div", { staticClass: "col-md-3" }, [
-              _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "form-group mb-0" }, [
                 _vm._m(7),
                 _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.form.po_payment_method,
-                        expression: "form.po_payment_method"
-                      }
-                    ],
-                    staticClass: "form-control form-control-sm",
-                    attrs: {
-                      id: "po_payment_method",
-                      name: "po_payment_method"
-                    },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.form,
-                          "po_payment_method",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.po_vendor_invoice_no,
+                      expression: "form.po_vendor_invoice_no"
                     }
+                  ],
+                  staticClass: "form-control form-control-sm",
+                  attrs: {
+                    name: "po_vendor_invoice_no",
+                    placeholder: "Supplier invoice no, if any"
                   },
-                  [
-                    _c("option", { attrs: { disabled: "", value: "" } }, [
-                      _vm._v("Payment Type ..")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "" } }, [_vm._v("Cash")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "" } }, [
-                      _vm._v("Bank Transfer")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "" } }, [_vm._v("Cheque")])
-                  ]
-                )
+                  domProps: { value: _vm.form.po_vendor_invoice_no },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.form,
+                        "po_vendor_invoice_no",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "form-group mb-0" }, [
                 _vm._m(8),
                 _vm._v(" "),
                 _c("textarea", {
@@ -1637,7 +1892,7 @@ var render = function() {
                       expression: "form.po_details"
                     }
                   ],
-                  staticClass: "form-control",
+                  staticClass: "form-control form-control-sm",
                   attrs: { name: "po_details" },
                   domProps: { value: _vm.form.po_details },
                   on: {
@@ -1779,6 +2034,17 @@ var render = function() {
                     }
                   })
                 ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row form-group mb-2" }, [
+                _vm._m(13),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-4" }, [
+                  _c("span", [
+                    _vm._v(" " + _vm._s(_vm.form.po_due_amount) + " ")
+                  ]),
+                  _c("span", [_vm._v("Tk")])
+                ])
               ])
             ])
           ]),
@@ -1832,9 +2098,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "card-footer" }),
-    _vm._v(" "),
-    _vm._v("\r\n    " + _vm._s(_vm.product_id_list) + "\r\n\r\n")
+    _c("div", { staticClass: "card-footer" })
   ])
 }
 var staticRenderFns = [
@@ -1842,16 +2106,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3" }, [
-      _c("h4", [_vm._v(" Middle")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3" }, [
-      _c("h4", [_vm._v(" Middle")])
+    return _c("div", { staticClass: "col-sm-5 text-right" }, [
+      _c("label", { staticClass: "pt-2-" }, [
+        _c("small", [_vm._v("Select Branch")])
+      ])
     ])
   },
   function() {
@@ -1887,7 +2145,19 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-sm-5 text-right" }, [
-      _c("label", { staticClass: "pt-2-" }, [_c("small", [_vm._v("Due Date")])])
+      _c("label", { staticClass: "pt-2-" }, [
+        _c("small", [_vm._v("Payment Method")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-5 text-right" }, [
+      _c("label", { staticClass: "pt-2-" }, [
+        _c("small", [_c("strong", [_vm._v("*Order Status")])])
+      ])
     ])
   },
   function() {
@@ -1975,7 +2245,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c(
         "th",
-        { attrs: { width: "3%", scope: "col", title: "Product wise Total" } },
+        { attrs: { width: "5%", scope: "col", title: "Product wise Total" } },
         [_c("small", [_vm._v("Total")])]
       )
     ])
@@ -1984,7 +2254,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("label", [_c("small", [_vm._v("Payment Method")])])
+    return _c("label", { attrs: { for: "po_vendor_invoice_no" } }, [
+      _c("small", [_vm._v("Vendor / Supplier invoice")])
+    ])
   },
   function() {
     var _vm = this
@@ -2031,6 +2303,16 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-sm-8 text-right" }, [
       _c("label", { staticClass: "pt-2-" }, [
         _c("small", [_c("strong", [_vm._v("Paid Amount:")])])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-8 text-right" }, [
+      _c("label", { staticClass: "pt-2-" }, [
+        _c("small", [_c("strong", [_vm._v("Due Amount:")])])
       ])
     ])
   }

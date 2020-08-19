@@ -108,9 +108,9 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         name: 'Product'
       }, {
-        name: 'PruchaseOrder'
+        name: 'PurchaseOrder'
       }, {
-        name: 'PruchaseReturn'
+        name: 'PurchaseReturn'
       }, {
         name: 'SalesOrder'
       }, {

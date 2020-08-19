@@ -170,7 +170,7 @@
 
         mounted() {
           //console.log(JSON.parse(this.authPermissions.permission).BranchInfo.delete);
-          console.log(JSON.parse(this.authPermissions.permission));
+          //console.log(JSON.parse(this.authPermissions.permission));
           //console.log(this.authPermissions.permission['BranchInfo']['delete']);
 
         }

@@ -50,6 +50,7 @@ Vue.component('single-select-app-one', () => import(/* webpackChunkName: "single
 Vue.component('single-select-app-two', () => import(/* webpackChunkName: "single-select-app-two-global" */'./components/Admin/GlobalComponents/single-select-app-two.vue'));
 Vue.component('auto-complete-app', () => import(/* webpackChunkName: "auto-complete-app" */'./components/Admin/GlobalComponents/auto-complete-app.vue'));
 Vue.component('search-app-one', () => import(/* webpackChunkName: "search-app-one" */'./components/Admin/GlobalComponents/search-app-one.vue'));
+Vue.component('my-date-time-global', () => import(/* webpackChunkName: "my-date-time-global" */'./components/Admin/GlobalComponents/my-date-time-global'));
 
 
 import counttest from './components/Admin/MultiComponent/countTest.vue';
@@ -59,7 +60,11 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 
 
 /*Moment JS - Format Dates*/
-import moment from 'moment'
+import moment from 'moment' 
+//Vue.use(moment) //not working properly
+window.moment = moment; // use if moment define form data
+Vue.prototype.moment = moment //use if moment function use inside component
+//window.moment = require('moment'); //work also
 
 /**Vue 2 Editor**/
 import Vue2Editor from 'vue2-editor'
@@ -155,6 +160,8 @@ const app = new Vue({
       }
     },
 
+  
+
     /*Global print function. add this @click.prevent="printMe" to any link that you want to print*/
     printMe(){
       window.print();
@@ -164,6 +171,8 @@ const app = new Vue({
     components: { 
       counttest, 
     }, 
+
+    
 
 
 });

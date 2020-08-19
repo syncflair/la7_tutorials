@@ -373,7 +373,7 @@ var render = function() {
                 ref: "autoSearchField",
                 staticClass: "form-control form-control-sm form-control-navbar",
                 attrs: {
-                  type: "text",
+                  type: "search",
                   autocomplete: "off",
                   placeHolder: this.placeHolder,
                   id: "autoSearchField"

@@ -96,9 +96,12 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
 
-       <!-- Show Clock Here -->
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" title="Clock" class="nav-link"><i class="far fa-clock"></i></a>
+      <!-- Show Clock Here -->
+      <li class="nav-item">        
+        <a class="nav-link" href="#" role="button">  
+          <i class="far fa-clock"></i>       
+          <my-date-time-global />
+        </a>
       </li>
 
 
@@ -207,6 +210,8 @@
               </form>
           </div>
       </li> -->
+
+      
 
       <li class="nav-item">        
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">         

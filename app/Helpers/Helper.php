@@ -1,5 +1,6 @@
 <?php
-use app\user;
+use App\user;
+use App\Models\Purchase\PurchaseOrder;
 use Illuminate\Http\Request;
 
 
@@ -46,6 +47,30 @@ function slug_generator($string){
 	return strtolower(preg_replace('/-+/', '-', $string));
 
 }
+
+function purchase_order_invoice_generate(){
+	$record = PurchaseOrder::latest()->first();
+	// $record = 'PO-20-1';
+	
+	if ($record == null) {
+      	$invoiceNumber = 'PO-'.date('y').'-1';       
+    }else{
+    	$parts = explode('-', $record->po_invoice); //splite into three part
+    	
+    	//check first day in a year
+		if ( date('l',strtotime(date('Y-01-01'))) ){
+		    $invoiceNumber = 'PO-'.date('y').'-0001';
+		}else{
+		    //increase 1 with last invoice number
+		    $invoiceNumber = $parts[0].'-'.$parts[1].'-'. ($parts[2] + 1);
+		    //$parts[0] - PO, $parts[1] - year, $parts[2] - number
+		}		
+    }
+    return $invoiceNumber;
+    //dd($invoiceNumber);	
+	//date('y') 2 digits of year, date('4') 4 digits of year, date('m') number of month, date('M') name of month
+}
+
 
 
 

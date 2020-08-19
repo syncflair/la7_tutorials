@@ -75,6 +75,7 @@ class UserController extends Controller
             'employee_id' => 'nullable|sometimes|unique:users,employee_id', 
             'role_id' => 'required', 
             'status_id' => 'required', 
+            'branch_id' => 'required', 
             'password' => 'required|min:8|max:30',   //confirmed
             'password_confirmation' => 'required|same:password',
             //'avatar' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,PNG',
@@ -90,8 +91,9 @@ class UserController extends Controller
         $data['email']=$request->email;
         $data['role_id']=$request->role_id;
         $data['status_id']=$request->status_id;
-        $data['employee_id'] =  $request->employee_id ;
+        $data['employee_id'] =  $request->employee_id ;        
         //$data['employee_id'] = empty($request->employee_id) ? NULL : $request->employee_id ;
+        $data['branch_id'] = $request->branch_id ; 
         
         $data['password'] = Hash::make($request->password); //make hash password
         //$request['password'] = Hash::make($request->password); //make hash password
@@ -177,6 +179,7 @@ class UserController extends Controller
             'employee_id' => 'nullable|sometimes|unique:users,employee_id,'.$id, 
             'role_id' => 'required', 
             'status_id' => 'required', 
+            'branch_id' => 'required',
             'password' => 'nullable|sometimes|min:8|max:30',   //confirmed
             'password_confirmation' => 'sometimes|same:password',
             //'avatar' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,PNG',
@@ -195,6 +198,7 @@ class UserController extends Controller
         $data['role_id']=$request->role_id;
         $data['status_id']=$request->status_id;     
         $data['employee_id'] = $request->employee_id ;     
+        $data['branch_id'] = $request->branch_id ;     
         
         $data['password'] = $request->password == null ? $existing_password : Hash::make($request->password);
         //$request['password'] = Hash::make($request->password); //make hash password
@@ -336,7 +340,8 @@ class UserController extends Controller
                         ->orWhere('user_status.us_name','LIKE','%'.$searchKey.'%')
                         ->orWhere('roles.name','LIKE','%'.$searchKey.'%');
             })
-            ->select('users.*','user_status.us_name', 'roles.name')
+            //->select('users.*','user_status.us_name')
+            ->select('users.*','user_status.us_name', 'roles.name AS role_name')
             ->join('user_status', 'users.status_id','=', 'user_status.id')
             ->join('roles', 'users.role_id','=', 'roles.id')
             ->paginate($perPage);
@@ -351,7 +356,7 @@ class UserController extends Controller
                     $query->where( 'users.'.$searchOption,'LIKE','%'.$searchKey.'%');
                 }                
             })
-            ->select('users.*','user_status.us_name', 'roles.name')
+            ->select('users.*','user_status.us_name', 'roles.name AS role_name')
             ->join('user_status', 'users.status_id','=', 'user_status.id')
             ->join('roles', 'users.role_id','=', 'roles.id')
             ->paginate($perPage);

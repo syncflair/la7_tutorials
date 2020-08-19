@@ -16,9 +16,9 @@
     <div class="card-body">  
    	<form @submit.prevent=" editMode ? updateFormData() : storeFormData() ">
 
-   	  <div class="row"><!--First Part-->
-   	  	<div class="col-md-3">
-          <div class="form-group">
+   	  <div class="row"><!--Top Part-->
+   	  	<div class="col-md-3"><!--First-->
+          <div class="form-group mb-0">
             <!-- <label>Select Vendor *</label> -->
               <single-select-app-two                           
                 :options="selectedVendor"
@@ -29,27 +29,42 @@
                 :place-holder="placeHolder"
                 :value-property="valueProperty"
                 v-model="form.vendor_id"
-                style="margin-top: 10px !important;" 
+                style="margin-top: 0px !important; padding: 0px !important;" 
                 :class="{ 'is-invalid': form.errors.has('vendor_id') }"
               />
               <has-error :form="form" field="vendor_id"></has-error>
-          </div>         
+          </div> 
 
-   	    </div>
+          <div class="form-group mt-1 mb-0">
+            <div v-if="selectedVendor.length != 0" class="ml-1">
+              <!-- <p class="mb-0"><small>{{selectedVendor[0]['vendor_name']}}</small></p> -->
+              <p class="mb-0 border-bottom-1"><small>{{selectedVendor[0]['vendor_phone']}}, {{selectedVendor[0]['vendor_email']}}</small></p>
+              <p class="mb-0 border-bottom-1"><small>Vendor Type: {{selectedVendor[0]['vendor_type']}}</small></p>
+              <p class="mb-0 border-bottom-1"><small>{{selectedVendor[0]['vendor_address']}}</small></p>             
+            </div>
 
-        <div class="col-md-3">
-          <h4> Middle</h4>
+          </div>        
 
-        </div>
+   	    </div><!--end first-->
 
-        <div class="col-md-3">
-          <h4> Middle</h4>
+        <div class="col-md-3"><!--Second-->
 
-        </div>
+          <div v-if="authUser.role_id === 1" class="row form-group mb-1">            
+            <div class="col-sm-5 text-right">
+              <label class="pt-2-"><small>Select Branch</small></label>                      
+            </div>
+            <div class="col-sm-7">
+              <select v-model="form.branch_id" class="form-control form-control-sm" @change="onChangeBranch($event)"  name="branch_id" >
+                  <option disabled value="">Select Branch/Store</option>                
+                  <option v-for="branch in branches" :key="branch.id" v-bind:value="branch.id">{{branch.branch_name}}</option>    
+              </select>
+            </div> 
+          </div>
 
-        <div class="col-md-3">
+        </div><!--end second-->
 
-          <div class="row form-group mb-1">
+        <div class="col-md-3"> <!--Third-->
+           <!-- <div class="row form-group mb-1">
             <div class="col-sm-5 text-right">
               <label class="pt-2-"><small>*Invoice</small></label>                      
             </div>
@@ -57,7 +72,20 @@
               <input v-model="form.po_invoice" type="text" ref="po_invoice" name="po_invoice" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('po_invoice') }" placeholder="Purchase order invoice">
               <has-error :form="form" field="po_invoice"></has-error>
             </div> 
+          </div> -->
+
+          <div class="row form-group mb-1">
+            <div class="col-sm-5 text-right">
+              <label class="pt-2-"><small>*Invoice</small></label>                      
+            </div>
+            <div class="col-sm-7">
+              <input v-model="form.po_invoice" type="text" ref="po_invoice" name="po_invoice" class="form-control form-control-sm"  readonly min="0" step=".01" placeholder="Ex. PO-20-1">
+            </div> 
           </div>
+
+        </div><!--end third-->
+
+        <div class="col-md-3"><!-- Fourth -->
 
           <div class="row form-group mb-1">
             <div class="col-sm-5 text-right">
@@ -85,20 +113,45 @@
 
           <div class="row form-group mb-1">
             <div class="col-sm-5 text-right">
+              <label class="pt-2-"><small>Payment Method</small></label>                      
+            </div>
+            <div class="col-sm-7">
+              <select v-model="form.po_payment_method" class="form-control form-control-sm" name="po_payment_method" >
+                  <option disabled value="">Payment by ..</option>                
+                  <option v-for="pm in paymentMethods" v-bind:value="pm.name">{{pm.name}}</option>                  
+               </select>
+            </div> 
+          </div>
+
+          <div class="row form-group mb-1">
+            <div class="col-sm-5 text-right">
+              <label class="pt-2-"><small><strong>*Order Status</strong></small></label>                      
+            </div>
+            <div class="col-sm-7">
+              <select v-model="form.status_m_id" class="form-control form-control-sm" id="status_m_id" name="status_m_id" :class="{ 'is-invalid': form.errors.has('status_m_id') }" >
+                  <option value="">Select order Status</option>                
+                  <!-- <option disabled value="">Select order Status</option>                 -->
+                  <option v-for="as in AllStatus" :key="as.id" v-bind:value="as.id">{{as.status_name}}</option>    
+              </select>
+              <has-error :form="form" field="status_m_id"></has-error>
+            </div> 
+          </div>
+
+          <!-- <div class="row form-group mb-1">
+            <div class="col-sm-5 text-right">
               <label class="pt-2-"><small>Due Date</small></label>                      
             </div>
             <div class="col-sm-7">
               <input type="date" class="form-control form-control-sm" v-model="form.po_due_date" name="po_due_date" placeholder="Due Date">
             </div> 
-          </div>
+          </div> -->          
+
+        </div><!--end fourth-->
+
+   	  </div><!--End Top Part-->
 
 
-        </div>
-
-   	  </div><!--End First Part-->
-
-
-      <div class="row mt-4"><!--Secound Part- Order Details-->
+      <div class="row mt-3"><!--Secound Part- Order Details-->
         <div class="col-md-12" style=""> 
           <div class="table-responsive-">
           <table class="table-sm table table-striped style-order-form-input">
@@ -125,7 +178,7 @@
               <th width="3%" scope="col" title="Vat Fixed"><small>V.F</small></th> 
               <th width="3%" scope="col" title="Vat Percent"><small>V.%</small></th> 
 
-              <th width="3%" scope="col" title="Product wise Total"><small>Total</small></th>        
+              <th width="5%" scope="col" title="Product wise Total"><small>Total</small></th>        
               
               
             </tr>
@@ -159,7 +212,9 @@
                     :place-holder="placeHolder_product"
                     :value-property="valueProperty_product"
                     v-model="input.product_id" 
+                    :class="{ 'is-invalid': form.errors.has('product_id') }"
                   />
+                   <has-error :form="form" field="product_id"></has-error>
                 </div>
               </td>
               <td scope="col">
@@ -248,7 +303,7 @@
               <td scope="col">
                 <div class="form-group-">
                   <!-- <span v-model="input.pod_line_total"> {{input.pod_line_total}}</span> -->
-                  <input readonly class="form-control form-control-sm" type="number" min="0" step=".01" v-model="input.pod_line_total" />
+                  <input class="form-control form-control-sm" type="number" readonly min="0" step=".01" v-model="input.pod_line_total" />
                 </div> 
               </td>                    
             </tr>
@@ -262,23 +317,15 @@
 
       <div class="row"><!--Thireds Part-->
         <div class="col-md-3"> 
-          <div class="form-group">
-            <label> <small>Payment Method</small></label>
-              <select v-model="form.po_payment_method" class="form-control form-control-sm" id="po_payment_method" name="po_payment_method" >
-                  <option disabled value="">Payment Type ..</option>                
-                  <option value="">Cash</option>                
-                  <option value="">Bank Transfer</option>
-                  <option value="">Cheque</option>                
 
-                  <!-- <option v-for="gender in genders" v-bind:value="gender.name">
-                    {{gender.name}}
-                  </option>  -->                      
-               </select>                          
+          <div class="form-group mb-0">
+              <label for="po_vendor_invoice_no"><small>Vendor / Supplier invoice</small></label>
+              <input v-model="form.po_vendor_invoice_no" class="form-control form-control-sm" name="po_vendor_invoice_no" placeholder="Supplier invoice no, if any" /> 
           </div>
 
-          <div class="form-group">
+          <div class="form-group mb-0">
               <label for="po_details"><small>Order Description</small></label>
-              <textarea v-model="form.po_details" class="form-control" name="po_details"> </textarea>
+              <textarea v-model="form.po_details" class="form-control form-control-sm" name="po_details"> </textarea>
           </div>
 
         </div>
@@ -333,6 +380,15 @@
             </div> 
           </div>
 
+          <div class="row form-group mb-2">
+            <div class="col-sm-8 text-right">
+              <label class="pt-2-"><small><strong>Due Amount:</strong></small></label>                      
+            </div>
+            <div class="col-sm-4">
+              <span> {{ form.po_due_amount}} </span><span>Tk</span>
+            </div> 
+          </div>
+
         </div>
       </div><!--Thireds Part-->
 
@@ -357,30 +413,40 @@
 
     <!-- sortable data test -->
     <!-- {{currentSortDir }} {{currentSort}} -->
-    {{product_id_list}}
+    <!-- {{moment(mydate).format('YYYY-MM-DD')}} -->
+    <!-- <a @click="click">Click Me</a> -->
+    <!-- {{product_id_list}} -->
+    <!-- {{form.po_due_amount}} -->
 
 </div><!--/vue-card-item -->
 </template>
 
 <script>
   import { mapState } from 'vuex' //for user MapState
+  
   export default {
     name: "PurchaseOrderForm",
     
     data () {
       return {
-        NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
-        ShowOnChangeImage:null,
-        deleteImageIcon: false, //Delete Image icon if image exist
+        //NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
+        //ShowOnChangeImage:null,
+        //deleteImageIcon: false, //Delete Image icon if image exist
         editMode: false, //Use this for add edit using the same form   
         PaymentTerms: [
           { name: 'Due' },
   	      { name: 'Partial' },
   	      { name: 'Paid'},
-		    ],      
+		    ],
+
+        paymentMethods:[
+          { name: 'Cash' },
+          { name: 'Bank Transfer'},
+          { name: 'Cheque'},
+        ],      
 
 		    //For Single select app
-        placeHolder:'Select Vendor',
+        placeHolder:'Select Vendor / Supplier',
         filterBy:'vendor_name',
         valueProperty: 'id',
 
@@ -388,18 +454,40 @@
         placeHolder_product:'Product',
         filterBy_product:'sys_pro_name',
         valueProperty_product: 'id', 
-    
-
 
         //multi product id
         product_id_list:[],
+
         // Create a new form instance
         form: new Form({
           id: '',
+          po_invoice:'',
           vendor_id:'',
-          po_date:'',
+          po_date: '',
           po_payment_term:'',
-          po_due_date:'',          
+          //po_due_date:'', 
+          po_payment_method:'',
+
+          branch_id:'',
+          status_m_id:'',     
+
+          po_vendor_invoice_no:'',
+          po_details:'',
+
+          po_discount_fixed:'',
+          po_discount_percent:'',
+
+          po_tax_fiexd:'',
+          po_tax_percent:'',
+
+          po_invoice_sub_total: 0.00,
+          po_invoice_total: 0.00,
+
+          po_paid_amount: '',
+          po_due_amount: 0.00,
+
+          //po_image:'',
+          
           pur_order_details:[{ 
             product_id:'', 
             batch_no:'',
@@ -419,14 +507,6 @@
             vat_fixed:'',
             pod_line_total: 0.00,
           }],
-          po_payment_method:'',
-          po_details:'',
-          po_discount_fixed:'',
-          po_discount_percent:'',
-          po_paid_amount: 0.00,
-
-          po_invoice_sub_total: 0.00,
-          po_invoice_total: 0.00,
         })
       }
     },//end data
@@ -434,7 +514,7 @@
     computed: {
     	/*userStatus get form commonSotreForAll*/	
         ...mapState( 'ProductMasterStore', ['products','pagination'] ),
-        ...mapState( 'commonStoreForAll', ['userStatus'] ),
+        ...mapState( 'commonStoreForAll', ['AllStatus','branches'] ),
         ...mapState( 'PurchaseOrderMasterStore', ['selectedVendor', 'autoSearchVendor','selectedProductList','autoSearchProduct'] ), 
 
         // finalAmount(){
@@ -455,7 +535,7 @@
                 price = price + p.pod_line_total;
             });
             this.form.po_invoice_sub_total = price;
-            return price;
+            return price.toFixed(2);
         }, 
 
         // subTotalAmount: function(){
@@ -480,6 +560,7 @@
         handler (newValue, oldValue) {
           newValue.forEach((p) => {  // if(!isNaN(p.vat_percent)){ 
 
+            //Calculater each order item total
             if( p.discount_fixed != '' && p.discount_percent ==='' && p.vat_fixed ==='' && p.vat_percent === ''){              
               p.pod_line_total =  (p.mrp_price * p.pro_qty) - (p.pro_qty * p.discount_fixed) 
             }
@@ -522,15 +603,26 @@
 
       form:{
         handler (value) {
+          //calculate purchase order total amount
           if( value.po_discount_fixed != '' &&  value.po_discount_percent ==='' ){              
-            value.po_invoice_total =  value.po_invoice_sub_total - value.po_discount_fixed; 
+            value.po_invoice_total =  (value.po_invoice_sub_total - value.po_discount_fixed).toFixed(2); 
           }
           else if(value.po_discount_fixed === '' &&  value.po_discount_percent !=''){              
             let o_discountPercent = (value.po_discount_percent / 100) * value.po_invoice_sub_total;
-            value.po_invoice_total =  value.po_invoice_sub_total - o_discountPercent; 
+            value.po_invoice_total =  (value.po_invoice_sub_total - o_discountPercent).toFixed(2); 
           }else{
-            value.po_invoice_total =  value.po_invoice_sub_total;
+            value.po_invoice_total = (value.po_invoice_sub_total).toFixed(2);
           }
+
+          //calculate purchase order due
+          if(value.po_paid_amount != ''){
+            value.po_due_amount =  (value.po_invoice_total - value.po_paid_amount).toFixed(2); 
+          }else if(value.po_paid_amount === '' &&  value.po_invoice_total != 0){
+            value.po_due_amount = value.po_invoice_total;
+          }else{
+            value.po_due_amount = (0).toFixed(2);
+          }
+          
 
         }, deep: true
       }, 
@@ -539,6 +631,9 @@
 
 
   	methods:{
+      click(){
+        //this.form.po_date = '2017-07-04';
+      },
 
       //###################################### Purchase Order Details ################################################
       add_order_item() {
@@ -568,25 +663,30 @@
       },
 
       //###################################### End Purchase Order Details ################################################
+      //on change branch
+      onChangeBranch(event){
+        //alert(event.target.value);
+        //console.log(event);
+      },
 
     	//Make image as base64 
-	    onImageChange(e){
-	        //let file = e.target.files || e.dataTransfer.files;
-	        let file = e.target.files[0];        
-	        //console.log(file);
-	        this.ShowOnChangeImage = URL.createObjectURL(file); //display image in form when select image
-	        let reader = new FileReader();
-	        //let vm = this;
-	        if(file['size'] > 512000 ){  //512Kb = 512000Byte
-	          toastr.warning('Please select file size within 500kb');
-	        }else{          
-	          reader.onloadend = (file) => {
-	            //console.log(reader.result);
-	            this.form.avatar = reader.result; //push base64 to logo veriable
-	          };          
-	          reader.readAsDataURL(file);
-	        }
-	    },
+	    // onImageChange(e){
+	    //     //let file = e.target.files || e.dataTransfer.files;
+	    //     let file = e.target.files[0];        
+	    //     //console.log(file);
+	    //     this.ShowOnChangeImage = URL.createObjectURL(file); //display image in form when select image
+	    //     let reader = new FileReader();
+	    //     //let vm = this;
+	    //     if(file['size'] > 512000 ){  //512Kb = 512000Byte
+	    //       toastr.warning('Please select file size within 500kb');
+	    //     }else{          
+	    //       reader.onloadend = (file) => {
+	    //         //console.log(reader.result);
+	    //         this.form.avatar = reader.result; //push base64 to logo veriable
+	    //       };          
+	    //       reader.readAsDataURL(file);
+	    //     }
+	    // },
 
 	    // Submit the form via a POST request
   		storeFormData() {  
@@ -601,9 +701,9 @@
   		      toastr.success(data.success);             
   		      this.$Progress.finish();  
   		      this.form.reset();  //reset from after submit	
-  		      this.$refs.avatar.value = ''; //clear file input tag 
-  			  this.ShowOnChangeImage = null;
-  			  this.$router.push({ path : '/spa/PurchaseOrderMaster' });	 //route after successfule submit	      
+  		      //this.$refs.avatar.value = ''; //clear file input tag 
+  			    //this.ShowOnChangeImage = null;
+  			    this.$router.push({ path : '/spa/PurchaseOrderMaster' });	 //route after successfule submit	      
   		    }
   		    if(data.errors){
   		      this.$Progress.fail();
@@ -628,8 +728,8 @@
   			      toastr.success(data.success);               
   			      this.form.reset();  //reset from after submit
   			      this.editMode = false; 
-  			      this.$refs.avatar.value = ''; //clear file input tag 
-  			  	  this.ShowOnChangeImage = null;
+  			      //this.$refs.avatar.value = ''; //clear file input tag 
+  			  	  //this.ShowOnChangeImage = null;
   			  	  this.$router.push({ path : '/spa/EmployeeMaster' });	 //route after successfule submit
   			    }
   			    if(data.errors){
@@ -667,14 +767,14 @@
 	    		this.form.fill(this.$route.params.data);
 	    		//this.form.departments = this.$route.params.data.departments; //pass the array
 	    		//this.$refs.po_invoice.focus();  
-	    		if(this.$route.params.data.departments.length === 0){
-	    			this.form.departments = [];
+	    		if(this.$route.params.data.pur_order_details.length === 0){
+	    			this.form.pur_order_details = [];
 	    		}else{
 		    		 //return only department id from depertment list 
-		    		 this.form.departments = Object.values(this.$route.params.data.departments).map(
+		    		 this.product_id_list = Object.values(this.$route.params.data.pur_order_details).map(
 	       		 		item => {	
 	       		 			//return item['id'];
-	       		 			 return item.id;
+	       		 			 return item.product_id;
 	       		 		}
 		       		 );
 	    		}	
@@ -730,10 +830,15 @@
 	},
 
   	created(){
-      this.$store.dispatch('ProductMasterStore/fetchData', this.pagination.per_page);
+      //Current date show in purhase order date at first load
+      this.form.po_date = new Date().toISOString().substr(0, 10);
+
+      //this.$store.dispatch('ProductMasterStore/fetchData', this.pagination.per_page);
 
   		this.fillForm();
-    	this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
+      //this.$store.dispatch('commonStoreForAll/AllStatus', 'Product');
+      this.$store.dispatch('commonStoreForAll/AllStatus', 'PurchaseOrder'); //get all status
+    	this.$store.dispatch('commonStoreForAll/fetchBranches'); //get Branch list
 
       //call from multi-select-app-one.vue
 		  FireEvent.$on('AutoCompleteSearchForData', (data) => {
@@ -742,8 +847,12 @@
 
 
 	    
+      
+    	//console.log(moment().format('LTS'));
+    },
 
-    	//console.log(this.form);
+    mounted(){
+      //console.log(moment().format('LTS'))
     }
 
 

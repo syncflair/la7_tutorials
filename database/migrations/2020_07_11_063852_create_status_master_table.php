@@ -18,7 +18,7 @@ class CreateStatusMasterTable extends Migration
             $table->string('status_name');
             $table->string('status_slug')->unique()->nullable();
             $table->string('status_desc')->nullable();
-            $table->enum('status_type', ['Stock','Shipping','Payment','Product','SalesOrder','SalesReturn','PruchaseOrder','PruchaseReturn']);  
+            $table->enum('status_type', ['Stock','Shipping','Payment','Product','SalesOrder','SalesReturn','PurchaseOrder','PurchaseReturn']);  
             $table->boolean('is_enabled')->default(true); 
             $table->unsignedBigInteger('created_by')->nullable()->comment('Created by User');  
             $table->unsignedBigInteger('updated_by')->nullable()->comment('Updated by User'); 

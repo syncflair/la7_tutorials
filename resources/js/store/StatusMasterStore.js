@@ -38,7 +38,7 @@ const StatusMasterStore ={
         fetchData(context, payload){
             let perPageVelue ;
             if(!payload){
-                perPageVelue = 10
+                perPageVelue = 50
             }else{
                 perPageVelue = payload
             }

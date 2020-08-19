@@ -6,13 +6,14 @@ export default {
 
 	data(){
         return {
-        	myName: 'Md. Mahmudur Rahman',
+        	//myName: 'Md. Mahmudur Rahman',
         }
     }, 
 
     computed: {
     	...mapState( 
-	        'commonStoreForAll', ['authUser','authPermissions']
+            'commonStoreForAll', ['authUser']
+	        //'commonStoreForAll', ['authUser','authPermissions']
 	    ),
 	    
     	authPermissionsData(){  //return 'decodet Data';

@@ -74,6 +74,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 //import { mapState } from 'vuex' //for user MapState
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "search-app-one",
@@ -146,8 +147,8 @@ __webpack_require__.r(__webpack_exports__);
         }
     },
     autoSearch: _.debounce(function (e) {
-      //alert(e.target.value)
-      FireEvent.$emit('AutoCompleteSearch', e.target.value); //this.$store.dispatch('CountryStore/searching', this.searchText); 	          
+      //alert(e.target.value)	          
+      FireEvent.$emit('AutoCompleteSearch', e.target.value);
     }, 200),
     toggleVisible: function toggleVisible() {
       var _this = this;
@@ -275,76 +276,64 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "col-6" }, [
       _c("div", { staticClass: "autoCompleteSearch " }, [
-        _c(
-          "div",
-          {
-            staticClass: "input-group input-control-sm searchBox",
-            attrs: { tabindex: "-1" },
-            on: {
-              blur: function($event) {
-                _vm.visible = false
-              }
-            }
-          },
-          [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.selectedItem
-                    ? _vm.selectedItem[_vm.filterBy]
-                    : _vm.searchText,
-                  expression:
-                    "selectedItem ? selectedItem[filterBy] : searchText "
-                }
-              ],
-              ref: "searchText",
-              staticClass: "form-control form-control-sm form-control-navbar",
-              attrs: {
-                type: "text",
-                placeholder: "Search...",
-                "aria-label": "Search"
-              },
-              domProps: {
+        _c("div", { staticClass: "input-group input-control-sm searchBox" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
                 value: _vm.selectedItem
                   ? _vm.selectedItem[_vm.filterBy]
-                  : _vm.searchText
-              },
-              on: {
-                mousedown: _vm.toggleVisible,
-                keyup: function($event) {
-                  if (
-                    !$event.type.indexOf("key") &&
-                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                  ) {
-                    return null
-                  }
-                  return _vm.searchIt($event)
-                },
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.selectedItem
-                    ? _vm.selectedItem[_vm.filterBy]
-                    : (_vm.searchText = $event.target.value)
-                }
+                  : _vm.searchText,
+                expression:
+                  "selectedItem ? selectedItem[filterBy] : searchText "
               }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "input-group-append" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-navbar btn-sm border",
-                  on: { click: _vm.searchIt }
-                },
-                [_c("i", { staticClass: "fas fa-search blue" })]
-              )
-            ])
-          ]
-        ),
+            ],
+            ref: "searchText",
+            staticClass: "form-control form-control-sm form-control-navbar",
+            attrs: {
+              type: "text",
+              placeholder: "Search...",
+              "aria-label": "Search"
+            },
+            domProps: {
+              value: _vm.selectedItem
+                ? _vm.selectedItem[_vm.filterBy]
+                : _vm.searchText
+            },
+            on: {
+              mousedown: _vm.toggleVisible,
+              keyup: function($event) {
+                if (
+                  !$event.type.indexOf("key") &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                return _vm.searchIt($event)
+              },
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.selectedItem
+                  ? _vm.selectedItem[_vm.filterBy]
+                  : (_vm.searchText = $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "input-group-append" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-navbar btn-sm border",
+                on: { click: _vm.searchIt }
+              },
+              [_c("i", { staticClass: "fas fa-search blue" })]
+            )
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -410,6 +399,9 @@ var render = function() {
                     return _vm.selectItem($event)
                   }
                 ],
+                blur: function($event) {
+                  _vm.visible = false
+                },
                 input: function($event) {
                   if ($event.target.composing) {
                     return
@@ -443,7 +435,7 @@ var render = function() {
                         key: item[_vm.filterBy],
                         class: { selected: _vm.selected == index },
                         on: {
-                          click: function($event) {
+                          mousedown: function($event) {
                             return _vm.itemClicked(index)
                           }
                         }

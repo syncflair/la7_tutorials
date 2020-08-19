@@ -12,11 +12,12 @@ use Illuminate\Support\Carbon;
 //use App\Mail\PurchaseOrderNotificationMail;
 //use Illuminate\Support\Facades\Mail;
 use App\Models\Purchase\PurchaseOrder;
+use App\Models\Catalog\Product;
 
 use Illuminate\Support\Facades\DB; //for database transection
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Config; //get constant velue without - \Config::get('constants.UserFliesPath'); app/config
+//use Illuminate\Support\Facades\File;
+//use Illuminate\Support\Facades\Storage;
+//use Illuminate\Support\Facades\Config; //get constant velue without - \Config::get('constants.UserFliesPath'); app/config
 
 class PurchaseOrderController extends Controller
 {
@@ -64,8 +65,68 @@ class PurchaseOrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {        
+        
+        $this->validate($request, [
+            'vendor_id' => 'required', 
+            'po_date' => 'required', 
+            'po_payment_term' => 'required',
+            'status_m_id' => 'required', 
+            // '*.product_id' => 'required',
+            // '*.mrp_price' => 'required',
+            // '*.pro_qty' => 'required',
+        ],
+        [
+            'vendor_id.required' => 'Please Select Vendor / Supplier',
+            'po_date.required' => 'Order Date is required',
+            'po_payment_term.required' => 'Payment Term is required',
+            'status_m_id.required' => 'Order Status is required.',
+            // '*.product_id.required' => 'Please Select product',
+            // '*.mrp_price.required' => 'MRP Price is required',
+            // '*.pro_qty.required' => 'Quantity is required',
+        ]);
+
+        $data =array();
+        $data['po_invoice']= purchase_order_invoice_generate(); //get from helper
+        $data['vendor_id']=$request->vendor_id;
+        $data['po_date']=$request->po_date;
+        $data['po_payment_term']=$request->po_payment_term;       
+        $data['po_payment_method']=$request->po_payment_method;        
+        $data['branch_id']= $request->branch_id != '' ? $request->branch_id : \Auth::user()->branch_id;        
+        $data['status_m_id']=$request->status_m_id;
+
+        $data['po_vendor_invoice_no']=$request->po_vendor_invoice_no;    
+        $data['po_details']=$request->po_details;    
+        $data['po_discount_fixed']=$request->po_discount_fixed !='' ? $request->po_discount_fixed : $request->po_discount_fixed =0.00;    
+        $data['po_discount_percent']=$request->po_discount_percent !='' ? $request->po_discount_percent : $request->po_discount_percent = 0.00;    
+        //$data['po_tax_fiexd']=$request->po_tax_fiexd;    
+        //$data['po_tax_percent']=$request->po_tax_percent;    
+        $data['po_invoice_sub_total']=$request->po_invoice_sub_total;    
+        $data['po_invoice_total']=$request->po_invoice_total;    
+        $data['po_paid_amount']=$request->po_paid_amount;    
+        $data['po_due_amount']=$request->po_due_amount;  
+
+        $data['pur_order_details']=$request->pur_order_details;  //JSON Array of order Details
+
+        $data['created_by']= \Auth::user()->id;  
+
+     
+        try{
+            DB::beginTransaction();
+
+            $po = PurchaseOrder::create($data); 
+
+            //$po->Departments()->attach($request->departments);          
+
+            DB::commit();            
+            return response()->json(['success'=>'Purchase Order Submited']);
+            
+        }catch(\Exception $e){
+            //logger($e->getMessage());
+            DB::rollBack();
+            return response()->json(['errors'=> $e->getMessage() ], 500); 
+        }
+
     }
 
     /**
@@ -111,14 +172,14 @@ class PurchaseOrderController extends Controller
     public function destroy($id)
     {
         //query for existing image
-        $existing_image = PurchaseOrder::select('po_image')->where('id', $id)->first();   
+        // $existing_image = PurchaseOrder::select('po_image')->where('id', $id)->first();   
 
-        if($existing_image->po_image != null){            
-            $parts = parse_url($existing_image->po_image); 
-            $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
-            Storage::disk('s3')->delete($parts);
-            //dd($parts);
-        } 
+        // if($existing_image->po_image != null){            
+        //     $parts = parse_url($existing_image->po_image); 
+        //     $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+        //     Storage::disk('s3')->delete($parts);
+        //     //dd($parts);
+        // } 
                         
         // if( File::exists($existing_image->po_image) ) {  
         //     File::delete($existing_image->po_image); 
@@ -127,42 +188,13 @@ class PurchaseOrderController extends Controller
 
         $data = PurchaseOrder::findOrFail($id)->delete();        
         if($data){
-            return response()->json(['success'=> 'Record is successfully deleted']);
+            return response()->json(['success'=> 'Record is deleted']);
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
     }
 
-    //delect single image
-    public function DeleteImage($id){
-        //query for existing image
-        $existing_image = PurchaseOrder::select('po_image')->where('id', $id)->first();                   
-         //for s3
-        if($existing_image->po_image != null){            
-            $parts = parse_url($existing_image->po_image); 
-            $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
-            Storage::disk('s3')->delete($parts);
-            //dd($parts);
-        } 
-
-        //delete single image from public storage                                         
-        // if( File::exists($existing_image->po_image) ) {  
-        //     File::delete($existing_image->po_image); 
-        //     //delete file //use Illuminate\Support\Facades\File; at top
-        // }
-      
-        //update image field
-        $data = PurchaseOrder::find($id);
-        $data->po_image = null; 
-        $data->save();
-
-        if($data){
-            return response()->json(['success'=> 'Image deleted']);
-        }else{
-            return response()->json(['errors'=> 'Something is wrong..']);
-        }//*/
-    }
-
+    //search
     public function search(Request $request){
         if(!empty($request->perPage)){
             $perPage = $request->perPage;

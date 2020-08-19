@@ -165,9 +165,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'authPermissions'])),
   methods: {},
-  mounted: function mounted() {
-    //console.log(JSON.parse(this.authPermissions.permission).BranchInfo.delete);
-    console.log(JSON.parse(this.authPermissions.permission)); //console.log(this.authPermissions.permission['BranchInfo']['delete']);
+  mounted: function mounted() {//console.log(JSON.parse(this.authPermissions.permission).BranchInfo.delete);
+    //console.log(JSON.parse(this.authPermissions.permission));
+    //console.log(this.authPermissions.permission['BranchInfo']['delete']);
   }
 });
 

@@ -830,9 +830,9 @@
             // }          
             for (var i = 0; i < this.allLanguages.length; i++) {
               this.form.pro_translation.push( { language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, product_name: '', product_desc: '' } ); 
-            }       
+            }   
                        
-        },
+      },
 
     	
 
@@ -982,7 +982,9 @@
             this.pushToLanguageTranslationArray();
           }, 2300);
       }
+
   		this.fillForm();
+
     	this.$store.dispatch('commonStoreForAll/AllStatus', 'Product'); //get status with "Product" keyword
       this.$store.dispatch('commonStoreForAll/fetchLanguages'); //get all language
       this.$store.dispatch('commonStoreForAll/fetchBrands'); //get all brands

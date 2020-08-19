@@ -39,7 +39,7 @@
 			</select> -->
 
 			<!-- v-on:blur="visible = false;" -->
-			<input type="text" class="form-control form-control-sm form-control-navbar" autocomplete="off"
+			<input type="search" class="form-control form-control-sm form-control-navbar" autocomplete="off"
 			 	:placeHolder="this.placeHolder" 
 			 	ref="autoSearchField" id="autoSearchField" 
 			 	v-model="autoQuery"

@@ -37,34 +37,32 @@
         </thead>
 
         <tbody>
-          <tr v-for="(pur_order, index) in sortedData" :key="index">
+          <tr v-for="(po, index) in sortedData" :key="index">
 
             <!-- <td > id</td> -->
-            <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="pur_order.id"></td>
+            <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="po.id"></td>
 
  
-            <td scope="col"> {{ pur_order.id }} </td>
-            <td > {{ pur_order.pur_order }} </td> 
+            <td scope="col"> {{ po.id }} </td>
+            <td > {{ po.po_invoice }} </td> 
             <td > supplier </td>          
-            <td > status<!-- {{ pur_order['belongs_to_branch']['branch_name'] }} --> </td> 
+            <td > status<!-- {{ po['belongs_to_branch']['branch_name'] }} --> </td> 
 
-            <td > 
-              total
-            </td> 
-            <td > <small>{{ pur_order.created_at | formatDate }}</small> </td>
-            <td > <small>{{ pur_order.updated_at | formatDate }}</small> </td>
+            <td > {{po.po_invoice_total}} Tk</td> 
+            <td > <small>{{ po.created_at | formatDate }}</small> </td>
+            <td > <small>{{ po.updated_at | formatDate }}</small> </td>
 
            <!--  
             <td style="text-align:center;">
-              <span @click="inactivepur_order(pur_order.id)" v-show="pur_order.status_id === 1" title="Active pur_order, Click to inactive"><i class="fas fa-user-check green pointer"></i></span>
-              <span @click="activepur_order(pur_order.id)" v-show="pur_order.status_id === 2" title="Inactive pur_order, Click to active"> <i class="fas fa-user-times yellow pointer"></i></span>
-              <span @click="activepur_order(pur_order.id)" v-show="pur_order.status_id === 3" title="Panding pur_order, Click to active"> <i class="fas fa-user-lock red pointer"></i></span>
-              <span @click="verifyByUser(pur_order.id)" v-show="pur_order.status_id === 4" title="Not Verified pur_order, Click to verify">
+              <span @click="inactivepo(po.id)" v-show="po.status_id === 1" title="Active po, Click to inactive"><i class="fas fa-user-check green pointer"></i></span>
+              <span @click="activepo(po.id)" v-show="po.status_id === 2" title="Inactive po, Click to active"> <i class="fas fa-user-times yellow pointer"></i></span>
+              <span @click="activepo(po.id)" v-show="po.status_id === 3" title="Panding po, Click to active"> <i class="fas fa-user-lock red pointer"></i></span>
+              <span @click="verifyByUser(po.id)" v-show="po.status_id === 4" title="Not Verified po, Click to verify">
                   <i class="fas fa-user-secret red pointer" style="font-size:22px !important;" ></i>
               </span>
             </td> -->
              <!-- <td style="text-align:center;">
-              <input type="checkbox" @click="ChangeNotify(pur_order.id, $event)" name="enable_notify" value="1" v-model="pur_order.enable_notify"  />
+              <input type="checkbox" @click="ChangeNotify(po.id, $event)" name="enable_notify" value="1" v-model="po.enable_notify"  />
             </td> -->
 
              
@@ -72,15 +70,15 @@
             <td class="text-right">  
               <a @click="ViewDetails()" class="btn btn-flat btn-sm"> <i class="fas fa-eye primary"></i> </a>   
               
-              <!-- <a @click="editData(pur_order)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
+              <!-- <a @click="editData(po)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
                   <i class="fas fa-edit primary "></i>
               </a> -->
 
-              <router-link :to="{ name: 'PurchaseOrderForm', params: { data:pur_order } }" class="btn btn-primary- btn-flat btn-sm">
+              <router-link :to="{ name: 'PurchaseOrderForm', params: { data:po } }" class="btn btn-primary- btn-flat btn-sm">
                   <i class="fas fa-edit primary "></i>
               </router-link>
 
-              <a @click="DeleteData(pur_order.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
+              <a @click="DeleteData(po.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
                  <i class="far fa-trash-alt red"></i>
               </a>
             </td>
@@ -88,7 +86,7 @@
           </tr>
 
           <tr v-show="PurchaseOrders && !PurchaseOrders.length">
-            <td colspan="12">
+            <td colspan="13">
               <div class="alert alert-warning text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
           </tr>

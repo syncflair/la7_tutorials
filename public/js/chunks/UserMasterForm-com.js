@@ -168,6 +168,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -194,12 +208,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         role_id: '',
         status_id: '',
         employee_id: '',
+        branch_id: '',
         avatar: ''
       })
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('usersAdminStore', ['pagination', 'autoSearchEmployee', 'selectedEmployee']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'adminRoles'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('usersAdminStore', ['pagination', 'autoSearchEmployee', 'selectedEmployee']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'adminRoles', 'branches'])),
   methods: {
     //Make image as base64 
     onImageChange: function onImageChange(e) {
@@ -360,6 +375,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
 
     this.$store.dispatch('commonStoreForAll/fetchRoles'); //get user role for admin (1 to 6)
+
+    this.$store.dispatch('commonStoreForAll/fetchBranches'); //get Branchs
 
     FireEvent.$on('AfterChange', function () {
       _this6.$Progress.start();
@@ -659,83 +676,186 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("User Status *")]),
-                              _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-sm-6" }, [
                               _c(
-                                "select",
-                                {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.status_id,
-                                      expression: "form.status_id"
-                                    }
-                                  ],
-                                  staticClass: "form-control form-control-sm",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "status_id"
-                                    )
-                                  },
-                                  attrs: { id: "status_id", name: "status_id" },
-                                  on: {
-                                    change: function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
-                                      _vm.$set(
-                                        _vm.form,
-                                        "status_id",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      )
-                                    }
-                                  }
-                                },
+                                "div",
+                                { staticClass: "form-group" },
                                 [
+                                  _c("label", [_vm._v("User Status *")]),
+                                  _vm._v(" "),
                                   _c(
-                                    "option",
-                                    { attrs: { disabled: "", value: "" } },
-                                    [_vm._v("Select user Status ..")]
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.status_id,
+                                          expression: "form.status_id"
+                                        }
+                                      ],
+                                      staticClass:
+                                        "form-control form-control-sm",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "status_id"
+                                        )
+                                      },
+                                      attrs: {
+                                        id: "status_id",
+                                        name: "status_id"
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.form,
+                                            "status_id",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { disabled: "", value: "" } },
+                                        [_vm._v("Select user Status ..")]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(_vm.userStatus, function(
+                                        u_status
+                                      ) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            key: u_status.id,
+                                            domProps: { value: u_status.id }
+                                          },
+                                          [_vm._v(_vm._s(u_status.us_name))]
+                                        )
+                                      })
+                                    ],
+                                    2
                                   ),
                                   _vm._v(" "),
-                                  _vm._l(_vm.userStatus, function(u_status) {
-                                    return _c(
-                                      "option",
-                                      {
-                                        key: u_status.id,
-                                        domProps: { value: u_status.id }
-                                      },
-                                      [_vm._v(_vm._s(u_status.us_name))]
-                                    )
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.form,
+                                      field: "status_id"
+                                    }
                                   })
                                 ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: { form: _vm.form, field: "status_id" }
-                              })
-                            ],
-                            1
-                          ),
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-sm-6" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c("label", [_vm._v("Branch *")]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.branch_id,
+                                          expression: "form.branch_id"
+                                        }
+                                      ],
+                                      staticClass:
+                                        "form-control form-control-sm",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "branch_id"
+                                        )
+                                      },
+                                      attrs: {
+                                        id: "branch_id",
+                                        name: "branch_id"
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.form,
+                                            "branch_id",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { disabled: "", value: "" } },
+                                        [_vm._v("Select user Status ..")]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(_vm.branches, function(branch) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            key: branch.id,
+                                            domProps: { value: branch.id }
+                                          },
+                                          [_vm._v(_vm._s(branch.branch_name))]
+                                        )
+                                      })
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.form,
+                                      field: "branch_id"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
-                            _c("label", [_vm._v("User Status *")]),
+                            _c("label", [_vm._v("Select Employee ")]),
                             _vm._v(" "),
                             _c(
                               "div",

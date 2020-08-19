@@ -129,8 +129,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -533,7 +531,7 @@ var render = function() {
           _c(
             "tbody",
             [
-              _vm._l(_vm.sortedData, function(pur_order, index) {
+              _vm._l(_vm.sortedData, function(po, index) {
                 return _c("tr", { key: index }, [
                   _c("td", { attrs: { scope: "col" } }, [
                     _c("input", {
@@ -547,9 +545,9 @@ var render = function() {
                       ],
                       attrs: { type: "checkbox", name: "" },
                       domProps: {
-                        value: pur_order.id,
+                        value: po.id,
                         checked: Array.isArray(_vm.selectedCheckbox)
-                          ? _vm._i(_vm.selectedCheckbox, pur_order.id) > -1
+                          ? _vm._i(_vm.selectedCheckbox, po.id) > -1
                           : _vm.selectedCheckbox
                       },
                       on: {
@@ -558,7 +556,7 @@ var render = function() {
                             $$el = $event.target,
                             $$c = $$el.checked ? true : false
                           if (Array.isArray($$a)) {
-                            var $$v = pur_order.id,
+                            var $$v = po.id,
                               $$i = _vm._i($$a, $$v)
                             if ($$el.checked) {
                               $$i < 0 &&
@@ -578,28 +576,26 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", { attrs: { scope: "col" } }, [
-                    _vm._v(" " + _vm._s(pur_order.id) + " ")
+                    _vm._v(" " + _vm._s(po.id) + " ")
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(pur_order.pur_order) + " ")]),
+                  _c("td", [_vm._v(" " + _vm._s(po.po_invoice) + " ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" supplier ")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(" status")]),
                   _vm._v(" "),
-                  _c("td", [
-                    _vm._v(" \r\n              total\r\n            ")
-                  ]),
+                  _c("td", [_vm._v(" " + _vm._s(po.po_invoice_total) + " Tk")]),
                   _vm._v(" "),
                   _c("td", [
                     _c("small", [
-                      _vm._v(_vm._s(_vm._f("formatDate")(pur_order.created_at)))
+                      _vm._v(_vm._s(_vm._f("formatDate")(po.created_at)))
                     ])
                   ]),
                   _vm._v(" "),
                   _c("td", [
                     _c("small", [
-                      _vm._v(_vm._s(_vm._f("formatDate")(pur_order.updated_at)))
+                      _vm._v(_vm._s(_vm._f("formatDate")(po.updated_at)))
                     ])
                   ]),
                   _vm._v(" "),
@@ -627,7 +623,7 @@ var render = function() {
                           attrs: {
                             to: {
                               name: "PurchaseOrderForm",
-                              params: { data: pur_order }
+                              params: { data: po }
                             }
                           }
                         },
@@ -642,7 +638,7 @@ var render = function() {
                           attrs: { id: "delete" },
                           on: {
                             click: function($event) {
-                              return _vm.DeleteData(pur_order.id)
+                              return _vm.DeleteData(po.id)
                             }
                           }
                         },
@@ -699,7 +695,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "12" } }, [
+    return _c("td", { attrs: { colspan: "13" } }, [
       _c(
         "div",
         {

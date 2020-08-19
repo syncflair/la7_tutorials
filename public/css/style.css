@@ -32490,6 +32490,10 @@ label:not(.form-check-label):not(.custom-file-label) {
   cursor: pointer;
 }
 
+.border-bottom-1 {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
 .border-lef-style {
   border-left: 15px solid #17a2b8 !important;
 }
@@ -33068,7 +33072,8 @@ form .form-control:focus {
 
 .popOver {
   position: absolute;
-  width: 100%;
+  min-width: 350px;
+  max-width: 100% !important;
   z-index: 1;
   background: #fff;
   border: 1px solid #dee2e6;
@@ -33118,7 +33123,7 @@ form .form-control:focus {
 .my-multiselect {
   cursor: pointer;
   position: relative;
-  padding: 0px 3px;
+  padding: 0px !important;
   margin: 12px 0px 0px 0px;
   display: inline-block;
   display: flex;
@@ -33159,7 +33164,7 @@ form .form-control:focus {
 
 .popOverBox {
   position: absolute;
-  width: 100%;
+  min-width: 350px;
   left: 0;
   right: 0;
   z-index: 9;

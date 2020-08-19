@@ -18,7 +18,7 @@
 	<div class="col-6">	
 
 	<div class="autoCompleteSearch ">	
-	  <div class="input-group input-control-sm searchBox" v-on:blur="visible = false" tabindex="-1" >                      
+	  <div class="input-group input-control-sm searchBox" >                      
         <input  type="text" ref="searchText" class="form-control form-control-sm form-control-navbar"        	
         	@mousedown="toggleVisible"  	
         	@keyup.enter="searchIt"
@@ -31,7 +31,7 @@
 
       </div>
 
-
+      <!-- v-on:blur="visible = false"  -->
       <div v-show="visible" class="popOver">
      	 <input type="text" class="form-control form-control-sm form-control-navbar" 
      	 	ref="autoSearchField"
@@ -40,14 +40,15 @@
      	 	@keydown.up="up"
        		@keydown.down="down" 
        		@keydown.enter="selectItem"
+       		v-on:blur="visible = false"
      	 	placeholder="Start typing...">
 
      	 <ul v-show="listVisible === true" ref="optionList" class="optionList dropdown-menu-">
-
+     	 	<!-- @click="itemClicked(index)" -->
 	        <li v-if="autoQuery === '' ? listVisible = false : listVisible = true" 
 	        	v-for="(item, index) in autoCompleteData" 
 	        	:key="item[filterBy]"
-	        	@click="itemClicked(index)"
+	        	@mousedown="itemClicked(index)"
 	        	:class="{'selected' : (selected == index) }"
 	        >	        	
 	        		{{ item[filterBy] }}	 
@@ -148,9 +149,8 @@
         	},
 
         	autoSearch: _.debounce( (e) => {        		
-	        	//alert(e.target.value)
-	          	FireEvent.$emit('AutoCompleteSearch', e.target.value );
-	          	//this.$store.dispatch('CountryStore/searching', this.searchText); 	          
+	        	//alert(e.target.value)	          
+	          	FireEvent.$emit('AutoCompleteSearch', e.target.value );	          
 	        },200 ),
 
 	        toggleVisible(){
