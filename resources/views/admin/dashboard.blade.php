@@ -11,22 +11,22 @@
 <!-- Router-view passing through admin wrapper component -->
 <adminwrapper 
 	:user="{{Auth::user()}}" 
-	:permissions="{{ \App\Models\Permission::where(['id' => Auth::user()->role->id ])->first() }}" 
+	:permissions="{{ \App\Models\Permission::where(['id' => Auth::user()->role->id ])->first() }}"
+	:settings="{{ \App\Models\Settings\Setting::with('belongsToLanguage','belongsToCurrency')->where(['id' => 1 ])->first() }}" 
 ></adminwrapper>
 
 <!-- :permissions="{{ \App\Models\Permission::where(['id' => Auth::user()->role->id ])->first() }} " -->
 
 
-<!-- {{Auth::user()->role->id}} -->
-<!-- {{ GetAuthUserRolePermission()->role->read }} -->
-@php
-$data = ["title" => ["name" => "bony", "email" => "bony@gmail.com"], "desc" => "test test test"];
-print_r($data);
+	<!-- {{Auth::user()->role->id}} -->
+	<!-- {{ GetAuthUserRolePermission()->role->read }} -->
+	<!-- @php
+	$data = ["title" => ["name" => "bony", "email" => "bony@gmail.com"], "desc" => "test test test"];
+	print_r($data);	
+	@endphp -->
+	<!-- {{$data['desc']}} -->
+	<!-- {{$data['title']['name']}} -->
 
-	
-@endphp
-{{$data['desc']}}
-{{$data['title']['name']}}
 
 <!-- {{ \App\Models\Permission::where(['id' => Auth::user()->role->id ])->first() }}  -->
 

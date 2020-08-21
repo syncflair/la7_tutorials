@@ -169,6 +169,19 @@
 
 
           <div class="row">
+
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>Select Unit</label>
+                <select v-model="form.unit_id" class="form-control form-control-sm-" id="unit_id" name="unit_id">
+                    <option disabled value="">Default (pc) ..</option>                
+                    <option v-for="unit in allUnits" :key="unit.id" v-bind:value="unit.id">
+                        {{unit.unit_title}} ({{unit.unit_code}})
+                    </option> 
+                </select>
+              </div> 
+            </div>
+
             <div class="col-md-2">
               <div class="form-group">
                 <label>Quantity</label>
@@ -665,6 +678,7 @@
           upc:'',
           isbn:'',
           mpn:'',
+          unit_id:'',
           pro_qty:'',
           pro_price:'',
           pro_sale_price:'',
@@ -699,7 +713,7 @@
         ...mapState( 'ProductMasterStore', [, 'selectedBrand', 'autoSearchBrands','selectedVendorList','autoSearchVendors','selectedCategoryList','selectedProductList','autoSearchProducts'] ),
         //selectedSupplierList
 
-        ...mapState( 'commonStoreForAll', ['allLanguages','AllStatus','AllBrands','autoSearchCategories','AllSpecifications','AllAttributes','AllAttributeValues','allCustomerGroups'] ),        
+        ...mapState( 'commonStoreForAll', ['allUnits','allLanguages','AllStatus','AllBrands','autoSearchCategories','AllSpecifications','AllAttributes','AllAttributeValues','allCustomerGroups'] ),        
         //autoSearchSuppliers 
 
   	}, //end Computed
@@ -985,6 +999,7 @@
 
   		this.fillForm();
 
+      this.$store.dispatch('commonStoreForAll/fetchUnits'); //get units
     	this.$store.dispatch('commonStoreForAll/AllStatus', 'Product'); //get status with "Product" keyword
       this.$store.dispatch('commonStoreForAll/fetchLanguages'); //get all language
       this.$store.dispatch('commonStoreForAll/fetchBrands'); //get all brands

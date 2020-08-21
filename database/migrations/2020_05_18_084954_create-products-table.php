@@ -39,6 +39,7 @@ class CreateProductsTable extends Migration
             $table->float('pro_sale_price', 10, 2)->nullable();
             $table->integer('pro_reward_points')->nullable();
             $table->integer('pro_qty')->nullable();
+            $table->integer('unit_id')->nullable(); 
             $table->integer('pro_delivery_charge')->nullable()->comment('Normal Delivery Charge');
 
 

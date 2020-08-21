@@ -637,6 +637,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -693,6 +706,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         upc: '',
         isbn: '',
         mpn: '',
+        unit_id: '',
         pro_qty: '',
         pro_price: '',
         pro_sale_price: '',
@@ -729,7 +743,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   //end data
   watch: {},
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('ProductMasterStore', [, 'selectedBrand', 'autoSearchBrands', 'selectedVendorList', 'autoSearchVendors', 'selectedCategoryList', 'selectedProductList', 'autoSearchProducts']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['allLanguages', 'AllStatus', 'AllBrands', 'autoSearchCategories', 'AllSpecifications', 'AllAttributes', 'AllAttributeValues', 'allCustomerGroups'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('ProductMasterStore', [, 'selectedBrand', 'autoSearchBrands', 'selectedVendorList', 'autoSearchVendors', 'selectedCategoryList', 'selectedProductList', 'autoSearchProducts']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['allUnits', 'allLanguages', 'AllStatus', 'AllBrands', 'autoSearchCategories', 'AllSpecifications', 'AllAttributes', 'AllAttributeValues', 'allCustomerGroups'])),
   //end Computed
   methods: {
     //###################################### Images Function ################################################
@@ -1121,6 +1135,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
 
     this.fillForm();
+    this.$store.dispatch('commonStoreForAll/fetchUnits'); //get units
+
     this.$store.dispatch('commonStoreForAll/AllStatus', 'Product'); //get status with "Product" keyword
 
     this.$store.dispatch('commonStoreForAll/fetchLanguages'); //get all language
@@ -1936,6 +1952,81 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-md-2" }, [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("label", [_vm._v("Select Unit")]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.unit_id,
+                                          expression: "form.unit_id"
+                                        }
+                                      ],
+                                      staticClass:
+                                        "form-control form-control-sm-",
+                                      attrs: { id: "unit_id", name: "unit_id" },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.form,
+                                            "unit_id",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { disabled: "", value: "" } },
+                                        [_vm._v("Default (pc) ..")]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(_vm.allUnits, function(unit) {
+                                        return _c(
+                                          "option",
+                                          {
+                                            key: unit.id,
+                                            domProps: { value: unit.id }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\r\n                        " +
+                                                _vm._s(unit.unit_title) +
+                                                " (" +
+                                                _vm._s(unit.unit_code) +
+                                                ")\r\n                    "
+                                            )
+                                          ]
+                                        )
+                                      })
+                                    ],
+                                    2
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
                               _c("div", { staticClass: "col-md-2" }, [
                                 _c("div", { staticClass: "form-group" }, [
                                   _c("label", [_vm._v("Quantity")]),

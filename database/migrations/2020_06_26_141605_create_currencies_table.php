@@ -17,6 +17,7 @@ class CreateCurrenciesTable extends Migration
             $table->bigIncrements('id');
             $table->string('currency_name',100)->unique();
             $table->string('currency_code',5)->unique();
+            $table->string('currency_short_code',5)->nullable();
             //$table->string('currency_value',5)->nullable();
             $table->float('currency_value', 10, 2)->nullable();
             $table->boolean('is_enabled')->default(false);

@@ -439,6 +439,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -469,7 +470,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       filterBy: 'vendor_name',
       valueProperty: 'id',
       //Single select app for product
-      placeHolder_product: 'Product',
+      placeHolder_product: 'Select Product',
       filterBy_product: 'sys_pro_name',
       valueProperty_product: 'id',
       //multi product id
@@ -558,35 +559,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         newValue.forEach(function (p) {
           // if(!isNaN(p.vat_percent)){ 
           //Calculater each order item total
-          if (p.discount_fixed != '' && p.discount_percent === '' && p.vat_fixed === '' && p.vat_percent === '') {
+          if ((p.discount_fixed != '' || p.discount_fixed != null) && (p.discount_percent === '' || p.discount_percent === null) && (p.vat_fixed === '' || p.vat_fixed === null) && (p.vat_percent === '' || p.vat_percent === null)) {
             p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * p.discount_fixed;
-          } else if (p.discount_fixed === '' && p.discount_percent != '' && p.vat_fixed === '' && p.vat_percent === '') {
+          } else if ((p.discount_fixed === '' || p.discount_fixed === null) && (p.discount_percent != '' || p.discount_percent != null) && (p.vat_fixed === '' || p.vat_fixed === null) && (p.vat_percent === '' || p.vat_percent === null)) {
             var DiscountPercent = p.discount_percent / 100 * p.mrp_price;
             p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * DiscountPercent;
-          } else if (p.discount_fixed === '' && p.discount_percent === '' && p.vat_fixed != '' && p.vat_percent === '') {
+          } else if ((p.discount_fixed === '' || p.discount_fixed === null) && (p.discount_percent === '' || p.discount_percent === null) && (p.vat_fixed != '' || p.vat_fixed != null) && (p.vat_percent === '' || p.vat_percent === null)) {
             p.pod_line_total = p.mrp_price * p.pro_qty + p.pro_qty * p.vat_fixed;
-          } else if (p.discount_fixed === '' && p.discount_percent === '' && p.vat_fixed === '' && p.vat_percent != '') {
+          } else if ((p.discount_fixed === '' || p.discount_fixed === null) && (p.discount_percent === '' || p.discount_percent === null) && (p.vat_fixed === '' || p.vat_fixed === null) && (p.vat_percent != '' || p.vat_percent != null)) {
             var vatPercent = p.vat_percent / 100 * p.mrp_price;
             p.pod_line_total = p.mrp_price * p.pro_qty + p.pro_qty * vatPercent; //console.log(p.pod_line_total);
-          } else if (p.discount_fixed != '' && p.discount_percent === '' && p.vat_fixed != '' && p.vat_percent === '') {
+          } else if ((p.discount_fixed != '' || p.discount_fixed != null) && (p.discount_percent === '' || p.discount_percent === null) && (p.vat_fixed != '' || p.vat_fixed != null) && (p.vat_percent === '' || p.vat_percent === null)) {
             p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * p.discount_fixed + p.pro_qty * p.vat_fixed;
-          } else if (p.discount_fixed != '' && p.discount_percent === '' && p.vat_fixed === '' && p.vat_percent != '') {
+          } else if ((p.discount_fixed != '' || p.discount_fixed != null) && (p.discount_percent === '' || p.discount_percent === null) && (p.vat_fixed === '' || p.vat_fixed === null) && (p.vat_percent != '' || p.vat_percent != null)) {
             var _vatPercent = p.vat_percent / 100 * p.mrp_price;
 
             p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * p.discount_fixed + p.pro_qty * _vatPercent;
-          } else if (p.discount_fixed === '' && p.discount_percent != '' && p.vat_fixed != '' && p.vat_percent === '') {
+          } else if ((p.discount_fixed === '' || p.discount_fixed === null) && (p.discount_percent != '' || p.discount_percent != null) && (p.vat_fixed != '' || p.vat_fixed != null) && (p.vat_percent === '' || p.vat_percent === null)) {
             var _DiscountPercent = p.discount_percent / 100 * p.mrp_price;
 
             p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * _DiscountPercent + p.pro_qty * p.vat_fixed;
-          } else if (p.discount_fixed === '' && p.discount_percent != '' && p.vat_fixed === '' && p.vat_percent != '') {
+          } else if ((p.discount_fixed === '' || p.discount_fixed === null) && (p.discount_percent != '' || p.discount_percent != null) && (p.vat_fixed === '' || p.vat_fixed === null) && (p.vat_percent != '' || p.vat_percent != null)) {
             var _DiscountPercent2 = p.discount_percent / 100 * p.mrp_price;
 
             var _vatPercent2 = p.vat_percent / 100 * p.mrp_price;
 
             p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * _DiscountPercent2 + p.pro_qty * _vatPercent2;
-          } else {
-            p.pod_line_total = p.mrp_price * p.pro_qty;
-          }
+          } // p.mrp_price !='' && p.pro_qty !=''
+          else {
+              p.pod_line_total = p.mrp_price * p.pro_qty;
+            }
         });
       },
       deep: true
@@ -594,9 +596,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     form: {
       handler: function handler(value) {
         //calculate purchase order total amount
-        if (value.po_discount_fixed != '' && value.po_discount_percent === '') {
+        if ((value.po_discount_fixed != '' || value.po_discount_fixed != null) && (value.po_discount_percent === '' || value.po_discount_percent === null)) {
           value.po_invoice_total = (value.po_invoice_sub_total - value.po_discount_fixed).toFixed(2);
-        } else if (value.po_discount_fixed === '' && value.po_discount_percent != '') {
+        } else if ((value.po_discount_fixed === '' || value.po_discount_fixed === null) && (value.po_discount_percent != '' || value.po_discount_percent != null)) {
           var o_discountPercent = value.po_discount_percent / 100 * value.po_invoice_sub_total;
           value.po_invoice_total = (value.po_invoice_sub_total - o_discountPercent).toFixed(2);
         } else {
@@ -604,9 +606,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         } //calculate purchase order due
 
 
-        if (value.po_paid_amount != '') {
+        if (value.po_paid_amount != '' || value.po_paid_amount != null) {
           value.po_due_amount = (value.po_invoice_total - value.po_paid_amount).toFixed(2);
-        } else if (value.po_paid_amount === '' && value.po_invoice_total != 0) {
+        } else if ((value.po_paid_amount === '' || value.po_paid_amount === null) && value.po_invoice_total != 0) {
           value.po_due_amount = value.po_invoice_total;
         } else {
           value.po_due_amount = 0 .toFixed(2);
@@ -629,15 +631,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         pro_desc: '',
         pro_size: '',
         pro_color: '',
-        mrp_price: '',
-        pro_qty: '',
-        pro_free_qty: '',
+        mrp_price: null,
+        pro_qty: null,
+        pro_free_qty: null,
         pro_unit: '',
         unit_mrp: '',
-        discount_fixed: '',
-        discount_percent: '',
-        vat_percent: '',
-        vat_fixed: '',
+        discount_fixed: null,
+        discount_percent: null,
+        vat_percent: null,
+        vat_fixed: null,
         pod_line_total: 0.00
       });
     },
@@ -649,6 +651,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //on change branch
     onChangeBranch: function onChangeBranch(event) {//alert(event.target.value);
       //console.log(event);
+    },
+    pushTotalToPaidAmount: function pushTotalToPaidAmount(data) {
+      this.form.po_paid_amount = data; //Push total amaout to paid amount input when click on po_invoice_total  amount
     },
     //Make image as base64 
     // onImageChange(e){
@@ -729,7 +734,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           //this.ShowOnChangeImage = null;
 
           _this2.$router.push({
-            path: '/spa/EmployeeMaster'
+            path: '/spa/PurchaseOrderMaster'
           }); //route after successfule submit
 
         }
@@ -745,27 +750,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         toastr.warning('Something is wrong!');
       });
     },
-    deleteImage: function deleteImage(id) {
-      var _this3 = this;
-
-      this.$Progress.start(); //using progress-bar package        
-      //console.log(this.form.has_many_image);
-
-      axios.post('/spa/PurchaseOrder-Info-DeleteImage/' + id).then(function (_ref3) {
-        var data = _ref3.data;
-        // this.ShowOnChangeImage = null;
-        _this3.deleteImageIcon = false;
-        _this3.form.avatar = null;
-
-        _this3.$Progress.finish();
-
-        toastr.success(data.success);
-      })["catch"](function () {
-        _this3.$Progress.fail();
-
-        toastr.warning('Something is wrong!');
-      });
-    },
+    // deleteImage(id){ 
+    //   this.$Progress.start(); //using progress-bar package        
+    //     //console.log(this.form.has_many_image);
+    //     axios.post('/spa/PurchaseOrder-Info-DeleteImage/'+id)
+    //       .then(({ data }) => {
+    //           // this.ShowOnChangeImage = null;
+    //           this.deleteImageIcon = false;
+    //           this.form.avatar = null;
+    //           this.$Progress.finish(); 
+    //           toastr.success(data.success);
+    //        })
+    //       .catch(() => {
+    //         this.$Progress.fail();
+    //         toastr.warning('Something is wrong!');
+    //       });
+    // },
     fillForm: function fillForm() {
       if (this.$route.params.data != null) {
         this.editMode = true;
@@ -781,10 +781,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             //return item['id'];
             return item.product_id;
           });
-        }
-
-        if (this.$route.params.data.avatar != null) {
-          this.deleteImageIcon = true;
         }
       } //get selected Vendor based on form.vendor_id
 
@@ -825,7 +821,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this3 = this;
 
     //Current date show in purhase order date at first load
     this.form.po_date = new Date().toISOString().substr(0, 10); //this.$store.dispatch('ProductMasterStore/fetchData', this.pagination.per_page);
@@ -838,7 +834,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //call from multi-select-app-one.vue
 
     FireEvent.$on('AutoCompleteSearchForData', function (data) {
-      _this4.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data);
+      _this3.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data);
     }); //console.log(moment().format('LTS'));
   },
   mounted: function mounted() {//console.log(moment().format('LTS'))
@@ -863,7 +859,60 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card vue-card-item" }, [
-    _c("div", { staticClass: "card-header" }),
+    _c("div", { staticClass: "card-header" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-md-5 col-sm-9" }, [
+          _c(
+            "span",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: !_vm.editMode,
+                  expression: "!editMode"
+                }
+              ]
+            },
+            [_vm._v("New Purchase Order")]
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.editMode,
+                  expression: "editMode"
+                }
+              ]
+            },
+            [_vm._v("Update - " + _vm._s(_vm.form.po_invoice))]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-md-7 col-sm-3 text-right" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn btn-primary btn-flat btn-sm",
+                attrs: { to: "/spa/PurchaseOrderMaster" }
+              },
+              [
+                _c("i", { staticClass: "fas fa-user-tie" }),
+                _vm._v(" Purchase Order List\r\n        \t")
+              ]
+            )
+          ],
+          1
+        )
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c(
@@ -1040,7 +1089,7 @@ var render = function() {
                       readonly: "",
                       min: "0",
                       step: ".01",
-                      placeholder: "Ex. PO-20-1"
+                      placeholder: "Ex. PO20-0001"
                     },
                     domProps: { value: _vm.form.po_invoice },
                     on: {
@@ -1917,7 +1966,16 @@ var render = function() {
                   _c("span", [
                     _vm._v(" " + _vm._s(_vm.invoiceSubTotalAmount) + " ")
                   ]),
-                  _c("span", [_vm._v("Tk")])
+                  _c("span", [
+                    _vm._v(
+                      "  " +
+                        _vm._s(
+                          _vm.systemSettings.belongs_to_currency
+                            .currency_short_code
+                        ) +
+                        "  "
+                    )
+                  ])
                 ])
               ]),
               _vm._v(" "),
@@ -1997,10 +2055,36 @@ var render = function() {
                 _vm._m(11),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-4" }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "pointer",
+                      on: {
+                        click: function($event) {
+                          return _vm.pushTotalToPaidAmount(
+                            _vm.form.po_invoice_total
+                          )
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                 " +
+                          _vm._s(_vm.form.po_invoice_total) +
+                          " "
+                      )
+                    ]
+                  ),
                   _c("span", [
-                    _vm._v(" " + _vm._s(_vm.form.po_invoice_total) + " ")
-                  ]),
-                  _c("span", [_vm._v("Tk")])
+                    _vm._v(
+                      " " +
+                        _vm._s(
+                          _vm.systemSettings.belongs_to_currency
+                            .currency_short_code
+                        ) +
+                        " "
+                    )
+                  ])
                 ])
               ]),
               _vm._v(" "),
@@ -2017,6 +2101,7 @@ var render = function() {
                         expression: "form.po_paid_amount"
                       }
                     ],
+                    ref: "po_paid_amount",
                     staticClass: "form-control form-control-sm",
                     attrs: { type: "number", name: "po_paid_amount" },
                     domProps: { value: _vm.form.po_paid_amount },
@@ -2043,7 +2128,16 @@ var render = function() {
                   _c("span", [
                     _vm._v(" " + _vm._s(_vm.form.po_due_amount) + " ")
                   ]),
-                  _c("span", [_vm._v("Tk")])
+                  _c("span", [
+                    _vm._v(
+                      " " +
+                        _vm._s(
+                          _vm.systemSettings.belongs_to_currency
+                            .currency_short_code
+                        ) +
+                        " "
+                    )
+                  ])
                 ])
               ])
             ])

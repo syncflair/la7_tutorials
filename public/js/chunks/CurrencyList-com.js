@@ -87,6 +87,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CurrencyList",
   data: function data() {
@@ -229,6 +230,8 @@ var render = function() {
                     _vm._v(
                       " " +
                         _vm._s(currency.currency_code) +
+                        " / " +
+                        _vm._s(currency.currency_short_code) +
                         " / \r\n                "
                     ),
                     currency.currency_icon != null
@@ -371,7 +374,7 @@ var staticRenderFns = [
           _vm._v("Currency Title")
         ]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "15%" }, attrs: { scope: "col" } }, [
+        _c("th", { staticStyle: { width: "25%" }, attrs: { scope: "col" } }, [
           _vm._v("Code")
         ]),
         _vm._v(" "),
@@ -379,18 +382,18 @@ var staticRenderFns = [
           _vm._v("Value (Equal to 1$)")
         ]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "20%" }, attrs: { scope: "col" } }, [
+        _c("th", { staticStyle: { width: "10%" }, attrs: { scope: "col" } }, [
           _vm._v("Updated At")
         ]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "8%" }, attrs: { scope: "col" } }, [
+        _c("th", { staticStyle: { width: "10%" }, attrs: { scope: "col" } }, [
           _vm._v("Status")
         ]),
         _vm._v(" "),
         _c(
           "th",
           {
-            staticStyle: { width: "15%", "text-align": "right" },
+            staticStyle: { width: "10%", "text-align": "right" },
             attrs: { scope: "col" }
           },
           [_vm._v("Action")]

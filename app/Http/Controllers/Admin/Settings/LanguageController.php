@@ -214,7 +214,8 @@ class LanguageController extends Controller
     //return division list without pagination
     public function getLanguages(){
         //this is for commonStoreForAll Store
-        $data = Language::get();
+        // $data = Language::where('is_enabled', 1)->get();
+        $data = Language::where('is_enabled', '=', 1)->get();
         return response()->json($data);
     }
 

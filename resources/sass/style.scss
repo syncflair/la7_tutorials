@@ -240,6 +240,17 @@ body{
 //.table th:first-child, .table td:first-child{border-left:unset !important;}
 .table-striped tbody tr:hover{background-color: rgba(0, 0, 0, 0.09);}
 
+//########################## style list item action options ###############################
+.option-dropdown-manu-style > a{ padding: 0px 3px 0px 3px; }
+.option-dropdown-manu-style > .dropdown-menu{ left: -15px !important; }
+.option-dropdown-manu-style > .dropdown-menu > .dropdown-item{ 
+    font-size: 12px;
+    font-family:Arial;
+    font-weight: 600 !important;
+    //text-shadow: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
 //###################### remove arrow from Number input ####################
 /* Chrome, Safari, Edge, Opera */

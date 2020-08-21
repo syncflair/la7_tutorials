@@ -69,7 +69,7 @@ class WeightUnitController extends Controller
         }
 
         WeightUnit::create($data);        
-        return response()->json(['success'=>'Weight Unit Created successfully.']); 
+        return response()->json(['success'=>'Weight Unit Created.']); 
     }
 
     /**

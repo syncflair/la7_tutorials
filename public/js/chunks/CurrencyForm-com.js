@@ -112,6 +112,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -124,6 +128,7 @@ __webpack_require__.r(__webpack_exports__);
         id: '',
         currency_name: '',
         currency_code: '',
+        currency_short_code: '',
         currency_value: '',
         currency_icon: '',
         is_enabled: ''
@@ -436,7 +441,6 @@ var render = function() {
                                     expression: "form.currency_code"
                                   }
                                 ],
-                                ref: "currency_code",
                                 staticClass: "form-control",
                                 class: {
                                   "is-invalid": _vm.form.errors.has(
@@ -473,57 +477,73 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("Currency Value (1$)")]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.currency_value,
-                                    expression: "form.currency_value"
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("Short Code")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.currency_short_code,
+                                  expression: "form.currency_short_code"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "currency_short_code",
+                                placeholder: "currency Short code"
+                              },
+                              domProps: { value: _vm.form.currency_short_code },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
                                   }
-                                ],
-                                ref: "currency_value",
-                                staticClass: "form-control",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has(
-                                    "currency_value"
+                                  _vm.$set(
+                                    _vm.form,
+                                    "currency_short_code",
+                                    $event.target.value
                                   )
-                                },
-                                attrs: {
-                                  type: "text",
-                                  name: "currency_value",
-                                  placeholder: "Enter currency value"
-                                },
-                                domProps: { value: _vm.form.currency_value },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "currency_value",
-                                      $event.target.value
-                                    )
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("Currency Value (1$)")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.currency_value,
+                                  expression: "form.currency_value"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                name: "currency_value",
+                                placeholder: "Enter currency value"
+                              },
+                              domProps: { value: _vm.form.currency_value },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
                                   }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "currency_value",
+                                    $event.target.value
+                                  )
                                 }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: {
-                                  form: _vm.form,
-                                  field: "currency_value"
-                                }
-                              })
-                            ],
-                            1
-                          ),
+                              }
+                            })
+                          ]),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-check" }, [
                             _c("input", {

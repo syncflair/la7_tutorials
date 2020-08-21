@@ -35,7 +35,7 @@
             <th style="width: 5%;" scope="col" @click="sort('pro_price')" class="sortable-title">price </th> 
             <th style="width: 3%;" scope="col">Status</th>           
             <!-- <th style="width: 3%;" scope="col">Verify</th>            -->
-            <th style="width: 10%; text-align:right;" scope="col">Action</th>
+            <th style="width: 2%; text-align:right;" scope="col">#</th>
           </tr>
         </thead>
 
@@ -95,19 +95,28 @@
             
 
             <td class="text-right">  
-              <a @click="ViewDetails()" class="btn btn-flat btn-sm"> <i class="fas fa-eye primary"></i> </a>   
-              
-              <!-- <a @click="editData(product)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
-                  <i class="fas fa-edit primary "></i>
-              </a> -->
+              <!-- Dropdown List -->
+              <div class="btn-group option-dropdown-manu-style left">
+                <a class="btn btn-flat btn-sm btn-warning dropdown-toggle-" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-ellipsis-v"></i>
+                  <!-- <i class="fas fa-ellipsis-h"></i> -->
+                </a>    
 
-              <router-link :to="{ name: 'ProductMasterForm', params: { data:product } }" class="btn btn-primary- btn-flat btn-sm">
-                  <i class="fas fa-edit primary "></i>
-              </router-link>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a @click="ViewDetails()" class="dropdown-item pointer"> <i class="fas fa-eye primary"></i> View </a>  
+                  
+                  <router-link :to="{ name: 'ProductMasterForm', params: { data:product } }" class="dropdown-item pointer">
+                      <i class="fas fa-edit primary "></i> Edit
+                  </router-link>
 
-              <a @click="DeleteData(product.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
-                 <i class="far fa-trash-alt red"></i>
-              </a>
+                  <div class="dropdown-divider"></div>
+
+                  <a @click="DeleteData(product.id)" class="dropdown-item pointer" id="delete">
+                     <i class="far fa-trash-alt red"></i> Delete
+                  </a>
+                </div>
+              </div><!--End Dropdown List -->
+
             </td>
           </tr>
 

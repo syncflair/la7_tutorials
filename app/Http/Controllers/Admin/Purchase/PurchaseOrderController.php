@@ -97,13 +97,13 @@ class PurchaseOrderController extends Controller
 
         $data['po_vendor_invoice_no']=$request->po_vendor_invoice_no;    
         $data['po_details']=$request->po_details;    
-        $data['po_discount_fixed']=$request->po_discount_fixed !='' ? $request->po_discount_fixed : $request->po_discount_fixed =0.00;    
-        $data['po_discount_percent']=$request->po_discount_percent !='' ? $request->po_discount_percent : $request->po_discount_percent = 0.00;    
+        $data['po_discount_fixed']=$request->po_discount_fixed !='' ? $request->po_discount_fixed : 0.00;    
+        $data['po_discount_percent']=$request->po_discount_percent !='' ? $request->po_discount_percent : 0.00;    
         //$data['po_tax_fiexd']=$request->po_tax_fiexd;    
         //$data['po_tax_percent']=$request->po_tax_percent;    
         $data['po_invoice_sub_total']=$request->po_invoice_sub_total;    
         $data['po_invoice_total']=$request->po_invoice_total;    
-        $data['po_paid_amount']=$request->po_paid_amount;    
+        $data['po_paid_amount']=$request->po_paid_amount != '' ? $request->po_paid_amount : 0.00;    
         $data['po_due_amount']=$request->po_due_amount;  
 
         $data['pur_order_details']=$request->pur_order_details;  //JSON Array of order Details
@@ -160,7 +160,63 @@ class PurchaseOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'vendor_id' => 'required', 
+            'po_date' => 'required', 
+            'po_payment_term' => 'required',
+            'status_m_id' => 'required', 
+            // '*.product_id' => 'required',
+            // '*.mrp_price' => 'required',
+            // '*.pro_qty' => 'required',
+        ],
+        [
+            'vendor_id.required' => 'Please Select Vendor / Supplier',
+            'po_date.required' => 'Order Date is required',
+            'po_payment_term.required' => 'Payment Term is required',
+            'status_m_id.required' => 'Order Status is required.',
+            // '*.product_id.required' => 'Please Select product',
+            // '*.mrp_price.required' => 'MRP Price is required',
+            // '*.pro_qty.required' => 'Quantity is required',
+        ]);
+
+        $data =array();
+        //$data['po_invoice']= purchase_order_invoice_generate(); //get from helper
+        $data['vendor_id']=$request->vendor_id;
+        $data['po_date']=$request->po_date;
+        $data['po_payment_term']=$request->po_payment_term;       
+        $data['po_payment_method']=$request->po_payment_method;        
+        $data['branch_id']= $request->branch_id != '' ? $request->branch_id : \Auth::user()->branch_id;        
+        $data['status_m_id']=$request->status_m_id;
+
+        $data['po_vendor_invoice_no']=$request->po_vendor_invoice_no;    
+        $data['po_details']=$request->po_details;    
+        $data['po_discount_fixed']=$request->po_discount_fixed !='' ? $request->po_discount_fixed : 0.00;    
+        $data['po_discount_percent']=$request->po_discount_percent !='' ? $request->po_discount_percent : 0.00;    
+        //$data['po_tax_fiexd']=$request->po_tax_fiexd;    
+        //$data['po_tax_percent']=$request->po_tax_percent;    
+        $data['po_invoice_sub_total']=$request->po_invoice_sub_total;    
+        $data['po_invoice_total']=$request->po_invoice_total;    
+        $data['po_paid_amount']=$request->po_paid_amount != '' ? $request->po_paid_amount : 0.00;    
+        $data['po_due_amount']=$request->po_due_amount;  
+
+        $data['pur_order_details']=$request->pur_order_details;  //JSON Array of order Details
+
+        $data['created_by']= \Auth::user()->id;  
+
+     
+        try{
+            DB::beginTransaction();
+
+            $po = PurchaseOrder::find($request->id)->update($data); 
+
+            DB::commit();            
+            return response()->json(['success'=>'Purchase Order Update']);
+            
+        }catch(\Exception $e){
+            //logger($e->getMessage());
+            DB::rollBack();
+            return response()->json(['errors'=> $e->getMessage() ], 500); 
+        }
     }
 
     /**

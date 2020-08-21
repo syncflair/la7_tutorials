@@ -6,9 +6,12 @@ const commonStoreForAll ={
 	    //accessable from any where 
       authUser: {},
       authPermissions:{},
+      systemSettings:{},
+
       adminRoles:{},
       branches:{},
       allLanguages:{},
+      allCurrencies:{},
       allDepertments:{},
       autoSearchDepartments:{},
       userStatus: {}, //get data from user_status table
@@ -27,6 +30,7 @@ const commonStoreForAll ={
       autoSearchSuppliers:{}, 
       AllSpecifications:{},
       allCustomerGroups:{},
+      allUnits:{},
       
       
 	}),/*end state*/
@@ -40,12 +44,14 @@ const commonStoreForAll ={
       //commit from resources/js/components/admin/AdminWrapper.vue
       AUTH_USER(state, data) { return state.authUser = data; },
       AUTH_PERMISSIONS(state, data){ return state.authPermissions = data;},
+      SYSTEM_SETTINGS(state, data){ return state.systemSettings = data;},
       //End Commit
 
       //get from action
       FETCH_ROLES(state, data){return state.adminRoles = data;}, 
       FETCH_BRANCHES(state, data){return state.branches = data;},       
       FETCH_LANGUAGES(state, data){return state.allLanguages = data;},       
+      FETCH_CURRENCIES(state, data){return state.allCurrencies = data;},       
       FETCH_DEPARTMENTS(state, data){return state.allDepertments = data;},       
       FETCH_JOB_TITLE(state, data){return state.jobTitles = data;}, 
       FETCH_USER_STATUS(state, data) { return state.userStatus = data; },
@@ -61,6 +67,7 @@ const commonStoreForAll ={
       FETCH_CATEGORY_DATA(state, data) { return state.AllCategory = data; },
       FETCH_SPECIFICATION_DATA(state, data) { return state.AllSpecifications = data; },
       FETCH_CUSTOMER_GROUPS_DATA(state, data) { return state.allCustomerGroups = data; },
+      FETCH_UNITS_DATA(state, data) { return state.allUnits = data; },
       
       //#####################################Search ###########################################
       AUTO_COMPLETE_DATA_FOR_DEPARTMENTS(state, data){return state.autoSearchDepartments = data;},       
@@ -113,6 +120,13 @@ const commonStoreForAll ={
         axios.get('/spa/Language-Info/getLanguages')
         .then( (response) => {
           context.commit('FETCH_LANGUAGES', response.data); //use for only show data
+        }).catch( () => { })
+      },
+
+      fetchCurrencies(context){ 
+        axios.get('/spa/Currency-Info/getCurrencies')
+        .then( (response) => {
+          context.commit('FETCH_CURRENCIES', response.data); //use for only show data
         }).catch( () => { })
       },
 
@@ -198,6 +212,13 @@ const commonStoreForAll ={
         axios.get('/spa/customerGroup-Info/getCustomerGroup')
         .then( (response) => {
           context.commit('FETCH_CUSTOMER_GROUPS_DATA', response.data);
+        }).catch( () => { })
+      },
+
+      fetchUnits(context){
+        axios.get('/spa/UnitsMaster-Info/getAllUnits')
+        .then( (response) => {
+          context.commit('FETCH_UNITS_DATA', response.data);
         }).catch( () => { })
       },
 

@@ -440,6 +440,15 @@
               </li>
 
               <li class="nav-item">
+                <router-link to="/spa/AccountHeadsMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Account Heads
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
                 <a href="pages/UI/general.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Bank Account</p>
@@ -560,6 +569,14 @@
                 </ul>
               </li> -->
 
+              <li class="nav-item">
+                <router-link to="/spa/SettingsMaster" class="nav-link">
+                  <i class="nav-icon fas fa-cogs"></i>
+                  <p>
+                    Settings
+                  </p>
+                </router-link>
+              </li>
 
               <li class="nav-item">
                 <router-link to="/spa/OrganizationInfo" class="nav-link">
@@ -597,6 +614,15 @@
                   <i class="nav-icon fas fa-info-circle"></i>
                   <p>
                     Language
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/UnitsMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Units
                   </p>
                 </router-link>
               </li>

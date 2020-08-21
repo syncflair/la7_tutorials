@@ -60,6 +60,7 @@ class CurrencyController extends Controller
         $data =array();
         $data['currency_name']=$request->currency_name;
         $data['currency_code']=$request->currency_code;
+        $data['currency_short_code']=$request->currency_short_code;        
         $data['currency_value']=$request->currency_value;
         //$data['currency_icon']=$request->currency_icon;
 
@@ -150,6 +151,7 @@ class CurrencyController extends Controller
         $data =array();
         $data['currency_name']=$request->currency_name;
         $data['currency_code']=$request->currency_code;
+        $data['currency_short_code']=$request->currency_short_code;
         $data['currency_value']=$request->currency_value;
         //$data['currency_icon']=$request->currency_icon;
 
@@ -219,4 +221,12 @@ class CurrencyController extends Controller
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
     }
+
+    //return currency list without pagination
+    public function getCurrencies(){
+        //this is for commonStoreForAll Store
+        $data = Currency::where('is_enabled', '=', 1)->get();
+        return response()->json($data);
+    }
+
 }

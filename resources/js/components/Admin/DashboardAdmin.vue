@@ -128,7 +128,10 @@
         </div>
     </div>
 
-    {{authPermissionsData}}<br>
+    <!-- {{authPermissionsData}} -->
+    <br>
+
+    <!-- {{systemSettings}} -->
     <!-- {{ isViewPermitted('user')}} -->
 
     <h2 v-show="authPermissionsData.BranchInfo.view === true"> This Permission check</h2>
@@ -173,6 +176,7 @@
           //console.log(JSON.parse(this.authPermissions.permission));
           //console.log(this.authPermissions.permission['BranchInfo']['delete']);
 
+          // console.log(this.systemSettings);
         }
     }
 </script>

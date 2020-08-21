@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/chunks/" + ({"AttirbuteMaster":"AttirbuteMaster","AttributeValueMaster":"AttributeValueMaster","BranchInfo":"BranchInfo","BrandMaster":"BrandMaster","BrandShopMaster":"BrandShopMaster","CashFlowReportMaster":"CashFlowReportMaster","Category-demo":"Category-demo","CategoryMaster":"CategoryMaster","ChartOfAccounts":"ChartOfAccounts","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","CustomerGroupMaster":"CustomerGroupMaster","CustomerMaster":"CustomerMaster","Dashboard":"Dashboard","DepartmentMaster":"DepartmentMaster","DistrictMaster":"DistrictMaster","DistrictZoneMaster":"DistrictZoneMaster","DivisionMaster":"DivisionMaster","EmployeeMaster":"EmployeeMaster","EmployeeMasterForm":"EmployeeMasterForm","EmployeeMasterList":"EmployeeMasterList","GiftVoucher":"GiftVoucher","JobTitleMaster":"JobTitleMaster","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","LoanReportMaster":"LoanReportMaster","Multicomponent":"Multicomponent","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","PaymentMethod":"PaymentMethod","PermissionMaster":"PermissionMaster","ProductMaster":"ProductMaster","ProductMasterForm":"ProductMasterForm","ProductMasterList":"ProductMasterList","PurchaseOrderForm":"PurchaseOrderForm","PurchaseOrderList":"PurchaseOrderList","PurchaseOrderMaster":"PurchaseOrderMaster","PurchaseSingleOrderView":"PurchaseSingleOrderView","Returns":"Returns","Reviews":"Reviews","RoleMaster":"RoleMaster","SalesReportMaster":"SalesReportMaster","SpecificationMaster":"SpecificationMaster","StatusMaster":"StatusMaster","StockReportMaster":"StockReportMaster","Store":"Store","SupplierMaster":"SupplierMaster","SuppliersReportMaster":"SuppliersReportMaster","UserMaster":"UserMaster","UserStatus":"UserStatus","VatRate":"VatRate","VendorMaster":"VendorMaster","VendorMasterForm":"VendorMasterForm","VendorMasterList":"VendorMasterList","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","adminwrapper":"adminwrapper","multi-select-app-one-global":"multi-select-app-one-global","my-date-time-global":"my-date-time-global","pagination-app":"pagination-app","search-app-one":"search-app-one","single-select-app-one-global":"single-select-app-one-global","single-select-app-two-global":"single-select-app-two-global","vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098":"vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098","NotFound":"NotFound","ReportMaster":"ReportMaster","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","AttributeMasterForm-com":"AttributeMasterForm-com","AttributeMasterList-com":"AttributeMasterList-com","AttributeValueMasterForm-com":"AttributeValueMasterForm-com","AttributeValueMasterList-com":"AttributeValueMasterList-com","BranchForm-com":"BranchForm-com","BranchList-com":"BranchList-com","BrandMasterForm-com":"BrandMasterForm-com","BrandMasterList-com":"BrandMasterList-com","BrandShopMasterForm-com":"BrandShopMasterForm-com","BrandShopMasterList-com":"BrandShopMasterList-com","CategoryMasterForm-com":"CategoryMasterForm-com","CategoryMasterList-com":"CategoryMasterList-com","ChartOfAccountsForm-com":"ChartOfAccountsForm-com","ChartOfAccountsList-com":"ChartOfAccountsList-com","CountryForm-com":"CountryForm-com","CountryList-com":"CountryList-com","CurrencyForm-com":"CurrencyForm-com","CurrencyList-com":"CurrencyList-com","CustomerGroupMasterForm-com":"CustomerGroupMasterForm-com","CustomerGroupMasterList-com":"CustomerGroupMasterList-com","CustomerMasterForm-com":"CustomerMasterForm-com","CustomerMasterList-com":"CustomerMasterList-com","DepartmentMaserForm-com":"DepartmentMaserForm-com","DepartmentMasterList-com":"DepartmentMasterList-com","DistrictMasterList-com":"DistrictMasterList-com","DistrictMasterform-com":"DistrictMasterform-com","DistrictZoneMasterForm-com":"DistrictZoneMasterForm-com","DistrictZoneMasterList-com":"DistrictZoneMasterList-com","DivisionMasterList-com":"DivisionMasterList-com","DivisionMasterform-com":"DivisionMasterform-com","JobTitleMasterForm-com":"JobTitleMasterForm-com","JobTitleMasterList-com":"JobTitleMasterList-com","LanguageForm-com":"LanguageForm-com","LanguageList-com":"LanguageList-com","LengthUnitForm-com":"LengthUnitForm-com","LengthUnitList-com":"LengthUnitList-com","formBox":"formBox","searchBox":"searchBox","PackageUnitForm-com":"PackageUnitForm-com","PackageUnitList-com":"PackageUnitList-com","PaymentMethodForm-com":"PaymentMethodForm-com","PaymentMethodList-com":"PaymentMethodList-com","PermissionAddForm-com":"PermissionAddForm-com","RoleAdminMasterForm-com":"RoleAdminMasterForm-com","RoleAdminMasterList-com":"RoleAdminMasterList-com","SpecificationMasterForm-com":"SpecificationMasterForm-com","SpecificationMasterList-com":"SpecificationMasterList-com","StatusMasterForm-com":"StatusMasterForm-com","StatusMasterList-com":"StatusMasterList-com","SupplierMasterForm-com":"SupplierMasterForm-com","SupplierMasterList-com":"SupplierMasterList-com","UserMasterForm-com":"UserMasterForm-com","UserMasterList-com":"UserMasterList-com","UserStatusForm-com":"UserStatusForm-com","UserStatusList-com":"UserStatusList-com","VatRateForm-com":"VatRateForm-com","VatRateList-com":"VatRateList-com","WeightUnitForm-com":"WeightUnitForm-com","WeightUnitList-com":"WeightUnitList-com","ReportMasterContent-com":"ReportMasterContent-com","ReportMasterNav-com":"ReportMasterNav-com"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "js/chunks/" + ({"AccountHeadsMaster":"AccountHeadsMaster","AttirbuteMaster":"AttirbuteMaster","AttributeValueMaster":"AttributeValueMaster","BranchInfo":"BranchInfo","BrandMaster":"BrandMaster","BrandShopMaster":"BrandShopMaster","CashFlowReportMaster":"CashFlowReportMaster","Category-demo":"Category-demo","CategoryMaster":"CategoryMaster","ChartOfAccounts":"ChartOfAccounts","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","CustomerGroupMaster":"CustomerGroupMaster","CustomerMaster":"CustomerMaster","Dashboard":"Dashboard","DepartmentMaster":"DepartmentMaster","DistrictMaster":"DistrictMaster","DistrictZoneMaster":"DistrictZoneMaster","DivisionMaster":"DivisionMaster","EmployeeMaster":"EmployeeMaster","EmployeeMasterForm":"EmployeeMasterForm","EmployeeMasterList":"EmployeeMasterList","GiftVoucher":"GiftVoucher","JobTitleMaster":"JobTitleMaster","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","LoanReportMaster":"LoanReportMaster","Multicomponent":"Multicomponent","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","PaymentMethod":"PaymentMethod","PermissionMaster":"PermissionMaster","ProductMaster":"ProductMaster","ProductMasterForm":"ProductMasterForm","ProductMasterList":"ProductMasterList","PurchaseOrderForm":"PurchaseOrderForm","PurchaseOrderList":"PurchaseOrderList","PurchaseOrderMaster":"PurchaseOrderMaster","PurchaseSingleOrderView":"PurchaseSingleOrderView","Returns":"Returns","Reviews":"Reviews","RoleMaster":"RoleMaster","SalesReportMaster":"SalesReportMaster","SettingsMaster":"SettingsMaster","SpecificationMaster":"SpecificationMaster","StatusMaster":"StatusMaster","StockReportMaster":"StockReportMaster","Store":"Store","SupplierMaster":"SupplierMaster","SuppliersReportMaster":"SuppliersReportMaster","UnitsMaster":"UnitsMaster","UserMaster":"UserMaster","UserStatus":"UserStatus","VatRate":"VatRate","VendorMaster":"VendorMaster","VendorMasterForm":"VendorMasterForm","VendorMasterList":"VendorMasterList","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","adminwrapper":"adminwrapper","multi-select-app-one-global":"multi-select-app-one-global","my-date-time-global":"my-date-time-global","pagination-app":"pagination-app","search-app-one":"search-app-one","single-select-app-one-global":"single-select-app-one-global","single-select-app-two-global":"single-select-app-two-global","vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098":"vendors~NotFound~PermissionAddForm-com~ReportMaster~auto-complete-app~formComponent~multi-select-app~51eb4098","NotFound":"NotFound","ReportMaster":"ReportMaster","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","AccountHeadsMasterForm-com":"AccountHeadsMasterForm-com","AccountHeadsMasterList-com":"AccountHeadsMasterList-com","AttributeMasterForm-com":"AttributeMasterForm-com","AttributeMasterList-com":"AttributeMasterList-com","AttributeValueMasterForm-com":"AttributeValueMasterForm-com","AttributeValueMasterList-com":"AttributeValueMasterList-com","BranchForm-com":"BranchForm-com","BranchList-com":"BranchList-com","BrandMasterForm-com":"BrandMasterForm-com","BrandMasterList-com":"BrandMasterList-com","BrandShopMasterForm-com":"BrandShopMasterForm-com","BrandShopMasterList-com":"BrandShopMasterList-com","CategoryMasterForm-com":"CategoryMasterForm-com","CategoryMasterList-com":"CategoryMasterList-com","ChartOfAccountsForm-com":"ChartOfAccountsForm-com","ChartOfAccountsList-com":"ChartOfAccountsList-com","CountryForm-com":"CountryForm-com","CountryList-com":"CountryList-com","CurrencyForm-com":"CurrencyForm-com","CurrencyList-com":"CurrencyList-com","CustomerGroupMasterForm-com":"CustomerGroupMasterForm-com","CustomerGroupMasterList-com":"CustomerGroupMasterList-com","CustomerMasterForm-com":"CustomerMasterForm-com","CustomerMasterList-com":"CustomerMasterList-com","DepartmentMaserForm-com":"DepartmentMaserForm-com","DepartmentMasterList-com":"DepartmentMasterList-com","DistrictMasterList-com":"DistrictMasterList-com","DistrictMasterform-com":"DistrictMasterform-com","DistrictZoneMasterForm-com":"DistrictZoneMasterForm-com","DistrictZoneMasterList-com":"DistrictZoneMasterList-com","DivisionMasterList-com":"DivisionMasterList-com","DivisionMasterform-com":"DivisionMasterform-com","JobTitleMasterForm-com":"JobTitleMasterForm-com","JobTitleMasterList-com":"JobTitleMasterList-com","LanguageForm-com":"LanguageForm-com","LanguageList-com":"LanguageList-com","LengthUnitForm-com":"LengthUnitForm-com","LengthUnitList-com":"LengthUnitList-com","formBox":"formBox","searchBox":"searchBox","PackageUnitForm-com":"PackageUnitForm-com","PackageUnitList-com":"PackageUnitList-com","PaymentMethodForm-com":"PaymentMethodForm-com","PaymentMethodList-com":"PaymentMethodList-com","PermissionAddForm-com":"PermissionAddForm-com","RoleAdminMasterForm-com":"RoleAdminMasterForm-com","RoleAdminMasterList-com":"RoleAdminMasterList-com","SpecificationMasterForm-com":"SpecificationMasterForm-com","SpecificationMasterList-com":"SpecificationMasterList-com","StatusMasterForm-com":"StatusMasterForm-com","StatusMasterList-com":"StatusMasterList-com","SupplierMasterForm-com":"SupplierMasterForm-com","SupplierMasterList-com":"SupplierMasterList-com","UnitsMasterForm-com":"UnitsMasterForm-com","UnitsMasterList-com":"UnitsMasterList-com","UserMasterForm-com":"UserMasterForm-com","UserMasterList-com":"UserMasterList-com","UserStatusForm-com":"UserStatusForm-com","UserStatusList-com":"UserStatusList-com","VatRateForm-com":"VatRateForm-com","VatRateList-com":"VatRateList-com","WeightUnitForm-com":"WeightUnitForm-com","WeightUnitList-com":"WeightUnitList-com","ReportMasterContent-com":"ReportMasterContent-com","ReportMasterNav-com":"ReportMasterNav-com"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -122639,6 +122639,15 @@ var routes = [//export const routes = [
   meta: {
     title: 'Chart Of Accounts'
   }
+}, {
+  path: '/spa/AccountHeadsMaster',
+  name: 'AccountHeadsMaster',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | AccountHeadsMaster */ "AccountHeadsMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Accounting/AccountHead/AccountHeadsMaster.vue */ "./resources/js/components/Admin/Accounting/AccountHead/AccountHeadsMaster.vue"));
+  },
+  meta: {
+    title: 'Account Head'
+  }
 }, //HRM
 {
   path: '/spa/JobTitleMaster',
@@ -122681,6 +122690,15 @@ var routes = [//export const routes = [
   ]
 }, //settings
 {
+  path: '/spa/SettingsMaster',
+  name: 'SettingsMaster',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | SettingsMaster */ "SettingsMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/Settings/SettingsMaster.vue */ "./resources/js/components/Admin/Settings/Settings/SettingsMaster.vue"));
+  },
+  meta: {
+    title: 'Settings'
+  }
+}, {
   path: '/spa/OrganizationInfo',
   name: 'OrganizationInfo',
   component: function component() {
@@ -122715,6 +122733,15 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Language Master'
+  }
+}, {
+  path: '/spa/UnitsMaster',
+  name: 'UnitsMaster',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | UnitsMaster */ "UnitsMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/Units/UnitsMaster.vue */ "./resources/js/components/Admin/Settings/Units/UnitsMaster.vue"));
+  },
+  meta: {
+    title: 'Unit Master'
   }
 }, {
   path: '/spa/LengthUnit',
@@ -122915,14 +122942,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_AttributeValueMasterStore__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./store/AttributeValueMasterStore */ "./resources/js/store/AttributeValueMasterStore.js");
 /* harmony import */ var _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./store/BrandMasterStore */ "./resources/js/store/BrandMasterStore.js");
 /* harmony import */ var _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./store/ChartOfAccounts */ "./resources/js/store/ChartOfAccounts.js");
-/* harmony import */ var _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./store/EmployeeMasterStore */ "./resources/js/store/EmployeeMasterStore.js");
-/* harmony import */ var _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./store/BranchInfoStore */ "./resources/js/store/BranchInfoStore.js");
-/* harmony import */ var _store_CountryStore__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./store/CountryStore */ "./resources/js/store/CountryStore.js");
-/* harmony import */ var _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store/VatRatesStore */ "./resources/js/store/VatRatesStore.js");
-/* harmony import */ var _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store/StatusMasterStore */ "./resources/js/store/StatusMasterStore.js");
-/* harmony import */ var _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store/DivisionMasterStore */ "./resources/js/store/DivisionMasterStore.js");
-/* harmony import */ var _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./store/DistrictMasterStore */ "./resources/js/store/DistrictMasterStore.js");
-/* harmony import */ var _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./store/DistrictZoneMasterStore */ "./resources/js/store/DistrictZoneMasterStore.js");
+/* harmony import */ var _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./store/AccountHeadsMasterSotre */ "./resources/js/store/AccountHeadsMasterSotre.js");
+/* harmony import */ var _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./store/EmployeeMasterStore */ "./resources/js/store/EmployeeMasterStore.js");
+/* harmony import */ var _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./store/BranchInfoStore */ "./resources/js/store/BranchInfoStore.js");
+/* harmony import */ var _store_CountryStore__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store/CountryStore */ "./resources/js/store/CountryStore.js");
+/* harmony import */ var _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store/VatRatesStore */ "./resources/js/store/VatRatesStore.js");
+/* harmony import */ var _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store/StatusMasterStore */ "./resources/js/store/StatusMasterStore.js");
+/* harmony import */ var _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./store/DivisionMasterStore */ "./resources/js/store/DivisionMasterStore.js");
+/* harmony import */ var _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./store/DistrictMasterStore */ "./resources/js/store/DistrictMasterStore.js");
+/* harmony import */ var _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./store/DistrictZoneMasterStore */ "./resources/js/store/DistrictZoneMasterStore.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]); //import all Modules here from store folder
@@ -122948,6 +122976,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 
  //Accounting
+
 
  //HRM
 
@@ -122983,16 +123012,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     BrandMasterStore: _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_15__["default"],
     //Accounting
     ChartOfAccounts: _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_16__["default"],
+    AccountHeadsMasterSotre: _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_17__["default"],
     //HRM
-    EmployeeMasterStore: _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_17__["default"],
+    EmployeeMasterStore: _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_18__["default"],
     //Settings
-    BranchInfoStore: _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_18__["default"],
-    CountryStore: _store_CountryStore__WEBPACK_IMPORTED_MODULE_19__["default"],
-    VatRatesStore: _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_20__["default"],
-    StatusMasterStore: _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_21__["default"],
-    DivisionMasterStore: _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_22__["default"],
-    DistrictMasterStore: _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_23__["default"],
-    DistrictZoneMasterStore: _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_24__["default"]
+    BranchInfoStore: _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_19__["default"],
+    CountryStore: _store_CountryStore__WEBPACK_IMPORTED_MODULE_20__["default"],
+    VatRatesStore: _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_21__["default"],
+    StatusMasterStore: _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_22__["default"],
+    DivisionMasterStore: _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_23__["default"],
+    DistrictMasterStore: _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_24__["default"],
+    DistrictZoneMasterStore: _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_25__["default"]
   }
 }));
 
@@ -123312,7 +123342,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {//myName: 'Md. Mahmudur Rahman',
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser'] //'commonStoreForAll', ['authUser','authPermissions']
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'systemSettings'] //'commonStoreForAll', ['authUser','authPermissions']
   ), {
     authPermissionsData: function authPermissionsData() {
       //return 'decodet Data';
@@ -123356,6 +123386,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {//console.log(this.authPermissionsData);
     //console.log(this.authUser.role);
     //console.log(JSON.parse(this.authPermissions.permission).role.edit);
+    //console.log(this.systemSettings);
   }
 }); //End Export default
 
@@ -123427,6 +123458,96 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_countTest_vue_vue_type_template_id_04a0f6c1___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/store/AccountHeadsMasterSotre.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/store/AccountHeadsMasterSotre.js ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var AccountHeadsMasterSotre = {
+  namespaced: true,
+  state: function state() {
+    return {
+      //accessable from any where 
+      allAccountHeads: {},
+      pagination: {
+        current_page: 1,
+        per_page: 0
+      },
+      autoCompleteData: {}
+    };
+  },
+
+  /*end state*/
+  getters: {},
+
+  /*end getters*/
+  mutations: {
+    //return data to state
+    FETCH_DATA: function FETCH_DATA(state, data) {
+      return state.allAccountHeads = data;
+    } // FATCH_PAGINATION(state, pagination){
+    //     return state.pagination = pagination;  
+    // },
+    // AUTO_COMPLETE_DATA(state, data){
+    //     return state.autoCompleteData = data;  
+    // }
+
+  },
+
+  /*end Mutations*/
+  actions: {
+    fetchData: function fetchData(context, payload) {
+      var perPageVelue;
+
+      if (!payload) {
+        perPageVelue = 100;
+      } else {
+        perPageVelue = payload;
+      }
+
+      axios.get('/spa/AccountHeads-Info?page=' + context.state.pagination.current_page + '&perPage=' + perPageVelue).then(function (response) {
+        context.commit('FETCH_DATA', response.data); //use for only show data
+        //context.commit('FATCH_PAGINATION', response.data) //for pagination
+        //console.log(response.data);
+      })["catch"](function () {//toastr.warning('Something is wrong!');
+      });
+    } // //For Search
+    // searching(context, payload){        
+    //     let searchKey = payload.search_key; let searchOption = payload.search_option; //alert(query2);
+    //     axios.get('/spa/searchChartOfAccountsData?page='+ 
+    //                 context.state.pagination.current_page + '&perPage=' +
+    //                 context.state.pagination.per_page + 
+    //                 '&q='+searchKey+'&so='+searchOption)
+    //     //axios.get('/spa/searcCartOfAccountsData?q='+query)
+    //     .then( ( response ) => {
+    //             context.commit('FETCH_DATA', response.data.data);
+    //             context.commit('FATCH_PAGINATION', response.data) //for pagination                                       
+    //     }).catch(() => { }) 
+    // },
+    // //For Search
+    // AutoCompleteSearch(context, payload){  
+    //     let query = payload;  
+    //     //let query2 = payload.key2; 
+    //     axios.get('/spa/searchChartOfAccountsData?&q='+ query)
+    //     //axios.get('/spa/searcCartOfAccountsData?q='+query)
+    //     .then( ( response ) => {
+    //             context.commit('AUTO_COMPLETE_DATA', response.data.data);
+    //             //this.categories = response.data; // is an object... use when pagination                                         
+    //     }).catch(() => { }) 
+    // },
+
+  }
+  /*end actions*/
+
+};
+/* harmony default export */ __webpack_exports__["default"] = (AccountHeadsMasterSotre);
 
 /***/ }),
 
@@ -125520,9 +125641,11 @@ var commonStoreForAll = {
       //accessable from any where 
       authUser: {},
       authPermissions: {},
+      systemSettings: {},
       adminRoles: {},
       branches: {},
       allLanguages: {},
+      allCurrencies: {},
       allDepertments: {},
       autoSearchDepartments: {},
       userStatus: {},
@@ -125542,7 +125665,8 @@ var commonStoreForAll = {
       autoSearchCategories: {},
       autoSearchSuppliers: {},
       AllSpecifications: {},
-      allCustomerGroups: {}
+      allCustomerGroups: {},
+      allUnits: {}
     };
   },
 
@@ -125559,6 +125683,9 @@ var commonStoreForAll = {
     AUTH_PERMISSIONS: function AUTH_PERMISSIONS(state, data) {
       return state.authPermissions = data;
     },
+    SYSTEM_SETTINGS: function SYSTEM_SETTINGS(state, data) {
+      return state.systemSettings = data;
+    },
     //End Commit
     //get from action
     FETCH_ROLES: function FETCH_ROLES(state, data) {
@@ -125569,6 +125696,9 @@ var commonStoreForAll = {
     },
     FETCH_LANGUAGES: function FETCH_LANGUAGES(state, data) {
       return state.allLanguages = data;
+    },
+    FETCH_CURRENCIES: function FETCH_CURRENCIES(state, data) {
+      return state.allCurrencies = data;
     },
     FETCH_DEPARTMENTS: function FETCH_DEPARTMENTS(state, data) {
       return state.allDepertments = data;
@@ -125615,6 +125745,9 @@ var commonStoreForAll = {
     FETCH_CUSTOMER_GROUPS_DATA: function FETCH_CUSTOMER_GROUPS_DATA(state, data) {
       return state.allCustomerGroups = data;
     },
+    FETCH_UNITS_DATA: function FETCH_UNITS_DATA(state, data) {
+      return state.allUnits = data;
+    },
     //#####################################Search ###########################################
     AUTO_COMPLETE_DATA_FOR_DEPARTMENTS: function AUTO_COMPLETE_DATA_FOR_DEPARTMENTS(state, data) {
       return state.autoSearchDepartments = data;
@@ -125659,6 +125792,11 @@ var commonStoreForAll = {
     fetchLanguages: function fetchLanguages(context) {
       axios.get('/spa/Language-Info/getLanguages').then(function (response) {
         context.commit('FETCH_LANGUAGES', response.data); //use for only show data
+      })["catch"](function () {});
+    },
+    fetchCurrencies: function fetchCurrencies(context) {
+      axios.get('/spa/Currency-Info/getCurrencies').then(function (response) {
+        context.commit('FETCH_CURRENCIES', response.data); //use for only show data
       })["catch"](function () {});
     },
     fetchDepartments: function fetchDepartments(context) {
@@ -125720,6 +125858,11 @@ var commonStoreForAll = {
     fetchCustomerGroups: function fetchCustomerGroups(context) {
       axios.get('/spa/customerGroup-Info/getCustomerGroup').then(function (response) {
         context.commit('FETCH_CUSTOMER_GROUPS_DATA', response.data);
+      })["catch"](function () {});
+    },
+    fetchUnits: function fetchUnits(context) {
+      axios.get('/spa/UnitsMaster-Info/getAllUnits').then(function (response) {
+        context.commit('FETCH_UNITS_DATA', response.data);
       })["catch"](function () {});
     },
     //############################################# Search ############################################

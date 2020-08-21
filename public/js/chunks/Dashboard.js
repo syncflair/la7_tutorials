@@ -155,6 +155,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -168,6 +171,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {//console.log(JSON.parse(this.authPermissions.permission).BranchInfo.delete);
     //console.log(JSON.parse(this.authPermissions.permission));
     //console.log(this.authPermissions.permission['BranchInfo']['delete']);
+    // console.log(this.systemSettings);
   }
 });
 
@@ -191,7 +195,7 @@ var render = function() {
   return _c("section", { staticClass: "content" }, [
     _c("div", { staticClass: "container-fluid" }, [
       _vm._m(0),
-      _vm._v("\r\n\r\n    " + _vm._s(_vm.authPermissionsData)),
+      _vm._v(" "),
       _c("br"),
       _vm._v(" "),
       _c(

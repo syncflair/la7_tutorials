@@ -50,21 +50,37 @@ function slug_generator($string){
 
 function purchase_order_invoice_generate(){
 	$record = PurchaseOrder::latest()->first();
-	// $record = 'PO-20-1';
+	// $record = 'PO20-1';
 	
 	if ($record == null) {
-      	$invoiceNumber = 'PO-'.date('y').'-1';       
+      	$invoiceNumber = 'PO'.date('y').'-0001';       
     }else{
-    	$parts = explode('-', $record->po_invoice); //splite into three part
-    	
-    	//check first day in a year
-		if ( date('l',strtotime(date('Y-01-01'))) ){
-		    $invoiceNumber = 'PO-'.date('y').'-0001';
-		}else{
-		    //increase 1 with last invoice number
-		    $invoiceNumber = $parts[0].'-'.$parts[1].'-'. ($parts[2] + 1);
-		    //$parts[0] - PO, $parts[1] - year, $parts[2] - number
-		}		
+    	$parts = explode('-', $record->po_invoice); //splite into three part    	
+
+    	$partNewNumber =  $parts[1] + 1; //increment by one
+
+    	if(strlen($partNewNumber) == 1){
+    		$invoiceNumber = 'PO'.date('y').'-000'. $partNewNumber;
+    	}elseif(strlen($partNewNumber) == 2){
+    		$invoiceNumber = 'PO'.date('y').'-00'. $partNewNumber;    		
+    	}elseif(strlen($partNewNumber) == 3){
+    		$invoiceNumber = 'PO'.date('y').'-0'. $partNewNumber;    		
+    	}elseif(strlen($partNewNumber) == 4){
+    		$invoiceNumber = 'PO'.date('y').'-'. $partNewNumber;    		
+    	}else{
+    		$invoiceNumber = 'PO'.date('y').'-'. $partNewNumber; 
+    	}
+
+
+    	//$invoiceNumber = 'PO'.date('y').'-000'. ($parts[1] + 1);
+  		////check first day in a year
+		// if ( date('l',strtotime(date('Y-01-01'))) ){
+		//     $invoiceNumber = 'PO-'.date('y').'-0001';
+		// }else{
+		//     //increase 1 with last invoice number
+		//     $invoiceNumber = $parts[0].'-'.$parts[1].'-'. ($parts[2] + 1);
+		//     //$parts[0] - PO, $parts[1] - year, $parts[2] - number
+		// }		
     }
     return $invoiceNumber;
     //dd($invoiceNumber);	

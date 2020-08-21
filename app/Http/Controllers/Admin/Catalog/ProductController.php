@@ -101,6 +101,7 @@ class ProductController extends Controller
         $data['pro_sale_price']=$request->pro_sale_price;
         $data['pro_reward_points']=$request->pro_reward_points;
         $data['pro_qty']=$request->pro_qty;  
+        $data['unit_id']=$request->unit_id != '' ? $request->unit_id : 1;   //default is 1 (pc)
         $data['pro_delivery_charge']=$request->pro_delivery_charge;  
         $data['pro_translation'] =$request->pro_translation;        
         $data['pro_category'] =$request->pro_category;
@@ -222,7 +223,8 @@ class ProductController extends Controller
         $data['pro_price']=$request->pro_price;
         $data['pro_sale_price']=$request->pro_sale_price;
         $data['pro_reward_points']=$request->pro_reward_points;
-        $data['pro_qty']=$request->pro_qty;  
+        $data['pro_qty']=$request->pro_qty; 
+        $data['unit_id']=$request->unit_id != '' ? $request->unit_id : 1;   //default is 1 (pc) 
         $data['pro_delivery_charge']=$request->pro_delivery_charge;  
         $data['pro_translation'] =$request->pro_translation; 
         $data['related_products'] =$request->related_products;       

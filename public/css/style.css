@@ -32972,6 +32972,22 @@ body {
   background-color: rgba(0, 0, 0, 0.09);
 }
 
+.option-dropdown-manu-style > a {
+  padding: 0px 3px 0px 3px;
+}
+
+.option-dropdown-manu-style > .dropdown-menu {
+  left: -15px !important;
+}
+
+.option-dropdown-manu-style > .dropdown-menu > .dropdown-item {
+  font-size: 12px;
+  font-family: Arial;
+  font-weight: 600 !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /* Chrome, Safari, Edge, Opera */
 
 input::-webkit-outer-spin-button,

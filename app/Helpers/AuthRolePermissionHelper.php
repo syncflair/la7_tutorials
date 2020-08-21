@@ -3,6 +3,7 @@
 use App\User;
 use App\Models\Role;
 use App\Models\UserStatus;
+use App\Models\Settings\Setting;
 use Illuminate\Support\Str; //for str::random
 
 use App\Models\Settings\OrganizationInfo;
@@ -96,6 +97,27 @@ function OrganizationInformation(){
   //return $AuthUserId = Auth::user()->id;
    $OrgInfo = OrganizationInfo::where('id', 1 )->select('org_name', 'org_logo','org_url')->first();
    return $OrgInfo;//->org_name;
+}
+
+//System Settings
+function systemSettingsAll(){
+  $settings = Setting::with('belongsToLanguage','belongsToCurrency')->where(['id' => 1 ])->first();
+  return $settings;
+}
+function systemSettingsGetResolution($searchKey){
+  // $settings = Setting::where(['id' => 1])
+  //               ->orWhere('image_resolution->img_module', 'LIKE',  '%'.$searchKey.'%')
+  //               ->first();
+
+  // $settings = Setting::where('json_test->img_module', 'LIKE',  '%'.$searchKey.'%')
+  //               ->get(); 
+  // return $settings;
+  $settings = Setting::where('json_test->img_module', '=',  'user-img')
+              // ->select('json_test')
+               ->first(); 
+  return $settings;
+
+  //select * from `settings` where json_unquote(json_extract(`json_test`, '$."img_module"')) = 'user-img'
 }
 
 

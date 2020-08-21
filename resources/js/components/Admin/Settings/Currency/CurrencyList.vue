@@ -14,11 +14,11 @@
           <tr>
             <!-- <th style="">#</th> -->
             <th style="width: 20%;" scope="col">Currency Title</th>
-            <th style="width: 15%;" scope="col">Code</th>             
+            <th style="width: 25%;" scope="col">Code</th>             
             <th style="width: 20%;" scope="col">Value (Equal to 1$)</th>
-            <th style="width: 20%;" scope="col">Updated At</th>
-            <th style="width: 8%;" scope="col">Status</th>
-            <th style="width: 15%; text-align:right;" scope="col">Action</th>
+            <th style="width: 10%;" scope="col">Updated At</th>
+            <th style="width: 10%;" scope="col">Status</th>
+            <th style="width: 10%; text-align:right;" scope="col">Action</th>
           </tr>
         </thead>
 
@@ -27,11 +27,12 @@
           <tr v-for="(currency, index) in Currencies" :key="index">
             <!-- <td > id</td> -->
             <td scope="col"> {{ currency.currency_name }} </td>
-            <td> {{ currency.currency_code }} / 
+            <td> {{ currency.currency_code }} / {{ currency.currency_short_code }} / 
                 <span v-if="currency.currency_icon != null"> 
                   <img :src="'../'+currency.currency_icon" height="15px" width="15px"> 
                 </span>
                 <span v-if="currency.currency_icon === null"> <img :src="'../'+NoIconUrl" height="15px" width="15px"> </span>
+
             </td> 
             <td > {{currency.currency_value}} </td>
             <td >{{ currency.updated_at | formatDate }} </td>

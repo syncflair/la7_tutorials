@@ -1,7 +1,7 @@
 <template>
 <div class="card vue-card-item">
     <div class="card-header">      
-      <!-- <div class="row">
+      <div class="row">
         <div class="col-md-5 col-sm-9">
         	<span v-show="!editMode">New Purchase Order</span>
         	<span v-show="editMode">Update - {{form.po_invoice}}</span>
@@ -11,7 +11,7 @@
         		<i class="fas fa-user-tie"></i> Purchase Order List
         	</router-link>
         </div>
-      </div> -->
+      </div>
     </div><!--/card-header-->
     <div class="card-body">  
    	<form @submit.prevent=" editMode ? updateFormData() : storeFormData() ">
@@ -79,7 +79,7 @@
               <label class="pt-2-"><small>*Invoice</small></label>                      
             </div>
             <div class="col-sm-7">
-              <input v-model="form.po_invoice" type="text" ref="po_invoice" name="po_invoice" class="form-control form-control-sm"  readonly min="0" step=".01" placeholder="Ex. PO-20-1">
+              <input v-model="form.po_invoice" type="text" ref="po_invoice" name="po_invoice" class="form-control form-control-sm"  readonly min="0" step=".01" placeholder="Ex. PO20-0001">
             </div> 
           </div>
 
@@ -341,7 +341,7 @@
             <div class="col-sm-4">
               <!--this also work-->
               <!-- <span> {{form.po_invoice_sub_total}} </span><span>Tk</span> -->
-              <span> {{invoiceSubTotalAmount}} </span><span>Tk</span>
+              <span> {{invoiceSubTotalAmount}} </span><span>  {{systemSettings.belongs_to_currency.currency_short_code}}  </span>
             </div> 
           </div>
 
@@ -367,7 +367,8 @@
               <label class="pt-2-"><small><strong>Total:</strong></small></label>                      
             </div>
             <div class="col-sm-4">
-              <span> {{ form.po_invoice_total}} </span><span>Tk</span>
+              <span class="pointer" @click="pushTotalToPaidAmount(form.po_invoice_total)">
+                 {{ form.po_invoice_total}} </span><span> {{systemSettings.belongs_to_currency.currency_short_code}} </span>
             </div> 
           </div>
 
@@ -376,7 +377,7 @@
               <label class="pt-2-"><small><strong>Paid Amount:</strong></small></label>                      
             </div>
             <div class="col-sm-4">
-              <input type="number" class="form-control form-control-sm" v-model="form.po_paid_amount" name="po_paid_amount"> 
+              <input type="number" class="form-control form-control-sm" v-model="form.po_paid_amount" ref="po_paid_amount" name="po_paid_amount"> 
             </div> 
           </div>
 
@@ -385,7 +386,7 @@
               <label class="pt-2-"><small><strong>Due Amount:</strong></small></label>                      
             </div>
             <div class="col-sm-4">
-              <span> {{ form.po_due_amount}} </span><span>Tk</span>
+              <span> {{ form.po_due_amount}} </span><span> {{systemSettings.belongs_to_currency.currency_short_code}} </span>
             </div> 
           </div>
 
@@ -451,7 +452,7 @@
         valueProperty: 'id',
 
         //Single select app for product
-        placeHolder_product:'Product',
+        placeHolder_product:'Select Product',
         filterBy_product:'sys_pro_name',
         valueProperty_product: 'id', 
 
@@ -496,7 +497,7 @@
             pro_desc:'',
             pro_size:'', 
             pro_color:'', 
-            mrp_price:'',
+            mrp_price: '',
             pro_qty:'',
             pro_free_qty:'',
             pro_unit:'',
@@ -561,37 +562,38 @@
           newValue.forEach((p) => {  // if(!isNaN(p.vat_percent)){ 
 
             //Calculater each order item total
-            if( p.discount_fixed != '' && p.discount_percent ==='' && p.vat_fixed ==='' && p.vat_percent === ''){              
+            if( (p.discount_fixed !='' || p.discount_fixed !=null)  && (p.discount_percent ==='' || p.discount_percent ===null) && (p.vat_fixed ==='' || p.vat_fixed ===null) && (p.vat_percent === '' || p.vat_percent === null)){              
               p.pod_line_total =  (p.mrp_price * p.pro_qty) - (p.pro_qty * p.discount_fixed) 
             }
-            else if( p.discount_fixed === '' && p.discount_percent != '' && p.vat_fixed ==='' && p.vat_percent === ''){              
+            else if((p.discount_fixed ==='' || p.discount_fixed ===null) && (p.discount_percent !='' || p.discount_percent !=null) && (p.vat_fixed ==='' || p.vat_fixed ===null) && (p.vat_percent === '' || p.vat_percent === null)){              
               let DiscountPercent = (p.discount_percent / 100) * p.mrp_price;
               p.pod_line_total = (p.mrp_price * p.pro_qty) - (p.pro_qty * DiscountPercent )
             }
-            else if( p.discount_fixed === '' && p.discount_percent ==='' && p.vat_fixed !='' && p.vat_percent === ''){              
+            else if((p.discount_fixed ==='' || p.discount_fixed ===null) && (p.discount_percent ==='' || p.discount_percent ===null) && (p.vat_fixed !='' || p.vat_fixed !=null) && (p.vat_percent ==='' || p.vat_percent ===null)){              
               p.pod_line_total = (p.mrp_price * p.pro_qty) + (p.pro_qty * p.vat_fixed)
             }
-            else if( p.discount_fixed === '' && p.discount_percent ==='' && p.vat_fixed ==='' && p.vat_percent != ''){              
+            else if((p.discount_fixed ==='' || p.discount_fixed ===null) && (p.discount_percent ==='' || p.discount_percent ===null) && (p.vat_fixed ==='' || p.vat_fixed ===null) && (p.vat_percent != '' || p.vat_percent != null) ){              
               let vatPercent = (p.vat_percent / 100) * p.mrp_price;
               p.pod_line_total = (p.mrp_price * p.pro_qty) + (p.pro_qty * vatPercent )  //console.log(p.pod_line_total);
             }
-            else if( p.discount_fixed != '' && p.discount_percent ==='' && p.vat_fixed !='' && p.vat_percent === ''){              
+            else if((p.discount_fixed !='' || p.discount_fixed !=null) && (p.discount_percent ==='' || p.discount_percent ===null) && (p.vat_fixed !='' || p.vat_fixed !=null) && (p.vat_percent === '' || p.vat_percent === null)){              
               p.pod_line_total = ( (p.mrp_price * p.pro_qty) - (p.pro_qty * p.discount_fixed) ) +  (p.pro_qty * p.vat_fixed)
             }
-            else if( p.discount_fixed != '' && p.discount_percent ==='' && p.vat_fixed ==='' && p.vat_percent != ''){  
+            else if((p.discount_fixed !='' || p.discount_fixed !=null) && (p.discount_percent ==='' || p.discount_percent ===null) && (p.vat_fixed ==='' || p.vat_fixed ===null) && (p.vat_percent != '' || p.vat_percent != null)){  
               let vatPercent = (p.vat_percent / 100) * p.mrp_price;            
               p.pod_line_total = ( (p.mrp_price * p.pro_qty) - (p.pro_qty * p.discount_fixed) ) +  (p.pro_qty * vatPercent)
             }
-            else if( p.discount_fixed === '' && p.discount_percent !='' && p.vat_fixed !='' && p.vat_percent === ''){  
+            else if((p.discount_fixed === '' || p.discount_fixed ===null) && (p.discount_percent !='' || p.discount_percent !=null) && (p.vat_fixed !='' || p.vat_fixed !=null) && (p.vat_percent === '' || p.vat_percent === null)){  
               let DiscountPercent = (p.discount_percent / 100) * p.mrp_price;          
               p.pod_line_total = ( (p.mrp_price * p.pro_qty) - (p.pro_qty * DiscountPercent) ) +  (p.pro_qty * p.vat_fixed)
             }
-            else if( p.discount_fixed === '' && p.discount_percent !='' && p.vat_fixed ==='' && p.vat_percent != ''){  
+            else if((p.discount_fixed === '' || p.discount_fixed ===null) && (p.discount_percent !='' || p.discount_percent !=null) && (p.vat_fixed ==='' || p.vat_fixed ===null) && (p.vat_percent != '' || p.vat_percent != null)){  
               let DiscountPercent = (p.discount_percent / 100) * p.mrp_price; 
               let vatPercent = (p.vat_percent / 100) * p.mrp_price;            
               p.pod_line_total = ( (p.mrp_price * p.pro_qty) - (p.pro_qty * DiscountPercent) ) +  (p.pro_qty * vatPercent)
             }
 
+            // p.mrp_price !='' && p.pro_qty !=''
             else{
               p.pod_line_total = p.mrp_price * p.pro_qty              
             }
@@ -604,10 +606,10 @@
       form:{
         handler (value) {
           //calculate purchase order total amount
-          if( value.po_discount_fixed != '' &&  value.po_discount_percent ==='' ){              
+          if( (value.po_discount_fixed !='' || value.po_discount_fixed !=null) &&  (value.po_discount_percent ==='' || value.po_discount_percent ===null) ){              
             value.po_invoice_total =  (value.po_invoice_sub_total - value.po_discount_fixed).toFixed(2); 
           }
-          else if(value.po_discount_fixed === '' &&  value.po_discount_percent !=''){              
+          else if((value.po_discount_fixed==='' || value.po_discount_fixed===null) &&  (value.po_discount_percent !='' || value.po_discount_percent !=null)){              
             let o_discountPercent = (value.po_discount_percent / 100) * value.po_invoice_sub_total;
             value.po_invoice_total =  (value.po_invoice_sub_total - o_discountPercent).toFixed(2); 
           }else{
@@ -615,9 +617,9 @@
           }
 
           //calculate purchase order due
-          if(value.po_paid_amount != ''){
+          if( (value.po_paid_amount != '' || value.po_paid_amount != null) ){
             value.po_due_amount =  (value.po_invoice_total - value.po_paid_amount).toFixed(2); 
-          }else if(value.po_paid_amount === '' &&  value.po_invoice_total != 0){
+          }else if((value.po_paid_amount === '' || value.po_paid_amount === null) &&  value.po_invoice_total != 0){
             value.po_due_amount = value.po_invoice_total;
           }else{
             value.po_due_amount = (0).toFixed(2);
@@ -645,15 +647,15 @@
           pro_desc:'',
           pro_size:'', 
           pro_color:'', 
-          mrp_price:'',
-          pro_qty:'',
-          pro_free_qty:'',
+          mrp_price:null,
+          pro_qty:null,
+          pro_free_qty:null,
           pro_unit:'',
           unit_mrp:'',
-          discount_fixed:'', 
-          discount_percent:'', 
-          vat_percent:'',
-          vat_fixed:'',
+          discount_fixed:null, 
+          discount_percent:null, 
+          vat_percent:null,
+          vat_fixed:null,
           pod_line_total: 0.00,
         });
       },
@@ -667,6 +669,11 @@
       onChangeBranch(event){
         //alert(event.target.value);
         //console.log(event);
+      },
+
+      pushTotalToPaidAmount(data){
+        this.form.po_paid_amount = data; 
+        //Push total amaout to paid amount input when click on po_invoice_total  amount
       },
 
     	//Make image as base64 
@@ -730,7 +737,7 @@
   			      this.editMode = false; 
   			      //this.$refs.avatar.value = ''; //clear file input tag 
   			  	  //this.ShowOnChangeImage = null;
-  			  	  this.$router.push({ path : '/spa/EmployeeMaster' });	 //route after successfule submit
+  			  	  this.$router.push({ path : '/spa/PurchaseOrderMaster' });	 //route after successfule submit
   			    }
   			    if(data.errors){
   			      this.$Progress.fail();
@@ -743,22 +750,22 @@
   			  }) 
   		},
 
-      deleteImage(id){ 
-        this.$Progress.start(); //using progress-bar package        
-          //console.log(this.form.has_many_image);
-          axios.post('/spa/PurchaseOrder-Info-DeleteImage/'+id)
-            .then(({ data }) => {
-                // this.ShowOnChangeImage = null;
-                this.deleteImageIcon = false;
-                this.form.avatar = null;
-                this.$Progress.finish(); 
-                toastr.success(data.success);
-             })
-            .catch(() => {
-              this.$Progress.fail();
-              toastr.warning('Something is wrong!');
-            });
-      },
+      // deleteImage(id){ 
+      //   this.$Progress.start(); //using progress-bar package        
+      //     //console.log(this.form.has_many_image);
+      //     axios.post('/spa/PurchaseOrder-Info-DeleteImage/'+id)
+      //       .then(({ data }) => {
+      //           // this.ShowOnChangeImage = null;
+      //           this.deleteImageIcon = false;
+      //           this.form.avatar = null;
+      //           this.$Progress.finish(); 
+      //           toastr.success(data.success);
+      //        })
+      //       .catch(() => {
+      //         this.$Progress.fail();
+      //         toastr.warning('Something is wrong!');
+      //       });
+      // },
 
 	    fillForm(){
 	    	if(this.$route.params.data != null){
@@ -777,10 +784,7 @@
 	       		 			 return item.product_id;
 	       		 		}
 		       		 );
-	    		}	
-          if(this.$route.params.data.avatar != null){
-            this.deleteImageIcon = true;  
-          }           	
+	    		}          	
 
 	    	}
          

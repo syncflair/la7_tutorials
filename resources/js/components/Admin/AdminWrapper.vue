@@ -12,7 +12,7 @@
     export default {
         name: "Admin-Wrapper",
         //Get props form views/admin/dashboard.blade.php
-        props:['user','permissions'], 
+        props:['user','permissions','settings'], 
         data (){      
             return {
                             
@@ -26,6 +26,7 @@
             //direct commit (mutations) to resources/js/store/commonStoreForAll.js
             this.$store.commit('commonStoreForAll/AUTH_USER', this.user ); 
             this.$store.commit('commonStoreForAll/AUTH_PERMISSIONS', this.permissions ); 
+            this.$store.commit('commonStoreForAll/SYSTEM_SETTINGS', this.settings ); 
         },
            
         mounted() {

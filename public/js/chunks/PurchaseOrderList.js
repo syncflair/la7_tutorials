@@ -129,6 +129,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -411,7 +423,7 @@ var render = function() {
     _c("div", { staticClass: "card-body" }, [
       _c(
         "table",
-        { staticClass: "table table-striped table-sm table-responsive" },
+        { staticClass: "table table-striped table-sm table-responsive-" },
         [
           _c("thead", [
             _c("tr", [
@@ -520,10 +532,10 @@ var render = function() {
               _c(
                 "th",
                 {
-                  staticStyle: { width: "10%", "text-align": "right" },
+                  staticStyle: { width: "2%", "text-align": "right" },
                   attrs: { scope: "col" }
                 },
-                [_vm._v("Action")]
+                [_vm._v("#")]
               )
             ])
           ]),
@@ -599,54 +611,80 @@ var render = function() {
                     ])
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "text-right" },
-                    [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-flat btn-sm",
-                          on: {
-                            click: function($event) {
-                              return _vm.ViewDetails()
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-eye primary" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-primary- btn-flat btn-sm",
-                          attrs: {
-                            to: {
-                              name: "PurchaseOrderForm",
-                              params: { data: po }
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-edit primary " })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass:
-                            "btn btn-block- btn-danger- btn-flat btn-sm",
-                          attrs: { id: "delete" },
-                          on: {
-                            click: function($event) {
-                              return _vm.DeleteData(po.id)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "far fa-trash-alt red" })]
-                      )
-                    ],
-                    1
-                  )
+                  _c("td", { staticClass: "text-right" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "btn-group option-dropdown-manu-style left"
+                      },
+                      [
+                        _vm._m(0, true),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "dropdown-menu dropdown-menu-right" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.ViewDetails()
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-eye primary" }),
+                                _vm._v(" View ")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                attrs: {
+                                  to: {
+                                    name: "PurchaseOrderForm",
+                                    params: { data: po }
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-edit primary "
+                                }),
+                                _vm._v(" Edit\r\n                  ")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                attrs: { id: "delete" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.DeleteData(po.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "far fa-trash-alt red"
+                                }),
+                                _vm._v(" Delete\r\n                  ")
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    )
+                  ])
                 ])
               }),
               _vm._v(" "),
@@ -662,7 +700,7 @@ var render = function() {
                     }
                   ]
                 },
-                [_vm._m(0)]
+                [_vm._m(1)]
               )
             ],
             2
@@ -691,6 +729,23 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "btn btn-flat btn-sm btn-warning dropdown-toggle-",
+        attrs: {
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-ellipsis-v" })]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

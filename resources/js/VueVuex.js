@@ -29,6 +29,7 @@ import BrandMasterStore from './store/BrandMasterStore'
 
 //Accounting
 import ChartOfAccounts from './store/ChartOfAccounts'
+import AccountHeadsMasterSotre from './store/AccountHeadsMasterSotre'
 //HRM
 import EmployeeMasterStore from './store/EmployeeMasterStore'
 //Settings
@@ -63,7 +64,7 @@ export default new Vuex.Store({
         CategoryMasterStore, SpecificationMasterStore, AttributeValueMasterStore, BrandMasterStore,
 
         //Accounting
-        ChartOfAccounts,
+        ChartOfAccounts, AccountHeadsMasterSotre,
         //HRM
         EmployeeMasterStore,
 

@@ -1,5 +1,6 @@
 <?php
-
+//print_r(systemSettingsAll()->image_resolution[0]);
+//print_r(systemSettingsGetResolution('user-img'));
 /*Enable Query Log to check raw sql query*/
 DB::listen(function($sql) {
    //print_r($sql->sql); 
@@ -204,6 +205,9 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/ChartOfAccounts-Info', 'Admin\Accounting\ChartOfAccountsController', 
       ['except'=>['create','show','edit'] ]);
 
+    Route::resource('spa/AccountHeads-Info', 'Admin\Accounting\AccountHeadController', 
+      ['except'=>['create','show','edit'] ]);
+
     //HRM
     Route::post('spa/getSelectedEmployee/', 'Admin\HRM\EmployeeController@getSelectedEmployee');
     Route::get('spa/AutoCompleteEmployeeData', 'Admin\HRM\EmployeeController@autoCompleteSearch'); //Auto Complete
@@ -215,19 +219,25 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/JobTitle-Info', 'Admin\HRM\JobTitleController', 
       ['except'=>['create','show','edit'] ]);
 
-    //Settings Rute
-    Route::resource('spa/user-status-info', 'Admin\Settings\UserStatusController',
-      ['except'=>['create','show','edit'] ]);
+    //Settings Route    
+    Route::resource('spa/Settings-Info', 'Admin\Settings\SettingController', 
+      ['except'=>['index','create','show','destroy'] ]);
     Route::resource('spa/OrgInfo', 'Admin\Settings\OrganizationInfoController', 
       ['except'=>['index','create','store','show','destroy'] ]);
+    Route::resource('spa/user-status-info', 'Admin\Settings\UserStatusController',
+      ['except'=>['create','show','edit'] ]);
     Route::get('spa/searhBaranchInfoData', 'Admin\Settings\BranchInfoController@search'); //search
     Route::get('spa/Branch-Info/getBranches', 'Admin\Settings\BranchInfoController@getBranches'); //for commonStoreForAll store
     Route::resource('spa/Branch-Info', 'Admin\Settings\BranchInfoController', 
       ['except'=>['create','show','edit'] ]);
+    Route::get('spa/Currency-Info/getCurrencies', 'Admin\Settings\CurrencyController@getCurrencies');//commonStoreForAll
     Route::resource('spa/Currency-Info', 'Admin\Settings\CurrencyController', 
       ['except'=>['create','show','edit'] ]);
-    Route::get('spa/Language-Info/getLanguages', 'Admin\Settings\LanguageController@getLanguages');//commonStoreForAll store
+    Route::get('spa/Language-Info/getLanguages', 'Admin\Settings\LanguageController@getLanguages');//commonStoreForAll
     Route::resource('spa/Language-Info', 'Admin\Settings\LanguageController', 
+      ['except'=>['create','show','edit'] ]);
+    Route::get('spa/UnitsMaster-Info/getAllUnits', 'Admin\Settings\UnitController@getAllUnits');//commonStoreForAll store
+    Route::resource('spa/UnitsMaster-Info', 'Admin\Settings\UnitController', 
       ['except'=>['create','show','edit'] ]);
     Route::resource('spa/LengthUnit-Info', 'Admin\Settings\LengthUnitController', 
       ['except'=>['create','show','edit'] ]);

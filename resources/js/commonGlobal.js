@@ -12,7 +12,7 @@ export default {
 
     computed: {
     	...mapState( 
-            'commonStoreForAll', ['authUser']
+            'commonStoreForAll', ['authUser','systemSettings']
 	        //'commonStoreForAll', ['authUser','authPermissions']
 	    ),
 	    
@@ -68,6 +68,7 @@ export default {
         //console.log(this.authPermissionsData);
         //console.log(this.authUser.role);
         //console.log(JSON.parse(this.authPermissions.permission).role.edit);
+        //console.log(this.systemSettings);
 
     }
 } //End Export default

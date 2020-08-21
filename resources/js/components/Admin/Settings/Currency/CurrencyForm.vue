@@ -30,14 +30,18 @@
 	               
                   	<div class="form-group">
                       <label>Currency Code</label>
-                        <input v-model="form.currency_code" type="text" ref="currency_code" name="currency_code" class="form-control" :class="{ 'is-invalid': form.errors.has('currency_code') }" placeholder="Enter currency code">
+                        <input v-model="form.currency_code" type="text" name="currency_code" class="form-control" :class="{ 'is-invalid': form.errors.has('currency_code') }" placeholder="Enter currency code">
                       <has-error :form="form" field="currency_code"></has-error>
                     </div>	
 
                     <div class="form-group">
+                      <label>Short Code</label>
+                        <input v-model="form.currency_short_code" type="text" name="currency_short_code" class="form-control" placeholder="currency Short code">
+                    </div>	
+
+                    <div class="form-group">
                       <label>Currency Value (1$)</label>
-                        <input v-model="form.currency_value" type="text" ref="currency_value" name="currency_value" class="form-control" :class="{ 'is-invalid': form.errors.has('currency_value') }" placeholder="Enter currency value">
-                      <has-error :form="form" field="currency_value"></has-error>
+                        <input v-model="form.currency_value" type="text" name="currency_value" class="form-control" placeholder="Enter currency value">
                     </div>
 
 	                
@@ -114,6 +118,7 @@
 	          id: '',
 	          currency_name: '',
 	          currency_code: '',
+	          currency_short_code:'',
 	          currency_value: '',
 	          currency_icon: '',
 	          is_enabled: '',	          
