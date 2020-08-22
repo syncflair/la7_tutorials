@@ -37,9 +37,11 @@ class CreateProductsTable extends Migration
             $table->json('related_products')->nullable()->comment('JSON related products list');
             $table->float('pro_price', 10, 2)->nullable();
             $table->float('pro_sale_price', 10, 2)->nullable();
+            $table->float('pro_mrp', 10, 2)->nullable();
             $table->integer('pro_reward_points')->nullable();
             $table->integer('pro_qty')->nullable();
             $table->integer('unit_id')->nullable(); 
+            $table->string('pro_unit_value', 50)->nullable()->comment('Make Unit value based on unit');
             $table->integer('pro_delivery_charge')->nullable()->comment('Normal Delivery Charge');
 
 

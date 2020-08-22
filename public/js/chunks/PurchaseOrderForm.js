@@ -440,6 +440,65 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -475,6 +534,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       valueProperty_product: 'id',
       //multi product id
       product_id_list: [],
+      //print after save
+      print_after_save: '',
       // Create a new form instance
       form: new Form({
         id: '',
@@ -496,6 +557,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         po_invoice_total: 0.00,
         po_paid_amount: '',
         po_due_amount: 0.00,
+        is_approved: '',
         //po_image:'',
         pur_order_details: [{
           product_id: '',
@@ -503,13 +565,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           mfg_date: '',
           exp_date: '',
           pro_desc: '',
-          pro_size: '',
-          pro_color: '',
+          //pro_size:'', 
+          //pro_color:'', 
           mrp_price: '',
+          unit_id: '',
+          p_unit_value: '',
           pro_qty: '',
           pro_free_qty: '',
-          pro_unit: '',
-          unit_mrp: '',
+          pro_qty_adjustment: '',
+          //pro_unit:'',
+          //unit_mrp:'',
           discount_fixed: '',
           discount_percent: '',
           vat_percent: '',
@@ -520,7 +585,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('ProductMasterStore', ['products', 'pagination']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['AllStatus', 'branches']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('PurchaseOrderMasterStore', ['selectedVendor', 'autoSearchVendor', 'selectedProductList', 'autoSearchProduct']), {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('ProductMasterStore', ['products', 'pagination']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['AllStatus', 'branches', 'allUnits']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('PurchaseOrderMasterStore', ['selectedVendor', 'autoSearchVendor', 'selectedProductList', 'autoSearchProduct']), {
     // finalAmount(){
     //   let price = 0;
     //   this.orderDetails.forEach(order => {
@@ -619,7 +684,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   //end watch
   methods: {
-    click: function click() {//this.form.po_date = '2017-07-04';
+    getProductID: function getProductID($event) {
+      alert(event.target.value);
     },
     //###################################### Purchase Order Details ################################################
     add_order_item: function add_order_item() {
@@ -629,13 +695,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         mfg_date: '',
         exp_date: '',
         pro_desc: '',
-        pro_size: '',
-        pro_color: '',
+        //pro_size:'', 
+        //pro_color:'', 
+        unit_id: '',
+        p_unit_value: '',
         mrp_price: null,
         pro_qty: null,
         pro_free_qty: null,
-        pro_unit: '',
-        unit_mrp: '',
+        pro_qty_adjustment: '',
+        //pro_unit:'',
+        //unit_mrp:'',
         discount_fixed: null,
         discount_percent: null,
         vat_percent: null,
@@ -794,6 +863,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     getSelectedDataByIdsForVendor: function getSelectedDataByIdsForVendor(data) {
       //this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedVendor', this.form.vendor_id);
       this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedVendor', data);
+      alert(data);
     },
     AutoCompleteSearchForDataProduct: function AutoCompleteSearchForDataProduct(data) {
       this.$store.dispatch('PurchaseOrderMasterStore/AutoCompleteSearchForDataProduct', data);
@@ -831,6 +901,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$store.dispatch('commonStoreForAll/AllStatus', 'PurchaseOrder'); //get all status
 
     this.$store.dispatch('commonStoreForAll/fetchBranches'); //get Branch list
+
+    this.$store.dispatch('commonStoreForAll/fetchUnits'); //get units
     //call from multi-select-app-one.vue
 
     FireEvent.$on('AutoCompleteSearchForData', function (data) {
@@ -1407,7 +1479,7 @@ var render = function() {
                               _c("single-select-app-two", {
                                 class: {
                                   "is-invalid": _vm.form.errors.has(
-                                    "product_id"
+                                    "pur_order_details." + [key] + ".product_id"
                                   )
                                 },
                                 attrs: {
@@ -1433,7 +1505,11 @@ var render = function() {
                               }),
                               _vm._v(" "),
                               _c("has-error", {
-                                attrs: { form: _vm.form, field: "product_id" }
+                                attrs: {
+                                  form: _vm.form,
+                                  field:
+                                    "pur_order_details." + [key] + ".product_id"
+                                }
                               })
                             ],
                             1
@@ -1569,38 +1645,82 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("td", { attrs: { scope: "col" } }, [
-                          _c("div", { staticClass: "form-group-" }, [
-                            _c("input", {
-                              directives: [
+                          _c(
+                            "div",
+                            { staticClass: "form-group-" },
+                            [
+                              _c(
+                                "select",
                                 {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: input.mrp_price,
-                                  expression: "input.mrp_price"
-                                }
-                              ],
-                              staticClass: "form-control form-control-sm",
-                              attrs: {
-                                type: "number",
-                                min: "1",
-                                step: "any",
-                                name: "mrp_price"
-                              },
-                              domProps: { value: input.mrp_price },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: input.unit_id,
+                                      expression: "input.unit_id"
+                                    }
+                                  ],
+                                  staticClass: "form-control form-control-sm",
+                                  class: {
+                                    "is-invalid": _vm.form.errors.has(
+                                      "pur_order_details." + [key] + ".unit_id"
+                                    )
+                                  },
+                                  attrs: { id: "unit_id", name: "unit_id" },
+                                  on: {
+                                    change: function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        input,
+                                        "unit_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    }
                                   }
-                                  _vm.$set(
-                                    input,
-                                    "mrp_price",
-                                    $event.target.value
+                                },
+                                _vm._l(_vm.allUnits, function(unit) {
+                                  return _c(
+                                    "option",
+                                    {
+                                      key: unit.id,
+                                      domProps: { value: unit.id }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\r\n                          " +
+                                          _vm._s(unit.unit_title) +
+                                          " (" +
+                                          _vm._s(unit.unit_code) +
+                                          ")\r\n                      "
+                                      )
+                                    ]
                                   )
+                                }),
+                                0
+                              ),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: {
+                                  form: _vm.form,
+                                  field:
+                                    "pur_order_details." + [key] + ".unit_id"
                                 }
-                              }
-                            })
-                          ])
+                              })
+                            ],
+                            1
+                          )
                         ]),
                         _vm._v(" "),
                         _c("td", { attrs: { scope: "col" } }, [
@@ -1610,13 +1730,13 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: input.pro_qty,
-                                  expression: "input.pro_qty"
+                                  value: input.p_unit_value,
+                                  expression: "input.p_unit_value"
                                 }
                               ],
                               staticClass: "form-control form-control-sm",
-                              attrs: { type: "number", name: "pro_qty" },
-                              domProps: { value: input.pro_qty },
+                              attrs: { type: "text", name: "p_unit_value" },
+                              domProps: { value: input.p_unit_value },
                               on: {
                                 input: function($event) {
                                   if ($event.target.composing) {
@@ -1624,13 +1744,114 @@ var render = function() {
                                   }
                                   _vm.$set(
                                     input,
-                                    "pro_qty",
+                                    "p_unit_value",
                                     $event.target.value
                                   )
                                 }
                               }
                             })
                           ])
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { attrs: { scope: "col" } }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group-" },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: input.mrp_price,
+                                    expression: "input.mrp_price"
+                                  }
+                                ],
+                                staticClass: "form-control form-control-sm",
+                                class: {
+                                  "is-invalid": _vm.form.errors.has(
+                                    "pur_order_details." + [key] + ".mrp_price"
+                                  )
+                                },
+                                attrs: {
+                                  type: "number",
+                                  min: "1",
+                                  step: "any",
+                                  name: "mrp_price"
+                                },
+                                domProps: { value: input.mrp_price },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      input,
+                                      "mrp_price",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: {
+                                  form: _vm.form,
+                                  field:
+                                    "pur_order_details." + [key] + ".mrp_price"
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { attrs: { scope: "col" } }, [
+                          _c(
+                            "div",
+                            { staticClass: "form-group-" },
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: input.pro_qty,
+                                    expression: "input.pro_qty"
+                                  }
+                                ],
+                                staticClass: "form-control form-control-sm",
+                                class: {
+                                  "is-invalid": _vm.form.errors.has(
+                                    "pur_order_details." + [key] + ".pro_qty"
+                                  )
+                                },
+                                attrs: { type: "number", name: "pro_qty" },
+                                domProps: { value: input.pro_qty },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      input,
+                                      "pro_qty",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: {
+                                  form: _vm.form,
+                                  field:
+                                    "pur_order_details." + [key] + ".pro_qty"
+                                }
+                              })
+                            ],
+                            1
+                          )
                         ]),
                         _vm._v(" "),
                         _c("td", { attrs: { scope: "col" } }, [
@@ -1670,48 +1891,17 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: input.pro_unit,
-                                  expression: "input.pro_unit"
-                                }
-                              ],
-                              staticClass: "form-control form-control-sm",
-                              attrs: { type: "text", name: "pro_unit" },
-                              domProps: { value: input.pro_unit },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    input,
-                                    "pro_unit",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("td", { attrs: { scope: "col" } }, [
-                          _c("div", { staticClass: "form-group-" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: input.unit_mrp,
-                                  expression: "input.unit_mrp"
+                                  value: input.pro_qty_adjustment,
+                                  expression: "input.pro_qty_adjustment"
                                 }
                               ],
                               staticClass: "form-control form-control-sm",
                               attrs: {
                                 type: "number",
-                                min: "0",
-                                step: ".01",
-                                name: "unit_mrp"
+                                name: "pro_qty_adjustment",
+                                placeholder: "+1,-1"
                               },
-                              domProps: { value: input.unit_mrp },
+                              domProps: { value: input.pro_qty_adjustment },
                               on: {
                                 input: function($event) {
                                   if ($event.target.composing) {
@@ -1719,7 +1909,7 @@ var render = function() {
                                   }
                                   _vm.$set(
                                     input,
-                                    "unit_mrp",
+                                    "pro_qty_adjustment",
                                     $event.target.value
                                   )
                                 }
@@ -1956,13 +2146,125 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-5" }),
+            _c("div", { staticClass: "col-md-4" }),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-4 text-right" }, [
-              _c("div", { staticClass: "row form-group mb-1 mb-1" }, [
+            _c("div", { staticClass: "col-md-2" }, [
+              _c("div", { staticClass: "row form-group mb-0" }, [
                 _vm._m(9),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
+                _c("div", { staticClass: "col-sm-2" }, [
+                  _c("div", { staticClass: "form-check text-right" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.is_approved,
+                          expression: "form.is_approved"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "checkbox",
+                        name: "is_enabled",
+                        value: "1"
+                      },
+                      domProps: {
+                        checked: Array.isArray(_vm.form.is_approved)
+                          ? _vm._i(_vm.form.is_approved, "1") > -1
+                          : _vm.form.is_approved
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.form.is_approved,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = "1",
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  _vm.form,
+                                  "is_approved",
+                                  $$a.concat([$$v])
+                                )
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  _vm.form,
+                                  "is_approved",
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
+                          } else {
+                            _vm.$set(_vm.form, "is_approved", $$c)
+                          }
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row form-group mb-0" }, [
+                _vm._m(10),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-2" }, [
+                  _c("div", { staticClass: "form-check text-right" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.print_after_save,
+                          expression: "print_after_save"
+                        }
+                      ],
+                      staticClass: "form-check-input",
+                      attrs: {
+                        type: "checkbox",
+                        name: "is_enabled",
+                        value: "1"
+                      },
+                      domProps: {
+                        checked: Array.isArray(_vm.print_after_save)
+                          ? _vm._i(_vm.print_after_save, "1") > -1
+                          : _vm.print_after_save
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.print_after_save,
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = "1",
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                (_vm.print_after_save = $$a.concat([$$v]))
+                            } else {
+                              $$i > -1 &&
+                                (_vm.print_after_save = $$a
+                                  .slice(0, $$i)
+                                  .concat($$a.slice($$i + 1)))
+                            }
+                          } else {
+                            _vm.print_after_save = $$c
+                          }
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3 text-right" }, [
+              _c("div", { staticClass: "row form-group mb-1 mb-1" }, [
+                _vm._m(11),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-sm-6" }, [
                   _c("span", [
                     _vm._v(" " + _vm._s(_vm.invoiceSubTotalAmount) + " ")
                   ]),
@@ -1980,9 +2282,9 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row mb-1" }, [
-                _vm._m(10),
+                _vm._m(12),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
+                _c("div", { staticClass: "col-sm-6" }, [
                   _c("div", { staticClass: "row form-group mb-1" }, [
                     _c("div", { staticClass: "col-sm-6" }, [
                       _c("input", {
@@ -2052,9 +2354,9 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row form-group mb-2" }, [
-                _vm._m(11),
+                _vm._m(13),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
+                _c("div", { staticClass: "col-sm-6" }, [
                   _c(
                     "span",
                     {
@@ -2089,9 +2391,9 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row form-group mb-1" }, [
-                _vm._m(12),
+                _vm._m(14),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
+                _c("div", { staticClass: "col-sm-5" }, [
                   _c("input", {
                     directives: [
                       {
@@ -2103,7 +2405,7 @@ var render = function() {
                     ],
                     ref: "po_paid_amount",
                     staticClass: "form-control form-control-sm",
-                    attrs: { type: "number", name: "po_paid_amount" },
+                    attrs: { type: "text", name: "po_paid_amount" },
                     domProps: { value: _vm.form.po_paid_amount },
                     on: {
                       input: function($event) {
@@ -2122,9 +2424,9 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "row form-group mb-2" }, [
-                _vm._m(13),
+                _vm._m(15),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-4" }, [
+                _c("div", { staticClass: "col-sm-5" }, [
                   _c("span", [
                     _vm._v(" " + _vm._s(_vm.form.po_due_amount) + " ")
                   ]),
@@ -2291,6 +2593,14 @@ var staticRenderFns = [
         [_c("small", [_vm._v("Details")])]
       ),
       _vm._v(" "),
+      _c("th", { attrs: { width: "5%", scope: "col" } }, [
+        _c("small", [_vm._v("Unit")])
+      ]),
+      _vm._v(" "),
+      _c("th", { attrs: { width: "5%", scope: "col" } }, [
+        _c("small", [_vm._v("U.Value")])
+      ]),
+      _vm._v(" "),
       _c("th", { attrs: { width: "4%", scope: "col" } }, [
         _c("small", [_vm._v("MRP")])
       ]),
@@ -2307,14 +2617,14 @@ var staticRenderFns = [
       _vm._v(" "),
       _c(
         "th",
-        { attrs: { width: "3%", scope: "col", title: "Product Unit" } },
-        [_c("small", [_vm._v("Unit")])]
-      ),
-      _vm._v(" "),
-      _c(
-        "th",
-        { attrs: { width: "4%", scope: "col", title: "Product Unit Price" } },
-        [_c("small", [_vm._v("Unit MRP")])]
+        {
+          attrs: {
+            width: "3%",
+            scope: "col",
+            title: "if wrong quantity was store, Adjust like -10, +10"
+          }
+        },
+        [_c("small", [_vm._v("Adj")])]
       ),
       _vm._v(" "),
       _c(
@@ -2364,7 +2674,27 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-8 text-right" }, [
+    return _c("div", { staticClass: "col-sm-9 text-right" }, [
+      _c("label", { staticClass: "form-check-label" }, [_vm._v("Is approved:")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-9 text-right" }, [
+      _c(
+        "label",
+        { staticClass: "form-check-label", attrs: { for: "checkbox" } },
+        [_vm._v("Print after Save:")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-6 text-right" }, [
       _c("label", { staticClass: "pt-2-" }, [
         _c("small", [_vm._v("Sub Total:")])
       ])
@@ -2374,7 +2704,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-8 text-right" }, [
+    return _c("div", { staticClass: "col-sm-6 text-right" }, [
       _c("label", { staticClass: "pt-2-" }, [
         _c("small", [_vm._v("Discount:")])
       ])
@@ -2384,7 +2714,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-8 text-right" }, [
+    return _c("div", { staticClass: "col-sm-6 text-right" }, [
       _c("label", { staticClass: "pt-2-" }, [
         _c("small", [_c("strong", [_vm._v("Total:")])])
       ])
@@ -2394,7 +2724,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-8 text-right" }, [
+    return _c("div", { staticClass: "col-sm-6 text-right" }, [
       _c("label", { staticClass: "pt-2-" }, [
         _c("small", [_c("strong", [_vm._v("Paid Amount:")])])
       ])
@@ -2404,7 +2734,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-8 text-right" }, [
+    return _c("div", { staticClass: "col-sm-6 text-right" }, [
       _c("label", { staticClass: "pt-2-" }, [
         _c("small", [_c("strong", [_vm._v("Due Amount:")])])
       ])

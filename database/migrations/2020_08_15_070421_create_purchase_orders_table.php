@@ -42,6 +42,7 @@ class CreatePurchaseOrdersTable extends Migration
             $table->float('po_due_amount', 10, 2)->default(0); 
 
             $table->json('pur_order_details')->nullable()->comment('JSON, All order details store here');
+            $table->boolean('is_approved')->default(false);
             $table->string('po_image')->nullable()->comment('Purchase Order Image if any');
 
             $table->unsignedBigInteger('created_by')->nullable()->comment('Created by User');  

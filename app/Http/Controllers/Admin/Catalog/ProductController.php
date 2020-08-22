@@ -99,9 +99,11 @@ class ProductController extends Controller
         $data['brand_id']=$request->brand_id;
         $data['pro_price']=$request->pro_price;
         $data['pro_sale_price']=$request->pro_sale_price;
+        $data['pro_mrp']=$request->pro_mrp;
         $data['pro_reward_points']=$request->pro_reward_points;
         $data['pro_qty']=$request->pro_qty;  
         $data['unit_id']=$request->unit_id != '' ? $request->unit_id : 1;   //default is 1 (pc)
+        $data['pro_unit_value']=$request->pro_unit_value;
         $data['pro_delivery_charge']=$request->pro_delivery_charge;  
         $data['pro_translation'] =$request->pro_translation;        
         $data['pro_category'] =$request->pro_category;
@@ -222,9 +224,11 @@ class ProductController extends Controller
         $data['brand_id']=$request->brand_id;
         $data['pro_price']=$request->pro_price;
         $data['pro_sale_price']=$request->pro_sale_price;
+        $data['pro_mrp']=$request->pro_mrp;
         $data['pro_reward_points']=$request->pro_reward_points;
         $data['pro_qty']=$request->pro_qty; 
         $data['unit_id']=$request->unit_id != '' ? $request->unit_id : 1;   //default is 1 (pc) 
+        $data['pro_unit_value']=$request->pro_unit_value;
         $data['pro_delivery_charge']=$request->pro_delivery_charge;  
         $data['pro_translation'] =$request->pro_translation; 
         $data['related_products'] =$request->related_products;       
@@ -234,6 +238,7 @@ class ProductController extends Controller
         $data['pro_attributes'] =$request->pro_attributes;
         $data['pro_specification'] =$request->pro_specification;
         $data['pro_discount'] =$request->pro_discount;
+
         
         $data['updated_by']= \Auth::user()->id;         
         
@@ -446,7 +451,7 @@ class ProductController extends Controller
 
         $searchKey = $request->q != null ? $request->q : $request->q = [];
         $searchResult = Product::whereIn('id', $searchKey)
-                        ->select('id','sys_pro_name')
+                        ->select('id','sys_pro_name','unit_id','pro_unit_value','pro_mrp')
                         ->get(); 
         return response()->json($searchResult);
     }//end search

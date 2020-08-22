@@ -650,6 +650,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -707,7 +728,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         isbn: '',
         mpn: '',
         unit_id: '',
+        pro_unit_value: '',
         pro_qty: '',
+        pro_mrp: '',
         pro_price: '',
         pro_sale_price: '',
         pro_reward_points: '',
@@ -2029,6 +2052,47 @@ var render = function() {
                               _vm._v(" "),
                               _c("div", { staticClass: "col-md-2" }, [
                                 _c("div", { staticClass: "form-group" }, [
+                                  _c("label", [_vm._v("Unit Value")]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.pro_unit_value,
+                                        expression: "form.pro_unit_value"
+                                      }
+                                    ],
+                                    ref: "pro_unit_value",
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "text",
+                                      name: "pro_unit_value",
+                                      placeholder: "Product unit value"
+                                    },
+                                    domProps: {
+                                      value: _vm.form.pro_unit_value
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "pro_unit_value",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row" }, [
+                              _c("div", { staticClass: "col-md-2" }, [
+                                _c("div", { staticClass: "form-group" }, [
                                   _c("label", [_vm._v("Quantity")]),
                                   _vm._v(" "),
                                   _c("input", {
@@ -2043,7 +2107,7 @@ var render = function() {
                                     ref: "pro_qty",
                                     staticClass: "form-control",
                                     attrs: {
-                                      type: "text",
+                                      type: "number",
                                       name: "pro_qty",
                                       placeholder: "Product quantity"
                                     },
@@ -2080,7 +2144,7 @@ var render = function() {
                                     ref: "pro_price",
                                     staticClass: "form-control",
                                     attrs: {
-                                      type: "text",
+                                      type: "number",
                                       name: "pro_price",
                                       placeholder: "Product price"
                                     },
@@ -2117,7 +2181,7 @@ var render = function() {
                                     ref: "pro_sale_price",
                                     staticClass: "form-control",
                                     attrs: {
-                                      type: "text",
+                                      type: "number",
                                       name: "pro_sale_price",
                                       placeholder: "Product Sale price"
                                     },
@@ -2132,6 +2196,43 @@ var render = function() {
                                         _vm.$set(
                                           _vm.form,
                                           "pro_sale_price",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  })
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "col-md-2" }, [
+                                _c("div", { staticClass: "form-group" }, [
+                                  _c("label", [_vm._v("MRP")]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.pro_mrp,
+                                        expression: "form.pro_mrp"
+                                      }
+                                    ],
+                                    ref: "pro_mrp",
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "number",
+                                      name: "pro_mrp",
+                                      placeholder: "Product MRP"
+                                    },
+                                    domProps: { value: _vm.form.pro_mrp },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "pro_mrp",
                                           $event.target.value
                                         )
                                       }

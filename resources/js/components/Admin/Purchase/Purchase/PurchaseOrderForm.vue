@@ -165,12 +165,15 @@
               <!-- <th width="3%" scope="col" title="Size of product"><small>Size</small></th>
               <th width="3%" scope="col" title="Color of product"><small>Color</small></th> -->
 
+              <th width="5%" scope="col"><small>Unit</small></th>
+              <th width="5%" scope="col"><small>U.Value</small></th>
               <th width="4%" scope="col"><small>MRP</small></th>
               <th width="2%" scope="col"><small>Qty</small></th>
               <th width="3%" scope="col" title="Free qty of product"><small>Free Qty</small></th>
+              <th width="3%" scope="col" title="if wrong quantity was store, Adjust like -10, +10"><small>Adj</small></th>
               
-              <th width="3%" scope="col" title="Product Unit"><small>Unit</small></th>
-              <th width="4%" scope="col" title="Product Unit Price"><small>Unit MRP</small></th>
+              <!-- <th width="3%" scope="col" title="Product Unit"><small>Unit</small></th>
+              <th width="4%" scope="col" title="Product Unit Price"><small>Unit MRP</small></th> -->
 
               <th width="2%" scope="col" title="Discount Fixed"><small>D.F</small></th>
               <th width="2%" scope="col" title="Discount Percent"><small>D.%</small></th>
@@ -212,9 +215,9 @@
                     :place-holder="placeHolder_product"
                     :value-property="valueProperty_product"
                     v-model="input.product_id" 
-                    :class="{ 'is-invalid': form.errors.has('product_id') }"
+                    :class="{ 'is-invalid': form.errors.has('pur_order_details.'+[key]+'.product_id') }"
                   />
-                   <has-error :form="form" field="product_id"></has-error>
+                   <has-error :form="form" :field="('pur_order_details.'+[key]+'.product_id')" ></has-error>
                 </div>
               </td>
               <td scope="col">
@@ -237,6 +240,7 @@
                   <input type="text" class="form-control form-control-sm" v-model="input.product_desc" name="product_desc">  
                 </div> 
               </td>
+
               <!-- <td scope="col">
                 <div class="form-group-">
                   <input type="text" class="form-control form-control-sm" v-model="input.pro_size" name="pro_size">  
@@ -247,25 +251,54 @@
                   <input type="text" class="form-control form-control-sm" v-model="input.pro_color" name="pro_color">  
                 </div> 
               </td> -->
+
               <td scope="col">
                 <div class="form-group-">
-                  <input type="number" class="form-control form-control-sm" min="1" step="any" v-model="input.mrp_price" name="mrp_price">  
-                  <!-- @change="calculateLineTotal(input)" -->
+                  <select v-model="input.unit_id" class="form-control form-control-sm" id="unit_id" name="unit_id" :class="{ 'is-invalid': form.errors.has('pur_order_details.'+[key]+'.unit_id') }">
+                      <!-- <option disabled value="">Default (pc) ..</option>                 -->
+                      <option v-for="unit in allUnits" :key="unit.id" v-bind:value="unit.id">
+                          {{unit.unit_title}} ({{unit.unit_code}})
+                      </option> 
+                  </select>
+                  <has-error :form="form" :field="('pur_order_details.'+[key]+'.unit_id')" ></has-error>
+                </div>
+              </td>
+
+              <td scope="col"> 
+                <div class="form-group-">
+                  <input type="text" class="form-control form-control-sm" v-model="input.p_unit_value" name="p_unit_value">  
                 </div> 
               </td>
+
               <td scope="col">
                 <div class="form-group-">
-                  <input type="number" class="form-control form-control-sm" v-model="input.pro_qty" name="pro_qty">  
+                  <input type="number" class="form-control form-control-sm" min="1" step="any" v-model="input.mrp_price" name="mrp_price" :class="{ 'is-invalid': form.errors.has('pur_order_details.'+[key]+'.mrp_price') }">  
                   <!-- @change="calculateLineTotal(input)" -->
+                  <has-error :form="form" :field="('pur_order_details.'+[key]+'.mrp_price')" ></has-error>
                 </div> 
               </td>
+
+              <td scope="col">
+                <div class="form-group-">
+                  <input type="number" class="form-control form-control-sm" v-model="input.pro_qty" name="pro_qty" :class="{ 'is-invalid': form.errors.has('pur_order_details.'+[key]+'.pro_qty') }">  
+                  <!-- @change="calculateLineTotal(input)" -->
+                  <has-error :form="form" :field="('pur_order_details.'+[key]+'.pro_qty')" ></has-error>
+                </div> 
+              </td>
+
               <td scope="col">
                 <div class="form-group-">
                   <input type="number" class="form-control form-control-sm" v-model="input.pro_free_qty" name="pro_free_qty">  
                 </div> 
               </td>
 
-               <td scope="col"> 
+              <td scope="col">
+                <div class="form-group-">
+                  <input type="number" class="form-control form-control-sm" v-model="input.pro_qty_adjustment" name="pro_qty_adjustment" placeholder="+1,-1">  
+                </div> 
+              </td>
+
+              <!--  <td scope="col"> 
                 <div class="form-group-">
                   <input type="text" class="form-control form-control-sm" v-model="input.pro_unit" name="pro_unit">  
                 </div> 
@@ -275,7 +308,7 @@
                   <input type="number" class="form-control form-control-sm" min="0" step=".01" v-model="input.unit_mrp" name="unit_mrp" 
                     >  
                 </div> 
-              </td>                           
+              </td>  -->                          
               
               <td scope="col">
                 <div class="form-group-">
@@ -330,15 +363,41 @@
 
         </div>
 
-        <div class="col-md-5"> </div>
+        <div class="col-md-4"></div>
 
-        <div class="col-md-4 text-right"> 
+        <div class="col-md-2"> 
+
+          <div class="row form-group mb-0">            
+            <div class="col-sm-9 text-right">
+              <label class="form-check-label">Is approved:</label>                      
+            </div>
+            <div class="col-sm-2">
+              <div class="form-check text-right">
+                <input v-model="form.is_approved" type="checkbox" class="form-check-input" name="is_enabled" value="1">
+              </div>
+            </div> 
+          </div> 
+
+          <div class="row form-group mb-0">            
+            <div class="col-sm-9 text-right">
+              <label class="form-check-label" for="checkbox" >Print after Save:</label>                    
+            </div>
+            <div class="col-sm-2">
+              <div class="form-check text-right">
+                <input v-model="print_after_save" type="checkbox" class="form-check-input" name="is_enabled" value="1">
+              </div>
+            </div> 
+          </div> 
+
+        </div>
+
+        <div class="col-md-3 text-right"> 
           
           <div class="row form-group mb-1 mb-1">
-            <div class="col-sm-8 text-right">
+            <div class="col-sm-6 text-right">
               <label class="pt-2-"><small>Sub Total:</small></label>                      
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
               <!--this also work-->
               <!-- <span> {{form.po_invoice_sub_total}} </span><span>Tk</span> -->
               <span> {{invoiceSubTotalAmount}} </span><span>  {{systemSettings.belongs_to_currency.currency_short_code}}  </span>
@@ -347,10 +406,10 @@
 
 
           <div class="row mb-1">
-            <div class="col-sm-8 text-right">
+            <div class="col-sm-6 text-right">
               <label class="pt-2-"><small>Discount:</small></label>                      
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
               <div class="row form-group mb-1">
                 <div class="col-sm-6">
                   <input type="number" class="form-control form-control-sm" v-model="form.po_discount_fixed" name="po_discount_fixed" placeholder="Fixed">         
@@ -363,29 +422,29 @@
           </div>
 
           <div class="row form-group mb-2">
-            <div class="col-sm-8 text-right">
+            <div class="col-sm-6 text-right">
               <label class="pt-2-"><small><strong>Total:</strong></small></label>                      
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-6">
               <span class="pointer" @click="pushTotalToPaidAmount(form.po_invoice_total)">
                  {{ form.po_invoice_total}} </span><span> {{systemSettings.belongs_to_currency.currency_short_code}} </span>
             </div> 
           </div>
 
           <div class="row form-group mb-1">
-            <div class="col-sm-8 text-right">
+            <div class="col-sm-6 text-right">
               <label class="pt-2-"><small><strong>Paid Amount:</strong></small></label>                      
             </div>
-            <div class="col-sm-4">
-              <input type="number" class="form-control form-control-sm" v-model="form.po_paid_amount" ref="po_paid_amount" name="po_paid_amount"> 
+            <div class="col-sm-5">
+              <input type="text" class="form-control form-control-sm" v-model="form.po_paid_amount" ref="po_paid_amount" name="po_paid_amount"> 
             </div> 
           </div>
 
           <div class="row form-group mb-2">
-            <div class="col-sm-8 text-right">
+            <div class="col-sm-6 text-right">
               <label class="pt-2-"><small><strong>Due Amount:</strong></small></label>                      
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-5">
               <span> {{ form.po_due_amount}} </span><span> {{systemSettings.belongs_to_currency.currency_short_code}} </span>
             </div> 
           </div>
@@ -459,6 +518,9 @@
         //multi product id
         product_id_list:[],
 
+        //print after save
+        print_after_save:'',
+
         // Create a new form instance
         form: new Form({
           id: '',
@@ -481,11 +543,14 @@
           po_tax_fiexd:'',
           po_tax_percent:'',
 
+
           po_invoice_sub_total: 0.00,
           po_invoice_total: 0.00,
 
           po_paid_amount: '',
           po_due_amount: 0.00,
+
+          is_approved:'',
 
           //po_image:'',
           
@@ -495,13 +560,16 @@
             mfg_date:'', 
             exp_date:'',
             pro_desc:'',
-            pro_size:'', 
-            pro_color:'', 
+            //pro_size:'', 
+            //pro_color:'', 
             mrp_price: '',
+            unit_id:'',
+            p_unit_value:'',
             pro_qty:'',
             pro_free_qty:'',
-            pro_unit:'',
-            unit_mrp:'',
+            pro_qty_adjustment:'',
+            //pro_unit:'',
+            //unit_mrp:'',
             discount_fixed:'', 
             discount_percent:'', 
             vat_percent:'',
@@ -515,7 +583,7 @@
     computed: {
     	/*userStatus get form commonSotreForAll*/	
         ...mapState( 'ProductMasterStore', ['products','pagination'] ),
-        ...mapState( 'commonStoreForAll', ['AllStatus','branches'] ),
+        ...mapState( 'commonStoreForAll', ['AllStatus','branches','allUnits'] ),
         ...mapState( 'PurchaseOrderMasterStore', ['selectedVendor', 'autoSearchVendor','selectedProductList','autoSearchProduct'] ), 
 
         // finalAmount(){
@@ -633,8 +701,8 @@
 
 
   	methods:{
-      click(){
-        //this.form.po_date = '2017-07-04';
+      getProductID($event){
+        alert(event.target.value)
       },
 
       //###################################### Purchase Order Details ################################################
@@ -645,13 +713,16 @@
           mfg_date:'', 
           exp_date:'',
           pro_desc:'',
-          pro_size:'', 
-          pro_color:'', 
+          //pro_size:'', 
+          //pro_color:'', 
+          unit_id:'',
+          p_unit_value:'',
           mrp_price:null,
           pro_qty:null,
           pro_free_qty:null,
-          pro_unit:'',
-          unit_mrp:'',
+          pro_qty_adjustment:'',
+          //pro_unit:'',
+          //unit_mrp:'',
           discount_fixed:null, 
           discount_percent:null, 
           vat_percent:null,
@@ -799,6 +870,7 @@
       getSelectedDataByIdsForVendor(data){
             //this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedVendor', this.form.vendor_id);
             this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedVendor', data);
+            alert(data)
       },
 
       AutoCompleteSearchForDataProduct(data){
@@ -843,6 +915,7 @@
       //this.$store.dispatch('commonStoreForAll/AllStatus', 'Product');
       this.$store.dispatch('commonStoreForAll/AllStatus', 'PurchaseOrder'); //get all status
     	this.$store.dispatch('commonStoreForAll/fetchBranches'); //get Branch list
+      this.$store.dispatch('commonStoreForAll/fetchUnits'); //get units
 
       //call from multi-select-app-one.vue
 		  FireEvent.$on('AutoCompleteSearchForData', (data) => {

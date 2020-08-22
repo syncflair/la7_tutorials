@@ -72,18 +72,20 @@ class PurchaseOrderController extends Controller
             'po_date' => 'required', 
             'po_payment_term' => 'required',
             'status_m_id' => 'required', 
-            // '*.product_id' => 'required',
-            // '*.mrp_price' => 'required',
-            // '*.pro_qty' => 'required',
+            'pur_order_details.*.product_id' => 'required',
+            'pur_order_details.*.unit_id' => 'required',
+            'pur_order_details.*.mrp_price' => 'required',
+            'pur_order_details.*.pro_qty' => 'required',
         ],
         [
             'vendor_id.required' => 'Please Select Vendor / Supplier',
             'po_date.required' => 'Order Date is required',
             'po_payment_term.required' => 'Payment Term is required',
             'status_m_id.required' => 'Order Status is required.',
-            // '*.product_id.required' => 'Please Select product',
-            // '*.mrp_price.required' => 'MRP Price is required',
-            // '*.pro_qty.required' => 'Quantity is required',
+            'pur_order_details.*.product_id.required' => 'Select product',
+            'pur_order_details.*.unit_id.required' => 'Unit required',
+            'pur_order_details.*.mrp_price.required' => 'MRP required',
+            'pur_order_details.*.pro_qty.required' => 'Qty required',
         ]);
 
         $data =array();
@@ -107,7 +109,7 @@ class PurchaseOrderController extends Controller
         $data['po_due_amount']=$request->po_due_amount;  
 
         $data['pur_order_details']=$request->pur_order_details;  //JSON Array of order Details
-
+        $data['is_approved'] = $request->is_approved == NULL ? 0 : $request->is_approved;
         $data['created_by']= \Auth::user()->id;  
 
      
@@ -115,8 +117,22 @@ class PurchaseOrderController extends Controller
             DB::beginTransaction();
 
             $po = PurchaseOrder::create($data); 
+            //$po->Departments()->attach($request->departments);  
 
-            //$po->Departments()->attach($request->departments);          
+            //update Product Table if is approved
+            if($request->is_approved == 1){                
+                foreach ($request->pur_order_details as $key => $object) {
+                    $product_qty = Product::where('id', $request->pur_order_details[$key]['product_id'])
+                                    ->select('pro_qty')->first();
+                    
+                    $value =array();
+                    $value['pro_qty'] = $product_qty->pro_qty + ($request->pur_order_details[$key]['pro_qty'] + $request->pur_order_details[$key]['pro_free_qty']);
+                    $value['pro_mrp'] = $request->pur_order_details[$key]['mrp_price'];
+
+                    Product::find($request->pur_order_details[$key]['product_id'])->update($value);
+                }
+            }
+
 
             DB::commit();            
             return response()->json(['success'=>'Purchase Order Submited']);
@@ -165,18 +181,20 @@ class PurchaseOrderController extends Controller
             'po_date' => 'required', 
             'po_payment_term' => 'required',
             'status_m_id' => 'required', 
-            // '*.product_id' => 'required',
-            // '*.mrp_price' => 'required',
-            // '*.pro_qty' => 'required',
+            'pur_order_details.*.product_id' => 'required',
+            'pur_order_details.*.unit_id' => 'required',
+            'pur_order_details.*.mrp_price' => 'required',
+            'pur_order_details.*.pro_qty' => 'required',
         ],
         [
             'vendor_id.required' => 'Please Select Vendor / Supplier',
             'po_date.required' => 'Order Date is required',
             'po_payment_term.required' => 'Payment Term is required',
             'status_m_id.required' => 'Order Status is required.',
-            // '*.product_id.required' => 'Please Select product',
-            // '*.mrp_price.required' => 'MRP Price is required',
-            // '*.pro_qty.required' => 'Quantity is required',
+            'pur_order_details.*.product_id.required' => 'Select product',
+            'pur_order_details.*.unit_id.required' => 'Unit required',
+            'pur_order_details.*.mrp_price.required' => 'MRP required',
+            'pur_order_details.*.pro_qty.required' => 'Qty required',
         ]);
 
         $data =array();
@@ -200,14 +218,62 @@ class PurchaseOrderController extends Controller
         $data['po_due_amount']=$request->po_due_amount;  
 
         $data['pur_order_details']=$request->pur_order_details;  //JSON Array of order Details
-
+        $data['is_approved'] = $request->is_approved == NULL ? 0 : $request->is_approved;
         $data['created_by']= \Auth::user()->id;  
 
      
         try{
             DB::beginTransaction();
 
-            $po = PurchaseOrder::find($request->id)->update($data); 
+            $is_approved_check = PurchaseOrder::where('id', $request->id)->select('is_approved')->first();
+            
+            if($is_approved_check->is_approved == 0){
+
+                $po = PurchaseOrder::find($request->id)->update($data); //update Purchase
+
+
+                //update Product Table if is approved
+                if($request->is_approved == 1){                
+                    foreach ($request->pur_order_details as $key => $object) {
+                        $product_qty = Product::where('id', $request->pur_order_details[$key]['product_id'])
+                                        ->select('pro_qty')->first();
+                        
+                        $value =array();
+                        $value['pro_qty'] = $product_qty->pro_qty + ($request->pur_order_details[$key]['pro_qty'] + $request->pur_order_details[$key]['pro_free_qty']);
+                        $value['pro_mrp'] = $request->pur_order_details[$key]['mrp_price'];
+
+                        Product::find($request->pur_order_details[$key]['product_id'])->update($value);
+                    }
+                }
+            }else{
+
+                $po = PurchaseOrder::find($request->id)->update($data); //update Purchase
+            }
+
+            //update Product Table
+            // foreach ($request->pur_order_details as $key => $object) {
+            //     $product_qty = Product::where('id', $request->pur_order_details[$key]['product_id'])
+            //                     ->select('pro_qty')->first();
+
+            //     if( $product_qty->pro_qty > $request->pur_order_details[$key]['pro_qty']  ){
+            //         $value =array();
+            //         $value['pro_qty'] = $product_qty->pro_qty - ($product_qty->pro_qty - $request->pur_order_details[$key]['pro_qty'] ); //10 - (10 - 9) 
+            //         $value['pro_mrp'] = $request->pur_order_details[$key]['mrp_price'];
+            //         Product::find($request->pur_order_details[$key]['product_id'])->update($value);
+            //     }elseif($product_qty->pro_qty < $request->pur_order_details[$key]['pro_qty'] ){
+            //         $value =array();
+            //         $value['pro_qty'] = $product_qty->pro_qty + ($product_qty->pro_qty - $request->pur_order_details[$key]['pro_qty'] ); //10 + (10 - 11) 
+            //         $value['pro_mrp'] = $request->pur_order_details[$key]['mrp_price'];
+            //         Product::find($request->pur_order_details[$key]['product_id'])->update($value); 
+            //     }
+            // }
+
+            // //test For loop (working)
+            // for ($i = 0; $i < count($request->pur_order_details); $i++) {
+            //     $arrays[] = $request->pur_order_details[$i]['product_id'];
+            // }
+            // return $arrays;
+        
 
             DB::commit();            
             return response()->json(['success'=>'Purchase Order Update']);

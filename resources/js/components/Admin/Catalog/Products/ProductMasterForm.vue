@@ -167,7 +167,6 @@
             </div>
           </div> 
 
-
           <div class="row">
 
             <div class="col-md-2">
@@ -184,22 +183,44 @@
 
             <div class="col-md-2">
               <div class="form-group">
-                <label>Quantity</label>
-                <input v-model="form.pro_qty" type="text" ref="pro_qty" name="pro_qty" class="form-control" placeholder="Product quantity">
+                <label>Unit Value</label>
+                <input v-model="form.pro_unit_value" type="text" ref="pro_unit_value" name="pro_unit_value" class="form-control" placeholder="Product unit value">
               </div> 
             </div>
+            
+          </div>
+
+
+          <div class="row">            
+
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>Quantity</label>
+                <input v-model="form.pro_qty" type="number" ref="pro_qty" name="pro_qty" class="form-control" placeholder="Product quantity">
+              </div> 
+            </div>
+
             <div class="col-md-2">
               <div class="form-group">
                 <label>Price</label>
-                  <input v-model="form.pro_price" type="text" ref="pro_price" name="pro_price" class="form-control" placeholder="Product price">
+                  <input v-model="form.pro_price" type="number" ref="pro_price" name="pro_price" class="form-control" placeholder="Product price">
               </div> 
             </div>
+
             <div class="col-md-2">
               <div class="form-group">
                 <label>Sale Price</label>
-                  <input v-model="form.pro_sale_price" type="text" ref="pro_sale_price" name="pro_sale_price" class="form-control" placeholder="Product Sale price">
+                  <input v-model="form.pro_sale_price" type="number" ref="pro_sale_price" name="pro_sale_price" class="form-control" placeholder="Product Sale price">
               </div> 
             </div>
+
+            <div class="col-md-2">
+              <div class="form-group">
+                <label>MRP</label>
+                  <input v-model="form.pro_mrp" type="number" ref="pro_mrp" name="pro_mrp" class="form-control" placeholder="Product MRP">
+              </div> 
+            </div>
+
             <div class="col-md-2">
               <div class="form-group">
                 <label>Reward Points</label>
@@ -679,7 +700,9 @@
           isbn:'',
           mpn:'',
           unit_id:'',
+          pro_unit_value:'',
           pro_qty:'',
+          pro_mrp:'',
           pro_price:'',
           pro_sale_price:'',
           pro_reward_points:'',
