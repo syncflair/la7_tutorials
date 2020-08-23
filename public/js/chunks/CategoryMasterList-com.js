@@ -173,6 +173,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -354,7 +356,7 @@ var render = function() {
                       category.cat_img != null
                         ? _c("img", {
                             attrs: {
-                              src: "../" + category.cat_img,
+                              src: category.cat_img,
                               height: "30px",
                               width: "30px"
                             }
@@ -372,10 +374,7 @@ var render = function() {
                             " \r\n                "
                         ),
                         _vm._v(" "),
-                        _vm._l(category.lang_translation, function(
-                          language,
-                          i
-                        ) {
+                        _vm._l(category.cat_translation, function(language, i) {
                           return _c("span", [
                             _c("span", [
                               _vm._v(
@@ -543,7 +542,7 @@ var render = function() {
                                   )
                                 ]),
                                 _vm._v(" "),
-                                _vm._l(c_category.lang_translation, function(
+                                _vm._l(c_category.cat_translation, function(
                                   language,
                                   i
                                 ) {
@@ -714,7 +713,7 @@ var render = function() {
                                         ]),
                                         _vm._v(" "),
                                         _vm._l(
-                                          sc_category.lang_translation,
+                                          sc_category.cat_translation,
                                           function(language, i) {
                                             return _c("span", [
                                               _c("span", [

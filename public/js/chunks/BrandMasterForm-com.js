@@ -163,13 +163,13 @@ __webpack_require__.r(__webpack_exports__);
         reader.readAsDataURL(file);
       }
     },
-    addData: function addData() {
+    addBrand: function addBrand() {
       this.editMode = false;
       this.form.reset(); // setTimeout(() => {
       // 	this.$refs.brand_name.focus(); 
       //          }, 200);
     },
-    editData: function editData(data) {
+    editBrand: function editBrand(data) {
       this.editMode = true;
       this.form.reset();
       this.form.fill(data); //this.$refs.brand_name.focus();    		
@@ -256,13 +256,13 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this4 = this;
 
-    FireEvent.$on('editData', function (data) {
+    FireEvent.$on('editBrand', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this4.editData(data);
+      _this4.editBrand(data);
     });
-    FireEvent.$on('addData', function () {
-      _this4.addData();
+    FireEvent.$on('addBrand', function () {
+      _this4.addBrand();
     });
   }
 }); //End Exprot Default

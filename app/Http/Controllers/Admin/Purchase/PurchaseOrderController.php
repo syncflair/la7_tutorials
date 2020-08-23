@@ -120,7 +120,8 @@ class PurchaseOrderController extends Controller
             //$po->Departments()->attach($request->departments);  
 
             //update Product Table if is approved
-            if($request->is_approved == 1){                
+            if($request->is_approved == 1){   
+
                 foreach ($request->pur_order_details as $key => $object) {
                     $product_qty = Product::where('id', $request->pur_order_details[$key]['product_id'])
                                     ->select('pro_qty')->first();
@@ -218,7 +219,7 @@ class PurchaseOrderController extends Controller
         $data['po_due_amount']=$request->po_due_amount;  
 
         $data['pur_order_details']=$request->pur_order_details;  //JSON Array of order Details
-        $data['is_approved'] = $request->is_approved == NULL ? 0 : $request->is_approved;
+       
         $data['created_by']= \Auth::user()->id;  
 
      
@@ -227,13 +228,15 @@ class PurchaseOrderController extends Controller
 
             $is_approved_check = PurchaseOrder::where('id', $request->id)->select('is_approved')->first();
             
-            if($is_approved_check->is_approved == 0){
+            if($is_approved_check->is_approved == 0){ 
 
-                $po = PurchaseOrder::find($request->id)->update($data); //update Purchase
+                if($request->is_approved == 1){ 
 
+                    // $data['is_approved'] = $request->is_approved == NULL ? 0 : $request->is_approved;
+                    $data['is_approved'] = $request->is_approved;
+                    $po = PurchaseOrder::find($request->id)->update($data); //update Purchase
 
-                //update Product Table if is approved
-                if($request->is_approved == 1){                
+                    //update Product Table if is approved
                     foreach ($request->pur_order_details as $key => $object) {
                         $product_qty = Product::where('id', $request->pur_order_details[$key]['product_id'])
                                         ->select('pro_qty')->first();
@@ -244,10 +247,15 @@ class PurchaseOrderController extends Controller
 
                         Product::find($request->pur_order_details[$key]['product_id'])->update($value);
                     }
-                }
-            }else{
 
-                $po = PurchaseOrder::find($request->id)->update($data); //update Purchase
+                }elseif($request->is_approved == NULL){
+                    //$data['is_approved'] = $request->is_approved == NULL ? 0 : $request->is_approved;
+                    $po = PurchaseOrder::find($request->id)->update($data); //update Purchase
+                }
+
+            }elseif($is_approved_check->is_approved == 1){
+
+                //$po = PurchaseOrder::find($request->id)->update($data); //update Purchase
             }
 
             //update Product Table

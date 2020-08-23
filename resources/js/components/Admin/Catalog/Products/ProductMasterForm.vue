@@ -944,9 +944,9 @@
           });
       },
 
-      fillForm(){
+      fillForm(){ 
       	if(this.$route.params.data != null){
-      		this.editMode = true;
+          this.editMode = true;      		
       		this.form.reset(); 
       		this.form.fill(this.$route.params.data);
       		//this.form.departments = this.$route.params.data.departments; //pass the array
@@ -1011,26 +1011,44 @@
         this.$store.dispatch('ProductMasterStore/fetchSelectedProductList', this.form.related_products);        
       },
 
+      loadProTranslation(){
+        if( this.editMode === false){
+          if(this.form.pro_translation.length === 0){
+            setTimeout(() => {
+              this.pushToLanguageTranslationArray();
+            }, 2300);
+          }
+        }
+      },
+
     }, //end Methods
 
   	created(){
-      if( this.editMode === false){
-          setTimeout(() => {
-            this.pushToLanguageTranslationArray();
-          }, 2300);
-      }
+      this.fillForm();
 
-  		this.fillForm();
+     
 
-      this.$store.dispatch('commonStoreForAll/fetchUnits'); //get units
-    	this.$store.dispatch('commonStoreForAll/AllStatus', 'Product'); //get status with "Product" keyword
+      //this.loadProTranslation();
+
+  		
       this.$store.dispatch('commonStoreForAll/fetchLanguages'); //get all language
+      this.$store.dispatch('commonStoreForAll/fetchUnits'); //get units
+    	this.$store.dispatch('commonStoreForAll/AllStatus', 'Product'); //get status with "Product" keyword      
       this.$store.dispatch('commonStoreForAll/fetchBrands'); //get all brands
       //this.$store.dispatch('commonStoreForAll/fetchCategory'); //get all category
       this.$store.dispatch('commonStoreForAll/fetchSpecifications'); //get all Specification
       this.$store.dispatch('commonStoreForAll/fetchAttributeList'); //get all Attribute
       this.$store.dispatch('commonStoreForAll/fetchAttributeValue'); //get all Attribute Value
       this.$store.dispatch('commonStoreForAll/fetchCustomerGroups'); //get all customer Group
+
+      //call pushToLanguageTranslationArray after fetchLanguages
+      if( this.editMode === false){
+        if(this.form.pro_translation.length === 0){
+          setTimeout(() => {
+            this.pushToLanguageTranslationArray();
+          }, 2300);
+        }
+      }
 
 
       //call from multi-select-app-one.vue

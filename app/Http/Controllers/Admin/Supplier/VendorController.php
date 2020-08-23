@@ -314,7 +314,7 @@ class VendorController extends Controller
 
         if(!empty($searchKey) && empty($searchOption)){
         //if($search = \Request::get('q')){
-            $searchResult = Vendor::where(function($query) use ($searchKey){
+            $searchResult = Vendor::with('hasManySupplier','UserStatus','belongsToBrandShop')->where(function($query) use ($searchKey){
                 $query->where('vendor_name','LIKE','%'.$searchKey.'%')
                     ->orWhere('vendor_email','LIKE','%'.$searchKey.'%')
                     ->orWhere('vendor_desc','LIKE','%'.$searchKey.'%')
@@ -322,13 +322,13 @@ class VendorController extends Controller
             })->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){
-            $searchResult = Vendor::where(function($query) use ($searchKey, $searchOption){
+            $searchResult = Vendor::with('hasManySupplier','UserStatus','belongsToBrandShop')->where(function($query) use ($searchKey, $searchOption){
                 $query->where( $searchOption,'LIKE','%'.$searchKey.'%');
             })->paginate($perPage);
             
         }else{
             //$searchResult = Vendor::latest()->paginate(10);
-            $searchResult = Vendor::paginate($perPage);
+            $searchResult = Vendor::with('hasManySupplier','UserStatus','belongsToBrandShop')->paginate($perPage);
         }
 
         //return $searchResult;

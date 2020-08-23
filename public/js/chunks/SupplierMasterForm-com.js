@@ -252,7 +252,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     },
     //this event call from CustomerList component
-    addData: function addData() {
+    addSupplier: function addSupplier() {
       var _this2 = this;
 
       this.editMode = false;
@@ -262,7 +262,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, 200);
     },
     //this event call from CustomerList component
-    editData: function editData(data) {
+    editSupplier: function editSupplier(data) {
       var _this3 = this;
 
       this.editMode = true;
@@ -399,14 +399,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       _this7.$Progress.finish();
     }); //this event call from CustomerList component
 
-    FireEvent.$on('editData', function (data) {
+    FireEvent.$on('editSupplier', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this7.editData(data);
+      _this7.editSupplier(data);
     }); //this event call from CustomerList component
 
-    FireEvent.$on('addData', function () {
-      _this7.addData();
+    FireEvent.$on('addSupplier', function () {
+      _this7.addSupplier();
     });
   }
 }); //End Exprot Default

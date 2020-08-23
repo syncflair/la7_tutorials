@@ -1145,24 +1145,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     getSelectedListByIdsForProduct: function getSelectedListByIdsForProduct() {
       this.$store.dispatch('ProductMasterStore/fetchSelectedProductList', this.form.related_products);
+    },
+    loadProTranslation: function loadProTranslation() {
+      var _this7 = this;
+
+      if (this.editMode === false) {
+        if (this.form.pro_translation.length === 0) {
+          setTimeout(function () {
+            _this7.pushToLanguageTranslationArray();
+          }, 2300);
+        }
+      }
     }
   },
   //end Methods
   created: function created() {
-    var _this7 = this;
+    var _this8 = this;
 
-    if (this.editMode === false) {
-      setTimeout(function () {
-        _this7.pushToLanguageTranslationArray();
-      }, 2300);
-    }
-
-    this.fillForm();
-    this.$store.dispatch('commonStoreForAll/fetchUnits'); //get units
-
-    this.$store.dispatch('commonStoreForAll/AllStatus', 'Product'); //get status with "Product" keyword
+    this.fillForm(); //this.loadProTranslation();
 
     this.$store.dispatch('commonStoreForAll/fetchLanguages'); //get all language
+
+    this.$store.dispatch('commonStoreForAll/fetchUnits'); //get units
+
+    this.$store.dispatch('commonStoreForAll/AllStatus', 'Product'); //get status with "Product" keyword      
 
     this.$store.dispatch('commonStoreForAll/fetchBrands'); //get all brands
     //this.$store.dispatch('commonStoreForAll/fetchCategory'); //get all category
@@ -1174,7 +1180,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$store.dispatch('commonStoreForAll/fetchAttributeValue'); //get all Attribute Value
 
     this.$store.dispatch('commonStoreForAll/fetchCustomerGroups'); //get all customer Group
-    //call from multi-select-app-one.vue
+    //call pushToLanguageTranslationArray after fetchLanguages
+
+    if (this.editMode === false) {
+      if (this.form.pro_translation.length === 0) {
+        setTimeout(function () {
+          _this8.pushToLanguageTranslationArray();
+        }, 2300);
+      }
+    } //call from multi-select-app-one.vue
     // FireEvent.$on('AutoCompleteSearchForDataOne', (data) => {
     //       //this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForCategory', data ); 
     //  });
@@ -1183,6 +1197,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     // });
     //this.pushToLanguageTranslationArray();
     //console.log(this.form);
+
   },
   //end Created
   mounted: function mounted() {//console.log(this.form.pro_translation);        

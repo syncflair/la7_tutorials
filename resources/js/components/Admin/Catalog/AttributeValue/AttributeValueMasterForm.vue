@@ -95,7 +95,7 @@
 
 	    methods:{
 
-	    	addData(){
+	    	addAttribValue(){
 	    		this.editMode = false;
 	    		this.form.reset();
 	    		setTimeout(() => {
@@ -103,7 +103,7 @@
                 }, 600);
 	    	},
 
-	    	editData(data){
+	    	editAttribValue(data){
 	    		this.editMode = true;
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
@@ -174,14 +174,14 @@
 	    	//for options
 	    	this.$store.dispatch('commonStoreForAll/fetchAttributeList'); //get for attribute list for options
 
-	    	FireEvent.$on('editData', (data) => {
+	    	FireEvent.$on('editAttribValue', (data) => {
               //alert(data.id);
               //this.form.fill(data);   //this is also work
-              this.editData(data);
+              this.editAttribValue(data);
             });
 
-            FireEvent.$on('addData', () => {
-              this.addData();
+            FireEvent.$on('addAttribValue', () => {
+              this.addAttribValue();
             });
 	    }
 

@@ -38,7 +38,7 @@ const AttributeValueMasterStore ={
         fetchData(context, payload){
             let perPageVelue ;
             if(!payload){
-                perPageVelue = 10
+                perPageVelue = 100
             }else{
                 perPageVelue = payload
             }

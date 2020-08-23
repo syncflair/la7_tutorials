@@ -101,6 +101,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -134,12 +136,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //       toastr.warning('Something is wrong!');
     //     })
     // },
-    addData: function addData() {
-      FireEvent.$emit('addData');
+    addBrandShop: function addBrandShop() {
+      FireEvent.$emit('addBrandShop');
     },
-    editData: function editData(data) {
+    editBrandShop: function editBrandShop(data) {
       //alert(data.id);
-      FireEvent.$emit('editData', data);
+      FireEvent.$emit('editBrandShop', data);
     },
     DeleteData: function DeleteData(id) {
       Swal.fire({
@@ -182,7 +184,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     reloadThis: function reloadThis() {
       this.fetchData();
-    }
+    },
+    // ################################ For search App ###############################################
+    searchData: function searchData(data) {
+      this.$store.dispatch('BrandShopMasterStore/searching', data);
+    },
+    AutoCompleteSearch: function AutoCompleteSearch(data) {
+      if (data != '') {
+        this.$store.dispatch('BrandShopMasterStore/AutoCompleteSearch', data);
+      }
+    } // ################################ For search App ###############################################
+
   },
   created: function created() {
     var _this = this;
@@ -199,18 +211,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     FireEvent.$on('changPerPage', function (data) {
       _this.$store.dispatch('BrandShopMasterStore/fetchData', data);
-    }); //This is come from search-app-one.vue file for serch data
-
-    FireEvent.$on('searchData', function (data) {
-      //alert(data.search_key+'-'+data.search_option);
-      _this.$store.dispatch('BrandShopMasterStore/searching', data);
-    }); //This is come from search-app-one.vue file for Auto Complete data
-
-    FireEvent.$on('AutoCompleteSearch', function (data) {
-      //alert(data);
-      if (data != '') {
-        _this.$store.dispatch('BrandShopMasterStore/AutoCompleteSearch', data);
-      }
     });
   },
   mounted: function mounted() {//console.log(this.categories)    
@@ -243,12 +243,16 @@ var render = function() {
           "div",
           { staticClass: "col-md-6 col-sm-9" },
           [
-            _c("search-app-one", {
+            _c("search-app-master", {
               attrs: {
                 SearchByOptions: _vm.SearchByOptions,
                 filterBy: _vm.filterBy,
                 autoCompleteData: _vm.autoCompleteData,
                 pagination: _vm.pagination
+              },
+              on: {
+                searchData: _vm.searchData,
+                AutoCompleteSearch: _vm.AutoCompleteSearch
               }
             })
           ],
@@ -271,7 +275,7 @@ var render = function() {
             {
               staticClass: "btn btn-primary btn-flat btn-sm",
               attrs: { "data-toggle": "modal", "data-target": "#formModal" },
-              on: { click: _vm.addData }
+              on: { click: _vm.addBrandShop }
             },
             [_c("i", { staticClass: "icon fas fa-plus" }), _vm._v(" Add New")]
           )
@@ -372,7 +376,7 @@ var render = function() {
                         },
                         on: {
                           click: function($event) {
-                            return _vm.editData(bs)
+                            return _vm.editBrandShop(bs)
                           }
                         }
                       },

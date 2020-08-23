@@ -50,6 +50,7 @@ Vue.component('single-select-app-one', () => import(/* webpackChunkName: "single
 Vue.component('single-select-app-two', () => import(/* webpackChunkName: "single-select-app-two-global" */'./components/Admin/GlobalComponents/single-select-app-two.vue'));
 Vue.component('auto-complete-app', () => import(/* webpackChunkName: "auto-complete-app" */'./components/Admin/GlobalComponents/auto-complete-app.vue'));
 Vue.component('search-app-one', () => import(/* webpackChunkName: "search-app-one" */'./components/Admin/GlobalComponents/search-app-one.vue'));
+Vue.component('search-app-master', () => import(/* webpackChunkName: "search-app-master" */'./components/Admin/GlobalComponents/search-app-master.vue'));
 Vue.component('my-date-time-global', () => import(/* webpackChunkName: "my-date-time-global" */'./components/Admin/GlobalComponents/my-date-time-global'));
 
 

@@ -100,6 +100,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -187,7 +189,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$Progress.start();
       this.$store.dispatch('CountryStore/fetchCountry', this.pagination.per_page);
       this.$Progress.finish(); //console.log(this.pagination.total);
-    }
+    },
+    // ################################ For search App ###############################################
+    searchData: function searchData(data) {
+      this.$store.dispatch('CountryStore/searching', data);
+    },
+    AutoCompleteSearch: function AutoCompleteSearch(data) {
+      if (data != '') {
+        this.$store.dispatch('CountryStore/AutoCompleteSearch', data);
+      }
+    } // ################################ For search App ###############################################
+
   },
   created: function created() {
     var _this = this;
@@ -204,18 +216,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     FireEvent.$on('changPerPage', function (data) {
       _this.$store.dispatch('CountryStore/fetchCountry', data);
-    }); //This is come from search-app-one.vue file for serch data
-
-    FireEvent.$on('searchData', function (data) {
-      //alert(data.search_key+'-'+data.search_option);
-      _this.$store.dispatch('CountryStore/searching', data);
-    }); //This is come from search-app-one.vue file for Auto Complete data
-
-    FireEvent.$on('AutoCompleteSearch', function (data) {
-      //alert(data);
-      if (data != '') {
-        _this.$store.dispatch('CountryStore/AutoCompleteSearch', data);
-      }
     });
   },
   mounted: function mounted() {//console.log(this.categories)    
@@ -248,12 +248,16 @@ var render = function() {
           "div",
           { staticClass: "col-md-6 col-sm-9" },
           [
-            _c("search-app-one", {
+            _c("search-app-master", {
               attrs: {
                 SearchByOptions: _vm.SearchByOptions,
                 filterBy: _vm.filterBy,
                 autoCompleteData: _vm.autoCompleteData,
                 pagination: _vm.pagination
+              },
+              on: {
+                searchData: _vm.searchData,
+                AutoCompleteSearch: _vm.AutoCompleteSearch
               }
             })
           ],

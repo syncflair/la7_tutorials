@@ -10,6 +10,9 @@ use Illuminate\Support\Str; //for str::random
 use Illuminate\Support\Facades\File; //for file management
 
 use Illuminate\Support\Facades\DB; //for database transection
+//use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Config; //that for call constants form app/config
 
 class CategoryController extends Controller
 {
@@ -36,8 +39,9 @@ class CategoryController extends Controller
         // }else{
         //     $perPage = 20;
         // }
-        //$data = Catgory::whereNull('parent_id')->with('childCOAS')->where('is_enabled', '1')->get(); //FOR PUBLIC
-        $data = Category::whereNull('parent_id')->with('child_category','lang_translation')->get(); //for admin
+
+        //$data = Category::whereNull('parent_id')->with('child_category','lang_translation')->get(); //for admin
+        $data = Category::whereNull('parent_id')->with('child_category')->get(); //for admin
         // $data = Catgory::paginate($perPage);
 
         return response()->json($data);
@@ -75,43 +79,38 @@ class CategoryController extends Controller
         //$data['cat_name_lang']=$request->cat_name_lang;
         $data['cat_slug']= slug_generator($request->cat_name);//slug_generator get from helper
         $data['cat_desc']=$request->cat_desc;
+        $data['cat_translation']=$request->cat_translation; //JSON Data
         $data['created_by']= \Auth::user()->id;         
         
-        if($request->is_enabled == NULL){
-            $data['is_enabled'] = 0;
-        }else{
-           $data['is_enabled']=$request->is_enabled; 
-        }
+        $data['is_enabled']=$request->is_enabled == null ? 0 : $request->is_enabled; 
 
-        $image = $request->cat_img;
+        $image_base64 = $request->cat_img;
 
-        if($image){
+        if($image_base64){
             //return $imageSize =getimagesize($image);
-            $imageExt = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            $imageExt = explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
             if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
                 return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
             }else{
 
                 //new name generate from base64 file
-                $imageName = slug_generator($request->cat_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-                //save image using intervention image
-                \Image::make($image)
-                    //->fit(200, 200)
-                    ->resize(200, 200)
-                    //->text('SHORBORAHO', 140, 190)
-                    // ->text('SHORBORAHO', 140, 190, function($font) {
-                    //     //$font->file('/backend/fonts/FontAwesome.otf');
-                    //     $font->size(12);
-                    //     $font->color('#fdf6e3');
-                    //     $font->align('center');
-                    //     $font->valign('top');
-                    //     $font->angle(45);
-                    // })
-                    //->text('foo', 0, 0, function($font) {  $font->color(array(255, 255, 255, 0.5)); })                    
-                    // ->save(public_path('FilesStorage/Backend/Category/').$imageName);
-                    ->save(storage_path('app/public/category/').$imageName);
+                $imageName = slug_generator($request->cat_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
 
-                $data['cat_img'] = 'storage/Category/'.$imageName;
+                //save image using intervention image
+                $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
+                $image = str_replace($replace, '', $image_base64); 
+                $image = str_replace(' ', '+', $image);
+                $image = base64_decode($image); 
+                $resized_image = \Image::make($image)->resize(200, 120)
+                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                    ->insert(Config::get('constants.watermark'))->stream($imageExt, 100);      
+                            
+                Storage::disk('s3')->put('category/'.$imageName, $resized_image ); //for s3
+                //Storage::disk('public')->put('category/'.$imageName, $resized_image );//for public storage
+
+                //s3_url get from constants file 
+                $data['cat_img'] = Config::get('constants.s3_url').'category/'.$imageName;
+                //$data['cat_img'] = 'storage/category/'.$imageName; //for public storage
 
             }//end image type check
         }else{
@@ -122,17 +121,21 @@ class CategoryController extends Controller
         try{
             DB::beginTransaction();
 
-            $category = Category::create($data);   
-            $category->languageTranslation()->attach($request->lang_translation); 
+            $category = Category::create($data);  
+
+            // //this is to save category_language_translation table using attach() function 
+            //$category->languageTranslation()->attach($request->lang_translation); 
 
             DB::commit();
+            return response()->json(['success'=>'Category Created.'], 200); 
+
         }catch(\Exception $e){
             logger($e->getMessage());
             DB::rollBack();
             return response()->json(['errors'=> $e->getMessage() ], 500); 
         }
         
-        return response()->json(['success'=>'Category Created.'], 200); 
+        
     }
 
     /**
@@ -179,41 +182,53 @@ class CategoryController extends Controller
         // $data['cat_name_lang']=$request->cat_name_lang;
         $data['cat_slug']= slug_generator($request->cat_name);//slug_generator get from helper 
         $data['cat_desc']=$request->cat_desc;  
+        $data['cat_translation']=$request->cat_translation; //JSON Data
         $data['updated_by']= \Auth::user()->id; 
 
-        if($request->is_enabled == NULL){
-            $data['is_enabled'] = 0;
-        }else{
-           $data['is_enabled']=$request->is_enabled; 
-        }
+        $data['is_enabled']=$request->is_enabled == null ? 0 : $request->is_enabled; 
 
-        $image = $request->cat_img;        
+        $image_base64 = $request->cat_img;        
 
-        //if(strlen($image) > 150){ /*php function*/
-        if( Str::length($image) > 150){ /*larvel helper function*/
+        //if(strlen($image_base64) > 150){ /*php function*/
+        if( Str::length($image_base64) > 150){ /*larvel helper function*/
 
             //return $imageSize =getimagesize($image);
-            $imageExt = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+            $imageExt = explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
             if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
                 return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
             }else{
 
                 //query for existing image
-                $existing_image = Category::select('cat_img')->where('id', $id)->first();                   
-                if(!empty($existing_image->cat_img)) {
-                    File::delete($existing_image->cat_img); //delete file //use Illuminate\Support\Facades\File; at top
-                }//else{echo 'Empty';}  
+                $existing_image = Category::select('cat_img')->where('id', $id)->first(); 
+                
+                if($existing_image->cat_img != null){            
+                    $parts = parse_url($existing_image->cat_img); 
+                    $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+                    Storage::disk('s3')->delete($parts); //dd($parts);
+                }  
+
+                // if(!empty($existing_image->cat_img)) {
+                //     File::delete($existing_image->cat_img); //delete file //use Illuminate\Support\Facades\File; at top
+                // }//else{echo 'Empty';}  
 
                 //new name generate from base64 file
-                $imageName = slug_generator($request->cat_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
-                //save image using intervention image
-                \Image::make($image)
-                    ->resize(200, 200)
-                    ->text('SHORBORAHO', 140, 190)
-                    // ->save(public_path('FilesStorage/Backend/Category/').$imageName);
-                    ->save(storage_path('app/public/category/').$imageName);
+                $imageName = slug_generator($request->cat_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
+                
 
-                $data['cat_img'] = 'storage/Category/'.$imageName;
+                $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
+                $image = str_replace($replace, '', $image_base64); 
+                $image = str_replace(' ', '+', $image);
+                $image = base64_decode($image); 
+                $resized_image = \Image::make($image)->resize(200, 120)
+                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
+                    ->insert(Config::get('constants.watermark'))->stream($imageExt, 100);      
+                            
+                Storage::disk('s3')->put('category/'.$imageName, $resized_image ); //for s3
+                //Storage::disk('public')->put('category/'.$imageName, $resized_image );//for public storage
+
+                //s3_url get from constants file 
+                $data['cat_img'] = Config::get('constants.s3_url').'category/'.$imageName;
+                //$data['cat_img'] = 'storage/category/'.$imageName; //for public storage
 
             }//end image type check
         }else{
@@ -227,25 +242,23 @@ class CategoryController extends Controller
 
             //Category::whereId($id)->update($data); 
             $category = Category::find($id)->update($data); 
-            $category = Category::find($request->id);            
 
-            foreach($request->lang_translation as $key => $object){
-                $arrays[$object['language_id']] =  (array) $object;
-                //convert to array like
-                //[1 => ['fields' => 'data'], 2 => ['fields' => 'data'] ]
-            }
-            //dd($arrays);
-            $category->languageTranslation()->sync($arrays);
+            // //this is to save category_language_translation table using attach() function
+            // $category = Category::find($request->id);
+            // foreach($request->lang_translation as $key => $object){
+            //     $arrays[$object['language_id']] =  (array) $object;
+            //     //convert to array like //[1 => ['fields' => 'data'], 2 => ['fields' => 'data'] ]
+            // } //dd($arrays);
+            // $category->languageTranslation()->sync($arrays);
 
 
             DB::commit();
+            return response()->json(['success'=>'Category Update.'], 200);
         }catch(\Exception $e){
             logger($e->getMessage());
             DB::rollBack();
             return response()->json(['errors'=> $e->getMessage() ], 500); 
-        }
-
-        return response()->json(['success'=>'Category Update.'], 200);
+        }        
 
     }
 
@@ -259,10 +272,19 @@ class CategoryController extends Controller
     {
         //query for existing image
         $existing_image = Category::select('cat_img')->where('id', $id)->first();                   
-        if( File::exists($existing_image->cat_img) ) {  
-            File::delete($existing_image->cat_img); 
-            //delete file //use Illuminate\Support\Facades\File; at top
-        }
+        
+        //Delete from s3
+        if($existing_image->cat_img != null){            
+            $parts = parse_url($existing_image->cat_img); 
+            $parts = ltrim($parts['path'],'/'); //remove '/' from start of string
+            Storage::disk('s3')->delete($parts); //dd($parts);
+        } 
+        
+        //delete single image from public storage                        
+        // if( File::exists($existing_image->cat_img) ) {  
+        //     File::delete($existing_image->cat_img); 
+        //     //delete file //use Illuminate\Support\Facades\File; at top            
+        // }
        
         $data = Category::findOrFail($id)->delete();        
         if($data){

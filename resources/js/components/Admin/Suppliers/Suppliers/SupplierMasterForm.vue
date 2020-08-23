@@ -238,7 +238,7 @@
 
 
 	    	//this event call from CustomerList component
-	    	addData(){
+	    	addSupplier(){
 	    		this.editMode = false;
 	    		this.form.reset();	    		
 	    		setTimeout(() => {
@@ -247,7 +247,7 @@
 	    	},
 
 	    	//this event call from CustomerList component
-	    	editData(data){
+	    	editSupplier(data){
 	    		this.editMode = true;
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
@@ -365,15 +365,15 @@
             });
 
 	    	//this event call from CustomerList component
-	    	FireEvent.$on('editData', (data) => {
+	    	FireEvent.$on('editSupplier', (data) => {
               //alert(data.id);
               //this.form.fill(data);   //this is also work
-              this.editData(data);
+              this.editSupplier(data);
             });
 
 	    	//this event call from CustomerList component
-            FireEvent.$on('addData', () => {
-              this.addData();
+            FireEvent.$on('addSupplier', () => {
+              this.addSupplier();
             });
 	    }
 

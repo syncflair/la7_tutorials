@@ -33,7 +33,7 @@ class CountryController extends Controller
         if(!empty($request->perPage)){
             $perPage = $request->perPage;
         }else{
-            $perPage = 20;
+            $perPage = 100;
         }
 
         $data = Country::paginate($perPage);
@@ -228,7 +228,7 @@ class CountryController extends Controller
         if(!empty($request->perPage)){
             $perPage = $request->perPage;
         }else{
-            $perPage = 50;
+            $perPage = 100;
         }
 
         $searchKey = $request->q;

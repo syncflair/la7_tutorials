@@ -63,10 +63,10 @@ class Supplier extends Authenticatable
     }
 
     //Supplier belongs to Brand Shop
-    public function belongsToBrandShop(){
-        //return $this->belongsTo('App\Models\Supplier\BrandShop', 'brand_shop_id');
-        return $this->belongsTo(Models\Supplier\BrandShop::class, 'brand_shop_id');
-    }
+    // public function belongsToBrandShop(){
+    //     //return $this->belongsTo('App\Models\Supplier\BrandShop', 'brand_shop_id');
+    //     return $this->belongsTo(Models\Supplier\BrandShop::class, 'brand_shop_id');
+    // }
 
      /**
      * Send the password reset notification.

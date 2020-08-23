@@ -36,12 +36,14 @@
             <tr>    
               <td >
                 <img v-if="category.cat_img === null" :src="'../'+NoIconUrl" height="30px" width="30px">
-                <img v-if="category.cat_img != null" :src="'../'+category.cat_img" height="30px" width="30px">
+                <!-- <img v-if="category.cat_img != null" :src="'../'+category.cat_img" height="30px" width="30px"> -->
+                <img v-if="category.cat_img != null" :src="category.cat_img" height="30px" width="30px">
            	  </td>
               <td scope="col"> 
                 {{ category.cat_name }} 
                 <!-- <span v-show="category.cat_name_lang !=null"> ({{category.cat_name_lang}})</span> -->
-                <span v-for="(language, i) in category.lang_translation">
+                <span v-for="(language, i) in category.cat_translation">
+                <!-- <span v-for="(language, i) in category.lang_translation"> -->
                   <span>( {{ language['category_name'] }} ) </span>
                 </span>
 
@@ -73,7 +75,7 @@
                 <td scope="col" > 
                   <span class="pl-2"> - {{ c_category.cat_name }} </span> 
                   <!-- <span v-show="c_category.cat_name_lang !=null"> ({{c_category.cat_name_lang}})</span> -->
-                  <span v-for="(language, i) in c_category.lang_translation">
+                  <span v-for="(language, i) in c_category.cat_translation">
                     <span>( {{ language['category_name'] }} ) </span>
                   </span>
                 </td> 
@@ -103,7 +105,7 @@
 	                <td scope="col" > 
                     <span class="pl-4"> -- {{ sc_category.cat_name }} </span>
                     <!-- <span v-show="sc_category.cat_name_lang !=null"> ({{sc_category.cat_name_lang}})</span> -->
-                    <span v-for="(language, i) in sc_category.lang_translation">
+                    <span v-for="(language, i) in sc_category.cat_translation">
                       <span>( {{ language['category_name'] }} ) </span>
                     </span>
                   </td> 

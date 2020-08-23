@@ -226,7 +226,7 @@
 
 
 	    	//this event call from CustomerList component
-	    	addData(){
+	    	addUser(){
 	    		this.editMode = false;
 	    		this.deleteImageIcon = false;
 	    		this.form.reset();	    		
@@ -236,7 +236,7 @@
 	    	},
 
 	    	//this event call from CustomerList component
-	    	editData(data){
+	    	editUser(data){
 	    		this.editMode = true;
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
@@ -351,15 +351,15 @@
             });
 
 	    	//this event call from CustomerList component
-	    	FireEvent.$on('editData', (data) => {
+	    	FireEvent.$on('editUser', (data) => {
               //alert(data.id);
               //this.form.fill(data);   //this is also work
-              this.editData(data);
+              this.editUser(data);
             });
 
 	    	//this event call from CustomerList component
-            FireEvent.$on('addData', () => {
-              this.addData();
+            FireEvent.$on('addUser', () => {
+              this.addUser();
             });
 	    }
 

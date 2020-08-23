@@ -3,12 +3,14 @@
     <div class="card-header">      
       <div class="row">
         <div class="col-md-5 col-sm-9">
-          <search-app-one 
+          <search-app-master 
+            @searchData="searchData"
+            @AutoCompleteSearch="AutoCompleteSearch"
             :SearchByOptions="SearchByOptions"
             :filterBy="filterBy"
             :autoCompleteData="autoCompleteData"
             :pagination="pagination"
-          ></search-app-one>
+          ></search-app-master>
         </div>
         <div class="col-md-7 col-sm-3 text-right">
           <a @click="reloadThis" class="btn btn-primary btn-flat btn-sm" title="reload"> <i class="fas fa-sync-alt"></i> </a>
@@ -354,14 +356,14 @@
           alert('ok');
         },
 
-  	    addData(){
-  	    	FireEvent.$emit('addData');
-  	    },
+  	    // addData(){
+  	    // 	FireEvent.$emit('addData');
+  	    // },
 
-  	    editData(data){
-  	    	//alert(data.id);
-  	    	FireEvent.$emit('editData', data);
-  	    },
+  	    // editData(data){
+  	    // 	//alert(data.id);
+  	    // 	FireEvent.$emit('editData', data);
+  	    // },
 
 	      DeleteData(id){
           this.$Progress.start();
@@ -401,6 +403,16 @@
 	          })
 	      }, //end delete
        
+        // ################################ For search App ###############################################
+          searchData(data){
+            this.$store.dispatch('ProductMasterStore/searching', data );  
+          },      
+          AutoCompleteSearch(data){
+            if(data != ''){
+                this.$store.dispatch('ProductMasterStore/AutoCompleteSearch', data ); 
+            }        
+          },
+        // ################################ For search App ###############################################
       
       },
 
@@ -417,19 +429,6 @@
           //this event call from Pagination-app component for change number of data show per page
           FireEvent.$on('changPerPage', (data) => {
             this.$store.dispatch('ProductMasterStore/fetchData',data);
-          });
-
-          //This is come from search-app-one.vue file for serch data
-          FireEvent.$on('searchData', (data) => {
-             //alert(data.search_key+'-'+data.search_option);
-             this.$store.dispatch('ProductMasterStore/searching', data ); 
-          });
-          //This is come from search-app-one.vue file for Auto Complete data
-          FireEvent.$on('AutoCompleteSearch', (data) => {
-              //alert(data);
-              if(data != ''){
-                this.$store.dispatch('ProductMasterStore/AutoCompleteSearch', data ); 
-              }
           });
 
       },

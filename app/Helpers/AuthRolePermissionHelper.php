@@ -112,9 +112,11 @@ function systemSettingsGetResolution($searchKey){
   // $settings = Setting::where('json_test->img_module', 'LIKE',  '%'.$searchKey.'%')
   //               ->get(); 
   // return $settings;
-  $settings = Setting::where('json_test->img_module', '=',  'user-img')
-              // ->select('json_test')
-               ->first(); 
+  // $settings = Setting::whereJsonContains('image_resolution->img_module', ["user-img"])
+  //             // ->select('json_test')
+  //              ->first(); 
+
+  $settings = Setting::withCount('image_resolution->img_module')->get();
   return $settings;
 
   //select * from `settings` where json_unquote(json_extract(`json_test`, '$."img_module"')) = 'user-img'

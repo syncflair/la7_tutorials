@@ -155,6 +155,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -325,13 +333,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     ViewDetails: function ViewDetails() {
       alert('ok');
     },
-    addData: function addData() {
-      FireEvent.$emit('addData');
-    },
-    editData: function editData(data) {
-      //alert(data.id);
-      FireEvent.$emit('editData', data);
-    },
+    // addData(){
+    // 	FireEvent.$emit('addData');
+    // },
+    // editData(data){
+    // 	//alert(data.id);
+    // 	FireEvent.$emit('editData', data);
+    // },
     DeleteData: function DeleteData(id) {
       var _this5 = this;
 
@@ -371,7 +379,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           toastr.info('Your data is safe!');
         }
       });
-    } //end delete
+    },
+    //end delete
+    // ################################ For search App ###############################################
+    searchData: function searchData(data) {
+      this.$store.dispatch('VendorMasterStore/searching', data);
+    },
+    AutoCompleteSearch: function AutoCompleteSearch(data) {
+      if (data != '') {
+        this.$store.dispatch('VendorMasterStore/AutoCompleteSearch', data);
+      }
+    } // ################################ For search App ###############################################
 
   },
   created: function created() {
@@ -389,18 +407,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     FireEvent.$on('changPerPage', function (data) {
       _this6.$store.dispatch('VendorMasterStore/fetchData', data);
-    }); //This is come from search-app-one.vue file for serch data
-
-    FireEvent.$on('searchData', function (data) {
-      //alert(data.search_key+'-'+data.search_option);
-      _this6.$store.dispatch('VendorMasterStore/searching', data);
-    }); //This is come from search-app-one.vue file for Auto Complete data
-
-    FireEvent.$on('AutoCompleteSearch', function (data) {
-      //alert(data);
-      if (data != '') {
-        _this6.$store.dispatch('VendorMasterStore/AutoCompleteSearch', data);
-      }
     });
   },
   mounted: function mounted() {//console.log(this.categories)   
@@ -432,12 +438,16 @@ var render = function() {
           "div",
           { staticClass: "col-md-5 col-sm-9" },
           [
-            _c("search-app-one", {
+            _c("search-app-master", {
               attrs: {
                 SearchByOptions: _vm.SearchByOptions,
                 filterBy: _vm.filterBy,
                 autoCompleteData: _vm.autoCompleteData,
                 pagination: _vm.pagination
+              },
+              on: {
+                searchData: _vm.searchData,
+                AutoCompleteSearch: _vm.AutoCompleteSearch
               }
             })
           ],
@@ -879,54 +889,80 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "text-right" },
-                    [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-flat btn-sm",
-                          on: {
-                            click: function($event) {
-                              return _vm.ViewDetails()
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-eye primary" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-primary- btn-flat btn-sm",
-                          attrs: {
-                            to: {
-                              name: "VendorMasterForm",
-                              params: { data: vendor }
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-edit primary " })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass:
-                            "btn btn-block- btn-danger- btn-flat btn-sm",
-                          attrs: { id: "delete" },
-                          on: {
-                            click: function($event) {
-                              return _vm.DeleteData(vendor.id)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "far fa-trash-alt red" })]
-                      )
-                    ],
-                    1
-                  )
+                  _c("td", { staticClass: "text-right" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "btn-group option-dropdown-manu-style left"
+                      },
+                      [
+                        _vm._m(0, true),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "dropdown-menu dropdown-menu-right" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.ViewDetails(vendor.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-eye primary" }),
+                                _vm._v(" View ")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                attrs: {
+                                  to: {
+                                    name: "VendorMasterForm",
+                                    params: { data: vendor }
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-edit primary "
+                                }),
+                                _vm._v(" Edit\r\n                  ")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                attrs: { id: "delete" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.DeleteData(vendor.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "far fa-trash-alt red"
+                                }),
+                                _vm._v(" Delete\r\n                  ")
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    )
+                  ])
                 ])
               }),
               _vm._v(" "),
@@ -942,7 +978,7 @@ var render = function() {
                     }
                   ]
                 },
-                [_vm._m(0)]
+                [_vm._m(1)]
               )
             ],
             2
@@ -971,6 +1007,23 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "btn btn-flat btn-sm btn-warning dropdown-toggle-",
+        attrs: {
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-ellipsis-v" })]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

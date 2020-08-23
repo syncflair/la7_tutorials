@@ -4,12 +4,14 @@
       <div class="row">
         <div class="col-md-6 col-sm-9">
           <!-- Branch List -->
-          <search-app-one 
+          <search-app-master 
+            @searchData="searchData"
+            @AutoCompleteSearch="AutoCompleteSearch"
             :SearchByOptions="SearchByOptions"
             :filterBy="filterBy"
             :autoCompleteData="autoCompleteData"
             :pagination="pagination"
-          ></search-app-one>
+          ></search-app-master>
 
         </div>
         <div class="col-md-6 col-sm-3 text-right">
@@ -171,6 +173,16 @@
           //console.log(this.pagination.total);
         },
        
+       // ################################ For search App ###############################################
+          searchData(data){
+            this.$store.dispatch('BranchInfoStore/searching', data ); 
+          },      
+          AutoCompleteSearch(data){
+            if(data != ''){
+                this.$store.dispatch('BranchInfoStore/AutoCompleteSearch', data ); 
+            }        
+          },
+        // ################################ For search App ###############################################
       
       },
 
@@ -188,19 +200,6 @@
              this.$store.dispatch('BranchInfoStore/fetchData',data);
           });
 
-
-          //This is come from search-app-one.vue file for serch data
-          FireEvent.$on('searchData', (data) => {
-             //alert(data.search_key+'-'+data.search_option);
-             this.$store.dispatch('BranchInfoStore/searching', data ); 
-          });
-          //This is come from search-app-one.vue file for Auto Complete data
-          FireEvent.$on('AutoCompleteSearch', (data) => {
-              //alert(data);
-              if(data != ''){
-                this.$store.dispatch('BranchInfoStore/AutoCompleteSearch', data ); 
-              }
-          });
       },
 
       mounted() {

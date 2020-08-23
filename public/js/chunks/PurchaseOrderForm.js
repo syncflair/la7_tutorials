@@ -861,9 +861,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$store.dispatch('PurchaseOrderMasterStore/AutoCompleteSearchForDataVendor', data);
     },
     getSelectedDataByIdsForVendor: function getSelectedDataByIdsForVendor(data) {
-      //this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedVendor', this.form.vendor_id);
+      //this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedVendor', this.form.vendor_id);            
       this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedVendor', data);
-      alert(data);
     },
     AutoCompleteSearchForDataProduct: function AutoCompleteSearchForDataProduct(data) {
       this.$store.dispatch('PurchaseOrderMasterStore/AutoCompleteSearchForDataProduct', data);
@@ -887,7 +886,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //console.log(i);
       }
 
-      this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedProductList', this.product_id_list);
+      this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedProductList', this.product_id_list); //alert(this.selectedProductList);
+      // console.log(this.selectedProductList[]);
     }
   },
   created: function created() {
@@ -907,7 +907,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     FireEvent.$on('AutoCompleteSearchForData', function (data) {
       _this3.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data);
-    }); //console.log(moment().format('LTS'));
+    });
+    console.log(this.selectedProductList); //console.log(moment().format('LTS'));
   },
   mounted: function mounted() {//console.log(moment().format('LTS'))
   }
@@ -2445,51 +2446,56 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "row mr-4- mt-2" }, [
-            _c("div", { staticClass: "col-12  text-right" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary btn-flat btn-sm ",
-                  attrs: { type: "submit" }
-                },
-                [
+          _vm.form.is_approved === 0
+            ? _c("div", { staticClass: "row mr-4- mt-2" }, [
+                _c("div", { staticClass: "col-12  text-right" }, [
                   _c(
-                    "span",
+                    "button",
                     {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: !_vm.editMode,
-                          expression: "!editMode"
-                        }
-                      ]
+                      staticClass: "btn btn-primary btn-flat btn-sm ",
+                      attrs: { type: "submit" }
                     },
                     [
-                      _c("i", { staticClass: "fas fa-save" }),
-                      _vm._v(" Place Order")
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      directives: [
+                      _c(
+                        "span",
                         {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.editMode,
-                          expression: "editMode"
-                        }
-                      ]
-                    },
-                    [_c("i", { staticClass: "far fa-edit" }), _vm._v(" Update")]
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: !_vm.editMode,
+                              expression: "!editMode"
+                            }
+                          ]
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-save" }),
+                          _vm._v(" Place Order")
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: _vm.editMode,
+                              expression: "editMode"
+                            }
+                          ]
+                        },
+                        [
+                          _c("i", { staticClass: "far fa-edit" }),
+                          _vm._v(" Update order")
+                        ]
+                      )
+                    ]
                   )
-                ]
-              )
-            ])
-          ])
+                ])
+              ])
+            : _vm._e()
         ]
       )
     ]),

@@ -103,6 +103,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -123,14 +125,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }]
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('StatusMasterStore', ['StatusMaster', 'pagination', 'autoCompleteData'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('StatusMasterStore', ['StatusMaster'] // 'StatusMasterStore', ['StatusMaster', 'pagination','autoCompleteData']
+  )),
   methods: {
-    addData: function addData() {
-      FireEvent.$emit('addData');
+    addStatusMaster: function addStatusMaster() {
+      FireEvent.$emit('addStatusMaster');
     },
-    editData: function editData(data) {
+    editStatusMaster: function editStatusMaster(data) {
       //alert(data.id);
-      FireEvent.$emit('editData', data);
+      FireEvent.$emit('editStatusMaster', data);
     },
     DeleteData: function DeleteData(id) {
       Swal.fire({
@@ -170,7 +173,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$Progress.start();
       this.$store.dispatch('StatusMasterStore/fetchData', this.pagination.per_page);
       this.$Progress.finish(); //console.log(this.pagination.total);
-    }
+    } // ################################ For search App ###############################################
+    // searchData(data){
+    //     this.$store.dispatch('StatusMasterStore/searching', data ); 
+    // },      
+    // AutoCompleteSearch(data){
+    //   if(data != ''){
+    //     this.$store.dispatch('StatusMasterStore/AutoCompleteSearch', data ); 
+    //   }        
+    // },
+    // ################################ For search App ###############################################
+
   },
   created: function created() {
     var _this = this;
@@ -178,27 +191,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$store.dispatch('StatusMasterStore/fetchData'); //call this function at first loading from Action with Modules namespace 
 
     FireEvent.$on('AfterChange', function () {
-      _this.$Progress.start();
+      _this.$Progress.start(); // this.$store.dispatch('StatusMasterStore/fetchData', this.pagination.per_page);
 
-      _this.$store.dispatch('StatusMasterStore/fetchData', _this.pagination.per_page);
+
+      _this.$store.dispatch('StatusMasterStore/fetchData');
 
       _this.$Progress.finish();
     }); //this event call from Pagination-app component for change number of data show per page
 
     FireEvent.$on('changPerPage', function (data) {
       _this.$store.dispatch('StatusMasterStore/fetchData', data);
-    }); //This is come from search-app-one.vue file for serch data
-
-    FireEvent.$on('searchData', function (data) {
-      //alert(data.search_key+'-'+data.search_option);
-      _this.$store.dispatch('StatusMasterStore/searching', data);
-    }); //This is come from search-app-one.vue file for Auto Complete data
-
-    FireEvent.$on('AutoCompleteSearch', function (data) {
-      //alert(data);
-      if (data != '') {
-        _this.$store.dispatch('StatusMasterStore/AutoCompleteSearch', data);
-      }
     });
   },
   mounted: function mounted() {//console.log(this.categories)    
@@ -226,21 +228,9 @@ var render = function() {
   return _c("div", { staticClass: "card vue-card-item" }, [
     _c("div", { staticClass: "card-header" }, [
       _c("div", { staticClass: "row" }, [
-        _c(
-          "div",
-          { staticClass: "col-md-6 col-sm-9" },
-          [
-            _c("search-app-one", {
-              attrs: {
-                SearchByOptions: _vm.SearchByOptions,
-                filterBy: _vm.filterBy,
-                autoCompleteData: _vm.autoCompleteData,
-                pagination: _vm.pagination
-              }
-            })
-          ],
-          1
-        ),
+        _c("div", { staticClass: "col-md-6 col-sm-9" }, [
+          _vm._v("\r\n          Status Master\r\n          ")
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6 col-sm-3 text-right" }, [
           _c(
@@ -248,7 +238,7 @@ var render = function() {
             {
               staticClass: "btn btn-primary btn-flat btn-sm",
               attrs: { "data-toggle": "modal", "data-target": "#formModal" },
-              on: { click: _vm.addData }
+              on: { click: _vm.addStatusMaster }
             },
             [_c("i", { staticClass: "icon fas fa-plus" }), _vm._v(" Add New")]
           )
@@ -327,7 +317,7 @@ var render = function() {
                         },
                         on: {
                           click: function($event) {
-                            return _vm.editData(m_status)
+                            return _vm.editStatusMaster(m_status)
                           }
                         }
                       },
@@ -373,23 +363,7 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "card-footer" },
-      [
-        _vm.pagination.last_page >= 1
-          ? _c("pagination-app", {
-              attrs: { pagination: _vm.pagination, offset: 5 },
-              on: {
-                paginate: function($event) {
-                  return _vm.fetchData()
-                }
-              }
-            })
-          : _vm._e()
-      ],
-      1
-    )
+    _c("div", { staticClass: "card-footer" })
   ])
 }
 var staticRenderFns = [

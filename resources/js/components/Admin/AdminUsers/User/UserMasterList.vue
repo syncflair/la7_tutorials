@@ -4,16 +4,18 @@
       <div class="row">
         <div class="col-md-5 col-sm-9">
           <!-- user List -->
-          <search-app-one 
+          <search-app-master 
+            @searchData="searchData"
+            @AutoCompleteSearch="AutoCompleteSearch"
             :SearchByOptions="SearchByOptions"
             :filterBy="filterBy"
             :autoCompleteData="autoCompleteData"
             :pagination="pagination"
-          ></search-app-one>
+          ></search-app-master>
         </div>
         <div class="col-md-7 col-sm-3 text-right">
           <a @click="reloadThis" class="btn btn-primary btn-flat btn-sm" title="reload"> <i class="fas fa-sync-alt"></i> </a>
-        	<a @click="addData" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#FormModal"> <i class="icon fas fa-plus"></i> Add New</a>
+        	<a @click="addUser" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#FormModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>
     </div><!--/card-header-->
@@ -74,7 +76,7 @@
 
             <td class="text-right">  
               <a @click="ViewDetails()" class="btn btn-flat btn-sm"> <i class="fas fa-eye primary"></i> </a>   
-              <a @click="editData(user)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
+              <a @click="editUser(user)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
                   <i class="fas fa-edit primary "></i>
               </a> 
               <a @click="DeleteData(user.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
@@ -299,13 +301,13 @@
           alert('ok');
         },
 
-  	    addData(){
-  	    	FireEvent.$emit('addData'); //call to form components
+  	    addUser(){
+  	    	FireEvent.$emit('addUser'); //call to form components
   	    },
 
-  	    editData(data){
+  	    editUser(data){
   	    	//alert(data.id);
-  	    	FireEvent.$emit('editData', data); //call to form components
+  	    	FireEvent.$emit('editUser', data); //call to form components
   	    },
 
 	      DeleteData(id){
@@ -347,6 +349,17 @@
 	          })
 	      }, //end delete
          
+
+         // ################################ For search App ###############################################
+          searchData(data){ //This is come from search-app-master.vue file for serch data
+            this.$store.dispatch('usersAdminStore/searching', data ); 
+          },      
+          AutoCompleteSearch(data){ //This is come from search-app-master.vue file for Auto Complete data
+            if(data != ''){
+                this.$store.dispatch('usersAdminStore/AutoCompleteSearch', data ); 
+            }        
+          },
+        // ################################ For search App ###############################################
       
       },
 
@@ -366,19 +379,6 @@
             this.$store.dispatch('usersAdminStore/fetchData',data);
           });
 
-
-          //This is come from search-app-one.vue file for serch data
-          FireEvent.$on('searchData', (data) => {
-             //alert(data.search_key+'-'+data.search_option);
-             this.$store.dispatch('usersAdminStore/searching', data ); 
-          });
-          //This is come from search-app-one.vue file for Auto Complete data
-          FireEvent.$on('AutoCompleteSearch', (data) => {
-              //alert(data);
-              if(data != ''){
-                this.$store.dispatch('usersAdminStore/AutoCompleteSearch', data ); 
-              }
-          });
       },
 
       mounted() {

@@ -91,7 +91,7 @@
 
 	    methods:{
 
-	    	addData(){
+	    	addSpecification(){
 	    		this.editMode = false;
 	    		this.form.reset();
 	    		// setTimeout(() => {
@@ -99,7 +99,7 @@
        //          }, 600);
 	    	},
 
-	    	editData(data){
+	    	editSpecification(data){
 	    		this.editMode = true;
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
@@ -168,14 +168,14 @@
 	    },
 
 	    created(){
-	    	FireEvent.$on('editData', (data) => {
+	    	FireEvent.$on('editSpecification', (data) => {
               //alert(data.id);
               //this.form.fill(data);   //this is also work
-              this.editData(data);
+              this.editSpecification(data);
             });
 
-            FireEvent.$on('addData', () => {
-              this.addData();
+            FireEvent.$on('addSpecification', () => {
+              this.addSpecification();
             });
 	    }
 

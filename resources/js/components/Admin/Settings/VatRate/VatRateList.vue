@@ -4,12 +4,14 @@
       <div class="row">
         <div class="col-md-6 col-sm-9">
           <!-- Vate Rates -->
-          <search-app-one 
+          <search-app-master 
+            @searchData="searchData"
+            @AutoCompleteSearch="AutoCompleteSearch"
             :SearchByOptions="SearchByOptions"
             :filterBy="filterBy"
             :autoCompleteData="autoCompleteData"
             :pagination="pagination"
-          ></search-app-one>
+          ></search-app-master>
         </div>
         <div class="col-md-6 col-sm-3 text-right">
         	<a @click="addVatRate" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#VatRateModal"> <i class="icon fas fa-plus"></i> Add New</a>
@@ -180,6 +182,16 @@
           //console.log(this.pagination.total);
         },
        
+       // ################################ For search App ###############################################
+          searchData(data){
+            this.$store.dispatch('VatRatesStore/searching', data );
+          },      
+          AutoCompleteSearch(data){
+            if(data != ''){
+                this.$store.dispatch('VatRatesStore/AutoCompleteSearch', data ); 
+            }        
+          },
+        // ################################ For search App ###############################################
       
       },
 
@@ -197,19 +209,6 @@
              this.$store.dispatch('VatRatesStore/fetchData',data);
           });
 
-
-          //This is come from search-app-one.vue file for serch data
-          FireEvent.$on('searchData', (data) => {
-             //alert(data.search_key+'-'+data.search_option);
-             this.$store.dispatch('VatRatesStore/searching', data ); 
-          });
-          //This is come from search-app-one.vue file for Auto Complete data
-          FireEvent.$on('AutoCompleteSearch', (data) => {
-              //alert(data);
-              if(data != ''){
-                this.$store.dispatch('VatRatesStore/AutoCompleteSearch', data ); 
-              }
-          });
       },
 
       mounted() {

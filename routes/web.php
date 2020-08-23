@@ -1,6 +1,6 @@
 <?php
 //print_r(systemSettingsAll()->image_resolution[0]);
-//print_r(systemSettingsGetResolution('user-img'));
+print_r(systemSettingsGetResolution('user-img'));
 /*Enable Query Log to check raw sql query*/
 DB::listen(function($sql) {
    //print_r($sql->sql); 

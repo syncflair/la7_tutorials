@@ -21,6 +21,15 @@ class Category extends Model
 
     protected $guarded = []; 
 
+      /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'cat_translation' => 'array',      
+    ];
+
 
     //A Category Has Many Products (hasMany())
     public function product(){
@@ -50,7 +59,7 @@ class Category extends Model
     }
 
 
-    //this function for query 
+    //this function for query ()
     public function lang_translation(){
         return $this->hasMany(CategoryLanguageTranslation::class,'category_id');
             //->select('language_id', 'lang_code','category_name', 'category_desc');

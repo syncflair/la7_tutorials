@@ -140,6 +140,7 @@
     "/js/chunks/multi-select-app-one-global.js": "/js/chunks/multi-select-app-one-global.js",
     "/js/chunks/my-date-time-global.js": "/js/chunks/my-date-time-global.js",
     "/js/chunks/pagination-app.js": "/js/chunks/pagination-app.js",
+    "/js/chunks/search-app-master.js": "/js/chunks/search-app-master.js",
     "/js/chunks/search-app-one.js": "/js/chunks/search-app-one.js",
     "/js/chunks/searchBox.js": "/js/chunks/searchBox.js",
     "/js/chunks/single-select-app-one-global.js": "/js/chunks/single-select-app-one-global.js",

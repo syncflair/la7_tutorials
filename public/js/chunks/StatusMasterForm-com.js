@@ -129,7 +129,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   //end data
   methods: {
-    addData: function addData() {
+    addStatusMaster: function addStatusMaster() {
       var _this = this;
 
       this.editMode = false;
@@ -138,7 +138,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.$refs.status_name.focus();
       }, 600);
     },
-    editData: function editData(data) {
+    editStatusMaster: function editStatusMaster(data) {
       this.editMode = true;
       this.form.reset();
       this.form.fill(data); //this.$refs.status_name.focus();    		
@@ -216,13 +216,13 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this4 = this;
 
-    FireEvent.$on('editData', function (data) {
+    FireEvent.$on('editStatusMaster', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this4.editData(data);
+      _this4.editStatusMaster(data);
     });
-    FireEvent.$on('addData', function () {
-      _this4.addData();
+    FireEvent.$on('addStatusMaster', function () {
+      _this4.addStatusMaster();
     });
   }
 }); //End Exprot Default

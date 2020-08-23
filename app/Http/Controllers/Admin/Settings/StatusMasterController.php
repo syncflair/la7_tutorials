@@ -29,7 +29,7 @@ class StatusMasterController extends Controller
         if(!empty($request->perPage)){
             $perPage = $request->perPage;
         }else{
-            $perPage = 50;
+            $perPage = 200;
         }
 
         $data = StatusMaster::orderBy('status_type', 'ASC')->paginate($perPage);
@@ -155,7 +155,7 @@ class StatusMasterController extends Controller
         if(!empty($request->perPage)){
             $perPage = $request->perPage;
         }else{
-            $perPage = 50;
+            $perPage = 100;
         }
 
         $searchKey = $request->q;

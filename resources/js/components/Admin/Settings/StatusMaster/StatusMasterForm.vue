@@ -114,7 +114,7 @@
 
 	    methods:{
 
-	    	addData(){
+	    	addStatusMaster(){
 	    		this.editMode = false;
 	    		this.form.reset();
 	    		setTimeout(() => {
@@ -122,7 +122,7 @@
                 }, 600);
 	    	},
 
-	    	editData(data){
+	    	editStatusMaster(data){
 	    		this.editMode = true;
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
@@ -190,14 +190,14 @@
 	    },
 
 	    created(){
-	    	FireEvent.$on('editData', (data) => {
+	    	FireEvent.$on('editStatusMaster', (data) => {
               //alert(data.id);
               //this.form.fill(data);   //this is also work
-              this.editData(data);
+              this.editStatusMaster(data);
             });
 
-            FireEvent.$on('addData', () => {
-              this.addData();
+            FireEvent.$on('addStatusMaster', () => {
+              this.addStatusMaster();
             });
 	    }
 

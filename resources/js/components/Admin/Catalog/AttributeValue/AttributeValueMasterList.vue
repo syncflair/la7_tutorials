@@ -4,16 +4,18 @@
       <div class="row">
         <div class="col-md-6 col-sm-9">
           <!-- Vate Rates -->
-          <search-app-one 
+          <search-app-master 
+            @searchData="searchData"
+            @AutoCompleteSearch="AutoCompleteSearch"
             :SearchByOptions="SearchByOptions"
             :filterBy="filterBy"
             :autoCompleteData="autoCompleteData"
             :pagination="pagination"
-          ></search-app-one>
+          ></search-app-master>
         </div>
         <div class="col-md-6 col-sm-3 text-right">
           <a @click="reloadThis" class="btn btn-primary btn-flat btn-sm" title="reload"> <i class="fas fa-sync-alt"></i> </a>
-        	<a @click="addData" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#formModal"> <i class="icon fas fa-plus"></i> Add New</a>
+        	<a @click="addAttribValue" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#formModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>
     </div><!--/card-header-->
@@ -41,7 +43,7 @@
             </td>
 
             <td class="text-right">    
-              <a @click="editData(av)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#formModal">
+              <a @click="editAttribValue(av)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#formModal">
                   <i class="fas fa-edit primary "></i>
               </a> 
               <a @click="DeleteData(av.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
@@ -97,13 +99,13 @@
 
       methods:{
 
-  	    addData(){
-  	    	FireEvent.$emit('addData');
+  	    addAttribValue(){
+  	    	FireEvent.$emit('addAttribValue');
   	    },
 
-  	    editData(data){
+  	    editAttribValue(data){
   	    	//alert(data.id);
-  	    	FireEvent.$emit('editData', data);
+  	    	FireEvent.$emit('editAttribValue', data);
   	    },
 
   	    DeleteData(id){
@@ -152,6 +154,17 @@
         reloadThis(){
           this.fetchData();
         },
+
+        // ################################ For search App ###############################################
+          searchData(data){
+            this.$store.dispatch('AttributeValueMasterStore/searching', data ); 
+          },      
+          AutoCompleteSearch(data){
+            if(data != ''){
+                this.$store.dispatch('AttributeValueMasterStore/AutoCompleteSearch', data );
+            }        
+          },
+        // ################################ For search App ###############################################
       
       },
 
@@ -169,19 +182,6 @@
              this.$store.dispatch('AttributeValueMasterStore/fetchData',data);
           });
 
-
-          //This is come from search-app-one.vue file for serch data
-          FireEvent.$on('searchData', (data) => {
-             //alert(data.search_key+'-'+data.search_option);
-             this.$store.dispatch('AttributeValueMasterStore/searching', data ); 
-          });
-          //This is come from search-app-one.vue file for Auto Complete data
-          FireEvent.$on('AutoCompleteSearch', (data) => {
-              //alert(data);
-              if(data != ''){
-                this.$store.dispatch('AttributeValueMasterStore/AutoCompleteSearch', data ); 
-              }
-          });
       },
 
       mounted() {

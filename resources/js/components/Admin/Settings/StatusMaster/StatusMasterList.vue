@@ -3,16 +3,18 @@
     <div class="card-header">
       <div class="row">
         <div class="col-md-6 col-sm-9">
-          <!-- Vate Rates -->
-          <search-app-one 
+          Status Master
+          <!-- <search-app-master 
+            @searchData="searchData"
+            @AutoCompleteSearch="AutoCompleteSearch"
             :SearchByOptions="SearchByOptions"
             :filterBy="filterBy"
             :autoCompleteData="autoCompleteData"
             :pagination="pagination"
-          ></search-app-one>
+          ></search-app-master> -->
         </div>
         <div class="col-md-6 col-sm-3 text-right">
-        	<a @click="addData" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#formModal"> <i class="icon fas fa-plus"></i> Add New</a>
+        	<a @click="addStatusMaster" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#formModal"> <i class="icon fas fa-plus"></i> Add New</a>
         </div>
       </div>
     </div><!--/card-header-->
@@ -52,7 +54,7 @@
 
 
             <td class="text-right">    
-              <a @click="editData(m_status)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#formModal">
+              <a @click="editStatusMaster(m_status)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#formModal">
                   <i class="fas fa-edit primary "></i>
               </a> 
               <a @click="DeleteData(m_status.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
@@ -74,12 +76,12 @@
     </div>
 
     <div class="card-footer">      
-      <pagination-app 
+      <!-- <pagination-app 
           v-if="pagination.last_page >= 1"  
           :pagination="pagination"
           :offset="5"
           @paginate="fetchData()"
-      ></pagination-app>
+      ></pagination-app> -->
     </div>
 
 </div><!--/vue-card-item -->
@@ -104,19 +106,20 @@
 
       computed: {
         ...mapState( 
-             'StatusMasterStore', ['StatusMaster', 'pagination','autoCompleteData']
+             'StatusMasterStore', ['StatusMaster']
+             // 'StatusMasterStore', ['StatusMaster', 'pagination','autoCompleteData']
           ),
       },
 
       methods:{
 
-  	    addData(){
-  	    	FireEvent.$emit('addData');
+  	    addStatusMaster(){
+  	    	FireEvent.$emit('addStatusMaster');
   	    },
 
-  	    editData(data){
+  	    editStatusMaster(data){
   	    	//alert(data.id);
-  	    	FireEvent.$emit('editData', data);
+  	    	FireEvent.$emit('editStatusMaster', data);
   	    },
 
   	    DeleteData(id){
@@ -162,6 +165,16 @@
           //console.log(this.pagination.total);
         },
        
+        // ################################ For search App ###############################################
+          // searchData(data){
+          //     this.$store.dispatch('StatusMasterStore/searching', data ); 
+          // },      
+          // AutoCompleteSearch(data){
+          //   if(data != ''){
+          //     this.$store.dispatch('StatusMasterStore/AutoCompleteSearch', data ); 
+          //   }        
+          // },
+        // ################################ For search App ###############################################
       
       },
 
@@ -170,7 +183,8 @@
 
           FireEvent.$on('AfterChange', () => {
               this.$Progress.start();
-              this.$store.dispatch('StatusMasterStore/fetchData', this.pagination.per_page);
+              // this.$store.dispatch('StatusMasterStore/fetchData', this.pagination.per_page);
+              this.$store.dispatch('StatusMasterStore/fetchData');
               this.$Progress.finish();
           });
 
@@ -179,19 +193,6 @@
              this.$store.dispatch('StatusMasterStore/fetchData',data);
           });
 
-
-          //This is come from search-app-one.vue file for serch data
-          FireEvent.$on('searchData', (data) => {
-             //alert(data.search_key+'-'+data.search_option);
-             this.$store.dispatch('StatusMasterStore/searching', data ); 
-          });
-          //This is come from search-app-one.vue file for Auto Complete data
-          FireEvent.$on('AutoCompleteSearch', (data) => {
-              //alert(data);
-              if(data != ''){
-                this.$store.dispatch('StatusMasterStore/AutoCompleteSearch', data ); 
-              }
-          });
       },
 
       mounted() {

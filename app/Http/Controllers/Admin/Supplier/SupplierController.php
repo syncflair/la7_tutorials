@@ -338,7 +338,7 @@ class SupplierController extends Controller
 
         if(!empty($searchKey) && empty($searchOption)){
         //if($search = \Request::get('q')){
-            $searchResult = Supplier::with('belongsToBrandShop')
+            $searchResult = Supplier::with('belongsToVendor')
                 ->where(function($query) use ($searchKey){
                 $query->where('suppliers.name','LIKE','%'.$searchKey.'%')
                         ->orWhere('suppliers.email','LIKE','%'.$searchKey.'%')
@@ -352,7 +352,7 @@ class SupplierController extends Controller
             ->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){
-            $searchResult = Supplier::with('belongsToBrandShop')
+            $searchResult = Supplier::with('belongsToVendor')
             ->where(function($query) use ($searchKey, $searchOption){
                 if($searchOption == 'us_name'){
                     $query->where( 'user_status.'.$searchOption,'LIKE','%'.$searchKey.'%');
@@ -366,7 +366,7 @@ class SupplierController extends Controller
             
         }else{
             //$searchResult = Supplier::latest()->paginate(10);
-            $searchResult = Supplier::with('belongsToBrandShop')
+            $searchResult = Supplier::with('belongsToVendor')
                     ->paginate($perPage);
         }
         //return $searchResult;

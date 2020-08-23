@@ -100,13 +100,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   //end data
   methods: {
-    addData: function addData() {
+    addSpecification: function addSpecification() {
       this.editMode = false;
       this.form.reset(); // setTimeout(() => {
       // 	this.$refs.specification_name.focus(); 
       //          }, 600);
     },
-    editData: function editData(data) {
+    editSpecification: function editSpecification(data) {
       this.editMode = true;
       this.form.reset();
       this.form.fill(data); //this.$refs.specification_name.focus();    		
@@ -184,13 +184,13 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this3 = this;
 
-    FireEvent.$on('editData', function (data) {
+    FireEvent.$on('editSpecification', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this3.editData(data);
+      _this3.editSpecification(data);
     });
-    FireEvent.$on('addData', function () {
-      _this3.addData();
+    FireEvent.$on('addSpecification', function () {
+      _this3.addSpecification();
     });
   }
 }); //End Exprot Default

@@ -105,7 +105,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   //end data
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['AllAttributes'])),
   methods: {
-    addData: function addData() {
+    addAttribValue: function addAttribValue() {
       var _this = this;
 
       this.editMode = false;
@@ -114,7 +114,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.$refs.attribute_value.focus();
       }, 600);
     },
-    editData: function editData(data) {
+    editAttribValue: function editAttribValue(data) {
       this.editMode = true;
       this.form.reset();
       this.form.fill(data); //this.$refs.attribute_value.focus();    		
@@ -195,13 +195,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //for options
     this.$store.dispatch('commonStoreForAll/fetchAttributeList'); //get for attribute list for options
 
-    FireEvent.$on('editData', function (data) {
+    FireEvent.$on('editAttribValue', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this4.editData(data);
+      _this4.editAttribValue(data);
     });
-    FireEvent.$on('addData', function () {
-      _this4.addData();
+    FireEvent.$on('addAttribValue', function () {
+      _this4.addAttribValue();
     });
   }
 }); //End Exprot Default

@@ -454,11 +454,11 @@
 
 
 
-   	  <div class="row mr-4- mt-2">
+   	  <div class="row mr-4- mt-2" v-if="form.is_approved === 0">
    	  	<div class="col-12  text-right">
    	  		<button type="submit" class="btn btn-primary btn-flat btn-sm ">
 	        	<span v-show="!editMode"> <i class="fas fa-save"></i> Place Order</span>
-	        	<span v-show="editMode"> <i class="far fa-edit"></i> Update</span>
+	        	<span v-show="editMode"> <i class="far fa-edit"></i> Update order</span>
 	    	</button>    	  		
    	  	</div>
    	  </div>  	  	
@@ -868,15 +868,15 @@
             this.$store.dispatch('PurchaseOrderMasterStore/AutoCompleteSearchForDataVendor', data ); 
       },
       getSelectedDataByIdsForVendor(data){
-            //this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedVendor', this.form.vendor_id);
-            this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedVendor', data);
-            alert(data)
+            //this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedVendor', this.form.vendor_id);            
+            this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedVendor', data);            
       },
 
       AutoCompleteSearchForDataProduct(data){
             this.$store.dispatch('PurchaseOrderMasterStore/AutoCompleteSearchForDataProduct', data ); 
       },
       getSelectedDataByIdsForProduct(data){ 
+
           if(!this.product_id_list.includes(data)){
           // if(!this.product_id_list.includes(data)){
             this.product_id_list.push(data);
@@ -900,6 +900,9 @@
           } 
 
           this.$store.dispatch('PurchaseOrderMasterStore/fetchSelectedProductList', this.product_id_list);
+
+          //alert(this.selectedProductList);
+          // console.log(this.selectedProductList[]);
       },
 
 
@@ -922,7 +925,7 @@
 	        this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data ); 
 	    });
 
-
+      console.log(this.selectedProductList);
 	    
       
     	//console.log(moment().format('LTS'));

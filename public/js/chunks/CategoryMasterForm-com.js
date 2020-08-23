@@ -169,6 +169,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -192,7 +193,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         // 	category_name: '',
         // 	category_desc: '',
         // }],
-        lang_translation: []
+        //lang_translation: [], //not used
+        cat_translation: [] //used
+
       })
     };
   },
@@ -201,12 +204,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   watch: {},
   methods: {
     pushToLanguageTranslationArray: function pushToLanguageTranslationArray() {
-      // for(let i in this.allLanguages){
-      // //this.allLanguages[i].id
-      //       this.form.lang_translation.push({ language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, category_name: '', category_desc: '' }); 
-      //     }
+      //using attach() function to save category_language_translation table
+      // for (var i = 0; i < this.allLanguages.length; i++) {
+      //   this.form.lang_translation.push( { language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, category_name: '', category_desc: '' } ); 
+      // }
+      //sor JSON
       for (var i = 0; i < this.allLanguages.length; i++) {
-        this.form.lang_translation.push({
+        this.form.cat_translation.push({
           language_id: this.allLanguages[i].id,
           lang_code: this.allLanguages[i].lang_code,
           category_name: '',
@@ -246,11 +250,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, 600);
     },
     editCategory: function editCategory(data) {
+      var _this3 = this;
+
       this.editMode = true;
       this.form.reset();
       this.form.fill(data);
-      this.$refs.cat_name.focus();
-      console.log(data);
+      this.$refs.cat_name.focus(); //console.log(data);
+
+      if (this.form.cat_translation === null) {
+        this.form.cat_translation = [];
+        setTimeout(function () {
+          _this3.pushToLanguageTranslationArray();
+        }, 1000); //console.log(this.allLanguages);
+      }
     },
     ClearForm: function ClearForm() {
       this.editMode = false;
@@ -260,7 +272,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     // Submit the form via a POST request
     storeFormData: function storeFormData() {
-      var _this3 = this;
+      var _this4 = this;
 
       //console.log(this.form); 
       this.$Progress.start(); //using progress-bar package
@@ -274,11 +286,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           toastr.success(data.success);
 
-          _this3.$Progress.finish();
+          _this4.$Progress.finish();
 
-          _this3.form.reset(); //reset from after submit
+          _this4.form.reset(); //reset from after submit
 
 
+          _this4.$refs.cat_img.value = ''; //clear file input tag 
+
+          _this4.ShowOnChangeImage = null;
           $('#CategoryModal').modal('hide');
         }
 
@@ -286,13 +301,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           toastr.warning(data.errors);
         }
       })["catch"](function () {
-        _this3.$Progress.fail();
+        _this4.$Progress.fail();
 
         toastr.warning('Something is wrong!');
       });
     },
     updateFormData: function updateFormData() {
-      var _this4 = this;
+      var _this5 = this;
 
       //console.log('Update is working!'); 
       this.$Progress.start(); //using progress-bar package
@@ -304,14 +319,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (data.success) {
           FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update
 
-          _this4.$Progress.finish();
+          _this5.$Progress.finish();
 
           toastr.success(data.success);
 
-          _this4.form.reset(); //reset from after submit
+          _this5.form.reset(); //reset from after submit
 
 
-          _this4.editMode = false;
+          _this5.$refs.cat_img.value = ''; //clear file input tag 
+
+          _this5.ShowOnChangeImage = null;
+          _this5.editMode = false;
           $('#CategoryModal').modal('hide'); //  this.$refs.cat_name.focus(); //ret focus to first input filed. ref="cat_name" tag must be use
         }
 
@@ -319,27 +337,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           toastr.warning(data.errors);
         }
       })["catch"](function () {
-        _this4.$Progress.fail();
+        _this5.$Progress.fail();
 
         toastr.warning('Something is wrong!');
       });
     }
   },
   created: function created() {
-    var _this5 = this;
+    var _this6 = this;
 
     //this.pushToLanguageTranslationArray();
     this.$store.dispatch('commonStoreForAll/fetchLanguages'); //get all language
 
     FireEvent.$on('editCategory', function (data) {
+      //this.$store.dispatch('commonStoreForAll/fetchLanguages'); //get all language
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this5.editCategory(data);
+      _this6.editCategory(data);
     });
     FireEvent.$on('addCategory', function () {
-      _this5.addCategory();
+      _this6.addCategory();
 
-      _this5.pushToLanguageTranslationArray();
+      _this6.pushToLanguageTranslationArray();
     });
   },
   mounted: function mounted() {//console.log(this.form.lang_translation);
@@ -776,9 +795,7 @@ var render = function() {
                                             width: "65px",
                                             height: "65px"
                                           },
-                                          attrs: {
-                                            src: "../" + _vm.form.cat_img
-                                          }
+                                          attrs: { src: _vm.form.cat_img }
                                         })
                                       : _vm._e()
                                   ])
@@ -789,7 +806,7 @@ var render = function() {
                         _c("div", { staticClass: "col-md-7 col-sm-12 mt-3" }, [
                           _c(
                             "table",
-                            _vm._l(_vm.form.lang_translation, function(
+                            _vm._l(_vm.form.cat_translation, function(
                               ct,
                               index
                             ) {

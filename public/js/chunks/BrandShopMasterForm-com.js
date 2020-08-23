@@ -152,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
         reader.readAsDataURL(file);
       }
     },
-    addData: function addData() {
+    addBrandShop: function addBrandShop() {
       var _this2 = this;
 
       this.editMode = false;
@@ -161,7 +161,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$refs.brand_shop_title.focus();
       }, 600);
     },
-    editData: function editData(data) {
+    editBrandShop: function editBrandShop(data) {
       this.editMode = true;
       this.form.reset();
       this.form.fill(data); //this.$refs.brand_shop_title.focus(); 
@@ -268,13 +268,13 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this6 = this;
 
-    FireEvent.$on('editData', function (data) {
+    FireEvent.$on('editBrandShop', function (data) {
       //alert(data.id);
       //this.form.fill(data);   //this is also work
-      _this6.editData(data);
+      _this6.editBrandShop(data);
     });
-    FireEvent.$on('addData', function () {
-      _this6.addData();
+    FireEvent.$on('addBrandShop', function () {
+      _this6.addBrandShop();
     });
   }
 }); //End Exprot Default

@@ -3,12 +3,14 @@
     <div class="card-header">      
       <div class="row">
         <div class="col-md-5 col-sm-9">
-          <search-app-one 
+          <search-app-master 
+            @searchData="searchData"
+            @AutoCompleteSearch="AutoCompleteSearch"
             :SearchByOptions="SearchByOptions"
             :filterBy="filterBy"
             :autoCompleteData="autoCompleteData"
             :pagination="pagination"
-          ></search-app-one>
+          ></search-app-master>
         </div>
         <div class="col-md-7 col-sm-3 text-right">
           <a @click="reloadThis" class="btn btn-primary btn-flat btn-sm" title="reload"> <i class="fas fa-sync-alt"></i> </a>
@@ -94,20 +96,26 @@
              
 
             <td class="text-right">  
-              <a @click="ViewDetails()" class="btn btn-flat btn-sm"> <i class="fas fa-eye primary"></i> </a>   
-              
-              <!-- <a @click="editData(vendor)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
-                  <i class="fas fa-edit primary "></i>
-              </a> -->
+              <!-- Dropdown List -->
+              <div class="btn-group option-dropdown-manu-style left">
+                <a class="btn btn-flat btn-sm btn-warning dropdown-toggle-" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i><!-- <i class="fas fa-ellipsis-h"></i> --></a>    
 
-              <router-link :to="{ name: 'VendorMasterForm', params: { data:vendor } }" class="btn btn-primary- btn-flat btn-sm">
-                  <i class="fas fa-edit primary "></i>
-              </router-link>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a @click="ViewDetails(vendor.id)" class="dropdown-item pointer"> <i class="fas fa-eye primary"></i> View </a> 
+                  
+                  <router-link :to="{ name: 'VendorMasterForm', params: { data:vendor } }" class="dropdown-item pointer">
+                      <i class="fas fa-edit primary "> </i> Edit
+                  </router-link>
 
-              <a @click="DeleteData(vendor.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
-                 <i class="far fa-trash-alt red"></i>
-              </a>
+                  <div class="dropdown-divider"></div>
+
+                  <a @click="DeleteData(vendor.id)" class="dropdown-item pointer" id="delete">
+                     <i class="far fa-trash-alt red"></i> Delete
+                  </a>
+                </div>
+              </div><!--End Dropdown List -->
             </td>
+
 
           </tr>
 
@@ -308,14 +316,14 @@
           alert('ok');
         },
 
-  	    addData(){
-  	    	FireEvent.$emit('addData');
-  	    },
+  	    // addData(){
+  	    // 	FireEvent.$emit('addData');
+  	    // },
 
-  	    editData(data){
-  	    	//alert(data.id);
-  	    	FireEvent.$emit('editData', data);
-  	    },
+  	    // editData(data){
+  	    // 	//alert(data.id);
+  	    // 	FireEvent.$emit('editData', data);
+  	    // },
 
 	      DeleteData(id){
           this.$Progress.start();
@@ -355,6 +363,16 @@
 	          })
 	      }, //end delete
        
+       // ################################ For search App ###############################################
+          searchData(data){
+            this.$store.dispatch('VendorMasterStore/searching', data );
+          },      
+          AutoCompleteSearch(data){
+            if(data != ''){
+                this.$store.dispatch('VendorMasterStore/AutoCompleteSearch', data );  
+            }        
+          },
+        // ################################ For search App ###############################################
       
       },
 
@@ -372,19 +390,6 @@
           //this event call from Pagination-app component for change number of data show per page
           FireEvent.$on('changPerPage', (data) => {
             this.$store.dispatch('VendorMasterStore/fetchData',data);
-          });
-
-          //This is come from search-app-one.vue file for serch data
-          FireEvent.$on('searchData', (data) => {
-             //alert(data.search_key+'-'+data.search_option);
-             this.$store.dispatch('VendorMasterStore/searching', data ); 
-          });
-          //This is come from search-app-one.vue file for Auto Complete data
-          FireEvent.$on('AutoCompleteSearch', (data) => {
-              //alert(data);
-              if(data != ''){
-                this.$store.dispatch('VendorMasterStore/AutoCompleteSearch', data ); 
-              }
           });
 
       },

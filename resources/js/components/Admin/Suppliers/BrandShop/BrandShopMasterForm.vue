@@ -137,7 +137,7 @@
 		        }
 		      },
 
-	    	addData(){
+	    	addBrandShop(){
 	    		this.editMode = false;
 	    		this.form.reset();	    		
 	    		setTimeout(() => {
@@ -145,7 +145,7 @@
                 }, 600);
 	    	},
 
-	    	editData(data){
+	    	editBrandShop(data){
 	    		this.editMode = true;
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
@@ -238,14 +238,14 @@
 	    },
 
 	    created(){
-	    	FireEvent.$on('editData', (data) => {
+	    	FireEvent.$on('editBrandShop', (data) => {
               //alert(data.id);
               //this.form.fill(data);   //this is also work
-              this.editData(data);
+              this.editBrandShop(data);
             });
 
-            FireEvent.$on('addData', () => {
-              this.addData();
+            FireEvent.$on('addBrandShop', () => {
+              this.addBrandShop();
             });
 	    }
 

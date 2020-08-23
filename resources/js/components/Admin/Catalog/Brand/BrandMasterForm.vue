@@ -149,7 +149,7 @@
 		        }
 		      },
 
-	    	addData(){
+	    	addBrand(){
 	    		this.editMode = false;
 	    		this.form.reset();	    		
 	    		// setTimeout(() => {
@@ -157,7 +157,7 @@
        //          }, 200);
 	    	},
 
-	    	editData(data){
+	    	editBrand(data){
 	    		this.editMode = true;
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
@@ -234,14 +234,14 @@
 	    },
 
 	    created(){
-	    	FireEvent.$on('editData', (data) => {
+	    	FireEvent.$on('editBrand', (data) => {
               //alert(data.id);
               //this.form.fill(data);   //this is also work
-              this.editData(data);
+              this.editBrand(data);
             });
 
-            FireEvent.$on('addData', () => {
-              this.addData();
+            FireEvent.$on('addBrand', () => {
+              this.addBrand();
             });
 	    }
 

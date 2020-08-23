@@ -84,7 +84,8 @@
                          <img v-if="form.cat_img == 'undefined'" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
                          <img v-if="form.cat_img === '' " :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
                          <img v-else-if="form.cat_img === null" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:65px;height:65px;">
-                          <img v-else-if="form.cat_img != '' " :src="'../'+form.cat_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:65px;height:65px;">
+                          <!-- <img v-else-if="form.cat_img != '' " :src="'../'+form.cat_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:65px;height:65px;"> -->
+                          <img v-else-if="form.cat_img != '' " :src="form.cat_img" class="img-fluid img-thumbnail focusImgOnHover" style="width:65px;height:65px;">
                         </span>                        
                         
                       </div>	                      
@@ -96,8 +97,8 @@
 	          		<!-- <a @click="pushToLanguageTranslationArray" class="pointer">click</a> -->
 	          	  <table>
 	          	  	<!-- allLanguages -->
-	          	  	<span v-for="(ct, index) in form.lang_translation" :key="index">	 
-	          	  	<!-- <tr><td>{{ index }} </td><td>{{ct}}</td></tr> -->                 
+	          	  	<!-- <span v-for="(ct, index) in form.lang_translation" :key="index">                 -->
+	          	  	<span v-for="(ct, index) in form.cat_translation" :key="index">                
 
 	          	  	<tr>
 	          	  	  <th colspan="2" style="background: rgba(0, 0, 0, 0.06);"><div class="alert- alert-warning- text-center mb-0">{{ct.lang_code}}</div></th>
@@ -177,7 +178,8 @@
 	          // 	category_name: '',
 	          // 	category_desc: '',
 	          // }],
-	          lang_translation: [],
+	          //lang_translation: [], //not used
+	          cat_translation: [], //used
 
 	        })
 	      }
@@ -194,16 +196,19 @@
 
 	    methods:{
 	    	pushToLanguageTranslationArray(){
-	    	  	// for(let i in this.allLanguages){
-	    	  	// //this.allLanguages[i].id
-		        //       this.form.lang_translation.push({ language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, category_name: '', category_desc: '' }); 
-		        //     }
-		        
+
+	    		//using attach() function to save category_language_translation table
+	            // for (var i = 0; i < this.allLanguages.length; i++) {
+	            //   this.form.lang_translation.push( { language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, category_name: '', category_desc: '' } ); 
+	            // }
+
+	            //sor JSON
 	            for (var i = 0; i < this.allLanguages.length; i++) {
-	              this.form.lang_translation.push( { language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, category_name: '', category_desc: '' } ); 
+	              this.form.cat_translation.push( { language_id:this.allLanguages[i].id, lang_code:this.allLanguages[i].lang_code, category_name: '', category_desc: '' } ); 
 	            }
 		        
 	    	},
+
 
 	    	onImageChange(e){
 		        //let file = e.target.files || e.dataTransfer.files;
@@ -236,8 +241,18 @@
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
 	    		this.$refs.cat_name.focus();    
-	    		console.log(data);		
+	    		//console.log(data);
+
+	    		if(this.form.cat_translation === null){
+	    			this.form.cat_translation = [] ; 
+		    		
+		    		setTimeout(() => {
+			           this.pushToLanguageTranslationArray();			           
+			        }, 1000);
+			     //console.log(this.allLanguages);
+		    	}	    			    		
 	    	},
+
 	    	ClearForm(){
 	    		this.editMode = false;
 		        this.form.reset();  //reset from after submit
@@ -259,6 +274,8 @@
 			      toastr.success(data.success);             
 			      this.$Progress.finish();  
 			      this.form.reset();  //reset from after submit
+			      this.$refs.cat_img.value = ''; //clear file input tag 
+  			  	  this.ShowOnChangeImage = null;
 			      $('#CategoryModal').modal('hide');			      
 			    }
 			    if(data.errors){
@@ -284,6 +301,8 @@
 				      this.$Progress.finish(); 
 				      toastr.success(data.success);               
 				      this.form.reset();  //reset from after submit
+				      this.$refs.cat_img.value = ''; //clear file input tag 
+  			  	      this.ShowOnChangeImage = null;
 				      this.editMode = false; 
 
 				     $('#CategoryModal').modal('hide');
@@ -309,9 +328,11 @@
     		this.$store.dispatch('commonStoreForAll/fetchLanguages'); //get all language
 
 	    	FireEvent.$on('editCategory', (data) => {
+	    	  //this.$store.dispatch('commonStoreForAll/fetchLanguages'); //get all language
               //alert(data.id);
               //this.form.fill(data);   //this is also work
               this.editCategory(data);
+
             });
 
             FireEvent.$on('addCategory', () => {
