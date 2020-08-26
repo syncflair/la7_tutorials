@@ -125191,7 +125191,7 @@ var SpecificationMasterStore = {
       var perPageVelue;
 
       if (!payload) {
-        perPageVelue = 10;
+        perPageVelue = 100;
       } else {
         perPageVelue = payload;
       }

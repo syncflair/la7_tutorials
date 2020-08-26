@@ -44,7 +44,7 @@ class PurchaseOrderController extends Controller
             $perPage = 100;
        }
 
-       $data = PurchaseOrder::with('pur_order_details')->paginate($perPage);
+       $data = PurchaseOrder::paginate($perPage);
        return response()->json($data);
     }
 
@@ -108,7 +108,7 @@ class PurchaseOrderController extends Controller
         $data['po_paid_amount']=$request->po_paid_amount != '' ? $request->po_paid_amount : 0.00;    
         $data['po_due_amount']=$request->po_due_amount;  
 
-        //$data['pur_order_details']=$request->pur_order_details;  //JSON Array of order Details
+        $data['pur_order_details']=$request->pur_order_details;  //JSON Array of order Details
         $data['is_approved'] = $request->is_approved == NULL ? 0 : $request->is_approved;
         $data['created_by']= \Auth::user()->id;  
 
@@ -117,7 +117,7 @@ class PurchaseOrderController extends Controller
             DB::beginTransaction();
 
             $po = PurchaseOrder::create($data); 
-            $po->PurOrderDetails()->attach($request->pur_order_details);  
+            //$po->PurOrderDetails()->attach($request->departments);  
 
             //update Product Table if is approved
             if($request->is_approved == 1){   
@@ -218,7 +218,7 @@ class PurchaseOrderController extends Controller
         $data['po_paid_amount']=$request->po_paid_amount != '' ? $request->po_paid_amount : 0.00;    
         $data['po_due_amount']=$request->po_due_amount;  
 
-        //$data['pur_order_details']=$request->pur_order_details;  //JSON Array of order Details
+        $data['pur_order_details']=$request->pur_order_details;  //JSON Array of order Details
        
         $data['created_by']= \Auth::user()->id;  
 
@@ -236,15 +236,6 @@ class PurchaseOrderController extends Controller
                     $data['is_approved'] = $request->is_approved;
                     $po = PurchaseOrder::find($request->id)->update($data); //update Purchase
 
-                    // //this is to save purchase_order_details table using attach() function
-                    $po = PurchaseOrder::find($request->id);
-                    foreach($request->pur_order_details as $key => $object){
-                        $arrays[$object['product_id']] =  (array) $object;
-                        //convert to array like //[1 => ['fields' => 'data'], 2 => ['fields' => 'data'] ]
-                    } //dd($arrays);
-                    $po->PurOrderDetails()->sync($arrays);
-
-
                     //update Product Table if is approved
                     foreach ($request->pur_order_details as $key => $object) {
                         $product_qty = Product::where('id', $request->pur_order_details[$key]['product_id'])
@@ -257,18 +248,9 @@ class PurchaseOrderController extends Controller
                         Product::find($request->pur_order_details[$key]['product_id'])->update($value);
                     }
 
-
                 }elseif($request->is_approved == NULL){
                     //$data['is_approved'] = $request->is_approved == NULL ? 0 : $request->is_approved;
                     $po = PurchaseOrder::find($request->id)->update($data); //update Purchase
-
-                    // //this is to save purchase_order_details table using attach() function
-                    $po = PurchaseOrder::find($request->id);
-                    foreach($request->pur_order_details as $key => $object){
-                        $arrays[$object['product_id']] =  (array) $object;
-                        //convert to array like //[1 => ['fields' => 'data'], 2 => ['fields' => 'data'] ]
-                    } //dd($arrays);
-                    $po->PurOrderDetails()->sync($arrays);
                 }
 
             }elseif($is_approved_check->is_approved == 1){

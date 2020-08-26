@@ -20,6 +20,11 @@ class CreateBrandShopsTable extends Migration
             $table->text('brand_shop_desc')->nullable(); 
             $table->boolean('is_enabled')->default(true);
             $table->string('bs_img', 250)->nullable(); 
+
+    
+            $table->index('brand_shop_title');
+            $table->index('brand_shop_slug');
+            $table->index('bs_img');
             $table->unsignedBigInteger('created_by')->nullable()->comment('Created by User');  
             $table->unsignedBigInteger('updated_by')->nullable()->comment('Updated by User');
             $table->timestamps();

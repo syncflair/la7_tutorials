@@ -40,9 +40,19 @@
                       <select v-model="form.parent_id" name="parent_id" class="form-control">
                           <option disabled value=""> Select Parent </option>
                           <option v-bind:value="null"> Parent </option>
-                          <option v-for="parentAH in allAccountHeads" :key="parentAH.id" v-bind:value="parentAH.id">
+
+                          <template v-for="parentAH in allAccountHeads" >
+                          	<option v-bind:value="parentAH.id"> <span>{{parentAH.ah_name}} </span> </option>
+	                        
+	                        <template v-for="c_parentAH in parentAH.child_account_head">
+	                        	<option v-bind:value="c_parentAH.id"> <span> -- {{c_parentAH.ah_name}} </span>  </option>
+	                        </template>
+
+                          </template>
+
+                          <!-- <option v-for="parentAH in allAccountHeads" :key="parentAH.id" v-bind:value="parentAH.id">
                             {{parentAH.ah_name}}
-                          </option>
+                          </option> -->
                       </select>
                     </div>	                  
 

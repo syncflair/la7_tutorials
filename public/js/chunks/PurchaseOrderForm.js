@@ -499,6 +499,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -568,11 +580,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           //pro_size:'', 
           //pro_color:'', 
           mrp_price: '',
+          mrp_after_discount_or_vat: '',
           unit_id: '',
           p_unit_value: '',
           pro_qty: '',
           pro_free_qty: '',
-          pro_qty_adjustment: '',
+          //pro_qty_adjustment:'',
           //pro_unit:'',
           //unit_mrp:'',
           discount_fixed: '',
@@ -623,37 +636,49 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       handler: function handler(newValue, oldValue) {
         newValue.forEach(function (p) {
           // if(!isNaN(p.vat_percent)){ 
+          // p.pod_line_total / (p.pro_qty +- p.pro_free_qty)
           //Calculater each order item total
           if ((p.discount_fixed != '' || p.discount_fixed != null) && (p.discount_percent === '' || p.discount_percent === null) && (p.vat_fixed === '' || p.vat_fixed === null) && (p.vat_percent === '' || p.vat_percent === null)) {
-            p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * p.discount_fixed;
+            p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * p.discount_fixed; // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+            // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
           } else if ((p.discount_fixed === '' || p.discount_fixed === null) && (p.discount_percent != '' || p.discount_percent != null) && (p.vat_fixed === '' || p.vat_fixed === null) && (p.vat_percent === '' || p.vat_percent === null)) {
             var DiscountPercent = p.discount_percent / 100 * p.mrp_price;
-            p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * DiscountPercent;
+            p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * DiscountPercent; // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+            // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
           } else if ((p.discount_fixed === '' || p.discount_fixed === null) && (p.discount_percent === '' || p.discount_percent === null) && (p.vat_fixed != '' || p.vat_fixed != null) && (p.vat_percent === '' || p.vat_percent === null)) {
-            p.pod_line_total = p.mrp_price * p.pro_qty + p.pro_qty * p.vat_fixed;
+            p.pod_line_total = p.mrp_price * p.pro_qty + p.pro_qty * p.vat_fixed; // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+            // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
           } else if ((p.discount_fixed === '' || p.discount_fixed === null) && (p.discount_percent === '' || p.discount_percent === null) && (p.vat_fixed === '' || p.vat_fixed === null) && (p.vat_percent != '' || p.vat_percent != null)) {
             var vatPercent = p.vat_percent / 100 * p.mrp_price;
             p.pod_line_total = p.mrp_price * p.pro_qty + p.pro_qty * vatPercent; //console.log(p.pod_line_total);
+            // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+            // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
           } else if ((p.discount_fixed != '' || p.discount_fixed != null) && (p.discount_percent === '' || p.discount_percent === null) && (p.vat_fixed != '' || p.vat_fixed != null) && (p.vat_percent === '' || p.vat_percent === null)) {
-            p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * p.discount_fixed + p.pro_qty * p.vat_fixed;
+            p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * p.discount_fixed + p.pro_qty * p.vat_fixed; // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+            // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
           } else if ((p.discount_fixed != '' || p.discount_fixed != null) && (p.discount_percent === '' || p.discount_percent === null) && (p.vat_fixed === '' || p.vat_fixed === null) && (p.vat_percent != '' || p.vat_percent != null)) {
             var _vatPercent = p.vat_percent / 100 * p.mrp_price;
 
-            p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * p.discount_fixed + p.pro_qty * _vatPercent;
+            p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * p.discount_fixed + p.pro_qty * _vatPercent; // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+            // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
           } else if ((p.discount_fixed === '' || p.discount_fixed === null) && (p.discount_percent != '' || p.discount_percent != null) && (p.vat_fixed != '' || p.vat_fixed != null) && (p.vat_percent === '' || p.vat_percent === null)) {
             var _DiscountPercent = p.discount_percent / 100 * p.mrp_price;
 
-            p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * _DiscountPercent + p.pro_qty * p.vat_fixed;
+            p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * _DiscountPercent + p.pro_qty * p.vat_fixed; // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+            // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
           } else if ((p.discount_fixed === '' || p.discount_fixed === null) && (p.discount_percent != '' || p.discount_percent != null) && (p.vat_fixed === '' || p.vat_fixed === null) && (p.vat_percent != '' || p.vat_percent != null)) {
             var _DiscountPercent2 = p.discount_percent / 100 * p.mrp_price;
 
             var _vatPercent2 = p.vat_percent / 100 * p.mrp_price;
 
-            p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * _DiscountPercent2 + p.pro_qty * _vatPercent2;
+            p.pod_line_total = p.mrp_price * p.pro_qty - p.pro_qty * _DiscountPercent2 + p.pro_qty * _vatPercent2; // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+            //  else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
           } // p.mrp_price !='' && p.pro_qty !=''
-          else {
-              p.pod_line_total = p.mrp_price * p.pro_qty;
-            }
+          // else{
+          //   p.pod_line_total = p.mrp_price * p.pro_qty;   
+          //   if(p.pod_line_total != '' ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }          
+          // }   
+
         });
       },
       deep: true
@@ -700,9 +725,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         unit_id: '',
         p_unit_value: '',
         mrp_price: null,
+        mrp_after_discount_or_vat: null,
         pro_qty: null,
         pro_free_qty: null,
-        pro_qty_adjustment: '',
+        //pro_qty_adjustment:'',
         //pro_unit:'',
         //unit_mrp:'',
         discount_fixed: null,
@@ -907,8 +933,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     FireEvent.$on('AutoCompleteSearchForData', function (data) {
       _this3.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data);
-    });
-    console.log(this.selectedProductList); //console.log(moment().format('LTS'));
+    }); //console.log(this.selectedProductList);
+    //console.log(moment().format('LTS'));
   },
   mounted: function mounted() {//console.log(moment().format('LTS'))
   }
@@ -1862,13 +1888,21 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: input.pro_free_qty,
-                                  expression: "input.pro_free_qty"
+                                  value: input.mrp_after_discount_or_vat,
+                                  expression: "input.mrp_after_discount_or_vat"
                                 }
                               ],
                               staticClass: "form-control form-control-sm",
-                              attrs: { type: "number", name: "pro_free_qty" },
-                              domProps: { value: input.pro_free_qty },
+                              attrs: {
+                                type: "number",
+                                readonly: "",
+                                min: "1",
+                                step: "any",
+                                name: "mrp_after_discount_or_vat"
+                              },
+                              domProps: {
+                                value: input.mrp_after_discount_or_vat
+                              },
                               on: {
                                 input: function($event) {
                                   if ($event.target.composing) {
@@ -1876,7 +1910,7 @@ var render = function() {
                                   }
                                   _vm.$set(
                                     input,
-                                    "pro_free_qty",
+                                    "mrp_after_discount_or_vat",
                                     $event.target.value
                                   )
                                 }
@@ -1892,17 +1926,13 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: input.pro_qty_adjustment,
-                                  expression: "input.pro_qty_adjustment"
+                                  value: input.pro_free_qty,
+                                  expression: "input.pro_free_qty"
                                 }
                               ],
                               staticClass: "form-control form-control-sm",
-                              attrs: {
-                                type: "number",
-                                name: "pro_qty_adjustment",
-                                placeholder: "+1,-1"
-                              },
-                              domProps: { value: input.pro_qty_adjustment },
+                              attrs: { type: "number", name: "pro_free_qty" },
+                              domProps: { value: input.pro_free_qty },
                               on: {
                                 input: function($event) {
                                   if ($event.target.composing) {
@@ -1910,7 +1940,7 @@ var render = function() {
                                   }
                                   _vm.$set(
                                     input,
-                                    "pro_qty_adjustment",
+                                    "pro_free_qty",
                                     $event.target.value
                                   )
                                 }
@@ -2446,56 +2476,43 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm.form.is_approved === 0
-            ? _c("div", { staticClass: "row mr-4- mt-2" }, [
-                _c("div", { staticClass: "col-12  text-right" }, [
-                  _c(
-                    "button",
+          _c("div", { staticClass: "row mr-4- mt-2" }, [
+            _c("div", { staticClass: "col-12  text-right" }, [
+              _c(
+                "button",
+                {
+                  directives: [
                     {
-                      staticClass: "btn btn-primary btn-flat btn-sm ",
-                      attrs: { type: "submit" }
-                    },
-                    [
-                      _c(
-                        "span",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: !_vm.editMode,
-                              expression: "!editMode"
-                            }
-                          ]
-                        },
-                        [
-                          _c("i", { staticClass: "fas fa-save" }),
-                          _vm._v(" Place Order")
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "span",
-                        {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.editMode,
-                              expression: "editMode"
-                            }
-                          ]
-                        },
-                        [
-                          _c("i", { staticClass: "far fa-edit" }),
-                          _vm._v(" Update order")
-                        ]
-                      )
-                    ]
-                  )
-                ])
-              ])
-            : _vm._e()
+                      name: "show",
+                      rawName: "v-show",
+                      value: !_vm.editMode,
+                      expression: "!editMode"
+                    }
+                  ],
+                  staticClass: "btn btn-primary btn-flat btn-sm ",
+                  attrs: { type: "submit" }
+                },
+                [_vm._m(16)]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.editMode,
+                      expression: "editMode"
+                    }
+                  ],
+                  staticClass: "btn btn-primary btn-flat btn-sm ",
+                  attrs: { type: "submit" }
+                },
+                [_vm._m(17)]
+              )
+            ])
+          ])
         ]
       )
     ]),
@@ -2617,20 +2634,20 @@ var staticRenderFns = [
       _vm._v(" "),
       _c(
         "th",
-        { attrs: { width: "3%", scope: "col", title: "Free qty of product" } },
-        [_c("small", [_vm._v("Free Qty")])]
+        {
+          attrs: {
+            width: "2%",
+            scope: "col",
+            title: "MRP After VAT or Discount"
+          }
+        },
+        [_c("small", [_vm._v("MRP.A")])]
       ),
       _vm._v(" "),
       _c(
         "th",
-        {
-          attrs: {
-            width: "3%",
-            scope: "col",
-            title: "if wrong quantity was store, Adjust like -10, +10"
-          }
-        },
-        [_c("small", [_vm._v("Adj")])]
+        { attrs: { width: "3%", scope: "col", title: "Free qty of product" } },
+        [_c("small", [_vm._v("Free Qty")])]
       ),
       _vm._v(" "),
       _c(
@@ -2744,6 +2761,24 @@ var staticRenderFns = [
       _c("label", { staticClass: "pt-2-" }, [
         _c("small", [_c("strong", [_vm._v("Due Amount:")])])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("i", { staticClass: "fas fa-save" }),
+      _vm._v(" Place Order")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c("i", { staticClass: "far fa-edit" }),
+      _vm._v(" Update order")
     ])
   }
 ]

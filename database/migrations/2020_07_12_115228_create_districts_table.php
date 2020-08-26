@@ -24,6 +24,8 @@ class CreateDistrictsTable extends Migration
             $table->timestamps();
 
             $table->foreign('division_id')->references('id')->on('divisions')->onDelete('cascade');
+
+            $table->index('district_name');
         });
     }
 

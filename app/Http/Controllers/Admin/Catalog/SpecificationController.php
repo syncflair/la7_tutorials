@@ -29,7 +29,7 @@ class SpecificationController extends Controller
         if(!empty($request->perPage)){
             $perPage = $request->perPage;
         }else{
-            $perPage = 10;
+            $perPage = 100;
         }
 
         $data = Specification::orderBy('specification_name', 'ASC')->paginate($perPage);
@@ -149,7 +149,7 @@ class SpecificationController extends Controller
         if(!empty($request->perPage)){
             $perPage = $request->perPage;
         }else{
-            $perPage = 10;
+            $perPage = 100;
         }
 
         $searchKey = $request->q;
@@ -179,7 +179,7 @@ class SpecificationController extends Controller
     //Get only enabled specification
     public function getSpecification(){
         //this is for commonStoreForAll Store
-        $data = Specification::where('is_enabled', '1')->get();
+        $data = Specification::where('is_enabled', '1')->orderBy('specification_name', 'ASC')->get();
         return response()->json($data);
     }
 

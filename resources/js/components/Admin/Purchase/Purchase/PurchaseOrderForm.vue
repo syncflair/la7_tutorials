@@ -169,8 +169,9 @@
               <th width="5%" scope="col"><small>U.Value</small></th>
               <th width="4%" scope="col"><small>MRP</small></th>
               <th width="2%" scope="col"><small>Qty</small></th>
+              <th width="2%" scope="col" title="MRP After VAT or Discount"><small>MRP.A</small></th>
               <th width="3%" scope="col" title="Free qty of product"><small>Free Qty</small></th>
-              <th width="3%" scope="col" title="if wrong quantity was store, Adjust like -10, +10"><small>Adj</small></th>
+              <!-- <th width="3%" scope="col" title="if wrong quantity was store, Adjust like -10, +10"><small>Adj</small></th> -->
               
               <!-- <th width="3%" scope="col" title="Product Unit"><small>Unit</small></th>
               <th width="4%" scope="col" title="Product Unit Price"><small>Unit MRP</small></th> -->
@@ -288,15 +289,21 @@
 
               <td scope="col">
                 <div class="form-group-">
-                  <input type="number" class="form-control form-control-sm" v-model="input.pro_free_qty" name="pro_free_qty">  
+                  <input type="number" class="form-control form-control-sm" readonly min="1" step="any" v-model="input.mrp_after_discount_or_vat" name="mrp_after_discount_or_vat" >
                 </div> 
               </td>
 
               <td scope="col">
                 <div class="form-group-">
-                  <input type="number" class="form-control form-control-sm" v-model="input.pro_qty_adjustment" name="pro_qty_adjustment" placeholder="+1,-1">  
+                  <input type="number" class="form-control form-control-sm" v-model="input.pro_free_qty" name="pro_free_qty">  
                 </div> 
               </td>
+
+              <!-- <td scope="col">
+                <div class="form-group-">
+                  <input type="number" class="form-control form-control-sm" v-model="input.pro_qty_adjustment" name="pro_qty_adjustment" placeholder="+1,-1">  
+                </div> 
+              </td> -->
 
               <!--  <td scope="col"> 
                 <div class="form-group-">
@@ -453,13 +460,18 @@
       </div><!--Thireds Part-->
 
 
+            <!-- v-if="is_approved === '' ? listVisible = false : listVisible = true" -->
 
-   	  <div class="row mr-4- mt-2" v-if="form.is_approved === 0">
+   	  <div class="row mr-4- mt-2">
    	  	<div class="col-12  text-right">
-   	  		<button type="submit" class="btn btn-primary btn-flat btn-sm ">
-	        	<span v-show="!editMode"> <i class="fas fa-save"></i> Place Order</span>
-	        	<span v-show="editMode"> <i class="far fa-edit"></i> Update order</span>
-	    	</button>    	  		
+   	  		<button v-show="!editMode" type="submit" class="btn btn-primary btn-flat btn-sm ">
+	        	<span > <i class="fas fa-save"></i> Place Order</span>
+	    	  </button>    
+          <button  v-show="editMode" type="submit" class="btn btn-primary btn-flat btn-sm " 
+           
+          >
+            <span> <i class="far fa-edit"></i> Update order</span>
+          </button> 	  		
    	  	</div>
    	  </div>  	  	
 
@@ -563,11 +575,12 @@
             //pro_size:'', 
             //pro_color:'', 
             mrp_price: '',
+            mrp_after_discount_or_vat: '',
             unit_id:'',
             p_unit_value:'',
             pro_qty:'',
             pro_free_qty:'',
-            pro_qty_adjustment:'',
+            //pro_qty_adjustment:'',
             //pro_unit:'',
             //unit_mrp:'',
             discount_fixed:'', 
@@ -629,42 +642,68 @@
         handler (newValue, oldValue) {
           newValue.forEach((p) => {  // if(!isNaN(p.vat_percent)){ 
 
+// p.pod_line_total / (p.pro_qty +- p.pro_free_qty)
             //Calculater each order item total
             if( (p.discount_fixed !='' || p.discount_fixed !=null)  && (p.discount_percent ==='' || p.discount_percent ===null) && (p.vat_fixed ==='' || p.vat_fixed ===null) && (p.vat_percent === '' || p.vat_percent === null)){              
               p.pod_line_total =  (p.mrp_price * p.pro_qty) - (p.pro_qty * p.discount_fixed) 
+
+              // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+              // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
             }
             else if((p.discount_fixed ==='' || p.discount_fixed ===null) && (p.discount_percent !='' || p.discount_percent !=null) && (p.vat_fixed ==='' || p.vat_fixed ===null) && (p.vat_percent === '' || p.vat_percent === null)){              
               let DiscountPercent = (p.discount_percent / 100) * p.mrp_price;
               p.pod_line_total = (p.mrp_price * p.pro_qty) - (p.pro_qty * DiscountPercent )
+              
+              // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+              // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
             }
             else if((p.discount_fixed ==='' || p.discount_fixed ===null) && (p.discount_percent ==='' || p.discount_percent ===null) && (p.vat_fixed !='' || p.vat_fixed !=null) && (p.vat_percent ==='' || p.vat_percent ===null)){              
               p.pod_line_total = (p.mrp_price * p.pro_qty) + (p.pro_qty * p.vat_fixed)
+              
+              // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+              // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
             }
             else if((p.discount_fixed ==='' || p.discount_fixed ===null) && (p.discount_percent ==='' || p.discount_percent ===null) && (p.vat_fixed ==='' || p.vat_fixed ===null) && (p.vat_percent != '' || p.vat_percent != null) ){              
               let vatPercent = (p.vat_percent / 100) * p.mrp_price;
               p.pod_line_total = (p.mrp_price * p.pro_qty) + (p.pro_qty * vatPercent )  //console.log(p.pod_line_total);
+              
+              // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+              // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
             }
             else if((p.discount_fixed !='' || p.discount_fixed !=null) && (p.discount_percent ==='' || p.discount_percent ===null) && (p.vat_fixed !='' || p.vat_fixed !=null) && (p.vat_percent === '' || p.vat_percent === null)){              
               p.pod_line_total = ( (p.mrp_price * p.pro_qty) - (p.pro_qty * p.discount_fixed) ) +  (p.pro_qty * p.vat_fixed)
+              
+              // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+              // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
             }
             else if((p.discount_fixed !='' || p.discount_fixed !=null) && (p.discount_percent ==='' || p.discount_percent ===null) && (p.vat_fixed ==='' || p.vat_fixed ===null) && (p.vat_percent != '' || p.vat_percent != null)){  
               let vatPercent = (p.vat_percent / 100) * p.mrp_price;            
               p.pod_line_total = ( (p.mrp_price * p.pro_qty) - (p.pro_qty * p.discount_fixed) ) +  (p.pro_qty * vatPercent)
+              
+              // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+              // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
             }
             else if((p.discount_fixed === '' || p.discount_fixed ===null) && (p.discount_percent !='' || p.discount_percent !=null) && (p.vat_fixed !='' || p.vat_fixed !=null) && (p.vat_percent === '' || p.vat_percent === null)){  
               let DiscountPercent = (p.discount_percent / 100) * p.mrp_price;          
               p.pod_line_total = ( (p.mrp_price * p.pro_qty) - (p.pro_qty * DiscountPercent) ) +  (p.pro_qty * p.vat_fixed)
+
+              // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+              // else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
             }
             else if((p.discount_fixed === '' || p.discount_fixed ===null) && (p.discount_percent !='' || p.discount_percent !=null) && (p.vat_fixed ==='' || p.vat_fixed ===null) && (p.vat_percent != '' || p.vat_percent != null)){  
               let DiscountPercent = (p.discount_percent / 100) * p.mrp_price; 
               let vatPercent = (p.vat_percent / 100) * p.mrp_price;            
-              p.pod_line_total = ( (p.mrp_price * p.pro_qty) - (p.pro_qty * DiscountPercent) ) +  (p.pro_qty * vatPercent)
+              p.pod_line_total = ( (p.mrp_price * p.pro_qty) - (p.pro_qty * DiscountPercent) ) +  (p.pro_qty * vatPercent);
+              
+             // if(p.pod_line_total != '' && (p.pro_free_qty ==='' || p.pro_free_qty === null) ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }
+             //  else if(p.pod_line_total !='' && (p.pro_free_qty !='' || p.pro_free_qty != null) ){p.mrp_after_discount_or_vat  = (p.pro_qty + p.pro_free_qty) }
             }
 
             // p.mrp_price !='' && p.pro_qty !=''
-            else{
-              p.pod_line_total = p.mrp_price * p.pro_qty              
-            }
+            // else{
+            //   p.pod_line_total = p.mrp_price * p.pro_qty;   
+            //   if(p.pod_line_total != '' ){p.mrp_after_discount_or_vat  = p.pod_line_total / p.pro_qty; }          
+            // }   
             
           })
         },
@@ -692,6 +731,7 @@
           }else{
             value.po_due_amount = (0).toFixed(2);
           }
+
           
 
         }, deep: true
@@ -718,9 +758,10 @@
           unit_id:'',
           p_unit_value:'',
           mrp_price:null,
+          mrp_after_discount_or_vat: null,
           pro_qty:null,
           pro_free_qty:null,
-          pro_qty_adjustment:'',
+          //pro_qty_adjustment:'',
           //pro_unit:'',
           //unit_mrp:'',
           discount_fixed:null, 
@@ -925,7 +966,7 @@
 	        this.$store.dispatch('commonStoreForAll/AutoCompleteSearchForDepartment', data ); 
 	    });
 
-      console.log(this.selectedProductList);
+      //console.log(this.selectedProductList);
 	    
       
     	//console.log(moment().format('LTS'));

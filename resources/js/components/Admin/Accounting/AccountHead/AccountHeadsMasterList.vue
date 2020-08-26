@@ -57,9 +57,9 @@
               <!-- child account head's = c_ahs -->
               <tr>  
                 <td scope="col"> {{ c_ahs.ah_code }} </td>          
-                <td scope="col" > <span class="pl-2"> -- {{ c_ahs.ah_name }} </span> </td> 
+                <td scope="col" > <span class="pl-2"> - {{ c_ahs.ah_name }} </span> </td> 
                 <td scope="col">
-                   <span v-show="c_ahs.parent_id != null"> - {{c_ahs.ah_name }} </span> 
+                   <span v-show="c_ahs.parent_id != null"> {{ah.ah_name }} </span> 
                 </td> 
                 <td scope="col"> {{ c_ahs.ah_desc }} </td> 
                 <td>
@@ -74,6 +74,29 @@
                    </a>
                 </td>
               </tr>
+
+              <template v-if="c_ahs.sub_child_account_head.length > 0"  v-for="sc_ahs in c_ahs.sub_child_account_head">
+                <!-- child account head's = c_ahs -->
+                <tr>  
+                  <td scope="col"> {{ sc_ahs.ah_code }} </td>          
+                  <td scope="col" > <span class="pl-4"> -- {{ sc_ahs.ah_name }} </span> </td> 
+                  <td scope="col">
+                     <span v-show="sc_ahs.parent_id != null"> - {{c_ahs.ah_name }} </span> 
+                  </td> 
+                  <td scope="col"> {{ sc_ahs.ah_desc }} </td> 
+                  <td>
+                    <span v-show="sc_ahs.is_enabled === 1" class="green"> Active</span>
+                    <span v-show="sc_ahs.is_enabled === 0" class="red text-bold"> Inactive</span>
+                  </td>
+                  <td class="text-right">  
+                    <a @click="ViewDetails(sc_ahs.id)" class="btn btn-flat btn-sm"><i class="fas fa-eye primary"></i></a>   
+                    <a @click="editData(sc_ahs)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#formModal"><i class="fas fa-edit primary "></i></a> 
+                    <a @click="DeleteData(sc_ahs.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
+                       <i class="far fa-trash-alt red"></i>
+                     </a>
+                  </td>
+                </tr>
+              </template><!--Child Template-->
             </template><!--Child Template-->
           </template><!--Parent Template-->
 

@@ -5,7 +5,10 @@ use App\Models\Role;
 use App\Models\UserStatus;
 use App\Models\Settings\Setting;
 use Illuminate\Support\Str; //for str::random
+use Illuminate\Support\Facades\DB; 
 
+use App\Models\Catalog\Product;
+use App\Models\Purchase\PurchaseOrder;
 use App\Models\Settings\OrganizationInfo;
 
 
@@ -120,6 +123,32 @@ function systemSettingsGetResolution($searchKey){
   return $settings;
 
   //select * from `settings` where json_unquote(json_extract(`json_test`, '$."img_module"')) = 'user-img'
+}
+
+function testQuery(){
+  //DB::table('products')->whereJsonContains('pro_discount->customer_group', 1)->get();
+  //Setting::withCount('image_resolution->img_module')->get();
+  //$data = PurchaseOrder::select('pur_order_details')->get();
+  //$data = Product::whereJsonContains('pro_discount->customer_group', 1)->get();
+  //$data =Product::where('pro_discount->discount_qty', 3 )->get();
+  //$data = DB::table('products')->whereJsonContains('pro_discount->customer_group', '1' )->get();
+    //$data = DB::table('products')->withCount('pro_discount->discount_qty');
+    //$data = DB::table('products')->whereJsonContains('pro_discount', ['customer_group' => 1])->get(); //working
+  //$data = Product::whereJsonContains('pro_discount', ['customer_group' => '1'])->get();
+ // $data = Product::query();
+
+  //$data = Product::whereRaw('JSON_CONTAINS(pro_discount->"$[*].customer_group", "3")')->get();
+  //$data = Product::whereRaw('JSON_CONTAINS(pro_discount, \'{"customer_group": 2}\')')->select('sys_pro_name')->get(); //Working
+  //$data = Product::whereJsonContains('pro_discount', ['customer_group' => 1])->select('sys_pro_name')->get(); //Working
+
+  //dd($data);
+  //Product::find(1)->update(['pro_discount->discount_qty' => 5]);
+
+  //DB::table('purchase_orders')->where('id', 23)->update(['po_due_amount' => '111']);
+   // DB::table('purchase_orders')->where('id', 23)->update(['pur_order_details->>batch_no' => 'b111']);
+   //DB::table('purchase_orders')->where('id', 23)->update(array('pur_order_details->batch_no' => 'b111'));
+
+  // array('info->pizza->calorie' => '90')
 }
 
 

@@ -23,6 +23,10 @@ class CreateBrandsTable extends Migration
             $table->unsignedBigInteger('created_by')->nullable()->comment('Created by User');  
             $table->unsignedBigInteger('updated_by')->nullable()->comment('Updated by User');
             $table->timestamps();
+
+            $table->index('brand_name');
+            $table->index('brand_url');
+            $table->index('brand_img');
         });
     }
 
