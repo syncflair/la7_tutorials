@@ -13,7 +13,7 @@ class Customer extends Authenticatable
     use Notifiable;
 
 
-    protected $guard = 'customer'; //customer....
+    protected $guard = 'customer'; //customer.... 
 
     /**
      * The attributes that are mass assignable.

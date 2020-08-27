@@ -449,17 +449,23 @@
               </li>
 
               <li class="nav-item">
-                <a href="pages/UI/general.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Bank Account</p>
-                </a>
+                <router-link to="/spa/BankAccountMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Bank Accounts
+                  </p>
+                </router-link>
               </li>
+
               <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Cash In Hand</p>
-                </a>
+                <router-link to="/spa/CashAccountMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Cash Accounts
+                  </p>
+                </router-link>
               </li>
+
               <li class="nav-item">
                 <a href="pages/UI/buttons.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

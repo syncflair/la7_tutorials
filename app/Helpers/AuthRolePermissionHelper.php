@@ -12,6 +12,8 @@ use App\Models\Purchase\PurchaseOrder;
 use App\Models\Settings\OrganizationInfo;
 
 
+
+
 //All of this role id can access in Master Dashboard
 //$RoleId = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 );
 //print_r($RoleId);
@@ -107,6 +109,8 @@ function systemSettingsAll(){
   $settings = Setting::with('belongsToLanguage','belongsToCurrency')->where(['id' => 1 ])->first();
   return $settings;
 }
+
+//not use now
 function systemSettingsGetResolution($searchKey){
   // $settings = Setting::where(['id' => 1])
   //               ->orWhere('image_resolution->img_module', 'LIKE',  '%'.$searchKey.'%')
@@ -125,31 +129,7 @@ function systemSettingsGetResolution($searchKey){
   //select * from `settings` where json_unquote(json_extract(`json_test`, '$."img_module"')) = 'user-img'
 }
 
-function testQuery(){
-  //DB::table('products')->whereJsonContains('pro_discount->customer_group', 1)->get();
-  //Setting::withCount('image_resolution->img_module')->get();
-  //$data = PurchaseOrder::select('pur_order_details')->get();
-  //$data = Product::whereJsonContains('pro_discount->customer_group', 1)->get();
-  //$data =Product::where('pro_discount->discount_qty', 3 )->get();
-  //$data = DB::table('products')->whereJsonContains('pro_discount->customer_group', '1' )->get();
-    //$data = DB::table('products')->withCount('pro_discount->discount_qty');
-    //$data = DB::table('products')->whereJsonContains('pro_discount', ['customer_group' => 1])->get(); //working
-  //$data = Product::whereJsonContains('pro_discount', ['customer_group' => '1'])->get();
- // $data = Product::query();
 
-  //$data = Product::whereRaw('JSON_CONTAINS(pro_discount->"$[*].customer_group", "3")')->get();
-  //$data = Product::whereRaw('JSON_CONTAINS(pro_discount, \'{"customer_group": 2}\')')->select('sys_pro_name')->get(); //Working
-  //$data = Product::whereJsonContains('pro_discount', ['customer_group' => 1])->select('sys_pro_name')->get(); //Working
-
-  //dd($data);
-  //Product::find(1)->update(['pro_discount->discount_qty' => 5]);
-
-  //DB::table('purchase_orders')->where('id', 23)->update(['po_due_amount' => '111']);
-   // DB::table('purchase_orders')->where('id', 23)->update(['pur_order_details->>batch_no' => 'b111']);
-   //DB::table('purchase_orders')->where('id', 23)->update(array('pur_order_details->batch_no' => 'b111'));
-
-  // array('info->pizza->calorie' => '90')
-}
 
 
 

@@ -2,7 +2,7 @@
 //print_r(systemSettingsAll()->image_resolution[0]);
 //print_r(systemSettingsGetResolution('user-img'));
 
-//testQuery();
+testQuery();
 /*Enable Query Log to check raw sql query*/
 DB::listen(function($sql) {
    //print_r($sql->sql); 
@@ -208,6 +208,11 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
       ['except'=>['create','show','edit'] ]);
 
     Route::resource('spa/AccountHeads-Info', 'Admin\Accounting\AccountHeadController', 
+      ['except'=>['create','show','edit'] ]);
+
+    Route::resource('spa/BankAccount-Info', 'Admin\Accounting\BankAccountController', 
+      ['except'=>['create','show','edit'] ]);
+    Route::resource('spa/CashAccount-Info', 'Admin\Accounting\CashAccountController', 
       ['except'=>['create','show','edit'] ]);
 
     //HRM
