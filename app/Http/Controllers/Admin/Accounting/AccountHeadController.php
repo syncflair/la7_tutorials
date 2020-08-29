@@ -152,4 +152,15 @@ class AccountHeadController extends Controller
             return response()->json(['errors'=> 'Something is wrong..']);
         }//*/
     }
+
+    //Get all AccountDetail
+    public function getChartOfAccountHeads(Request $request){
+        //this is for commonStoreForAll Store
+        //$data = AccountHead::whereNull('parent_id')->with('child_account_head')->get(); //for admin
+        $data = AccountHead::whereNull('parent_id')->where('is_enabled', 1)
+                //->whereNotNull('parent_id')
+                ->with('child_account_head')
+                ->get();
+        return response()->json($data);
+    }
 }

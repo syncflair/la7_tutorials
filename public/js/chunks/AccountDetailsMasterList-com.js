@@ -1,16 +1,14 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["BankAccountMasterList-com"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["AccountDetailsMasterList-com"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -102,10 +100,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "BankAccountMasterList",
+  name: "AccountDetailsMasterList",
   data: function data() {
     return {
-      bankAccounts: {} // perPage: 0,                 
+      accountDetails: {} // perPage: 0,                 
 
     };
   },
@@ -113,15 +111,15 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     viewDetials: function viewDetials(data) {
       //alert(id);
-      FireEvent.$emit('BankAccountMasterContentHead', data);
+      FireEvent.$emit('AccountDetailsMasterContentHead', data);
     },
     fetchData: function fetchData() {
       var _this = this;
 
       this.$Progress.start(); //using progress-bar package
 
-      axios.get('/spa/BankAccount-Info').then(function (response) {
-        _this.bankAccounts = response.data; // is an object... use when pagination
+      axios.get('/spa/AccountDetails-Info').then(function (response) {
+        _this.accountDetails = response.data; // is an object... use when pagination
         //console.log(response.data); 
 
         _this.$Progress.finish();
@@ -132,12 +130,12 @@ __webpack_require__.r(__webpack_exports__);
         toastr.warning('Something is wrong!');
       });
     },
-    addBankAccount: function addBankAccount() {
-      FireEvent.$emit('addBankAccount');
+    addAccountDetails: function addAccountDetails() {
+      FireEvent.$emit('addAccountDetails');
     },
-    editBankAccount: function editBankAccount(data) {
+    editAccountDetails: function editAccountDetails(data) {
       //alert(data.id);
-      FireEvent.$emit('editBankAccount', data);
+      FireEvent.$emit('editAccountDetails', data);
     },
     DeleteData: function DeleteData(id) {
       Swal.fire({
@@ -150,7 +148,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]('/spa/BankAccount-Info/' + id).then(function (_ref) {
+          axios["delete"]('/spa/AccountDetails-Info/' + id).then(function (_ref) {
             var data = _ref.data;
 
             if (data.success) {
@@ -177,8 +175,8 @@ __webpack_require__.r(__webpack_exports__);
 
     this.fetchData();
     setTimeout(function () {
-      //console.log(this.bankAccounts);
-      _this2.viewDetials(_this2.bankAccounts[0]);
+      //console.log(this.accountDetails);
+      _this2.viewDetials(_this2.accountDetails[0]);
     }, 1000);
     FireEvent.$on('AfterChange', function () {
       _this2.fetchData();
@@ -192,10 +190,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue?vue&type=template&id=35d4dce4&":
-/*!*****************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue?vue&type=template&id=35d4dce4& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue?vue&type=template&id=5aaff320&":
+/*!***********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue?vue&type=template&id=5aaff320& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -224,7 +222,7 @@ var render = function() {
               {
                 staticClass: "btn btn-primary btn-flat btn-sm",
                 attrs: { "data-toggle": "modal", "data-target": "#formModal" },
-                on: { click: _vm.addBankAccount }
+                on: { click: _vm.addAccountDetails }
               },
               [_c("i", { staticClass: "icon fas fa-plus" }), _vm._v(" New")]
             )
@@ -241,7 +239,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "tbody",
-              _vm._l(_vm.bankAccounts, function(ba, index) {
+              _vm._l(_vm.accountDetails, function(ad, index) {
                 return _c("tr", { key: index }, [
                   _c("td", { attrs: { scope: "col" } }, [
                     _c(
@@ -250,26 +248,22 @@ var render = function() {
                         staticClass: "pointer mb-0",
                         on: {
                           click: function($event) {
-                            return _vm.viewDetials(ba)
+                            return _vm.viewDetials(ad)
                           }
                         }
                       },
                       [
                         _vm._v(
                           " \r\n                " +
-                            _vm._s(ba.bank_account_name) +
+                            _vm._s(ad.account_name) +
                             " "
                         ),
                         _c("br"),
                         _vm._v(" "),
-                        _c("small", [_vm._v(" " + _vm._s(ba.bank_name) + " ")]),
-                        _vm._v(" "),
-                        _c("br"),
-                        _vm._v(" "),
-                        ba.account_opening_balance != null
+                        ad.opening_balance != null
                           ? _c("span", { staticClass: "green" }, [
                               _vm._v(
-                                _vm._s(ba.account_opening_balance) +
+                                _vm._s(ad.opening_balance) +
                                   " \r\n                  "
                               ),
                               _c("small", [
@@ -283,8 +277,8 @@ var render = function() {
                             ])
                           : _vm._e(),
                         _vm._v(" "),
-                        ba.account_opening_balance === null
-                          ? _c("span", [
+                        ad.opening_balance === null
+                          ? _c("span", { staticClass: "red" }, [
                               _vm._v(" 0.00 \r\n                  "),
                               _c("small", [
                                 _vm._v(
@@ -319,7 +313,7 @@ var render = function() {
                                 staticClass: "dropdown-item pointer",
                                 on: {
                                   click: function($event) {
-                                    return _vm.viewDetials(ba)
+                                    return _vm.viewDetials(ad)
                                   }
                                 }
                               },
@@ -339,7 +333,7 @@ var render = function() {
                                 },
                                 on: {
                                   click: function($event) {
-                                    return _vm.editBankAccount(ba)
+                                    return _vm.editAccountDetails(ad)
                                   }
                                 }
                               },
@@ -358,7 +352,7 @@ var render = function() {
                                 attrs: { id: "delete" },
                                 on: {
                                   click: function($event) {
-                                    return _vm.DeleteData(ba.id)
+                                    return _vm.DeleteData(ad.id)
                                   }
                                 }
                               },
@@ -394,7 +388,7 @@ var staticRenderFns = [
     return _c("thead", [
       _c("tr", [
         _c("th", { staticStyle: { width: "60%" }, attrs: { scope: "col" } }, [
-          _vm._v("Accounts")
+          _vm._v("Account Details")
         ]),
         _vm._v(" "),
         _c(
@@ -432,17 +426,17 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue ***!
-  \****************************************************************************************/
+/***/ "./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue ***!
+  \**********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BankAccountMasterList_vue_vue_type_template_id_35d4dce4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BankAccountMasterList.vue?vue&type=template&id=35d4dce4& */ "./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue?vue&type=template&id=35d4dce4&");
-/* harmony import */ var _BankAccountMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BankAccountMasterList.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue?vue&type=script&lang=js&");
+/* harmony import */ var _AccountDetailsMasterList_vue_vue_type_template_id_5aaff320___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AccountDetailsMasterList.vue?vue&type=template&id=5aaff320& */ "./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue?vue&type=template&id=5aaff320&");
+/* harmony import */ var _AccountDetailsMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AccountDetailsMasterList.vue?vue&type=script&lang=js& */ "./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -452,9 +446,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _BankAccountMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _BankAccountMasterList_vue_vue_type_template_id_35d4dce4___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BankAccountMasterList_vue_vue_type_template_id_35d4dce4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AccountDetailsMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AccountDetailsMasterList_vue_vue_type_template_id_5aaff320___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AccountDetailsMasterList_vue_vue_type_template_id_5aaff320___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -464,38 +458,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue"
+component.options.__file = "resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************/
+/***/ "./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BankAccountMasterList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountDetailsMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AccountDetailsMasterList.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountDetailsMasterList_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue?vue&type=template&id=35d4dce4&":
-/*!***********************************************************************************************************************!*\
-  !*** ./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue?vue&type=template&id=35d4dce4& ***!
-  \***********************************************************************************************************************/
+/***/ "./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue?vue&type=template&id=5aaff320&":
+/*!*****************************************************************************************************************************!*\
+  !*** ./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue?vue&type=template&id=5aaff320& ***!
+  \*****************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountMasterList_vue_vue_type_template_id_35d4dce4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./BankAccountMasterList.vue?vue&type=template&id=35d4dce4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Accounting/BankAccount/BankAccountMasterList.vue?vue&type=template&id=35d4dce4&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountMasterList_vue_vue_type_template_id_35d4dce4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountDetailsMasterList_vue_vue_type_template_id_5aaff320___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./AccountDetailsMasterList.vue?vue&type=template&id=5aaff320& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMasterList.vue?vue&type=template&id=5aaff320&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountDetailsMasterList_vue_vue_type_template_id_5aaff320___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BankAccountMasterList_vue_vue_type_template_id_35d4dce4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountDetailsMasterList_vue_vue_type_template_id_5aaff320___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

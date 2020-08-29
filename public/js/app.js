@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/chunks/" + ({"AccountHeadsMaster":"AccountHeadsMaster","AttirbuteMaster":"AttirbuteMaster","AttributeValueMaster":"AttributeValueMaster","BankAccountMaster":"BankAccountMaster","BranchInfo":"BranchInfo","BrandMaster":"BrandMaster","BrandShopMaster":"BrandShopMaster","CashAccountMaster":"CashAccountMaster","CashFlowReportMaster":"CashFlowReportMaster","Category-demo":"Category-demo","CategoryMaster":"CategoryMaster","ChartOfAccounts":"ChartOfAccounts","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","CustomerGroupMaster":"CustomerGroupMaster","CustomerMaster":"CustomerMaster","Dashboard":"Dashboard","DepartmentMaster":"DepartmentMaster","DistrictMaster":"DistrictMaster","DistrictZoneMaster":"DistrictZoneMaster","DivisionMaster":"DivisionMaster","EmployeeMaster":"EmployeeMaster","EmployeeMasterForm":"EmployeeMasterForm","EmployeeMasterList":"EmployeeMasterList","GiftVoucher":"GiftVoucher","JobTitleMaster":"JobTitleMaster","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","LoanReportMaster":"LoanReportMaster","Multicomponent":"Multicomponent","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","PaymentMethod":"PaymentMethod","PermissionMaster":"PermissionMaster","ProductMaster":"ProductMaster","ProductMasterForm":"ProductMasterForm","ProductMasterList":"ProductMasterList","PurchaseOrderForm":"PurchaseOrderForm","PurchaseOrderList":"PurchaseOrderList","PurchaseOrderMaster":"PurchaseOrderMaster","PurchaseSingleOrderView":"PurchaseSingleOrderView","ReportMaster":"ReportMaster","Returns":"Returns","Reviews":"Reviews","RoleMaster":"RoleMaster","SalesReportMaster":"SalesReportMaster","SettingsMaster":"SettingsMaster","SpecificationMaster":"SpecificationMaster","StatusMaster":"StatusMaster","StockReportMaster":"StockReportMaster","Store":"Store","SupplierMaster":"SupplierMaster","SuppliersReportMaster":"SuppliersReportMaster","UnitsMaster":"UnitsMaster","UserMaster":"UserMaster","UserStatus":"UserStatus","VatRate":"VatRate","VendorMaster":"VendorMaster","VendorMasterForm":"VendorMasterForm","VendorMasterList":"VendorMasterList","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","adminwrapper":"adminwrapper","multi-select-app-one-global":"multi-select-app-one-global","my-date-time-global":"my-date-time-global","pagination-app":"pagination-app","search-app-master":"search-app-master","search-app-one":"search-app-one","single-select-app-one-global":"single-select-app-one-global","single-select-app-two-global":"single-select-app-two-global","vendors~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-select-app~switch-app":"vendors~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-select-app~switch-app","NotFound":"NotFound","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","AccountHeadsMasterForm-com":"AccountHeadsMasterForm-com","AccountHeadsMasterList-com":"AccountHeadsMasterList-com","AttributeMasterForm-com":"AttributeMasterForm-com","AttributeMasterList-com":"AttributeMasterList-com","AttributeValueMasterForm-com":"AttributeValueMasterForm-com","AttributeValueMasterList-com":"AttributeValueMasterList-com","BankAccountMasterContent-com":"BankAccountMasterContent-com","BankAccountMasterForm-com":"BankAccountMasterForm-com","BankAccountMasterList-com":"BankAccountMasterList-com","BranchForm-com":"BranchForm-com","BranchList-com":"BranchList-com","BrandMasterForm-com":"BrandMasterForm-com","BrandMasterList-com":"BrandMasterList-com","BrandShopMasterForm-com":"BrandShopMasterForm-com","BrandShopMasterList-com":"BrandShopMasterList-com","CashAccountMasterContent-com":"CashAccountMasterContent-com","CashAccountMasterForm-com":"CashAccountMasterForm-com","CashAccountMasterList-com":"CashAccountMasterList-com","CategoryMasterForm-com":"CategoryMasterForm-com","CategoryMasterList-com":"CategoryMasterList-com","ChartOfAccountsForm-com":"ChartOfAccountsForm-com","ChartOfAccountsList-com":"ChartOfAccountsList-com","CountryForm-com":"CountryForm-com","CountryList-com":"CountryList-com","CurrencyForm-com":"CurrencyForm-com","CurrencyList-com":"CurrencyList-com","CustomerGroupMasterForm-com":"CustomerGroupMasterForm-com","CustomerGroupMasterList-com":"CustomerGroupMasterList-com","CustomerMasterForm-com":"CustomerMasterForm-com","CustomerMasterList-com":"CustomerMasterList-com","DepartmentMaserForm-com":"DepartmentMaserForm-com","DepartmentMasterList-com":"DepartmentMasterList-com","DistrictMasterList-com":"DistrictMasterList-com","DistrictMasterform-com":"DistrictMasterform-com","DistrictZoneMasterForm-com":"DistrictZoneMasterForm-com","DistrictZoneMasterList-com":"DistrictZoneMasterList-com","DivisionMasterList-com":"DivisionMasterList-com","DivisionMasterform-com":"DivisionMasterform-com","JobTitleMasterForm-com":"JobTitleMasterForm-com","JobTitleMasterList-com":"JobTitleMasterList-com","LanguageForm-com":"LanguageForm-com","LanguageList-com":"LanguageList-com","LengthUnitForm-com":"LengthUnitForm-com","LengthUnitList-com":"LengthUnitList-com","formBox":"formBox","searchBox":"searchBox","PackageUnitForm-com":"PackageUnitForm-com","PackageUnitList-com":"PackageUnitList-com","PaymentMethodForm-com":"PaymentMethodForm-com","PaymentMethodList-com":"PaymentMethodList-com","PermissionAddForm-com":"PermissionAddForm-com","ReportMasterContent-com":"ReportMasterContent-com","ReportMasterNav-com":"ReportMasterNav-com","RoleAdminMasterForm-com":"RoleAdminMasterForm-com","RoleAdminMasterList-com":"RoleAdminMasterList-com","SpecificationMasterForm-com":"SpecificationMasterForm-com","SpecificationMasterList-com":"SpecificationMasterList-com","StatusMasterForm-com":"StatusMasterForm-com","StatusMasterList-com":"StatusMasterList-com","SupplierMasterForm-com":"SupplierMasterForm-com","SupplierMasterList-com":"SupplierMasterList-com","UnitsMasterForm-com":"UnitsMasterForm-com","UnitsMasterList-com":"UnitsMasterList-com","UserMasterForm-com":"UserMasterForm-com","UserMasterList-com":"UserMasterList-com","UserStatusForm-com":"UserStatusForm-com","UserStatusList-com":"UserStatusList-com","VatRateForm-com":"VatRateForm-com","VatRateList-com":"VatRateList-com","WeightUnitForm-com":"WeightUnitForm-com","WeightUnitList-com":"WeightUnitList-com","AdjustBankAccountForm-com":"AdjustBankAccountForm-com","AdjustCashAccountForm-com":"AdjustCashAccountForm-com"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "js/chunks/" + ({"AccountDetailsMaster":"AccountDetailsMaster","AccountHeadsMaster":"AccountHeadsMaster","AttirbuteMaster":"AttirbuteMaster","AttributeValueMaster":"AttributeValueMaster","BankAccountMaster":"BankAccountMaster","BranchInfo":"BranchInfo","BrandMaster":"BrandMaster","BrandShopMaster":"BrandShopMaster","CashAccountMaster":"CashAccountMaster","CashFlowReportMaster":"CashFlowReportMaster","Category-demo":"Category-demo","CategoryMaster":"CategoryMaster","ChartOfAccounts":"ChartOfAccounts","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","CustomerGroupMaster":"CustomerGroupMaster","CustomerMaster":"CustomerMaster","Dashboard":"Dashboard","DepartmentMaster":"DepartmentMaster","DistrictMaster":"DistrictMaster","DistrictZoneMaster":"DistrictZoneMaster","DivisionMaster":"DivisionMaster","EmployeeMaster":"EmployeeMaster","EmployeeMasterForm":"EmployeeMasterForm","EmployeeMasterList":"EmployeeMasterList","GiftVoucher":"GiftVoucher","JobTitleMaster":"JobTitleMaster","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","LoanReportMaster":"LoanReportMaster","Multicomponent":"Multicomponent","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","PaymentMethod":"PaymentMethod","PermissionMaster":"PermissionMaster","ProductMaster":"ProductMaster","ProductMasterForm":"ProductMasterForm","ProductMasterList":"ProductMasterList","PurchaseOrderForm":"PurchaseOrderForm","PurchaseOrderList":"PurchaseOrderList","PurchaseOrderMaster":"PurchaseOrderMaster","PurchaseSingleOrderView":"PurchaseSingleOrderView","ReportMaster":"ReportMaster","Returns":"Returns","Reviews":"Reviews","RoleMaster":"RoleMaster","SalesReportMaster":"SalesReportMaster","SettingsMaster":"SettingsMaster","SpecificationMaster":"SpecificationMaster","StatusMaster":"StatusMaster","StockReportMaster":"StockReportMaster","Store":"Store","SupplierMaster":"SupplierMaster","SuppliersReportMaster":"SuppliersReportMaster","UnitsMaster":"UnitsMaster","UserMaster":"UserMaster","UserStatus":"UserStatus","VatRate":"VatRate","VendorMaster":"VendorMaster","VendorMasterForm":"VendorMasterForm","VendorMasterList":"VendorMasterList","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","adminwrapper":"adminwrapper","multi-select-app-one-global":"multi-select-app-one-global","my-date-time-global":"my-date-time-global","pagination-app":"pagination-app","search-app-master":"search-app-master","search-app-one":"search-app-one","single-select-app-one-global":"single-select-app-one-global","single-select-app-two-global":"single-select-app-two-global","vendors~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-select-app~switch-app":"vendors~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-select-app~switch-app","NotFound":"NotFound","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","AccountDetailsMasterContent-com":"AccountDetailsMasterContent-com","AccountDetailsMasterForm-com":"AccountDetailsMasterForm-com","AccountDetailsMasterList-com":"AccountDetailsMasterList-com","AccountHeadsMasterForm-com":"AccountHeadsMasterForm-com","AccountHeadsMasterList-com":"AccountHeadsMasterList-com","AttributeMasterForm-com":"AttributeMasterForm-com","AttributeMasterList-com":"AttributeMasterList-com","AttributeValueMasterForm-com":"AttributeValueMasterForm-com","AttributeValueMasterList-com":"AttributeValueMasterList-com","BankAccountMasterContent-com":"BankAccountMasterContent-com","BankAccountMasterForm-com":"BankAccountMasterForm-com","BankAccountMasterList-com":"BankAccountMasterList-com","BranchForm-com":"BranchForm-com","BranchList-com":"BranchList-com","BrandMasterForm-com":"BrandMasterForm-com","BrandMasterList-com":"BrandMasterList-com","BrandShopMasterForm-com":"BrandShopMasterForm-com","BrandShopMasterList-com":"BrandShopMasterList-com","CashAccountMasterContent-com":"CashAccountMasterContent-com","CashAccountMasterForm-com":"CashAccountMasterForm-com","CashAccountMasterList-com":"CashAccountMasterList-com","CategoryMasterForm-com":"CategoryMasterForm-com","CategoryMasterList-com":"CategoryMasterList-com","ChartOfAccountsForm-com":"ChartOfAccountsForm-com","ChartOfAccountsList-com":"ChartOfAccountsList-com","CountryForm-com":"CountryForm-com","CountryList-com":"CountryList-com","CurrencyForm-com":"CurrencyForm-com","CurrencyList-com":"CurrencyList-com","CustomerGroupMasterForm-com":"CustomerGroupMasterForm-com","CustomerGroupMasterList-com":"CustomerGroupMasterList-com","CustomerMasterForm-com":"CustomerMasterForm-com","CustomerMasterList-com":"CustomerMasterList-com","DepartmentMaserForm-com":"DepartmentMaserForm-com","DepartmentMasterList-com":"DepartmentMasterList-com","DistrictMasterList-com":"DistrictMasterList-com","DistrictMasterform-com":"DistrictMasterform-com","DistrictZoneMasterForm-com":"DistrictZoneMasterForm-com","DistrictZoneMasterList-com":"DistrictZoneMasterList-com","DivisionMasterList-com":"DivisionMasterList-com","DivisionMasterform-com":"DivisionMasterform-com","JobTitleMasterForm-com":"JobTitleMasterForm-com","JobTitleMasterList-com":"JobTitleMasterList-com","LanguageForm-com":"LanguageForm-com","LanguageList-com":"LanguageList-com","LengthUnitForm-com":"LengthUnitForm-com","LengthUnitList-com":"LengthUnitList-com","formBox":"formBox","searchBox":"searchBox","PackageUnitForm-com":"PackageUnitForm-com","PackageUnitList-com":"PackageUnitList-com","PaymentMethodForm-com":"PaymentMethodForm-com","PaymentMethodList-com":"PaymentMethodList-com","PermissionAddForm-com":"PermissionAddForm-com","ReportMasterContent-com":"ReportMasterContent-com","ReportMasterNav-com":"ReportMasterNav-com","RoleAdminMasterForm-com":"RoleAdminMasterForm-com","RoleAdminMasterList-com":"RoleAdminMasterList-com","SpecificationMasterForm-com":"SpecificationMasterForm-com","SpecificationMasterList-com":"SpecificationMasterList-com","StatusMasterForm-com":"StatusMasterForm-com","StatusMasterList-com":"StatusMasterList-com","SupplierMasterForm-com":"SupplierMasterForm-com","SupplierMasterList-com":"SupplierMasterList-com","UnitsMasterForm-com":"UnitsMasterForm-com","UnitsMasterList-com":"UnitsMasterList-com","UserMasterForm-com":"UserMasterForm-com","UserMasterList-com":"UserMasterList-com","UserStatusForm-com":"UserStatusForm-com","UserStatusList-com":"UserStatusList-com","VatRateForm-com":"VatRateForm-com","VatRateList-com":"VatRateList-com","WeightUnitForm-com":"WeightUnitForm-com","WeightUnitList-com":"WeightUnitList-com","AdjustBankAccountForm-com":"AdjustBankAccountForm-com","AdjustCashAccountForm-com":"AdjustCashAccountForm-com"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -122649,6 +122649,15 @@ var routes = [//export const routes = [
     title: 'Account Head'
   }
 }, {
+  path: '/spa/AccountDetailsMaster',
+  name: 'AccountDetailsMaster',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | AccountDetailsMaster */ "AccountDetailsMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Accounting/AccountDetails/AccountDetailsMaster.vue */ "./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMaster.vue"));
+  },
+  meta: {
+    title: 'Bank Accounts'
+  }
+}, {
   path: '/spa/BankAccountMaster',
   name: 'BankAccountMaster',
   component: function component() {
@@ -122969,6 +122978,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./store/DivisionMasterStore */ "./resources/js/store/DivisionMasterStore.js");
 /* harmony import */ var _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./store/DistrictMasterStore */ "./resources/js/store/DistrictMasterStore.js");
 /* harmony import */ var _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./store/DistrictZoneMasterStore */ "./resources/js/store/DistrictZoneMasterStore.js");
+/* harmony import */ var _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./store/CashAccountMasterStore */ "./resources/js/store/CashAccountMasterStore.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]); //import all Modules here from store folder
@@ -123007,8 +123017,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
+    CashAccountMasterStore: _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_26__["default"],
     commonStoreForAll: _store_commonStoreForAll__WEBPACK_IMPORTED_MODULE_2__["default"],
     CategoryStore: _store_CategoryStore__WEBPACK_IMPORTED_MODULE_3__["default"],
     ProductMasterStore: _store_ProductMasterStore__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -123917,6 +123929,93 @@ var BrandShopMasterStore = {
 
 };
 /* harmony default export */ __webpack_exports__["default"] = (BrandShopMasterStore);
+
+/***/ }),
+
+/***/ "./resources/js/store/CashAccountMasterStore.js":
+/*!******************************************************!*\
+  !*** ./resources/js/store/CashAccountMasterStore.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var CashAccountMasterStore = {
+  namespaced: true,
+  state: function state() {
+    return {
+      //accessable from any where        
+      account_head_details: {},
+      pagination: {
+        current_page: 1,
+        per_page: 0
+      },
+      autoCompleteData: {}
+    };
+  },
+
+  /*end state*/
+  getters: {},
+
+  /*end getters*/
+  mutations: {
+    //return data to state
+    FETCH_DATA: function FETCH_DATA(state, data) {
+      return state.account_head_details = data;
+    },
+    FATCH_PAGINATION: function FATCH_PAGINATION(state, pagination) {
+      return state.pagination = pagination;
+    },
+    AUTO_COMPLETE_DATA: function AUTO_COMPLETE_DATA(state, data) {
+      return state.autoCompleteData = data;
+    }
+  },
+
+  /*end Mutations*/
+  actions: {
+    fetchData: function fetchData(context, payload) {
+      var perPageVelue;
+
+      if (!payload) {
+        perPageVelue = 100;
+      } else {
+        perPageVelue = payload;
+      }
+
+      axios.get('/spa/CashAccount-Info?page=' + context.state.pagination.current_page + '&perPage=' + perPageVelue).then(function (response) {
+        context.commit('FETCH_DATA', response.data.data); //use for only show data
+
+        context.commit('FATCH_PAGINATION', response.data); //for pagination
+        //console.log(response.data);
+      })["catch"](function () {//toastr.warning('Something is wrong!');
+      });
+    },
+    //For Search
+    searching: function searching(context, payload) {
+      var searchKey = payload.search_key;
+      var searchOption = payload.search_option; //alert(query2);
+
+      axios.get('/spa/searchCashData?page=' + context.state.pagination.current_page + '&perPage=' + context.state.pagination.per_page + '&q=' + searchKey + '&so=' + searchOption) //axios.get('/spa/searchCashData?q='+query)
+      .then(function (response) {
+        context.commit('FETCH_DATA', response.data);
+        context.commit('FATCH_PAGINATION', response.data); //for pagination                                       
+      })["catch"](function () {});
+    },
+    //For Search
+    AutoCompleteSearch: function AutoCompleteSearch(context, payload) {
+      var query = payload; //let query2 = payload.key2; 
+
+      axios.get('/spa/searchCashData?&q=' + query) //axios.get('/spa/searchCashData?q='+query)
+      .then(function (response) {
+        context.commit('AUTO_COMPLETE_DATA', response.data); //this.categories = response.data; // is an object... use when pagination                                         
+      })["catch"](function () {});
+    }
+  }
+  /*end actions*/
+
+};
+/* harmony default export */ __webpack_exports__["default"] = (CashAccountMasterStore);
 
 /***/ }),
 
@@ -125665,6 +125764,7 @@ var commonStoreForAll = {
       systemSettings: {},
       adminRoles: {},
       branches: {},
+      chartOfAccountHeads: {},
       allLanguages: {},
       allCurrencies: {},
       allDepertments: {},
@@ -125714,6 +125814,9 @@ var commonStoreForAll = {
     },
     FETCH_BRANCHES: function FETCH_BRANCHES(state, data) {
       return state.branches = data;
+    },
+    FETCH_CHART_OF_ACCOUNT_HEADS: function FETCH_CHART_OF_ACCOUNT_HEADS(state, data) {
+      return state.chartOfAccountHeads = data;
     },
     FETCH_LANGUAGES: function FETCH_LANGUAGES(state, data) {
       return state.allLanguages = data;
@@ -125808,6 +125911,11 @@ var commonStoreForAll = {
     fetchBranches: function fetchBranches(context) {
       axios.get('/spa/Branch-Info/getBranches').then(function (response) {
         context.commit('FETCH_BRANCHES', response.data); //use for only show data
+      })["catch"](function () {});
+    },
+    fetchChartOfAccountHeads: function fetchChartOfAccountHeads(context) {
+      axios.get('/spa/AccountHeads-Info/getChartOfAccountHeads').then(function (response) {
+        context.commit('FETCH_CHART_OF_ACCOUNT_HEADS', response.data); //use for only show data
       })["catch"](function () {});
     },
     fetchLanguages: function fetchLanguages(context) {

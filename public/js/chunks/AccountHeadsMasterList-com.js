@@ -742,7 +742,7 @@ var staticRenderFns = [
           _vm._v("Parent")
         ]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "30%" }, attrs: { scope: "col" } }, [
+        _c("th", { staticStyle: { width: "40%" }, attrs: { scope: "col" } }, [
           _vm._v("Details")
         ]),
         _vm._v(" "),

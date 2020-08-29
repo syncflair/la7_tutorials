@@ -15,11 +15,11 @@
     <div class="card-body inside-card-body pl-1 pr-1 pt-0 pb-0">
         <!--Row -->
         <div class="row">
-            <div class="col-md-3 inside-card-body-nav" style="min-height: 670px !important">
+            <div class="col-md-7 inside-card-body-nav" style="min-height: 670px !important">
                 <CashAccountMasterList></CashAccountMasterList>
             </div>
 
-            <div class="col-md-9 inside-card-body-content" style="background: rgba(0, 0, 0, 0.02); min-height: 650px !important">
+            <div class="col-md-5 inside-card-body-content" style="background: rgba(0, 0, 0, 0.02); min-height: 650px !important">
                 <CashAccountMasterContent></CashAccountMasterContent>
             </div>
         </div><!--/Row -->

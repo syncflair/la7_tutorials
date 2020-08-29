@@ -652,69 +652,7 @@ var render = function() {
                             })
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "form-check" }, [
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.form.is_enabled,
-                                  expression: "form.is_enabled"
-                                }
-                              ],
-                              staticClass: "form-check-input",
-                              attrs: {
-                                type: "checkbox",
-                                name: "is_enabled",
-                                id: "checkbox",
-                                value: "1"
-                              },
-                              domProps: {
-                                checked: Array.isArray(_vm.form.is_enabled)
-                                  ? _vm._i(_vm.form.is_enabled, "1") > -1
-                                  : _vm.form.is_enabled
-                              },
-                              on: {
-                                change: function($event) {
-                                  var $$a = _vm.form.is_enabled,
-                                    $$el = $event.target,
-                                    $$c = $$el.checked ? true : false
-                                  if (Array.isArray($$a)) {
-                                    var $$v = "1",
-                                      $$i = _vm._i($$a, $$v)
-                                    if ($$el.checked) {
-                                      $$i < 0 &&
-                                        _vm.$set(
-                                          _vm.form,
-                                          "is_enabled",
-                                          $$a.concat([$$v])
-                                        )
-                                    } else {
-                                      $$i > -1 &&
-                                        _vm.$set(
-                                          _vm.form,
-                                          "is_enabled",
-                                          $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1))
-                                        )
-                                    }
-                                  } else {
-                                    _vm.$set(_vm.form, "is_enabled", $$c)
-                                  }
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c(
-                              "label",
-                              {
-                                staticClass: "form-check-label",
-                                attrs: { for: "checkbox" }
-                              },
-                              [_vm._v("Is Active")]
-                            )
-                          ]),
+                          _vm._m(0),
                           _vm._v(" "),
                           _c("div", { staticClass: "form-group" }, [
                             _c("input", {
@@ -826,7 +764,20 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-check" }, [
+      _c(
+        "label",
+        { staticClass: "form-check-label", attrs: { for: "checkbox" } },
+        [_vm._v("Is Active")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 
 

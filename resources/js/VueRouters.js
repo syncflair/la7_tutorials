@@ -86,6 +86,8 @@ const routes = [
 	//Accounting
 	{ path: '/spa/ChartOfAccounts', name: 'ChartOfAccounts', component: () => import(/* webpackChunkName: "ChartOfAccounts" */ './components/Admin/Accounting/COA/ChartOfAccounts.vue'), meta: { title: 'Chart Of Accounts'} },
 	{ path: '/spa/AccountHeadsMaster', name: 'AccountHeadsMaster', component: () => import(/* webpackChunkName: "AccountHeadsMaster" */ './components/Admin/Accounting/AccountHead/AccountHeadsMaster.vue'), meta: { title: 'Account Head'} },
+	{ path: '/spa/AccountDetailsMaster', name: 'AccountDetailsMaster', component: () => import(/* webpackChunkName: "AccountDetailsMaster" */ './components/Admin/Accounting/AccountDetails/AccountDetailsMaster.vue'), meta: { title: 'Bank Accounts'} },
+
 	{ path: '/spa/BankAccountMaster', name: 'BankAccountMaster', component: () => import(/* webpackChunkName: "BankAccountMaster" */ './components/Admin/Accounting/BankAccount/BankAccountMaster.vue'), meta: { title: 'Bank Accounts'} },
 	{ path: '/spa/CashAccountMaster', name: 'CashAccountMaster', component: () => import(/* webpackChunkName: "CashAccountMaster" */ './components/Admin/Accounting/CashAccount/CashAccountMaster.vue'), meta: { title: 'Cash Accounts'} },
 

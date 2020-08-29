@@ -9,12 +9,12 @@
     <!-- Card Header -->
     <div class="card-header">            
         <div class="row">
-        	<div class="col-md-6 col-sm-6 col-xs-12 text-left"><h5>Account Heads</h5></div>
+        	<div class="col-md-6 col-sm-6 col-xs-12 text-left"><h5>Chart of Account Heads</h5></div>
             <div class="col-md-6 col-sm-6 col-xs-12 text-right">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item active">Dashboard</li>
                     <li class="breadcrumb-item active">Accounting</li>
-                    <li class="breadcrumb-item"><a>Account Heads</a></li>
+                    <li class="breadcrumb-item"><a>Chart of Account Heads</a></li>
                 </ol>
             </div>           
         </div>

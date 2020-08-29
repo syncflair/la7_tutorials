@@ -2,10 +2,21 @@
 <div class="card vue-card-item vue-card-item-multi-layer" style="min-height: 665px !important">
     <div class="card-header">
       <div class="row">
-        <div class="col-6"></div>
+        <div class="col-6">
+            
+           <search-app-master 
+            @searchData="searchData"
+            @AutoCompleteSearch="AutoCompleteSearch"
+            :SearchByOptions="SearchByOptions"
+            :filterBy="filterBy"
+            :autoCompleteData="autoCompleteData"
+            :pagination="pagination"
+          ></search-app-master>
+
+        </div>
         <div class="col-6 text-right">
           <a @click="addCashAccount" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#formModal"> 
-            <i class="icon fas fa-plus"></i> Add New</a>
+            <i class="icon fas fa-plus"></i>New</a>
         </div>
       </div>
     </div><!--/card-header-->
@@ -77,6 +88,7 @@
     </div>
 
     <!-- {{cashAccounts[0]}} -->
+    {{autoCompleteData}}
 
     <div class="card-footer">      
       <!-- <pagination-app 
@@ -91,21 +103,29 @@
 </template>
 
 <script>
- 
+    import { mapState } from 'vuex' //for user MapState
     export default {
       name: "CashAccountMasterList",
 
       data(){
         return {
           cashAccounts: {}, 
-         // perPage: 0,                 
+         // perPage: 0, 
+
+        
+          filterBy:'name', // this is use for which field use for auto search, default
+          SearchByOptions:[{'field_name':'name', 'show_name':'name'}, ],                
         }
       },
 
       computed: {
+        ...mapState( 
+             'CashAccountMasterStore', ['account_head_details', 'pagination','autoCompleteData']
+          ),
       },
 
       methods:{
+
         viewDetials(data){
           //alert(id);
           FireEvent.$emit('CashAccountMasterContentHead', data);
@@ -170,6 +190,18 @@
 
             })
         }, //end delete
+
+
+         // ################################ For search App ###############################################
+          searchData(data){
+            this.$store.dispatch('CashAccountMasterStore/searching', data ); 
+          },      
+          AutoCompleteSearch(data){
+            if(data != ''){
+                this.$store.dispatch('CashAccountMasterStore/AutoCompleteSearch', data );
+            }        
+          },
+        // ################################ For search App ###############################################
        
       
       },

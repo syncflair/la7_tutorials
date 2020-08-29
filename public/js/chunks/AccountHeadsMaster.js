@@ -126,7 +126,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-header" }, [
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-md-6 col-sm-6 col-xs-12 text-left" }, [
-          _c("h5", [_vm._v("Account Heads")])
+          _c("h5", [_vm._v("Chart of Account Heads")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-6 col-sm-6 col-xs-12 text-right" }, [
@@ -140,7 +140,7 @@ var staticRenderFns = [
             ]),
             _vm._v(" "),
             _c("li", { staticClass: "breadcrumb-item" }, [
-              _c("a", [_vm._v("Account Heads")])
+              _c("a", [_vm._v("Chart of Account Heads")])
             ])
           ])
         ])

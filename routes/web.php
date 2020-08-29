@@ -2,7 +2,7 @@
 //print_r(systemSettingsAll()->image_resolution[0]);
 //print_r(systemSettingsGetResolution('user-img'));
 
-testQuery();
+//testQuery();
 /*Enable Query Log to check raw sql query*/
 DB::listen(function($sql) {
    //print_r($sql->sql); 
@@ -207,11 +207,17 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/ChartOfAccounts-Info', 'Admin\Accounting\ChartOfAccountsController', 
       ['except'=>['create','show','edit'] ]);
 
+    Route::get('spa/AccountHeads-Info/getChartOfAccountHeads', 'Admin\Accounting\AccountHeadController@getChartOfAccountHeads');//commonStoreForAll store 
     Route::resource('spa/AccountHeads-Info', 'Admin\Accounting\AccountHeadController', 
-      ['except'=>['create','show','edit'] ]);
+      ['except'=>['create','show','edit'] ]); //Chart Of Accounting
+
+    Route::resource('spa/AccountDetails-Info', 'Admin\Accounting\AccountDetailController', 
+      ['except'=>['create','show','edit'] ]); //COA Detials
 
     Route::resource('spa/BankAccount-Info', 'Admin\Accounting\BankAccountController', 
       ['except'=>['create','show','edit'] ]);
+    
+    Route::get('spa/searchCashData', 'Admin\Accounting\CashAccountController@search'); //search
     Route::resource('spa/CashAccount-Info', 'Admin\Accounting\CashAccountController', 
       ['except'=>['create','show','edit'] ]);
 

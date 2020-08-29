@@ -62,7 +62,7 @@
 				                  <option v-for="branch in branches" :key="branch.id" v-bind:value="branch.id">{{branch.branch_name}}</option> 
 				               </select>
 				               <has-error :form="form" field="branch_id"></has-error>			                      
-					        </div>
+					          </div>
 		            	</div>
 		            </div>
 
@@ -488,7 +488,7 @@
   		this.fillForm();
     	this.$store.dispatch('commonStoreForAll/userStatus'); //get user status
     	this.$store.dispatch('commonStoreForAll/fetchJobTitles'); //get job title
-    	this.$store.dispatch('commonStoreForAll/fetchBranches'); //get job title
+    	this.$store.dispatch('commonStoreForAll/fetchBranches'); //get Branch
     	this.$store.dispatch('commonStoreForAll/fetchDepartments');//fetchDepartments
 
       //call from multi-select-app-one.vue

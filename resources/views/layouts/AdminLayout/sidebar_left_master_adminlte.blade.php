@@ -443,7 +443,16 @@
                 <router-link to="/spa/AccountHeadsMaster" class="nav-link">
                   <i class="nav-icon fas fa-info-circle"></i>
                   <p>
-                    Account Heads
+                    Chart of Account Heads
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/AccountDetailsMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Account Details 
                   </p>
                 </router-link>
               </li>

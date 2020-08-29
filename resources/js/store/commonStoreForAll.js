@@ -10,6 +10,7 @@ const commonStoreForAll ={
 
       adminRoles:{},
       branches:{},
+      chartOfAccountHeads:{},
       allLanguages:{},
       allCurrencies:{},
       allDepertments:{},
@@ -50,6 +51,8 @@ const commonStoreForAll ={
       //get from action
       FETCH_ROLES(state, data){return state.adminRoles = data;}, 
       FETCH_BRANCHES(state, data){return state.branches = data;},       
+      FETCH_CHART_OF_ACCOUNT_HEADS(state, data){return state.chartOfAccountHeads = data;},  
+
       FETCH_LANGUAGES(state, data){return state.allLanguages = data;},       
       FETCH_CURRENCIES(state, data){return state.allCurrencies = data;},       
       FETCH_DEPARTMENTS(state, data){return state.allDepertments = data;},       
@@ -113,6 +116,13 @@ const commonStoreForAll ={
         axios.get('/spa/Branch-Info/getBranches')
         .then( (response) => {
           context.commit('FETCH_BRANCHES', response.data); //use for only show data
+        }).catch( () => { })
+      },
+
+      fetchChartOfAccountHeads(context){ 
+        axios.get('/spa/AccountHeads-Info/getChartOfAccountHeads')
+        .then( (response) => {
+          context.commit('FETCH_CHART_OF_ACCOUNT_HEADS', response.data); //use for only show data
         }).catch( () => { })
       },
 

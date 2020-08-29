@@ -3,8 +3,31 @@
 use App\User;
 use App\Supplier;
 use App\Customer;
+use App\Models\Accounting\AccountDetail;
 use App\Models\Accounting\BankAccount;
 use App\Models\Accounting\CashAccount;
+
+
+//generate bank account code for account_transection
+function coa_account_details_code_generate(){
+  $record = AccountDetail::latest()->first(); // $record = 'BA-01'; 
+  
+  if ($record == null) {
+        $code = 'AHD-01';       
+  }else{
+    $parts = explode('-', $record->coa_code); //splite into three part 
+    $partNewNumber =  $parts[1] + 1; //increment by one
+
+    if(strlen($partNewNumber) == 1){
+      $code = 'AHD-0'. $partNewNumber;
+    }elseif(strlen($partNewNumber) == 2){
+      $code = 'AHD-'. $partNewNumber;        
+    }else{
+      $code = 'AHD-'. $partNewNumber; 
+    }   
+  }
+  return $code;
+}
 
 //generate bank account code for account_transection
 function bank_account_code_generate(){
@@ -119,17 +142,20 @@ function testQuery(){
   $suppliers = App\Supplier::select('name')->get()->toArray();
   $customers = App\Customer::select('name')->get()->toArray();
   $employees = App\Models\HRM\Employee::select('emp_name as name')->get()->toArray();
+  $banks = App\Models\Accounting\BankAccount::select('bank_account_name as name')->get()->toArray();
   // print_r($suppliers);
   //dd($customers);
 
   //$data = array_merge($suppliers, $customers);
-  $data = array_merge_recursive($suppliers, $customers, $employees);
+  $data = array_merge_recursive($suppliers, $customers, $employees, $banks);
   // $dataArr = [
   //   'supplier'=> $suppliers,
   //   'customer' => $customers,
   // ];
 
  // $data = (object) $data;
-  //dd($data);
+  dd(response()->json($data));
+
+  //return response()->json($data);
  // print_r($data);
 }

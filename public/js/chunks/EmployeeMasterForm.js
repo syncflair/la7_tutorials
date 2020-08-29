@@ -527,7 +527,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     this.$store.dispatch('commonStoreForAll/fetchJobTitles'); //get job title
 
-    this.$store.dispatch('commonStoreForAll/fetchBranches'); //get job title
+    this.$store.dispatch('commonStoreForAll/fetchBranches'); //get Branch
 
     this.$store.dispatch('commonStoreForAll/fetchDepartments'); //fetchDepartments
     //call from multi-select-app-one.vue

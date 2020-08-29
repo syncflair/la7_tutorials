@@ -24,7 +24,7 @@
             <th style="width: 5%;" scope="col">Code</th> 
             <th style="width: 20%;" scope="col">Name</th>
             <th style="width: 20%;" scope="col">Parent</th>             
-            <th style="width: 30%;" scope="col">Details</th>
+            <th style="width: 40%;" scope="col">Details</th>
             <th style="width: 5%;" scope="col">Status</th>
             <th style="width: 10%; text-align:right;" scope="col">Action</th>
           </tr>

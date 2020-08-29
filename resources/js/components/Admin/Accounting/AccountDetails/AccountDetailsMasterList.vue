@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-6"></div>
         <div class="col-6 text-right">
-          <a @click="addBankAccount" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#formModal"> 
+          <a @click="addAccountDetails" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#formModal"> 
             <i class="icon fas fa-plus"></i> New</a>
         </div>
       </div>
@@ -14,26 +14,24 @@
         <thead>
           <tr>
             <!-- <th style="">#</th> -->
-            <th style="width: 60%;" scope="col">Accounts</th>
+            <th style="width: 60%;" scope="col">Account Details</th>
             <!-- <th style="width: 30%;" scope="col">Amounts</th> -->
             <th style="width: 10%; text-align:right;" scope="col">...</th>
           </tr>
         </thead>
 
         <tbody>
-          <tr v-for="(ba, index) in bankAccounts" :key="index">
+          <tr v-for="(ad, index) in accountDetails" :key="index">
             <!-- <td > id</td> -->
             <td scope="col">
 
-              <p class="pointer mb-0" @click="viewDetials(ba)"> 
-                {{ ba.bank_account_name }} <br>
-                <small> {{ ba.bank_name }} </small>
-              
-                <br>
-                <span class="green" v-if="ba.account_opening_balance != null">{{ba.account_opening_balance}} 
+              <p class="pointer mb-0" @click="viewDetials(ad)"> 
+                {{ ad.account_name }} <br>
+
+                <span class="green" v-if="ad.opening_balance != null">{{ad.opening_balance}} 
                   <small>{{systemSettings.belongs_to_currency.currency_short_code}} </small>
                 </span>
-                <span v-if="ba.account_opening_balance === null"> 0.00 
+                <span class="red" v-if="ad.opening_balance === null"> 0.00 
                   <small>{{systemSettings.belongs_to_currency.currency_short_code}} </small>
                 </span>
               </p>
@@ -49,13 +47,13 @@
                 </a>    
 
                 <div class="dropdown-menu dropdown-menu-right">
-                  <a @click="viewDetials(ba)" class="dropdown-item pointer"> <i class="fas fa-eye primary"></i> View </a> 
+                  <a @click="viewDetials(ad)" class="dropdown-item pointer"> <i class="fas fa-eye primary"></i> View </a> 
 
-                  <a @click="editBankAccount(ba)" class="dropdown-item pointer" data-toggle="modal" data-target="#formModal"> <i class="fas fa-eye primary"></i> Edit </a>  
+                  <a @click="editAccountDetails(ad)" class="dropdown-item pointer" data-toggle="modal" data-target="#formModal"> <i class="fas fa-eye primary"></i> Edit </a>  
 
                   <div class="dropdown-divider"></div>
 
-                  <a @click="DeleteData(ba.id)" class="dropdown-item pointer" id="delete">
+                  <a @click="DeleteData(ad.id)" class="dropdown-item pointer" id="delete">
                      <i class="far fa-trash-alt red"></i> Delete
                   </a>
                 </div> 
@@ -65,7 +63,7 @@
 
           </tr>
 
-          <!-- <tr v-show="bankAccounts && !bankAccounts.length">
+          <!-- <tr v-show="accountDetails && !accountDetails.length">
             <td colspan="5">
               <div class="alert alert-warning text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
@@ -76,7 +74,7 @@
 
     </div>
 
-    <!-- {{bankAccounts[0]}} -->
+    <!-- {{accountDetails[0]}} -->
 
     <div class="card-footer">      
       <!-- <pagination-app 
@@ -93,11 +91,11 @@
 <script>
  
     export default {
-      name: "BankAccountMasterList",
+      name: "AccountDetailsMasterList",
 
       data(){
         return {
-          bankAccounts: {}, 
+          accountDetails: {}, 
          // perPage: 0,                 
         }
       },
@@ -108,16 +106,16 @@
       methods:{
         viewDetials(data){
           //alert(id);
-          FireEvent.$emit('BankAccountMasterContentHead', data);
+          FireEvent.$emit('AccountDetailsMasterContentHead', data);
         },
 
         fetchData(){
           this.$Progress.start(); //using progress-bar package
 
-          axios.get('/spa/BankAccount-Info')
+          axios.get('/spa/AccountDetails-Info')
             .then( ( response ) => {
 
-              this.bankAccounts = response.data; // is an object... use when pagination
+              this.accountDetails = response.data; // is an object... use when pagination
               //console.log(response.data); 
               this.$Progress.finish(); 
             })
@@ -128,13 +126,13 @@
             })
         },
 
-        addBankAccount(){
-          FireEvent.$emit('addBankAccount');
+        addAccountDetails(){
+          FireEvent.$emit('addAccountDetails');
         },
 
-        editBankAccount(data){
+        editAccountDetails(data){
           //alert(data.id);
-          FireEvent.$emit('editBankAccount', data);
+          FireEvent.$emit('editAccountDetails', data);
         },
 
         DeleteData(id){
@@ -149,7 +147,7 @@
             }).then( (result) => {
 
               if ( result.value ) {  
-                axios.delete('/spa/BankAccount-Info/'+id)
+                axios.delete('/spa/AccountDetails-Info/'+id)
                   .then( ({data}) => {
 
                     if(data.success){                  
@@ -179,8 +177,8 @@
         this.fetchData();
 
         setTimeout(() => {
-            //console.log(this.bankAccounts);
-            this.viewDetials(this.bankAccounts[0]);
+            //console.log(this.accountDetails);
+            this.viewDetials(this.accountDetails[0]);
           }, 1000);
         
 

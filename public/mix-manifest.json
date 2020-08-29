@@ -11,6 +11,7 @@
     "/js/chunks/AccountHeadsMasterForm-com.js": "/js/chunks/AccountHeadsMasterForm-com.js",
     "/js/chunks/AccountHeadsMasterList-com.js": "/js/chunks/AccountHeadsMasterList-com.js",
     "/js/chunks/AdjustBankAccountForm-com.js": "/js/chunks/AdjustBankAccountForm-com.js",
+    "/js/chunks/AdjustCashAccountForm-com.js": "/js/chunks/AdjustCashAccountForm-com.js",
     "/js/chunks/AttirbuteMaster.js": "/js/chunks/AttirbuteMaster.js",
     "/js/chunks/AttributeMasterForm-com.js": "/js/chunks/AttributeMasterForm-com.js",
     "/js/chunks/AttributeMasterList-com.js": "/js/chunks/AttributeMasterList-com.js",
@@ -30,6 +31,10 @@
     "/js/chunks/BrandShopMaster.js": "/js/chunks/BrandShopMaster.js",
     "/js/chunks/BrandShopMasterForm-com.js": "/js/chunks/BrandShopMasterForm-com.js",
     "/js/chunks/BrandShopMasterList-com.js": "/js/chunks/BrandShopMasterList-com.js",
+    "/js/chunks/CashAccountMaster.js": "/js/chunks/CashAccountMaster.js",
+    "/js/chunks/CashAccountMasterContent-com.js": "/js/chunks/CashAccountMasterContent-com.js",
+    "/js/chunks/CashAccountMasterForm-com.js": "/js/chunks/CashAccountMasterForm-com.js",
+    "/js/chunks/CashAccountMasterList-com.js": "/js/chunks/CashAccountMasterList-com.js",
     "/js/chunks/CashFlowReportMaster.js": "/js/chunks/CashFlowReportMaster.js",
     "/js/chunks/Category-demo.js": "/js/chunks/Category-demo.js",
     "/js/chunks/CategoryMaster.js": "/js/chunks/CategoryMaster.js",
@@ -152,9 +157,8 @@
     "/js/chunks/single-select-app-two-global.js": "/js/chunks/single-select-app-two-global.js",
     "/js/chunks/switch-app.js": "/js/chunks/switch-app.js",
     "/js/chunks/vendors~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-select-app~switch-app.js": "/js/chunks/vendors~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-select-app~switch-app.js",
-    "/js/chunks/CashAccountMaster.js": "/js/chunks/CashAccountMaster.js",
-    "/js/chunks/CashAccountMasterList-com.js": "/js/chunks/CashAccountMasterList-com.js",
-    "/js/chunks/CashAccountMasterForm-com.js": "/js/chunks/CashAccountMasterForm-com.js",
-    "/js/chunks/CashAccountMasterContent-com.js": "/js/chunks/CashAccountMasterContent-com.js",
-    "/js/chunks/AdjustCashAccountForm-com.js": "/js/chunks/AdjustCashAccountForm-com.js"
+    "/js/chunks/AccountDetailsMaster.js": "/js/chunks/AccountDetailsMaster.js",
+    "/js/chunks/AccountDetailsMasterContent-com.js": "/js/chunks/AccountDetailsMasterContent-com.js",
+    "/js/chunks/AccountDetailsMasterForm-com.js": "/js/chunks/AccountDetailsMasterForm-com.js",
+    "/js/chunks/AccountDetailsMasterList-com.js": "/js/chunks/AccountDetailsMasterList-com.js"
 }

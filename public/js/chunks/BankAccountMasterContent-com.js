@@ -130,6 +130,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var AdjustBankAccountForm = function AdjustBankAccountForm() {
   return __webpack_require__.e(/*! import() | AdjustBankAccountForm-com */ "AdjustBankAccountForm-com").then(__webpack_require__.bind(null, /*! ./AdjustBankAccountForm */ "./resources/js/components/Admin/Accounting/BankAccount/AdjustBankAccountForm.vue"));
 };
@@ -275,7 +277,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "card-body pt-1 pb-1 pl-1 pr-1" }, [
           _c("div", { staticClass: "row", staticStyle: { height: "84px" } }, [
-            _c("div", { staticClass: "col-md-6" }, [
+            _c("div", { staticClass: "col-md-8 col-sm-12" }, [
               _vm.headData
                 ? _c("span", [
                     _c("p", { staticClass: "mb-0 border-bottom-1-" }, [
@@ -284,17 +286,20 @@ var render = function() {
                           _vm._s(_vm.headData.bank_account_name) +
                           " \r\n\t\t\t\t\t"
                       ),
-                      _c("small", { staticClass: "text-bold green" }, [
+                      _c("span", { staticClass: "text-bold green" }, [
                         _vm._v(
                           " ( " +
                             _vm._s(_vm.headData.account_opening_balance) +
-                            " " +
+                            " \r\n\t\t\t\t\t\t"
+                        ),
+                        _c("small", [
+                          _vm._v(
                             _vm._s(
                               _vm.systemSettings.belongs_to_currency
                                 .currency_short_code
-                            ) +
-                            " )"
-                        )
+                            ) + " ) "
+                          )
+                        ])
                       ])
                     ]),
                     _vm._v(" "),
@@ -328,7 +333,7 @@ var render = function() {
                 : _vm._e()
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-6 text-right" }, [
+            _c("div", { staticClass: "col-md-4 col-sm-12 text-right" }, [
               _c(
                 "a",
                 {

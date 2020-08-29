@@ -5,6 +5,10 @@ namespace App\Http\Controllers\Admin\Accounting;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Accounting\CashAccount;
+use App\Models\Accounting\BankAccount;
+use App\Models\HRM\Employee;
+use App\Models\Supplier\Vendor;
+use App\Customer;
 
 class CashAccountController extends Controller
 {
@@ -151,4 +155,50 @@ class CashAccountController extends Controller
         $data = CashAccount::where('is_enabled', 1)->get();
         return response()->json($data);
     }
+
+
+
+
+    public function search(Request $request){
+        $searchKey = $request->q;
+        // $searchOption = $request->so;
+
+        if(!empty($searchKey) ){
+
+            $cash = CashAccount::where(function($query) use ($searchKey){
+                $query->where('cash_account_name','LIKE','%'.$searchKey.'%');
+            })->select('cash_account_name as name')->get()->toArray();
+
+            $employee = Employee::where(function($query) use ($searchKey){
+                $query->where('emp_name','LIKE','%'.$searchKey.'%');
+            })->select('emp_name as name')->get()->toArray();
+
+            $customer = Customer::where(function($query) use ($searchKey){
+                $query->where('name','LIKE','%'.$searchKey.'%');
+            })->select('name')->get()->toArray();
+
+            $vendor = Vendor::where(function($query) use ($searchKey){
+                $query->where('vendor_name','LIKE','%'.$searchKey.'%');
+            })->select('vendor_name as name')->get()->toArray();
+
+            $banks = BankAccount::where(function($query) use ($searchKey){
+                $query->where('bank_account_name','LIKE','%'.$searchKey.'%');
+            })->select('bank_account_name as name')->get()->toArray();
+
+            
+        }
+
+        // $banks = BankAccount::select('bank_account_name as name')->get()->toArray();
+
+        $mergeData = array_merge_recursive($cash, $banks, $employee, $customer, $vendor);
+
+
+        return response()->json($mergeData);
+    }//end search
+
+
+
+
 }
+
+

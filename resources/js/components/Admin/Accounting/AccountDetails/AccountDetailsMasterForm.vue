@@ -2,13 +2,13 @@
 <span>
 		
 	<!-- Modal -->
-<div class="modal fade" id="AdjustCashAccountModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" >
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true" data-backdrop="static" >
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="">
-        	<span v-show="!editMode">Adjust Cash Account Form</span>
-        	<span v-show="editMode">Update - {{form.bank_account_name}}</span>
+        	<span v-show="!editMode">Add Account</span>
+        	<span v-show="editMode">Update - {{form.account_name}}</span>
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="ClearForm()">
           <span aria-hidden="true">&times;</span>
@@ -24,31 +24,41 @@
 
 	          		<div class="form-group">
 	                  <label>Account Name*</label>
-	                    <input v-model="form.bank_account_name" type="text" ref="bank_account_name" name="bank_account_name" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('bank_account_name') }" placeholder="Account Name">
-	                  <has-error :form="form" field="bank_account_name"></has-error>
+	                    <input v-model="form.account_name" type="text" ref="account_name" name="account_name" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('account_name') }" placeholder="Account Name">
+	                  <has-error :form="form" field="account_name"></has-error>
 	                </div>
-	               
-                  	<div class="form-group">
-                      <label>Account Number *</label>
-                        <input v-model="form.bank_account_number" type="text" ref="bank_account_number" name="bank_account_number" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('bank_account_number') }" placeholder="Account Number">
-                      <has-error :form="form" field="bank_account_number"></has-error>
-                    </div>	
 
-                    <div class="form-group">
-                      <label>Bank Name *</label>
-                        <input v-model="form.bank_name" type="text" ref="bank_name" name="bank_name" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('bank_name') }" placeholder="Bank Name">
-                      <has-error :form="form" field="bank_name"></has-error>
-                    </div>	
+	                <div class="form-group">
+			          <label>Account Head </label>
+		              <select v-model="form.coa_id" class="form-control form-control-sm-" id="coa_id" name="coa_id" :class="{ 'is-invalid': form.errors.has('coa_id') }" >
+		              	  <option disabled value="">Select Account Head ..</option> 
 
-                    <div class="form-group">
-                      <label>Bank branch *</label>
-                        <input v-model="form.bank_branch" type="text" ref="bank_branch" name="bank_branch" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('bank_branch') }" placeholder="Bank Branch">
-                      <has-error :form="form" field="bank_branch"></has-error>
-                    </div>
+		              	  <template v-for="parentAH in chartOfAccountHeads" >
+                          	<option disabled v-bind:value="parentAH.id"> <span>{{parentAH.ah_name}} </span> </option>
+	                        
+	                        <template v-for="c_parentAH in parentAH.child_account_head">
+	                        	<option v-bind:value="c_parentAH.id"> <span> -- {{c_parentAH.ah_name}} </span>  </option>
+	                        </template>
+
+                          </template>               
+		                  <!-- <option v-for="coah in chartOfAccountHeads" :key="coah.id" v-bind:value="coah.id">{{coah.ah_name}}</option> --> 
+		              </select>
+		              <has-error :form="form" field="coa_id"></has-error>			                      
+			        </div>
+
+	                <div class="form-group">
+			          <label>Branch </label>
+		              <select v-model="form.branch_id" class="form-control form-control-sm-" id="branch_id" name="branch_id" :class="{ 'is-invalid': form.errors.has('branch_id') }" >
+		              	  <option disabled value="">Select Branch ..</option>                
+		                  <option v-for="branch in branches" :key="branch.id" v-bind:value="branch.id">{{branch.branch_name}}</option> 
+		               </select>
+		               <!-- <has-error :form="form" field="branch_id"></has-error>			                       -->
+			        </div>
+
 
                    	<div class="form-group">
                       <label>Oppening Balance</label>
-                      <input type="number" class="form-control form-control-sm" min="1" step="any" v-model="form.account_opening_balance" name="account_opening_balance"> 
+                      <input type="number" class="form-control form-control-sm" min="1" step="any" v-model="form.opening_balance" name="opening_balance"> 
                     </div>
 
 
@@ -57,22 +67,22 @@
 
 	          		<div class="form-group">
                       <label>Oppening Date *</label>
-                      <input type="date" class="form-control form-control-sm" v-model="form.account_open_date" name="account_open_date" >
+                      <input type="date" class="form-control form-control-sm" v-model="form.open_date" name="open_date" >
                     </div>
 
 	          		<div class="form-group">
                       <label >Account Details</label>
-                        <textarea v-model="form.bank_account_desc" ref="bank_account_desc" name="bank_account_desc" class="form-control" placeholder="Details"></textarea>
+                        <textarea v-model="form.account_desc" ref="account_desc" name="account_desc" class="form-control" placeholder="Details"></textarea>
                     </div>
 
                     <div class="form-check">
-                      <!-- <input v-model="form.is_enabled" type="checkbox" class="form-check-input" name="is_enabled" id="checkbox" value="1"> -->
+                      <input v-model="form.is_enabled" type="checkbox" class="form-check-input" name="is_enabled" id="checkbox" value="1">
                       <label class="form-check-label" for="checkbox" >Is Active</label>
                     </div>
 
                     <div class="form-group">
-                      <!-- <label>Bank Account Code*</label> -->
-                        <input v-model="form.bank_account_code" type="hidden" ref="bank_account_code" name="bank_account_code" class="form-control form-control-sm"  readonly min="0" step=".01" placeholder="Ex. BA-01">
+                      <!-- <label>Chart of Accounting code Code*</label> -->
+                        <input v-model="form.coa_code" type="hidden" ref="coa_code" name="coa_code" class="form-control form-control-sm"  readonly min="0" step=".01" placeholder="Ex. BA-01">
                     </div>
 
 	          	</div>	
@@ -101,6 +111,7 @@
 </span>	
 </template>
 <script>
+	import { mapState } from 'vuex' //for user MapState
 	export default {
 		 data () {
 	      return {
@@ -111,50 +122,53 @@
 	        // Create a new form instance
 	        form: new Form({
 	          id: '',
-	          bank_account_code:'',
-	          bank_account_name: '',
-	          bank_account_number: '',
-	          bank_name: '',
-	          bank_branch: '',
-	          account_opening_balance: '',
-	          account_open_date: '',
-	          //account_close_date: '',
-	          bank_account_desc: '',
+	          account_name:'',
+	          coa_code:'',
+	          coa_id: '',
+	          branch_id: '',
+	          opening_balance: '',
+	          open_date: '',
+	          account_desc: '',
 	          is_enabled: '',	          
 	        })
 	      }
 	    },//end data
 
+	    computed: {
+	    	/* get form commonSotreForAll*/	
+	        ...mapState( 'commonStoreForAll', ['branches','chartOfAccountHeads'] ),
+	  	},
+
 	    methods:{
 
-	    	addBankAccount(){
+	    	addAccountDetails(){
 	    		this.editMode = false;
 	    		this.form.reset();
 	    		//Current date show in date at first load
-      			this.form.account_open_date = new Date().toISOString().substr(0, 10);
+      			this.form.open_date = new Date().toISOString().substr(0, 10);
 	    		setTimeout(() => {
-	    			this.$refs.bank_account_name.focus(); 
+	    			this.$refs.account_name.focus(); 
                 }, 600);
 	    	},
 
-	    	editBankAccount(data){
+	    	editAccountDetails(data){
 	    		this.editMode = true;
 	    		this.form.reset(); 
 	    		this.form.fill(data); 	 
-	    		//this.$refs.bank_account_name.focus();    		
+	    		//this.$refs.account_name.focus();    		
 	    	},
 	    	ClearForm(){
 	    		this.editMode = false;
 		        this.form.reset();  //reset from after submit
 		        this.form.clear(); 
-		        //this.$refs.bank_account_name.focus()
+		        //this.$refs.account_name.focus()
 	    	},
 
 	    	// Submit the form via a POST request
 			storeFormData() {  
 			  this.$Progress.start(); //using progress-bar package
 
-			  this.form.post('/spa/BankAccount-Info')
+			  this.form.post('/spa/AccountDetails-Info')
 			  .then(({ data }) => { 
 
 			    if(data.success){ 
@@ -178,7 +192,7 @@
 				//console.log('Update is working!'); 
 				this.$Progress.start(); //using progress-bar package
 
-				this.form.put('/spa/BankAccount-Info/'+this.form.id)
+				this.form.put('/spa/AccountDetails-Info/'+this.form.id)
 				  .then(({ data }) => { 
 
 				    if(data.success){ 
@@ -189,7 +203,7 @@
 				      this.form.reset();  //reset from after submit
 				      this.editMode = false; 
 				     $('#formModal').modal('hide');
-				    //  this.$refs.bank_account_name.focus(); 
+				    //  this.$refs.account_name.focus(); 
 				    
 				    }
 				    if(data.errors){
@@ -206,17 +220,18 @@
 	    },
 
 	    created(){
-
+	    	this.$store.dispatch('commonStoreForAll/fetchBranches'); //get Branch
+	    	this.$store.dispatch('commonStoreForAll/fetchChartOfAccountHeads'); //get Chart of Account heads
 	    	
 
-	    	FireEvent.$on('editBankAccount', (data) => {
+	    	FireEvent.$on('editAccountDetails', (data) => {
               //alert(data.id);
               //this.form.fill(data);   //this is also work
-              this.editBankAccount(data);
+              this.editAccountDetails(data);
             });
 
-            FireEvent.$on('addBankAccount', () => {
-              this.addBankAccount();
+            FireEvent.$on('addAccountDetails', () => {
+              this.addAccountDetails();
             });
 	    }
 

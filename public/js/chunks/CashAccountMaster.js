@@ -106,7 +106,7 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    staticClass: "col-md-3 inside-card-body-nav",
+                    staticClass: "col-md-7 inside-card-body-nav",
                     staticStyle: { "min-height": "670px !important" }
                   },
                   [_c("CashAccountMasterList")],
@@ -116,7 +116,7 @@ var render = function() {
                 _c(
                   "div",
                   {
-                    staticClass: "col-md-9 inside-card-body-content",
+                    staticClass: "col-md-5 inside-card-body-content",
                     staticStyle: {
                       background: "rgba(0, 0, 0, 0.02)",
                       "min-height": "650px !important"

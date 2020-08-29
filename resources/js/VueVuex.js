@@ -42,11 +42,16 @@ import DistrictMasterStore from './store/DistrictMasterStore'
 import DistrictZoneMasterStore from './store/DistrictZoneMasterStore'
 
 
+import CashAccountMasterStore from './store/CashAccountMasterStore'
+
+
 
 
 export default new Vuex.Store({
 
 	modules: {
+        CashAccountMasterStore,
+
 		commonStoreForAll,
     	CategoryStore,
     	ProductMasterStore,
