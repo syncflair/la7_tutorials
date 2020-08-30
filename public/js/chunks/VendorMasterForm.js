@@ -242,6 +242,43 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -274,6 +311,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         vendor_email: '',
         vendor_phone: '',
         vendor_type: '',
+        vendor_contact_name: '',
+        vendor_nid: '',
+        vendor_tin: '',
+        vendor_bank_details: '',
         vendor_desc: '',
         vendor_address: '',
         dist_zone_id: '',
@@ -588,6 +629,42 @@ var render = function() {
                   _c("div", { staticClass: "row form-group" }, [
                     _vm._m(1),
                     _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-10" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.vendor_contact_name,
+                            expression: "form.vendor_contact_name"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "vendor_contact_name",
+                          placeholder: "Contact person name"
+                        },
+                        domProps: { value: _vm.form.vendor_contact_name },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "vendor_contact_name",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row form-group" }, [
+                    _vm._m(2),
+                    _vm._v(" "),
                     _c(
                       "div",
                       { staticClass: "col-sm-10" },
@@ -635,14 +712,14 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row form-group" }, [
-                    _vm._m(2),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-10" }, [
                       _c(
                         "div",
                         { staticClass: "input-group input-group-sm- mb-3" },
                         [
-                          _vm._m(3),
+                          _vm._m(4),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -688,7 +765,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row form-group" }, [
-                    _vm._m(4),
+                    _vm._m(5),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -760,7 +837,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row form-group" }, [
-                    _vm._m(5),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -835,7 +912,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row form-group" }, [
-                    _vm._m(6),
+                    _vm._m(7),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -869,7 +946,115 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row form-group" }, [
-                    _vm._m(7),
+                    _vm._m(8),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-10" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.vendor_nid,
+                            expression: "form.vendor_nid"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "vendor_nid",
+                          placeholder: "NID"
+                        },
+                        domProps: { value: _vm.form.vendor_nid },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "vendor_nid",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row form-group" }, [
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-10" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.vendor_tin,
+                            expression: "form.vendor_tin"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "vendor_tin",
+                          placeholder: "TIN"
+                        },
+                        domProps: { value: _vm.form.vendor_tin },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "vendor_tin",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row form-group" }, [
+                    _vm._m(10),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-sm-10" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.vendor_bank_details,
+                            expression: "form.vendor_bank_details"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "vendor_bank_details",
+                          placeholder: "Bank account details"
+                        },
+                        domProps: { value: _vm.form.vendor_bank_details },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.form,
+                              "vendor_bank_details",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row form-group" }, [
+                    _vm._m(11),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-10" }, [
                       _c("textarea", {
@@ -904,7 +1089,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row form-group" }, [
-                    _vm._m(8),
+                    _vm._m(12),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-sm-10" }, [
                       _c(
@@ -966,7 +1151,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row form-group" }, [
-                    _vm._m(9),
+                    _vm._m(13),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -1156,6 +1341,14 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-sm-2 text-right" }, [
+      _c("label", { staticClass: "pt-2" }, [_vm._v("Contact Person")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-2 text-right" }, [
       _c("label", { staticClass: "pt-2" }, [_vm._v("Email *")])
     ])
   },
@@ -1197,6 +1390,30 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-sm-2 text-right" }, [
       _c("label", { staticClass: "pt-2" }, [_vm._v("Brand Shop")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-2 text-right" }, [
+      _c("label", { staticClass: "pt-2" }, [_vm._v("NID")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-2 text-right" }, [
+      _c("label", { staticClass: "pt-2" }, [_vm._v("TIN")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-2 text-right" }, [
+      _c("label", { staticClass: "pt-2" }, [_vm._v("Bank details")])
     ])
   },
   function() {

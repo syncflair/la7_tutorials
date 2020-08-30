@@ -13,11 +13,11 @@
         <thead>
           <tr>
             <!-- <th style="">#</th> -->
-            <th style="width: 25%;" scope="col">Department</th>
-            <th style="width: 40%;" scope="col">Details</th>
+            <th style="width: 20%;" scope="col">Department</th>
+            <th style="width: 50%;" scope="col">Details</th>
             <th style="width: 10%;" scope="col">Updated At</th>
             <th style="width: 10%;" scope="col">Status</th>
-            <th style="width: 15%; text-align:right;" scope="col">Action</th>
+            <th style="width: 10%; text-align:right;" scope="col">Action</th>
           </tr>
         </thead>
 

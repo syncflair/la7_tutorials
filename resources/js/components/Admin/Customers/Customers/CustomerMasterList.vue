@@ -20,19 +20,20 @@
       </div>
     </div><!--/card-header-->
     <div class="card-body">   
-      <table class="table table-striped table-sm table-responsive">
+      <table class="table table-striped table-sm table-responsive-">
         <thead>
           <tr>
             <th style="width: 2%;" scope="col"><input type="checkbox" v-model="selectAllCheckbox" @click="selectCheckbox"></th>
             
+            <th style="width: 6%;" scope="col" @click="sort('customer_code')" class="sortable-title">Code</th>
             <th style="width: 20%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
             <th style="width: 20%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>             
-            <th style="width: 7%;" scope="col" @click="sort('phone')" class="sortable-title">Phone</th>
+            <th style="width: 14%;" scope="col" @click="sort('phone')" class="sortable-title">Phone</th>
             <th style="width: 5%;" scope="col" @click="sort('customer_group')" class="sortable-title">Group</th>
             <th style="width: 3%;" scope="col" @click="sort('us_name')" class="sortable-title">Status</th>
             <th style="width: 3%;" scope="col">Nofify</th>
             <th style="width: 7%;" scope="col">Date</th>
-            <th style="width: 10%; text-align:right;" scope="col">Action</th>
+            <th style="width: 2%; text-align:right;" scope="col"><strong>...</strong></th>
           </tr>
         </thead>
 
@@ -43,6 +44,7 @@
 
             <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="customer.id"></td>
             
+            <td scope="col"> <small>{{ customer.customer_code }} </small> </td>
             <td scope="col"> {{ customer.name }} </td>
             <td > {{ customer.email }} </td> 
             <td > {{ customer.phone }} </td>          
@@ -65,7 +67,7 @@
             <td > {{ customer.created_at | formatDate }} </td> 
 
 
-            <td class="text-right">  
+    <!--         <td class="text-right">  
               <a @click="ViewDetails()" class="btn btn-flat btn-sm"> <i class="fas fa-eye primary"></i> </a>   
               <a @click="editCustomer(customer)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#customerModal">
                   <i class="fas fa-edit primary "></i>
@@ -73,12 +75,33 @@
               <a @click="DeleteData(customer.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
                  <i class="far fa-trash-alt red"></i>
               </a>
+            </td> -->
+
+            <td class="text-right">  
+              <!-- Dropdown List -->
+              <div class="btn-group option-dropdown-manu-style left">
+                <a class="btn btn-flat btn-sm btn-warning dropdown-toggle-" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i><!-- <i class="fas fa-ellipsis-h"></i> --></a>    
+
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a @click="ViewDetails(customer.id)" class="dropdown-item pointer"> <i class="fas fa-eye primary"></i> View </a> 
+                  
+                  <a @click="editCustomer(customer)" class="dropdown-item pointer" data-toggle="modal" data-target="#customerModal">
+                      <i class="fas fa-edit primary "></i> Edit
+                  </a> 
+
+                  <div class="dropdown-divider"></div>
+
+                  <a @click="DeleteData(customer.id)" class="dropdown-item pointer" id="delete">
+                     <i class="far fa-trash-alt red"></i> Delete
+                  </a>
+                </div>
+              </div><!--End Dropdown List -->
             </td>
 
           </tr>
 
           <tr v-show="customers && !customers.length">
-            <td colspan="9">
+            <td colspan="10">
               <div class="alert alert-warning text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
           </tr>
@@ -188,7 +211,6 @@
         },
 
         inactiveCustomer(id){
-          this.$Progress.start();
           Swal.fire({
               title: 'Are you sure to Active this Customer?',
              // text: "You won't be able to revert this!",
@@ -200,7 +222,7 @@
           }).then( (result) => {
             
               if ( result.value ) {  
-                
+                this.$Progress.start();
                 axios.post('/spa/customer-Info/inactive-customer/'+id)
                 .then( ({data}) => {
                   //console.log(data);
@@ -222,8 +244,7 @@
           })
         },
 
-        activeCustomer(id){
-          this.$Progress.start();
+        activeCustomer(id){          
           Swal.fire({
               title: 'Are you sure to Active this Customer?',
              // text: "You won't be able to revert this!",
@@ -235,7 +256,7 @@
           }).then( (result) => {
             
               if ( result.value ) {  
-                
+                this.$Progress.start();
                 axios.post('/spa/customer-Info/active-customer/'+id)
                 .then( ({data}) => {
                   //console.log(data);
@@ -257,8 +278,7 @@
           })
         },
 
-        verifyByUser(id){
-          this.$Progress.start();
+        verifyByUser(id){          
           Swal.fire({
               title: 'Are you sure to Verify this user?',
              // text: "You won't be able to revert this!",
@@ -270,7 +290,7 @@
           }).then( (result) => {
 
               if ( result.value ) {  
-                
+                this.$Progress.start();
                 axios.post('/spa/customer-verify-by-admin/'+id)
                 .then( ({data}) => {
                   //console.log(data);
@@ -317,8 +337,7 @@
   	    	FireEvent.$emit('editCustomer', data);
   	    },
 
-	      DeleteData(id){
-          this.$Progress.start();
+	      DeleteData(id){          
 	        Swal.fire({
 	            title: 'Are you sure to Delete?',
 	            text: "You won't be able to revert this!",
@@ -330,6 +349,7 @@
 	          }).then( (result) => {
 
 	            if ( result.value ) {  
+                this.$Progress.start();
 	              axios.delete('/spa/customer-Info/'+id)
 	                .then( ({data}) => {
 

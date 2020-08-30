@@ -18,8 +18,14 @@
 		                  <small>{{systemSettings.belongs_to_currency.currency_short_code}} </small> )
 		                </span>
 					</p>
+					
+					<p class="mb-0 border-bottom-1-">
+					  <small class="text-bold"> COA: {{headData.belongs_to_account_head.ah_name}} ({{headData.belongs_to_account_head.ah_code}})</small>
+					  <small class="text-bold" v-if="headData.belongs_to_branch != null">, Branch: {{headData.belongs_to_branch.branch_name}}</small>
+					</p>
+
 					<p class="mb-0 border-bottom-1-"><small>{{headData.account_desc}}</small></p>
-					<!-- <p class="mb-0 border-bottom-1-"><small>Bank: {{headData.bank_name}}, Branch: {{headData.bank_branch}}</small></p> -->
+
 				</span>
 				<span v-if="!headData">
 					<span class="mt-3">Please Select bank account</span>

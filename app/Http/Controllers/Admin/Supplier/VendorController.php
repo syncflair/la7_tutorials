@@ -70,12 +70,18 @@ class VendorController extends Controller
         ]);
 
         $data =array();
+        $data['vendor_code'] = vendor_code_generate();
+        $data['coa_code']= 202; //Liabilities - Accounts Payable 202
         $data['vendor_name']=$request->vendor_name;
+        $data['vendor_contact_name']=$request->vendor_contact_name;
         $data['vendor_email']=$request->vendor_email;
         $data['vendor_phone']=$request->vendor_phone;
         $data['status_id']=$request->status_id;
         $data['vendor_type']=$request->vendor_type;
         $data['brand_shop_id']=$request->brand_shop_id;
+        $data['vendor_nid']=$request->vendor_nid;
+        $data['vendor_tin']=$request->vendor_tin;
+        $data['vendor_bank_details']=$request->vendor_bank_details;
         $data['vendor_desc']=$request->vendor_desc;
         $data['vendor_address']=$request->vendor_address;
         $data['dist_zone_id']=$request->dist_zone_id;
@@ -168,11 +174,16 @@ class VendorController extends Controller
 
         $data =array();
         $data['vendor_name']=$request->vendor_name;
+        $data['vendor_contact_name']=$request->vendor_contact_name;
         $data['vendor_email']=$request->vendor_email;
         $data['vendor_phone']=$request->vendor_phone;
         $data['status_id']=$request->status_id;
         $data['vendor_type']=$request->vendor_type;
         $data['brand_shop_id']=$request->brand_shop_id;
+
+        $data['vendor_nid']=$request->vendor_nid;
+        $data['vendor_tin']=$request->vendor_tin;
+        $data['vendor_bank_details']=$request->vendor_bank_details;
         $data['vendor_desc']=$request->vendor_desc;
         $data['vendor_address']=$request->vendor_address;
         $data['dist_zone_id']=$request->dist_zone_id;
@@ -403,7 +414,7 @@ class VendorController extends Controller
     public function selectedVendortList(Request $request){
        $searchKey = $request->q;
         $searchResult = Vendor::whereIn('id', $searchKey)
-                        ->select('id','vendor_name')
+                        ->select('id','vendor_name','vendor_code')
                         ->get(); 
         return response()->json($searchResult);
     }//end search

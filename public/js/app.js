@@ -122715,6 +122715,15 @@ var routes = [//export const routes = [
     }
   } // { path: '*', redirect: '/spa/EmployeeMasterList' }
   ]
+}, {
+  path: '/spa/DepartmentMaster',
+  name: 'DepartmentMaster',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | DepartmentMaster */ "DepartmentMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/HRM/Department/DepartmentMaster.vue */ "./resources/js/components/Admin/HRM/Department/DepartmentMaster.vue"));
+  },
+  meta: {
+    title: 'Department Master'
+  }
 }, //settings
 {
   path: '/spa/SettingsMaster',
@@ -122832,15 +122841,6 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Payment Method Master'
-  }
-}, {
-  path: '/spa/DepartmentMaster',
-  name: 'DepartmentMaster',
-  component: function component() {
-    return __webpack_require__.e(/*! import() | DepartmentMaster */ "DepartmentMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/Department/DepartmentMaster.vue */ "./resources/js/components/Admin/Settings/Department/DepartmentMaster.vue"));
-  },
-  meta: {
-    title: 'Department Master'
   }
 }, {
   path: '/spa/CountryMaster',

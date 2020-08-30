@@ -225,12 +225,22 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::post('spa/getSelectedEmployee/', 'Admin\HRM\EmployeeController@getSelectedEmployee');
     Route::get('spa/AutoCompleteEmployeeData', 'Admin\HRM\EmployeeController@autoCompleteSearch'); //Auto Complete
     Route::get('spa/searchEmployeeData', 'Admin\HRM\EmployeeController@search'); //search
+    Route::post('spa/Employee-Info/inactive-employee/{id}', 'Admin\HRM\EmployeeController@inactive_employee');
+    Route::post('spa/Employee-Info/active-employee/{id}', 'Admin\HRM\EmployeeController@active_employee');
+    Route::post('spa/employee-verify-by-admin/{id}', 'Admin\HRM\EmployeeController@verifiedByAdmin');
     Route::post('spa/Employee-Info-DeleteImage/{id}', 'Admin\HRM\EmployeeController@DeleteImage');
     Route::resource('spa/Employee-Info', 'Admin\HRM\EmployeeController', 
       ['except'=>['create','show','edit'] ]);
+    
     Route::get('spa/JobTitle-Info/GetJobTitles', 'Admin\HRM\JobTitleController@GetJobTitles'); //for commonStoreForAll store
     Route::resource('spa/JobTitle-Info', 'Admin\HRM\JobTitleController', 
       ['except'=>['create','show','edit'] ]);
+
+    Route::post('spa/Department-getSelectedDepartmentList/', 'Admin\HRM\DepartmentController@getSelectedDepartmentList');
+    Route::get('spa/AutoCompleteDepartmentData', 'Admin\HRM\DepartmentController@autoCompleteSearch'); //Auto Complete
+    Route::get('spa/searchDepartmentData', 'Admin\HRM\DepartmentController@autoSearch'); //search
+    Route::get('spa/Department-Info/getDetartments', 'Admin\HRM\DepartmentController@getDetartments');//commonStoreForAll store
+    Route::resource('spa/Department-Info', 'Admin\HRM\DepartmentController');
 
     //Settings Route    
     Route::resource('spa/Settings-Info', 'Admin\Settings\SettingController', 
@@ -288,11 +298,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/DistrictZone-Info', 'Admin\Settings\DistrictZoneController', 
       ['except'=>['create','show','edit'] ]);
 
-    Route::post('spa/Department-getSelectedDepartmentList/', 'Admin\Settings\DepartmentController@getSelectedDepartmentList');
-    Route::get('spa/AutoCompleteDepartmentData', 'Admin\Settings\DepartmentController@autoCompleteSearch'); //Auto Complete
-    Route::get('spa/searchDepartmentData', 'Admin\Settings\DepartmentController@autoSearch'); //search
-    Route::get('spa/Department-Info/getDetartments', 'Admin\Settings\DepartmentController@getDetartments');//commonStoreForAll store
-    Route::resource('spa/Department-Info', 'Admin\Settings\DepartmentController');
+    
 
 
 

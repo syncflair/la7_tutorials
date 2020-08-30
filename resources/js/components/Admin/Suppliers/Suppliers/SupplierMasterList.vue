@@ -28,11 +28,11 @@
             <th style="width: 15%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
             <th style="width: 15%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>             
             <th style="width: 7%;" scope="col" @click="sort('phone')" class="sortable-title">Phone</th>
-            <th style="width: 20%;" scope="col" @click="sort('vendor_id')" class="sortable-title">Vendor (address)</th>
+            <th style="width: 27%;" scope="col" @click="sort('vendor_id')" class="sortable-title">Vendor (address)</th>
             <th style="width: 7%;" scope="col">Date</th>
             <th style="width: 3%;" scope="col">Status</th>
             <th style="width: 3%;" scope="col">Nofify</th>            
-            <th style="width: 10%; text-align:right;" scope="col">Action</th>
+            <th style="width: 3%; text-align:right;" scope="col"><strong>...</strong></th>
           </tr>
         </thead>
 
@@ -51,8 +51,8 @@
             <td > {{ supplier.email }} </td> 
             <td > {{ supplier.phone }} </td>          
           	<td > 
-              <span>{{supplier.belongs_to_vendor.vendor_name}}</span>
-              <small v-show="supplier.supplier_address != null"> - {{ supplier.supplier_address }}, </small>
+              <span v-if="supplier.belongs_to_vendor != null">{{supplier.belongs_to_vendor.vendor_name}} ({{supplier.belongs_to_vendor.vendor_code}})</span>
+              <!-- <small v-show="supplier.supplier_address != null"> - {{ supplier.supplier_address }}, </small> -->
             </td> 
 
             <td > <small>{{ supplier.created_at | formatDate }}</small> </td>
@@ -69,16 +69,26 @@
               <input type="checkbox" @click="ChangeNotify(supplier.id, $event)" name="enable_notify" value="1" v-model="supplier.enable_notify"  />
             </td>
 
-             
 
             <td class="text-right">  
-              <a @click="ViewDetails()" class="btn btn-flat btn-sm"> <i class="fas fa-eye primary"></i> </a>   
-              <a @click="editSupplier(supplier)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
-                  <i class="fas fa-edit primary "></i>
-              </a> 
-              <a @click="DeleteData(supplier.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
-                 <i class="far fa-trash-alt red"></i>
-              </a>
+              <!-- Dropdown List -->
+              <div class="btn-group option-dropdown-manu-style left">
+                <a class="btn btn-flat btn-sm btn-warning dropdown-toggle-" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i><!-- <i class="fas fa-ellipsis-h"></i> --></a>    
+
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a @click="ViewDetails(supplier.id)" class="dropdown-item pointer"> <i class="fas fa-eye primary"></i> View </a> 
+                  
+                  <a @click="editSupplier(supplier)" class="dropdown-item pointer" data-toggle="modal" data-target="#FormModal">
+                      <i class="fas fa-edit primary "></i> Edit
+                  </a> 
+
+                  <div class="dropdown-divider"></div>
+
+                  <a @click="DeleteData(supplier.id)" class="dropdown-item pointer" id="delete">
+                     <i class="far fa-trash-alt red"></i> Delete
+                  </a>
+                </div>
+              </div><!--End Dropdown List -->
             </td>
 
           </tr>

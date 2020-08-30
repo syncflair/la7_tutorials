@@ -655,14 +655,7 @@ var render = function() {
                 [_vm._v("Status")]
               ),
               _vm._v(" "),
-              _c(
-                "th",
-                {
-                  staticStyle: { width: "2%", "text-align": "right" },
-                  attrs: { scope: "col" }
-                },
-                [_vm._v("#")]
-              )
+              _vm._m(0)
             ])
           ]),
           _vm._v(" "),
@@ -903,7 +896,7 @@ var render = function() {
                         staticClass: "btn-group option-dropdown-manu-style left"
                       },
                       [
-                        _vm._m(0, true),
+                        _vm._m(1, true),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -985,7 +978,7 @@ var render = function() {
                     }
                   ]
                 },
-                [_vm._m(1)]
+                [_vm._m(2)]
               )
             ],
             2
@@ -1014,6 +1007,19 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "th",
+      {
+        staticStyle: { width: "2%", "text-align": "right" },
+        attrs: { scope: "col" }
+      },
+      [_c("strong", [_vm._v("...")])]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

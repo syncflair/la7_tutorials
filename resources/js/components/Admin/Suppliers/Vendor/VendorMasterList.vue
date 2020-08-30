@@ -37,7 +37,7 @@
             <th style="width: 15%;" scope="col">Assign to supplier user</th>
             <th style="width: 4%;" scope="col">Status</th>           
             <th style="width: 3%;" scope="col">Notify</th>           
-            <th style="width: 10%; text-align:right;" scope="col">Action</th>
+            <th style="width: 10%; text-align:right;" scope="col"><strong>...</strong></th>
           </tr>
         </thead>
 
@@ -64,6 +64,8 @@
               <small>{{ vendor.vendor_type }} </small>
               <small v-if="vendor.brand_shop_id != null"> 
                 ( {{vendor.belongs_to_brand_shop.brand_shop_title }} )
+
+                
               </small>
             </td> 
 

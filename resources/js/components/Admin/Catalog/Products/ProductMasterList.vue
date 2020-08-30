@@ -37,7 +37,7 @@
             <th style="width: 5%;" scope="col" @click="sort('pro_price')" class="sortable-title">price </th> 
             <th style="width: 3%;" scope="col">Status</th>           
             <!-- <th style="width: 3%;" scope="col">Verify</th>            -->
-            <th style="width: 2%; text-align:right;" scope="col">#</th>
+            <th style="width: 2%; text-align:right;" scope="col"><strong>...</strong></th>
           </tr>
         </thead>
 

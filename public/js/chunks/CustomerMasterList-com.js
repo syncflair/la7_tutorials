@@ -121,6 +121,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -212,7 +235,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     inactiveCustomer: function inactiveCustomer(id) {
       var _this3 = this;
 
-      this.$Progress.start();
       Swal.fire({
         title: 'Are you sure to Active this Customer?',
         // text: "You won't be able to revert this!",
@@ -223,6 +245,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, Inactive!'
       }).then(function (result) {
         if (result.value) {
+          _this3.$Progress.start();
+
           axios.post('/spa/customer-Info/inactive-customer/' + id).then(function (_ref2) {
             var data = _ref2.data;
 
@@ -249,7 +273,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     activeCustomer: function activeCustomer(id) {
       var _this4 = this;
 
-      this.$Progress.start();
       Swal.fire({
         title: 'Are you sure to Active this Customer?',
         // text: "You won't be able to revert this!",
@@ -260,6 +283,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, Active!'
       }).then(function (result) {
         if (result.value) {
+          _this4.$Progress.start();
+
           axios.post('/spa/customer-Info/active-customer/' + id).then(function (_ref3) {
             var data = _ref3.data;
 
@@ -286,7 +311,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     verifyByUser: function verifyByUser(id) {
       var _this5 = this;
 
-      this.$Progress.start();
       Swal.fire({
         title: 'Are you sure to Verify this user?',
         // text: "You won't be able to revert this!",
@@ -297,6 +321,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, Verified!'
       }).then(function (result) {
         if (result.value) {
+          _this5.$Progress.start();
+
           axios.post('/spa/customer-verify-by-admin/' + id).then(function (_ref4) {
             var data = _ref4.data;
 
@@ -342,7 +368,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     DeleteData: function DeleteData(id) {
       var _this6 = this;
 
-      this.$Progress.start();
       Swal.fire({
         title: 'Are you sure to Delete?',
         text: "You won't be able to revert this!",
@@ -353,6 +378,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
+          _this6.$Progress.start();
+
           axios["delete"]('/spa/customer-Info/' + id).then(function (_ref5) {
             var data = _ref5.data;
 
@@ -483,7 +510,7 @@ var render = function() {
     _c("div", { staticClass: "card-body" }, [
       _c(
         "table",
-        { staticClass: "table table-striped table-sm table-responsive" },
+        { staticClass: "table table-striped table-sm table-responsive-" },
         [
           _c("thead", [
             _c("tr", [
@@ -537,6 +564,21 @@ var render = function() {
                 "th",
                 {
                   staticClass: "sortable-title",
+                  staticStyle: { width: "6%" },
+                  attrs: { scope: "col" },
+                  on: {
+                    click: function($event) {
+                      return _vm.sort("customer_code")
+                    }
+                  }
+                },
+                [_vm._v("Code")]
+              ),
+              _vm._v(" "),
+              _c(
+                "th",
+                {
+                  staticClass: "sortable-title",
                   staticStyle: { width: "20%" },
                   attrs: { scope: "col" },
                   on: {
@@ -567,7 +609,7 @@ var render = function() {
                 "th",
                 {
                   staticClass: "sortable-title",
-                  staticStyle: { width: "7%" },
+                  staticStyle: { width: "14%" },
                   attrs: { scope: "col" },
                   on: {
                     click: function($event) {
@@ -620,14 +662,7 @@ var render = function() {
                 [_vm._v("Date")]
               ),
               _vm._v(" "),
-              _c(
-                "th",
-                {
-                  staticStyle: { width: "10%", "text-align": "right" },
-                  attrs: { scope: "col" }
-                },
-                [_vm._v("Action")]
-              )
+              _vm._m(0)
             ])
           ]),
           _vm._v(" "),
@@ -676,6 +711,10 @@ var render = function() {
                         }
                       }
                     })
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { attrs: { scope: "col" } }, [
+                    _c("small", [_vm._v(_vm._s(customer.customer_code) + " ")])
                   ]),
                   _vm._v(" "),
                   _c("td", { attrs: { scope: "col" } }, [
@@ -865,48 +904,78 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-right" }, [
                     _c(
-                      "a",
+                      "div",
                       {
-                        staticClass: "btn btn-flat btn-sm",
-                        on: {
-                          click: function($event) {
-                            return _vm.ViewDetails()
-                          }
-                        }
+                        staticClass: "btn-group option-dropdown-manu-style left"
                       },
-                      [_c("i", { staticClass: "fas fa-eye primary" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-primary- btn-flat btn-sm",
-                        attrs: {
-                          "data-toggle": "modal",
-                          "data-target": "#customerModal"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.editCustomer(customer)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-edit primary " })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "btn btn-block- btn-danger- btn-flat btn-sm",
-                        attrs: { id: "delete" },
-                        on: {
-                          click: function($event) {
-                            return _vm.DeleteData(customer.id)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "far fa-trash-alt red" })]
+                      [
+                        _vm._m(1, true),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "dropdown-menu dropdown-menu-right" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.ViewDetails(customer.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-eye primary" }),
+                                _vm._v(" View ")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                attrs: {
+                                  "data-toggle": "modal",
+                                  "data-target": "#customerModal"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.editCustomer(customer)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-edit primary "
+                                }),
+                                _vm._v(" Edit\r\n                  ")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                attrs: { id: "delete" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.DeleteData(customer.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "far fa-trash-alt red"
+                                }),
+                                _vm._v(" Delete\r\n                  ")
+                              ]
+                            )
+                          ]
+                        )
+                      ]
                     )
                   ])
                 ])
@@ -924,7 +993,7 @@ var render = function() {
                     }
                   ]
                 },
-                [_vm._m(0)]
+                [_vm._m(2)]
               )
             ],
             2
@@ -957,7 +1026,37 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "9" } }, [
+    return _c(
+      "th",
+      {
+        staticStyle: { width: "2%", "text-align": "right" },
+        attrs: { scope: "col" }
+      },
+      [_c("strong", [_vm._v("...")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "btn btn-flat btn-sm btn-warning dropdown-toggle-",
+        attrs: {
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-ellipsis-v" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { attrs: { colspan: "10" } }, [
       _c(
         "div",
         {

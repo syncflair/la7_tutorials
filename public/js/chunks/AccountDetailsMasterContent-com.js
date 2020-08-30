@@ -134,6 +134,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AccountDetailsMasterContentHead",
   components: {},
@@ -310,6 +316,27 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" )\r\n\t\t                ")
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("p", { staticClass: "mb-0 border-bottom-1-" }, [
+                    _c("small", { staticClass: "text-bold" }, [
+                      _vm._v(
+                        " COA: " +
+                          _vm._s(_vm.headData.belongs_to_account_head.ah_name) +
+                          " (" +
+                          _vm._s(_vm.headData.belongs_to_account_head.ah_code) +
+                          ")"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm.headData.belongs_to_branch != null
+                      ? _c("small", { staticClass: "text-bold" }, [
+                          _vm._v(
+                            ", Branch: " +
+                              _vm._s(_vm.headData.belongs_to_branch.branch_name)
+                          )
                         ])
                       : _vm._e()
                   ]),

@@ -89,6 +89,8 @@ class EmployeeController extends Controller
         ]);
        
         $data =array();
+        $data['employee_code']= employee_code_generate();
+        $data['coa_code']= 202;  ////Liabilities - Accounts Payable 203
         $data['branch_id']=$request->branch_id; 
         $data['emp_name']=$request->emp_name;
         $data['emp_email']=$request->emp_email;
@@ -385,6 +387,29 @@ class EmployeeController extends Controller
         }//*/
     }
 
+
+    public function inactive_employee($id){
+        $data = Employee::find($id);
+        $data->status_id = 2; 
+        $data->save();  
+        return response()->json(['success'=> 'Inactive User']);      
+    }
+
+    public function active_employee($id){
+        $data = Employee::find($id);
+        $data->status_id = 1; 
+        $data->save();  
+        return response()->json(['success'=> 'Active User']);
+    }
+
+    public function verifiedByAdmin($id){
+        $data = Employee::find($id);
+        $data->status_id = 1; 
+        $data->verified_by = \Auth::user()->id; 
+        $data->updated_by = \Auth::user()->id; 
+        $data->save();    
+        return response()->json(['success'=> $user->name.' is verifyed Now']);    
+    }
 
     public function search(Request $request){
         if(!empty($request->perPage)){

@@ -28,11 +28,11 @@
             <th style="width: 20%;" scope="col" @click="sort('name')" class="sortable-title">Name</th>
             <th style="width: 20%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>  
             <th style="width: 5%;" scope="col" @click="sort('role_name')" class="sortable-title">Role</th>
-            <th style="width: 15%;" scope="col" ><small>Assign To employee </small></th>
+            <th style="width: 22%;" scope="col" ><small>Assign To employee </small></th>
             <th style="width: 3%;" scope="col" >Status</th>
             <th style="width: 3%;" scope="col">Nofify</th>
             <th style="width: 8%;" scope="col">Date</th>
-            <th style="width: 10%; text-align:right;" scope="col">Action</th>
+            <th style="width: 2%; text-align:right;" scope="col"><strong>...</strong></th>
           </tr>
         </thead>
 
@@ -54,7 +54,7 @@
             <td > {{ user.email }} </td>          
             <td > {{ user['role']['name'] }} </td> 
           	<td >
-              <small v-if="user.employee_id != null">
+              <small v-if="user.belongs_to_employee != null">
                 {{ user.belongs_to_employee.emp_name }} 
               </small> 
             </td> 
@@ -75,13 +75,24 @@
 
 
             <td class="text-right">  
-              <a @click="ViewDetails()" class="btn btn-flat btn-sm"> <i class="fas fa-eye primary"></i> </a>   
-              <a @click="editUser(user)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
-                  <i class="fas fa-edit primary "></i>
-              </a> 
-              <a @click="DeleteData(user.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
-                 <i class="far fa-trash-alt red"></i>
-              </a>
+              <!-- Dropdown List -->
+              <div class="btn-group option-dropdown-manu-style left">
+                <a class="btn btn-flat btn-sm btn-warning dropdown-toggle-" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i><!-- <i class="fas fa-ellipsis-h"></i> --></a>    
+
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a @click="ViewDetails(user.id)" class="dropdown-item pointer"> <i class="fas fa-eye primary"></i> View </a> 
+                  
+                  <a @click="editUser(user)" class="dropdown-item pointer" data-toggle="modal" data-target="#FormModal">
+                      <i class="fas fa-edit primary "></i> Edit
+                  </a> 
+
+                  <div class="dropdown-divider"></div>
+
+                  <a @click="DeleteData(user.id)" class="dropdown-item pointer" id="delete">
+                     <i class="far fa-trash-alt red"></i> Delete
+                  </a>
+                </div>
+              </div><!--End Dropdown List -->
             </td>
 
           </tr>
@@ -178,8 +189,7 @@
           this.currentSort = s;
         },
 
-        inactiveUser(id){
-          this.$Progress.start();
+        inactiveUser(id){          
           Swal.fire({
               title: 'Are you sure to Inactive this User?',
              // text: "You won't be able to revert this!",
@@ -191,7 +201,7 @@
           }).then( (result) => {
             
               if ( result.value ) {  
-                
+                this.$Progress.start();
                 axios.post('/spa/Users-Info/inactive-user/'+id)
                 .then( ({data}) => {
                   //console.log(data);
@@ -214,7 +224,6 @@
         },
 
         activeUser(id){
-          this.$Progress.start();
           Swal.fire({
               title: 'Are you sure to Active this User?',
              // text: "You won't be able to revert this!",
@@ -226,7 +235,7 @@
           }).then( (result) => {
             
               if ( result.value ) {  
-                
+                this.$Progress.start();
                 axios.post('/spa/Users-Info/active-user/'+id)
                 .then( ({data}) => {
                   //console.log(data);
@@ -249,7 +258,6 @@
         },
 
         verifyByUser(id){
-          this.$Progress.start();
           Swal.fire({
               title: 'Are you sure to Verify this user?',
              // text: "You won't be able to revert this!",
@@ -261,7 +269,7 @@
             }).then( (result) => {
 
               if ( result.value ) {  
-                
+                this.$Progress.start();
                 axios.post('/spa/Users-Info/verify-by-admin/'+id)
                 .then( ({data}) => {
                   //console.log(data);
@@ -311,7 +319,6 @@
   	    },
 
 	      DeleteData(id){
-          this.$Progress.start();
 	        Swal.fire({
 	            title: 'Are you sure to Delete?',
 	            text: "You won't be able to revert this!",
@@ -323,7 +330,7 @@
 	          }).then( (result) => {
 
 	            if ( result.value ) {  
-
+                this.$Progress.start();
 	              axios.delete('/spa/Users-Info/'+id)
 	                .then( ({data}) => {
 

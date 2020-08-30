@@ -35,6 +35,15 @@
 
                 <div class="row form-group">
                   <div class="col-sm-2 text-right">
+                    <label class="pt-2">Contact Person</label>                      
+                  </div>
+                  <div class="col-sm-10">
+                    <input v-model="form.vendor_contact_name" type="text" name="vendor_contact_name" class="form-control" placeholder="Contact person name">
+                  </div> 
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-sm-2 text-right">
                     <label class="pt-2">Email *</label>                      
                   </div>
                   <div class="col-sm-10">
@@ -131,6 +140,34 @@
                     />
                   </div> 
                 </div>
+
+                <div class="row form-group">
+                  <div class="col-sm-2 text-right">
+                    <label class="pt-2">NID</label>                      
+                  </div>
+                  <div class="col-sm-10">
+                    <input v-model="form.vendor_nid" type="text" name="vendor_nid" class="form-control" placeholder="NID">
+                  </div> 
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-sm-2 text-right">
+                    <label class="pt-2">TIN</label>                      
+                  </div>
+                  <div class="col-sm-10">
+                    <input v-model="form.vendor_tin" type="text" name="vendor_tin" class="form-control" placeholder="TIN">
+                  </div> 
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-sm-2 text-right">
+                    <label class="pt-2">Bank details</label>                      
+                  </div>
+                  <div class="col-sm-10">
+                    <input v-model="form.vendor_bank_details" type="text" name="vendor_bank_details" class="form-control" placeholder="Bank account details">
+                  </div> 
+                </div>
+                
 
                 <div class="row form-group">
                   <div class="col-sm-2 text-right">
@@ -255,6 +292,11 @@
           vendor_email: '',
           vendor_phone: '',
           vendor_type: '',
+
+          vendor_contact_name:'',
+          vendor_nid:'',
+          vendor_tin:'',
+          vendor_bank_details:'',
 
           vendor_desc: '',
           vendor_address: '',

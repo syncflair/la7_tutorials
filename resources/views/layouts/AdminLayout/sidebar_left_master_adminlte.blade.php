@@ -522,6 +522,16 @@
                   </p>
                 </router-link>
               </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/DepartmentMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Departments
+                  </p>
+                </router-link>
+              </li>
+              
               <li class="nav-item">
                 <a href="pages/tables/data.html" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -595,8 +605,7 @@
 
               <li class="nav-item">
                 <router-link to="/spa/OrganizationInfo" class="nav-link">
-                  <!-- <i class="nav-icon fas fa-boxes"></i> -->
-                  <i class="nav-icon fas fa-info-circle"></i>
+                  <i class="nav-icon far fa-building"></i>
                   <p>
                     Organization Info
                   </p>
@@ -606,8 +615,7 @@
               <!-- @if(GetAuthUserRolePermission()->BranchInfo->view == true) -->
               <li class="nav-item">
                 <router-link to="/spa/BranchInfo" class="nav-link">
-                  <!-- <i class="nav-icon fas fa-boxes"></i> -->
-                  <i class="nav-icon fas fa-info-circle"></i>
+                  <i class="nav-icon fas fa-code-branch"></i>
                   <p>
                     Branch Info
                   </p>
@@ -617,7 +625,7 @@
 
               <li class="nav-item">
                 <router-link to="/spa/CurrencyMarster" class="nav-link">
-                  <i class="nav-icon fas fa-info-circle"></i>
+                  <i class="nav-icon fas fa-dollar-sign"></i>
                   <p>
                     Currency
                   </p>
@@ -705,14 +713,14 @@
                 </router-link>
               </li>
 
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <router-link to="/spa/DepartmentMaster" class="nav-link">
                   <i class="nav-icon fas fa-info-circle"></i>
                   <p>
                     Departments
                   </p>
                 </router-link>
-              </li>
+              </li> -->
 
               <li class="nav-item">
                 <router-link to="/spa/CountryMaster" class="nav-link">

@@ -16,6 +16,8 @@ class CreateEmployeesTable extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('branch_id');
+            $table->string('employee_code', 50)->unique()->comment('COA, EMP-02 (Account Head Detail)');
+            $table->string('coa_code', 10)->comment('liability');
             //$table->unsignedBigInteger('user_id')->nullable()->default(null)->comment('Assign this employee to User for login');
             $table->unsignedBigInteger('job_title_id');
             $table->string('emp_name', 80); 
@@ -41,10 +43,21 @@ class CreateEmployeesTable extends Migration
             $table->date('emp_hire_date', 50)->nullable(); 
             $table->date('emp_quit_date', 50)->nullable(); 
             $table->string('avatar', 250)->nullable();
-            $table->unsignedInteger('status_id')->default(1); //4 Not Verified 
+            $table->unsignedBigInteger('status_id')->default(1); //4 Not Verified 
             $table->unsignedBigInteger('created_by')->nullable()->comment('Created by User');  
             $table->unsignedBigInteger('updated_by')->nullable()->comment('Updated by User');
+            $table->unsignedBigInteger('verified_by')->nullable()->comment('Verified by User'); 
             $table->timestamps();
+
+            $table->index('employee_code');
+            $table->index('emp_name');
+            $table->index('emp_phone');
+            $table->index('emp_email');
+
+            $table->foreign('status_id')->references('id')->on('user_status');
+            $table->foreign('branch_id')->references('id')->on('branch_info');
+            $table->foreign('coa_code')->references('ah_code')->on('account_heads'); //chart of account (account_heads) ah_code
+
         });
     }
 

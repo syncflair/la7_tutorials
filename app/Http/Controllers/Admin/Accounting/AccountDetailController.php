@@ -27,7 +27,7 @@ class AccountDetailController extends Controller
     public function index()
     {
         
-        $data = AccountDetail::get(); 
+        $data = AccountDetail::with('belongsToAccountHead','belongsToBranch')->get(); 
 
         return response()->json($data);
     }

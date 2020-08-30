@@ -258,38 +258,7 @@ var render = function() {
                             _vm._s(ad.account_name) +
                             " "
                         ),
-                        _c("br"),
-                        _vm._v(" "),
-                        ad.opening_balance != null
-                          ? _c("span", { staticClass: "green" }, [
-                              _vm._v(
-                                _vm._s(ad.opening_balance) +
-                                  " \r\n                  "
-                              ),
-                              _c("small", [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.systemSettings.belongs_to_currency
-                                      .currency_short_code
-                                  ) + " "
-                                )
-                              ])
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        ad.opening_balance === null
-                          ? _c("span", { staticClass: "red" }, [
-                              _vm._v(" 0.00 \r\n                  "),
-                              _c("small", [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm.systemSettings.belongs_to_currency
-                                      .currency_short_code
-                                  ) + " "
-                                )
-                              ])
-                            ])
-                          : _vm._e()
+                        _c("br")
                       ]
                     )
                   ]),

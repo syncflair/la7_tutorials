@@ -152,6 +152,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -220,33 +227,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.currentSort = s;
     },
-    ChangeNotify: function ChangeNotify(id, event) {
+    // ChangeNotify(id, event){
+    //   this.$Progress.start();
+    //   axios.post('/spa/employee-change-notify/'+id+'/'+event.target.checked)
+    //     .then( ({data}) => {
+    //       //console.log(data);
+    //       if(data.success){                  
+    //         FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update             
+    //         this.$Progress.finish();    
+    //         toastr.success(data.success);                 
+    //       } 
+    //     })                          
+    //     .catch(() => {
+    //       this.$Progress.fail();
+    //       toastr.warning('Something is wrong!');
+    //     })
+    // },
+    inactiveEmployee: function inactiveEmployee(id) {
       var _this2 = this;
 
-      this.$Progress.start();
-      axios.post('/spa/employee-change-notify/' + id + '/' + event.target.checked).then(function (_ref) {
-        var data = _ref.data;
-
-        //console.log(data);
-        if (data.success) {
-          FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update             
-
-          _this2.$Progress.finish();
-
-          toastr.success(data.success);
-        }
-      })["catch"](function () {
-        _this2.$Progress.fail();
-
-        toastr.warning('Something is wrong!');
-      });
-    },
-    inactiveEmployee: function inactiveEmployee(id) {
-      var _this3 = this;
-
-      this.$Progress.start();
       Swal.fire({
-        title: 'Are you sure to Active this employee?',
+        title: 'Are you sure to Inactive this employee?',
         // text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
@@ -255,16 +256,54 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, Inactive!'
       }).then(function (result) {
         if (result.value) {
-          axios.post('/spa/Employee-Info/inactive-employee/' + id).then(function (_ref2) {
+          _this2.$Progress.start();
+
+          axios.post('/spa/Employee-Info/inactive-employee/' + id).then(function (_ref) {
+            var data = _ref.data;
+
+            //console.log(data);
+            if (data.success) {
+              _this2.$Progress.finish();
+
+              toastr.warning(data.success);
+              FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update                                                      
+            }
+          })["catch"](function () {
+            _this2.$Progress.fail();
+
+            toastr.warning('Something is wrong!');
+          });
+        } else {
+          _this2.$Progress.finish();
+
+          toastr.info('Your action canceled!');
+        }
+      });
+    },
+    activeEmployee: function activeEmployee(id) {
+      var _this3 = this;
+
+      Swal.fire({
+        title: 'Are you sure to Active this user?',
+        // text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Active!'
+      }).then(function (result) {
+        if (result.value) {
+          _this3.$Progress.start();
+
+          axios.post('/spa/Employee-Info/active-employee/' + id).then(function (_ref2) {
             var data = _ref2.data;
 
             //console.log(data);
             if (data.success) {
-              FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
-
               _this3.$Progress.finish();
 
-              toastr.warning(data.success);
+              toastr.success(data.success);
+              FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update                                                       
             }
           })["catch"](function () {
             _this3.$Progress.fail();
@@ -278,45 +317,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       });
     },
-    activeEmployee: function activeEmployee(id) {
-      var _this4 = this;
-
-      this.$Progress.start();
-      Swal.fire({
-        title: 'Are you sure to Active this user?',
-        // text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, Active!'
-      }).then(function (result) {
-        if (result.value) {
-          axios.post('/spa/Employee-Info/active-employee/' + id).then(function (_ref3) {
-            var data = _ref3.data;
-
-            //console.log(data);
-            if (data.success) {
-              FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
-
-              _this4.$Progress.finish();
-
-              toastr.success(data.success);
-            }
-          })["catch"](function () {
-            _this4.$Progress.fail();
-
-            toastr.warning('Something is wrong!');
-          });
-        } else {
-          _this4.$Progress.finish();
-
-          toastr.info('Your action canceled!');
-        }
-      });
-    },
     verifyByUser: function verifyByUser(id) {
-      var _this5 = this;
+      var _this4 = this;
 
       this.$Progress.start();
       Swal.fire({
@@ -329,24 +331,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, Verified!'
       }).then(function (result) {
         if (result.value) {
-          axios.post('/spa/employee-verify-by-admin/' + id).then(function (_ref4) {
-            var data = _ref4.data;
+          axios.post('/spa/employee-verify-by-admin/' + id).then(function (_ref3) {
+            var data = _ref3.data;
 
             //console.log(data);
             if (data.success) {
-              FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
-
-              _this5.$Progress.finish();
+              _this4.$Progress.finish();
 
               toastr.success(data.success);
+              FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
             }
           })["catch"](function () {
-            _this5.$Progress.fail();
+            _this4.$Progress.fail();
 
             toastr.warning('Something is wrong!');
           });
         } else {
-          _this5.$Progress.finish();
+          _this4.$Progress.finish();
 
           toastr.info('Your action canceled!');
         }
@@ -372,9 +373,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       FireEvent.$emit('editData', data);
     },
     DeleteData: function DeleteData(id) {
-      var _this6 = this;
+      var _this5 = this;
 
-      this.$Progress.start();
       Swal.fire({
         title: 'Are you sure to Delete?',
         text: "You won't be able to revert this!",
@@ -385,13 +385,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          axios["delete"]('/spa/Employee-Info/' + id).then(function (_ref5) {
-            var data = _ref5.data;
+          _this5.$Progress.start();
+
+          axios["delete"]('/spa/Employee-Info/' + id).then(function (_ref4) {
+            var data = _ref4.data;
 
             if (data.success) {
               FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update               
 
-              _this6.$Progress.finish();
+              _this5.$Progress.finish();
 
               toastr.warning(data.success);
             }
@@ -400,12 +402,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               toastr.warning(data.errors);
             }
           })["catch"](function () {
-            _this6.$Progress.fail();
+            _this5.$Progress.fail();
 
             toastr.warning('Something is wrong!');
           });
         } else {
-          _this6.$Progress.finish();
+          _this5.$Progress.finish();
 
           toastr.info('Your data is safe!');
         }
@@ -424,20 +426,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   },
   created: function created() {
-    var _this7 = this;
+    var _this6 = this;
 
     this.$store.dispatch('EmployeeMasterStore/fetchData'); //call this function at first loading from Action with Modules namespace 
 
     FireEvent.$on('AfterChange', function () {
-      _this7.$Progress.start();
+      _this6.$Progress.start();
 
-      _this7.$store.dispatch('EmployeeMasterStore/fetchData', _this7.pagination.per_page);
+      _this6.$store.dispatch('EmployeeMasterStore/fetchData', _this6.pagination.per_page);
 
-      _this7.$Progress.finish();
+      _this6.$Progress.finish();
     }); //this event call from Pagination-app component for change number of data show per page
 
     FireEvent.$on('changPerPage', function (data) {
-      _this7.$store.dispatch('EmployeeMasterStore/fetchData', data);
+      _this6.$store.dispatch('EmployeeMasterStore/fetchData', data);
     });
   },
   mounted: function mounted() {//console.log(this.categories)   
@@ -519,7 +521,7 @@ var render = function() {
     _c("div", { staticClass: "card-body" }, [
       _c(
         "table",
-        { staticClass: "table table-striped table-sm table-responsive" },
+        { staticClass: "table table-striped table-sm table-responsive-" },
         [
           _c("thead", [
             _c("tr", [
@@ -571,8 +573,17 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "th",
-                { staticStyle: { width: "3%" }, attrs: { scope: "col" } },
-                [_vm._v("Img")]
+                {
+                  staticClass: "sortable-title",
+                  staticStyle: { width: "5%" },
+                  attrs: { scope: "col" },
+                  on: {
+                    click: function($event) {
+                      return _vm.sort("employee_code")
+                    }
+                  }
+                },
+                [_vm._v("code")]
               ),
               _vm._v(" "),
               _c(
@@ -620,7 +631,7 @@ var render = function() {
                 [_vm._v("Phone")]
               ),
               _vm._v(" "),
-              _c("th", { staticStyle: { width: "6%" } }, [_vm._v("Branch")]),
+              _c("th", { staticStyle: { width: "10%" } }, [_vm._v("Branch")]),
               _vm._v(" "),
               _c(
                 "th",
@@ -642,14 +653,7 @@ var render = function() {
                 [_vm._v("Status")]
               ),
               _vm._v(" "),
-              _c(
-                "th",
-                {
-                  staticStyle: { width: "10%", "text-align": "right" },
-                  attrs: { scope: "col" }
-                },
-                [_vm._v("Action")]
-              )
+              _vm._m(1)
             ])
           ]),
           _vm._v(" "),
@@ -700,31 +704,8 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c("td", [
-                    employee.avatar != null
-                      ? _c("span", [
-                          _c("img", {
-                            attrs: {
-                              src: employee.avatar,
-                              loading: "lazy",
-                              height: "20px",
-                              width: "20px"
-                            }
-                          })
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    employee.avatar === null
-                      ? _c("span", [
-                          _c("img", {
-                            attrs: {
-                              src: "../" + _vm.NoIconUrl,
-                              height: "20px",
-                              width: "20px"
-                            }
-                          })
-                        ])
-                      : _vm._e()
+                  _c("td", { attrs: { scope: "col" } }, [
+                    _c("small", [_vm._v(_vm._s(employee.employee_code))])
                   ]),
                   _vm._v(" "),
                   _c("td", { attrs: { scope: "col" } }, [
@@ -893,54 +874,80 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c(
-                    "td",
-                    { staticClass: "text-right" },
-                    [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-flat btn-sm",
-                          on: {
-                            click: function($event) {
-                              return _vm.ViewDetails()
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-eye primary" })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-primary- btn-flat btn-sm",
-                          attrs: {
-                            to: {
-                              name: "EmployeeMasterForm",
-                              params: { data: employee }
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-edit primary " })]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass:
-                            "btn btn-block- btn-danger- btn-flat btn-sm",
-                          attrs: { id: "delete" },
-                          on: {
-                            click: function($event) {
-                              return _vm.DeleteData(employee.id)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "far fa-trash-alt red" })]
-                      )
-                    ],
-                    1
-                  )
+                  _c("td", { staticClass: "text-right" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass: "btn-group option-dropdown-manu-style left"
+                      },
+                      [
+                        _vm._m(2, true),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "dropdown-menu dropdown-menu-right" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.ViewDetails(employee.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-eye primary" }),
+                                _vm._v(" View ")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                attrs: {
+                                  to: {
+                                    name: "EmployeeMasterForm",
+                                    params: { data: employee }
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-edit primary "
+                                }),
+                                _vm._v(" Edit\r\n                  ")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                attrs: { id: "delete" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.DeleteData(employee.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "far fa-trash-alt red"
+                                }),
+                                _vm._v(" Delete\r\n                  ")
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    )
+                  ])
                 ])
               }),
               _vm._v(" "),
@@ -956,7 +963,7 @@ var render = function() {
                     }
                   ]
                 },
-                [_vm._m(1)]
+                [_vm._m(3)]
               )
             ],
             2
@@ -993,6 +1000,36 @@ var staticRenderFns = [
       "th",
       { staticStyle: { width: "15%" }, attrs: { scope: "col" } },
       [_c("small", [_vm._v("Assign to User")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "th",
+      {
+        staticStyle: { width: "2%", "text-align": "right" },
+        attrs: { scope: "col" }
+      },
+      [_c("strong", [_vm._v("...")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "btn btn-flat btn-sm btn-warning dropdown-toggle-",
+        attrs: {
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-ellipsis-v" })]
     )
   },
   function() {

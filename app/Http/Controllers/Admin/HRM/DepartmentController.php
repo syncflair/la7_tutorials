@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\admin\settings;
+namespace App\Http\Controllers\admin\HRM;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\Settings\Department;
+use App\Models\HRM\Department;
 
 class DepartmentController extends Controller
 {

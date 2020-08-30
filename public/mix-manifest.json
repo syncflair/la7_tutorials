@@ -7,6 +7,10 @@
     "/css/ac_style.css": "/css/ac_style.css",
     "/css/w_style.css": "/css/w_style.css",
     "/js/w_main.js": "/js/w_main.js",
+    "/js/chunks/AccountDetailsMaster.js": "/js/chunks/AccountDetailsMaster.js",
+    "/js/chunks/AccountDetailsMasterContent-com.js": "/js/chunks/AccountDetailsMasterContent-com.js",
+    "/js/chunks/AccountDetailsMasterForm-com.js": "/js/chunks/AccountDetailsMasterForm-com.js",
+    "/js/chunks/AccountDetailsMasterList-com.js": "/js/chunks/AccountDetailsMasterList-com.js",
     "/js/chunks/AccountHeadsMaster.js": "/js/chunks/AccountHeadsMaster.js",
     "/js/chunks/AccountHeadsMasterForm-com.js": "/js/chunks/AccountHeadsMasterForm-com.js",
     "/js/chunks/AccountHeadsMasterList-com.js": "/js/chunks/AccountHeadsMasterList-com.js",
@@ -156,9 +160,5 @@
     "/js/chunks/single-select-app-one-global.js": "/js/chunks/single-select-app-one-global.js",
     "/js/chunks/single-select-app-two-global.js": "/js/chunks/single-select-app-two-global.js",
     "/js/chunks/switch-app.js": "/js/chunks/switch-app.js",
-    "/js/chunks/vendors~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-select-app~switch-app.js": "/js/chunks/vendors~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-select-app~switch-app.js",
-    "/js/chunks/AccountDetailsMaster.js": "/js/chunks/AccountDetailsMaster.js",
-    "/js/chunks/AccountDetailsMasterContent-com.js": "/js/chunks/AccountDetailsMasterContent-com.js",
-    "/js/chunks/AccountDetailsMasterForm-com.js": "/js/chunks/AccountDetailsMasterForm-com.js",
-    "/js/chunks/AccountDetailsMasterList-com.js": "/js/chunks/AccountDetailsMasterList-com.js"
+    "/js/chunks/vendors~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-select-app~switch-app.js": "/js/chunks/vendors~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-select-app~switch-app.js"
 }

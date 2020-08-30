@@ -22,22 +22,23 @@
       </div>
     </div><!--/card-header-->
     <div class="card-body">   
-      <table class="table table-striped table-sm table-responsive">
+      <table class="table table-striped table-sm table-responsive-">
         <thead>
           <tr>
             <!-- <th style="">#</th> -->
             <th style="width: 2%;" scope="col"><input type="checkbox" v-model="selectAllCheckbox" @click="selectCheckbox"></th>
-            <th style="width: 3%;" scope="col">Img</th>
+            <!-- <th style="width: 3%;" scope="col">Img</th> -->
+            <th style="width: 5%;" scope="col" @click="sort('employee_code')" class="sortable-title">code</th>
             <th style="width: 15%;" scope="col" @click="sort('emp_name')" class="sortable-title">Name</th>
             <th style="width: 15%;" scope="col" @click="sort('emp_email')" class="sortable-title">Email</th>             
             <th style="width: 7%;" scope="col" @click="sort('emp_phone')" class="sortable-title">Phone</th>
-            <th style="width: 6%;" >Branch</th>
+            <th style="width: 10%;" >Branch</th>
             <th style="width: 10%;" scope="col">Job Title</th>
             <th style="width: 15%;" scope="col"> <small>Assign to User</small></th>
             <th style="width: 10%;" scope="col">Dept</th>
             <th style="width: 3%;" scope="col">Status</th>           
             <!-- <th style="width: 3%;" scope="col">Verify</th>            -->
-            <th style="width: 10%; text-align:right;" scope="col">Action</th>
+            <th style="width: 2%; text-align:right;" scope="col"><strong>...</strong></th>
           </tr>
         </thead>
 
@@ -47,14 +48,17 @@
             <!-- <td > id</td> -->
             <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="employee.id"></td>
 
-            <td> 
+
+            <!-- <img :src="'../'+employee.avatar" loading="lazy" height="20px" width="20px"> -->
+            <!-- <td> 
                 <span v-if="employee.avatar != null"> 
-                  <!-- <img :src="'../'+employee.avatar" loading="lazy" height="20px" width="20px">  -->
+                   
                   <img :src="employee.avatar" loading="lazy" height="20px" width="20px"> 
                 </span>
                 <span v-if="employee.avatar === null"> <img :src="'../'+NoIconUrl" height="20px" width="20px"> </span>
-            </td> 
+            </td> --> 
 
+            <td scope="col"> <small>{{ employee.employee_code }}</small> </td>
             <td scope="col"> {{ employee.emp_name }} </td>
             <td > {{ employee.emp_email }} </td> 
             <td > {{ employee.emp_phone }} </td>          
@@ -89,21 +93,24 @@
             </td> -->
 
              
-
             <td class="text-right">  
-              <a @click="ViewDetails()" class="btn btn-flat btn-sm"> <i class="fas fa-eye primary"></i> </a>   
-              
-              <!-- <a @click="editData(employee)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#FormModal">
-                  <i class="fas fa-edit primary "></i>
-              </a> -->
+              <!-- Dropdown List -->
+              <div class="btn-group option-dropdown-manu-style left">
+                <a class="btn btn-flat btn-sm btn-warning dropdown-toggle-" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-v"></i><!-- <i class="fas fa-ellipsis-h"></i> --></a>    
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a @click="ViewDetails(employee.id)" class="dropdown-item pointer"> <i class="fas fa-eye primary"></i> View </a> 
+                  
+                  <router-link :to="{ name: 'EmployeeMasterForm', params: { data:employee } }" class="dropdown-item pointer">
+                    <i class="fas fa-edit primary "></i> Edit
+                  </router-link>
 
-              <router-link :to="{ name: 'EmployeeMasterForm', params: { data:employee } }" class="btn btn-primary- btn-flat btn-sm">
-                  <i class="fas fa-edit primary "></i>
-              </router-link>
+                  <div class="dropdown-divider"></div>
 
-              <a @click="DeleteData(employee.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
-                 <i class="far fa-trash-alt red"></i>
-              </a>
+                  <a @click="DeleteData(employee.id)" class="dropdown-item pointer" id="delete">
+                     <i class="far fa-trash-alt red"></i> Delete
+                  </a>
+                </div>
+              </div><!--End Dropdown List -->
             </td>
 
           </tr>
@@ -202,27 +209,26 @@
           this.currentSort = s;
         },
 
-        ChangeNotify(id, event){
-          this.$Progress.start();
-          axios.post('/spa/employee-change-notify/'+id+'/'+event.target.checked)
-            .then( ({data}) => {
-              //console.log(data);
-              if(data.success){                  
-                FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update             
-                this.$Progress.finish();    
-                toastr.success(data.success);                 
-              } 
-            })                          
-            .catch(() => {
-              this.$Progress.fail();
-              toastr.warning('Something is wrong!');
-            })
-        },
+        // ChangeNotify(id, event){
+        //   this.$Progress.start();
+        //   axios.post('/spa/employee-change-notify/'+id+'/'+event.target.checked)
+        //     .then( ({data}) => {
+        //       //console.log(data);
+        //       if(data.success){                  
+        //         FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update             
+        //         this.$Progress.finish();    
+        //         toastr.success(data.success);                 
+        //       } 
+        //     })                          
+        //     .catch(() => {
+        //       this.$Progress.fail();
+        //       toastr.warning('Something is wrong!');
+        //     })
+        // },
 
         inactiveEmployee(id){
-          this.$Progress.start();
           Swal.fire({
-              title: 'Are you sure to Active this employee?',
+              title: 'Are you sure to Inactive this employee?',
              // text: "You won't be able to revert this!",
               icon: 'warning',
               showCancelButton: true,
@@ -232,14 +238,14 @@
           }).then( (result) => {
             
               if ( result.value ) {  
-                
+                this.$Progress.start();
                 axios.post('/spa/Employee-Info/inactive-employee/'+id)
                 .then( ({data}) => {
                   //console.log(data);
-                  if(data.success){                  
-                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
+                  if(data.success){
                     this.$Progress.finish();                
-                    toastr.warning(data.success);                                   
+                    toastr.warning(data.success);  
+                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update                                                      
                   } 
                 })                          
                 .catch(() => {
@@ -254,8 +260,7 @@
           })
         },
 
-        activeEmployee(id){
-          this.$Progress.start();
+        activeEmployee(id){          
           Swal.fire({
               title: 'Are you sure to Active this user?',
              // text: "You won't be able to revert this!",
@@ -267,14 +272,15 @@
           }).then( (result) => {
             
               if ( result.value ) {  
+                this.$Progress.start();
                 
                 axios.post('/spa/Employee-Info/active-employee/'+id)
                 .then( ({data}) => {
                   //console.log(data);
                   if(data.success){                  
-                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
                     this.$Progress.finish();                
-                    toastr.success(data.success);                                   
+                    toastr.success(data.success); 
+                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update                                                       
                   } 
                 })                          
                 .catch(() => {
@@ -307,9 +313,9 @@
                 .then( ({data}) => {
                   //console.log(data);
                   if(data.success){                  
-                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
                     this.$Progress.finish();                
-                    toastr.success(data.success);                                   
+                    toastr.success(data.success);  
+                    FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update 
                   } 
                 })                          
                 .catch(() => {
@@ -350,7 +356,7 @@
   	    },
 
 	      DeleteData(id){
-          this.$Progress.start();
+          
 	        Swal.fire({
 	            title: 'Are you sure to Delete?',
 	            text: "You won't be able to revert this!",
@@ -362,6 +368,7 @@
 	          }).then( (result) => {
 
 	            if ( result.value ) {  
+                this.$Progress.start();
 	              axios.delete('/spa/Employee-Info/'+id)
 	                .then( ({data}) => {
 
@@ -411,6 +418,7 @@
               this.$store.dispatch('EmployeeMasterStore/fetchData', this.pagination.per_page);
               this.$Progress.finish();
           }); 
+
 
           //this event call from Pagination-app component for change number of data show per page
           FireEvent.$on('changPerPage', (data) => {

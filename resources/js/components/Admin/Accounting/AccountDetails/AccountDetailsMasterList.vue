@@ -28,12 +28,12 @@
               <p class="pointer mb-0" @click="viewDetials(ad)"> 
                 {{ ad.account_name }} <br>
 
-                <span class="green" v-if="ad.opening_balance != null">{{ad.opening_balance}} 
+                <!-- <span class="green" v-if="ad.opening_balance != null">{{ad.opening_balance}} 
                   <small>{{systemSettings.belongs_to_currency.currency_short_code}} </small>
                 </span>
                 <span class="red" v-if="ad.opening_balance === null"> 0.00 
                   <small>{{systemSettings.belongs_to_currency.currency_short_code}} </small>
-                </span>
+                </span> -->
               </p>
 
             </td>

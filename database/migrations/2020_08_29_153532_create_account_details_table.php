@@ -16,7 +16,7 @@ class CreateAccountDetailsTable extends Migration
         Schema::create('account_details', function (Blueprint $table) {
             $table->bigIncrements('id');            
             $table->string('account_name', 50)->comment('Name of account');
-            $table->string('coa_code', 50)->comment('COA, AHD-02 (Account Head Detail)');
+            $table->string('coa_code', 50)->unique()->comment('COA, AHD-02 (Account Head Detail)');
             $table->unsignedBigInteger('coa_id')->nullable()->comment('account_heads table id');
             $table->unsignedBigInteger('branch_id')->nullable();
             $table->float('opening_balance', 20, 2)->nullable(); 

@@ -127,6 +127,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -589,7 +599,7 @@ var render = function() {
                 "th",
                 {
                   staticClass: "sortable-title",
-                  staticStyle: { width: "20%" },
+                  staticStyle: { width: "27%" },
                   attrs: { scope: "col" },
                   on: {
                     click: function($event) {
@@ -618,14 +628,7 @@ var render = function() {
                 [_vm._v("Nofify")]
               ),
               _vm._v(" "),
-              _c(
-                "th",
-                {
-                  staticStyle: { width: "10%", "text-align": "right" },
-                  attrs: { scope: "col" }
-                },
-                [_vm._v("Action")]
-              )
+              _vm._m(0)
             ])
           ]),
           _vm._v(" "),
@@ -712,24 +715,16 @@ var render = function() {
                   _c("td", [_vm._v(" " + _vm._s(supplier.phone) + " ")]),
                   _vm._v(" "),
                   _c("td", [
-                    _c("span", [
-                      _vm._v(_vm._s(supplier.belongs_to_vendor.vendor_name))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "small",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: supplier.supplier_address != null,
-                            expression: "supplier.supplier_address != null"
-                          }
-                        ]
-                      },
-                      [_vm._v(" - " + _vm._s(supplier.supplier_address) + ", ")]
-                    )
+                    supplier.belongs_to_vendor != null
+                      ? _c("span", [
+                          _vm._v(
+                            _vm._s(supplier.belongs_to_vendor.vendor_name) +
+                              " (" +
+                              _vm._s(supplier.belongs_to_vendor.vendor_code) +
+                              ")"
+                          )
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
                   _c("td", [
@@ -895,48 +890,78 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-right" }, [
                     _c(
-                      "a",
+                      "div",
                       {
-                        staticClass: "btn btn-flat btn-sm",
-                        on: {
-                          click: function($event) {
-                            return _vm.ViewDetails()
-                          }
-                        }
+                        staticClass: "btn-group option-dropdown-manu-style left"
                       },
-                      [_c("i", { staticClass: "fas fa-eye primary" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-primary- btn-flat btn-sm",
-                        attrs: {
-                          "data-toggle": "modal",
-                          "data-target": "#FormModal"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.editSupplier(supplier)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-edit primary " })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "btn btn-block- btn-danger- btn-flat btn-sm",
-                        attrs: { id: "delete" },
-                        on: {
-                          click: function($event) {
-                            return _vm.DeleteData(supplier.id)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "far fa-trash-alt red" })]
+                      [
+                        _vm._m(1, true),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "dropdown-menu dropdown-menu-right" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.ViewDetails(supplier.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-eye primary" }),
+                                _vm._v(" View ")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                attrs: {
+                                  "data-toggle": "modal",
+                                  "data-target": "#FormModal"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.editSupplier(supplier)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-edit primary "
+                                }),
+                                _vm._v(" Edit\r\n                  ")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                attrs: { id: "delete" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.DeleteData(supplier.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "far fa-trash-alt red"
+                                }),
+                                _vm._v(" Delete\r\n                  ")
+                              ]
+                            )
+                          ]
+                        )
+                      ]
                     )
                   ])
                 ])
@@ -954,7 +979,7 @@ var render = function() {
                     }
                   ]
                 },
-                [_vm._m(0)]
+                [_vm._m(2)]
               )
             ],
             2
@@ -983,6 +1008,36 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "th",
+      {
+        staticStyle: { width: "3%", "text-align": "right" },
+        attrs: { scope: "col" }
+      },
+      [_c("strong", [_vm._v("...")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "btn btn-flat btn-sm btn-warning dropdown-toggle-",
+        attrs: {
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-ellipsis-v" })]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

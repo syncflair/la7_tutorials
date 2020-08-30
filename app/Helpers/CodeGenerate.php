@@ -4,13 +4,81 @@ use App\User;
 use App\Supplier;
 use App\Customer;
 use App\Models\Accounting\AccountDetail;
+use App\Models\Supplier\Vendor;
+use App\Models\HRM\Employee;
+
+
 use App\Models\Accounting\BankAccount;
 use App\Models\Accounting\CashAccount;
 
 
-//generate bank account code for account_transection
+
+//generate Employees for account_transection
+function employee_code_generate(){
+  $record = Employee::latest()->first(); // $record = 'EMP-01'; 
+  
+  if ($record == null) {
+        $code = 'EMP-01';       
+  }else{
+    $parts = explode('-', $record->employee_code); //splite into three part 
+    $partNewNumber =  $parts[1] + 1; //increment by one
+
+    if(strlen($partNewNumber) == 1){
+      $code = 'EMP-0'. $partNewNumber;
+    }elseif(strlen($partNewNumber) == 2){
+      $code = 'EMP-'. $partNewNumber;        
+    }else{
+      $code = 'EMP-'. $partNewNumber; 
+    }   
+  }
+  return $code;
+}
+
+//generate customer for account_transection
+function customer_code_generate(){
+  $record = Customer::latest()->first(); // $record = 'CUS-01'; 
+  
+  if ($record == null) {
+        $code = 'CUS-01';       
+  }else{
+    $parts = explode('-', $record->customer_code); //splite into three part 
+    $partNewNumber =  $parts[1] + 1; //increment by one
+
+    if(strlen($partNewNumber) == 1){
+      $code = 'CUS-0'. $partNewNumber;
+    }elseif(strlen($partNewNumber) == 2){
+      $code = 'CUS-'. $partNewNumber;        
+    }else{
+      $code = 'CUS-'. $partNewNumber; 
+    }   
+  }
+  return $code;
+}
+
+//generate vendors for account_transection
+function vendor_code_generate(){
+  $record = Vendor::latest()->first(); // $record = 'VEN-01'; 
+  
+  if ($record == null) {
+        $code = 'VEN-01';       
+  }else{
+    $parts = explode('-', $record->vendor_code); //splite into three part 
+    $partNewNumber =  $parts[1] + 1; //increment by one
+
+    if(strlen($partNewNumber) == 1){
+      $code = 'VEN-0'. $partNewNumber;
+    }elseif(strlen($partNewNumber) == 2){
+      $code = 'VEN-'. $partNewNumber;        
+    }else{
+      $code = 'VEN-'. $partNewNumber; 
+    }   
+  }
+  return $code;
+}
+
+//generate account_details for account_transection
 function coa_account_details_code_generate(){
-  $record = AccountDetail::latest()->first(); // $record = 'BA-01'; 
+  $record = AccountDetail::latest()->first(); // $record = 'AHD-01'; 
   
   if ($record == null) {
         $code = 'AHD-01';       

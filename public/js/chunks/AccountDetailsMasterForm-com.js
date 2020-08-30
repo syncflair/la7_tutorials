@@ -128,6 +128,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -566,11 +567,9 @@ var render = function() {
                                 }
                               },
                               [
-                                _c(
-                                  "option",
-                                  { attrs: { disabled: "", value: "" } },
-                                  [_vm._v("Select Branch ..")]
-                                ),
+                                _c("option", { domProps: { value: null } }, [
+                                  _vm._v("Select Branch ..")
+                                ]),
                                 _vm._v(" "),
                                 _vm._l(_vm.branches, function(branch) {
                                   return _c(

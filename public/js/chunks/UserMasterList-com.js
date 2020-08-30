@@ -130,6 +130,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -200,7 +211,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     inactiveUser: function inactiveUser(id) {
       var _this2 = this;
 
-      this.$Progress.start();
       Swal.fire({
         title: 'Are you sure to Inactive this User?',
         // text: "You won't be able to revert this!",
@@ -211,6 +221,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, Inactive!'
       }).then(function (result) {
         if (result.value) {
+          _this2.$Progress.start();
+
           axios.post('/spa/Users-Info/inactive-user/' + id).then(function (_ref) {
             var data = _ref.data;
 
@@ -237,7 +249,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     activeUser: function activeUser(id) {
       var _this3 = this;
 
-      this.$Progress.start();
       Swal.fire({
         title: 'Are you sure to Active this User?',
         // text: "You won't be able to revert this!",
@@ -248,6 +259,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, Active!'
       }).then(function (result) {
         if (result.value) {
+          _this3.$Progress.start();
+
           axios.post('/spa/Users-Info/active-user/' + id).then(function (_ref2) {
             var data = _ref2.data;
 
@@ -274,7 +287,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     verifyByUser: function verifyByUser(id) {
       var _this4 = this;
 
-      this.$Progress.start();
       Swal.fire({
         title: 'Are you sure to Verify this user?',
         // text: "You won't be able to revert this!",
@@ -285,6 +297,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, Verified!'
       }).then(function (result) {
         if (result.value) {
+          _this4.$Progress.start();
+
           axios.post('/spa/Users-Info/verify-by-admin/' + id).then(function (_ref3) {
             var data = _ref3.data;
 
@@ -330,7 +344,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     DeleteData: function DeleteData(id) {
       var _this5 = this;
 
-      this.$Progress.start();
       Swal.fire({
         title: 'Are you sure to Delete?',
         text: "You won't be able to revert this!",
@@ -341,6 +354,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
+          _this5.$Progress.start();
+
           axios["delete"]('/spa/Users-Info/' + id).then(function (_ref4) {
             var data = _ref4.data;
 
@@ -591,14 +606,7 @@ var render = function() {
                 [_vm._v("Date")]
               ),
               _vm._v(" "),
-              _c(
-                "th",
-                {
-                  staticStyle: { width: "10%", "text-align": "right" },
-                  attrs: { scope: "col" }
-                },
-                [_vm._v("Action")]
-              )
+              _vm._m(1)
             ])
           ]),
           _vm._v(" "),
@@ -685,7 +693,7 @@ var render = function() {
                   _c("td", [_vm._v(" " + _vm._s(user["role"]["name"]) + " ")]),
                   _vm._v(" "),
                   _c("td", [
-                    user.employee_id != null
+                    user.belongs_to_employee != null
                       ? _c("small", [
                           _vm._v(
                             "\r\n                " +
@@ -815,48 +823,78 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", { staticClass: "text-right" }, [
                     _c(
-                      "a",
+                      "div",
                       {
-                        staticClass: "btn btn-flat btn-sm",
-                        on: {
-                          click: function($event) {
-                            return _vm.ViewDetails()
-                          }
-                        }
+                        staticClass: "btn-group option-dropdown-manu-style left"
                       },
-                      [_c("i", { staticClass: "fas fa-eye primary" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-primary- btn-flat btn-sm",
-                        attrs: {
-                          "data-toggle": "modal",
-                          "data-target": "#FormModal"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.editUser(user)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-edit primary " })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "btn btn-block- btn-danger- btn-flat btn-sm",
-                        attrs: { id: "delete" },
-                        on: {
-                          click: function($event) {
-                            return _vm.DeleteData(user.id)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "far fa-trash-alt red" })]
+                      [
+                        _vm._m(2, true),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "dropdown-menu dropdown-menu-right" },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                on: {
+                                  click: function($event) {
+                                    return _vm.ViewDetails(user.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", { staticClass: "fas fa-eye primary" }),
+                                _vm._v(" View ")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                attrs: {
+                                  "data-toggle": "modal",
+                                  "data-target": "#FormModal"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.editUser(user)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fas fa-edit primary "
+                                }),
+                                _vm._v(" Edit\r\n                  ")
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "dropdown-divider" }),
+                            _vm._v(" "),
+                            _c(
+                              "a",
+                              {
+                                staticClass: "dropdown-item pointer",
+                                attrs: { id: "delete" },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.DeleteData(user.id)
+                                  }
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "far fa-trash-alt red"
+                                }),
+                                _vm._v(" Delete\r\n                  ")
+                              ]
+                            )
+                          ]
+                        )
+                      ]
                     )
                   ])
                 ])
@@ -874,7 +912,7 @@ var render = function() {
                     }
                   ]
                 },
-                [_vm._m(1)]
+                [_vm._m(3)]
               )
             ],
             2
@@ -909,8 +947,38 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "th",
-      { staticStyle: { width: "15%" }, attrs: { scope: "col" } },
+      { staticStyle: { width: "22%" }, attrs: { scope: "col" } },
       [_c("small", [_vm._v("Assign To employee ")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "th",
+      {
+        staticStyle: { width: "2%", "text-align": "right" },
+        attrs: { scope: "col" }
+      },
+      [_c("strong", [_vm._v("...")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "btn btn-flat btn-sm btn-warning dropdown-toggle-",
+        attrs: {
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
+        }
+      },
+      [_c("i", { staticClass: "fas fa-ellipsis-v" })]
     )
   },
   function() {

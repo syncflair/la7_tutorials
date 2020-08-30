@@ -72,6 +72,8 @@ class CustomerController extends Controller
         ]);
 
         $customer = Customer::create([
+            'customer_code' => customer_code_generate(),
+            'coa_code' => 103, //Asset - Accounts Receivable 103
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -271,8 +273,7 @@ class CustomerController extends Controller
             Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));
 
             return response()->json(['success'=> 'Inactive Customer']);
-        }
-         
+        }         
     }
 
     public function active_customer($id){
