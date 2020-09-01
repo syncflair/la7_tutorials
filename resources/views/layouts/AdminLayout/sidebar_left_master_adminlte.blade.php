@@ -515,6 +515,14 @@
                 </router-link>
               </li>
               <li class="nav-item">
+                <router-link to="/spa/PayrollMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Payrolls
+                  </p>
+                </router-link>
+              </li>
+              <li class="nav-item">
                 <router-link to="/spa/JobTitleMaster" class="nav-link">
                   <i class="nav-icon fas fa-info-circle"></i>
                   <p>

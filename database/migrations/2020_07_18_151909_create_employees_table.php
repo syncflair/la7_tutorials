@@ -19,6 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->string('employee_code', 50)->unique()->comment('COA, EMP-02 (Account Head Detail)');
             $table->string('coa_code', 10)->comment('liability');
             //$table->unsignedBigInteger('user_id')->nullable()->default(null)->comment('Assign this employee to User for login');
+            $table->enum('emp_job_type', ['Permanent','Part time','Pontractual','Internship']);
             $table->unsignedBigInteger('job_title_id');
             $table->string('emp_name', 80); 
             $table->string('emp_father_name', 80)->nullable(); 

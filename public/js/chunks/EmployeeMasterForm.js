@@ -310,6 +310,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -327,6 +339,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         name: 'Female'
       }],
+      employeeJobTypes: [{
+        name: 'Permanent'
+      }, {
+        name: 'Part time'
+      }, {
+        name: 'Intractual'
+      }, {
+        name: 'Internship'
+      }],
       //form multiselect app
       placeHolder: 'Select departments',
       filterBy: 'dept_name',
@@ -336,6 +357,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         id: '',
         branch_id: '',
         job_title_id: '',
+        emp_job_type: '',
         emp_name: '',
         emp_father_name: '',
         emp_mother_name: '',
@@ -759,7 +781,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-6" }, [
+                    _c("div", { staticClass: "col-md-4" }, [
                       _c(
                         "div",
                         { staticClass: "form-group" },
@@ -834,7 +856,7 @@ var render = function() {
                       )
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-6" }, [
+                    _c("div", { staticClass: "col-md-4" }, [
                       _c(
                         "div",
                         { staticClass: "form-group" },
@@ -903,6 +925,89 @@ var render = function() {
                           _vm._v(" "),
                           _c("has-error", {
                             attrs: { form: _vm.form, field: "branch_id" }
+                          })
+                        ],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-4" }, [
+                      _c(
+                        "div",
+                        { staticClass: "form-group" },
+                        [
+                          _c("label", { attrs: { for: "role_id" } }, [
+                            _vm._v("Job Type *")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.emp_job_type,
+                                  expression: "form.emp_job_type"
+                                }
+                              ],
+                              staticClass: "form-control form-control-sm-",
+                              class: {
+                                "is-invalid": _vm.form.errors.has(
+                                  "emp_job_type"
+                                )
+                              },
+                              attrs: {
+                                id: "emp_job_type",
+                                name: "emp_job_type"
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.form,
+                                    "emp_job_type",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c(
+                                "option",
+                                { attrs: { disabled: "", value: "" } },
+                                [_vm._v("Job type ..")]
+                              ),
+                              _vm._v(" "),
+                              _vm._l(_vm.employeeJobTypes, function(jobType) {
+                                return _c(
+                                  "option",
+                                  { domProps: { value: jobType.name } },
+                                  [
+                                    _vm._v(
+                                      "\r\n                            " +
+                                        _vm._s(jobType.name) +
+                                        "\r\n                          "
+                                    )
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "emp_job_type" }
                           })
                         ],
                         1

@@ -44,17 +44,17 @@
             		</div>	
 
 		            <div class="row">
-		            	<div class="col-6">
+		            	<div class="col-md-4">
 		            		<div class="form-group">
-					          <label for="status_id"">Status *</label>
-				              <select v-model="form.status_id" class="form-control form-control-sm-" id="status_id" name="status_id" :class="{ 'is-invalid': form.errors.has('status_id') }" >
-				              	  <option disabled value="">Select Status ..</option>                
-				                  <option v-for="u_status in userStatus" :key="u_status.id" v-bind:value="u_status.id">{{u_status.us_name}}</option> 
-				               </select>
-				               <has-error :form="form" field="status_id"></has-error>			                      
-					        </div>
+  					          <label for="status_id"">Status *</label>
+  				              <select v-model="form.status_id" class="form-control form-control-sm-" id="status_id" name="status_id" :class="{ 'is-invalid': form.errors.has('status_id') }" >
+  				              	  <option disabled value="">Select Status ..</option>                
+  				                  <option v-for="u_status in userStatus" :key="u_status.id" v-bind:value="u_status.id">{{u_status.us_name}}</option> 
+  				               </select>
+  				               <has-error :form="form" field="status_id"></has-error>			                      
+  					        </div>
 		            	</div>
-		            	<div class="col-6">
+		            	<div class="col-md-4">
 		            		<div class="form-group">
 					          <label for="branch_id"">Branch *</label>
 				              <select v-model="form.branch_id" class="form-control form-control-sm-" id="branch_id" name="branch_id" :class="{ 'is-invalid': form.errors.has('branch_id') }" >
@@ -64,6 +64,18 @@
 				               <has-error :form="form" field="branch_id"></has-error>			                      
 					          </div>
 		            	</div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label for="role_id"">Job Type *</label>
+                      <select v-model="form.emp_job_type" class="form-control form-control-sm-" id="emp_job_type" name="emp_job_type" :class="{ 'is-invalid': form.errors.has('emp_job_type') }" >
+                          <option disabled value="">Job type ..</option>                
+                          <option v-for="jobType in employeeJobTypes" v-bind:value="jobType.name">
+                            {{jobType.name}}
+                          </option>                       
+                       </select>
+                       <has-error :form="form" field="emp_job_type"></has-error>                            
+                    </div>                    
+                  </div>
 		            </div>
 
 		            <div class="row">
@@ -162,7 +174,7 @@
             	</div>            	
             	<div class="col-md-3 col-sm-6">
             		<div class="form-group">
-			          <label for="role_id"">Gender *</label>
+			            <label for="role_id"">Gender *</label>
 		              <select v-model="form.emp_gender" class="form-control form-control-sm-" id="emp_gender" name="emp_gender" :class="{ 'is-invalid': form.errors.has('emp_gender') }" >
 		              	  <option disabled value="">Select Gender ..</option>                
 		                  <option v-for="gender in genders" v-bind:value="gender.name">
@@ -170,7 +182,7 @@
 		                  </option>			                  
 		               </select>
 		               <has-error :form="form" field="emp_gender"></has-error>			                      
-			        </div>
+			          </div>
             	</div>            	
             </div> 
 
@@ -306,7 +318,14 @@
         genders: [
   	      { name: 'Male' },
   	      { name: 'Female'},
-		    ],      
+		    ], 
+
+        employeeJobTypes: [
+            { name: 'Permanent' },
+            { name: 'Part time' },
+            { name: 'Intractual' },
+            { name: 'Internship' },
+          ],     
 
     		//form multiselect app
     		placeHolder:'Select departments',
@@ -320,6 +339,7 @@
           id: '',
           branch_id:'',
           job_title_id:'',
+          emp_job_type:'',
           emp_name: '',
           emp_father_name: '',
           emp_mother_name: '',

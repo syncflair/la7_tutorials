@@ -75,6 +75,7 @@ class EmployeeController extends Controller
             'status_id' => 'required', 
             'emp_gender' => 'required',             
             'branch_id' => 'required',             
+            'emp_job_type' => 'required',             
         ],
         [   
             'emp_name.required' => 'The Employee name field is required.',            
@@ -85,13 +86,15 @@ class EmployeeController extends Controller
             'emp_phone.numeric' => 'The Phone number must be numeric.',
             'emp_phone.unique' => 'The Phone number already used.',
             'emp_phone.regex' => 'The Phone number is not valid.',
-            'branch_id.required' => 'The Branch field is required.',             
+            'branch_id.required' => 'The Branch field is required.',  
+            'emp_job_type' => 'Select Job Type',          
         ]);
        
         $data =array();
         $data['employee_code']= employee_code_generate();
         $data['coa_code']= 202;  ////Liabilities - Accounts Payable 203
         $data['branch_id']=$request->branch_id; 
+        $data['emp_job_type']=$request->emp_job_type; 
         $data['emp_name']=$request->emp_name;
         $data['emp_email']=$request->emp_email;
         $data['emp_phone']=$request->emp_phone;
@@ -218,6 +221,7 @@ class EmployeeController extends Controller
             'status_id' => 'required', 
             'emp_gender' => 'required',
             'branch_id' => 'required',
+            'emp_job_type' => 'required',
         ],
         [
             'emp_name.required' => 'The Employee name field is required.',            
@@ -228,12 +232,14 @@ class EmployeeController extends Controller
             'emp_phone.numeric' => 'The Phone number must be numeric.',
             'emp_phone.unique' => 'The Phone number already used.',
             'emp_phone.regex' => 'The Phone number is not valid.', 
-            'branch_id.required' => 'The Branch field is required.',            
+            'branch_id.required' => 'The Branch field is required.',    
+            'emp_job_type' => 'Select Job Type',         
         ]);
        
        
         $data =array();
-        $data['branch_id']=$request->branch_id;        
+        $data['branch_id']=$request->branch_id;   
+        $data['emp_job_type']=$request->emp_job_type;      
         $data['emp_name']=$request->emp_name;
         $data['emp_email']=$request->emp_email;
         $data['emp_phone']=$request->emp_phone;
