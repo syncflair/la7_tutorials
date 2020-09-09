@@ -31,6 +31,7 @@ const commonStoreForAll ={
       autoSearchSuppliers:{}, 
       AllSpecifications:{},
       allCustomerGroups:{},
+      allCustomerMemberships:{},
       allUnits:{},
       
       
@@ -70,6 +71,7 @@ const commonStoreForAll ={
       FETCH_CATEGORY_DATA(state, data) { return state.AllCategory = data; },
       FETCH_SPECIFICATION_DATA(state, data) { return state.AllSpecifications = data; },
       FETCH_CUSTOMER_GROUPS_DATA(state, data) { return state.allCustomerGroups = data; },
+      FETCH_CUSTOMER_MEMBERSHIP_DATA(state, data) { return state.allCustomerMemberships = data; },
       FETCH_UNITS_DATA(state, data) { return state.allUnits = data; },
       
       //#####################################Search ###########################################
@@ -154,22 +156,29 @@ const commonStoreForAll ={
         }).catch( () => { })
       },      
 
-      fetchDivisionList(context){
-        axios.get('/spa/Division-Info/GetDivision')
+      // fetchDivisionList(context){
+      //   axios.get('/spa/Division-Info/GetDivision')
+      //   .then( (response) => {
+      //     context.commit('FETCH_DIVISION_DATA', response.data); //use for only show data
+      //   }).catch( () => { })
+      // },
+
+      fetchDivisionList(context, payload){
+        axios.get('/spa/Division-Info/GetDivision?&id='+payload)
         .then( (response) => {
           context.commit('FETCH_DIVISION_DATA', response.data); //use for only show data
         }).catch( () => { })
       },
 
-      fetchDistrictList(context){
-        axios.get('/spa/District-Info/GetDistrict')
+      fetchDistrictList(context, payload){
+        axios.get('/spa/District-Info/GetDistrict?&id='+payload)
         .then( (response) => {
           context.commit('FETCH_DISTRICT_DATA', response.data); //use for only show data
         }).catch( () => { })
       },
 
-      fetchDistrictZoneList(context){
-        axios.get('/spa/DistrictZone-Info/GetDistrictZone')
+      fetchDistrictZoneList(context, payload){
+        axios.get('/spa/DistrictZone-Info/GetDistrictZone?&id='+payload)
         .then( (response) => {
           context.commit('FETCH_DISTRICT_ZONE_DATA', response.data); //use for only show data
         }).catch( () => { })
@@ -222,6 +231,13 @@ const commonStoreForAll ={
         axios.get('/spa/customerGroup-Info/getCustomerGroup')
         .then( (response) => {
           context.commit('FETCH_CUSTOMER_GROUPS_DATA', response.data);
+        }).catch( () => { })
+      },
+
+      fetchCustomerMemberships(context){
+        axios.get('/spa/customerMembership-Info/getCustomerMembership')
+        .then( (response) => {
+          context.commit('FETCH_CUSTOMER_MEMBERSHIP_DATA', response.data);
         }).catch( () => { })
       },
 

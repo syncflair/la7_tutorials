@@ -56,11 +56,22 @@ Route::post('supplier/password/reset','AuthSupplier\ResetPasswordController@rese
 Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
    Route::get('/dashboard-customer', 'AdminCustomer\AdminCustomerController@index')->name('dashboard-customer');
    Route::post('customer/logout', 'AuthCustomer\LoginController@logout')->name('customer.logout');
+
+     // Vue: single page application (SPA)- Any route that not match that redirect to dashboard-customer. 
+    Route::get('/spac/{anypath}', function () {
+      return view('adminCustomer.DashboardCustomer'); 
+    })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
+
 });
 
 Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
     Route::get('/dashboard-supplier', 'AdminSupplier\AdminSupplierController@index')->name('dashboard-supplier');
     Route::post('supplier/logout', 'AuthSupplier\LoginController@logout')->name('supplier.logout');
+
+    // Vue: single page application (SPA )- Any route that not match that redirect to dashboard-supplier. 
+    Route::get('/spas/{anypath}', function () {
+      return view('adminSupplier.DashboardSupplier'); 
+    })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
 });
 
 
@@ -126,6 +137,11 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::get('spa/customerGroup-Info/getCustomerGroup', 'Admin\Customer\CustomerGroupController@getCustomerGroup');//commonStoreForAll store  
     Route::resource('spa/customerGroup-Info', 'Admin\Customer\CustomerGroupController',
       ['except'=>['create','show','edit'] ]);
+    
+    Route::get('spa/customerMembership-Info/getCustomerMembership', 'Admin\Customer\CustomerMembershipController@getCustomerMembership');//commonStoreForAll store  
+    Route::resource('spa/customerMembership-Info', 'Admin\Customer\CustomerMembershipController',
+      ['except'=>['create','show','edit'] ]);
+
 
 
     //Supplier control Route For Admin Dashboard
@@ -331,13 +347,61 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
     //})->where('anypath', '.*' ); 
 
+   
+    // Vue: single page application (SPA )- Any route that not match that redirect to admin childs dashboard. 
+    // Route::get('/spaa/{anypath}', function () {
+    //   if (auth()->user()->role_id == 7) { //Sales = 7
+    //     return view('adminSales.DashboardSales');
+    //   }
+    //   elseif (auth()->user()->role_id == 8) { //Purchase = 8
+    //     return view('adminPurchase.DashboardPurchase');
+    //   }
+    //   elseif (auth()->user()->role_id == 9) { //Storage = 9
+    //       return view('adminStorage.DashboardStorage');
+    //   }
+    //   elseif (auth()->user()->role_id == 10) { //Order = 10
+    //       return view('adminOrder.DashboardOrder');
+    //   }
+    //   elseif (auth()->user()->role_id == 11) { //Packaging = 11
+    //       return view('adminPackaging.DashboardPackaging');
+    //   }
+    //   elseif (auth()->user()->role_id == 13) { //Delivery = 13
+    //       return view('adminDelivery.DashboardDelivery');
+    //   }
+    //   elseif (auth()->user()->role_id == 14) { //Supervisor = 14
+    //       return view('adminSupervisor.DashboardSupervisor'); 
+    //   }
+    //   //this is guest user that only for verification check
+    //   elseif (auth()->user()->role_id == 17) { //guest = 17
+    //       return view('GuestUser.DashboardGuestUser');
+    //   }      
+    // })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
+
 });
 /**************************************** End Admin middleware *****************************************************/
+
+
+/**************** Routes for all role based admin child ********************/
+Route::group(['middleware'=>['auth'] ], function(){
+  Route::get('spaa/admin-child-profille-info', 'AdminChild\AdminChildProfileController@index');
+});
 
 /**************************************** Admin Supervisor middleware *************************************************/
 Route::group(['middleware'=>['AdminSupervisor','auth','verified'] ], function(){
 
     Route::get('dashboard-supervisor', 'AdminSupervisor\AdminSupervisorController@index')->name('dashboard-supervisor');
+
+    Route::get('/spaa/{anypath}', function () {
+      if (auth()->user()->role_id == 7) { return view('adminSales.DashboardSales'); }
+      elseif (auth()->user()->role_id == 8) { return view('adminPurchase.DashboardPurchase'); }
+      elseif (auth()->user()->role_id == 9) { return view('adminStorage.DashboardStorage'); }
+      elseif (auth()->user()->role_id == 10) { return view('adminOrder.DashboardOrder'); }
+      elseif (auth()->user()->role_id == 11) { return view('adminPackaging.DashboardPackaging'); }
+      elseif (auth()->user()->role_id == 13) { return view('adminDelivery.DashboardDelivery'); }
+      elseif (auth()->user()->role_id == 14) { return view('adminSupervisor.DashboardSupervisor'); }
+      //this is guest user that only for verification check
+      elseif (auth()->user()->role_id == 17) { return view('GuestUser.DashboardGuestUser'); }      
+    })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
 
 });
 /****************************************end Admin Supervisor middleware ***********************************************/
@@ -346,6 +410,18 @@ Route::group(['middleware'=>['AdminSupervisor','auth','verified'] ], function(){
 Route::group(['middleware'=>['AdminDelivery','auth','verified'] ], function(){
 
     Route::get('dashboard-delivery', 'AdminDelivery\AdminDeliveryController@index')->name('dashboard-delivery');
+
+    Route::get('/spaa/{anypath}', function () {
+      if (auth()->user()->role_id == 7) { return view('adminSales.DashboardSales'); }
+      elseif (auth()->user()->role_id == 8) { return view('adminPurchase.DashboardPurchase'); }
+      elseif (auth()->user()->role_id == 9) { return view('adminStorage.DashboardStorage'); }
+      elseif (auth()->user()->role_id == 10) { return view('adminOrder.DashboardOrder'); }
+      elseif (auth()->user()->role_id == 11) { return view('adminPackaging.DashboardPackaging'); }
+      elseif (auth()->user()->role_id == 13) { return view('adminDelivery.DashboardDelivery'); }
+      elseif (auth()->user()->role_id == 14) { return view('adminSupervisor.DashboardSupervisor'); }
+      //this is guest user that only for verification check
+      elseif (auth()->user()->role_id == 17) { return view('GuestUser.DashboardGuestUser'); }      
+    })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
 
 });
 /****************************************end Admin Delivery middleware ***********************************************/
@@ -397,6 +473,12 @@ Route::group(['middleware'=>['GuestUser','auth','verified'] ], function(){
 
 });
 /****************************************end Admin Sales middleware ***********************************************/
+
+
+
+
+
+
 
 /****************************************Website Routes Link *****************************************************/
 

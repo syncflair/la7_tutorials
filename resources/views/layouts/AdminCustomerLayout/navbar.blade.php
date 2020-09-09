@@ -1,10 +1,10 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-      <a href="dashboard-customer" class="navbar-brand">
+      <router-link to="/dashboard-customer" class="navbar-brand">
         <img src="{{asset('FilesStorage/CommonFiles/favicon.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-text font-weight-light">Dashboard</span>
-      </a>
+      </router-link>
       
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -130,17 +130,19 @@
 
         <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ Auth::guard('customer')->user()->name }} </a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow dropdown-menu-right">
               <!-- <li><a href="#" class="dropdown-item"> </a></li> -->
-              <li><a href="#" class="dropdown-item"><i class="far fa-user-circle"></i> My Account</a></li>
+              <li>
+                <router-link to="/spac/customer-profile" class="dropdown-item"><i class="far fa-user-circle"></i> My Account</router-link>
+              </li>
 
               <li class="dropdown-divider"></li>
-              <li><a href="#" class="dropdown-item"><i class="fas fa-cart-plus green"></i> Wishlist</a></li>
-              <li><a href="#" class="dropdown-item"><i class="fas fa-shopping-bag green"></i> Cart</a></li> 
-              <li><a href="#" class="dropdown-item"><i class="fas fa-shopping-basket green"></i> Order</a></li>
+              <li><router-link to="/spac/customer-wishlist" class="dropdown-item"><i class="fas fa-cart-plus green"></i> Wishlist</router-link></li>
+              <li><router-link to="/spac/customer-cart" class="dropdown-item"><i class="fas fa-shopping-bag green"></i> Cart</router-link></li> 
+              <li><router-link to="/spac/customer-order" href="#" class="dropdown-item"><i class="fas fa-shopping-basket green"></i> Order</router-link></li>
 
-              <li><a href="#" class="dropdown-item"><i class="fas fa-download blue"></i> Download</a></li>
-              <li><a href="#" class="dropdown-item"><i class="far fa-address-card"></i> Address</a></li>
+              <!-- <li><router-link to="/spac/CustomerDownloadMaster" class="dropdown-item"><i class="fas fa-download blue"></i> Download</router-link></li> -->
+              <li><router-link to="/spac/customer-Address" class="dropdown-item"><i class="far fa-address-card"></i> Address</router-link></li>
               <li class="dropdown-divider"></li>
               <li>
                 <!-- <a href="#" class="dropdown-item"><i class="fas fa-sign-out-alt red"></i> Logout</a> -->

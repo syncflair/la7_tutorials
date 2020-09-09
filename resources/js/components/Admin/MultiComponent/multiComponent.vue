@@ -87,11 +87,17 @@
 </template>
 
 <script>
-	import dataList from './dataList.vue'	
-	import viewCategory from './viewCategory.vue'
-	import countCategory from './countCategory.vue'
-	import childCategory from './childCategory.vue'
-	import ProductListMultiComponent from './ProductListMultiComponent.vue'
+	//import dataList from './dataList.vue'	
+	//import viewCategory from './viewCategory.vue'
+	//import countCategory from './countCategory.vue'
+	//import childCategory from './childCategory.vue'
+	//import ProductListMultiComponent from './ProductListMultiComponent.vue'
+
+	const dataList = () => import( /* webpackChunkName: "dataList-com" */ './dataList.vue')
+	const viewCategory = () => import( /* webpackChunkName: "viewCategory-com" */ './viewCategory.vue')
+	const countCategory = () => import( /* webpackChunkName: "countCategory-com" */ './countCategory.vue')
+	const childCategory = () => import( /* webpackChunkName: "childCategory-com" */ './childCategory.vue')
+	const ProductListMultiComponent = () => import( /* webpackChunkName: "ProductListMultiComponent-com" */ './ProductListMultiComponent.vue')
 
 	//import searchBox from './searchBox.vue'
 	//import formBox from './formBox.vue'

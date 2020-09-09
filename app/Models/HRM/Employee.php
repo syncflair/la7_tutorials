@@ -21,9 +21,14 @@ class Employee extends Model
        return $this->belongsToMany(Department::class, 'department_employee', 'employee_id', 'department_id')
                 ->withTimestamps();
 
-
        //->withTimestamps(); //for update time 
        //->withPivot('fieldName'); //for extra field view from join table
+    }
+
+    //Employee hasMany Payrolls
+    public function hasManyPayroll()
+    {
+       return $this->hasMany(Payroll::class, 'emp_id');
     }
 
     //Employee belongsTo Branch

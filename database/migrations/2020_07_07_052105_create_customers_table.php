@@ -27,6 +27,7 @@ class CreateCustomersTable extends Migration
             $table->string('password');  
            // $table->enum('customer_group', ['Default', 'Wholesale']); 
             $table->unsignedBigInteger('customer_group_id'); 
+            $table->unsignedBigInteger('customer_membership_id')->nullable(); 
             //$table->unsignedBigInteger('customer_type_id')->default(1);             
             $table->unsignedBigInteger('status_id')->default(4); //4 Not Verified
             $table->boolean('enable_notify')->default(false);
@@ -47,6 +48,7 @@ class CreateCustomersTable extends Migration
             $table->foreign('status_id')->references('id')->on('user_status');
             //$table->foreign('customer_type_id')->references('id')->on('customer_type');
             $table->foreign('customer_group_id')->references('id')->on('customer_groups');
+            $table->foreign('customer_membership_id')->references('id')->on('customer_memberships');
             $table->foreign('coa_code')->references('ah_code')->on('account_heads'); //chart of account (account_heads) ah_code
         });
     }

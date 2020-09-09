@@ -9,15 +9,20 @@ Vue.use(VueRouter)
 
 
 /*define All Vue Routers her*/
-// import Dashboard from './components/Admin/DashboardAdmin.vue';
+import DashboardCustomer from '../components/AdminCustomer/DashboardCustomerAdmin.vue';
+//import CustomerProfileMaster from '../components/AdminCustomer/Profile/ProfileMaster.vue';
+//import DashboardCustomer from '../components/AdminCustomer/DashboardCustomerAdmin.vue';
 // const Dashboard = () => import('./components/Admin/DashboardAdmin.vue')
 //const Parties = () => import('./components/Admin/Client/Parties.vue')
 //const NotFound = () => import('./components/Admin/NotFound.vue')
 
 const routes = [
 //export const routes = [
-	//{ path: '/dashboard', component: Dashboard, meta: { title: 'Dashboard'} },
+	{ path: '/dashboard-customer', component: DashboardCustomer, meta: { title: 'Customer Dashboard'} },
+	//{ path: '/CustomerProfileMaster', component: CustomerProfileMaster, meta: { title: 'Profile'} },
 	//{ path: '/dashboard', component: () => import(/* webpackChunkName: "Dashboard" */ './components/Admin/DashboardAdmin.vue'), meta: { title: 'Dashboard'} },
+	//{ path: '/dashboard-customer', component: () => import(/* webpackChunkName: "customer-Dashboard" */ '../components/AdminCustomer/DashboardCustomerAdmin.vue'), meta: { title: 'Dashboard'} },
+	//{ path: '/sap/CustomerProfileMaster', component: () => import(/* webpackChunkName: "CustomerProfileMaster" */ '../components/AdminCustomer/Profile/ProfileMaster.vue'), meta: { title: 'Profile'} },
 
 ]
 

@@ -1,4 +1,4 @@
 <!-- jQuery -->
-<script src="{{ asset('js/ac_main.js') }}" defer-></script>
+<script src="{{ asset('js/app.js') }}" defer-></script>
 
 @yield('extra_script')

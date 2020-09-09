@@ -12,6 +12,7 @@ use Illuminate\Support\Carbon;
 //use App\Mail\EmployeeNotificationMail;
 //use Illuminate\Support\Facades\Mail;
 use App\Models\HRM\Employee;
+use App\Models\HRM\Payroll;
 use App\Models\HRM\DepartmentEmployee;
 
 use Illuminate\Support\Facades\DB; //for database transection
@@ -44,7 +45,8 @@ class EmployeeController extends Controller
             $perPage = 100;
        }
 
-       $data = Employee::with('Departments','belongsToBranch', 'belongsToJobTitle','hasOneUser')->paginate($perPage);
+       $data = Employee::with('Departments','belongsToBranch', 'belongsToJobTitle','hasOneUser','hasManyPayroll')
+                ->paginate($perPage);
        return response()->json($data);
     }
 
@@ -75,7 +77,10 @@ class EmployeeController extends Controller
             'status_id' => 'required', 
             'emp_gender' => 'required',             
             'branch_id' => 'required',             
-            'emp_job_type' => 'required',             
+            'emp_job_type' => 'required',  
+            'emp_job_status' => 'required',   
+            'emp_payrolls.*.payroll_status' => 'required',        
+            'emp_payrolls.*.basic_salary' => 'required',        
         ],
         [   
             'emp_name.required' => 'The Employee name field is required.',            
@@ -87,7 +92,10 @@ class EmployeeController extends Controller
             'emp_phone.unique' => 'The Phone number already used.',
             'emp_phone.regex' => 'The Phone number is not valid.',
             'branch_id.required' => 'The Branch field is required.',  
-            'emp_job_type' => 'Select Job Type',          
+            'emp_job_type.required' => 'Select Job Type', 
+            'emp_job_status.required' => 'Select Job Status',  
+            'emp_payrolls.*.payroll_status.required' => 'Required',      
+            'emp_payrolls.*.basic_salary.required' => 'Required',          
         ]);
        
         $data =array();
@@ -95,6 +103,7 @@ class EmployeeController extends Controller
         $data['coa_code']= 202;  ////Liabilities - Accounts Payable 203
         $data['branch_id']=$request->branch_id; 
         $data['emp_job_type']=$request->emp_job_type; 
+        $data['emp_job_status']=$request->emp_job_status; 
         $data['emp_name']=$request->emp_name;
         $data['emp_email']=$request->emp_email;
         $data['emp_phone']=$request->emp_phone;
@@ -108,6 +117,7 @@ class EmployeeController extends Controller
         $data['emp_nid']=$request->emp_nid;        
         $data['emp_passport']=$request->emp_passport;        
         $data['emp_driving_license']=$request->emp_driving_license;        
+        $data['emp_tin']=$request->emp_tin;        
         $data['emp_hire_date']=$request->emp_hire_date;        
         $data['emp_desc']=$request->emp_desc;        
         $data['emp_qualification']=$request->emp_qualification; 
@@ -169,7 +179,29 @@ class EmployeeController extends Controller
             DB::beginTransaction();
 
             $employee = Employee::create($data); 
-            $employee->Departments()->attach($request->departments);          
+            $employee->Departments()->attach($request->departments);  
+
+            //insert payrolls
+            foreach ($request->emp_payrolls as $key => $object) {
+                    //Product::find($request->pur_order_details[$key]['product_id'])->update($value);
+                $payrolls = Payroll::create([
+                    'emp_id' => $employee->id, //last inserted id
+                    'payroll_status' => $request->emp_payrolls[$key]['payroll_status'],
+                    'house_rent' => $request->emp_payrolls[$key]['house_rent'],
+                    'medical_allowance' => $request->emp_payrolls[$key]['medical_allowance'],
+                    'ta_daily' => $request->emp_payrolls[$key]['ta_daily'],
+                    'ta_monthly' => $request->emp_payrolls[$key]['ta_monthly'],
+                    'da_daily' => $request->emp_payrolls[$key]['da_daily'],
+                    'da_monthly' => $request->emp_payrolls[$key]['da_monthly'],
+                    'over_time' => $request->emp_payrolls[$key]['over_time'],
+                    'basic_salary' => $request->emp_payrolls[$key]['basic_salary'],
+                    'bonuse_percent' => $request->emp_payrolls[$key]['bonuse_percent'], 
+                    'increment_percent' => $request->emp_payrolls[$key]['increment_percent'], 
+                    'starting_date' => $request->emp_payrolls[$key]['starting_date'], 
+                    'payroll_desc' => $request->emp_payrolls[$key]['payroll_desc'], 
+                ]);
+            }
+
 
             DB::commit();            
             return response()->json(['success'=>'Employee inserted']);
@@ -222,6 +254,9 @@ class EmployeeController extends Controller
             'emp_gender' => 'required',
             'branch_id' => 'required',
             'emp_job_type' => 'required',
+            'emp_job_status' => 'required',
+            'emp_payrolls.*.payroll_status' => 'required',        
+            'emp_payrolls.*.basic_salary' => 'required',  
         ],
         [
             'emp_name.required' => 'The Employee name field is required.',            
@@ -233,13 +268,18 @@ class EmployeeController extends Controller
             'emp_phone.unique' => 'The Phone number already used.',
             'emp_phone.regex' => 'The Phone number is not valid.', 
             'branch_id.required' => 'The Branch field is required.',    
-            'emp_job_type' => 'Select Job Type',         
+            'emp_job_type.required' => 'Select Job Type',  
+            'emp_job_status.required' => 'Select Job Status',  
+
+            'emp_payrolls.*.payroll_status.required' => 'Required',      
+            'emp_payrolls.*.basic_salary.required' => 'Required',      
         ]);
        
        
         $data =array();
         $data['branch_id']=$request->branch_id;   
         $data['emp_job_type']=$request->emp_job_type;      
+        $data['emp_job_status']=$request->emp_job_status;      
         $data['emp_name']=$request->emp_name;
         $data['emp_email']=$request->emp_email;
         $data['emp_phone']=$request->emp_phone;
@@ -252,7 +292,8 @@ class EmployeeController extends Controller
         $data['emp_gender']=$request->emp_gender;        
         $data['emp_nid']=$request->emp_nid;        
         $data['emp_passport']=$request->emp_passport;        
-        $data['emp_driving_license']=$request->emp_driving_license;        
+        $data['emp_driving_license']=$request->emp_driving_license; 
+        $data['emp_tin']=$request->emp_tin;         
         $data['emp_hire_date']=$request->emp_hire_date;        
         $data['emp_desc']=$request->emp_desc;        
         $data['emp_qualification']=$request->emp_qualification; 
@@ -317,7 +358,32 @@ class EmployeeController extends Controller
 
             $employee = Employee::find($request->id)->update($data);
             $abcd = Employee::find($request->id); 
-            $abcd->Departments()->sync($request->departments); //update department_employee            
+            $abcd->Departments()->sync($request->departments); //update department_employee    
+
+
+            //$org->products()->whereIn('id', $ids)->delete()
+            // Payroll::whereIn('emp_id', $request->id)->delete();
+            Payroll::where('emp_id', '=', $request->id)->delete(); //delete previous payroll
+            //insert payrolls
+            foreach ($request->emp_payrolls as $key => $object) {
+                $payrolls = Payroll::create([
+                    'emp_id' => $request->id, //last inserted id
+                    'payroll_status' => $request->emp_payrolls[$key]['payroll_status'],
+                    'house_rent' => $request->emp_payrolls[$key]['house_rent'],
+                    'medical_allowance' => $request->emp_payrolls[$key]['medical_allowance'],
+                    'ta_daily' => $request->emp_payrolls[$key]['ta_daily'],
+                    'ta_monthly' => $request->emp_payrolls[$key]['ta_monthly'],
+                    'da_daily' => $request->emp_payrolls[$key]['da_daily'],
+                    'da_monthly' => $request->emp_payrolls[$key]['da_monthly'],
+                    'over_time' => $request->emp_payrolls[$key]['over_time'],
+                    'basic_salary' => $request->emp_payrolls[$key]['basic_salary'],
+                    'bonuse_percent' => $request->emp_payrolls[$key]['bonuse_percent'], 
+                    'increment_percent' => $request->emp_payrolls[$key]['increment_percent'], 
+                    'starting_date' => $request->emp_payrolls[$key]['starting_date'], 
+                    'payroll_desc' => $request->emp_payrolls[$key]['payroll_desc'], 
+                ]);
+            }
+
 
             DB::commit();            
             return response()->json(['success'=>'Employee Update']);
@@ -381,12 +447,16 @@ class EmployeeController extends Controller
         //     //delete file //use Illuminate\Support\Facades\File; at top
         // }
       
+      
+
         //update image field
         $data = Employee::find($id);
         $data->avatar = null; 
         $data->save();
 
         if($data){
+            //Payroll::where('emp_id', $request->id)->delete(); //delete previous payroll 
+
             return response()->json(['success'=> 'Image deleted']);
         }else{
             return response()->json(['errors'=> 'Something is wrong..']);
@@ -429,7 +499,7 @@ class EmployeeController extends Controller
 
         if(!empty($searchKey) && empty($searchOption)){
         //if($search = \Request::get('q')){
-            $searchResult = Employee::with('Departments','belongsToBranch', 'belongsToJobTitle')
+            $searchResult = Employee::with('Departments','belongsToBranch', 'belongsToJobTitle','hasManyPayroll')
                 ->where(function($query) use ($searchKey){
                 $query->where('employees.emp_name','LIKE','%'.$searchKey.'%')
                         ->orWhere('employees.emp_email','LIKE','%'.$searchKey.'%')
@@ -444,7 +514,7 @@ class EmployeeController extends Controller
             ->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){
-            $searchResult = Employee::with('Departments','belongsToBranch', 'belongsToJobTitle')
+            $searchResult = Employee::with('Departments','belongsToBranch', 'belongsToJobTitle','hasManyPayroll')
                 ->where(function($query) use ($searchKey, $searchOption){
                     if($searchOption == 'us_name'){
                         $query->where( 'user_status.'.$searchOption,'LIKE','%'.$searchKey.'%');
@@ -457,7 +527,8 @@ class EmployeeController extends Controller
             ->paginate($perPage);
             
         }else{
-            $searchResult = Employee::with('Departments','belongsToBranch', 'belongsToJobTitle')->paginate($perPage);
+            $searchResult = Employee::with('Departments','belongsToBranch', 'belongsToJobTitle','hasManyPayroll')
+                    ->paginate($perPage);
         }
         //return $searchResult;
         return response()->json($searchResult);

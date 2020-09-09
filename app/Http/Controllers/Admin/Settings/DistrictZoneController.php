@@ -181,10 +181,13 @@ class DistrictZoneController extends Controller
 
 
     //return division list without pagination
-    public function GetDistrictZone(){
+    public function GetDistrictZone(Request $request){
         //this is for commonStoreForAll Store
-        $data = DistrictZone::get();
-        //$data = DistrictZone::All();
+        if(!empty($request->id)){
+            $data = DistrictZone::where('district_id', '=' ,$request->id)->get();
+        }else{
+            $data = DistrictZone::get();
+        }
         return response()->json($data);
     }
 

@@ -1,10 +1,36 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-      <a href="" class="navbar-brand">
+
+      <!-- Role base route for admin child dashboard -->
+      @if(Auth::user()->role_id == 7) <!-- sales = 7 -->
+        <router-link to="/dashboard-sales" class="navbar-brand">
+      @endif
+      @if(Auth::user()->role_id == 8) <!-- purchase = 8 -->
+        <router-link to="/dashboard-purchase" class="navbar-brand">
+      @endif
+      @if(Auth::user()->role_id == 9) <!-- storage = 9 -->
+        <router-link to="/dashboard-storage" class="navbar-brand">
+      @endif
+      @if(Auth::user()->role_id == 10) <!-- order = 10 -->
+        <router-link to="/dashboard-order" class="navbar-brand">
+      @endif
+      @if(Auth::user()->role_id == 11) <!-- packaging = 11 -->
+        <router-link to="/dashboard-packaging" class="navbar-brand">
+      @endif
+      @if(Auth::user()->role_id == 13) <!-- Delivery = 13 -->
+        <router-link to="/dashboard-delivery" class="navbar-brand">
+      @endif
+      @if(Auth::user()->role_id == 14) <!-- Supervisor = 14 -->
+        <router-link to="/dashboard-supervisor" class="navbar-brand">
+      @endif
+      @if(Auth::user()->role_id == 17) <!-- Guest user = 17 -->
+        <router-link to="/dashboard-guest-user" class="navbar-brand">
+      @endif
+      
         <img src="{{asset('FilesStorage/CommonFiles/favicon.png')}}" alt="Sorboraho Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
-        <span class="brand-text font-weight-light">Dashboard</span>
-      </a>
+        <span class="brand-text font-weight-light">Dashboard</span> <!-- {{ Auth::user()->role_id }} -->
+      </router-link>
 
       <a class="navbar-brand" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       
@@ -51,7 +77,7 @@
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="../../dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                <img src="{{asset('/FilesStorage/CommonFiles/favicon.png')}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Brad Diesel
@@ -67,7 +93,7 @@
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="../../dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <img src="{{asset('/FilesStorage/CommonFiles/favicon.png')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     John Pierce
@@ -83,7 +109,7 @@
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <img src="{{asset('/FilesStorage/CommonFiles/favicon.png')}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Nora Silvester
@@ -133,16 +159,16 @@
 
         <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ Auth::user()->name }} </a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-              <li><a href="" class="dropdown-item"><i class="far fa-user-circle"></i> My Account</a></li>
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow dropdown-menu-right">
+              <li><router-link to="/spaa/admin-user-profile" class="dropdown-item"><i class="far fa-user-circle"></i> My Account</router-link></li>
 
-              <li class="dropdown-divider"></li>
-              <li><a href="#" class="dropdown-item"><i class="fas fa-cart-plus green"></i> Wishlist</a></li>
+              <!-- <li class="dropdown-divider"></li> -->
+              <!-- <li><a href="#" class="dropdown-item"><i class="fas fa-cart-plus green"></i> Wishlist</a></li>
               <li><a href="#" class="dropdown-item"><i class="fas fa-shopping-bag green"></i> Cart</a></li> 
               <li><a href="#" class="dropdown-item"><i class="fas fa-shopping-basket green"></i> Order</a></li>
 
               <li><a href="#" class="dropdown-item"><i class="fas fa-download blue"></i> Download</a></li>
-              <li><a href="#" class="dropdown-item"><i class="far fa-address-card"></i> Address</a></li>
+              <li><a href="#" class="dropdown-item"><i class="far fa-address-card"></i> Address</a></li> -->
 
               <li class="dropdown-divider"></li>
                @if(Auth::guard()->check())

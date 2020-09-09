@@ -12,6 +12,7 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js') //user for only admin  
+   .js('resources/js/appPublic.js', 'public/js') //user for website and customer supplier
    .js('resources/js/admin_childs_js/ac_main.js', 'public/js')  //user for admin childs
    .js('resources/js/website_js/w_main.js', 'public/js')  //use for website or auth client or customer
 

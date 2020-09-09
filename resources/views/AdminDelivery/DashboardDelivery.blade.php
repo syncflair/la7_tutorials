@@ -1,23 +1,26 @@
-@extends('layouts.app')
+@extends('layouts.AdminChildsLayout.master_template')
+@section('title')
+  Dashboard | {{ Auth::user()->name }}
+@endsection
+
+@section('extra_css')
+    <!--Extra CSS-->
+@endsection 
+
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
 
-                    Delivery Management Dashboard
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <admin-child-wrapper
+    	:user="{{Auth::user()}}" 	
+		:settings="{{ \App\Models\Settings\Setting::with('belongsToLanguage','belongsToCurrency')->where(['id' => 1 ])->first() }}" 
+    ></admin-child-wrapper>
+
+<!-- :permissions="{{ \App\Models\Permission::where(['id' => Auth::user()->role->id ])->first() }}"        -->
+
 @endsection
+
+@section('extra_script')
+    <!--Extra Script-->
+@endsection
+

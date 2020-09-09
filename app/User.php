@@ -50,9 +50,15 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(Models\Role::class);
     }
 
+    //User belongsTo belongsToBranch
+    public function belongsToBranch(){
+        return $this->belongsTo('App\Models\Settings\BranchInfo', 'branch_id')->select('id','branch_name');
+    }
+
     public function UserStatus(){
         //return $this->belongsTo('App\Models\UserStatus');
-        return $this->belongsTo(Models\Settings\UserStatus::class, 'user_id');
+        //return $this->belongsTo(Models\Settings\UserStatus::class, 'user_id');
+        return $this->belongsTo('App\Models\Settings\UserStatus', 'status_id');
     }
 
     //A User Has Many Products (hasMany())
@@ -61,11 +67,26 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Models\Product::class);  
     }
 
+
+
+
+
     //User belongs to Employee
     public function belongsToEmployee(){
-        return $this->belongsTo('App\Models\HRM\Employee', 'employee_id')->select('id','emp_name');
+        return $this->belongsTo('App\Models\HRM\Employee', 'employee_id')->with('belongsToJObTitle');
+        //->select('id','emp_name','emp_job_type');
         //return $this->belongsTo(Models\Supplier\Vendor::class, 'vendor_id');
     }
+
+    //Employee belongsTo belongsToJObTitle
+    public function belongsToJObTitle(){
+        return $this->belongsTo('App\Models\HRM\JobTitle', 'job_title_id');
+    }
+
+    //Employee haseMany Department
+    // public function belongsToManyDepartment(){
+    //     return $this->belongsToMany('App\Models\HRM\Department', 'department_employee', 'employee_id', 'department_id');
+    // }
 
 
     

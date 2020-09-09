@@ -173,9 +173,13 @@ class DistrictController extends Controller
 
 
     //return division list without pagination
-    public function GetDistrict(){
+    public function GetDistrict(Request $request){
         //this is for commonStoreForAll Store
-        $data = District::get();
+        if(!empty($request->id)){
+            $data = District::where('division_id', '=' ,$request->id)->get();
+        }else{
+            $data = District::get();
+        }
         return response()->json($data);
     }
 

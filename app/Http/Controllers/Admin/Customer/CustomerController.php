@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\Hash;
 use App\Mail\CustomerRegisterByAdminMail;
 use App\Mail\CustomerNotificationMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB; //for database transection
 use App\Customer;
+use App\Models\Customer\CustomerAddress;
+
 
 class CustomerController extends Controller
 {
@@ -33,7 +36,7 @@ class CustomerController extends Controller
             $perPage = 100;
        }
 
-        $data = Customer::with('belongsToCustomerGroup')->paginate($perPage);
+        $data = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->paginate($perPage);
 
         return response()->json($data);
     }
@@ -64,33 +67,66 @@ class CustomerController extends Controller
             'status_id' => ['required','numeric'], 
             //'customer_group' => ['required'],
             'customer_group_id' => ['required'],
+            'customer_membership_id' => ['required'],
             'password' => ['required','min:8','max:50'],  //regex:/[@$!%*#?&]/  //confirmed
             'password_confirmation' => ['sometimes','same:password'],
         ],
         [
-            'customer_group_id.required' => 'Customer Group is required',
+            'customer_group_id.required' => 'Select Group',
+            'customer_membership_id.required' => 'Select Membership',
         ]);
 
-        $customer = Customer::create([
-            'customer_code' => customer_code_generate(),
-            'coa_code' => 103, //Asset - Accounts Receivable 103
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => Hash::make($request->password),
-            'status_id' => $request->status_id,
-            'customer_group_id' => $request->customer_group_id,
-            //'customer_group' => $request->customer_group,
-            'enable_notify' => $request->enable_notify == NULL ? 0 : $request->enable_notify,
-            'created_by' => \Auth::user()->id, 
-        ]);
 
-        if($customer != null){           
-            $data = ["userInfo" => $request->all(), "tag" => "register"];
-            Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));
-            
-            return response()->json(['success'=>'Customer Created.']); 
-        }   
+        try{
+            DB::beginTransaction();
+
+            $customer = Customer::create([
+                'customer_code' => customer_code_generate(),
+                'coa_code' => 103, //Asset - Accounts Receivable 103
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'password' => Hash::make($request->password),
+                'status_id' => $request->status_id,
+                'customer_group_id' => $request->customer_group_id,
+                'customer_membership_id' => $request->customer_membership_id,
+                //'customer_group' => $request->customer_group,
+                'enable_notify' => $request->enable_notify == NULL ? 0 : $request->enable_notify,
+                'created_by' => \Auth::user()->id, 
+            ]);
+
+            //insert address
+            foreach ($request->customer_address as $key => $object) {
+                $customerAddress = CustomerAddress::create([
+                    'customer_id' => $customer->id, //last inserted id
+                    'customer_name' => $request->customer_address[$key]['customer_name'],
+                    'company' => $request->customer_address[$key]['company'],
+                    'address_1' => $request->customer_address[$key]['address_1'],
+                    'address_2' => $request->customer_address[$key]['address_2'],
+                    //'custome_fields' => $request->customer_address[$key]['custome_fields'],
+                    'country_id' => $request->customer_address[$key]['country_id'],
+                    'division_id' => $request->customer_address[$key]['division_id'],
+                    'district_id' => $request->customer_address[$key]['district_id'],
+                    'area_zone_id' => $request->customer_address[$key]['area_zone_id'],
+                    'city' => $request->customer_address[$key]['city'], 
+                    'zip' => $request->customer_address[$key]['zip'], 
+                    'default_address' => $request->customer_address[$key]['default_address'] == NULL ? 0 : $request->customer_address[$key]['default_address'],
+                ]);
+            }
+
+            DB::commit();  
+
+            if($customer != null){           
+                $data = ["userInfo" => $request->all(), "tag" => "register"];
+                Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));                
+                return response()->json(['success'=>'Customer Created.']); 
+            }
+
+        }catch(\Exception $e){
+            //logger($e->getMessage());
+            DB::rollBack();
+            return response()->json(['errors'=> $e->getMessage() ], 500); 
+        } //end try  
     }
 
     /**
@@ -132,11 +168,13 @@ class CustomerController extends Controller
             'status_id' => ['required','numeric'], 
             //'customer_group' => ['required'],
             'customer_group_id' => ['required'],
+            'customer_membership_id' => ['required'],
             'password' => ['nullable','sometimes','min:8','max:50'],  //regex:/[@$!%*#?&]/  //confirmed
             'password_confirmation' => ['sometimes','same:password'],
         ],
         [
-            'customer_group_id.required' => 'Customer Group is required',
+            'customer_group_id.required' => 'Select Group',
+            'customer_membership_id.required' => 'Select Membership',
         ]);
 
         //existing password query
@@ -144,22 +182,59 @@ class CustomerController extends Controller
         $existing_password = $existing_user_password->password;
 
 
-        $customer = Customer::find($request->id);
-        $customer->name = $request->name;
-        $customer->email = $request->email;
-        $customer->phone = $request->phone;
-        $customer->password = $request->password == null ? $existing_password : Hash::make($request->password);
-        $customer->status_id = $request->status_id;
-        $customer->customer_group_id = $request->customer_group_id;
-        //$customer->customer_group = $request->customer_group;
-        $customer->enable_notify = $request->enable_notify == NULL ? 0 : $request->enable_notify;
-        $customer->updated_by = \Auth::user()->id; 
-        $customer->save();
+        try{
+            DB::beginTransaction();
 
-        if($customer != null){
-           //Mail::to($customer->email)->send(new CustomerRegisterVerificationMail($customer)); //for verification email send to customer
-            return response()->json(['success'=>'Customer update.']); 
-        }
+            $customer = Customer::find($request->id);
+            $customer->name = $request->name;
+            $customer->email = $request->email;
+            $customer->phone = $request->phone;
+            $customer->password = $request->password == null ? $existing_password : Hash::make($request->password);
+            $customer->status_id = $request->status_id;
+            $customer->customer_group_id = $request->customer_group_id;
+            $customer->customer_membership_id = $request->customer_membership_id;
+            //$customer->customer_group = $request->customer_group;
+            $customer->enable_notify = $request->enable_notify == NULL ? 0 : $request->enable_notify;
+            $customer->updated_by = \Auth::user()->id; 
+            $customer->save();
+
+
+
+            CustomerAddress::where('customer_id', '=', $request->id)->delete(); //delete previous address
+
+            //insert address
+            foreach ($request->customer_address as $key => $object) {
+                    //Product::find($request->pur_order_details[$key]['product_id'])->update($value);
+                $customerAddress = CustomerAddress::create([
+                    'customer_id' => $request->id, //last inserted id
+                    'customer_name' => $request->customer_address[$key]['customer_name'],
+                    'company' => $request->customer_address[$key]['company'],
+                    'address_1' => $request->customer_address[$key]['address_1'],
+                    'address_2' => $request->customer_address[$key]['address_2'],
+                    //'custome_fields' => $request->customer_address[$key]['custome_fields'],
+                    'country_id' => $request->customer_address[$key]['country_id'],
+                    'division_id' => $request->customer_address[$key]['division_id'],
+                    'district_id' => $request->customer_address[$key]['district_id'],
+                    'area_zone_id' => $request->customer_address[$key]['area_zone_id'],
+                    'city' => $request->customer_address[$key]['city'], 
+                    'zip' => $request->customer_address[$key]['zip'], 
+                    'default_address' => $request->customer_address[$key]['default_address'] == NULL ? 0 : $request->customer_address[$key]['default_address'],
+                ]);
+            }
+
+
+            DB::commit(); 
+
+            if($customer != null){
+               //Mail::to($customer->email)->send(new CustomerRegisterVerificationMail($customer)); //for verification email send to customer
+                return response()->json(['success'=>'Customer update.']); 
+            }
+
+        }catch(\Exception $e){
+            //logger($e->getMessage());
+            DB::rollBack();
+            return response()->json(['errors'=> $e->getMessage() ], 500); 
+        } //end try  
     }
 
     /**
@@ -205,7 +280,8 @@ class CustomerController extends Controller
 
         if(!empty($searchKey) && empty($searchOption)){
         //if($search = \Request::get('q')){
-            $searchResult = Customer::with('belongsToCustomerGroup')->where(function($query) use ($searchKey){
+            $searchResult = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')
+                ->where(function($query) use ($searchKey){
                 $query->where('customers.name','LIKE','%'.$searchKey.'%')
                         ->orWhere('customers.email','LIKE','%'.$searchKey.'%')
                         ->orWhere('customers.phone','LIKE','%'.$searchKey.'%')
@@ -220,7 +296,8 @@ class CustomerController extends Controller
             ->paginate($perPage);
 
         }elseif(!empty($searchKey) && !empty($searchOption)){
-            $searchResult = Customer::with('belongsToCustomerGroup')->where(function($query) use ($searchKey, $searchOption){
+            $searchResult = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')
+            ->where(function($query) use ($searchKey, $searchOption){
                 if($searchOption == 'name' OR $searchOption == 'email' OR $searchOption == 'phone'  ){
                     $query->where( 'customers.'.$searchOption,'LIKE','%'.$searchKey.'%');
                 }elseif($searchOption == 'us_name'){
@@ -237,7 +314,8 @@ class CustomerController extends Controller
             
         }else{
             //$searchResult = Customer::latest()->paginate(10);
-            $searchResult = Customer::with('belongsToCustomerGroup')->paginate($perPage);
+            $searchResult = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')
+            ->paginate($perPage);
         }
         //return $searchResult;
         return response()->json($searchResult);

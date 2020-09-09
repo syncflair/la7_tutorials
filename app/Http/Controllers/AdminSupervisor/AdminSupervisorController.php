@@ -22,4 +22,5 @@ class AdminSupervisorController extends Controller
     {
         return view('AdminSupervisor.DashboardSupervisor');
     }
+
 }

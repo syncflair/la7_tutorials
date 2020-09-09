@@ -1,10 +1,10 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-      <a href="dashboard-supplier" class="navbar-brand">
+      <router-link to="/dashboard-supplier" class="navbar-brand">
         <img src="{{asset('FilesStorage/CommonFiles/favicon.png')}}" alt="Sorboraho Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-text font-weight-light">Dashboard</span>
-      </a>
+      </router-link>
       
       <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -131,19 +131,27 @@
         
         <li class="nav-item dropdown">
             <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{ Auth::guard('supplier')->user()->name }} </a>
-            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+            <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow dropdown-menu-right">
               <!-- <li><a href="#" class="dropdown-item"> </a></li> -->
-              <li><a href="#" class="dropdown-item"><i class="far fa-user-circle"></i> My Account</a></li>
+              <li><router-link to="/spas/supplier-profile" class="dropdown-item"><i class="far fa-user-circle"></i> My Account</router-link></li>
 
               <li class="dropdown-divider"></li>
-              <li><a href="#" class="dropdown-item"><i class="fas fa-shopping-basket green"></i>New Order</a></li>
-              <li><a href="#" class="dropdown-item"><i class="fas fa-shopping-bag green"></i> Order </a></li> 
-              <li><a href="#" class="dropdown-item"><i class="fas fa-shopping-bag green"></i> Delivered </a></li> 
-              <li><a href="#" class="dropdown-item"><i class="fas fa-cart-plus green"></i> Product List</a></li>
-              <li><a href="#" class="dropdown-item"><i class="far fa-address-card"></i> Return</a></li>       
+              <li><router-link to="/spas/supplier-new-order-list" class="dropdown-item"><i class="fas fa-shopping-basket green"></i> New Order</router-link></li>
 
-              <li><a href="#" class="dropdown-item"><i class="fas fa-download blue"></i>Amount Receivable</a></li>
-              <li><a href="#" class="dropdown-item"><i class="fas fa-download blue"></i> Payment History</a></li>
+              <li><router-link to="/spas/supplier-order-delivered" class="dropdown-item"><i class="fas fa-shopping-bag green"></i> Delivered Order </router-link></li> 
+              
+              <li><router-link to="/spas/supplier-all-order" class="dropdown-item"><i class="fas fa-shopping-bag green"></i> Order </router-link></li> 
+
+
+              <li><router-link to="/spas/supplier-product-list" class="dropdown-item"><i class="fas fa-cart-plus green"></i> Product List</router-link></li>
+
+              <li><router-link to="/spas/supplier-producct-Return" class="dropdown-item"><i class="far fa-address-card"></i> Return</router-link></li>       
+
+              <li><router-link to="/spas/supplier-producct-Replace" class="dropdown-item"><i class="far fa-address-card"></i> Replace</router-link></li>       
+
+              <li><router-link to="/spas/supplier-amount-receivable" class="dropdown-item"><i class="far fa-address-card"></i> Amount Receivable</router-link></li> 
+
+              <li><router-link to="/spas/supplier-payment-history" class="dropdown-item"><i class="far fa-address-card"></i> Payment History</router-link></li>       
               
 
               <li class="dropdown-divider"></li>

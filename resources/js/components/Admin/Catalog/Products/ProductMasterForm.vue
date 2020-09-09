@@ -753,7 +753,7 @@
         let files = e.target.files;  
         //const files = e.target.files;
         Array.from(files).forEach(file => this.converBase64(file));
-        console.log(this.form.pro_images);
+        //console.log(this.form.pro_images);
       },
       converBase64(file){ //Make image as base64         
         let reader = new FileReader();

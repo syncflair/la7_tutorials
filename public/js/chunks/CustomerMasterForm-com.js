@@ -145,6 +145,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -168,12 +198,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //customer_group:'',
         status_id: '',
         customer_group_id: '',
+        customer_membership_id: '',
         enable_notify: ''
       })
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('CustomerForAdminStore', ['pagination']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'allCustomerGroups'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('CustomerForAdminStore', ['pagination']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'allCustomerGroups', 'allCustomerMemberships'])),
   methods: {
     //this event call from CustomerList component
     addCustomer: function addCustomer() {
@@ -270,6 +301,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     this.$store.dispatch('commonStoreForAll/fetchCustomerGroups'); //get customer Groups
 
+    this.$store.dispatch('commonStoreForAll/fetchCustomerMemberships'); //get customer Memberships
+
     FireEvent.$on('AfterChange', function () {
       _this4.$Progress.start();
 
@@ -324,7 +357,7 @@ var render = function() {
       [
         _c(
           "div",
-          { staticClass: "modal-dialog modal-lg", attrs: { role: "document" } },
+          { staticClass: "modal-dialog modal-xl", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header pb-1" }, [
@@ -397,7 +430,7 @@ var render = function() {
                   _c("div", { staticClass: "modal-body pt-1" }, [
                     _c("div", { staticClass: "card--" }, [
                       _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-7 col-sm-6" }, [
+                        _c("div", { staticClass: "col-md-6 col-sm-6" }, [
                           _c(
                             "div",
                             { staticClass: "form-group" },
@@ -545,212 +578,200 @@ var render = function() {
                             )
                           ]),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [
-                                _vm._v(" Password  "),
-                                _c(
-                                  "span",
-                                  {
-                                    directives: [
-                                      {
-                                        name: "show",
-                                        rawName: "v-show",
-                                        value: _vm.editMode === false,
-                                        expression: "editMode === false"
-                                      }
-                                    ]
-                                  },
-                                  [_vm._v(" * ")]
-                                )
-                              ]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.password,
-                                    expression: "form.password"
-                                  }
-                                ],
-                                ref: "password",
-                                staticClass: "form-control form-control-sm",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has("password")
-                                },
-                                attrs: {
-                                  type: "password",
-                                  name: "password",
-                                  placeholder: "Password"
-                                },
-                                domProps: { value: _vm.form.password },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "password",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: { form: _vm.form, field: "password" }
-                              })
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("Password")]),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.password_confirmation,
-                                    expression: "form.password_confirmation"
-                                  }
-                                ],
-                                ref: "password_confirmation",
-                                staticClass: "form-control form-control-sm",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has(
-                                    "password_confirmation"
-                                  )
-                                },
-                                attrs: {
-                                  type: "password",
-                                  name: "password_confirmation",
-                                  placeholder: "Confirm Password"
-                                },
-                                domProps: {
-                                  value: _vm.form.password_confirmation
-                                },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "password_confirmation",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: {
-                                  form: _vm.form,
-                                  field: "password_confirmation"
-                                }
-                              })
-                            ],
-                            1
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-5 col-sm-6" }, [
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", { attrs: { for: "role_id" } }, [
-                                _vm._v("Customer Group *")
-                              ]),
-                              _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-6 col-sm-6" }, [
                               _c(
-                                "select",
-                                {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.customer_group_id,
-                                      expression: "form.customer_group_id"
-                                    }
-                                  ],
-                                  staticClass: "form-control form-control-sm",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "customer_group_id"
-                                    )
-                                  },
-                                  attrs: {
-                                    id: "customer_group_id",
-                                    name: "customer_group_id"
-                                  },
-                                  on: {
-                                    change: function($event) {
-                                      var $$selectedVal = Array.prototype.filter
-                                        .call($event.target.options, function(
-                                          o
-                                        ) {
-                                          return o.selected
-                                        })
-                                        .map(function(o) {
-                                          var val =
-                                            "_value" in o ? o._value : o.value
-                                          return val
-                                        })
-                                      _vm.$set(
-                                        _vm.form,
-                                        "customer_group_id",
-                                        $event.target.multiple
-                                          ? $$selectedVal
-                                          : $$selectedVal[0]
-                                      )
-                                    }
-                                  }
-                                },
+                                "div",
+                                { staticClass: "form-group" },
                                 [
+                                  _c("label", { attrs: { for: "role_id" } }, [
+                                    _vm._v("Customer Group *")
+                                  ]),
+                                  _vm._v(" "),
                                   _c(
-                                    "option",
-                                    { attrs: { disabled: "", value: "" } },
-                                    [_vm._v("Select customer Group")]
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.customer_group_id,
+                                          expression: "form.customer_group_id"
+                                        }
+                                      ],
+                                      staticClass:
+                                        "form-control form-control-sm",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "customer_group_id"
+                                        )
+                                      },
+                                      attrs: {
+                                        id: "customer_group_id",
+                                        name: "customer_group_id"
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.form,
+                                            "customer_group_id",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { disabled: "", value: "" } },
+                                        [_vm._v("Select customer Group")]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(_vm.allCustomerGroups, function(
+                                        c_group
+                                      ) {
+                                        return _c(
+                                          "option",
+                                          { domProps: { value: c_group.id } },
+                                          [
+                                            _vm._v(
+                                              "\r\n\t\t\t\t                  \t" +
+                                                _vm._s(c_group.group_name) +
+                                                "\r\n\t\t\t\t                  "
+                                            )
+                                          ]
+                                        )
+                                      })
+                                    ],
+                                    2
                                   ),
                                   _vm._v(" "),
-                                  _vm._l(_vm.allCustomerGroups, function(
-                                    c_group
-                                  ) {
-                                    return _c(
-                                      "option",
-                                      { domProps: { value: c_group.id } },
-                                      [
-                                        _vm._v(
-                                          "\r\n\t\t                  \t" +
-                                            _vm._s(c_group.group_name) +
-                                            "\r\n\t\t                  "
-                                        )
-                                      ]
-                                    )
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.form,
+                                      field: "customer_group_id"
+                                    }
                                   })
                                 ],
-                                2
-                              ),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: {
-                                  form: _vm.form,
-                                  field: "customer_group_id"
-                                }
-                              })
-                            ],
-                            1
-                          ),
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-6 col-sm-6" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c("label", { attrs: { for: "role_id" } }, [
+                                    _vm._v("Membership *")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "select",
+                                    {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value:
+                                            _vm.form.customer_membership_id,
+                                          expression:
+                                            "form.customer_membership_id"
+                                        }
+                                      ],
+                                      staticClass:
+                                        "form-control form-control-sm",
+                                      class: {
+                                        "is-invalid": _vm.form.errors.has(
+                                          "customer_membership_id"
+                                        )
+                                      },
+                                      attrs: {
+                                        id: "customer_membership_id",
+                                        name: "customer_membership_id"
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          var $$selectedVal = Array.prototype.filter
+                                            .call(
+                                              $event.target.options,
+                                              function(o) {
+                                                return o.selected
+                                              }
+                                            )
+                                            .map(function(o) {
+                                              var val =
+                                                "_value" in o
+                                                  ? o._value
+                                                  : o.value
+                                              return val
+                                            })
+                                          _vm.$set(
+                                            _vm.form,
+                                            "customer_membership_id",
+                                            $event.target.multiple
+                                              ? $$selectedVal
+                                              : $$selectedVal[0]
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c(
+                                        "option",
+                                        { attrs: { disabled: "", value: "" } },
+                                        [_vm._v("Select membership")]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm._l(
+                                        _vm.allCustomerMemberships,
+                                        function(cus_mem) {
+                                          return _c(
+                                            "option",
+                                            { domProps: { value: cus_mem.id } },
+                                            [
+                                              _vm._v(
+                                                "\r\n\t\t\t\t                  \t" +
+                                                  _vm._s(
+                                                    cus_mem.membership_title
+                                                  ) +
+                                                  "\r\n\t\t\t\t                  "
+                                              )
+                                            ]
+                                          )
+                                        }
+                                      )
+                                    ],
+                                    2
+                                  ),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.form,
+                                      field: "customer_membership_id"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
+                          ]),
                           _vm._v(" "),
                           _c(
                             "div",
@@ -892,8 +913,135 @@ var render = function() {
                               },
                               [_vm._v("Notification")]
                             )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "row" }, [
+                            _c("div", { staticClass: "col-md-6 col-sm-6" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c("label", [
+                                    _vm._v(" Password  "),
+                                    _c(
+                                      "span",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.editMode === false,
+                                            expression: "editMode === false"
+                                          }
+                                        ]
+                                      },
+                                      [_vm._v(" * ")]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.password,
+                                        expression: "form.password"
+                                      }
+                                    ],
+                                    ref: "password",
+                                    staticClass: "form-control form-control-sm",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has(
+                                        "password"
+                                      )
+                                    },
+                                    attrs: {
+                                      type: "password",
+                                      name: "password",
+                                      placeholder: "Password"
+                                    },
+                                    domProps: { value: _vm.form.password },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "password",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: { form: _vm.form, field: "password" }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-6 col-sm-6" }, [
+                              _c(
+                                "div",
+                                { staticClass: "form-group" },
+                                [
+                                  _c("label", [_vm._v("Password")]),
+                                  _vm._v(" "),
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.password_confirmation,
+                                        expression: "form.password_confirmation"
+                                      }
+                                    ],
+                                    ref: "password_confirmation",
+                                    staticClass: "form-control form-control-sm",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has(
+                                        "password_confirmation"
+                                      )
+                                    },
+                                    attrs: {
+                                      type: "password",
+                                      name: "password_confirmation",
+                                      placeholder: "Confirm Password"
+                                    },
+                                    domProps: {
+                                      value: _vm.form.password_confirmation
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "password_confirmation",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.form,
+                                      field: "password_confirmation"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ])
                           ])
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6 col-sm-6" })
                       ])
                     ])
                   ]),

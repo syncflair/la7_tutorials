@@ -67,7 +67,7 @@ class LoginController extends Controller
         }
 
         //this is guest user that only for verification check
-        elseif (auth()->user()->role_id == 17) { /*Supervisor = 17*/
+        elseif (auth()->user()->role_id == 17) { /*guest = 17*/
             return route('dashboard-guest-user');
         }
 

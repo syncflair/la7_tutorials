@@ -46,6 +46,11 @@ import toastr from 'toastr'
 window.toastr = toastr;
 /**End Toastr **/
 
+//global Component
+Vue.component('customer-admin-wrapper', require('../components/AdminCustomer/CustomerAdminWrapper.vue').default);
+//Vue.component('customer-admin-wrapper', () => import(/* webpackChunkName: "CustomerAdminWrapper" */'../components/AdminCustomer/CustomerAdminWrapper.vue'));
+
+
 /*Moment - Format Dates*/
 import moment from 'moment'
 
@@ -57,6 +62,8 @@ Vue.filter('formatDate', function(data){
 /*Register Fire as Globally event to use from any where from apps*/
 const FireEvent = new Vue();
 window.FireEvent = FireEvent;
+
+
 
 
 const app = new Vue({

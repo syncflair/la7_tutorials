@@ -20,6 +20,8 @@ class CreateEmployeesTable extends Migration
             $table->string('coa_code', 10)->comment('liability');
             //$table->unsignedBigInteger('user_id')->nullable()->default(null)->comment('Assign this employee to User for login');
             $table->enum('emp_job_type', ['Permanent','Part time','Pontractual','Internship']);
+            $table->enum('emp_job_status', ['Employee','Terminate','Fired']);
+
             $table->unsignedBigInteger('job_title_id');
             $table->string('emp_name', 80); 
             $table->string('emp_father_name', 80)->nullable(); 
@@ -30,6 +32,7 @@ class CreateEmployeesTable extends Migration
             $table->string('emp_phone', 50)->nullable();
             $table->string('emp_email', 80)->nullable();
             $table->string('emp_nid', 50)->nullable();
+            $table->string('emp_tin', 50)->nullable();
             $table->string('emp_passport', 50)->nullable();
             $table->string('emp_driving_license', 50)->nullable();
             $table->string('emp_permanent_address', 250)->nullable(); 

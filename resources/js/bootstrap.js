@@ -1,4 +1,6 @@
-window._ = require('lodash');
+//window._ = require('lodash');
+import _debounce from 'lodash/fp/debounce';
+//import { cloneDeep, sortBy } from 'lodash/core';
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -15,12 +17,20 @@ try {
 
     require('bootstrap');
 
+    
+
+
+
+
+
     //require('cookie');
 
 
 	//for Datatables
     //require('datatables.net');
-    require('datatables.net-bs4');
+
+    //require('datatables.net-bs4'); //Main file
+
     //require('datatables.net-responsive-bs4');
     /*require('datatables.net-buttons');
     require('datatables.net-buttons-bs4');

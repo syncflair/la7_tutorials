@@ -15,7 +15,10 @@
         </div>
         <div class="col-md-7 col-sm-3 text-right">
           <a @click="reloadThis" class="btn btn-primary btn-flat btn-sm" title="reload"> <i class="fas fa-sync-alt"></i> </a>
-        	<a @click="addCustomer" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#customerModal"> <i class="icon fas fa-plus"></i> Add New</a>
+        	<!-- <a @click="addCustomer" class="btn btn-primary btn-flat btn-sm" data-toggle="modal" data-target="#customerModal"> <i class="icon fas fa-plus"></i> Add New</a> -->
+           <router-link to="/spa/CustomerMasterForm" class="btn btn-primary btn-flat btn-sm"> 
+            <i class="icon fas fa-plus"></i> Add New
+          </router-link>
         </div>
       </div>
     </div><!--/card-header-->
@@ -85,9 +88,13 @@
                 <div class="dropdown-menu dropdown-menu-right">
                   <a @click="ViewDetails(customer.id)" class="dropdown-item pointer"> <i class="fas fa-eye primary"></i> View </a> 
                   
-                  <a @click="editCustomer(customer)" class="dropdown-item pointer" data-toggle="modal" data-target="#customerModal">
+                  <!-- <a @click="editCustomer(customer)" class="dropdown-item pointer" data-toggle="modal" data-target="#customerModal">
                       <i class="fas fa-edit primary "></i> Edit
-                  </a> 
+                  </a>  -->
+
+                  <router-link :to="{ name: 'CustomerMasterForm', params: { data:customer } }" class="dropdown-item pointer">
+                    <i class="fas fa-edit primary "></i> Edit
+                  </router-link>
 
                   <div class="dropdown-divider"></div>
 

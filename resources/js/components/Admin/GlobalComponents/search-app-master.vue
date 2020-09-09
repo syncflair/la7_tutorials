@@ -157,6 +157,7 @@
 	        //   	// this.$emit('AutoCompleteSearch', e.target.value );	
 	        //   	this.$emit('AutoCompleteSearch', e.target.value );       
 	        // },200 ),
+	        
 	        autoSearch(e){
 	        	this.$emit('AutoCompleteSearch', e.target.value ); 
 	        },

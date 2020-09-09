@@ -177,10 +177,13 @@ class DivisionController extends Controller
 
 
     //return division list without pagination
-    public function GetDivision(){
+    public function GetDivision(Request $request){
         //this is for commonStoreForAll Store
-        $data = Division::get();
-        //$data = Division::All();
+        if(!empty($request->id)){
+            $data = Division::where('country_id', '=' ,$request->id)->get();
+        }else{
+            $data = Division::get();
+        }
         return response()->json($data);
     }
 }

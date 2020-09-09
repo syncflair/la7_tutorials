@@ -92,18 +92,18 @@
 	            this.$Progress.fail(); 
 	            toastr.warning('Something is wrong!');
 	          })
-	    },
+  	    },
 
-	    addUserStatus(){
-	    	FireEvent.$emit('addUserStatus');
-	    },
+  	    addUserStatus(){
+  	    	FireEvent.$emit('addUserStatus');
+  	    },
 
-	    editUserStatus(data){
-	    	//alert(data.id);
-	    	FireEvent.$emit('editUserStatus', data);
-	    },
+  	    editUserStatus(data){
+  	    	//alert(data.id);
+  	    	FireEvent.$emit('editUserStatus', data);
+  	    },
 
-	    DeleteData(id){
+  	    DeleteData(id){
 	        Swal.fire({
 	            title: 'Are you sure to Delete?',
 	            text: "You won't be able to revert this!",

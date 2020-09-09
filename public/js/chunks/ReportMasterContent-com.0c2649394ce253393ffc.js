@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[107],{371:function(t,e,n){"use strict";n.r(e);var o={name:"ReportMasterContent",components:{},data:function(){return{}},methods:{},created:function(){}},r=n(0),u=Object(r.a)(o,(function(){var t=this.$createElement;return(this._self._c||t)("router-view")}),[],!1,null,null,null);e.default=u.exports}}]);

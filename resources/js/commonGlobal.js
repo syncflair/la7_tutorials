@@ -1,7 +1,5 @@
 import { mapState } from 'vuex' //for user MapState
 
-
-
 export default {
 
 	data(){

@@ -41,7 +41,7 @@ import store from './VueVuex'
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //Global Components
-Vue.component('adminwrapper', () => import(/* webpackChunkName: "adminwrapper" */'./components/Admin/AdminWrapper.vue'));
+Vue.component('adminwrapper', () => import(/* webpackChunkName: "adminwrapper" */'./components/Admin/AdminWrapper.vue')); //admin dashboard
 Vue.component('pagination-app', () => import(/* webpackChunkName: "pagination-app" */'./components/Admin/GlobalComponents/pagination-app.vue'));
 Vue.component('switch-app', () => import(/* webpackChunkName: "switch-app" */'./components/Admin/GlobalComponents/switch-app.vue'));
 Vue.component('multi-select-app', () => import(/* webpackChunkName: "multi-select-app" */'./components/Admin/GlobalComponents/multi-select-app.vue'));
@@ -54,14 +54,27 @@ Vue.component('search-app-master', () => import(/* webpackChunkName: "search-app
 Vue.component('my-date-time-global', () => import(/* webpackChunkName: "my-date-time-global" */'./components/Admin/GlobalComponents/my-date-time-global'));
 
 
-import counttest from './components/Admin/MultiComponent/countTest.vue';
+//Global Components for Admin Childs (Order, Deliver, Packging etc)
+Vue.component('admin-child-wrapper', () => import(/* webpackChunkName: "AdminChiledWrapper" */'./components/AdminChild/AdminChildWrapper.vue'));
+
+
+//Global Components for Customer
+Vue.component('customer-admin-wrapper', () => import(/* webpackChunkName: "CustomerAdminWrapper" */'./components/AdminCustomer/CustomerAdminWrapper.vue'));
+
+//Global Components for Supplier
+Vue.component('supplier-admin-wrapper', () => import(/* webpackChunkName: "SupplierAdminWrapper" */'./components/AdminSupplier/SupplierAdminWrapper.vue'));
+
+
+//import counttest from './components/Admin/MultiComponent/countTest.vue';
+Vue.component('counttest', () => import(/* webpackChunkName: "counttest-sample" */'./components/Admin/MultiComponent/countTest.vue'));
+
 
 //pagination
 Vue.component('pagination', require('laravel-vue-pagination'));
 
 
 /*Moment JS - Format Dates*/
-import moment from 'moment' 
+import moment from 'moment'  //import moment from 'moment/src/moment'
 //Vue.use(moment) //not working properly
 window.moment = moment; // use if moment define form data
 Vue.prototype.moment = moment //use if moment function use inside component
@@ -94,7 +107,7 @@ import toastr from 'toastr'
 window.toastr = toastr;
 /**End Toastr **/
 
-/**V-tooltip**/
+/**V-tooltip (dont want to use)**/  
 import VTooltip from 'v-tooltip'
 Vue.use(VTooltip)
 //Vue.config.productionTip = false;
@@ -170,7 +183,7 @@ const app = new Vue({
 
     /*// Register components as globaly ....*/
     components: { 
-      counttest, 
+      //counttest, 
     }, 
 
     

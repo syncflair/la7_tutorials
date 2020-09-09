@@ -20,9 +20,11 @@ class Customer extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'customer_code','coa_code','name', 'email', 'username', 'phone', 'password', 'customer_type_id', 'status_id','avatar','email_verification_code','phone_verification_code','created_by','updated_by','verified_by','customer_group_id'
-    ];
+    // protected $fillable = [
+    //     'customer_code','coa_code','name', 'email', 'username', 'phone', 'password', 'status_id','avatar','email_verification_code','phone_verification_code','created_by','updated_by','verified_by','customer_group_id','customer_membership_id'
+    // ];
+
+    protected $guarded = []; 
 
     /**
      * The attributes that should be hidden for arrays.
@@ -55,9 +57,20 @@ class Customer extends Authenticatable
         return $this->belongsTo(Models\Customer\CustomerGroup::class, 'customer_group_id');
     }
 
+    //customer belongs to customer Membership
+    public function belongsToCustomerMembership(){
+        return $this->belongsTo(Models\Customer\CustomerMembership::class, 'customer_membership_id');
+    }
+
     public function UserStatus(){
         //return $this->belongsTo('App\Models\UserStatus');
         return $this->belongsTo(Models\Settings\UserStatus::class);
+    }
+
+    //Customer hasMany Address
+    public function hasManyAddress()
+    {
+       return $this->hasMany(Models\Customer\CustomerAddress::class, 'customer_id');
     }
 
 
@@ -73,4 +86,7 @@ class Customer extends Authenticatable
         //$this->notify(new ResetPasswordNotification($token)); //default 
         $this->notify(new CustomerResetPasswordNotification($token)); //default 
     }
+
+    
+
 }
