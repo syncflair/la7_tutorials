@@ -353,6 +353,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -371,9 +380,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       // Create a new form instance
       form: new Form({
         id: '',
-        //name: '',
-        //email: '',
-        old_password: '',
+        name: '',
+        email: '',
+        current_password: '',
         password: '',
         password_confirmation: '' // role_id:'',
         // status_id: '',
@@ -429,18 +438,46 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })["catch"](function (errors) {//toastr.warning('Something is wrong!');
       });
     },
-    editUser: function editUser(data) {
-      // this.editMode = true;
-      this.form.fill(data); //this.$refs.name.focus();  
-      // if(data.avatar != null){
-      //   this.deleteImageIcon = true;  
-      // }
-      // this.$store.dispatch('usersAdminStore/fetchSelectedEmployee', this.form.employee_id);   
+    ChangePassword: function ChangePassword() {
+      var _this3 = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.put('/spaa/admin-child-profille-change-password/' + this.form.id) //axios.post('/spaa/admin-child-profille-change-password/'+ this.authUser.id)
+      .then(function (_ref) {
+        var data = _ref.data;
+
+        //console.log(data); 
+        if (data.success) {
+          toastr.success(data.success);
+
+          _this3.$Progress.finish();
+
+          _this3.form.reset(); //reset from after submit
+          // console.log(data.success);  
+
+
+          _this3.fillData(_this3.authUser);
+        }
+
+        if (data.errors) {
+          toastr.warning(data.errors);
+        }
+      })["catch"](function (errors) {
+        _this3.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
+    },
+    fillData: function fillData(data) {
+      // this.form.name = data.name;
+      // this.form.email = data.email;   
+      this.form.fill(data);
     }
   },
   created: function created() {
     this.fetchUserStatus();
-    this.editUser(this.authUser);
+    this.fillData(this.authUser);
   },
   mounted: function mounted() {}
 });
@@ -544,28 +581,29 @@ var render = function() {
                           ])
                         : _vm._e()
                     ]
-                  ),
-                  _vm._v(" "),
-                  _vm._m(1)
+                  )
                 ])
               ])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-9" }, [
               _c("div", { staticClass: "card" }, [
-                _vm._m(2),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("div", { staticClass: "tab-content" }, [
                     _c(
                       "div",
-                      { staticClass: "tab-pane", attrs: { id: "tab-one" } },
+                      {
+                        staticClass: "tab-pane active",
+                        attrs: { id: "tab-one" }
+                      },
                       [
                         _c(
                           "div",
                           { staticClass: "timeline timeline-inverse" },
                           [
-                            _vm._m(3),
+                            _vm._m(2),
                             _vm._v(" "),
                             _vm.UserInfo.belongs_to_employee != null
                               ? _c("div", [
@@ -578,7 +616,22 @@ var render = function() {
                                       "p",
                                       { staticClass: "timeline-header" },
                                       [
-                                        _c("strong", [_vm._v("Emp ID:")]),
+                                        _c("strong", [_vm._v("Name:")]),
+                                        _vm._v(
+                                          " " +
+                                            _vm._s(
+                                              _vm.UserInfo.belongs_to_employee
+                                                .emp_name
+                                            )
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      { staticClass: "timeline-header" },
+                                      [
+                                        _c("strong", [_vm._v("Office ID:")]),
                                         _vm._v(
                                           " " +
                                             _vm._s(
@@ -635,6 +688,25 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
+                                    _c(
+                                      "p",
+                                      { staticClass: "timeline-header" },
+                                      [
+                                        _c("strong", [_vm._v("Join Date:")]),
+                                        _vm._v(
+                                          " " +
+                                            _vm._s(
+                                              _vm._f("formatDate")(
+                                                _vm.UserInfo
+                                                  .belongs_to_employee[
+                                                  "emp_hire_date"
+                                                ]
+                                              )
+                                            )
+                                        )
+                                      ]
+                                    ),
+                                    _vm._v(" "),
                                     _vm.UserInfo.belongs_to_employee.emp_desc !=
                                     null
                                       ? _c(
@@ -657,191 +729,683 @@ var render = function() {
                                 ])
                               : _vm._e(),
                             _vm._v(" "),
-                            _vm._m(4),
+                            _vm.UserInfo.belongs_to_employee != null
+                              ? _c("div", [
+                                  _c("i", {
+                                    staticClass: "fas fa-envelope bg-primary"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "timeline-item" }, [
+                                    _c(
+                                      "h3",
+                                      {
+                                        staticClass: "timeline-header border-0"
+                                      },
+                                      [
+                                        _c("strong", [_vm._v("Email: ")]),
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.UserInfo.belongs_to_employee[
+                                              "emp_email"
+                                            ]
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e(),
                             _vm._v(" "),
-                            _vm._m(5),
+                            _vm.UserInfo.belongs_to_employee != null
+                              ? _c("div", [
+                                  _c("i", {
+                                    staticClass: "fas fa-mobile-alt bg-primary"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "timeline-item" }, [
+                                    _c(
+                                      "h3",
+                                      {
+                                        staticClass: "timeline-header border-0"
+                                      },
+                                      [
+                                        _c("strong", [_vm._v("Phone: ")]),
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.UserInfo.belongs_to_employee[
+                                              "emp_phone"
+                                            ]
+                                          )
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e(),
                             _vm._v(" "),
-                            _vm._m(6),
+                            _vm._m(3),
                             _vm._v(" "),
-                            _vm._m(7)
+                            _vm._m(4)
                           ]
                         )
                       ]
                     ),
                     _vm._v(" "),
-                    _vm._m(8),
+                    _c(
+                      "div",
+                      { staticClass: "tab-pane", attrs: { id: "tab-two" } },
+                      [
+                        _c(
+                          "div",
+                          { staticClass: "timeline timeline-inverse" },
+                          [
+                            _vm._m(5),
+                            _vm._v(" "),
+                            _vm.UserInfo.belongs_to_employee != null
+                              ? _c("div", [
+                                  _c("i", {
+                                    staticClass: "fas fa-info-circle bg-primary"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "timeline-item" }, [
+                                    _c(
+                                      "h3",
+                                      { staticClass: "timeline-header" },
+                                      [_vm._v("Personal Details")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "timeline-body" },
+                                      [
+                                        _c(
+                                          "p",
+                                          {
+                                            staticClass: "timeline-header mb-0"
+                                          },
+                                          [
+                                            _c("strong", [_vm._v("DOB:")]),
+                                            _vm._v(
+                                              " " +
+                                                _vm._s(
+                                                  _vm.UserInfo
+                                                    .belongs_to_employee.emp_dob
+                                                )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "p",
+                                          {
+                                            staticClass: "timeline-header mb-0"
+                                          },
+                                          [
+                                            _c("strong", [_vm._v("Gender:")]),
+                                            _vm._v(
+                                              " " +
+                                                _vm._s(
+                                                  _vm.UserInfo
+                                                    .belongs_to_employee
+                                                    .emp_gender
+                                                )
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _vm.UserInfo.belongs_to_employee
+                                          .emp_father_name != null
+                                          ? _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "timeline-header mb-0"
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v("Father Name:")
+                                                ]),
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      _vm.UserInfo
+                                                        .belongs_to_employee
+                                                        .emp_father_name
+                                                    )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.UserInfo.belongs_to_employee
+                                          .emp_mother_name != null
+                                          ? _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "timeline-header mb-0"
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v("Mother Name:")
+                                                ]),
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      _vm.UserInfo
+                                                        .belongs_to_employee
+                                                        .emp_mother_name
+                                                    )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.UserInfo.belongs_to_employee
+                                          .emp_wife_name != null
+                                          ? _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "timeline-header mb-0"
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v("Wife Name:")
+                                                ]),
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      _vm.UserInfo
+                                                        .belongs_to_employee
+                                                        .emp_wife_name
+                                                    )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.UserInfo.belongs_to_employee
+                                          .emp_tin != null
+                                          ? _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "timeline-header mb-0"
+                                              },
+                                              [
+                                                _c("strong", [_vm._v("TIN:")]),
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      _vm.UserInfo
+                                                        .belongs_to_employee
+                                                        .emp_tin
+                                                    )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.UserInfo.belongs_to_employee
+                                          .emp_nid != null
+                                          ? _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "timeline-header mb-0"
+                                              },
+                                              [
+                                                _c("strong", [_vm._v("NID:")]),
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      _vm.UserInfo
+                                                        .belongs_to_employee
+                                                        .emp_nid
+                                                    )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.UserInfo.belongs_to_employee
+                                          .emp_driving_license != null
+                                          ? _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "timeline-header mb-0"
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v("Driving License:")
+                                                ]),
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      _vm.UserInfo
+                                                        .belongs_to_employee
+                                                        .emp_driving_license
+                                                    )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.UserInfo.belongs_to_employee
+                                          .emp_passport != null
+                                          ? _c(
+                                              "p",
+                                              {
+                                                staticClass:
+                                                  "timeline-header mb-0"
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v("Passport:")
+                                                ]),
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      _vm.UserInfo
+                                                        .belongs_to_employee
+                                                        .emp_passport
+                                                    )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.UserInfo.belongs_to_employee != null
+                              ? _c("div", [
+                                  _c("i", {
+                                    staticClass:
+                                      "far fa-address-card bg-primary"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "timeline-item" }, [
+                                    _c(
+                                      "h3",
+                                      { staticClass: "timeline-header" },
+                                      [_vm._v("Address")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "timeline-body" },
+                                      [
+                                        _vm.UserInfo.belongs_to_employee
+                                          .emp_Present_address != null
+                                          ? _c(
+                                              "p",
+                                              {
+                                                staticClass: "timeline-header"
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v("Present Address:")
+                                                ]),
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      _vm.UserInfo
+                                                        .belongs_to_employee
+                                                        .emp_Present_address
+                                                    )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e(),
+                                        _vm._v(" "),
+                                        _vm.UserInfo.belongs_to_employee
+                                          .emp_permanent_address != null
+                                          ? _c(
+                                              "p",
+                                              {
+                                                staticClass: "timeline-header"
+                                              },
+                                              [
+                                                _c("strong", [
+                                                  _vm._v("Permanent Address:")
+                                                ]),
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      _vm.UserInfo
+                                                        .belongs_to_employee
+                                                        .emp_permanent_address
+                                                    )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.UserInfo.belongs_to_employee != null
+                              ? _c("div", [
+                                  _c("i", {
+                                    staticClass:
+                                      "fas fa-graduation-cap bg-success"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "timeline-item" }, [
+                                    _c(
+                                      "h3",
+                                      { staticClass: "timeline-header" },
+                                      [_vm._v("Qualification")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "timeline-body" },
+                                      [
+                                        _vm.UserInfo.belongs_to_employee
+                                          .emp_qualification != null
+                                          ? _c(
+                                              "p",
+                                              {
+                                                staticClass: "timeline-header"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      _vm.UserInfo
+                                                        .belongs_to_employee
+                                                        .emp_qualification
+                                                    )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.UserInfo.belongs_to_employee != null
+                              ? _c("div", [
+                                  _c("i", {
+                                    staticClass: "fas fa-briefcase bg-primary"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "timeline-item" }, [
+                                    _c(
+                                      "h3",
+                                      { staticClass: "timeline-header" },
+                                      [_vm._v("Experience")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "timeline-body" },
+                                      [
+                                        _vm.UserInfo.belongs_to_employee
+                                          .emp_experience != null
+                                          ? _c(
+                                              "p",
+                                              {
+                                                staticClass: "timeline-header"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      _vm.UserInfo
+                                                        .belongs_to_employee
+                                                        .emp_experience
+                                                    )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm.UserInfo.belongs_to_employee != null
+                              ? _c("div", [
+                                  _c("i", {
+                                    staticClass: "fas fa-history bg-warning"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "timeline-item" }, [
+                                    _c(
+                                      "h3",
+                                      { staticClass: "timeline-header" },
+                                      [_vm._v("Job History")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      { staticClass: "timeline-body" },
+                                      [
+                                        _vm.UserInfo.belongs_to_employee
+                                          .emp_previous_job_history != null
+                                          ? _c(
+                                              "p",
+                                              {
+                                                staticClass: "timeline-header"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  " " +
+                                                    _vm._s(
+                                                      _vm.UserInfo
+                                                        .belongs_to_employee
+                                                        .emp_previous_job_history
+                                                    )
+                                                )
+                                              ]
+                                            )
+                                          : _vm._e()
+                                      ]
+                                    )
+                                  ])
+                                ])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _vm._m(6)
+                          ]
+                        )
+                      ]
+                    ),
                     _vm._v(" "),
                     _c(
                       "div",
-                      {
-                        staticClass: "tab-pane active",
-                        attrs: { id: "tab-three" }
-                      },
+                      { staticClass: "tab-pane", attrs: { id: "tab-three" } },
                       [
-                        _c("form", { staticClass: "form-horizontal" }, [
-                          _c("div", { staticClass: "row form-group" }, [
-                            _vm._m(9),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "col-sm-9" },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.old_password,
-                                      expression: "form.old_password"
-                                    }
-                                  ],
-                                  ref: "old_password",
-                                  staticClass: "form-control form-control-sm",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "old_password"
-                                    )
-                                  },
-                                  attrs: {
-                                    type: "old_password",
-                                    name: "old_password",
-                                    placeholder: "Old Password"
-                                  },
-                                  domProps: { value: _vm.form.old_password },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
+                        _c(
+                          "form",
+                          {
+                            staticClass: "form-horizontal",
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.ChangePassword()
+                              }
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "row form-group" }, [
+                              _vm._m(7),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "col-sm-9" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.current_password,
+                                        expression: "form.current_password"
                                       }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "old_password",
-                                        $event.target.value
+                                    ],
+                                    ref: "current_password",
+                                    staticClass: "form-control form-control-sm",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has(
+                                        "current_password"
                                       )
-                                    }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: {
-                                    form: _vm.form,
-                                    field: "old_password"
-                                  }
-                                })
-                              ],
-                              1
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "row form-group" }, [
-                            _vm._m(10),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "col-sm-9" },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.password,
-                                      expression: "form.password"
-                                    }
-                                  ],
-                                  ref: "password",
-                                  staticClass: "form-control form-control-sm",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "password"
-                                    )
-                                  },
-                                  attrs: {
-                                    type: "password",
-                                    name: "password",
-                                    placeholder: "New Password"
-                                  },
-                                  domProps: { value: _vm.form.password },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
+                                    },
+                                    attrs: {
+                                      type: "current_password",
+                                      name: "current_password",
+                                      placeholder: "Current Password"
+                                    },
+                                    domProps: {
+                                      value: _vm.form.current_password
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "current_password",
+                                          $event.target.value
+                                        )
                                       }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "password",
-                                        $event.target.value
-                                      )
                                     }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: { form: _vm.form, field: "password" }
-                                })
-                              ],
-                              1
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "row form-group" }, [
-                            _vm._m(11),
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.form,
+                                      field: "current_password"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
                             _vm._v(" "),
-                            _c(
-                              "div",
-                              { staticClass: "col-sm-9" },
-                              [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.form.password_confirmation,
-                                      expression: "form.password_confirmation"
-                                    }
-                                  ],
-                                  ref: "password_confirmation",
-                                  staticClass: "form-control form-control-sm",
-                                  class: {
-                                    "is-invalid": _vm.form.errors.has(
-                                      "password_confirmation"
-                                    )
-                                  },
-                                  attrs: {
-                                    type: "password",
-                                    name: "password_confirmation",
-                                    placeholder: "Confirm new Password"
-                                  },
-                                  domProps: {
-                                    value: _vm.form.password_confirmation
-                                  },
-                                  on: {
-                                    input: function($event) {
-                                      if ($event.target.composing) {
-                                        return
+                            _c("div", { staticClass: "row form-group" }, [
+                              _vm._m(8),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "col-sm-9" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.password,
+                                        expression: "form.password"
                                       }
-                                      _vm.$set(
-                                        _vm.form,
-                                        "password_confirmation",
-                                        $event.target.value
+                                    ],
+                                    ref: "password",
+                                    staticClass: "form-control form-control-sm",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has(
+                                        "password"
                                       )
+                                    },
+                                    attrs: {
+                                      type: "password",
+                                      name: "password",
+                                      placeholder: "New Password"
+                                    },
+                                    domProps: { value: _vm.form.password },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "password",
+                                          $event.target.value
+                                        )
+                                      }
                                     }
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("has-error", {
-                                  attrs: {
-                                    form: _vm.form,
-                                    field: "password_confirmation"
-                                  }
-                                })
-                              ],
-                              1
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(12)
-                        ])
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: { form: _vm.form, field: "password" }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "row form-group" }, [
+                              _vm._m(9),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "col-sm-9" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: _vm.form.password_confirmation,
+                                        expression: "form.password_confirmation"
+                                      }
+                                    ],
+                                    ref: "password_confirmation",
+                                    staticClass: "form-control form-control-sm",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has(
+                                        "password_confirmation"
+                                      )
+                                    },
+                                    attrs: {
+                                      type: "password",
+                                      name: "password_confirmation",
+                                      placeholder: "Confirm new Password"
+                                    },
+                                    domProps: {
+                                      value: _vm.form.password_confirmation
+                                    },
+                                    on: {
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          _vm.form,
+                                          "password_confirmation",
+                                          $event.target.value
+                                        )
+                                      }
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("has-error", {
+                                    attrs: {
+                                      form: _vm.form,
+                                      field: "password_confirmation"
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(10)
+                          ]
+                        )
                       ]
                     )
                   ])
@@ -885,23 +1449,13 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "btn btn-primary btn-block", attrs: { href: "#" } },
-      [_c("b", [_vm._v("Follow")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header p-2" }, [
       _c("ul", { staticClass: "nav nav-pills" }, [
         _c("li", { staticClass: "nav-item" }, [
           _c(
             "a",
             {
-              staticClass: "nav-link",
+              staticClass: "nav-link active",
               attrs: { href: "#tab-one", "data-toggle": "tab" }
             },
             [_vm._v("Job Details")]
@@ -915,7 +1469,7 @@ var staticRenderFns = [
               staticClass: "nav-link",
               attrs: { href: "#tab-two", "data-toggle": "tab" }
             },
-            [_vm._v("My details")]
+            [_vm._v("My Details")]
           )
         ]),
         _vm._v(" "),
@@ -923,7 +1477,7 @@ var staticRenderFns = [
           _c(
             "a",
             {
-              staticClass: "nav-link active",
+              staticClass: "nav-link",
               attrs: { href: "#tab-three", "data-toggle": "tab" }
             },
             [_vm._v("Change password")]
@@ -949,64 +1503,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("i", { staticClass: "fas fa-user bg-info" }),
+      _c("i", { staticClass: "fas fa-qrcode bg-purple" }),
       _vm._v(" "),
       _c("div", { staticClass: "timeline-item" }, [
-        _c("span", { staticClass: "time" }, [
-          _c("i", { staticClass: "far fa-clock" }),
-          _vm._v(" 5 mins ago")
-        ]),
-        _vm._v(" "),
-        _c("h3", { staticClass: "timeline-header border-0" }, [
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Sarah Young")]),
-          _vm._v(" accepted your friend request\r\n                          ")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("i", { staticClass: "fas fa-camera bg-purple" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "timeline-item" }, [
-        _c("span", { staticClass: "time" }, [
-          _c("i", { staticClass: "far fa-clock" }),
-          _vm._v(" 2 days ago")
-        ]),
-        _vm._v(" "),
-        _c("h3", { staticClass: "timeline-header" }, [
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Mina Lee")]),
-          _vm._v(" uploaded new photos")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "timeline-body" }, [
-          _c("img", {
-            attrs: { src: "http://placehold.it/150x100", alt: "..." }
-          })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("i", { staticClass: "fas fa-camera bg-purple" }),
-      _vm._v(" "),
-      _c("div", { staticClass: "timeline-item" }, [
-        _c("span", { staticClass: "time" }, [
-          _c("i", { staticClass: "far fa-clock" }),
-          _vm._v(" 2 days ago")
-        ]),
-        _vm._v(" "),
-        _c("h3", { staticClass: "timeline-header" }, [
-          _c("a", { attrs: { href: "#" } }, [_vm._v("Mina Lee")]),
-          _vm._v(" uploaded new photos")
-        ]),
+        _c("h3", { staticClass: "timeline-header" }, [_vm._v(" QR Code")]),
         _vm._v(" "),
         _c("div", { staticClass: "timeline-body" }, [
           _c("img", {
@@ -1026,124 +1526,22 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "tab-pane", attrs: { id: "tab-two" } }, [
-      _c("div", { staticClass: "timeline timeline-inverse" }, [
-        _c("div", { staticClass: "time-label" }, [
-          _c("span", { staticClass: "bg-danger" }, [
-            _vm._v(
-              "\r\n                          Personal Information\r\n                        "
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c("i", { staticClass: "fas fa-envelope bg-primary" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "timeline-item" }, [
-            _c("span", { staticClass: "time" }, [
-              _c("i", { staticClass: "far fa-clock" }),
-              _vm._v(" 12:05")
-            ]),
-            _vm._v(" "),
-            _c("h3", { staticClass: "timeline-header" }, [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Support Team")]),
-              _vm._v(" sent you an email")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "timeline-body" }, [
-              _vm._v(
-                "\r\n                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,\r\n                            weebly ning heekya handango imeem plugg dopplr jibjab, movity\r\n                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle\r\n                            quora plaxo ideeli hulu weebly balihoo...\r\n                          "
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "timeline-footer" }, [
-              _c(
-                "a",
-                { staticClass: "btn btn-primary btn-sm", attrs: { href: "#" } },
-                [_vm._v("Read more")]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                { staticClass: "btn btn-danger btn-sm", attrs: { href: "#" } },
-                [_vm._v("Delete")]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c("i", { staticClass: "fas fa-user bg-info" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "timeline-item" }, [
-            _c("span", { staticClass: "time" }, [
-              _c("i", { staticClass: "far fa-clock" }),
-              _vm._v(" 5 mins ago")
-            ]),
-            _vm._v(" "),
-            _c("h3", { staticClass: "timeline-header border-0" }, [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Sarah Young")]),
-              _vm._v(
-                " accepted your friend request\r\n                          "
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c("i", { staticClass: "fas fa-camera bg-purple" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "timeline-item" }, [
-            _c("span", { staticClass: "time" }, [
-              _c("i", { staticClass: "far fa-clock" }),
-              _vm._v(" 2 days ago")
-            ]),
-            _vm._v(" "),
-            _c("h3", { staticClass: "timeline-header" }, [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Mina Lee")]),
-              _vm._v(" uploaded new photos")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "timeline-body" }, [
-              _c("img", {
-                attrs: { src: "http://placehold.it/150x100", alt: "..." }
-              })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", [
-          _c("i", { staticClass: "fas fa-camera bg-purple" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "timeline-item" }, [
-            _c("span", { staticClass: "time" }, [
-              _c("i", { staticClass: "far fa-clock" }),
-              _vm._v(" 2 days ago")
-            ]),
-            _vm._v(" "),
-            _c("h3", { staticClass: "timeline-header" }, [
-              _c("a", { attrs: { href: "#" } }, [_vm._v("Mina Lee")]),
-              _vm._v(" uploaded new photos")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "timeline-body" }, [
-              _c("img", {
-                attrs: { src: "http://placehold.it/150x100", alt: "..." }
-              })
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", [_c("i", { staticClass: "far fa-clock bg-gray" })])
-      ])
+    return _c("div", { staticClass: "time-label" }, [
+      _c("span", { staticClass: "bg-danger" }, [_vm._v(" My Detials ")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("div", [_c("i", { staticClass: "far fa-clock bg-gray" })])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-sm-3 text-right" }, [
-      _c("label", [_vm._v("Old Password")])
+      _c("label", [_vm._v("Current Password")])
     ])
   },
   function() {

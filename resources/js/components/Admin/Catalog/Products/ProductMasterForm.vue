@@ -76,7 +76,21 @@
                  <has-error :form="form" field="pro_type"></has-error>  
               </div> 
             </div>
+
             <div class="col-md-2">
+              <div class="form-group">
+                <label>Status *</label>
+                <select v-model="form.pro_status" class="form-control form-control-sm-" id="pro_status" name="pro_status" :class="{ 'is-invalid': form.errors.has('pro_status') }" >
+                    <option disabled value="">Select Status ..</option>                
+                    <option v-for="ps in productStatus" v-bind:value="ps.name">
+                      {{ps.name}}
+                    </option>                       
+                 </select>
+                 <has-error :form="form" field="pro_status"></has-error>  
+              </div> 
+            </div>
+
+            <!-- <div class="col-md-2">
               <div class="form-group">
                 <label>Status *</label>
                 <select v-model="form.status_m_id" class="form-control form-control-sm-" id="status_m_id" name="status_m_id" :class="{ 'is-invalid': form.errors.has('status_m_id') }" >
@@ -85,7 +99,7 @@
                 </select>
                 <has-error :form="form" field="status_m_id"></has-error>
               </div> 
-            </div>
+            </div> -->
           </div> 
 
 
@@ -664,6 +678,11 @@
   	      { name: 'Downloadable'},
 		    ],  
 
+        productStatus: [
+          { name: 'Active' },
+          { name: 'Inactive'},
+        ], 
+
         //Single Select app for Brand
         placeHolder_brand:'Select brand', filterBy_brand:'brand_name', valueProperty_brand: 'id',   
 
@@ -691,6 +710,7 @@
           sys_pro_name:'',
           pro_code: '',          
           pro_type: '',
+          pro_status:'',
           pro_slug:'',
           status_m_id:'',
           brand_id:'',

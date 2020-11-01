@@ -40,7 +40,6 @@
 
                 <h3 class="profile-username text-center">{{UserInfo.name}}</h3>
 
-
                 <p class="text-muted text-center" v-if="UserInfo.belongs_to_employee != null">{{UserInfo.belongs_to_employee['belongs_to_j_ob_title']['job_title_name']}}</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
@@ -49,10 +48,10 @@
                   </li>
                   <li class="list-group-item" v-if="UserInfo.belongs_to_employee != null">
                     <b>Job Type</b> <a class="float-right">{{UserInfo.belongs_to_employee['emp_job_type']}}</a>
-                  </li>
+                  </li>                  
                 </ul>
 
-                <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
               </div>
               <!-- /.card-body -->
             </div>
@@ -67,9 +66,9 @@
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link" href="#tab-one" data-toggle="tab">Job Details</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#tab-two" data-toggle="tab">My details</a></li>
-                  <li class="nav-item"><a class="nav-link active" href="#tab-three" data-toggle="tab">Change password</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#tab-one" data-toggle="tab">Job Details</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#tab-two" data-toggle="tab">My Details</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#tab-three" data-toggle="tab">Change password</a></li>
                 </ul>
               </div><!-- /.card-header -->
               <div class="card-body">
@@ -77,7 +76,7 @@
 
 
                   <!-- /.tab-pane -->
-                  <div class="tab-pane" id="tab-one">
+                  <div class="tab-pane active" id="tab-one">
                     
                     <!-- The timeline -->
                     <div class="timeline timeline-inverse">
@@ -90,15 +89,16 @@
                       </div>
                       <!-- /.timeline-label -->
                       <!-- timeline item -->
-                      <div v-if="UserInfo.belongs_to_employee != null">
-                        <!-- <i class="fas fa-envelope bg-primary"></i> -->
+                      <div v-if="UserInfo.belongs_to_employee != null">                        
                         <i class="far fa-id-badge bg-primary"></i>
                         <div class="timeline-item">
                           <!-- <span class="time"><i class="far fa-clock"></i> 12:05</span> -->
-                          <p class="timeline-header"><strong>Emp ID:</strong> {{UserInfo.belongs_to_employee.employee_code}}</p>
+                          <p class="timeline-header"><strong>Name:</strong> {{UserInfo.belongs_to_employee.emp_name}}</p>
+                          <p class="timeline-header"><strong>Office ID:</strong> {{UserInfo.belongs_to_employee.employee_code}}</p>
                           <p class="timeline-header"><strong>Job Status:</strong> {{UserInfo.belongs_to_employee.emp_job_status}}</p>
                           <p class="timeline-header"><strong>Job Type:</strong> {{UserInfo.belongs_to_employee.emp_job_type}}</p>
                           <p class="timeline-header"><strong>Designation:</strong> {{UserInfo.belongs_to_employee['belongs_to_j_ob_title']['job_title_name']}}</p>
+                          <p class="timeline-header"><strong>Join Date:</strong> {{UserInfo.belongs_to_employee['emp_hire_date'] | formatDate }}</p>
 
                           <div class="timeline-body" v-if="UserInfo.belongs_to_employee.emp_desc != null"> 
                             {{UserInfo.belongs_to_employee.emp_desc}}
@@ -107,45 +107,38 @@
                         </div>
                       </div>
                       <!-- END timeline item -->
+
                       <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-user bg-info"></i>
-
+                      <div v-if="UserInfo.belongs_to_employee != null">
+                        <i class="fas fa-envelope bg-primary"></i>
+                        <!-- <i class="fas fa-user bg-info"></i> -->
                         <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
-                          <h3 class="timeline-header border-0"><a href="#">Sarah Young</a> accepted your friend request
-                          </h3>
+                          <!-- <span class="time"><i class="far fa-clock"></i> 5 mins ago</span> -->
+                          <h3 class="timeline-header border-0"><strong>Email: </strong>{{UserInfo.belongs_to_employee['emp_email']}}</h3>
                         </div>
                       </div>
                       <!-- END timeline item -->
 
-
                       <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-camera bg-purple"></i>
-
+                      <div v-if="UserInfo.belongs_to_employee != null">
+                        <!-- <i class="fas fa-envelope bg-primary"></i> -->
+                        <i class="fas fa-mobile-alt bg-primary"></i>
+                        <!-- <i class="fas fa-user bg-info"></i> -->
                         <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                          <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                          <div class="timeline-body">
-                            <img src="http://placehold.it/150x100" alt="...">
-                          </div>
+                          <!-- <span class="time"><i class="far fa-clock"></i> 5 mins ago</span> -->
+                          <h3 class="timeline-header border-0"><strong>Phone: </strong>{{UserInfo.belongs_to_employee['emp_phone']}}</h3>
                         </div>
                       </div>
                       <!-- END timeline item -->
 
                       <!-- timeline item -->
                       <div>
-                        <i class="fas fa-camera bg-purple"></i>
-
+                        <!-- <i class="fas fa-camera bg-purple"></i> -->
+                        <!-- <i class="fas fa-barcode bg-success"></i> -->
+                        <i class="fas fa-qrcode bg-purple"></i>
                         <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                          <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
+                          <!-- <span class="time"><i class="far fa-clock"></i> 2 days ago</span> -->
+                          <h3 class="timeline-header"> QR Code</h3>
                           <div class="timeline-body">
                             <img src="http://placehold.it/150x100" alt="...">
                           </div>
@@ -169,78 +162,94 @@
                     <div class="timeline timeline-inverse">
                      
                       <!-- timeline time label -->
-                      <div class="time-label">
-                        <span class="bg-danger">
-                          Personal Information
-                        </span>
-                      </div>
+                      <div class="time-label"> <span class="bg-danger"> My Detials </span> </div>
                       <!-- /.timeline-label -->
                       <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-envelope bg-primary"></i>
+                      <div v-if="UserInfo.belongs_to_employee != null">
+                        <i class="fas fa-info-circle bg-primary"></i>
 
                         <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 12:05</span>
-
-                          <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
-
+                          <h3 class="timeline-header">Personal Details</h3>
                           <div class="timeline-body">
-                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                            quora plaxo ideeli hulu weebly balihoo...
+                            <p class="timeline-header mb-0"><strong>DOB:</strong> {{UserInfo.belongs_to_employee.emp_dob}}</p>
+                            <p class="timeline-header mb-0"><strong>Gender:</strong> {{UserInfo.belongs_to_employee.emp_gender}}</p>
+                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_father_name !=null"><strong>Father Name:</strong> {{UserInfo.belongs_to_employee.emp_father_name}}</p>
+                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_mother_name !=null"><strong>Mother Name:</strong> {{UserInfo.belongs_to_employee.emp_mother_name}}</p>
+                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_wife_name !=null"><strong>Wife Name:</strong> {{UserInfo.belongs_to_employee.emp_wife_name}}</p>
+                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_tin !=null"><strong>TIN:</strong> {{UserInfo.belongs_to_employee.emp_tin}}</p>
+                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_nid !=null"><strong>NID:</strong> {{UserInfo.belongs_to_employee.emp_nid}}</p>
+                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_driving_license !=null"><strong>Driving License:</strong> {{UserInfo.belongs_to_employee.emp_driving_license}}</p>
+                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_passport !=null"><strong>Passport:</strong> {{UserInfo.belongs_to_employee.emp_passport}}</p>
                           </div>
-                          <div class="timeline-footer">
+                          <!-- <div class="timeline-footer">
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
                             <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                          </div> -->
+                        </div>
+                      </div>
+                      <!-- END timeline item -->
+
+                      <!-- timeline item -->
+                      <div v-if="UserInfo.belongs_to_employee != null">
+                        <i class="far fa-address-card bg-primary"></i>
+                        <div class="timeline-item">
+                          <h3 class="timeline-header">Address</h3>
+                          <div class="timeline-body">
+                            <p class="timeline-header" v-if="UserInfo.belongs_to_employee.emp_Present_address !=null"><strong>Present Address:</strong> {{UserInfo.belongs_to_employee.emp_Present_address}}</p>
+                            <p class="timeline-header" v-if="UserInfo.belongs_to_employee.emp_permanent_address !=null"><strong>Permanent Address:</strong> {{UserInfo.belongs_to_employee.emp_permanent_address}}</p>     
                           </div>
                         </div>
                       </div>
                       <!-- END timeline item -->
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-user bg-info"></i>
 
+                      <!-- timeline item -->
+                      <div v-if="UserInfo.belongs_to_employee != null">
+                        <i class="fas fa-graduation-cap bg-success"></i>
+                        <div class="timeline-item">
+                          <h3 class="timeline-header">Qualification</h3>
+                          <div class="timeline-body">
+                            <p class="timeline-header" v-if="UserInfo.belongs_to_employee.emp_qualification !=null"> {{UserInfo.belongs_to_employee.emp_qualification}}</p>   
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END timeline item -->
+
+                       <!-- timeline item -->
+                      <div v-if="UserInfo.belongs_to_employee != null">
+                        <!-- <i class="far fa-address-card bg-primary"></i> -->
+                        <i class="fas fa-briefcase bg-primary"></i>
+                        <!-- <i class="far fa-address-book"></i> -->
+                        <div class="timeline-item">
+                          <h3 class="timeline-header">Experience</h3>
+                          <div class="timeline-body">
+                            <p class="timeline-header" v-if="UserInfo.belongs_to_employee.emp_experience !=null"> {{UserInfo.belongs_to_employee.emp_experience}}</p>   
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END timeline item -->
+
+                       <!-- timeline item -->
+                      <div v-if="UserInfo.belongs_to_employee != null">
+                        <!-- <i class="far fa-address-card bg-primary"></i> -->
+                        <i class="fas fa-history bg-warning"></i>
+                        <div class="timeline-item">
+                          <h3 class="timeline-header">Job History</h3>
+                          <div class="timeline-body">
+                            <p class="timeline-header" v-if="UserInfo.belongs_to_employee.emp_previous_job_history !=null"> {{UserInfo.belongs_to_employee.emp_previous_job_history}}</p>   
+                          </div>
+                        </div>
+                      </div>
+                      <!-- END timeline item -->
+
+                      <!-- timeline item -->
+                      <!-- <div>
+                        <i class="fas fa-user bg-info"></i>
                         <div class="timeline-item">
                           <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-
                           <h3 class="timeline-header border-0"><a href="#">Sarah Young</a> accepted your friend request
                           </h3>
                         </div>
-                      </div>
-                      <!-- END timeline item -->
-
-
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-camera bg-purple"></i>
-
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                          <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                          <div class="timeline-body">
-                            <img src="http://placehold.it/150x100" alt="...">
-                          </div>
-                        </div>
-                      </div>
-                      <!-- END timeline item -->
-
-                      <!-- timeline item -->
-                      <div>
-                        <i class="fas fa-camera bg-purple"></i>
-
-                        <div class="timeline-item">
-                          <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-
-                          <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
-
-                          <div class="timeline-body">
-                            <img src="http://placehold.it/150x100" alt="...">
-                          </div>
-                        </div>
-                      </div>
+                      </div> -->
                       <!-- END timeline item -->
 
                       <div>
@@ -251,8 +260,8 @@
                   </div>
                   <!-- /.tab-pane -->
 
-                  <div class="tab-pane active" id="tab-three">
-                    <form class="form-horizontal">
+                  <div class="tab-pane" id="tab-three">
+                    <form class="form-horizontal" @submit.prevent="ChangePassword()">
 
                       
                       <!-- <div class="form-group row">
@@ -264,11 +273,11 @@
 
                       <div class="row form-group">
                         <div class="col-sm-3 text-right">
-                          <label>Old Password</label>                   
+                          <label>Current Password</label>                   
                         </div>
                         <div class="col-sm-9">
-                          <input v-model="form.old_password" type="old_password" ref="old_password" name="old_password" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('old_password') }" placeholder="Old Password">
-                          <has-error :form="form" field="old_password"></has-error>
+                          <input v-model="form.current_password" type="current_password" ref="current_password" name="current_password" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('current_password') }" placeholder="Current Password">
+                          <has-error :form="form" field="current_password"></has-error>
                         </div> 
                       </div>
 
@@ -354,9 +363,9 @@
             // Create a new form instance
             form: new Form({
               id: '',
-              //name: '',
-              //email: '',
-              old_password:'',
+              name: '',
+              email: '',
+              current_password:'',
               password: '',
               password_confirmation:'',
               // role_id:'',
@@ -421,20 +430,41 @@
               })
           },
 
-          editUser(data){
-           // this.editMode = true;
-            this.form.fill(data);    
-            //this.$refs.name.focus();  
-            // if(data.avatar != null){
-            //   this.deleteImageIcon = true;  
-            // }
-            // this.$store.dispatch('usersAdminStore/fetchSelectedEmployee', this.form.employee_id);   
+          ChangePassword(){
+            this.$Progress.start(); //using progress-bar package
+            this.form.put('/spaa/admin-child-profille-change-password/'+ this.form.id)
+            //axios.post('/spaa/admin-child-profille-change-password/'+ this.authUser.id)
+              .then(({ data }) => { 
+                //console.log(data); 
+
+                if(data.success){ 
+                  toastr.success(data.success);       
+                  this.$Progress.finish();                  
+                  this.form.reset();  //reset from after submit
+                  // console.log(data.success);  
+                  this.fillData(this.authUser);              
+                }
+                if(data.errors){
+                  toastr.warning(data.errors); 
+                }
+
+              })
+              .catch( (errors) => {  
+                this.$Progress.fail();
+                toastr.warning('Something is wrong!');
+              })
+          },
+
+          fillData(data){
+            // this.form.name = data.name;
+            // this.form.email = data.email;   
+            this.form.fill(data);   
           },        
         },           
 
         created(){
           this.fetchUserStatus();
-          this.editUser(this.authUser);
+          this.fillData(this.authUser);          
         },
            
         mounted() {

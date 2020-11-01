@@ -20,29 +20,29 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('contact-us', app()->getLocale() ) }}">{{ __('Contact Us') }}</a>
+                                <a class="nav-link" href="{{ route('contact-us', app()->getLocale() ) }}">{{ __('menu.contactus')}}</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('auth-check', app()->getLocale() ) }}">{{ __('Authentication') }}</a>
+                                <a class="nav-link" href="{{ route('auth-check', app()->getLocale() ) }}">{{ __('menu.authentication') }}</a>
                             </li>
                             
                         @guest
                             
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('customer.login' ) }}">{{ __('Customer') }}</a>
+                                <a class="nav-link" href="{{ route('customer.login' ) }}">{{ __('menu.customer') }}</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('supplier.login' ) }}">{{ __('Supplier') }}</a>
+                                <a class="nav-link" href="{{ route('supplier.login' ) }}">{{ __('menu.supplier') }}</a>
                             </li>
                           
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login' ) }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login' ) }}">{{ __('menu.login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register' ) }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register' ) }}">{{ __('menu.register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -125,7 +125,7 @@
                                     <img src="{{asset('FilesStorage/CommonFiles/en_lang.png')}}" width="30px" height="20x"> English
                                     @break
                                     @case('bn')
-                                    <img src="{{asset('FilesStorage/CommonFiles/bn_lang.png')}}" width="30px" height="20x"> Bangla
+                                    <img src="{{asset('FilesStorage/CommonFiles/bn_lang.png')}}" width="30px" height="20x"> {{ __('menu.bangla') }}
                                     @break
                                     
                                     @default
@@ -136,7 +136,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ URL::to('/en') }}"><img src="{{asset('FilesStorage/CommonFiles/en_lang.png')}}" width="30px" height="20x"> English</a>
-                                <a class="dropdown-item" href="{{ URL::to('/bn') }}"><img src="{{asset('FilesStorage/CommonFiles/bn_lang.png')}}" width="30px" height="20x"> Bangla</a>
+                                <a class="dropdown-item" href="{{ URL::to('/bn') }}"><img src="{{asset('FilesStorage/CommonFiles/bn_lang.png')}}" width="30px" height="20x"> {{ __('menu.bangla') }}</a>
                             </div>
                         </li>
                 </ul>

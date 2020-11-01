@@ -11,16 +11,19 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js') //user for only admin  
-   .js('resources/js/appPublic.js', 'public/js') //user for website and customer supplier
-   .js('resources/js/admin_childs_js/ac_main.js', 'public/js')  //user for admin childs
-   .js('resources/js/website_js/w_main.js', 'public/js')  //use for website or auth client or customer
+mix.js('resources/js/app.js', 'public/js') //user for all admins and website
+   .js('resources/js/app-admin.js', 'public/js') //user for all admins
 
    .sass('resources/sass/app.scss', 'public/css') //user for all 
    .sass('resources/sass/style.scss', 'public/css') //user for only admin 
-   .sass('resources/sass/auth_user_css/au_style.scss', 'public/css') // only auth client or customer 
-   .sass('resources/sass/admin_childs_css/ac_style.scss', 'public/css') //user for admin childs
-   .sass('resources/sass/website_css/w_style.scss', 'public/css'); //user for website
+
+   .sass('resources/sass/admin_child_style.scss', 'public/css') //user for only admin childs panel
+   
+   .sass('resources/sass/auth_user_style.scss', 'public/css') // only auth client or customer 
+
+
+   //.sass('resources/sass/admin_childs_css/ac_style.scss', 'public/css') //user for admin childs
+   //.sass('resources/sass/website_css/w_style.scss', 'public/css'); //user for website
    //.version(); //if need to using cach, it is good for increasing speed. must be use to production server
    //.copy('node_modules/asap/asap.js', 'public/js'); //if need to copy some css or js file
 

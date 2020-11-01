@@ -14,7 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
  
   <!-- Styles -->  
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/ac_style.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/admin_child_style.css') }}" rel="stylesheet">
 
   @yield('extra_css')
 

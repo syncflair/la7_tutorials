@@ -41,6 +41,7 @@ import store from './VueVuex'
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //Global Components
+Vue.component('website-wrapper', () => import(/* webpackChunkName: "website-wrapper" */'./components/Website/WebsiteWrapper.vue')); //Website component
 Vue.component('adminwrapper', () => import(/* webpackChunkName: "adminwrapper" */'./components/Admin/AdminWrapper.vue')); //admin dashboard
 Vue.component('pagination-app', () => import(/* webpackChunkName: "pagination-app" */'./components/Admin/GlobalComponents/pagination-app.vue'));
 Vue.component('switch-app', () => import(/* webpackChunkName: "switch-app" */'./components/Admin/GlobalComponents/switch-app.vue'));
@@ -165,6 +166,7 @@ const app = new Vue({
     el: '#app',
     router, //use Vue router from globally
     store,
+
     watch: { //for title
       '$route':{
         handler: (to, from) => {
@@ -186,7 +188,13 @@ const app = new Vue({
       //counttest, 
     }, 
 
-    
+    mounted() {
+
+     
+             
+
+
+    }, //end mounted   
 
 
 });

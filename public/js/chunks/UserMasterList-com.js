@@ -141,6 +141,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
  //for user MapState 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -602,7 +603,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "th",
-                { staticStyle: { width: "8%" }, attrs: { scope: "col" } },
+                { staticStyle: { width: "3%" }, attrs: { scope: "col" } },
                 [_vm._v("Date")]
               ),
               _vm._v(" "),
@@ -814,11 +815,14 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", [
-                    _c("small", [
-                      _vm._v(
-                        " " + _vm._s(_vm._f("formatDate")(user.created_at))
-                      )
-                    ])
+                    _c(
+                      "span",
+                      {
+                        staticClass: "pointer",
+                        attrs: { title: _vm._f("formatDate")(user.created_at) }
+                      },
+                      [_c("i", { staticClass: "far fa-calendar-check" })]
+                    )
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-right" }, [

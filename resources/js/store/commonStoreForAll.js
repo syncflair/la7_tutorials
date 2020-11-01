@@ -7,6 +7,7 @@ const commonStoreForAll ={
       authUser: {},
       authPermissions:{},
       systemSettings:{},
+      isitwebsiteCheck:'',
 
       adminRoles:{},
       branches:{},
@@ -17,6 +18,13 @@ const commonStoreForAll ={
       autoSearchDepartments:{},
       userStatus: {}, //get data from user_status table
 	    AllStatus: {}, //get status for order, payment, purchase, porduct
+
+      OrderStatus: {},
+      StockStatus: {},
+      PaymentStatus: {},
+      ReturnStatus: {},
+      ReturnActions: {},
+
       jobTitles:{},      
 	    Countries:{},
       Divisions:{}, 
@@ -47,6 +55,7 @@ const commonStoreForAll ={
       AUTH_USER(state, data) { return state.authUser = data; },
       AUTH_PERMISSIONS(state, data){ return state.authPermissions = data;},
       SYSTEM_SETTINGS(state, data){ return state.systemSettings = data;},
+      IS_IT_WEBSITE_CHECK(state, data) { return state.isitwebsiteCheck = data; },
       //End Commit
 
       //get from action
@@ -60,6 +69,13 @@ const commonStoreForAll ={
       FETCH_JOB_TITLE(state, data){return state.jobTitles = data;}, 
       FETCH_USER_STATUS(state, data) { return state.userStatus = data; },
     	FETCH_ALL_STATUS(state, data) { return state.AllStatus = data; },
+
+      FETCH_ORDER_STATUS(state, data) { return state.OrderStatus = data; },
+      FETCH_STOCK_STATUS(state, data) { return state.StockStatus = data; },
+      FETCH_PAYMENT_STATUS(state, data) { return state.PaymentStatus = data; },
+      FETCH_RETURN_STATUS(state, data) { return state.ReturnStatus = data; },
+      FETCH_RETURN_ACTIONS(state, data) { return state.ReturnActions = data; },
+
       FETCH_COUNTRY_DATA(state, Countries) { return state.Countries = Countries; },
       FETCH_DIVISION_DATA(state, Divisions) { return state.Divisions = Divisions; },
       FETCH_DISTRICT_DATA(state, Districts) { return state.Districts = Districts; },
@@ -99,6 +115,41 @@ const commonStoreForAll ={
           context.commit('FETCH_ALL_STATUS', response.data);
         }).catch( () => { })
       },  
+
+      fetchOrderStatus(context){
+        axios.get('/spa/order-status-info/GetOrderStatus')
+        .then( (response) => {
+          context.commit('FETCH_ORDER_STATUS', response.data);
+        }).catch( () => { })
+      },
+
+      fetchStockStatus(context){
+        axios.get('/spa/stock-status-info/GetStockStatus')
+        .then( (response) => {
+          context.commit('FETCH_STOCK_STATUS', response.data);
+        }).catch( () => { })
+      },
+
+      fetchPaymentStatus(context){
+        axios.get('/spa/payment-status-info/GetPaymentStatus')
+        .then( (response) => {
+          context.commit('FETCH_PAYMENT_STATUS', response.data);
+        }).catch( () => { })
+      },
+
+      fetchReturnStatus(context){
+        axios.get('/spa/return-status-info/GetReturnStatus')
+        .then( (response) => {
+          context.commit('FETCH_RETURN_STATUS', response.data);
+        }).catch( () => { })
+      },
+
+      fetchReturnActions(context){
+        axios.get('/spa/return-action-info/getReturnAction')
+        .then( (response) => {
+          context.commit('FETCH_RETURN_ACTIONS', response.data);
+        }).catch( () => { })
+      },
 
       fetchJobTitles(context){ 
         axios.get('/spa/JobTitle-Info/GetJobTitles')

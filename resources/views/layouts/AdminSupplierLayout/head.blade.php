@@ -13,7 +13,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>@yield('title')</title>
  <!-- Styles -->  
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/au_style.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/auth_user_style.css') }}" rel="stylesheet">
 
 
   @yield('extra_css')	

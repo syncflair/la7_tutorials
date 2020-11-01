@@ -16,6 +16,15 @@ Vue.use(VueRouter)
 
 const routes = [
 //export const routes = [
+
+	//website
+	{ path: '/home', component: () => import(/* webpackChunkName: "website-home-public" */ './components/Website/Home/HomePublic.vue'), meta: { title: 'Welcome To Sorboraho'} },
+
+
+
+
+
+
 	//{ path: '/dashboard', component: Dashboard, meta: { title: 'Dashboard'} },
 	{ path: '/dashboard', component: () => import(/* webpackChunkName: "Dashboard" */ './components/Admin/DashboardAdmin.vue'), meta: { title: 'Dashboard'} },
 	//{ path: '/spa/dashboard', component: () => import('./components/Admin/DashboardAdmin.vue'), meta: { title: 'Dashboard'} },
@@ -124,6 +133,13 @@ const routes = [
 	{ path: '/spa/DivisionMaster', name: 'DivisionMaster', component: () => import(/* webpackChunkName: "DivisionMaster" */ './components/Admin/Settings/Division/DivisionMaster.vue'), meta: { title: 'Division'} },
 	{ path: '/spa/DistrictMaster', name: 'DistrictMaster', component: () => import(/* webpackChunkName: "DistrictMaster" */ './components/Admin/Settings/District/DistrictMaster.vue'), meta: { title: 'District'} },
 	{ path: '/spa/DistrictZoneMaster', name: 'DistrictZoneMaster', component: () => import(/* webpackChunkName: "DistrictZoneMaster" */ './components/Admin/Settings/DistrictZone/DistrictZoneMaster.vue'), meta: { title: 'Zone/Area'} },
+	
+
+	{ path: '/spa/OrderStatusMaster', name: 'OrderStatusMaster', component: () => import(/* webpackChunkName: "OrderStatusMaster" */ './components/Admin/Settings/OrderStatus/OrderStatusMaster.vue'), meta: { title: 'Order Status'} },
+	{ path: '/spa/StockStatusMaster', name: 'StockStatusMaster', component: () => import(/* webpackChunkName: "StockStatusMaster" */ './components/Admin/Settings/StockStatus/StockStatusMaster.vue'), meta: { title: 'Stock Status'} },
+	{ path: '/spa/ReturnStatusMaster', name: 'ReturnStatusMaster', component: () => import(/* webpackChunkName: "ReturnStatusMaster" */ './components/Admin/Settings/ReturnStatus/ReturnStatusMaster.vue'), meta: { title: 'Return Status'} },
+	{ path: '/spa/ReturnActionMaster', name: 'ReturnActionMaster', component: () => import(/* webpackChunkName: "ReturnActionMaster" */ './components/Admin/Settings/ReturnAction/ReturnActionMaster.vue'), meta: { title: 'Return Action'} },
+	{ path: '/spa/PaymentStatusMaster', name: 'PaymentStatusMaster', component: () => import(/* webpackChunkName: "PaymentStatusMaster" */ './components/Admin/Settings/PaymentStatus/PaymentStatusMaster.vue'), meta: { title: 'Payment Status'} },
 
 	//Reports
 	{ path: '/spa/ReportMaster', name: 'ReportMaster', component: () => import(/* webpackChunkName: "ReportMaster" */ './components/Admin/Reports/ReportMaster.vue'), meta: { title: 'Reports'},
@@ -144,21 +160,23 @@ const routes = [
 	//########################################################## Admin Child Routes ###########################################################################
 	//Admin Supervisor
 	{ path: '/dashboard-supervisor', component: () => import(/* webpackChunkName: "DashboardAdminChildSupervisor" */ './components/AdminChild/AdminSupervisor/DashboardAdminChildSupervisor.vue'), meta: { title: 'Dashboard'} },
-	
 	//Admin Delivery
 	{ path: '/dashboard-delivery', component: () => import(/* webpackChunkName: "DashboardAdminChildDelivery" */ './components/AdminChild/AdminDelivery/DashboardAdminChildDelivery.vue'), meta: { title: 'Dashboard'} },
-	
 	//Admin Packaging
 	{ path: '/dashboard-packaging', component: () => import(/* webpackChunkName: "DashboardAdminChildPackaging" */ './components/AdminChild/AdminPackaging/DashboardAdminChildPackaging.vue'), meta: { title: 'Dashboard'} },
-	
-
 	//Admin Order
 	{ path: '/dashboard-Order', component: () => import(/* webpackChunkName: "DashboardAdminChildOrder" */ './components/AdminChild/AdminOrder/DashboardAdminChildOrder.vue'), meta: { title: 'Dashboard'} },
-
+	//Admin Sales
+	{ path: '/dashboard-Sales', component: () => import(/* webpackChunkName: "DashboardAdminChildSales" */ './components/AdminChild/AdminSales/DashboardAdminChildSales.vue'), meta: { title: 'Dashboard'} },
+	//Admin Storage
+	{ path: '/dashboard-Storage', component: () => import(/* webpackChunkName: "DashboardAdminChildStorage" */ './components/AdminChild/AdminStorage/DashboardAdminChildStorage.vue'), meta: { title: 'Dashboard'} },
+	//Admin Purchase
+	{ path: '/dashboard-Purchase', component: () => import(/* webpackChunkName: "DashboardAdminChildPurchase" */ './components/AdminChild/AdminPurchase/DashboardAdminChildPurchase.vue'), meta: { title: 'Dashboard'} },
+	//Admin GuestUser
+	{ path: '/dashboard-GuestUser', component: () => import(/* webpackChunkName: "DashboardAdminChildGuestUser" */ './components/AdminChild/AdminGuestUser/DashboardAdminChildGuestUser.vue'), meta: { title: 'Dashboard'} },
 
 	//Admin child profile for all 
 	{ path: '/spaa/admin-user-profile', component: () => import(/* webpackChunkName: "AdminChildUserProfile" */ './components/AdminChild/AdminChildProfile/AdminChildProfileMaster.vue'), meta: { title: 'Profile'} },
-
 	//not found page for Admin child
 	{ path: '/spaa/*', component: () => import(/* webpackChunkName: "AdminChildNotFound" */'./components/AdminChild/GlobalComponents/NotFound.vue'), meta: { title: 'Not Found'} },
 
@@ -188,6 +206,8 @@ const routes = [
 	{ path: '/spas/supplier-producct-Replace', component: () => import(/* webpackChunkName: "SupplierProductReplace" */ './components/AdminSupplier/Replace/SupplierProductReplace.vue'), meta: { title: 'Replace'} },
 	//not found page for Customer Admin Panel
 	{ path: '/spas/*', component: () => import(/* webpackChunkName: "NotFoundSupplierAdmin" */'./components/AdminSupplier/GlobalComponents/NotFound.vue'), meta: { title: 'Not Found'} },
+
+
 
 
 

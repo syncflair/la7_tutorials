@@ -70,7 +70,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -342,51 +341,39 @@ var render = function() {
                             1
                           ),
                           _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "form-group" },
-                            [
-                              _c("label", [_vm._v("Details")]),
-                              _vm._v(" "),
-                              _c("textarea", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.us_desc,
-                                    expression: "form.us_desc"
-                                  }
-                                ],
-                                ref: "us_desc",
-                                staticClass: "form-control form-control-sm",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has("us_desc")
-                                },
-                                attrs: {
-                                  name: "us_desc",
-                                  placeholder: "User Status details"
-                                },
-                                domProps: { value: _vm.form.us_desc },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "us_desc",
-                                      $event.target.value
-                                    )
-                                  }
+                          _c("div", { staticClass: "form-group" }, [
+                            _c("label", [_vm._v("Details")]),
+                            _vm._v(" "),
+                            _c("textarea", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.us_desc,
+                                  expression: "form.us_desc"
                                 }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: { form: _vm.form, field: "us_desc" }
-                              })
-                            ],
-                            1
-                          )
+                              ],
+                              ref: "us_desc",
+                              staticClass: "form-control form-control-sm",
+                              attrs: {
+                                name: "us_desc",
+                                placeholder: "User Status details"
+                              },
+                              domProps: { value: _vm.form.us_desc },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form,
+                                    "us_desc",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            })
+                          ])
                         ])
                       ])
                     ])

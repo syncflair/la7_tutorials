@@ -89,7 +89,8 @@ class ProductController extends Controller
         $data['sys_pro_name']=$request->sys_pro_name;
         $data['pro_slug']= slug_generator($request->sys_pro_name);//slug_generator get from helper
         $data['pro_type']=$request->pro_type;
-        $data['status_m_id']=$request->status_m_id;
+        // $data['status_m_id']=$request->status_m_id;        
+        $data['pro_status']=$request->pro_status;
         $data['pro_code']=$request->pro_code;
         $data['pro_model']=$request->pro_model;
         $data['sku']=$request->sku;
@@ -116,11 +117,7 @@ class ProductController extends Controller
         
         $data['created_by']= \Auth::user()->id;         
         
-        if($request->is_enabled == NULL){
-            $data['is_enabled'] = 0;
-        }else{
-           $data['is_enabled']=$request->is_enabled; 
-        }
+        //$data['is_enabled']= $request->is_enabled == NULL ? 0 : $request->is_enabled; 
 
         $image_base64 = $request->pro_images;  //base64 images array       
         
@@ -214,7 +211,8 @@ class ProductController extends Controller
         $data['sys_pro_name']=$request->sys_pro_name;
         $data['pro_slug']= slug_generator($request->sys_pro_name);//slug_generator get from helper
         $data['pro_type']=$request->pro_type;
-        $data['status_m_id']=$request->status_m_id;
+        // $data['status_m_id']=$request->status_m_id;
+        $data['pro_status']=$request->pro_status;
         $data['pro_code']=$request->pro_code;
         $data['pro_model']=$request->pro_model;
         $data['sku']=$request->sku;
@@ -240,13 +238,9 @@ class ProductController extends Controller
         $data['pro_discount'] =$request->pro_discount;
 
         
-        $data['updated_by']= \Auth::user()->id;         
-        
-        if($request->is_enabled == NULL){
-            $data['is_enabled'] = 0;
-        }else{
-           $data['is_enabled']=$request->is_enabled; 
-        }
+        $data['updated_by']= \Auth::user()->id;            
+       
+        //$data['is_enabled']= $request->is_enabled == NULL ? 0 : $request->is_enabled; 
 
         $image_base64 = $request->pro_images;              
         
@@ -402,10 +396,12 @@ class ProductController extends Controller
                 $query->where('products.sys_pro_name','LIKE','%'.$searchKey.'%')
                         ->orWhere('products.pro_price','LIKE','%'.$searchKey.'%')
                         ->orWhere('products.created_at','LIKE','%'.$searchKey.'%')
-                        ->orWhere('status_master.status_name','LIKE','%'.$searchKey.'%');
+                        ->orWhere('products.pro_status','LIKE','%'.$searchKey.'%');
+                        //->orWhere('status_master.status_name','LIKE','%'.$searchKey.'%');
             })
-            ->select('products.*','status_master.status_name')
-            ->join('status_master', 'products.status_m_id','=', 'status_master.id')
+            ->select('products.*')
+            //->select('products.*','status_master.status_name')
+           // ->join('status_master', 'products.status_m_id','=', 'status_master.id')
             //->join('brands', 'products.brand_id','=', 'brands.id')
             //->join('categories', 'products.pro_category','=', 'categories.id')
             ->paginate($perPage);
@@ -413,14 +409,15 @@ class ProductController extends Controller
         }elseif(!empty($searchKey) && !empty($searchOption)){
             $searchResult = Product::with('belongsToStatusMaster','belongsToBrand','hasManyImage')
                 ->where(function($query) use ($searchKey, $searchOption){
-                    if($searchOption == 'status_name'){
-                        $query->where( 'status_master.'.$searchOption,'LIKE','%'.$searchKey.'%');
-                    }else{
+                    // if($searchOption == 'status_name'){
+                    //     $query->where( 'status_master.'.$searchOption,'LIKE','%'.$searchKey.'%');
+                    // }else{
                         $query->where( 'products.'.$searchOption,'LIKE','%'.$searchKey.'%');
-                    }                
+                    //}                
                 })
+            ->select('products.*')
             ->select('products.*','status_master.status_name')
-            ->join('status_master', 'products.status_m_id','=', 'status_master.id')
+            //->join('status_master', 'products.status_m_id','=', 'status_master.id')
             ->paginate($perPage);
             
         }else{

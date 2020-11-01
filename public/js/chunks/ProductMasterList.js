@@ -166,6 +166,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -195,10 +196,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, {
         'field_name': 'cat_name',
         'show_name': 'Category'
-      }, {
-        'field_name': 'status_name',
-        'show_name': 'Product Status'
-      }]
+      } //{'field_name':'status_name', 'show_name':'Product Status'},
+      ]
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('ProductMasterStore', ['products', 'pagination', 'autoCompleteData']), {
@@ -880,14 +879,7 @@ var render = function() {
                       : _vm._e()
                   ]),
                   _vm._v(" "),
-                  _c("td", [
-                    _vm._v(
-                      " " +
-                        _vm._s(
-                          product["belongs_to_status_master"]["status_name"]
-                        )
-                    )
-                  ]),
+                  _c("td", [_vm._v(" " + _vm._s(product.pro_status))]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-right" }, [
                     _c(

@@ -1,0 +1,744 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\AccountDetail;
+use App\AccountLedger;
+use App\AccountVoucherMaster;
+use App\CompanyInfoMaster;
+use App\DebitVoucher;
+use App\Model\ReceiveMaster;
+use App\Model\SalesMaster;
+use App\Model\VoucherNumberList;
+use App\Model\TermsCondition;
+use App\Model\BrandImage;
+use DB;
+use MPDF;
+use Illuminate\Http\Request;
+
+class DebitVoucherController extends Controller {
+
+	public function showVoucherInvoiceList(Request $request) {
+		$invoices = VoucherNumberList::where('voucher_type', $request->voucher_type)->orderBy('id', 'DESC')->get();
+		return ['invoices' => $invoices];
+	}
+
+	public function showPreviousVoucher(Request $request) {
+		try {
+			$maindata = AccountVoucherMaster::where('vm_no', $request->voucher_no)->with('user')->first();
+			$invoicelist = AccountLedger::where('lg_vd_rm_id', $request->voucher_no)->with('account_name')->with('branch_name')->get();
+			return ['invoicelist' => $invoicelist, 'maindata' => $maindata];
+		} catch (Exception $e) {
+			return response()->json(['error' => true]);
+		}
+	}
+
+
+	public function voucherPrintPdf(Request $request){
+
+		try{
+			$voucher_type = $request->voucher_type ?? 'jv';
+			$company_info = user_permissions()[0]->company;
+			$condition = TermsCondition::first();
+        	$brand_image = BrandImage::where('status', 1)->limit(10)->get();
+			$maindata = AccountVoucherMaster::where('vm_no', $request->lg_voucher_no)->with('branch')->with('user')->first();
+			$voucher_details = AccountLedger::where('lg_voucher_no', $request->lg_voucher_no)->with('account_name')->with('branch_name')->get();
+
+			$pdf = MPDF::loadView('voucher.voucher_pdf', compact('maindata','voucher_details','company_info','condition','brand_image','voucher_type'));
+        	return $pdf->download('voucher.pdf');
+		}catch(Exception $e){
+			return response()->json(['error'=>true]);
+		}
+
+
+	}
+
+
+	/*
+	return voucher information
+	*/
+	public function voucherInfoRetrive(Request $request){
+		try {
+
+			$maindata = AccountVoucherMaster::where('vm_no', $request->voucher_no)->with('user')->first();
+			$invoicelist = AccountLedger::where('lg_voucher_no', $request->voucher_no)->with('account_name')->with('branch_name')->orderBy('lg_data_flag','DESC')->get();
+			$voucher_details=[];
+			foreach ($invoicelist as $key => $value) {
+				$voucher_details[$value->lg_data_flag][] = $value;
+			}
+			$voucher_details = (array) $voucher_details;
+			echo json_encode(['invoicelist' => $voucher_details, 'maindata' => $maindata]);
+		} catch (Exception $e) {
+			return response()->json(['error' => true]);
+		}
+	}
+
+	public function voucherRowDelete(Request $request){
+		try{
+			//return $request->all();
+
+			if(checkVoucherEntery($request->lg_voucher_no) !="true") return ['ref'=>'ref'];
+
+			$updateInfo = AccountLedger::where('lg_voucher_no',$request->lg_voucher_no)
+					->where('lg_data_flag',$request->lg_data_flag)->get();
+			foreach ($updateInfo as $key => $value) {
+				if($value->lg_lc_mr !='' && $value->lg_dr_amt > 0){
+					$ReceiveMaster = ReceiveMaster::where('rm_mr_no',$value->lg_lc_mr)->first();
+					if(empty($ReceiveMaster)) return ['ref'=>'ref'];
+					$current_paid_amount = $ReceiveMaster->rm_paid_amt ?? 0 -$value->lg_dr_amt ?? 0;
+					$current_due_amount = $ReceiveMaster->rm_tot_amt ?? 0- $current_paid_amount ?? 0;
+					$ReceiveMaster->rm_paid_amt = $current_paid_amount;
+					$ReceiveMaster->save();
+				}
+				if ($value->lg_inv != '' && $value->lg_cr_amt > 0) {
+					$SalesMaster = SalesMaster::where('sm_inv_no', $value->lg_inv)->first();
+					if(empty($SalesMaster)) return ['ref'=>'ref'];
+					$sm_paid_amt = $SalesMaster->sm_paid_amt ?? 0;
+					$new_paid_amt = $sm_paid_amt - $value->lg_cr_amt ?? 0;
+					SalesMaster::where('sm_inv_no', $value->lg_inv)->update(['sm_paid_amt' => $new_paid_amt]);
+				}
+			}
+
+			$update = AccountLedger::where('lg_voucher_no',$request->lg_voucher_no)
+					->where('lg_data_flag',$request->lg_data_flag)
+					->update(['status'=>0]);
+			
+
+			 return ['update'=>'update'];
+
+		}catch(Exception $e){
+			return response()->json(['error'=>true]);
+		}
+	}
+
+
+	/*
+	Voucher Single pair save
+	*/
+	public function voucherSinglePairSave(Request $request){
+
+		//return $request->all();
+		DB::beginTransaction();
+		try{
+			$singledata = $request->singledata;
+			$detailsdata = $request->detailsdata;
+			if(checkVoucherEntery($singledata['lg_voucher_no']) !="true") return ['ref'=>'ref'];
+
+			$lg_voucher_no =$singledata['lg_voucher_no'];
+			$user_id = user_permissions()[0]->id;
+			if($lg_voucher_no ==''){
+				$v_data=	$this->newVoucherNumber($singledata);
+				$voucher_number = $v_data['voucher_number'] ?? '';
+				$new_id = $v_data['vm_no_id'] ?? '';
+			}else {
+				$voucher_number = $singledata['lg_voucher_no'];
+			} 
+
+			if ($singledata['lg_voucher_no'] == '') {
+				$accountvouchermaster = new AccountVoucherMaster();
+				$accountvouchermaster->vm_no = $voucher_number;
+				$accountvouchermaster->vm_date = date('Y-m-d h:i:s');
+				$accountvouchermaster->vm_no_id = $new_id;
+			} else {
+				$accountvouchermaster = AccountVoucherMaster::where('vm_no', $singledata['lg_voucher_no'])->first();
+			}
+			$accountvouchermaster->vm_user = $user_id;
+			$accountvouchermaster->vm_type = $singledata['lg_voucher_type'] ?? null;
+			$accountvouchermaster->vm_naration = $singledata['lg_naration'] ?? null;
+			$accountvouchermaster->vm_post_flag = $singledata['vm_post_flag'] ?? 0;
+			$accountvouchermaster->vm_bill_ref_no = $singledata['lg_bill_ref'] ?? null;
+			$accountvouchermaster->vm_amount = $singledata['vm_amount'] ?? 0;
+			$accountvouchermaster->vm_bm_id = GetDefaultBranch();
+			$accountvouchermaster->save();
+
+			$voucher_master_row_id = $accountvouchermaster->id;
+			$new_id = $accountvouchermaster->vm_no_id;
+
+			if ($singledata['lg_voucher_no'] != '') {
+				$previousall = AccountLedger::where('lg_vd_rm_id', $singledata['lg_voucher_no'])->select('id')->get()->toArray();
+				$currentids = [];
+			}
+
+			for ($i = 0; $i < count($detailsdata); $i++) {
+
+				if ($detailsdata[$i]['id'] == '') {
+					$accountledger = new AccountLedger();
+					$accountledger->lg_voucher_date = $singledata['lg_voucher_date'];
+					$accountledger->lg_voucher_no = $voucher_number;
+					$accountledger->lg_vd_rm_id = $voucher_number;
+				}
+
+				$accountledger->lg_particulars = $singledata['lg_naration'] ?? null;
+				$accountledger->lg_ad_id = $detailsdata[$i]['lg_ad_id'];
+				$accountledger->lg_bm_id = $detailsdata[$i]['branch_id'];
+				$accountledger->lg_chq_date = $detailsdata[$i]['lg_chq_date'] ?? null;
+				$accountledger->lg_chq_no = $detailsdata[$i]['lg_chq_no'] ?? null;
+				$accountledger->lg_cr_amt = $detailsdata[$i]['lg_cr_amt'] ?? 0;
+				$accountledger->lg_dr_amt = $detailsdata[$i]['lg_dr_amt'] ?? 0;
+				$accountledger->lg_inv = $detailsdata[$i]['lg_inv'] ?? null;
+				$accountledger->lg_lc_mr = $detailsdata[$i]['lg_lc_mr'] ?? null;
+				$accountledger->lg_voucher_type = $singledata['lg_voucher_type'] ?? 'jv';
+				$accountledger->lg_data_flag = $detailsdata[$i]['lg_data_flag']; // 1 mean posted
+				$accountledger->save();
+
+
+				if($detailsdata[$i]['lg_lc_mr'] !='' && $detailsdata[$i]['lg_dr_amt'] > 0){
+					$ReceiveMaster = ReceiveMaster::where('rm_mr_no',$detailsdata[$i]['lg_lc_mr'])->first();
+					if(empty($ReceiveMaster)) return ['ref'=>'ref'];
+					$previous_paid_amount = $ReceiveMaster->rm_paid_amt ?? 0;
+					$previous_due_amount = $ReceiveMaster->rm_tot_amt ?? 0- $ReceiveMaster->rm_paid_amt ?? 0;
+					$ReceiveMaster->rm_paid_amt = ($previous_paid_amount+ intval($detailsdata[$i]['lg_dr_amt'] ?? 0));
+					$ReceiveMaster->save();
+
+				}
+
+				if ($detailsdata[$i]['lg_inv'] != '' && $detailsdata[$i]['lg_cr_amt'] > 0) {
+					$SalesMaster = SalesMaster::where('sm_inv_no', $detailsdata[$i]['lg_inv'])->first();
+					if(empty($SalesMaster)) return ['ref'=>'ref'];
+					$sm_paid_amt = $SalesMaster->sm_paid_amt ?? 0;
+					$new_paid_amt = $sm_paid_amt + $detailsdata[$i]['lg_cr_amt'] ?? 0;
+					SalesMaster::where('sm_inv_no', $detailsdata[$i]['lg_inv'])->update(['sm_paid_amt' => $new_paid_amt]);
+
+				}
+
+			}
+			
+			DB::commit();
+			$maindata = AccountVoucherMaster::where('vm_no', $voucher_number)->with('user')->first();
+			$invoicelist = AccountLedger::where('lg_voucher_no', $voucher_number)
+										->with('account_name')
+										->with('branch_name')->orderBy('lg_data_flag','DESC')->get();
+			$voucher_details=[];
+			foreach ($invoicelist as $key => $value) {
+				$voucher_details[$value->lg_data_flag][] = $value;
+			}
+			$voucher_details = (array) $voucher_details;
+			return json_encode(['invoicelist' => $voucher_details, 'maindata' => $maindata]);
+
+		}catch(Exception $e){
+			DB::rollback();
+			return response()->json(['error'=>true]);
+		}
+
+		
+	}
+
+	public function voucherInfoSave(Request $request){
+		DB::beginTransaction();
+		try{
+			$singledata = $request->singledata;
+			$detailsdata = $request->detailsdata;
+			$lg_voucher_no =$singledata['lg_voucher_no'];
+			$user_id = user_permissions()[0]->id;
+
+			if(checkVoucherEntery($singledata['lg_voucher_no'] ?? null) !="true") return ['ref'=>'ref'];
+
+			$voucher_number = $singledata['lg_voucher_no'];
+			
+			$accountvouchermaster = AccountVoucherMaster::withoutGlobalScopes()->where('vm_no', $singledata['lg_voucher_no'])->first();
+			
+			$accountvouchermaster->vm_type = $singledata['lg_voucher_type'];
+			$accountvouchermaster->vm_naration = $singledata['lg_naration'];
+			$accountvouchermaster->vm_user = $user_id;
+			$accountvouchermaster->vm_post_flag = $singledata['vm_post_flag'] ?? 0;
+			$accountvouchermaster->vm_bill_ref_no = $singledata['lg_bill_ref'];
+			$accountvouchermaster->vm_amount = $singledata['vm_amount'];
+			$accountvouchermaster->vm_bm_id = GetDefaultBranch();
+			$accountvouchermaster->save();
+
+			$voucher_master_row_id = $accountvouchermaster->id;
+			$new_id = $accountvouchermaster->vm_no_id;
+
+			if ($singledata['lg_voucher_no'] != '') {
+				$previousall = AccountLedger::where('lg_vd_rm_id', $singledata['lg_voucher_no'])->select('id')->get()->toArray();
+				$currentids = [];
+			}
+
+			for ($j = 0; $j < count($detailsdata); $j++) {
+				$detail_data_next =(array) $detailsdata[$j];
+				for ($i=0; $i <count($detail_data_next) ; $i++) { 
+
+					  $accountledger = AccountLedger::where('id', $detail_data_next[$i]['id'])->first();
+					 //return $detail_data_next[$i]['lg_cr_amt'];
+
+					if($detail_data_next[$i]['lg_lc_mr'] !='' && $detail_data_next[$i]['lg_dr_amt'] > 0){
+						$ReceiveMaster = ReceiveMaster::where('rm_mr_no',$detail_data_next[$i]['lg_lc_mr'])->first();
+						$previous_paid_amount = ($ReceiveMaster->rm_paid_amt - $accountledger->lg_dr_amt)+$detail_data_next[$i]['lg_dr_amt'];
+						$ReceiveMaster->rm_paid_amt = $previous_paid_amount;
+						$ReceiveMaster->save();
+
+					}
+
+					if ( $detail_data_next[$i]['lg_inv'] != '' && $detail_data_next[$i]['lg_cr_amt'] > 0) {
+						
+						$SalesMaster = SalesMaster::where('sm_inv_no', $detail_data_next[$i]['lg_inv'])->first();
+						$sm_paid_amt = ($SalesMaster->sm_paid_amt-$accountledger->lg_cr_amt)+$detail_data_next[$i]['lg_cr_amt'];
+						SalesMaster::where('sm_inv_no', $detail_data_next[$i]['lg_inv'])->update(['sm_paid_amt' => $sm_paid_amt]);
+
+					}
+
+					$accountledger->lg_particulars = $singledata['lg_naration'] ?? null;
+					$accountledger->lg_ad_id = $detail_data_next[$i]['lg_ad_id'];
+					$accountledger->lg_bm_id = $detail_data_next[$i]['branch_id'];
+					$accountledger->lg_chq_date = $detail_data_next[$i]['lg_chq_date'] ?? null;
+					$accountledger->lg_chq_no = $detail_data_next[$i]['lg_chq_no'] ?? null;
+					$accountledger->lg_cr_amt = $detail_data_next[$i]['lg_cr_amt'] ?? 0;
+					$accountledger->lg_dr_amt = $detail_data_next[$i]['lg_dr_amt'] ?? 0;
+					$accountledger->lg_inv = $detail_data_next[$i]['lg_inv'] ?? null;
+					$accountledger->lg_lc_mr = $detail_data_next[$i]['lg_lc_mr'] ?? null;
+					$accountledger->lg_voucher_type = $singledata['lg_voucher_type'] ?? 'jv';
+					$accountledger->lg_data_flag = $detail_data_next[$i]['lg_data_flag']; // 1 mean posted
+					$accountledger->save();
+
+
+					
+				}
+
+				
+
+			}
+	
+
+			DB::commit();
+			return ['update'=>'update'];
+		}catch(Exception $e){
+			DB::rollback();
+			return response()->json(['error'=>true]);
+		}
+	}
+
+	public function newVoucherNumber($singledata){
+		try{
+			$user_id = user_permissions()[0]->id;
+			if ($singledata['lg_voucher_no'] == '') {
+				
+				//start of if for new order number create
+				$das= date('Y-m-d h:i:s');
+				$date = date_create($das);
+				$f_date = date_format($date, "Y");
+				$lastrow = DB::select("select voucher_number_lists.`serial_number`,branch_masters.branch_short_name from voucher_number_lists
+                        inner join branch_masters on voucher_number_lists.branch_id=branch_masters.id
+                        where  voucher_number_lists.`branch_id`=" . GetDefaultBranch() . " and voucher_number_lists.`year_number`='" . $f_date . "' and voucher_type='" . $singledata['lg_voucher_type'] . "'   order by voucher_number_lists.id desc limit 1");
+				if (empty($lastrow)) {
+					$lastrow = DB::select("select users.name,branch_masters.branch_short_name
+                        from `users`
+                        inner join branch_masters on branch_masters.id =" . GetDefaultBranch() . "
+                        where users.id =" . $user_id . " ");
+					$branch_short_name = $lastrow[0]->branch_short_name;
+					$new_id = 1;
+				} else {
+					$branch_short_name = $lastrow[0]->branch_short_name;
+					$new_id = $lastrow[0]->serial_number + 1;
+				}
+
+				$com_info = CompanyInfoMaster::select('cim_short_name')->first();
+				$company_short_name = $com_info->cim_short_name ?? null;
+				$strlen = strlen($new_id);
+				$zero = '';
+				if ($strlen < 6) {$zero = addZero($strlen);}
+
+				$voucher_number = strtolower("" . $company_short_name . "/" . $branch_short_name . "/" . $singledata['lg_voucher_type'] . "/" . $f_date . "/" . $zero . $new_id);
+				VoucherNumberList::create(['invoice_no' => $voucher_number, 'company_id' => $com_info->id ?? 1, 'voucher_type' => $singledata['lg_voucher_type'], 'year_number' => $f_date, 'serial_number' => $new_id]);
+				return ['voucher_number'=>$voucher_number,'vm_no_id'=>$new_id];
+
+			}
+
+		}catch(Exception $e){
+
+			return response()->json(['error'=>true]);
+		}
+	}
+	/*
+
+		    * Voucher Save
+	*/
+
+	public function voucherSave(Request $request) {
+		//return $request->all();
+		try {
+			DB::beginTransaction();
+			$detailsdata = $request->detailsdata;
+			$singledata = $request->singledata;
+			$user_id = user_permissions()[0]->id;
+			if ($singledata['lg_voucher_no'] == '') {
+				//start of if for new order number create
+				$date = date_create($singledata['lg_voucher_date']);
+				$f_date = date_format($date, "Y");
+				$lastrow = DB::select("select voucher_number_lists.`serial_number`,branch_masters.branch_short_name from voucher_number_lists
+                        inner join branch_masters on voucher_number_lists.branch_id=branch_masters.id
+                        where  voucher_number_lists.`branch_id`=" . GetDefaultBranch() . " and voucher_number_lists.`year_number`='" . $f_date . "' and voucher_type='" . $singledata['lg_voucher_type'] . "'   order by voucher_number_lists.id desc limit 1");
+				if (empty($lastrow)) {
+					$lastrow = DB::select("select users.name,branch_masters.branch_short_name
+                        from `users`
+                        inner join branch_masters on branch_masters.id =" . GetDefaultBranch() . "
+                        where users.id =" . $user_id . " ");
+					$branch_short_name = $lastrow[0]->branch_short_name;
+					$new_id = 1;
+				} else {
+					$branch_short_name = $lastrow[0]->branch_short_name;
+					$new_id = $lastrow[0]->serial_number + 1;
+				}
+
+				$com_info = CompanyInfoMaster::select('cim_short_name')->first();
+				$company_short_name = $com_info->cim_short_name ?? null;
+				$strlen = strlen($new_id);
+				$zero = '';
+				if ($strlen < 6) {$zero = addZero($strlen);}
+
+				$voucher_number = strtolower("" . $company_short_name . "/" . $branch_short_name . "/" . $singledata['lg_voucher_type'] . "/" . $f_date . "/" . $zero . $new_id);
+				VoucherNumberList::create(['invoice_no' => $voucher_number, 'company_id' => $com_info->id ?? 1, 'voucher_type' => $singledata['lg_voucher_type'], 'year_number' => $f_date, 'serial_number' => $new_id]);
+
+			} else {
+				$voucher_number = $singledata['lg_voucher_no'];
+			} //end of if for new order number create
+
+			if ($singledata['lg_voucher_no'] == '') {
+				$accountvouchermaster = new AccountVoucherMaster();
+				$accountvouchermaster->vm_no = $voucher_number;
+				$accountvouchermaster->vm_date = $singledata['lg_voucher_date'];
+				$accountvouchermaster->vm_no_id = $new_id;
+			} else {
+				$accountvouchermaster = AccountVoucherMaster::where('vm_no', $singledata['lg_voucher_no'])->first();
+			}
+			$accountvouchermaster->vm_type = $singledata['lg_voucher_type'];
+			$accountvouchermaster->vm_naration = $singledata['lg_naration'];
+			$accountvouchermaster->vm_user = $user_id;
+			$accountvouchermaster->vm_post_flag = $singledata['vm_post_flag'] ?? 0;
+			$accountvouchermaster->vm_bill_ref_no = $singledata['lg_bill_ref'];
+			$accountvouchermaster->vm_amount = $singledata['vm_amount'];
+			$accountvouchermaster->vm_bm_id = GetDefaultBranch();
+			$accountvouchermaster->save();
+
+			$voucher_master_row_id = $accountvouchermaster->id;
+			$new_id = $accountvouchermaster->vm_no_id;
+
+			if ($singledata['lg_voucher_no'] != '') {
+				$previousall = AccountLedger::where('lg_vd_rm_id', $singledata['lg_voucher_no'])->select('id')->get()->toArray();
+				$currentids = [];
+			}
+
+			for ($i = 0; $i < count($detailsdata); $i++) {
+
+				if ($detailsdata[$i]['id'] == '') {
+					$accountledger = new AccountLedger();
+					$accountledger->lg_voucher_date = $singledata['lg_voucher_date'];
+					$accountledger->lg_voucher_no = $voucher_number;
+					$accountledger->lg_vd_rm_id = $voucher_number;
+				}
+
+				if ($detailsdata[$i]['id'] != '') {
+					array_push($currentids, $detailsdata[$i]['id']);
+					$accountledger = AccountLedger::where('id', $detailsdata[$i]['id'])->first();
+				}
+				$accountledger->lg_particulars = $singledata['lg_naration'];
+				$accountledger->lg_ad_id = $detailsdata[$i]['account_id'];
+				$accountledger->lg_bm_id = $detailsdata[$i]['lg_bm_id'];
+				$accountledger->lg_chq_date = $detailsdata[$i]['lg_chq_date'];
+				$accountledger->lg_chq_no = $detailsdata[$i]['lg_chq_no'];
+				$accountledger->lg_cr_amt = $detailsdata[$i]['lg_cr_amt'];
+				$accountledger->lg_dr_amt = $detailsdata[$i]['lg_dr_amt'];
+				$accountledger->lg_inv = $detailsdata[$i]['lg_inv'];
+				$accountledger->lg_lc_mr = $detailsdata[$i]['lg_lc_mr'];
+				$accountledger->lg_voucher_type = $singledata['lg_voucher_type'];
+				$accountledger->lg_data_flag = 1; // 1 mean posted
+				$accountledger->save();
+
+
+				if($detailsdata[$i]['lg_lc_mr'] !='' && $detailsdata[$i]['lg_dr_amt'] > 0){
+					$ReceiveMaster = ReceiveMaster::where('rm_mr_no',$detailsdata[$i]['lg_lc_mr'])->first();
+					$previous_paid_amount = $ReceiveMaster->rm_paid_amt ?? 0;
+					$previous_due_amount = $ReceiveMaster->rm_tot_amt ?? 0- $ReceiveMaster->rm_paid_amt ?? 0;
+					$ReceiveMaster->rm_paid_amt = ($previous_paid_amount+ ($detailsdata[$i]['lg_dr_amt'] ?? 0));
+					$ReceiveMaster->save();
+
+				}
+
+				if ( $detailsdata[$i]['lg_inv'] != '' && $detailsdata[$i]['lg_cr_amt'] > 0) {
+					$SalesMaster = SalesMaster::where('sm_inv_no', $detailsdata[$i]['lg_inv'])->first();
+					$sm_paid_amt = $SalesMaster->sm_paid_amt ?? 0;
+					$new_paid_amt = $sm_paid_amt + $detailsdata[$i]['lg_cr_amt'] ?? 0;
+					SalesMaster::where('sm_inv_no', $detailsdata[$i]['lg_inv'])->update(['sm_paid_amt' => $new_paid_amt]);
+
+				}
+
+			}
+			if ($singledata['lg_voucher_no'] != '') {
+				$oldarray = array();
+				$currentids = array_values($currentids);
+				if (sizeof($previousall) > 0) {
+					foreach ($previousall as $key => $value) {
+						$oldarray[] = $value['id'];
+					}
+				}
+				$diff = array_diff($oldarray, $currentids);
+				if (sizeof($diff) > 0) {
+					foreach ($diff as $key1 => $value1) {
+						AccountLedger::where('id', $value1)->update(['status' => 0]);
+					}
+				}
+
+			}
+
+			DB::commit();
+			return ['invoice' => $voucher_number];
+		} catch (Exception $e) {
+			DB::rollback();
+			return response()->json(['error' => true]);
+		}
+
+	}
+
+	/*
+		        Display item code
+	*/
+	public function showItemList() {
+		try {
+			$item_code = AccountDetail::get();
+			return (['item_code' => $item_code]);
+		} catch (Exception $e) {
+			return response()->json(['error' => true]);
+		}
+	}
+	/*
+		        Display item code
+	*/
+	public function accountListDisplay(Request $request) {
+		try {
+			$limit = $request->limit ?? 20;
+			$skip = $request->skip ?? 0;
+
+			$item_code = AccountDetail::where('status',1);
+			$item_count = AccountDetail::where('status',1)->count();
+			if($request->has('search_key')){
+				if($request->search_key !=""){
+					$q = $request->search_key;
+					$item_code = $item_code->where(function ($query) use ($q) {
+						$query->orWhere('ad_code', 'LIKE', '%' . $q . '%')
+							->orWhere('ad_name', 'LIKE', '%' . $q . '%');
+					});
+				}
+			}
+			$item_code =$item_code->skip($skip)->limit($limit)->orderBy('id','desc')->get();
+			return (['item_code' => $item_code,'item_count'=>$item_count]);
+		} catch (Exception $e) {
+			return response()->json(['error' => true]);
+		}
+	}
+
+	/*
+	return voucher number list
+	*/
+	public function voucherNumberList(Request $request){
+			$limit = $request->limit ?? 20;
+			$skip = $request->skip ?? 0;
+			$voucher_type = $request->voucher_type ?? 'jv';
+
+			$vouchers=VoucherNumberList::with('user')
+						->with('ref')
+						->where('status',1)
+						->where('voucher_type',$voucher_type);
+			$voucher_count = $vouchers->count();
+			if($request->has('search_key')){
+				if($request->search_key !=""){
+					$q = $request->search_key;
+					$vouchers = $vouchers->where(function ($query) use ($q) {
+						$query->orWhere('invoice_no', 'LIKE', '%' . $q . '%');
+					});
+				}
+			}
+			$vouchers =$vouchers->skip($skip)->limit($limit)->orderBy('id','desc')->get();
+			
+			return (['vouchers' => $vouchers,'voucher_count'=>$voucher_count]);
+
+	}
+	public function lcNumberList(Request $request) {
+		try {
+			$ad_id = AccountDetail::where('ad_code', $request->lg_ad_id)->first();
+			if ($ad_id) {
+				$lclist = ReceiveMaster::where('rm_ad_id', $ad_id->id)->get();
+				return ['lclist' => $lclist];
+			}
+		} catch (Exception $e) {
+			return response()->json(['error' => true]);
+		}
+
+	}
+
+	public function accountBaseLcMrNumber(Request $request) {
+		try {
+			//return $request->all();
+			$limit = $request->limit ?? 10;
+			$skip = $request->skip ?? 0;
+			$lclist = ReceiveMaster::where('status',1);
+			$lclist_count = $lclist->count();
+			if($request->has('search_key')){
+				if($request->search_key !=""){
+					$q = $request->search_key;
+					$lclist = $lclist->where(function ($query) use ($q) {
+						$query->orWhere('rm_mr_no', 'LIKE', '%' . $q . '%')
+							->orWhere('rm_mr_date', 'LIKE', '%' . $q . '%');
+					});
+				}
+			}
+			$lclist =$lclist->where('rm_ad_id', $request->lg_ad_id)->skip($skip)->limit($limit)->orderBy('id','DESC')->get();
+			return ['lclist' => $lclist,'lclist_count'=>$lclist_count];
+			
+		} catch (Exception $e) {
+			return response()->json(['error' => true]);
+		}
+
+	}
+
+	public function accountBaseInvoiceNumber(Request $request) {
+		try {
+			//return $request->all();
+			$limit = $request->limit ?? 10;
+			$skip = $request->skip ?? 0;
+			$inlist = SalesMaster::where('status',1);
+			$inlist_count = $inlist->count();
+			if($request->has('search_key')){
+				if($request->search_key !=""){
+					$q = $request->search_key;
+					$inlist = $inlist->where(function ($query) use ($q) {
+						$query->orWhere('sm_inv_no', 'LIKE', '%' . $q . '%')
+							->orWhere('sm_inv_date', 'LIKE', '%' . $q . '%');
+					});
+				}
+			}
+			$inlist =$inlist->where('sm_ad_id', $request->lg_ad_id)->skip($skip)->limit($limit)->orderBy('id','DESC')->get();
+			return ['inlist' => $inlist,'inlist_count'=>$inlist_count];
+			
+		} catch (Exception $e) {
+			return response()->json(['error' => true]);
+		}
+
+	}
+
+	/*
+		    * return invoice number wise balance amount
+	*/
+
+	public function invoiceNumberWiseBalance(Request $request) {
+		try {
+			$ad_id = AccountDetail::where('ad_code', $request->lg_ad_id)->first();
+			if ($ad_id) {
+				$ac_row_id = $ad_id->id;
+				$balance = DB::select(" select (sum(`lg_dr_amt`)-sum(`lg_cr_amt`) ) as balance
+                        from `account_ledgers`
+                        where lg_vd_rm_id='" . $request->invoice_number . "' and `lg_ad_id`=" . $ac_row_id . " ");
+				return ['balance' => $balance];
+			}
+		} catch (Exception $e) {
+			DB::rollback();
+			return response()->json([
+				'error' => true,
+			]);
+
+		}
+	}
+
+	public function mrNumberBalance(Request $request) {
+		try {
+			$ad_id = AccountDetail::where('ad_code', $request->lg_ad_id)->first();
+			if ($ad_id) {
+				$ac_row_id = $ad_id->id;
+				$balance = DB::select(" select (sum(`lg_cr_amt`)-sum(`lg_dr_amt`) ) as balance
+                        from `account_ledgers`
+                        where lg_vd_rm_id='" . $request->invoice_number . "' and `lg_ad_id`=" . $ac_row_id . " ");
+				return ['balance' => $balance];
+			}
+		} catch (Exception $e) {
+			DB::rollback();
+			return response()->json([
+				'error' => true,
+			]);
+
+		}
+	}
+
+	public function invoiceNumberList(Request $request) {
+		try {
+			$ad_id = AccountDetail::where('ad_code', $request->lg_ad_id)->first();
+			if ($ad_id) {
+				$invoicenumber = SalesMaster::where('sm_ad_id', $ad_id->id)->get();
+				return ['invoicenumber' => $invoicenumber];
+			}
+		} catch (Exception $e) {
+			DB::rollback();
+			return response()->json([
+				'error' => true,
+			]);
+
+		}
+	}
+
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index() {
+		//
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create() {
+		//
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request) {
+		//
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  \App\DebitVoucher  $debitVoucher
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show(DebitVoucher $debitVoucher) {
+		//
+	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  \App\DebitVoucher  $debitVoucher
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit(DebitVoucher $debitVoucher) {
+		//
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \App\DebitVoucher  $debitVoucher
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, DebitVoucher $debitVoucher) {
+		//
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\DebitVoucher  $debitVoucher
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy(DebitVoucher $debitVoucher) {
+		//
+	}
+}
+

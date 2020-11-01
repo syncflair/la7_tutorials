@@ -63,11 +63,15 @@ class LengthUnitController extends Controller
 
         $data['updated_by']= \Auth::user()->id;         
         
-        if($request->is_enabled == NULL){
-            $data['is_enabled'] = 0;
-        }else{
-           $data['is_enabled']=$request->is_enabled; 
-        }
+        // if($request->is_enabled == NULL){
+        //     $data['is_enabled'] = 0;
+        // }else{
+        //    $data['is_enabled']=$request->is_enabled; 
+        // }
+
+        $data['is_enabled']=$request->is_enabled == NULL ? 0 : $request->is_enabled; 
+
+
 
         LengthUnit::create($data);        
         return response()->json(['success'=>'Length Unit Created successfully.']); 
@@ -117,11 +121,13 @@ class LengthUnitController extends Controller
 
         $data['updated_by']= \Auth::user()->id;         
         
-        if($request->is_enabled == NULL){
-            $data['is_enabled'] = 0;
-        }else{
-           $data['is_enabled']=$request->is_enabled; 
-        }
+        // if($request->is_enabled == NULL){
+        //     $data['is_enabled'] = 0;
+        // }else{
+        //    $data['is_enabled']=$request->is_enabled; 
+        // }
+
+        $data['is_enabled']=$request->is_enabled == NULL ? 0 : $request->is_enabled; 
 
         LengthUnit::whereId($id)->update($data);         
         return response()->json(['success'=>'Length Unit Updated successfully.']); 

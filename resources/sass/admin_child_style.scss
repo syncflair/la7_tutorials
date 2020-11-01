@@ -1,0 +1,12 @@
+/*THis css Only For Admin Childs Dashboard*/
+
+/*Admin Lte Css Import*/
+@import 'admin_lte_css.scss';
+
+//Toastr
+@import "toastr";
+
+
+.LogoTextStyle{
+	color:#ffffff; font-weight: bold; padding: 5px; border: 1px solid #f0f0f0; border-radius: 5px; background-color: rgb(255,69,0); text-align: center; margin-bottom: 0;
+}

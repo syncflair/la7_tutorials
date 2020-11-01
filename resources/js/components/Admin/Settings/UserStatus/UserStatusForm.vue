@@ -31,8 +31,7 @@
 
                     <div class="form-group">
                       <label >Details</label>
-                        <textarea v-model="form.us_desc" ref="us_desc" name="us_desc" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('us_desc') }" placeholder="User Status details"></textarea>
-                      <has-error :form="form" field="us_desc"></has-error>
+                        <textarea v-model="form.us_desc" ref="us_desc" name="us_desc" class="form-control form-control-sm" placeholder="User Status details"></textarea>
                     </div>
 
 

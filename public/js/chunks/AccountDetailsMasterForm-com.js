@@ -567,8 +567,14 @@ var render = function() {
                                 }
                               },
                               [
+                                _c(
+                                  "option",
+                                  { attrs: { disabled: "", value: "" } },
+                                  [_vm._v("Select Branch ..")]
+                                ),
+                                _vm._v(" "),
                                 _c("option", { domProps: { value: null } }, [
-                                  _vm._v("Select Branch ..")
+                                  _vm._v("For All")
                                 ]),
                                 _vm._v(" "),
                                 _vm._l(_vm.branches, function(branch) {

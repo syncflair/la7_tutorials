@@ -71,6 +71,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UserStatusList",
   data: function data() {
@@ -203,6 +205,8 @@ var render = function() {
             [
               _vm._l(_vm.UserStatus, function(u_status, index) {
                 return _c("tr", { key: index }, [
+                  _c("td", [_vm._v(" " + _vm._s(u_status.id) + " ")]),
+                  _vm._v(" "),
                   _c(
                     "td",
                     { staticClass: "text-bold green", attrs: { scope: "col" } },
@@ -212,37 +216,47 @@ var render = function() {
                   _c("td", [_vm._v(" " + _vm._s(u_status.us_desc) + " ")]),
                   _vm._v(" "),
                   _c("td", { staticClass: "text-right" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-primary- btn-flat btn-sm",
-                        attrs: {
-                          "data-toggle": "modal",
-                          "data-target": "#UserStatusModal"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.editUserStatus(u_status)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-edit primary " })]
-                    ),
+                    _vm.authUser.role_id === 1
+                      ? _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-primary- btn-flat btn-sm",
+                            attrs: {
+                              "data-toggle": "modal",
+                              "data-target": "#UserStatusModal"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.editUserStatus(u_status)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "fas fa-edit primary " })]
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "btn btn-block- btn-danger- btn-flat btn-sm",
-                        attrs: { id: "delete" },
-                        on: {
-                          click: function($event) {
-                            return _vm.DeleteData(u_status.id)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "far fa-trash-alt red" })]
-                    )
+                    _vm.authUser.role_id === 1
+                      ? _c(
+                          "a",
+                          {
+                            staticClass:
+                              "btn btn-block- btn-danger- btn-flat btn-sm",
+                            attrs: { id: "delete" },
+                            on: {
+                              click: function($event) {
+                                return _vm.DeleteData(u_status.id)
+                              }
+                            }
+                          },
+                          [_c("i", { staticClass: "far fa-trash-alt red" })]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.authUser.role_id != 1
+                      ? _c("span", { staticClass: "red text-bold" }, [
+                          _vm._v("No Action")
+                        ])
+                      : _vm._e()
                   ])
                 ])
               }),
@@ -278,18 +292,20 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
+        _c("th", { staticStyle: { width: "5%" } }, [_vm._v("#")]),
+        _vm._v(" "),
         _c("th", { staticStyle: { width: "20%" }, attrs: { scope: "col" } }, [
           _vm._v("Title")
         ]),
         _vm._v(" "),
-        _c("th", { staticStyle: { width: "20%" }, attrs: { scope: "col" } }, [
+        _c("th", { staticStyle: { width: "50%" }, attrs: { scope: "col" } }, [
           _vm._v("Details")
         ]),
         _vm._v(" "),
         _c(
           "th",
           {
-            staticStyle: { width: "15%", "text-align": "right" },
+            staticStyle: { width: "10%", "text-align": "right" },
             attrs: { scope: "col" }
           },
           [_vm._v("Action")]

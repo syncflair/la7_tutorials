@@ -29,7 +29,7 @@
             <th style="width: 15%;" scope="col" @click="sort('email')" class="sortable-title">Email</th>             
             <th style="width: 7%;" scope="col" @click="sort('phone')" class="sortable-title">Phone</th>
             <th style="width: 27%;" scope="col" @click="sort('vendor_id')" class="sortable-title">Vendor (address)</th>
-            <th style="width: 7%;" scope="col">Date</th>
+            <th style="width: 3%;" scope="col">Date</th>
             <th style="width: 3%;" scope="col">Status</th>
             <th style="width: 3%;" scope="col">Nofify</th>            
             <th style="width: 3%; text-align:right;" scope="col"><strong>...</strong></th>
@@ -55,7 +55,8 @@
               <!-- <small v-show="supplier.supplier_address != null"> - {{ supplier.supplier_address }}, </small> -->
             </td> 
 
-            <td > <small>{{ supplier.created_at | formatDate }}</small> </td>
+            <!-- <td > <small>{{ supplier.created_at | formatDate }}</small> </td> -->
+            <td ><span class="pointer" :title="supplier.created_at | formatDate"><i class="far fa-calendar-check"></i></span></td>
             
             <td style="text-align:center;">
               <span @click="inactiveSupplier(supplier.id)" v-show="supplier.status_id === 1" title="Active supplier, Click to inactive"><i class="fas fa-user-check green pointer"></i></span>

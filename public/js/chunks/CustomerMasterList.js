@@ -669,7 +669,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "th",
-                { staticStyle: { width: "7%" }, attrs: { scope: "col" } },
+                { staticStyle: { width: "3%" }, attrs: { scope: "col" } },
                 [_vm._v("Date")]
               ),
               _vm._v(" "),
@@ -906,10 +906,15 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", [
-                    _vm._v(
-                      " " +
-                        _vm._s(_vm._f("formatDate")(customer.created_at)) +
-                        " "
+                    _c(
+                      "span",
+                      {
+                        staticClass: "pointer",
+                        attrs: {
+                          title: _vm._f("formatDate")(customer.created_at)
+                        }
+                      },
+                      [_c("i", { staticClass: "far fa-calendar-check" })]
                     )
                   ]),
                   _vm._v(" "),

@@ -37,7 +37,7 @@
             <th style="width: 15%;" scope="col">Assign to supplier user</th>
             <th style="width: 4%;" scope="col">Status</th>           
             <th style="width: 3%;" scope="col">Notify</th>           
-            <th style="width: 10%; text-align:right;" scope="col"><strong>...</strong></th>
+            <th style="width: 2%; text-align:right;" scope="col"><strong>...</strong></th>
           </tr>
         </thead>
 

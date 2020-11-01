@@ -17,7 +17,7 @@
 
   <!-- Styles -->  
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-  <link href="{{ asset('css/au_style.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/auth_user_style.css') }}" rel="stylesheet">
 
 
   <style type="text/css">
@@ -38,7 +38,7 @@
   @yield('content')
 
 <!-- Scripts -->
-<script src="{{ asset('js/w_main.js') }}" defer-></script>
+<script src="{{ asset('js/app.js') }}" defer-></script>
  
 
 </body>

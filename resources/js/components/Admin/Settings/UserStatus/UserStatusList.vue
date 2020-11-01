@@ -12,27 +12,29 @@
       <table class="table table-striped table-sm table-responsive-">
         <thead>
           <tr>
-            <!-- <th style="">#</th> -->
+            <th style="width: 5%;">#</th>
             <th style="width: 20%;" scope="col">Title</th>
-            <th style="width: 20%;" scope="col">Details</th>
-            <th style="width: 15%; text-align:right;" scope="col">Action</th>
+            <th style="width: 50%;" scope="col">Details</th>
+            <th style="width: 10%; text-align:right;" scope="col">Action</th>
           </tr>
         </thead>
 
         <tbody>
           <tr v-for="(u_status, index) in UserStatus" :key="index">
-            <!-- <td > id</td> -->
+            <td > {{ u_status.id }} </td>
             <td scope="col" class="text-bold green"> {{ u_status.us_name }} </td>
              
             <td > {{u_status.us_desc}} </td>
 
             <td class="text-right">    
-              <a @click="editUserStatus(u_status)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#UserStatusModal">
+              <a @click="editUserStatus(u_status)" class="btn btn-primary- btn-flat btn-sm" data-toggle="modal" data-target="#UserStatusModal" v-if="authUser.role_id === 1">
                   <i class="fas fa-edit primary "></i>
               </a> 
-              <a @click="DeleteData(u_status.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete">
+              <a @click="DeleteData(u_status.id)" class="btn btn-block- btn-danger- btn-flat btn-sm" id="delete" v-if="authUser.role_id === 1">
                  <i class="far fa-trash-alt red"></i>
               </a>
+
+              <span class="red text-bold" v-if="authUser.role_id != 1">No Action</span>
             </td>
 
           </tr>

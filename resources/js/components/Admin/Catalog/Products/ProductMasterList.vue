@@ -93,7 +93,8 @@
 
             <!-- <td > <small>{{ product.emp_hire_date | formatDate }}</small> </td> -->
             
-            <td> {{product['belongs_to_status_master']['status_name']}}</td>
+            <!-- <td> {{product['belongs_to_status_master']['status_name']}}</td> -->
+            <td> {{product.pro_status}}</td>
             
 
             <td class="text-right">  
@@ -175,7 +176,7 @@
             {'field_name':'pro_price', 'show_name':'price'},
             {'field_name':'brand_name', 'show_name':'Brand'},
             {'field_name':'cat_name', 'show_name':'Category'},
-            {'field_name':'status_name', 'show_name':'Product Status'},
+            //{'field_name':'status_name', 'show_name':'Product Status'},
           ],     
 
                   

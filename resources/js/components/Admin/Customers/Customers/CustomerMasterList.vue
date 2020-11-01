@@ -35,7 +35,7 @@
             <th style="width: 5%;" scope="col" @click="sort('customer_group')" class="sortable-title">Group</th>
             <th style="width: 3%;" scope="col" @click="sort('us_name')" class="sortable-title">Status</th>
             <th style="width: 3%;" scope="col">Nofify</th>
-            <th style="width: 7%;" scope="col">Date</th>
+            <th style="width: 3%;" scope="col">Date</th>
             <th style="width: 2%; text-align:right;" scope="col"><strong>...</strong></th>
           </tr>
         </thead>
@@ -67,7 +67,7 @@
              <td style="text-align:center;">
               <input type="checkbox" @click="ChangeNotify(customer.id, $event)" name="enable_notify" value="1" v-model="customer.enable_notify"  />
             </td>
-            <td > {{ customer.created_at | formatDate }} </td> 
+            <td ><span class="pointer" :title="customer.created_at | formatDate"><i class="far fa-calendar-check"></i></span></td> 
 
 
     <!--         <td class="text-right">  

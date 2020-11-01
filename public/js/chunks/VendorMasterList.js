@@ -1009,7 +1009,7 @@ var staticRenderFns = [
     return _c(
       "th",
       {
-        staticStyle: { width: "10%", "text-align": "right" },
+        staticStyle: { width: "2%", "text-align": "right" },
         attrs: { scope: "col" }
       },
       [_c("strong", [_vm._v("...")])]

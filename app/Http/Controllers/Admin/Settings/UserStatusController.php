@@ -55,7 +55,7 @@ class UserStatusController extends Controller
         $data['created_by']= \Auth::user()->id;
 
         UserStatus::create($data);         
-        return response()->json(['success'=>'User Status added successfully.']); 
+        return response()->json(['success'=>'User Status added.']); 
     }
 
     /**

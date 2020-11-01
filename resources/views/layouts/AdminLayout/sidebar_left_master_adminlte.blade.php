@@ -215,6 +215,19 @@
                 </router-link>
               </li>
 
+              <li class="nav-item">
+                <a href="pages/charts/inline.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Payment Out</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/charts/inline.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Purchase Return</p>
+                </a>
+              </li>
+
             </ul>
           </li><!--/Purchase-->
 
@@ -383,9 +396,8 @@
           
 
 
-          <li class="nav-item has-treeview">
+          <!-- <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <!--<i class="nav-icon fas fa-chart-pie"></i>-->
               <i class="nav-icon fas fa-cart-plus warning"></i>
               <p>
                 Purchase
@@ -405,20 +417,9 @@
                   <p>Purchase Order</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Payment Out</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Purchase Return</p>
-                </a>
-              </li>
+              
             </ul>
-          </li>
+          </li> -->
 
 
           <li class="nav-item">
@@ -523,14 +524,14 @@
                   </p>
                 </router-link>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <router-link to="/spa/PayrollMaster" class="nav-link">
                   <i class="nav-icon fas fa-info-circle"></i>
                   <p>
                     Payrolls
                   </p>
                 </router-link>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <router-link to="/spa/JobTitleMaster" class="nav-link">
                   <i class="nav-icon fas fa-info-circle"></i>
@@ -710,16 +711,7 @@
                     Vat Rate
                   </p>
                 </router-link>
-              </li>
-
-              <li class="nav-item">
-                <router-link to="/spa/StatusMaster" class="nav-link">
-                  <i class="nav-icon fas fa-info-circle"></i>
-                  <p>
-                    Status Master
-                  </p>
-                </router-link>
-              </li>
+              </li>              
 
               <li class="nav-item">
                 <router-link to="/spa/PaymentMethod" class="nav-link">
@@ -776,6 +768,65 @@
               </li>
 
 
+
+              <li class="nav-item">
+                <router-link to="/spa/StatusMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Status Master
+                  </p>
+                </router-link>
+              </li>
+
+
+
+              <li class="nav-item">
+                <router-link to="/spa/OrderStatusMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Order Status
+                  </p>
+                </router-link>
+              </li>              
+
+              <li class="nav-item">
+                <router-link to="/spa/StockStatusMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Stock Status
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/PaymentStatusMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Payment Status
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/ReturnStatusMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Return Status
+                  </p>
+                </router-link>
+              </li>
+
+              <li class="nav-item">
+                <router-link to="/spa/ReturnActionMaster" class="nav-link">
+                  <i class="nav-icon fas fa-info-circle"></i>
+                  <p>
+                    Return Action
+                  </p>
+                </router-link>
+              </li>
+
+
+
              
             </ul>
           </li>
@@ -813,7 +864,7 @@
 
 
 
-          <li class="nav-item has-treeview">
+         <!--  <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-wrench purple"></i>
               <p>
@@ -847,9 +898,9 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
 
-          <li class="nav-item has-treeview">
+<!--           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope blue"></i>
               <p>
@@ -877,9 +928,9 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
 
-          <li class="nav-item has-treeview">
+<!--           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
@@ -901,7 +952,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
 
 
           <!-- Add icons to the links using the .nav-icon class

@@ -671,6 +671,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -688,6 +702,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         name: 'Service'
       }, {
         name: 'Downloadable'
+      }],
+      productStatus: [{
+        name: 'Active'
+      }, {
+        name: 'Inactive'
       }],
       //Single Select app for Brand
       placeHolder_brand: 'Select brand',
@@ -719,6 +738,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         sys_pro_name: '',
         pro_code: '',
         pro_type: '',
+        pro_status: '',
         pro_slug: '',
         status_m_id: '',
         brand_id: '',
@@ -1484,20 +1504,20 @@ var render = function() {
                                           {
                                             name: "model",
                                             rawName: "v-model",
-                                            value: _vm.form.status_m_id,
-                                            expression: "form.status_m_id"
+                                            value: _vm.form.pro_status,
+                                            expression: "form.pro_status"
                                           }
                                         ],
                                         staticClass:
                                           "form-control form-control-sm-",
                                         class: {
                                           "is-invalid": _vm.form.errors.has(
-                                            "status_m_id"
+                                            "pro_status"
                                           )
                                         },
                                         attrs: {
-                                          id: "status_m_id",
-                                          name: "status_m_id"
+                                          id: "pro_status",
+                                          name: "pro_status"
                                         },
                                         on: {
                                           change: function($event) {
@@ -1517,7 +1537,7 @@ var render = function() {
                                               })
                                             _vm.$set(
                                               _vm.form,
-                                              "status_m_id",
+                                              "pro_status",
                                               $event.target.multiple
                                                 ? $$selectedVal
                                                 : $$selectedVal[0]
@@ -1531,21 +1551,18 @@ var render = function() {
                                           {
                                             attrs: { disabled: "", value: "" }
                                           },
-                                          [_vm._v("Select product status ..")]
+                                          [_vm._v("Select Status ..")]
                                         ),
                                         _vm._v(" "),
-                                        _vm._l(_vm.AllStatus, function(
-                                          a_status
-                                        ) {
+                                        _vm._l(_vm.productStatus, function(ps) {
                                           return _c(
                                             "option",
-                                            {
-                                              key: a_status.id,
-                                              domProps: { value: a_status.id }
-                                            },
+                                            { domProps: { value: ps.name } },
                                             [
                                               _vm._v(
-                                                _vm._s(a_status.status_name)
+                                                "\r\n                      " +
+                                                  _vm._s(ps.name) +
+                                                  "\r\n                    "
                                               )
                                             ]
                                           )
@@ -1557,7 +1574,7 @@ var render = function() {
                                     _c("has-error", {
                                       attrs: {
                                         form: _vm.form,
-                                        field: "status_m_id"
+                                        field: "pro_status"
                                       }
                                     })
                                   ],

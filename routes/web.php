@@ -314,6 +314,23 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     Route::resource('spa/DistrictZone-Info', 'Admin\Settings\DistrictZoneController', 
       ['except'=>['create','show','edit'] ]);
 
+
+    Route::get('spa/order-status-info/GetOrderStatus', 'Admin\Settings\OrderStatusController@GetOrderStatus');//commonStoreForAll store
+    Route::resource('spa/order-status-info', 'Admin\Settings\OrderStatusController',
+      ['except'=>['create','show','edit'] ]);
+    Route::get('spa/stock-status-info/GetStockStatus', 'Admin\Settings\StockStatusController@GetStockStatus');//commonStoreForAll store
+    Route::resource('spa/stock-status-info', 'Admin\Settings\StockStatusController',
+      ['except'=>['create','show','edit'] ]);
+    Route::get('spa/payment-status-info/GetPaymentStatus', 'Admin\Settings\PaymentStatusController@GetPaymentStatus');//commonStoreForAll store
+    Route::resource('spa/payment-status-info', 'Admin\Settings\PaymentStatusController',
+      ['except'=>['create','show','edit'] ]);
+    Route::get('spa/return-status-info/GetReturnStatus', 'Admin\Settings\ReturnStatusController@GetReturnStatus');//commonStoreForAll store
+    Route::resource('spa/return-status-info', 'Admin\Settings\ReturnStatusController',
+      ['except'=>['create','show','edit'] ]);
+    Route::get('spa/return-action-info/getReturnAction', 'Admin\Settings\ReturnActionController@getReturnAction');//commonStoreForAll store
+    Route::resource('spa/return-action-info', 'Admin\Settings\ReturnActionController',
+      ['except'=>['create','show','edit'] ]);
+
     
 
 
@@ -347,36 +364,6 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
     })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
     //})->where('anypath', '.*' ); 
 
-   
-    // Vue: single page application (SPA )- Any route that not match that redirect to admin childs dashboard. 
-    // Route::get('/spaa/{anypath}', function () {
-    //   if (auth()->user()->role_id == 7) { //Sales = 7
-    //     return view('adminSales.DashboardSales');
-    //   }
-    //   elseif (auth()->user()->role_id == 8) { //Purchase = 8
-    //     return view('adminPurchase.DashboardPurchase');
-    //   }
-    //   elseif (auth()->user()->role_id == 9) { //Storage = 9
-    //       return view('adminStorage.DashboardStorage');
-    //   }
-    //   elseif (auth()->user()->role_id == 10) { //Order = 10
-    //       return view('adminOrder.DashboardOrder');
-    //   }
-    //   elseif (auth()->user()->role_id == 11) { //Packaging = 11
-    //       return view('adminPackaging.DashboardPackaging');
-    //   }
-    //   elseif (auth()->user()->role_id == 13) { //Delivery = 13
-    //       return view('adminDelivery.DashboardDelivery');
-    //   }
-    //   elseif (auth()->user()->role_id == 14) { //Supervisor = 14
-    //       return view('adminSupervisor.DashboardSupervisor'); 
-    //   }
-    //   //this is guest user that only for verification check
-    //   elseif (auth()->user()->role_id == 17) { //guest = 17
-    //       return view('GuestUser.DashboardGuestUser');
-    //   }      
-    // })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
-
 });
 /**************************************** End Admin middleware *****************************************************/
 
@@ -384,96 +371,77 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 /**************** Routes for all role based admin child ********************/
 Route::group(['middleware'=>['auth'] ], function(){
   Route::get('spaa/admin-child-profille-info', 'AdminChild\AdminChildProfileController@index');
+  Route::put('spaa/admin-child-profille-change-password/{id}', 'AdminChild\AdminChildProfileController@ChangePassword');
 });
 
-/**************************************** Admin Supervisor middleware *************************************************/
-Route::group(['middleware'=>['AdminSupervisor','auth','verified'] ], function(){
+  /**************************************** Admin Supervisor middleware *************************************************/
+  Route::group(['middleware'=>['AdminSupervisor','auth','verified'] ], function(){
+      Route::get('dashboard-supervisor', 'AdminChild\AdminSupervisor\AdminSupervisorController@index')->name('dashboard-supervisor');
+  });
+  /****************************************end Admin Supervisor middleware ***********************************************/
 
-    Route::get('dashboard-supervisor', 'AdminSupervisor\AdminSupervisorController@index')->name('dashboard-supervisor');
+  /**************************************** Admin Delivery middleware ***************************************************/
+  Route::group(['middleware'=>['AdminDelivery','auth','verified'] ], function(){
+      Route::get('dashboard-delivery', 'AdminChild\AdminDelivery\AdminDeliveryController@index')->name('dashboard-delivery');
+  });
+  /****************************************end Admin Delivery middleware ***********************************************/
 
-    Route::get('/spaa/{anypath}', function () {
-      if (auth()->user()->role_id == 7) { return view('adminSales.DashboardSales'); }
-      elseif (auth()->user()->role_id == 8) { return view('adminPurchase.DashboardPurchase'); }
-      elseif (auth()->user()->role_id == 9) { return view('adminStorage.DashboardStorage'); }
-      elseif (auth()->user()->role_id == 10) { return view('adminOrder.DashboardOrder'); }
-      elseif (auth()->user()->role_id == 11) { return view('adminPackaging.DashboardPackaging'); }
-      elseif (auth()->user()->role_id == 13) { return view('adminDelivery.DashboardDelivery'); }
-      elseif (auth()->user()->role_id == 14) { return view('adminSupervisor.DashboardSupervisor'); }
-      //this is guest user that only for verification check
-      elseif (auth()->user()->role_id == 17) { return view('GuestUser.DashboardGuestUser'); }      
-    })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
+  /**************************************** Admin Store middleware ***************************************************/
+  Route::group(['middleware'=>['AdminStorage','auth','verified'] ], function(){
+      Route::get('dashboard-storage', 'AdminChild\AdminStorage\AdminStorageController@index')->name('dashboard-storage');
+  });
+  /****************************************end Admin Store middleware ***********************************************/
 
-});
-/****************************************end Admin Supervisor middleware ***********************************************/
+  /**************************************** Admin Order middleware ***************************************************/
+  Route::group(['middleware'=>['AdminOrder','auth','verified'] ], function(){
+      Route::get('dashboard-order', 'AdminChild\AdminOrder\AdminOrderController@index')->name('dashboard-order');
+  });
+  /****************************************end Admin Order middleware ***********************************************/
 
-/**************************************** Admin Delivery middleware ***************************************************/
-Route::group(['middleware'=>['AdminDelivery','auth','verified'] ], function(){
+  /**************************************** Admin Packaging middleware ***************************************************/
+  Route::group(['middleware'=>['AdminPackaging','auth','verified'] ], function(){
+      Route::get('dashboard-packaging', 'AdminChild\AdminPackaging\AdminPackagingController@index')->name('dashboard-packaging');
+  });
+  /****************************************end Admin Packaging middleware ***********************************************/
 
-    Route::get('dashboard-delivery', 'AdminDelivery\AdminDeliveryController@index')->name('dashboard-delivery');
+  /**************************************** Admin Sales middleware ***************************************************/
+  Route::group(['middleware'=>['AdminSales','auth','verified'] ], function(){
+      Route::get('dashboard-sales', 'AdminChild\AdminSales\AdminSalesController@index')->name('dashboard-sales');
+  });
+  /****************************************end Admin Sales middleware ***********************************************/
 
-    Route::get('/spaa/{anypath}', function () {
-      if (auth()->user()->role_id == 7) { return view('adminSales.DashboardSales'); }
-      elseif (auth()->user()->role_id == 8) { return view('adminPurchase.DashboardPurchase'); }
-      elseif (auth()->user()->role_id == 9) { return view('adminStorage.DashboardStorage'); }
-      elseif (auth()->user()->role_id == 10) { return view('adminOrder.DashboardOrder'); }
-      elseif (auth()->user()->role_id == 11) { return view('adminPackaging.DashboardPackaging'); }
-      elseif (auth()->user()->role_id == 13) { return view('adminDelivery.DashboardDelivery'); }
-      elseif (auth()->user()->role_id == 14) { return view('adminSupervisor.DashboardSupervisor'); }
-      //this is guest user that only for verification check
-      elseif (auth()->user()->role_id == 17) { return view('GuestUser.DashboardGuestUser'); }      
-    })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
+  /**************************************** Admin Purchase middleware ***************************************************/
+  Route::group(['middleware'=>['AdminPurchase','auth','verified'] ], function(){
+      Route::get('dashboard-purchase', 'AdminChild\AdminPurchase\AdminPurchaseController@index')->name('dashboard-purchase');
+  });
+  /****************************************end Admin Sales middleware ***********************************************/
 
-});
-/****************************************end Admin Delivery middleware ***********************************************/
+  /**************************************** Guest User middleware ***************************************************/
+  Route::group(['middleware'=>['GuestUser','auth','verified'] ], function(){
+      Route::get('dashboard-guest-user', 'AdminChild\GuestUser\GuestUserController@index')->name('dashboard-guest-user');
+  });
+  /****************************************end Admin Sales middleware ***********************************************/
 
-/**************************************** Admin Store middleware ***************************************************/
-Route::group(['middleware'=>['AdminStorage','auth','verified'] ], function(){
+  Route::get('/spaa/{anypath}', function () {
+    if (Auth::check()) {
+        if (auth()->user()->role_id == 7) { return view('AdminChild.adminSales.DashboardSales'); }
+        elseif (auth()->user()->role_id == 8) { return view('AdminChild.adminPurchase.DashboardPurchase'); }
+        elseif (auth()->user()->role_id == 9) { return view('AdminChild.adminStorage.DashboardStorage'); }
+        elseif (auth()->user()->role_id == 10) { return view('AdminChild.adminOrder.DashboardOrder'); }
+        elseif (auth()->user()->role_id == 11) { return view('AdminChild.adminPackaging.DashboardPackaging'); }
+        elseif (auth()->user()->role_id == 13) { return view('AdminChild.adminDelivery.DashboardDelivery'); }
+        elseif (auth()->user()->role_id == 14) { return view('AdminChild.adminSupervisor.DashboardSupervisor'); }
+        //this is guest user that only for verification check
+        elseif (auth()->user()->role_id == 17) { return view('AdminChild.GuestUser.DashboardGuestUser'); }  
+    }else{
+      //abort(403, 'Unauthorized action.');
+      //abort(404);
+      return redirect('/');
+    }
 
-    Route::get('dashboard-storage', 'AdminStorage\AdminStorageController@index')->name('dashboard-storage');
+  })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
 
-});
-/****************************************end Admin Store middleware ***********************************************/
-
-/**************************************** Admin Order middleware ***************************************************/
-Route::group(['middleware'=>['AdminOrder','auth','verified'] ], function(){
-
-    Route::get('dashboard-order', 'AdminOrder\AdminOrderController@index')->name('dashboard-order');
-
-});
-/****************************************end Admin Order middleware ***********************************************/
-
-/**************************************** Admin Packaging middleware ***************************************************/
-Route::group(['middleware'=>['AdminPackaging','auth','verified'] ], function(){
-
-    Route::get('dashboard-packaging', 'AdminPackaging\AdminPackagingController@index')->name('dashboard-packaging');
-
-});
-/****************************************end Admin Packaging middleware ***********************************************/
-
-/**************************************** Admin Sales middleware ***************************************************/
-Route::group(['middleware'=>['AdminSales','auth','verified'] ], function(){
-
-    Route::get('dashboard-sales', 'AdminSales\AdminSalesController@index')->name('dashboard-sales');
-
-});
-/****************************************end Admin Sales middleware ***********************************************/
-
-/**************************************** Admin Purchase middleware ***************************************************/
-Route::group(['middleware'=>['AdminPurchase','auth','verified'] ], function(){
-
-    Route::get('dashboard-purchase', 'AdminPurchase\AdminPurchaseController@index')->name('dashboard-purchase');
-
-});
-/****************************************end Admin Sales middleware ***********************************************/
-
-/**************************************** Guest User middleware ***************************************************/
-Route::group(['middleware'=>['GuestUser','auth','verified'] ], function(){
-
-    Route::get('dashboard-guest-user', 'GuestUser\GuestUserController@index')->name('dashboard-guest-user');
-
-});
-/****************************************end Admin Sales middleware ***********************************************/
-
+/****************End Routes for all role based admin child ********************/
 
 
 
@@ -502,6 +470,12 @@ Route::group(['middleware'=>['GuestUser','auth','verified'] ], function(){
 // Route::get('/', function () {
 //     return redirect(app()->getLocale());
 // });
+
+Route::get('/home', function () {
+    //App::setLocale('bn'); //app()->getLocale()
+    return view('website.home');    
+  });
+
 Route::redirect('/','/en');
 Route::group(['prefix'=>'{locale}', 'where'=>['locale' => '[a-zA-Z]{2}'], 'middleware'=>'SetLanguage'], function(){
 //Route::group(['prefix' => '{locale}'], function(){

@@ -49,8 +49,8 @@
 	                <div class="form-group">
 			          <label>Branch </label>
 		              <select v-model="form.branch_id" class="form-control form-control-sm-" id="branch_id" name="branch_id" :class="{ 'is-invalid': form.errors.has('branch_id') }" >
-		              	  <!-- <option disabled value="">Select Branch ..</option>                 -->
-		              	  <option v-bind:value="null">Select Branch ..</option>                
+		              	  <option disabled value="">Select Branch ..</option>                
+		              	  <option v-bind:value="null">For All</option>                
 		                  <option v-for="branch in branches" :key="branch.id" v-bind:value="branch.id">{{branch.branch_name}}</option> 
 		               </select>
 		               <!-- <has-error :form="form" field="branch_id"></has-error>			                       -->

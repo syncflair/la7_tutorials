@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->json('pro_translation')->nullable()->comment('JSON Product Name description translation'); 
             $table->string('pro_slug', 150)->unique();
             $table->enum('pro_type', ['General','Virtual','Service','Downloadable']); 
+            $table->enum('pro_status', ['active','inactive']); 
             $table->integer('status_m_id')->comment('Data call from Status Master');   
             $table->string('pro_code', 50)->unique()->nullable(); 
             $table->string('pro_model', 150)->unique()->nullable(); 

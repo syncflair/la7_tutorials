@@ -31,7 +31,7 @@
             <th style="width: 22%;" scope="col" ><small>Assign To employee </small></th>
             <th style="width: 3%;" scope="col" >Status</th>
             <th style="width: 3%;" scope="col">Nofify</th>
-            <th style="width: 8%;" scope="col">Date</th>
+            <th style="width: 3%;" scope="col">Date</th>
             <th style="width: 2%; text-align:right;" scope="col"><strong>...</strong></th>
           </tr>
         </thead>
@@ -71,7 +71,8 @@
               data
               <!-- <input type="checkbox" @click="ChangeNotify(user.id, $event)" name="enable_notify" value="1" v-model="user.enable_notify"  /> -->
             </td>
-            <td ><small> {{ user.created_at | formatDate }}</small> </td> 
+            <!-- <td ><small> {{ user.created_at | formatDate }}</small> </td> -->
+            <td><span class="pointer" :title="user.created_at | formatDate"><i class="far fa-calendar-check"></i></span></td>
 
 
             <td class="text-right">  
