@@ -325,7 +325,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'branches', 'Dist_Zones']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('VendorMasterStore', ['autoSearchBrandShop', 'selectedBrandShop'])),
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'branches', 'Dist_Zones'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('VendorMasterStore', ['autoSearchBrandShop', 'selectedBrandShop'])),
   methods: {
     //Make image as base64 
     onImageChange: function onImageChange(e) {
@@ -1521,7 +1521,12 @@ function normalizeComponent (
     options._ssrRegister = hook
   } else if (injectStyles) {
     hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      ? function () {
+        injectStyles.call(
+          this,
+          (options.functional ? this.parent : this).$root.$options.shadowRoot
+        )
+      }
       : injectStyles
   }
 

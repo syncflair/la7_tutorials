@@ -174,9 +174,7 @@ const app = new Vue({
         },
          //immediate: true,
       }
-    },
-
-  
+    },  
 
     /*Global print function. add this @click.prevent="printMe" to any link that you want to print*/
     printMe(){
@@ -189,11 +187,6 @@ const app = new Vue({
     }, 
 
     mounted() {
-
-     
-             
-
-
     }, //end mounted   
 
 

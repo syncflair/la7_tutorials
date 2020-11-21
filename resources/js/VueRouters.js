@@ -17,12 +17,8 @@ Vue.use(VueRouter)
 const routes = [
 //export const routes = [
 
-	//website
-	{ path: '/home', component: () => import(/* webpackChunkName: "website-home-public" */ './components/Website/Home/HomePublic.vue'), meta: { title: 'Welcome To Sorboraho'} },
-
-
-
-
+	
+	
 
 
 	//{ path: '/dashboard', component: Dashboard, meta: { title: 'Dashboard'} },
@@ -209,6 +205,21 @@ const routes = [
 
 
 
+
+	//website
+	//{ path: '/home', name: 'home', component: () => import(/* webpackChunkName: "website-home-public" */ './components/Website/Home/HomePublic.vue'), meta: { title: 'Welcome To Sorboraho'} },
+	//{ path: '/contact', name: 'contact', component: () => import(/* webpackChunkName: "website-contact-public" */ './components/Website/Contact/ContactPublic.vue'), meta: { title: 'Contact Us'} },
+
+	{ path: '/home', name: 'HomeMaster', component: () => import(/* webpackChunkName: "HomeMaster-website" */ './components/Website/Home/HomeMaster.vue'), meta: { title: 'Welcome To Sorboraho'},
+	  children: [
+	  	{ path: '/home', name: 'HomePublic', component: () => import(/* webpackChunkName: "HomePublic-website" */ './components/Website/Home/HomePublic.vue'), },
+		{ path: '/contact', name: 'ContactPublic', component: () => import(/* webpackChunkName: "ContactPublic-website" */ './components/Website/Contact/ContactPublic.vue'), },
+		{ path: '/about', name: 'AboutUsPublic', component: () => import(/* webpackChunkName: "AboutUsPublic-website" */ './components/Website/About/AboutUsPublic.vue'), },
+		{ path: '/terms-and-conditions', name: 'TermsAndConditionsPublic', component: () => import(/* webpackChunkName: "TermsAndConditionsPublic-website" */ './components/Website/TAC/TermsAndConditionsPublic.vue'), },
+		{ path: '/faq', name: 'FAQPublic', component: () => import(/* webpackChunkName: "FAQPublic-website" */ './components/Website/FAQ/FAQPublic.vue'), },
+		{ path: '/track-order', name: 'TrackYourOrder', component: () => import(/* webpackChunkName: "TrackYourOrder-website" */ './components/Website/TrackOrder/TrackYourOrder.vue'), },
+	  ]
+	},
 
 
 

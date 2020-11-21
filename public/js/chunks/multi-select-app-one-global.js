@@ -13,7 +13,7 @@ function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableTo
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
@@ -169,7 +169,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           return v === option[_this.valueProperty];
         });
 
-        return _objectSpread({}, option, {
+        return _objectSpread(_objectSpread({}, option), {}, {
           checked: checked
         }); //}
       });
@@ -618,7 +618,12 @@ function normalizeComponent (
     options._ssrRegister = hook
   } else if (injectStyles) {
     hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      ? function () {
+        injectStyles.call(
+          this,
+          (options.functional ? this.parent : this).$root.$options.shadowRoot
+        )
+      }
       : injectStyles
   }
 

@@ -625,7 +625,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'jobTitles', 'branches', 'allDepertments', 'autoSearchDepartments']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('EmployeeMasterStore', ['selectedDepartmentList', 'autoSearchDepartments'])),
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus', 'jobTitles', 'branches', 'allDepertments', 'autoSearchDepartments'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('EmployeeMasterStore', ['selectedDepartmentList', 'autoSearchDepartments'])),
   methods: {
     //###################################### Payrole Function ################################################
     add_payroll: function add_payroll() {
@@ -3689,7 +3689,12 @@ function normalizeComponent (
     options._ssrRegister = hook
   } else if (injectStyles) {
     hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      ? function () {
+        injectStyles.call(
+          this,
+          (options.functional ? this.parent : this).$root.$options.shadowRoot
+        )
+      }
       : injectStyles
   }
 

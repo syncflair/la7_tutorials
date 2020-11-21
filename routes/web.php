@@ -54,8 +54,8 @@ Route::post('supplier/password/reset','AuthSupplier\ResetPasswordController@rese
 
 
 Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
-   Route::get('/dashboard-customer', 'AdminCustomer\AdminCustomerController@index')->name('dashboard-customer');
-   Route::post('customer/logout', 'AuthCustomer\LoginController@logout')->name('customer.logout');
+    Route::get('/dashboard-customer', 'AdminCustomer\AdminCustomerController@index')->name('dashboard-customer');
+    Route::post('customer/logout', 'AuthCustomer\LoginController@logout')->name('customer.logout');
 
      // Vue: single page application (SPA)- Any route that not match that redirect to dashboard-customer. 
     Route::get('/spac/{anypath}', function () {
@@ -471,10 +471,20 @@ Route::group(['middleware'=>['auth'] ], function(){
 //     return redirect(app()->getLocale());
 // });
 
+
+//-----------------------------------Website------------------------------------------------
 Route::get('/home', function () {
     //App::setLocale('bn'); //app()->getLocale()
     return view('website.home');    
-  });
+});
+
+Route::get('/{anypath}', function () {
+      return view('website.home'); 
+    //})->where(['anypath' => '([A-z\d-/_.]+)?' ]);
+    })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
+
+//-------------------------------------End Website------------------------------------------
+
 
 Route::redirect('/','/en');
 Route::group(['prefix'=>'{locale}', 'where'=>['locale' => '[a-zA-Z]{2}'], 'middleware'=>'SetLanguage'], function(){

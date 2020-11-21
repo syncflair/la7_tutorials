@@ -174,7 +174,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }]
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('usersAdminStore', ['users', 'pagination', 'autoCompleteData']), {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('usersAdminStore', ['users', 'pagination', 'autoCompleteData'])), {}, {
     // use for sortable
     sortedObjects: function sortedObjects() {
       var _this = this;

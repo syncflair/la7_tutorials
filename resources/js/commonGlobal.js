@@ -25,22 +25,22 @@ export default {
     },
 
     methods: {  
-        isViewPermitted(modules){
-            //return this.authPermissionsDecode.;
-        }, 
+        // isViewPermitted(modules){
+        //     //return this.authPermissionsDecode.;
+        // }, 
 
-        isReadPermitted(module){
-            return module;
-        },
-        isWritePermitted(module){
-            return module;
-        },
-        isUpdatePermitted(module){
-            return module;
-        },
-        isDeletePermitted(module){
-            return module;
-        }        
+        // isReadPermitted(module){
+        //     return module;
+        // },
+        // isWritePermitted(module){
+        //     return module;
+        // },
+        // isUpdatePermitted(module){
+        //     return module;
+        // },
+        // isDeletePermitted(module){
+        //     return module;
+        // }        
 
 
 
@@ -77,8 +77,10 @@ export default {
         if value is '1' then work the bellow code (Template script) for website only
       */
       //console.log('Website:' + this.isitwebsiteCheck);
-      if(this.isitwebsiteCheck != ''){
+      // if(this.isitwebsiteCheck != ''){
+      if(this.isitwebsiteCheck ===  1){
 
+        
               //############################# Windown Load ###################################            
 
               //initialization of HSMegaMenu component
@@ -89,6 +91,11 @@ export default {
                   breakpoint: 767.98,
                   hideTimeOut: 0
               });
+
+              
+              
+
+
 
               // initialization of svg injector module
               $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
@@ -142,8 +149,14 @@ export default {
               // initialization of fancybox
               $.HSCore.components.HSFancyBox.init('.js-fancybox');
 
+
+
+
+
+              //Slick slider call from HomePublic.vue component
               // initialization of slick carousel
-              $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+              //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+
 
               // initialization of go to
               $.HSCore.components.HSGoTo.init('.js-go-to');
@@ -178,7 +191,7 @@ export default {
 
               // initialization of select picker
               $.HSCore.components.HSSelectPicker.init('.js-select');
-      
+        
       }//end authUser Check        
 
     },

@@ -156,7 +156,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var fo = Object.values(this.autoSearchOptions).map(function (option) {
         var checked = _this.value === option[_this.valueProperty];
-        return _objectSpread({}, option, {
+        return _objectSpread(_objectSpread({}, option), {}, {
           checked: checked
         });
       });
@@ -567,7 +567,12 @@ function normalizeComponent (
     options._ssrRegister = hook
   } else if (injectStyles) {
     hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      ? function () {
+        injectStyles.call(
+          this,
+          (options.functional ? this.parent : this).$root.$options.shadowRoot
+        )
+      }
       : injectStyles
   }
 

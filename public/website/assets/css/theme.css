@@ -28398,7 +28398,7 @@ label.btn {
   font-family: "Font Awesome 5 Free";
   font-size: 80%;
   font-weight: 900;
-  content: "";
+  //content: "";
   margin-left: .5rem;
 }
 

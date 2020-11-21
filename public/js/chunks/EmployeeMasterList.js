@@ -193,7 +193,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }]
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('EmployeeMasterStore', ['employees', 'pagination', 'autoCompleteData']), {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('EmployeeMasterStore', ['employees', 'pagination', 'autoCompleteData'])), {}, {
     // use for sortable
     sortedemployees: function sortedemployees() {
       var _this = this;
@@ -1128,7 +1128,12 @@ function normalizeComponent (
     options._ssrRegister = hook
   } else if (injectStyles) {
     hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      ? function () {
+        injectStyles.call(
+          this,
+          (options.functional ? this.parent : this).$root.$options.shadowRoot
+        )
+      }
       : injectStyles
   }
 

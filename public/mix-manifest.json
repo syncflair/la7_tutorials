@@ -48,6 +48,7 @@
     "/js/chunks/ChartOfAccounts.js": "/js/chunks/ChartOfAccounts.js",
     "/js/chunks/ChartOfAccountsForm-com.js": "/js/chunks/ChartOfAccountsForm-com.js",
     "/js/chunks/ChartOfAccountsList-com.js": "/js/chunks/ChartOfAccountsList-com.js",
+    "/js/chunks/ContactPublic-website.js": "/js/chunks/ContactPublic-website.js",
     "/js/chunks/CountryForm-com.js": "/js/chunks/CountryForm-com.js",
     "/js/chunks/CountryList-com.js": "/js/chunks/CountryList-com.js",
     "/js/chunks/CountryMaster.js": "/js/chunks/CountryMaster.js",
@@ -96,6 +97,8 @@
     "/js/chunks/EmployeeMasterForm.js": "/js/chunks/EmployeeMasterForm.js",
     "/js/chunks/EmployeeMasterList.js": "/js/chunks/EmployeeMasterList.js",
     "/js/chunks/GiftVoucher.js": "/js/chunks/GiftVoucher.js",
+    "/js/chunks/HomeMaster-website.js": "/js/chunks/HomeMaster-website.js",
+    "/js/chunks/HomePublic-website.js": "/js/chunks/HomePublic-website.js",
     "/js/chunks/JobTitleMaster.js": "/js/chunks/JobTitleMaster.js",
     "/js/chunks/JobTitleMasterForm-com.js": "/js/chunks/JobTitleMasterForm-com.js",
     "/js/chunks/JobTitleMasterList-com.js": "/js/chunks/JobTitleMasterList-com.js",
@@ -213,7 +216,10 @@
     "/js/chunks/single-select-app-two-global.js": "/js/chunks/single-select-app-two-global.js",
     "/js/chunks/switch-app.js": "/js/chunks/switch-app.js",
     "/js/chunks/viewCategory-com.js": "/js/chunks/viewCategory-com.js",
-    "/js/chunks/website-home-public.js": "/js/chunks/website-home-public.js",
     "/js/chunks/website-wrapper.js": "/js/chunks/website-wrapper.js",
-    "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf.js": "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf.js"
+    "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf.js": "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf.js",
+    "/js/chunks/AboutUsPublic-website.js": "/js/chunks/AboutUsPublic-website.js",
+    "/js/chunks/TermsAndConditionsPublic-website.js": "/js/chunks/TermsAndConditionsPublic-website.js",
+    "/js/chunks/FAQPublic-website.js": "/js/chunks/FAQPublic-website.js",
+    "/js/chunks/TrackYourOrder-website.js": "/js/chunks/TrackYourOrder-website.js"
 }

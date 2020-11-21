@@ -226,7 +226,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   //end data
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('SupplierForAdminStore', ['pagination', 'selectedVendor', 'autoSearchVendor']), {}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus'])),
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('SupplierForAdminStore', ['pagination', 'selectedVendor', 'autoSearchVendor'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['userStatus'])),
   methods: {
     //Make image as base64 
     onImageChange: function onImageChange(e) {

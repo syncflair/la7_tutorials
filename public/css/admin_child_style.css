@@ -31278,8 +31278,7 @@ body.os-dragging * {
     margin: 0 !important;
     border-radius: 0px !important;
     float: none !important;
-    -webkit-filter: none !important;
-            filter: none !important;
+    filter: none !important;
     border: none !important;
     resize: none !important;
     transform: none !important;
