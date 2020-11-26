@@ -1,34 +1,31 @@
 <template>
-<span>
 	<div class="u-header-topbar py-2 d-none d-xl-block">
         <div class="container">
             <div class="d-flex align-items-center">
                 <div class="topbar-left">
-                    <a href="#" class="text-gray-110 font-size-13 hover-on-dark">Welcome to Sorboraho</a>
+                    <a href="#" class="text-gray-110 font-size-13 hover-on-dark">Welcome to SORBORAHO</a>
                 </div>
                 <div class="topbar-right ml-auto">
                     <ul class="list-inline mb-0">
-                    	<!-- <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                        <!-- <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                             <a href="#" @click.prevent="$router.push({ name: 'home' })" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i>Home</a>
                         </li> -->
-
-                        <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                            <a href="#" @click="GotoHome()" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i>Home</a>
-                        </li>
-
                         <!-- <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                            <a href="#" @click.prevent="$router.push({ name: 'contact' })" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i>Get In Touch</a>
+                            <router-link to="/home" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> Home</router-link>
                         </li> -->
+                        <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                            <router-link to="/shop" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> Shop</router-link>
+                        </li>
+                        <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                            <router-link to="/about" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> About</router-link>
+                        </li>
 
                         <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                             <router-link to="/contact" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> Contact Us</router-link>
                         </li>
-
+                        
                         <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                            <a href="#" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> Store Locator</a>
-                        </li>
-                        <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                            <a href="../shop/track-your-order.html" class="u-header-topbar__nav-link"><i class="ec ec-transport mr-1"></i> Track Your Order</a>
+                            <router-link to="/track-order" class="u-header-topbar__nav-link"><i class="ec ec-transport mr-1"></i> Track Your Order</router-link>
                         </li>
                         <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
                             <div class="d-flex align-items-center">
@@ -81,7 +78,6 @@
             </div>
         </div>
     </div>
-</span>
 </template>
 
 <script>

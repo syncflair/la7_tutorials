@@ -121,6 +121,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 //import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
 //import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
 //const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
@@ -133,7 +139,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {},
   created: function created() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    // initialization of slick carousel (Slick Slider call from here, otherwise it get error)
+    $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+  }
 });
 
 /***/ }),
@@ -160,405 +169,289 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("main", { attrs: { id: "content", role: "main" } }, [
-        _c("div", { staticClass: "bg-gray-13 bg-md-transparent" }, [
-          _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "my-md-3" }, [
-              _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
-                _c(
-                  "ol",
-                  {
-                    staticClass:
-                      "breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
-                  },
-                  [
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
-                      },
-                      [
-                        _c("a", { attrs: { href: "../home/index.html" } }, [
-                          _vm._v("Home")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active",
-                        attrs: { "aria-current": "page" }
-                      },
-                      [_vm._v("Terms and Conditions")]
-                    )
-                  ]
-                )
-              ])
+    return _c("main", { attrs: { id: "content", role: "main" } }, [
+      _c("div", { staticClass: "bg-gray-13 bg-md-transparent" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "my-md-3" }, [
+            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+              _c(
+                "ol",
+                {
+                  staticClass:
+                    "breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
+                },
+                [
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
+                    },
+                    [
+                      _c("a", { attrs: { href: "../home/index.html" } }, [
+                        _vm._v("Home")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active",
+                      attrs: { "aria-current": "page" }
+                    },
+                    [_vm._v("Terms and Conditions")]
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "mb-12 text-center" }, [
+          _c("h1", [_vm._v("Terms and Conditions")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-gray-44" }, [
+            _vm._v("This Agreement was last modified on 18th february 2019")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-10" }, [
+          _c("h3", { staticClass: "mb-6 pb-2 font-size-25" }, [
+            _vm._v("Intellectual Propertly")
+          ]),
+          _vm._v(" "),
+          _c("ol", [
+            _c("li", [
+              _vm._v(
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem sed ultrices interdum."
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _vm._v(
+                "Leo metus luctus sem, vel vulputate diam ipsum sed lorem. Donec tempor arcu nisl, et molestie massa scelerisque ut. Nunc at rutrum leo. Mauris metus mauris, tristique quis sapien eu, rutrum vulputate enim."
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _vm._v(
+                "Mauris tempus erat laoreet turpis lobortis, eu tincidunt erat fermentum."
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _vm._v(
+                "Aliquam non tincidunt urna. Integer tincidunt nec nisl vitae ullamcorper. Proin sed ultrices erat. Praesent varius ultrices massa at faucibus."
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _vm._v(
+                "Aenean dignissim, orci sed faucibus pharetra, dui mi dignissim tortor, sit amet condimentum mi ligula sit amet augue."
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _vm._v("Pellentesque vitae eros eget enim mollis placerat.")
             ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "mb-12 text-center" }, [
-            _c("h1", [_vm._v("Terms and Conditions")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-gray-44" }, [
-              _vm._v("This Agreement was last modified on 18th february 2019")
-            ])
+        _c("div", { staticClass: "mb-10" }, [
+          _c("h3", { staticClass: "mb-6 pb-2 font-size-25" }, [
+            _vm._v("Termination")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "mb-10" }, [
-            _c("h3", { staticClass: "mb-6 pb-2 font-size-25" }, [
-              _vm._v("Intellectual Propertly")
-            ]),
-            _vm._v(" "),
-            _c("ol", [
-              _c("li", [
-                _vm._v(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem sed ultrices interdum."
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Leo metus luctus sem, vel vulputate diam ipsum sed lorem. Donec tempor arcu nisl, et molestie massa scelerisque ut. Nunc at rutrum leo. Mauris metus mauris, tristique quis sapien eu, rutrum vulputate enim."
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Mauris tempus erat laoreet turpis lobortis, eu tincidunt erat fermentum."
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Aliquam non tincidunt urna. Integer tincidunt nec nisl vitae ullamcorper. Proin sed ultrices erat. Praesent varius ultrices massa at faucibus."
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Aenean dignissim, orci sed faucibus pharetra, dui mi dignissim tortor, sit amet condimentum mi ligula sit amet augue."
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v("Pellentesque vitae eros eget enim mollis placerat.")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mb-10" }, [
-            _c("h3", { staticClass: "mb-6 pb-2 font-size-25" }, [
-              _vm._v("Termination")
-            ]),
-            _vm._v(" "),
-            _c("ol", [
-              _c("li", [
-                _vm._v(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem sed ultrices interdum."
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Leo metus luctus sem, vel vulputate diam ipsum sed lorem. Donec tempor arcu nisl, et molestie massa scelerisque ut. Nunc at rutrum leo. Mauris metus mauris, tristique quis sapien eu, rutrum vulputate enim."
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Mauris tempus erat laoreet turpis lobortis, eu tincidunt erat fermentum."
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Aliquam non tincidunt urna. Integer tincidunt nec nisl vitae ullamcorper. Proin sed ultrices erat. Praesent varius ultrices massa at faucibus."
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v(
-                  "Aenean dignissim, orci sed faucibus pharetra, dui mi dignissim tortor, sit amet condimentum mi ligula sit amet augue."
-                )
-              ]),
-              _vm._v(" "),
-              _c("li", [
-                _vm._v("Pellentesque vitae eros eget enim mollis placerat.")
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mb-10" }, [
-            _c("h3", { staticClass: "mb-6 pb-2 font-size-25" }, [
-              _vm._v("Changes To This Agreement")
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-gray-90" }, [
+          _c("ol", [
+            _c("li", [
               _vm._v(
-                "We reserve the right, at our sole discretion, to modify or replace these Terms and Conditions by posting the updated terms on the Site. Your continued use of the Site after any such changes constitutes your acceptance of the new Terms and Conditions."
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam quis diam erat. Duis velit lectus, posuere a blandit sit amet, tempor at lorem. Donec ultricies, lorem sed ultrices interdum."
               )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mb-10" }, [
-            _c("h3", { staticClass: "mb-6 pb-2 font-size-25" }, [
-              _vm._v("Contact Us")
             ]),
             _vm._v(" "),
-            _c("p", { staticClass: "text-gray-90" }, [
+            _c("li", [
               _vm._v(
-                "If you have any questions about this Agreement, please contact us filling this "
-              ),
-              _c(
-                "a",
-                {
-                  staticClass: "text-blue font-weight-bold",
-                  attrs: { href: "#" }
-                },
-                [_vm._v("contact form")]
+                "Leo metus luctus sem, vel vulputate diam ipsum sed lorem. Donec tempor arcu nisl, et molestie massa scelerisque ut. Nunc at rutrum leo. Mauris metus mauris, tristique quis sapien eu, rutrum vulputate enim."
               )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _vm._v(
+                "Mauris tempus erat laoreet turpis lobortis, eu tincidunt erat fermentum."
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _vm._v(
+                "Aliquam non tincidunt urna. Integer tincidunt nec nisl vitae ullamcorper. Proin sed ultrices erat. Praesent varius ultrices massa at faucibus."
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _vm._v(
+                "Aenean dignissim, orci sed faucibus pharetra, dui mi dignissim tortor, sit amet condimentum mi ligula sit amet augue."
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _vm._v("Pellentesque vitae eros eget enim mollis placerat.")
             ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-10" }, [
+          _c("h3", { staticClass: "mb-6 pb-2 font-size-25" }, [
+            _vm._v("Changes To This Agreement")
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "mb-8" }, [
-            _c("div", { staticClass: "py-2 border-top border-bottom" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "js-slick-carousel u-slick my-1 slick-initialized slick-slider",
-                  attrs: {
-                    "data-slides-show": "5",
-                    "data-slides-scroll": "1",
-                    "data-arrows-classes":
-                      "d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y",
-                    "data-arrow-left-classes":
-                      "fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9",
-                    "data-arrow-right-classes":
-                      "fa fa-angle-right u-slick__arrow-classic-inner--right",
-                    "data-responsive":
-                      '[{\r\n                            "breakpoint": 992,\r\n                            "settings": {\r\n                                "slidesToShow": 2\r\n                            }\r\n                        }, {\r\n                            "breakpoint": 768,\r\n                            "settings": {\r\n                                "slidesToShow": 1\r\n                            }\r\n                        }, {\r\n                            "breakpoint": 554,\r\n                            "settings": {\r\n                                "slidesToShow": 1\r\n                            }\r\n                        }]'
-                  }
-                },
-                [
-                  _c("div", {
-                    staticClass:
-                      "js-prev d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9 slick-arrow slick-disabled",
-                    attrs: { "aria-disabled": "true" }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "slick-list draggable" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "slick-track",
-                        staticStyle: {
-                          opacity: "1",
-                          width: "1404px",
-                          transform: "translate3d(0px, 0px, 0px)"
+          _c("p", { staticClass: "text-gray-90" }, [
+            _vm._v(
+              "We reserve the right, at our sole discretion, to modify or replace these Terms and Conditions by posting the updated terms on the Site. Your continued use of the Site after any such changes constitutes your acceptance of the new Terms and Conditions."
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-10" }, [
+          _c("h3", { staticClass: "mb-6 pb-2 font-size-25" }, [
+            _vm._v("Contact Us")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-gray-90" }, [
+            _vm._v(
+              "If you have any questions about this Agreement, please contact us filling this "
+            ),
+            _c(
+              "a",
+              {
+                staticClass: "text-blue font-weight-bold",
+                attrs: { href: "#" }
+              },
+              [_vm._v("contact form")]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-8" }, [
+          _c("div", { staticClass: "py-2 border-top border-bottom" }, [
+            _c(
+              "div",
+              {
+                staticClass: "js-slick-carousel u-slick my-1",
+                attrs: {
+                  "data-slides-show": "5",
+                  "data-slides-scroll": "1",
+                  "data-arrows-classes":
+                    "d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y",
+                  "data-arrow-left-classes":
+                    "fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9",
+                  "data-arrow-right-classes":
+                    "fa fa-angle-right u-slick__arrow-classic-inner--right",
+                  "data-responsive":
+                    '[{\r\n                        "breakpoint": 992,\r\n                        "settings": {\r\n                            "slidesToShow": 2\r\n                        }\r\n                    }, {\r\n                        "breakpoint": 768,\r\n                        "settings": {\r\n                            "slidesToShow": 1\r\n                        }\r\n                    }, {\r\n                        "breakpoint": 554,\r\n                        "settings": {\r\n                            "slidesToShow": 1\r\n                        }\r\n                    }]'
+                }
+              },
+              [
+                _c("div", { staticClass: "js-slide" }, [
+                  _c(
+                    "a",
+                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid m-auto max-height-50",
+                        attrs: {
+                          src: "website/assets/img/200X60/img1.png",
+                          alt: "Image Description"
                         }
-                      },
-                      [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "js-slide slick-slide slick-current slick-active",
-                            staticStyle: { width: "234px", height: "auto" },
-                            attrs: {
-                              "data-slick-index": "0",
-                              "aria-hidden": "false",
-                              tabindex: "0"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "link-hover__brand",
-                                attrs: { href: "#", tabindex: "0" }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-fluid m-auto max-height-50",
-                                  attrs: {
-                                    src: "website/assets/img/200X60/img1.png",
-                                    alt: "Image Description"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        ),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "js-slide slick-slide slick-active",
-                            staticStyle: { width: "234px", height: "auto" },
-                            attrs: {
-                              "data-slick-index": "1",
-                              "aria-hidden": "false",
-                              tabindex: "0"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "link-hover__brand",
-                                attrs: { href: "#", tabindex: "0" }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-fluid m-auto max-height-50",
-                                  attrs: {
-                                    src: "website/assets/img/200X60/img2.png",
-                                    alt: "Image Description"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        ),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "js-slide slick-slide slick-active",
-                            staticStyle: { width: "234px", height: "auto" },
-                            attrs: {
-                              "data-slick-index": "2",
-                              "aria-hidden": "false",
-                              tabindex: "0"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "link-hover__brand",
-                                attrs: { href: "#", tabindex: "0" }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-fluid m-auto max-height-50",
-                                  attrs: {
-                                    src: "website/assets/img/200X60/img3.png",
-                                    alt: "Image Description"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        ),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "js-slide slick-slide slick-active",
-                            staticStyle: { width: "234px", height: "auto" },
-                            attrs: {
-                              "data-slick-index": "3",
-                              "aria-hidden": "false",
-                              tabindex: "0"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "link-hover__brand",
-                                attrs: { href: "#", tabindex: "0" }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-fluid m-auto max-height-50",
-                                  attrs: {
-                                    src: "website/assets/img/200X60/img4.png",
-                                    alt: "Image Description"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        ),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "js-slide slick-slide slick-active",
-                            staticStyle: { width: "234px", height: "auto" },
-                            attrs: {
-                              "data-slick-index": "4",
-                              "aria-hidden": "false",
-                              tabindex: "0"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "link-hover__brand",
-                                attrs: { href: "#", tabindex: "0" }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-fluid m-auto max-height-50",
-                                  attrs: {
-                                    src: "website/assets/img/200X60/img5.png",
-                                    alt: "Image Description"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        ),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "js-slide slick-slide",
-                            staticStyle: { width: "234px", height: "auto" },
-                            attrs: {
-                              "data-slick-index": "5",
-                              "aria-hidden": "true",
-                              tabindex: "-1"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "link-hover__brand",
-                                attrs: { href: "#", tabindex: "-1" }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-fluid m-auto max-height-50",
-                                  attrs: {
-                                    src: "website/assets/img/200X60/img6.png",
-                                    alt: "Image Description"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", {
-                    staticClass:
-                      "js-next d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y fa fa-angle-right u-slick__arrow-classic-inner--right slick-arrow",
-                    attrs: { "aria-disabled": "false" }
-                  })
-                ]
-              )
-            ])
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "js-slide" }, [
+                  _c(
+                    "a",
+                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid m-auto max-height-50",
+                        attrs: {
+                          src: "website/assets/img/200X60/img2.png",
+                          alt: "Image Description"
+                        }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "js-slide" }, [
+                  _c(
+                    "a",
+                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid m-auto max-height-50",
+                        attrs: {
+                          src: "website/assets/img/200X60/img3.png",
+                          alt: "Image Description"
+                        }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "js-slide" }, [
+                  _c(
+                    "a",
+                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid m-auto max-height-50",
+                        attrs: {
+                          src: "website/assets/img/200X60/img4.png",
+                          alt: "Image Description"
+                        }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "js-slide" }, [
+                  _c(
+                    "a",
+                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid m-auto max-height-50",
+                        attrs: {
+                          src: "website/assets/img/200X60/img5.png",
+                          alt: "Image Description"
+                        }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "js-slide" }, [
+                  _c(
+                    "a",
+                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid m-auto max-height-50",
+                        attrs: {
+                          src: "website/assets/img/200X60/img6.png",
+                          alt: "Image Description"
+                        }
+                      })
+                    ]
+                  )
+                ])
+              ]
+            )
           ])
         ])
       ])

@@ -1,7 +1,4 @@
 <template>
-<span>
-	<!-- ========== SECONDARY CONTENTS ========== -->
-    <!-- Account Sidebar Navigation -->
     <aside id="sidebarContent" class="u-sidebar u-sidebar__lg" aria-labelledby="sidebarNavToggler">
         <div class="u-sidebar__scroller">
             <div class="u-sidebar__container">
@@ -261,10 +258,6 @@
             </div>
         </div>
     </aside>
-    <!-- End Account Sidebar Navigation -->
-    <!-- ========== END SECONDARY CONTENTS ========== -->
-	
-</span>
 </template>
 <script>
 	

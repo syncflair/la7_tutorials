@@ -80,7 +80,7 @@ export default {
       // if(this.isitwebsiteCheck != ''){
       if(this.isitwebsiteCheck ===  1){
 
-        
+          
               //############################# Windown Load ###################################            
 
               //initialization of HSMegaMenu component
@@ -91,11 +91,7 @@ export default {
                   breakpoint: 767.98,
                   hideTimeOut: 0
               });
-
-              
-              
-
-
+             
 
               // initialization of svg injector module
               $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
@@ -118,15 +114,17 @@ export default {
               // initialization of popups
               $.HSCore.components.HSFancyBox.init('.js-fancybox');
 
-              // initialization of countdowns
-              var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
-                  yearsElSelector: '.js-cd-years',
-                  monthsElSelector: '.js-cd-months',
-                  daysElSelector: '.js-cd-days',
-                  hoursElSelector: '.js-cd-hours',
-                  minutesElSelector: '.js-cd-minutes',
-                  secondsElSelector: '.js-cd-seconds'
-              });
+
+
+              // // initialization of countdowns
+              // var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+              //     yearsElSelector: '.js-cd-years',
+              //     monthsElSelector: '.js-cd-months',
+              //     daysElSelector: '.js-cd-days',
+              //     hoursElSelector: '.js-cd-hours',
+              //     minutesElSelector: '.js-cd-minutes',
+              //     secondsElSelector: '.js-cd-seconds'
+              // });
 
               // initialization of malihu scrollbar
               $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
@@ -148,8 +146,6 @@ export default {
 
               // initialization of fancybox
               $.HSCore.components.HSFancyBox.init('.js-fancybox');
-
-
 
 
 
@@ -191,6 +187,18 @@ export default {
 
               // initialization of select picker
               $.HSCore.components.HSSelectPicker.init('.js-select');
+
+
+              // initialization of HSScrollNav component
+                $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
+                  duration: 700
+                });
+
+              // initialization of quantity counter
+                $.HSCore.components.HSQantityCounter.init('.js-quantity');
+
+              // initialization of forms
+              $.HSCore.components.HSRangeSlider.init('.js-range-slider');
         
       }//end authUser Check        
 

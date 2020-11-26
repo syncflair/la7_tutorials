@@ -22,6 +22,7 @@
 <script src="{{ asset('website/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js')}}"></script>
 <script src="{{ asset('website/assets/vendor/jquery-validation/dist/jquery.validate.min.js')}}"></script>
 <script src="{{ asset('website/assets/vendor/fancybox/jquery.fancybox.min.js')}}"></script>
+<script src="{{ asset('website/assets/vendor/ion-rangeslider/js/ion.rangeSlider.min.js')}}"></script> <!--New add-->
 <script src="{{ asset('website/assets/vendor/typed.js/lib/typed.min.js')}}"></script>
 <script src="{{ asset('website/assets/vendor/slick-carousel/slick/slick.js')}}"></script>
 <script src="{{ asset('website/assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
@@ -38,10 +39,14 @@
 <script src="{{ asset('website/assets/js/components/hs.fancybox.js')}}"></script>
 <script src="{{ asset('website/assets/js/components/hs.onscroll-animation.js')}}"></script>
 <script src="{{ asset('website/assets/js/components/hs.slick-carousel.js')}}"></script>
+<script src="{{ asset('website/assets/js/components/hs.quantity-counter.js')}}"></script><!--New add-->
+<script src="{{ asset('website/assets/js/components/hs.range-slider.js')}}"></script><!--New add-->
 <script src="{{ asset('website/assets/js/components/hs.show-animation.js')}}"></script>
 <script src="{{ asset('website/assets/js/components/hs.svg-injector.js')}}"></script>
+<script src="{{ asset('website/assets/js/components/hs.scroll-nav.js')}}"></script><!--New add-->
 <script src="{{ asset('website/assets/js/components/hs.go-to.js')}}"></script>
 <script src="{{ asset('website/assets/js/components/hs.selectpicker.js')}}"></script>
+
 
 <!-- JS Plugins Init. -->
 <script>
@@ -146,6 +151,10 @@
    //      // initialization of select picker
    //      $.HSCore.components.HSSelectPicker.init('.js-select');
    //  });
+
+   // $(document).on('ready', function () {
+   //    $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+   // })
 </script>
 
 @yield('extra_script')

@@ -69,6 +69,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 //import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
 //import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
 //const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
@@ -81,7 +84,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {},
   created: function created() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {// initialization of slick carousel (Slick Slider call from here, otherwise it get error)
+    //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+  }
 });
 
 /***/ }),
@@ -108,146 +113,140 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("main", { attrs: { id: "content", role: "main" } }, [
-        _c("div", { staticClass: "bg-gray-13 bg-md-transparent" }, [
-          _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "my-md-3" }, [
-              _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
-                _c(
-                  "ol",
-                  {
-                    staticClass:
-                      "breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
-                  },
-                  [
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
-                      },
-                      [
-                        _c("a", { attrs: { href: "../home/index.html" } }, [
-                          _vm._v("Home")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active",
-                        attrs: { "aria-current": "page" }
-                      },
-                      [_vm._v("Track your Order")]
-                    )
-                  ]
-                )
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
+    return _c("main", { attrs: { id: "content", role: "main" } }, [
+      _c("div", { staticClass: "bg-gray-13 bg-md-transparent" }, [
         _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "mx-xl-10" }, [
-            _c("div", { staticClass: "mb-6 text-center" }, [
-              _c("h1", { staticClass: "mb-6" }, [_vm._v("Track your Order")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "text-gray-90 px-xl-10" }, [
-                _vm._v(
-                  'To track your order please enter your Order ID in the box below and press the "Track" button. This was given to you on your receipt and in the confirmation email you should have received.'
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "my-4 my-xl-8" }, [
+          _c("div", { staticClass: "my-md-3" }, [
+            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
               _c(
-                "form",
+                "ol",
                 {
-                  staticClass: "js-validate",
-                  attrs: { novalidate: "novalidate" }
+                  staticClass:
+                    "breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
                 },
                 [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-6 mb-3" }, [
-                      _c("div", { staticClass: "js-form-message form-group" }, [
-                        _c(
-                          "label",
-                          {
-                            staticClass: "form-label",
-                            attrs: { for: "orderid" }
-                          },
-                          [
-                            _vm._v(
-                              "Order ID\r\n                                    "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "text",
-                            id: "orderid",
-                            placeholder:
-                              "Found in your order confirmation email.",
-                            "aria-label":
-                              "Found in your order confirmation email."
-                          }
-                        })
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
+                    },
+                    [
+                      _c("a", { attrs: { href: "../home/index.html" } }, [
+                        _vm._v("Home")
                       ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col-md-6 mb-3" }, [
-                      _c("div", { staticClass: "js-form-message form-group" }, [
-                        _c(
-                          "label",
-                          {
-                            staticClass: "form-label",
-                            attrs: { for: "billingemail" }
-                          },
-                          [
-                            _vm._v(
-                              "Billing email\r\n                                    "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "email",
-                            name: "email",
-                            id: "billingemail",
-                            placeholder: "Email you used during checkout.",
-                            "aria-label": "Email you used during checkout.",
-                            required: "",
-                            "data-msg": "Please enter a valid email address.",
-                            "data-error-class": "u-has-error",
-                            "data-success-class": "u-has-success"
-                          }
-                        })
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "col mb-1" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-5 px-md-4 px-lg-5 w-100 w-md-auto",
-                          attrs: { type: "button" }
-                        },
-                        [_vm._v("Track")]
-                      )
-                    ])
-                  ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active",
+                      attrs: { "aria-current": "page" }
+                    },
+                    [_vm._v("Track your Order")]
+                  )
                 ]
               )
             ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "mx-xl-10" }, [
+          _c("div", { staticClass: "mb-6 text-center" }, [
+            _c("h1", { staticClass: "mb-6" }, [_vm._v("Track your Order")]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-gray-90 px-xl-10" }, [
+              _vm._v(
+                'To track your order please enter your Order ID in the box below and press the "Track" button. This was given to you on your receipt and in the confirmation email you should have received.'
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "my-4 my-xl-8" }, [
+            _c(
+              "form",
+              {
+                staticClass: "js-validate",
+                attrs: { novalidate: "novalidate" }
+              },
+              [
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-6 mb-3" }, [
+                    _c("div", { staticClass: "js-form-message form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-label",
+                          attrs: { for: "orderid" }
+                        },
+                        [_vm._v("Order ID\r\n                                ")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "text",
+                          name: "text",
+                          id: "orderid",
+                          placeholder:
+                            "Found in your order confirmation email.",
+                          "aria-label":
+                            "Found in your order confirmation email."
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-6 mb-3" }, [
+                    _c("div", { staticClass: "js-form-message form-group" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "form-label",
+                          attrs: { for: "billingemail" }
+                        },
+                        [
+                          _vm._v(
+                            "Billing email\r\n                                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          type: "email",
+                          name: "email",
+                          id: "billingemail",
+                          placeholder: "Email you used during checkout.",
+                          "aria-label": "Email you used during checkout.",
+                          required: "",
+                          "data-msg": "Please enter a valid email address.",
+                          "data-error-class": "u-has-error",
+                          "data-success-class": "u-has-success"
+                        }
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col mb-1" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-5 px-md-4 px-lg-5 w-100 w-md-auto",
+                        attrs: { type: "button" }
+                      },
+                      [_vm._v("Track")]
+                    )
+                  ])
+                ])
+              ]
+            )
           ])
         ])
       ])

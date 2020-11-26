@@ -26,6 +26,7 @@
 
         <link rel="stylesheet" href="{{ asset('website/assets/vendor/animate.css/animate.min.css')}}">
         <link rel="stylesheet" href="{{ asset('website/assets/vendor/hs-megamenu/src/hs.megamenu.css')}}">
+        <link rel="stylesheet" href="{{ asset('website/assets/vendor/ion-rangeslider/css/ion.rangeSlider.css')}}"> <!--Add new-->
         <link rel="stylesheet" href="{{ asset('website/assets/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css')}}">
         <link rel="stylesheet" href="{{ asset('website/assets/vendor/fancybox/jquery.fancybox.css')}}">
         <link rel="stylesheet" href="{{ asset('website/assets/vendor/slick-carousel/slick/slick.css')}}">

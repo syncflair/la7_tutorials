@@ -172,6 +172,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 //import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
 //import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
 //const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
@@ -184,7 +191,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {},
   created: function created() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    // initialization of slick carousel (Slick Slider call from here, otherwise it get error)
+    $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+  }
 });
 
 /***/ }),
@@ -211,501 +221,377 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("main", { attrs: { id: "content", role: "main" } }, [
-        _c("div", { staticClass: "bg-gray-13 bg-md-transparent" }, [
-          _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "my-md-3" }, [
-              _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
-                _c(
-                  "ol",
-                  {
-                    staticClass:
-                      "breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
-                  },
-                  [
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
-                      },
-                      [
-                        _c("a", { attrs: { href: "../home/index.html" } }, [
-                          _vm._v("Home")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active",
-                        attrs: { "aria-current": "page" }
-                      },
-                      [_vm._v("Contact-v1")]
-                    )
-                  ]
-                )
-              ])
+    return _c("main", { attrs: { id: "content", role: "main" } }, [
+      _c("div", { staticClass: "bg-gray-13 bg-md-transparent" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "my-md-3" }, [
+            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+              _c(
+                "ol",
+                {
+                  staticClass:
+                    "breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
+                },
+                [
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
+                    },
+                    [
+                      _c("a", { attrs: { href: "../home/index.html" } }, [
+                        _vm._v("Home")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active",
+                      attrs: { "aria-current": "page" }
+                    },
+                    [_vm._v("Contact-v1")]
+                  )
+                ]
+              )
             ])
           ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "mb-5" }, [
+          _c("h1", { staticClass: "text-center" }, [_vm._v("Contact-V2")])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "mb-5" }, [
-            _c("h1", { staticClass: "text-center" }, [_vm._v("Contact-V2")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row mb-10" }, [
-            _c("div", { staticClass: "col-lg-7 col-xl-6 mb-8 mb-lg-0" }, [
-              _c("div", { staticClass: "mr-xl-6" }, [
-                _c(
-                  "div",
-                  { staticClass: "border-bottom border-color-1 mb-5" },
-                  [
-                    _c(
-                      "h3",
-                      { staticClass: "section-title mb-0 pb-2 font-size-25" },
-                      [_vm._v("Leave us a Message")]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("p", { staticClass: "max-width-830-xl text-gray-90" }, [
-                  _vm._v(
-                    "Aenean massa diam, viverra vitae luctus sed, gravida eget est. Etiam nec ipsum porttitor, consequat libero eu, dignissim eros. Nulla auctor lacinia enim id mollis. Curabitur luctus interdum eleifend. Ut tempor lorem a turpis fermentum."
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "form",
-                  {
-                    staticClass: "js-validate",
-                    attrs: { novalidate: "novalidate" }
-                  },
-                  [
-                    _c("div", { staticClass: "row" }, [
-                      _c("div", { staticClass: "col-md-6" }, [
-                        _c("div", { staticClass: "js-form-message mb-4" }, [
-                          _c("label", { staticClass: "form-label" }, [
-                            _vm._v(
-                              "\r\n                                                First name\r\n                                                "
-                            ),
-                            _c("span", { staticClass: "text-danger" }, [
-                              _vm._v("*")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              name: "firstName",
-                              placeholder: "",
-                              "aria-label": "",
-                              required: "",
-                              "data-msg": "Please enter your frist name.",
-                              "data-error-class": "u-has-error",
-                              "data-success-class": "u-has-success",
-                              autocomplete: "off"
-                            }
-                          })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6" }, [
-                        _c("div", { staticClass: "js-form-message mb-4" }, [
-                          _c("label", { staticClass: "form-label" }, [
-                            _vm._v(
-                              "\r\n                                                Last name\r\n                                                "
-                            ),
-                            _c("span", { staticClass: "text-danger" }, [
-                              _vm._v("*")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              name: "lastName",
-                              placeholder: "",
-                              "aria-label": "",
-                              required: "",
-                              "data-msg": "Please enter your last name.",
-                              "data-error-class": "u-has-error",
-                              "data-success-class": "u-has-success"
-                            }
-                          })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-12" }, [
-                        _c("div", { staticClass: "js-form-message mb-4" }, [
-                          _c("label", { staticClass: "form-label" }, [
-                            _vm._v(
-                              "\r\n                                                Subject\r\n                                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("input", {
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              name: "Subject",
-                              placeholder: "",
-                              "aria-label": "",
-                              "data-msg": "Please enter subject.",
-                              "data-error-class": "u-has-error",
-                              "data-success-class": "u-has-success"
-                            }
-                          })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-12" }, [
-                        _c("div", { staticClass: "js-form-message mb-4" }, [
-                          _c("label", { staticClass: "form-label" }, [
-                            _vm._v(
-                              "\r\n                                                Your Message\r\n                                            "
-                            )
-                          ]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "input-group" }, [
-                            _c("textarea", {
-                              staticClass: "form-control p-5",
-                              attrs: {
-                                rows: "4",
-                                name: "text",
-                                placeholder: ""
-                              }
-                            })
-                          ])
-                        ])
-                      ])
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "mb-3" }, [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary-dark-w px-5",
-                          attrs: { type: "submit" }
-                        },
-                        [_vm._v("Send Message")]
-                      )
-                    ])
-                  ]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-5 col-xl-6" }, [
-              _c("div", { staticClass: "mb-6" }, [
-                _c("iframe", {
-                  staticStyle: { border: "0" },
-                  attrs: {
-                    src:
-                      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835252972956!2d144.95592398991224!3d-37.817327693787625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sin!4v1575470633967!5m2!1sen!2sin",
-                    width: "100%",
-                    height: "288",
-                    frameborder: "0",
-                    allowfullscreen: ""
-                  }
-                })
-              ]),
-              _vm._v(" "),
+        _c("div", { staticClass: "row mb-10" }, [
+          _c("div", { staticClass: "col-lg-7 col-xl-6 mb-8 mb-lg-0" }, [
+            _c("div", { staticClass: "mr-xl-6" }, [
               _c("div", { staticClass: "border-bottom border-color-1 mb-5" }, [
                 _c(
                   "h3",
                   { staticClass: "section-title mb-0 pb-2 font-size-25" },
-                  [_vm._v("Our Address")]
+                  [_vm._v("Leave us a Message")]
                 )
               ]),
               _vm._v(" "),
-              _c("address", { staticClass: "mb-6 text-lh-23" }, [
+              _c("p", { staticClass: "max-width-830-xl text-gray-90" }, [
                 _vm._v(
-                  "\r\n                            121 King Street,\r\n                            Melbourne VIC 3000,\r\n                            Australia\r\n                            "
-                ),
-                _c("div", {}, [_vm._v("Support(+800)856 800 604")]),
-                _vm._v(" "),
-                _c("div", {}, [
-                  _vm._v("Email: "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "text-blue text-decoration-on",
-                      attrs: { href: "mailto:contact@yourstore.com" }
-                    },
-                    [_vm._v("info@electro.com")]
-                  )
-                ])
+                  "Aenean massa diam, viverra vitae luctus sed, gravida eget est. Etiam nec ipsum porttitor, consequat libero eu, dignissim eros. Nulla auctor lacinia enim id mollis. Curabitur luctus interdum eleifend. Ut tempor lorem a turpis fermentum."
+                )
               ]),
               _vm._v(" "),
-              _c("h5", { staticClass: "font-size-14 font-weight-bold mb-3" }, [
-                _vm._v("Opening Hours")
-              ]),
+              _c(
+                "form",
+                {
+                  staticClass: "js-validate",
+                  attrs: { novalidate: "novalidate" }
+                },
+                [
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "js-form-message mb-4" }, [
+                        _c("label", { staticClass: "form-label" }, [
+                          _vm._v(
+                            "\r\n                                        First name\r\n                                        "
+                          ),
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v("*")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            name: "firstName",
+                            placeholder: "",
+                            "aria-label": "",
+                            required: "",
+                            "data-msg": "Please enter your frist name.",
+                            "data-error-class": "u-has-error",
+                            "data-success-class": "u-has-success",
+                            autocomplete: "off"
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "js-form-message mb-4" }, [
+                        _c("label", { staticClass: "form-label" }, [
+                          _vm._v(
+                            "\r\n                                        Last name\r\n                                        "
+                          ),
+                          _c("span", { staticClass: "text-danger" }, [
+                            _vm._v("*")
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            name: "lastName",
+                            placeholder: "",
+                            "aria-label": "",
+                            required: "",
+                            "data-msg": "Please enter your last name.",
+                            "data-error-class": "u-has-error",
+                            "data-success-class": "u-has-success"
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c("div", { staticClass: "js-form-message mb-4" }, [
+                        _c("label", { staticClass: "form-label" }, [
+                          _vm._v(
+                            "\r\n                                        Subject\r\n                                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            name: "Subject",
+                            placeholder: "",
+                            "aria-label": "",
+                            "data-msg": "Please enter subject.",
+                            "data-error-class": "u-has-error",
+                            "data-success-class": "u-has-success"
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c("div", { staticClass: "js-form-message mb-4" }, [
+                        _c("label", { staticClass: "form-label" }, [
+                          _vm._v(
+                            "\r\n                                        Your Message\r\n                                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _c("textarea", {
+                            staticClass: "form-control p-5",
+                            attrs: { rows: "4", name: "text", placeholder: "" }
+                          })
+                        ])
+                      ])
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "mb-3" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary-dark-w px-5",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Send Message")]
+                    )
+                  ])
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-5 col-xl-6" }, [
+            _c("div", { staticClass: "mb-6" }, [
+              _c("iframe", {
+                staticStyle: { border: "0" },
+                attrs: {
+                  src:
+                    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835252972956!2d144.95592398991224!3d-37.817327693787625!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sin!4v1575470633967!5m2!1sen!2sin",
+                  width: "100%",
+                  height: "288",
+                  frameborder: "0",
+                  allowfullscreen: ""
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "border-bottom border-color-1 mb-5" }, [
+              _c(
+                "h3",
+                { staticClass: "section-title mb-0 pb-2 font-size-25" },
+                [_vm._v("Our Address")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("address", { staticClass: "mb-6 text-lh-23" }, [
+              _vm._v(
+                "\r\n                    121 King Street,\r\n                    Melbourne VIC 3000,\r\n                    Australia\r\n                    "
+              ),
+              _c("div", {}, [_vm._v("Support(+800)856 800 604")]),
               _vm._v(" "),
-              _c("div", {}, [_vm._v("Monday to Friday: 9am-9pm")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "mb-6" }, [
-                _vm._v("Saturday to Sunday: 9am-11pm")
-              ]),
-              _vm._v(" "),
-              _c("h5", { staticClass: "font-size-14 font-weight-bold mb-3" }, [
-                _vm._v("Careers")
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "text-gray-90" }, [
-                _vm._v(
-                  "If you’re interested in employment opportunities at Electro, please email us: "
-                ),
+              _c("div", {}, [
+                _vm._v("Email: "),
                 _c(
                   "a",
                   {
                     staticClass: "text-blue text-decoration-on",
                     attrs: { href: "mailto:contact@yourstore.com" }
                   },
-                  [_vm._v("contact@yourstore.com")]
+                  [_vm._v("info@electro.com")]
                 )
               ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "mb-8" }, [
-            _c("div", { staticClass: "py-2 border-top border-bottom" }, [
+            ]),
+            _vm._v(" "),
+            _c("h5", { staticClass: "font-size-14 font-weight-bold mb-3" }, [
+              _vm._v("Opening Hours")
+            ]),
+            _vm._v(" "),
+            _c("div", {}, [_vm._v("Monday to Friday: 9am-9pm")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "mb-6" }, [
+              _vm._v("Saturday to Sunday: 9am-11pm")
+            ]),
+            _vm._v(" "),
+            _c("h5", { staticClass: "font-size-14 font-weight-bold mb-3" }, [
+              _vm._v("Careers")
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-gray-90" }, [
+              _vm._v(
+                "If you’re interested in employment opportunities at Electro, please email us: "
+              ),
               _c(
-                "div",
+                "a",
                 {
-                  staticClass:
-                    "js-slick-carousel u-slick my-1 slick-initialized slick-slider",
-                  attrs: {
-                    "data-slides-show": "5",
-                    "data-slides-scroll": "1",
-                    "data-arrows-classes":
-                      "d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y",
-                    "data-arrow-left-classes":
-                      "fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9",
-                    "data-arrow-right-classes":
-                      "fa fa-angle-right u-slick__arrow-classic-inner--right",
-                    "data-responsive":
-                      '[{\r\n                                "breakpoint": 992,\r\n                                "settings": {\r\n                                    "slidesToShow": 2\r\n                                }\r\n                            }, {\r\n                                "breakpoint": 768,\r\n                                "settings": {\r\n                                    "slidesToShow": 1\r\n                                }\r\n                            }, {\r\n                                "breakpoint": 554,\r\n                                "settings": {\r\n                                    "slidesToShow": 1\r\n                                }\r\n                            }]'
-                  }
+                  staticClass: "text-blue text-decoration-on",
+                  attrs: { href: "mailto:contact@yourstore.com" }
                 },
-                [
-                  _c("div", {
-                    staticClass:
-                      "js-prev d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9 slick-arrow slick-disabled",
-                    attrs: { "aria-disabled": "true" }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "slick-list draggable" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "slick-track",
-                        staticStyle: {
-                          opacity: "1",
-                          width: "1404px",
-                          transform: "translate3d(0px, 0px, 0px)"
-                        }
-                      },
-                      [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "js-slide slick-slide slick-current slick-active",
-                            staticStyle: { width: "234px", height: "auto" },
-                            attrs: {
-                              "data-slick-index": "0",
-                              "aria-hidden": "false",
-                              tabindex: "0"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "link-hover__brand",
-                                attrs: { href: "#", tabindex: "0" }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-fluid m-auto max-height-50",
-                                  attrs: {
-                                    src: "website/assets/img/200X60/img1.png",
-                                    alt: "Image Description"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        ),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "js-slide slick-slide slick-active",
-                            staticStyle: { width: "234px", height: "auto" },
-                            attrs: {
-                              "data-slick-index": "1",
-                              "aria-hidden": "false",
-                              tabindex: "0"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "link-hover__brand",
-                                attrs: { href: "#", tabindex: "0" }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-fluid m-auto max-height-50",
-                                  attrs: {
-                                    src: "website/assets/img/200X60/img2.png",
-                                    alt: "Image Description"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        ),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "js-slide slick-slide slick-active",
-                            staticStyle: { width: "234px", height: "auto" },
-                            attrs: {
-                              "data-slick-index": "2",
-                              "aria-hidden": "false",
-                              tabindex: "0"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "link-hover__brand",
-                                attrs: { href: "#", tabindex: "0" }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-fluid m-auto max-height-50",
-                                  attrs: {
-                                    src: "website/assets/img/200X60/img3.png",
-                                    alt: "Image Description"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        ),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "js-slide slick-slide slick-active",
-                            staticStyle: { width: "234px", height: "auto" },
-                            attrs: {
-                              "data-slick-index": "3",
-                              "aria-hidden": "false",
-                              tabindex: "0"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "link-hover__brand",
-                                attrs: { href: "#", tabindex: "0" }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-fluid m-auto max-height-50",
-                                  attrs: {
-                                    src: "website/assets/img/200X60/img4.png",
-                                    alt: "Image Description"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        ),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "js-slide slick-slide slick-active",
-                            staticStyle: { width: "234px", height: "auto" },
-                            attrs: {
-                              "data-slick-index": "4",
-                              "aria-hidden": "false",
-                              tabindex: "0"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "link-hover__brand",
-                                attrs: { href: "#", tabindex: "0" }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-fluid m-auto max-height-50",
-                                  attrs: {
-                                    src: "website/assets/img/200X60/img5.png",
-                                    alt: "Image Description"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        ),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "js-slide slick-slide",
-                            staticStyle: { width: "234px", height: "auto" },
-                            attrs: {
-                              "data-slick-index": "5",
-                              "aria-hidden": "true",
-                              tabindex: "-1"
-                            }
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "link-hover__brand",
-                                attrs: { href: "#", tabindex: "-1" }
-                              },
-                              [
-                                _c("img", {
-                                  staticClass: "img-fluid m-auto max-height-50",
-                                  attrs: {
-                                    src: "website/assets/img/200X60/img6.png",
-                                    alt: "Image Description"
-                                  }
-                                })
-                              ]
-                            )
-                          ]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", {
-                    staticClass:
-                      "js-next d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y fa fa-angle-right u-slick__arrow-classic-inner--right slick-arrow",
-                    attrs: { "aria-disabled": "false" }
-                  })
-                ]
+                [_vm._v("contact@yourstore.com")]
               )
             ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "mb-8" }, [
+          _c("div", { staticClass: "py-2 border-top border-bottom" }, [
+            _c(
+              "div",
+              {
+                staticClass: "js-slick-carousel u-slick my-1",
+                attrs: {
+                  "data-slides-show": "5",
+                  "data-slides-scroll": "1",
+                  "data-arrows-classes":
+                    "d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y",
+                  "data-arrow-left-classes":
+                    "fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9",
+                  "data-arrow-right-classes":
+                    "fa fa-angle-right u-slick__arrow-classic-inner--right",
+                  "data-responsive":
+                    '[{\r\n                        "breakpoint": 992,\r\n                        "settings": {\r\n                            "slidesToShow": 2\r\n                        }\r\n                    }, {\r\n                        "breakpoint": 768,\r\n                        "settings": {\r\n                            "slidesToShow": 1\r\n                        }\r\n                    }, {\r\n                        "breakpoint": 554,\r\n                        "settings": {\r\n                            "slidesToShow": 1\r\n                        }\r\n                    }]'
+                }
+              },
+              [
+                _c("div", { staticClass: "js-slide" }, [
+                  _c(
+                    "a",
+                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid m-auto max-height-50",
+                        attrs: {
+                          src: "website/assets/img/200X60/img1.png",
+                          alt: "Image Description"
+                        }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "js-slide" }, [
+                  _c(
+                    "a",
+                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid m-auto max-height-50",
+                        attrs: {
+                          src: "website/assets/img/200X60/img2.png",
+                          alt: "Image Description"
+                        }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "js-slide" }, [
+                  _c(
+                    "a",
+                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid m-auto max-height-50",
+                        attrs: {
+                          src: "website/assets/img/200X60/img3.png",
+                          alt: "Image Description"
+                        }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "js-slide" }, [
+                  _c(
+                    "a",
+                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid m-auto max-height-50",
+                        attrs: {
+                          src: "website/assets/img/200X60/img4.png",
+                          alt: "Image Description"
+                        }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "js-slide" }, [
+                  _c(
+                    "a",
+                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid m-auto max-height-50",
+                        attrs: {
+                          src: "website/assets/img/200X60/img5.png",
+                          alt: "Image Description"
+                        }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "js-slide" }, [
+                  _c(
+                    "a",
+                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                    [
+                      _c("img", {
+                        staticClass: "img-fluid m-auto max-height-50",
+                        attrs: {
+                          src: "website/assets/img/200X60/img6.png",
+                          alt: "Image Description"
+                        }
+                      })
+                    ]
+                  )
+                ])
+              ]
+            )
           ])
         ])
       ])

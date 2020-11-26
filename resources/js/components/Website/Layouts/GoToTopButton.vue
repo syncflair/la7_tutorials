@@ -1,5 +1,4 @@
 <template>
-<span>
 	<a class="js-go-to u-go-to" href="#"
         data-position='{"bottom": 15, "right": 15 }'
         data-type="fixed"
@@ -9,7 +8,6 @@
         data-hide-effect="slideOutDown">
         <span class="fas fa-arrow-up u-go-to__inner"></span>
     </a>
-</span>
 </template>
 <script>
 	

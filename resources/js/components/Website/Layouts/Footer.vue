@@ -1,5 +1,4 @@
 <template>
-<span>
 	<footer>
         <!-- Footer-top-widget -->
         <div class="container d-none d-lg-block mb-3">
@@ -156,6 +155,7 @@
             </div>
         </div>
         <!-- End Footer-top-widget -->
+
         <!-- Footer-newsletter -->
         <div class="bg-primary py-3">
             <div class="container">
@@ -314,13 +314,13 @@
                                 <!-- List Group -->
                                 <ul class="list-group list-group-flush list-group-borderless mb-0 list-group-transparent">
                                     <!-- <li><router-link class="list-group-item list-group-item-action" to="/home"> My Account</router-link></li> -->
-                                    <li><a class="list-group-item list-group-item-action" href="/home"> My Account</a></li>
-                                    <li><a class="list-group-item list-group-item-action" href="../shop/track-your-order.html">Order Tracking</a></li>
-                                    <li><a class="list-group-item list-group-item-action" href="../shop/wishlist.html">Wish List</a></li>
-                                    <li><a class="list-group-item list-group-item-action" href="../home/terms-and-conditions.html">Customer Service</a></li>
-                                    <li><a class="list-group-item list-group-item-action" href="../home/terms-and-conditions.html">Returns / Exchange</a></li>
-                                    <li><a class="list-group-item list-group-item-action" href="../home/faq.html">FAQs</a></li>
-                                    <li><a class="list-group-item list-group-item-action" href="../home/terms-and-conditions.html">Product Support</a></li>
+                                    <li><router-link class="list-group-item list-group-item-action" to="/home"> My Account</router-link></li>
+                                    <li><router-link class="list-group-item list-group-item-action" to="/track-order">Order Tracking</router-link></li>
+                                    <li><router-link class="list-group-item list-group-item-action" to="/wishlist">Wish List</router-link></li>
+                                    <!-- <li><a class="list-group-item list-group-item-action" href="../home/terms-and-conditions.html">Customer Service</a></li> -->
+                                    <!-- <li><a class="list-group-item list-group-item-action" href="../home/terms-and-conditions.html">Returns / Exchange</a></li> -->
+                                    <li><router-link class="list-group-item list-group-item-action" to="/faq">FAQs</router-link></li>
+                                    <li><router-link class="list-group-item list-group-item-action" to="/terms-and-conditions">Terms and Conditions</router-link></li>
                                 </ul>
                                 <!-- End List Group -->
                             </div>
@@ -335,7 +335,7 @@
             <div class="container">
                 <div class="flex-center-between d-block d-md-flex">
                     <!-- <div class="mb-3 mb-md-0">© <router-link to="/home" class="font-weight-bold text-gray-90">Sorboraho</router-link> - All rights Reserved</div> -->
-                    <div class="mb-3 mb-md-0">© <a href="/home" class="font-weight-bold text-gray-90">Sorboraho</a> - All rights Reserved</div>
+                    <div class="mb-3 mb-md-0">© <a href="/home" class="font-weight-bold text-gray-90">SORBORAHO</a> - All rights Reserved</div>
                     <div class="text-md-right">
                         <span class="d-inline-block bg-white border rounded p-1">
                             <img class="max-width-5" src="website/assets/img/100X60/img1.jpg" alt="Image Description">
@@ -358,7 +358,7 @@
         </div>
         <!-- End Footer-copy-right -->
     </footer>
-</span>
+
 </template>
 <script>
 	export default {

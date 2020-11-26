@@ -28398,7 +28398,7 @@ label.btn {
   font-family: "Font Awesome 5 Free";
   font-size: 80%;
   font-weight: 900;
-  //content: "";
+  //content: ""; /*Comment by sumon*/
   margin-left: .5rem;
 }
 
@@ -34158,7 +34158,7 @@ blockquote:not(.blockquote) p {
 }
 
 .sidebar-navbar .dropdown-toggle::after {
-  content: "\f105";
+  //content: "\f105"; /*Comment by sumon*/
   font-size: 1.00012rem;
   line-height: 1;
 }

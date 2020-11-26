@@ -477,12 +477,6 @@ Route::get('/home', function () {
     //App::setLocale('bn'); //app()->getLocale()
     return view('website.home');    
 });
-
-Route::get('/{anypath}', function () {
-      return view('website.home'); 
-    //})->where(['anypath' => '([A-z\d-/_.]+)?' ]);
-    })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
-
 //-------------------------------------End Website------------------------------------------
 
 
@@ -508,5 +502,11 @@ Route::group(['prefix'=>'{locale}', 'where'=>['locale' => '[a-zA-Z]{2}'], 'middl
 Route::post('send-message-query', 'Website\ContactUsController@sendMessageQuery')->name('send-message-query');
 
 /****************************************End Website Routes Link *************************************************/
+
+//For Public
+Route::get('/{anypath}', function () {
+      return view('website.home'); 
+    //})->where(['anypath' => '([A-z\d-/_.]+)?' ]);
+    })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
 
 

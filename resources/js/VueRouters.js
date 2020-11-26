@@ -210,9 +210,10 @@ const routes = [
 	//{ path: '/home', name: 'home', component: () => import(/* webpackChunkName: "website-home-public" */ './components/Website/Home/HomePublic.vue'), meta: { title: 'Welcome To Sorboraho'} },
 	//{ path: '/contact', name: 'contact', component: () => import(/* webpackChunkName: "website-contact-public" */ './components/Website/Contact/ContactPublic.vue'), meta: { title: 'Contact Us'} },
 
-	{ path: '/home', name: 'HomeMaster', component: () => import(/* webpackChunkName: "HomeMaster-website" */ './components/Website/Home/HomeMaster.vue'), meta: { title: 'Welcome To Sorboraho'},
+	{ path: '/home', name: 'PublicMaster', component: () => import(/* webpackChunkName: "PublicMaster-website" */ './components/Website/PublicMaster.vue'), meta: { title: 'Welcome To Sorboraho'},
 	  children: [
 	  	{ path: '/home', name: 'HomePublic', component: () => import(/* webpackChunkName: "HomePublic-website" */ './components/Website/Home/HomePublic.vue'), },
+		{ path: '/shop', name: 'ShopPublic', component: () => import(/* webpackChunkName: "ShopPublic-website" */ './components/Website/Shop/ShopPublic.vue'), meta: { title: 'Shop'} },
 		{ path: '/contact', name: 'ContactPublic', component: () => import(/* webpackChunkName: "ContactPublic-website" */ './components/Website/Contact/ContactPublic.vue'), },
 		{ path: '/about', name: 'AboutUsPublic', component: () => import(/* webpackChunkName: "AboutUsPublic-website" */ './components/Website/About/AboutUsPublic.vue'), },
 		{ path: '/terms-and-conditions', name: 'TermsAndConditionsPublic', component: () => import(/* webpackChunkName: "TermsAndConditionsPublic-website" */ './components/Website/TAC/TermsAndConditionsPublic.vue'), },
