@@ -934,9 +934,12 @@
   			      toastr.success(data.success);               
   			      this.form.reset();  //reset from after submit
   			      this.editMode = false; 
+
   			     // this.$refs.avatar.value = ''; //clear file input tag 
   			  	 // this.ShowOnChangeImage = null;
+
   			  	  this.$router.push({ path : '/spa/ProductMaster' });	 //route after successfule submit
+              //this.fillForm();
   			    }
   			    if(data.errors){
   			      this.$Progress.fail();
@@ -964,6 +967,7 @@
           });
       },
 
+
       fillForm(){ 
       	if(this.$route.params.data != null){
           this.editMode = true;      		
@@ -982,8 +986,7 @@
           if(this.$route.params.data.pro_suppliers === null){ this.form.pro_suppliers = []; }
           if(this.$route.params.data.pro_vendors === null){ this.form.pro_vendors = []; }
           if(this.$route.params.data.related_products === null){ this.form.related_products = []; }
-          if(this.$route.params.data.has_many_image){ this.form.pro_images = []; }
-    	
+          if(this.$route.params.data.has_many_image){ this.form.pro_images = []; }    	
       	}
 
         //for single Select

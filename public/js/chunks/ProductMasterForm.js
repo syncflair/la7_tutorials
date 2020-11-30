@@ -1040,6 +1040,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           _this5.$router.push({
             path: '/spa/ProductMaster'
           }); //route after successfule submit
+          //this.fillForm();
 
         }
 

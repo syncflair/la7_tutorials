@@ -500,6 +500,7 @@ Route::group(['prefix'=>'{locale}', 'where'=>['locale' => '[a-zA-Z]{2}'], 'middl
 //Route::get('/{locale}', 'SetLanguageController@index'); //use this route after localization middleware
 
 Route::post('send-message-query', 'Website\ContactUsController@sendMessageQuery')->name('send-message-query');
+Route::post('send-visitor-query', 'Website\ContactUsController@sendVisitorQuery');
 
 /****************************************End Website Routes Link *************************************************/
 

@@ -8086,6 +8086,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 
@@ -46819,7 +46828,7 @@ var staticRenderFns = [
                                   staticClass:
                                     "js-countdown d-flex justify-content-center",
                                   attrs: {
-                                    "data-end-date": "2021/12/10",
+                                    "data-end-date": "2020/12/10 21:30:00",
                                     "data-days-format": "%D",
                                     "data-hours-format": "%H",
                                     "data-minutes-format": "%M",
@@ -46836,7 +46845,7 @@ var staticRenderFns = [
                                       },
                                       [
                                         _c("span", {
-                                          staticClass: "js-cd-hours"
+                                          staticClass: "js-cd-days"
                                         })
                                       ]
                                     ),
@@ -46850,6 +46859,15 @@ var staticRenderFns = [
                                       [_vm._v("DAY")]
                                     )
                                   ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "mx-1 pt-1 text-gray-2 font-size-24"
+                                    },
+                                    [_vm._v(":")]
+                                  ),
                                   _vm._v(" "),
                                   _c("div", { staticClass: "text-lh-1" }, [
                                     _c(
@@ -47147,13 +47165,47 @@ var staticRenderFns = [
                                   staticClass:
                                     "js-countdown d-flex justify-content-center",
                                   attrs: {
-                                    "data-end-date": "2020/11/30",
+                                    "data-end-date": "2021/01/05",
+                                    "data-days-format": "%D",
                                     "data-hours-format": "%H",
                                     "data-minutes-format": "%M",
                                     "data-seconds-format": "%S"
                                   }
                                 },
                                 [
+                                  _c("div", { staticClass: "text-lh-1" }, [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                                      },
+                                      [
+                                        _c("span", {
+                                          staticClass: "js-cd-days"
+                                        })
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "text-gray-2 font-size-12 text-center"
+                                      },
+                                      [_vm._v("DAY")]
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    {
+                                      staticClass:
+                                        "mx-1 pt-1 text-gray-2 font-size-24"
+                                    },
+                                    [_vm._v(":")]
+                                  ),
+                                  _vm._v(" "),
                                   _c("div", { staticClass: "text-lh-1" }, [
                                     _c(
                                       "div",

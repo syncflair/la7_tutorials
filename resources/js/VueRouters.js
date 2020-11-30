@@ -214,11 +214,17 @@ const routes = [
 	  children: [
 	  	{ path: '/home', name: 'HomePublic', component: () => import(/* webpackChunkName: "HomePublic-website" */ './components/Website/Home/HomePublic.vue'), },
 		{ path: '/shop', name: 'ShopPublic', component: () => import(/* webpackChunkName: "ShopPublic-website" */ './components/Website/Shop/ShopPublic.vue'), meta: { title: 'Shop'} },
-		{ path: '/contact', name: 'ContactPublic', component: () => import(/* webpackChunkName: "ContactPublic-website" */ './components/Website/Contact/ContactPublic.vue'), },
-		{ path: '/about', name: 'AboutUsPublic', component: () => import(/* webpackChunkName: "AboutUsPublic-website" */ './components/Website/About/AboutUsPublic.vue'), },
+		{ path: '/single-product', name: 'SingleProductPublic', component: () => import(/* webpackChunkName: "SingleProductPublic-website" */ './components/Website/SingleProduct/SingleProductPublic.vue'),  },
+		{ path: '/contact', name: 'ContactPublic', component: () => import(/* webpackChunkName: "ContactPublic-website" */ './components/Website/Contact/ContactPublic.vue'), meta: { title: 'Contact'} },
+		{ path: '/about', name: 'AboutUsPublic', component: () => import(/* webpackChunkName: "AboutUsPublic-website" */ './components/Website/About/AboutUsPublic.vue'), meta: { title: 'About Us'} },
 		{ path: '/terms-and-conditions', name: 'TermsAndConditionsPublic', component: () => import(/* webpackChunkName: "TermsAndConditionsPublic-website" */ './components/Website/TAC/TermsAndConditionsPublic.vue'), },
-		{ path: '/faq', name: 'FAQPublic', component: () => import(/* webpackChunkName: "FAQPublic-website" */ './components/Website/FAQ/FAQPublic.vue'), },
-		{ path: '/track-order', name: 'TrackYourOrder', component: () => import(/* webpackChunkName: "TrackYourOrder-website" */ './components/Website/TrackOrder/TrackYourOrder.vue'), },
+		{ path: '/faq', name: 'FAQPublic', component: () => import(/* webpackChunkName: "FAQPublic-website" */ './components/Website/FAQ/FAQPublic.vue'), meta: { title: 'FAQ'} },
+		{ path: '/track-order', name: 'TrackYourOrder', component: () => import(/* webpackChunkName: "TrackYourOrder-website" */ './components/Website/TrackOrder/TrackYourOrder.vue'), meta: { title: 'Track Order'} },
+		{ path: '/cart', name: 'CartPublic', component: () => import(/* webpackChunkName: "CartPublic-website" */ './components/Website/Cart/CartPublic.vue'), meta: { title: 'Cart'}},
+		{ path: '/checkout', name: 'CheckoutPublic', component: () => import(/* webpackChunkName: "CheckoutPublic-website" */ './components/Website/Checkout/CheckoutPublic.vue'), meta: { title: 'Checkout'}},
+		{ path: '/wishlist', name: 'WishlistPublic', component: () => import(/* webpackChunkName: "WishlistPublic-website" */ './components/Website/Wishlist/WishlistPublic.vue'), meta: { title: 'Wishlist'}},
+		{ path: '/compare', name: 'ComparePublic', component: () => import(/* webpackChunkName: "ComparePublic-website" */ './components/Website/Compare/ComparePublic.vue'), meta: { title: 'Wishlist'}},
+		{ path: '/my-account', name: 'MyAccountPublic', component: () => import(/* webpackChunkName: "MyAccountPublic-website" */ './components/Website/MyAccount/MyAccountPublic.vue'), meta: { title: 'My Account'}},
 	  ]
 	},
 
