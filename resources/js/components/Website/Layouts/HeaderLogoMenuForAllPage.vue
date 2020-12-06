@@ -1,5 +1,5 @@
 <template>
-<div class="py-2 py-xl-4 bg-primary-down-lg">
+<div class="screen-width py-2 py-xl-4 bg-primary-down-lg d-none- d-xl-block- " style="width:100%;">
     <div class="container my-0dot5 my-xl-0">
         <div class="row align-items-center">
             <!-- Logo-offcanvas-menu -->
@@ -50,8 +50,8 @@
                     </router-link>
                     <!-- End Logo -->
 
-                    <!-- Fullscreen Toggle Button -->
-                    <button id="sidebarHeaderInvokerMenu" type="button" class="navbar-toggler d-block btn u-hamburger mr-3 mr-xl-0"
+                    <!-- Fullscreen Toggle Button  sidebarHeaderInvokerMenu-->
+                    <button id="sidebarHeaderInvoker" type="button" class="navbar-toggler d-block btn u-hamburger mr-3 mr-xl-0"
                         aria-controls="sidebarHeader"
                         aria-haspopup="true"
                         aria-expanded="false"
@@ -287,16 +287,52 @@
                             <!-- End Input -->
                         </li>
                         <!-- End Search -->
-                        <li class="col d-none d-xl-block"><a href="../shop/compare.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Compare"><i class="font-size-22 ec ec-compare"></i></a></li>
-                        <li class="col d-none d-xl-block"><a href="../shop/wishlist.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Favorites"><i class="font-size-22 ec ec-favorites"></i></a></li>
-                        <li class="col d-xl-none px-2 px-sm-3"><a href="../shop/my-account.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="My Account"><i class="font-size-22 ec ec-user"></i></a></li>
-                        <li class="col pr-xl-0 px-2 px-sm-3">
-                            <a href="../shop/cart.html" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
-                                <i class="font-size-22 ec ec-shopping-bag"></i>
-                                <span class="width-22 height-22 bg-dark position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12 text-white">2</span>
-                                <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3">$1785.00</span>
-                            </a>
+                        
+                        <!-- <li class="col d-none d-xl-block">
+                            <a href="../shop/compare.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Compare"><i class="font-size-22 ec ec-compare"></i></a>
+                        </li> -->
+
+                        <li class="col d-none d-xl-block">
+                            <a href="../shop/wishlist.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Favorites"><i class="font-size-22 ec ec-favorites"></i></a>
                         </li>
+
+
+                        <li class="col pr-xl-0 px-2 px-sm-3">
+
+                            <!-- <router-link to="/cart" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
+                                <i class="font-size-22 ec ec-shopping-bag"></i>
+                                <span class="bg-lg-down-black width-22 height-22 bg-primary position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12">3</span>
+                                <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3">$1785.00</span>
+                            </router-link> -->
+
+                            <!-- cart link  -->
+                                <CartLink></CartLink>
+                            <!-- End cart link  -->
+                            
+                        </li>
+
+                        <li class="col d-xl-none px-2 px-sm-3">
+                            <!-- <router-link to="/my-account" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="My Account"><i class="font-size-22 ec ec-user"></i></router-link> -->
+
+                            <!-- Account Sidebar Toggle Button -->
+                            <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link"
+                                aria-controls="sidebarContent"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                data-unfold-event="click"
+                                data-unfold-hide-on-scroll="false"
+                                data-unfold-target="#sidebarContent"
+                                data-unfold-type="css-animation"
+                                data-unfold-animation-in="fadeInRight"
+                                data-unfold-animation-out="fadeOutRight"
+                                data-unfold-duration="500">
+                                <i class="ec ec-user mr-1"></i> 
+                                <!-- Register <span class="text-gray-50">or</span> Sign in -->
+                            </a>
+                            <!-- End Account Sidebar Toggle Button -->
+                        </li>
+
+
                     </ul>
                 </div>
             </div>
@@ -307,6 +343,7 @@
 </template>
 <script>
     import SidebarNavigationHeader1 from './SidebarNavigationHeader1.vue' //Load to all
+    import CartLink from './CartLink.vue' //Load to all
     export default {        
 
         name: "Header-Logo-Menu-For-All-Page-website",
@@ -316,6 +353,7 @@
         },
         components:{
             SidebarNavigationHeader1,
+            CartLink,
         },
 
         methods: {          
@@ -325,6 +363,8 @@
         },
            
         mounted() {
+            //console.log(window.innerHeight);
+            alert('Height:' +window.innerHeight + ' - Width:' + window.innerWidth);
         },
     }
 </script>

@@ -14,18 +14,24 @@
                             <router-link to="/home" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> Home</router-link>
                         </li> -->
                         <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                            <router-link to="/shop" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> Shop</router-link>
+                            <router-link to="/404" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> 404</router-link>
+                        </li>
+                        <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                            <router-link to="/categories" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> Category</router-link>
                         </li>
                         <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                             <router-link to="/about" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> About</router-link>
                         </li>
 
                         <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                            <router-link to="/contact" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> Contact Us</router-link>
+                            <router-link to="/contact" class="u-header-topbar__nav-link"><i class="ec ec-map-pointer mr-1"></i> Contact</router-link>
                         </li>
                         
                         <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
-                            <router-link to="/track-order" class="u-header-topbar__nav-link"><i class="ec ec-transport mr-1"></i> Track Your Order</router-link>
+                            <router-link to="/track-order" class="u-header-topbar__nav-link"><i class="ec ec-transport mr-1"></i> Track Order</router-link>
+                        </li>
+                        <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                            <router-link to="#" class="u-header-topbar__nav-link"><i class="ec ec-transport mr-1"></i>Get Apps</router-link>
                         </li>
                         <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
                             <div class="d-flex align-items-center">

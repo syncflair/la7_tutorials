@@ -53,8 +53,9 @@
             <h3 class="mb-6 pb-2 font-size-25">Contact Us</h3>
             <p class="text-gray-90">If you have any questions about this Agreement, please contact us filling this <a href="#" class="text-blue font-weight-bold">contact form</a></p>
         </div>
+        
         <!-- Brand Carousel -->
-        <div class="mb-8">
+        <!-- <div class="mb-8">
             <div class="py-2 border-top border-bottom">
                 <div class="js-slick-carousel u-slick my-1"
                     data-slides-show="5"
@@ -110,7 +111,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- End Brand Carousel -->
     </div>
 </main>
@@ -139,8 +140,10 @@
         },
            
         mounted() {
-            // initialization of slick carousel (Slick Slider call from here, otherwise it get error)
-            $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+            // setTimeout(() => {
+                // initialization of slick carousel (Slick Slider call from here, otherwise it get error)
+                //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+            // }, 3500);
         },
     }
 </script>

@@ -491,6 +491,10 @@
 //
 //
 //
+//
+//
+//
+//
 
 /***/ }),
 
@@ -518,7 +522,7 @@ var render = function() {
       _c("div", { staticClass: "container" }, [
         _vm._m(1),
         _vm._v(" "),
-        _c("div", { staticClass: "mb-10 cart-table" }, [
+        _c("div", { staticClass: "mb-5 cart-table" }, [
           _c(
             "form",
             { staticClass: "mb-4", attrs: { action: "#", method: "post" } },
@@ -539,7 +543,7 @@ var render = function() {
                         "td",
                         {
                           staticClass:
-                            "border-top space-top-2 justify-content-center",
+                            "border-top space-top-1 justify-content-center",
                           attrs: { colspan: "6" }
                         },
                         [
@@ -894,7 +898,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-8 cart-total" }, [
+    return _c("div", { staticClass: "mb-12 cart-total" }, [
       _c("div", { staticClass: "row" }, [
         _c(
           "div",

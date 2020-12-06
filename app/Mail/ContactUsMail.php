@@ -7,14 +7,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-
 use App\User;
-
 
 class ContactUsMail extends Mailable
 {
     use Queueable, SerializesModels;
-
 
     public $data;
 

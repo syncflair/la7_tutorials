@@ -298,9 +298,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {},
   created: function created() {},
-  mounted: function mounted() {
-    // initialization of slick carousel (Slick Slider call from here, otherwise it get error)
-    $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+  mounted: function mounted() {// initialization of slick carousel (Slick Slider call from here, otherwise it get error)
+    //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
   }
 });
 

@@ -23,9 +23,19 @@
                     "slidesToShow": 1
                 }
             }]'>
+
+            <!-- <tr v-for="(brand, index) in Brands" :key="index"> :data-slick-index="index" brand_url-->
+            <div class="js-slide" v-for="(brand, index) in brandList" :key="index" >
+                <a :href="brand.brand_url" class="link-hover__brand" :title="brand.brand_name">
+                    <img class="img-fluid m-auto max-height-50" :src="brand.brand_img" loading="lazy" :alt="brand.brand_desc">
+                </a>
+            </div>
+
+
+            <!-- 
             <div class="js-slide">
                 <a href="#" class="link-hover__brand">
-                    <img class="img-fluid m-auto max-height-50" src="website/assets/img/200X60/img1.png" alt="Image Description">
+                    <img class="img-fluid m-auto max-height-50" src="website/assets/img/200X60/img2.png" alt="Image Description">
                 </a>
             </div>
             <div class="js-slide">
@@ -52,11 +62,43 @@
                 <a href="#" class="link-hover__brand">
                     <img class="img-fluid m-auto max-height-50" src="website/assets/img/200X60/img6.png" alt="Image Description">
                 </a>
-            </div>
+            </div> -->
+
+
         </div>
     </div>
+    <!-- <div>{{brandList}}</div> -->
+
 </div>
 </template>
 <script>
+    export default {
+        name: "Brand-Carousel-Public-website",
+        data (){      
+            return {
+                brandList:{},          
+            }
+        },
+
+        components:{ }, 
+
+        methods: { 
+            fetchBrand(){
+                axios.get('/get-brand-for-carousel')
+                  .then( (response) => {
+                    this.brandList = response.data;
+                    //console.log(response.data);
+                });
+            }
+        },           
+
+        created(){
+            
+        },
+           
+        mounted() {
+            this.fetchBrand();
+        },
+    }
 	
 </script>

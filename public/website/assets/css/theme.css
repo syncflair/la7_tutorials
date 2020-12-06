@@ -37474,3 +37474,17 @@ blockquote:not(.blockquote) p {
 /*------------------------------------
   File for your custom SCSS style
 ------------------------------------*/
+
+
+/*------------------------------------
+  Sumon custom SCSS style
+------------------------------------*/
+.u-header-sidebar__content_cart{
+  padding: 1rem 1rem 1rem;
+}
+
+
+/*------------------------------------
+  Sumon custom SCSS style
+------------------------------------*/
+

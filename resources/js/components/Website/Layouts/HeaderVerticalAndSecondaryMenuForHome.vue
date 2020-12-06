@@ -481,7 +481,7 @@
 
                         <!-- Gift Cards -->
                         <li class="nav-item u-header__nav-item">
-                            <a class="nav-link u-header__nav-link" href="#" aria-haspopup="true" aria-expanded="false">Gift Cards</a>
+                            <router-link class="nav-link u-header__nav-link" to="/gift-card" aria-haspopup="true" aria-expanded="false">Gift Cards</router-link>
                         </li>
                         <!-- End Gift Cards -->
 

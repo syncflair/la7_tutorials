@@ -479,7 +479,7 @@
 
                 
                 <!-- Recommended Products -->
-                <div class="mb-6 d-none d-xl-block">
+                <!-- <div class="mb-6 d-none d-xl-block">
                     <div class="position-relative">
                         <div class="border-bottom border-color-1 mb-2">
                             <h3 class="d-inline-block section-title section-title__full mb-0 pb-2 font-size-22">Recommended Products</h3>
@@ -780,7 +780,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!-- End Recommended Products -->
 
 
@@ -2964,8 +2964,10 @@
                 <!-- End Shop Pagination -->
             </div>
         </div>
+
+
         <!-- Brand Carousel -->
-        <div class="mb-6">
+        <!-- <div class="mb-6">
             <div class="py-2 border-top border-bottom">
                 <div class="js-slick-carousel u-slick my-1"
                     data-slides-show="5"
@@ -3021,7 +3023,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- End Brand Carousel -->
     </div>
 </main>
@@ -3044,10 +3046,12 @@
         mounted() {
 
             // initialization of forms
-            //$.HSCore.components.HSRangeSlider.init('.js-range-slider');
+            $.HSCore.components.HSRangeSlider.init('.js-range-slider');
 
-            // // initialization of slick carousel (Slick Slider call from here, otherwise it get error)
-            $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+            // setTimeout(() => {
+                // initialization of slick carousel (Slick Slider call from here, otherwise it get error)
+                //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+            // }, 3500);
 
 
         },

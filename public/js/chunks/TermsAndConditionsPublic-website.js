@@ -127,6 +127,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 //import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
 //import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
 //const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
@@ -139,9 +140,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {},
   created: function created() {},
-  mounted: function mounted() {
+  mounted: function mounted() {// setTimeout(() => {
     // initialization of slick carousel (Slick Slider call from here, otherwise it get error)
-    $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+    //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+    // }, 3500);
   }
 });
 
@@ -331,126 +333,6 @@ var staticRenderFns = [
                 attrs: { href: "#" }
               },
               [_vm._v("contact form")]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-8" }, [
-          _c("div", { staticClass: "py-2 border-top border-bottom" }, [
-            _c(
-              "div",
-              {
-                staticClass: "js-slick-carousel u-slick my-1",
-                attrs: {
-                  "data-slides-show": "5",
-                  "data-slides-scroll": "1",
-                  "data-arrows-classes":
-                    "d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y",
-                  "data-arrow-left-classes":
-                    "fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9",
-                  "data-arrow-right-classes":
-                    "fa fa-angle-right u-slick__arrow-classic-inner--right",
-                  "data-responsive":
-                    '[{\r\n                        "breakpoint": 992,\r\n                        "settings": {\r\n                            "slidesToShow": 2\r\n                        }\r\n                    }, {\r\n                        "breakpoint": 768,\r\n                        "settings": {\r\n                            "slidesToShow": 1\r\n                        }\r\n                    }, {\r\n                        "breakpoint": 554,\r\n                        "settings": {\r\n                            "slidesToShow": 1\r\n                        }\r\n                    }]'
-                }
-              },
-              [
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img1.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img2.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img3.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img4.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img5.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img6.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ])
-              ]
             )
           ])
         ])

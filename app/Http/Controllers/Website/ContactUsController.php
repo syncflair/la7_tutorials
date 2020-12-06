@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Validator; //for vlidation
 use App\Mail\ContactUsMail;
+use App\Mail\ContactUsQueryMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Session;
@@ -58,6 +59,7 @@ class ContactUsController extends Controller
         ],[
             'firstName.required' => 'Please enter your First Name',
             'lastName.required' => 'Please enter your Last Name',
+            'visitorQuery.required' => 'Please enter Your Message here',
         ]);
 
         $data = array();
@@ -68,14 +70,10 @@ class ContactUsController extends Controller
         $data['subject']=$request->subject;
         $data['visitorQuery']=$request->visitorQuery;
          
-        
-        // if($request->is_enabled == NULL){
-        //     $data['is_enabled'] = 0;
-        // }else{
-        //    $data['is_enabled']=$request->is_enabled; 
-        // }
 
-        // Unit::create($data);        
+        Mail::to('sorboraho@gmail.com')->send(new ContactUsQueryMail($data));
+        return response()->json(['success'=>'Your email send succcessfully, we will get back to you soon.']); 
         // return response()->json(['success'=>'Unit Created.']); 
+        //return response()->json($data);
     }
 }

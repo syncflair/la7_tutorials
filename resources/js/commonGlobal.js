@@ -78,8 +78,7 @@ export default {
       */
       //console.log('Website:' + this.isitwebsiteCheck);
       // if(this.isitwebsiteCheck != ''){
-      if(this.isitwebsiteCheck ===  1){
-
+      if(this.isitwebsiteCheck !=  0 ){
           
               //############################# Windown Load ###################################            
 
@@ -112,7 +111,7 @@ export default {
               });
 
               // initialization of popups
-              $.HSCore.components.HSFancyBox.init('.js-fancybox');
+             $.HSCore.components.HSFancyBox.init('.js-fancybox');
 
 
 
@@ -133,13 +132,13 @@ export default {
               $.HSCore.components.HSFocusState.init();
 
               // initialization of form validation
-              $.HSCore.components.HSValidation.init('.js-validate', {
-                  rules: {
-                      confirmPassword: {
-                          equalTo: '#signupPassword'
-                      }
-                  }
-              });
+              // $.HSCore.components.HSValidation.init('.js-validate', {
+              //     rules: {
+              //         confirmPassword: {
+              //             equalTo: '#signupPassword'
+              //         }
+              //     }
+              // });
 
               // initialization of show animations
               $.HSCore.components.HSShowAnimation.init('.js-animation-link');
@@ -182,6 +181,8 @@ export default {
                   }
               });
 
+
+
               // initialization of unfold component
               $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
 
@@ -190,15 +191,15 @@ export default {
 
 
               // initialization of HSScrollNav component
-                $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
-                  duration: 700
-                });
+                // $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
+                //   duration: 700
+                // });
 
               // initialization of quantity counter
-                $.HSCore.components.HSQantityCounter.init('.js-quantity');
+              $.HSCore.components.HSQantityCounter.init('.js-quantity');
 
               // initialization of forms
-              $.HSCore.components.HSRangeSlider.init('.js-range-slider');
+              //$.HSCore.components.HSRangeSlider.init('.js-range-slider');
         
       }//end authUser Check        
 

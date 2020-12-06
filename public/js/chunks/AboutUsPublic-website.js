@@ -300,21 +300,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
 //import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
 //const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
@@ -327,10 +312,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {},
   created: function created() {},
-  mounted: function mounted() {
-    // initialization of slick carousel (Slick Slider call from here, otherwise it get error)
-    $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -358,295 +340,47 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("main", { attrs: { id: "content", role: "main" } }, [
-      _c(
-        "div",
-        {
-          staticClass: "bg-img-hero mb-14",
-          staticStyle: {
-            "background-image": "url(website/assets/img/1920x600/img1.jpg)"
-          }
-        },
-        [
-          _c("div", { staticClass: "container" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "flex-content-center max-width-620-lg flex-column mx-auto text-center min-height-564"
-              },
-              [
-                _c("h1", { staticClass: "h1 font-weight-bold" }, [
-                  _vm._v("About Us")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  { staticClass: "text-gray-39 font-size-18 text-lh-default" },
-                  [
-                    _vm._v(
-                      "Passion may be a friendly or eager interest in or admiration for a proposal, cause, discovery, or activity or love to a feeling of unusual excitement."
-                    )
-                  ]
-                )
-              ]
-            )
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-md-4 mb-4 mb-md-0" }, [
-            _c(
-              "div",
-              { staticClass: "card mb-3 border-0 text-center rounded-0" },
-              [
-                _c("img", {
-                  staticClass: "img-fluid mb-3",
-                  attrs: {
-                    src: "website/assets/img/500X300/img1.jpg",
-                    alt: "Card image cap"
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "h5",
-                    { staticClass: "font-size-18 font-weight-semi-bold mb-3" },
-                    [_vm._v("What we really do?")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    { staticClass: "text-gray-90 max-width-334 mx-auto" },
-                    [
-                      _vm._v(
-                        "Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna,vitae ultrices lacus purus vitae metus."
-                      )
-                    ]
-                  )
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4 mb-4 mb-md-0" }, [
-            _c(
-              "div",
-              { staticClass: "card mb-3 border-0 text-center rounded-0" },
-              [
-                _c("img", {
-                  staticClass: "img-fluid mb-3",
-                  attrs: {
-                    src: "website/assets/img/500X300/img2.jpg",
-                    alt: "Card image cap"
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "h5",
-                    { staticClass: "font-size-18 font-weight-semi-bold mb-3" },
-                    [_vm._v("Our Vision")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    { staticClass: "text-gray-90 max-width-334 mx-auto" },
-                    [
-                      _vm._v(
-                        "Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna,vitae ultrices lacus purus vitae metus."
-                      )
-                    ]
-                  )
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-4" }, [
-            _c(
-              "div",
-              { staticClass: "card mb-3 border-0 text-center rounded-0" },
-              [
-                _c("img", {
-                  staticClass: "img-fluid mb-3",
-                  attrs: {
-                    src: "website/assets/img/500X300/img3.jpg",
-                    alt: "Card image cap"
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c(
-                    "h5",
-                    { staticClass: "font-size-18 font-weight-semi-bold mb-3" },
-                    [_vm._v("History of Beginning")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "p",
-                    { staticClass: "text-gray-90 max-width-334 mx-auto" },
-                    [
-                      _vm._v(
-                        "Donec libero dolor, tincidunt id laoreet vitae, ullamcorper eu tortor. Maecenas pellentesque, dui vitae iaculis mattis, tortor nisi faucibus magna,vitae ultrices lacus purus vitae metus."
-                      )
-                    ]
-                  )
-                ])
-              ]
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "bg-gray-1 py-12 mb-10 mb-lg-15" }, [
+      _c("div", { staticClass: "bg-gray-13 bg-md-transparent" }, [
         _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              { staticClass: "col-md-4 mb-5 mb-xl-0 col-xl text-center" },
-              [
-                _c("img", {
-                  staticClass: "img-fluid mb-3 rounded-circle",
-                  attrs: {
-                    src: "website/assets/img/300X300/img16.jpg",
-                    alt: "Card image cap"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "h2",
-                  { staticClass: "font-size-18 font-weight-semi-bold mb-0" },
-                  [_vm._v("Thomas Snow")]
-                ),
-                _vm._v(" "),
-                _c("span", { staticClass: "text-gray-41" }, [
-                  _vm._v("CEO/Founder")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-md-4 mb-5 mb-xl-0 col-xl text-center" },
-              [
-                _c("img", {
-                  staticClass: "img-fluid mb-3 rounded-circle",
-                  attrs: {
-                    src: "website/assets/img/300X300/img17.jpg",
-                    alt: "Card image cap"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "h2",
-                  { staticClass: "font-size-18 font-weight-semi-bold mb-0" },
-                  [_vm._v("Anna Baranov")]
-                ),
-                _vm._v(" "),
-                _c("span", { staticClass: "text-gray-41" }, [
-                  _vm._v("Client Care")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-md-4 mb-5 mb-xl-0 col-xl text-center" },
-              [
-                _c("img", {
-                  staticClass: "img-fluid mb-3 rounded-circle",
-                  attrs: {
-                    src: "website/assets/img/300X300/img18.jpg",
-                    alt: "Card image cap"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "h2",
-                  { staticClass: "font-size-18 font-weight-semi-bold mb-0" },
-                  [_vm._v("Andre Kowalsy")]
-                ),
-                _vm._v(" "),
-                _c("span", { staticClass: "text-gray-41" }, [
-                  _vm._v("Support Boss")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-md-4 mb-5 mb-xl-0 col-xl text-center" },
-              [
-                _c("img", {
-                  staticClass: "img-fluid mb-3 rounded-circle",
-                  attrs: {
-                    src: "website/assets/img/300X300/img19.jpg",
-                    alt: "Card image cap"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "h2",
-                  { staticClass: "font-size-18 font-weight-semi-bold mb-0" },
-                  [_vm._v("Pamela Doe")]
-                ),
-                _vm._v(" "),
-                _c("span", { staticClass: "text-gray-41" }, [
-                  _vm._v("Delivery Driver")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-md-4 mb-5 mb-xl-0 col-xl text-center" },
-              [
-                _c("img", {
-                  staticClass: "img-fluid mb-3 rounded-circle",
-                  attrs: {
-                    src: "website/assets/img/300X300/img20.jpg",
-                    alt: "Card image cap"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "h2",
-                  { staticClass: "font-size-18 font-weight-semi-bold mb-0" },
-                  [_vm._v("Susan McCain")]
-                ),
-                _vm._v(" "),
-                _c("span", { staticClass: "text-gray-41" }, [
-                  _vm._v("Packaging Girl")
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-md-4 mb-5 mb-xl-0 col-xl text-center" },
-              [
-                _c("img", {
-                  staticClass: "img-fluid mb-3 rounded-circle",
-                  attrs: {
-                    src: "website/assets/img/300X300/img21.png",
-                    alt: "Card image cap"
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "h2",
-                  { staticClass: "font-size-18 font-weight-semi-bold mb-0" },
-                  [_vm._v("See Details")]
-                )
-              ]
-            )
+          _c("div", { staticClass: "my-md-3" }, [
+            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+              _c(
+                "ol",
+                {
+                  staticClass:
+                    "breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
+                },
+                [
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
+                    },
+                    [
+                      _c("a", { attrs: { href: "../home/index.html" } }, [
+                        _vm._v("Home")
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "li",
+                    {
+                      staticClass:
+                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active",
+                      attrs: { "aria-current": "page" }
+                    },
+                    [_vm._v("About Us")]
+                  )
+                ]
+              )
+            ])
           ])
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "container mb-8 mb-lg-0" }, [
+      _c("div", { staticClass: "container mb-8 mt-8 mb-lg-0" }, [
         _c("div", { staticClass: "row mb-8" }, [
           _c("div", { staticClass: "col-lg-7" }, [
             _c("div", { staticClass: "row" }, [
@@ -1096,123 +830,149 @@ var staticRenderFns = [
               )
             ])
           ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-8" }, [
-          _c("div", { staticClass: "py-2 border-top border-bottom" }, [
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "bg-gray-1 py-12 mb-10- mb-lg-15" }, [
+        _c("div", { staticClass: "container" }, [
+          _c("div", { staticClass: "row" }, [
             _c(
               "div",
-              {
-                staticClass: "js-slick-carousel u-slick my-1",
-                attrs: {
-                  "data-slides-show": "5",
-                  "data-slides-scroll": "1",
-                  "data-arrows-classes":
-                    "d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y",
-                  "data-arrow-left-classes":
-                    "fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9",
-                  "data-arrow-right-classes":
-                    "fa fa-angle-right u-slick__arrow-classic-inner--right",
-                  "data-responsive":
-                    '[{\r\n                        "breakpoint": 992,\r\n                        "settings": {\r\n                            "slidesToShow": 2\r\n                        }\r\n                    }, {\r\n                        "breakpoint": 768,\r\n                        "settings": {\r\n                            "slidesToShow": 1\r\n                        }\r\n                    }, {\r\n                        "breakpoint": 554,\r\n                        "settings": {\r\n                            "slidesToShow": 1\r\n                        }\r\n                    }]'
-                }
-              },
+              { staticClass: "col-md-4 mb-5 mb-xl-0 col-xl text-center" },
               [
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img1.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
+                _c("img", {
+                  staticClass: "img-fluid mb-3 rounded-circle",
+                  attrs: {
+                    src: "website/assets/img/300X300/img16.jpg",
+                    alt: "Card image cap"
+                  }
+                }),
                 _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img2.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
+                _c(
+                  "h2",
+                  { staticClass: "font-size-18 font-weight-semi-bold mb-0" },
+                  [_vm._v("Thomas Snow")]
+                ),
                 _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img3.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img4.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img5.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img6.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
+                _c("span", { staticClass: "text-gray-41" }, [
+                  _vm._v("CEO/Founder")
                 ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-4 mb-5 mb-xl-0 col-xl text-center" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid mb-3 rounded-circle",
+                  attrs: {
+                    src: "website/assets/img/300X300/img17.jpg",
+                    alt: "Card image cap"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "h2",
+                  { staticClass: "font-size-18 font-weight-semi-bold mb-0" },
+                  [_vm._v("Anna Baranov")]
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "text-gray-41" }, [
+                  _vm._v("Client Care")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-4 mb-5 mb-xl-0 col-xl text-center" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid mb-3 rounded-circle",
+                  attrs: {
+                    src: "website/assets/img/300X300/img18.jpg",
+                    alt: "Card image cap"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "h2",
+                  { staticClass: "font-size-18 font-weight-semi-bold mb-0" },
+                  [_vm._v("Andre Kowalsy")]
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "text-gray-41" }, [
+                  _vm._v("Support Boss")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-4 mb-5 mb-xl-0 col-xl text-center" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid mb-3 rounded-circle",
+                  attrs: {
+                    src: "website/assets/img/300X300/img19.jpg",
+                    alt: "Card image cap"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "h2",
+                  { staticClass: "font-size-18 font-weight-semi-bold mb-0" },
+                  [_vm._v("Pamela Doe")]
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "text-gray-41" }, [
+                  _vm._v("Delivery Driver")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-4 mb-5 mb-xl-0 col-xl text-center" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid mb-3 rounded-circle",
+                  attrs: {
+                    src: "website/assets/img/300X300/img20.jpg",
+                    alt: "Card image cap"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "h2",
+                  { staticClass: "font-size-18 font-weight-semi-bold mb-0" },
+                  [_vm._v("Susan McCain")]
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "text-gray-41" }, [
+                  _vm._v("Packaging Girl")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "col-md-4 mb-5 mb-xl-0 col-xl text-center" },
+              [
+                _c("img", {
+                  staticClass: "img-fluid mb-3 rounded-circle",
+                  attrs: {
+                    src: "website/assets/img/300X300/img21.png",
+                    alt: "Card image cap"
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "h2",
+                  { staticClass: "font-size-18 font-weight-semi-bold mb-0" },
+                  [_vm._v("See Details")]
+                )
               ]
             )
           ])

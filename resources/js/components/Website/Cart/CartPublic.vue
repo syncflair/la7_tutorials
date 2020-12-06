@@ -22,7 +22,9 @@
         <div class="mb-4">
             <h1 class="text-center">Cart</h1>
         </div>
-        <div class="mb-10 cart-table">
+
+        <!-- <div class="mb-10 cart-table"> -->
+        <div class="mb-5 cart-table">
             <form class="mb-4" action="#" method="post">
                 <table class="table" cellspacing="0">
                     <thead>
@@ -119,7 +121,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="6" class="border-top space-top-2 justify-content-center">
+                            <!-- <td colspan="6" class="border-top space-top-2 justify-content-center"> -->
+                            <td colspan="6" class="border-top space-top-1 justify-content-center">
                                 <div class="pt-md-3">
                                     <div class="d-block d-md-flex flex-center-between">
                                         <div class="mb-3 mb-md-0 w-xl-40">
@@ -148,7 +151,8 @@
                 </table>
             </form>
         </div>
-        <div class="mb-8 cart-total">
+        <!-- <div class="mb-8 cart-total"> -->
+        <div class="mb-12 cart-total">
             <div class="row">
                 <div class="col-xl-5 col-lg-6 offset-lg-6 offset-xl-7 col-md-8 offset-md-4">
                     <div class="border-bottom border-color-1 mb-3">

@@ -214,9 +214,16 @@ const routes = [
 	  children: [
 	  	{ path: '/home', name: 'HomePublic', component: () => import(/* webpackChunkName: "HomePublic-website" */ './components/Website/Home/HomePublic.vue'), },
 		{ path: '/shop', name: 'ShopPublic', component: () => import(/* webpackChunkName: "ShopPublic-website" */ './components/Website/Shop/ShopPublic.vue'), meta: { title: 'Shop'} },
-		{ path: '/single-product', name: 'SingleProductPublic', component: () => import(/* webpackChunkName: "SingleProductPublic-website" */ './components/Website/SingleProduct/SingleProductPublic.vue'),  },
+		{ path: '/categories', name: 'CategoriesPublic', component: () => import(/* webpackChunkName: "CategoriesPublic-website" */ './components/Website/Category/CategoriesPublic.vue'), },
+		{ path: '/deals-of-day', name: 'DealsListPublic', component: () => import(/* webpackChunkName: "DealsListPublic-website" */ './components/Website/Deals/DealsListPublic.vue'), meta: { title: 'Brands'} },
+		{ path: '/brands', name: 'BrandsListPublic', component: () => import(/* webpackChunkName: "BrandsListPublic-website" */ './components/Website/Brand/BrandsListPublic.vue'), meta: { title: 'Brands'} },
+		{ path: '/brand', name: 'BrandPublic', component: () => import(/* webpackChunkName: "BrandPublic-website" */ './components/Website/Brand/BrandPublic.vue'), },
+		{ path: '/brand-shops', name: 'BrandShopsListPublic', component: () => import(/* webpackChunkName: "BrandShopsListPublic-website" */ './components/Website/BrandShop/BrandShopsListPublic.vue'), meta: { title: 'Brand Shops'} },
+		{ path: '/single-product', name: 'SingleProductPublic', component: () => import(/* webpackChunkName: "SingleProductPublic-website" */ './components/Website/Product/SingleProductPublic.vue'),  },
 		{ path: '/contact', name: 'ContactPublic', component: () => import(/* webpackChunkName: "ContactPublic-website" */ './components/Website/Contact/ContactPublic.vue'), meta: { title: 'Contact'} },
 		{ path: '/about', name: 'AboutUsPublic', component: () => import(/* webpackChunkName: "AboutUsPublic-website" */ './components/Website/About/AboutUsPublic.vue'), meta: { title: 'About Us'} },
+		{ path: '/gift-card', name: 'GiftCardPublic', component: () => import(/* webpackChunkName: "GiftCardPublic-website" */ './components/Website/GiftCard/GiftCardPublic.vue'), meta: { title: 'Gift Card'} },
+		{ path: '/membership', name: 'MembershipPublic', component: () => import(/* webpackChunkName: "MembershipPublic-website" */ './components/Website/Membership/MembershipPublic.vue'), meta: { title: 'Membership'} },
 		{ path: '/terms-and-conditions', name: 'TermsAndConditionsPublic', component: () => import(/* webpackChunkName: "TermsAndConditionsPublic-website" */ './components/Website/TAC/TermsAndConditionsPublic.vue'), },
 		{ path: '/faq', name: 'FAQPublic', component: () => import(/* webpackChunkName: "FAQPublic-website" */ './components/Website/FAQ/FAQPublic.vue'), meta: { title: 'FAQ'} },
 		{ path: '/track-order', name: 'TrackYourOrder', component: () => import(/* webpackChunkName: "TrackYourOrder-website" */ './components/Website/TrackOrder/TrackYourOrder.vue'), meta: { title: 'Track Order'} },
@@ -225,6 +232,7 @@ const routes = [
 		{ path: '/wishlist', name: 'WishlistPublic', component: () => import(/* webpackChunkName: "WishlistPublic-website" */ './components/Website/Wishlist/WishlistPublic.vue'), meta: { title: 'Wishlist'}},
 		{ path: '/compare', name: 'ComparePublic', component: () => import(/* webpackChunkName: "ComparePublic-website" */ './components/Website/Compare/ComparePublic.vue'), meta: { title: 'Wishlist'}},
 		{ path: '/my-account', name: 'MyAccountPublic', component: () => import(/* webpackChunkName: "MyAccountPublic-website" */ './components/Website/MyAccount/MyAccountPublic.vue'), meta: { title: 'My Account'}},
+		{ path: '/404', name: '404Public', component: () => import(/* webpackChunkName: "404Public-website" */ './components/Website/404/404Public.vue'), meta: { title: 'Page Not Found'}},
 	  ]
 	},
 

@@ -396,25 +396,122 @@
                 <!-- End Search-Form -->
             </div>
             <!-- End Search bar -->
+
+
             <!-- Header Icons -->
             <div class="col-md-auto align-self-center">
                 <div class="d-flex">
                     <ul class="d-flex list-unstyled mb-0">
-                        <li class="col"><a href="../shop/compare.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Compare"><i class="font-size-22 ec ec-compare"></i></a></li>
-                        <li class="col"><a href="../shop/wishlist.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Favorites"><i class="font-size-22 ec ec-favorites"></i></a></li>
+                        <li class="col">
+                            <a href="../shop/compare.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Compare"><i class="font-size-22 ec ec-compare"></i></a>
+                        </li>
+
+                        <li class="col">
+                            <a href="../shop/wishlist.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Favorites"><i class="font-size-22 ec ec-favorites"></i></a>
+                        </li>
+                        
                         <li class="col pr-0">
-                            <router-link to="/cart" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
+                            <!-- <router-link to="/cart" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                 <i class="font-size-22 ec ec-shopping-bag"></i>
                                 <span class="width-22 height-22 bg-dark position-absolute flex-content-center text-white rounded-circle left-12 top-8 font-weight-bold font-size-12">2</span>
                                 <span class="font-weight-bold font-size-16 text-gray-90 ml-3">$1785.00</span>
-                            </router-link>
+                            </router-link> -->
+
+                            <!-- <div id="basicDropdownHoverInvoker-01" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart"
+                                aria-controls="basicDropdownHover-01"
+                                aria-haspopup="true"
+                                aria-expanded="false"
+                                data-unfold-event="click"
+                                data-unfold-target="#basicDropdownHover-01"
+                                data-unfold-type="css-animation"
+                                data-unfold-duration="300"
+                                data-unfold-delay="300"
+                                data-unfold-hide-on-scroll="true"
+                                data-unfold-animation-in="slideInUp"
+                                data-unfold-animation-out="fadeOut">
+                                <i class="font-size-22 ec ec-shopping-bag"></i>
+                                <span class="bg-lg-down-black width-22 height-22 bg-white position-absolute d-flex align-items-center justify-content-center rounded-circle left-12 top-8 font-weight-bold font-size-12">2</span>
+                                <span class="d-none d-xl-block font-weight-bold font-size-16 text-gray-90 ml-3">$1785.00</span>
+                            </div>
+
+                            <div id="basicDropdownHover-01" class="cart-dropdown dropdown-menu dropdown-unfold border-top border-top-primary mt-3 border-width-2 border-left-0 border-right-0 border-bottom-0 left-auto right-0" aria-labelledby="basicDropdownHoverInvoker-01">
+                                <ul class="list-unstyled px-3 pt-3">
+                                    <li class="border-bottom pb-3 mb-3">
+                                        <div class="">
+                                            <ul class="list-unstyled row mx-n2">
+                                                <li class="px-2 col-auto">
+                                                    <img class="img-fluid" src="website/assets/img/75X75/img1.jpg" alt="Image Description">
+                                                </li>
+                                                <li class="px-2 col">
+                                                    <h5 class="text-blue font-size-14 font-weight-bold">Ultra Wireless S50 Headphones S50 with Bluetooth</h5>
+                                                    <span class="font-size-14">1 × $1,100.00</span>
+                                                </li>
+                                                <li class="px-2 col-auto">
+                                                    <a href="#" class="text-gray-90"><i class="ec ec-close-remove"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="border-bottom pb-3 mb-3">
+                                        <div class="">
+                                            <ul class="list-unstyled row mx-n2">
+                                                <li class="px-2 col-auto">
+                                                    <img class="img-fluid" src="website/assets/img/75X75/img2.jpg" alt="Image Description">
+                                                </li>
+                                                <li class="px-2 col">
+                                                    <h5 class="text-blue font-size-14 font-weight-bold">Widescreen NX Mini F1 SMART NX</h5>
+                                                    <span class="font-size-14">1 × $685.00</span>
+                                                </li>
+                                                <li class="px-2 col-auto">
+                                                    <a href="#" class="text-gray-90"><i class="ec ec-close-remove"></i></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="flex-center-between px-4 pt-2">
+                                    <router-link to="/cart" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-5 px-md-4 px-lg-5">View cart</router-link>
+                                    <router-link to="/checkout" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5">Checkout</router-link>
+                                </div>
+                            </div> -->
+
+                            <!-- cart link  -->
+                            <CartLink></CartLink>
+                            <!-- End cart link  -->
+                            
                         </li>
                     </ul>
                 </div>
             </div>
             <!-- End Header Icons -->
+
+
         </div>
     </div>
 </div>
 </template>
-<script></script>
+<script>
+    import CartLink from './CartLink.vue' //Load to all
+    import CartPopup from './CartPopup.vue' //Load to all
+    export default {        
+
+        name: "Header-Vertical-And-Search-For-All-Page-website",
+        data (){      
+            return {                            
+            }
+        },
+        components:{
+            CartLink,
+            CartPopup,
+        },
+
+        methods: {          
+        },           
+
+        created(){
+        },
+           
+        mounted() {
+        },
+    }
+</script>
