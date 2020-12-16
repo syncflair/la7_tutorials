@@ -46,7 +46,11 @@
     <!-- ========== END HEADER ========== -->
 
     <!-- ========== MAIN CONTENT ========== -->
-    <router-view default="{name: 'HomePublic'}"></router-view>    
+    <main id="content" role="main" :class="mainContentMarginTopWhenHeaderFiexd">
+
+        <router-view default="{name: 'HomePublic'}"></router-view> 
+
+    </main>   
     <!-- ========== END MAIN CONTENT ========== -->
 
     
@@ -114,7 +118,12 @@
     export default {
         name: "Home-Master-website",
         data (){      
-            return {                            
+            return {  
+                mainContentMarginTopWhenHeaderFiexd:'',  
+                window: {
+                    width: 0,
+                    height: 0
+                }                            
             }
         },
 
@@ -135,10 +144,31 @@
             FooterFixed,
         }, 
 
-        methods: {          
+        watch: {
+
+            'window.width': function (val) {                
+                if( val < 1200 ){
+                    return this.mainContentMarginTopWhenHeaderFiexd = 'mainContentMarginTopWhenHeaderFiexd';
+                }else if(val > 1200 ){
+                    return this.mainContentMarginTopWhenHeaderFiexd = '';
+                }
+            },
+        },
+
+        methods: { 
+            handleResize() {
+                this.window.width = window.innerWidth;
+                this.window.height = window.innerHeight;
+            }         
         },           
 
         created(){
+            window.addEventListener('resize', this.handleResize);
+            this.handleResize();
+        },
+           
+        destroyed() {
+            window.removeEventListener('resize', this.handleResize);
         },
            
         mounted() {

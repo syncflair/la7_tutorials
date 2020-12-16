@@ -966,6 +966,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
  //Load to only Home Page
 
 
@@ -5517,8 +5518,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "main",
-    { attrs: { id: "content", role: "main" } },
+    "span",
     [
       _c("HomeSliderSection"),
       _vm._v(" "),

@@ -1973,6 +1973,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
  //Load to every page
 
  //Load to every page
@@ -2014,7 +2018,13 @@ var HeaderVerticalAndSearchForAllPage = function HeaderVerticalAndSearchForAllPa
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home-Master-website",
   data: function data() {
-    return {};
+    return {
+      mainContentMarginTopWhenHeaderFiexd: '',
+      window: {
+        width: 0,
+        height: 0
+      }
+    };
   },
   components: {
     HeaderLogoMenuFixedToTop: _Layouts_HeaderLogoMenuFixedToTop_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -2030,8 +2040,28 @@ var HeaderVerticalAndSearchForAllPage = function HeaderVerticalAndSearchForAllPa
     FooterComponent: _Layouts_Footer_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
     FooterFixed: _Layouts_FooterFixed_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   },
-  methods: {},
-  created: function created() {},
+  watch: {
+    'window.width': function windowWidth(val) {
+      if (val < 1200) {
+        return this.mainContentMarginTopWhenHeaderFiexd = 'mainContentMarginTopWhenHeaderFiexd';
+      } else if (val > 1200) {
+        return this.mainContentMarginTopWhenHeaderFiexd = '';
+      }
+    }
+  },
+  methods: {
+    handleResize: function handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    }
+  },
+  created: function created() {
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+  },
+  destroyed: function destroyed() {
+    window.removeEventListener('resize', this.handleResize);
+  },
   mounted: function mounted() {//initialization of slick carousel (Slick Slider call from here, otherwise it get error)
     //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
   }
@@ -6233,7 +6263,15 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("router-view", { attrs: { default: "{name: 'HomePublic'}" } }),
+      _c(
+        "main",
+        {
+          class: _vm.mainContentMarginTopWhenHeaderFiexd,
+          attrs: { id: "content", role: "main" }
+        },
+        [_c("router-view", { attrs: { default: "{name: 'HomePublic'}" } })],
+        1
+      ),
       _vm._v(" "),
       _c("FooterComponent"),
       _vm._v(" "),

@@ -210,15 +210,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Header-Logo-Search-Icons-For-Home-website",
   data: function data() {
-    return {};
+    return {
+      topFixedClass: '',
+      window: {
+        width: 0,
+        height: 0
+      }
+    };
+  },
+  watch: {
+    'window.width': function windowWidth(val) {
+      if (val < 1200) {
+        return this.topFixedClass = 'u-header--sticky-top';
+      } else if (val > 1200) {
+        return this.topFixedClass = '';
+      }
+    }
   },
   components: {
     SidebarNavigationHeader1: _SidebarNavigationHeader1_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     CartLink: _CartLink_vue__WEBPACK_IMPORTED_MODULE_1__["default"] //CartPopup,
 
   },
-  methods: {},
-  created: function created() {},
+  methods: {
+    handleResize: function handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    }
+  },
+  created: function created() {
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+  },
+  destroyed: function destroyed() {
+    window.removeEventListener('resize', this.handleResize);
+  },
   mounted: function mounted() {}
 });
 
@@ -241,7 +267,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "py-2 py-xl-5 bg-primary-down-lg d-none- d-xl-block-" },
+    {
+      staticClass: "py-2 py-xl-5 bg-primary-down-lg d-none- d-xl-block-",
+      class: _vm.topFixedClass,
+      staticStyle: { "//width": "100%" }
+    },
     [
       _c("div", { staticClass: "container my-0dot5 my-xl-0" }, [
         _c("div", { staticClass: "row align-items-center" }, [

@@ -354,6 +354,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
  //Load to all
 
  //Load to all
@@ -361,19 +365,73 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Header-Logo-Menu-For-All-Page-website",
   data: function data() {
-    return {};
+    return {
+      topHeaderFixedClass: '',
+      window: {
+        width: 0,
+        height: 0
+      }
+    };
   },
   components: {
     SidebarNavigationHeader1: _SidebarNavigationHeader1_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     CartLink: _CartLink_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
-  methods: {},
-  created: function created() {},
-  mounted: function mounted() {
+  watch: {
+    //topHeaderFixedClass: function () {
+    'window.width': function windowWidth(val) {
+      if (val < 1200) {
+        return this.topHeaderFixedClass = 'u-header--sticky-top';
+      } else if (val > 1200) {
+        return this.topHeaderFixedClass = '';
+      }
+    } // firstName: function (val) {
+    //   this.fullName = val + ' ' + this.lastName
+    // },
+    // lastName: function (val) {
+    //   this.fullName = this.firstName + ' ' + val
+    // }
+
+  },
+  methods: {
+    // toggleBodyClass(addRemoveClass, className) {
+    //     // const el = document.body;
+    //     //const el = document.getElementsByClassName('screenWidth');
+    //     const el = this.$refs.screenWidth;
+    //     if (addRemoveClass === 'screenWidth') {
+    //       el.classList.add(className);
+    //     } else {
+    //       el.classList.remove(className);
+    //     }
+    // },    
+    // TextColor(){
+    //     // document.querySelector(".sithLord").style.display = "none"
+    //     document.querySelector(".breadcrumb ol li a").style.color = "red";
+    // }, 
+    //u-header--sticky-top 
+    handleResize: function handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    }
+  },
+  created: function created() {
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+  },
+  destroyed: function destroyed() {
+    window.removeEventListener('resize', this.handleResize);
+  },
+  mounted: function mounted() {// alert(this.$refs.screenWidth.clientHeight +' '+  this.$refs.screenWidth.clientWidth);
+    //this.toggleBodyClass('screenWidth', 'TestClassTEse');
+    // document.getElementsByClassName('screenWidth').classList.add('testClass');
+    // document.body.classList.add('testClass');
+    // document.getElementsByClassName(‘classname’).classList.remove(‘classname’)
     //console.log(window.innerHeight);
-    alert('Height:' + window.innerHeight + ' - Width:' + window.innerWidth);
+    //alert('Height: ' +window.innerHeight + ' - Width: ' + window.innerWidth);
+    //alert(this.$refs.screenWidth.clientHeight + '-' + this.$refs.screenWidth.clientWidth); //working
+    //console.log('Width: '+this.window.width+ ' Height: ' + this.window.height );
   }
-});
+}); //document.getElementsByClassName(‘classname’).classList.remove(‘classname’)
 
 /***/ }),
 
@@ -395,8 +453,10 @@ var render = function() {
   return _c(
     "div",
     {
+      ref: "screenWidth",
       staticClass:
-        "screen-width py-2 py-xl-4 bg-primary-down-lg d-none- d-xl-block- ",
+        "screenWidth py-2 py-xl-4 bg-primary-down-lg d-none- d-xl-block- ",
+      class: _vm.topHeaderFixedClass,
       staticStyle: { width: "100%" }
     },
     [
@@ -494,6 +554,19 @@ var render = function() {
                     _vm._m(3),
                     _vm._v(" "),
                     _vm._m(4),
+                    _vm._v(" "),
+                    _c("li", [
+                      _vm._v(
+                        "\r\n                            " +
+                          _vm._s(
+                            "Width: " +
+                              this.window.width +
+                              " Height: " +
+                              this.window.height
+                          ) +
+                          "\r\n                        "
+                      )
+                    ]),
                     _vm._v(" "),
                     _c(
                       "li",

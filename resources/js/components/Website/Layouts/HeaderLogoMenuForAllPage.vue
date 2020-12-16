@@ -1,5 +1,6 @@
 <template>
-<div class="screen-width py-2 py-xl-4 bg-primary-down-lg d-none- d-xl-block- " style="width:100%;">
+<div ref="screenWidth" class="screenWidth py-2 py-xl-4 bg-primary-down-lg d-none- d-xl-block- " 
+     :class="topHeaderFixedClass" style="width:100%;">
     <div class="container my-0dot5 my-xl-0">
         <div class="row align-items-center">
             <!-- Logo-offcanvas-menu -->
@@ -295,6 +296,9 @@
                         <li class="col d-none d-xl-block">
                             <a href="../shop/wishlist.html" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="Favorites"><i class="font-size-22 ec ec-favorites"></i></a>
                         </li>
+                        <li>
+                            {{'Width: '+this.window.width+ ' Height: ' + this.window.height}}
+                        </li>
 
 
                         <li class="col pr-xl-0 px-2 px-sm-3">
@@ -348,7 +352,12 @@
 
         name: "Header-Logo-Menu-For-All-Page-website",
         data (){      
-            return {                            
+            return { 
+                topHeaderFixedClass:'',  
+                window: {
+                    width: 0,
+                    height: 0
+                }                         
             }
         },
         components:{
@@ -356,15 +365,75 @@
             CartLink,
         },
 
-        methods: {          
+        watch: {
+
+            //topHeaderFixedClass: function () {
+            'window.width': function (val) {                
+                if( val < 1200 ){
+                    return this.topHeaderFixedClass = 'u-header--sticky-top';
+                }else if(val > 1200 ){
+                    return this.topHeaderFixedClass = '';
+                }
+            },
+            // firstName: function (val) {
+            //   this.fullName = val + ' ' + this.lastName
+            // },
+            // lastName: function (val) {
+            //   this.fullName = this.firstName + ' ' + val
+            // }
+        },
+
+        methods: {    
+
+            // toggleBodyClass(addRemoveClass, className) {
+            //     // const el = document.body;
+            //     //const el = document.getElementsByClassName('screenWidth');
+            //     const el = this.$refs.screenWidth;
+
+            //     if (addRemoveClass === 'screenWidth') {
+            //       el.classList.add(className);
+            //     } else {
+            //       el.classList.remove(className);
+            //     }
+            // },    
+
+            // TextColor(){
+            //     // document.querySelector(".sithLord").style.display = "none"
+            //     document.querySelector(".breadcrumb ol li a").style.color = "red";
+            // }, 
+
+            //u-header--sticky-top 
+
+            handleResize() {
+                this.window.width = window.innerWidth;
+                this.window.height = window.innerHeight;
+            }
+
         },           
 
         created(){
+            window.addEventListener('resize', this.handleResize);
+            this.handleResize();
         },
            
+        destroyed() {
+            window.removeEventListener('resize', this.handleResize);
+        },
+
         mounted() {
+           // alert(this.$refs.screenWidth.clientHeight +' '+  this.$refs.screenWidth.clientWidth);
+            //this.toggleBodyClass('screenWidth', 'TestClassTEse');
+            // document.getElementsByClassName('screenWidth').classList.add('testClass');
+            // document.body.classList.add('testClass');
+            // document.getElementsByClassName(‘classname’).classList.remove(‘classname’)
             //console.log(window.innerHeight);
-            alert('Height:' +window.innerHeight + ' - Width:' + window.innerWidth);
+            //alert('Height: ' +window.innerHeight + ' - Width: ' + window.innerWidth);
+
+
+            //alert(this.$refs.screenWidth.clientHeight + '-' + this.$refs.screenWidth.clientWidth); //working
+            //console.log('Width: '+this.window.width+ ' Height: ' + this.window.height );
         },
     }
+
+    //document.getElementsByClassName(‘classname’).classList.remove(‘classname’)
 </script>

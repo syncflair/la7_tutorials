@@ -23769,6 +23769,7 @@ button:focus {
 ------------------------------------*/
 .u-header--sticky-top, .u-header--sticky-bottom {
   position: fixed;
+  width: 100%; /*Added By Sumon*/
 }
 
 .u-header--sticky-top {
@@ -37487,4 +37488,10 @@ blockquote:not(.blockquote) p {
 /*------------------------------------
   Sumon custom SCSS style
 ------------------------------------*/
+.topHeaderFixedWidth{
+  width: 100%;
+}
+.mainContentMarginTopWhenHeaderFiexd{
+  margin-top: 63px;
+}
 

@@ -1,5 +1,5 @@
 <template>
-<div class="py-2 py-xl-5 bg-primary-down-lg d-none- d-xl-block-">
+<div class="py-2 py-xl-5 bg-primary-down-lg d-none- d-xl-block-" :class="topFixedClass" style="//width:100%;">
     <div class="container my-0dot5 my-xl-0">
         <div class="row align-items-center">
             <!-- Logo-offcanvas-menu -->
@@ -198,19 +198,47 @@
 
         name: "Header-Logo-Search-Icons-For-Home-website",
         data (){      
-            return {                            
+            return { 
+                topFixedClass:'',  
+                window: {
+                    width: 0,
+                    height: 0
+                }                              
             }
         },
+
+        watch: {
+
+            'window.width': function (val) {                
+                if( val < 1200 ){
+                    return this.topFixedClass = 'u-header--sticky-top';
+                }else if(val > 1200 ){
+                    return this.topFixedClass = '';
+                }
+            },
+        },
+
         components:{
             SidebarNavigationHeader1,
             CartLink, 
             //CartPopup,
         },
 
-        methods: {          
+        methods: {    
+
+            handleResize() {
+                this.window.width = window.innerWidth;
+                this.window.height = window.innerHeight;
+            }      
         },           
 
         created(){
+            window.addEventListener('resize', this.handleResize);
+            this.handleResize();
+        },
+
+        destroyed() {
+            window.removeEventListener('resize', this.handleResize);
         },
            
         mounted() {

@@ -1,7 +1,8 @@
 <template>
 
 <!-- ========== MAIN CONTENT ========== -->
-    <main id="content" role="main">
+    <!-- <main id="content" role="main"> -->
+    <span>
 
         <!-- Slider Section -->
         <HomeSliderSection></HomeSliderSection>
@@ -77,7 +78,7 @@
 
         </div>
 
-    </main>
+    </span>
     <!-- ========== END MAIN CONTENT ========== -->
 
 
