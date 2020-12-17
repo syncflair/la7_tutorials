@@ -71,23 +71,23 @@
 
                         <!-- List -->
                         <ul id="headerSidebarList" class="u-header-collapse__nav">
-                            <!-- Value of the Day -->
+                            <!-- Deal of the Day -->
                             <li class="">
-                                <a class="u-header-collapse__nav-link font-weight-bold" href="#">Value of the Day</a>
+                                <a class="u-header-collapse__nav-link font-weight-bold" href="#">Deal of the Day</a>
                             </li>
-                            <!-- End Value of the Day -->
+                            <!-- End Deal of the Day -->
 
-                            <!-- Top 100 Offers -->
+                            <!-- Daily Needs -->
                             <li class="">
-                                <a class="u-header-collapse__nav-link font-weight-bold" href="#">Top 100 Offers</a>
+                                <a class="u-header-collapse__nav-link font-weight-bold" href="#">Daily Needs</a>
                             </li>
-                            <!-- End Top 100 Offers -->
+                            <!-- End Daily Needs -->
 
-                            <!-- New Arrivals -->
+                            <!-- Signeture Products -->
                             <li class="">
-                                <a class="u-header-collapse__nav-link font-weight-bold" href="#">New Arrivals</a>
+                                <a class="u-header-collapse__nav-link font-weight-bold" href="#">Signeture Products</a>
                             </li>
-                            <!-- End New Arrivals -->
+                            <!-- End Signeture Products -->
 
                             <!-- Computers & Accessories -->
                             <li class="u-has-submenu u-header-collapse__submenu">

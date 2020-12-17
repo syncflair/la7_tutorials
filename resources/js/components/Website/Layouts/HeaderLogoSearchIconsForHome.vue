@@ -1,5 +1,5 @@
 <template>
-<div class="py-2 py-xl-5 bg-primary-down-lg d-none- d-xl-block-" :class="topFixedClass" style="//width:100%;">
+<div class="py-2 py-xl-5 bg-primary-down-lg d-none- d-xl-block-" :class="topHeaderFixedClass">
     <div class="container my-0dot5 my-xl-0">
         <div class="row align-items-center">
             <!-- Logo-offcanvas-menu -->
@@ -146,7 +146,7 @@
                         </li>
 
                         
-                        <li class="col pr-xl-0 px-2 px-sm-3 d-none d-xl-block">
+                        <li class="col pr-xl-0 px-2 px-sm-3 d-none- d-xl-block">
                             <!--Cart Section-->
                             <!-- <router-link to="/cart" class="text-gray-90 position-relative d-flex " data-toggle="tooltip" data-placement="top" title="Cart">
                                 <i class="font-size-22 ec ec-shopping-bag"></i>
@@ -197,25 +197,12 @@
     export default {        
 
         name: "Header-Logo-Search-Icons-For-Home-website",
+
+        props:['topHeaderFixedClass'],
+
         data (){      
-            return { 
-                topFixedClass:'',  
-                window: {
-                    width: 0,
-                    height: 0
-                }                              
+            return {                             
             }
-        },
-
-        watch: {
-
-            'window.width': function (val) {                
-                if( val < 1200 ){
-                    return this.topFixedClass = 'u-header--sticky-top';
-                }else if(val > 1200 ){
-                    return this.topFixedClass = '';
-                }
-            },
         },
 
         components:{
@@ -224,21 +211,10 @@
             //CartPopup,
         },
 
-        methods: {    
-
-            handleResize() {
-                this.window.width = window.innerWidth;
-                this.window.height = window.innerHeight;
-            }      
+        methods: {     
         },           
 
         created(){
-            window.addEventListener('resize', this.handleResize);
-            this.handleResize();
-        },
-
-        destroyed() {
-            window.removeEventListener('resize', this.handleResize);
         },
            
         mounted() {

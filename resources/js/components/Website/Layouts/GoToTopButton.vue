@@ -1,5 +1,5 @@
 <template>
-	<a class="js-go-to u-go-to" href="#"
+	<a class="js-go-to u-go-to d-none d-xl-block" href="#"
         data-position='{"bottom": 15, "right": 15 }'
         data-type="fixed"
         data-offset-top="400"

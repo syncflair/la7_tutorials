@@ -10,7 +10,6 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CartLink_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CartLink.vue */ "./resources/js/components/Website/Layouts/CartLink.vue");
-/* harmony import */ var _CartPopup_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CartPopup.vue */ "./resources/js/components/Website/Layouts/CartPopup.vue");
 //
 //
 //
@@ -504,8 +503,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
  //Load to all
-
- //Load to all
+//import CartPopup from './CartPopup.vue' //Load to all
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Header-Vertical-And-Search-For-All-Page-website",
@@ -513,8 +511,8 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   components: {
-    CartLink: _CartLink_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    CartPopup: _CartPopup_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    CartLink: _CartLink_vue__WEBPACK_IMPORTED_MODULE_0__["default"] //CartPopup,
+
   },
   methods: {},
   created: function created() {},

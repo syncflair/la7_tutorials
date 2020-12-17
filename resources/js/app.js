@@ -41,7 +41,8 @@ import store from './VueVuex'
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //Global Components
-Vue.component('website-wrapper', () => import(/* webpackChunkName: "website-wrapper" */'./components/Website/WebsiteWrapper.vue')); //Website component
+Vue.component('website-wrapper', () => import(/* webpackChunkName: "website-wrapper" */'./components/Website/Public/WebsiteWrapper.vue')); //Website component
+
 Vue.component('adminwrapper', () => import(/* webpackChunkName: "adminwrapper" */'./components/Admin/AdminWrapper.vue')); //admin dashboard
 Vue.component('pagination-app', () => import(/* webpackChunkName: "pagination-app" */'./components/Admin/GlobalComponents/pagination-app.vue'));
 Vue.component('switch-app', () => import(/* webpackChunkName: "switch-app" */'./components/Admin/GlobalComponents/switch-app.vue'));

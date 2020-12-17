@@ -29,7 +29,7 @@
 
         <div class="row">
           <div class="col-md-12">
-            <h3>Wishlist</h3>
+            <h3>Wishlist of customer</h3>
           </div> 
         </div> 
 

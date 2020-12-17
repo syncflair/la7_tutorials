@@ -107,10 +107,10 @@
 			GotoHome(){
 				//alert('0k');
 	    		//this.$router.push({ name: 'home' });
-	    		const HomePath = "/home";
-	    		if (this.$route.path !== HomePath) {
-	    			this.$router.push(HomePath)
-	    		}
+	    		// const HomePath = "/home";
+	    		// if (this.$route.path !== HomePath) {
+	    		// 	this.$router.push(HomePath)
+	    		// }
 	    	},
 		}, //end Methods
 

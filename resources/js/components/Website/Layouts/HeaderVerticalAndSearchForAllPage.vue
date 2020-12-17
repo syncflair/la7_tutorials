@@ -492,7 +492,7 @@
 </template>
 <script>
     import CartLink from './CartLink.vue' //Load to all
-    import CartPopup from './CartPopup.vue' //Load to all
+    //import CartPopup from './CartPopup.vue' //Load to all
     export default {        
 
         name: "Header-Vertical-And-Search-For-All-Page-website",
@@ -502,7 +502,7 @@
         },
         components:{
             CartLink,
-            CartPopup,
+            //CartPopup,
         },
 
         methods: {          

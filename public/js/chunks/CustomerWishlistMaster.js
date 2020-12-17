@@ -122,7 +122,7 @@ var staticRenderFns = [
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-md-12" }, [
-                _c("h3", [_vm._v("Wishlist")])
+                _c("h3", [_vm._v("Wishlist of customer")])
               ])
             ])
           ])

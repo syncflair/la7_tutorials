@@ -473,7 +473,7 @@ var staticRenderFns = [
               staticClass: "u-header-collapse__nav-link font-weight-bold",
               attrs: { href: "#" }
             },
-            [_vm._v("Value of the Day")]
+            [_vm._v("Deal of the Day")]
           )
         ]),
         _vm._v(" "),
@@ -484,7 +484,7 @@ var staticRenderFns = [
               staticClass: "u-header-collapse__nav-link font-weight-bold",
               attrs: { href: "#" }
             },
-            [_vm._v("Top 100 Offers")]
+            [_vm._v("Daily Needs")]
           )
         ]),
         _vm._v(" "),
@@ -495,7 +495,7 @@ var staticRenderFns = [
               staticClass: "u-header-collapse__nav-link font-weight-bold",
               attrs: { href: "#" }
             },
-            [_vm._v("New Arrivals")]
+            [_vm._v("Signeture Products")]
           )
         ]),
         _vm._v(" "),

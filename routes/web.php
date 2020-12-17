@@ -478,6 +478,11 @@ Route::get('/home', function () {
     return view('website.home');    
 });
 
+Route::get('/customer_dashboard', function () {
+    //App::setLocale('bn'); //app()->getLocale()
+    return view('website.home');    
+});
+
 
 Route::get('get-brand-for-carousel', 'Website\BrandController@GetBrandForCarousel');
 

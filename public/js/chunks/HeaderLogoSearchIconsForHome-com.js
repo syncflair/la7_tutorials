@@ -209,42 +209,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Header-Logo-Search-Icons-For-Home-website",
+  props: ['topHeaderFixedClass'],
   data: function data() {
-    return {
-      topFixedClass: '',
-      window: {
-        width: 0,
-        height: 0
-      }
-    };
-  },
-  watch: {
-    'window.width': function windowWidth(val) {
-      if (val < 1200) {
-        return this.topFixedClass = 'u-header--sticky-top';
-      } else if (val > 1200) {
-        return this.topFixedClass = '';
-      }
-    }
+    return {};
   },
   components: {
     SidebarNavigationHeader1: _SidebarNavigationHeader1_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     CartLink: _CartLink_vue__WEBPACK_IMPORTED_MODULE_1__["default"] //CartPopup,
 
   },
-  methods: {
-    handleResize: function handleResize() {
-      this.window.width = window.innerWidth;
-      this.window.height = window.innerHeight;
-    }
-  },
-  created: function created() {
-    window.addEventListener('resize', this.handleResize);
-    this.handleResize();
-  },
-  destroyed: function destroyed() {
-    window.removeEventListener('resize', this.handleResize);
-  },
+  methods: {},
+  created: function created() {},
   mounted: function mounted() {}
 });
 
@@ -269,8 +244,7 @@ var render = function() {
     "div",
     {
       staticClass: "py-2 py-xl-5 bg-primary-down-lg d-none- d-xl-block-",
-      class: _vm.topFixedClass,
-      staticStyle: { "//width": "100%" }
+      class: _vm.topHeaderFixedClass
     },
     [
       _c("div", { staticClass: "container my-0dot5 my-xl-0" }, [
@@ -370,7 +344,7 @@ var render = function() {
                       "li",
                       {
                         staticClass:
-                          "col pr-xl-0 px-2 px-sm-3 d-none d-xl-block"
+                          "col pr-xl-0 px-2 px-sm-3 d-none- d-xl-block"
                       },
                       [_c("CartLink")],
                       1
