@@ -163,8 +163,9 @@ __webpack_require__.r(__webpack_exports__);
 
         //console.log(data.success); 
         if (data.success) {
-          Swal.fire(data.success); //toastr.success('success');             
-          // toastr.success(data.success);             
+          //Swal.fire(data.success)
+          //toastr.success('success');             
+          toastr.success(data.success);
 
           _this.form.reset(); //reset from after submit
 

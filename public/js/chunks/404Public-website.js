@@ -232,6 +232,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 //import BrandCarouselComponent from '../Layouts/BrandCarouselComponent.vue' //this component load to every page of website
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "not-found-public-website",
@@ -266,135 +271,402 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("span", [
+    _c("div", { staticClass: "bg-gray-13 bg-md-transparent" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "my-md-3" }, [
+          _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
+            _c(
+              "ol",
+              {
+                staticClass:
+                  "breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
+              },
+              [
+                _vm._m(0),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  {
+                    staticClass:
+                      "breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active",
+                    attrs: { "aria-current": "page" }
+                  },
+                  [
+                    _vm._v(
+                      "\r\n                            " +
+                        _vm._s(_vm.$route.name) +
+                        "\r\n                            "
+                    )
+                  ]
+                )
+              ]
+            )
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(1)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("div", { staticClass: "bg-gray-13 bg-md-transparent" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "my-md-3" }, [
-            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
-              _c(
-                "ol",
-                {
-                  staticClass:
-                    "breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
-                },
-                [
-                  _c(
-                    "li",
-                    {
-                      staticClass:
-                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
-                    },
-                    [
-                      _c("a", { attrs: { href: "../home/index.html" } }, [
-                        _vm._v("Home")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    {
-                      staticClass:
-                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active",
-                      attrs: { "aria-current": "page" }
-                    },
-                    [_vm._v("Error 404")]
-                  )
-                ]
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c(
-          "div",
-          { staticClass: "mb-5 text-center pb-3 border-bottom border-color-1" },
-          [
-            _c(
-              "h1",
-              { staticClass: "font-size-sl-72 font-weight-light mb-3" },
-              [_vm._v("404!")]
-            ),
-            _vm._v(" "),
-            _c(
-              "p",
-              {
-                staticClass: "text-gray-90 font-size-20 mb-0 font-weight-light"
-              },
-              [
-                _vm._v(
-                  "Nothing was found at this location. Try searching, or check out the links below."
-                )
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "d-flex mb-6" }, [
+    return _c(
+      "li",
+      { staticClass: "breadcrumb-item flex-shrink-0 flex-xl-shrink-1" },
+      [_c("a", { attrs: { href: "../home/index.html" } }, [_vm._v("Home")])]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        { staticClass: "mb-5 text-center pb-3 border-bottom border-color-1" },
+        [
+          _c("h1", { staticClass: "font-size-sl-72 font-weight-light mb-3" }, [
+            _vm._v("404!")
+          ]),
+          _vm._v(" "),
           _c(
-            "form",
-            {
-              staticClass:
-                "d-block d-md-flex flex-horizontal-center w-100 w-lg-80 w-xl-50 mx-md-auto"
-            },
+            "p",
+            { staticClass: "text-gray-90 font-size-20 mb-0 font-weight-light" },
             [
-              _c("div", { staticClass: "mb-3 mb-md-0 col px-md-2 px-0" }, [
-                _c("div", { staticClass: "js-focus-state" }, [
-                  _c("input", {
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Search products…",
-                      "aria-label": "Search products…",
-                      "aria-describedby": "keywordInputAddon"
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", {}, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-block btn-primary-dark-w px-5",
-                    attrs: { type: "submit" }
-                  },
-                  [_vm._v("Search")]
-                )
-              ])
+              _vm._v(
+                "Nothing was found at this location. Try searching, or check out the links below."
+              )
             ]
           )
-        ]),
-        _vm._v(" "),
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-flex mb-6" }, [
         _c(
-          "div",
-          { staticClass: " d-flex border-bottom border-color-1 mr-md-2 mb-4" },
+          "form",
+          {
+            staticClass:
+              "d-block d-md-flex flex-horizontal-center w-100 w-lg-80 w-xl-50 mx-md-auto"
+          },
           [
-            _c(
-              "h3",
-              {
-                staticClass:
-                  "section-title section-title__full mb-0 pb-2 font-size-22"
-              },
-              [_vm._v("Popular Products")]
-            )
+            _c("div", { staticClass: "mb-3 mb-md-0 col px-md-2 px-0" }, [
+              _c("div", { staticClass: "js-focus-state" }, [
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Search products…",
+                    "aria-label": "Search products…",
+                    "aria-describedby": "keywordInputAddon"
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", {}, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-block btn-primary-dark-w px-5",
+                  attrs: { type: "submit" }
+                },
+                [_vm._v("Search")]
+              )
+            ])
           ]
-        ),
-        _vm._v(" "),
-        _c(
-          "ul",
-          { staticClass: "row list-unstyled products-group no-gutters mb-8" },
-          [
-            _c("li", { staticClass: "col-6 col-md-4 col-xl product-item" }, [
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: " d-flex border-bottom border-color-1 mr-md-2 mb-4" },
+        [
+          _c(
+            "h3",
+            {
+              staticClass:
+                "section-title section-title__full mb-0 pb-2 font-size-22"
+            },
+            [_vm._v("Popular Products")]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "ul",
+        { staticClass: "row list-unstyled products-group no-gutters mb-8" },
+        [
+          _c("li", { staticClass: "col-6 col-md-4 col-xl product-item" }, [
+            _c("div", { staticClass: "product-item__outer h-100" }, [
+              _c("div", { staticClass: "product-item__inner px-xl-4 p-3" }, [
+                _c("div", { staticClass: "product-item__body pb-xl-2" }, [
+                  _c("div", { staticClass: "mb-2" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "font-size-12 text-gray-5",
+                        attrs: {
+                          href:
+                            "../shop/product-categories-7-column-full-width.html"
+                        }
+                      },
+                      [_vm._v("Speakers")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h5", { staticClass: "mb-1 product-item__title" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "text-blue font-weight-bold",
+                        attrs: { href: "../shop/single-product-fullwidth.html" }
+                      },
+                      [
+                        _vm._v(
+                          "Wireless Audio System Multiroom 360 degree Full base audio"
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "mb-2" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "d-block text-center",
+                        attrs: { href: "../shop/single-product-fullwidth.html" }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid",
+                          attrs: {
+                            src: "website/assets/img/212X200/img1.jpg",
+                            alt: "Image Description"
+                          }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex-center-between mb-1" }, [
+                    _c("div", { staticClass: "prodcut-price" }, [
+                      _c("div", { staticClass: "text-gray-100" }, [
+                        _vm._v("$685,00")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "d-none d-xl-block prodcut-add-cart" },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "btn-add-cart btn-primary transition-3d-hover",
+                            attrs: {
+                              href: "../shop/single-product-fullwidth.html"
+                            }
+                          },
+                          [_c("i", { staticClass: "ec ec-add-to-cart" })]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "product-item__footer" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "border-top pt-2 flex-center-between flex-wrap"
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-gray-6 font-size-13",
+                          attrs: { href: "../shop/compare.html" }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "ec ec-compare mr-1 font-size-15"
+                          }),
+                          _vm._v(" Compare")
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-gray-6 font-size-13",
+                          attrs: { href: "../shop/wishlist.html" }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "ec ec-favorites mr-1 font-size-15"
+                          }),
+                          _vm._v(" Wishlist")
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "col-6 col-md-4 col-xl product-item" }, [
+            _c("div", { staticClass: "product-item__outer h-100" }, [
+              _c("div", { staticClass: "product-item__inner px-xl-4 p-3" }, [
+                _c("div", { staticClass: "product-item__body pb-xl-2" }, [
+                  _c("div", { staticClass: "mb-2" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "font-size-12 text-gray-5",
+                        attrs: {
+                          href:
+                            "../shop/product-categories-7-column-full-width.html"
+                        }
+                      },
+                      [_vm._v("Speakers")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("h5", { staticClass: "mb-1 product-item__title" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "text-blue font-weight-bold",
+                        attrs: { href: "../shop/single-product-fullwidth.html" }
+                      },
+                      [_vm._v("Tablet White EliteBook Revolve 810 G2")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "mb-2" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "d-block text-center",
+                        attrs: { href: "../shop/single-product-fullwidth.html" }
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fluid",
+                          attrs: {
+                            src: "website/assets/img/212X200/img2.jpg",
+                            alt: "Image Description"
+                          }
+                        })
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex-center-between mb-1" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "prodcut-price d-flex align-items-center position-relative"
+                      },
+                      [
+                        _c(
+                          "ins",
+                          {
+                            staticClass:
+                              "font-size-20 text-red text-decoration-none"
+                          },
+                          [_vm._v("$1999,00")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "del",
+                          {
+                            staticClass:
+                              "font-size-12 tex-gray-6 position-absolute bottom-100"
+                          },
+                          [_vm._v("$2 299,00")]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "d-none d-xl-block prodcut-add-cart" },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "btn-add-cart btn-primary transition-3d-hover",
+                            attrs: {
+                              href: "../shop/single-product-fullwidth.html"
+                            }
+                          },
+                          [_c("i", { staticClass: "ec ec-add-to-cart" })]
+                        )
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "product-item__footer" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "border-top pt-2 flex-center-between flex-wrap"
+                    },
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-gray-6 font-size-13",
+                          attrs: { href: "../shop/compare.html" }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "ec ec-compare mr-1 font-size-15"
+                          }),
+                          _vm._v(" Compare")
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-gray-6 font-size-13",
+                          attrs: { href: "../shop/wishlist.html" }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "ec ec-favorites mr-1 font-size-15"
+                          }),
+                          _vm._v(" Wishlist")
+                        ]
+                      )
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass:
+                "col-6 col-md-4 col-xl product-item remove-divider-md-lg"
+            },
+            [
               _c("div", { staticClass: "product-item__outer h-100" }, [
                 _c("div", { staticClass: "product-item__inner px-xl-4 p-3" }, [
                   _c("div", { staticClass: "product-item__body pb-xl-2" }, [
@@ -421,11 +693,7 @@ var staticRenderFns = [
                             href: "../shop/single-product-fullwidth.html"
                           }
                         },
-                        [
-                          _vm._v(
-                            "Wireless Audio System Multiroom 360 degree Full base audio"
-                          )
-                        ]
+                        [_vm._v("Purple Solo 2 Wireless")]
                       )
                     ]),
                     _vm._v(" "),
@@ -442,7 +710,7 @@ var staticRenderFns = [
                           _c("img", {
                             staticClass: "img-fluid",
                             attrs: {
-                              src: "website/assets/img/212X200/img1.jpg",
+                              src: "website/assets/img/212X200/img3.jpg",
                               alt: "Image Description"
                             }
                           })
@@ -517,9 +785,272 @@ var staticRenderFns = [
                   ])
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "col-6 col-md-4 col-xl product-item" }, [
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass:
+                "col-6 col-md-4 col-xl product-item remove-divider-xl"
+            },
+            [
+              _c("div", { staticClass: "product-item__outer h-100" }, [
+                _c("div", { staticClass: "product-item__inner px-xl-4 p-3" }, [
+                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "font-size-12 text-gray-5",
+                          attrs: {
+                            href:
+                              "../shop/product-categories-7-column-full-width.html"
+                          }
+                        },
+                        [_vm._v("Speakers")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("h5", { staticClass: "mb-1 product-item__title" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-blue font-weight-bold",
+                          attrs: {
+                            href: "../shop/single-product-fullwidth.html"
+                          }
+                        },
+                        [_vm._v("Smartphone 6S 32GB LTE")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block text-center",
+                          attrs: {
+                            href: "../shop/single-product-fullwidth.html"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img-fluid",
+                            attrs: {
+                              src: "website/assets/img/212X200/img4.jpg",
+                              alt: "Image Description"
+                            }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "flex-center-between mb-1" }, [
+                      _c("div", { staticClass: "prodcut-price" }, [
+                        _c("div", { staticClass: "text-gray-100" }, [
+                          _vm._v("$685,00")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "d-none d-xl-block prodcut-add-cart" },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "btn-add-cart btn-primary transition-3d-hover",
+                              attrs: {
+                                href: "../shop/single-product-fullwidth.html"
+                              }
+                            },
+                            [_c("i", { staticClass: "ec ec-add-to-cart" })]
+                          )
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "product-item__footer" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "border-top pt-2 flex-center-between flex-wrap"
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-gray-6 font-size-13",
+                            attrs: { href: "../shop/compare.html" }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "ec ec-compare mr-1 font-size-15"
+                            }),
+                            _vm._v(" Compare")
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-gray-6 font-size-13",
+                            attrs: { href: "../shop/wishlist.html" }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "ec ec-favorites mr-1 font-size-15"
+                            }),
+                            _vm._v(" Wishlist")
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass:
+                "col-6 col-md-4 col-xl product-item d-xl-none d-wd-block"
+            },
+            [
+              _c("div", { staticClass: "product-item__outer h-100" }, [
+                _c("div", { staticClass: "product-item__inner px-xl-4 p-3" }, [
+                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "font-size-12 text-gray-5",
+                          attrs: {
+                            href:
+                              "../shop/product-categories-7-column-full-width.html"
+                          }
+                        },
+                        [_vm._v("Speakers")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("h5", { staticClass: "mb-1 product-item__title" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "text-blue font-weight-bold",
+                          attrs: {
+                            href: "../shop/single-product-fullwidth.html"
+                          }
+                        },
+                        [_vm._v("Widescreen NX Mini F1 SMART NX")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block text-center",
+                          attrs: {
+                            href: "../shop/single-product-fullwidth.html"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            staticClass: "img-fluid",
+                            attrs: {
+                              src: "website/assets/img/212X200/img5.jpg",
+                              alt: "Image Description"
+                            }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "flex-center-between mb-1" }, [
+                      _c("div", { staticClass: "prodcut-price" }, [
+                        _c("div", { staticClass: "text-gray-100" }, [
+                          _vm._v("$685,00")
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "d-none d-xl-block prodcut-add-cart" },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass:
+                                "btn-add-cart btn-primary transition-3d-hover",
+                              attrs: {
+                                href: "../shop/single-product-fullwidth.html"
+                              }
+                            },
+                            [_c("i", { staticClass: "ec ec-add-to-cart" })]
+                          )
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "product-item__footer" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "border-top pt-2 flex-center-between flex-wrap"
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-gray-6 font-size-13",
+                            attrs: { href: "../shop/compare.html" }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "ec ec-compare mr-1 font-size-15"
+                            }),
+                            _vm._v(" Compare")
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "text-gray-6 font-size-13",
+                            attrs: { href: "../shop/wishlist.html" }
+                          },
+                          [
+                            _c("i", {
+                              staticClass: "ec ec-favorites mr-1 font-size-15"
+                            }),
+                            _vm._v(" Wishlist")
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            {
+              staticClass:
+                "col-6 col-md-4 col-xl product-item d-xl-none d-wd-block remove-divider-wd remove-divider-md-lg"
+            },
+            [
               _c("div", { staticClass: "product-item__outer h-100" }, [
                 _c("div", { staticClass: "product-item__inner px-xl-4 p-3" }, [
                   _c("div", { staticClass: "product-item__body pb-xl-2" }, [
@@ -659,575 +1190,10 @@ var staticRenderFns = [
                   ])
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass:
-                  "col-6 col-md-4 col-xl product-item remove-divider-md-lg"
-              },
-              [
-                _c("div", { staticClass: "product-item__outer h-100" }, [
-                  _c(
-                    "div",
-                    { staticClass: "product-item__inner px-xl-4 p-3" },
-                    [
-                      _c("div", { staticClass: "product-item__body pb-xl-2" }, [
-                        _c("div", { staticClass: "mb-2" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "font-size-12 text-gray-5",
-                              attrs: {
-                                href:
-                                  "../shop/product-categories-7-column-full-width.html"
-                              }
-                            },
-                            [_vm._v("Speakers")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h5", { staticClass: "mb-1 product-item__title" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "text-blue font-weight-bold",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [_vm._v("Purple Solo 2 Wireless")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "mb-2" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "d-block text-center",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [
-                              _c("img", {
-                                staticClass: "img-fluid",
-                                attrs: {
-                                  src: "website/assets/img/212X200/img3.jpg",
-                                  alt: "Image Description"
-                                }
-                              })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "flex-center-between mb-1" }, [
-                          _c("div", { staticClass: "prodcut-price" }, [
-                            _c("div", { staticClass: "text-gray-100" }, [
-                              _vm._v("$685,00")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "d-none d-xl-block prodcut-add-cart"
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "btn-add-cart btn-primary transition-3d-hover",
-                                  attrs: {
-                                    href:
-                                      "../shop/single-product-fullwidth.html"
-                                  }
-                                },
-                                [_c("i", { staticClass: "ec ec-add-to-cart" })]
-                              )
-                            ]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "product-item__footer" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "border-top pt-2 flex-center-between flex-wrap"
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "text-gray-6 font-size-13",
-                                attrs: { href: "../shop/compare.html" }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "ec ec-compare mr-1 font-size-15"
-                                }),
-                                _vm._v(" Compare")
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "text-gray-6 font-size-13",
-                                attrs: { href: "../shop/wishlist.html" }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass:
-                                    "ec ec-favorites mr-1 font-size-15"
-                                }),
-                                _vm._v(" Wishlist")
-                              ]
-                            )
-                          ]
-                        )
-                      ])
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass:
-                  "col-6 col-md-4 col-xl product-item remove-divider-xl"
-              },
-              [
-                _c("div", { staticClass: "product-item__outer h-100" }, [
-                  _c(
-                    "div",
-                    { staticClass: "product-item__inner px-xl-4 p-3" },
-                    [
-                      _c("div", { staticClass: "product-item__body pb-xl-2" }, [
-                        _c("div", { staticClass: "mb-2" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "font-size-12 text-gray-5",
-                              attrs: {
-                                href:
-                                  "../shop/product-categories-7-column-full-width.html"
-                              }
-                            },
-                            [_vm._v("Speakers")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h5", { staticClass: "mb-1 product-item__title" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "text-blue font-weight-bold",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [_vm._v("Smartphone 6S 32GB LTE")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "mb-2" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "d-block text-center",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [
-                              _c("img", {
-                                staticClass: "img-fluid",
-                                attrs: {
-                                  src: "website/assets/img/212X200/img4.jpg",
-                                  alt: "Image Description"
-                                }
-                              })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "flex-center-between mb-1" }, [
-                          _c("div", { staticClass: "prodcut-price" }, [
-                            _c("div", { staticClass: "text-gray-100" }, [
-                              _vm._v("$685,00")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "d-none d-xl-block prodcut-add-cart"
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "btn-add-cart btn-primary transition-3d-hover",
-                                  attrs: {
-                                    href:
-                                      "../shop/single-product-fullwidth.html"
-                                  }
-                                },
-                                [_c("i", { staticClass: "ec ec-add-to-cart" })]
-                              )
-                            ]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "product-item__footer" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "border-top pt-2 flex-center-between flex-wrap"
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "text-gray-6 font-size-13",
-                                attrs: { href: "../shop/compare.html" }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "ec ec-compare mr-1 font-size-15"
-                                }),
-                                _vm._v(" Compare")
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "text-gray-6 font-size-13",
-                                attrs: { href: "../shop/wishlist.html" }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass:
-                                    "ec ec-favorites mr-1 font-size-15"
-                                }),
-                                _vm._v(" Wishlist")
-                              ]
-                            )
-                          ]
-                        )
-                      ])
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass:
-                  "col-6 col-md-4 col-xl product-item d-xl-none d-wd-block"
-              },
-              [
-                _c("div", { staticClass: "product-item__outer h-100" }, [
-                  _c(
-                    "div",
-                    { staticClass: "product-item__inner px-xl-4 p-3" },
-                    [
-                      _c("div", { staticClass: "product-item__body pb-xl-2" }, [
-                        _c("div", { staticClass: "mb-2" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "font-size-12 text-gray-5",
-                              attrs: {
-                                href:
-                                  "../shop/product-categories-7-column-full-width.html"
-                              }
-                            },
-                            [_vm._v("Speakers")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h5", { staticClass: "mb-1 product-item__title" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "text-blue font-weight-bold",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [_vm._v("Widescreen NX Mini F1 SMART NX")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "mb-2" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "d-block text-center",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [
-                              _c("img", {
-                                staticClass: "img-fluid",
-                                attrs: {
-                                  src: "website/assets/img/212X200/img5.jpg",
-                                  alt: "Image Description"
-                                }
-                              })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "flex-center-between mb-1" }, [
-                          _c("div", { staticClass: "prodcut-price" }, [
-                            _c("div", { staticClass: "text-gray-100" }, [
-                              _vm._v("$685,00")
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "d-none d-xl-block prodcut-add-cart"
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "btn-add-cart btn-primary transition-3d-hover",
-                                  attrs: {
-                                    href:
-                                      "../shop/single-product-fullwidth.html"
-                                  }
-                                },
-                                [_c("i", { staticClass: "ec ec-add-to-cart" })]
-                              )
-                            ]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "product-item__footer" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "border-top pt-2 flex-center-between flex-wrap"
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "text-gray-6 font-size-13",
-                                attrs: { href: "../shop/compare.html" }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "ec ec-compare mr-1 font-size-15"
-                                }),
-                                _vm._v(" Compare")
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "text-gray-6 font-size-13",
-                                attrs: { href: "../shop/wishlist.html" }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass:
-                                    "ec ec-favorites mr-1 font-size-15"
-                                }),
-                                _vm._v(" Wishlist")
-                              ]
-                            )
-                          ]
-                        )
-                      ])
-                    ]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass:
-                  "col-6 col-md-4 col-xl product-item d-xl-none d-wd-block remove-divider-wd remove-divider-md-lg"
-              },
-              [
-                _c("div", { staticClass: "product-item__outer h-100" }, [
-                  _c(
-                    "div",
-                    { staticClass: "product-item__inner px-xl-4 p-3" },
-                    [
-                      _c("div", { staticClass: "product-item__body pb-xl-2" }, [
-                        _c("div", { staticClass: "mb-2" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "font-size-12 text-gray-5",
-                              attrs: {
-                                href:
-                                  "../shop/product-categories-7-column-full-width.html"
-                              }
-                            },
-                            [_vm._v("Speakers")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("h5", { staticClass: "mb-1 product-item__title" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "text-blue font-weight-bold",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [_vm._v("Tablet White EliteBook Revolve 810 G2")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "mb-2" }, [
-                          _c(
-                            "a",
-                            {
-                              staticClass: "d-block text-center",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [
-                              _c("img", {
-                                staticClass: "img-fluid",
-                                attrs: {
-                                  src: "website/assets/img/212X200/img2.jpg",
-                                  alt: "Image Description"
-                                }
-                              })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "flex-center-between mb-1" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "prodcut-price d-flex align-items-center position-relative"
-                            },
-                            [
-                              _c(
-                                "ins",
-                                {
-                                  staticClass:
-                                    "font-size-20 text-red text-decoration-none"
-                                },
-                                [_vm._v("$1999,00")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "del",
-                                {
-                                  staticClass:
-                                    "font-size-12 tex-gray-6 position-absolute bottom-100"
-                                },
-                                [_vm._v("$2 299,00")]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "d-none d-xl-block prodcut-add-cart"
-                            },
-                            [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "btn-add-cart btn-primary transition-3d-hover",
-                                  attrs: {
-                                    href:
-                                      "../shop/single-product-fullwidth.html"
-                                  }
-                                },
-                                [_c("i", { staticClass: "ec ec-add-to-cart" })]
-                              )
-                            ]
-                          )
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "product-item__footer" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "border-top pt-2 flex-center-between flex-wrap"
-                          },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "text-gray-6 font-size-13",
-                                attrs: { href: "../shop/compare.html" }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "ec ec-compare mr-1 font-size-15"
-                                }),
-                                _vm._v(" Compare")
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "text-gray-6 font-size-13",
-                                attrs: { href: "../shop/wishlist.html" }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass:
-                                    "ec ec-favorites mr-1 font-size-15"
-                                }),
-                                _vm._v(" Wishlist")
-                              ]
-                            )
-                          ]
-                        )
-                      ])
-                    ]
-                  )
-                ])
-              ]
-            )
-          ]
-        )
-      ])
+            ]
+          )
+        ]
+      )
     ])
   }
 ]

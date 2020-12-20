@@ -8819,6 +8819,10 @@ a.close.disabled {
   pointer-events: none;
 }
 
+
+
+/*toast coment by sumon */
+/*
 .toast {
   max-width: 350px;
   overflow: hidden;
@@ -8864,7 +8868,8 @@ a.close.disabled {
 
 .toast-body {
   padding: 0.75rem;
-}
+}*/
+/*toast coment by sumon */
 
 .modal-open {
   overflow: hidden;
@@ -9679,7 +9684,7 @@ button.bg-secondary:focus {
 }
 
 .bg-success {
-  background-color: #00c9a7 !important;
+  //background-color: #00c9a7 !important; /*Custome by sumon, color use from app.css*/
 }
 
 a.bg-success:hover, a.bg-success:focus,
@@ -9689,7 +9694,7 @@ button.bg-success:focus {
 }
 
 .bg-info {
-  background-color: #00dffc !important;
+  //background-color: #00dffc !important; /*Custome by sumon, color use from app.css*/
 }
 
 a.bg-info:hover, a.bg-info:focus,
@@ -37485,13 +37490,61 @@ blockquote:not(.blockquote) p {
 }
 
 
-/*------------------------------------
-  Sumon custom SCSS style
-------------------------------------*/
+/*----------------------------------------------------------------------------------------------------------
+############################################################################################################
+Sumon custom SCSS style
+############################################################################################################  
+----------------------------------------------------------------------------------------------------------*/
 .topHeaderFixedWidth{
   width: 100%;
 }
 .mainContentMarginTopWhenHeaderFiexd{
   margin-top: 63px;
 }
+
+/*Customer Dashboard*/
+.small-box {
+    border-radius: 0.25rem;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin-bottom: 20px;
+    position: relative;
+}
+.small-box > .inner {
+    padding: 10px;
+}
+.small-box .icon {
+    color: rgba(0, 0, 0, 0.15);
+    z-index: 0;
+}
+
+.small-box > .small-box-footer {
+    background: rgba(0, 0, 0, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    display: block;
+    padding: 3px 0;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    z-index: 10;
+}
+
+/*dropdown-item for customer admin dashboard*/
+.dropdown-item-custome{
+  padding: 0.2rem .5rem !important;
+  color: gray !important;
+}
+.dropdown-item-custome.router-link-active.active{
+  font-weight: bold !important;
+}
+.dropdown-item-custome:hover{
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/*----------------------------------------------------------------------------------------------------------
+############################################################################################################
+End Sumon custom SCSS style
+############################################################################################################  
+----------------------------------------------------------------------------------------------------------*/
 

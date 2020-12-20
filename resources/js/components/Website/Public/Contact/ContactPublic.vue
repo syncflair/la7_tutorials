@@ -152,14 +152,16 @@
                 //console.log(this.form); 
               this.$Progress.start(); //using progress-bar package
 
+
+
               this.form.post('/send-visitor-query')
               .then(({ data }) => { 
                 //console.log(data.success); 
 
                 if(data.success){ 
-                  Swal.fire(data.success)
+                  //Swal.fire(data.success)
                   //toastr.success('success');             
-                  // toastr.success(data.success);             
+                  toastr.success(data.success);             
                   
                   this.form.reset();  //reset from after submit
                   this.$Progress.finish();                  
@@ -172,7 +174,8 @@
               .catch( () => {
                 this.$Progress.fail();
                 //toastr.warning('Something is wrong!');
-              })            
+              })   
+
             },  //End SendPublicQueryEmail
 
 

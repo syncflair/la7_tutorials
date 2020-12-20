@@ -470,9 +470,111 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "col d-none d-xl-block" }, [
+            _c(
+              "nav",
+              {
+                staticClass:
+                  "js-mega-menu navbar navbar-expand-md u-header__navbar u-header__navbar--no-space"
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "collapse navbar-collapse u-header__navbar-collapse",
+                    attrs: { id: "navBar" }
+                  },
+                  [
+                    _c(
+                      "ul",
+                      { staticClass: "navbar-nav u-header__navbar-nav" },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c(
+                          "li",
+                          {
+                            staticClass:
+                              "nav-item hs-has-sub-menu u-header__nav-item",
+                            attrs: {
+                              "data-event": "hover",
+                              "data-animation-in": "slideInUp",
+                              "data-animation-out": "fadeOut"
+                            }
+                          },
+                          [
+                            _c(
+                              "a",
+                              {
+                                staticClass:
+                                  "nav-link u-header__nav-link u-header__nav-link-toggle",
+                                attrs: {
+                                  id: "blogMegaMenu",
+                                  href: "javascript:;",
+                                  "aria-haspopup": "true",
+                                  "aria-expanded": "false",
+                                  "aria-labelledby": "blogSubMenu"
+                                }
+                              },
+                              [_vm._v("Admin")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "ul",
+                              {
+                                staticClass: "hs-sub-menu u-header__sub-menu",
+                                staticStyle: { "min-width": "230px" },
+                                attrs: {
+                                  id: "blogSubMenu",
+                                  "aria-labelledby": "blogMegaMenu"
+                                }
+                              },
+                              [
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "nav-link u-header__sub-menu-nav-link",
+                                        attrs: { to: "/customer-dashboard" }
+                                      },
+                                      [_vm._v("Dashboard")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _vm._m(3),
+                                _vm._v(" "),
+                                _vm._m(4),
+                                _vm._v(" "),
+                                _vm._m(5),
+                                _vm._v(" "),
+                                _vm._m(6)
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(7),
+                        _vm._v(" "),
+                        _vm._m(8),
+                        _vm._v(" "),
+                        _vm._m(9)
+                      ]
+                    )
+                  ]
+                )
+              ]
+            )
+          ]),
           _vm._v(" "),
-          _vm._m(2),
+          _vm._m(10),
           _vm._v(" "),
           _c(
             "div",
@@ -488,9 +590,9 @@ var render = function() {
                     staticClass: "d-flex list-unstyled mb-0 align-items-center"
                   },
                   [
-                    _vm._m(3),
+                    _vm._m(11),
                     _vm._v(" "),
-                    _vm._m(4),
+                    _vm._m(12),
                     _vm._v(" "),
                     _c(
                       "li",
@@ -499,7 +601,7 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _vm._m(5)
+                    _vm._m(13)
                   ]
                 )
               ])
@@ -550,1058 +652,839 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col d-none d-xl-block" }, [
-      _c(
-        "nav",
-        {
-          staticClass:
-            "js-mega-menu navbar navbar-expand-md u-header__navbar u-header__navbar--no-space"
-        },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "collapse navbar-collapse u-header__navbar-collapse",
-              attrs: { id: "navBar" }
-            },
-            [
-              _c("ul", { staticClass: "navbar-nav u-header__navbar-nav" }, [
-                _c(
-                  "li",
-                  {
-                    staticClass: "nav-item hs-has-sub-menu u-header__nav-item",
-                    attrs: {
-                      "data-event": "hover",
-                      "data-animation-in": "slideInUp",
-                      "data-animation-out": "fadeOut"
-                    }
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "nav-link u-header__nav-link u-header__nav-link-toggle",
-                        attrs: {
-                          id: "HomeMegaMenu",
-                          href: "javascript:;",
-                          "aria-haspopup": "true",
-                          "aria-expanded": "false",
-                          "aria-labelledby": "HomeSubMenu"
-                        }
-                      },
-                      [_vm._v("Home")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "ul",
-                      {
-                        staticClass:
-                          "hs-sub-menu u-header__sub-menu animated fadeOut",
-                        staticStyle: { "min-width": "230px", display: "none" },
-                        attrs: {
-                          id: "HomeSubMenu",
-                          "aria-labelledby": "HomeMegaMenu"
-                        }
-                      },
-                      [
-                        _c("li", [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link u-header__sub-menu-nav-link",
-                              attrs: { href: "../home/index.html" }
-                            },
-                            [_vm._v("Home v1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link u-header__sub-menu-nav-link",
-                              attrs: { href: "../home/home-v2.html" }
-                            },
-                            [_vm._v("Home v2")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link u-header__sub-menu-nav-link",
-                              attrs: { href: "../home/home-v3.html" }
-                            },
-                            [_vm._v("Home v3")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link u-header__sub-menu-nav-link",
-                              attrs: {
-                                href: "../home/home-v3-full-color-bg.html"
-                              }
-                            },
-                            [_vm._v("Home v3.1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link u-header__sub-menu-nav-link",
-                              attrs: { href: "../home/home-v4.html" }
-                            },
-                            [_vm._v("Home v4")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link u-header__sub-menu-nav-link",
-                              attrs: { href: "../home/home-v5.html" }
-                            },
-                            [_vm._v("Home v5")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link u-header__sub-menu-nav-link",
-                              attrs: { href: "../home/home-v6.html" }
-                            },
-                            [_vm._v("Home v6")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link u-header__sub-menu-nav-link",
-                              attrs: { href: "../home/home-v7.html" }
-                            },
-                            [_vm._v("Home v7")]
-                          )
-                        ])
-                      ]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  {
-                    staticClass: "nav-item hs-has-mega-menu u-header__nav-item",
-                    attrs: {
-                      "data-event": "hover",
-                      "data-animation-in": "slideInUp",
-                      "data-animation-out": "fadeOut"
-                    }
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "nav-link u-header__nav-link u-header__nav-link-toggle",
-                        attrs: {
-                          id: "pagesMegaMenu",
-                          href: "javascript:;",
-                          "aria-haspopup": "true",
-                          "aria-expanded": "false"
-                        }
-                      },
-                      [_vm._v("Pages")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "hs-mega-menu w-100 u-header__sub-menu",
-                        attrs: { "aria-labelledby": "pagesMegaMenu" }
-                      },
-                      [
-                        _c(
-                          "div",
-                          { staticClass: "row u-header__mega-menu-wrapper" },
-                          [
-                            _c("div", { staticClass: "col-md-3" }, [
-                              _c(
-                                "span",
-                                { staticClass: "u-header__sub-menu-title" },
-                                [_vm._v("Home & Static Pages")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                { staticClass: "u-header__sub-menu-nav-group" },
-                                [
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../home/index.html" }
-                                      },
-                                      [_vm._v("Home v1")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../home/home-v2.html" }
-                                      },
-                                      [_vm._v("Home v2")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../home/home-v3.html" }
-                                      },
-                                      [_vm._v("Home v3")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../home/home-v3-full-color-bg.html"
-                                        }
-                                      },
-                                      [_vm._v("Home v3.1")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../home/home-v4.html" }
-                                      },
-                                      [_vm._v("Home v4")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../home/home-v5.html" }
-                                      },
-                                      [_vm._v("Home v5")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../home/home-v6.html" }
-                                      },
-                                      [_vm._v("Home v6")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../home/home-v7.html" }
-                                      },
-                                      [_vm._v("Home v7")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../home/about.html" }
-                                      },
-                                      [_vm._v("About")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href: "../home/contact-v1.html"
-                                        }
-                                      },
-                                      [_vm._v("Contact v1")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href: "../home/contact-v2.html"
-                                        }
-                                      },
-                                      [_vm._v("Contact v2")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../home/faq.html" }
-                                      },
-                                      [_vm._v("FAQ")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href: "../home/store-directory.html"
-                                        }
-                                      },
-                                      [_vm._v("Store Directory")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../home/terms-and-conditions.html"
-                                        }
-                                      },
-                                      [_vm._v("Terms and Conditions")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../home/404.html" }
-                                      },
-                                      [_vm._v("404")]
-                                    )
-                                  ])
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-3" }, [
-                              _c(
-                                "span",
-                                { staticClass: "u-header__sub-menu-title" },
-                                [_vm._v("Shop Pages")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                {
-                                  staticClass:
-                                    "u-header__sub-menu-nav-group mb-3"
-                                },
-                                [
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href: "../shop/shop-grid.html"
-                                        }
-                                      },
-                                      [_vm._v("Shop Grid")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/shop-grid-extended.html"
-                                        }
-                                      },
-                                      [_vm._v("Shop Grid Extended")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href: "../shop/shop-list-view.html"
-                                        }
-                                      },
-                                      [_vm._v("Shop List View")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/shop-list-view-small.html"
-                                        }
-                                      },
-                                      [_vm._v("Shop List View Small")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href: "../shop/shop-left-sidebar.html"
-                                        }
-                                      },
-                                      [_vm._v("Shop Left Sidebar")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href: "../shop/shop-full-width.html"
-                                        }
-                                      },
-                                      [_vm._v("Shop Full width")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/shop-right-sidebar.html"
-                                        }
-                                      },
-                                      [_vm._v("Shop Right Sidebar")]
-                                    )
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "u-header__sub-menu-title" },
-                                [_vm._v("Product Categories")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                { staticClass: "u-header__sub-menu-nav-group" },
-                                [
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/product-categories-4-column-sidebar.html"
-                                        }
-                                      },
-                                      [_vm._v("4 Column Sidebar")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/product-categories-5-column-sidebar.html"
-                                        }
-                                      },
-                                      [_vm._v("5 Column Sidebar")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/product-categories-6-column-full-width.html"
-                                        }
-                                      },
-                                      [_vm._v("6 Column Full width")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/product-categories-7-column-full-width.html"
-                                        }
-                                      },
-                                      [_vm._v("7 Column Full width")]
-                                    )
-                                  ])
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-3" }, [
-                              _c(
-                                "span",
-                                { staticClass: "u-header__sub-menu-title" },
-                                [_vm._v("Single Product Pages")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                {
-                                  staticClass:
-                                    "u-header__sub-menu-nav-group mb-3"
-                                },
-                                [
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/single-product-extended.html"
-                                        }
-                                      },
-                                      [_vm._v("Single Product Extended")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/single-product-fullwidth.html"
-                                        }
-                                      },
-                                      [_vm._v("Single Product Fullwidth")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/single-product-sidebar.html"
-                                        }
-                                      },
-                                      [_vm._v("Single Product Sidebar")]
-                                    )
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "u-header__sub-menu-title" },
-                                [_vm._v("Ecommerce Pages")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                { staticClass: "u-header__sub-menu-nav-group" },
-                                [
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../shop/shop.html" }
-                                      },
-                                      [_vm._v("Shop")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../shop/cart.html" }
-                                      },
-                                      [_vm._v("Cart")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../shop/checkout.html" }
-                                      },
-                                      [_vm._v("Checkout")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href: "../shop/my-account.html"
-                                        }
-                                      },
-                                      [_vm._v("My Account")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href: "../shop/track-your-order.html"
-                                        }
-                                      },
-                                      [_vm._v("Track your Order")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../shop/compare.html" }
-                                      },
-                                      [_vm._v("Compare")]
-                                    )
-                                  ])
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "col-md-3" }, [
-                              _c(
-                                "span",
-                                { staticClass: "u-header__sub-menu-title" },
-                                [_vm._v("Blog Pages")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                {
-                                  staticClass:
-                                    "u-header__sub-menu-nav-group mb-3"
-                                },
-                                [
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../blog/blog-v1.html" }
-                                      },
-                                      [_vm._v("Blog v1")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../blog/blog-v2.html" }
-                                      },
-                                      [_vm._v("Blog v2")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { href: "../blog/blog-v3.html" }
-                                      },
-                                      [_vm._v("Blog v3")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href: "../blog/blog-full-width.html"
-                                        }
-                                      },
-                                      [_vm._v("Blog Full Width")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href: "../blog/single-blog-post.html"
-                                        }
-                                      },
-                                      [_vm._v("Single Blog Post")]
-                                    )
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "span",
-                                { staticClass: "u-header__sub-menu-title" },
-                                [_vm._v("Shop Columns")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "ul",
-                                { staticClass: "u-header__sub-menu-nav-group" },
-                                [
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/shop-7-columns-full-width.html"
-                                        }
-                                      },
-                                      [_vm._v("7 Column Full width")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/shop-6-columns-full-width.html"
-                                        }
-                                      },
-                                      [_vm._v("6 Column Full width")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/shop-5-columns-sidebar.html"
-                                        }
-                                      },
-                                      [_vm._v("5 Column Sidebar")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/shop-4-columns-sidebar.html"
-                                        }
-                                      },
-                                      [_vm._v("4 Column Sidebar")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("li", [
-                                    _c(
-                                      "a",
-                                      {
-                                        staticClass:
-                                          "nav-link u-header__sub-menu-nav-link",
-                                        attrs: {
-                                          href:
-                                            "../shop/shop-3-columns-sidebar.html"
-                                        }
-                                      },
-                                      [_vm._v("3 Column Sidebar")]
-                                    )
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]
-                        )
-                      ]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  {
-                    staticClass: "nav-item hs-has-sub-menu u-header__nav-item",
-                    attrs: {
-                      "data-event": "hover",
-                      "data-animation-in": "slideInUp",
-                      "data-animation-out": "fadeOut"
-                    }
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "nav-link u-header__nav-link u-header__nav-link-toggle",
-                        attrs: {
-                          id: "blogMegaMenu",
-                          href: "javascript:;",
-                          "aria-haspopup": "true",
-                          "aria-expanded": "false",
-                          "aria-labelledby": "blogSubMenu"
-                        }
-                      },
-                      [_vm._v("Blog")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "ul",
-                      {
-                        staticClass: "hs-sub-menu u-header__sub-menu",
-                        staticStyle: { "min-width": "230px" },
-                        attrs: {
-                          id: "blogSubMenu",
-                          "aria-labelledby": "blogMegaMenu"
-                        }
-                      },
-                      [
-                        _c("li", [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link u-header__sub-menu-nav-link",
-                              attrs: { href: "../blog/blog-v1.html" }
-                            },
-                            [_vm._v("Blog v1")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link u-header__sub-menu-nav-link",
-                              attrs: { href: "../blog/blog-v2.html" }
-                            },
-                            [_vm._v("Blog v2")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link u-header__sub-menu-nav-link",
-                              attrs: { href: "../blog/blog-v3.html" }
-                            },
-                            [_vm._v("Blog v3")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link u-header__sub-menu-nav-link",
-                              attrs: { href: "../blog/blog-full-width.html" }
-                            },
-                            [_vm._v("Blog Full Width")]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("li", [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "nav-link u-header__sub-menu-nav-link",
-                              attrs: { href: "../blog/single-blog-post.html" }
-                            },
-                            [_vm._v("Single Blog Post")]
-                          )
-                        ])
-                      ]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("li", { staticClass: "nav-item u-header__nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link u-header__nav-link",
-                      attrs: { href: "../home/about.html" }
-                    },
-                    [_vm._v("About us")]
-                  )
+    return _c(
+      "li",
+      {
+        staticClass: "nav-item hs-has-sub-menu u-header__nav-item",
+        attrs: {
+          "data-event": "hover",
+          "data-animation-in": "slideInUp",
+          "data-animation-out": "fadeOut"
+        }
+      },
+      [
+        _c(
+          "a",
+          {
+            staticClass:
+              "nav-link u-header__nav-link u-header__nav-link-toggle",
+            attrs: {
+              id: "HomeMegaMenu",
+              href: "javascript:;",
+              "aria-haspopup": "true",
+              "aria-expanded": "false",
+              "aria-labelledby": "HomeSubMenu"
+            }
+          },
+          [_vm._v("Home")]
+        ),
+        _vm._v(" "),
+        _c(
+          "ul",
+          {
+            staticClass: "hs-sub-menu u-header__sub-menu animated fadeOut",
+            staticStyle: { "min-width": "230px", display: "none" },
+            attrs: { id: "HomeSubMenu", "aria-labelledby": "HomeMegaMenu" }
+          },
+          [
+            _c("li", [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link u-header__sub-menu-nav-link",
+                  attrs: { href: "../home/index.html" }
+                },
+                [_vm._v("Home v1")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link u-header__sub-menu-nav-link",
+                  attrs: { href: "../home/home-v2.html" }
+                },
+                [_vm._v("Home v2")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link u-header__sub-menu-nav-link",
+                  attrs: { href: "../home/home-v3.html" }
+                },
+                [_vm._v("Home v3")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link u-header__sub-menu-nav-link",
+                  attrs: { href: "../home/home-v3-full-color-bg.html" }
+                },
+                [_vm._v("Home v3.1")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link u-header__sub-menu-nav-link",
+                  attrs: { href: "../home/home-v4.html" }
+                },
+                [_vm._v("Home v4")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link u-header__sub-menu-nav-link",
+                  attrs: { href: "../home/home-v5.html" }
+                },
+                [_vm._v("Home v5")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link u-header__sub-menu-nav-link",
+                  attrs: { href: "../home/home-v6.html" }
+                },
+                [_vm._v("Home v6")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("li", [
+              _c(
+                "a",
+                {
+                  staticClass: "nav-link u-header__sub-menu-nav-link",
+                  attrs: { href: "../home/home-v7.html" }
+                },
+                [_vm._v("Home v7")]
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "li",
+      {
+        staticClass: "nav-item hs-has-mega-menu u-header__nav-item",
+        attrs: {
+          "data-event": "hover",
+          "data-animation-in": "slideInUp",
+          "data-animation-out": "fadeOut"
+        }
+      },
+      [
+        _c(
+          "a",
+          {
+            staticClass:
+              "nav-link u-header__nav-link u-header__nav-link-toggle",
+            attrs: {
+              id: "pagesMegaMenu",
+              href: "javascript:;",
+              "aria-haspopup": "true",
+              "aria-expanded": "false"
+            }
+          },
+          [_vm._v("Pages")]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "hs-mega-menu w-100 u-header__sub-menu",
+            attrs: { "aria-labelledby": "pagesMegaMenu" }
+          },
+          [
+            _c("div", { staticClass: "row u-header__mega-menu-wrapper" }, [
+              _c("div", { staticClass: "col-md-3" }, [
+                _c("span", { staticClass: "u-header__sub-menu-title" }, [
+                  _vm._v("Home & Static Pages")
                 ]),
                 _vm._v(" "),
-                _c("li", { staticClass: "nav-item u-header__nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link u-header__nav-link",
-                      attrs: { href: "../home/faq.html" }
-                    },
-                    [_vm._v("FAQs")]
-                  )
+                _c("ul", { staticClass: "u-header__sub-menu-nav-group" }, [
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/index.html" }
+                      },
+                      [_vm._v("Home v1")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/home-v2.html" }
+                      },
+                      [_vm._v("Home v2")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/home-v3.html" }
+                      },
+                      [_vm._v("Home v3")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/home-v3-full-color-bg.html" }
+                      },
+                      [_vm._v("Home v3.1")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/home-v4.html" }
+                      },
+                      [_vm._v("Home v4")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/home-v5.html" }
+                      },
+                      [_vm._v("Home v5")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/home-v6.html" }
+                      },
+                      [_vm._v("Home v6")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/home-v7.html" }
+                      },
+                      [_vm._v("Home v7")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/about.html" }
+                      },
+                      [_vm._v("About")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/contact-v1.html" }
+                      },
+                      [_vm._v("Contact v1")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/contact-v2.html" }
+                      },
+                      [_vm._v("Contact v2")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/faq.html" }
+                      },
+                      [_vm._v("FAQ")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/store-directory.html" }
+                      },
+                      [_vm._v("Store Directory")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/terms-and-conditions.html" }
+                      },
+                      [_vm._v("Terms and Conditions")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../home/404.html" }
+                      },
+                      [_vm._v("404")]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-3" }, [
+                _c("span", { staticClass: "u-header__sub-menu-title" }, [
+                  _vm._v("Shop Pages")
                 ]),
                 _vm._v(" "),
-                _c("li", { staticClass: "nav-item u-header__nav-item" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "nav-link u-header__nav-link",
-                      attrs: { href: "../home/contact-v1.html" }
-                    },
-                    [_vm._v("Contact Us")]
-                  )
+                _c("ul", { staticClass: "u-header__sub-menu-nav-group mb-3" }, [
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/shop-grid.html" }
+                      },
+                      [_vm._v("Shop Grid")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/shop-grid-extended.html" }
+                      },
+                      [_vm._v("Shop Grid Extended")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/shop-list-view.html" }
+                      },
+                      [_vm._v("Shop List View")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/shop-list-view-small.html" }
+                      },
+                      [_vm._v("Shop List View Small")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/shop-left-sidebar.html" }
+                      },
+                      [_vm._v("Shop Left Sidebar")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/shop-full-width.html" }
+                      },
+                      [_vm._v("Shop Full width")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/shop-right-sidebar.html" }
+                      },
+                      [_vm._v("Shop Right Sidebar")]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "u-header__sub-menu-title" }, [
+                  _vm._v("Product Categories")
+                ]),
+                _vm._v(" "),
+                _c("ul", { staticClass: "u-header__sub-menu-nav-group" }, [
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: {
+                          href:
+                            "../shop/product-categories-4-column-sidebar.html"
+                        }
+                      },
+                      [_vm._v("4 Column Sidebar")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: {
+                          href:
+                            "../shop/product-categories-5-column-sidebar.html"
+                        }
+                      },
+                      [_vm._v("5 Column Sidebar")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: {
+                          href:
+                            "../shop/product-categories-6-column-full-width.html"
+                        }
+                      },
+                      [_vm._v("6 Column Full width")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: {
+                          href:
+                            "../shop/product-categories-7-column-full-width.html"
+                        }
+                      },
+                      [_vm._v("7 Column Full width")]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-3" }, [
+                _c("span", { staticClass: "u-header__sub-menu-title" }, [
+                  _vm._v("Single Product Pages")
+                ]),
+                _vm._v(" "),
+                _c("ul", { staticClass: "u-header__sub-menu-nav-group mb-3" }, [
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/single-product-extended.html" }
+                      },
+                      [_vm._v("Single Product Extended")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/single-product-fullwidth.html" }
+                      },
+                      [_vm._v("Single Product Fullwidth")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/single-product-sidebar.html" }
+                      },
+                      [_vm._v("Single Product Sidebar")]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "u-header__sub-menu-title" }, [
+                  _vm._v("Ecommerce Pages")
+                ]),
+                _vm._v(" "),
+                _c("ul", { staticClass: "u-header__sub-menu-nav-group" }, [
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/shop.html" }
+                      },
+                      [_vm._v("Shop")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/cart.html" }
+                      },
+                      [_vm._v("Cart")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/checkout.html" }
+                      },
+                      [_vm._v("Checkout")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/my-account.html" }
+                      },
+                      [_vm._v("My Account")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/track-your-order.html" }
+                      },
+                      [_vm._v("Track your Order")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/compare.html" }
+                      },
+                      [_vm._v("Compare")]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-3" }, [
+                _c("span", { staticClass: "u-header__sub-menu-title" }, [
+                  _vm._v("Blog Pages")
+                ]),
+                _vm._v(" "),
+                _c("ul", { staticClass: "u-header__sub-menu-nav-group mb-3" }, [
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../blog/blog-v1.html" }
+                      },
+                      [_vm._v("Blog v1")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../blog/blog-v2.html" }
+                      },
+                      [_vm._v("Blog v2")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../blog/blog-v3.html" }
+                      },
+                      [_vm._v("Blog v3")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../blog/blog-full-width.html" }
+                      },
+                      [_vm._v("Blog Full Width")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../blog/single-blog-post.html" }
+                      },
+                      [_vm._v("Single Blog Post")]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("span", { staticClass: "u-header__sub-menu-title" }, [
+                  _vm._v("Shop Columns")
+                ]),
+                _vm._v(" "),
+                _c("ul", { staticClass: "u-header__sub-menu-nav-group" }, [
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: {
+                          href: "../shop/shop-7-columns-full-width.html"
+                        }
+                      },
+                      [_vm._v("7 Column Full width")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: {
+                          href: "../shop/shop-6-columns-full-width.html"
+                        }
+                      },
+                      [_vm._v("6 Column Full width")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/shop-5-columns-sidebar.html" }
+                      },
+                      [_vm._v("5 Column Sidebar")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/shop-4-columns-sidebar.html" }
+                      },
+                      [_vm._v("4 Column Sidebar")]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "nav-link u-header__sub-menu-nav-link",
+                        attrs: { href: "../shop/shop-3-columns-sidebar.html" }
+                      },
+                      [_vm._v("3 Column Sidebar")]
+                    )
+                  ])
                 ])
               ])
-            ]
-          )
-        ]
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link u-header__sub-menu-nav-link",
+          attrs: { href: "../blog/blog-v2.html" }
+        },
+        [_vm._v("Blog v2")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link u-header__sub-menu-nav-link",
+          attrs: { href: "../blog/blog-v3.html" }
+        },
+        [_vm._v("Blog v3")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link u-header__sub-menu-nav-link",
+          attrs: { href: "../blog/blog-full-width.html" }
+        },
+        [_vm._v("Blog Full Width")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link u-header__sub-menu-nav-link",
+          attrs: { href: "../blog/single-blog-post.html" }
+        },
+        [_vm._v("Single Blog Post")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item u-header__nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link u-header__nav-link",
+          attrs: { href: "../home/about.html" }
+        },
+        [_vm._v("About us")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item u-header__nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link u-header__nav-link",
+          attrs: { href: "../home/faq.html" }
+        },
+        [_vm._v("FAQs")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item u-header__nav-item" }, [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link u-header__nav-link",
+          attrs: { href: "../home/contact-v1.html" }
+        },
+        [_vm._v("Contact Us")]
       )
     ])
   },

@@ -1644,6 +1644,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
  //Load to every page
 //import HeaderLogoSearchIconsForHome from './Layouts/HeaderLogoSearchIconsForHome.vue' //Load to only Home
 //import HeaderVerticalAndSecondaryMenuForHome from './Layouts/HeaderVerticalAndSecondaryMenuForHome.vue' //Load to only Home
@@ -5434,7 +5435,7 @@ var render = function() {
           class: _vm.mainContentMarginTopWhenHeaderFiexd,
           attrs: { id: "content", role: "main" }
         },
-        [_c("router-view", { attrs: { default: "{name: 'HomePublic'}" } })],
+        [_c("router-view")],
         1
       ),
       _vm._v(" "),

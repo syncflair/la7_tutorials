@@ -47,7 +47,9 @@
     <!-- ========== MAIN CONTENT ========== -->
     <main id="content" role="main" :class="mainContentMarginTopWhenHeaderFiexd">
 
-        <router-view default="{name: 'HomePublic'}"></router-view> 
+        <!-- <router-view default="{name: 'HomePublic'}"></router-view>  -->
+        <router-view></router-view> 
+        <vue-progress-bar></vue-progress-bar>
 
     </main>   
     <!-- ========== END MAIN CONTENT ========== -->
@@ -143,7 +145,6 @@
         }, 
 
         watch: {
-
             /*Add Remove Class based on window width change*/
             'window.width': function (val) {                
                 if( val < 1200 ){

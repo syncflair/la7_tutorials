@@ -13,7 +13,7 @@ Vue.config.productionTip = false //turn on production mode Remove when upload to
 
 /*VueProgressBar*/
 import VueProgressBar from 'vue-progressbar'
-const options = { color: '#28a745', failedColor: '#dc3545', thickness: '4px',
+const options = { color: '#28a745', failedColor: '#dc3545', thickness: '2px',
   transition: { speed: '0.2s', opacity: '0.6s', termination: 300 },
   autoRevert: true, location: 'top', inverse: false }
 Vue.use(VueProgressBar, options)
@@ -41,7 +41,7 @@ import store from './VueVuex'
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //Global Components
-Vue.component('website-wrapper', () => import(/* webpackChunkName: "website-wrapper" */'./components/Website/Public/WebsiteWrapper.vue')); //Website component
+Vue.component('website-wrapper', () => import(/* webpackChunkName: "website-wrapper" */'./components/Website/WebsiteWrapper.vue')); //Website component
 
 Vue.component('adminwrapper', () => import(/* webpackChunkName: "adminwrapper" */'./components/Admin/AdminWrapper.vue')); //admin dashboard
 Vue.component('pagination-app', () => import(/* webpackChunkName: "pagination-app" */'./components/Admin/GlobalComponents/pagination-app.vue'));
@@ -94,7 +94,7 @@ const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
-  timer: 3000,
+  timer: 5000,
   timerProgressBar: true,
   onOpen: (toast) => {
     toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -167,7 +167,7 @@ const app = new Vue({
     el: '#app',
     router, //use Vue router from globally
     store,
-
+    
     watch: { //for title
       '$route':{
         handler: (to, from) => {
