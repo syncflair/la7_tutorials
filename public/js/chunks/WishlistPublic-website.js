@@ -92,21 +92,6 @@
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /***/ }),
 
@@ -136,46 +121,6 @@ var staticRenderFns = [
       "main",
       { staticClass: "cart-page", attrs: { id: "content", role: "main" } },
       [
-        _c("div", { staticClass: "bg-gray-13 bg-md-transparent" }, [
-          _c("div", { staticClass: "container" }, [
-            _c("div", { staticClass: "my-md-3" }, [
-              _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
-                _c(
-                  "ol",
-                  {
-                    staticClass:
-                      "breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
-                  },
-                  [
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
-                      },
-                      [
-                        _c("a", { attrs: { href: "../home/index.html" } }, [
-                          _vm._v("Home")
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      {
-                        staticClass:
-                          "breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active",
-                        attrs: { "aria-current": "page" }
-                      },
-                      [_vm._v("Wishlist")]
-                    )
-                  ]
-                )
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "my-6" }, [
             _c("h1", { staticClass: "text-center" }, [

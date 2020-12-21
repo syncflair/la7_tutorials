@@ -1040,23 +1040,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //import HomeSliderSection from './HomeSliderSection.vue' //Load to only Home Page
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Single-Product-Public-website",
@@ -1099,72 +1082,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", [
-      _c("div", { staticClass: "bg-gray-13 bg-md-transparent" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "my-md-3" }, [
-            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
-              _c(
-                "ol",
-                {
-                  staticClass:
-                    "breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
-                },
-                [
-                  _c(
-                    "li",
-                    {
-                      staticClass:
-                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
-                    },
-                    [
-                      _c("a", { attrs: { href: "../home/index.html" } }, [
-                        _vm._v("Home")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    {
-                      staticClass:
-                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
-                    },
-                    [
-                      _c("a", { attrs: { href: "../shop/shop.html" } }, [
-                        _vm._v("Accessories")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    {
-                      staticClass:
-                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
-                    },
-                    [
-                      _c("a", { attrs: { href: "../shop/shop.html" } }, [
-                        _vm._v("Headphones")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    {
-                      staticClass:
-                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active",
-                      attrs: { "aria-current": "page" }
-                    },
-                    [_vm._v("Ultra Wireless S50 Headphones S50 with Bluetooth")]
-                  )
-                ]
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
       _c("div", { staticClass: "container" }, [
         _c("div", { staticClass: "row" }, [
           _c(

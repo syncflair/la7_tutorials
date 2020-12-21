@@ -480,21 +480,6 @@
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /***/ }),
 
@@ -517,10 +502,8 @@ var render = function() {
     "main",
     { staticClass: "cart-page", attrs: { id: "content", role: "main" } },
     [
-      _vm._m(0),
-      _vm._v(" "),
       _c("div", { staticClass: "container" }, [
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "mb-5 cart-table" }, [
           _c(
@@ -531,12 +514,12 @@ var render = function() {
                 "table",
                 { staticClass: "table", attrs: { cellspacing: "0" } },
                 [
-                  _vm._m(2),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c("tbody", [
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
-                    _vm._m(4),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("tr", [
                       _c(
@@ -555,7 +538,7 @@ var render = function() {
                                   "d-block d-md-flex flex-center-between"
                               },
                               [
-                                _vm._m(5),
+                                _vm._m(4),
                                 _vm._v(" "),
                                 _c(
                                   "div",
@@ -596,56 +579,12 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _vm._m(6)
+        _vm._m(5)
       ])
     ]
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bg-gray-13 bg-md-transparent" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "my-md-3" }, [
-          _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
-            _c(
-              "ol",
-              {
-                staticClass:
-                  "breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
-              },
-              [
-                _c(
-                  "li",
-                  {
-                    staticClass:
-                      "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
-                  },
-                  [
-                    _c("a", { attrs: { href: "../home/index.html" } }, [
-                      _vm._v("Home")
-                    ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "li",
-                  {
-                    staticClass:
-                      "breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active",
-                    attrs: { "aria-current": "page" }
-                  },
-                  [_vm._v("Cart")]
-                )
-              ]
-            )
-          ])
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

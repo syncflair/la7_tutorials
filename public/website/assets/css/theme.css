@@ -37542,6 +37542,19 @@ Sumon custom SCSS style
   text-decoration: underline;
 }
 
+/*Cart Wishlist custome css*/
+.cart-wishlist-custome .table tbody tr td{
+  padding: .5rem 0.75rem;
+}
+
+.cart-wishlist-custome .table tbody tr:first-child td{
+  padding-top: .5rem;
+}
+
+
+
+
+
 /*----------------------------------------------------------------------------------------------------------
 ############################################################################################################
 End Sumon custom SCSS style

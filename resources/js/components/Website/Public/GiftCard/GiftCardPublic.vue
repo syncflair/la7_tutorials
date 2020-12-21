@@ -1,13 +1,6 @@
 <template>
 <span>
-    <!-- <div class="bg-img-hero mb-14" style="background-image: url(website/assets/img/1920x600/img1.jpg);">
-        <div class="container">
-            <div class="flex-content-center max-width-620-lg flex-column mx-auto text-center min-height-564">
-                <h1 class="h1 font-weight-bold">About Us</h1>
-                <p class="text-gray-39 font-size-18 text-lh-default">Passion may be a friendly or eager interest in or admiration for a proposal, cause, discovery, or activity or love to a feeling of unusual excitement.</p>
-            </div>
-        </div>
-    </div> -->
+
 
     <div class="container mt-10 mb-10">
         <div class="row">

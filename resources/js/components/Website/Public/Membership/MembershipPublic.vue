@@ -1,21 +1,6 @@
 <template>
 <span>
-    <!-- breadcrumb -->
-    <div class="bg-gray-13 bg-md-transparent">
-        <div class="container">
-            <!-- breadcrumb -->
-            <div class="my-md-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="../home/index.html">Home</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">Membership</li>
-                    </ol>
-                </nav>
-            </div>
-            <!-- End breadcrumb -->
-        </div>
-    </div>
-    <!-- End breadcrumb -->
+   
     <!-- <div class="bg-img-hero mb-14" style="background-image: url(website/assets/img/1920x600/img1.jpg);">
         <div class="container">
             <div class="flex-content-center max-width-620-lg flex-column mx-auto text-center min-height-564">

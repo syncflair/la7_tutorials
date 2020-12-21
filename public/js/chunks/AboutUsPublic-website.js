@@ -281,23 +281,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
 //import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
 //const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
@@ -338,46 +321,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("span", [
-      _c("div", { staticClass: "bg-gray-13 bg-md-transparent" }, [
-        _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "my-md-3" }, [
-            _c("nav", { attrs: { "aria-label": "breadcrumb" } }, [
-              _c(
-                "ol",
-                {
-                  staticClass:
-                    "breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble"
-                },
-                [
-                  _c(
-                    "li",
-                    {
-                      staticClass:
-                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1"
-                    },
-                    [
-                      _c("a", { attrs: { href: "../home/index.html" } }, [
-                        _vm._v("Home")
-                      ])
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    {
-                      staticClass:
-                        "breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active",
-                      attrs: { "aria-current": "page" }
-                    },
-                    [_vm._v("About Us")]
-                  )
-                ]
-              )
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
       _c("div", { staticClass: "container mb-8 mt-8 mb-lg-0" }, [
         _c("div", { staticClass: "row mb-8" }, [
           _c("div", { staticClass: "col-lg-7" }, [

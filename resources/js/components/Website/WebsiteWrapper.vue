@@ -48,6 +48,10 @@
         <!-- ========== MAIN CONTENT ========== -->
         <main id="content" role="main" :class="mainContentMarginTopWhenHeaderFiexd">
 
+            <!-- breadcrumb -->
+            <Breadcrumb/>
+            <!-- End breadcrumb -->
+
             <!-- <router-view default="{name: 'HomePublic'}"></router-view>  -->
             <router-view></router-view> 
             <vue-progress-bar></vue-progress-bar>
@@ -108,6 +112,7 @@
     const HeaderLogoMenuForAllPage = () => import( /* webpackChunkName: "HeaderLogoMenuForAllPage-com" */ './Layouts/HeaderLogoMenuForAllPage.vue')
     const HeaderVerticalAndSearchForAllPage = () => import( /* webpackChunkName: "HeaderVerticalAndSearchForAllPage-com" */ './Layouts/HeaderVerticalAndSearchForAllPage.vue')
     
+    import Breadcrumb from './Layouts/Breadcrumb.vue' //Load to every page
     import AccountSidebarNavigationToggler from './Layouts/AccountSidebarNavigationToggler.vue' //Load to every page
     import SidebarCartContent from './Layouts/SidebarCartContent.vue' //Load to every page
     //const AccountSidebarNavigationToggler = () => import( /* webpackChunkName: "AccountSidebarNavigationToggler-com" */ './Layouts/AccountSidebarNavigationToggler.vue')
@@ -140,10 +145,9 @@
             HeaderLogoSearchIconsForHome, 
             HeaderVerticalAndSecondaryMenuForHome, 
             //SidebarNavigationHeader1,
-
             HeaderLogoMenuForAllPage,
             HeaderVerticalAndSearchForAllPage,
-            
+            Breadcrumb,            
             AccountSidebarNavigationToggler, 
             SidebarCartContent,
             GoToTopButton,

@@ -1,28 +1,13 @@
 <template>
 <span>
-    <!-- breadcrumb -->
-    <div class="bg-gray-13 bg-md-transparent">
-        <div class="container">
-            <!-- breadcrumb -->
-            <div class="my-md-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-3 flex-nowrap flex-xl-wrap overflow-auto overflow-xl-visble">
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1"><a href="../home/index.html">Home</a></li>
-                        <li class="breadcrumb-item flex-shrink-0 flex-xl-shrink-1 active" aria-current="page">Contact</li>
-                    </ol>
-                </nav>
-            </div>
-            <!-- End breadcrumb -->
-        </div>
-    </div>
-    <!-- End breadcrumb -->
+
 
 
     <div class="container">
         <!-- <div class="mb-5">
             <h1 class="text-center">Contact</h1>
         </div> -->
-        <div class="row mb-10">
+        <div class="row mb-10 mt-6-">
             <div class="col-lg-7 col-xl-6 mb-8 mb-lg-0">
                 <div class="mr-xl-6">
                     <div class="border-bottom border-color-1 mb-5">
