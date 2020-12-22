@@ -14,7 +14,7 @@ class Role extends Model
 
     //My Custome Relation - A Role Has Many User (hasMany())
     public function user(){
-        return $this->hasMany('App\User', 'role_id');
+        return $this->hasMany('App\Models\User', 'role_id');
         //return $this->hasMany(User::class);  
     }
 

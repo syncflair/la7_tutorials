@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 //use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -54,23 +54,27 @@ class Customer extends Authenticatable
     //customer belongs to customer group
     public function belongsToCustomerGroup(){
         //return $this->belongsTo('App\Models\Customer\CustomerGroup', 'customer_group_id');
-        return $this->belongsTo(Models\Customer\CustomerGroup::class, 'customer_group_id');
+        // return $this->belongsTo(Models\Customer\CustomerGroup::class, 'customer_group_id');
+        return $this->belongsTo(Customer\CustomerGroup::class, 'customer_group_id');
     }
 
     //customer belongs to customer Membership
     public function belongsToCustomerMembership(){
-        return $this->belongsTo(Models\Customer\CustomerMembership::class, 'customer_membership_id');
+        // return $this->belongsTo(Models\Customer\CustomerMembership::class, 'customer_membership_id');
+        return $this->belongsTo(Customer\CustomerMembership::class, 'customer_membership_id');
     }
 
     public function UserStatus(){
         //return $this->belongsTo('App\Models\UserStatus');
-        return $this->belongsTo(Models\Settings\UserStatus::class);
+        // return $this->belongsTo(Models\Settings\UserStatus::class);
+        return $this->belongsTo(Settings\UserStatus::class);
     }
 
     //Customer hasMany Address
     public function hasManyAddress()
     {
-       return $this->hasMany(Models\Customer\CustomerAddress::class, 'customer_id');
+       // return $this->hasMany(Models\Customer\CustomerAddress::class, 'customer_id');
+       return $this->hasMany(Customer\CustomerAddress::class, 'customer_id');
     }
 
 

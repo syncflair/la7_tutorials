@@ -1,5 +1,5 @@
 <?php
-use App\user;
+use App\Models\User;
 use App\Models\Purchase\PurchaseOrder;
 use Illuminate\Http\Request;
 

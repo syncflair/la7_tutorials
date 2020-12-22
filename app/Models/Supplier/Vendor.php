@@ -29,6 +29,7 @@ class Vendor extends Model
     //vendor shop hasMany supplier
     public function hasManySupplier()
     {
-        return $this->hasMany('App\Supplier', 'vendor_id');
+        // return $this->hasMany('App\Supplier', 'vendor_id');
+        return $this->hasMany('App\Models\Supplier', 'vendor_id');
     }
 }

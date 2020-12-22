@@ -297,7 +297,8 @@ var staticRenderFns = [
                                       "img-fluid max-width-70 p-1 border border-color-1",
                                     attrs: {
                                       src:
-                                        "website/assets/img/300X300/img6.jpg",
+                                        "/../website/assets/img/300X300/img6.jpg",
+                                      loading: "lazy",
                                       alt: "Image Description"
                                     }
                                   })
@@ -367,7 +368,7 @@ var staticRenderFns = [
                                       "img-fluid max-width-70 p-1 border border-color-1",
                                     attrs: {
                                       src:
-                                        "website/assets/img/300X300/img7.png",
+                                        "/../website/assets/img/300X300/img7.png",
                                       alt: "Image Description"
                                     }
                                   })
@@ -433,7 +434,7 @@ var staticRenderFns = [
                                       "img-fluid max-width-70 p-1 border border-color-1",
                                     attrs: {
                                       src:
-                                        "website/assets/img/300X300/img7.png",
+                                        "/../website/assets/img/300X300/img7.png",
                                       alt: "Image Description"
                                     }
                                   })
@@ -499,7 +500,7 @@ var staticRenderFns = [
                                       "img-fluid max-width-70 p-1 border border-color-1",
                                     attrs: {
                                       src:
-                                        "website/assets/img/300X300/img7.png",
+                                        "/../website/assets/img/300X300/img7.png",
                                       alt: "Image Description"
                                     }
                                   })

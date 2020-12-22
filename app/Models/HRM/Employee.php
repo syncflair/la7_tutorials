@@ -44,6 +44,6 @@ class Employee extends Model
      //Employee shop hasOne Users
     public function hasOneUser()
     {
-        return $this->hasOne('App\User', 'employee_id');
+        return $this->hasOne('App\Models\User', 'employee_id');
     }
 }

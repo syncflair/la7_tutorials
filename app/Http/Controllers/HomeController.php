@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use app\user;
+use app\Models\User;
 use App\Helpers\AuthRolePermissionHelper;
 
 class HomeController extends Controller

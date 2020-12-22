@@ -11,7 +11,7 @@ use App\Mail\CustomerRegisterByAdminMail;
 use App\Mail\CustomerNotificationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB; //for database transection
-use App\Customer;
+use App\Models\Customer;
 use App\Models\Customer\CustomerAddress;
 
 

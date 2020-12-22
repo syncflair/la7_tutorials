@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Mail\AdminChildNotificationMail;
 use Illuminate\Support\Facades\Mail;
-use App\User;
+use App\Models\User;
 
 use Illuminate\Support\Facades\Hash;
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\AuthManagement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 use Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str; //for str::random

@@ -18,6 +18,7 @@ class CustomerGroup extends Model
     //Customer Group hasMany customer
     public function hasManyCustomer()
     {
-        return $this->hasMany('App\Customer', 'customer_group_id');
+        // return $this->hasMany('App\Customer', 'customer_group_id');
+        return $this->hasMany('App\Models\Customer', 'customer_group_id');
     }
 }

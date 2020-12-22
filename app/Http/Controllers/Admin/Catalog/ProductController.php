@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Catalog\Product;
 use App\Models\Catalog\Image;
-use App\Supplier;
+use App\Models\Supplier;
 use App\Models\Catalog\Category;
 
 use Illuminate\Support\Str; //for str::random

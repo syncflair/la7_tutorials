@@ -43,7 +43,7 @@ Route::get('get-brand-for-carousel', 'Website\BrandController@GetBrandForCarouse
 
 
 
-//------------------------------------- Website Localization------------------------------------------
+//------------------------------------- Website Localization (Language switcher)------------------------------------------
 Route::redirect('/','/en');
 Route::group(['prefix'=>'{locale}', 'where'=>['locale' => '[a-zA-Z]{2}'], 'middleware'=>'SetLanguage'], function(){
 
@@ -62,6 +62,11 @@ Route::group(['prefix'=>'{locale}', 'where'=>['locale' => '[a-zA-Z]{2}'], 'middl
 
 //For Public
 Route::get('/{anypath}', function () {
+      return view('website.home'); 
+})->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
+
+//for authorise user
+Route::get('/auth/{anypath}', function () {
       return view('website.home'); 
 })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
 

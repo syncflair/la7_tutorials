@@ -1,8 +1,8 @@
 <?php
 
-use App\User;
-use App\Supplier;
-use App\Customer;
+use App\Models\User;
+use App\Models\Supplier;
+use App\Models\Customer;
 use App\Models\Accounting\AccountDetail;
 use App\Models\Supplier\Vendor;
 use App\Models\HRM\Employee;
@@ -207,8 +207,8 @@ function testQuery(){
   // array('info->pizza->calorie' => '90')
 
   //$dataArr = [];
-  $suppliers = App\Supplier::select('name')->get()->toArray();
-  $customers = App\Customer::select('name')->get()->toArray();
+  $suppliers = App\Models\Supplier::select('name')->get()->toArray();
+  $customers = App\Models\Customer::select('name')->get()->toArray();
   $employees = App\Models\HRM\Employee::select('emp_name as name')->get()->toArray();
   $banks = App\Models\Accounting\BankAccount::select('bank_account_name as name')->get()->toArray();
   // print_r($suppliers);

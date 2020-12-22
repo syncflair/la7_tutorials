@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\AuthManagement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 use Yajra\DataTables\DataTables;
 use Auth;
 use Illuminate\Support\Facades\File;

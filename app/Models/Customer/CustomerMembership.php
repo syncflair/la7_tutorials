@@ -19,6 +19,7 @@ class CustomerMembership extends Model
     //Customer Membership hasMany customer
     public function hasManyCustomer()
     {
-        return $this->hasMany('App\Customer', 'customer_membership_id');
+        // return $this->hasMany('App\Customer', 'customer_membership_id');
+        return $this->hasMany('App\Models\Customer', 'customer_membership_id');
     }
 }

@@ -172,6 +172,7 @@ const app = new Vue({
       '$route':{
         handler: (to, from) => {
           document.title = to.meta.title || 'Sorboraho'
+          // document.title = ${process.env.APP_NAME}
         },
          //immediate: true,
       }

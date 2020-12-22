@@ -8,7 +8,7 @@ use App\Models\Accounting\CashAccount;
 use App\Models\Accounting\BankAccount;
 use App\Models\HRM\Employee;
 use App\Models\Supplier\Vendor;
-use App\Customer;
+use App\Models\Customer;
 
 class CashAccountController extends Controller
 {

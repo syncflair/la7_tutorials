@@ -18,6 +18,7 @@ class BrandShop extends Model
     //Brand shop hasMany supplier
     public function hasManySupplier()
     {
-        return $this->hasMany('App\Supplier', 'brand_shop_id');
+        // return $this->hasMany('App\Supplier', 'brand_shop_id');
+        return $this->hasMany('App\Models\Supplier', 'brand_shop_id');
     }
 }

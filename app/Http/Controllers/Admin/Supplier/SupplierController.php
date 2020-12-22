@@ -13,7 +13,7 @@ use Illuminate\Support\Carbon;
 //use App\Mail\SupplierRegisterByAdminMail;
 use App\Mail\SupplierNotificationMail;
 use Illuminate\Support\Facades\Mail;
-use App\Supplier;
+use App\Models\Supplier;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Config; //that for call constants form app/config

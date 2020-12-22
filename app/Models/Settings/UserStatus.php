@@ -30,17 +30,18 @@ class UserStatus extends Model
 
 
     public function user(){
-        return $this->hasMany('App\User', 'status_id');
+        return $this->hasMany('App\Models\User', 'status_id');
         //return $this->hasMany(User::class);  
     }
 
     public function customer(){
-        return $this->hasMany('App\Customer');
+        return $this->hasMany('App\Models\Customer');
         //return $this->hasMany(User::class);  
     }
 
     public function supplier(){
-        return $this->hasMany('App\Supplier');
+        // return $this->hasMany('App\Supplier');
+        return $this->hasMany('App\Models\Supplier');
         //return $this->hasMany(User::class);  
     }
 }

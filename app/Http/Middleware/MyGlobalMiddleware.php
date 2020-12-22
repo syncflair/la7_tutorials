@@ -6,7 +6,7 @@ use Closure;
 
 use Illuminate\Support\Facades\Auth;
 //use Auth;
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 
 class MyGlobalMiddleware

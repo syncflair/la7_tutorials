@@ -1,6 +1,6 @@
 <?php
 
-use App\User;
+use App\Models\User;
 use App\Models\Role;
 use App\Models\UserStatus;
 use App\Models\Settings\Setting;

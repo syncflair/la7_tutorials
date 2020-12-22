@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 //use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -48,12 +48,14 @@ class Supplier extends Authenticatable
  
     public function UserStatus(){
         //return $this->belongsTo('App\Models\UserStatus');
-        return $this->belongsTo(Models\Settings\UserStatus::class);
+        // return $this->belongsTo(Models\Settings\UserStatus::class);
+        return $this->belongsTo(Settings\UserStatus::class);
     }
 
     //Supplier belongsTo District_zone
     public function belongsToDistrictZone(){
-        return $this->belongsTo(Models\Settings\DistrictZone::class, 'dist_zone_id');
+        // return $this->belongsTo(Models\Settings\DistrictZone::class, 'dist_zone_id');
+        return $this->belongsTo(Settings\DistrictZone::class, 'dist_zone_id');
     }
 
     //Supplier belongs to vendor

@@ -1,10 +1,6 @@
 <template>
 
-    <div class="container">
-        <!-- <div class="mb-5">
-            <h1 class="text-center">Contact</h1>
-        </div> -->
-                
+    <div class="container">                
         <div class="row mb-10">
             <div class="d-none- d-xl-block col-xl-2 col-wd-2gdot5-">
 
@@ -35,7 +31,7 @@
                                     <tbody>
                                         <tr>                                            
                                             <td class="d-none d-md-table-cell">
-                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="website/assets/img/300X300/img6.jpg" alt="Image Description"></a>
+                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="/../website/assets/img/300X300/img6.jpg" loading="lazy" alt="Image Description"></a>
                                             </td>
 
                                             <td data-title="Product">
@@ -71,7 +67,7 @@
                                         </tr>
                                         <tr class="">
                                             <td class="d-none d-md-table-cell">
-                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="website/assets/img/300X300/img7.png" alt="Image Description"></a>
+                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="/../website/assets/img/300X300/img7.png" alt="Image Description"></a>
                                             </td>
 
                                             <td data-title="Product">
@@ -107,7 +103,7 @@
                                         </tr>
                                         <tr class="">
                                             <td class="d-none d-md-table-cell">
-                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="website/assets/img/300X300/img7.png" alt="Image Description"></a>
+                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="/../website/assets/img/300X300/img7.png" alt="Image Description"></a>
                                             </td>
 
                                             <td data-title="Product">
@@ -144,7 +140,7 @@
 
                                         <tr class="">
                                             <td class="d-none d-md-table-cell">
-                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="website/assets/img/300X300/img7.png" alt="Image Description"></a>
+                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="/../website/assets/img/300X300/img7.png" alt="Image Description"></a>
                                             </td>
 
                                             <td data-title="Product">
@@ -197,6 +193,15 @@
     import NavForAdminCustomer from '../Include/NavForAdminCustomer'
     export default {
         name: "customer-Reviews-website-auth",
+        metaInfo:{
+            
+        },
+
+        // meta: {
+        //         title: 'Reviews', 
+        //         breadcrumb: 'Reviews'
+        //     },
+
         data (){      
             return {         
             }

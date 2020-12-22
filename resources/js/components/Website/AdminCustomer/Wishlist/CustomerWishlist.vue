@@ -38,7 +38,7 @@
                                                 <a href="#" class="text-gray-32 font-size-26">×</a>
                                             </td>
                                             <td class="d-none d-md-table-cell">
-                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="website/assets/img/300X300/img6.jpg" alt="Image Description"></a>
+                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="/../website/assets/img/300X300/img6.jpg" loading="lazy" alt="Image Description"></a>
                                             </td>
 
                                             <td data-title="Product">
@@ -64,7 +64,7 @@
                                                 <a href="#" class="text-gray-32 font-size-26">×</a>
                                             </td>
                                             <td class="d-none d-md-table-cell">
-                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="website/assets/img/300X300/img7.png" alt="Image Description"></a>
+                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="/../website/assets/img/300X300/img7.png" alt="Image Description"></a>
                                             </td>
 
                                             <td data-title="Product">
@@ -90,7 +90,7 @@
                                                 <a href="#" class="text-gray-32 font-size-26">×</a>
                                             </td>
                                             <td class="d-none d-md-table-cell">
-                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="website/assets/img/300X300/img7.png" alt="Image Description"></a>
+                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="/../website/assets/img/300X300/img7.png" alt="Image Description"></a>
                                             </td>
 
                                             <td data-title="Product">
@@ -117,7 +117,7 @@
                                                 <a href="#" class="text-gray-32 font-size-26">×</a>
                                             </td>
                                             <td class="d-none d-md-table-cell">
-                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="website/assets/img/300X300/img7.png" alt="Image Description"></a>
+                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="/../website/assets/img/300X300/img7.png" alt="Image Description"></a>
                                             </td>
 
                                             <td data-title="Product">

@@ -234,19 +234,20 @@ const routes = [
 	{ path: '/404', name: '404Public', component: () => import(/* webpackChunkName: "404Public-website" */ './components/Website/Public/404/404Public.vue'), meta: { title: 'Page Not Found', breadcrumb: 'Page Not Found'}},
 	
 	//Authendication
-	{ path: '/customer-login', name: 'CustomerLogin', component: () => import(/* webpackChunkName: "customer-login-website" */ './components/Website/Auth/login.vue'), meta: { title: 'Login', } },
+	{ path: '/auth/customer-login', name: 'CustomerLogin', component: () => import(/* webpackChunkName: "customer-login-website" */ './components/Website/Auth/login.vue'), meta: { title: 'Login', } },
 
 
 
 	//website user admin dashboard
-  	{ path: '/customer-dashboard', name: 'CustomerDashboard', component: () => import(/* webpackChunkName: "customer-dashboard-website-auth" */ './components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue'), meta: { title: 'Dashboard', breadcrumb: 'Dashboard'} },
-  	{ path: '/customer-orders', name: 'CustomerOrder', component: () => import(/* webpackChunkName: "customer-order-website-auth" */ './components/Website/AdminCustomer/Order/CustomerOrders.vue'), meta: { title: 'Orders', breadcrumb: 'Orders'} },
-  	{ path: '/customer-profile', name: 'CustomerProfile', component: () => import(/* webpackChunkName: "customer-profile-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerProfile.vue'), meta: { title: 'Profile', breadcrumb: 'Profile'} },
-  	{ path: '/customer-address', name: 'CustomerAddress', component: () => import(/* webpackChunkName: "customer-address-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerAddress.vue'), meta: { title: 'Address', breadcrumb: 'Address'}},
-  	{ path: '/customer-address-form', name: 'CustomerAddressForm', component: () => import(/* webpackChunkName: "customer-address-form-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerAddressForm.vue'), meta: { breadcrumb: 'Customer Address form', title: 'Customer Address'} },
-  	{ path: '/customer-wishlist', name: 'CustomerWishlist', component: () => import(/* webpackChunkName: "customer-wishlist-website-auth" */ './components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue'), meta: { title: 'Wishlist', breadcrumb: 'Wishlist'} },
-  	{ path: '/customer-vouchers', name: 'CustomerVoucher', component: () => import(/* webpackChunkName: "customer-voucher-website-auth" */ './components/Website/AdminCustomer/Voucher/CustomerVoucher.vue'), meta: { title: 'Voucher', breadcrumb: 'Voucher'}},
-  	{ path: '/customer-reviews', name: 'CustomerReviews', component: () => import(/* webpackChunkName: "customer-reviews-website-auth" */ './components/Website/AdminCustomer/Review/CustomerReviews.vue'), meta: { title: 'Reviews', breadcrumb: 'Reviews'} },
+  	{ path: '/auth/customer-dashboard', name: 'CustomerDashboard', component: () => import(/* webpackChunkName: "customer-dashboard-website-auth" */ './components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue'), meta: { title: 'Dashboard', breadcrumb: 'Dashboard'} },
+  	{ path: '/auth/customer-orders', name: 'CustomerOrder', component: () => import(/* webpackChunkName: "customer-order-website-auth" */ './components/Website/AdminCustomer/Order/CustomerOrders.vue'), meta: { title: 'Orders', breadcrumb: 'Orders'} },
+  	{ path: '/auth/customer-profile', name: 'CustomerProfile', component: () => import(/* webpackChunkName: "customer-profile-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerProfile.vue'), meta: { title: 'Profile', breadcrumb: 'Profile'} },
+  	{ path: '/auth/customer-address', name: 'CustomerAddress', component: () => import(/* webpackChunkName: "customer-address-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerAddress.vue'), meta: { title: 'Address', breadcrumb: 'Address'}},
+  	{ path: '/auth/customer-address-form', name: 'CustomerAddressForm', component: () => import(/* webpackChunkName: "customer-address-form-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerAddressForm.vue'), meta: { breadcrumb: 'Customer Address form', title: 'Customer Address'} },
+  	{ path: '/auth/customer-wishlist', name: 'CustomerWishlist', component: () => import(/* webpackChunkName: "customer-wishlist-website-auth" */ './components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue'), meta: { title: 'Wishlist', breadcrumb: 'Wishlist'} },
+  	{ path: '/auth/customer-vouchers', name: 'CustomerVoucher', component: () => import(/* webpackChunkName: "customer-voucher-website-auth" */ './components/Website/AdminCustomer/Voucher/CustomerVoucher.vue'), meta: { title: 'Voucher', breadcrumb: 'Voucher'}},
+  	{ path: '/auth/customer-reviews', name: 'CustomerReviews', component: () => import(/* webpackChunkName: "customer-reviews-website-auth" */ './components/Website/AdminCustomer/Review/CustomerReviews.vue'),  },
+  	// meta: { title: 'Reviews', breadcrumb: 'Reviews'}
 
 
 

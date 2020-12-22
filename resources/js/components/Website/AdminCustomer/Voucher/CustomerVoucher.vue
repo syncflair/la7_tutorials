@@ -35,7 +35,7 @@
                                     <tbody>
                                         <tr>                                            
                                             <td class="d-none d-md-table-cell">
-                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="website/assets/img/300X300/img6.jpg" alt="Image Description"></a>
+                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="/../website/assets/img/300X300/img6.jpg" loading="lazy" alt="Image Description"></a>
                                             </td>
 
                                             <td data-title="Product">
@@ -62,35 +62,7 @@
                                         </tr>
                                         <tr>                                            
                                             <td class="d-none d-md-table-cell">
-                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="website/assets/img/300X300/img6.jpg" alt="Image Description"></a>
-                                            </td>
-
-                                            <td data-title="Product">
-                                                <a href="#" class="text-gray-90">Ultra Wireless S50 Headphones S50 with Bluetooth</a>
-                                            </td>                                           
-
-                                            <td data-title="Unit Price">
-                                                <span class="">$1,100.00</span>
-                                            </td>
-
-                                            <td class="text-center">
-                                                <span class="">Fixed</span>
-                                            </td>
-
-                                            <td data-title="Stock Status">
-                                                <!-- Stock Status -->
-                                                <span>10/10/2023</span>
-                                                <!-- End Stock Status -->
-                                            </td>
-
-                                            <td>
-                                                <button type="button" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto"><!-- <i class="font-size-22 ec ec-shopping-bag"></i> --> Manage</button>
-                                            </td>
-                                        </tr>
-
-                                        <tr>                                            
-                                            <td class="d-none d-md-table-cell">
-                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="website/assets/img/300X300/img6.jpg" alt="Image Description"></a>
+                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="/../website/assets/img/300X300/img6.jpg" alt="Image Description"></a>
                                             </td>
 
                                             <td data-title="Product">
@@ -118,7 +90,35 @@
 
                                         <tr>                                            
                                             <td class="d-none d-md-table-cell">
-                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="website/assets/img/300X300/img6.jpg" alt="Image Description"></a>
+                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="/../website/assets/img/300X300/img6.jpg" alt="Image Description"></a>
+                                            </td>
+
+                                            <td data-title="Product">
+                                                <a href="#" class="text-gray-90">Ultra Wireless S50 Headphones S50 with Bluetooth</a>
+                                            </td>                                           
+
+                                            <td data-title="Unit Price">
+                                                <span class="">$1,100.00</span>
+                                            </td>
+
+                                            <td class="text-center">
+                                                <span class="">Fixed</span>
+                                            </td>
+
+                                            <td data-title="Stock Status">
+                                                <!-- Stock Status -->
+                                                <span>10/10/2023</span>
+                                                <!-- End Stock Status -->
+                                            </td>
+
+                                            <td>
+                                                <button type="button" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto"><!-- <i class="font-size-22 ec ec-shopping-bag"></i> --> Manage</button>
+                                            </td>
+                                        </tr>
+
+                                        <tr>                                            
+                                            <td class="d-none d-md-table-cell">
+                                                <a href="#"><img class="img-fluid max-width-70 p-1 border border-color-1" src="/../website/assets/img/300X300/img6.jpg" alt="Image Description"></a>
                                             </td>
 
                                             <td data-title="Product">

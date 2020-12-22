@@ -93405,7 +93405,7 @@ var routes = [//export const routes = [
   }
 }, //Authendication
 {
-  path: '/customer-login',
+  path: '/auth/customer-login',
   name: 'CustomerLogin',
   component: function component() {
     return __webpack_require__.e(/*! import() | customer-login-website */ "customer-login-website").then(__webpack_require__.bind(null, /*! ./components/Website/Auth/login.vue */ "./resources/js/components/Website/Auth/login.vue"));
@@ -93415,7 +93415,7 @@ var routes = [//export const routes = [
   }
 }, //website user admin dashboard
 {
-  path: '/customer-dashboard',
+  path: '/auth/customer-dashboard',
   name: 'CustomerDashboard',
   component: function component() {
     return Promise.all(/*! import() | customer-dashboard-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-dashboard-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue */ "./resources/js/components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue"));
@@ -93425,7 +93425,7 @@ var routes = [//export const routes = [
     breadcrumb: 'Dashboard'
   }
 }, {
-  path: '/customer-orders',
+  path: '/auth/customer-orders',
   name: 'CustomerOrder',
   component: function component() {
     return Promise.all(/*! import() | customer-order-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-order-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Order/CustomerOrders.vue */ "./resources/js/components/Website/AdminCustomer/Order/CustomerOrders.vue"));
@@ -93435,7 +93435,7 @@ var routes = [//export const routes = [
     breadcrumb: 'Orders'
   }
 }, {
-  path: '/customer-profile',
+  path: '/auth/customer-profile',
   name: 'CustomerProfile',
   component: function component() {
     return Promise.all(/*! import() | customer-profile-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-profile-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerProfile.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerProfile.vue"));
@@ -93445,7 +93445,7 @@ var routes = [//export const routes = [
     breadcrumb: 'Profile'
   }
 }, {
-  path: '/customer-address',
+  path: '/auth/customer-address',
   name: 'CustomerAddress',
   component: function component() {
     return Promise.all(/*! import() | customer-address-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-address-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerAddress.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerAddress.vue"));
@@ -93455,7 +93455,7 @@ var routes = [//export const routes = [
     breadcrumb: 'Address'
   }
 }, {
-  path: '/customer-address-form',
+  path: '/auth/customer-address-form',
   name: 'CustomerAddressForm',
   component: function component() {
     return Promise.all(/*! import() | customer-address-form-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-address-form-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerAddressForm.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerAddressForm.vue"));
@@ -93465,7 +93465,7 @@ var routes = [//export const routes = [
     title: 'Customer Address'
   }
 }, {
-  path: '/customer-wishlist',
+  path: '/auth/customer-wishlist',
   name: 'CustomerWishlist',
   component: function component() {
     return Promise.all(/*! import() | customer-wishlist-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-wishlist-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue */ "./resources/js/components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue"));
@@ -93475,7 +93475,7 @@ var routes = [//export const routes = [
     breadcrumb: 'Wishlist'
   }
 }, {
-  path: '/customer-vouchers',
+  path: '/auth/customer-vouchers',
   name: 'CustomerVoucher',
   component: function component() {
     return Promise.all(/*! import() | customer-voucher-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-voucher-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Voucher/CustomerVoucher.vue */ "./resources/js/components/Website/AdminCustomer/Voucher/CustomerVoucher.vue"));
@@ -93485,16 +93485,13 @@ var routes = [//export const routes = [
     breadcrumb: 'Voucher'
   }
 }, {
-  path: '/customer-reviews',
+  path: '/auth/customer-reviews',
   name: 'CustomerReviews',
   component: function component() {
     return Promise.all(/*! import() | customer-reviews-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-reviews-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Review/CustomerReviews.vue */ "./resources/js/components/Website/AdminCustomer/Review/CustomerReviews.vue"));
-  },
-  meta: {
-    title: 'Reviews',
-    breadcrumb: 'Reviews'
   }
-}]; //end routes
+} // meta: { title: 'Reviews', breadcrumb: 'Reviews'}
+]; //end routes
 //const router = new VueRouter({
 
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
@@ -93848,7 +93845,7 @@ var app = new Vue({
     //for title
     '$route': {
       handler: function handler(to, from) {
-        document.title = to.meta.title || 'Sorboraho';
+        document.title = to.meta.title || 'Sorboraho'; // document.title = ${process.env.APP_NAME}
       } //immediate: true,
 
     }

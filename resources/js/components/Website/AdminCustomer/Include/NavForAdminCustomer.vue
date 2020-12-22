@@ -19,37 +19,37 @@
         <ul id="sidebarNav" class="list-unstyled dropdown-list">
             <!-- Menu List -->
             <li class="border-bottom-">
-                <router-link to="/customer-dashboard" class="dropdown-item dropdown-item-custome" 
+                <router-link to="/auth/customer-dashboard" class="dropdown-item dropdown-item-custome" 
                 	:class="[currentPage.includes('customer-dashboard')] ? ActiveLinkClass : '' " > Dashboard
                 </router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome" to="/customer-orders"
+            	<router-link class="dropdown-item dropdown-item-custome" to="/auth/customer-orders"
 	            	:class="[currentPage.includes('customer-orders')] ? ActiveLinkClass : '' " >My Orders
 	            </router-link>
             </li>
-            <li><router-link class="dropdown-item dropdown-item-custome " to="/customer-wishlist"
+            <li><router-link class="dropdown-item dropdown-item-custome " to="/auth/customer-wishlist"
             	:class="[currentPage.includes('customer-wishlist')] ? ActiveLinkClass : '' "  >Wishlist
             	</router-link>
             </li>
             
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome " to="/customer-reviews" 
+            	<router-link class="dropdown-item dropdown-item-custome " to="/auth/customer-reviews" 
             	:class="[currentPage.includes('customer-reviews')] ? ActiveLinkClass : '' " >My Reviews
             	</router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome " to="/customer-profile"
+            	<router-link class="dropdown-item dropdown-item-custome " to="/auth/customer-profile"
 	            	:class="[currentPage.includes('customer-profile')] ? ActiveLinkClass : '' "  > My Profile
 	            </router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome " to="/customer-address" 
+            	<router-link class="dropdown-item dropdown-item-custome " to="/auth/customer-address" 
             	:class="[currentPage.includes('customer-address')] ? ActiveLinkClass : '' " > Address Book
             	</router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome " to="/customer-vouchers" 
+            	<router-link class="dropdown-item dropdown-item-custome " to="/auth/customer-vouchers" 
             	:class="[currentPage.includes('customer-vouchers')] ? ActiveLinkClass : '' " > Vouchers
             	</router-link>
             </li>

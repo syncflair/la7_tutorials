@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -47,24 +47,28 @@ class User extends Authenticatable implements MustVerifyEmail
     //My Custome Relation --  user belong to this Role 
     public function role(){
         //return $this->belongsTo('App\Models\Role');
-        return $this->belongsTo(Models\Role::class);
+        // return $this->belongsTo(Models\Role::class);
+        return $this->belongsTo(Role::class);
     }
 
     //User belongsTo belongsToBranch
     public function belongsToBranch(){
-        return $this->belongsTo('App\Models\Settings\BranchInfo', 'branch_id')->select('id','branch_name');
+        // return $this->belongsTo('App\Models\Settings\BranchInfo', 'branch_id')->select('id','branch_name');
+        return $this->belongsTo('Settings\BranchInfo', 'branch_id')->select('id','branch_name');
     }
 
     public function UserStatus(){
         //return $this->belongsTo('App\Models\UserStatus');
         //return $this->belongsTo(Models\Settings\UserStatus::class, 'user_id');
-        return $this->belongsTo('App\Models\Settings\UserStatus', 'status_id');
+        // return $this->belongsTo('App\Models\Settings\UserStatus', 'status_id');
+        return $this->belongsTo('Settings\UserStatus', 'status_id');
     }
 
     //A User Has Many Products (hasMany())
     public function haseManyProduct(){
         //return $this->hasMany('App\Models\Product');
-        return $this->hasMany(Models\Product::class);  
+        // return $this->hasMany(Models\Product::class);  
+        return $this->hasMany(Product::class);  
     }
 
 
@@ -73,6 +77,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     //User belongs to Employee
     public function belongsToEmployee(){
+        // return $this->belongsTo('App\Models\HRM\Employee', 'employee_id')->with('belongsToJObTitle');
         return $this->belongsTo('App\Models\HRM\Employee', 'employee_id')->with('belongsToJObTitle');
         //->select('id','emp_name','emp_job_type');
         //return $this->belongsTo(Models\Supplier\Vendor::class, 'vendor_id');
@@ -80,7 +85,8 @@ class User extends Authenticatable implements MustVerifyEmail
 
     //Employee belongsTo belongsToJObTitle
     public function belongsToJObTitle(){
-        return $this->belongsTo('App\Models\HRM\JobTitle', 'job_title_id');
+        // return $this->belongsTo('App\Models\HRM\JobTitle', 'job_title_id');
+        return $this->belongsTo('HRM\JobTitle', 'job_title_id');
     }
 
     //Employee haseMany Department
