@@ -33,8 +33,10 @@ Route::get('email-temp', function () {
    return view('layouts.EmailLayoutConfirmation.email_master');  
 });
 
+
 //customers Route
-Route::get('customer/login', 'AuthCustomer\LoginController@showLoginForm')->name('customer.login');
+// Route::get('customer/login', 'AuthCustomer\LoginController@showLoginForm')->name('customer.login');
+// Route::get('/auth/login', 'AuthCustomer\LoginController@showLoginForm');
 Route::post('customer/login', 'AuthCustomer\LoginController@login')->name('customer.login');
 Route::get('customer/register', 'AuthCustomer\RegisterController@showRegisterForm')->name('customer.register');
 Route::post('customer/register', 'AuthCustomer\RegisterController@register')->name('customer.register');
@@ -44,6 +46,8 @@ Route::get('customer/password/reset','AuthCustomer\ForgotPasswordController@show
 Route::post('customer/password/email','AuthCustomer\ForgotPasswordController@sendResetLinkEmail')->name('customer.password.email');
 Route::get('customer/password/reset/{token}','AuthCustomer\ResetPasswordController@showResetForm')->name('customer.password.reset');
 Route::post('customer/password/reset','AuthCustomer\ResetPasswordController@reset')->name('customer.password.update');
+
+
 
 //Suppliers Route
 Route::get('supplier/login', 'AuthSupplier\LoginController@showLoginForm')->name('supplier.login');
@@ -55,16 +59,23 @@ Route::get('supplier/password/reset/{token}','AuthSupplier\ResetPasswordControll
 Route::post('supplier/password/reset','AuthSupplier\ResetPasswordController@reset')->name('supplier.password.update');
 
 
+
 Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
-    Route::get('/dashboard-customer', 'AdminCustomer\AdminCustomerController@index')->name('dashboard-customer');
+    // Route::get('/dashboard-customer', 'AdminCustomer\AdminCustomerController@index')->name('dashboard-customer');
+    Route::get('auth/customer-dashboard', 'AdminCustomer\AdminCustomerController@index')->name('customer-dashboard');
     Route::post('customer/logout', 'AuthCustomer\LoginController@logout')->name('customer.logout');
 
      // Vue: single page application (SPA)- Any route that not match that redirect to dashboard-customer. 
-    Route::get('/spac/{anypath}', function () {
-      return view('adminCustomer.DashboardCustomer'); 
+    // Route::get('/spac/{anypath}', function () {
+    //   return view('adminCustomer.DashboardCustomer'); 
+    // })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
+
+    Route::get('/auth/{anypath}', function () {
+      return view('website.home'); 
     })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
 
 });
+
 
 Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
     Route::get('/dashboard-supplier', 'AdminSupplier\AdminSupplierController@index')->name('dashboard-supplier');

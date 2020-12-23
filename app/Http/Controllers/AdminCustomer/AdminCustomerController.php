@@ -20,6 +20,8 @@ class AdminCustomerController extends Controller
 
     public function index()
     {
-        return view('AdminCustomer.DashboardCustomer');
+        // return view('AdminCustomer.DashboardCustomer');
+        return view('website.home'); 
+        // return route('auth/customer-dashboard');
     }
 }

@@ -19,42 +19,43 @@
         <ul id="sidebarNav" class="list-unstyled dropdown-list">
             <!-- Menu List -->
             <li class="border-bottom-">
-                <router-link to="/auth/customer-dashboard" class="dropdown-item dropdown-item-custome" 
+                <router-link to="/auth/customer-dashboard" class="dropdown-item dropdown-item-custome transition-3d-hover" 
                 	:class="[currentPage.includes('customer-dashboard')] ? ActiveLinkClass : '' " > Dashboard
                 </router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome" to="/auth/customer-orders"
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/customer-orders"
 	            	:class="[currentPage.includes('customer-orders')] ? ActiveLinkClass : '' " >My Orders
 	            </router-link>
             </li>
-            <li><router-link class="dropdown-item dropdown-item-custome " to="/auth/customer-wishlist"
+            <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/customer-wishlist"
             	:class="[currentPage.includes('customer-wishlist')] ? ActiveLinkClass : '' "  >Wishlist
             	</router-link>
             </li>
             
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome " to="/auth/customer-reviews" 
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/customer-reviews" 
             	:class="[currentPage.includes('customer-reviews')] ? ActiveLinkClass : '' " >My Reviews
             	</router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome " to="/auth/customer-profile"
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/customer-profile"
 	            	:class="[currentPage.includes('customer-profile')] ? ActiveLinkClass : '' "  > My Profile
 	            </router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome " to="/auth/customer-address" 
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/customer-address" 
             	:class="[currentPage.includes('customer-address')] ? ActiveLinkClass : '' " > Address Book
             	</router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome " to="/auth/customer-vouchers" 
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/customer-vouchers" 
             	:class="[currentPage.includes('customer-vouchers')] ? ActiveLinkClass : '' " > Vouchers
             	</router-link>
             </li>
             <li class="border-top-">
-            	<router-link class="dropdown-item dropdown-item-custome " to=""><i class="fas fa-sign-out-alt"></i> Logout</router-link>
+            	<a class="dropdown-item dropdown-item-custome transition-3d-hover" @click.prevent="Logout()" href="javascript:;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <!-- <button type="submit" class="btn btn-block btn-sm btn-primary transition-3d-hover"><i class="fas fa-sign-out-alt"></i>  Logout</button> -->
             </li>
             <!-- End Menu List -->
 
@@ -73,6 +74,7 @@
             }
         },
         cumputed:{
+            //for active link management
         	currentPage(){
         		return this.$route.path;
         	}
@@ -83,6 +85,30 @@
         }, 
 
         methods: { 
+
+            Logout(){  
+              this.$Progress.start(); //using progress-bar package
+
+              axios.post('/customer/logout')
+              .then(({ response }) => { 
+                //console.log(response); 
+                //if(response.success){             
+                  // toastr.success(response.success);         
+                  this.$Progress.finish();  
+
+                  this.$router.push({ path : '/auth/login' });   //route after successfule 
+                  //this.$router.replace({ path : '/auth/login' });   //route after successfule 
+                  //this.$router.go('/auth/login');
+                  toastr.success('Logout successfule'); 
+                //}
+
+              })
+              .catch( () => {
+                this.$Progress.fail();
+              })   
+            },  //End SendPublicQueryEmail  
+
+
         },           
 
         created(){

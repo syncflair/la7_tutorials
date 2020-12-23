@@ -24,8 +24,9 @@
                     <!-- Content -->
                     <div class="js-scrollbar u-sidebar__body">
                         <div class="u-sidebar__content u-header-sidebar__content">
-                            <form class="js-validate">
-                                <!-- Login -->
+                            <!-- Login -->
+                            <form class="js-validate-" @submit.prevent="CustomerLogin()">  
+
                                 <div id="login" data-target-group="idForm">
                                     <!-- Title -->
                                     <header class="text-center mb-7">
@@ -34,20 +35,25 @@
                                     </header>
                                     <!-- End Title -->
 
+
+                                    <div v-if="display_error" class="text-danger text-center mb-3">
+                                        <span class="small text-muted-">{{error_message }}</span>
+                                    </div> 
+
                                     <!-- Form Group -->
                                     <div class="form-group">
-                                        <div class="js-form-message js-focus-state">
+                                        <div class="js-form-message- js-focus-state-">
                                             <label class="sr-only" for="signinEmail">Email</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="signinEmailLabel">
+                                                    <span class="input-group-text">
                                                         <span class="fas fa-user"></span>
                                                     </span>
                                                 </div>
-                                                <input type="email" class="form-control" name="email" id="signinEmail" placeholder="Email" aria-label="Email" aria-describedby="signinEmailLabel" required
-                                                data-msg="Please enter a valid email address."
-                                                data-error-class="u-has-error"
-                                                data-success-class="u-has-success">
+                                                <input v-model="form.login.username" type="email" class="form-control" name="username" placeholder="Email Or Phone" 
+                                                :class="{ 'is-invalid': form.errors.has('username') }">
+                                                <!-- <has-error :form="form" field="username"></has-error> -->
+                                                <alert-errors :form="form" message="There were some problems with your input."></alert-errors>
                                             </div>
                                         </div>
                                     </div>
@@ -63,10 +69,9 @@
                                                     <span class="fas fa-lock"></span>
                                                 </span>
                                             </div>
-                                            <input type="password" class="form-control" name="password" id="signinPassword" placeholder="Password" aria-label="Password" aria-describedby="signinPasswordLabel" required
-                                               data-msg="Your password is invalid. Please try again."
-                                               data-error-class="u-has-error"
-                                               data-success-class="u-has-success">
+                                            <input v-model="form.login.password" type="password" class="form-control" name="password" placeholder="Password" 
+                                            :class="{ 'is-invalid': form.errors.has('password') }">
+                                            <has-error :form="form" field="password"></has-error>
                                           </div>
                                         </div>
                                     </div>
@@ -109,8 +114,11 @@
                                     </div>
                                     <!-- End Login Buttons -->
                                 </div>
+                            </form>
+                            <!-- End Login -->
 
-                                <!-- Signup -->
+                            <!-- Signup -->
+                            <form>                                
                                 <div id="signup" style="display: none; opacity: 0;" data-target-group="idForm">
                                     <!-- Title -->
                                     <header class="text-center mb-7">
@@ -205,10 +213,13 @@
                                         </a>
                                     </div>
                                     <!-- End Login Buttons -->
-                                </div>
-                                <!-- End Signup -->
+                                </div>                                
+                            </form>
+                            <!-- End Signup -->
 
-                                <!-- Forgot Password -->
+
+                            <!-- Forgot Password -->
+                            <form>                                
                                 <div id="forgotPassword" style="display: none; opacity: 0;" data-target-group="idForm">
                                     <!-- Title -->
                                     <header class="text-center mb-7">
@@ -248,9 +259,10 @@
                                            data-animation-in="slideInUp">Login
                                         </a>
                                     </div>
-                                </div>
-                                <!-- End Forgot Password -->
+                                </div>                                
                             </form>
+                            <!-- End Forgot Password -->
+
                         </div>
                     </div>
                     <!-- End Content -->
@@ -260,5 +272,98 @@
     </aside>
 </template>
 <script>
-	
+    //import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
+    //import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
+    //const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
+    export default {
+        name: "Account-Sidebar-Navigation-Toggler-Public-website",
+        data (){      
+            return {
+                //for form top error display
+                display_error: false,
+                error_message: '',
+
+                form: new Form({
+                  login:{
+                    username: '',
+                    password: '', 
+                    //remember: false,
+                  },
+
+                  register:{
+                    email: '',
+                    phone: '',
+                    password: '', 
+                    confirm_password: '', 
+                  },
+
+                  password_reset:{
+                    email:''
+                  }                              
+                })                             
+            }
+        },
+
+        components:{ 
+            //HeaderTopbar, FooterComponent,
+        }, 
+
+        methods: {  
+            // Submit the form via a POST request
+            CustomerLogin() {  
+              this.$Progress.start(); //using progress-bar package
+
+              // this.form.post('/customer/login')
+              axios.post('/customer/login',{
+                    username: this.form.login.username,
+                    password: this.form.login.password
+                }
+              )
+              .then(({ data }) => { 
+                //console.log(data);                 
+
+                if(data.success){ 
+                    this.$Progress.finish();
+                    this.display_error = false;
+                  
+                    //$('#sidebarContent').hide();     
+                    $("#sidebarContent").fadeOut("slow"); // Hide login sidebar                              
+                                      
+                    this.$router.push({ path : '/auth/customer-dashboard' });   //route after successfule submit                   
+                    //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit
+
+                    this.form.reset();  //reset from after submit 
+
+                    toastr.success('Login successfule'); 
+                }
+
+                if(data.error){
+                    this.$Progress.finish(); 
+                    this.display_error = true;
+                    this.error_message = data.error;
+                }
+
+                if(data.errors){
+                    this.$Progress.finish(); 
+                    this.display_error = false;
+                    toastr.warning(data.errors);                        
+                }
+
+              })
+              .catch( () => {
+                this.display_error = false;
+                this.$Progress.fail();
+                //toastr.warning('Something is wrong!');
+              })   
+
+            },  //End SendPublicQueryEmail  
+    
+        },           
+
+        created(){
+        },
+           
+        mounted() {
+        },
+    }
 </script>

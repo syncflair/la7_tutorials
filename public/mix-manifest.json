@@ -252,5 +252,6 @@
     "/js/chunks/viewCategory-com.js": "/js/chunks/viewCategory-com.js",
     "/js/chunks/website-wrapper.js": "/js/chunks/website-wrapper.js",
     "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf.js": "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf.js",
-    "/js/chunks/customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~4a0fa6a5.js": "/js/chunks/customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~4a0fa6a5.js"
+    "/js/chunks/customer-register-website.js": "/js/chunks/customer-register-website.js",
+    "/js/chunks/customer-password-reset-website.js": "/js/chunks/customer-password-reset-website.js"
 }

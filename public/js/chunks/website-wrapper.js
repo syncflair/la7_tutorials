@@ -4,9 +4,11 @@
 /*!**********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Website/Layouts/AccountSidebarNavigationToggler.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -268,6 +270,107 @@
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
+//import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
+//const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Account-Sidebar-Navigation-Toggler-Public-website",
+  data: function data() {
+    return {
+      //for form top error display
+      display_error: false,
+      error_message: '',
+      form: new Form({
+        login: {
+          username: '',
+          password: '' //remember: false,
+
+        },
+        register: {
+          email: '',
+          phone: '',
+          password: '',
+          confirm_password: ''
+        },
+        password_reset: {
+          email: ''
+        }
+      })
+    };
+  },
+  components: {//HeaderTopbar, FooterComponent,
+  },
+  methods: {
+    // Submit the form via a POST request
+    CustomerLogin: function CustomerLogin() {
+      var _this = this;
+
+      this.$Progress.start(); //using progress-bar package
+      // this.form.post('/customer/login')
+
+      axios.post('/customer/login', {
+        username: this.form.login.username,
+        password: this.form.login.password
+      }).then(function (_ref) {
+        var data = _ref.data;
+
+        //console.log(data);                 
+        if (data.success) {
+          _this.$Progress.finish();
+
+          _this.display_error = false; //$('#sidebarContent').hide();     
+
+          $("#sidebarContent").fadeOut("slow"); // Hide login sidebar                              
+
+          _this.$router.push({
+            path: '/auth/customer-dashboard'
+          }); //route after successfule submit                   
+          //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit
+
+
+          _this.form.reset(); //reset from after submit 
+
+
+          toastr.success('Login successfule');
+        }
+
+        if (data.error) {
+          _this.$Progress.finish();
+
+          _this.display_error = true;
+          _this.error_message = data.error;
+        }
+
+        if (data.errors) {
+          _this.$Progress.finish();
+
+          _this.display_error = false;
+          toastr.warning(data.errors);
+        }
+      })["catch"](function () {
+        _this.display_error = false;
+
+        _this.$Progress.fail(); //toastr.warning('Something is wrong!');
+
+      });
+    } //End SendPublicQueryEmail  
+
+  },
+  created: function created() {},
+  mounted: function mounted() {}
+});
 
 /***/ }),
 
@@ -1543,64 +1646,42 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "aside",
-      {
-        staticClass: "u-sidebar u-sidebar__lg",
-        attrs: { id: "sidebarContent", "aria-labelledby": "sidebarNavToggler" }
-      },
-      [
-        _c("div", { staticClass: "u-sidebar__scroller" }, [
-          _c("div", { staticClass: "u-sidebar__container" }, [
-            _c(
-              "div",
-              {
-                staticClass: "js-scrollbar u-header-sidebar__footer-offset pb-3"
-              },
-              [
+  return _c(
+    "aside",
+    {
+      staticClass: "u-sidebar u-sidebar__lg",
+      attrs: { id: "sidebarContent", "aria-labelledby": "sidebarNavToggler" }
+    },
+    [
+      _c("div", { staticClass: "u-sidebar__scroller" }, [
+        _c("div", { staticClass: "u-sidebar__container" }, [
+          _c(
+            "div",
+            {
+              staticClass: "js-scrollbar u-header-sidebar__footer-offset pb-3"
+            },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "js-scrollbar u-sidebar__body" }, [
                 _c(
                   "div",
-                  { staticClass: "d-flex align-items-center pt-4 px-7" },
+                  {
+                    staticClass: "u-sidebar__content u-header-sidebar__content"
+                  },
                   [
                     _c(
-                      "button",
+                      "form",
                       {
-                        staticClass: "close ml-auto",
-                        attrs: {
-                          type: "button",
-                          "aria-controls": "sidebarContent",
-                          "aria-haspopup": "true",
-                          "aria-expanded": "false",
-                          "data-unfold-event": "click",
-                          "data-unfold-hide-on-scroll": "false",
-                          "data-unfold-target": "#sidebarContent",
-                          "data-unfold-type": "css-animation",
-                          "data-unfold-animation-in": "fadeInRight",
-                          "data-unfold-animation-out": "fadeOutRight",
-                          "data-unfold-duration": "500"
+                        staticClass: "js-validate-",
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.CustomerLogin()
+                          }
                         }
                       },
-                      [_c("i", { staticClass: "ec ec-close-remove" })]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-scrollbar u-sidebar__body" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "u-sidebar__content u-header-sidebar__content"
-                    },
-                    [
-                      _c("form", { staticClass: "js-validate" }, [
+                      [
                         _c(
                           "div",
                           {
@@ -1610,19 +1691,30 @@ var staticRenderFns = [
                             }
                           },
                           [
-                            _c("header", { staticClass: "text-center mb-7" }, [
-                              _c("h2", { staticClass: "h4 mb-0" }, [
-                                _vm._v("Welcome Back!")
-                              ]),
-                              _vm._v(" "),
-                              _c("p", [_vm._v("Login to manage your account.")])
-                            ]),
+                            _vm._m(1),
+                            _vm._v(" "),
+                            _vm.display_error
+                              ? _c(
+                                  "div",
+                                  {
+                                    staticClass: "text-danger text-center mb-3"
+                                  },
+                                  [
+                                    _c(
+                                      "span",
+                                      { staticClass: "small text-muted-" },
+                                      [_vm._v(_vm._s(_vm.error_message))]
+                                    )
+                                  ]
+                                )
+                              : _vm._e(),
                             _vm._v(" "),
                             _c("div", { staticClass: "form-group" }, [
                               _c(
                                 "div",
                                 {
-                                  staticClass: "js-form-message js-focus-state"
+                                  staticClass:
+                                    "js-form-message- js-focus-state-"
                                 },
                                 [
                                   _c(
@@ -1634,43 +1726,59 @@ var staticRenderFns = [
                                     [_vm._v("Email")]
                                   ),
                                   _vm._v(" "),
-                                  _c("div", { staticClass: "input-group" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "input-group-prepend" },
-                                      [
-                                        _c(
-                                          "span",
+                                  _c(
+                                    "div",
+                                    { staticClass: "input-group" },
+                                    [
+                                      _vm._m(2),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
                                           {
-                                            staticClass: "input-group-text",
-                                            attrs: { id: "signinEmailLabel" }
-                                          },
-                                          [
-                                            _c("span", {
-                                              staticClass: "fas fa-user"
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      staticClass: "form-control",
-                                      attrs: {
-                                        type: "email",
-                                        name: "email",
-                                        id: "signinEmail",
-                                        placeholder: "Email",
-                                        "aria-label": "Email",
-                                        "aria-describedby": "signinEmailLabel",
-                                        required: "",
-                                        "data-msg":
-                                          "Please enter a valid email address.",
-                                        "data-error-class": "u-has-error",
-                                        "data-success-class": "u-has-success"
-                                      }
-                                    })
-                                  ])
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.login.username,
+                                            expression: "form.login.username"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "username"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "email",
+                                          name: "username",
+                                          placeholder: "Email Or Phone"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.login.username
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
+                                            }
+                                            _vm.$set(
+                                              _vm.form.login,
+                                              "username",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("alert-errors", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          message:
+                                            "There were some problems with your input."
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
                                 ]
                               )
                             ]),
@@ -1691,564 +1799,569 @@ var staticRenderFns = [
                                     [_vm._v("Password")]
                                   ),
                                   _vm._v(" "),
-                                  _c("div", { staticClass: "input-group" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "input-group-prepend" },
-                                      [
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass: "input-group-text",
-                                            attrs: { id: "signinPasswordLabel" }
-                                          },
-                                          [
-                                            _c("span", {
-                                              staticClass: "fas fa-lock"
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      staticClass: "form-control",
-                                      attrs: {
-                                        type: "password",
-                                        name: "password",
-                                        id: "signinPassword",
-                                        placeholder: "Password",
-                                        "aria-label": "Password",
-                                        "aria-describedby":
-                                          "signinPasswordLabel",
-                                        required: "",
-                                        "data-msg":
-                                          "Your password is invalid. Please try again.",
-                                        "data-error-class": "u-has-error",
-                                        "data-success-class": "u-has-success"
-                                      }
-                                    })
-                                  ])
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "d-flex justify-content-end mb-4"
-                              },
-                              [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass:
-                                      "js-animation-link small link-muted",
-                                    attrs: {
-                                      href: "javascript:;",
-                                      "data-target": "#forgotPassword",
-                                      "data-link-group": "idForm",
-                                      "data-animation-in": "slideInUp"
-                                    }
-                                  },
-                                  [_vm._v("Forgot Password?")]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mb-2" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-block btn-sm btn-primary transition-3d-hover",
-                                  attrs: { type: "submit" }
-                                },
-                                [_vm._v("Login")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "text-center mb-4" }, [
-                              _c("span", { staticClass: "small text-muted" }, [
-                                _vm._v("Do not have an account?")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "js-animation-link small text-dark",
-                                  attrs: {
-                                    href: "javascript:;",
-                                    "data-target": "#signup",
-                                    "data-link-group": "idForm",
-                                    "data-animation-in": "slideInUp"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "Signup\n                                    "
-                                  )
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "text-center" }, [
-                              _c(
-                                "span",
-                                {
-                                  staticClass:
-                                    "u-divider u-divider--xs u-divider--text mb-4"
-                                },
-                                [_vm._v("OR")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "d-flex" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "btn btn-block btn-sm btn-soft-facebook transition-3d-hover mr-1",
-                                  attrs: { href: "#" }
-                                },
-                                [
-                                  _c("span", {
-                                    staticClass: "fab fa-facebook-square mr-1"
-                                  }),
-                                  _vm._v(
-                                    "\n                                      Facebook\n                                    "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "btn btn-block btn-sm btn-soft-google transition-3d-hover ml-1 mt-0",
-                                  attrs: { href: "#" }
-                                },
-                                [
-                                  _c("span", {
-                                    staticClass: "fab fa-google mr-1"
-                                  }),
-                                  _vm._v(
-                                    "\n                                      Google\n                                    "
-                                  )
-                                ]
-                              )
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticStyle: { display: "none", opacity: "0" },
-                            attrs: {
-                              id: "signup",
-                              "data-target-group": "idForm"
-                            }
-                          },
-                          [
-                            _c("header", { staticClass: "text-center mb-7" }, [
-                              _c("h2", { staticClass: "h4 mb-0" }, [
-                                _vm._v("Welcome to Electro.")
-                              ]),
-                              _vm._v(" "),
-                              _c("p", [
-                                _vm._v("Fill out the form to get started.")
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "form-group" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "js-form-message js-focus-state"
-                                },
-                                [
                                   _c(
-                                    "label",
-                                    {
-                                      staticClass: "sr-only",
-                                      attrs: { for: "signupEmail" }
-                                    },
-                                    [_vm._v("Email")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "input-group" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "input-group-prepend" },
-                                      [
-                                        _c(
-                                          "span",
+                                    "div",
+                                    { staticClass: "input-group" },
+                                    [
+                                      _vm._m(3),
+                                      _vm._v(" "),
+                                      _c("input", {
+                                        directives: [
                                           {
-                                            staticClass: "input-group-text",
-                                            attrs: { id: "signupEmailLabel" }
-                                          },
-                                          [
-                                            _c("span", {
-                                              staticClass: "fas fa-user"
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      staticClass: "form-control",
-                                      attrs: {
-                                        type: "email",
-                                        name: "email",
-                                        id: "signupEmail",
-                                        placeholder: "Email",
-                                        "aria-label": "Email",
-                                        "aria-describedby": "signupEmailLabel",
-                                        required: "",
-                                        "data-msg":
-                                          "Please enter a valid email address.",
-                                        "data-error-class": "u-has-error",
-                                        "data-success-class": "u-has-success"
-                                      }
-                                    })
-                                  ])
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "form-group" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "js-form-message js-focus-state"
-                                },
-                                [
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "sr-only",
-                                      attrs: { for: "signupPassword" }
-                                    },
-                                    [_vm._v("Password")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "input-group" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "input-group-prepend" },
-                                      [
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass: "input-group-text",
-                                            attrs: { id: "signupPasswordLabel" }
-                                          },
-                                          [
-                                            _c("span", {
-                                              staticClass: "fas fa-lock"
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      staticClass: "form-control",
-                                      attrs: {
-                                        type: "password",
-                                        name: "password",
-                                        id: "signupPassword",
-                                        placeholder: "Password",
-                                        "aria-label": "Password",
-                                        "aria-describedby":
-                                          "signupPasswordLabel",
-                                        required: "",
-                                        "data-msg":
-                                          "Your password is invalid. Please try again.",
-                                        "data-error-class": "u-has-error",
-                                        "data-success-class": "u-has-success"
-                                      }
-                                    })
-                                  ])
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "form-group" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "js-form-message js-focus-state"
-                                },
-                                [
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "sr-only",
-                                      attrs: { for: "signupConfirmPassword" }
-                                    },
-                                    [_vm._v("Confirm Password")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "input-group" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "input-group-prepend" },
-                                      [
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass: "input-group-text",
-                                            attrs: {
-                                              id: "signupConfirmPasswordLabel"
+                                            name: "model",
+                                            rawName: "v-model",
+                                            value: _vm.form.login.password,
+                                            expression: "form.login.password"
+                                          }
+                                        ],
+                                        staticClass: "form-control",
+                                        class: {
+                                          "is-invalid": _vm.form.errors.has(
+                                            "password"
+                                          )
+                                        },
+                                        attrs: {
+                                          type: "password",
+                                          name: "password",
+                                          placeholder: "Password"
+                                        },
+                                        domProps: {
+                                          value: _vm.form.login.password
+                                        },
+                                        on: {
+                                          input: function($event) {
+                                            if ($event.target.composing) {
+                                              return
                                             }
-                                          },
-                                          [
-                                            _c("span", {
-                                              staticClass: "fas fa-key"
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      staticClass: "form-control",
-                                      attrs: {
-                                        type: "password",
-                                        name: "confirmPassword",
-                                        id: "signupConfirmPassword",
-                                        placeholder: "Confirm Password",
-                                        "aria-label": "Confirm Password",
-                                        "aria-describedby":
-                                          "signupConfirmPasswordLabel",
-                                        required: "",
-                                        "data-msg":
-                                          "Password does not match the confirm password.",
-                                        "data-error-class": "u-has-error",
-                                        "data-success-class": "u-has-success"
-                                      }
-                                    })
-                                  ])
-                                ]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mb-2" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-block btn-sm btn-primary transition-3d-hover",
-                                  attrs: { type: "submit" }
-                                },
-                                [_vm._v("Get Started")]
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "text-center mb-4" }, [
-                              _c("span", { staticClass: "small text-muted" }, [
-                                _vm._v("Already have an account?")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "js-animation-link small text-dark",
-                                  attrs: {
-                                    href: "javascript:;",
-                                    "data-target": "#login",
-                                    "data-link-group": "idForm",
-                                    "data-animation-in": "slideInUp"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "Login\n                                    "
+                                            _vm.$set(
+                                              _vm.form.login,
+                                              "password",
+                                              $event.target.value
+                                            )
+                                          }
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("has-error", {
+                                        attrs: {
+                                          form: _vm.form,
+                                          field: "password"
+                                        }
+                                      })
+                                    ],
+                                    1
                                   )
                                 ]
                               )
                             ]),
                             _vm._v(" "),
-                            _c("div", { staticClass: "text-center" }, [
-                              _c(
-                                "span",
-                                {
-                                  staticClass:
-                                    "u-divider u-divider--xs u-divider--text mb-4"
-                                },
-                                [_vm._v("OR")]
-                              )
-                            ]),
+                            _vm._m(4),
                             _vm._v(" "),
-                            _c("div", { staticClass: "d-flex" }, [
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "btn btn-block btn-sm btn-soft-facebook transition-3d-hover mr-1",
-                                  attrs: { href: "#" }
-                                },
-                                [
-                                  _c("span", {
-                                    staticClass: "fab fa-facebook-square mr-1"
-                                  }),
-                                  _vm._v(
-                                    "\n                                        Facebook\n                                    "
-                                  )
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "btn btn-block btn-sm btn-soft-google transition-3d-hover ml-1 mt-0",
-                                  attrs: { href: "#" }
-                                },
-                                [
-                                  _c("span", {
-                                    staticClass: "fab fa-google mr-1"
-                                  }),
-                                  _vm._v(
-                                    "\n                                        Google\n                                    "
-                                  )
-                                ]
-                              )
-                            ])
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticStyle: { display: "none", opacity: "0" },
-                            attrs: {
-                              id: "forgotPassword",
-                              "data-target-group": "idForm"
-                            }
-                          },
-                          [
-                            _c("header", { staticClass: "text-center mb-7" }, [
-                              _c("h2", { staticClass: "h4 mb-0" }, [
-                                _vm._v("Recover Password.")
-                              ]),
-                              _vm._v(" "),
-                              _c("p", [
-                                _vm._v(
-                                  "Enter your email address and an email with instructions will be sent to you."
-                                )
-                              ])
-                            ]),
+                            _vm._m(5),
                             _vm._v(" "),
-                            _c("div", { staticClass: "form-group" }, [
-                              _c(
-                                "div",
-                                {
-                                  staticClass: "js-form-message js-focus-state"
-                                },
-                                [
-                                  _c(
-                                    "label",
-                                    {
-                                      staticClass: "sr-only",
-                                      attrs: { for: "recoverEmail" }
-                                    },
-                                    [_vm._v("Your email")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "input-group" }, [
-                                    _c(
-                                      "div",
-                                      { staticClass: "input-group-prepend" },
-                                      [
-                                        _c(
-                                          "span",
-                                          {
-                                            staticClass: "input-group-text",
-                                            attrs: { id: "recoverEmailLabel" }
-                                          },
-                                          [
-                                            _c("span", {
-                                              staticClass: "fas fa-user"
-                                            })
-                                          ]
-                                        )
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("input", {
-                                      staticClass: "form-control",
-                                      attrs: {
-                                        type: "email",
-                                        name: "email",
-                                        id: "recoverEmail",
-                                        placeholder: "Your email",
-                                        "aria-label": "Your email",
-                                        "aria-describedby": "recoverEmailLabel",
-                                        required: "",
-                                        "data-msg":
-                                          "Please enter a valid email address.",
-                                        "data-error-class": "u-has-error",
-                                        "data-success-class": "u-has-success"
-                                      }
-                                    })
-                                  ])
-                                ]
-                              )
-                            ]),
+                            _vm._m(6),
                             _vm._v(" "),
-                            _c("div", { staticClass: "mb-2" }, [
-                              _c(
-                                "button",
-                                {
-                                  staticClass:
-                                    "btn btn-block btn-sm btn-primary transition-3d-hover",
-                                  attrs: { type: "submit" }
-                                },
-                                [_vm._v("Recover Password")]
-                              )
-                            ]),
+                            _vm._m(7),
                             _vm._v(" "),
-                            _c("div", { staticClass: "text-center mb-4" }, [
-                              _c("span", { staticClass: "small text-muted" }, [
-                                _vm._v("Remember your password?")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass: "js-animation-link small",
-                                  attrs: {
-                                    href: "javascript:;",
-                                    "data-target": "#login",
-                                    "data-link-group": "idForm",
-                                    "data-animation-in": "slideInUp"
-                                  }
-                                },
-                                [
-                                  _vm._v(
-                                    "Login\n                                    "
-                                  )
-                                ]
-                              )
-                            ])
+                            _vm._m(8)
                           ]
                         )
-                      ])
-                    ]
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _vm._m(10)
+                  ]
+                )
+              ])
+            ]
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex align-items-center pt-4 px-7" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close ml-auto",
+          attrs: {
+            type: "button",
+            "aria-controls": "sidebarContent",
+            "aria-haspopup": "true",
+            "aria-expanded": "false",
+            "data-unfold-event": "click",
+            "data-unfold-hide-on-scroll": "false",
+            "data-unfold-target": "#sidebarContent",
+            "data-unfold-type": "css-animation",
+            "data-unfold-animation-in": "fadeInRight",
+            "data-unfold-animation-out": "fadeOutRight",
+            "data-unfold-duration": "500"
+          }
+        },
+        [_c("i", { staticClass: "ec ec-close-remove" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("header", { staticClass: "text-center mb-7" }, [
+      _c("h2", { staticClass: "h4 mb-0" }, [_vm._v("Welcome Back!")]),
+      _vm._v(" "),
+      _c("p", [_vm._v("Login to manage your account.")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c("span", { staticClass: "input-group-text" }, [
+        _c("span", { staticClass: "fas fa-user" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        {
+          staticClass: "input-group-text",
+          attrs: { id: "signinPasswordLabel" }
+        },
+        [_c("span", { staticClass: "fas fa-lock" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex justify-content-end mb-4" }, [
+      _c(
+        "a",
+        {
+          staticClass: "js-animation-link small link-muted",
+          attrs: {
+            href: "javascript:;",
+            "data-target": "#forgotPassword",
+            "data-link-group": "idForm",
+            "data-animation-in": "slideInUp"
+          }
+        },
+        [_vm._v("Forgot Password?")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-2" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-block btn-sm btn-primary transition-3d-hover",
+          attrs: { type: "submit" }
+        },
+        [_vm._v("Login")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center mb-4" }, [
+      _c("span", { staticClass: "small text-muted" }, [
+        _vm._v("Do not have an account?")
+      ]),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass: "js-animation-link small text-dark",
+          attrs: {
+            href: "javascript:;",
+            "data-target": "#signup",
+            "data-link-group": "idForm",
+            "data-animation-in": "slideInUp"
+          }
+        },
+        [_vm._v("Signup\n                                    ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center" }, [
+      _c(
+        "span",
+        { staticClass: "u-divider u-divider--xs u-divider--text mb-4" },
+        [_vm._v("OR")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "d-flex" }, [
+      _c(
+        "a",
+        {
+          staticClass:
+            "btn btn-block btn-sm btn-soft-facebook transition-3d-hover mr-1",
+          attrs: { href: "#" }
+        },
+        [
+          _c("span", { staticClass: "fab fa-facebook-square mr-1" }),
+          _vm._v(
+            "\n                                      Facebook\n                                    "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "a",
+        {
+          staticClass:
+            "btn btn-block btn-sm btn-soft-google transition-3d-hover ml-1 mt-0",
+          attrs: { href: "#" }
+        },
+        [
+          _c("span", { staticClass: "fab fa-google mr-1" }),
+          _vm._v(
+            "\n                                      Google\n                                    "
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", [
+      _c(
+        "div",
+        {
+          staticStyle: { display: "none", opacity: "0" },
+          attrs: { id: "signup", "data-target-group": "idForm" }
+        },
+        [
+          _c("header", { staticClass: "text-center mb-7" }, [
+            _c("h2", { staticClass: "h4 mb-0" }, [
+              _vm._v("Welcome to Electro.")
+            ]),
+            _vm._v(" "),
+            _c("p", [_vm._v("Fill out the form to get started.")])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "js-form-message js-focus-state" }, [
+              _c(
+                "label",
+                { staticClass: "sr-only", attrs: { for: "signupEmail" } },
+                [_vm._v("Email")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("div", { staticClass: "input-group-prepend" }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "input-group-text",
+                      attrs: { id: "signupEmailLabel" }
+                    },
+                    [_c("span", { staticClass: "fas fa-user" })]
                   )
-                ])
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "email",
+                    name: "email",
+                    id: "signupEmail",
+                    placeholder: "Email",
+                    "aria-label": "Email",
+                    "aria-describedby": "signupEmailLabel",
+                    required: "",
+                    "data-msg": "Please enter a valid email address.",
+                    "data-error-class": "u-has-error",
+                    "data-success-class": "u-has-success"
+                  }
+                })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "js-form-message js-focus-state" }, [
+              _c(
+                "label",
+                { staticClass: "sr-only", attrs: { for: "signupPassword" } },
+                [_vm._v("Password")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("div", { staticClass: "input-group-prepend" }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "input-group-text",
+                      attrs: { id: "signupPasswordLabel" }
+                    },
+                    [_c("span", { staticClass: "fas fa-lock" })]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "password",
+                    name: "password",
+                    id: "signupPassword",
+                    placeholder: "Password",
+                    "aria-label": "Password",
+                    "aria-describedby": "signupPasswordLabel",
+                    required: "",
+                    "data-msg": "Your password is invalid. Please try again.",
+                    "data-error-class": "u-has-error",
+                    "data-success-class": "u-has-success"
+                  }
+                })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "js-form-message js-focus-state" }, [
+              _c(
+                "label",
+                {
+                  staticClass: "sr-only",
+                  attrs: { for: "signupConfirmPassword" }
+                },
+                [_vm._v("Confirm Password")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("div", { staticClass: "input-group-prepend" }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "input-group-text",
+                      attrs: { id: "signupConfirmPasswordLabel" }
+                    },
+                    [_c("span", { staticClass: "fas fa-key" })]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "password",
+                    name: "confirmPassword",
+                    id: "signupConfirmPassword",
+                    placeholder: "Confirm Password",
+                    "aria-label": "Confirm Password",
+                    "aria-describedby": "signupConfirmPasswordLabel",
+                    required: "",
+                    "data-msg": "Password does not match the confirm password.",
+                    "data-error-class": "u-has-error",
+                    "data-success-class": "u-has-success"
+                  }
+                })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-2" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-block btn-sm btn-primary transition-3d-hover",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Get Started")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-center mb-4" }, [
+            _c("span", { staticClass: "small text-muted" }, [
+              _vm._v("Already have an account?")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "js-animation-link small text-dark",
+                attrs: {
+                  href: "javascript:;",
+                  "data-target": "#login",
+                  "data-link-group": "idForm",
+                  "data-animation-in": "slideInUp"
+                }
+              },
+              [_vm._v("Login\n                                    ")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-center" }, [
+            _c(
+              "span",
+              { staticClass: "u-divider u-divider--xs u-divider--text mb-4" },
+              [_vm._v("OR")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "d-flex" }, [
+            _c(
+              "a",
+              {
+                staticClass:
+                  "btn btn-block btn-sm btn-soft-facebook transition-3d-hover mr-1",
+                attrs: { href: "#" }
+              },
+              [
+                _c("span", { staticClass: "fab fa-facebook-square mr-1" }),
+                _vm._v(
+                  "\n                                        Facebook\n                                    "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass:
+                  "btn btn-block btn-sm btn-soft-google transition-3d-hover ml-1 mt-0",
+                attrs: { href: "#" }
+              },
+              [
+                _c("span", { staticClass: "fab fa-google mr-1" }),
+                _vm._v(
+                  "\n                                        Google\n                                    "
+                )
               ]
             )
           ])
-        ])
-      ]
-    )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("form", [
+      _c(
+        "div",
+        {
+          staticStyle: { display: "none", opacity: "0" },
+          attrs: { id: "forgotPassword", "data-target-group": "idForm" }
+        },
+        [
+          _c("header", { staticClass: "text-center mb-7" }, [
+            _c("h2", { staticClass: "h4 mb-0" }, [_vm._v("Recover Password.")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "Enter your email address and an email with instructions will be sent to you."
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group" }, [
+            _c("div", { staticClass: "js-form-message js-focus-state" }, [
+              _c(
+                "label",
+                { staticClass: "sr-only", attrs: { for: "recoverEmail" } },
+                [_vm._v("Your email")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group" }, [
+                _c("div", { staticClass: "input-group-prepend" }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "input-group-text",
+                      attrs: { id: "recoverEmailLabel" }
+                    },
+                    [_c("span", { staticClass: "fas fa-user" })]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "email",
+                    name: "email",
+                    id: "recoverEmail",
+                    placeholder: "Your email",
+                    "aria-label": "Your email",
+                    "aria-describedby": "recoverEmailLabel",
+                    required: "",
+                    "data-msg": "Please enter a valid email address.",
+                    "data-error-class": "u-has-error",
+                    "data-success-class": "u-has-success"
+                  }
+                })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-2" }, [
+            _c(
+              "button",
+              {
+                staticClass:
+                  "btn btn-block btn-sm btn-primary transition-3d-hover",
+                attrs: { type: "submit" }
+              },
+              [_vm._v("Recover Password")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-center mb-4" }, [
+            _c("span", { staticClass: "small text-muted" }, [
+              _vm._v("Remember your password?")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "js-animation-link small",
+                attrs: {
+                  href: "javascript:;",
+                  "data-target": "#login",
+                  "data-link-group": "idForm",
+                  "data-animation-in": "slideInUp"
+                }
+              },
+              [_vm._v("Login\n                                    ")]
+            )
+          ])
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -4126,9 +4239,7 @@ component.options.__file = "resources/js/components/Website/Layouts/AccountSideb
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSidebarNavigationToggler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./AccountSidebarNavigationToggler.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Website/Layouts/AccountSidebarNavigationToggler.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSidebarNavigationToggler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSidebarNavigationToggler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSidebarNavigationToggler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSidebarNavigationToggler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSidebarNavigationToggler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AccountSidebarNavigationToggler_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

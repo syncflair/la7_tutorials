@@ -2903,14 +2903,17 @@ textarea.form-control {
   border-radius: 0.3125rem;
 }
 
-.was-validated .form-control:invalid, .form-control.is-invalid {
+
+/*Hide by sumon*/
+/*.was-validated .form-control:invalid, .form-control.is-invalid {
   border-color: #de4437;
   padding-right: calc(1.5em + 1.34rem);
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23de4437' viewBox='-2 -2 7 7'%3e%3cpath stroke='%23de4437' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E");
   background-repeat: no-repeat;
   background-position: center right calc(0.375em + 0.335rem);
   background-size: calc(0.75em + 0.67rem) calc(0.75em + 0.67rem);
-}
+}*/
+/*End Hide by sumon*/
 
 .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
   border-color: #de4437;
@@ -37551,6 +37554,15 @@ Sumon custom SCSS style
   padding-top: .5rem;
 }
 
+
+/*input field Error display overwrite in form-control*/
+.was-validated .form-control:invalid, .form-control.is-invalid{
+  border-color: rgba(255, 0, 0, .4);
+}
+.input-group > .form-control:not(:last-child), .input-group > .custom-select:not(:last-child){
+      border-top-right-radius: 20px; 
+    border-bottom-right-radius: 20px; 
+}
 
 
 

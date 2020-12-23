@@ -265,14 +265,14 @@ var staticRenderFns = [
               "div",
               {
                 staticClass:
-                  "position-relative bg-white- text-center- text-left z-index-2"
+                  "position-relative bg-white- text-center- text-left z-index-2 pb-3"
               },
               [
                 _c(
                   "ul",
                   {
                     staticClass:
-                      "nav nav-classic nav-tab justify-content-center",
+                      "nav nav-classic nav-tab justify-content-left justify-content-center-",
                     attrs: { id: "pills-tab", role: "tablist" }
                   },
                   [

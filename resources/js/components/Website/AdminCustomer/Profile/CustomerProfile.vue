@@ -24,8 +24,8 @@
                     <!-- Tab Prodcut -->
                     <div class="col-lg-12  col- order-lg-1">
                             <!-- Nav Classic -->
-                            <div class="position-relative bg-white- text-center- text-left z-index-2">
-                                <ul class="nav nav-classic nav-tab justify-content-center" id="pills-tab" role="tablist">
+                            <div class="position-relative bg-white- text-center- text-left z-index-2 pb-3">
+                                <ul class="nav nav-classic nav-tab justify-content-left justify-content-center-" id="pills-tab" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active " id="pills-one-example1-tab" data-toggle="pill" href="#pills-one-example1" role="tab" aria-controls="pills-one-example1" aria-selected="true">
                                             <div class="d-md-flex justify-content-md-center align-items-md-center">

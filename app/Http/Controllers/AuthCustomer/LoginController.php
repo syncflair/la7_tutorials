@@ -32,7 +32,9 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('AuthCustomer.login');
+        // return view('AuthCustomer.login');
+        // return route('/auth/login');
+        return route('customer.login'); 
     }
 
 
@@ -100,7 +102,8 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         if (Auth::guard('customer')->check() ) {
-                return route('dashboard-customer');
+                // return route('dashboard-customer');
+                return route('auth/customer-dashboard');
         }    
     }  
 
@@ -110,25 +113,31 @@ class LoginController extends Controller
         
         if ( Auth::guard('customer')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 1 ]) OR Auth::guard('customer')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 1 ])) {
             // Authentication passed...
-           return redirect()->intended('dashboard-customer'); //if not this route this will redirect using middleware
+           // return redirect()->intended('dashboard-customer'); //if not this route this will redirect using middleware
+
+           return response()->json(['success'=>'1']); 
+           return redirect()->intended('auth/customer-dashboard'); //if not this route this will redirect using middleware
         }
 
         if ( Auth::guard('customer')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ]) OR Auth::guard('customer')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ]) ) {            
             Auth::guard('customer')->logout();
             //return abort(401, 'You Account is not active, Please contact with Authority ');
-            Session::put('error','You Account is not active, Please contact with Authority');
+            //Session::put('error','You Account is not active, Please contact with Authority');
+            return response()->json(['error'=>'You Account is not active, Please contact with Authority']);
             return redirect()->back();  
         }
         if ( Auth::guard('customer')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 3 ]) OR Auth::guard('customer')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 3 ]) ) {
             Auth::guard('customer')->logout();
             //return abort(401, 'Your Account is Pending now. Please contact with Authority');
-            Session::put('error','Your Account is Pending now, Please contact with Authority'); 
+            //Session::put('error','Your Account is Pending now, Please contact with Authority'); 
+            return response()->json(['error'=>'Your Account is Pending now, Please contact with Authority']);
             return redirect()->back();  
         }
         if ( Auth::guard('customer')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 4 ]) OR Auth::guard('customer')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 4 ]) ) {
             Auth::guard('customer')->logout();
             //return abort(401, 'Your Account is Block now, Please contact with Authority');
-            Session::put('error','Your Account is Not Verified, Please verify from email or contact with Authority'); 
+            //Session::put('error','Your Account is Not Verified, Please verify from email or contact with Authority'); 
+            return response()->json(['error'=>'Your Account is Not Verified, Please verify from email or contact with Authority']);
             return redirect()->back(); 
         }
         
@@ -166,7 +175,9 @@ class LoginController extends Controller
         //     ? new Response('', 204)
         //     : redirect('/');
 
-        return redirect('/');
+       // return response()->json(['success'=>'1']); //for vue js
+        // return redirect('/');        
+        return redirect('/home');
     }
 
 	/**

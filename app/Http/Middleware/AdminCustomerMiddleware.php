@@ -23,7 +23,10 @@ class AdminCustomerMiddleware
         if (Auth::guard('customer')->check() ) {
             return $next($request);
         }else{
-            return redirect()->route('customer.login');
+            // return redirect()->route('customer.login');
+            // return redirect()->route('/auth/login'); 
+            return redirect()->route('customer.login'); 
+            
         }
         
     }

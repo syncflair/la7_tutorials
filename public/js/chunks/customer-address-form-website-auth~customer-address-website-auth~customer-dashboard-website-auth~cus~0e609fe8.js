@@ -75,6 +75,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "nav-for-admin-customer-website-auth",
   data: function data() {
@@ -83,12 +84,40 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   cumputed: {
+    //for active link management
     currentPage: function currentPage() {
       return this.$route.path;
     }
   },
   components: {},
-  methods: {},
+  methods: {
+    Logout: function Logout() {
+      var _this = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      axios.post('/customer/logout').then(function (_ref) {
+        var response = _ref.response;
+
+        //console.log(response); 
+        //if(response.success){             
+        // toastr.success(response.success);         
+        _this.$Progress.finish();
+
+        _this.$router.push({
+          path: '/auth/login'
+        }); //route after successfule 
+        //this.$router.replace({ path : '/auth/login' });   //route after successfule 
+        //this.$router.go('/auth/login');
+
+
+        toastr.success('Logout successfule'); //}
+      })["catch"](function () {
+        _this.$Progress.fail();
+      });
+    } //End SendPublicQueryEmail  
+
+  },
   created: function created() {},
   mounted: function mounted() {}
 });
@@ -133,7 +162,8 @@ var render = function() {
               _c(
                 "router-link",
                 {
-                  staticClass: "dropdown-item dropdown-item-custome",
+                  staticClass:
+                    "dropdown-item dropdown-item-custome transition-3d-hover",
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
@@ -151,7 +181,8 @@ var render = function() {
               _c(
                 "router-link",
                 {
-                  staticClass: "dropdown-item dropdown-item-custome",
+                  staticClass:
+                    "dropdown-item dropdown-item-custome transition-3d-hover",
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
@@ -169,7 +200,8 @@ var render = function() {
               _c(
                 "router-link",
                 {
-                  staticClass: "dropdown-item dropdown-item-custome ",
+                  staticClass:
+                    "dropdown-item dropdown-item-custome transition-3d-hover",
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
@@ -187,7 +219,8 @@ var render = function() {
               _c(
                 "router-link",
                 {
-                  staticClass: "dropdown-item dropdown-item-custome ",
+                  staticClass:
+                    "dropdown-item dropdown-item-custome transition-3d-hover",
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
@@ -205,7 +238,8 @@ var render = function() {
               _c(
                 "router-link",
                 {
-                  staticClass: "dropdown-item dropdown-item-custome ",
+                  staticClass:
+                    "dropdown-item dropdown-item-custome transition-3d-hover",
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
@@ -223,7 +257,8 @@ var render = function() {
               _c(
                 "router-link",
                 {
-                  staticClass: "dropdown-item dropdown-item-custome ",
+                  staticClass:
+                    "dropdown-item dropdown-item-custome transition-3d-hover",
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
@@ -241,7 +276,8 @@ var render = function() {
               _c(
                 "router-link",
                 {
-                  staticClass: "dropdown-item dropdown-item-custome ",
+                  staticClass:
+                    "dropdown-item dropdown-item-custome transition-3d-hover",
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
@@ -253,24 +289,26 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c(
-            "li",
-            { staticClass: "border-top-" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "dropdown-item dropdown-item-custome ",
-                  attrs: { to: "" }
-                },
-                [
-                  _c("i", { staticClass: "fas fa-sign-out-alt" }),
-                  _vm._v(" Logout")
-                ]
-              )
-            ],
-            1
-          )
+          _c("li", { staticClass: "border-top-" }, [
+            _c(
+              "a",
+              {
+                staticClass:
+                  "dropdown-item dropdown-item-custome transition-3d-hover",
+                attrs: { href: "javascript:;" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.Logout()
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fas fa-sign-out-alt" }),
+                _vm._v(" Logout")
+              ]
+            )
+          ])
         ]
       )
     ]
