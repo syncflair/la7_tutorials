@@ -50,10 +50,10 @@
                                                         <span class="fas fa-user"></span>
                                                     </span>
                                                 </div>
-                                                <input v-model="form.login.username" type="email" class="form-control" name="username" placeholder="Email Or Phone" 
+                                                <input v-model="form.username" type="email" class="form-control" name="username" placeholder="Email Or Phone" 
                                                 :class="{ 'is-invalid': form.errors.has('username') }">
-                                                <!-- <has-error :form="form" field="username"></has-error> -->
-                                                <alert-errors :form="form" message="There were some problems with your input."></alert-errors>
+                                                <has-error :form="form" field="username"></has-error>
+                                                <!-- <alert-errors :form="form" message="There were some problems with your input."></alert-errors> -->
                                             </div>
                                         </div>
                                     </div>
@@ -69,7 +69,7 @@
                                                     <span class="fas fa-lock"></span>
                                                 </span>
                                             </div>
-                                            <input v-model="form.login.password" type="password" class="form-control" name="password" placeholder="Password" 
+                                            <input v-model="form.password" type="password" class="form-control" name="password" placeholder="Password" 
                                             :class="{ 'is-invalid': form.errors.has('password') }">
                                             <has-error :form="form" field="password"></has-error>
                                           </div>
@@ -118,7 +118,7 @@
                             <!-- End Login -->
 
                             <!-- Signup -->
-                            <form>                                
+                            <form @submit.prevent="CustomerRegister()">                                
                                 <div id="signup" style="display: none; opacity: 0;" data-target-group="idForm">
                                     <!-- Title -->
                                     <header class="text-center mb-7">
@@ -133,14 +133,12 @@
                                             <label class="sr-only" for="signupEmail">Email</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="signupEmailLabel">
+                                                    <span class="input-group-text">
                                                         <span class="fas fa-user"></span>
                                                     </span>
                                                 </div>
-                                                <input type="email" class="form-control" name="email" id="signupEmail" placeholder="Email" aria-label="Email" aria-describedby="signupEmailLabel" required
-                                                data-msg="Please enter a valid email address."
-                                                data-error-class="u-has-error"
-                                                data-success-class="u-has-success">
+                                                <input v-model="form.email" type="email" class="form-control" name="email" placeholder="Email" :class="{ 'is-invalid': form.errors.has('email') }">
+                                                <has-error :form="form" field="username"></has-error>
                                             </div>
                                         </div>
                                     </div>
@@ -152,14 +150,13 @@
                                             <label class="sr-only" for="signupPassword">Password</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="signupPasswordLabel">
+                                                    <span class="input-group-text">
                                                         <span class="fas fa-lock"></span>
                                                     </span>
                                                 </div>
-                                                <input type="password" class="form-control" name="password" id="signupPassword" placeholder="Password" aria-label="Password" aria-describedby="signupPasswordLabel" required
-                                                data-msg="Your password is invalid. Please try again."
-                                                data-error-class="u-has-error"
-                                                data-success-class="u-has-success">
+                                                <input v-model="form.password" type="password" class="form-control" name="password" placeholder="Password" 
+                                                :class="{ 'is-invalid': form.errors.has('password') }" >
+                                                <has-error :form="form" field="password"></has-error>
                                             </div>
                                         </div>
                                     </div>
@@ -171,14 +168,12 @@
                                         <label class="sr-only" for="signupConfirmPassword">Confirm Password</label>
                                             <div class="input-group">
                                             <div class="input-group-prepend">
-                                                <span class="input-group-text" id="signupConfirmPasswordLabel">
+                                                <span class="input-group-text">
                                                     <span class="fas fa-key"></span>
                                                 </span>
                                             </div>
-                                            <input type="password" class="form-control" name="confirmPassword" id="signupConfirmPassword" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="signupConfirmPasswordLabel" required
-                                            data-msg="Password does not match the confirm password."
-                                            data-error-class="u-has-error"
-                                            data-success-class="u-has-success">
+                                            <input v-model="form.confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="Confirm Password">
+                                            <has-error :form="form" field="confirmPassword"></has-error>
                                             </div>
                                         </div>
                                     </div>
@@ -219,7 +214,7 @@
 
 
                             <!-- Forgot Password -->
-                            <form>                                
+                            <form @submit.prevent="CustomerResetPassword()">                                
                                 <div id="forgotPassword" style="display: none; opacity: 0;" data-target-group="idForm">
                                     <!-- Title -->
                                     <header class="text-center mb-7">
@@ -234,14 +229,13 @@
                                             <label class="sr-only" for="recoverEmail">Your email</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    <span class="input-group-text" id="recoverEmailLabel">
+                                                    <span class="input-group-text">
                                                         <span class="fas fa-user"></span>
                                                     </span>
                                                 </div>
-                                                <input type="email" class="form-control" name="email" id="recoverEmail" placeholder="Your email" aria-label="Your email" aria-describedby="recoverEmailLabel" required
-                                                data-msg="Please enter a valid email address."
-                                                data-error-class="u-has-error"
-                                                data-success-class="u-has-success">
+                                                <input v-model="form.email" type="email" class="form-control" name="email" id="recoverEmail" placeholder="Your email" aria-label="Your email" 
+                                                :class="{ 'is-invalid': form.errors.has('email') }">
+                                                <has-error :form="form" field="email"></has-error>
                                             </div>
                                         </div>
                                     </div>
@@ -284,22 +278,30 @@
                 error_message: '',
 
                 form: new Form({
-                  login:{
                     username: '',
                     password: '', 
-                    //remember: false,
-                  },
 
-                  register:{
                     email: '',
                     phone: '',
-                    password: '', 
-                    confirm_password: '', 
-                  },
+                    password: '',
+                    confirmPassword: '',
 
-                  password_reset:{
-                    email:''
-                  }                              
+                  // login:{
+                  //   username: '',
+                  //   password: '', 
+                  //   //remember: false,
+                  // },
+
+                  // register:{
+                  //   email: '',
+                  //   phone: '',
+                  //   password: '', 
+                  //   confirm_password: '', 
+                  // },
+
+                  // password_reset:{
+                  //   email:''
+                  // }                              
                 })                             
             }
         },
@@ -313,12 +315,12 @@
             CustomerLogin() {  
               this.$Progress.start(); //using progress-bar package
 
-              // this.form.post('/customer/login')
-              axios.post('/customer/login',{
-                    username: this.form.login.username,
-                    password: this.form.login.password
-                }
-              )
+              this.form.post('/customer/login')
+              // axios.post('/customer/login',{
+              //       username: this.form.login.username,
+              //       password: this.form.login.password
+              //   }
+              // )
               .then(({ data }) => { 
                 //console.log(data);                 
 
@@ -356,7 +358,64 @@
                 //toastr.warning('Something is wrong!');
               })   
 
-            },  //End SendPublicQueryEmail  
+            },  //End login  
+
+
+            CustomerRegister(){
+                alert('Ok');
+            }, //End reset password
+
+            CustomerResetPassword(){
+                // $("#signup").hide('fist',function(){
+                //     $(this).addClass("animated slideInUp");
+                //     $(this).css('opacity', '0');
+                //     $(this).css('display', 'none');
+                // });
+
+                // $("#forgotPassword").hide('fist',function(){
+                //     $(this).addClass("animated slideInUp");
+                //     $(this).css('opacity', '0');
+                //     $(this).css('display', 'none');
+                // });
+                // $("#login").show(function(){
+                // // $("#login").show('slideUp', function(){
+                //     $(this).css('display', 'block');
+                //     $(this).css('opacity', '1');
+                //     $(this).addClass("animated slideInUp");
+
+                // });               
+
+
+
+                // $("#signup").slideToggle();
+              // this.$Progress.start(); //using progress-bar package
+
+              this.form.post('/customer/password/email')
+              .then(({ data }) => { 
+                //console.log(data);                 
+
+                if(data.success){ 
+                    this.$Progress.finish();
+                    //$('#sidebarContent').hide();     
+                    //$("#sidebarContent").fadeOut("slow"); // Hide login sidebar 
+                    this.$router.push({ path : '/auth/login' });   //route after successfule submit                   
+                    //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit
+                    this.form.reset();  //reset from after submit 
+                    toastr.success('Login successfule'); 
+                }
+
+                if(data.errors){
+                    this.$Progress.finish(); 
+                    // toastr.warning(data.errors);                        
+                }
+
+              })
+              .catch( () => {
+                this.$Progress.fail();
+                //toastr.warning('Something is wrong!');
+              }) 
+
+            }, //End reset password
     
         },           
 
