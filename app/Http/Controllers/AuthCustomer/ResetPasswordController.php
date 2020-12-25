@@ -43,9 +43,14 @@ class ResetPasswordController extends Controller
 
     public function showResetForm(Request $request, $token = null)
     {
-        return view('AuthCustomer.passwords.reset')->with(
+        // return view('AuthCustomer.passwords.reset')->with(
+        //     ['token' => $token, 'email' => $request->email]
+        // );
+
+        return view('website.home')->with(
             ['token' => $token, 'email' => $request->email]
         );
+
     }
 
 
@@ -54,7 +59,8 @@ class ResetPasswordController extends Controller
    protected function redirectTo()
     {               
         
-        Session::put('success','Your password reset is successful . Please login');  
+        // Session::put('success','Your password reset is successful . Please login');  
+        return response()->json(['success'=>'Your password reset is successful . Please login']);
         //return route('dashboard-customer');
         return route('customer.login');
 

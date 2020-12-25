@@ -1,4 +1,4 @@
-<?php //use for reset password email management for Suppier(Multi Auth)
+<?php //use for reset password email management for Customer(Multi Auth)
 
 namespace App\Notifications;
 

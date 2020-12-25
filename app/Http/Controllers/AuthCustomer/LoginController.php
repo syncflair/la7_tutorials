@@ -33,8 +33,7 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         // return view('AuthCustomer.login');
-        // return route('/auth/login');
-        return route('customer.login'); 
+        return view('website.home');
     }
 
 

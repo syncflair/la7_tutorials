@@ -234,9 +234,10 @@ const routes = [
 	{ path: '/404', name: '404Public', component: () => import(/* webpackChunkName: "404Public-website" */ './components/Website/Public/404/404Public.vue'), meta: { title: 'Page Not Found', breadcrumb: 'Page Not Found'}},
 	
 	//Authendication
-	{ path: '/auth/login', name: 'CustomerLogin', component: () => import(/* webpackChunkName: "customer-login-website" */ './components/Website/Auth/CustomerLogin.vue'), meta: { title: 'Login', } },
-	{ path: '/auth/register', name: 'CustomerRegister', component: () => import(/* webpackChunkName: "customer-register-website" */ './components/Website/Auth/CustomerRegister.vue'), meta: { title: 'Register', } },
-	{ path: '/auth/password-reset', name: 'CustomerPasswordReset', component: () => import(/* webpackChunkName: "customer-password-reset-website" */ './components/Website/Auth/CustomerPasswordReset.vue'), meta: { title: 'Password Reset', } },
+	{ path: '/auth/login', name: 'CustomerLogin', component: () => import(/* webpackChunkName: "customer-login-website" */ './components/Website/Auth/login.vue'), meta: { title: 'Login', } },
+	{ path: '/auth/register', name: 'CustomerRegister', component: () => import(/* webpackChunkName: "customer-register-website" */ './components/Website/Auth/register.vue'), meta: { title: 'Register', } },
+	{ path: '/auth/password-recover', name: 'CustomerPasswordRecover', component: () => import(/* webpackChunkName: "customer-password-recover-website" */ './components/Website/Auth/Password/email.vue'), meta: { title: 'Recover Password', } },
+	{ path: '/auth/password-recover/:token', name: 'CustomerPasswordReset', component: () => import(/* webpackChunkName: "customer-password-reset-website" */ './components/Website/Auth/Password/reset.vue'), meta: { title: 'Reset Password', } },
 
 
 

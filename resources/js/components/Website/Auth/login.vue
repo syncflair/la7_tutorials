@@ -66,7 +66,7 @@
                     <!-- End Checkbox -->
 
                     <div class="d-flex justify-content-end mb-4">
-                        <router-link class="js-animation-link small link-muted" to="/auth/password-reset"
+                        <router-link class="js-animation-link small link-muted" to="/auth/password-recover"
                            data-target="#forgotPassword"
                            data-link-group="idForm"
                            data-animation-in="slideInUp">Forgot Password?</router-link>
@@ -164,12 +164,12 @@
                         this.$Progress.finish(); 
                         this.display_error = true;
                         this.error_message = data.error;
+                        toastr.warning(data.error);
                     }
 
                     if(data.errors){
                         this.$Progress.finish(); 
-                        this.display_error = false;
-                        toastr.warning(data.errors);                        
+                        this.display_error = false;                        
                     }
               })
               .catch( () => {
@@ -178,7 +178,7 @@
                 //toastr.warning('Something is wrong!');
               })   
 
-            },  //End SendPublicQueryEmail        
+            },  //End Customer Login        
         },           
 
         created(){

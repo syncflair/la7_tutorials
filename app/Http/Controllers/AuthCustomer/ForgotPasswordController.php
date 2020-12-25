@@ -24,9 +24,11 @@ class ForgotPasswordController extends Controller
 
     public function showLinkRequestForm()
     {
-        return view('AuthCustomer.passwords.email');
+        // return view('AuthCustomer.passwords.email');
+        return view('website.home');
     }
 
+   
 
     /**
      * Create a new controller instance.
