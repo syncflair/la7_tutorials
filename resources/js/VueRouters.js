@@ -235,7 +235,7 @@ const routes = [
 	
 	//Authendication
 	{ path: '/auth/login', name: 'CustomerLogin', component: () => import(/* webpackChunkName: "customer-login-website" */ './components/Website/Auth/login.vue'), meta: { title: 'Login', } },
-	{ path: '/auth/register', name: 'CustomerRegister', component: () => import(/* webpackChunkName: "customer-register-website" */ './components/Website/Auth/register.vue'), meta: { title: 'Register', } },
+	{ path: '/auth/register', name: 'CustomerRegister', component: () => import(/* webpackChunkName: "customer-register-website" */ './components/Website/Auth/register.vue'), meta: { title: 'Signup', } },
 	{ path: '/auth/password-recover', name: 'CustomerPasswordRecover', component: () => import(/* webpackChunkName: "customer-password-recover-website" */ './components/Website/Auth/Password/email.vue'), meta: { title: 'Recover Password', } },
 	{ path: '/auth/password-recover/:token', name: 'CustomerPasswordReset', component: () => import(/* webpackChunkName: "customer-password-reset-website" */ './components/Website/Auth/Password/reset.vue'), meta: { title: 'Reset Password', } },
 

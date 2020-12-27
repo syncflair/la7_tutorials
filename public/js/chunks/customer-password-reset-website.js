@@ -272,41 +272,101 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "js-form-message js-focus-state" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "sr-only",
-                        attrs: { for: "signinPassword" }
-                      },
-                      [_vm._v("Password")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "input-group" },
-                      [
-                        _vm._m(2),
+                  _c(
+                    "div",
+                    { staticClass: "js-form-messag- js-focus-state-" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "sr-only",
+                          attrs: { for: "signinPassword" }
+                        },
+                        [_vm._v("Password")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "input-group" },
+                        [
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.password,
+                                expression: "form.password"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("password")
+                            },
+                            attrs: {
+                              type: "password",
+                              name: "password",
+                              placeholder: "Password"
+                            },
+                            domProps: { value: _vm.form.password },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "password",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "password" }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "div",
+                    { staticClass: "js-form-message- js-focus-state-" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "sr-only",
+                          attrs: { for: "signupConfirmPassword" }
+                        },
+                        [_vm._v("Confirm Password")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group" }, [
+                        _vm._m(3),
                         _vm._v(" "),
                         _c("input", {
                           directives: [
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.form.password,
-                              expression: "form.password"
+                              value: _vm.form.password_confirmation,
+                              expression: "form.password_confirmation"
                             }
                           ],
                           staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("password")
-                          },
                           attrs: {
                             type: "password",
-                            name: "password",
-                            placeholder: "Password"
+                            name: "password_confirmation",
+                            placeholder: "Confirm Password"
                           },
-                          domProps: { value: _vm.form.password },
+                          domProps: { value: _vm.form.password_confirmation },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
@@ -314,67 +374,15 @@ var render = function() {
                               }
                               _vm.$set(
                                 _vm.form,
-                                "password",
+                                "password_confirmation",
                                 $event.target.value
                               )
                             }
                           }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "password" }
                         })
-                      ],
-                      1
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("div", { staticClass: "js-form-message js-focus-state" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "sr-only",
-                        attrs: { for: "signupConfirmPassword" }
-                      },
-                      [_vm._v("Confirm Password")]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "input-group" }, [
-                      _vm._m(3),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.password_confirmation,
-                            expression: "form.password_confirmation"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "password",
-                          name: "password_confirmation",
-                          placeholder: "Confirm Password"
-                        },
-                        domProps: { value: _vm.form.password_confirmation },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.form,
-                              "password_confirmation",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
-                  ])
+                      ])
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _vm._m(4),

@@ -16,7 +16,7 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('customer_code', 50)->unique()->comment('COA, CUS-02 (Account Head Detail)');
-            $table->string('coa_code', 10)->comment('Assets - Accounts Payable 103');
+            $table->string('coa_code', 10)->default(103)->comment('Assets - Accounts Payable 103');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->unique()->nullable(); //unique and also nullable
@@ -26,8 +26,8 @@ class CreateCustomersTable extends Migration
             $table->string('phone_verification_code', 10)->nullable()->comment('Custom phone Verification Code');
             $table->string('password');  
            // $table->enum('customer_group', ['Default', 'Wholesale']); 
-            $table->unsignedBigInteger('customer_group_id'); 
-            $table->unsignedBigInteger('customer_membership_id')->nullable(); 
+            $table->unsignedBigInteger('customer_group_id')->default(1); 
+            $table->unsignedBigInteger('customer_membership_id')->default(1); 
             //$table->unsignedBigInteger('customer_type_id')->default(1);             
             $table->unsignedBigInteger('status_id')->default(4); //4 Not Verified
             $table->boolean('enable_notify')->default(false);

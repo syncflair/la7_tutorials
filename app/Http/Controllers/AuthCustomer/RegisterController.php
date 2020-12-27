@@ -8,6 +8,7 @@ use App\Models\Customer;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Response;
 
 
 use Illuminate\Auth\Events\Registered;
@@ -38,7 +39,8 @@ class RegisterController extends Controller
     {
        // print_r(RoleId);        
 
-        return view('AuthCustomer.Register');
+        //return view('AuthCustomer.Register');
+        return view('website.home');
     }
 
     /**
@@ -54,8 +56,10 @@ class RegisterController extends Controller
     //my Custome Code. OverWrite redirectTo
    protected function redirectTo()
     {               
-        Session::put('success','Your registration is successful, Please login');  
-        return route('customer.login');
+        //Session::put('success','Your registration is successful, Please login');
+        //return response()->json(['success'=>'Your registration is successful']);  
+        // return route('customer.login');
+        return route('/home');
     } //*/
 
 
@@ -127,6 +131,8 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
             'email_verification_code'=> sha1(Str::random(40)), //Hash::make(Str::random(40))
+            'customer_code' => customer_code_generate(), //this code will insert when register
+            //'coa_code' => 103, //managed by database default value
         ]);
 
         if($customer != null){
@@ -146,11 +152,16 @@ class RegisterController extends Controller
             $verifyCustomer->email_verification_code = null;
             $verifyCustomer->save();
 
-            Session::put('success','You verified now, Please login');  
+            // session::put('success','You verified now, Please login');  
+            //return response()->json(['error'=>'You verified now, Please login']);          
+            //return redirect()->route('customer.login');
             return redirect()->route('customer.login');
+            //return redirect()->intended();
 
        }elseif($verifyCustomer == null){
-            session::put('error','Your e-mail is already verified, Please Login or Contact with Admin');  
+            // session::put('error','Your e-mail is already verified, Please Login or Contact with Admin');  
+            //return response()->json(['error'=>'Your e-mail is already verified, Please Login or Contact with Admin']);
+            //return redirect()->route('customer.login');
             return redirect()->route('customer.login');
             //return redirect()->intended();
        }

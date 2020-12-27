@@ -93420,7 +93420,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | customer-register-website */ "customer-register-website").then(__webpack_require__.bind(null, /*! ./components/Website/Auth/register.vue */ "./resources/js/components/Website/Auth/register.vue"));
   },
   meta: {
-    title: 'Register'
+    title: 'Signup'
   }
 }, {
   path: '/auth/password-recover',

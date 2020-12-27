@@ -285,7 +285,7 @@ class CustomerController extends Controller
                 $query->where('customers.name','LIKE','%'.$searchKey.'%')
                         ->orWhere('customers.email','LIKE','%'.$searchKey.'%')
                         ->orWhere('customers.phone','LIKE','%'.$searchKey.'%')
-                        ->orWhere('customers.customer_group','LIKE','%'.$searchKey.'%')
+                        // ->orWhere('customers.customer_group','LIKE','%'.$searchKey.'%')
                         ->orWhere('customers.created_at','LIKE','%'.$searchKey.'%')
                         ->orWhere('user_status.us_name','LIKE','%'.$searchKey.'%')
                         ->orWhere('customer_groups.group_name','LIKE','%'.$searchKey.'%');

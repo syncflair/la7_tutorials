@@ -32,7 +32,7 @@ Route::get('/home', function () {
     return view('website.home');    
 });
 
-Route::get('/auth/login', 'AuthCustomer\LoginController@showLoginForm')->name('customer.login');
+// Route::get('/auth/login', 'AuthCustomer\LoginController@showLoginForm')->name('customer.login');
 
 
 

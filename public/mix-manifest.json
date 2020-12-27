@@ -232,6 +232,7 @@
     "/js/chunks/customer-dashboard-website-auth.js": "/js/chunks/customer-dashboard-website-auth.js",
     "/js/chunks/customer-login-website.js": "/js/chunks/customer-login-website.js",
     "/js/chunks/customer-order-website-auth.js": "/js/chunks/customer-order-website-auth.js",
+    "/js/chunks/customer-password-recover-website.js": "/js/chunks/customer-password-recover-website.js",
     "/js/chunks/customer-password-reset-website.js": "/js/chunks/customer-password-reset-website.js",
     "/js/chunks/customer-profile-website-auth.js": "/js/chunks/customer-profile-website-auth.js",
     "/js/chunks/customer-register-website.js": "/js/chunks/customer-register-website.js",
@@ -253,6 +254,5 @@
     "/js/chunks/switch-app.js": "/js/chunks/switch-app.js",
     "/js/chunks/viewCategory-com.js": "/js/chunks/viewCategory-com.js",
     "/js/chunks/website-wrapper.js": "/js/chunks/website-wrapper.js",
-    "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf.js": "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf.js",
-    "/js/chunks/customer-password-recover-website.js": "/js/chunks/customer-password-recover-website.js"
+    "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf.js": "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf.js"
 }

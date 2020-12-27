@@ -9,6 +9,8 @@ use App\Models\Settings\OrganizationInfo;
 use Illuminate\Support\Str; //for str::random
 use Illuminate\Support\Facades\File; //for file management
 
+use Illuminate\Support\Facades\Storage;
+
 class OrganizationInfoController extends Controller
 {
 
@@ -142,7 +144,7 @@ class OrganizationInfoController extends Controller
             $data['org_logo'] = $existing_image->org_logo;
         }
 
-        OrganizationInfo::whereId($id)->update($data);      
+        OrganizationInfo::find($id)->update($data);      
         return response()->json(['success'=>'Update successfull.']);
     }
 

@@ -125,17 +125,94 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
 //import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
 //const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "customer-register-Public-website",
   data: function data() {
-    return {};
+    return {
+      form: new Form({
+        name: '',
+        email: '',
+        phone: '',
+        password: '',
+        password_confirmation: '' //tac_agree: '',  //I agree to the terms         
+
+      })
+    };
   },
   components: {//HeaderTopbar, FooterComponent,
   },
-  methods: {},
+  methods: {
+    CustomerRegister: function CustomerRegister() {
+      var _this = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.post('/customer/register').then(function (_ref) {
+        var data = _ref.data;
+
+        //console.log(data); 
+        _this.$Progress.finish();
+
+        _this.$router.push({
+          path: '/home'
+        }); //route after successfule submit                   
+        // this.$router.push({ path : '/auth/login' });   //route after successfule submit                   
+        //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit 
+
+
+        _this.form.reset(); //reset from after submit
+
+
+        toastr.success('Registration successfule, Please verify');
+      })["catch"](function (data) {
+        _this.$Progress.fail();
+
+        toastr.warning('The given data was invalid.'); // console.log(data.message);
+      });
+    }
+  },
   created: function created() {},
   mounted: function mounted() {}
 });
@@ -172,17 +249,330 @@ var render = function() {
             _c(
               "form",
               {
-                staticClass: "js-validate",
-                attrs: { novalidate: "novalidate" }
+                staticClass: "js-validate-",
+                attrs: { novalidate: "novalidate-" },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.CustomerRegister()
+                  }
+                }
               },
               [
-                _vm._m(1),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "div",
+                    { staticClass: "js-form-message- js-focus-state-" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "sr-only",
+                          attrs: { for: "signinEmail" }
+                        },
+                        [_vm._v("Name")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "input-group" },
+                        [
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.name,
+                                expression: "form.name"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("name")
+                            },
+                            attrs: {
+                              type: "text",
+                              name: "name",
+                              id: "signinName",
+                              placeholder: "Full name"
+                            },
+                            domProps: { value: _vm.form.name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "name", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "name" }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
-                _vm._m(2),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "div",
+                    { staticClass: "js-form-message- js-focus-state-" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "sr-only",
+                          attrs: { for: "signinEmail" }
+                        },
+                        [_vm._v("Email")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "input-group" },
+                        [
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.email,
+                                expression: "form.email"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("email")
+                            },
+                            attrs: {
+                              type: "email",
+                              name: "email",
+                              id: "signinEmail",
+                              placeholder: "Email"
+                            },
+                            domProps: { value: _vm.form.email },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "email", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "email" }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
-                _vm._m(3),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "div",
+                    { staticClass: "js-form-message- js-focus-state-" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "sr-only",
+                          attrs: { for: "signinEmail" }
+                        },
+                        [_vm._v("Phone")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "input-group" },
+                        [
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _vm._m(4),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.phone,
+                                expression: "form.phone"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("phone")
+                            },
+                            attrs: {
+                              type: "number",
+                              name: "phone",
+                              id: "signinPhone",
+                              placeholder: "Phone"
+                            },
+                            domProps: { value: _vm.form.phone },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.form, "phone", $event.target.value)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "phone" }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
-                _vm._m(4),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "div",
+                    { staticClass: "js-form-message- js-focus-state-" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "sr-only",
+                          attrs: { for: "signinPassword" }
+                        },
+                        [_vm._v("Password")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "input-group" },
+                        [
+                          _vm._m(5),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.password,
+                                expression: "form.password"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has("password")
+                            },
+                            attrs: {
+                              type: "password",
+                              name: "password",
+                              placeholder: "Password"
+                            },
+                            domProps: { value: _vm.form.password },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "password",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: { form: _vm.form, field: "password" }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "div",
+                    { staticClass: "js-form-message- js-focus-state-" },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "sr-only",
+                          attrs: { for: "signupConfirmPassword" }
+                        },
+                        [_vm._v("Confirm Password")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "input-group" },
+                        [
+                          _vm._m(6),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.password_confirmation,
+                                expression: "form.password_confirmation"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: {
+                              "is-invalid": _vm.form.errors.has(
+                                "password_confirmation"
+                              )
+                            },
+                            attrs: {
+                              type: "password",
+                              name: "password_confirmation",
+                              placeholder: "Confirm Password"
+                            },
+                            domProps: { value: _vm.form.password_confirmation },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "password_confirmation",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("has-error", {
+                            attrs: {
+                              form: _vm.form,
+                              field: "password_confirmation"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(7),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -209,9 +599,9 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _vm._m(5),
+                _vm._m(8),
                 _vm._v(" "),
-                _vm._m(6)
+                _vm._m(9)
               ]
             )
           ]
@@ -237,127 +627,78 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "js-form-message js-focus-state" }, [
-        _c("label", { staticClass: "sr-only", attrs: { for: "signinEmail" } }, [
-          _vm._v("Email")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group" }, [
-          _c("div", { staticClass: "input-group-prepend" }, [
-            _c(
-              "span",
-              {
-                staticClass: "input-group-text",
-                attrs: { id: "signinEmailLabel" }
-              },
-              [_c("span", { staticClass: "fas fa-user" })]
-            )
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "email",
-              name: "email",
-              id: "signinEmail",
-              placeholder: "Email",
-              "aria-label": "Email",
-              "aria-describedby": "signinEmailLabel",
-              required: "",
-              "data-msg": "Please enter a valid email address.",
-              "data-error-class": "u-has-error",
-              "data-success-class": "u-has-success"
-            }
-          })
-        ])
-      ])
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "signinEmailLabel" } },
+        [_c("span", { staticClass: "fas fa-user" })]
+      )
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "js-form-message js-focus-state" }, [
-        _c(
-          "label",
-          { staticClass: "sr-only", attrs: { for: "signinPassword" } },
-          [_vm._v("Password")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group" }, [
-          _c("div", { staticClass: "input-group-prepend" }, [
-            _c(
-              "span",
-              {
-                staticClass: "input-group-text",
-                attrs: { id: "signinPasswordLabel" }
-              },
-              [_c("span", { staticClass: "fas fa-lock" })]
-            )
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "password",
-              name: "password",
-              id: "signinPassword",
-              placeholder: "Password",
-              "aria-label": "Password",
-              "aria-describedby": "signinPasswordLabel",
-              required: "",
-              "data-msg": "Your password is invalid. Please try again.",
-              "data-error-class": "u-has-error",
-              "data-success-class": "u-has-success"
-            }
-          })
-        ])
-      ])
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "signinEmailLabel" } },
+        [_c("span", { staticClass: "fas fa-user" })]
+      )
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("div", { staticClass: "js-form-message js-focus-state" }, [
-        _c(
-          "label",
-          { staticClass: "sr-only", attrs: { for: "signupConfirmPassword" } },
-          [_vm._v("Confirm Password")]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "input-group" }, [
-          _c("div", { staticClass: "input-group-prepend" }, [
-            _c(
-              "span",
-              {
-                staticClass: "input-group-text",
-                attrs: { id: "signupConfirmPasswordLabel" }
-              },
-              [_c("span", { staticClass: "fas fa-key" })]
-            )
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "password",
-              name: "confirmPassword",
-              id: "signupConfirmPassword",
-              placeholder: "Confirm Password",
-              "aria-label": "Confirm Password",
-              "aria-describedby": "signupConfirmPasswordLabel",
-              required: "",
-              "data-msg": "Password does not match the confirm password.",
-              "data-error-class": "u-has-error",
-              "data-success-class": "u-has-success"
-            }
-          })
-        ])
-      ])
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "signinPhoneLabel" } },
+        [_c("i", { staticClass: "fas fa-mobile-alt" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "signinPhoneLabel" } },
+        [_vm._v(" +88\r\n                                    ")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        {
+          staticClass: "input-group-text",
+          attrs: { id: "signinPasswordLabel" }
+        },
+        [_c("span", { staticClass: "fas fa-lock" })]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        {
+          staticClass: "input-group-text",
+          attrs: { id: "signupConfirmPasswordLabel" }
+        },
+        [_c("span", { staticClass: "fas fa-lock" })]
+      )
     ])
   },
   function() {

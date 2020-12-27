@@ -32,7 +32,7 @@
 
                     <!-- Form Group -->
                     <div class="form-group">
-                        <div class="js-form-message js-focus-state">
+                        <div class="js-form-messag- js-focus-state-">
                           <label class="sr-only" for="signinPassword">Password</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -50,7 +50,7 @@
 
                     <!-- Form Group -->
                     <div class="form-group">
-                        <div class="js-form-message js-focus-state">
+                        <div class="js-form-message- js-focus-state-">
                         <label class="sr-only" for="signupConfirmPassword">Confirm Password</label>
                             <div class="input-group">
                             <div class="input-group-prepend">

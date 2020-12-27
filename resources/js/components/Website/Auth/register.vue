@@ -12,10 +12,28 @@
                 </div>
                 <!-- <p class="text-gray-90 mb-4">Welcome to SORBORAHO! Sign in to your account.</p> -->
                 <!-- End Title -->
-                <form class="js-validate" novalidate="novalidate">
+                <form class="js-validate-" novalidate="novalidate-" @submit.prevent="CustomerRegister()">
                     <!-- Form Group -->
                     <div class="form-group">
-                        <div class="js-form-message js-focus-state">
+                        <div class="js-form-message- js-focus-state-">
+                            <label class="sr-only" for="signinEmail">Name</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="signinEmailLabel">
+                                        <span class="fas fa-user"></span>
+                                    </span>
+                                </div>
+                                <input v-model="form.name" type="text" class="form-control" name="name" id="signinName" placeholder="Full name" 
+                                :class="{ 'is-invalid': form.errors.has('name') }" >
+                                <has-error :form="form" field="name"></has-error>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Form Group -->
+
+                    <!-- Form Group -->
+                    <div class="form-group">
+                        <div class="js-form-message- js-focus-state-">
                             <label class="sr-only" for="signinEmail">Email</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
@@ -23,10 +41,9 @@
                                         <span class="fas fa-user"></span>
                                     </span>
                                 </div>
-                                <input type="email" class="form-control" name="email" id="signinEmail" placeholder="Email" aria-label="Email" aria-describedby="signinEmailLabel" required
-                                data-msg="Please enter a valid email address."
-                                data-error-class="u-has-error"
-                                data-success-class="u-has-success">
+                                <input v-model="form.email" type="email" class="form-control" name="email" id="signinEmail" placeholder="Email" 
+                                :class="{ 'is-invalid': form.errors.has('email') }" >
+                                <has-error :form="form" field="email"></has-error>
                             </div>
                         </div>
                     </div>
@@ -34,7 +51,31 @@
 
                     <!-- Form Group -->
                     <div class="form-group">
-                        <div class="js-form-message js-focus-state">
+                        <div class="js-form-message- js-focus-state-">
+                            <label class="sr-only" for="signinEmail">Phone</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="signinPhoneLabel">
+                                        <!-- <span class="fas fa-user"></span> -->
+                                        <i class="fas fa-mobile-alt"></i>
+                                    </span>
+                                </div>
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="signinPhoneLabel">
+                                        <!-- <span class="fas fa-user"></span> --> +88
+                                    </span>
+                                </div>
+                                <input v-model="form.phone" type="number" class="form-control" name="phone" id="signinPhone" placeholder="Phone" 
+                                :class="{ 'is-invalid': form.errors.has('phone') }" >
+                                <has-error :form="form" field="phone"></has-error>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Form Group -->
+
+                    <!-- Form Group -->
+                    <div class="form-group">
+                        <div class="js-form-message- js-focus-state-">
                           <label class="sr-only" for="signinPassword">Password</label>
                           <div class="input-group">
                             <div class="input-group-prepend">
@@ -42,10 +83,9 @@
                                     <span class="fas fa-lock"></span>
                                 </span>
                             </div>
-                            <input type="password" class="form-control" name="password" id="signinPassword" placeholder="Password" aria-label="Password" aria-describedby="signinPasswordLabel" required
-                               data-msg="Your password is invalid. Please try again."
-                               data-error-class="u-has-error"
-                               data-success-class="u-has-success">
+                            <input v-model="form.password" type="password" class="form-control" name="password" placeholder="Password"
+                            :class="{ 'is-invalid': form.errors.has('password') }">
+                            <has-error :form="form" field="password"></has-error>
                           </div>
                         </div>
                     </div>
@@ -53,18 +93,17 @@
 
                     <!-- Form Group -->
                     <div class="form-group">
-                        <div class="js-form-message js-focus-state">
+                        <div class="js-form-message- js-focus-state-">
                         <label class="sr-only" for="signupConfirmPassword">Confirm Password</label>
                             <div class="input-group">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="signupConfirmPasswordLabel">
-                                    <span class="fas fa-key"></span>
+                                    <!-- <span class="fas fa-key"></span> -->
+                                    <span class="fas fa-lock"></span>
                                 </span>
                             </div>
-                            <input type="password" class="form-control" name="confirmPassword" id="signupConfirmPassword" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="signupConfirmPasswordLabel" required
-                            data-msg="Password does not match the confirm password."
-                            data-error-class="u-has-error"
-                            data-success-class="u-has-success">
+                            <input v-model="form.password_confirmation" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" :class="{ 'is-invalid': form.errors.has('password_confirmation') }">
+                            <has-error :form="form" field="password_confirmation"></has-error>
                             </div>
                         </div>
                     </div>
@@ -122,7 +161,15 @@
         name: "customer-register-Public-website",
         data (){      
             return {
-                            
+
+                form: new Form({
+                  name:'',
+                  email: '',
+                  phone: '',
+                  password: '',  
+                  password_confirmation:'',
+                  //tac_agree: '',  //I agree to the terms         
+                })            
             }
         },
 
@@ -130,7 +177,31 @@
             //HeaderTopbar, FooterComponent,
         }, 
 
-        methods: {          
+        methods: {  
+            CustomerRegister(){
+              this.$Progress.start(); //using progress-bar package
+
+              this.form.post('/customer/register')
+              .then(({ data }) => { 
+                    //console.log(data); 
+
+                    this.$Progress.finish();                    
+
+                    this.$router.push({ path : '/home' });   //route after successfule submit                   
+                    // this.$router.push({ path : '/auth/login' });   //route after successfule submit                   
+                    //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit 
+
+                    this.form.reset();  //reset from after submit
+
+                    toastr.success('Registration successfule, Please verify'); 
+    
+              })
+              .catch( (data) => {
+                this.$Progress.fail();
+                toastr.warning('The given data was invalid.');
+                // console.log(data.message);
+              })
+            }        
         },           
 
         created(){

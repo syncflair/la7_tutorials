@@ -37,9 +37,12 @@ Route::get('email-temp', function () {
 //customers Route
 // Route::get('customer/login', 'AuthCustomer\LoginController@showLoginForm')->name('customer.login');
 Route::get('/auth/login', 'AuthCustomer\LoginController@showLoginForm')->name('customer.login');
-Route::post('customer/login', 'AuthCustomer\LoginController@login')->name('customer.login');
-Route::get('customer/register', 'AuthCustomer\RegisterController@showRegisterForm')->name('customer.register');
-Route::post('customer/register', 'AuthCustomer\RegisterController@register')->name('customer.register');
+Route::post('customer/login', 'AuthCustomer\LoginController@login');
+// Route::post('customer/login', 'AuthCustomer\LoginController@login')->name('customer.login');
+// Route::get('customer/register', 'AuthCustomer\RegisterController@showRegisterForm')->name('customer.register');
+Route::get('auth/register', 'AuthCustomer\RegisterController@showRegisterForm')->name('customer.register');
+Route::post('customer/register', 'AuthCustomer\RegisterController@register');
+// Route::post('customer/register', 'AuthCustomer\RegisterController@register')->name('customer.register');
 Route::get('/customer/verify/{token}', 'AuthCustomer\RegisterController@verifyUser'); //customer verification route 
 // Password Reset Routes for customers
 // Route::get('customer/password/reset','AuthCustomer\ForgotPasswordController@showLinkRequestForm')->name('customer.password.request');
