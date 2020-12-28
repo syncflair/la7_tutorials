@@ -10,9 +10,12 @@ export default {
 
     computed: {
     	...mapState( 
-            'commonStoreForAll', ['authUser','systemSettings','isitwebsiteCheck']
-	        //'commonStoreForAll', ['authUser','authPermissions']
+            'commonStoreForAll', ['authUser','systemSettings']
 	    ),
+
+      ...mapState( 
+            'commonStoreForWebsite', ['isitwebsiteCheck']
+      ),
 	    
     	authPermissionsData(){  //return 'decodet Data';
     		return JSON.parse(this.authPermissions.permission);

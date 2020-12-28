@@ -9,6 +9,13 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -76,6 +83,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+ //for user MapState
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "nav-for-admin-customer-website-auth",
   data: function data() {
@@ -83,12 +94,12 @@ __webpack_require__.r(__webpack_exports__);
       ActiveLinkClass: 'active'
     };
   },
-  cumputed: {
+  cumputed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['authCustomer'])), {}, {
     //for active link management
     currentPage: function currentPage() {
       return this.$route.path;
     }
-  },
+  }),
   components: {},
   methods: {
     Logout: function Logout() {
@@ -151,7 +162,7 @@ var render = function() {
       _c(
         "ul",
         {
-          staticClass: "list-unstyled dropdown-list",
+          staticClass: "list-unstyled dropdown-list dropdown-list-custome",
           attrs: { id: "sidebarNav" }
         },
         [
@@ -167,7 +178,7 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/customer-dashboard" }
+                  attrs: { to: "/auth/my-dashboard" }
                 },
                 [_vm._v(" Dashboard\n                ")]
               )
@@ -186,7 +197,7 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/customer-orders" }
+                  attrs: { to: "/auth/my-orders" }
                 },
                 [_vm._v("My Orders\n\t            ")]
               )
@@ -205,7 +216,7 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/customer-wishlist" }
+                  attrs: { to: "/auth/my-wishlist" }
                 },
                 [_vm._v("Wishlist\n            \t")]
               )
@@ -224,7 +235,7 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/customer-reviews" }
+                  attrs: { to: "/auth/my-reviews" }
                 },
                 [_vm._v("My Reviews\n            \t")]
               )
@@ -243,7 +254,7 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/customer-profile" }
+                  attrs: { to: "/auth/my-profile" }
                 },
                 [_vm._v(" My Profile\n\t            ")]
               )
@@ -262,7 +273,7 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/customer-address" }
+                  attrs: { to: "/auth/my-address" }
                 },
                 [_vm._v(" Address Book\n            \t")]
               )
@@ -281,7 +292,7 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/customer-vouchers" }
+                  attrs: { to: "/auth/my-vouchers" }
                 },
                 [_vm._v(" Vouchers\n            \t")]
               )
@@ -328,7 +339,7 @@ var staticRenderFns = [
       [
         _c("div", { staticClass: "info border- bg-gray-1- rounded-lg-" }, [
           _c("span", { staticClass: "font-size-10 text-black" }, [
-            _vm._v(" Mahmudur Rahman sumon Sumon")
+            _vm._v("  name ")
           ]),
           _vm._v(" "),
           _c("br"),

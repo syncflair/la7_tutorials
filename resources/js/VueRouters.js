@@ -242,14 +242,15 @@ const routes = [
 
 
 	//website user admin dashboard
-  	{ path: '/auth/customer-dashboard', name: 'CustomerDashboard', component: () => import(/* webpackChunkName: "customer-dashboard-website-auth" */ './components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue'), meta: { title: 'Dashboard', breadcrumb: 'Dashboard'} },
-  	{ path: '/auth/customer-orders', name: 'CustomerOrder', component: () => import(/* webpackChunkName: "customer-order-website-auth" */ './components/Website/AdminCustomer/Order/CustomerOrders.vue'), meta: { title: 'Orders', breadcrumb: 'Orders'} },
-  	{ path: '/auth/customer-profile', name: 'CustomerProfile', component: () => import(/* webpackChunkName: "customer-profile-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerProfile.vue'), meta: { title: 'Profile', breadcrumb: 'Profile'} },
-  	{ path: '/auth/customer-address', name: 'CustomerAddress', component: () => import(/* webpackChunkName: "customer-address-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerAddress.vue'), meta: { title: 'Address', breadcrumb: 'Address'}},
-  	{ path: '/auth/customer-address-form', name: 'CustomerAddressForm', component: () => import(/* webpackChunkName: "customer-address-form-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerAddressForm.vue'), meta: { breadcrumb: 'Customer Address form', title: 'Customer Address'} },
-  	{ path: '/auth/customer-wishlist', name: 'CustomerWishlist', component: () => import(/* webpackChunkName: "customer-wishlist-website-auth" */ './components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue'), meta: { title: 'Wishlist', breadcrumb: 'Wishlist'} },
-  	{ path: '/auth/customer-vouchers', name: 'CustomerVoucher', component: () => import(/* webpackChunkName: "customer-voucher-website-auth" */ './components/Website/AdminCustomer/Voucher/CustomerVoucher.vue'), meta: { title: 'Voucher', breadcrumb: 'Voucher'}},
-  	{ path: '/auth/customer-reviews', name: 'CustomerReviews', component: () => import(/* webpackChunkName: "customer-reviews-website-auth" */ './components/Website/AdminCustomer/Review/CustomerReviews.vue'),  },
+  	{ path: '/auth/my-dashboard', name: 'CustomerDashboard', component: () => import(/* webpackChunkName: "customer-dashboard-website-auth" */ './components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue'), meta: { title: 'Dashboard',} },
+  	{ path: '/auth/my-orders', name: 'CustomerOrder', component: () => import(/* webpackChunkName: "customer-order-website-auth" */ './components/Website/AdminCustomer/Order/CustomerOrders.vue'), meta: { title: 'Orders', } },
+  	{ path: '/auth/my-profile', name: 'CustomerProfile', component: () => import(/* webpackChunkName: "customer-profile-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerProfile.vue'), meta: { title: 'Profile',} },
+  	{ path: '/auth/my-address', name: 'CustomerAddress', component: () => import(/* webpackChunkName: "customer-address-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerAddress.vue'), meta: { title: 'Address',}},
+  	{ path: '/auth/my-address-update', name: 'CustomerAddressForm', component: () => import(/* webpackChunkName: "customer-address-form-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerAddressForm.vue'), meta: { title: 'Customer Address'} },
+  	{ path: '/auth/my-wishlist', name: 'CustomerWishlist', component: () => import(/* webpackChunkName: "customer-wishlist-website-auth" */ './components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue'), meta: { title: 'Wishlist',} },
+  	{ path: '/auth/my-vouchers', name: 'CustomerVoucher', component: () => import(/* webpackChunkName: "customer-voucher-website-auth" */ './components/Website/AdminCustomer/Voucher/CustomerVoucher.vue'), meta: { title: 'Voucher', }},
+  	{ path: '/auth/my-reviews', name: 'CustomerReviews', component: () => import(/* webpackChunkName: "customer-reviews-website-auth" */ './components/Website/AdminCustomer/Review/CustomerReviews.vue'),  meta: { title: 'Reviews',} },
+  	// { path: '/auth/my-reviews', name: 'CustomerReviews', component: () => import(/* webpackChunkName: "customer-reviews-website-auth" */ './components/Website/AdminCustomer/Review/CustomerReviews.vue'),  meta: { title: 'Reviews', breadcrumb: 'Reviews'} },
   	// meta: { title: 'Reviews', breadcrumb: 'Reviews'}
 
 

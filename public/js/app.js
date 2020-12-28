@@ -93442,82 +93442,79 @@ var routes = [//export const routes = [
   }
 }, //website user admin dashboard
 {
-  path: '/auth/customer-dashboard',
+  path: '/auth/my-dashboard',
   name: 'CustomerDashboard',
   component: function component() {
     return Promise.all(/*! import() | customer-dashboard-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-dashboard-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue */ "./resources/js/components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue"));
   },
   meta: {
-    title: 'Dashboard',
-    breadcrumb: 'Dashboard'
+    title: 'Dashboard'
   }
 }, {
-  path: '/auth/customer-orders',
+  path: '/auth/my-orders',
   name: 'CustomerOrder',
   component: function component() {
     return Promise.all(/*! import() | customer-order-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-order-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Order/CustomerOrders.vue */ "./resources/js/components/Website/AdminCustomer/Order/CustomerOrders.vue"));
   },
   meta: {
-    title: 'Orders',
-    breadcrumb: 'Orders'
+    title: 'Orders'
   }
 }, {
-  path: '/auth/customer-profile',
+  path: '/auth/my-profile',
   name: 'CustomerProfile',
   component: function component() {
     return Promise.all(/*! import() | customer-profile-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-profile-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerProfile.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerProfile.vue"));
   },
   meta: {
-    title: 'Profile',
-    breadcrumb: 'Profile'
+    title: 'Profile'
   }
 }, {
-  path: '/auth/customer-address',
+  path: '/auth/my-address',
   name: 'CustomerAddress',
   component: function component() {
     return Promise.all(/*! import() | customer-address-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-address-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerAddress.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerAddress.vue"));
   },
   meta: {
-    title: 'Address',
-    breadcrumb: 'Address'
+    title: 'Address'
   }
 }, {
-  path: '/auth/customer-address-form',
+  path: '/auth/my-address-update',
   name: 'CustomerAddressForm',
   component: function component() {
     return Promise.all(/*! import() | customer-address-form-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-address-form-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerAddressForm.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerAddressForm.vue"));
   },
   meta: {
-    breadcrumb: 'Customer Address form',
     title: 'Customer Address'
   }
 }, {
-  path: '/auth/customer-wishlist',
+  path: '/auth/my-wishlist',
   name: 'CustomerWishlist',
   component: function component() {
     return Promise.all(/*! import() | customer-wishlist-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-wishlist-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue */ "./resources/js/components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue"));
   },
   meta: {
-    title: 'Wishlist',
-    breadcrumb: 'Wishlist'
+    title: 'Wishlist'
   }
 }, {
-  path: '/auth/customer-vouchers',
+  path: '/auth/my-vouchers',
   name: 'CustomerVoucher',
   component: function component() {
     return Promise.all(/*! import() | customer-voucher-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-voucher-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Voucher/CustomerVoucher.vue */ "./resources/js/components/Website/AdminCustomer/Voucher/CustomerVoucher.vue"));
   },
   meta: {
-    title: 'Voucher',
-    breadcrumb: 'Voucher'
+    title: 'Voucher'
   }
 }, {
-  path: '/auth/customer-reviews',
+  path: '/auth/my-reviews',
   name: 'CustomerReviews',
   component: function component() {
     return Promise.all(/*! import() | customer-reviews-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"), __webpack_require__.e("customer-reviews-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Review/CustomerReviews.vue */ "./resources/js/components/Website/AdminCustomer/Review/CustomerReviews.vue"));
+  },
+  meta: {
+    title: 'Reviews'
   }
-} // meta: { title: 'Reviews', breadcrumb: 'Reviews'}
+} // { path: '/auth/my-reviews', name: 'CustomerReviews', component: () => import(/* webpackChunkName: "customer-reviews-website-auth" */ './components/Website/AdminCustomer/Review/CustomerReviews.vue'),  meta: { title: 'Reviews', breadcrumb: 'Reviews'} },
+// meta: { title: 'Reviews', breadcrumb: 'Reviews'}
 ]; //end routes
 //const router = new VueRouter({
 
@@ -93543,36 +93540,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _store_commonStoreForAll__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/commonStoreForAll */ "./resources/js/store/commonStoreForAll.js");
-/* harmony import */ var _store_CategoryStore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/CategoryStore */ "./resources/js/store/CategoryStore.js");
-/* harmony import */ var _store_ProductMasterStore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/ProductMasterStore */ "./resources/js/store/ProductMasterStore.js");
-/* harmony import */ var _store_PartieStore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/PartieStore */ "./resources/js/store/PartieStore.js");
-/* harmony import */ var _store_PurchaseOrderMasterStore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/PurchaseOrderMasterStore */ "./resources/js/store/PurchaseOrderMasterStore.js");
-/* harmony import */ var _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store/CustomerForAdminStore */ "./resources/js/store/CustomerForAdminStore.js");
-/* harmony import */ var _store_SupplierForAdminStore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store/SupplierForAdminStore */ "./resources/js/store/SupplierForAdminStore.js");
-/* harmony import */ var _store_BrandShopMasterStore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store/BrandShopMasterStore */ "./resources/js/store/BrandShopMasterStore.js");
-/* harmony import */ var _store_VendorMasterStore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./store/VendorMasterStore */ "./resources/js/store/VendorMasterStore.js");
-/* harmony import */ var _store_usersAdminStore__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./store/usersAdminStore */ "./resources/js/store/usersAdminStore.js");
-/* harmony import */ var _store_CategoryMasterStore__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./store/CategoryMasterStore */ "./resources/js/store/CategoryMasterStore.js");
-/* harmony import */ var _store_SpecificationMasterStore__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./store/SpecificationMasterStore */ "./resources/js/store/SpecificationMasterStore.js");
-/* harmony import */ var _store_AttributeValueMasterStore__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./store/AttributeValueMasterStore */ "./resources/js/store/AttributeValueMasterStore.js");
-/* harmony import */ var _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./store/BrandMasterStore */ "./resources/js/store/BrandMasterStore.js");
-/* harmony import */ var _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./store/ChartOfAccounts */ "./resources/js/store/ChartOfAccounts.js");
-/* harmony import */ var _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./store/AccountHeadsMasterSotre */ "./resources/js/store/AccountHeadsMasterSotre.js");
-/* harmony import */ var _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./store/EmployeeMasterStore */ "./resources/js/store/EmployeeMasterStore.js");
-/* harmony import */ var _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./store/BranchInfoStore */ "./resources/js/store/BranchInfoStore.js");
-/* harmony import */ var _store_CountryStore__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store/CountryStore */ "./resources/js/store/CountryStore.js");
-/* harmony import */ var _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store/VatRatesStore */ "./resources/js/store/VatRatesStore.js");
-/* harmony import */ var _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store/StatusMasterStore */ "./resources/js/store/StatusMasterStore.js");
-/* harmony import */ var _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./store/DivisionMasterStore */ "./resources/js/store/DivisionMasterStore.js");
-/* harmony import */ var _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./store/DistrictMasterStore */ "./resources/js/store/DistrictMasterStore.js");
-/* harmony import */ var _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./store/DistrictZoneMasterStore */ "./resources/js/store/DistrictZoneMasterStore.js");
-/* harmony import */ var _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./store/CashAccountMasterStore */ "./resources/js/store/CashAccountMasterStore.js");
+/* harmony import */ var _store_commonStoreForWebsite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/commonStoreForWebsite */ "./resources/js/store/commonStoreForWebsite.js");
+/* harmony import */ var _store_commonStoreForAll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/commonStoreForAll */ "./resources/js/store/commonStoreForAll.js");
+/* harmony import */ var _store_CategoryStore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/CategoryStore */ "./resources/js/store/CategoryStore.js");
+/* harmony import */ var _store_ProductMasterStore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/ProductMasterStore */ "./resources/js/store/ProductMasterStore.js");
+/* harmony import */ var _store_PartieStore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/PartieStore */ "./resources/js/store/PartieStore.js");
+/* harmony import */ var _store_PurchaseOrderMasterStore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store/PurchaseOrderMasterStore */ "./resources/js/store/PurchaseOrderMasterStore.js");
+/* harmony import */ var _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store/CustomerForAdminStore */ "./resources/js/store/CustomerForAdminStore.js");
+/* harmony import */ var _store_SupplierForAdminStore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store/SupplierForAdminStore */ "./resources/js/store/SupplierForAdminStore.js");
+/* harmony import */ var _store_BrandShopMasterStore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./store/BrandShopMasterStore */ "./resources/js/store/BrandShopMasterStore.js");
+/* harmony import */ var _store_VendorMasterStore__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./store/VendorMasterStore */ "./resources/js/store/VendorMasterStore.js");
+/* harmony import */ var _store_usersAdminStore__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./store/usersAdminStore */ "./resources/js/store/usersAdminStore.js");
+/* harmony import */ var _store_CategoryMasterStore__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./store/CategoryMasterStore */ "./resources/js/store/CategoryMasterStore.js");
+/* harmony import */ var _store_SpecificationMasterStore__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./store/SpecificationMasterStore */ "./resources/js/store/SpecificationMasterStore.js");
+/* harmony import */ var _store_AttributeValueMasterStore__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./store/AttributeValueMasterStore */ "./resources/js/store/AttributeValueMasterStore.js");
+/* harmony import */ var _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./store/BrandMasterStore */ "./resources/js/store/BrandMasterStore.js");
+/* harmony import */ var _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./store/ChartOfAccounts */ "./resources/js/store/ChartOfAccounts.js");
+/* harmony import */ var _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./store/AccountHeadsMasterSotre */ "./resources/js/store/AccountHeadsMasterSotre.js");
+/* harmony import */ var _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./store/EmployeeMasterStore */ "./resources/js/store/EmployeeMasterStore.js");
+/* harmony import */ var _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store/BranchInfoStore */ "./resources/js/store/BranchInfoStore.js");
+/* harmony import */ var _store_CountryStore__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store/CountryStore */ "./resources/js/store/CountryStore.js");
+/* harmony import */ var _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store/VatRatesStore */ "./resources/js/store/VatRatesStore.js");
+/* harmony import */ var _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./store/StatusMasterStore */ "./resources/js/store/StatusMasterStore.js");
+/* harmony import */ var _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./store/DivisionMasterStore */ "./resources/js/store/DivisionMasterStore.js");
+/* harmony import */ var _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./store/DistrictMasterStore */ "./resources/js/store/DistrictMasterStore.js");
+/* harmony import */ var _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./store/DistrictZoneMasterStore */ "./resources/js/store/DistrictZoneMasterStore.js");
+/* harmony import */ var _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./store/CashAccountMasterStore */ "./resources/js/store/CashAccountMasterStore.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]); //import all Modules here from store folder
 //es6 (VX-VueX)
 //const commonStoreForAll = () => import( /* webpackChunkName: "commonStoreForAll-VX" */ './store/commonStoreForAll') 
+
 
 
 
@@ -93609,39 +93608,40 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
-    CashAccountMasterStore: _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_26__["default"],
-    commonStoreForAll: _store_commonStoreForAll__WEBPACK_IMPORTED_MODULE_2__["default"],
-    CategoryStore: _store_CategoryStore__WEBPACK_IMPORTED_MODULE_3__["default"],
-    ProductMasterStore: _store_ProductMasterStore__WEBPACK_IMPORTED_MODULE_4__["default"],
-    PartieStore: _store_PartieStore__WEBPACK_IMPORTED_MODULE_5__["default"],
+    CashAccountMasterStore: _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_27__["default"],
+    commonStoreForWebsite: _store_commonStoreForWebsite__WEBPACK_IMPORTED_MODULE_2__["default"],
+    commonStoreForAll: _store_commonStoreForAll__WEBPACK_IMPORTED_MODULE_3__["default"],
+    CategoryStore: _store_CategoryStore__WEBPACK_IMPORTED_MODULE_4__["default"],
+    ProductMasterStore: _store_ProductMasterStore__WEBPACK_IMPORTED_MODULE_5__["default"],
+    PartieStore: _store_PartieStore__WEBPACK_IMPORTED_MODULE_6__["default"],
     //purchase
-    PurchaseOrderMasterStore: _store_PurchaseOrderMasterStore__WEBPACK_IMPORTED_MODULE_6__["default"],
+    PurchaseOrderMasterStore: _store_PurchaseOrderMasterStore__WEBPACK_IMPORTED_MODULE_7__["default"],
     //customer	
-    CustomerForAdminStore: _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_7__["default"],
+    CustomerForAdminStore: _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_8__["default"],
     //Suppliers
-    SupplierForAdminStore: _store_SupplierForAdminStore__WEBPACK_IMPORTED_MODULE_8__["default"],
-    BrandShopMasterStore: _store_BrandShopMasterStore__WEBPACK_IMPORTED_MODULE_9__["default"],
-    VendorMasterStore: _store_VendorMasterStore__WEBPACK_IMPORTED_MODULE_10__["default"],
+    SupplierForAdminStore: _store_SupplierForAdminStore__WEBPACK_IMPORTED_MODULE_9__["default"],
+    BrandShopMasterStore: _store_BrandShopMasterStore__WEBPACK_IMPORTED_MODULE_10__["default"],
+    VendorMasterStore: _store_VendorMasterStore__WEBPACK_IMPORTED_MODULE_11__["default"],
     //user management
-    usersAdminStore: _store_usersAdminStore__WEBPACK_IMPORTED_MODULE_11__["default"],
+    usersAdminStore: _store_usersAdminStore__WEBPACK_IMPORTED_MODULE_12__["default"],
     //Catalog
-    CategoryMasterStore: _store_CategoryMasterStore__WEBPACK_IMPORTED_MODULE_12__["default"],
-    SpecificationMasterStore: _store_SpecificationMasterStore__WEBPACK_IMPORTED_MODULE_13__["default"],
-    AttributeValueMasterStore: _store_AttributeValueMasterStore__WEBPACK_IMPORTED_MODULE_14__["default"],
-    BrandMasterStore: _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_15__["default"],
+    CategoryMasterStore: _store_CategoryMasterStore__WEBPACK_IMPORTED_MODULE_13__["default"],
+    SpecificationMasterStore: _store_SpecificationMasterStore__WEBPACK_IMPORTED_MODULE_14__["default"],
+    AttributeValueMasterStore: _store_AttributeValueMasterStore__WEBPACK_IMPORTED_MODULE_15__["default"],
+    BrandMasterStore: _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_16__["default"],
     //Accounting
-    ChartOfAccounts: _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_16__["default"],
-    AccountHeadsMasterSotre: _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_17__["default"],
+    ChartOfAccounts: _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_17__["default"],
+    AccountHeadsMasterSotre: _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_18__["default"],
     //HRM
-    EmployeeMasterStore: _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_18__["default"],
+    EmployeeMasterStore: _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_19__["default"],
     //Settings
-    BranchInfoStore: _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_19__["default"],
-    CountryStore: _store_CountryStore__WEBPACK_IMPORTED_MODULE_20__["default"],
-    VatRatesStore: _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_21__["default"],
-    StatusMasterStore: _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_22__["default"],
-    DivisionMasterStore: _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_23__["default"],
-    DistrictMasterStore: _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_24__["default"],
-    DistrictZoneMasterStore: _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_25__["default"]
+    BranchInfoStore: _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_20__["default"],
+    CountryStore: _store_CountryStore__WEBPACK_IMPORTED_MODULE_21__["default"],
+    VatRatesStore: _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_22__["default"],
+    StatusMasterStore: _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_23__["default"],
+    DivisionMasterStore: _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_24__["default"],
+    DistrictMasterStore: _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_25__["default"],
+    DistrictZoneMasterStore: _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_26__["default"]
   }
 }));
 
@@ -93988,8 +93988,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {//myName: 'Md. Mahmudur Rahman',
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'systemSettings', 'isitwebsiteCheck'] //'commonStoreForAll', ['authUser','authPermissions']
-  )), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'systemSettings'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['isitwebsiteCheck'])), {}, {
     authPermissionsData: function authPermissionsData() {
       //return 'decodet Data';
       return JSON.parse(this.authPermissions.permission);
@@ -96724,6 +96723,50 @@ var commonStoreForAll = {
 
 };
 /* harmony default export */ __webpack_exports__["default"] = (commonStoreForAll);
+
+/***/ }),
+
+/***/ "./resources/js/store/commonStoreForWebsite.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/store/commonStoreForWebsite.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var commonStoreForWebsite = {
+  namespaced: true,
+  state: function state() {
+    return {
+      //accessable from any where 
+      authCustomer: {},
+      isitwebsiteCheck: ''
+    };
+  },
+
+  /*end state*/
+  getters: {//userStatus: state => { return state.userStatus },
+  },
+
+  /*end getters*/
+  mutations: {
+    //commit from resources/js/components/Website/WebsiteWrapper.vue
+    AUTH_CUSTOMER_CHECK: function AUTH_CUSTOMER_CHECK(state, data) {
+      return state.authCustomer = data;
+    },
+    //for website public
+    IS_IT_WEBSITE_CHECK: function IS_IT_WEBSITE_CHECK(state, data) {
+      return state.isitwebsiteCheck = data;
+    }
+  },
+
+  /*end Mutations*/
+  actions: {}
+  /*end actions*/
+
+};
+/* harmony default export */ __webpack_exports__["default"] = (commonStoreForWebsite);
 
 /***/ }),
 

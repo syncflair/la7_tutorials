@@ -374,7 +374,7 @@
                     //$('#sidebarContent').hide();     
                     $("#sidebarContent").fadeOut("slow"); // Hide login sidebar                              
                                       
-                    this.$router.push({ path : '/auth/customer-dashboard' });   //route after successfule submit                   
+                    this.$router.push({ path : '/auth/my-dashboard' });   //route after successfule submit                   
                     //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit
 
                     this.form.reset();  //reset from after submit 

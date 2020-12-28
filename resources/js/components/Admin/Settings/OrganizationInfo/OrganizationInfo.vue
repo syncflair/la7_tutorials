@@ -144,8 +144,12 @@
 		                            
 		                            <span v-else>
 		                             <img v-if="form.org_logo == 'undefined'" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:150px;">
+
 		                             <img v-if="form.org_logo === '' " :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:150px;">
+
 		                             <img v-else-if="form.org_logo === null" :src="'../'+NoIconUrl" class="img-fluid img-thumbnail" style="width:150px;height:150px;">
+
+		                              <!-- <img v-else-if="form.org_logo != '' " :src="'../'+form.org_logo" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:150px;"> -->
 		                              <img v-else-if="form.org_logo != '' " :src="'../'+form.org_logo" class="img-fluid img-thumbnail focusImgOnHover" style="width:150px;height:150px;">
 		                            </span> 
 		                            <!-- <img :src="'../'+NoIconUrl"> -->

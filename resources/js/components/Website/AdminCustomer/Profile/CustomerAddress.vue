@@ -5,7 +5,7 @@
             <h1 class="text-center">Contact</h1>
         </div> -->
                 
-        <div class="row mb-5">
+        <div class="row mb-5 mt-4">
             <div class="d-none- d-xl-block col-xl-2 col-wd-2gdot5-">
 
                 <NavForAdminCustomer />
@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="mb-1 col text-right">
-                        <router-link to="/customer-address-form" class="btn btn-primary-dark ml-md-2 px-5 px-md-4 px-lg-5 w-100- w-md-auto d-none- d-md-inline-block"><i class="fas fa-plus"></i> Add new address</router-link>
+                        <router-link to="/auth/my-address-update" class="btn btn-primary-dark ml-md-2 px-5 px-md-4 px-lg-5 w-100- w-md-auto d-none- d-md-inline-block"><i class="fas fa-plus"></i> Add new address</router-link>
                     </div>
 
                 </div>

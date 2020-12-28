@@ -10,7 +10,6 @@ use Illuminate\Support\Str; //for str::random
 use Illuminate\Support\Facades\File; //for file management
 
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Config; //that for call constants form app/config
 
 class OrganizationInfoController extends Controller
 {
@@ -109,15 +108,15 @@ class OrganizationInfoController extends Controller
         $data['city']=$request->city; 
         $data['state']=$request->state; 
         $data['country']=$request->country; 
-        $data['updated_by']= \Auth::user()->id; 
-  
-        $image_base64 = $request->org_logo;     
+         $data['updated_by']= \Auth::user()->id; 
+
+        $image = $request->org_logo;        
 
         //if(strlen($image) > 150){ /*php function*/
-        if( Str::length($image_base64) > 150){ /*larvel helper function*/
+        if( Str::length($image) > 150){ /*larvel helper function*/
 
-            //return $imageSize =getimagesize($image_base64);
-            $imageExt = explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
+            //return $imageSize =getimagesize($image);
+            $imageExt = explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
             if( $imageExt != in_array( $imageExt, array('jpeg','jpg','png','gif','tiff') )  ){
                 return response()->json(['errors'=>'Only support jpeg, jpg, png, gif, tiff']);
             }else{
@@ -128,21 +127,16 @@ class OrganizationInfoController extends Controller
                     File::delete($existing_image->org_logo); //delete file //use Illuminate\Support\Facades\File; at top
                 }//else{echo 'Empty';}  
 
-                //new name generate from base64 file //slug_generator($request->org_name)
-                $imageName = slug_generator('logo').'-'.Str::random(40).'.' . explode('/', explode(':', substr($image_base64, 0, strpos($image_base64, ';')))[1])[1];
-
-                $replace = substr($image_base64, 0, strpos($image_base64, ',')+1); 
-                $image = str_replace($replace, '', $image_base64); 
-                $image = str_replace(' ', '+', $image);
-                $image = base64_decode($image); 
-                $resized_image = \Image::make($image)->resize(200, 200)
-                    //->text('SHORBORAHO', 120, 110, function($font){ $font->size(24); $font->color('#fdf6e3'); })
-                    // ->insert(Config::get('constants.watermark')) //apply watermarke
-                ->stream($imageExt, 100);//The stream() method encodes the image in given format and given image quality and creates new PSR-7 stream based on image data.
-
-                Storage::disk('public')->put('settings/'.$imageName, $resized_image );//for public storage
-
-                $data['org_logo'] = 'storage/settings/'.$imageName; //for public storage
+                //new name generate from base64 file
+                $imageName = slug_generator($request->org_name).'-'.Str::random(40).'.' . explode('/', explode(':', substr($image, 0, strpos($image, ';')))[1])[1];
+                //save image using intervention image
+                \Image::make($image)
+                    ->resize(200, 200)
+                    //->text('SHORBORAHO', 140, 190)
+                //     ->save(public_path('FilesStorage/Backend/Settings/').$imageName);
+                // $data['org_logo'] = 'FilesStorage/Backend/Settings/'.$imageName;
+                ->save(storage_path('app/public/settings/').$imageName);
+                $data['org_logo'] = 'storage/settings/'.$imageName;
                 
             }//end image type check
         }else{

@@ -6,11 +6,10 @@
         <h1 class="text-center">Contact</h1>
     </div> -->
             
-    <div class="row mb-10">
+    <div class="row mb-10 mt-4">
+
         <div class="d-none- d-xl-block col-xl-2 col-wd-2gdot5-">
-
             <NavForAdminCustomer />
-
         </div>
 
         <div class="bg-gray-1 rounded-lg- col-xl-10 col-wd-9gdot5-">
@@ -55,8 +54,10 @@
                         <div class="icon"><i class="ion ion-pie-graph"></i></div> 
                         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
-                </div>
+                </div>   
             </div>
+
+            {{ authCustomer.name }}
 
         </div>
     </div>
@@ -67,11 +68,20 @@
 </template>
 <script>
     import NavForAdminCustomer from '../Include/NavForAdminCustomer'
+
+    import { mapState } from 'vuex' //for user MapState
+    
     export default {
         name: "customer-dashboard-website-auth",
         data (){      
-            return {         
+            return { 
             }
+        },
+
+        computed: {
+
+          ...mapState( 'commonStoreForWebsite', ['authCustomer'] ),
+
         },
 
         components:{

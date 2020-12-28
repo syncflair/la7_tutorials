@@ -162,7 +162,7 @@ __webpack_require__.r(__webpack_exports__);
           _this.display_error = false;
 
           _this.$router.push({
-            path: '/auth/customer-dashboard'
+            path: '/auth/my-dashboard'
           }); //route after successfule submit                   
           //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit 
 

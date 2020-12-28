@@ -7,6 +7,8 @@ Vue.use(Vuex)
 //import all Modules here from store folder
 //es6 (VX-VueX)
 //const commonStoreForAll = () => import( /* webpackChunkName: "commonStoreForAll-VX" */ './store/commonStoreForAll') 
+import commonStoreForWebsite from './store/commonStoreForWebsite' 
+
 import commonStoreForAll from './store/commonStoreForAll' 
 import CategoryStore from './store/CategoryStore'
 import ProductMasterStore from './store/ProductMasterStore'
@@ -52,7 +54,9 @@ export default new Vuex.Store({
 	modules: {
         CashAccountMasterStore,
 
-		commonStoreForAll,
+
+        commonStoreForWebsite,
+		commonStoreForAll, 
     	CategoryStore,
     	ProductMasterStore,
     	PartieStore, 

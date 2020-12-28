@@ -367,7 +367,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           $("#sidebarContent").fadeOut("slow"); // Hide login sidebar                              
 
           _this.$router.push({
-            path: '/auth/customer-dashboard'
+            path: '/auth/my-dashboard'
           }); //route after successfule submit                   
           //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit
 
@@ -1664,7 +1664,7 @@ var HeaderVerticalAndSearchForAllPage = function HeaderVerticalAndSearchForAllPa
   name: "Website-Wrapper-master",
   //Get props form views/admin/dashboard.blade.php
   // props:['user','permissions','settings'], 
-  props: ['isitwebsite'],
+  props: ['isitwebsite', 'authcustomer'],
   data: function data() {
     return {
       mainContentMarginTopWhenHeaderFiexd: '',
@@ -1710,7 +1710,9 @@ var HeaderVerticalAndSearchForAllPage = function HeaderVerticalAndSearchForAllPa
   },
   created: function created() {
     //direct commit (mutations) to resources/js/store/commonStoreForAll.js
-    this.$store.commit('commonStoreForAll/IS_IT_WEBSITE_CHECK', this.isitwebsite); //window resize is call
+    // this.$store.commit('commonStoreForAll/IS_IT_WEBSITE_CHECK', this.isitwebsite ); 
+    this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite);
+    this.$store.commit('commonStoreForWebsite/AUTH_CUSTOMER_CHECK', this.authcustomer); //window resize is call
 
     window.addEventListener('resize', this.handleResize);
     this.handleResize();

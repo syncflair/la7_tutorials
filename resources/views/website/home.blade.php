@@ -9,7 +9,10 @@
 
 
     <!-- Router-view passing through admin wrapper component -->
-    <website-wrapper :isitwebsite="1" ></website-wrapper>
+    <website-wrapper 
+    	:isitwebsite="1" 
+    	:authcustomer="{{ Auth::guard('customer')->check() ? Auth::guard('customer')->user() : 'null' }}" 
+    ></website-wrapper>
 
 
     

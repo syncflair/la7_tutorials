@@ -6,7 +6,7 @@
                 <img src="https://sorboraho.s3-ap-southeast-1.amazonaws.com/users/mahmudur-rahman-wYAVdNBwSUHZaf4VQcBeE2R806wJqwZT7zHgEl0h.png" alt="User Image" class="img-circle elevation-2">
             </div> -->
             <div class="info border- bg-gray-1- rounded-lg-"> 
-                    <span class="font-size-10 text-black"> Mahmudur Rahman sumon Sumon</span>
+                    <span class="font-size-10 text-black">  name </span>
                     <br> 
                     <span class="btn- px-1 bg-success text-white font-size-9- rounded-lg">
                         <i class="fas fa-check font-size-8"></i>
@@ -16,41 +16,41 @@
             </div>
         </div>
 
-        <ul id="sidebarNav" class="list-unstyled dropdown-list">
+        <ul id="sidebarNav" class="list-unstyled dropdown-list dropdown-list-custome">
             <!-- Menu List -->
             <li class="border-bottom-">
-                <router-link to="/auth/customer-dashboard" class="dropdown-item dropdown-item-custome transition-3d-hover" 
-                	:class="[currentPage.includes('customer-dashboard')] ? ActiveLinkClass : '' " > Dashboard
+                <router-link to="/auth/my-dashboard" class="dropdown-item dropdown-item-custome transition-3d-hover" 
+                	:class="[currentPage.includes('my-dashboard')] ? ActiveLinkClass : '' " > Dashboard
                 </router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/customer-orders"
-	            	:class="[currentPage.includes('customer-orders')] ? ActiveLinkClass : '' " >My Orders
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-orders"
+	            	:class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' " >My Orders
 	            </router-link>
             </li>
-            <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/customer-wishlist"
-            	:class="[currentPage.includes('customer-wishlist')] ? ActiveLinkClass : '' "  >Wishlist
+            <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-wishlist"
+            	:class="[currentPage.includes('my-wishlist')] ? ActiveLinkClass : '' "  >Wishlist
             	</router-link>
             </li>
             
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/customer-reviews" 
-            	:class="[currentPage.includes('customer-reviews')] ? ActiveLinkClass : '' " >My Reviews
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-reviews" 
+            	:class="[currentPage.includes('my-reviews')] ? ActiveLinkClass : '' " >My Reviews
             	</router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/customer-profile"
-	            	:class="[currentPage.includes('customer-profile')] ? ActiveLinkClass : '' "  > My Profile
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-profile"
+	            	:class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' "  > My Profile
 	            </router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/customer-address" 
-            	:class="[currentPage.includes('customer-address')] ? ActiveLinkClass : '' " > Address Book
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-address" 
+            	:class="[currentPage.includes('my-address')] ? ActiveLinkClass : '' " > Address Book
             	</router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/customer-vouchers" 
-            	:class="[currentPage.includes('customer-vouchers')] ? ActiveLinkClass : '' " > Vouchers
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-vouchers" 
+            	:class="[currentPage.includes('my-vouchers')] ? ActiveLinkClass : '' " > Vouchers
             	</router-link>
             </li>
             <li class="border-top-">
@@ -59,25 +59,36 @@
             </li>
             <!-- End Menu List -->
 
-            <!-- ($route.path === 'customer-dashboard') ? 'active' -->
+            <!-- ($route.path === 'my-dashboard') ? 'active' -->
+
 
         </ul>
         <!-- End List -->
+
     </div>
 </template>
 <script>
+
+    import { mapState } from 'vuex' //for user MapState
+
 	export default {
         name: "nav-for-admin-customer-website-auth",
         data (){      
             return {         
-                ActiveLinkClass: 'active',           
+                ActiveLinkClass: 'active',        
             }
         },
-        cumputed:{
+
+        cumputed:{            
+
+            ...mapState( 'commonStoreForWebsite', ['authCustomer'] ),
+
             //for active link management
         	currentPage(){
         		return this.$route.path;
-        	}
+        	},
+
+            
         },
 
         components:{

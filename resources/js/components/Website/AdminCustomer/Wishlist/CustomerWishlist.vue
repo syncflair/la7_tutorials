@@ -5,7 +5,7 @@
             <h1 class="text-center">Contact</h1>
         </div> -->
                 
-        <div class="row mb-10">
+        <div class="row mb-10 mt-4">
             <div class="bg-gray-1- d-none- d-xl-block col-xl-2 col-wd-2gdot5-">
 
                 <NavForAdminCustomer />

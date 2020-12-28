@@ -37533,6 +37533,12 @@ Sumon custom SCSS style
 }
 
 /*dropdown-item for customer admin dashboard*/
+@media (max-width: 1199px) {
+  .dropdown-list-custome > li {
+    float: left;
+  }
+}
+
 .dropdown-item-custome{
   padding: 0.2rem .5rem !important;
   color: gray !important;

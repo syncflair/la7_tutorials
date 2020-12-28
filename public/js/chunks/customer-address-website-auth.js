@@ -108,7 +108,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row mb-5" }, [
+    _c("div", { staticClass: "row mb-5 mt-4" }, [
       _c(
         "div",
         { staticClass: "d-none- d-xl-block col-xl-2 col-wd-2gdot5-" },
@@ -134,7 +134,7 @@ var render = function() {
                   {
                     staticClass:
                       "btn btn-primary-dark ml-md-2 px-5 px-md-4 px-lg-5 w-100- w-md-auto d-none- d-md-inline-block",
-                    attrs: { to: "/customer-address-form" }
+                    attrs: { to: "/auth/my-address-update" }
                   },
                   [
                     _c("i", { staticClass: "fas fa-plus" }),

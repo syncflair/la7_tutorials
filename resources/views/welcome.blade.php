@@ -8,7 +8,25 @@
             <div class="card">
                 <div class="card-header">{{ __('home.welcome')}}</div>
 
-               
+               <!-- Auth::user()->name -->
+               <!-- {{Auth::user()}} -->
+               <!-- {{Auth::user()->name}} -->
+
+              <br>
+                    @if (Auth::guard('customer')->check())
+                        {{ Auth::guard('customer')->user() }}
+                    @endif
+                    <br>
+                    <!-- {{ Auth::guard('customer')->user() }} -->
+                    
+                    
+                
+
+               <img width="100" src="{{asset('FilesStorage/CommonFiles/avatar.png')}}">
+
+               <!-- <img height="200" src="{{ public_path('settings/sorboraho-kRm1rP7X4ZHpyvgYUcqWlggTt277sx8o5zkHkfKe.png')}}" alt="" /> -->
+               <!--  -->
+               <!-- <img height="200" src="{{ public_path('storage/settings/sorboraho-kRm1rP7X4ZHpyvgYUcqWlggTt277sx8o5zkHkfKe.png')}}" alt="" /> -->
 
                 <!-- <div class="card-header">{{ trans_choice('home.welcome', 1)}}</div> -->
 

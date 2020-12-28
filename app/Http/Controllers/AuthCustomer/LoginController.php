@@ -102,7 +102,7 @@ class LoginController extends Controller
     {
         if (Auth::guard('customer')->check() ) {
                 // return route('dashboard-customer');
-                return route('auth/customer-dashboard');
+                return route('auth/my-dashboard');
         }    
     }  
 
@@ -115,7 +115,7 @@ class LoginController extends Controller
            // return redirect()->intended('dashboard-customer'); //if not this route this will redirect using middleware
 
            return response()->json(['success'=>'1']); 
-           return redirect()->intended('auth/customer-dashboard'); //if not this route this will redirect using middleware
+           return redirect()->intended('auth/my-dashboard'); //if not this route this will redirect using middleware
         }
 
         if ( Auth::guard('customer')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ]) OR Auth::guard('customer')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ]) ) {            

@@ -1,7 +1,8 @@
 <template>
 
-    <div class="container">                
-        <div class="row mb-10">
+    <div class="container">  
+                  
+        <div class="row mb-10 mt-4">
             <div class="d-none- d-xl-block col-xl-2 col-wd-2gdot5-">
 
                 <NavForAdminCustomer />
