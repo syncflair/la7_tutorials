@@ -48,6 +48,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+
 .ec-menu:before {
   content: "\61";
 }

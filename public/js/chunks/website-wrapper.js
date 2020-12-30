@@ -364,13 +364,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           _this.display_error = false; //$('#sidebarContent').hide();     
 
-          $("#sidebarContent").fadeOut("slow"); // Hide login sidebar                              
+          $("#sidebarContent").fadeOut("slow"); // Hide login sidebar      
+          // window.location = '/auth/my-dashboard';  
 
-          _this.$router.push({
-            path: '/auth/my-dashboard'
-          }); //route after successfule submit                   
+          window.location = '/home'; //this.$router.push({ path : '/auth/my-dashboard' });   //route after successfule submit                   
           //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit
-
 
           _this.form.reset(); //reset from after submit 
 
@@ -982,7 +980,8 @@ __webpack_require__.r(__webpack_exports__);
     //   	},
   },
   //end Methods
-  created: function created() {}
+  created: function created() {// console.log(this.baseURL);
+  }
 }); //end export default
 
 /***/ }),
@@ -1225,6 +1224,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -1313,16 +1319,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//const UnitsMasterList = () => import( /* webpackChunkName: "UnitsMasterList-com" */ './UnitsMasterList') 
-//const UnitsMasterForm = () => import( /* webpackChunkName: "UnitsMasterForm-com" */ './UnitsMasterForm')
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+ //for user MapState
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "HeaderTopbar-website",
+  data: function data() {
+    return {
+      ActiveLinkClass: 'active'
+    };
+  },
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['authCustomer'])), {}, {
+    //for active link management
+    currentPage: function currentPage() {
+      return this.$route.path;
+    }
+  }),
   components: {//UnitsMasterList, UnitsMasterForm,
   },
-  data: function data() {
-    return {};
-  },
-  //end data	
   methods: {
     GotoHome: function GotoHome() {//alert('0k');
       //this.$router.push({ name: 'home' });
@@ -1330,7 +1383,30 @@ __webpack_require__.r(__webpack_exports__);
       // if (this.$route.path !== HomePath) {
       // 	this.$router.push(HomePath)
       // }
-    }
+    },
+    Logout: function Logout() {
+      var _this = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      axios.post('/customer/logout').then(function (_ref) {
+        var response = _ref.response;
+
+        //console.log(response); 
+        //if(response.success){             
+        // toastr.success(response.success);         
+        _this.$Progress.finish();
+
+        window.location = '/home'; //this.$router.push({ path : '/auth/login' });   //route after successfule 
+        //this.$router.replace({ path : '/auth/login' });   //route after successfule 
+        //this.$router.go('/auth/login');
+
+        toastr.success('Logout successfule'); //}
+      })["catch"](function () {
+        _this.$Progress.fail();
+      });
+    } //End Logout  
+
   },
   //end Methods
   created: function created() {}
@@ -3208,7 +3284,85 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _vm._m(6)
+    _c("div", { staticClass: "bg-gray-14 py-2" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "flex-center-between d-block d-md-flex" }, [
+          _vm._m(6),
+          _vm._v(" "),
+          _c("div", { staticClass: "text-md-right" }, [
+            _c(
+              "span",
+              { staticClass: "d-inline-block bg-white border rounded p-1" },
+              [
+                _c("img", {
+                  staticClass: "max-width-5",
+                  attrs: {
+                    src: _vm.baseURL + "/website/assets/img/100X60/img1.jpg",
+                    alt: "Image Description"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              { staticClass: "d-inline-block bg-white border rounded p-1" },
+              [
+                _c("img", {
+                  staticClass: "max-width-5",
+                  attrs: {
+                    src: _vm.baseURL + "/website/assets/img/100X60/img2.jpg",
+                    alt: "Image Description"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              { staticClass: "d-inline-block bg-white border rounded p-1" },
+              [
+                _c("img", {
+                  staticClass: "max-width-5",
+                  attrs: {
+                    src: _vm.baseURL + "/website/assets/img/100X60/img3.jpg",
+                    alt: "Image Description"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              { staticClass: "d-inline-block bg-white border rounded p-1" },
+              [
+                _c("img", {
+                  staticClass: "max-width-5",
+                  attrs: {
+                    src: _vm.baseURL + "/website/assets/img/100X60/img4.jpg",
+                    alt: "Image Description"
+                  }
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "span",
+              { staticClass: "d-inline-block bg-white border rounded p-1" },
+              [
+                _c("img", {
+                  staticClass: "max-width-5",
+                  attrs: {
+                    src: _vm.baseURL + "/website/assets/img/100X60/img5.jpg",
+                    alt: "Image Description"
+                  }
+                })
+              ]
+            )
+          ])
+        ])
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -3571,95 +3725,17 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "bg-gray-14 py-2" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "flex-center-between d-block d-md-flex" }, [
-          _c("div", { staticClass: "mb-3 mb-md-0" }, [
-            _vm._v("© "),
-            _c(
-              "a",
-              {
-                staticClass: "font-weight-bold text-gray-90",
-                attrs: { href: "/home" }
-              },
-              [_vm._v("SORBORAHO")]
-            ),
-            _vm._v(" - All rights Reserved")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "text-md-right" }, [
-            _c(
-              "span",
-              { staticClass: "d-inline-block bg-white border rounded p-1" },
-              [
-                _c("img", {
-                  staticClass: "max-width-5",
-                  attrs: {
-                    src: "website/assets/img/100X60/img1.jpg",
-                    alt: "Image Description"
-                  }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              { staticClass: "d-inline-block bg-white border rounded p-1" },
-              [
-                _c("img", {
-                  staticClass: "max-width-5",
-                  attrs: {
-                    src: "website/assets/img/100X60/img2.jpg",
-                    alt: "Image Description"
-                  }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              { staticClass: "d-inline-block bg-white border rounded p-1" },
-              [
-                _c("img", {
-                  staticClass: "max-width-5",
-                  attrs: {
-                    src: "website/assets/img/100X60/img3.jpg",
-                    alt: "Image Description"
-                  }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              { staticClass: "d-inline-block bg-white border rounded p-1" },
-              [
-                _c("img", {
-                  staticClass: "max-width-5",
-                  attrs: {
-                    src: "website/assets/img/100X60/img4.jpg",
-                    alt: "Image Description"
-                  }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              { staticClass: "d-inline-block bg-white border rounded p-1" },
-              [
-                _c("img", {
-                  staticClass: "max-width-5",
-                  attrs: {
-                    src: "website/assets/img/100X60/img5.jpg",
-                    alt: "Image Description"
-                  }
-                })
-              ]
-            )
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "mb-3 mb-md-0" }, [
+      _vm._v("© "),
+      _c(
+        "a",
+        {
+          staticClass: "font-weight-bold text-gray-90",
+          attrs: { href: "/home" }
+        },
+        [_vm._v("SORBORAHO")]
+      ),
+      _vm._v(" - All rights Reserved")
     ])
   }
 ]
@@ -3859,153 +3935,340 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "u-header-topbar py-2 d-none d-xl-block" }, [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "d-flex align-items-center" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "topbar-right ml-auto" }, [
-          _c("ul", { staticClass: "list-inline mb-0" }, [
-            _c(
-              "li",
-              {
-                staticClass:
-                  "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
-              },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "u-header-topbar__nav-link",
-                    attrs: { to: "/404" }
-                  },
-                  [
-                    _c("i", { staticClass: "ec ec-map-pointer mr-1" }),
-                    _vm._v(" 404")
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass:
-                  "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
-              },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "u-header-topbar__nav-link",
-                    attrs: { to: "/categories" }
-                  },
-                  [
-                    _c("i", { staticClass: "ec ec-map-pointer mr-1" }),
-                    _vm._v(" Category")
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass:
-                  "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
-              },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "u-header-topbar__nav-link",
-                    attrs: { to: "/about" }
-                  },
-                  [
-                    _c("i", { staticClass: "ec ec-map-pointer mr-1" }),
-                    _vm._v(" About")
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass:
-                  "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
-              },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "u-header-topbar__nav-link",
-                    attrs: { to: "/contact" }
-                  },
-                  [
-                    _c("i", { staticClass: "ec ec-map-pointer mr-1" }),
-                    _vm._v(" Contact")
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass:
-                  "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
-              },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "u-header-topbar__nav-link",
-                    attrs: { to: "/track-order" }
-                  },
-                  [
-                    _c("i", { staticClass: "ec ec-transport mr-1" }),
-                    _vm._v(" Track Order")
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass:
-                  "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
-              },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "u-header-topbar__nav-link",
-                    attrs: { to: "#" }
-                  },
-                  [
-                    _c("i", { staticClass: "ec ec-transport mr-1" }),
-                    _vm._v("Get Apps")
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _vm._m(2)
+  return _c(
+    "div",
+    { staticClass: "u-header-topbar py-2- py-1 d-none d-xl-block" },
+    [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "d-flex align-items-center" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "topbar-right ml-auto" }, [
+            _c("ul", { staticClass: "list-inline mb-0" }, [
+              _c(
+                "li",
+                {
+                  staticClass:
+                    "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
+                },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "u-header-topbar__nav-link",
+                      attrs: { to: "/404" }
+                    },
+                    [
+                      _c("i", { staticClass: "ec ec-map-pointer mr-1" }),
+                      _vm._v(" 404")
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  staticClass:
+                    "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
+                },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "u-header-topbar__nav-link",
+                      attrs: { to: "/categories" }
+                    },
+                    [
+                      _c("i", { staticClass: "ec ec-map-pointer mr-1" }),
+                      _vm._v(" Category")
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  staticClass:
+                    "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
+                },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "u-header-topbar__nav-link",
+                      attrs: { to: "/about" }
+                    },
+                    [
+                      _c("i", { staticClass: "ec ec-map-pointer mr-1" }),
+                      _vm._v(" About")
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  staticClass:
+                    "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
+                },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "u-header-topbar__nav-link",
+                      attrs: { to: "/contact" }
+                    },
+                    [
+                      _c("i", { staticClass: "ec ec-map-pointer mr-1" }),
+                      _vm._v(" Contact")
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  staticClass:
+                    "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
+                },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "u-header-topbar__nav-link",
+                      attrs: { to: "/track-order" }
+                    },
+                    [
+                      _c("i", { staticClass: "ec ec-transport mr-1" }),
+                      _vm._v(" Track Order")
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  staticClass:
+                    "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
+                },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "u-header-topbar__nav-link",
+                      attrs: { to: "#" }
+                    },
+                    [
+                      _c("i", { staticClass: "ec ec-transport mr-1" }),
+                      _vm._v("Get Apps")
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              !_vm.authCustomer
+                ? _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
+                    },
+                    [_vm._m(1)]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.authCustomer
+                ? _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single"
+                    },
+                    [
+                      _c("div", { staticClass: "d-flex align-items-center" }, [
+                        _c("div", { staticClass: "position-relative" }, [
+                          _vm._m(2),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "dropdown-menu dropdown-unfold",
+                              attrs: {
+                                id: "MyAccountDropdown",
+                                "aria-labelledby": "MyAccountDropdownInvoker"
+                              }
+                            },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item active- dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/auth/my-dashboard" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-tachometer-alt"
+                                  }),
+                                  _vm._v(" Dashboard")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/auth/my-orders" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass:
+                                      "font-size-18 ec ec-shopping-bag"
+                                  }),
+                                  _vm._v(" My Orders")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/auth/my-wishlist" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "font-size-18 ec ec-favorites"
+                                  }),
+                                  _vm._v(" My Wishlist")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/auth/my-profile" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "font-size-18 ec ec-user"
+                                  }),
+                                  _vm._v(" Profile")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/auth/my-address" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "far fa-address-book pl-1"
+                                  }),
+                                  _vm._v(" Address")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/auth/my-vouchers" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "font-size-18 ec ec-payment"
+                                  }),
+                                  _vm._v(" Voucher")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/auth/my-reviews" }
+                                },
+                                [
+                                  _c("i", { staticClass: "far fa-star" }),
+                                  _vm._v(" My Reviews")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  attrs: { href: "javascript:;" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.Logout()
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-sign-out-alt pl-1"
+                                  }),
+                                  _vm._v(" Logout")
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      ])
+                    ]
+                  )
+                : _vm._e()
+            ])
           ])
         ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -4028,83 +4291,30 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "li",
+      "a",
       {
-        staticClass:
-          "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single"
+        staticClass: "u-header-topbar__nav-link",
+        attrs: {
+          id: "sidebarNavToggler",
+          href: "javascript:;",
+          role: "button",
+          "aria-controls": "sidebarContent",
+          "aria-haspopup": "true",
+          "aria-expanded": "false",
+          "data-unfold-event": "click",
+          "data-unfold-hide-on-scroll": "false",
+          "data-unfold-target": "#sidebarContent",
+          "data-unfold-type": "css-animation",
+          "data-unfold-animation-in": "fadeInRight",
+          "data-unfold-animation-out": "fadeOutRight",
+          "data-unfold-duration": "500"
+        }
       },
       [
-        _c("div", { staticClass: "d-flex align-items-center" }, [
-          _c("div", { staticClass: "position-relative" }, [
-            _c(
-              "a",
-              {
-                staticClass:
-                  "dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal",
-                attrs: {
-                  id: "languageDropdownInvoker",
-                  href: "javascript:;",
-                  role: "button",
-                  "aria-controls": "languageDropdown",
-                  "aria-haspopup": "true",
-                  "aria-expanded": "false",
-                  "data-unfold-event": "hover",
-                  "data-unfold-target": "#languageDropdown",
-                  "data-unfold-type": "css-animation",
-                  "data-unfold-duration": "300",
-                  "data-unfold-delay": "300",
-                  "data-unfold-hide-on-scroll": "true",
-                  "data-unfold-animation-in": "slideInUp",
-                  "data-unfold-animation-out": "fadeOut"
-                }
-              },
-              [
-                _c("span", { staticClass: "d-inline-block d-sm-none" }, [
-                  _vm._v("US")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "span",
-                  { staticClass: "d-none d-sm-inline-flex align-items-center" },
-                  [
-                    _c("i", { staticClass: "ec ec-dollar mr-1" }),
-                    _vm._v(" Dollar (US)")
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "dropdown-menu dropdown-unfold",
-                attrs: {
-                  id: "languageDropdown",
-                  "aria-labelledby": "languageDropdownInvoker"
-                }
-              },
-              [
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item active", attrs: { href: "#" } },
-                  [_vm._v("English")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "#" } },
-                  [_vm._v("Deutsch")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "a",
-                  { staticClass: "dropdown-item", attrs: { href: "#" } },
-                  [_vm._v("Español‎")]
-                )
-              ]
-            )
-          ])
-        ])
+        _c("i", { staticClass: "ec ec-user mr-1" }),
+        _vm._v(" Register "),
+        _c("span", { staticClass: "text-gray-50" }, [_vm._v("or")]),
+        _vm._v(" Sign in\n                            ")
       ]
     )
   },
@@ -4113,37 +4323,36 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "li",
+      "a",
       {
         staticClass:
-          "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
+          "dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal",
+        attrs: {
+          id: "MyAccountDropdownInvoker",
+          href: "javascript:;",
+          role: "button",
+          "aria-controls": "MyAccountDropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false",
+          "data-unfold-event": "click",
+          "data-unfold-target": "#MyAccountDropdown",
+          "data-unfold-type": "css-animation",
+          "data-unfold-duration": "300",
+          "data-unfold-delay": "300",
+          "data-unfold-hide-on-scroll": "true",
+          "data-unfold-animation-in": "slideInUp",
+          "data-unfold-animation-out": "fadeOut"
+        }
       },
       [
         _c(
-          "a",
-          {
-            staticClass: "u-header-topbar__nav-link",
-            attrs: {
-              id: "sidebarNavToggler",
-              href: "javascript:;",
-              role: "button",
-              "aria-controls": "sidebarContent",
-              "aria-haspopup": "true",
-              "aria-expanded": "false",
-              "data-unfold-event": "click",
-              "data-unfold-hide-on-scroll": "false",
-              "data-unfold-target": "#sidebarContent",
-              "data-unfold-type": "css-animation",
-              "data-unfold-animation-in": "fadeInRight",
-              "data-unfold-animation-out": "fadeOutRight",
-              "data-unfold-duration": "500"
-            }
-          },
+          "span",
+          { staticClass: "d-none d-sm-inline-flex align-items-center" },
           [
             _c("i", { staticClass: "ec ec-user mr-1" }),
-            _vm._v(" Register "),
-            _c("span", { staticClass: "text-gray-50" }, [_vm._v("or")]),
-            _vm._v(" Sign in\n                            ")
+            _vm._v(
+              "\n                                             My Account\n                                        "
+            )
           ]
         )
       ]

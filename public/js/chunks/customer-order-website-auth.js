@@ -233,7 +233,7 @@ var staticRenderFns = [
             [
               _c(
                 "h3",
-                { staticClass: "section-title mb-0 pb-2 pl-2 font-size-25" },
+                { staticClass: "section-title mb-0 pb-2 pl-2 font-size-20" },
                 [_vm._v("My Orders")]
               )
             ]

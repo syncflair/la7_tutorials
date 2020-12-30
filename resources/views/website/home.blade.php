@@ -8,14 +8,22 @@
 @section('content')
 
 
+	
+
     <!-- Router-view passing through admin wrapper component -->
-    <website-wrapper 
-    	:isitwebsite="1" 
-    	:authcustomer="{{ Auth::guard('customer')->check() ? Auth::guard('customer')->user() : 'null' }}" 
-    ></website-wrapper>
+    @if( Auth::guard('customer')->check() )
+	    <website-wrapper 
+	    	:isitwebsite="1" 
+	    	:authcustomer="{{ Auth::guard('customer')->user() }}" 
+	    ></website-wrapper>
+    @else
+    	<website-wrapper 
+	    	:isitwebsite="1" 
+	    ></website-wrapper>
+    @endif
 
+    <!-- Auth::guard('customer')->check() ? Auth::guard('customer')->user() : 'null' -->
 
-    
 
 @endsection   
 

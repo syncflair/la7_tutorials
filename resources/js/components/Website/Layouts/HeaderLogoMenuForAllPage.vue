@@ -1,5 +1,5 @@
 <template>
-<div class="py-2 py-xl-4 bg-primary-down-lg d-none- d-xl-block- " :class="topHeaderFixedClass">
+<div class="py-2 py-xl-4- py-xl-2 bg-primary-down-lg d-none- d-xl-block- " :class="topHeaderFixedClass">
     <div class="container my-0dot5 my-xl-0">
         <div class="row align-items-center">
             <!-- Logo-offcanvas-menu -->

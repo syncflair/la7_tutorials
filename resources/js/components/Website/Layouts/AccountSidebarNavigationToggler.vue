@@ -372,9 +372,12 @@
                     this.display_error = false;
                   
                     //$('#sidebarContent').hide();     
-                    $("#sidebarContent").fadeOut("slow"); // Hide login sidebar                              
+                    $("#sidebarContent").fadeOut("slow"); // Hide login sidebar      
+
+                    // window.location = '/auth/my-dashboard';  
+                    window.location = '/home';                        
                                       
-                    this.$router.push({ path : '/auth/my-dashboard' });   //route after successfule submit                   
+                    //this.$router.push({ path : '/auth/my-dashboard' });   //route after successfule submit                   
                     //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit
 
                     this.form.reset();  //reset from after submit 

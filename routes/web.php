@@ -70,6 +70,8 @@ Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
     Route::get('auth/my-dashboard', 'AdminCustomer\AdminCustomerController@index')->name('customer-dashboard');
     Route::post('customer/logout', 'AuthCustomer\LoginController@logout')->name('customer.logout');
 
+    Route::get('auth/getAuthCustomerData', 'AdminCustomer\AdminCustomerController@getAuthCustomerData');//commonStoreForCustomer
+
     Route::resource('auth/my-profile', 'AdminCustomer\AdminCustomerProfileController',
       ['except'=>['create','show','edit','update'] ]);
     Route::resource('auth/my-orders', 'AdminCustomer\AdminCustomerOrdersController',

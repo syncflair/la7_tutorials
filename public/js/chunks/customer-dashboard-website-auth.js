@@ -85,6 +85,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
  //for user MapState
 
@@ -98,7 +103,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     NavForAdminCustomer: _Include_NavForAdminCustomer__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {},
-  created: function created() {},
+  created: function created() {
+    this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data            
+  },
   mounted: function mounted() {}
 });
 
@@ -133,11 +140,13 @@ var render = function() {
         { staticClass: "bg-gray-1 rounded-lg- col-xl-10 col-wd-9gdot5-" },
         [
           _vm._m(0),
+          _vm._v(" "),
           _vm._v(
             "\r\n\r\n            " +
-              _vm._s(_vm.authCustomer.name) +
-              "\r\n\r\n        "
-          )
+              _vm._s(_vm.authCustomer) +
+              "\r\n\r\n            "
+          ),
+          _c("br")
         ]
       )
     ])

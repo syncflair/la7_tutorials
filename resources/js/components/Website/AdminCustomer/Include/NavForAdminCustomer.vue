@@ -6,7 +6,7 @@
                 <img src="https://sorboraho.s3-ap-southeast-1.amazonaws.com/users/mahmudur-rahman-wYAVdNBwSUHZaf4VQcBeE2R806wJqwZT7zHgEl0h.png" alt="User Image" class="img-circle elevation-2">
             </div> -->
             <div class="info border- bg-gray-1- rounded-lg-"> 
-                    <span class="font-size-10 text-black">  name </span>
+                    <span v-show="authCustomer" class="font-size-10 text-black"> {{authCustomer.name}} </span>
                     <br> 
                     <span class="btn- px-1 bg-success text-white font-size-9- rounded-lg">
                         <i class="fas fa-check font-size-8"></i>
@@ -20,38 +20,49 @@
             <!-- Menu List -->
             <li class="border-bottom-">
                 <router-link to="/auth/my-dashboard" class="dropdown-item dropdown-item-custome transition-3d-hover" 
-                	:class="[currentPage.includes('my-dashboard')] ? ActiveLinkClass : '' " > Dashboard
+                	:class="[currentPage.includes('my-dashboard')] ? ActiveLinkClass : '' " >
+                    <!-- <i class="fas fa-tachometer-alt"></i>  -->Dashboard
                 </router-link>
             </li>
             <li>
             	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-orders"
-	            	:class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' " >My Orders
+	            	:class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' " >
+                    <!-- <i class="font-size-18 ec ec-shopping-bag"></i>  -->My Orders
+                    <!-- <i class="fas fa-shopping-bag"></i> --> 
+                    <!-- <i class="far fa-times-circle"></i> -->
 	            </router-link>
             </li>
             <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-wishlist"
-            	:class="[currentPage.includes('my-wishlist')] ? ActiveLinkClass : '' "  >Wishlist
+            	:class="[currentPage.includes('my-wishlist')] ? ActiveLinkClass : '' "  >
+                <!-- <i class="far fa-heart"></i> -->
+                <!-- <i class="font-size-18 ec ec-favorites"></i>  -->Wishlist
             	</router-link>
-            </li>
+            </li>    
             
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-reviews" 
-            	:class="[currentPage.includes('my-reviews')] ? ActiveLinkClass : '' " >My Reviews
-            	</router-link>
-            </li>
-            <li>
             	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-profile"
-	            	:class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' "  > My Profile
+	            	:class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' "  >
+                    <!-- <i class="far fa-user"></i> -->
+                    <!-- <i class="font-size-18 ec ec-user"></i> --> My Profile
 	            </router-link>
             </li>
             <li>
             	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-address" 
-            	:class="[currentPage.includes('my-address')] ? ActiveLinkClass : '' " > Address Book
+            	:class="[currentPage.includes('my-address')] ? ActiveLinkClass : '' " >
+                <!-- <i class="far fa-address-card"></i>  -->Address Book
             	</router-link>
             </li>
             <li>
             	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-vouchers" 
-            	:class="[currentPage.includes('my-vouchers')] ? ActiveLinkClass : '' " > Vouchers
+            	:class="[currentPage.includes('my-vouchers')] ? ActiveLinkClass : '' " > 
+                <!-- <i class="fas fa-money-bill"></i> --><!--  <i class="font-size-18 ec ec-payment"></i>  -->Vouchers
             	</router-link>
+            </li>
+            <li>
+                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-reviews" 
+                :class="[currentPage.includes('my-reviews')] ? ActiveLinkClass : '' " > 
+                <!-- <i class="far fa-star"></i>  -->My Reviews
+                </router-link>
             </li>
             <li class="border-top-">
             	<a class="dropdown-item dropdown-item-custome transition-3d-hover" @click.prevent="Logout()" href="javascript:;"><i class="fas fa-sign-out-alt"></i> Logout</a>
@@ -67,36 +78,33 @@
 
     </div>
 </template>
+
 <script>
-
     import { mapState } from 'vuex' //for user MapState
-
-	export default {
+    
+    export default {
         name: "nav-for-admin-customer-website-auth",
         data (){      
-            return {         
-                ActiveLinkClass: 'active',        
+            return { 
+                ActiveLinkClass: 'active',
             }
         },
 
-        cumputed:{            
+        computed: {
 
-            ...mapState( 'commonStoreForWebsite', ['authCustomer'] ),
+          ...mapState( 'commonStoreForWebsite', ['authCustomer'] ),
 
-            //for active link management
-        	currentPage(){
-        		return this.$route.path;
-        	},
+          //for active link management
+            currentPage(){
+                return this.$route.path;
+            },
 
-            
         },
 
         components:{
-             
         }, 
 
         methods: { 
-
             Logout(){  
               this.$Progress.start(); //using progress-bar package
 
@@ -107,9 +115,12 @@
                   // toastr.success(response.success);         
                   this.$Progress.finish();  
 
-                  this.$router.push({ path : '/auth/login' });   //route after successfule 
-                  //this.$router.replace({ path : '/auth/login' });   //route after successfule 
-                  //this.$router.go('/auth/login');
+                  window.location = '/home';
+
+                  //this.$router.push({ path : '/home' });   //route after successfule 
+                  //this.$router.replace({ path : '/home' });   //route after successfule 
+                  //this.$router.go('/home');
+                  
                   toastr.success('Logout successfule'); 
                 //}
 
@@ -117,15 +128,15 @@
               .catch( () => {
                 this.$Progress.fail();
               })   
-            },  //End SendPublicQueryEmail  
-
-
+            },  //End Logout 
         },           
 
         created(){
         },
            
         mounted() {
+            // console.log(this.baseURL);
         },
     }
 </script>
+

@@ -37532,6 +37532,11 @@ Sumon custom SCSS style
     z-index: 10;
 }
 
+.nav-link-custom{
+  font-size:15px;
+}
+
+
 /*dropdown-item for customer admin dashboard*/
 @media (max-width: 1199px) {
   .dropdown-list-custome > li {
@@ -37540,7 +37545,7 @@ Sumon custom SCSS style
 }
 
 .dropdown-item-custome{
-  padding: 0.2rem .5rem !important;
+  padding: 0.4rem .5rem !important;
   color: gray !important;
 }
 .dropdown-item-custome.router-link-active.active{
@@ -37548,7 +37553,7 @@ Sumon custom SCSS style
 }
 .dropdown-item-custome:hover{
   font-weight: 600;
-  text-decoration: underline;
+  /*text-decoration: underline;*/
 }
 
 /*Cart Wishlist custome css*/

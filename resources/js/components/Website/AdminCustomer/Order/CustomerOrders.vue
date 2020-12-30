@@ -15,7 +15,7 @@
         <div class="bg-gray-1 rounded-lg col-xl-10 col-wd-9gdot5-">
             <div class="row ">
                 <div class="border-bottom border-color-1 mb-1 col-6">
-                    <h3 class="section-title mb-0 pb-2 pl-2 font-size-25">My Orders</h3>
+                    <h3 class="section-title mb-0 pb-2 pl-2 font-size-20">My Orders</h3>
                 </div>
                 <div class="d-md-flex col-6">
                         <a href="../shop/checkout.html" class="btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100- w-md-auto d-none- d-md-inline-block">Return</a>

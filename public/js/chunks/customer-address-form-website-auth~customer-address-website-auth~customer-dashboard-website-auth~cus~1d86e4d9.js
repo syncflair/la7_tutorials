@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~0e609fe8"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~1d86e4d9"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************!*\
@@ -85,18 +85,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -106,7 +94,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ActiveLinkClass: 'active'
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['authCustomer'])), {}, {
+  cumputed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['authCustomer'])), {}, {
     //for active link management
     currentPage: function currentPage() {
       return this.$route.path;
@@ -127,20 +115,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         // toastr.success(response.success);         
         _this.$Progress.finish();
 
-        window.location = '/home'; //this.$router.push({ path : '/home' });   //route after successfule 
-        //this.$router.replace({ path : '/home' });   //route after successfule 
-        //this.$router.go('/home');
+        _this.$router.push({
+          path: '/auth/login'
+        }); //route after successfule 
+        //this.$router.replace({ path : '/auth/login' });   //route after successfule 
+        //this.$router.go('/auth/login');
+
 
         toastr.success('Logout successfule'); //}
       })["catch"](function () {
         _this.$Progress.fail();
       });
-    } //End Logout 
+    } //End SendPublicQueryEmail  
 
   },
   created: function created() {},
-  mounted: function mounted() {// console.log(this.baseURL);
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -167,36 +157,7 @@ var render = function() {
         "mb-8 border- border-width-2- border-color-3- borders-radius-6"
     },
     [
-      _c(
-        "div",
-        {
-          staticClass:
-            "user-panel pl-2- pr-2- mt-2 pb-2 mb-1 d-flex border-bottom-primary- border-bottom border-top- section-title"
-        },
-        [
-          _c("div", { staticClass: "info border- bg-gray-1- rounded-lg-" }, [
-            _c(
-              "span",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.authCustomer,
-                    expression: "authCustomer"
-                  }
-                ],
-                staticClass: "font-size-10 text-black"
-              },
-              [_vm._v(" " + _vm._s(_vm.authCustomer.name) + " ")]
-            ),
-            _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
-        ]
-      ),
+      _vm._m(0),
       _vm._v(" "),
       _c(
         "ul",
@@ -219,7 +180,7 @@ var render = function() {
                     : undefined,
                   attrs: { to: "/auth/my-dashboard" }
                 },
-                [_vm._v("Dashboard\n                ")]
+                [_vm._v(" Dashboard\n                ")]
               )
             ],
             1
@@ -238,7 +199,7 @@ var render = function() {
                     : undefined,
                   attrs: { to: "/auth/my-orders" }
                 },
-                [_vm._v("My Orders\n                    ")]
+                [_vm._v("My Orders\n\t            ")]
               )
             ],
             1
@@ -258,6 +219,25 @@ var render = function() {
                   attrs: { to: "/auth/my-wishlist" }
                 },
                 [_vm._v("Wishlist\n            \t")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass:
+                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                  class:  true
+                    ? _vm.ActiveLinkClass
+                    : undefined,
+                  attrs: { to: "/auth/my-reviews" }
+                },
+                [_vm._v("My Reviews\n            \t")]
               )
             ],
             1
@@ -295,7 +275,7 @@ var render = function() {
                     : undefined,
                   attrs: { to: "/auth/my-address" }
                 },
-                [_vm._v("Address Book\n            \t")]
+                [_vm._v(" Address Book\n            \t")]
               )
             ],
             1
@@ -314,26 +294,7 @@ var render = function() {
                     : undefined,
                   attrs: { to: "/auth/my-vouchers" }
                 },
-                [_vm._v("Vouchers\n            \t")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass:
-                    "dropdown-item dropdown-item-custome transition-3d-hover",
-                  class:  true
-                    ? _vm.ActiveLinkClass
-                    : undefined,
-                  attrs: { to: "/auth/my-reviews" }
-                },
-                [_vm._v("My Reviews\n                ")]
+                [_vm._v(" Vouchers\n            \t")]
               )
             ],
             1
@@ -370,14 +331,32 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "span",
+      "div",
       {
-        staticClass: "btn- px-1 bg-success text-white font-size-9- rounded-lg"
+        staticClass:
+          "user-panel pl-2- pr-2- mt-2 pb-2 mb-1 d-flex border-bottom-primary- border-bottom border-top- section-title"
       },
       [
-        _c("i", { staticClass: "fas fa-check font-size-8" }),
-        _vm._v(" "),
-        _c("small", [_vm._v("Verified")])
+        _c("div", { staticClass: "info border- bg-gray-1- rounded-lg-" }, [
+          _c("span", { staticClass: "font-size-10 text-black" }, [
+            _vm._v("  name ")
+          ]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass:
+                "btn- px-1 bg-success text-white font-size-9- rounded-lg"
+            },
+            [
+              _c("i", { staticClass: "fas fa-check font-size-8" }),
+              _vm._v(" "),
+              _c("small", [_vm._v("Verified")])
+            ]
+          )
+        ])
       ]
     )
   }

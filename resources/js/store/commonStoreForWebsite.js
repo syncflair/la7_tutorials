@@ -5,7 +5,9 @@ const commonStoreForWebsite ={
 	state: () => ({
 	    //accessable from any where 
       authCustomer: {},
-      isitwebsiteCheck:'',      
+      isitwebsiteCheck:'',  
+
+      //authCustomerData: {},    
       
 	}),/*end state*/
 
@@ -16,7 +18,11 @@ const commonStoreForWebsite ={
 
   mutations: {
       //commit from resources/js/components/Website/WebsiteWrapper.vue
-      AUTH_CUSTOMER_CHECK(state, data) { return state.authCustomer = data; },
+      AUTH_CUSTOMER_CHECK(state, data) { return state.authCustomer = data; }, //
+
+
+      AUTH_CUSTOMER_DATA(state, data) { return state.authCustomer = data; },
+      // AUTH_CUSTOMER_DATA(state, data) { return state.authCustomerData = data; },
 
 
       //for website public
@@ -24,7 +30,15 @@ const commonStoreForWebsite ={
       
   },/*end Mutations*/
 
-  actions: {         
+  actions: {    
+
+    //get auth customer data after login if any later update 
+    fetchAuthCustomerData(context){
+        axios.get('/auth/getAuthCustomerData')
+        .then( (response) => {
+          context.commit('AUTH_CUSTOMER_DATA', response.data);
+        }).catch( () => { })
+      },     
 
   } /*end actions*/
 

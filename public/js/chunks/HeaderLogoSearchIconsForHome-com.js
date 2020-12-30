@@ -243,7 +243,8 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "py-2 py-xl-5 bg-primary-down-lg d-none- d-xl-block-",
+      staticClass:
+        "py-2 py-xl-5- py-xl-4 bg-primary-down-lg d-none- d-xl-block-",
       class: _vm.topHeaderFixedClass
     },
     [

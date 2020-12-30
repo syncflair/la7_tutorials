@@ -150,9 +150,12 @@
 
                     if(data.success){ 
                       this.$Progress.finish();
-                      this.display_error = false;                     
+                      this.display_error = false;  
 
-                      this.$router.push({ path : '/auth/my-dashboard' });   //route after successfule submit                   
+                      // window.location = '/auth/my-dashboard';   
+                      window.location = '/home';   
+                      //this.$router.go('/auth/my-dashboard');
+                      //this.$router.push({ path : '/auth/my-dashboard' });   //route after successfule submit                   
                       //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit 
 
                       this.form.reset();  //reset from after submit

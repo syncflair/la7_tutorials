@@ -57,7 +57,12 @@
                 </div>   
             </div>
 
-            {{ authCustomer.name }}
+            <!-- <h4 v-show="authCustomer"> {{ authCustomer.name }} </h4> -->
+
+            {{ authCustomer }}
+
+            <br>
+
 
         </div>
     </div>
@@ -92,6 +97,7 @@
         },           
 
         created(){
+            this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data            
         },
            
         mounted() {

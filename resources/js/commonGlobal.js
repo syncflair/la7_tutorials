@@ -5,6 +5,7 @@ export default {
 	data(){
         return {
         	//myName: 'Md. Mahmudur Rahman',
+          baseURL: window.location.origin, //window.location.host -- to get host name, use for full path img
         }
     }, 
 
