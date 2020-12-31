@@ -37533,7 +37533,10 @@ Sumon custom SCSS style
 }
 
 .nav-link-custom{
-  font-size:15px;
+  font-size:14px !important;
+}
+.nav-link-custom .active{
+
 }
 
 

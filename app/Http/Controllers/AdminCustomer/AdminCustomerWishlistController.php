@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 class AdminCustomerWishlistController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+       $this->middleware('auth:customer');
+    }
+    
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

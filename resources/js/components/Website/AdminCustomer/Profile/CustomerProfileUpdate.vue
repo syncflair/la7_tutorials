@@ -27,7 +27,7 @@
                             <div class="position-relative bg-white- text-center- text-left z-index-2 pb-3">
                                 <ul class="nav nav-classic nav-tab justify-content-left justify-content-center-" id="pills-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active " id="pills-one-example1-tab" data-toggle="pill" href="#pills-one-example1" role="tab" aria-controls="pills-one-example1" aria-selected="true">
+                                        <a class="nav-link nav-link-custom active " id="pills-one-example1-tab" data-toggle="pill" href="#pills-one-example1" role="tab" aria-controls="pills-one-example1" aria-selected="true">
                                             <div class="d-md-flex justify-content-md-center align-items-md-center">
                                                 General Details
                                             </div>
@@ -64,32 +64,37 @@
                                 <div class="tab-pane fade pt-2 show active" id="pills-one-example1" role="tabpanel" aria-labelledby="pills-one-example1-tab">
                                     
                                     <!-- Profile Form -->
-                                    <form class="js-validate-" novalidate="novalidate-">
+                                    <form class="js-validate-" novalidate="novalidate-" @submit.prevent="CustomerProfileUpdate()">
                                         <div class="row text-center-">
                                             <div class="col-md-12">
-                                                <div class="js-form-message mb-4">
+                                                <div class="js-form-message- mb-4">
                                                     <label class="form-label"> Full Name </label>
-                                                    <input type="text" class="form-control">
+                                                    <input v-model="form.name" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
+                                                    <has-error :form="form" field="name"></has-error>
                                                 </div>
                                             </div>
 
                                             <!-- <div class="w-100"></div> -->
+                                            <!-- data-live-search="true" -->
                                             <div class="col-md-6">
-                                                <div class="js-form-message mb-4">
+                                                <div class="js-form-message- mb-4">
                                                     <label class="form-label"> Gender </label>
-                                                    <select class="form-control js-select selectpicker dropdown-select"
-                                                        data-live-search="true"
-                                                        data-style="form-control border-color-1 font-weight-normal">
-                                                        <option value="">Male</option>
-                                                        <option value="AF">Female</option>                                           
+                                                    <select v-model="form.gender" class="form-control js-select- selectpicker- dropdown-select"  data-style="form-control border-color-1 font-weight-normal" name="gender" :class="{ 'is-invalid': form.errors.has('gender') }" >
+                                                        <option disabled value="">Select gender ..</option>                
+                                                        <option v-for="gt in gender_type" v-bind:value="gt.name">
+                                                          {{gt.name}}
+                                                        </option>                       
                                                     </select>
+                                                    <has-error :form="form" field="gender"></has-error>
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
-                                                <div class="js-form-message mb-4">
-                                                    <label class="form-label">Dath of Birth</label>
-                                                    <input type="date" class="form-control"  placeholder="">
+                                                <div class="js-form-message- mb-4">
+                                                    <label  class="form-label">Dath of Birth</label>
+                                                    <input v-model="form.date_of_birth" type="date" class="form-control"
+                                                    :class="{ 'is-invalid': form.errors.has('date_of_birth') }"  placeholder="">
+                                                    <has-error :form="form" field="date_of_birth"></has-error>
                                                 </div>
                                             </div>                                        
                                         </div>
@@ -104,12 +109,13 @@
 
                                 <div class="tab-pane fade pt-2" id="pills-two-example1" role="tabpanel" aria-labelledby="pills-two-example1-tab">
                                     <!-- Email Form -->
-                                    <form class="js-validate-" novalidate="novalidate-">
+                                    <form class="js-validate-" novalidate="novalidate-" @submit.prevent="CustomerChangeEmail()">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="js-form-message mb-6">
+                                            <div class="col-md-6 offset-md-3">
+                                                <div class="js-form-message- mb-6">
                                                     <label class="form-label">Email</label>
-                                                    <input type="email" class="form-control" >
+                                                    <input v-model="form.email" type="email" class="form-control" :class="{ 'is-invalid': form.errors.has('email') }" >
+                                                    <has-error :form="form" field="email"></has-error>
                                                 </div>
                                             </div>
                                         </div>
@@ -124,12 +130,13 @@
 
                                 <div class="tab-pane fade pt-2" id="pills-three-example1" role="tabpanel" aria-labelledby="pills-three-example1-tab">
                                     <!-- Phone Form -->
-                                    <form class="js-validate-" novalidate="novalidate-">
+                                    <form class="js-validate-" novalidate="novalidate-" @submit.prevent="CustomerChangePhone()">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="js-form-message mb-6">
+                                            <div class="col-md-6 offset-md-3">
+                                                <div class="js-form-message- mb-6">
                                                     <label class="form-label">Phone</label>
-                                                    <input type="text" class="form-control" placeholder="+1 (062) 109-9222" >
+                                                    <input v-model="form.phone" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('phone') }" placeholder="" >
+                                                    <has-error :form="form" field="phone"></has-error>
                                                 </div>
                                             </div>
                                         </div>
@@ -144,24 +151,27 @@
 
                                 <div class="tab-pane fade pt-2" id="pills-four-example1" role="tabpanel" aria-labelledby="pills-four-example1-tab">
                                     <!-- Password Form -->
-                                    <form class="js-validate-" novalidate="novalidate-">
+                                    <form class="js-validate-" novalidate="novalidate-" @submit.prevent="CustomerChangePassword()">
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="js-form-message mb-4">
+                                        <div class="col-md-4 col-sm-12">
+                                            <div class="js-form-message- mb-4">
                                                 <label class="form-label"> Old Password </label>
-                                                <input type="password" class="form-control">
+                                                <input v-model="form.old_password" type="password" class="form-control" :class="{ 'is-invalid': form.errors.has('old_password') }">
+                                                <has-error :form="form" field="old_password"></has-error>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="js-form-message mb-4">
+                                        <div class="col-md-4 col-sm-12">
+                                            <div class="js-form-message- mb-4">
                                                 <label class="form-label"> New Password </label>
-                                                <input type="password" class="form-control">
+                                                <input v-model="form.password" type="password" class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
+                                                <has-error :form="form" field="password"></has-error>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="js-form-message mb-4">
+                                        <div class="col-md-4 col-sm-12">
+                                            <div class="js-form-message- mb-4">
                                                 <label class="form-label"> Retype Password </label>
-                                                <input type="password" class="form-control">
+                                                <input v-model="form.password_confirmation" type="password" class="form-control" :class="{ 'is-invalid': form.errors.has('password_confirmation') }">
+                                                <has-error :form="form" field="password_confirmation"></has-error>
                                             </div>
                                         </div>
                                     </div>
@@ -202,7 +212,25 @@
     export default {
         name: "customer-Profile-Update-website-auth",
         data (){      
-            return {         
+            return { 
+                gender_type: [
+                  { name: 'Male' },
+                  { name: 'Female' },
+                  { name: 'Other' },
+                ], 
+                //editMode: false, //Use this for add edit using the same form 
+                form: new Form({
+                    id:'',
+                    name:'',
+                    email:'', 
+                    phone:'', 
+                    password:'', 
+                    old_password:'', 
+                    password_confirmation: '', 
+                    gender:'', 
+                    date_of_birth:'',                 
+                }),
+
             }
         },
 
@@ -217,9 +245,112 @@
         }, 
 
         methods: { 
+            editData(data){
+                //this.editMode = true;
+                this.form.fill(data);               
+            },
+
+            CustomerProfileUpdate(){
+                this.$Progress.start(); //using progress-bar package
+
+                this.form.post('/auth/CustomerProfileUpdate')
+                .then(({ data }) => { 
+                    this.$Progress.finish();
+                    if(data.success){
+                        this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data 
+                        toastr.success(data.success); 
+                    }
+                    if(data.error){
+                        this.$Progress.fail();
+                        toastr.warning(data.error);
+                    }
+                    //console.log(data);
+                })
+                .catch( (data) => {
+                this.$Progress.fail();
+                toastr.warning('The given data was invalid.');
+                // console.log(data.message);
+                })
+            },
+
+            CustomerChangeEmail(){
+                this.$Progress.start(); //using progress-bar package
+
+                this.form.post('/auth/CustomerChangeEmail')
+                .then(({ data }) => { 
+                    this.$Progress.finish();
+                    if(data.success){
+                        this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data 
+                        toastr.success(data.success); 
+                    }
+                    if(data.error){
+                        this.$Progress.fail();
+                        toastr.warning(data.error);
+                    }
+                })
+                .catch( (data) => {
+                this.$Progress.fail();
+                toastr.warning('The given data was invalid.');
+                // console.log(data.message);
+                })
+            },
+
+            CustomerChangePhone(){
+                this.$Progress.start(); //using progress-bar package
+
+                this.form.post('/auth/CustomerChangePhone')
+                .then(({ data }) => { 
+                    this.$Progress.finish();
+                    if(data.success){
+                        this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data 
+                        toastr.success(data.success); 
+                    }
+                    if(data.error){
+                        this.$Progress.fail();
+                        toastr.warning(data.error);
+                    }
+                })
+                .catch( (data) => {
+                this.$Progress.fail();
+                toastr.warning('The given data was invalid.');
+                // console.log(data.message);
+                })
+            },
+
+            CustomerChangePassword(){
+                this.$Progress.start(); //using progress-bar package
+
+                this.form.post('/auth/CustomerChangePassword')
+                .then(({ data }) => { 
+                    this.$Progress.finish();
+                    if(data.success){
+                        //this.form.reset();  //reset from after submit
+                        this.form.old_password = '';
+                        this.form.password = '';
+                        this.form.password_confirmation = '';
+
+                        this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data                         
+                        toastr.success(data.success); 
+                        //console.log(data.success); 
+                    }
+                    if(data.error){
+                        this.$Progress.fail();
+                        toastr.warning(data.error);
+                    }
+                })
+                .catch( (data) => {
+                this.$Progress.fail();
+                toastr.warning('The given data was invalid.');
+                // console.log(data.message);
+                })
+            }
+
         },           
 
         created(){
+            this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data 
+
+            this.editData(this.authCustomer);
         },
            
         mounted() {

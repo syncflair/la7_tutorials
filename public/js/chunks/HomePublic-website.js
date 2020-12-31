@@ -2196,7 +2196,8 @@ __webpack_require__.r(__webpack_exports__);
     FooterTopWidget: _CommonLayouts_FooterTopWidget_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
   },
   methods: {},
-  created: function created() {},
+  created: function created() {//this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data 
+  },
   mounted: function mounted() {
     // initialization of countdowns
     var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {

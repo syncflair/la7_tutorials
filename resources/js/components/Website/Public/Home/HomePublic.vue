@@ -123,6 +123,7 @@
         },           
 
         created(){
+            //this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data 
         },
            
         mounted() {

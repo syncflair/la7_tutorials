@@ -161,9 +161,9 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.display_error = false; // window.location = '/auth/my-dashboard';   
 
-          window.location = '/home'; //this.$router.go('/auth/my-dashboard');
-          //this.$router.push({ path : '/auth/my-dashboard' });   //route after successfule submit                   
-          //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit 
+          window.location = '/home'; //this.$router.push({ path : '/home' });   //route after successfule submit                   
+          //this.$router.replace({ path : '/auth/my-dashboard' });   //route after successfule submit 
+          //this.$router.go('/auth/my-dashboard');
 
           _this.form.reset(); //reset from after submit
 

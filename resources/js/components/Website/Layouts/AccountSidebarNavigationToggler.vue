@@ -375,10 +375,13 @@
                     $("#sidebarContent").fadeOut("slow"); // Hide login sidebar      
 
                     // window.location = '/auth/my-dashboard';  
-                    window.location = '/home';                        
+                    //window.location = '/home'; 
+                    this.$router.go();   
+
+                    //this.$router.reload(); //self reload                     
                                       
-                    //this.$router.push({ path : '/auth/my-dashboard' });   //route after successfule submit                   
-                    //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit
+                    //this.$router.push({ path : '/home' });   //route after successfule submit                   
+                    //this.$router.replace({ path : '/auth/my-dashboard' });   //route after successfule submit
 
                     this.form.reset();  //reset from after submit 
 
@@ -417,9 +420,11 @@
 
                     this.$Progress.finish(); 
 
-                    $('#sidebarContent').hide('fist',function(){});                   
+                    $('#sidebarContent').hide('fist',function(){}); 
 
-                    this.$router.push({ path : '/home' });   //route after successfule submit                   
+                    window.location = '/home';                  
+
+                    //this.$router.push({ path : '/home' });   //route after successfule submit                   
                     // this.$router.push({ path : '/auth/login' });   //route after successfule submit                   
                     //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit 
 

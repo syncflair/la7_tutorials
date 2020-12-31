@@ -111,6 +111,47 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  //for user MapState
 
@@ -198,16 +239,20 @@ var render = function() {
                     _vm._v(
                       " " +
                         _vm._s(
-                          _vm._f("formatDate")(_vm.authCustomer.created_at)
+                          _vm._f("formatDate")(_vm.authCustomer.date_of_birth)
                         ) +
                         " "
                     )
                   ])
                 ]),
                 _vm._v(" "),
-                _vm._m(1),
-                _vm._v(" "),
-                _vm._m(2),
+                _c("div", { staticClass: "col-lg-1 col-6 mb-1 col-6-" }, [
+                  _c("h3", { staticClass: " mb-0 pb-1 pl-2- font-size-14" }, [
+                    _vm._v("Gender")
+                  ]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(_vm.authCustomer.gender))])
+                ]),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -217,12 +262,94 @@ var render = function() {
                       "router-link",
                       {
                         staticClass:
-                          "btn btn-primary ml-md-2 px-3 px-md-4 px-lg-3 w-100- w-md-auto d-none- d-md-inline-block",
+                          "btn btn-primary ml-md-2 px-2 px-md-4 px-lg-3 w-100- w-md-auto d-none- d-md-inline-block",
                         attrs: { to: "/auth/my-profile-update" }
                       },
                       [
                         _c("i", { staticClass: "fas fa-plus" }),
                         _vm._v(" Edit Profile")
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-12" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "mb-4 w-100 wishlist-table cart-wishlist-custome"
+                    },
+                    [
+                      _c("div", { staticClass: "table-responsive-" }, [
+                        _c(
+                          "table",
+                          { staticClass: "table", attrs: { cellspacing: "0" } },
+                          [
+                            _vm._m(1),
+                            _vm._v(" "),
+                            _c("tbody", [
+                              _c("tr", [
+                                _vm._m(2),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  { staticClass: "text-right" },
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto",
+                                        attrs: { to: "/auth/my-address-update" }
+                                      },
+                                      [
+                                        _c("i", { staticClass: "far fa-edit" }),
+                                        _vm._v(" Edit")
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto",
+                                        attrs: { to: "" }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-trash-alt"
+                                        }),
+                                        _vm._v(" Delete")
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              ])
+                            ])
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "col-lg-12 col-12 mb-1 text-right" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass:
+                          "btn btn-primary ml-md-2 px-2 px-md-4 px-lg-3 w-100- w-md-auto d-none- d-md-inline-block",
+                        attrs: { to: "/auth/my-address-update" }
+                      },
+                      [
+                        _c("i", { staticClass: "fas fa-plus" }),
+                        _vm._v(" Add Address")
                       ]
                     )
                   ],
@@ -259,24 +386,24 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-1 col-6 mb-1 col-6-" }, [
-      _c("h3", { staticClass: " mb-0 pb-1 pl-2- font-size-14" }, [
-        _vm._v("Gender")
-      ]),
-      _vm._v(" "),
-      _c("p", [_vm._v("Male")])
+    return _c("thead", [
+      _c("tr", [
+        _c("th", { staticClass: "product-name" }, [_vm._v("Address")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "product-subtotal min-width-200-md-lg" }, [
+          _vm._v(" ")
+        ])
+      ])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-12 col-12 mb-1 col-6-" }, [
-      _c("h3", { staticClass: " mb-0 pb-1 pl-2- font-size-14" }, [
-        _vm._v("Address")
-      ]),
-      _vm._v(" "),
-      _c("p", [_vm._v(" Mahmudur ranman")])
+    return _c("td", { attrs: { "data-title": "Address" } }, [
+      _c("a", { staticClass: "text-gray-90", attrs: { href: "#" } }, [
+        _vm._v("100/5, Bordhonbari, Mirpur 1")
+      ])
     ])
   }
 ]

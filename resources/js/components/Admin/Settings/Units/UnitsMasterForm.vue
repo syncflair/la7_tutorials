@@ -106,6 +106,7 @@
 	    		this.form.fill(data); 	 
 	    		//this.$refs.unit_title.focus();    		
 	    	},
+	    	
 	    	ClearForm(){
 	    		this.editMode = false;
 		        this.form.reset();  //reset from after submit

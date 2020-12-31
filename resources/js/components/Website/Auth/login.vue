@@ -153,10 +153,10 @@
                       this.display_error = false;  
 
                       // window.location = '/auth/my-dashboard';   
-                      window.location = '/home';   
+                      window.location = '/home';                       
+                      //this.$router.push({ path : '/home' });   //route after successfule submit                   
+                      //this.$router.replace({ path : '/auth/my-dashboard' });   //route after successfule submit 
                       //this.$router.go('/auth/my-dashboard');
-                      //this.$router.push({ path : '/auth/my-dashboard' });   //route after successfule submit                   
-                      //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit 
 
                       this.form.reset();  //reset from after submit
 

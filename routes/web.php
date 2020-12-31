@@ -74,6 +74,12 @@ Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
 
     Route::resource('auth/my-profile', 'AdminCustomer\AdminCustomerProfileController',
       ['except'=>['create','show','edit','update'] ]);
+    Route::get('auth/my-profile-update', 'AdminCustomer\AdminCustomerProfileUpdateController@index');
+    Route::post('auth/CustomerProfileUpdate', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerProfileUpdate');
+    Route::post('auth/CustomerChangeEmail', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangeEmail');
+    Route::post('auth/CustomerChangePhone', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangePhone');
+    Route::post('auth/CustomerChangePassword', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangePassword');
+
     Route::resource('auth/my-orders', 'AdminCustomer\AdminCustomerOrdersController',
       ['except'=>['create','show','edit','update'] ]);
     Route::resource('auth/my-address', 'AdminCustomer\AdminCustomerAddressController',

@@ -45,30 +45,71 @@
 
                             <div class="col-lg-2 col-6 mb-1 col-6-">
                                 <h3 class=" mb-0 pb-1 pl-2- font-size-14">Birthday</h3>
-                                <p> {{ authCustomer.created_at | formatDate }} </p>
+                                <p> {{ authCustomer.date_of_birth | formatDate }} </p>
                             </div>
 
                             <div class="col-lg-1 col-6 mb-1 col-6-">
                                 <h3 class=" mb-0 pb-1 pl-2- font-size-14">Gender</h3>
-                                <p>Male</p>
+                                <p>{{authCustomer.gender}}</p>
                             </div>
 
                             
 
-
-                            <div class="col-lg-12 col-12 mb-1 col-6-">
-                                <h3 class=" mb-0 pb-1 pl-2- font-size-14">Address</h3>
-                                <p> Mahmudur ranman</p>
+                            <div class="col-lg-12 col-12 mb-1 text-right">
+                                <router-link to="/auth/my-profile-update" class="btn btn-primary ml-md-2 px-2 px-md-4 px-lg-3 w-100- w-md-auto d-none- d-md-inline-block"><i class="fas fa-plus"></i> Edit Profile</router-link>
                             </div>
 
+
+                            <!-- <div class="col-lg-12 border-bottom border-color-1 mb-3 mt-3"></div> -->
+
+
+                            <div class="col-lg-12">
+                                <div class="mb-4 w-100 wishlist-table cart-wishlist-custome">
+                                    <div class="table-responsive-">
+                                        <table class="table" cellspacing="0">
+                                            <thead>
+                                                <tr> 
+                                                    <!-- <th class="product-thumbnail">&nbsp;</th> -->
+                                                    <th class="product-name">Address</th>
+                                                    <!-- <th class="product-name">For</th> -->
+                                                    <th class="product-subtotal min-width-200-md-lg">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>  
+                                                    <!-- <td class="text-center">
+                                                        <span class="">#</span>
+                                                    </td> -->
+                                                    <td data-title="Address">
+                                                        <a href="#" class="text-gray-90">100/5, Bordhonbari, Mirpur 1</a>
+                                                    </td>
+
+                                                    <!-- <td class="text-center-" data-title="for">
+                                                        <span class="">Shiping</span>
+                                                    </td> -->
+
+                                                    <td class="text-right">
+                                                        <router-link to="/auth/my-address-update" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto"><i class="far fa-edit"></i> Edit</router-link>
+                                                        <router-link to="" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto"><i class="fas fa-trash-alt"></i> Delete</router-link>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>                           
 
 
                             <div class="col-lg-12 col-12 mb-1 text-right">
-                                <router-link to="/auth/my-profile-update" class="btn btn-primary ml-md-2 px-3 px-md-4 px-lg-3 w-100- w-md-auto d-none- d-md-inline-block"><i class="fas fa-plus"></i> Edit Profile</router-link>
+                                <router-link to="/auth/my-address-update" class="btn btn-primary ml-md-2 px-2 px-md-4 px-lg-3 w-100- w-md-auto d-none- d-md-inline-block"><i class="fas fa-plus"></i> Add Address</router-link>
                             </div>
 
 
-
+                            <!-- <div class="col-lg-6 col-6 mb-1 col-6-">
+                                <h3 class=" mb-0 pb-1 pl-2- font-size-14">Address</h3>
+                                <p> 105/1, Golartake, Mirpur 1, Dhaka</p>
+                            </div> -->
 
 
 

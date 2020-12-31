@@ -21,6 +21,8 @@ class CreateCustomersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique()->nullable(); //unique and also nullable
             $table->string('username')->unique()->nullable(); //unique and also nullable
+            $table->enum('gender', ['Male','Female','Other'])->nullable(); 
+            $table->string('date_of_birth')->nullable(); 
             $table->timestamp('email_verified_at')->nullable();
             $table->string('email_verification_code', 225)->nullable()->comment('Custom Email Verification Code');
             $table->string('phone_verification_code', 10)->nullable()->comment('Custom phone Verification Code');
