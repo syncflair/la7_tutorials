@@ -69,19 +69,20 @@
                                         <table class="table" cellspacing="0">
                                             <thead>
                                                 <tr> 
-                                                    <!-- <th class="product-thumbnail">&nbsp;</th> -->
                                                     <th class="product-name">Address</th>
                                                     <!-- <th class="product-name">For</th> -->
                                                     <th class="product-subtotal min-width-200-md-lg">&nbsp;</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>  
-                                                    <!-- <td class="text-center">
-                                                        <span class="">#</span>
-                                                    </td> -->
+                                                <tr v-for="(aca, index) in authCustomerAddress" :key="index"> 
                                                     <td data-title="Address">
-                                                        <a href="#" class="text-gray-90">100/5, Bordhonbari, Mirpur 1</a>
+                                                        <a href="#" class="text-gray-90">
+                                                            <span v-if="aca.customer_name">{{aca.customer_name }}, </span>
+                                                            <span v-if="aca.company">{{aca.company }}, </span>
+                                                            <span v-if="aca.address_1" >{{aca.address_1 }}, </span>
+
+                                                        </a>
                                                     </td>
 
                                                     <!-- <td class="text-center-" data-title="for">
@@ -89,8 +90,9 @@
                                                     </td> -->
 
                                                     <td class="text-right">
-                                                        <router-link to="/auth/my-address-update" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto"><i class="far fa-edit"></i> Edit</router-link>
-                                                        <router-link to="" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto"><i class="fas fa-trash-alt"></i> Delete</router-link>
+                                                        <router-link :to="{ name: 'CustomerAddressForm', params: { data:aca } }" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto"><i class="far fa-edit"></i> Edit</router-link>
+
+                                                        <a href="#" @click="DeleteCustomerAddress(aca.id)" class="btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto pointer"><i class="fas fa-trash-alt"></i> Delete</a>
                                                     </td>
                                                 </tr>
 
@@ -147,7 +149,7 @@
 
         computed: {
 
-          ...mapState( 'commonStoreForWebsite', ['authCustomer'] ),
+          ...mapState( 'commonStoreForWebsite', ['authCustomer','authCustomerAddress'] ),
 
         },
 
@@ -156,13 +158,54 @@
         }, 
 
         methods: { 
+
+
+            DeleteCustomerAddress(id){
+                Swal.fire({
+                    title: 'Are you sure to Delete?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',  
+                    confirmButtonText: 'Yes, delete it!'
+                  }).then( (result) => {
+
+                    if ( result.value ) {  
+                      axios.delete('/auth/my-address/'+id)
+                        .then( ({data}) => {
+
+                          if(data.success){
+                            this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', this.authCustomer.id);
+                            toastr.warning(data.success); 
+                          }   
+                          if(data.errors){
+                            toastr.warning(data.errors);                 
+                          }
+
+                        })                          
+                        .catch(() => {
+                          toastr.warning('Something is wrong!');
+                        })
+                    }else{
+                      toastr.info( 'Your data is safe!');
+                    }
+
+                  })
+              }, //end delete
         },           
 
         created(){
-            this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data  
+            this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data 
+
+            setTimeout(() => {
+                this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', this.authCustomer.id); //get auth customer address
+            },2000); 
+              
         },
            
         mounted() {
+            //console.log(this.authCustomerAddress);
         },
     }
 </script>

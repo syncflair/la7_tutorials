@@ -4,6 +4,11 @@ namespace App\Http\Controllers\AdminCustomer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Auth;
+use App\Models\Customer\CustomerAddress;
+
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class AdminCustomerAddressController extends Controller
 {
@@ -25,6 +30,8 @@ class AdminCustomerAddressController extends Controller
     public function index()
     {
         return view('website.home'); 
+
+
     }
 
     /**
@@ -45,7 +52,28 @@ class AdminCustomerAddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $this->validate($request, [
+        //     'unit_title' => 'required|min:3|max:40|unique:units,unit_title',
+        //     'unit_code' => 'required|min:1|max:8|unique:units,unit_code',
+        // ]);
+
+        // $data =array();
+        // $data['unit_title']=$request->unit_title;
+        // $data['unit_code']=$request->unit_code;
+        // $data['unit_desc']=$request->unit_desc;
+
+        // $data['updated_by']= \Auth::user()->id;         
+        
+        // if($request->is_enabled == NULL){
+        //     $data['is_enabled'] = 0;
+        // }else{
+        //    $data['is_enabled']=$request->is_enabled; 
+        // }
+
+        // Unit::create($data);        
+        // return response()->json(['success'=>'Unit Created.']); 
+
+        return response()->json(['success'=>'Unit added.']);
     }
 
     /**
@@ -79,7 +107,28 @@ class AdminCustomerAddressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $this->validate($request, [
+        //     'unit_title' => 'required|min:3|max:40|unique:units,unit_title,'.$id,
+        //     'unit_code' => 'required|min:1|max:8|unique:units,unit_code,'.$id,
+        // ]);
+
+        // $data =array();
+        // $data['unit_title']=$request->unit_title;
+        // $data['unit_code']=$request->unit_code;
+        // $data['unit_desc']=$request->unit_desc;
+
+        // $data['updated_by']= \Auth::user()->id;         
+        
+        // if($request->is_enabled == NULL){
+        //     $data['is_enabled'] = 0;
+        // }else{
+        //    $data['is_enabled']=$request->is_enabled; 
+        // }
+
+        // Unit::whereId($id)->update($data);         
+        // return response()->json(['success'=>'Unit Updated.']);
+
+        return response()->json(['success'=>'Unit Updated.']);
     }
 
     /**
@@ -90,6 +139,32 @@ class AdminCustomerAddressController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = CustomerAddress::findOrFail($id)->delete();        
+        if($data){
+            return response()->json(['success'=> 'Address is successfully deleted']);
+        }else{
+            return response()->json(['errors'=> 'Something is wrong..']);
+        }//*/
     }
+
+    public function getAuthCustomerAddress(Request $request){
+        if(Auth::guard('customer')->check()){
+           
+            if(Auth::guard('customer')->user()->id == $request->id ){
+
+                $customerAddress = CustomerAddress::where('customer_id', $request->id)->get();
+                return response()->json($customerAddress); 
+
+            }else{
+                return response()->json(['error'=>'Something worng!.']); 
+            }//End check Auth ID With Request ID
+
+        }//end Auth::guard Check
+
+        
+    }
+
+
+
+
 }

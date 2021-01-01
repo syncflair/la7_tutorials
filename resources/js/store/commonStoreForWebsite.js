@@ -5,7 +5,8 @@ const commonStoreForWebsite ={
 	state: () => ({
 	    //accessable from any where 
       authCustomer: {},
-      isitwebsiteCheck:'',  
+      isitwebsiteCheck:'', 
+      authCustomerAddress: {}, 
 
       //authCustomerData: {},    
       
@@ -23,6 +24,7 @@ const commonStoreForWebsite ={
 
       AUTH_CUSTOMER_DATA(state, data) { return state.authCustomer = data; },
       // AUTH_CUSTOMER_DATA(state, data) { return state.authCustomerData = data; },
+      AUTH_CUSTOMER_ADDRESS(state, data) { return state.authCustomerAddress = data; },
 
 
       //for website public
@@ -38,7 +40,15 @@ const commonStoreForWebsite ={
         .then( (response) => {
           context.commit('AUTH_CUSTOMER_DATA', response.data);
         }).catch( () => { })
-      },     
+      },   
+
+    //get auth customer address after login
+    fetchAuthCustomerAddress(context, payload){
+        axios.get('/auth/getAuthCustomerAddress?&id='+payload)
+        .then( (response) => {
+          context.commit('AUTH_CUSTOMER_ADDRESS', response.data);
+        }).catch( () => { })
+      }, 
 
   } /*end actions*/
 

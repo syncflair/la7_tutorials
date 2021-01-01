@@ -10,6 +10,18 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Include_NavForAdminCustomer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Include/NavForAdminCustomer */ "./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
 //
 //
 //
@@ -136,6 +148,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+ //for user MapState
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "customer-address-form-website-auth",
   data: function data() {
@@ -143,11 +157,13 @@ __webpack_require__.r(__webpack_exports__);
       editMode: false,
       //Use this for add edit using the same form 
       form: new Form({
+        id: '',
         customer_name: '',
         company: '',
         address_1: '',
         //address_2:'', 
         country_id: 18,
+        //this id use for bangladesh 
         division_id: '',
         district_id: '',
         area_zone_id: '',
@@ -160,9 +176,96 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     NavForAdminCustomer: _Include_NavForAdminCustomer__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  methods: {},
-  created: function created() {},
-  mounted: function mounted() {}
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('commonStoreForWebsite', ['authCustomer'])), Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('commonStoreForAll', ['Divisions', 'Districts', 'Dist_Zones'])),
+  methods: {
+    fillForm: function fillForm() {
+      if (this.$route.params.data != null) {
+        this.editMode = true;
+        this.form.reset();
+        this.form.fill(this.$route.params.data);
+      }
+    },
+    storeFormData: function storeFormData() {
+      var _this = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.post('/auth/my-address').then(function (_ref) {
+        var data = _ref.data;
+
+        if (data.success) {
+          toastr.success(data.success);
+
+          _this.$Progress.finish();
+
+          _this.form.reset(); //reset from after submit                 
+
+        }
+
+        if (data.errors) {
+          toastr.warning(data.errors);
+        }
+      })["catch"](function () {
+        _this.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
+    },
+    updateFormData: function updateFormData() {
+      var _this2 = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.put('/auth/my-address/' + this.form.id).then(function (_ref2) {
+        var data = _ref2.data;
+
+        if (data.success) {
+          _this2.$Progress.finish();
+
+          toastr.success(data.success); //this.form.reset();  //reset from after submit
+
+          _this2.editMode = false;
+        }
+
+        if (data.errors) {
+          toastr.warning(data.errors);
+        }
+      })["catch"](function () {
+        _this2.$Progress.fail();
+
+        toastr.warning('Something is wrong!');
+      });
+    },
+    // getDivision(e){
+    //     // alert(e.target.value);
+    //     let data = e.target.value;
+    //     this.$store.dispatch('commonStoreForAll/fetchDivisionList', data); //get Division
+    // },
+    getDistrict: function getDistrict(e) {
+      alert('Ok');
+      var data = e.target.value;
+      this.$store.dispatch('commonStoreForAll/fetchDistrictList', data); //get Division
+    },
+    getDistrictZone: function getDistrictZone(e) {
+      var data = e.target.value;
+      this.$store.dispatch('commonStoreForAll/fetchDistrictZoneList', data); //get District Zone
+    }
+  },
+  created: function created() {
+    this.fillForm(); //this.$store.dispatch('commonStoreForAll/fetchCountryList'); //get country
+
+    this.$store.dispatch('commonStoreForAll/fetchDivisionList', ''); //get Division
+
+    this.$store.dispatch('commonStoreForAll/fetchDistrictList', ''); //get District
+
+    this.$store.dispatch('commonStoreForAll/fetchDistrictZoneList', ''); //get zone Area
+  },
+  mounted: function mounted() {
+    setTimeout(function () {
+      // initialization of select picker
+      $.HSCore.components.HSSelectPicker.init('.js-select');
+    }, 3500);
+  }
 });
 
 /***/ }),
@@ -196,63 +299,75 @@ var render = function() {
         { staticClass: "bg-gray-1 rounded-lg col-xl-10 col-wd-9gdot5-" },
         [
           _c("div", { staticClass: "row " }, [
-            _c("div", { staticClass: "border-bottom border-color-1 mb-3" }, [
-              _c(
-                "h5",
-                { staticClass: "section-title mb-0 pb-2 pl-2 font-size-25" },
-                [
-                  _c(
-                    "span",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: !_vm.editMode,
-                          expression: "!editMode"
-                        }
-                      ]
-                    },
-                    [_vm._v("Add Address")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "span",
-                    {
-                      directives: [
-                        {
-                          name: "show",
-                          rawName: "v-show",
-                          value: _vm.editMode,
-                          expression: "editMode"
-                        }
-                      ]
-                    },
-                    [_vm._v("Update Address")]
-                  )
-                ]
-              )
-            ]),
+            _c(
+              "div",
+              { staticClass: "col-md-12 border-bottom border-color-1 mb-3" },
+              [
+                _c(
+                  "h5",
+                  { staticClass: "section-title mb-0 pb-2 pl-2 font-size-25" },
+                  [
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: !_vm.editMode,
+                            expression: "!editMode"
+                          }
+                        ]
+                      },
+                      [_vm._v("Add Address")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "span",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.editMode,
+                            expression: "editMode"
+                          }
+                        ]
+                      },
+                      [_vm._v("Update Address")]
+                    )
+                  ]
+                )
+              ]
+            ),
             _vm._v(" "),
             _c(
               "div",
               {
                 staticClass:
-                  "col-12 mb-8 w-100 wishlist-table cart-wishlist-custome"
+                  "col-md-8 offset-md-2 mb-8 w-100 wishlist-table cart-wishlist-custome"
               },
               [
                 _c(
                   "form",
                   {
                     staticClass: "js-validate-",
-                    attrs: { novalidate: "novalidate-" }
+                    attrs: { novalidate: "novalidate-" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.editMode
+                          ? _vm.updateFormData()
+                          : _vm.storeFormData()
+                      }
+                    }
                   },
                   [
                     _c("div", { staticClass: "row text-center-" }, [
                       _c("div", { staticClass: "col-md-6" }, [
                         _c(
                           "div",
-                          { staticClass: "js-form-message mb-2" },
+                          { staticClass: "js-form-message- mb-2" },
                           [
                             _c("label", { staticClass: "form-label" }, [
                               _vm._v(" Full Name ")
@@ -304,7 +419,7 @@ var render = function() {
                       _c("div", { staticClass: "col-md-6" }, [
                         _c(
                           "div",
-                          { staticClass: "js-form-message mb-2" },
+                          { staticClass: "js-form-message- mb-2" },
                           [
                             _c("label", { staticClass: "form-label" }, [
                               _vm._v(" Company ")
@@ -354,7 +469,7 @@ var render = function() {
                       _c("div", { staticClass: "col-md-4" }, [
                         _c(
                           "div",
-                          { staticClass: "js-form-message mb-2" },
+                          { staticClass: "js-form-message- mb-2" },
                           [
                             _c("label", { staticClass: "form-label" }, [
                               _vm._v(" Division ")
@@ -379,6 +494,7 @@ var render = function() {
                                   )
                                 },
                                 attrs: {
+                                  "data-msg": "Select division",
                                   "data-live-search": "true",
                                   "data-style":
                                     "form-control border-color-1 font-weight-normal",
@@ -405,17 +521,20 @@ var render = function() {
                                   }
                                 }
                               },
-                              [
-                                _c(
+                              _vm._l(_vm.Divisions, function(division) {
+                                return _c(
                                   "option",
-                                  { attrs: { disabled: "", value: "" } },
-                                  [_vm._v("Select division ")]
-                                ),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "" } }, [
-                                  _vm._v("bogura")
-                                ])
-                              ]
+                                  { domProps: { value: division.id } },
+                                  [
+                                    _vm._v(
+                                      "\n                                                " +
+                                        _vm._s(division.division_name) +
+                                        "\n                                            "
+                                    )
+                                  ]
+                                )
+                              }),
+                              0
                             ),
                             _vm._v(" "),
                             _c("has-error", {
@@ -429,7 +548,7 @@ var render = function() {
                       _c("div", { staticClass: "col-md-4" }, [
                         _c(
                           "div",
-                          { staticClass: "js-form-message mb-2" },
+                          { staticClass: "js-form-message- mb-2" },
                           [
                             _c("label", { staticClass: "form-label" }, [
                               _vm._v(" District / City ")
@@ -460,24 +579,31 @@ var render = function() {
                                   name: "district_id"
                                 },
                                 on: {
-                                  change: function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.$set(
-                                      _vm.form,
-                                      "district_id",
-                                      $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
-                                    )
-                                  }
+                                  change: [
+                                    function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.form,
+                                        "district_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    },
+                                    function($event) {
+                                      return _vm.getDistrictZone($event)
+                                    }
+                                  ]
                                 }
                               },
                               [
@@ -487,14 +613,21 @@ var render = function() {
                                   [_vm._v("Select district / city")]
                                 ),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "" } }, [
-                                  _vm._v("Male")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "AF" } }, [
-                                  _vm._v("Female")
-                                ])
-                              ]
+                                _vm._l(_vm.Districts, function(district) {
+                                  return _c(
+                                    "option",
+                                    { domProps: { value: district.id } },
+                                    [
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(district.district_name) +
+                                          "\n                                            "
+                                      )
+                                    ]
+                                  )
+                                })
+                              ],
+                              2
                             ),
                             _vm._v(" "),
                             _c("has-error", {
@@ -508,7 +641,7 @@ var render = function() {
                       _c("div", { staticClass: "col-md-4" }, [
                         _c(
                           "div",
-                          { staticClass: "js-form-message mb-2" },
+                          { staticClass: "js-form-message- mb-2" },
                           [
                             _c("label", { staticClass: "form-label" }, [
                               _vm._v(" Zone / Area ")
@@ -560,14 +693,29 @@ var render = function() {
                                 }
                               },
                               [
-                                _c("option", { attrs: { value: "" } }, [
-                                  _vm._v("Male")
-                                ]),
+                                _c(
+                                  "option",
+                                  { attrs: { disabled: "", value: "" } },
+                                  [_vm._v("Select zone / area")]
+                                ),
                                 _vm._v(" "),
-                                _c("option", { attrs: { value: "AF" } }, [
-                                  _vm._v("Female")
-                                ])
-                              ]
+                                _vm._l(_vm.Dist_Zones, function(zone) {
+                                  return _c(
+                                    "option",
+                                    { domProps: { value: zone.id } },
+                                    [
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(zone.zone_name) +
+                                          " - " +
+                                          _vm._s(zone.zip_code) +
+                                          "\n                                            "
+                                      )
+                                    ]
+                                  )
+                                })
+                              ],
+                              2
                             ),
                             _vm._v(" "),
                             _c("has-error", {
@@ -579,7 +727,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-6" }, [
-                        _c("div", { staticClass: "js-form-message mb-2" }, [
+                        _c("div", { staticClass: "js-form-message- mb-2" }, [
                           _c("label", { staticClass: "form-label" }, [
                             _vm._v("City")
                           ]),
@@ -613,7 +761,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-6" }, [
-                        _c("div", { staticClass: "js-form-message mb-2" }, [
+                        _c("div", { staticClass: "js-form-message- mb-2" }, [
                           _c("label", { staticClass: "form-label" }, [
                             _vm._v("Zip")
                           ]),
@@ -647,7 +795,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-6" }, [
-                        _c("div", { staticClass: "js-form-message mb-2" }, [
+                        _c("div", { staticClass: "js-form-message- mb-2" }, [
                           _c("label", { staticClass: "form-label" }, [
                             _vm._v("Address")
                           ]),
@@ -756,7 +904,8 @@ var render = function() {
           ])
         ]
       )
-    ])
+    ]),
+    _vm._v("\n        " + _vm._s(_vm.Divisions) + "\n    ")
   ])
 }
 var staticRenderFns = []

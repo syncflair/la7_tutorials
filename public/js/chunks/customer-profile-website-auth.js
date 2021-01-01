@@ -152,6 +152,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
  //for user MapState
 
@@ -160,15 +162,58 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {};
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('commonStoreForWebsite', ['authCustomer'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('commonStoreForWebsite', ['authCustomer', 'authCustomerAddress'])),
   components: {
     NavForAdminCustomer: _Include_NavForAdminCustomer__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  methods: {},
-  created: function created() {
-    this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data  
+  methods: {
+    DeleteCustomerAddress: function DeleteCustomerAddress(id) {
+      var _this = this;
+
+      Swal.fire({
+        title: 'Are you sure to Delete?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.value) {
+          axios["delete"]('/auth/my-address/' + id).then(function (_ref) {
+            var data = _ref.data;
+
+            if (data.success) {
+              _this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', _this.authCustomer.id);
+
+              toastr.warning(data.success);
+            }
+
+            if (data.errors) {
+              toastr.warning(data.errors);
+            }
+          })["catch"](function () {
+            toastr.warning('Something is wrong!');
+          });
+        } else {
+          toastr.info('Your data is safe!');
+        }
+      });
+    } //end delete
+
   },
-  mounted: function mounted() {}
+  created: function created() {
+    var _this2 = this;
+
+    this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data 
+
+    setTimeout(function () {
+      _this2.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', _this2.authCustomer.id); //get auth customer address
+
+    }, 2000);
+  },
+  mounted: function mounted() {//console.log(this.authCustomerAddress);
+  }
 });
 
 /***/ }),
@@ -289,46 +334,105 @@ var render = function() {
                           [
                             _vm._m(1),
                             _vm._v(" "),
-                            _c("tbody", [
-                              _c("tr", [
-                                _vm._m(2),
-                                _vm._v(" "),
-                                _c(
-                                  "td",
-                                  { staticClass: "text-right" },
-                                  [
-                                    _c(
-                                      "router-link",
-                                      {
-                                        staticClass:
-                                          "btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto",
-                                        attrs: { to: "/auth/my-address-update" }
-                                      },
-                                      [
-                                        _c("i", { staticClass: "far fa-edit" }),
-                                        _vm._v(" Edit")
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "router-link",
-                                      {
-                                        staticClass:
-                                          "btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto",
-                                        attrs: { to: "" }
-                                      },
-                                      [
-                                        _c("i", {
-                                          staticClass: "fas fa-trash-alt"
-                                        }),
-                                        _vm._v(" Delete")
-                                      ]
-                                    )
-                                  ],
-                                  1
-                                )
-                              ])
-                            ])
+                            _c(
+                              "tbody",
+                              _vm._l(_vm.authCustomerAddress, function(
+                                aca,
+                                index
+                              ) {
+                                return _c("tr", { key: index }, [
+                                  _c(
+                                    "td",
+                                    { attrs: { "data-title": "Address" } },
+                                    [
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass: "text-gray-90",
+                                          attrs: { href: "#" }
+                                        },
+                                        [
+                                          aca.customer_name
+                                            ? _c("span", [
+                                                _vm._v(
+                                                  _vm._s(aca.customer_name) +
+                                                    ", "
+                                                )
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          aca.company
+                                            ? _c("span", [
+                                                _vm._v(
+                                                  _vm._s(aca.company) + ", "
+                                                )
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          aca.address_1
+                                            ? _c("span", [
+                                                _vm._v(
+                                                  _vm._s(aca.address_1) + ", "
+                                                )
+                                              ])
+                                            : _vm._e()
+                                        ]
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "td",
+                                    { staticClass: "text-right" },
+                                    [
+                                      _c(
+                                        "router-link",
+                                        {
+                                          staticClass:
+                                            "btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto",
+                                          attrs: {
+                                            to: {
+                                              name: "CustomerAddressForm",
+                                              params: { data: aca }
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "far fa-edit"
+                                          }),
+                                          _vm._v(" Edit")
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "a",
+                                        {
+                                          staticClass:
+                                            "btn btn-soft-secondary mb-3 mb-md-0 font-weight-normal px-2 px-md-2 px-lg-2 w-100 w-md-auto pointer",
+                                          attrs: { href: "#" },
+                                          on: {
+                                            click: function($event) {
+                                              return _vm.DeleteCustomerAddress(
+                                                aca.id
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _c("i", {
+                                            staticClass: "fas fa-trash-alt"
+                                          }),
+                                          _vm._v(" Delete")
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ])
+                              }),
+                              0
+                            )
                           ]
                         )
                       ])
@@ -393,16 +497,6 @@ var staticRenderFns = [
         _c("th", { staticClass: "product-subtotal min-width-200-md-lg" }, [
           _vm._v(" ")
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { attrs: { "data-title": "Address" } }, [
-      _c("a", { staticClass: "text-gray-90", attrs: { href: "#" } }, [
-        _vm._v("100/5, Bordhonbari, Mirpur 1")
       ])
     ])
   }

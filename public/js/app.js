@@ -96753,7 +96753,8 @@ var commonStoreForWebsite = {
     return {
       //accessable from any where 
       authCustomer: {},
-      isitwebsiteCheck: '' //authCustomerData: {},    
+      isitwebsiteCheck: '',
+      authCustomerAddress: {} //authCustomerData: {},    
 
     };
   },
@@ -96773,6 +96774,9 @@ var commonStoreForWebsite = {
       return state.authCustomer = data;
     },
     // AUTH_CUSTOMER_DATA(state, data) { return state.authCustomerData = data; },
+    AUTH_CUSTOMER_ADDRESS: function AUTH_CUSTOMER_ADDRESS(state, data) {
+      return state.authCustomerAddress = data;
+    },
     //for website public
     IS_IT_WEBSITE_CHECK: function IS_IT_WEBSITE_CHECK(state, data) {
       return state.isitwebsiteCheck = data;
@@ -96785,6 +96789,12 @@ var commonStoreForWebsite = {
     fetchAuthCustomerData: function fetchAuthCustomerData(context) {
       axios.get('/auth/getAuthCustomerData').then(function (response) {
         context.commit('AUTH_CUSTOMER_DATA', response.data);
+      })["catch"](function () {});
+    },
+    //get auth customer address after login
+    fetchAuthCustomerAddress: function fetchAuthCustomerAddress(context, payload) {
+      axios.get('/auth/getAuthCustomerAddress?&id=' + payload).then(function (response) {
+        context.commit('AUTH_CUSTOMER_ADDRESS', response.data);
       })["catch"](function () {});
     }
   }
