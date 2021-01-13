@@ -186,7 +186,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             if (data.success) {
               _this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', _this.authCustomer.id);
 
-              toastr.warning(data.success);
+              toastr.success(data.success);
             }
 
             if (data.errors) {
@@ -210,7 +210,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setTimeout(function () {
       _this2.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', _this2.authCustomer.id); //get auth customer address
 
-    }, 2000);
+    }, 2400);
   },
   mounted: function mounted() {//console.log(this.authCustomerAddress);
   }

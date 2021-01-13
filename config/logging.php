@@ -34,7 +34,8 @@ return [
     |
     */
 
-    'channels' => [
+    'channels' => [        
+
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],
@@ -99,6 +100,15 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        /*My Custome Log file*/
+        'customeLog' => [
+            //'driver' => 'single',
+            'driver' => 'daily',
+            //'tap' => [App\Logging\CustomizeFormatter::class],  //custome lineFormatter
+            'path' => storage_path('logs/customeLog.log'),
+            'level' => 'debug',
+        ], /* End My Custome Log file*/
     ],
 
 ];

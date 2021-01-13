@@ -177,7 +177,7 @@
 
                           if(data.success){
                             this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', this.authCustomer.id);
-                            toastr.warning(data.success); 
+                            toastr.success(data.success); 
                           }   
                           if(data.errors){
                             toastr.warning(data.errors);                 
@@ -200,7 +200,7 @@
 
             setTimeout(() => {
                 this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', this.authCustomer.id); //get auth customer address
-            },2000); 
+            },2400); 
               
         },
            

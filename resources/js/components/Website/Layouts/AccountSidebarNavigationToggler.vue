@@ -376,7 +376,8 @@
 
                     // window.location = '/auth/my-dashboard';  
                     //window.location = '/home'; 
-                    this.$router.go();   
+                    //this.$router.go();   
+                    window.location = '/home';    
 
                     //this.$router.reload(); //self reload                     
                                       

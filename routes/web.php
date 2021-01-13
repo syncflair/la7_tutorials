@@ -2,6 +2,15 @@
 //print_r(systemSettingsAll()->image_resolution[0]);
 //print_r(systemSettingsGetResolution('user-img'));
 
+//Logging test
+Route::get('test-log', function () {
+  //Log::info('This is some useful information.');
+  Log::channel('customeLog')->info('Something happened! Login Successfull');  
+  Log::channel('customeLog')->warning('Something could be going wrong.');
+  Log::channel('customeLog')->error('Something is really going wrong.'); 
+  // Log::channel('customeLog')->info('Log message', ['context' => 'Other helpful information']);
+});
+
 
 
 //testQuery();

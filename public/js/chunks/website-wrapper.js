@@ -367,11 +367,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           $("#sidebarContent").fadeOut("slow"); // Hide login sidebar      
           // window.location = '/auth/my-dashboard';  
           //window.location = '/home'; 
+          //this.$router.go();   
 
-          _this.$router.go(); //this.$router.reload(); //self reload                     
+          window.location = '/home'; //this.$router.reload(); //self reload                     
           //this.$router.push({ path : '/home' });   //route after successfule submit                   
           //this.$router.replace({ path : '/auth/my-dashboard' });   //route after successfule submit
-
 
           _this.form.reset(); //reset from after submit 
 

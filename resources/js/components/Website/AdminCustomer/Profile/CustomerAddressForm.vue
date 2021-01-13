@@ -26,11 +26,12 @@
                         <form class="js-validate-" novalidate="novalidate-" 
                             @submit.prevent=" editMode ? updateFormData() : storeFormData() ">
 
+
                             <div class="row text-center-">
                                 <div class="col-md-6">
                                     <div class="js-form-message- mb-2">
                                         <label class="form-label"> Full Name </label>
-                                        <input v-model="form.customer_name" type="text" name="customer_name" class="form-control" :class="{ 'is-invalid': form.errors.has('customer_name') }" placeholder="Customer Name">
+                                        <input v-model="form.customer_name" type="text" name="customer_name" class="form-control" :class="{ 'is-invalid': form.errors.has('customer_name') }" placeholder="Enter Name">
                                         <has-error :form="form" field="customer_name"></has-error>
                                     </div>
                                 </div>
@@ -38,18 +39,26 @@
                                 <div class="col-md-6">
                                     <div class="js-form-message- mb-2">
                                         <label class="form-label"> Company </label>
-                                        <input v-model="form.company" type="text" name="company" class="form-control" :class="{ 'is-invalid': form.errors.has('company') }" placeholder="Company name">
+                                        <input v-model="form.company" type="text" name="company" class="form-control" :class="{ 'is-invalid': form.errors.has('company') }" placeholder="Enter Company name">
                                         <has-error :form="form" field="company"></has-error>
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                     <div class="js-form-message- mb-2">
-                                        <label class="form-label"> Division </label>
-                                        <select v-model="form.division_id" class="form-control js-select selectpicker dropdown-select"
-                                            data-msg="Select division" data-live-search="true"
-                                            data-style="form-control border-color-1 font-weight-normal" name="division_id" :class="{ 'is-invalid': form.errors.has('division_id') }" >
-                                            <!-- <option disabled value="">Select division </option>  -->
+                                        <label class="form-label">Address</label>
+                                        <div class="input-group">
+                                            <textarea v-model="form.address_1" name="address_1" class="form-control p-2" rows="2" placeholder="" style="margin-top: 0px; margin-bottom: 0px; " :class="{ 'is-invalid': form.errors.has('address_1') }" placeholder="Enter Address"></textarea>
+                                            <has-error :form="form" field="address_1"></has-error> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="js-form-message mb-2">
+                                        <label class="form-label"> Division *</label>
+                                        <select v-model="form.division_id" @change="getDistrict($event)" class="form-control js-select- selectpicker- dropdown-select-" data-style="form-control border-color-1 font-weight-normal" name="division_id" :class="{ 'is-invalid': form.errors.has('division_id') }" >
+                                            <option disabled value="">Select division </option> 
                                             <option v-for="division in Divisions" v-bind:value="division.id">
                                                 {{ division.division_name }}
                                             </option>                                          
@@ -60,8 +69,8 @@
 
                                 <div class="col-md-4">
                                     <div class="js-form-message- mb-2">
-                                        <label class="form-label"> District / City </label>
-                                        <select v-model="form.district_id" @change="getDistrictZone($event)" class="form-control js-select selectpicker dropdown-select" data-live-search="true" data-style="form-control border-color-1 font-weight-normal" name="district_id" :class="{ 'is-invalid': form.errors.has('district_id') }" >
+                                        <label class="form-label"> District / City *</label>
+                                        <select v-model="form.district_id" @change="getDistrictZone($event)" class="form-control js-select- selectpicker- dropdown-select-" data-style="form-control border-color-1 font-weight-normal" name="district_id" :class="{ 'is-invalid': form.errors.has('district_id') }" >
                                             <option disabled value="">Select district / city</option>
                                             <option v-for="district in Districts" v-bind:value="district.id">
                                                 {{district.district_name}}
@@ -73,9 +82,8 @@
 
                                 <div class="col-md-4">
                                     <div class="js-form-message- mb-2">
-                                        <label class="form-label"> Zone / Area </label>
-                                        <select v-model="form.area_zone_id" class="form-control js-select selectpicker dropdown-select"
-                                            data-live-search="true"
+                                        <label class="form-label"> Zone / Area *</label>
+                                        <select v-model="form.area_zone_id" class="form-control js-select- selectpicker- dropdown-select-"  
                                             data-style="form-control border-color-1 font-weight-normal" name="area_zone_id" :class="{ 'is-invalid': form.errors.has('area_zone_id') }">
                                             <option disabled value="">Select zone / area</option>
                                             <option v-for="zone in Dist_Zones" v-bind:value="zone.id">
@@ -89,26 +97,18 @@
                                 <div class="col-md-6">
                                     <div class="js-form-message- mb-2">
                                         <label class="form-label">City</label>
-                                        <input v-model="form.city" type="text" name="city" class="form-control"  placeholder="City">
+                                        <input v-model="form.city" type="text" name="city" class="form-control"  placeholder="Enter City">
                                     </div>
                                 </div>
 
                                 <div class="col-md-6">
                                     <div class="js-form-message- mb-2">
                                         <label class="form-label">Zip</label>
-                                        <input v-model="form.zip" type="text" name="zip" class="form-control"  placeholder="ZIP">
+                                        <input v-model="form.zip" type="text" name="zip" class="form-control"  placeholder="Enter ZIP">
                                     </div>
                                 </div> 
 
-                                <div class="col-md-6">
-                                    <div class="js-form-message- mb-2">
-                                        <label class="form-label">Address</label>
-                                        <div class="input-group">
-                                            <textarea v-model="form.address_1" name="address_1" class="form-control p-2" rows="2" placeholder="" style="margin-top: 0px; margin-bottom: 0px; " :class="{ 'is-invalid': form.errors.has('address_1') }"></textarea>
-                                            <has-error :form="form" field="address_1"></has-error> 
-                                        </div>
-                                    </div>
-                                </div> 
+                                 
 
                             </div>
                             <div class="mb-3 text-right">
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-        {{Divisions}}
+        <!-- {{authCustomer.id}} -->
     </div>
 
 </template>
@@ -140,6 +140,7 @@
             	editMode: false, //Use this for add edit using the same form 
             	form: new Form({
                     id: '',
+                    customer_id: '',
             	    customer_name:'',
             	    company:'', 
             	    address_1:'', 
@@ -158,6 +159,13 @@
         components:{
             NavForAdminCustomer, 
         },
+
+        // watch: {
+        //     /*Add Remove Class based on window width change*/
+        //     'form.customer_id': function (val) {               
+        //        this.customer_id == 2
+        //     },
+        // },
 
         computed: {
             ...mapState( 'commonStoreForWebsite', ['authCustomer'] ),
@@ -179,15 +187,22 @@
 
                 this.form.post('/auth/my-address')
                 .then(({ data }) => { 
+                    console.log(data)
+                    if(data.success){ 
+                      this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', this.authCustomer.id); //get auth customer address 
+                      this.$Progress.finish();  
+                      toastr.success(data.success);             
+                      this.form.reset();  //reset from after submit                 
+                    }
 
-                if(data.success){ 
-                  toastr.success(data.success);             
-                  this.$Progress.finish();  
-                  this.form.reset();  //reset from after submit                 
-                }
-                if(data.errors){
-                  toastr.warning(data.errors); 
-                }
+                    if(data.error){ 
+                      toastr.warning(data.success);             
+                      this.$Progress.finish();                 
+                    }
+
+                    if(data.errors){
+                      toastr.warning(data.errors); 
+                    }
                 })
                 .catch( () => {
                     this.$Progress.fail();
@@ -201,7 +216,8 @@
                 this.form.put('/auth/my-address/'+this.form.id)
                 .then(({ data }) => { 
 
-                    if(data.success){           
+                    if(data.success){
+                      this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', this.authCustomer.id); //get auth customer address 
                       this.$Progress.finish(); 
                       toastr.success(data.success);               
                       //this.form.reset();  //reset from after submit
@@ -226,7 +242,7 @@
             // },
 
             getDistrict(e){
-                alert('Ok')
+                //alert('Ok')
                 let data = e.target.value;
                 this.$store.dispatch('commonStoreForAll/fetchDistrictList', data); //get Division
             },
@@ -250,12 +266,13 @@
         },
            
         mounted() {
-           
+           //$.HSCore.components.HSSelectPicker.init('.js-select');
 
             setTimeout(() => {
                  // initialization of select picker
-                $.HSCore.components.HSSelectPicker.init('.js-select');
-            }, 3500);
+                //$.HSCore.components.HSSelectPicker.init('.js-select');
+                this.form.customer_id = this.authCustomer.id;
+            }, 3000);
         },
     }
 </script>

@@ -158,6 +158,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //Use this for add edit using the same form 
       form: new Form({
         id: '',
+        customer_id: '',
         customer_name: '',
         company: '',
         address_1: '',
@@ -176,6 +177,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     NavForAdminCustomer: _Include_NavForAdminCustomer__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
+  // watch: {
+  //     /*Add Remove Class based on window width change*/
+  //     'form.customer_id': function (val) {               
+  //        this.customer_id == 2
+  //     },
+  // },
   computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('commonStoreForWebsite', ['authCustomer'])), Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('commonStoreForAll', ['Divisions', 'Districts', 'Dist_Zones'])),
   methods: {
     fillForm: function fillForm() {
@@ -192,14 +199,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.form.post('/auth/my-address').then(function (_ref) {
         var data = _ref.data;
+        console.log(data);
 
         if (data.success) {
-          toastr.success(data.success);
+          _this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', _this.authCustomer.id); //get auth customer address 
+
 
           _this.$Progress.finish();
 
+          toastr.success(data.success);
+
           _this.form.reset(); //reset from after submit                 
 
+        }
+
+        if (data.error) {
+          toastr.warning(data.success);
+
+          _this.$Progress.finish();
         }
 
         if (data.errors) {
@@ -220,6 +237,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var data = _ref2.data;
 
         if (data.success) {
+          _this2.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', _this2.authCustomer.id); //get auth customer address 
+
+
           _this2.$Progress.finish();
 
           toastr.success(data.success); //this.form.reset();  //reset from after submit
@@ -242,7 +262,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //     this.$store.dispatch('commonStoreForAll/fetchDivisionList', data); //get Division
     // },
     getDistrict: function getDistrict(e) {
-      alert('Ok');
+      //alert('Ok')
       var data = e.target.value;
       this.$store.dispatch('commonStoreForAll/fetchDistrictList', data); //get Division
     },
@@ -261,10 +281,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.$store.dispatch('commonStoreForAll/fetchDistrictZoneList', ''); //get zone Area
   },
   mounted: function mounted() {
+    var _this3 = this;
+
+    //$.HSCore.components.HSSelectPicker.init('.js-select');
     setTimeout(function () {
       // initialization of select picker
-      $.HSCore.components.HSSelectPicker.init('.js-select');
-    }, 3500);
+      //$.HSCore.components.HSSelectPicker.init('.js-select');
+      _this3.form.customer_id = _this3.authCustomer.id;
+    }, 3000);
   }
 });
 
@@ -391,7 +415,7 @@ var render = function() {
                               attrs: {
                                 type: "text",
                                 name: "customer_name",
-                                placeholder: "Customer Name"
+                                placeholder: "Enter Name"
                               },
                               domProps: { value: _vm.form.customer_name },
                               on: {
@@ -441,7 +465,7 @@ var render = function() {
                               attrs: {
                                 type: "text",
                                 name: "company",
-                                placeholder: "Company name"
+                                placeholder: "Enter Company name"
                               },
                               domProps: { value: _vm.form.company },
                               on: {
@@ -466,13 +490,70 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12" }, [
+                        _c("div", { staticClass: "js-form-message- mb-2" }, [
+                          _c("label", { staticClass: "form-label" }, [
+                            _vm._v("Address")
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "input-group" },
+                            [
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.form.address_1,
+                                    expression: "form.address_1"
+                                  }
+                                ],
+                                staticClass: "form-control p-2",
+                                class: {
+                                  "is-invalid": _vm.form.errors.has("address_1")
+                                },
+                                staticStyle: {
+                                  "margin-top": "0px",
+                                  "margin-bottom": "0px"
+                                },
+                                attrs: {
+                                  name: "address_1",
+                                  rows: "2",
+                                  placeholder: "",
+                                  placeholder: "Enter Address"
+                                },
+                                domProps: { value: _vm.form.address_1 },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.form,
+                                      "address_1",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("has-error", {
+                                attrs: { form: _vm.form, field: "address_1" }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
                       _c("div", { staticClass: "col-md-4" }, [
                         _c(
                           "div",
-                          { staticClass: "js-form-message- mb-2" },
+                          { staticClass: "js-form-message mb-2" },
                           [
                             _c("label", { staticClass: "form-label" }, [
-                              _vm._v(" Division ")
+                              _vm._v(" Division *")
                             ]),
                             _vm._v(" "),
                             _c(
@@ -487,54 +568,67 @@ var render = function() {
                                   }
                                 ],
                                 staticClass:
-                                  "form-control js-select selectpicker dropdown-select",
+                                  "form-control js-select- selectpicker- dropdown-select-",
                                 class: {
                                   "is-invalid": _vm.form.errors.has(
                                     "division_id"
                                   )
                                 },
                                 attrs: {
-                                  "data-msg": "Select division",
-                                  "data-live-search": "true",
                                   "data-style":
                                     "form-control border-color-1 font-weight-normal",
                                   name: "division_id"
                                 },
                                 on: {
-                                  change: function($event) {
-                                    var $$selectedVal = Array.prototype.filter
-                                      .call($event.target.options, function(o) {
-                                        return o.selected
-                                      })
-                                      .map(function(o) {
-                                        var val =
-                                          "_value" in o ? o._value : o.value
-                                        return val
-                                      })
-                                    _vm.$set(
-                                      _vm.form,
-                                      "division_id",
-                                      $event.target.multiple
-                                        ? $$selectedVal
-                                        : $$selectedVal[0]
-                                    )
-                                  }
+                                  change: [
+                                    function($event) {
+                                      var $$selectedVal = Array.prototype.filter
+                                        .call($event.target.options, function(
+                                          o
+                                        ) {
+                                          return o.selected
+                                        })
+                                        .map(function(o) {
+                                          var val =
+                                            "_value" in o ? o._value : o.value
+                                          return val
+                                        })
+                                      _vm.$set(
+                                        _vm.form,
+                                        "division_id",
+                                        $event.target.multiple
+                                          ? $$selectedVal
+                                          : $$selectedVal[0]
+                                      )
+                                    },
+                                    function($event) {
+                                      return _vm.getDistrict($event)
+                                    }
+                                  ]
                                 }
                               },
-                              _vm._l(_vm.Divisions, function(division) {
-                                return _c(
+                              [
+                                _c(
                                   "option",
-                                  { domProps: { value: division.id } },
-                                  [
-                                    _vm._v(
-                                      "\n                                                " +
-                                        _vm._s(division.division_name) +
-                                        "\n                                            "
-                                    )
-                                  ]
-                                )
-                              }),
-                              0
+                                  { attrs: { disabled: "", value: "" } },
+                                  [_vm._v("Select division ")]
+                                ),
+                                _vm._v(" "),
+                                _vm._l(_vm.Divisions, function(division) {
+                                  return _c(
+                                    "option",
+                                    { domProps: { value: division.id } },
+                                    [
+                                      _vm._v(
+                                        "\n                                                " +
+                                          _vm._s(division.division_name) +
+                                          "\n                                            "
+                                      )
+                                    ]
+                                  )
+                                })
+                              ],
+                              2
                             ),
                             _vm._v(" "),
                             _c("has-error", {
@@ -551,7 +645,7 @@ var render = function() {
                           { staticClass: "js-form-message- mb-2" },
                           [
                             _c("label", { staticClass: "form-label" }, [
-                              _vm._v(" District / City ")
+                              _vm._v(" District / City *")
                             ]),
                             _vm._v(" "),
                             _c(
@@ -566,14 +660,13 @@ var render = function() {
                                   }
                                 ],
                                 staticClass:
-                                  "form-control js-select selectpicker dropdown-select",
+                                  "form-control js-select- selectpicker- dropdown-select-",
                                 class: {
                                   "is-invalid": _vm.form.errors.has(
                                     "district_id"
                                   )
                                 },
                                 attrs: {
-                                  "data-live-search": "true",
                                   "data-style":
                                     "form-control border-color-1 font-weight-normal",
                                   name: "district_id"
@@ -644,7 +737,7 @@ var render = function() {
                           { staticClass: "js-form-message- mb-2" },
                           [
                             _c("label", { staticClass: "form-label" }, [
-                              _vm._v(" Zone / Area ")
+                              _vm._v(" Zone / Area *")
                             ]),
                             _vm._v(" "),
                             _c(
@@ -659,14 +752,13 @@ var render = function() {
                                   }
                                 ],
                                 staticClass:
-                                  "form-control js-select selectpicker dropdown-select",
+                                  "form-control js-select- selectpicker- dropdown-select-",
                                 class: {
                                   "is-invalid": _vm.form.errors.has(
                                     "area_zone_id"
                                   )
                                 },
                                 attrs: {
-                                  "data-live-search": "true",
                                   "data-style":
                                     "form-control border-color-1 font-weight-normal",
                                   name: "area_zone_id"
@@ -745,7 +837,7 @@ var render = function() {
                             attrs: {
                               type: "text",
                               name: "city",
-                              placeholder: "City"
+                              placeholder: "Enter City"
                             },
                             domProps: { value: _vm.form.city },
                             on: {
@@ -779,7 +871,7 @@ var render = function() {
                             attrs: {
                               type: "text",
                               name: "zip",
-                              placeholder: "ZIP"
+                              placeholder: "Enter ZIP"
                             },
                             domProps: { value: _vm.form.zip },
                             on: {
@@ -791,62 +883,6 @@ var render = function() {
                               }
                             }
                           })
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6" }, [
-                        _c("div", { staticClass: "js-form-message- mb-2" }, [
-                          _c("label", { staticClass: "form-label" }, [
-                            _vm._v("Address")
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "input-group" },
-                            [
-                              _c("textarea", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.form.address_1,
-                                    expression: "form.address_1"
-                                  }
-                                ],
-                                staticClass: "form-control p-2",
-                                class: {
-                                  "is-invalid": _vm.form.errors.has("address_1")
-                                },
-                                staticStyle: {
-                                  "margin-top": "0px",
-                                  "margin-bottom": "0px"
-                                },
-                                attrs: {
-                                  name: "address_1",
-                                  rows: "2",
-                                  placeholder: ""
-                                },
-                                domProps: { value: _vm.form.address_1 },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.form,
-                                      "address_1",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("has-error", {
-                                attrs: { form: _vm.form, field: "address_1" }
-                              })
-                            ],
-                            1
-                          )
                         ])
                       ])
                     ]),
@@ -904,8 +940,7 @@ var render = function() {
           ])
         ]
       )
-    ]),
-    _vm._v("\n        " + _vm._s(_vm.Divisions) + "\n    ")
+    ])
   ])
 }
 var staticRenderFns = []

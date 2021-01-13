@@ -52,28 +52,39 @@ class AdminCustomerAddressController extends Controller
      */
     public function store(Request $request)
     {
-        // $this->validate($request, [
-        //     'unit_title' => 'required|min:3|max:40|unique:units,unit_title',
-        //     'unit_code' => 'required|min:1|max:8|unique:units,unit_code',
-        // ]);
 
-        // $data =array();
-        // $data['unit_title']=$request->unit_title;
-        // $data['unit_code']=$request->unit_code;
-        // $data['unit_desc']=$request->unit_desc;
+        //return response()->json($request->all());        
+        if(Auth::guard('customer')->check()){
+           
+            if(Auth::guard('customer')->user()->id == $request->customer_id ){
 
-        // $data['updated_by']= \Auth::user()->id;         
-        
-        // if($request->is_enabled == NULL){
-        //     $data['is_enabled'] = 0;
-        // }else{
-        //    $data['is_enabled']=$request->is_enabled; 
-        // }
+                // $this->validate($request, [
+                //     'customer_id' => 'required',
+                // ]);
 
-        // Unit::create($data);        
-        // return response()->json(['success'=>'Unit Created.']); 
+                $data =array();
+                $data['customer_id']=$request->customer_id;
+                $data['customer_name']=$request->customer_name;
+                $data['company']=$request->company;       
+                $data['address_1']=$request->address_1;       
+                $data['address_2']=$request->address_2;       
+                $data['country_id']=$request->country_id;       
+                $data['division_id']=$request->division_id;       
+                $data['district_id']=$request->district_id;       
+                $data['area_zone_id']=$request->area_zone_id;       
+                $data['city']=$request->city;       
+                $data['zip']=$request->zip;       
+                // $data['default_address']=$request->default_address == NULL ? 0 : $request->default_address; 
 
-        return response()->json(['success'=>'Unit added.']);
+                CustomerAddress::create($data);        
+                return response()->json(['success'=>'Address added.']); 
+
+            }else{
+                return response()->json(['error'=>'Something worng!.']); 
+            }//End check Auth ID With Request ID
+
+        }//end Auth::guard Check
+
     }
 
     /**
@@ -107,28 +118,34 @@ class AdminCustomerAddressController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $this->validate($request, [
-        //     'unit_title' => 'required|min:3|max:40|unique:units,unit_title,'.$id,
-        //     'unit_code' => 'required|min:1|max:8|unique:units,unit_code,'.$id,
-        // ]);
+        if(Auth::guard('customer')->check()){
+           
+            if(Auth::guard('customer')->user()->id == $request->customer_id ){
 
-        // $data =array();
-        // $data['unit_title']=$request->unit_title;
-        // $data['unit_code']=$request->unit_code;
-        // $data['unit_desc']=$request->unit_desc;
+                $data =array();
+                //$data['customer_id']=$request->customer_id;
+                $data['customer_name']=$request->customer_name;
+                $data['company']=$request->company;       
+                $data['address_1']=$request->address_1;       
+                $data['address_2']=$request->address_2;       
+                $data['country_id']=$request->country_id;       
+                $data['division_id']=$request->division_id;       
+                $data['district_id']=$request->district_id;       
+                $data['area_zone_id']=$request->area_zone_id;       
+                $data['city']=$request->city;       
+                $data['zip']=$request->zip; 
+               
 
-        // $data['updated_by']= \Auth::user()->id;         
-        
-        // if($request->is_enabled == NULL){
-        //     $data['is_enabled'] = 0;
-        // }else{
-        //    $data['is_enabled']=$request->is_enabled; 
-        // }
+                CustomerAddress::find($id)
+                            // ->where('customer_id' , $request->customer_id)
+                            ->update($data);  
+                return response()->json(['success'=>'Address Update.']); 
 
-        // Unit::whereId($id)->update($data);         
-        // return response()->json(['success'=>'Unit Updated.']);
+            }else{
+                return response()->json(['error'=>'Something worng!.']); 
+            }//End check Auth ID With Request ID
 
-        return response()->json(['success'=>'Unit Updated.']);
+        }//end Auth::guard Check
     }
 
     /**
@@ -138,13 +155,20 @@ class AdminCustomerAddressController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        $data = CustomerAddress::findOrFail($id)->delete();        
-        if($data){
-            return response()->json(['success'=> 'Address is successfully deleted']);
-        }else{
-            return response()->json(['errors'=> 'Something is wrong..']);
-        }//*/
+    {  
+        //return response()->json($id);
+
+        if(Auth::guard('customer')->check()){
+           
+            $data = CustomerAddress::findOrFail($id)->delete();        
+            if($data){
+                return response()->json(['success'=> 'Address is successfully deleted']);
+            }else{
+                return response()->json(['errors'=> 'Something is wrong..']);
+            }//*/           
+
+        }//end Auth::guard Check
+
     }
 
     public function getAuthCustomerAddress(Request $request){
@@ -160,7 +184,6 @@ class AdminCustomerAddressController extends Controller
             }//End check Auth ID With Request ID
 
         }//end Auth::guard Check
-
         
     }
 

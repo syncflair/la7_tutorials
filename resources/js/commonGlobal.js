@@ -191,7 +191,7 @@ export default {
               $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
 
               // initialization of select picker
-              $.HSCore.components.HSSelectPicker.init('.js-select');
+              //$.HSCore.components.HSSelectPicker.init('.js-select');
 
 
               // initialization of HSScrollNav component

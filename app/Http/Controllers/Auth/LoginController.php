@@ -7,6 +7,8 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Log;
+
 //use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request; //custome 
 use Session;
@@ -89,6 +91,7 @@ class LoginController extends Controller
 
         if (Auth::attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 1 ])) {
             // Authentication passed...
+            //Log::info('Admin Login successful');
             return redirect()->intended('dashboard'); //if not this route this will redirect using middleware
         }
         if (Auth::attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ])) {            
