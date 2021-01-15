@@ -1394,7 +1394,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //console.log(response); 
         //if(response.success){             
         // toastr.success(response.success);         
-        _this.$Progress.finish();
+        _this.$Progress.finish(); //for security reson, Best Policy for API Based Authentication
+        //localStorage.setItem('isAuthenticated', false);  
+        //localStorage.removeItem('isAuthenticated');  
+
+
+        _this.$store.commit('commonStoreForWebsite/IS_AUTHENTICATED_CHECK', false); //
+
 
         window.location = '/home'; //this.$router.push({ path : '/auth/login' });   //route after successfule 
         //this.$router.replace({ path : '/auth/login' });   //route after successfule 
@@ -1739,7 +1745,7 @@ var HeaderVerticalAndSearchForAllPage = function HeaderVerticalAndSearchForAllPa
   name: "Website-Wrapper-master",
   //Get props form views/admin/dashboard.blade.php
   // props:['user','permissions','settings'], 
-  props: ['isitwebsite', 'authcustomer'],
+  props: ['isitwebsite', 'authcustomer', 'isauthenticated'],
   data: function data() {
     return {
       mainContentMarginTopWhenHeaderFiexd: '',
@@ -1786,6 +1792,7 @@ var HeaderVerticalAndSearchForAllPage = function HeaderVerticalAndSearchForAllPa
   created: function created() {
     //direct commit (mutations) to resources/js/store/commonStoreForAll.js
     // this.$store.commit('commonStoreForAll/IS_IT_WEBSITE_CHECK', this.isitwebsite ); 
+    this.$store.commit('commonStoreForWebsite/IS_AUTHENTICATED_CHECK', this.isauthenticated);
     this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite);
     this.$store.commit('commonStoreForWebsite/AUTH_CUSTOMER_CHECK', this.authcustomer); //window resize is call
 

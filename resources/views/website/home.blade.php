@@ -13,12 +13,14 @@
     <!-- Router-view passing through admin wrapper component -->
     @if( Auth::guard('customer')->check() )
 	    <website-wrapper 
-	    	:isitwebsite="1" 
+	    	:isitwebsite="1"
+            :isauthenticated="true" 
 	    	:authcustomer="{{ Auth::guard('customer')->user() }}" 
 	    ></website-wrapper>
     @else
     	<website-wrapper 
 	    	:isitwebsite="1" 
+            :isauthenticated="false"
 	    ></website-wrapper>
     @endif
 

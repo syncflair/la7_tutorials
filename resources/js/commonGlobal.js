@@ -15,7 +15,8 @@ export default {
 	    ),
 
       ...mapState( 
-            'commonStoreForWebsite', ['isitwebsiteCheck']
+            'commonStoreForWebsite', ['isitwebsiteCheck','isAuthenticated']
+            //isAuthenticated
       ),
 	    
     	authPermissionsData(){  //return 'decodet Data';

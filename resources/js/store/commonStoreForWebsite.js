@@ -8,6 +8,8 @@ const commonStoreForWebsite ={
       isitwebsiteCheck:'', 
       authCustomerAddress: {}, 
 
+      isAuthenticated: false,
+
       //authCustomerData: {},    
       
 	}),/*end state*/
@@ -18,6 +20,9 @@ const commonStoreForWebsite ={
 
 
   mutations: {
+      //Mutation for authetication check form login methods
+      IS_AUTHENTICATED_CHECK(state, data) { return state.isAuthenticated = data; },
+
       //commit from resources/js/components/Website/WebsiteWrapper.vue
       AUTH_CUSTOMER_CHECK(state, data) { return state.authCustomer = data; }, //
 
@@ -29,6 +34,8 @@ const commonStoreForWebsite ={
 
       //for website public
       IS_IT_WEBSITE_CHECK(state, data) { return state.isitwebsiteCheck = data; },
+
+      
       
   },/*end Mutations*/
 

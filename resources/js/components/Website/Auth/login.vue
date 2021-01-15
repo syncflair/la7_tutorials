@@ -150,17 +150,25 @@
 
                     if(data.success){ 
                       this.$Progress.finish();
-                      this.display_error = false;  
+                      this.display_error = false; 
+                      //console.log(data);
+
+                      //for security reson, Best Policy for API Based Authentication
+                      //localStorage.setItem('isAuthenticated', true); 
+
+                      this.$store.commit('commonStoreForWebsite/IS_AUTHENTICATED_CHECK', true ); 
+
+                      this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data 
 
                       // window.location = '/auth/my-dashboard';   
-                      window.location = '/home';                       
-                      //this.$router.push({ path : '/home' });   //route after successfule submit                   
+                      //window.location = '/home';                       
+                      this.$router.push({ path : '/home' });   //route after successfule submit                   
                       //this.$router.replace({ path : '/auth/my-dashboard' });   //route after successfule submit 
                       //this.$router.go('/auth/my-dashboard');
 
                       this.form.reset();  //reset from after submit
 
-                      toastr.success('Login successfule'); 
+                      //toastr.success('Login successfule'); 
                     }
 
                     if(data.error){
@@ -188,6 +196,8 @@
         },
            
         mounted() {
+            //console.log(this.$router);
+            //console.log(this.isAuthenticated);
         },
     }
 </script>

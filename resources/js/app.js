@@ -18,9 +18,8 @@ const options = { color: '#28a745', failedColor: '#dc3545', thickness: '2px',
   autoRevert: true, location: 'top', inverse: false }
 Vue.use(VueProgressBar, options)
 
-
 /*Vuex*/
-import store from './VueVuex'
+  import store from './VueVuex'
 
 /*Import & Use Vue Router*/ 
   // import VueRouter from 'vue-router'
@@ -30,6 +29,8 @@ import store from './VueVuex'
   //import {routes} from './VueRouters' //import VueRouters (Customize)
   import router from './VueRouters' //import VueRouters (Customize)
 
+
+
   //Use vue router
   // const router = new VueRouter({
   //   routes, // short for `routes: routes`
@@ -37,6 +38,8 @@ import store from './VueVuex'
   //   //mode: 'hash', //hash mode = use # (hash) to url (Default mode)
   // })
 /*Import & Use Vue Router*/ 
+
+
 
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
@@ -163,6 +166,34 @@ import common from './commonGlobal'
 Vue.mixin(common)
 
 
+
+/* ####################### router middleware ###########################################*/
+router.beforeEach((to, from, next) => {  
+
+  if(to.meta.authRequiredCustomer === true){
+    const protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerProfile', 'CustomerProfileUpdate', 'CustomerAddressForm', 
+    'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews'];
+
+    // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
+    const isAuthenticated = store.state.commonStoreForWebsite.isAuthenticated;//this.isAuthenticated; //publish from commonGlobal.js and get form commonStoreForWebsite.js
+    if (protectedCustomerRoutes.includes(to.name) && !isAuthenticated) next({ name: 'CustomerLogin' })
+    // if (to.name !== 'CustomerLogin' && !isAuthenticated) next({ name: 'CustomerLogin' })
+    else next()
+  }
+  
+  else if(to.meta.authRequiredAdmin === true){
+    next()
+
+  }
+
+  else {
+      next()
+  }
+
+})
+/* ####################### End router middleware ###########################################*/
+
+
 const app = new Vue({
     el: '#app',
     router, //use Vue router from globally
@@ -189,7 +220,12 @@ const app = new Vue({
     }, 
 
     mounted() {
+      // console.log(this.isAuthenticated);
+      // console.log(this.$store.state.commonStoreForWebsite.isAuthenticated);
     }, //end mounted   
 
 
 });
+
+
+

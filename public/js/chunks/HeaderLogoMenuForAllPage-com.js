@@ -354,6 +354,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
  //Load to all
 
  //Load to all
@@ -542,9 +545,57 @@ var render = function() {
                                       {
                                         staticClass:
                                           "nav-link u-header__sub-menu-nav-link",
-                                        attrs: { to: "/customer-dashboard" }
+                                        attrs: { to: "/auth/my-dashboard" }
                                       },
                                       [_vm._v("Dashboard")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "nav-link u-header__sub-menu-nav-link",
+                                        attrs: { to: "/auth/my-profile" }
+                                      },
+                                      [_vm._v("Profile")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "nav-link u-header__sub-menu-nav-link",
+                                        attrs: { to: "/auth/login" }
+                                      },
+                                      [_vm._v("Login")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "nav-link u-header__sub-menu-nav-link",
+                                        attrs: { to: "/auth/register" }
+                                      },
+                                      [_vm._v("Register")]
                                     )
                                   ],
                                   1

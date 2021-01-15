@@ -92268,10 +92268,14 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _VueVuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VueVuex */ "./resources/js/VueVuex.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 
 
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
+/*this.$store is not available in the router object. You can (in your router):*/
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
 /*Global Components is Here*/
 //Vue.component('counttest', require('./components/countTest.vue'));
 
@@ -92302,6 +92306,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | UserMaster */ "UserMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/AdminUsers/User/UserMaster.vue */ "./resources/js/components/Admin/AdminUsers/User/UserMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'User Master'
   }
 }, {
@@ -93412,6 +93417,12 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Login'
+  },
+  beforeEnter: function beforeEnter(to, from, next) {
+    // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
+    if (to.name === 'CustomerLogin' && _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.commonStoreForWebsite.isAuthenticated) next({
+      name: 'CustomerDashboard'
+    });else next();
   }
 }, {
   path: '/auth/register',
@@ -93421,6 +93432,12 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Signup'
+  },
+  beforeEnter: function beforeEnter(to, from, next) {
+    // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
+    if (to.name === 'CustomerRegister' && _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.commonStoreForWebsite.isAuthenticated) next({
+      name: 'CustomerDashboard'
+    });else next();
   }
 }, {
   path: '/auth/password-recover',
@@ -93448,6 +93465,7 @@ var routes = [//export const routes = [
     return Promise.all(/*! import() | customer-dashboard-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-dashboard-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue */ "./resources/js/components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue"));
   },
   meta: {
+    authRequiredCustomer: true,
     title: 'Dashboard'
   }
 }, {
@@ -93457,6 +93475,7 @@ var routes = [//export const routes = [
     return Promise.all(/*! import() | customer-order-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-order-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Order/CustomerOrders.vue */ "./resources/js/components/Website/AdminCustomer/Order/CustomerOrders.vue"));
   },
   meta: {
+    authRequiredCustomer: true,
     title: 'Orders'
   }
 }, {
@@ -93466,8 +93485,14 @@ var routes = [//export const routes = [
     return Promise.all(/*! import() | customer-profile-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-profile-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerProfile.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerProfile.vue"));
   },
   meta: {
+    authRequiredCustomer: true,
     title: 'Profile'
-  }
+  } //  beforeEnter: (to, from, next) => {
+  // const isAuthenticated = localStorage.getItem(isAuthenticated);
+  //     if (to.name !== 'CustomerLogin' && !isAuthenticated) next({ name: 'CustomerLogin' }) 
+  //     else next()
+  //   }
+
 }, {
   path: '/auth/my-profile-update',
   name: 'CustomerProfileUpdate',
@@ -93475,6 +93500,7 @@ var routes = [//export const routes = [
     return Promise.all(/*! import() | customer-profile-update-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-profile-update-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerProfileUpdate.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerProfileUpdate.vue"));
   },
   meta: {
+    authRequiredCustomer: true,
     title: 'Profile Update'
   }
 }, {
@@ -93484,6 +93510,7 @@ var routes = [//export const routes = [
     return Promise.all(/*! import() | customer-address-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-address-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerAddress.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerAddress.vue"));
   },
   meta: {
+    authRequiredCustomer: true,
     title: 'Address'
   }
 }, {
@@ -93493,6 +93520,7 @@ var routes = [//export const routes = [
     return Promise.all(/*! import() | customer-address-form-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-address-form-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerAddressForm.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerAddressForm.vue"));
   },
   meta: {
+    authRequiredCustomer: true,
     title: 'Customer Address'
   }
 }, {
@@ -93502,6 +93530,7 @@ var routes = [//export const routes = [
     return Promise.all(/*! import() | customer-wishlist-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-wishlist-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue */ "./resources/js/components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue"));
   },
   meta: {
+    authRequiredCustomer: true,
     title: 'Wishlist'
   }
 }, {
@@ -93511,6 +93540,7 @@ var routes = [//export const routes = [
     return Promise.all(/*! import() | customer-voucher-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-voucher-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Voucher/CustomerVoucher.vue */ "./resources/js/components/Website/AdminCustomer/Voucher/CustomerVoucher.vue"));
   },
   meta: {
+    authRequiredCustomer: true,
     title: 'Voucher'
   }
 }, {
@@ -93520,6 +93550,7 @@ var routes = [//export const routes = [
     return Promise.all(/*! import() | customer-reviews-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-reviews-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Review/CustomerReviews.vue */ "./resources/js/components/Website/AdminCustomer/Review/CustomerReviews.vue"));
   },
   meta: {
+    authRequiredCustomer: true,
     title: 'Reviews'
   }
 } // { path: '/auth/my-reviews', name: 'CustomerReviews', component: () => import(/* webpackChunkName: "customer-reviews-website-auth" */ './components/Website/AdminCustomer/Review/CustomerReviews.vue'),  meta: { title: 'Reviews', breadcrumb: 'Reviews'} },
@@ -93527,7 +93558,7 @@ var routes = [//export const routes = [
 ]; //end routes
 //const router = new VueRouter({
 
-/* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
+/* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
   routes: routes,
   // short for `routes: routes`
   mode: 'history' //history mode - remove # (hash) from url
@@ -93872,6 +93903,26 @@ window.FireEvent = FireEvent; //All common js function for global use
 
 
 Vue.mixin(_commonGlobal__WEBPACK_IMPORTED_MODULE_9__["default"]);
+/* ####################### router middleware ###########################################*/
+
+_VueRouters__WEBPACK_IMPORTED_MODULE_2__["default"].beforeEach(function (to, from, next) {
+  if (to.meta.authRequiredCustomer === true) {
+    var protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerProfile', 'CustomerProfileUpdate', 'CustomerAddressForm', 'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews']; // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
+
+    var isAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.commonStoreForWebsite.isAuthenticated; //this.isAuthenticated; //publish from commonGlobal.js and get form commonStoreForWebsite.js
+
+    if (protectedCustomerRoutes.includes(to.name) && !isAuthenticated) next({
+      name: 'CustomerLogin'
+    }); // if (to.name !== 'CustomerLogin' && !isAuthenticated) next({ name: 'CustomerLogin' })
+    else next();
+  } else if (to.meta.authRequiredAdmin === true) {
+    next();
+  } else {
+    next();
+  }
+});
+/* ####################### End router middleware ###########################################*/
+
 var app = new Vue({
   el: '#app',
   router: _VueRouters__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -93895,7 +93946,9 @@ var app = new Vue({
   /*// Register components as globaly ....*/
   components: {//counttest, 
   },
-  mounted: function mounted() {} //end mounted   
+  mounted: function mounted() {// console.log(this.isAuthenticated);
+    // console.log(this.$store.state.commonStoreForWebsite.isAuthenticated);
+  } //end mounted   
 
 });
 
@@ -94000,7 +94053,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'systemSettings'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['isitwebsiteCheck'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'systemSettings'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['isitwebsiteCheck', 'isAuthenticated'] //isAuthenticated
+  )), {}, {
     authPermissionsData: function authPermissionsData() {
       //return 'decodet Data';
       return JSON.parse(this.authPermissions.permission);
@@ -96754,7 +96808,8 @@ var commonStoreForWebsite = {
       //accessable from any where 
       authCustomer: {},
       isitwebsiteCheck: '',
-      authCustomerAddress: {} //authCustomerData: {},    
+      authCustomerAddress: {},
+      isAuthenticated: false //authCustomerData: {},    
 
     };
   },
@@ -96765,6 +96820,10 @@ var commonStoreForWebsite = {
 
   /*end getters*/
   mutations: {
+    //Mutation for authetication check form login methods
+    IS_AUTHENTICATED_CHECK: function IS_AUTHENTICATED_CHECK(state, data) {
+      return state.isAuthenticated = data;
+    },
     //commit from resources/js/components/Website/WebsiteWrapper.vue
     AUTH_CUSTOMER_CHECK: function AUTH_CUSTOMER_CHECK(state, data) {
       return state.authCustomer = data;

@@ -172,7 +172,13 @@
                 //console.log(response); 
                 //if(response.success){             
                   // toastr.success(response.success);         
-                  this.$Progress.finish();  
+                  this.$Progress.finish(); 
+
+                  //for security reson, Best Policy for API Based Authentication
+                  //localStorage.setItem('isAuthenticated', false);  
+                  //localStorage.removeItem('isAuthenticated');  
+
+                  this.$store.commit('commonStoreForWebsite/IS_AUTHENTICATED_CHECK', false ); //
 
                   window.location = '/home';
 

@@ -159,16 +159,27 @@ __webpack_require__.r(__webpack_exports__);
         if (data.success) {
           _this.$Progress.finish();
 
-          _this.display_error = false; // window.location = '/auth/my-dashboard';   
+          _this.display_error = false; //console.log(data);
+          //for security reson, Best Policy for API Based Authentication
+          //localStorage.setItem('isAuthenticated', true); 
 
-          window.location = '/home'; //this.$router.push({ path : '/home' });   //route after successfule submit                   
+          _this.$store.commit('commonStoreForWebsite/IS_AUTHENTICATED_CHECK', true);
+
+          _this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data 
+          // window.location = '/auth/my-dashboard';   
+          //window.location = '/home';                       
+
+
+          _this.$router.push({
+            path: '/home'
+          }); //route after successfule submit                   
           //this.$router.replace({ path : '/auth/my-dashboard' });   //route after successfule submit 
           //this.$router.go('/auth/my-dashboard');
 
+
           _this.form.reset(); //reset from after submit
+          //toastr.success('Login successfule'); 
 
-
-          toastr.success('Login successfule');
         }
 
         if (data.error) {
@@ -194,7 +205,9 @@ __webpack_require__.r(__webpack_exports__);
 
   },
   created: function created() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {//console.log(this.$router);
+    //console.log(this.isAuthenticated);
+  }
 });
 
 /***/ }),
