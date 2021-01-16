@@ -183,7 +183,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   //        this.customer_id == 2
   //     },
   // },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('commonStoreForWebsite', ['authCustomer'])), Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('commonStoreForAll', ['Divisions', 'Districts', 'Dist_Zones'])),
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('AuthenticationForWebsite', ['authCustomer'])), Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('commonStoreForAll', ['Divisions', 'Districts', 'Dist_Zones'])),
   methods: {
     fillForm: function fillForm() {
       if (this.$route.params.data != null) {
@@ -202,7 +202,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         console.log(data);
 
         if (data.success) {
-          _this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', _this.authCustomer.id); //get auth customer address 
+          _this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerAddress', _this.authCustomer.id); //get auth customer address 
 
 
           _this.$Progress.finish();
@@ -237,7 +237,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var data = _ref2.data;
 
         if (data.success) {
-          _this2.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', _this2.authCustomer.id); //get auth customer address 
+          _this2.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerAddress', _this2.authCustomer.id); //get auth customer address 
 
 
           _this2.$Progress.finish();

@@ -32,6 +32,12 @@
                     <!-- <i class="far fa-times-circle"></i> -->
 	            </router-link>
             </li>
+            <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-cart"
+                :class="[currentPage.includes('my-cart')] ? ActiveLinkClass : '' "  >
+                <!-- <i class="far fa-heart"></i> -->
+                <!-- <i class="font-size-18 ec ec-favorites"></i>  -->My Cart
+                </router-link>
+            </li>
             <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-wishlist"
             	:class="[currentPage.includes('my-wishlist')] ? ActiveLinkClass : '' "  >
                 <!-- <i class="far fa-heart"></i> -->
@@ -46,12 +52,10 @@
                     <!-- <i class="font-size-18 ec ec-user"></i> --> My Profile
 	            </router-link>
             </li>
-            <li>
+            <!-- <li>
             	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-address" 
-            	:class="[currentPage.includes('my-address')] ? ActiveLinkClass : '' " >
-                <!-- <i class="far fa-address-card"></i>  -->Address Book
-            	</router-link>
-            </li>
+            	:class="[currentPage.includes('my-address')] ? ActiveLinkClass : '' " >Address Book </router-link>
+            </li> -->
             <li>
             	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-vouchers" 
             	:class="[currentPage.includes('my-vouchers')] ? ActiveLinkClass : '' " > 
@@ -92,7 +96,7 @@
 
         computed: {
 
-          ...mapState( 'commonStoreForWebsite', ['authCustomer'] ),
+          ...mapState( 'AuthenticationForWebsite', ['authCustomer'] ),
 
           //for active link management
             currentPage(){
@@ -115,6 +119,8 @@
                   // toastr.success(response.success);         
                   this.$Progress.finish();  
 
+                  this.$store.commit('AuthenticationForWebsite/IS_AUTHENTICATED_CHECK', false );  
+                  
                   window.location = '/home';
 
                   //this.$router.push({ path : '/home' });   //route after successfule 

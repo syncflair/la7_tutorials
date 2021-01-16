@@ -106,9 +106,10 @@
                                         <router-link class="dropdown-item active- dropdown-item-custome transition-3d-hover" to="/auth/my-dashboard" 
                                         :class="[currentPage.includes('my-dashboard')] ? ActiveLinkClass : '' "><i class="fas fa-tachometer-alt"></i> Dashboard</router-link>
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-orders" :class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-shopping-bag"></i> My Orders</router-link>
+                                        <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/cart" :class="[currentPage.includes('my-wishlist')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-favorites"></i> My Cart</router-link>
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-wishlist" :class="[currentPage.includes('my-wishlist')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-favorites"></i> My Wishlist</router-link>
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-profile" :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-user"></i> Profile</router-link>
-                                        <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-address" :class="[currentPage.includes('my-address')] ? ActiveLinkClass : '' " ><i class="far fa-address-book pl-1"></i> Address</router-link>
+                                        <!-- <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-address" :class="[currentPage.includes('my-address')] ? ActiveLinkClass : '' " ><i class="far fa-address-book pl-1"></i> Address</router-link> -->
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-vouchers" :class="[currentPage.includes('my-vouchers')] ? ActiveLinkClass : '' "><!-- <i class="fas fa-money-bill"></i> --> <i class="font-size-18 ec ec-payment"></i> Voucher</router-link>
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-reviews" :class="[currentPage.includes('my-reviews')] ? ActiveLinkClass : '' "><i class="far fa-star"></i> My Reviews</router-link>
                                         <a @click.prevent="Logout()" class="dropdown-item dropdown-item-custome transition-3d-hover" href="javascript:;"> <i class="fas fa-sign-out-alt pl-1"></i> Logout</a>
@@ -141,7 +142,7 @@
 
         computed: {
 
-          ...mapState( 'commonStoreForWebsite', ['authCustomer'] ),
+          ...mapState( 'AuthenticationForWebsite', ['authCustomer'] ),
 
           //for active link management
             currentPage(){
@@ -178,7 +179,7 @@
                   //localStorage.setItem('isAuthenticated', false);  
                   //localStorage.removeItem('isAuthenticated');  
 
-                  this.$store.commit('commonStoreForWebsite/IS_AUTHENTICATED_CHECK', false ); //
+                  this.$store.commit('AuthenticationForWebsite/IS_AUTHENTICATED_CHECK', false ); //
 
                   window.location = '/home';
 

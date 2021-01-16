@@ -28,6 +28,5 @@ class AdminCustomerMiddleware
             return redirect()->route('customer.login'); 
             
         }
-        
     }
 }

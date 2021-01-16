@@ -162,7 +162,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {};
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('commonStoreForWebsite', ['authCustomer', 'authCustomerAddress'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('AuthenticationForWebsite', ['authCustomer', 'authCustomerAddress'])),
   components: {
     NavForAdminCustomer: _Include_NavForAdminCustomer__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -184,7 +184,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             var data = _ref.data;
 
             if (data.success) {
-              _this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', _this.authCustomer.id);
+              _this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerAddress', _this.authCustomer.id);
 
               toastr.success(data.success);
             }
@@ -205,10 +205,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   created: function created() {
     var _this2 = this;
 
-    this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data 
+    this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data 
 
     setTimeout(function () {
-      _this2.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerAddress', _this2.authCustomer.id); //get auth customer address
+      _this2.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerAddress', _this2.authCustomer.id); //get auth customer address
 
     }, 2400);
   },

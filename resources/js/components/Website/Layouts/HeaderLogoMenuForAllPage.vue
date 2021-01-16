@@ -207,6 +207,11 @@
                                     <li><router-link to="/auth/my-profile" class="nav-link u-header__sub-menu-nav-link" >Profile</router-link></li>
                                     <li><router-link to="/auth/login" class="nav-link u-header__sub-menu-nav-link" >Login</router-link></li>
                                     <li><router-link to="/auth/register" class="nav-link u-header__sub-menu-nav-link" >Register</router-link></li>
+
+
+                                    <li><router-link to="/spa/ProductMaster" class="nav-link u-header__sub-menu-nav-link" >Admin Product</router-link></li>
+
+
                                     <li><a class="nav-link u-header__sub-menu-nav-link" href="../blog/blog-v2.html">Blog v2</a></li>
                                     <li><a class="nav-link u-header__sub-menu-nav-link" href="../blog/blog-v3.html">Blog v3</a></li>
                                     <li><a class="nav-link u-header__sub-menu-nav-link" href="../blog/blog-full-width.html">Blog Full Width</a></li>

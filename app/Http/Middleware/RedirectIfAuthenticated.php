@@ -36,9 +36,6 @@ class RedirectIfAuthenticated
                          // return redirect()->route('dashboard-customer'); //call by route name
                          // return redirect()->route('/auth/my-dashboard');
                          return redirect()->route('customer-dashboard'); //call by route name
-                         
-
-
                     }
                 break;
 

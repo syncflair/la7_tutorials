@@ -364,10 +364,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           _this.display_error = false; //$('#sidebarContent').hide();     
 
-          $("#sidebarContent").fadeOut("slow"); // Hide login sidebar      
+          $("#sidebarContent").fadeOut("slow"); // Hide login sidebar 
+
+          _this.$store.commit('AuthenticationForWebsite/IS_AUTHENTICATED_CHECK', true);
+
+          _this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data      
           // window.location = '/auth/my-dashboard';  
           //window.location = '/home'; 
           //this.$router.go();   
+
 
           window.location = '/home'; //this.$router.reload(); //self reload                     
           //this.$router.push({ path : '/home' });   //route after successfule submit                   
@@ -1358,6 +1363,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1367,7 +1373,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ActiveLinkClass: 'active'
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['authCustomer'])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForWebsite', ['authCustomer'])), {}, {
     //for active link management
     currentPage: function currentPage() {
       return this.$route.path;
@@ -1399,7 +1405,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //localStorage.removeItem('isAuthenticated');  
 
 
-        _this.$store.commit('commonStoreForWebsite/IS_AUTHENTICATED_CHECK', false); //
+        _this.$store.commit('AuthenticationForWebsite/IS_AUTHENTICATED_CHECK', false); //
 
 
         window.location = '/home'; //this.$router.push({ path : '/auth/login' });   //route after successfule 
@@ -1791,10 +1797,10 @@ var HeaderVerticalAndSearchForAllPage = function HeaderVerticalAndSearchForAllPa
   },
   created: function created() {
     //direct commit (mutations) to resources/js/store/commonStoreForAll.js
-    // this.$store.commit('commonStoreForAll/IS_IT_WEBSITE_CHECK', this.isitwebsite ); 
-    this.$store.commit('commonStoreForWebsite/IS_AUTHENTICATED_CHECK', this.isauthenticated);
-    this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite);
-    this.$store.commit('commonStoreForWebsite/AUTH_CUSTOMER_CHECK', this.authcustomer); //window resize is call
+    this.$store.commit('AuthenticationForWebsite/IS_AUTHENTICATED_CHECK', this.isauthenticated);
+    this.$store.commit('AuthenticationForWebsite/AUTH_CUSTOMER_CHECK', this.authcustomer); //commit from props
+
+    this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite); //window resize is call
 
     window.addEventListener('resize', this.handleResize);
     this.handleResize();
@@ -4161,6 +4167,24 @@ var render = function() {
                                   class:  true
                                     ? _vm.ActiveLinkClass
                                     : undefined,
+                                  attrs: { to: "/cart" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "font-size-18 ec ec-favorites"
+                                  }),
+                                  _vm._v(" My Cart")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
                                   attrs: { to: "/auth/my-wishlist" }
                                 },
                                 [
@@ -4186,24 +4210,6 @@ var render = function() {
                                     staticClass: "font-size-18 ec ec-user"
                                   }),
                                   _vm._v(" Profile")
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass:
-                                    "dropdown-item dropdown-item-custome transition-3d-hover",
-                                  class:  true
-                                    ? _vm.ActiveLinkClass
-                                    : undefined,
-                                  attrs: { to: "/auth/my-address" }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "far fa-address-book pl-1"
-                                  }),
-                                  _vm._v(" Address")
                                 ]
                               ),
                               _vm._v(" "),

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************!*\
@@ -263,7 +263,7 @@ var render = function() {
                     : undefined,
                   attrs: { to: "/auth/my-cart" }
                 },
-                [_vm._v("Cart\n                ")]
+                [_vm._v("My Cart\n                ")]
               )
             ],
             1

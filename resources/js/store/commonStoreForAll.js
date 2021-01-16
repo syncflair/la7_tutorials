@@ -7,7 +7,7 @@ const commonStoreForAll ={
       authUser: {},
       authPermissions:{},
       systemSettings:{},
-      isitwebsiteCheck:'',
+      //isitwebsiteCheck:'',
 
       adminRoles:{},
       branches:{},
@@ -55,7 +55,7 @@ const commonStoreForAll ={
       AUTH_USER(state, data) { return state.authUser = data; },
       AUTH_PERMISSIONS(state, data){ return state.authPermissions = data;},
       SYSTEM_SETTINGS(state, data){ return state.systemSettings = data;},
-      IS_IT_WEBSITE_CHECK(state, data) { return state.isitwebsiteCheck = data; },
+      //IS_IT_WEBSITE_CHECK(state, data) { return state.isitwebsiteCheck = data; },
       //End Commit
 
       //get from action

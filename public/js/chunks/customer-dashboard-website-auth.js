@@ -90,6 +90,62 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  //for user MapState
 
@@ -98,13 +154,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {};
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('commonStoreForWebsite', ['authCustomer'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('AuthenticationForWebsite', ['authCustomer'])),
   components: {
     NavForAdminCustomer: _Include_NavForAdminCustomer__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {},
   created: function created() {
-    this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data            
+    this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data            
   },
   mounted: function mounted() {}
 });
@@ -139,7 +195,135 @@ var render = function() {
         "div",
         { staticClass: "bg-gray-1 rounded-lg- col-xl-10 col-wd-9gdot5-" },
         [
-          _vm._m(0),
+          _c("div", { staticClass: "row pt-3" }, [
+            _c("div", { staticClass: "col-lg-3 col-6" }, [
+              _c(
+                "div",
+                { staticClass: "small-box bg-danger- bg-white" },
+                [
+                  _c("div", { staticClass: "inner" }, [
+                    _c("h5", { staticClass: "text-white- text-secondary" }, [
+                      _c("small", [_vm._v(_vm._s(_vm.authCustomer.name))])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      { staticClass: "text-white- text-secondary mb-2" },
+                      [
+                        _c("i", { staticClass: "fas fa-at" }),
+                        _vm._v(" " + _vm._s(_vm.authCustomer.email))
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      { staticClass: "text-white- text-secondary mb-2" },
+                      [
+                        _c("i", { staticClass: "fas fa-phone" }),
+                        _vm._v(" " + _vm._s(_vm.authCustomer.phone))
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm.authCustomer.status_id === 1
+                      ? _c(
+                          "p",
+                          { staticClass: "text-white- text-secondary mb-2" },
+                          [_vm._m(0)]
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer text-secondary",
+                      attrs: { to: "/auth/my-profile" }
+                    },
+                    [
+                      _vm._v("Profile "),
+                      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+                    ]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-3 col-6" }, [
+              _c(
+                "div",
+                { staticClass: "small-box bg-info- bg-white" },
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer text-secondary",
+                      attrs: { to: "/auth/my-orders" }
+                    },
+                    [
+                      _vm._v("My Orders "),
+                      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+                    ]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-3 col-6" }, [
+              _c(
+                "div",
+                { staticClass: "small-box bg-success- bg-white" },
+                [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer text-secondary",
+                      attrs: { to: "/auth/my-cart" }
+                    },
+                    [
+                      _vm._v("Cart "),
+                      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+                    ]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-3 col-6" }, [
+              _c(
+                "div",
+                { staticClass: "small-box bg-warning- bg-white" },
+                [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _vm._m(6),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer text-secondary",
+                      attrs: { to: "/auth/my-wishlist" }
+                    },
+                    [
+                      _vm._v("Wishlist "),
+                      _c("i", { staticClass: "fas fa-arrow-circle-right" })
+                    ]
+                  )
+                ],
+                1
+              )
+            ])
+          ]),
           _vm._v(" "),
           _vm._v(
             "\r\n\r\n            " +
@@ -157,85 +341,72 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row pt-3" }, [
-      _c("div", { staticClass: "col-lg-3 col-6" }, [
-        _c("div", { staticClass: "small-box bg-info" }, [
-          _c("div", { staticClass: "inner" }, [
-            _c("h3", { staticClass: "text-white" }, [_vm._v("150")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-white" }, [_vm._v("Orders")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "icon" }, [
-            _c("i", { staticClass: "ion ion-bag" })
-          ]),
-          _vm._v(" "),
-          _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-            _vm._v("More info "),
-            _c("i", { staticClass: "fas fa-arrow-circle-right" })
-          ])
-        ])
-      ]),
+    return _c(
+      "span",
+      {
+        staticClass: "btn- px-1 bg-success text-white font-size-9- rounded-lg"
+      },
+      [
+        _c("i", { staticClass: "fas fa-check font-size-8" }),
+        _vm._v(" "),
+        _c("small", [_vm._v("Verified")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "inner" }, [
+      _c("h3", { staticClass: "text-white- text-secondary" }, [_vm._v("150")]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-lg-3 col-6" }, [
-        _c("div", { staticClass: "small-box bg-success" }, [
-          _c("div", { staticClass: "inner" }, [
-            _c("h3", { staticClass: "text-white" }, [
-              _vm._v("53"),
-              _c("sup", { staticStyle: { "font-size": "20px" } }, [_vm._v("%")])
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-white" }, [_vm._v("Cart")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "icon" }, [
-            _c("i", { staticClass: "ion ion-stats-bars" })
-          ]),
-          _vm._v(" "),
-          _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-            _vm._v("More info "),
-            _c("i", { staticClass: "fas fa-arrow-circle-right" })
-          ])
-        ])
-      ]),
+      _c("p", { staticClass: "text-white- text-secondary" }, [_vm._v("Orders")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-shopping-cart" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "inner" }, [
+      _c("h3", { staticClass: "text-white- text-secondary" }, [_vm._v("53")]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-lg-3 col-6" }, [
-        _c("div", { staticClass: "small-box bg-warning" }, [
-          _c("div", { staticClass: "inner" }, [
-            _c("h3", { staticClass: "text-white" }, [_vm._v("44")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-white" }, [_vm._v("Wishlist")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "icon" }, [
-            _c("i", { staticClass: "ion ion-person-add" })
-          ]),
-          _vm._v(" "),
-          _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-            _vm._v("More info "),
-            _c("i", { staticClass: "fas fa-arrow-circle-right" })
-          ])
-        ])
-      ]),
+      _c("p", { staticClass: "text-white- text-secondary" }, [_vm._v("Cart")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-shopping-bag" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "inner" }, [
+      _c("h3", { staticClass: "text-white- text-secondary" }, [_vm._v("44")]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-lg-3 col-6" }, [
-        _c("div", { staticClass: "small-box bg-danger" }, [
-          _c("div", { staticClass: "inner" }, [
-            _c("h3", { staticClass: "text-white" }, [_vm._v("65")]),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-white" }, [_vm._v("Download")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "icon" }, [
-            _c("i", { staticClass: "ion ion-pie-graph" })
-          ]),
-          _vm._v(" "),
-          _c("a", { staticClass: "small-box-footer", attrs: { href: "#" } }, [
-            _vm._v("More info "),
-            _c("i", { staticClass: "fas fa-arrow-circle-right" })
-          ])
-        ])
+      _c("p", { staticClass: "text-white- text-secondary" }, [
+        _vm._v("Wishlist")
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-cart-plus" })
     ])
   }
 ]

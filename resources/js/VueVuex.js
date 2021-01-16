@@ -7,7 +7,10 @@ Vue.use(Vuex)
 //import all Modules here from store folder
 //es6 (VX-VueX)
 //const commonStoreForAll = () => import( /* webpackChunkName: "commonStoreForAll-VX" */ './store/commonStoreForAll') 
+import AuthenticationForWebsite from './store/AuthenticationForWebsite'
+
 import commonStoreForWebsite from './store/commonStoreForWebsite' 
+
 
 import commonStoreForAll from './store/commonStoreForAll' 
 import CategoryStore from './store/CategoryStore'
@@ -52,10 +55,12 @@ import CashAccountMasterStore from './store/CashAccountMasterStore'
 export default new Vuex.Store({
 
 	modules: {
-        CashAccountMasterStore,
+        
 
-
+        AuthenticationForWebsite,
+        
         commonStoreForWebsite,
+
 		commonStoreForAll, 
     	CategoryStore,
     	ProductMasterStore,
@@ -80,6 +85,9 @@ export default new Vuex.Store({
     	//Settings
         BranchInfoStore, CountryStore, VatRatesStore, StatusMasterStore, 
         DivisionMasterStore, DistrictMasterStore, DistrictZoneMasterStore,
+
+
+        CashAccountMasterStore,
 
         
     }

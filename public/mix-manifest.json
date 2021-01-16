@@ -256,5 +256,6 @@
     "/js/chunks/viewCategory-com.js": "/js/chunks/viewCategory-com.js",
     "/js/chunks/website-wrapper.js": "/js/chunks/website-wrapper.js",
     "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf.js": "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf.js",
-    "/js/chunks/vendors~auto-complete-app~multi-select-app~switch-app.js": "/js/chunks/vendors~auto-complete-app~multi-select-app~switch-app.js"
+    "/js/chunks/customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59.js": "/js/chunks/customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59.js",
+    "/js/chunks/customer-cart-website-auth.js": "/js/chunks/customer-cart-website-auth.js"
 }

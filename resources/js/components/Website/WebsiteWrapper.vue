@@ -180,11 +180,10 @@
 
         created(){
             //direct commit (mutations) to resources/js/store/commonStoreForAll.js
-            // this.$store.commit('commonStoreForAll/IS_IT_WEBSITE_CHECK', this.isitwebsite ); 
-            this.$store.commit('commonStoreForWebsite/IS_AUTHENTICATED_CHECK', this.isauthenticated ); 
-            
+            this.$store.commit('AuthenticationForWebsite/IS_AUTHENTICATED_CHECK', this.isauthenticated );             
+            this.$store.commit('AuthenticationForWebsite/AUTH_CUSTOMER_CHECK', this.authcustomer ); //commit from props
+
             this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite ); 
-            this.$store.commit('commonStoreForWebsite/AUTH_CUSTOMER_CHECK', this.authcustomer ); 
 
             //window resize is call
             window.addEventListener('resize', this.handleResize);

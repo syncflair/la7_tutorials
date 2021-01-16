@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/chunks/" + ({"404Public-website":"404Public-website","AboutUsPublic-website":"AboutUsPublic-website","AccountDetailsMaster":"AccountDetailsMaster","AccountHeadsMaster":"AccountHeadsMaster","AdminChildUserProfile":"AdminChildUserProfile","AdminChiledWrapper":"AdminChiledWrapper","AttirbuteMaster":"AttirbuteMaster","AttributeValueMaster":"AttributeValueMaster","BankAccountMaster":"BankAccountMaster","BranchInfo":"BranchInfo","BrandMaster":"BrandMaster","BrandPublic-website":"BrandPublic-website","BrandShopMaster":"BrandShopMaster","BrandShopPublic-website":"BrandShopPublic-website","BrandShopsListPublic-website":"BrandShopsListPublic-website","BrandsListPublic-website":"BrandsListPublic-website","CartPublic-website":"CartPublic-website","CashAccountMaster":"CashAccountMaster","CashFlowReportMaster":"CashFlowReportMaster","CategoriesPublic-website":"CategoriesPublic-website","Category-demo":"Category-demo","CategoryMaster":"CategoryMaster","ChartOfAccounts":"ChartOfAccounts","CheckoutPublic-website":"CheckoutPublic-website","ComparePublic-website":"ComparePublic-website","ContactPublic-website":"ContactPublic-website","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","CustomerAddressMaster":"CustomerAddressMaster","CustomerAdminWrapper":"CustomerAdminWrapper","CustomerCartMaster":"CustomerCartMaster","CustomerGroupMaster":"CustomerGroupMaster","CustomerMaster":"CustomerMaster","CustomerMasterForm":"CustomerMasterForm","CustomerMasterList":"CustomerMasterList","CustomerMembershipMaster":"CustomerMembershipMaster","CustomerOrderMaster":"CustomerOrderMaster","CustomerProfileMaster":"CustomerProfileMaster","CustomerWishlistMaster":"CustomerWishlistMaster","Dashboard":"Dashboard","DashboardAdminChildDelivery":"DashboardAdminChildDelivery","DashboardAdminChildGuestUser":"DashboardAdminChildGuestUser","DashboardAdminChildOrder":"DashboardAdminChildOrder","DashboardAdminChildPackaging":"DashboardAdminChildPackaging","DashboardAdminChildPurchase":"DashboardAdminChildPurchase","DashboardAdminChildSales":"DashboardAdminChildSales","DashboardAdminChildStorage":"DashboardAdminChildStorage","DashboardAdminChildSupervisor":"DashboardAdminChildSupervisor","DashboardCustomerAdmin":"DashboardCustomerAdmin","DashboardSupplierAdmin":"DashboardSupplierAdmin","DealsListPublic-website":"DealsListPublic-website","DepartmentMaster":"DepartmentMaster","DistrictMaster":"DistrictMaster","DistrictZoneMaster":"DistrictZoneMaster","DivisionMaster":"DivisionMaster","EmployeeMaster":"EmployeeMaster","EmployeeMasterForm":"EmployeeMasterForm","EmployeeMasterList":"EmployeeMasterList","FAQPublic-website":"FAQPublic-website","GiftCardPublic-website":"GiftCardPublic-website","GiftVoucher":"GiftVoucher","HomePublic-website":"HomePublic-website","JobTitleMaster":"JobTitleMaster","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","LoanReportMaster":"LoanReportMaster","MembershipPublic-website":"MembershipPublic-website","Multicomponent":"Multicomponent","MyAccountPublic-website":"MyAccountPublic-website","OrderStatusMaster":"OrderStatusMaster","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","PaymentMethod":"PaymentMethod","PaymentStatusMaster":"PaymentStatusMaster","PermissionMaster":"PermissionMaster","ProductMaster":"ProductMaster","ProductMasterForm":"ProductMasterForm","ProductMasterList":"ProductMasterList","PurchaseOrderForm":"PurchaseOrderForm","PurchaseOrderList":"PurchaseOrderList","PurchaseOrderMaster":"PurchaseOrderMaster","PurchaseSingleOrderView":"PurchaseSingleOrderView","ReportMaster":"ReportMaster","ReturnActionMaster":"ReturnActionMaster","ReturnStatusMaster":"ReturnStatusMaster","Returns":"Returns","Reviews":"Reviews","RoleMaster":"RoleMaster","SalesReportMaster":"SalesReportMaster","SettingsMaster":"SettingsMaster","ShopPublic-website":"ShopPublic-website","SingleProductPublic-website":"SingleProductPublic-website","SpecificationMaster":"SpecificationMaster","StatusMaster":"StatusMaster","StockReportMaster":"StockReportMaster","StockStatusMaster":"StockStatusMaster","Store":"Store","SupplierAdminWrapper":"SupplierAdminWrapper","SupplierAllOrder":"SupplierAllOrder","SupplierAmountReceivable":"SupplierAmountReceivable","SupplierMaster":"SupplierMaster","SupplierNewOrderList":"SupplierNewOrderList","SupplierOrderDelivered":"SupplierOrderDelivered","SupplierPaymentHistory":"SupplierPaymentHistory","SupplierProductList":"SupplierProductList","SupplierProductReplace":"SupplierProductReplace","SupplierProductReturn":"SupplierProductReturn","SupplierProfileMaster":"SupplierProfileMaster","SuppliersReportMaster":"SuppliersReportMaster","TermsAndConditionsPublic-website":"TermsAndConditionsPublic-website","TrackYourOrder-website":"TrackYourOrder-website","UnitsMaster":"UnitsMaster","UserMaster":"UserMaster","UserStatus":"UserStatus","VatRate":"VatRate","VendorMaster":"VendorMaster","VendorMasterForm":"VendorMasterForm","VendorMasterList":"VendorMasterList","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","WishlistPublic-website":"WishlistPublic-website","adminwrapper":"adminwrapper","counttest-sample":"counttest-sample","customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40":"customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40","customer-address-form-website-auth":"customer-address-form-website-auth","customer-address-website-auth":"customer-address-website-auth","customer-dashboard-website-auth":"customer-dashboard-website-auth","customer-order-website-auth":"customer-order-website-auth","customer-profile-update-website-auth":"customer-profile-update-website-auth","customer-profile-website-auth":"customer-profile-website-auth","customer-reviews-website-auth":"customer-reviews-website-auth","customer-voucher-website-auth":"customer-voucher-website-auth","customer-wishlist-website-auth":"customer-wishlist-website-auth","customer-login-website":"customer-login-website","customer-password-recover-website":"customer-password-recover-website","customer-password-reset-website":"customer-password-reset-website","customer-register-website":"customer-register-website","multi-select-app-one-global":"multi-select-app-one-global","my-date-time-global":"my-date-time-global","pagination-app":"pagination-app","search-app-master":"search-app-master","search-app-one":"search-app-one","single-select-app-one-global":"single-select-app-one-global","single-select-app-two-global":"single-select-app-two-global","vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf":"vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf","AdminChildNotFound":"AdminChildNotFound","NotFound":"NotFound","NotFoundCustomerAdmin":"NotFoundCustomerAdmin","NotFoundSupplierAdmin":"NotFoundSupplierAdmin","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","website-wrapper":"website-wrapper","AccountDetailsMasterContent-com":"AccountDetailsMasterContent-com","AccountDetailsMasterForm-com":"AccountDetailsMasterForm-com","AccountDetailsMasterList-com":"AccountDetailsMasterList-com","AccountHeadsMasterForm-com":"AccountHeadsMasterForm-com","AccountHeadsMasterList-com":"AccountHeadsMasterList-com","AttributeMasterForm-com":"AttributeMasterForm-com","AttributeMasterList-com":"AttributeMasterList-com","AttributeValueMasterForm-com":"AttributeValueMasterForm-com","AttributeValueMasterList-com":"AttributeValueMasterList-com","BankAccountMasterContent-com":"BankAccountMasterContent-com","BankAccountMasterForm-com":"BankAccountMasterForm-com","BankAccountMasterList-com":"BankAccountMasterList-com","BranchForm-com":"BranchForm-com","BranchList-com":"BranchList-com","BrandMasterForm-com":"BrandMasterForm-com","BrandMasterList-com":"BrandMasterList-com","BrandShopMasterForm-com":"BrandShopMasterForm-com","BrandShopMasterList-com":"BrandShopMasterList-com","CashAccountMasterContent-com":"CashAccountMasterContent-com","CashAccountMasterForm-com":"CashAccountMasterForm-com","CashAccountMasterList-com":"CashAccountMasterList-com","CategoryMasterForm-com":"CategoryMasterForm-com","CategoryMasterList-com":"CategoryMasterList-com","ChartOfAccountsForm-com":"ChartOfAccountsForm-com","ChartOfAccountsList-com":"ChartOfAccountsList-com","CountryForm-com":"CountryForm-com","CountryList-com":"CountryList-com","CurrencyForm-com":"CurrencyForm-com","CurrencyList-com":"CurrencyList-com","CustomerGroupMasterForm-com":"CustomerGroupMasterForm-com","CustomerGroupMasterList-com":"CustomerGroupMasterList-com","CustomerMembershipMasterForm-com":"CustomerMembershipMasterForm-com","CustomerMembershipMasterList-com":"CustomerMembershipMasterList-com","DepartmentMaserForm-com":"DepartmentMaserForm-com","DepartmentMasterList-com":"DepartmentMasterList-com","DistrictMasterList-com":"DistrictMasterList-com","DistrictMasterform-com":"DistrictMasterform-com","DistrictZoneMasterForm-com":"DistrictZoneMasterForm-com","DistrictZoneMasterList-com":"DistrictZoneMasterList-com","DivisionMasterList-com":"DivisionMasterList-com","DivisionMasterform-com":"DivisionMasterform-com","JobTitleMasterForm-com":"JobTitleMasterForm-com","JobTitleMasterList-com":"JobTitleMasterList-com","LanguageForm-com":"LanguageForm-com","LanguageList-com":"LanguageList-com","LengthUnitForm-com":"LengthUnitForm-com","LengthUnitList-com":"LengthUnitList-com","ProductListMultiComponent-com":"ProductListMultiComponent-com","childCategory-com":"childCategory-com","countCategory-com":"countCategory-com","dataList-com":"dataList-com","formBox":"formBox","searchBox":"searchBox","viewCategory-com":"viewCategory-com","OrderStatusMasterForm-com":"OrderStatusMasterForm-com","OrderStatusMasterList-com":"OrderStatusMasterList-com","PackageUnitForm-com":"PackageUnitForm-com","PackageUnitList-com":"PackageUnitList-com","PaymentMethodForm-com":"PaymentMethodForm-com","PaymentMethodList-com":"PaymentMethodList-com","PaymentStatusMasterForm-com":"PaymentStatusMasterForm-com","PaymentStatusMasterList-com":"PaymentStatusMasterList-com","PermissionAddForm-com":"PermissionAddForm-com","ReportMasterContent-com":"ReportMasterContent-com","ReportMasterNav-com":"ReportMasterNav-com","ReturnActionMasterForm-com":"ReturnActionMasterForm-com","ReturnActionMasterList-com":"ReturnActionMasterList-com","ReturnStatusMasterForm-com":"ReturnStatusMasterForm-com","ReturnStatusMasterList-com":"ReturnStatusMasterList-com","RoleAdminMasterForm-com":"RoleAdminMasterForm-com","RoleAdminMasterList-com":"RoleAdminMasterList-com","SpecificationMasterForm-com":"SpecificationMasterForm-com","SpecificationMasterList-com":"SpecificationMasterList-com","StatusMasterForm-com":"StatusMasterForm-com","StatusMasterList-com":"StatusMasterList-com","StockStatusMasterForm-com":"StockStatusMasterForm-com","StockStatusMasterList-com":"StockStatusMasterList-com","SupplierMasterForm-com":"SupplierMasterForm-com","SupplierMasterList-com":"SupplierMasterList-com","UnitsMasterForm-com":"UnitsMasterForm-com","UnitsMasterList-com":"UnitsMasterList-com","UserMasterForm-com":"UserMasterForm-com","UserMasterList-com":"UserMasterList-com","UserStatusForm-com":"UserStatusForm-com","UserStatusList-com":"UserStatusList-com","VatRateForm-com":"VatRateForm-com","VatRateList-com":"VatRateList-com","WeightUnitForm-com":"WeightUnitForm-com","WeightUnitList-com":"WeightUnitList-com","HeaderLogoMenuForAllPage-com~HeaderLogoSearchIconsForHome-com":"HeaderLogoMenuForAllPage-com~HeaderLogoSearchIconsForHome-com","HeaderLogoMenuForAllPage-com":"HeaderLogoMenuForAllPage-com","HeaderLogoSearchIconsForHome-com":"HeaderLogoSearchIconsForHome-com","HeaderVerticalAndSearchForAllPage-com":"HeaderVerticalAndSearchForAllPage-com","HeaderVerticalAndSecondaryMenuForHome-com":"HeaderVerticalAndSecondaryMenuForHome-com","AdjustBankAccountForm-com":"AdjustBankAccountForm-com","AdjustCashAccountForm-com":"AdjustCashAccountForm-com"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "js/chunks/" + ({"404Public-website":"404Public-website","AboutUsPublic-website":"AboutUsPublic-website","AccountDetailsMaster":"AccountDetailsMaster","AccountHeadsMaster":"AccountHeadsMaster","AdminChildUserProfile":"AdminChildUserProfile","AdminChiledWrapper":"AdminChiledWrapper","AttirbuteMaster":"AttirbuteMaster","AttributeValueMaster":"AttributeValueMaster","BankAccountMaster":"BankAccountMaster","BranchInfo":"BranchInfo","BrandMaster":"BrandMaster","BrandPublic-website":"BrandPublic-website","BrandShopMaster":"BrandShopMaster","BrandShopPublic-website":"BrandShopPublic-website","BrandShopsListPublic-website":"BrandShopsListPublic-website","BrandsListPublic-website":"BrandsListPublic-website","CartPublic-website":"CartPublic-website","CashAccountMaster":"CashAccountMaster","CashFlowReportMaster":"CashFlowReportMaster","CategoriesPublic-website":"CategoriesPublic-website","Category-demo":"Category-demo","CategoryMaster":"CategoryMaster","ChartOfAccounts":"ChartOfAccounts","CheckoutPublic-website":"CheckoutPublic-website","ComparePublic-website":"ComparePublic-website","ContactPublic-website":"ContactPublic-website","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","CustomerAddressMaster":"CustomerAddressMaster","CustomerAdminWrapper":"CustomerAdminWrapper","CustomerCartMaster":"CustomerCartMaster","CustomerGroupMaster":"CustomerGroupMaster","CustomerMaster":"CustomerMaster","CustomerMasterForm":"CustomerMasterForm","CustomerMasterList":"CustomerMasterList","CustomerMembershipMaster":"CustomerMembershipMaster","CustomerOrderMaster":"CustomerOrderMaster","CustomerProfileMaster":"CustomerProfileMaster","CustomerWishlistMaster":"CustomerWishlistMaster","Dashboard":"Dashboard","DashboardAdminChildDelivery":"DashboardAdminChildDelivery","DashboardAdminChildGuestUser":"DashboardAdminChildGuestUser","DashboardAdminChildOrder":"DashboardAdminChildOrder","DashboardAdminChildPackaging":"DashboardAdminChildPackaging","DashboardAdminChildPurchase":"DashboardAdminChildPurchase","DashboardAdminChildSales":"DashboardAdminChildSales","DashboardAdminChildStorage":"DashboardAdminChildStorage","DashboardAdminChildSupervisor":"DashboardAdminChildSupervisor","DashboardCustomerAdmin":"DashboardCustomerAdmin","DashboardSupplierAdmin":"DashboardSupplierAdmin","DealsListPublic-website":"DealsListPublic-website","DepartmentMaster":"DepartmentMaster","DistrictMaster":"DistrictMaster","DistrictZoneMaster":"DistrictZoneMaster","DivisionMaster":"DivisionMaster","EmployeeMaster":"EmployeeMaster","EmployeeMasterForm":"EmployeeMasterForm","EmployeeMasterList":"EmployeeMasterList","FAQPublic-website":"FAQPublic-website","GiftCardPublic-website":"GiftCardPublic-website","GiftVoucher":"GiftVoucher","HomePublic-website":"HomePublic-website","JobTitleMaster":"JobTitleMaster","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","LoanReportMaster":"LoanReportMaster","MembershipPublic-website":"MembershipPublic-website","Multicomponent":"Multicomponent","MyAccountPublic-website":"MyAccountPublic-website","OrderStatusMaster":"OrderStatusMaster","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","PaymentMethod":"PaymentMethod","PaymentStatusMaster":"PaymentStatusMaster","PermissionMaster":"PermissionMaster","ProductMaster":"ProductMaster","ProductMasterForm":"ProductMasterForm","ProductMasterList":"ProductMasterList","PurchaseOrderForm":"PurchaseOrderForm","PurchaseOrderList":"PurchaseOrderList","PurchaseOrderMaster":"PurchaseOrderMaster","PurchaseSingleOrderView":"PurchaseSingleOrderView","ReportMaster":"ReportMaster","ReturnActionMaster":"ReturnActionMaster","ReturnStatusMaster":"ReturnStatusMaster","Returns":"Returns","Reviews":"Reviews","RoleMaster":"RoleMaster","SalesReportMaster":"SalesReportMaster","SettingsMaster":"SettingsMaster","ShopPublic-website":"ShopPublic-website","SingleProductPublic-website":"SingleProductPublic-website","SpecificationMaster":"SpecificationMaster","StatusMaster":"StatusMaster","StockReportMaster":"StockReportMaster","StockStatusMaster":"StockStatusMaster","Store":"Store","SupplierAdminWrapper":"SupplierAdminWrapper","SupplierAllOrder":"SupplierAllOrder","SupplierAmountReceivable":"SupplierAmountReceivable","SupplierMaster":"SupplierMaster","SupplierNewOrderList":"SupplierNewOrderList","SupplierOrderDelivered":"SupplierOrderDelivered","SupplierPaymentHistory":"SupplierPaymentHistory","SupplierProductList":"SupplierProductList","SupplierProductReplace":"SupplierProductReplace","SupplierProductReturn":"SupplierProductReturn","SupplierProfileMaster":"SupplierProfileMaster","SuppliersReportMaster":"SuppliersReportMaster","TermsAndConditionsPublic-website":"TermsAndConditionsPublic-website","TrackYourOrder-website":"TrackYourOrder-website","UnitsMaster":"UnitsMaster","UserMaster":"UserMaster","UserStatus":"UserStatus","VatRate":"VatRate","VendorMaster":"VendorMaster","VendorMasterForm":"VendorMasterForm","VendorMasterList":"VendorMasterList","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","WishlistPublic-website":"WishlistPublic-website","adminwrapper":"adminwrapper","counttest-sample":"counttest-sample","customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59":"customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59","customer-address-form-website-auth":"customer-address-form-website-auth","customer-address-website-auth":"customer-address-website-auth","customer-cart-website-auth":"customer-cart-website-auth","customer-dashboard-website-auth":"customer-dashboard-website-auth","customer-order-website-auth":"customer-order-website-auth","customer-profile-update-website-auth":"customer-profile-update-website-auth","customer-profile-website-auth":"customer-profile-website-auth","customer-reviews-website-auth":"customer-reviews-website-auth","customer-voucher-website-auth":"customer-voucher-website-auth","customer-wishlist-website-auth":"customer-wishlist-website-auth","customer-login-website":"customer-login-website","customer-password-recover-website":"customer-password-recover-website","customer-password-reset-website":"customer-password-reset-website","customer-register-website":"customer-register-website","multi-select-app-one-global":"multi-select-app-one-global","my-date-time-global":"my-date-time-global","pagination-app":"pagination-app","search-app-master":"search-app-master","search-app-one":"search-app-one","single-select-app-one-global":"single-select-app-one-global","single-select-app-two-global":"single-select-app-two-global","vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf":"vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf","AdminChildNotFound":"AdminChildNotFound","NotFound":"NotFound","NotFoundCustomerAdmin":"NotFoundCustomerAdmin","NotFoundSupplierAdmin":"NotFoundSupplierAdmin","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","website-wrapper":"website-wrapper","AccountDetailsMasterContent-com":"AccountDetailsMasterContent-com","AccountDetailsMasterForm-com":"AccountDetailsMasterForm-com","AccountDetailsMasterList-com":"AccountDetailsMasterList-com","AccountHeadsMasterForm-com":"AccountHeadsMasterForm-com","AccountHeadsMasterList-com":"AccountHeadsMasterList-com","AttributeMasterForm-com":"AttributeMasterForm-com","AttributeMasterList-com":"AttributeMasterList-com","AttributeValueMasterForm-com":"AttributeValueMasterForm-com","AttributeValueMasterList-com":"AttributeValueMasterList-com","BankAccountMasterContent-com":"BankAccountMasterContent-com","BankAccountMasterForm-com":"BankAccountMasterForm-com","BankAccountMasterList-com":"BankAccountMasterList-com","BranchForm-com":"BranchForm-com","BranchList-com":"BranchList-com","BrandMasterForm-com":"BrandMasterForm-com","BrandMasterList-com":"BrandMasterList-com","BrandShopMasterForm-com":"BrandShopMasterForm-com","BrandShopMasterList-com":"BrandShopMasterList-com","CashAccountMasterContent-com":"CashAccountMasterContent-com","CashAccountMasterForm-com":"CashAccountMasterForm-com","CashAccountMasterList-com":"CashAccountMasterList-com","CategoryMasterForm-com":"CategoryMasterForm-com","CategoryMasterList-com":"CategoryMasterList-com","ChartOfAccountsForm-com":"ChartOfAccountsForm-com","ChartOfAccountsList-com":"ChartOfAccountsList-com","CountryForm-com":"CountryForm-com","CountryList-com":"CountryList-com","CurrencyForm-com":"CurrencyForm-com","CurrencyList-com":"CurrencyList-com","CustomerGroupMasterForm-com":"CustomerGroupMasterForm-com","CustomerGroupMasterList-com":"CustomerGroupMasterList-com","CustomerMembershipMasterForm-com":"CustomerMembershipMasterForm-com","CustomerMembershipMasterList-com":"CustomerMembershipMasterList-com","DepartmentMaserForm-com":"DepartmentMaserForm-com","DepartmentMasterList-com":"DepartmentMasterList-com","DistrictMasterList-com":"DistrictMasterList-com","DistrictMasterform-com":"DistrictMasterform-com","DistrictZoneMasterForm-com":"DistrictZoneMasterForm-com","DistrictZoneMasterList-com":"DistrictZoneMasterList-com","DivisionMasterList-com":"DivisionMasterList-com","DivisionMasterform-com":"DivisionMasterform-com","JobTitleMasterForm-com":"JobTitleMasterForm-com","JobTitleMasterList-com":"JobTitleMasterList-com","LanguageForm-com":"LanguageForm-com","LanguageList-com":"LanguageList-com","LengthUnitForm-com":"LengthUnitForm-com","LengthUnitList-com":"LengthUnitList-com","ProductListMultiComponent-com":"ProductListMultiComponent-com","childCategory-com":"childCategory-com","countCategory-com":"countCategory-com","dataList-com":"dataList-com","formBox":"formBox","searchBox":"searchBox","viewCategory-com":"viewCategory-com","OrderStatusMasterForm-com":"OrderStatusMasterForm-com","OrderStatusMasterList-com":"OrderStatusMasterList-com","PackageUnitForm-com":"PackageUnitForm-com","PackageUnitList-com":"PackageUnitList-com","PaymentMethodForm-com":"PaymentMethodForm-com","PaymentMethodList-com":"PaymentMethodList-com","PaymentStatusMasterForm-com":"PaymentStatusMasterForm-com","PaymentStatusMasterList-com":"PaymentStatusMasterList-com","PermissionAddForm-com":"PermissionAddForm-com","ReportMasterContent-com":"ReportMasterContent-com","ReportMasterNav-com":"ReportMasterNav-com","ReturnActionMasterForm-com":"ReturnActionMasterForm-com","ReturnActionMasterList-com":"ReturnActionMasterList-com","ReturnStatusMasterForm-com":"ReturnStatusMasterForm-com","ReturnStatusMasterList-com":"ReturnStatusMasterList-com","RoleAdminMasterForm-com":"RoleAdminMasterForm-com","RoleAdminMasterList-com":"RoleAdminMasterList-com","SpecificationMasterForm-com":"SpecificationMasterForm-com","SpecificationMasterList-com":"SpecificationMasterList-com","StatusMasterForm-com":"StatusMasterForm-com","StatusMasterList-com":"StatusMasterList-com","StockStatusMasterForm-com":"StockStatusMasterForm-com","StockStatusMasterList-com":"StockStatusMasterList-com","SupplierMasterForm-com":"SupplierMasterForm-com","SupplierMasterList-com":"SupplierMasterList-com","UnitsMasterForm-com":"UnitsMasterForm-com","UnitsMasterList-com":"UnitsMasterList-com","UserMasterForm-com":"UserMasterForm-com","UserMasterList-com":"UserMasterList-com","UserStatusForm-com":"UserStatusForm-com","UserStatusList-com":"UserStatusList-com","VatRateForm-com":"VatRateForm-com","VatRateList-com":"VatRateList-com","WeightUnitForm-com":"WeightUnitForm-com","WeightUnitList-com":"WeightUnitList-com","HeaderLogoMenuForAllPage-com~HeaderLogoSearchIconsForHome-com":"HeaderLogoMenuForAllPage-com~HeaderLogoSearchIconsForHome-com","HeaderLogoMenuForAllPage-com":"HeaderLogoMenuForAllPage-com","HeaderLogoSearchIconsForHome-com":"HeaderLogoSearchIconsForHome-com","HeaderVerticalAndSearchForAllPage-com":"HeaderVerticalAndSearchForAllPage-com","HeaderVerticalAndSecondaryMenuForHome-com":"HeaderVerticalAndSecondaryMenuForHome-com","AdjustBankAccountForm-com":"AdjustBankAccountForm-com","AdjustCashAccountForm-com":"AdjustCashAccountForm-com"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -93420,7 +93420,7 @@ var routes = [//export const routes = [
   },
   beforeEnter: function beforeEnter(to, from, next) {
     // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
-    if (to.name === 'CustomerLogin' && _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.commonStoreForWebsite.isAuthenticated) next({
+    if (to.name === 'CustomerLogin' && _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForWebsite.isAuthenticated === true) next({
       name: 'CustomerDashboard'
     });else next();
   }
@@ -93435,7 +93435,7 @@ var routes = [//export const routes = [
   },
   beforeEnter: function beforeEnter(to, from, next) {
     // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
-    if (to.name === 'CustomerRegister' && _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.commonStoreForWebsite.isAuthenticated) next({
+    if (to.name === 'CustomerRegister' && _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForWebsite.isAuthenticated === true) next({
       name: 'CustomerDashboard'
     });else next();
   }
@@ -93462,7 +93462,7 @@ var routes = [//export const routes = [
   path: '/auth/my-dashboard',
   name: 'CustomerDashboard',
   component: function component() {
-    return Promise.all(/*! import() | customer-dashboard-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-dashboard-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue */ "./resources/js/components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue"));
+    return Promise.all(/*! import() | customer-dashboard-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59"), __webpack_require__.e("customer-dashboard-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue */ "./resources/js/components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue"));
   },
   meta: {
     authRequiredCustomer: true,
@@ -93472,7 +93472,7 @@ var routes = [//export const routes = [
   path: '/auth/my-orders',
   name: 'CustomerOrder',
   component: function component() {
-    return Promise.all(/*! import() | customer-order-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-order-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Order/CustomerOrders.vue */ "./resources/js/components/Website/AdminCustomer/Order/CustomerOrders.vue"));
+    return Promise.all(/*! import() | customer-order-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59"), __webpack_require__.e("customer-order-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Order/CustomerOrders.vue */ "./resources/js/components/Website/AdminCustomer/Order/CustomerOrders.vue"));
   },
   meta: {
     authRequiredCustomer: true,
@@ -93482,7 +93482,7 @@ var routes = [//export const routes = [
   path: '/auth/my-profile',
   name: 'CustomerProfile',
   component: function component() {
-    return Promise.all(/*! import() | customer-profile-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-profile-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerProfile.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerProfile.vue"));
+    return Promise.all(/*! import() | customer-profile-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59"), __webpack_require__.e("customer-profile-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerProfile.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerProfile.vue"));
   },
   meta: {
     authRequiredCustomer: true,
@@ -93497,7 +93497,7 @@ var routes = [//export const routes = [
   path: '/auth/my-profile-update',
   name: 'CustomerProfileUpdate',
   component: function component() {
-    return Promise.all(/*! import() | customer-profile-update-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-profile-update-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerProfileUpdate.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerProfileUpdate.vue"));
+    return Promise.all(/*! import() | customer-profile-update-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59"), __webpack_require__.e("customer-profile-update-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerProfileUpdate.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerProfileUpdate.vue"));
   },
   meta: {
     authRequiredCustomer: true,
@@ -93507,7 +93507,7 @@ var routes = [//export const routes = [
   path: '/auth/my-address',
   name: 'CustomerAddress',
   component: function component() {
-    return Promise.all(/*! import() | customer-address-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-address-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerAddress.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerAddress.vue"));
+    return Promise.all(/*! import() | customer-address-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59"), __webpack_require__.e("customer-address-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerAddress.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerAddress.vue"));
   },
   meta: {
     authRequiredCustomer: true,
@@ -93517,17 +93517,27 @@ var routes = [//export const routes = [
   path: '/auth/my-address-update',
   name: 'CustomerAddressForm',
   component: function component() {
-    return Promise.all(/*! import() | customer-address-form-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-address-form-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerAddressForm.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerAddressForm.vue"));
+    return Promise.all(/*! import() | customer-address-form-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59"), __webpack_require__.e("customer-address-form-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Profile/CustomerAddressForm.vue */ "./resources/js/components/Website/AdminCustomer/Profile/CustomerAddressForm.vue"));
   },
   meta: {
     authRequiredCustomer: true,
     title: 'Customer Address'
   }
 }, {
+  path: '/auth/my-cart',
+  name: 'CustomerCart',
+  component: function component() {
+    return Promise.all(/*! import() | customer-cart-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59"), __webpack_require__.e("customer-cart-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Cart/CustomerCart.vue */ "./resources/js/components/Website/AdminCustomer/Cart/CustomerCart.vue"));
+  },
+  meta: {
+    authRequiredCustomer: true,
+    title: 'Cart'
+  }
+}, {
   path: '/auth/my-wishlist',
   name: 'CustomerWishlist',
   component: function component() {
-    return Promise.all(/*! import() | customer-wishlist-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-wishlist-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue */ "./resources/js/components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue"));
+    return Promise.all(/*! import() | customer-wishlist-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59"), __webpack_require__.e("customer-wishlist-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue */ "./resources/js/components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue"));
   },
   meta: {
     authRequiredCustomer: true,
@@ -93537,7 +93547,7 @@ var routes = [//export const routes = [
   path: '/auth/my-vouchers',
   name: 'CustomerVoucher',
   component: function component() {
-    return Promise.all(/*! import() | customer-voucher-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-voucher-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Voucher/CustomerVoucher.vue */ "./resources/js/components/Website/AdminCustomer/Voucher/CustomerVoucher.vue"));
+    return Promise.all(/*! import() | customer-voucher-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59"), __webpack_require__.e("customer-voucher-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Voucher/CustomerVoucher.vue */ "./resources/js/components/Website/AdminCustomer/Voucher/CustomerVoucher.vue"));
   },
   meta: {
     authRequiredCustomer: true,
@@ -93547,7 +93557,7 @@ var routes = [//export const routes = [
   path: '/auth/my-reviews',
   name: 'CustomerReviews',
   component: function component() {
-    return Promise.all(/*! import() | customer-reviews-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-dashboard-website-auth~cus~b1e7da40"), __webpack_require__.e("customer-reviews-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Review/CustomerReviews.vue */ "./resources/js/components/Website/AdminCustomer/Review/CustomerReviews.vue"));
+    return Promise.all(/*! import() | customer-reviews-website-auth */[__webpack_require__.e("customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59"), __webpack_require__.e("customer-reviews-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/Website/AdminCustomer/Review/CustomerReviews.vue */ "./resources/js/components/Website/AdminCustomer/Review/CustomerReviews.vue"));
   },
   meta: {
     authRequiredCustomer: true,
@@ -93580,37 +93590,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _store_commonStoreForWebsite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/commonStoreForWebsite */ "./resources/js/store/commonStoreForWebsite.js");
-/* harmony import */ var _store_commonStoreForAll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/commonStoreForAll */ "./resources/js/store/commonStoreForAll.js");
-/* harmony import */ var _store_CategoryStore__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/CategoryStore */ "./resources/js/store/CategoryStore.js");
-/* harmony import */ var _store_ProductMasterStore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/ProductMasterStore */ "./resources/js/store/ProductMasterStore.js");
-/* harmony import */ var _store_PartieStore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/PartieStore */ "./resources/js/store/PartieStore.js");
-/* harmony import */ var _store_PurchaseOrderMasterStore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store/PurchaseOrderMasterStore */ "./resources/js/store/PurchaseOrderMasterStore.js");
-/* harmony import */ var _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store/CustomerForAdminStore */ "./resources/js/store/CustomerForAdminStore.js");
-/* harmony import */ var _store_SupplierForAdminStore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store/SupplierForAdminStore */ "./resources/js/store/SupplierForAdminStore.js");
-/* harmony import */ var _store_BrandShopMasterStore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./store/BrandShopMasterStore */ "./resources/js/store/BrandShopMasterStore.js");
-/* harmony import */ var _store_VendorMasterStore__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./store/VendorMasterStore */ "./resources/js/store/VendorMasterStore.js");
-/* harmony import */ var _store_usersAdminStore__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./store/usersAdminStore */ "./resources/js/store/usersAdminStore.js");
-/* harmony import */ var _store_CategoryMasterStore__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./store/CategoryMasterStore */ "./resources/js/store/CategoryMasterStore.js");
-/* harmony import */ var _store_SpecificationMasterStore__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./store/SpecificationMasterStore */ "./resources/js/store/SpecificationMasterStore.js");
-/* harmony import */ var _store_AttributeValueMasterStore__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./store/AttributeValueMasterStore */ "./resources/js/store/AttributeValueMasterStore.js");
-/* harmony import */ var _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./store/BrandMasterStore */ "./resources/js/store/BrandMasterStore.js");
-/* harmony import */ var _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./store/ChartOfAccounts */ "./resources/js/store/ChartOfAccounts.js");
-/* harmony import */ var _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./store/AccountHeadsMasterSotre */ "./resources/js/store/AccountHeadsMasterSotre.js");
-/* harmony import */ var _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./store/EmployeeMasterStore */ "./resources/js/store/EmployeeMasterStore.js");
-/* harmony import */ var _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store/BranchInfoStore */ "./resources/js/store/BranchInfoStore.js");
-/* harmony import */ var _store_CountryStore__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store/CountryStore */ "./resources/js/store/CountryStore.js");
-/* harmony import */ var _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store/VatRatesStore */ "./resources/js/store/VatRatesStore.js");
-/* harmony import */ var _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./store/StatusMasterStore */ "./resources/js/store/StatusMasterStore.js");
-/* harmony import */ var _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./store/DivisionMasterStore */ "./resources/js/store/DivisionMasterStore.js");
-/* harmony import */ var _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./store/DistrictMasterStore */ "./resources/js/store/DistrictMasterStore.js");
-/* harmony import */ var _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./store/DistrictZoneMasterStore */ "./resources/js/store/DistrictZoneMasterStore.js");
-/* harmony import */ var _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./store/CashAccountMasterStore */ "./resources/js/store/CashAccountMasterStore.js");
+/* harmony import */ var _store_AuthenticationForWebsite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/AuthenticationForWebsite */ "./resources/js/store/AuthenticationForWebsite.js");
+/* harmony import */ var _store_commonStoreForWebsite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/commonStoreForWebsite */ "./resources/js/store/commonStoreForWebsite.js");
+/* harmony import */ var _store_commonStoreForAll__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/commonStoreForAll */ "./resources/js/store/commonStoreForAll.js");
+/* harmony import */ var _store_CategoryStore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/CategoryStore */ "./resources/js/store/CategoryStore.js");
+/* harmony import */ var _store_ProductMasterStore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/ProductMasterStore */ "./resources/js/store/ProductMasterStore.js");
+/* harmony import */ var _store_PartieStore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store/PartieStore */ "./resources/js/store/PartieStore.js");
+/* harmony import */ var _store_PurchaseOrderMasterStore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store/PurchaseOrderMasterStore */ "./resources/js/store/PurchaseOrderMasterStore.js");
+/* harmony import */ var _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store/CustomerForAdminStore */ "./resources/js/store/CustomerForAdminStore.js");
+/* harmony import */ var _store_SupplierForAdminStore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./store/SupplierForAdminStore */ "./resources/js/store/SupplierForAdminStore.js");
+/* harmony import */ var _store_BrandShopMasterStore__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./store/BrandShopMasterStore */ "./resources/js/store/BrandShopMasterStore.js");
+/* harmony import */ var _store_VendorMasterStore__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./store/VendorMasterStore */ "./resources/js/store/VendorMasterStore.js");
+/* harmony import */ var _store_usersAdminStore__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./store/usersAdminStore */ "./resources/js/store/usersAdminStore.js");
+/* harmony import */ var _store_CategoryMasterStore__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./store/CategoryMasterStore */ "./resources/js/store/CategoryMasterStore.js");
+/* harmony import */ var _store_SpecificationMasterStore__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./store/SpecificationMasterStore */ "./resources/js/store/SpecificationMasterStore.js");
+/* harmony import */ var _store_AttributeValueMasterStore__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./store/AttributeValueMasterStore */ "./resources/js/store/AttributeValueMasterStore.js");
+/* harmony import */ var _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./store/BrandMasterStore */ "./resources/js/store/BrandMasterStore.js");
+/* harmony import */ var _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./store/ChartOfAccounts */ "./resources/js/store/ChartOfAccounts.js");
+/* harmony import */ var _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./store/AccountHeadsMasterSotre */ "./resources/js/store/AccountHeadsMasterSotre.js");
+/* harmony import */ var _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store/EmployeeMasterStore */ "./resources/js/store/EmployeeMasterStore.js");
+/* harmony import */ var _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store/BranchInfoStore */ "./resources/js/store/BranchInfoStore.js");
+/* harmony import */ var _store_CountryStore__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store/CountryStore */ "./resources/js/store/CountryStore.js");
+/* harmony import */ var _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./store/VatRatesStore */ "./resources/js/store/VatRatesStore.js");
+/* harmony import */ var _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./store/StatusMasterStore */ "./resources/js/store/StatusMasterStore.js");
+/* harmony import */ var _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./store/DivisionMasterStore */ "./resources/js/store/DivisionMasterStore.js");
+/* harmony import */ var _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./store/DistrictMasterStore */ "./resources/js/store/DistrictMasterStore.js");
+/* harmony import */ var _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./store/DistrictZoneMasterStore */ "./resources/js/store/DistrictZoneMasterStore.js");
+/* harmony import */ var _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./store/CashAccountMasterStore */ "./resources/js/store/CashAccountMasterStore.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]); //import all Modules here from store folder
 //es6 (VX-VueX)
 //const commonStoreForAll = () => import( /* webpackChunkName: "commonStoreForAll-VX" */ './store/commonStoreForAll') 
+
 
 
 
@@ -93648,40 +93660,41 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
-    CashAccountMasterStore: _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_27__["default"],
-    commonStoreForWebsite: _store_commonStoreForWebsite__WEBPACK_IMPORTED_MODULE_2__["default"],
-    commonStoreForAll: _store_commonStoreForAll__WEBPACK_IMPORTED_MODULE_3__["default"],
-    CategoryStore: _store_CategoryStore__WEBPACK_IMPORTED_MODULE_4__["default"],
-    ProductMasterStore: _store_ProductMasterStore__WEBPACK_IMPORTED_MODULE_5__["default"],
-    PartieStore: _store_PartieStore__WEBPACK_IMPORTED_MODULE_6__["default"],
+    AuthenticationForWebsite: _store_AuthenticationForWebsite__WEBPACK_IMPORTED_MODULE_2__["default"],
+    commonStoreForWebsite: _store_commonStoreForWebsite__WEBPACK_IMPORTED_MODULE_3__["default"],
+    commonStoreForAll: _store_commonStoreForAll__WEBPACK_IMPORTED_MODULE_4__["default"],
+    CategoryStore: _store_CategoryStore__WEBPACK_IMPORTED_MODULE_5__["default"],
+    ProductMasterStore: _store_ProductMasterStore__WEBPACK_IMPORTED_MODULE_6__["default"],
+    PartieStore: _store_PartieStore__WEBPACK_IMPORTED_MODULE_7__["default"],
     //purchase
-    PurchaseOrderMasterStore: _store_PurchaseOrderMasterStore__WEBPACK_IMPORTED_MODULE_7__["default"],
+    PurchaseOrderMasterStore: _store_PurchaseOrderMasterStore__WEBPACK_IMPORTED_MODULE_8__["default"],
     //customer	
-    CustomerForAdminStore: _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_8__["default"],
+    CustomerForAdminStore: _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_9__["default"],
     //Suppliers
-    SupplierForAdminStore: _store_SupplierForAdminStore__WEBPACK_IMPORTED_MODULE_9__["default"],
-    BrandShopMasterStore: _store_BrandShopMasterStore__WEBPACK_IMPORTED_MODULE_10__["default"],
-    VendorMasterStore: _store_VendorMasterStore__WEBPACK_IMPORTED_MODULE_11__["default"],
+    SupplierForAdminStore: _store_SupplierForAdminStore__WEBPACK_IMPORTED_MODULE_10__["default"],
+    BrandShopMasterStore: _store_BrandShopMasterStore__WEBPACK_IMPORTED_MODULE_11__["default"],
+    VendorMasterStore: _store_VendorMasterStore__WEBPACK_IMPORTED_MODULE_12__["default"],
     //user management
-    usersAdminStore: _store_usersAdminStore__WEBPACK_IMPORTED_MODULE_12__["default"],
+    usersAdminStore: _store_usersAdminStore__WEBPACK_IMPORTED_MODULE_13__["default"],
     //Catalog
-    CategoryMasterStore: _store_CategoryMasterStore__WEBPACK_IMPORTED_MODULE_13__["default"],
-    SpecificationMasterStore: _store_SpecificationMasterStore__WEBPACK_IMPORTED_MODULE_14__["default"],
-    AttributeValueMasterStore: _store_AttributeValueMasterStore__WEBPACK_IMPORTED_MODULE_15__["default"],
-    BrandMasterStore: _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_16__["default"],
+    CategoryMasterStore: _store_CategoryMasterStore__WEBPACK_IMPORTED_MODULE_14__["default"],
+    SpecificationMasterStore: _store_SpecificationMasterStore__WEBPACK_IMPORTED_MODULE_15__["default"],
+    AttributeValueMasterStore: _store_AttributeValueMasterStore__WEBPACK_IMPORTED_MODULE_16__["default"],
+    BrandMasterStore: _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_17__["default"],
     //Accounting
-    ChartOfAccounts: _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_17__["default"],
-    AccountHeadsMasterSotre: _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_18__["default"],
+    ChartOfAccounts: _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_18__["default"],
+    AccountHeadsMasterSotre: _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_19__["default"],
     //HRM
-    EmployeeMasterStore: _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_19__["default"],
+    EmployeeMasterStore: _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_20__["default"],
     //Settings
-    BranchInfoStore: _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_20__["default"],
-    CountryStore: _store_CountryStore__WEBPACK_IMPORTED_MODULE_21__["default"],
-    VatRatesStore: _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_22__["default"],
-    StatusMasterStore: _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_23__["default"],
-    DivisionMasterStore: _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_24__["default"],
-    DistrictMasterStore: _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_25__["default"],
-    DistrictZoneMasterStore: _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_26__["default"]
+    BranchInfoStore: _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_21__["default"],
+    CountryStore: _store_CountryStore__WEBPACK_IMPORTED_MODULE_22__["default"],
+    VatRatesStore: _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_23__["default"],
+    StatusMasterStore: _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_24__["default"],
+    DivisionMasterStore: _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_25__["default"],
+    DistrictMasterStore: _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_26__["default"],
+    DistrictZoneMasterStore: _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_27__["default"],
+    CashAccountMasterStore: _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_28__["default"]
   }
 }));
 
@@ -93907,14 +93920,15 @@ Vue.mixin(_commonGlobal__WEBPACK_IMPORTED_MODULE_9__["default"]);
 
 _VueRouters__WEBPACK_IMPORTED_MODULE_2__["default"].beforeEach(function (to, from, next) {
   if (to.meta.authRequiredCustomer === true) {
-    var protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerProfile', 'CustomerProfileUpdate', 'CustomerAddressForm', 'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews']; // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
+    setTimeout(function () {
+      var protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerProfile', 'CustomerProfileUpdate', 'CustomerAddressForm', 'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews']; // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
 
-    var isAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.commonStoreForWebsite.isAuthenticated; //this.isAuthenticated; //publish from commonGlobal.js and get form commonStoreForWebsite.js
+      var isAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForWebsite.isAuthenticated; //this.isAuthenticated; //publish from commonGlobal.js and get form AuthenticationForWebsite.js
 
-    if (protectedCustomerRoutes.includes(to.name) && !isAuthenticated) next({
-      name: 'CustomerLogin'
-    }); // if (to.name !== 'CustomerLogin' && !isAuthenticated) next({ name: 'CustomerLogin' })
-    else next();
+      if (protectedCustomerRoutes.includes(to.name) && isAuthenticated !== true) next({
+        name: 'CustomerLogin'
+      });else next();
+    }, 1000); //call after 800 miliscound
   } else if (to.meta.authRequiredAdmin === true) {
     next();
   } else {
@@ -93928,6 +93942,9 @@ var app = new Vue({
   router: _VueRouters__WEBPACK_IMPORTED_MODULE_2__["default"],
   //use Vue router from globally
   store: _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"],
+  data: function data() {
+    return {};
+  },
   watch: {
     //for title
     '$route': {
@@ -93937,6 +93954,7 @@ var app = new Vue({
 
     }
   },
+  computed: {},
 
   /*Global print function. add this @click.prevent="printMe" to any link that you want to print*/
   printMe: function printMe() {
@@ -93946,8 +93964,11 @@ var app = new Vue({
   /*// Register components as globaly ....*/
   components: {//counttest, 
   },
-  mounted: function mounted() {// console.log(this.isAuthenticated);
-    // console.log(this.$store.state.commonStoreForWebsite.isAuthenticated);
+  mounted: function mounted() {// console.log(store.state.AuthenticationForWebsite.isAuthenticated); //get access to state
+    //console.log(store.getters['AuthenticationForWebsite/isAuthenticated']); //get access to getters
+    // setTimeout(() => {
+    //   console.log(store.getters['AuthenticationForWebsite/isAuthenticated']);
+    // }, 1000);
   } //end mounted   
 
 });
@@ -94049,11 +94070,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       //myName: 'Md. Mahmudur Rahman',
-      baseURL: window.location.origin //window.location.host -- to get host name, use for full path img
+      baseURL: window.location.origin //window.location.host -- to get host name, use for full path img 
 
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'systemSettings'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['isitwebsiteCheck', 'isAuthenticated'] //isAuthenticated
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'systemSettings'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['isitwebsiteCheck', 'isAuthenticated'] //isAuthenticated
+  )), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForWebsite', ['isAuthenticated'] //isAuthenticated
   )), {}, {
     authPermissionsData: function authPermissionsData() {
       //return 'decodet Data';
@@ -94375,6 +94397,86 @@ var AttributeValueMasterStore = {
 
 };
 /* harmony default export */ __webpack_exports__["default"] = (AttributeValueMasterStore);
+
+/***/ }),
+
+/***/ "./resources/js/store/AuthenticationForWebsite.js":
+/*!********************************************************!*\
+  !*** ./resources/js/store/AuthenticationForWebsite.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var AuthenticationForWebsite = {
+  namespaced: true,
+  state: function state() {
+    return {
+      //accessable from any where
+
+      /**************************************************/
+
+      /* Use for Customer authentication*/
+
+      /**************************************************/
+      isAuthenticated: false,
+      authCustomer: {},
+      authCustomerAddress: {}
+    };
+  },
+
+  /*end state*/
+  getters: {
+    //not used
+    isAuthenticated: function isAuthenticated(state) {
+      return state.isAuthenticated;
+    }
+  },
+
+  /*end getters*/
+  mutations: {
+    /**************************************************/
+
+    /* Use for Customer authentication*/
+
+    /**************************************************/
+    //Mutation for customer authetication check form login methods
+    IS_AUTHENTICATED_CHECK: function IS_AUTHENTICATED_CHECK(state, data) {
+      return state.isAuthenticated = data;
+    },
+    //commit from resources/js/components/Website/WebsiteWrapper.vue
+    AUTH_CUSTOMER_CHECK: function AUTH_CUSTOMER_CHECK(state, data) {
+      return state.authCustomer = data;
+    },
+    // commit form WebsiteWrapper.vue
+    AUTH_CUSTOMER_DATA: function AUTH_CUSTOMER_DATA(state, data) {
+      return state.authCustomer = data;
+    },
+    AUTH_CUSTOMER_ADDRESS: function AUTH_CUSTOMER_ADDRESS(state, data) {
+      return state.authCustomerAddress = data;
+    }
+  },
+
+  /*end Mutations*/
+  actions: {
+    //get auth customer data after login if any later update 
+    fetchAuthCustomerData: function fetchAuthCustomerData(context) {
+      axios.get('/auth/getAuthCustomerData').then(function (response) {
+        context.commit('AUTH_CUSTOMER_DATA', response.data);
+      })["catch"](function () {});
+    },
+    //get auth customer address after login
+    fetchAuthCustomerAddress: function fetchAuthCustomerAddress(context, payload) {
+      axios.get('/auth/getAuthCustomerAddress?&id=' + payload).then(function (response) {
+        context.commit('AUTH_CUSTOMER_ADDRESS', response.data);
+      })["catch"](function () {});
+    }
+  }
+  /*end actions*/
+
+};
+/* harmony default export */ __webpack_exports__["default"] = (AuthenticationForWebsite);
 
 /***/ }),
 
@@ -96469,7 +96571,7 @@ var commonStoreForAll = {
       authUser: {},
       authPermissions: {},
       systemSettings: {},
-      isitwebsiteCheck: '',
+      //isitwebsiteCheck:'',
       adminRoles: {},
       branches: {},
       chartOfAccountHeads: {},
@@ -96521,9 +96623,7 @@ var commonStoreForAll = {
     SYSTEM_SETTINGS: function SYSTEM_SETTINGS(state, data) {
       return state.systemSettings = data;
     },
-    IS_IT_WEBSITE_CHECK: function IS_IT_WEBSITE_CHECK(state, data) {
-      return state.isitwebsiteCheck = data;
-    },
+    //IS_IT_WEBSITE_CHECK(state, data) { return state.isitwebsiteCheck = data; },
     //End Commit
     //get from action
     FETCH_ROLES: function FETCH_ROLES(state, data) {
@@ -96806,36 +96906,15 @@ var commonStoreForWebsite = {
   state: function state() {
     return {
       //accessable from any where 
-      authCustomer: {},
-      isitwebsiteCheck: '',
-      authCustomerAddress: {},
-      isAuthenticated: false //authCustomerData: {},    
-
+      isitwebsiteCheck: ''
     };
   },
 
   /*end state*/
-  getters: {//userStatus: state => { return state.userStatus },
-  },
+  getters: {},
 
   /*end getters*/
   mutations: {
-    //Mutation for authetication check form login methods
-    IS_AUTHENTICATED_CHECK: function IS_AUTHENTICATED_CHECK(state, data) {
-      return state.isAuthenticated = data;
-    },
-    //commit from resources/js/components/Website/WebsiteWrapper.vue
-    AUTH_CUSTOMER_CHECK: function AUTH_CUSTOMER_CHECK(state, data) {
-      return state.authCustomer = data;
-    },
-    //
-    AUTH_CUSTOMER_DATA: function AUTH_CUSTOMER_DATA(state, data) {
-      return state.authCustomer = data;
-    },
-    // AUTH_CUSTOMER_DATA(state, data) { return state.authCustomerData = data; },
-    AUTH_CUSTOMER_ADDRESS: function AUTH_CUSTOMER_ADDRESS(state, data) {
-      return state.authCustomerAddress = data;
-    },
     //for website public
     IS_IT_WEBSITE_CHECK: function IS_IT_WEBSITE_CHECK(state, data) {
       return state.isitwebsiteCheck = data;
@@ -96843,19 +96922,13 @@ var commonStoreForWebsite = {
   },
 
   /*end Mutations*/
-  actions: {
-    //get auth customer data after login if any later update 
-    fetchAuthCustomerData: function fetchAuthCustomerData(context) {
-      axios.get('/auth/getAuthCustomerData').then(function (response) {
-        context.commit('AUTH_CUSTOMER_DATA', response.data);
-      })["catch"](function () {});
-    },
-    //get auth customer address after login
-    fetchAuthCustomerAddress: function fetchAuthCustomerAddress(context, payload) {
-      axios.get('/auth/getAuthCustomerAddress?&id=' + payload).then(function (response) {
-        context.commit('AUTH_CUSTOMER_ADDRESS', response.data);
-      })["catch"](function () {});
-    }
+  actions: {//get auth customer data after login if any later update 
+    // fetchAuthCustomerData(context){
+    //     axios.get('/auth/getAuthCustomerData')
+    //     .then( (response) => {
+    //       context.commit('AUTH_CUSTOMER_DATA', response.data);
+    //     }).catch( () => { })
+    // },   
   }
   /*end actions*/
 

@@ -5,7 +5,7 @@ export default {
 	data(){
         return {
         	//myName: 'Md. Mahmudur Rahman',
-          baseURL: window.location.origin, //window.location.host -- to get host name, use for full path img
+          baseURL: window.location.origin, //window.location.host -- to get host name, use for full path img 
         }
     }, 
 
@@ -16,6 +16,11 @@ export default {
 
       ...mapState( 
             'commonStoreForWebsite', ['isitwebsiteCheck','isAuthenticated']
+            //isAuthenticated
+      ),
+
+      ...mapState( 
+            'AuthenticationForWebsite', ['isAuthenticated']
             //isAuthenticated
       ),
 	    
@@ -75,7 +80,6 @@ export default {
     },
 
     mounted(){
-
       /*
         This is for check that the application is browse as website(public) or as admin, 
         if browse as website then it's value is '1', and if browse as admin then it's value in '' (Empty).

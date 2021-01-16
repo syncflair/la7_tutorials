@@ -167,18 +167,20 @@ Vue.mixin(common)
 
 
 
+
+
 /* ####################### router middleware ###########################################*/
 router.beforeEach((to, from, next) => {  
 
   if(to.meta.authRequiredCustomer === true){
-    const protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerProfile', 'CustomerProfileUpdate', 'CustomerAddressForm', 
-    'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews'];
-
-    // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
-    const isAuthenticated = store.state.commonStoreForWebsite.isAuthenticated;//this.isAuthenticated; //publish from commonGlobal.js and get form commonStoreForWebsite.js
-    if (protectedCustomerRoutes.includes(to.name) && !isAuthenticated) next({ name: 'CustomerLogin' })
-    // if (to.name !== 'CustomerLogin' && !isAuthenticated) next({ name: 'CustomerLogin' })
-    else next()
+    setTimeout(() => {
+        const protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerProfile', 'CustomerProfileUpdate', 'CustomerAddressForm', 
+        'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews'];
+        // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
+        const isAuthenticated = store.state.AuthenticationForWebsite.isAuthenticated;//this.isAuthenticated; //publish from commonGlobal.js and get form AuthenticationForWebsite.js
+        if (protectedCustomerRoutes.includes(to.name) && isAuthenticated !== true) next({ name: 'CustomerLogin' })
+        else next()
+    }, 1000);//call after 800 miliscound
   }
   
   else if(to.meta.authRequiredAdmin === true){
@@ -198,6 +200,11 @@ const app = new Vue({
     el: '#app',
     router, //use Vue router from globally
     store,
+
+    data (){      
+        return {                          
+        }
+    },
     
     watch: { //for title
       '$route':{
@@ -208,6 +215,10 @@ const app = new Vue({
          //immediate: true,
       }
     },  
+
+    computed: {
+
+    },
 
     /*Global print function. add this @click.prevent="printMe" to any link that you want to print*/
     printMe(){
@@ -220,8 +231,12 @@ const app = new Vue({
     }, 
 
     mounted() {
-      // console.log(this.isAuthenticated);
-      // console.log(this.$store.state.commonStoreForWebsite.isAuthenticated);
+      // console.log(store.state.AuthenticationForWebsite.isAuthenticated); //get access to state
+      //console.log(store.getters['AuthenticationForWebsite/isAuthenticated']); //get access to getters
+      
+      // setTimeout(() => {
+      //   console.log(store.getters['AuthenticationForWebsite/isAuthenticated']);
+      // }, 1000);
     }, //end mounted   
 
 

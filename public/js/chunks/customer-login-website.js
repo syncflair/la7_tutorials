@@ -163,9 +163,9 @@ __webpack_require__.r(__webpack_exports__);
           //for security reson, Best Policy for API Based Authentication
           //localStorage.setItem('isAuthenticated', true); 
 
-          _this.$store.commit('commonStoreForWebsite/IS_AUTHENTICATED_CHECK', true);
+          _this.$store.commit('AuthenticationForWebsite/IS_AUTHENTICATED_CHECK', true);
 
-          _this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data 
+          _this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data 
           // window.location = '/auth/my-dashboard';   
           //window.location = '/home';                       
 

@@ -237,14 +237,14 @@ const routes = [
 	{ path: '/auth/login', name: 'CustomerLogin', component: () => import(/* webpackChunkName: "customer-login-website" */ './components/Website/Auth/login.vue'), meta: { title: 'Login', },
 		beforeEnter: (to, from, next) => {
 	  		// const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
-	        if (to.name === 'CustomerLogin' && store.state.commonStoreForWebsite.isAuthenticated) next({ name: 'CustomerDashboard' }) 
+	        if (to.name === 'CustomerLogin' && store.state.AuthenticationForWebsite.isAuthenticated === true) next({ name: 'CustomerDashboard' }) 
 	        else next()
 	    }
 	},
 	{ path: '/auth/register', name: 'CustomerRegister', component: () => import(/* webpackChunkName: "customer-register-website" */ './components/Website/Auth/register.vue'), meta: { title: 'Signup', },
 		beforeEnter: (to, from, next) => {
 	  		// const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
-	        if (to.name === 'CustomerRegister' && store.state.commonStoreForWebsite.isAuthenticated) next({ name: 'CustomerDashboard' }) 
+	        if (to.name === 'CustomerRegister' && store.state.AuthenticationForWebsite.isAuthenticated === true) next({ name: 'CustomerDashboard' }) 
 	        else next()
 	    }
 	},
@@ -266,6 +266,7 @@ const routes = [
   	{ path: '/auth/my-profile-update', name: 'CustomerProfileUpdate', component: () => import(/* webpackChunkName: "customer-profile-update-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerProfileUpdate.vue'), meta: { authRequiredCustomer: true, title: 'Profile Update',} },
   	{ path: '/auth/my-address', name: 'CustomerAddress', component: () => import(/* webpackChunkName: "customer-address-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerAddress.vue'), meta: { authRequiredCustomer: true, title: 'Address',}},
   	{ path: '/auth/my-address-update', name: 'CustomerAddressForm', component: () => import(/* webpackChunkName: "customer-address-form-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerAddressForm.vue'), meta: { authRequiredCustomer: true, title: 'Customer Address'} },
+  	{ path: '/auth/my-cart', name: 'CustomerCart', component: () => import(/* webpackChunkName: "customer-cart-website-auth" */ './components/Website/AdminCustomer/Cart/CustomerCart.vue'), meta: { authRequiredCustomer: true, title: 'Cart',} },
   	{ path: '/auth/my-wishlist', name: 'CustomerWishlist', component: () => import(/* webpackChunkName: "customer-wishlist-website-auth" */ './components/Website/AdminCustomer/Wishlist/CustomerWishlist.vue'), meta: { authRequiredCustomer: true, title: 'Wishlist',} },
   	{ path: '/auth/my-vouchers', name: 'CustomerVoucher', component: () => import(/* webpackChunkName: "customer-voucher-website-auth" */ './components/Website/AdminCustomer/Voucher/CustomerVoucher.vue'), meta: { authRequiredCustomer: true, title: 'Voucher', }},
   	{ path: '/auth/my-reviews', name: 'CustomerReviews', component: () => import(/* webpackChunkName: "customer-reviews-website-auth" */ './components/Website/AdminCustomer/Review/CustomerReviews.vue'),  meta: { authRequiredCustomer: true, title: 'Reviews',} },
