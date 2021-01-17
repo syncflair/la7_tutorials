@@ -92288,6 +92288,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 //const NotFound = () => import('./components/Admin/NotFound.vue')
 
 var routes = [//export const routes = [
+
+/********************************************************/
+
+/* Master Admin Panel */
+
+/********************************************************/
 //{ path: '/dashboard', component: Dashboard, meta: { title: 'Dashboard'} },
 {
   path: '/dashboard',
@@ -92316,6 +92322,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | RoleMaster */ "RoleMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/AdminUsers/Role/RoleMaster.vue */ "./resources/js/components/Admin/AdminUsers/Role/RoleMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Role Master'
   }
 }, {
@@ -92325,6 +92332,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | PermissionMaster */ "PermissionMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/AdminUsers/Permission/PermissionMaster.vue */ "./resources/js/components/Admin/AdminUsers/Permission/PermissionMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Permission Master'
   }
 }, //Catalog
@@ -92334,20 +92342,25 @@ var routes = [//export const routes = [
   component: function component() {
     return __webpack_require__.e(/*! import() | ProductMaster */ "ProductMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Catalog/Products/ProductMaster.vue */ "./resources/js/components/Admin/Catalog/Products/ProductMaster.vue"));
   },
-  meta: {
-    title: 'Product Master'
-  },
   children: [{
     path: '/spa/ProductMaster',
     name: 'ProductMasterList',
     component: function component() {
       return __webpack_require__.e(/*! import() | ProductMasterList */ "ProductMasterList").then(__webpack_require__.bind(null, /*! ./components/Admin/Catalog/Products/ProductMasterList.vue */ "./resources/js/components/Admin/Catalog/Products/ProductMasterList.vue"));
+    },
+    meta: {
+      authRequiredAdmin: true,
+      title: 'Product Master'
     }
   }, {
     path: '/spa/ProductMasterForm',
     name: 'ProductMasterForm',
     component: function component() {
       return __webpack_require__.e(/*! import() | ProductMasterForm */ "ProductMasterForm").then(__webpack_require__.bind(null, /*! ./components/Admin/Catalog/Products/ProductMasterForm.vue */ "./resources/js/components/Admin/Catalog/Products/ProductMasterForm.vue"));
+    },
+    meta: {
+      authRequiredAdmin: true,
+      title: 'Product Update'
     }
   }]
 }, {
@@ -92357,6 +92370,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | CategoryMaster */ "CategoryMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Catalog/Category/CategoryMaster.vue */ "./resources/js/components/Admin/Catalog/Category/CategoryMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Category Master'
   }
 }, {
@@ -92366,6 +92380,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | AttirbuteMaster */ "AttirbuteMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Catalog/Attribute/AttirbuteMaster.vue */ "./resources/js/components/Admin/Catalog/Attribute/AttirbuteMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Attribute Master'
   }
 }, {
@@ -92375,6 +92390,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | AttributeValueMaster */ "AttributeValueMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Catalog/AttributeValue/AttributeValueMaster.vue */ "./resources/js/components/Admin/Catalog/AttributeValue/AttributeValueMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Attribute Value Master'
   }
 }, {
@@ -92384,6 +92400,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | SpecificationMaster */ "SpecificationMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Catalog/Specification/SpecificationMaster.vue */ "./resources/js/components/Admin/Catalog/Specification/SpecificationMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Specification Master'
   }
 }, {
@@ -92393,6 +92410,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | BrandMaster */ "BrandMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Catalog/Brand/BrandMaster.vue */ "./resources/js/components/Admin/Catalog/Brand/BrandMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Brand Master'
   }
 }, {
@@ -92411,6 +92429,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | GiftVoucher */ "GiftVoucher").then(__webpack_require__.bind(null, /*! ./components/Admin/Catalog/GiftVoucher/GiftVouchers.vue */ "./resources/js/components/Admin/Catalog/GiftVoucher/GiftVouchers.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'GiftVoucher'
   }
 }, {
@@ -92420,6 +92439,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | Reviews */ "Reviews").then(__webpack_require__.bind(null, /*! ./components/Admin/Catalog/Reviews/Reviews.vue */ "./resources/js/components/Admin/Catalog/Reviews/Reviews.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Reviews'
   }
 }, //Sales
@@ -92430,6 +92450,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | Orders */ "Orders").then(__webpack_require__.bind(null, /*! ./components/Admin/Sales/Orders/Orders.vue */ "./resources/js/components/Admin/Sales/Orders/Orders.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Orders'
   }
 }, {
@@ -92439,6 +92460,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | Returns */ "Returns").then(__webpack_require__.bind(null, /*! ./components/Admin/Sales/Returns/Returns.vue */ "./resources/js/components/Admin/Sales/Returns/Returns.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Returns'
   }
 }, //Purchase
@@ -92449,6 +92471,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | Store */ "Store").then(__webpack_require__.bind(null, /*! ./components/Admin/Purchase/Store/Storage.vue */ "./resources/js/components/Admin/Purchase/Store/Storage.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Storage'
   }
 }, {
@@ -92458,6 +92481,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | PurchaseOrderMaster */ "PurchaseOrderMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Purchase/Purchase/PurchaseOrderMaster.vue */ "./resources/js/components/Admin/Purchase/Purchase/PurchaseOrderMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Purchase order master'
   },
   children: [{
@@ -92467,6 +92491,7 @@ var routes = [//export const routes = [
       return __webpack_require__.e(/*! import() | PurchaseOrderList */ "PurchaseOrderList").then(__webpack_require__.bind(null, /*! ./components/Admin/Purchase/Purchase/PurchaseOrderList.vue */ "./resources/js/components/Admin/Purchase/Purchase/PurchaseOrderList.vue"));
     },
     meta: {
+      authRequiredAdmin: true,
       title: 'Purchase Orders'
     }
   }, {
@@ -92476,6 +92501,7 @@ var routes = [//export const routes = [
       return __webpack_require__.e(/*! import() | PurchaseOrderForm */ "PurchaseOrderForm").then(__webpack_require__.bind(null, /*! ./components/Admin/Purchase/Purchase/PurchaseOrderForm.vue */ "./resources/js/components/Admin/Purchase/Purchase/PurchaseOrderForm.vue"));
     },
     meta: {
+      authRequiredAdmin: true,
       title: 'Purchase Form'
     }
   }, {
@@ -92485,6 +92511,7 @@ var routes = [//export const routes = [
       return __webpack_require__.e(/*! import() | PurchaseSingleOrderView */ "PurchaseSingleOrderView").then(__webpack_require__.bind(null, /*! ./components/Admin/Purchase/Purchase/PurchaseSingleOrderView.vue */ "./resources/js/components/Admin/Purchase/Purchase/PurchaseSingleOrderView.vue"));
     },
     meta: {
+      authRequiredAdmin: true,
       title: 'PUrchase Order View'
     }
   }]
@@ -92496,6 +92523,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | CustomerMaster */ "CustomerMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Customers/Customers/CustomerMaster.vue */ "./resources/js/components/Admin/Customers/Customers/CustomerMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Customer'
   },
   children: [{
@@ -92505,6 +92533,7 @@ var routes = [//export const routes = [
       return __webpack_require__.e(/*! import() | CustomerMasterList */ "CustomerMasterList").then(__webpack_require__.bind(null, /*! ./components/Admin/Customers/Customers/CustomerMasterList.vue */ "./resources/js/components/Admin/Customers/Customers/CustomerMasterList.vue"));
     },
     meta: {
+      authRequiredAdmin: true,
       title: 'Customers'
     }
   }, {
@@ -92514,6 +92543,7 @@ var routes = [//export const routes = [
       return __webpack_require__.e(/*! import() | CustomerMasterForm */ "CustomerMasterForm").then(__webpack_require__.bind(null, /*! ./components/Admin/Customers/Customers/CustomerMasterForm.vue */ "./resources/js/components/Admin/Customers/Customers/CustomerMasterForm.vue"));
     },
     meta: {
+      authRequiredAdmin: true,
       title: 'Customer'
     }
   }]
@@ -92524,6 +92554,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | CustomerGroupMaster */ "CustomerGroupMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Customers/CustomerGroup/CustomerGroupMaster.vue */ "./resources/js/components/Admin/Customers/CustomerGroup/CustomerGroupMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Customer Group'
   }
 }, {
@@ -92533,6 +92564,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | CustomerMembershipMaster */ "CustomerMembershipMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Customers/Membership/CustomerMembershipMaster.vue */ "./resources/js/components/Admin/Customers/Membership/CustomerMembershipMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Customer Group'
   }
 }, //Suppliers
@@ -92543,6 +92575,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | SupplierMaster */ "SupplierMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Suppliers/Suppliers/SupplierMaster.vue */ "./resources/js/components/Admin/Suppliers/Suppliers/SupplierMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Supplier Master'
   }
 }, {
@@ -92552,6 +92585,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | BrandShopMaster */ "BrandShopMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Suppliers/BrandShop/BrandShopMaster.vue */ "./resources/js/components/Admin/Suppliers/BrandShop/BrandShopMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Brand Shop'
   }
 }, {
@@ -92561,6 +92595,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | VendorMaster */ "VendorMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Suppliers/Vendor/VendorMaster.vue */ "./resources/js/components/Admin/Suppliers/Vendor/VendorMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Vendor Master'
   },
   children: [{
@@ -92570,6 +92605,7 @@ var routes = [//export const routes = [
       return __webpack_require__.e(/*! import() | VendorMasterList */ "VendorMasterList").then(__webpack_require__.bind(null, /*! ./components/Admin/Suppliers/Vendor/VendorMasterList.vue */ "./resources/js/components/Admin/Suppliers/Vendor/VendorMasterList.vue"));
     },
     meta: {
+      authRequiredAdmin: true,
       title: 'Vendors'
     }
   }, {
@@ -92579,6 +92615,7 @@ var routes = [//export const routes = [
       return __webpack_require__.e(/*! import() | VendorMasterForm */ "VendorMasterForm").then(__webpack_require__.bind(null, /*! ./components/Admin/Suppliers/Vendor/VendorMasterForm.vue */ "./resources/js/components/Admin/Suppliers/Vendor/VendorMasterForm.vue"));
     },
     meta: {
+      authRequiredAdmin: true,
       title: 'Vendor'
     }
   } // { path: '*', redirect: '/spa/VendorMasterList' }
@@ -92591,6 +92628,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | Multicomponent */ "Multicomponent").then(__webpack_require__.bind(null, /*! ./components/Admin/MultiComponent/multiComponent.vue */ "./resources/js/components/Admin/MultiComponent/multiComponent.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Component Communication'
   }
 }, {
@@ -92600,6 +92638,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | VuexComponent */ "VuexComponent").then(__webpack_require__.bind(null, /*! ./components/Admin/VuexComponent/vuexComponent.vue */ "./resources/js/components/Admin/VuexComponent/vuexComponent.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Vuex Component Communication'
   }
 }, {
@@ -92609,6 +92648,7 @@ var routes = [//export const routes = [
     return Promise.all(/*! import() | formComponent */[__webpack_require__.e("vendors~AdminChildNotFound~NotFound~NotFoundCustomerAdmin~NotFoundSupplierAdmin~PermissionAddForm-co~630565cf"), __webpack_require__.e("formComponent")]).then(__webpack_require__.bind(null, /*! ./components/Admin/FormComponent/formComponent.vue */ "./resources/js/components/Admin/FormComponent/formComponent.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Vuex Form Component'
   }
 }, //Accounting
@@ -92619,6 +92659,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | ChartOfAccounts */ "ChartOfAccounts").then(__webpack_require__.bind(null, /*! ./components/Admin/Accounting/COA/ChartOfAccounts.vue */ "./resources/js/components/Admin/Accounting/COA/ChartOfAccounts.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Chart Of Accounts'
   }
 }, {
@@ -92628,6 +92669,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | AccountHeadsMaster */ "AccountHeadsMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Accounting/AccountHead/AccountHeadsMaster.vue */ "./resources/js/components/Admin/Accounting/AccountHead/AccountHeadsMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Account Head'
   }
 }, {
@@ -92637,6 +92679,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | AccountDetailsMaster */ "AccountDetailsMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Accounting/AccountDetails/AccountDetailsMaster.vue */ "./resources/js/components/Admin/Accounting/AccountDetails/AccountDetailsMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Bank Accounts'
   }
 }, {
@@ -92646,6 +92689,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | BankAccountMaster */ "BankAccountMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Accounting/BankAccount/BankAccountMaster.vue */ "./resources/js/components/Admin/Accounting/BankAccount/BankAccountMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Bank Accounts'
   }
 }, {
@@ -92655,6 +92699,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | CashAccountMaster */ "CashAccountMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Accounting/CashAccount/CashAccountMaster.vue */ "./resources/js/components/Admin/Accounting/CashAccount/CashAccountMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Cash Accounts'
   }
 }, //HRM
@@ -92665,6 +92710,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | JobTitleMaster */ "JobTitleMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/HRM/JobTitle/JobTitleMaster.vue */ "./resources/js/components/Admin/HRM/JobTitle/JobTitleMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Job Title'
   }
 }, {
@@ -92674,6 +92720,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | EmployeeMaster */ "EmployeeMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/HRM/Employee/EmployeeMaster.vue */ "./resources/js/components/Admin/HRM/Employee/EmployeeMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Employee Master'
   },
   children: [{
@@ -92683,6 +92730,7 @@ var routes = [//export const routes = [
       return __webpack_require__.e(/*! import() | EmployeeMasterList */ "EmployeeMasterList").then(__webpack_require__.bind(null, /*! ./components/Admin/HRM/Employee/EmployeeMasterList.vue */ "./resources/js/components/Admin/HRM/Employee/EmployeeMasterList.vue"));
     },
     meta: {
+      authRequiredAdmin: true,
       title: 'Employees'
     }
   }, //{ path: '/spa/EmployeeMasterList', name: 'EmployeeMasterList', component: () => import(/* webpackChunkName: "EmployeeMasterList" */ './components/Admin/HRM/Employee/EmployeeMasterList.vue'), },
@@ -92693,6 +92741,7 @@ var routes = [//export const routes = [
       return __webpack_require__.e(/*! import() | EmployeeMasterForm */ "EmployeeMasterForm").then(__webpack_require__.bind(null, /*! ./components/Admin/HRM/Employee/EmployeeMasterForm.vue */ "./resources/js/components/Admin/HRM/Employee/EmployeeMasterForm.vue"));
     },
     meta: {
+      authRequiredAdmin: true,
       title: 'Employee'
     }
   } // { path: '*', redirect: '/spa/EmployeeMasterList' }
@@ -92704,6 +92753,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | DepartmentMaster */ "DepartmentMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/HRM/Department/DepartmentMaster.vue */ "./resources/js/components/Admin/HRM/Department/DepartmentMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Department'
   }
 }, //settings
@@ -92714,6 +92764,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | SettingsMaster */ "SettingsMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/Settings/SettingsMaster.vue */ "./resources/js/components/Admin/Settings/Settings/SettingsMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Settings'
   }
 }, {
@@ -92723,6 +92774,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | OrganizationInfo */ "OrganizationInfo").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/OrganizationInfo/OrganizationInfo.vue */ "./resources/js/components/Admin/Settings/OrganizationInfo/OrganizationInfo.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Organization Information'
   }
 }, {
@@ -92732,6 +92784,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | BranchInfo */ "BranchInfo").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/BranchInfo/BranchInfo.vue */ "./resources/js/components/Admin/Settings/BranchInfo/BranchInfo.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'BranchInfo Information'
   }
 }, {
@@ -92741,6 +92794,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | CurrencyMarster */ "CurrencyMarster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/Currency/CurrencyMarster.vue */ "./resources/js/components/Admin/Settings/Currency/CurrencyMarster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Currency '
   }
 }, {
@@ -92750,6 +92804,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | LanguageMaster */ "LanguageMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/Language/LanguageMaster.vue */ "./resources/js/components/Admin/Settings/Language/LanguageMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Language'
   }
 }, {
@@ -92759,6 +92814,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | UnitsMaster */ "UnitsMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/Units/UnitsMaster.vue */ "./resources/js/components/Admin/Settings/Units/UnitsMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Unit'
   }
 }, {
@@ -92768,6 +92824,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | LengthUnit */ "LengthUnit").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/LengthUnit/LengthUnit.vue */ "./resources/js/components/Admin/Settings/LengthUnit/LengthUnit.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Lenght Unit'
   }
 }, {
@@ -92777,6 +92834,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | WeightUnit */ "WeightUnit").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/WeightUnit/WeightUnit.vue */ "./resources/js/components/Admin/Settings/WeightUnit/WeightUnit.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Weight Unit'
   }
 }, {
@@ -92786,6 +92844,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | PackageUnit */ "PackageUnit").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/PackageUnit/PackageUnit.vue */ "./resources/js/components/Admin/Settings/PackageUnit/PackageUnit.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Package Unit'
   }
 }, {
@@ -92795,6 +92854,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | VatRate */ "VatRate").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/VatRate/VatRate.vue */ "./resources/js/components/Admin/Settings/VatRate/VatRate.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Vat Rate'
   }
 }, {
@@ -92804,6 +92864,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | UserStatus */ "UserStatus").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/UserStatus/UserStatus.vue */ "./resources/js/components/Admin/Settings/UserStatus/UserStatus.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'User Status'
   }
 }, {
@@ -92813,6 +92874,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | StatusMaster */ "StatusMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/StatusMaster/StatusMaster.vue */ "./resources/js/components/Admin/Settings/StatusMaster/StatusMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Status'
   }
 }, {
@@ -92822,6 +92884,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | PaymentMethod */ "PaymentMethod").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/PaymentMethod/PaymentMethod.vue */ "./resources/js/components/Admin/Settings/PaymentMethod/PaymentMethod.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Payment Method'
   }
 }, {
@@ -92831,6 +92894,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | CountryMaster */ "CountryMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/Country/CountryMaster.vue */ "./resources/js/components/Admin/Settings/Country/CountryMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Country'
   }
 }, {
@@ -92840,6 +92904,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | DivisionMaster */ "DivisionMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/Division/DivisionMaster.vue */ "./resources/js/components/Admin/Settings/Division/DivisionMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Division'
   }
 }, {
@@ -92849,6 +92914,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | DistrictMaster */ "DistrictMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/District/DistrictMaster.vue */ "./resources/js/components/Admin/Settings/District/DistrictMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'District'
   }
 }, {
@@ -92858,6 +92924,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | DistrictZoneMaster */ "DistrictZoneMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/DistrictZone/DistrictZoneMaster.vue */ "./resources/js/components/Admin/Settings/DistrictZone/DistrictZoneMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Zone/Area'
   }
 }, {
@@ -92867,6 +92934,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | OrderStatusMaster */ "OrderStatusMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/OrderStatus/OrderStatusMaster.vue */ "./resources/js/components/Admin/Settings/OrderStatus/OrderStatusMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Order Status'
   }
 }, {
@@ -92876,6 +92944,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | StockStatusMaster */ "StockStatusMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/StockStatus/StockStatusMaster.vue */ "./resources/js/components/Admin/Settings/StockStatus/StockStatusMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Stock Status'
   }
 }, {
@@ -92885,6 +92954,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | ReturnStatusMaster */ "ReturnStatusMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/ReturnStatus/ReturnStatusMaster.vue */ "./resources/js/components/Admin/Settings/ReturnStatus/ReturnStatusMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Return Status'
   }
 }, {
@@ -92894,6 +92964,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | ReturnActionMaster */ "ReturnActionMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/ReturnAction/ReturnActionMaster.vue */ "./resources/js/components/Admin/Settings/ReturnAction/ReturnActionMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Return Action'
   }
 }, {
@@ -92903,6 +92974,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | PaymentStatusMaster */ "PaymentStatusMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Settings/PaymentStatus/PaymentStatusMaster.vue */ "./resources/js/components/Admin/Settings/PaymentStatus/PaymentStatusMaster.vue"));
   },
   meta: {
+    authRequiredAdmin: true,
     title: 'Payment Status'
   }
 }, //Reports
@@ -92912,38 +92984,55 @@ var routes = [//export const routes = [
   component: function component() {
     return __webpack_require__.e(/*! import() | ReportMaster */ "ReportMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Reports/ReportMaster.vue */ "./resources/js/components/Admin/Reports/ReportMaster.vue"));
   },
-  meta: {
-    title: 'Reports'
-  },
   children: [{
     path: '/spa/SalesReportMaster',
     name: 'SalesReportMaster',
     component: function component() {
       return __webpack_require__.e(/*! import() | SalesReportMaster */ "SalesReportMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Reports/Sales/SalesReportMaster.vue */ "./resources/js/components/Admin/Reports/Sales/SalesReportMaster.vue"));
+    },
+    meta: {
+      authRequiredAdmin: true,
+      title: 'Sales'
     }
   }, {
     path: '/spa/LoanReportMaster',
     name: 'LoanReportMaster',
     component: function component() {
       return __webpack_require__.e(/*! import() | LoanReportMaster */ "LoanReportMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Reports/Loans/LoanReportMaster.vue */ "./resources/js/components/Admin/Reports/Loans/LoanReportMaster.vue"));
+    },
+    meta: {
+      authRequiredAdmin: true,
+      title: 'Loan Reports'
     }
   }, {
     path: '/spa/StockReportMaster',
     name: 'StockReportMaster',
     component: function component() {
       return __webpack_require__.e(/*! import() | StockReportMaster */ "StockReportMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Reports/Stock/StockReportMaster.vue */ "./resources/js/components/Admin/Reports/Stock/StockReportMaster.vue"));
+    },
+    meta: {
+      authRequiredAdmin: true,
+      title: 'Stock Reports'
     }
   }, {
     path: '/spa/CashFlowReportMaster',
     name: 'CashFlowReportMaster',
     component: function component() {
       return __webpack_require__.e(/*! import() | CashFlowReportMaster */ "CashFlowReportMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Reports/CashFlow/CashFlowReportMaster.vue */ "./resources/js/components/Admin/Reports/CashFlow/CashFlowReportMaster.vue"));
+    },
+    meta: {
+      authRequiredAdmin: true,
+      title: 'Cash flow Reports'
     }
   }, {
     path: '/spa/SuppliersReportMaster',
     name: 'SuppliersReportMaster',
     component: function component() {
       return __webpack_require__.e(/*! import() | SuppliersReportMaster */ "SuppliersReportMaster").then(__webpack_require__.bind(null, /*! ./components/Admin/Reports/Suppliers/SuppliersReportMaster.vue */ "./resources/js/components/Admin/Reports/Suppliers/SuppliersReportMaster.vue"));
+    },
+    meta: {
+      authRequiredAdmin: true,
+      title: 'Supplier Reports'
     }
   }] //end Children
 
@@ -92957,7 +93046,12 @@ var routes = [//export const routes = [
   meta: {
     title: 'Not Found'
   }
-}, //########################################################## Admin Child Routes ###########################################################################
+},
+/********************************************************/
+
+/* Admin Child Routes */
+
+/********************************************************/
 //Admin Supervisor
 {
   path: '/dashboard-supervisor',
@@ -93048,7 +93142,12 @@ var routes = [//export const routes = [
   meta: {
     title: 'Not Found'
   }
-}, //########################################################## Customer Admin Routes ###########################################################################
+},
+/********************************************************/
+
+/* Customer Admin Routes */
+
+/********************************************************/
 {
   path: '/dashboard-customer',
   component: function component() {
@@ -93106,7 +93205,12 @@ var routes = [//export const routes = [
   meta: {
     title: 'Not Found'
   }
-}, //########################################################## Supplier Admin Routes ###########################################################################
+},
+/********************************************************/
+
+/* Supplier Admin Routes */
+
+/********************************************************/
 {
   path: '/dashboard-supplier',
   component: function component() {
@@ -93196,7 +93300,12 @@ var routes = [//export const routes = [
   meta: {
     title: 'Not Found'
   }
-}, //website
+},
+/********************************************************/
+
+/* website */
+
+/********************************************************/
 //{ path: '/home', name: 'home', component: () => import(/* webpackChunkName: "website-home-public" */ './components/Website/Public/Home/HomePublic.vue'), meta: { title: 'Welcome To Sorboraho'} },
 //{ path: '/contact', name: 'contact', component: () => import(/* webpackChunkName: "website-contact-public" */ './components/Website/Public/Contact/ContactPublic.vue'), meta: { title: 'Contact Us'} },
 {
@@ -93457,7 +93566,12 @@ var routes = [//export const routes = [
   meta: {
     title: 'Reset Password'
   }
-}, //website user admin dashboard
+},
+/********************************************************/
+
+/* Customer Admin Area for website */
+
+/********************************************************/
 {
   path: '/auth/my-dashboard',
   name: 'CustomerDashboard',
@@ -93921,7 +94035,7 @@ Vue.mixin(_commonGlobal__WEBPACK_IMPORTED_MODULE_9__["default"]);
 _VueRouters__WEBPACK_IMPORTED_MODULE_2__["default"].beforeEach(function (to, from, next) {
   if (to.meta.authRequiredCustomer === true) {
     setTimeout(function () {
-      var protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerProfile', 'CustomerProfileUpdate', 'CustomerAddressForm', 'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews']; // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
+      var protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerCart', 'CustomerProfile', 'CustomerProfileUpdate', 'CustomerAddressForm', 'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews']; // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
 
       var isAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForWebsite.isAuthenticated; //this.isAuthenticated; //publish from commonGlobal.js and get form AuthenticationForWebsite.js
 
@@ -96794,28 +96908,26 @@ var commonStoreForAll = {
       })["catch"](function () {});
     },
     fetchCountryList: function fetchCountryList(context) {
-      axios.get('/spa/Country-Info/GetCountry').then(function (response) {
+      axios.get('/Country-Info/GetCountry') // axios.get('/spa/Country-Info/GetCountry')
+      .then(function (response) {
         context.commit('FETCH_COUNTRY_DATA', response.data); //use for only show data
       })["catch"](function () {});
     },
-    // fetchDivisionList(context){
-    //   axios.get('/spa/Division-Info/GetDivision')
-    //   .then( (response) => {
-    //     context.commit('FETCH_DIVISION_DATA', response.data); //use for only show data
-    //   }).catch( () => { })
-    // },
     fetchDivisionList: function fetchDivisionList(context, payload) {
-      axios.get('/spa/Division-Info/GetDivision?&id=' + payload).then(function (response) {
+      axios.get('/Division-Info/GetDivision?&id=' + payload) // axios.get('/spa/Division-Info/GetDivision?&id='+payload)
+      .then(function (response) {
         context.commit('FETCH_DIVISION_DATA', response.data); //use for only show data
       })["catch"](function () {});
     },
     fetchDistrictList: function fetchDistrictList(context, payload) {
-      axios.get('/spa/District-Info/GetDistrict?&id=' + payload).then(function (response) {
+      axios.get('/District-Info/GetDistrict?&id=' + payload) // axios.get('/spa/District-Info/GetDistrict?&id='+payload)
+      .then(function (response) {
         context.commit('FETCH_DISTRICT_DATA', response.data); //use for only show data
       })["catch"](function () {});
     },
     fetchDistrictZoneList: function fetchDistrictZoneList(context, payload) {
-      axios.get('/spa/DistrictZone-Info/GetDistrictZone?&id=' + payload).then(function (response) {
+      axios.get('/DistrictZone-Info/GetDistrictZone?&id=' + payload) // axios.get('/spa/DistrictZone-Info/GetDistrictZone?&id='+payload)
+      .then(function (response) {
         context.commit('FETCH_DISTRICT_ZONE_DATA', response.data); //use for only show data
       })["catch"](function () {});
     },

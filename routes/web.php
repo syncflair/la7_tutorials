@@ -73,7 +73,9 @@ Route::get('supplier/password/reset/{token}','AuthSupplier\ResetPasswordControll
 Route::post('supplier/password/reset','AuthSupplier\ResetPasswordController@reset')->name('supplier.password.update');
 
 
-
+/***************************************************************************/
+/* Customer middleware */
+/***************************************************************************/
 Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
     // Route::get('/dashboard-customer', 'AdminCustomer\AdminCustomerController@index')->name('dashboard-customer');
     Route::get('auth/my-dashboard', 'AdminCustomer\AdminCustomerController@index')->name('customer-dashboard');
@@ -90,8 +92,6 @@ Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
     Route::post('auth/CustomerChangePassword', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangePassword');
 
     
-
-
     Route::resource('auth/my-orders', 'AdminCustomer\AdminCustomerOrdersController',
       ['except'=>['create','show','edit','update'] ]);
     Route::resource('auth/my-address', 'AdminCustomer\AdminCustomerAddressController',
@@ -108,16 +108,12 @@ Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
 
 
 
-     // Vue: single page application (SPA)- Any route that not match that redirect to dashboard-customer. 
-    // Route::get('/spac/{anypath}', function () {
-    //   return view('adminCustomer.DashboardCustomer'); 
-    // })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
-
+    // Vue: single page application (SPA)- Any route that not match that redirect to dashboard-customer. 
     Route::get('/auth/{anypath}', function () {
       return view('website.home'); 
     })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
 
-});
+}); /* End Customer middleware */
 
 
 Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
@@ -133,21 +129,63 @@ Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
 
 
 
-Route::get('confirmation', function () { return view('auth.confirmation'); });  //confirmation page
-/**************************************** Auth routes *************************************************/
-//Route::get('login123', 'Auth\LoginController@showLoginForm')->name('login');
-//Auth::routes(); //Default Laravel
-//Auth::routes(['register' => false ]); //disable Register route. No one can register to this site any more.
-Auth::routes([
-  //'register' => false,  //disable Register route. No one can register to this site any more.
-  //'reset' => false, //disable password Reset function. No one can reset password to this site any more.
-  'verify' => true  //Enable Email verification function.
-]);//*/
+/***************************************************************************/
+/* Auth routes */
+/* Replace Auth::routes(); (Default Laravel) with each route to change what ever you change
+*/
+/***************************************************************************/
+  // Default Laravel Auth route, it get route form vendor/laravel/ui/src/AuthRouteMethods.php
+  // Auth::routes([ 
+  //   //'login' => false,
+  //   //'register' => false,  //disable Register route. No one can register to this site any more.
+  //   //'reset' => false, //disable password Reset function. No one can reset password to this site any more.
+  //   'verify' => true  //Enable Email verification function.
+  // ]);
+
+  
+  // Login Routes...
+  /*Web.php, register.blade.php, login.blade.php, app_navbar.blade.php, email.blade.php, reset.blade.php*/
+  Route::get('login-abc', 'Auth\LoginController@showLoginForm')->name('login-abc');
+  Route::post('login-abc', 'Auth\LoginController@login');
+  Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+  // Registration Routes...
+  Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+  Route::post('register', 'Auth\RegisterController@register');
+
+  // Password Reset Routes...
+  Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+  Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+  Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+  Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
+
+
+  Route::get('email/verify', 'Auth\VerificationController@show')->name('verification.notice');
+  Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
+  Route::post('email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
+
+
+  //confirmation after register (My Custome route and page)
+  Route::get('confirmation', function () { return view('auth.confirmation'); });  //confirmation page
+/***************************************************************************/
+/* End Default Auth routes */
+/***************************************************************************/
 
 
 
-/**************************************** Admin middleware *****************************************************/
-//Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], function() {
+/***************************************************************************/
+/* Common Query Route (For Admin area and also public area)*/
+/***************************************************************************/
+Route::get('Country-Info/GetCountry', 'CommonController@GetCountry'); //for commonStoreForAll store
+Route::get('Division-Info/GetDivision', 'CommonController@GetDivision'); //for commonStoreForAll store
+Route::get('District-Info/GetDistrict', 'CommonController@GetDistrict'); //for commonStoreForAll store
+Route::get('DistrictZone-Info/GetDistrictZone', 'CommonController@GetDistrictZone');//commonStoreForAll store
+
+
+
+/***************************************************************************/
+/* Admin middleware */
+/***************************************************************************/
 Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], function() {
 //Route::group(['middleware'=>['admin','auth','verified'] ], function() {
 
@@ -353,21 +391,21 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
       ['except'=>['create','show','edit'] ]);
 
     Route::get('spa/searchCountryData', 'Admin\Settings\CountryController@search'); //search
-    Route::get('spa/Country-Info/GetCountry', 'Admin\Settings\CountryController@GetCountry'); //for commonStoreForAll store
+    // Route::get('spa/Country-Info/GetCountry', 'Admin\Settings\CountryController@GetCountry'); //for commonStoreForAll store
     Route::resource('spa/Country-Info', 'Admin\Settings\CountryController', 
       ['except'=>['create','show','edit'] ]);
     
     Route::get('spa/searchDivisionData', 'Admin\Settings\DivisionController@search'); //search
-    Route::get('spa/Division-Info/GetDivision', 'Admin\Settings\DivisionController@GetDivision'); //for commonStoreForAll store
+    // Route::get('spa/Division-Info/GetDivision', 'Admin\Settings\DivisionController@GetDivision'); //for commonStoreForAll store
     Route::resource('spa/Division-Info', 'Admin\Settings\DivisionController', 
       ['except'=>['create','show','edit'] ]);
 
     Route::get('spa/searchDistrictData', 'Admin\Settings\DistrictController@search'); //search
-    Route::get('spa/District-Info/GetDistrict', 'Admin\Settings\DistrictController@GetDistrict'); //for commonStoreForAll store
+    // Route::get('spa/District-Info/GetDistrict', 'Admin\Settings\DistrictController@GetDistrict'); //for commonStoreForAll store
     Route::resource('spa/District-Info', 'Admin\Settings\DistrictController', 
       ['except'=>['create','show','edit'] ]);
     Route::get('spa/searchDistrictZoneData', 'Admin\Settings\DistrictZoneController@search'); //search
-    Route::get('spa/DistrictZone-Info/GetDistrictZone', 'Admin\Settings\DistrictZoneController@GetDistrictZone');//commonStoreForAll store
+    // Route::get('spa/DistrictZone-Info/GetDistrictZone', 'Admin\Settings\DistrictZoneController@GetDistrictZone');//commonStoreForAll store
     Route::resource('spa/DistrictZone-Info', 'Admin\Settings\DistrictZoneController', 
       ['except'=>['create','show','edit'] ]);
 
@@ -429,7 +467,9 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 
 
 
-/**************** Routes for all role based admin child ********************/
+/***************************************************************************/
+/* Routes for all role based admin child */
+/***************************************************************************/
 Route::group(['middleware'=>['auth'] ], function(){
   Route::get('spaa/admin-child-profille-info', 'AdminChild\AdminChildProfileController@index');
   Route::put('spaa/admin-child-profille-change-password/{id}', 'AdminChild\AdminChildProfileController@ChangePassword');

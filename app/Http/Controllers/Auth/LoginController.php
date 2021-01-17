@@ -150,6 +150,6 @@ class LoginController extends Controller
         //     ? new Response('', 204)
         //     : redirect('/');
 
-        return redirect('/login');
+        return redirect('/');
     }
 }

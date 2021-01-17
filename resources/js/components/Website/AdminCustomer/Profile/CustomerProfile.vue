@@ -63,17 +63,19 @@
                             <!-- <div class="col-lg-12 border-bottom border-color-1 mb-3 mt-3"></div> -->
 
 
+                            <div class="col-lg-12 border-bottom border-color-1 mt-5 mb-3 col-6-">
+                                <h3 class="section-title- mb-0 pb-1 pl-2- font-size-14">Address</h3>
+                            </div>
                             <div class="col-lg-12">
                                 <div class="mb-4 w-100 wishlist-table cart-wishlist-custome">
                                     <div class="table-responsive-">
                                         <table class="table" cellspacing="0">
-                                            <thead>
+                                            <!-- <thead>
                                                 <tr> 
-                                                    <th class="product-name">Address</th>
-                                                    <!-- <th class="product-name">For</th> -->
+                                                    <th class="product-name">&nbsp;</th>
                                                     <th class="product-subtotal min-width-200-md-lg">&nbsp;</th>
                                                 </tr>
-                                            </thead>
+                                            </thead> -->
                                             <tbody>
                                                 <tr v-for="(aca, index) in authCustomerAddress" :key="index"> 
                                                     <td data-title="Address">

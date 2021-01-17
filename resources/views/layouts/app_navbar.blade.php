@@ -38,7 +38,7 @@
                             </li>
                           
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login' ) }}">{{ __('menu.login') }}</a>
+                                <a class="nav-link" href="{{ route('login-abc' ) }}">{{ __('menu.login') }}</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">

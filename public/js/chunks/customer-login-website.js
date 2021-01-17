@@ -139,7 +139,10 @@ __webpack_require__.r(__webpack_exports__);
       error_message: '',
       form: new Form({
         username: '',
-        password: ''
+        password: '',
+        remember: true
+        /*By default remember me true*/
+
       })
     };
   },

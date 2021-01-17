@@ -20,131 +20,134 @@ Vue.use(VueRouter)
 const routes = [
 //export const routes = [
 
-
+	
+	/********************************************************/
+	/* Master Admin Panel */
+	/********************************************************/
 	//{ path: '/dashboard', component: Dashboard, meta: { title: 'Dashboard'} },
 	{ path: '/dashboard', component: () => import(/* webpackChunkName: "Dashboard" */ './components/Admin/DashboardAdmin.vue'), meta: { title: 'Dashboard'} },
 	//{ path: '/spa/dashboard', component: () => import('./components/Admin/DashboardAdmin.vue'), meta: { title: 'Dashboard'} },
 	
 	//User Role permission management
 	{ path: '/spa/UserMaster', name: 'UserMaster', component: () => import(/* webpackChunkName: "UserMaster" */ './components/Admin/AdminUsers/User/UserMaster.vue'), meta: {authRequiredAdmin: true, title: 'User Master'} },
-	{ path: '/spa/RoleMaster', name: 'RoleMaster', component: () => import(/* webpackChunkName: "RoleMaster" */ './components/Admin/AdminUsers/Role/RoleMaster.vue'), meta: { title: 'Role Master'} },
-	{ path: '/spa/PermissionMaster', name: 'PermissionMaster', component: () => import(/* webpackChunkName: "PermissionMaster" */ './components/Admin/AdminUsers/Permission/PermissionMaster.vue'), meta: { title: 'Permission Master'} },
+	{ path: '/spa/RoleMaster', name: 'RoleMaster', component: () => import(/* webpackChunkName: "RoleMaster" */ './components/Admin/AdminUsers/Role/RoleMaster.vue'), meta: {authRequiredAdmin: true, title: 'Role Master'} },
+	{ path: '/spa/PermissionMaster', name: 'PermissionMaster', component: () => import(/* webpackChunkName: "PermissionMaster" */ './components/Admin/AdminUsers/Permission/PermissionMaster.vue'), meta: {authRequiredAdmin: true, title: 'Permission Master'} },
 	
 	//Catalog
-	{ path: '/spa/ProductMaster', name: 'ProductMaster', component: () => import(/* webpackChunkName: "ProductMaster" */ './components/Admin/Catalog/Products/ProductMaster.vue'), meta: { title: 'Product Master'},
+	{ path: '/spa/ProductMaster', name: 'ProductMaster', component: () => import(/* webpackChunkName: "ProductMaster" */ './components/Admin/Catalog/Products/ProductMaster.vue'),
 	  children: [
-	  	{ path: '/spa/ProductMaster', name: 'ProductMasterList', component: () => import(/* webpackChunkName: "ProductMasterList" */ './components/Admin/Catalog/Products/ProductMasterList.vue'), },
-		{ path: '/spa/ProductMasterForm', name: 'ProductMasterForm', component: () => import(/* webpackChunkName: "ProductMasterForm" */ './components/Admin/Catalog/Products/ProductMasterForm.vue'), },
+	  	{ path: '/spa/ProductMaster', name: 'ProductMasterList', component: () => import(/* webpackChunkName: "ProductMasterList" */ './components/Admin/Catalog/Products/ProductMasterList.vue'), meta: {authRequiredAdmin: true, title: 'Product Master'}, },
+		{ path: '/spa/ProductMasterForm', name: 'ProductMasterForm', component: () => import(/* webpackChunkName: "ProductMasterForm" */ './components/Admin/Catalog/Products/ProductMasterForm.vue'), meta: {authRequiredAdmin: true, title: 'Product Update'}, },
 	  ]
 	},
-	{ path: '/spa/Categories', name: 'Categories', component: () => import(/* webpackChunkName: "CategoryMaster" */ './components/Admin/Catalog/Category/CategoryMaster.vue'), meta: { title: 'Category Master'} },
+	{ path: '/spa/Categories', name: 'Categories', component: () => import(/* webpackChunkName: "CategoryMaster" */ './components/Admin/Catalog/Category/CategoryMaster.vue'), meta: {authRequiredAdmin: true, title: 'Category Master'} },
 	
-	{ path: '/spa/AttirbuteMaster', name: 'AttirbuteMaster', component: () => import(/* webpackChunkName: "AttirbuteMaster" */ './components/Admin/Catalog/Attribute/AttirbuteMaster.vue'), meta: { title: 'Attribute Master'} },
-	{ path: '/spa/AttributeValueMaster', name: 'AttributeValueMaster', component: () => import(/* webpackChunkName: "AttributeValueMaster" */ './components/Admin/Catalog/AttributeValue/AttributeValueMaster.vue'), meta: { title: 'Attribute Value Master'} },
-	{ path: '/spa/SpecificationMaster', name: 'SpecificationMaster', component: () => import(/* webpackChunkName: "SpecificationMaster" */ './components/Admin/Catalog/Specification/SpecificationMaster.vue'), meta: { title: 'Specification Master'} },
-	{ path: '/spa/BrandMaster', name: 'BrandMaster', component: () => import(/* webpackChunkName: "BrandMaster" */ './components/Admin/Catalog/Brand/BrandMaster.vue'), meta: { title: 'Brand Master'} },
+	{ path: '/spa/AttirbuteMaster', name: 'AttirbuteMaster', component: () => import(/* webpackChunkName: "AttirbuteMaster" */ './components/Admin/Catalog/Attribute/AttirbuteMaster.vue'), meta: {authRequiredAdmin: true, title: 'Attribute Master'} },
+	{ path: '/spa/AttributeValueMaster', name: 'AttributeValueMaster', component: () => import(/* webpackChunkName: "AttributeValueMaster" */ './components/Admin/Catalog/AttributeValue/AttributeValueMaster.vue'), meta: {authRequiredAdmin: true, title: 'Attribute Value Master'} },
+	{ path: '/spa/SpecificationMaster', name: 'SpecificationMaster', component: () => import(/* webpackChunkName: "SpecificationMaster" */ './components/Admin/Catalog/Specification/SpecificationMaster.vue'), meta: {authRequiredAdmin: true, title: 'Specification Master'} },
+	{ path: '/spa/BrandMaster', name: 'BrandMaster', component: () => import(/* webpackChunkName: "BrandMaster" */ './components/Admin/Catalog/Brand/BrandMaster.vue'), meta: {authRequiredAdmin: true, title: 'Brand Master'} },
 
 
 	{ path: '/spa/Category-demo', name: 'Category-demo', component: () => import(/* webpackChunkName: "Category-demo" */ './components/Admin/Catalog/Category/Category-demo.vue'), meta: { title: 'Category-Demo'} },
-	{ path: '/spa/GiftVoucher', name: 'GiftVoucher', component: () => import(/* webpackChunkName: "GiftVoucher" */ './components/Admin/Catalog/GiftVoucher/GiftVouchers.vue'), meta: { title: 'GiftVoucher'} },
-	{ path: '/spa/Reviews', name: 'Reviews', component: () => import(/* webpackChunkName: "Reviews" */ './components/Admin/Catalog/Reviews/Reviews.vue'), meta: { title: 'Reviews'} },
+	{ path: '/spa/GiftVoucher', name: 'GiftVoucher', component: () => import(/* webpackChunkName: "GiftVoucher" */ './components/Admin/Catalog/GiftVoucher/GiftVouchers.vue'), meta: {authRequiredAdmin: true, title: 'GiftVoucher'} },
+	{ path: '/spa/Reviews', name: 'Reviews', component: () => import(/* webpackChunkName: "Reviews" */ './components/Admin/Catalog/Reviews/Reviews.vue'), meta: {authRequiredAdmin: true, title: 'Reviews'} },
 	
 	//Sales
-	{ path: '/spa/Orders', name: 'Orders', component: () => import(/* webpackChunkName: "Orders" */ './components/Admin/Sales/Orders/Orders.vue'), meta: { title: 'Orders'} },
-	{ path: '/spa/Returns', name: 'Returns', component: () => import(/* webpackChunkName: "Returns" */ './components/Admin/Sales/Returns/Returns.vue'), meta: { title: 'Returns'} },
+	{ path: '/spa/Orders', name: 'Orders', component: () => import(/* webpackChunkName: "Orders" */ './components/Admin/Sales/Orders/Orders.vue'), meta: {authRequiredAdmin: true, title: 'Orders'} },
+	{ path: '/spa/Returns', name: 'Returns', component: () => import(/* webpackChunkName: "Returns" */ './components/Admin/Sales/Returns/Returns.vue'), meta: {authRequiredAdmin: true, title: 'Returns'} },
 
 	//Purchase
-	{ path: '/spa/Store', name: 'Store', component: () => import(/* webpackChunkName: "Store" */ './components/Admin/Purchase/Store/Storage.vue'), meta: { title: 'Storage'} },
-	{ path: '/spa/PurchaseOrderMaster', name: 'PurchaseOrderMaster', component: () => import(/* webpackChunkName: "PurchaseOrderMaster" */ './components/Admin/Purchase/Purchase/PurchaseOrderMaster.vue'), meta: { title: 'Purchase order master'},
+	{ path: '/spa/Store', name: 'Store', component: () => import(/* webpackChunkName: "Store" */ './components/Admin/Purchase/Store/Storage.vue'), meta: {authRequiredAdmin: true, title: 'Storage'} },
+	{ path: '/spa/PurchaseOrderMaster', name: 'PurchaseOrderMaster', component: () => import(/* webpackChunkName: "PurchaseOrderMaster" */ './components/Admin/Purchase/Purchase/PurchaseOrderMaster.vue'), meta: {authRequiredAdmin: true, title: 'Purchase order master'},
 	  children: [
-	  	{ path: '/spa/PurchaseOrderMaster', name: 'PurchaseOrderList', component: () => import(/* webpackChunkName: "PurchaseOrderList" */ './components/Admin/Purchase/Purchase/PurchaseOrderList.vue'), meta: { title: 'Purchase Orders'},  },
-	  	{ path: '/spa/PurchaseOrderForm', name: 'PurchaseOrderForm', component: () => import(/* webpackChunkName: "PurchaseOrderForm" */ './components/Admin/Purchase/Purchase/PurchaseOrderForm.vue'), meta: { title: 'Purchase Form'},  },
-	  	{ path: '/spa/PurchaseSingleOrderView', name: 'PurchaseSingleOrderView', component: () => import(/* webpackChunkName: "PurchaseSingleOrderView" */ './components/Admin/Purchase/Purchase/PurchaseSingleOrderView.vue'), meta: { title: 'PUrchase Order View'},  },
+	  	{ path: '/spa/PurchaseOrderMaster', name: 'PurchaseOrderList', component: () => import(/* webpackChunkName: "PurchaseOrderList" */ './components/Admin/Purchase/Purchase/PurchaseOrderList.vue'), meta: {authRequiredAdmin: true, title: 'Purchase Orders'},  },
+	  	{ path: '/spa/PurchaseOrderForm', name: 'PurchaseOrderForm', component: () => import(/* webpackChunkName: "PurchaseOrderForm" */ './components/Admin/Purchase/Purchase/PurchaseOrderForm.vue'), meta: {authRequiredAdmin: true, title: 'Purchase Form'},  },
+	  	{ path: '/spa/PurchaseSingleOrderView', name: 'PurchaseSingleOrderView', component: () => import(/* webpackChunkName: "PurchaseSingleOrderView" */ './components/Admin/Purchase/Purchase/PurchaseSingleOrderView.vue'), meta: {authRequiredAdmin: true, title: 'PUrchase Order View'},  },
 	  
 	  ]	
 	},
 
 	//Customers
-	{ path: '/spa/CustomerMaster', name: 'CustomerMaster', component: () => import( /* webpackChunkName: "CustomerMaster" */ './components/Admin/Customers/Customers/CustomerMaster.vue'), meta: { title: 'Customer'},
+	{ path: '/spa/CustomerMaster', name: 'CustomerMaster', component: () => import( /* webpackChunkName: "CustomerMaster" */ './components/Admin/Customers/Customers/CustomerMaster.vue'), meta: {authRequiredAdmin: true, title: 'Customer'},
 		children: [
-	  	{ path: '/spa/CustomerMaster', name: 'CustomerMasterList', component: () => import(/* webpackChunkName: "CustomerMasterList" */ './components/Admin/Customers/Customers/CustomerMasterList.vue'), meta: { title: 'Customers'}, },
-	  	{ path: '/spa/CustomerMasterForm', name: 'CustomerMasterForm', component: () => import(/* webpackChunkName: "CustomerMasterForm" */ './components/Admin/Customers/Customers/CustomerMasterForm.vue'), meta: { title: 'Customer'},},
+	  	{ path: '/spa/CustomerMaster', name: 'CustomerMasterList', component: () => import(/* webpackChunkName: "CustomerMasterList" */ './components/Admin/Customers/Customers/CustomerMasterList.vue'), meta: {authRequiredAdmin: true, title: 'Customers'}, },
+	  	{ path: '/spa/CustomerMasterForm', name: 'CustomerMasterForm', component: () => import(/* webpackChunkName: "CustomerMasterForm" */ './components/Admin/Customers/Customers/CustomerMasterForm.vue'), meta: {authRequiredAdmin: true, title: 'Customer'},},
 	  ]
 	},
-	{ path: '/spa/CustomerGroupMaster', name: 'CustomerGroupMaster', component: () => import( /* webpackChunkName: "CustomerGroupMaster" */ './components/Admin/Customers/CustomerGroup/CustomerGroupMaster.vue'), meta: { title: 'Customer Group'} },
-	{ path: '/spa/CustomerMembershipMaster', name: 'CustomerMembershipMaster', component: () => import( /* webpackChunkName: "CustomerMembershipMaster" */ './components/Admin/Customers/Membership/CustomerMembershipMaster.vue'), meta: { title: 'Customer Group'} },
+	{ path: '/spa/CustomerGroupMaster', name: 'CustomerGroupMaster', component: () => import( /* webpackChunkName: "CustomerGroupMaster" */ './components/Admin/Customers/CustomerGroup/CustomerGroupMaster.vue'), meta: {authRequiredAdmin: true, title: 'Customer Group'} },
+	{ path: '/spa/CustomerMembershipMaster', name: 'CustomerMembershipMaster', component: () => import( /* webpackChunkName: "CustomerMembershipMaster" */ './components/Admin/Customers/Membership/CustomerMembershipMaster.vue'), meta: {authRequiredAdmin: true, title: 'Customer Group'} },
 
 	//Suppliers
-	{ path: '/spa/SupplierMaster', name: 'SupplierMaster', component: () => import( /* webpackChunkName: "SupplierMaster" */ './components/Admin/Suppliers/Suppliers/SupplierMaster.vue'), meta: { title: 'Supplier Master'} },
-	{ path: '/spa/BrandShopMaster', name: 'BrandShopMaster', component: () => import( /* webpackChunkName: "BrandShopMaster" */ './components/Admin/Suppliers/BrandShop/BrandShopMaster.vue'), meta: { title: 'Brand Shop'} },
-	{ path: '/spa/VendorMaster', name: 'VendorMaster', component: () => import( /* webpackChunkName: "VendorMaster" */ './components/Admin/Suppliers/Vendor/VendorMaster.vue'), meta: { title: 'Vendor Master'}, 
+	{ path: '/spa/SupplierMaster', name: 'SupplierMaster', component: () => import( /* webpackChunkName: "SupplierMaster" */ './components/Admin/Suppliers/Suppliers/SupplierMaster.vue'), meta: {authRequiredAdmin: true, title: 'Supplier Master'} },
+	{ path: '/spa/BrandShopMaster', name: 'BrandShopMaster', component: () => import( /* webpackChunkName: "BrandShopMaster" */ './components/Admin/Suppliers/BrandShop/BrandShopMaster.vue'), meta: {authRequiredAdmin: true, title: 'Brand Shop'} },
+	{ path: '/spa/VendorMaster', name: 'VendorMaster', component: () => import( /* webpackChunkName: "VendorMaster" */ './components/Admin/Suppliers/Vendor/VendorMaster.vue'), meta: {authRequiredAdmin: true, title: 'Vendor Master'}, 
 	  children: [
-	  	{ path: '/spa/VendorMaster', name: 'VendorMasterList', component: () => import(/* webpackChunkName: "VendorMasterList" */ './components/Admin/Suppliers/Vendor/VendorMasterList.vue'), meta: { title: 'Vendors'}, },
-	  	{ path: '/spa/VendorMasterForm', name: 'VendorMasterForm', component: () => import(/* webpackChunkName: "VendorMasterForm" */ './components/Admin/Suppliers/Vendor/VendorMasterForm.vue'), meta: { title: 'Vendor'},},
+	  	{ path: '/spa/VendorMaster', name: 'VendorMasterList', component: () => import(/* webpackChunkName: "VendorMasterList" */ './components/Admin/Suppliers/Vendor/VendorMasterList.vue'), meta: {authRequiredAdmin: true, title: 'Vendors'}, },
+	  	{ path: '/spa/VendorMasterForm', name: 'VendorMasterForm', component: () => import(/* webpackChunkName: "VendorMasterForm" */ './components/Admin/Suppliers/Vendor/VendorMasterForm.vue'), meta: {authRequiredAdmin: true, title: 'Vendor'},},
 		// { path: '*', redirect: '/spa/VendorMasterList' }
 	  ]
 	},
 
 	//Test-link
-	{ path: '/spa/multiComponent', name: 'multiComponent', component: () => import(/* webpackChunkName: "Multicomponent" */ './components/Admin/MultiComponent/multiComponent.vue'), meta: { title: 'Component Communication'} },
-	{ path: '/spa/vuexComponent', name: 'vuexComponent', component: () => import(/* webpackChunkName: "VuexComponent" */ './components/Admin/VuexComponent/vuexComponent.vue'), meta: { title: 'Vuex Component Communication'} },
-	{ path: '/spa/formComponent', name: 'formComponent', component: () => import(/* webpackChunkName: "formComponent" */ './components/Admin/FormComponent/formComponent.vue'), meta: { title: 'Vuex Form Component'} },
+	{ path: '/spa/multiComponent', name: 'multiComponent', component: () => import(/* webpackChunkName: "Multicomponent" */ './components/Admin/MultiComponent/multiComponent.vue'), meta: {authRequiredAdmin: true, title: 'Component Communication'} },
+	{ path: '/spa/vuexComponent', name: 'vuexComponent', component: () => import(/* webpackChunkName: "VuexComponent" */ './components/Admin/VuexComponent/vuexComponent.vue'), meta: {authRequiredAdmin: true, title: 'Vuex Component Communication'} },
+	{ path: '/spa/formComponent', name: 'formComponent', component: () => import(/* webpackChunkName: "formComponent" */ './components/Admin/FormComponent/formComponent.vue'), meta: {authRequiredAdmin: true, title: 'Vuex Form Component'} },
 	
 
 	//Accounting
-	{ path: '/spa/ChartOfAccounts', name: 'ChartOfAccounts', component: () => import(/* webpackChunkName: "ChartOfAccounts" */ './components/Admin/Accounting/COA/ChartOfAccounts.vue'), meta: { title: 'Chart Of Accounts'} },
-	{ path: '/spa/AccountHeadsMaster', name: 'AccountHeadsMaster', component: () => import(/* webpackChunkName: "AccountHeadsMaster" */ './components/Admin/Accounting/AccountHead/AccountHeadsMaster.vue'), meta: { title: 'Account Head'} },
-	{ path: '/spa/AccountDetailsMaster', name: 'AccountDetailsMaster', component: () => import(/* webpackChunkName: "AccountDetailsMaster" */ './components/Admin/Accounting/AccountDetails/AccountDetailsMaster.vue'), meta: { title: 'Bank Accounts'} },
+	{ path: '/spa/ChartOfAccounts', name: 'ChartOfAccounts', component: () => import(/* webpackChunkName: "ChartOfAccounts" */ './components/Admin/Accounting/COA/ChartOfAccounts.vue'), meta: {authRequiredAdmin: true, title: 'Chart Of Accounts'} },
+	{ path: '/spa/AccountHeadsMaster', name: 'AccountHeadsMaster', component: () => import(/* webpackChunkName: "AccountHeadsMaster" */ './components/Admin/Accounting/AccountHead/AccountHeadsMaster.vue'), meta: {authRequiredAdmin: true, title: 'Account Head'} },
+	{ path: '/spa/AccountDetailsMaster', name: 'AccountDetailsMaster', component: () => import(/* webpackChunkName: "AccountDetailsMaster" */ './components/Admin/Accounting/AccountDetails/AccountDetailsMaster.vue'), meta: {authRequiredAdmin: true, title: 'Bank Accounts'} },
 
-	{ path: '/spa/BankAccountMaster', name: 'BankAccountMaster', component: () => import(/* webpackChunkName: "BankAccountMaster" */ './components/Admin/Accounting/BankAccount/BankAccountMaster.vue'), meta: { title: 'Bank Accounts'} },
-	{ path: '/spa/CashAccountMaster', name: 'CashAccountMaster', component: () => import(/* webpackChunkName: "CashAccountMaster" */ './components/Admin/Accounting/CashAccount/CashAccountMaster.vue'), meta: { title: 'Cash Accounts'} },
+	{ path: '/spa/BankAccountMaster', name: 'BankAccountMaster', component: () => import(/* webpackChunkName: "BankAccountMaster" */ './components/Admin/Accounting/BankAccount/BankAccountMaster.vue'), meta: {authRequiredAdmin: true, title: 'Bank Accounts'} },
+	{ path: '/spa/CashAccountMaster', name: 'CashAccountMaster', component: () => import(/* webpackChunkName: "CashAccountMaster" */ './components/Admin/Accounting/CashAccount/CashAccountMaster.vue'), meta: {authRequiredAdmin: true, title: 'Cash Accounts'} },
 
 	//HRM
-	{ path: '/spa/JobTitleMaster', name: 'JobTitleMaster', component: () => import(/* webpackChunkName: "JobTitleMaster" */ './components/Admin/HRM/JobTitle/JobTitleMaster.vue'), meta: { title: 'Job Title'} },
-	{ path: '/spa/EmployeeMaster', name: 'EmployeeMaster', component: () => import(/* webpackChunkName: "EmployeeMaster" */ './components/Admin/HRM/Employee/EmployeeMaster.vue'), meta: { title: 'Employee Master'}, 
+	{ path: '/spa/JobTitleMaster', name: 'JobTitleMaster', component: () => import(/* webpackChunkName: "JobTitleMaster" */ './components/Admin/HRM/JobTitle/JobTitleMaster.vue'), meta: {authRequiredAdmin: true, title: 'Job Title'} },
+	{ path: '/spa/EmployeeMaster', name: 'EmployeeMaster', component: () => import(/* webpackChunkName: "EmployeeMaster" */ './components/Admin/HRM/Employee/EmployeeMaster.vue'), meta: {authRequiredAdmin: true, title: 'Employee Master'}, 
 	  children: [
-	  	{ path: '/spa/EmployeeMaster', name: 'EmployeeMasterList', component: () => import(/* webpackChunkName: "EmployeeMasterList" */ './components/Admin/HRM/Employee/EmployeeMasterList.vue'), meta: { title: 'Employees'},  },
+	  	{ path: '/spa/EmployeeMaster', name: 'EmployeeMasterList', component: () => import(/* webpackChunkName: "EmployeeMasterList" */ './components/Admin/HRM/Employee/EmployeeMasterList.vue'), meta: {authRequiredAdmin: true, title: 'Employees'},  },
 	  	//{ path: '/spa/EmployeeMasterList', name: 'EmployeeMasterList', component: () => import(/* webpackChunkName: "EmployeeMasterList" */ './components/Admin/HRM/Employee/EmployeeMasterList.vue'), },
-	  	{ path: '/spa/EmployeeMasterForm', name: 'EmployeeMasterForm', component: () => import(/* webpackChunkName: "EmployeeMasterForm" */ './components/Admin/HRM/Employee/EmployeeMasterForm.vue'), meta: { title: 'Employee'}, },
+	  	{ path: '/spa/EmployeeMasterForm', name: 'EmployeeMasterForm', component: () => import(/* webpackChunkName: "EmployeeMasterForm" */ './components/Admin/HRM/Employee/EmployeeMasterForm.vue'), meta: {authRequiredAdmin: true, title: 'Employee'}, },
 		// { path: '*', redirect: '/spa/EmployeeMasterList' }
 	  ]	
 	},
-	{ path: '/spa/DepartmentMaster', name: 'DepartmentMaster', component: () => import(/* webpackChunkName: "DepartmentMaster" */ './components/Admin/HRM/Department/DepartmentMaster.vue'), meta: { title: 'Department'} },
+	{ path: '/spa/DepartmentMaster', name: 'DepartmentMaster', component: () => import(/* webpackChunkName: "DepartmentMaster" */ './components/Admin/HRM/Department/DepartmentMaster.vue'), meta: {authRequiredAdmin: true, title: 'Department'} },
 	
 	//settings
-	{ path: '/spa/SettingsMaster', name: 'SettingsMaster', component: () => import(/* webpackChunkName: "SettingsMaster" */ './components/Admin/Settings/Settings/SettingsMaster.vue'), meta: { title: 'Settings'} },
-	{ path: '/spa/OrganizationInfo', name: 'OrganizationInfo', component: () => import(/* webpackChunkName: "OrganizationInfo" */ './components/Admin/Settings/OrganizationInfo/OrganizationInfo.vue'), meta: { title: 'Organization Information'} },
-	{ path: '/spa/BranchInfo', name: 'BranchInfo', component: () => import(/* webpackChunkName: "BranchInfo" */ './components/Admin/Settings/BranchInfo/BranchInfo.vue'), meta: { title: 'BranchInfo Information'} },
-	{ path: '/spa/CurrencyMarster', name: 'CurrencyMarster', component: () => import(/* webpackChunkName: "CurrencyMarster" */ './components/Admin/Settings/Currency/CurrencyMarster.vue'), meta: { title: 'Currency '} },
-	{ path: '/spa/LanguageMaster', name: 'LanguageMaster', component: () => import(/* webpackChunkName: "LanguageMaster" */ './components/Admin/Settings/Language/LanguageMaster.vue'), meta: { title: 'Language'} },
-	{ path: '/spa/UnitsMaster', name: 'UnitsMaster', component: () => import(/* webpackChunkName: "UnitsMaster" */ './components/Admin/Settings/Units/UnitsMaster.vue'), meta: { title: 'Unit'} },
-	{ path: '/spa/LengthUnit', name: 'LengthUnit', component: () => import(/* webpackChunkName: "LengthUnit" */ './components/Admin/Settings/LengthUnit/LengthUnit.vue'), meta: { title: 'Lenght Unit'} },
-	{ path: '/spa/WeightUnit', name: 'WeightUnit', component: () => import(/* webpackChunkName: "WeightUnit" */ './components/Admin/Settings/WeightUnit/WeightUnit.vue'), meta: { title: 'Weight Unit'} },
-	{ path: '/spa/PackageUnit', name: 'PackageUnit', component: () => import(/* webpackChunkName: "PackageUnit" */ './components/Admin/Settings/PackageUnit/PackageUnit.vue'), meta: { title: 'Package Unit'} },
-	{ path: '/spa/VatRate', name: 'VatRate', component: () => import(/* webpackChunkName: "VatRate" */ './components/Admin/Settings/VatRate/VatRate.vue'), meta: { title: 'Vat Rate'} },
-	{ path: '/spa/UserStatus', name: 'UserStatus', component: () => import(/* webpackChunkName: "UserStatus" */ './components/Admin/Settings/UserStatus/UserStatus.vue'), meta: { title: 'User Status'} },
-	{ path: '/spa/StatusMaster', name: 'StatusMaster', component: () => import(/* webpackChunkName: "StatusMaster" */ './components/Admin/Settings/StatusMaster/StatusMaster.vue'), meta: { title: 'Status'} },
-	{ path: '/spa/PaymentMethod', name: 'PaymentMethod', component: () => import(/* webpackChunkName: "PaymentMethod" */ './components/Admin/Settings/PaymentMethod/PaymentMethod.vue'), meta: { title: 'Payment Method'} },
-	{ path: '/spa/CountryMaster', name: 'CountryMaster', component: () => import(/* webpackChunkName: "CountryMaster" */ './components/Admin/Settings/Country/CountryMaster.vue'), meta: { title: 'Country'} },
-	{ path: '/spa/DivisionMaster', name: 'DivisionMaster', component: () => import(/* webpackChunkName: "DivisionMaster" */ './components/Admin/Settings/Division/DivisionMaster.vue'), meta: { title: 'Division'} },
-	{ path: '/spa/DistrictMaster', name: 'DistrictMaster', component: () => import(/* webpackChunkName: "DistrictMaster" */ './components/Admin/Settings/District/DistrictMaster.vue'), meta: { title: 'District'} },
-	{ path: '/spa/DistrictZoneMaster', name: 'DistrictZoneMaster', component: () => import(/* webpackChunkName: "DistrictZoneMaster" */ './components/Admin/Settings/DistrictZone/DistrictZoneMaster.vue'), meta: { title: 'Zone/Area'} },
+	{ path: '/spa/SettingsMaster', name: 'SettingsMaster', component: () => import(/* webpackChunkName: "SettingsMaster" */ './components/Admin/Settings/Settings/SettingsMaster.vue'), meta: {authRequiredAdmin: true, title: 'Settings'} },
+	{ path: '/spa/OrganizationInfo', name: 'OrganizationInfo', component: () => import(/* webpackChunkName: "OrganizationInfo" */ './components/Admin/Settings/OrganizationInfo/OrganizationInfo.vue'), meta: {authRequiredAdmin: true, title: 'Organization Information'} },
+	{ path: '/spa/BranchInfo', name: 'BranchInfo', component: () => import(/* webpackChunkName: "BranchInfo" */ './components/Admin/Settings/BranchInfo/BranchInfo.vue'), meta: {authRequiredAdmin: true, title: 'BranchInfo Information'} },
+	{ path: '/spa/CurrencyMarster', name: 'CurrencyMarster', component: () => import(/* webpackChunkName: "CurrencyMarster" */ './components/Admin/Settings/Currency/CurrencyMarster.vue'), meta: {authRequiredAdmin: true, title: 'Currency '} },
+	{ path: '/spa/LanguageMaster', name: 'LanguageMaster', component: () => import(/* webpackChunkName: "LanguageMaster" */ './components/Admin/Settings/Language/LanguageMaster.vue'), meta: {authRequiredAdmin: true, title: 'Language'} },
+	{ path: '/spa/UnitsMaster', name: 'UnitsMaster', component: () => import(/* webpackChunkName: "UnitsMaster" */ './components/Admin/Settings/Units/UnitsMaster.vue'), meta: {authRequiredAdmin: true, title: 'Unit'} },
+	{ path: '/spa/LengthUnit', name: 'LengthUnit', component: () => import(/* webpackChunkName: "LengthUnit" */ './components/Admin/Settings/LengthUnit/LengthUnit.vue'), meta: {authRequiredAdmin: true, title: 'Lenght Unit'} },
+	{ path: '/spa/WeightUnit', name: 'WeightUnit', component: () => import(/* webpackChunkName: "WeightUnit" */ './components/Admin/Settings/WeightUnit/WeightUnit.vue'), meta: {authRequiredAdmin: true, title: 'Weight Unit'} },
+	{ path: '/spa/PackageUnit', name: 'PackageUnit', component: () => import(/* webpackChunkName: "PackageUnit" */ './components/Admin/Settings/PackageUnit/PackageUnit.vue'), meta: {authRequiredAdmin: true, title: 'Package Unit'} },
+	{ path: '/spa/VatRate', name: 'VatRate', component: () => import(/* webpackChunkName: "VatRate" */ './components/Admin/Settings/VatRate/VatRate.vue'), meta: {authRequiredAdmin: true, title: 'Vat Rate'} },
+	{ path: '/spa/UserStatus', name: 'UserStatus', component: () => import(/* webpackChunkName: "UserStatus" */ './components/Admin/Settings/UserStatus/UserStatus.vue'), meta: {authRequiredAdmin: true, title: 'User Status'} },
+	{ path: '/spa/StatusMaster', name: 'StatusMaster', component: () => import(/* webpackChunkName: "StatusMaster" */ './components/Admin/Settings/StatusMaster/StatusMaster.vue'), meta: {authRequiredAdmin: true, title: 'Status'} },
+	{ path: '/spa/PaymentMethod', name: 'PaymentMethod', component: () => import(/* webpackChunkName: "PaymentMethod" */ './components/Admin/Settings/PaymentMethod/PaymentMethod.vue'), meta: {authRequiredAdmin: true, title: 'Payment Method'} },
+	{ path: '/spa/CountryMaster', name: 'CountryMaster', component: () => import(/* webpackChunkName: "CountryMaster" */ './components/Admin/Settings/Country/CountryMaster.vue'), meta: {authRequiredAdmin: true, title: 'Country'} },
+	{ path: '/spa/DivisionMaster', name: 'DivisionMaster', component: () => import(/* webpackChunkName: "DivisionMaster" */ './components/Admin/Settings/Division/DivisionMaster.vue'), meta: {authRequiredAdmin: true, title: 'Division'} },
+	{ path: '/spa/DistrictMaster', name: 'DistrictMaster', component: () => import(/* webpackChunkName: "DistrictMaster" */ './components/Admin/Settings/District/DistrictMaster.vue'), meta: {authRequiredAdmin: true, title: 'District'} },
+	{ path: '/spa/DistrictZoneMaster', name: 'DistrictZoneMaster', component: () => import(/* webpackChunkName: "DistrictZoneMaster" */ './components/Admin/Settings/DistrictZone/DistrictZoneMaster.vue'), meta: {authRequiredAdmin: true, title: 'Zone/Area'} },
 	
 
-	{ path: '/spa/OrderStatusMaster', name: 'OrderStatusMaster', component: () => import(/* webpackChunkName: "OrderStatusMaster" */ './components/Admin/Settings/OrderStatus/OrderStatusMaster.vue'), meta: { title: 'Order Status'} },
-	{ path: '/spa/StockStatusMaster', name: 'StockStatusMaster', component: () => import(/* webpackChunkName: "StockStatusMaster" */ './components/Admin/Settings/StockStatus/StockStatusMaster.vue'), meta: { title: 'Stock Status'} },
-	{ path: '/spa/ReturnStatusMaster', name: 'ReturnStatusMaster', component: () => import(/* webpackChunkName: "ReturnStatusMaster" */ './components/Admin/Settings/ReturnStatus/ReturnStatusMaster.vue'), meta: { title: 'Return Status'} },
-	{ path: '/spa/ReturnActionMaster', name: 'ReturnActionMaster', component: () => import(/* webpackChunkName: "ReturnActionMaster" */ './components/Admin/Settings/ReturnAction/ReturnActionMaster.vue'), meta: { title: 'Return Action'} },
-	{ path: '/spa/PaymentStatusMaster', name: 'PaymentStatusMaster', component: () => import(/* webpackChunkName: "PaymentStatusMaster" */ './components/Admin/Settings/PaymentStatus/PaymentStatusMaster.vue'), meta: { title: 'Payment Status'} },
+	{ path: '/spa/OrderStatusMaster', name: 'OrderStatusMaster', component: () => import(/* webpackChunkName: "OrderStatusMaster" */ './components/Admin/Settings/OrderStatus/OrderStatusMaster.vue'), meta: {authRequiredAdmin: true, title: 'Order Status'} },
+	{ path: '/spa/StockStatusMaster', name: 'StockStatusMaster', component: () => import(/* webpackChunkName: "StockStatusMaster" */ './components/Admin/Settings/StockStatus/StockStatusMaster.vue'), meta: {authRequiredAdmin: true, title: 'Stock Status'} },
+	{ path: '/spa/ReturnStatusMaster', name: 'ReturnStatusMaster', component: () => import(/* webpackChunkName: "ReturnStatusMaster" */ './components/Admin/Settings/ReturnStatus/ReturnStatusMaster.vue'), meta: {authRequiredAdmin: true, title: 'Return Status'} },
+	{ path: '/spa/ReturnActionMaster', name: 'ReturnActionMaster', component: () => import(/* webpackChunkName: "ReturnActionMaster" */ './components/Admin/Settings/ReturnAction/ReturnActionMaster.vue'), meta: {authRequiredAdmin: true, title: 'Return Action'} },
+	{ path: '/spa/PaymentStatusMaster', name: 'PaymentStatusMaster', component: () => import(/* webpackChunkName: "PaymentStatusMaster" */ './components/Admin/Settings/PaymentStatus/PaymentStatusMaster.vue'), meta: {authRequiredAdmin: true, title: 'Payment Status'} },
 
 	//Reports
-	{ path: '/spa/ReportMaster', name: 'ReportMaster', component: () => import(/* webpackChunkName: "ReportMaster" */ './components/Admin/Reports/ReportMaster.vue'), meta: { title: 'Reports'},
+	{ path: '/spa/ReportMaster', name: 'ReportMaster', component: () => import(/* webpackChunkName: "ReportMaster" */ './components/Admin/Reports/ReportMaster.vue'),
 	  children: [	  
-	  	{ path: '/spa/SalesReportMaster', name: 'SalesReportMaster', component: () => import(/* webpackChunkName: "SalesReportMaster" */ './components/Admin/Reports/Sales/SalesReportMaster.vue'), },
-	  	{ path: '/spa/LoanReportMaster', name: 'LoanReportMaster', component: () => import(/* webpackChunkName: "LoanReportMaster" */ './components/Admin/Reports/Loans/LoanReportMaster.vue'), },
-	  	{ path: '/spa/StockReportMaster', name: 'StockReportMaster', component: () => import(/* webpackChunkName: "StockReportMaster" */ './components/Admin/Reports/Stock/StockReportMaster.vue'), },
-	  	{ path: '/spa/CashFlowReportMaster', name: 'CashFlowReportMaster', component: () => import(/* webpackChunkName: "CashFlowReportMaster" */ './components/Admin/Reports/CashFlow/CashFlowReportMaster.vue'), },
-	  	{ path: '/spa/SuppliersReportMaster', name: 'SuppliersReportMaster', component: () => import(/* webpackChunkName: "SuppliersReportMaster" */ './components/Admin/Reports/Suppliers/SuppliersReportMaster.vue'), },
+	  	{ path: '/spa/SalesReportMaster', name: 'SalesReportMaster', component: () => import(/* webpackChunkName: "SalesReportMaster" */ './components/Admin/Reports/Sales/SalesReportMaster.vue'),meta: {authRequiredAdmin: true, title: 'Sales'}, },
+	  	{ path: '/spa/LoanReportMaster', name: 'LoanReportMaster', component: () => import(/* webpackChunkName: "LoanReportMaster" */ './components/Admin/Reports/Loans/LoanReportMaster.vue'), meta: {authRequiredAdmin: true, title: 'Loan Reports'}, },
+	  	{ path: '/spa/StockReportMaster', name: 'StockReportMaster', component: () => import(/* webpackChunkName: "StockReportMaster" */ './components/Admin/Reports/Stock/StockReportMaster.vue'), meta: {authRequiredAdmin: true, title: 'Stock Reports'}, },
+	  	{ path: '/spa/CashFlowReportMaster', name: 'CashFlowReportMaster', component: () => import(/* webpackChunkName: "CashFlowReportMaster" */ './components/Admin/Reports/CashFlow/CashFlowReportMaster.vue'), meta: {authRequiredAdmin: true, title: 'Cash flow Reports'}, },
+	  	{ path: '/spa/SuppliersReportMaster', name: 'SuppliersReportMaster', component: () => import(/* webpackChunkName: "SuppliersReportMaster" */ './components/Admin/Reports/Suppliers/SuppliersReportMaster.vue'), meta: {authRequiredAdmin: true, title: 'Supplier Reports'}, },
       ] //end Children
 	},//end Reports
 
@@ -153,7 +156,9 @@ const routes = [
 
 
 
-	//########################################################## Admin Child Routes ###########################################################################
+	/********************************************************/
+	/* Admin Child Routes */
+	/********************************************************/
 	//Admin Supervisor
 	{ path: '/dashboard-supervisor', component: () => import(/* webpackChunkName: "DashboardAdminChildSupervisor" */ './components/AdminChild/AdminSupervisor/DashboardAdminChildSupervisor.vue'), meta: { title: 'Dashboard'} },
 	//Admin Delivery
@@ -177,8 +182,9 @@ const routes = [
 	{ path: '/spaa/*', component: () => import(/* webpackChunkName: "AdminChildNotFound" */'./components/AdminChild/GlobalComponents/NotFound.vue'), meta: { title: 'Not Found'} },
 
 
-
-	//########################################################## Customer Admin Routes ###########################################################################
+	/********************************************************/
+	/* Customer Admin Routes */
+	/********************************************************/
 	{ path: '/dashboard-customer', component: () => import(/* webpackChunkName: "DashboardCustomerAdmin" */ './components/AdminCustomer/DashboardCustomerAdmin.vue'), meta: { title: 'Dashboard'} },
 	{ path: '/spac/customer-profile', component: () => import(/* webpackChunkName: "CustomerProfileMaster" */ './components/AdminCustomer/Profile/CustomerProfileMaster.vue'), meta: { title: 'Profile'} },
 	{ path: '/spac/customer-order', component: () => import(/* webpackChunkName: "CustomerOrderMaster" */ './components/AdminCustomer/Orders/CustomerOrderMaster.vue'), meta: { title: 'Order'} },
@@ -189,7 +195,9 @@ const routes = [
 	{ path: '/spac/*', component: () => import(/* webpackChunkName: "NotFoundCustomerAdmin" */'./components/AdminCustomer/GlobalComponents/NotFound.vue'), meta: { title: 'Not Found'} },
 
 
-	//########################################################## Supplier Admin Routes ###########################################################################
+	/********************************************************/
+	/* Supplier Admin Routes */
+	/********************************************************/
 	{ path: '/dashboard-supplier', component: () => import(/* webpackChunkName: "DashboardSupplierAdmin" */ './components/AdminSupplier/DashboardSupplierAdmin.vue'), meta: { title: 'Dashboard'} },
 	{ path: '/spas/supplier-profile', component: () => import(/* webpackChunkName: "SupplierProfileMaster" */ './components/AdminSupplier/Profile/SupplierProfileMaster.vue'), meta: { title: 'Profile'} },
 	{ path: '/spas/supplier-new-order-list', component: () => import(/* webpackChunkName: "SupplierNewOrderList" */ './components/AdminSupplier/Orders/SupplierNewOrderList.vue'), meta: { title: 'New Order'} },
@@ -205,8 +213,9 @@ const routes = [
 
 
 
-
-	//website
+	/********************************************************/
+	/* website */
+	/********************************************************/	
 	//{ path: '/home', name: 'home', component: () => import(/* webpackChunkName: "website-home-public" */ './components/Website/Public/Home/HomePublic.vue'), meta: { title: 'Welcome To Sorboraho'} },
 	//{ path: '/contact', name: 'contact', component: () => import(/* webpackChunkName: "website-contact-public" */ './components/Website/Public/Contact/ContactPublic.vue'), meta: { title: 'Contact Us'} },
 	
@@ -253,7 +262,9 @@ const routes = [
 
 
 
-	//website user admin dashboard
+	/********************************************************/
+	/* Customer Admin Area for website */
+	/********************************************************/	
   	{ path: '/auth/my-dashboard', name: 'CustomerDashboard', component: () => import(/* webpackChunkName: "customer-dashboard-website-auth" */ './components/Website/AdminCustomer/Dashboard/CustomerDashboard.vue'), meta: {authRequiredCustomer: true, title: 'Dashboard',} },
   	{ path: '/auth/my-orders', name: 'CustomerOrder', component: () => import(/* webpackChunkName: "customer-order-website-auth" */ './components/Website/AdminCustomer/Order/CustomerOrders.vue'), meta: { authRequiredCustomer: true, title: 'Orders', } },
   	{ path: '/auth/my-profile', name: 'CustomerProfile', component: () => import(/* webpackChunkName: "customer-profile-website-auth" */ './components/Website/AdminCustomer/Profile/CustomerProfile.vue'), meta: { authRequiredCustomer: true, title: 'Profile',},

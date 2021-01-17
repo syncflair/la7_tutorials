@@ -173,6 +173,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "customer-Orders-website-auth",
@@ -229,35 +235,57 @@ var staticRenderFns = [
         _c("div", { staticClass: "row " }, [
           _c(
             "div",
-            { staticClass: "border-bottom border-color-1 mb-1 col-6" },
+            {
+              staticClass: "col-lg-12 border-bottom border-color-1 mb-3 col-6-"
+            },
             [
               _c(
                 "h3",
-                { staticClass: "section-title mb-0 pb-2 pl-2 font-size-20" },
-                [_vm._v("My Orders")]
+                { staticClass: "section-title- mb-0 pb-1 pl-2- font-size-18" },
+                [_vm._v("My Order")]
               )
             ]
           ),
           _vm._v(" "),
-          _c("div", { staticClass: "d-md-flex col-6" }, [
+          _c("div", { staticClass: "d-md-flex text-center col-12" }, [
             _c(
               "a",
               {
                 staticClass:
-                  "btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100- w-md-auto d-none- d-md-inline-block",
+                  "btn btn-xs btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100- w-md-auto d-none- d-md-inline-block",
                 attrs: { href: "../shop/checkout.html" }
               },
-              [_vm._v("Return")]
+              [_vm._v("All")]
             ),
             _vm._v(" "),
             _c(
               "a",
               {
                 staticClass:
-                  "btn btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100- w-md-auto d-none- d-md-inline-block",
+                  "btn btn-xs btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100- w-md-auto d-none- d-md-inline-block",
+                attrs: { href: "../shop/checkout.html" }
+              },
+              [_vm._v("Completed")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass:
+                  "btn btn-xs btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100- w-md-auto d-none- d-md-inline-block",
                 attrs: { href: "../shop/checkout.html" }
               },
               [_vm._v("Canceled")]
+            ),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass:
+                  "btn btn-xs btn-primary-dark-w ml-md-2 px-5 px-md-4 px-lg-5 w-100- w-md-auto d-none- d-md-inline-block",
+                attrs: { href: "../shop/checkout.html" }
+              },
+              [_vm._v("Return")]
             )
           ]),
           _vm._v(" "),

@@ -54,7 +54,7 @@
 	                      <label>Email *</label>                    
 	                    </div>
 	                    <div class="col-sm-9">
-	                      <input v-model="form.email" type="text" ref="email" name="email" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('email') }" placeholder="Enter Email">
+	                      <input v-model="form.email" type="text" name="email" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('email') }" placeholder="Enter Email">
                           <has-error :form="form" field="email"></has-error>
 	                    </div> 
 	                </div>
@@ -68,7 +68,7 @@
 			                  <div class="input-group-prepend">
 			                    <span class="input-group-text"> +88 </span>
 			                  </div>
-			                  <input v-model="form.phone" type="number" ref="phone" name="phone" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('phone') }" placeholder="Enter phone number">	 
+			                  <input v-model="form.phone" type="number" name="phone" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('phone') }" placeholder="Enter phone number">	 
 			                  <has-error :form="form" field="phone"></has-error>                     
 			              </div>
 	                    </div> 
@@ -92,7 +92,7 @@
 	                      <label for="role_id"">Customer Group *</label>                   
 	                    </div>
 	                    <div class="col-sm-9">
-	                      <select v-model="form.customer_group_id" class="form-control form-control-sm" id="customer_group_id" name="customer_group_id" :class="{ 'is-invalid': form.errors.has('customer_group_id') }" >
+	                      <select v-model="form.customer_group_id" class="form-control form-control-sm" name="customer_group_id" :class="{ 'is-invalid': form.errors.has('customer_group_id') }" >
 			              	  <option disabled value="">Select customer Group</option>                
 			                  <option v-for="c_group in allCustomerGroups" v-bind:value="c_group.id">
 			                  	{{c_group.group_name}}
@@ -107,7 +107,7 @@
 	                      <label for="role_id"">Membership *</label>                  
 	                    </div>
 	                    <div class="col-sm-9">
-	                      	<select v-model="form.customer_membership_id" class="form-control form-control-sm" id="customer_membership_id" name="customer_membership_id" :class="{ 'is-invalid': form.errors.has('customer_membership_id') }" >
+	                      	<select v-model="form.customer_membership_id" class="form-control form-control-sm" name="customer_membership_id" :class="{ 'is-invalid': form.errors.has('customer_membership_id') }" >
 				              	<option disabled value="">Select membership</option>                
 				                <option v-for="cus_mem in allCustomerMemberships" v-bind:value="cus_mem.id">
 				                  	{{cus_mem.membership_title}}
@@ -122,7 +122,7 @@
 	                      <label for="role_id"">Status *</label>                 
 	                    </div>
 	                    <div class="col-sm-9">
-	                      	<select v-model="form.status_id" class="form-control form-control-sm" id="status_id" name="status_id" :class="{ 'is-invalid': form.errors.has('status_id') }" >
+	                      	<select v-model="form.status_id" class="form-control form-control-sm" name="status_id" :class="{ 'is-invalid': form.errors.has('status_id') }" >
 				              	<option disabled value="">Select Customer Status ..</option>                
 				                <option v-for="u_status in userStatus" :key="u_status.id" v-bind:value="u_status.id">{{u_status.us_name}}</option>			                  
 				            </select>
@@ -140,14 +140,14 @@
 				            	<div class="col-md-6 col-sm-6">
 				            		<div class="form-group">                    	
 				                      <label> Password  <span v-show="editMode === false"> * </span> </label>
-				                        <input v-model="form.password" type="password" ref="password" name="password" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('password') }" placeholder="Password">
+				                        <input v-model="form.password" type="password" name="password" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('password') }" placeholder="Password">
 				                      <has-error :form="form" field="password"></has-error>
 				                    </div> 
 				            	</div>
 				            	<div class="col-md-6 col-sm-6">
 				            		<div class="form-group">
 				                      <label>Confirm Password</label>
-				                        <input v-model="form.password_confirmation" type="password" ref="password_confirmation" name="password_confirmation" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" placeholder="Confirm Password">
+				                        <input v-model="form.password_confirmation" type="password" name="password_confirmation" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" placeholder="Confirm Password">
 				                      <has-error :form="form" field="password_confirmation"></has-error>
 				                    </div> 
 				            	</div>
@@ -235,7 +235,7 @@
 						  	<div class="col-md-3">
 						  	  <div class="form-group">
 				                <label>Country *</label>
-				                  <select v-model="input.country_id" class="form-control form-control-sm" id="country_id" name="country_id" :class="{ 'is-invalid': form.errors.has('country_id') }" @change="getDivision($event)" >
+				                  <select v-model="input.country_id" class="form-control form-control-sm" name="country_id" :class="{ 'is-invalid': form.errors.has('country_id') }" @change="getDivision($event)" >
 					              	  <option disabled value="">Select country</option>                
 					                  <option v-for="country in Countries" v-bind:value="country.id">
 					                  	{{country.country_name}} - {{country.phone_code}}
@@ -247,7 +247,7 @@
 						  	<div class="col-md-3">
 						  	  <div class="form-group">
 				                <label>Division /State *</label>
-				                  <select v-model="input.division_id" class="form-control form-control-sm" id="division_id" name="division_id" :class="{ 'is-invalid': form.errors.has('division_id') }" @change="getDistrict($event)">
+				                  <select v-model="input.division_id" class="form-control form-control-sm" name="division_id" :class="{ 'is-invalid': form.errors.has('division_id') }" @change="getDistrict($event)">
 					              	  <option disabled value="">Select division / state</option>                
 					                  <option v-for="division in Divisions" v-bind:value="division.id">
 					                  	{{division.division_name}}
@@ -259,7 +259,7 @@
 						  	<div class="col-md-3">
 						  	  <div class="form-group">
 				                <label>District / City *</label>
-				                  <select v-model="input.district_id" class="form-control form-control-sm" id="district_id" name="district_id" :class="{ 'is-invalid': form.errors.has('district_id') }" @change="getDistrictZone($event)" >
+				                  <select v-model="input.district_id" class="form-control form-control-sm" name="district_id" :class="{ 'is-invalid': form.errors.has('district_id') }" @change="getDistrictZone($event)" >
 					              	  <option disabled value="">Select district / city</option>                
 					                  <option v-for="district in Districts" v-bind:value="district.id">
 					                  	{{district.district_name}}
@@ -271,7 +271,7 @@
 						  	<div class="col-md-3">
 						  	  <div class="form-group">
 				                <label>Zone / Area / Zip *</label>
-				                  <select v-model="input.area_zone_id" class="form-control form-control-sm" id="area_zone_id" name="area_zone_id" :class="{ 'is-invalid': form.errors.has('area_zone_id') }" >
+				                  <select v-model="input.area_zone_id" class="form-control form-control-sm" name="area_zone_id" :class="{ 'is-invalid': form.errors.has('area_zone_id') }" >
 					              	  <option disabled value="">Zone / Area / Zip</option>                
 					                  <option v-for="zone in Dist_Zones" v-bind:value="zone.id">
 					                  	{{zone.zone_name}} - {{zone.zip_code}}

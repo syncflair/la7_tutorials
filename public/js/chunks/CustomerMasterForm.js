@@ -756,7 +756,6 @@ var render = function() {
                                             expression: "form.email"
                                           }
                                         ],
-                                        ref: "email",
                                         staticClass:
                                           "form-control form-control-sm",
                                         class: {
@@ -820,7 +819,6 @@ var render = function() {
                                                 expression: "form.phone"
                                               }
                                             ],
-                                            ref: "phone",
                                             staticClass:
                                               "form-control form-control-sm",
                                             class: {
@@ -887,10 +885,7 @@ var render = function() {
                                               "customer_group_id"
                                             )
                                           },
-                                          attrs: {
-                                            id: "customer_group_id",
-                                            name: "customer_group_id"
-                                          },
+                                          attrs: { name: "customer_group_id" },
                                           on: {
                                             change: function($event) {
                                               var $$selectedVal = Array.prototype.filter
@@ -991,7 +986,6 @@ var render = function() {
                                             )
                                           },
                                           attrs: {
-                                            id: "customer_membership_id",
                                             name: "customer_membership_id"
                                           },
                                           on: {
@@ -1091,10 +1085,7 @@ var render = function() {
                                               "status_id"
                                             )
                                           },
-                                          attrs: {
-                                            id: "status_id",
-                                            name: "status_id"
-                                          },
+                                          attrs: { name: "status_id" },
                                           on: {
                                             change: function($event) {
                                               var $$selectedVal = Array.prototype.filter
@@ -1208,7 +1199,6 @@ var render = function() {
                                                         "form.password"
                                                     }
                                                   ],
-                                                  ref: "password",
                                                   staticClass:
                                                     "form-control form-control-sm",
                                                   class: {
@@ -1276,7 +1266,6 @@ var render = function() {
                                                         "form.password_confirmation"
                                                     }
                                                   ],
-                                                  ref: "password_confirmation",
                                                   staticClass:
                                                     "form-control form-control-sm",
                                                   class: {
@@ -1922,7 +1911,6 @@ var render = function() {
                                                         )
                                                       },
                                                       attrs: {
-                                                        id: "country_id",
                                                         name: "country_id"
                                                       },
                                                       on: {
@@ -2052,7 +2040,6 @@ var render = function() {
                                                         )
                                                       },
                                                       attrs: {
-                                                        id: "division_id",
                                                         name: "division_id"
                                                       },
                                                       on: {
@@ -2178,7 +2165,6 @@ var render = function() {
                                                         )
                                                       },
                                                       attrs: {
-                                                        id: "district_id",
                                                         name: "district_id"
                                                       },
                                                       on: {
@@ -2306,7 +2292,6 @@ var render = function() {
                                                         )
                                                       },
                                                       attrs: {
-                                                        id: "area_zone_id",
                                                         name: "area_zone_id"
                                                       },
                                                       on: {

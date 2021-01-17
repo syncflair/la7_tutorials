@@ -74,7 +74,7 @@ class LoginController extends Controller
         return $field;
     }  
 
-     protected function validateLogin(Request $request)
+    protected function validateLogin(Request $request)
     {
     	$this->validate($request, [
             //'email'   => 'required|email',

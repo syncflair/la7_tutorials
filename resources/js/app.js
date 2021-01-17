@@ -174,8 +174,8 @@ router.beforeEach((to, from, next) => {
 
   if(to.meta.authRequiredCustomer === true){
     setTimeout(() => {
-        const protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerProfile', 'CustomerProfileUpdate', 'CustomerAddressForm', 
-        'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews'];
+        const protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerCart', 'CustomerProfile', 'CustomerProfileUpdate',
+         'CustomerAddressForm', 'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews'];
         // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
         const isAuthenticated = store.state.AuthenticationForWebsite.isAuthenticated;//this.isAuthenticated; //publish from commonGlobal.js and get form AuthenticationForWebsite.js
         if (protectedCustomerRoutes.includes(to.name) && isAuthenticated !== true) next({ name: 'CustomerLogin' })

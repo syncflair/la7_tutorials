@@ -201,35 +201,32 @@ const commonStoreForAll ={
       },
 
 		  fetchCountryList(context){
-        axios.get('/spa/Country-Info/GetCountry')
+        axios.get('/Country-Info/GetCountry')
+        // axios.get('/spa/Country-Info/GetCountry')
         .then( (response) => {
           context.commit('FETCH_COUNTRY_DATA', response.data); //use for only show data
         }).catch( () => { })
       },      
 
-      // fetchDivisionList(context){
-      //   axios.get('/spa/Division-Info/GetDivision')
-      //   .then( (response) => {
-      //     context.commit('FETCH_DIVISION_DATA', response.data); //use for only show data
-      //   }).catch( () => { })
-      // },
-
       fetchDivisionList(context, payload){
-        axios.get('/spa/Division-Info/GetDivision?&id='+payload)
+        axios.get('/Division-Info/GetDivision?&id='+payload)
+        // axios.get('/spa/Division-Info/GetDivision?&id='+payload)
         .then( (response) => {
           context.commit('FETCH_DIVISION_DATA', response.data); //use for only show data
         }).catch( () => { })
       },
 
       fetchDistrictList(context, payload){
-        axios.get('/spa/District-Info/GetDistrict?&id='+payload)
+        axios.get('/District-Info/GetDistrict?&id='+payload)
+        // axios.get('/spa/District-Info/GetDistrict?&id='+payload)
         .then( (response) => {
           context.commit('FETCH_DISTRICT_DATA', response.data); //use for only show data
         }).catch( () => { })
       },
 
       fetchDistrictZoneList(context, payload){
-        axios.get('/spa/DistrictZone-Info/GetDistrictZone?&id='+payload)
+        axios.get('/DistrictZone-Info/GetDistrictZone?&id='+payload)
+        // axios.get('/spa/DistrictZone-Info/GetDistrictZone?&id='+payload)
         .then( (response) => {
           context.commit('FETCH_DISTRICT_ZONE_DATA', response.data); //use for only show data
         }).catch( () => { })

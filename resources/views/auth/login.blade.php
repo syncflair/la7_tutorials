@@ -21,9 +21,10 @@
       @include('commonParts.message_display')
 
 
-      <form method="POST" action="{{ route('login') }}">
+      <form method="POST" action="{{ route('login-abc') }}">
 
          @csrf
+         @method('POST')
 
         <div class="input-group mb-3">
           <!--<input type="email" class="form-control" placeholder="Email">-->
@@ -38,7 +39,7 @@
 	            <span class="invalid-feedback" role="alert">
 	                {{ $message }}
 	            </span>
-	        @enderror
+	          @enderror
         </div>
 
         <div class="input-group mb-3">

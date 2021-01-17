@@ -323,6 +323,7 @@
                     name: '',
                     username: '',
                     password: '', 
+                    remember: true, /*By default remember me true*/  
 
                     email: '',
                     phone: '',

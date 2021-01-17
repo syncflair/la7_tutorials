@@ -10,7 +10,6 @@
 
                <!-- Auth::user()->name -->
                <!-- {{Auth::user()}} -->
-               <!-- {{Auth::user()->name}} -->
 
               <br>
                     @if (Auth::guard('customer')->check())

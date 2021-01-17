@@ -130,7 +130,8 @@
 
                 form: new Form({
                   username: '',
-                  password: '',             
+                  password: '', 
+                  remember: true, /*By default remember me true*/            
                 })                             
             }
         },

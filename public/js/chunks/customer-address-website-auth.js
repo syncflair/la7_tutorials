@@ -156,7 +156,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "border-bottom border-color-1 mb-1" }, [
-      _c("h5", { staticClass: "section-title mb-0 pb-2 pl-2 font-size-25" }, [
+      _c("h5", { staticClass: "section-title- mb-0 pb-1 pl-2- font-size-18" }, [
         _vm._v("My Address")
       ])
     ])

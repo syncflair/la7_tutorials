@@ -336,6 +336,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         name: '',
         username: '',
         password: '',
+        remember: true,
+
+        /*By default remember me true*/
         email: '',
         phone: ''
       }, _defineProperty(_Form, "password", ''), _defineProperty(_Form, "password_confirmation", ''), _Form))

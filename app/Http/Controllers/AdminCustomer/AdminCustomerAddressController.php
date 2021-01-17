@@ -53,6 +53,14 @@ class AdminCustomerAddressController extends Controller
     public function store(Request $request)
     {
 
+
+        $this->validate($request, [
+            'address_1' => ['required'],
+            'division_id' => ['required'],
+            'district_id' => ['required'],
+            'area_zone_id' => ['required'],
+        ]);
+
         //return response()->json($request->all());        
         if(Auth::guard('customer')->check()){
            
@@ -118,6 +126,18 @@ class AdminCustomerAddressController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+        $this->validate($request, [
+            'address_1' => ['required'],
+            'division_id' => ['required'],
+            'district_id' => ['required'],
+            'area_zone_id' => ['required'],
+        ],
+        [
+            'address_1.required' => 'The Address field is required.',
+        ]
+        );
+
         if(Auth::guard('customer')->check()){
            
             if(Auth::guard('customer')->user()->id == $request->customer_id ){

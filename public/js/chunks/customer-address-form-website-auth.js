@@ -328,8 +328,10 @@ var render = function() {
               { staticClass: "col-md-12 border-bottom border-color-1 mb-3" },
               [
                 _c(
-                  "h5",
-                  { staticClass: "section-title mb-0 pb-2 pl-2 font-size-25" },
+                  "h3",
+                  {
+                    staticClass: "section-title- mb-0 pb-1 pl-2- font-size-18"
+                  },
                   [
                     _c(
                       "span",
@@ -940,7 +942,8 @@ var render = function() {
           ])
         ]
       )
-    ])
+    ]),
+    _vm._v("\n        " + _vm._s(_vm.authCustomer.id) + "\n    ")
   ])
 }
 var staticRenderFns = []

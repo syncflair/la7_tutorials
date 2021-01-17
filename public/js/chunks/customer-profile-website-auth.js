@@ -154,6 +154,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
  //for user MapState
 
@@ -319,6 +321,8 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
                 _c("div", { staticClass: "col-lg-12" }, [
                   _c(
                     "div",
@@ -332,8 +336,6 @@ var render = function() {
                           "table",
                           { staticClass: "table", attrs: { cellspacing: "0" } },
                           [
-                            _vm._m(1),
-                            _vm._v(" "),
                             _c(
                               "tbody",
                               _vm._l(_vm.authCustomerAddress, function(
@@ -490,15 +492,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { staticClass: "product-name" }, [_vm._v("Address")]),
-        _vm._v(" "),
-        _c("th", { staticClass: "product-subtotal min-width-200-md-lg" }, [
-          _vm._v(" ")
-        ])
-      ])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "col-lg-12 border-bottom border-color-1 mt-5 mb-3 col-6-"
+      },
+      [
+        _c(
+          "h3",
+          { staticClass: "section-title- mb-0 pb-1 pl-2- font-size-14" },
+          [_vm._v("Address")]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true

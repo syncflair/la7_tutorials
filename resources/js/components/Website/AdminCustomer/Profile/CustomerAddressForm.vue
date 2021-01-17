@@ -15,10 +15,10 @@
             <div class="bg-gray-1 rounded-lg col-xl-10 col-wd-9gdot5-">
                 <div class="row ">
                     <div class="col-md-12 border-bottom border-color-1 mb-3">
-                        <h5 class="section-title mb-0 pb-2 pl-2 font-size-25">
+                        <h3 class="section-title- mb-0 pb-1 pl-2- font-size-18">
                         	<span v-show="!editMode">Add Address</span>
         					<span v-show="editMode">Update Address</span>
-                        </h5>
+                        </h3>
                     </div>
 
                     <div class="col-md-8 offset-md-2 mb-8 w-100 wishlist-table cart-wishlist-custome">
@@ -124,7 +124,7 @@
                 </div>
             </div>
         </div>
-        <!-- {{authCustomer.id}} -->
+        {{authCustomer.id}}
     </div>
 
 </template>

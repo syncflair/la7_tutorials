@@ -14,8 +14,8 @@
 
             <div class="bg-gray-1 rounded-lg col-xl-10 col-wd-9gdot5-">
                 <div class="row ">
-                    <div class="border-bottom border-color-1 mb-1">
-                        <h3 class="section-title mb-0 pb-2 pl-2 font-size-25">My Cart</h3>
+                    <div class="col-lg-12 border-bottom border-color-1 mb-3 col-6-">
+                        <h3 class="section-title- mb-0 pb-1 pl-2- font-size-18">My Cart</h3>
                     </div>
 
                     <div class="mb-8 w-100 wishlist-table cart-wishlist-custome">
