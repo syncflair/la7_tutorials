@@ -21,7 +21,10 @@ export default {
 
       ...mapState( 
             'AuthenticationForWebsite', ['isAuthenticated']
-            //isAuthenticated
+      ),
+
+      ...mapState( 
+            'AuthenticationForAdmin', ['isAdminAuthenticated']
       ),
 	    
     	authPermissionsData(){  //return 'decodet Data';
@@ -35,6 +38,7 @@ export default {
     },
 
     methods: {  
+
         // isViewPermitted(modules){
         //     //return this.authPermissionsDecode.;
         // }, 
@@ -73,6 +77,7 @@ export default {
     },
 
     created(){ 
+
         //console.log(this.authPermissionsData);
         //console.log(this.authUser.role);
         //console.log(JSON.parse(this.authPermissions.permission).role.edit);

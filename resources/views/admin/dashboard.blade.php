@@ -9,11 +9,14 @@
 @section('content')
 
 <!-- Router-view passing through admin wrapper component -->
-<adminwrapper 
-	:user="{{ Auth::user() }}" 
-	:permissions="{{ \App\Models\Permission::where(['id' => Auth::user()->role->id ])->first() }}"
-	:settings="{{ \App\Models\Settings\Setting::with('belongsToLanguage','belongsToCurrency')->where(['id' => 1 ])->first() }}" 
-></adminwrapper>
+	@if( Auth::check() )
+		<adminwrapper 
+			:isadminauthenticated="true"
+			:user="{{ Auth::user() }}" 
+			:permissions="{{ \App\Models\Permission::where(['id' => Auth::user()->role->id ])->first() }}"
+			:settings="{{ \App\Models\Settings\Setting::with('belongsToLanguage','belongsToCurrency')->where(['id' => 1 ])->first() }}" 
+		></adminwrapper>
+	@endif
 
 <!-- :permissions="{{ \App\Models\Permission::where(['id' => Auth::user()->role->id ])->first() }} " -->
 

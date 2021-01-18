@@ -1,4 +1,4 @@
-<?php
+<?php //Custom Controller for get all common data for all
 
 namespace App\Http\Controllers;
 

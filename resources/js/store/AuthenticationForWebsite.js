@@ -8,7 +8,7 @@ const AuthenticationForWebsite ={
       /**************************************************/
       /* Use for Customer authentication*/ 
       /**************************************************/
-      isAuthenticated: false, 
+      isAuthenticated: false,  //use for customer admin area vue component middleware in app.js
       authCustomer: {}, 
       authCustomerAddress: {}, 
          

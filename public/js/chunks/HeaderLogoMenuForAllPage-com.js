@@ -359,9 +359,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
  //Load to all
 
  //Load to all
@@ -614,31 +611,39 @@ var render = function() {
                                       {
                                         staticClass:
                                           "nav-link u-header__sub-menu-nav-link",
+                                        attrs: { to: "/login-abc" }
+                                      },
+                                      [_vm._v("Admin Login")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "nav-link u-header__sub-menu-nav-link",
                                         attrs: { to: "/spa/ProductMaster" }
                                       },
                                       [_vm._v("Admin Product")]
                                     )
                                   ],
                                   1
-                                ),
-                                _vm._v(" "),
-                                _vm._m(3),
-                                _vm._v(" "),
-                                _vm._m(4),
-                                _vm._v(" "),
-                                _vm._m(5),
-                                _vm._v(" "),
-                                _vm._m(6)
+                                )
                               ]
                             )
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(7),
+                        _vm._m(3),
                         _vm._v(" "),
-                        _vm._m(8),
+                        _vm._m(4),
                         _vm._v(" "),
-                        _vm._m(9)
+                        _vm._m(5)
                       ]
                     )
                   ]
@@ -647,7 +652,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(10),
+          _vm._m(6),
           _vm._v(" "),
           _c(
             "div",
@@ -663,9 +668,9 @@ var render = function() {
                     staticClass: "d-flex list-unstyled mb-0 align-items-center"
                   },
                   [
-                    _vm._m(11),
+                    _vm._m(7),
                     _vm._v(" "),
-                    _vm._m(12),
+                    _vm._m(8),
                     _vm._v(" "),
                     _c(
                       "li",
@@ -674,7 +679,7 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _vm._m(13)
+                    _vm._m(9)
                   ]
                 )
               ])
@@ -1455,66 +1460,6 @@ var staticRenderFns = [
         )
       ]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c(
-        "a",
-        {
-          staticClass: "nav-link u-header__sub-menu-nav-link",
-          attrs: { href: "../blog/blog-v2.html" }
-        },
-        [_vm._v("Blog v2")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c(
-        "a",
-        {
-          staticClass: "nav-link u-header__sub-menu-nav-link",
-          attrs: { href: "../blog/blog-v3.html" }
-        },
-        [_vm._v("Blog v3")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c(
-        "a",
-        {
-          staticClass: "nav-link u-header__sub-menu-nav-link",
-          attrs: { href: "../blog/blog-full-width.html" }
-        },
-        [_vm._v("Blog Full Width")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", [
-      _c(
-        "a",
-        {
-          staticClass: "nav-link u-header__sub-menu-nav-link",
-          attrs: { href: "../blog/single-blog-post.html" }
-        },
-        [_vm._v("Single Blog Post")]
-      )
-    ])
   },
   function() {
     var _vm = this

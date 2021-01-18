@@ -92297,6 +92297,7 @@ var routes = [//export const routes = [
 //{ path: '/dashboard', component: Dashboard, meta: { title: 'Dashboard'} },
 {
   path: '/dashboard',
+  name: 'Dashboard',
   component: function component() {
     return __webpack_require__.e(/*! import() | Dashboard */ "Dashboard").then(__webpack_require__.bind(null, /*! ./components/Admin/DashboardAdmin.vue */ "./resources/js/components/Admin/DashboardAdmin.vue"));
   },
@@ -93705,37 +93706,39 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _store_AuthenticationForWebsite__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/AuthenticationForWebsite */ "./resources/js/store/AuthenticationForWebsite.js");
-/* harmony import */ var _store_commonStoreForWebsite__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/commonStoreForWebsite */ "./resources/js/store/commonStoreForWebsite.js");
-/* harmony import */ var _store_commonStoreForAll__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/commonStoreForAll */ "./resources/js/store/commonStoreForAll.js");
-/* harmony import */ var _store_CategoryStore__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/CategoryStore */ "./resources/js/store/CategoryStore.js");
-/* harmony import */ var _store_ProductMasterStore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/ProductMasterStore */ "./resources/js/store/ProductMasterStore.js");
-/* harmony import */ var _store_PartieStore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store/PartieStore */ "./resources/js/store/PartieStore.js");
-/* harmony import */ var _store_PurchaseOrderMasterStore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store/PurchaseOrderMasterStore */ "./resources/js/store/PurchaseOrderMasterStore.js");
-/* harmony import */ var _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store/CustomerForAdminStore */ "./resources/js/store/CustomerForAdminStore.js");
-/* harmony import */ var _store_SupplierForAdminStore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./store/SupplierForAdminStore */ "./resources/js/store/SupplierForAdminStore.js");
-/* harmony import */ var _store_BrandShopMasterStore__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./store/BrandShopMasterStore */ "./resources/js/store/BrandShopMasterStore.js");
-/* harmony import */ var _store_VendorMasterStore__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./store/VendorMasterStore */ "./resources/js/store/VendorMasterStore.js");
-/* harmony import */ var _store_usersAdminStore__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./store/usersAdminStore */ "./resources/js/store/usersAdminStore.js");
-/* harmony import */ var _store_CategoryMasterStore__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./store/CategoryMasterStore */ "./resources/js/store/CategoryMasterStore.js");
-/* harmony import */ var _store_SpecificationMasterStore__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./store/SpecificationMasterStore */ "./resources/js/store/SpecificationMasterStore.js");
-/* harmony import */ var _store_AttributeValueMasterStore__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./store/AttributeValueMasterStore */ "./resources/js/store/AttributeValueMasterStore.js");
-/* harmony import */ var _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./store/BrandMasterStore */ "./resources/js/store/BrandMasterStore.js");
-/* harmony import */ var _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./store/ChartOfAccounts */ "./resources/js/store/ChartOfAccounts.js");
-/* harmony import */ var _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./store/AccountHeadsMasterSotre */ "./resources/js/store/AccountHeadsMasterSotre.js");
-/* harmony import */ var _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store/EmployeeMasterStore */ "./resources/js/store/EmployeeMasterStore.js");
-/* harmony import */ var _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store/BranchInfoStore */ "./resources/js/store/BranchInfoStore.js");
-/* harmony import */ var _store_CountryStore__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store/CountryStore */ "./resources/js/store/CountryStore.js");
-/* harmony import */ var _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./store/VatRatesStore */ "./resources/js/store/VatRatesStore.js");
-/* harmony import */ var _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./store/StatusMasterStore */ "./resources/js/store/StatusMasterStore.js");
-/* harmony import */ var _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./store/DivisionMasterStore */ "./resources/js/store/DivisionMasterStore.js");
-/* harmony import */ var _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./store/DistrictMasterStore */ "./resources/js/store/DistrictMasterStore.js");
-/* harmony import */ var _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./store/DistrictZoneMasterStore */ "./resources/js/store/DistrictZoneMasterStore.js");
-/* harmony import */ var _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./store/CashAccountMasterStore */ "./resources/js/store/CashAccountMasterStore.js");
+/* harmony import */ var _store_AuthenticationForAdmin__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/AuthenticationForAdmin */ "./resources/js/store/AuthenticationForAdmin.js");
+/* harmony import */ var _store_commonStoreForWebsite__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/commonStoreForWebsite */ "./resources/js/store/commonStoreForWebsite.js");
+/* harmony import */ var _store_commonStoreForAll__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./store/commonStoreForAll */ "./resources/js/store/commonStoreForAll.js");
+/* harmony import */ var _store_CategoryStore__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./store/CategoryStore */ "./resources/js/store/CategoryStore.js");
+/* harmony import */ var _store_ProductMasterStore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./store/ProductMasterStore */ "./resources/js/store/ProductMasterStore.js");
+/* harmony import */ var _store_PartieStore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./store/PartieStore */ "./resources/js/store/PartieStore.js");
+/* harmony import */ var _store_PurchaseOrderMasterStore__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./store/PurchaseOrderMasterStore */ "./resources/js/store/PurchaseOrderMasterStore.js");
+/* harmony import */ var _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./store/CustomerForAdminStore */ "./resources/js/store/CustomerForAdminStore.js");
+/* harmony import */ var _store_SupplierForAdminStore__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./store/SupplierForAdminStore */ "./resources/js/store/SupplierForAdminStore.js");
+/* harmony import */ var _store_BrandShopMasterStore__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./store/BrandShopMasterStore */ "./resources/js/store/BrandShopMasterStore.js");
+/* harmony import */ var _store_VendorMasterStore__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./store/VendorMasterStore */ "./resources/js/store/VendorMasterStore.js");
+/* harmony import */ var _store_usersAdminStore__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./store/usersAdminStore */ "./resources/js/store/usersAdminStore.js");
+/* harmony import */ var _store_CategoryMasterStore__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./store/CategoryMasterStore */ "./resources/js/store/CategoryMasterStore.js");
+/* harmony import */ var _store_SpecificationMasterStore__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./store/SpecificationMasterStore */ "./resources/js/store/SpecificationMasterStore.js");
+/* harmony import */ var _store_AttributeValueMasterStore__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./store/AttributeValueMasterStore */ "./resources/js/store/AttributeValueMasterStore.js");
+/* harmony import */ var _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./store/BrandMasterStore */ "./resources/js/store/BrandMasterStore.js");
+/* harmony import */ var _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./store/ChartOfAccounts */ "./resources/js/store/ChartOfAccounts.js");
+/* harmony import */ var _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./store/AccountHeadsMasterSotre */ "./resources/js/store/AccountHeadsMasterSotre.js");
+/* harmony import */ var _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./store/EmployeeMasterStore */ "./resources/js/store/EmployeeMasterStore.js");
+/* harmony import */ var _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./store/BranchInfoStore */ "./resources/js/store/BranchInfoStore.js");
+/* harmony import */ var _store_CountryStore__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./store/CountryStore */ "./resources/js/store/CountryStore.js");
+/* harmony import */ var _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./store/VatRatesStore */ "./resources/js/store/VatRatesStore.js");
+/* harmony import */ var _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./store/StatusMasterStore */ "./resources/js/store/StatusMasterStore.js");
+/* harmony import */ var _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./store/DivisionMasterStore */ "./resources/js/store/DivisionMasterStore.js");
+/* harmony import */ var _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./store/DistrictMasterStore */ "./resources/js/store/DistrictMasterStore.js");
+/* harmony import */ var _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./store/DistrictZoneMasterStore */ "./resources/js/store/DistrictZoneMasterStore.js");
+/* harmony import */ var _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./store/CashAccountMasterStore */ "./resources/js/store/CashAccountMasterStore.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]); //import all Modules here from store folder
 //es6 (VX-VueX)
 //const commonStoreForAll = () => import( /* webpackChunkName: "commonStoreForAll-VX" */ './store/commonStoreForAll') 
+
 
 
 
@@ -93775,40 +93778,41 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
     AuthenticationForWebsite: _store_AuthenticationForWebsite__WEBPACK_IMPORTED_MODULE_2__["default"],
-    commonStoreForWebsite: _store_commonStoreForWebsite__WEBPACK_IMPORTED_MODULE_3__["default"],
-    commonStoreForAll: _store_commonStoreForAll__WEBPACK_IMPORTED_MODULE_4__["default"],
-    CategoryStore: _store_CategoryStore__WEBPACK_IMPORTED_MODULE_5__["default"],
-    ProductMasterStore: _store_ProductMasterStore__WEBPACK_IMPORTED_MODULE_6__["default"],
-    PartieStore: _store_PartieStore__WEBPACK_IMPORTED_MODULE_7__["default"],
+    AuthenticationForAdmin: _store_AuthenticationForAdmin__WEBPACK_IMPORTED_MODULE_3__["default"],
+    commonStoreForWebsite: _store_commonStoreForWebsite__WEBPACK_IMPORTED_MODULE_4__["default"],
+    commonStoreForAll: _store_commonStoreForAll__WEBPACK_IMPORTED_MODULE_5__["default"],
+    CategoryStore: _store_CategoryStore__WEBPACK_IMPORTED_MODULE_6__["default"],
+    ProductMasterStore: _store_ProductMasterStore__WEBPACK_IMPORTED_MODULE_7__["default"],
+    PartieStore: _store_PartieStore__WEBPACK_IMPORTED_MODULE_8__["default"],
     //purchase
-    PurchaseOrderMasterStore: _store_PurchaseOrderMasterStore__WEBPACK_IMPORTED_MODULE_8__["default"],
+    PurchaseOrderMasterStore: _store_PurchaseOrderMasterStore__WEBPACK_IMPORTED_MODULE_9__["default"],
     //customer	
-    CustomerForAdminStore: _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_9__["default"],
+    CustomerForAdminStore: _store_CustomerForAdminStore__WEBPACK_IMPORTED_MODULE_10__["default"],
     //Suppliers
-    SupplierForAdminStore: _store_SupplierForAdminStore__WEBPACK_IMPORTED_MODULE_10__["default"],
-    BrandShopMasterStore: _store_BrandShopMasterStore__WEBPACK_IMPORTED_MODULE_11__["default"],
-    VendorMasterStore: _store_VendorMasterStore__WEBPACK_IMPORTED_MODULE_12__["default"],
+    SupplierForAdminStore: _store_SupplierForAdminStore__WEBPACK_IMPORTED_MODULE_11__["default"],
+    BrandShopMasterStore: _store_BrandShopMasterStore__WEBPACK_IMPORTED_MODULE_12__["default"],
+    VendorMasterStore: _store_VendorMasterStore__WEBPACK_IMPORTED_MODULE_13__["default"],
     //user management
-    usersAdminStore: _store_usersAdminStore__WEBPACK_IMPORTED_MODULE_13__["default"],
+    usersAdminStore: _store_usersAdminStore__WEBPACK_IMPORTED_MODULE_14__["default"],
     //Catalog
-    CategoryMasterStore: _store_CategoryMasterStore__WEBPACK_IMPORTED_MODULE_14__["default"],
-    SpecificationMasterStore: _store_SpecificationMasterStore__WEBPACK_IMPORTED_MODULE_15__["default"],
-    AttributeValueMasterStore: _store_AttributeValueMasterStore__WEBPACK_IMPORTED_MODULE_16__["default"],
-    BrandMasterStore: _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_17__["default"],
+    CategoryMasterStore: _store_CategoryMasterStore__WEBPACK_IMPORTED_MODULE_15__["default"],
+    SpecificationMasterStore: _store_SpecificationMasterStore__WEBPACK_IMPORTED_MODULE_16__["default"],
+    AttributeValueMasterStore: _store_AttributeValueMasterStore__WEBPACK_IMPORTED_MODULE_17__["default"],
+    BrandMasterStore: _store_BrandMasterStore__WEBPACK_IMPORTED_MODULE_18__["default"],
     //Accounting
-    ChartOfAccounts: _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_18__["default"],
-    AccountHeadsMasterSotre: _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_19__["default"],
+    ChartOfAccounts: _store_ChartOfAccounts__WEBPACK_IMPORTED_MODULE_19__["default"],
+    AccountHeadsMasterSotre: _store_AccountHeadsMasterSotre__WEBPACK_IMPORTED_MODULE_20__["default"],
     //HRM
-    EmployeeMasterStore: _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_20__["default"],
+    EmployeeMasterStore: _store_EmployeeMasterStore__WEBPACK_IMPORTED_MODULE_21__["default"],
     //Settings
-    BranchInfoStore: _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_21__["default"],
-    CountryStore: _store_CountryStore__WEBPACK_IMPORTED_MODULE_22__["default"],
-    VatRatesStore: _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_23__["default"],
-    StatusMasterStore: _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_24__["default"],
-    DivisionMasterStore: _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_25__["default"],
-    DistrictMasterStore: _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_26__["default"],
-    DistrictZoneMasterStore: _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_27__["default"],
-    CashAccountMasterStore: _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_28__["default"]
+    BranchInfoStore: _store_BranchInfoStore__WEBPACK_IMPORTED_MODULE_22__["default"],
+    CountryStore: _store_CountryStore__WEBPACK_IMPORTED_MODULE_23__["default"],
+    VatRatesStore: _store_VatRatesStore__WEBPACK_IMPORTED_MODULE_24__["default"],
+    StatusMasterStore: _store_StatusMasterStore__WEBPACK_IMPORTED_MODULE_25__["default"],
+    DivisionMasterStore: _store_DivisionMasterStore__WEBPACK_IMPORTED_MODULE_26__["default"],
+    DistrictMasterStore: _store_DistrictMasterStore__WEBPACK_IMPORTED_MODULE_27__["default"],
+    DistrictZoneMasterStore: _store_DistrictZoneMasterStore__WEBPACK_IMPORTED_MODULE_28__["default"],
+    CashAccountMasterStore: _store_CashAccountMasterStore__WEBPACK_IMPORTED_MODULE_29__["default"]
   }
 }));
 
@@ -94033,21 +94037,30 @@ Vue.mixin(_commonGlobal__WEBPACK_IMPORTED_MODULE_9__["default"]);
 /* ####################### router middleware ###########################################*/
 
 _VueRouters__WEBPACK_IMPORTED_MODULE_2__["default"].beforeEach(function (to, from, next) {
+  //for customer authentication
   if (to.meta.authRequiredCustomer === true) {
     setTimeout(function () {
-      var protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerCart', 'CustomerProfile', 'CustomerProfileUpdate', 'CustomerAddressForm', 'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews']; // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
-
+      // const protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerCart', 'CustomerProfile', 'CustomerProfileUpdate',
+      //  'CustomerAddressForm', 'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews'];
+      // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
       var isAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForWebsite.isAuthenticated; //this.isAuthenticated; //publish from commonGlobal.js and get form AuthenticationForWebsite.js
+      // if (protectedCustomerRoutes.includes(to.name) && isAuthenticated !== true) next({ name: 'CustomerLogin' })
 
-      if (protectedCustomerRoutes.includes(to.name) && isAuthenticated !== true) next({
+      if (isAuthenticated !== true) next({
         name: 'CustomerLogin'
       });else next();
-    }, 1000); //call after 800 miliscound
-  } else if (to.meta.authRequiredAdmin === true) {
-    next();
-  } else {
-    next();
-  }
+    }, 800); //call after 8000 miliscound
+  } //for admin authentication
+  else if (to.meta.authRequiredAdmin === true) {
+      setTimeout(function () {
+        var isAdminAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForAdmin.isAdminAuthenticated; //this.isAdminAuthenticated; //publish from commonGlobal.js and get form AuthenticationForWebsite.js
+        // if (  isAdminAuthenticated !== true) next({ name: 'Dashboard' })
+
+        if (isAdminAuthenticated !== true) next(window.location = '/login-abc');else next();
+      }, 500); //call after 300 miliscound
+    } else {
+      next();
+    }
 });
 /* ####################### End router middleware ###########################################*/
 
@@ -94188,9 +94201,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'systemSettings'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['isitwebsiteCheck', 'isAuthenticated'] //isAuthenticated
-  )), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForWebsite', ['isAuthenticated'] //isAuthenticated
-  )), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'systemSettings'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['isitwebsiteCheck', 'isAuthenticated'] //isAuthenticated
+  )), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForWebsite', ['isAuthenticated'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForAdmin', ['isAdminAuthenticated'])), {}, {
     authPermissionsData: function authPermissionsData() {
       //return 'decodet Data';
       return JSON.parse(this.authPermissions.permission);
@@ -94514,6 +94526,67 @@ var AttributeValueMasterStore = {
 
 /***/ }),
 
+/***/ "./resources/js/store/AuthenticationForAdmin.js":
+/*!******************************************************!*\
+  !*** ./resources/js/store/AuthenticationForAdmin.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var AuthenticationForAdmin = {
+  namespaced: true,
+  state: function state() {
+    return {
+      /**************************************************/
+
+      /* Use for Admin authentication*/
+
+      /**************************************************/
+      isAdminAuthenticated: false //use for master admin area vue component middleware in app.js
+      // authUser: {},
+      // authPermissions:{},
+      // systemSettings:{},
+
+    };
+  },
+
+  /*end state*/
+  getters: {},
+
+  /*end getters*/
+  mutations: {
+    /**************************************************/
+
+    /* Use for Customer authentication*/
+
+    /**************************************************/
+    //Mutation for customer authetication check form login methods
+    IS_AUTHENTICATED_CHECK: function IS_AUTHENTICATED_CHECK(state, data) {
+      return state.isAdminAuthenticated = data;
+    } // AUTH_USER(state, data) { return state.authUser = data; },
+    // AUTH_PERMISSIONS(state, data){ return state.authPermissions = data;},
+    // SYSTEM_SETTINGS(state, data){ return state.systemSettings = data;},  
+
+  },
+
+  /*end Mutations*/
+  actions: {//get auth customer data after login if any later update 
+    // fetchAuthCustomerData(context){
+    //     axios.get('/auth/getAuthCustomerData')
+    //     .then( (response) => {
+    //       context.commit('AUTH_CUSTOMER_DATA', response.data);
+    //     }).catch( () => { })
+    // }, 
+  }
+  /*end actions*/
+
+};
+/* harmony default export */ __webpack_exports__["default"] = (AuthenticationForAdmin);
+
+/***/ }),
+
 /***/ "./resources/js/store/AuthenticationForWebsite.js":
 /*!********************************************************!*\
   !*** ./resources/js/store/AuthenticationForWebsite.js ***!
@@ -94535,6 +94608,7 @@ var AuthenticationForWebsite = {
 
       /**************************************************/
       isAuthenticated: false,
+      //use for customer admin area vue component middleware in app.js
       authCustomer: {},
       authCustomerAddress: {}
     };

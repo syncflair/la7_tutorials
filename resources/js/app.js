@@ -172,20 +172,28 @@ Vue.mixin(common)
 /* ####################### router middleware ###########################################*/
 router.beforeEach((to, from, next) => {  
 
-  if(to.meta.authRequiredCustomer === true){
+  //for customer authentication
+  if(to.meta.authRequiredCustomer === true){ 
     setTimeout(() => {
-        const protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerCart', 'CustomerProfile', 'CustomerProfileUpdate',
-         'CustomerAddressForm', 'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews'];
+        // const protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerCart', 'CustomerProfile', 'CustomerProfileUpdate',
+        //  'CustomerAddressForm', 'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews'];
         // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
         const isAuthenticated = store.state.AuthenticationForWebsite.isAuthenticated;//this.isAuthenticated; //publish from commonGlobal.js and get form AuthenticationForWebsite.js
-        if (protectedCustomerRoutes.includes(to.name) && isAuthenticated !== true) next({ name: 'CustomerLogin' })
+        // if (protectedCustomerRoutes.includes(to.name) && isAuthenticated !== true) next({ name: 'CustomerLogin' })
+        if ( isAuthenticated !== true) next({ name: 'CustomerLogin' })
         else next()
-    }, 1000);//call after 800 miliscound
+    }, 800);//call after 8000 miliscound
   }
   
+  //for admin authentication
   else if(to.meta.authRequiredAdmin === true){
-    next()
-
+    setTimeout(() => {
+      const isAdminAuthenticated = store.state.AuthenticationForAdmin.isAdminAuthenticated;//this.isAdminAuthenticated; //publish from commonGlobal.js and get form AuthenticationForWebsite.js
+      
+      // if (  isAdminAuthenticated !== true) next({ name: 'Dashboard' })
+      if (  isAdminAuthenticated !== true) next( window.location = '/login-abc' )
+      else next()
+    }, 500);//call after 300 miliscound
   }
 
   else {

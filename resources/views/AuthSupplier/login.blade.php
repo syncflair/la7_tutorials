@@ -21,8 +21,8 @@
       @include('commonParts.message_display')
 
 
-      <!-- <form method="POST" action="{{ route('login') }}"> -->
-        <form method="POST" action="{{ route('supplier.login') }}">
+      
+      <form method="POST" action="{{ route('supplier.login') }}">
          @csrf
 
         <!-- <div class="input-group mb-3">

@@ -25,7 +25,7 @@ const routes = [
 	/* Master Admin Panel */
 	/********************************************************/
 	//{ path: '/dashboard', component: Dashboard, meta: { title: 'Dashboard'} },
-	{ path: '/dashboard', component: () => import(/* webpackChunkName: "Dashboard" */ './components/Admin/DashboardAdmin.vue'), meta: { title: 'Dashboard'} },
+	{ path: '/dashboard', name: 'Dashboard', component: () => import(/* webpackChunkName: "Dashboard" */ './components/Admin/DashboardAdmin.vue'), meta: { title: 'Dashboard'} },
 	//{ path: '/spa/dashboard', component: () => import('./components/Admin/DashboardAdmin.vue'), meta: { title: 'Dashboard'} },
 	
 	//User Role permission management
