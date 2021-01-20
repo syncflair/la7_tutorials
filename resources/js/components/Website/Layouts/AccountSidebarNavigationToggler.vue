@@ -375,9 +375,9 @@
                     //$('#sidebarContent').hide();     
                     $("#sidebarContent").fadeOut("slow"); // Hide login sidebar 
 
-                    this.$store.commit('AuthenticationForWebsite/IS_AUTHENTICATED_CHECK', true ); 
+                    this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true ); 
 
-                    this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data      
+                    this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data      
 
                     // window.location = '/auth/my-dashboard';  
                     //window.location = '/home'; 

@@ -369,9 +369,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           $("#sidebarContent").fadeOut("slow"); // Hide login sidebar 
 
-          _this.$store.commit('AuthenticationForWebsite/IS_AUTHENTICATED_CHECK', true);
+          _this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true);
 
-          _this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data      
+          _this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data      
           // window.location = '/auth/my-dashboard';  
           //window.location = '/home'; 
           //this.$router.go();   
@@ -1367,19 +1367,87 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "HeaderTopbar-website",
   data: function data() {
     return {
-      ActiveLinkClass: 'active'
+      ActiveLinkClass: 'active' //NavLinkShow: true,    
+
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForWebsite', ['authCustomer'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForCustomer', ['authCustomer'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForSupplier', ['authSupplier'])), {}, {
     //for active link management
     currentPage: function currentPage() {
       return this.$route.path;
+    },
+    NavLinkShow: function NavLinkShow() {
+      // // return ? false : true;
+      if (!this.authCustomer) {
+        return true;
+      } else if (!this.authSupplier) {
+        return true;
+      } // else if(!this.authCustomer || this.authSupplier){
+      //     return true;
+      // }else if(this.authCustomer || !this.authSupplier){
+      //     return true;
+      // }else if(this.authCustomer || this.authSupplier){
+      //     return false;
+      // }else if(this.authCustomer ){
+      //     return false;
+      // }else if(this.authSupplier){
+      //     return false;
+      // }
+      else {
+          return false;
+        } //return true;
+      // if(Object.values( this.authCustomer ).length == 0 ){ return true;}
+      //if( Object.values( this.authSupplier ).length === 0 ){ return true;}
+      // else if(Object.keys( this.authSupplier ).length == 0 ){ return true;}
+
     }
   }),
   components: {//UnitsMasterList, UnitsMasterForm,
@@ -1392,7 +1460,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       // 	this.$router.push(HomePath)
       // }
     },
-    Logout: function Logout() {
+    CustomerLogout: function CustomerLogout() {
       var _this = this;
 
       this.$Progress.start(); //using progress-bar package
@@ -1408,7 +1476,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //localStorage.removeItem('isAuthenticated');  
 
 
-        _this.$store.commit('AuthenticationForWebsite/IS_AUTHENTICATED_CHECK', false); //
+        _this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false); //
 
 
         window.location = '/home'; //this.$router.push({ path : '/auth/login' });   //route after successfule 
@@ -1419,11 +1487,39 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })["catch"](function () {
         _this.$Progress.fail();
       });
-    } //End Logout  
+    },
+    //End Customer Logout  
+    SupplierLogout: function SupplierLogout() {
+      var _this2 = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      axios.post('/supplier/logout').then(function (_ref2) {
+        var response = _ref2.response;
+
+        _this2.$Progress.finish(); //for security reson, Best Policy for API Based Authentication
+        //localStorage.setItem('isAuthenticated', false);  
+        //localStorage.removeItem('isAuthenticated');  
+
+
+        _this2.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', false); //
+
+
+        window.location = '/home'; //this.$router.push({ path : '/auth/login' });   //route after successfule 
+        //this.$router.replace({ path : '/auth/login' });   //route after successfule 
+        //this.$router.go('/auth/login');
+
+        toastr.success('Logout successfule');
+      })["catch"](function () {
+        _this2.$Progress.fail();
+      });
+    } //End Supplier Logout  
 
   },
   //end Methods
-  created: function created() {}
+  created: function created() {
+    console.log(this.NavLinkShow);
+  }
 }); //end export default
 
 /***/ }),
@@ -1754,7 +1850,29 @@ var HeaderVerticalAndSearchForAllPage = function HeaderVerticalAndSearchForAllPa
   name: "Website-Wrapper-master",
   //Get props form views/admin/dashboard.blade.php
   // props:['user','permissions','settings'], 
-  props: ['isitwebsite', 'authcustomer', 'isauthenticated'],
+  //props:['isitwebsite', 'authcustomer', 'isauthenticated', 'authsupplier', 'issspaauthenticated'],
+  props: {
+    isitwebsite: {
+      type: Number,
+      required: true
+    },
+    authcustomer: {
+      type: Object //required: true
+
+    },
+    isauthenticated: {
+      type: Boolean //required: true
+
+    },
+    authsupplier: {
+      type: Object //required: true
+
+    },
+    issspaauthenticated: {
+      type: Boolean //required: true
+
+    }
+  },
   data: function data() {
     return {
       mainContentMarginTopWhenHeaderFiexd: '',
@@ -1800,8 +1918,11 @@ var HeaderVerticalAndSearchForAllPage = function HeaderVerticalAndSearchForAllPa
   },
   created: function created() {
     //direct commit (mutations) to resources/js/store/commonStoreForAll.js
-    this.$store.commit('AuthenticationForWebsite/IS_AUTHENTICATED_CHECK', this.isauthenticated);
-    this.$store.commit('AuthenticationForWebsite/AUTH_CUSTOMER_CHECK', this.authcustomer); //commit from props
+    this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', this.isauthenticated);
+    this.$store.commit('AuthenticationForCustomer/AUTH_CUSTOMER_CHECK', this.authcustomer); //commit from props
+
+    this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', this.issspaauthenticated);
+    this.$store.commit('AuthenticationForSupplier/AUTH_SUPPLIER_CHECK', this.authsupplier); //commit from props
 
     this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite); //window resize is call
 
@@ -4092,7 +4213,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              !_vm.authCustomer
+              _vm.NavLinkShow === true
                 ? _c(
                     "li",
                     {
@@ -4170,7 +4291,7 @@ var render = function() {
                                   class:  true
                                     ? _vm.ActiveLinkClass
                                     : undefined,
-                                  attrs: { to: "/cart" }
+                                  attrs: { to: "/auth/my-cart" }
                                 },
                                 [
                                   _c("i", {
@@ -4212,7 +4333,7 @@ var render = function() {
                                   _c("i", {
                                     staticClass: "font-size-18 ec ec-user"
                                   }),
-                                  _vm._v(" Profile")
+                                  _vm._v(" My Profile")
                                 ]
                               ),
                               _vm._v(" "),
@@ -4230,7 +4351,7 @@ var render = function() {
                                   _c("i", {
                                     staticClass: "font-size-18 ec ec-payment"
                                   }),
-                                  _vm._v(" Voucher")
+                                  _vm._v(" My Vouchers")
                                 ]
                               ),
                               _vm._v(" "),
@@ -4259,7 +4380,217 @@ var render = function() {
                                   on: {
                                     click: function($event) {
                                       $event.preventDefault()
-                                      return _vm.Logout()
+                                      return _vm.CustomerLogout()
+                                    }
+                                  }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-sign-out-alt pl-1"
+                                  }),
+                                  _vm._v(" Logout")
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      ])
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.authSupplier
+                ? _c(
+                    "li",
+                    {
+                      staticClass:
+                        "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single"
+                    },
+                    [
+                      _c("div", { staticClass: "d-flex align-items-center" }, [
+                        _c("div", { staticClass: "position-relative" }, [
+                          _vm._m(3),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "dropdown-menu dropdown-unfold",
+                              attrs: {
+                                id: "MyAccountDropdown",
+                                "aria-labelledby": "MyAccountDropdownInvoker"
+                              }
+                            },
+                            [
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item active- dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/sspa/my-dashboard" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "fas fa-tachometer-alt"
+                                  }),
+                                  _vm._v(" Dashboard")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/sspa/my-orders" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass:
+                                      "font-size-18 ec ec-shopping-bag"
+                                  }),
+                                  _vm._v(" My Orders")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/sspa/my-products" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "font-size-18 ec ec-favorites"
+                                  }),
+                                  _vm._v(" Product List")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/sspa/my-return" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "font-size-18 ec ec-favorites"
+                                  }),
+                                  _vm._v(" Return")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/sspa/my-replace" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "font-size-18 ec ec-user"
+                                  }),
+                                  _vm._v(" Replace")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/sspa/my-profile" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "font-size-18 ec ec-user"
+                                  }),
+                                  _vm._v(" My Profile")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/sspa/amount-receivable" }
+                                },
+                                [
+                                  _c("i", {
+                                    staticClass: "font-size-18 ec ec-payment"
+                                  }),
+                                  _vm._v(" Amount receivable")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/sspa/my-payment-history" }
+                                },
+                                [
+                                  _c("i", { staticClass: "far fa-star" }),
+                                  _vm._v(" Payment History")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "router-link",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  class:  true
+                                    ? _vm.ActiveLinkClass
+                                    : undefined,
+                                  attrs: { to: "/sspa/my-profile" }
+                                },
+                                [
+                                  _c("i", { staticClass: "far fa-star" }),
+                                  _vm._v(" My Profile")
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                                  attrs: { href: "javascript:;" },
+                                  on: {
+                                    click: function($event) {
+                                      $event.preventDefault()
+                                      return _vm.SupplierLogout()
                                     }
                                   }
                                 },
@@ -4330,6 +4661,46 @@ var staticRenderFns = [
         _vm._v(" Register "),
         _c("span", { staticClass: "text-gray-50" }, [_vm._v("or")]),
         _vm._v(" Sign in\n                            ")
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass:
+          "dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal",
+        attrs: {
+          id: "MyAccountDropdownInvoker",
+          href: "javascript:;",
+          role: "button",
+          "aria-controls": "MyAccountDropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false",
+          "data-unfold-event": "click",
+          "data-unfold-target": "#MyAccountDropdown",
+          "data-unfold-type": "css-animation",
+          "data-unfold-duration": "300",
+          "data-unfold-delay": "300",
+          "data-unfold-hide-on-scroll": "true",
+          "data-unfold-animation-in": "slideInUp",
+          "data-unfold-animation-out": "fadeOut"
+        }
+      },
+      [
+        _c(
+          "span",
+          { staticClass: "d-none d-sm-inline-flex align-items-center" },
+          [
+            _c("i", { staticClass: "ec ec-user mr-1" }),
+            _vm._v(
+              "\n                                             My Account\n                                        "
+            )
+          ]
+        )
       ]
     )
   },

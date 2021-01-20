@@ -7,7 +7,8 @@ Vue.use(Vuex)
 //import all Modules here from store folder
 //es6 (VX-VueX)
 //const commonStoreForAll = () => import( /* webpackChunkName: "commonStoreForAll-VX" */ './store/commonStoreForAll') 
-import AuthenticationForWebsite from './store/AuthenticationForWebsite'
+import AuthenticationForCustomer from './store/AuthenticationForCustomer'
+import AuthenticationForSupplier from './store/AuthenticationForSupplier'
 import AuthenticationForAdmin from './store/AuthenticationForAdmin'
 
 import commonStoreForWebsite from './store/commonStoreForWebsite' 
@@ -58,7 +59,8 @@ export default new Vuex.Store({
 	modules: {
         
 
-        AuthenticationForWebsite,
+        AuthenticationForCustomer,
+        AuthenticationForSupplier,
         AuthenticationForAdmin,
         
         commonStoreForWebsite,

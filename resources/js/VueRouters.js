@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import store from './VueVuex' /*this.$store is not available in the router object. You can (in your router):*/
+import store from './VueVuex' /*this.$store is not available in the router object. So import vuex here to use store*/
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
@@ -182,18 +182,6 @@ const routes = [
 	{ path: '/spaa/*', component: () => import(/* webpackChunkName: "AdminChildNotFound" */'./components/AdminChild/GlobalComponents/NotFound.vue'), meta: { title: 'Not Found'} },
 
 
-	/********************************************************/
-	/* Customer Admin Routes */
-	/********************************************************/
-	{ path: '/dashboard-customer', component: () => import(/* webpackChunkName: "DashboardCustomerAdmin" */ './components/AdminCustomer/DashboardCustomerAdmin.vue'), meta: { title: 'Dashboard'} },
-	{ path: '/spac/customer-profile', component: () => import(/* webpackChunkName: "CustomerProfileMaster" */ './components/AdminCustomer/Profile/CustomerProfileMaster.vue'), meta: { title: 'Profile'} },
-	{ path: '/spac/customer-order', component: () => import(/* webpackChunkName: "CustomerOrderMaster" */ './components/AdminCustomer/Orders/CustomerOrderMaster.vue'), meta: { title: 'Order'} },
-	{ path: '/spac/customer-cart', component: () => import(/* webpackChunkName: "CustomerCartMaster" */ './components/AdminCustomer/Cart/CustomerCartMaster.vue'), meta: { title: 'Cart'} },
-	{ path: '/spac/customer-wishlist', component: () => import(/* webpackChunkName: "CustomerWishlistMaster" */ './components/AdminCustomer/Wishlist/CustomerWishlistMaster.vue'), meta: { title: 'Wishlist'} },
-	{ path: '/spac/customer-address', component: () => import(/* webpackChunkName: "CustomerAddressMaster" */ './components/AdminCustomer/Address/CustomerAddressMaster.vue'), meta: { title: 'Wishlist'} },
-	//not found page for Customer Admin Panel
-	{ path: '/spac/*', component: () => import(/* webpackChunkName: "NotFoundCustomerAdmin" */'./components/AdminCustomer/GlobalComponents/NotFound.vue'), meta: { title: 'Not Found'} },
-
 
 	/********************************************************/
 	/* Supplier Admin Routes */
@@ -242,23 +230,25 @@ const routes = [
 	{ path: '/my-account', name: 'MyAccountPublic', component: () => import(/* webpackChunkName: "MyAccountPublic-website" */ './components/Website/Public/MyAccount/MyAccountPublic.vue'), meta: { title: 'My Account', breadcrumb: 'My Account'}},
 	{ path: '/404', name: '404Public', component: () => import(/* webpackChunkName: "404Public-website" */ './components/Website/Public/404/404Public.vue'), meta: { title: 'Page Not Found', breadcrumb: 'Page Not Found'}},
 	
-	//Authendication
-	{ path: '/auth/login', name: 'CustomerLogin', component: () => import(/* webpackChunkName: "customer-login-website" */ './components/Website/Auth/login.vue'), meta: { title: 'Login', },
+
+
+	//Authentication Customer link
+	{ path: '/auth/login', name: 'CustomerLogin', component: () => import(/* webpackChunkName: "customer-login-website" */ './components/Website/AuthCustomer/login.vue'), meta: { title: 'Login', },
 		beforeEnter: (to, from, next) => {
 	  		// const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
-	        if (to.name === 'CustomerLogin' && store.state.AuthenticationForWebsite.isAuthenticated === true) next({ name: 'CustomerDashboard' }) 
+	        if (to.name === 'CustomerLogin' && store.state.AuthenticationForCustomer.isAuthenticated === true) next({ name: 'CustomerDashboard' }) 
 	        else next()
 	    }
 	},
-	{ path: '/auth/register', name: 'CustomerRegister', component: () => import(/* webpackChunkName: "customer-register-website" */ './components/Website/Auth/register.vue'), meta: { title: 'Signup', },
+	{ path: '/auth/register', name: 'CustomerRegister', component: () => import(/* webpackChunkName: "customer-register-website" */ './components/Website/AuthCustomer/register.vue'), meta: { title: 'Signup', },
 		beforeEnter: (to, from, next) => {
 	  		// const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
-	        if (to.name === 'CustomerRegister' && store.state.AuthenticationForWebsite.isAuthenticated === true) next({ name: 'CustomerDashboard' }) 
+	        if (to.name === 'CustomerRegister' && store.state.AuthenticationForCustomer.isAuthenticated === true) next({ name: 'CustomerDashboard' }) 
 	        else next()
 	    }
 	},
-	{ path: '/auth/password-recover', name: 'CustomerPasswordRecover', component: () => import(/* webpackChunkName: "customer-password-recover-website" */ './components/Website/Auth/Password/email.vue'), meta: { title: 'Recover Password', } },
-	{ path: '/auth/password-recover/:token', name: 'CustomerPasswordReset', component: () => import(/* webpackChunkName: "customer-password-reset-website" */ './components/Website/Auth/Password/reset.vue'), meta: { title: 'Reset Password', } },
+	{ path: '/auth/password-recover', name: 'CustomerPasswordRecover', component: () => import(/* webpackChunkName: "customer-password-recover-website" */ './components/Website/AuthCustomer/Password/email.vue'), meta: { title: 'Recover Password', } },
+	{ path: '/auth/password-recover/:token', name: 'CustomerPasswordReset', component: () => import(/* webpackChunkName: "customer-password-reset-website" */ './components/Website/AuthCustomer/Password/reset.vue'), meta: { title: 'Reset Password', } },
 
 
 
@@ -285,6 +275,26 @@ const routes = [
   	// meta: { title: 'Reviews', breadcrumb: 'Reviews'}
 
 
+
+  	//Authentication Supplier link
+  	{ path: '/sspa/login', name: 'SupplierLogin', component: () => import(/* webpackChunkName: "supplier-login-website" */ './components/Website/AuthSupplier/login.vue'), meta: { title: 'Login', },
+		beforeEnter: (to, from, next) => {
+	        if (to.name === 'SupplierLogin' && store.state.AuthenticationForSupplier.isSspaAuthenticated === true) next({ name: 'SupplierDashboard' }) 
+	        else next()
+	    }
+	},
+
+  	/********************************************************/
+	/* Supplier Admin Area for website (sspa = supplier single page application ) */
+	/********************************************************/	
+  	{ path: '/sspa/my-dashboard', name: 'SupplierDashboard', component: () => import(/* webpackChunkName: "supplier-dashboard-website-auth" */ './components/Website/AdminSupplier/Dashboard/SupplierDashboard.vue'), meta: {authRequiredSupplier: true, title: 'Dashboard',} },
+  	{ path: '/sspa/my-orders', name: 'SupplierOrders', component: () => import(/* webpackChunkName: "supplier-orders-website-auth" */ './components/Website/AdminSupplier/Order/SupplierOrders.vue'), meta: {authRequiredSupplier: true, title: 'Orders',} },
+
+
+
+
+  	//not found page for website
+	{ path: '/*', name: 'NotFoundPublic', component: () => import(/* webpackChunkName: "404Public-website" */ './components/Website/Public/404/404Public.vue'), meta: { title: 'Page Not Found', breadcrumb: 'Page Not Found'}},
 
 
 

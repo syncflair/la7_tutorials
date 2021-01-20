@@ -1,8 +1,8 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["supplier-dashboard-website-auth~supplier-orders-website-auth"],{
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -89,22 +89,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "nav-for-admin-customer-website-auth",
+  name: "nav-for-admin-supplier-website-auth",
   data: function data() {
     return {
       ActiveLinkClass: 'active'
@@ -123,15 +111,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.$Progress.start(); //using progress-bar package
 
-      axios.post('/customer/logout').then(function (_ref) {
+      axios.post('/supplier/logout').then(function (_ref) {
         var response = _ref.response;
 
         //console.log(response); 
         //if(response.success){             
         // toastr.success(response.success);         
-        _this.$Progress.finish();
+        _this.$Progress.finish(); //this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false );  
 
-        _this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false);
 
         window.location = '/home'; //this.$router.push({ path : '/home' });   //route after successfule 
         //this.$router.replace({ path : '/home' });   //route after successfule 
@@ -151,9 +138,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=template&id=7edd6422&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue?vue&type=template&id=09a862cb&":
 /*!****************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=template&id=7edd6422& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue?vue&type=template&id=09a862cb& ***!
   \****************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -173,36 +160,7 @@ var render = function() {
         "mb-8 border- border-width-2- border-color-3- borders-radius-6"
     },
     [
-      _c(
-        "div",
-        {
-          staticClass:
-            "user-panel pl-2- pr-2- mt-2 pb-2 mb-1 d-flex border-bottom-primary- border-bottom border-top- section-title"
-        },
-        [
-          _c("div", { staticClass: "info border- bg-gray-1- rounded-lg-" }, [
-            _c(
-              "span",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.authCustomer,
-                    expression: "authCustomer"
-                  }
-                ],
-                staticClass: "font-size-10 text-black"
-              },
-              [_vm._v(" " + _vm._s(_vm.authCustomer.name) + " ")]
-            ),
-            _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
-        ]
-      ),
+      _vm._m(0),
       _vm._v(" "),
       _c(
         "ul",
@@ -223,9 +181,9 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/my-dashboard" }
+                  attrs: { to: "/sspa/my-dashboard" }
                 },
-                [_vm._v("Dashboard\n                ")]
+                [_vm._v(" Dashboard\n                ")]
               )
             ],
             1
@@ -242,9 +200,9 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/my-orders" }
+                  attrs: { to: "/sspa/my-orders" }
                 },
-                [_vm._v("My Orders\n                    ")]
+                [_vm._v("My Orders\n\t            ")]
               )
             ],
             1
@@ -261,9 +219,9 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/my-cart" }
+                  attrs: { to: "/sspa/my-products" }
                 },
-                [_vm._v("My Cart\n                ")]
+                [_vm._v("Product List ")]
               )
             ],
             1
@@ -280,9 +238,9 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/my-wishlist" }
+                  attrs: { to: "/sspa/my-return" }
                 },
-                [_vm._v("Wishlist\n            \t")]
+                [_vm._v("Return")]
               )
             ],
             1
@@ -299,9 +257,9 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/my-profile" }
+                  attrs: { to: "/sspa/my-replace" }
                 },
-                [_vm._v(" My Profile\n\t            ")]
+                [_vm._v(" Replace ")]
               )
             ],
             1
@@ -318,9 +276,9 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/my-vouchers" }
+                  attrs: { to: "/sspa/my-profile" }
                 },
-                [_vm._v("Vouchers\n            \t")]
+                [_vm._v("My Profile ")]
               )
             ],
             1
@@ -337,9 +295,28 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/auth/my-reviews" }
+                  attrs: { to: "/sspa/amount-receivable" }
                 },
-                [_vm._v("My Reviews\n                ")]
+                [_vm._v("Amount Receivable\n            \t")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass:
+                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                  class:  true
+                    ? _vm.ActiveLinkClass
+                    : undefined,
+                  attrs: { to: "/sspa/my-payment-history" }
+                },
+                [_vm._v("Payment History\n                ")]
               )
             ],
             1
@@ -376,14 +353,30 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "span",
+      "div",
       {
-        staticClass: "btn- px-1 bg-success text-white font-size-9- rounded-lg"
+        staticClass:
+          "user-panel pl-2- pr-2- mt-2 pb-2 mb-1 d-flex border-bottom-primary- border-bottom border-top- section-title"
       },
       [
-        _c("i", { staticClass: "fas fa-check font-size-8" }),
-        _vm._v(" "),
-        _c("small", [_vm._v("Verified")])
+        _c("div", { staticClass: "info border- bg-gray-1- rounded-lg-" }, [
+          _c("span", [_vm._v("name name")]),
+          _vm._v(" "),
+          _c("br"),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass:
+                "btn- px-1 bg-success text-white font-size-9- rounded-lg"
+            },
+            [
+              _c("i", { staticClass: "fas fa-check font-size-8" }),
+              _vm._v(" "),
+              _c("small", [_vm._v("Verified")])
+            ]
+          )
+        ])
       ]
     )
   }
@@ -506,17 +499,17 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue":
+/***/ "./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue":
 /*!***************************************************************************************!*\
-  !*** ./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue ***!
+  !*** ./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue ***!
   \***************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _NavForAdminCustomer_vue_vue_type_template_id_7edd6422___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NavForAdminCustomer.vue?vue&type=template&id=7edd6422& */ "./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=template&id=7edd6422&");
-/* harmony import */ var _NavForAdminCustomer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavForAdminCustomer.vue?vue&type=script&lang=js& */ "./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=script&lang=js&");
+/* harmony import */ var _NavForAdminSupplier_vue_vue_type_template_id_09a862cb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./NavForAdminSupplier.vue?vue&type=template&id=09a862cb& */ "./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue?vue&type=template&id=09a862cb&");
+/* harmony import */ var _NavForAdminSupplier_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NavForAdminSupplier.vue?vue&type=script&lang=js& */ "./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -526,9 +519,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _NavForAdminCustomer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _NavForAdminCustomer_vue_vue_type_template_id_7edd6422___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _NavForAdminCustomer_vue_vue_type_template_id_7edd6422___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _NavForAdminSupplier_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _NavForAdminSupplier_vue_vue_type_template_id_09a862cb___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _NavForAdminSupplier_vue_vue_type_template_id_09a862cb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -538,38 +531,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue"
+component.options.__file = "resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************!*\
-  !*** ./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NavForAdminCustomer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./NavForAdminCustomer.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NavForAdminCustomer_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NavForAdminSupplier_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./NavForAdminSupplier.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_NavForAdminSupplier_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=template&id=7edd6422&":
+/***/ "./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue?vue&type=template&id=09a862cb&":
 /*!**********************************************************************************************************************!*\
-  !*** ./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=template&id=7edd6422& ***!
+  !*** ./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue?vue&type=template&id=09a862cb& ***!
   \**********************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NavForAdminCustomer_vue_vue_type_template_id_7edd6422___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./NavForAdminCustomer.vue?vue&type=template&id=7edd6422& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Website/AdminCustomer/Include/NavForAdminCustomer.vue?vue&type=template&id=7edd6422&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NavForAdminCustomer_vue_vue_type_template_id_7edd6422___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NavForAdminSupplier_vue_vue_type_template_id_09a862cb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./NavForAdminSupplier.vue?vue&type=template&id=09a862cb& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue?vue&type=template&id=09a862cb&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NavForAdminSupplier_vue_vue_type_template_id_09a862cb___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NavForAdminCustomer_vue_vue_type_template_id_7edd6422___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_NavForAdminSupplier_vue_vue_type_template_id_09a862cb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -1,4 +1,4 @@
-const AuthenticationForWebsite ={
+const AuthenticationForCustomer ={
 
 	namespaced: true,
 	
@@ -15,9 +15,8 @@ const AuthenticationForWebsite ={
       
 	}),/*end state*/
 
-  getters: {
-      //not used
-    	isAuthenticated: state => { return state.isAuthenticated },
+  getters: {      
+    	isAuthenticated: state => { return state.isAuthenticated }, //not used
   },/*end getters*/
 
 
@@ -59,4 +58,4 @@ const AuthenticationForWebsite ={
 
 }
 
-export default AuthenticationForWebsite
+export default AuthenticationForCustomer

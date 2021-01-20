@@ -64,9 +64,6 @@ Route::get('/auth/password-recover/{token}','AuthCustomer\ResetPasswordControlle
 Route::post('customer/password/reset','AuthCustomer\ResetPasswordController@reset')->name('customer.password.update');
 
 
-
-
-
 /***************************************************************************/
 /* Customer authenticatiion and AdminCustomer middleware */
 /***************************************************************************/
@@ -75,7 +72,7 @@ Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
   Route::get('auth/my-dashboard', 'AdminCustomer\AdminCustomerController@index')->name('customer-dashboard');
   Route::post('customer/logout', 'AuthCustomer\LoginController@logout')->name('customer.logout');
 
-  Route::get('auth/getAuthCustomerData', 'AdminCustomer\AdminCustomerController@getAuthCustomerData');//commonStoreForCustomer
+  Route::get('auth/getAuthCustomerData', 'AdminCustomer\AdminCustomerController@getAuthCustomerData');//AuthenticationForWebsite.js
 
   Route::resource('auth/my-profile', 'AdminCustomer\AdminCustomerProfileController',
     ['except'=>['create','show','edit','update'] ]);
@@ -114,8 +111,9 @@ Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
 /***************************************************************************/
 /* Suppliers Route for public*/
 /***************************************************************************/
-Route::get('supplier/login', 'AuthSupplier\LoginController@showLoginForm')->name('supplier.login');
-Route::post('supplier/login', 'AuthSupplier\LoginController@login')->name('supplier.login');
+Route::get('sspa/login', 'AuthSupplier\LoginController@showLoginForm')->name('supplier.login');
+// Route::get('supplier/login', 'AuthSupplier\LoginController@showLoginForm')->name('supplier.login');
+Route::post('supplier/login', 'AuthSupplier\LoginController@login');
 // Password Reset Routes for customers
 Route::get('supplier/password/reset','AuthSupplier\ForgotPasswordController@showLinkRequestForm')->name('supplier.password.request');
 Route::post('supplier/password/email','AuthSupplier\ForgotPasswordController@sendResetLinkEmail')->name('supplier.password.email');
@@ -127,12 +125,19 @@ Route::post('supplier/password/reset','AuthSupplier\ResetPasswordController@rese
 /* Supplier authenticatiion and AdminSupplier middleware */
 /***************************************************************************/
 Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
-  Route::get('/dashboard-supplier', 'AdminSupplier\AdminSupplierController@index')->name('dashboard-supplier');
+  Route::get('sspa/my-dashboard', 'AdminSupplier\AdminSupplierController@index')->name('dashboard-supplier');
+  // Route::get('/dashboard-supplier', 'AdminSupplier\AdminSupplierController@index')->name('dashboard-supplier');
   Route::post('supplier/logout', 'AuthSupplier\LoginController@logout')->name('supplier.logout');
+
+  Route::get('sspa/getAuthSupplierData', 'AdminSupplier\AdminSupplierController@getAuthSupplierData');//AuthenticationForWebsite.js
+
+
+
 
   // Vue: single page application (SPA )- Any route that not match that redirect to dashboard-supplier. 
   Route::get('/spas/{anypath}', function () {
-    return view('adminSupplier.DashboardSupplier'); 
+    // return view('adminSupplier.DashboardSupplier'); 
+    return view('website.home'); 
   })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
 });
 /***************************************************************************/

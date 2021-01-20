@@ -236,7 +236,7 @@
 
         computed: {
 
-          ...mapState( 'AuthenticationForWebsite', ['authCustomer'] ),
+          ...mapState( 'AuthenticationForCustomer', ['authCustomer'] ),
 
         },
 
@@ -257,7 +257,7 @@
                 .then(({ data }) => { 
                     this.$Progress.finish();
                     if(data.success){
-                        this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data 
+                        this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
                         toastr.success(data.success); 
                     }
                     if(data.error){
@@ -280,7 +280,7 @@
                 .then(({ data }) => { 
                     this.$Progress.finish();
                     if(data.success){
-                        this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data 
+                        this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
                         toastr.success(data.success); 
                     }
                     if(data.error){
@@ -302,7 +302,7 @@
                 .then(({ data }) => { 
                     this.$Progress.finish();
                     if(data.success){
-                        this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data 
+                        this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
                         toastr.success(data.success); 
                     }
                     if(data.error){
@@ -329,7 +329,7 @@
                         this.form.password = '';
                         this.form.password_confirmation = '';
 
-                        this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data                         
+                        this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data                         
                         toastr.success(data.success); 
                         //console.log(data.success); 
                     }
@@ -348,7 +348,7 @@
         },           
 
         created(){
-            this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data 
+            this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
 
             this.editData(this.authCustomer);
         },

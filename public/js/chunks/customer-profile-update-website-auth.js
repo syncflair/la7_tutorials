@@ -251,7 +251,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('AuthenticationForWebsite', ['authCustomer'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapState"])('AuthenticationForCustomer', ['authCustomer'])),
   components: {
     NavForAdminCustomer: _Include_NavForAdminCustomer__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -271,7 +271,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.$Progress.finish();
 
         if (data.success) {
-          _this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data 
+          _this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
 
 
           toastr.success(data.success);
@@ -300,7 +300,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.$Progress.finish();
 
         if (data.success) {
-          _this2.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data 
+          _this2.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
 
 
           toastr.success(data.success);
@@ -328,7 +328,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this3.$Progress.finish();
 
         if (data.success) {
-          _this3.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data 
+          _this3.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
 
 
           toastr.success(data.success);
@@ -361,7 +361,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           _this4.form.password = '';
           _this4.form.password_confirmation = '';
 
-          _this4.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data                         
+          _this4.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data                         
 
 
           toastr.success(data.success); //console.log(data.success); 
@@ -380,7 +380,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {
-    this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data 
+    this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
 
     this.editData(this.authCustomer);
   },

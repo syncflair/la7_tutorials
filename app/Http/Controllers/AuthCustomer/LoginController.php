@@ -32,8 +32,8 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        // return view('AuthCustomer.login');
-        return view('website.home');
+        // return view('AuthCustomer.login'); //for login.blade.php
+        return view('website.home'); //for vue
     }
 
 

@@ -151,7 +151,7 @@
 
         computed: {
 
-          ...mapState( 'AuthenticationForWebsite', ['authCustomer','authCustomerAddress'] ),
+          ...mapState( 'AuthenticationForCustomer', ['authCustomer','authCustomerAddress'] ),
 
         },
 
@@ -178,7 +178,7 @@
                         .then( ({data}) => {
 
                           if(data.success){
-                            this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerAddress', this.authCustomer.id);
+                            this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerAddress', this.authCustomer.id);
                             toastr.success(data.success); 
                           }   
                           if(data.errors){
@@ -198,10 +198,10 @@
         },           
 
         created(){
-            this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerData'); //get auth customer data 
+            this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
 
             setTimeout(() => {
-                this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerAddress', this.authCustomer.id); //get auth customer address
+                this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerAddress', this.authCustomer.id); //get auth customer address
             },2400); 
               
         },

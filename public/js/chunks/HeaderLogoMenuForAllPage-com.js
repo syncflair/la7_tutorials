@@ -359,6 +359,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
  //Load to all
 
  //Load to all
@@ -630,6 +636,38 @@ var render = function() {
                                         attrs: { to: "/spa/ProductMaster" }
                                       },
                                       [_vm._v("Admin Product")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "nav-link u-header__sub-menu-nav-link",
+                                        attrs: { to: "/pagenotfound" }
+                                      },
+                                      [_vm._v("Check Not Found Page")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "nav-link u-header__sub-menu-nav-link",
+                                        attrs: { to: "/sspa/login" }
+                                      },
+                                      [_vm._v("Supplier Login")]
                                     )
                                   ],
                                   1

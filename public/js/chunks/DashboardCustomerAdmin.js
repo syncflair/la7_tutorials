@@ -216,7 +216,7 @@ var staticRenderFns = [
                   _c("div", { staticClass: "inner" }, [
                     _c("h3", [_vm._v("150")]),
                     _vm._v(" "),
-                    _c("p", [_vm._v("Orders")])
+                    _c("p", [_vm._v(" Test Orders")])
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "icon" }, [
@@ -313,7 +313,7 @@ var staticRenderFns = [
               _c("div", { staticClass: "col-md-8 offset-2" }, [
                 _c("div", { staticClass: "card" }, [
                   _c("div", { staticClass: "card-header" }, [
-                    _vm._v("Your may have interest to this product ")
+                    _vm._v(" Check Your may have interest to this product ")
                   ])
                 ])
               ])

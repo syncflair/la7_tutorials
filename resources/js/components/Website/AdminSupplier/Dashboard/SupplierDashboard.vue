@@ -9,7 +9,7 @@
     <div class="row mb-10 mt-4">
 
         <div class="d-none- d-xl-block col-xl-2 col-wd-2gdot5-">
-            <NavForAdminCustomer />
+            <NavForAdminSupplier />
         </div>
 
         <div class="bg-gray-1 rounded-lg- col-xl-10 col-wd-9gdot5-">
@@ -18,7 +18,7 @@
                     <div class="small-box bg-danger- bg-white">
                         <div class="inner">
 
-                            <h5 class="text-white- text-secondary" ><small>{{authCustomer.name}}</small></h5> 
+                            <!-- <h5 class="text-white- text-secondary" ><small>{{authCustomer.name}}</small></h5> 
                             <p class="text-white- text-secondary mb-2"><i class="fas fa-at"></i> {{authCustomer.email}}</p>
                             <p class="text-white- text-secondary mb-2"><i class="fas fa-phone"></i> {{authCustomer.phone}}</p>
 
@@ -27,7 +27,7 @@
                                     <i class="fas fa-check font-size-8"></i>
                                      <small>Verified</small>
                                 </span>
-                            </p>
+                            </p> -->
 
                         </div> 
                         <!-- <div class="icon"><i class="font-size-18 ec ec-shopping-bag"></i></div>  -->
@@ -116,7 +116,7 @@
             </div> -->
             <!-- <h4 v-show="authCustomer"> {{ authCustomer.name }} </h4> -->
 
-            {{ authCustomer }}
+            <!-- {{ authCustomer }} -->
 
             <br>
         </div>
@@ -128,12 +128,12 @@
 
 </template>
 <script>
-    import NavForAdminCustomer from '../Include/NavForAdminCustomer'
+    import NavForAdminSupplier from '../Include/NavForAdminSupplier'
 
     import { mapState } from 'vuex' //for user MapState
     
     export default {
-        name: "customer-dashboard-website-auth",
+        name: "supplier-dashboard-website-auth",
         data (){      
             return { 
             }
@@ -146,14 +146,14 @@
         },
 
         components:{
-            NavForAdminCustomer, 
+            NavForAdminSupplier, 
         }, 
 
         methods: { 
         },           
 
         created(){
-            this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data            
+            //this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data            
         },
            
         mounted() {

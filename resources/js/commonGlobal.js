@@ -15,17 +15,23 @@ export default {
 	    ),
 
       ...mapState( 
-            'commonStoreForWebsite', ['isitwebsiteCheck','isAuthenticated']
+            'commonStoreForWebsite', ['isitwebsiteCheck']
             //isAuthenticated
       ),
 
-      ...mapState( 
-            'AuthenticationForWebsite', ['isAuthenticated']
-      ),
+      // ...mapState( 
+      //       'AuthenticationForCustomer', ['isAuthenticated']
+      // ),
 
-      ...mapState( 
-            'AuthenticationForAdmin', ['isAdminAuthenticated']
-      ),
+      // ...mapState( 
+      //       'AuthenticationForSupplier', ['isSspaAuthenticated','authSupplier']
+      // ),
+
+      // ...mapState( 
+      //       'AuthenticationForAdmin', ['isAdminAuthenticated']
+      // ),
+
+
 	    
     	authPermissionsData(){  //return 'decodet Data';
     		return JSON.parse(this.authPermissions.permission);

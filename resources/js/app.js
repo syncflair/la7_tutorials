@@ -63,9 +63,6 @@ Vue.component('my-date-time-global', () => import(/* webpackChunkName: "my-date-
 Vue.component('admin-child-wrapper', () => import(/* webpackChunkName: "AdminChiledWrapper" */'./components/AdminChild/AdminChildWrapper.vue'));
 
 
-//Global Components for Customer
-Vue.component('customer-admin-wrapper', () => import(/* webpackChunkName: "CustomerAdminWrapper" */'./components/AdminCustomer/CustomerAdminWrapper.vue'));
-
 //Global Components for Supplier
 Vue.component('supplier-admin-wrapper', () => import(/* webpackChunkName: "SupplierAdminWrapper" */'./components/AdminSupplier/SupplierAdminWrapper.vue'));
 
@@ -172,25 +169,32 @@ Vue.mixin(common)
 /* ####################### router middleware ###########################################*/
 router.beforeEach((to, from, next) => {  
 
-  //for customer authentication
+  //For customer authentication
   if(to.meta.authRequiredCustomer === true){ 
     setTimeout(() => {
         // const protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerCart', 'CustomerProfile', 'CustomerProfileUpdate',
         //  'CustomerAddressForm', 'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews'];
         // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
-        const isAuthenticated = store.state.AuthenticationForWebsite.isAuthenticated;//this.isAuthenticated; //publish from commonGlobal.js and get form AuthenticationForWebsite.js
+        const isAuthenticated = store.state.AuthenticationForCustomer.isAuthenticated;//this.isAuthenticated; //publish from commonGlobal.js and get form AuthenticationForCustomer.js
         // if (protectedCustomerRoutes.includes(to.name) && isAuthenticated !== true) next({ name: 'CustomerLogin' })
         if ( isAuthenticated !== true) next({ name: 'CustomerLogin' })
         else next()
-    }, 800);//call after 8000 miliscound
+    }, 500);//call after 500 miliscound
+  }
+
+  //For Supplier authentication
+  else if(to.meta.authRequiredSupplier === true ){
+    setTimeout(() => {
+      const isAuthenticated = store.state.AuthenticationForSupplier.isSspaAuthenticated;//this.isSsapAuthenticated get form AuthenticationForCustomer.js
+      if ( isAuthenticated !== true) next({ name: 'SupplierLogin' })
+      else next()
+    }, 800);//call after 800 miliscound
   }
   
-  //for admin authentication
+  //For admin authentication
   else if(to.meta.authRequiredAdmin === true){
     setTimeout(() => {
-      const isAdminAuthenticated = store.state.AuthenticationForAdmin.isAdminAuthenticated;//this.isAdminAuthenticated; //publish from commonGlobal.js and get form AuthenticationForWebsite.js
-      
-      // if (  isAdminAuthenticated !== true) next({ name: 'Dashboard' })
+      const isAdminAuthenticated = store.state.AuthenticationForAdmin.isAdminAuthenticated;//this.isAdminAuthenticated; get form AuthenticationForCustomer.js
       if (  isAdminAuthenticated !== true) next( window.location = '/login-abc' )
       else next()
     }, 500);//call after 300 miliscound
@@ -200,7 +204,7 @@ router.beforeEach((to, from, next) => {
       next()
   }
 
-})
+}) //Vue Router Middleware
 /* ####################### End router middleware ###########################################*/
 
 
@@ -239,11 +243,11 @@ const app = new Vue({
     }, 
 
     mounted() {
-      // console.log(store.state.AuthenticationForWebsite.isAuthenticated); //get access to state
-      //console.log(store.getters['AuthenticationForWebsite/isAuthenticated']); //get access to getters
+      // console.log(store.state.AuthenticationForCustomer.isAuthenticated); //get access to state
+      //console.log(store.getters['AuthenticationForCustomer/isAuthenticated']); //get access to getters
       
       // setTimeout(() => {
-      //   console.log(store.getters['AuthenticationForWebsite/isAuthenticated']);
+      //   console.log(store.getters['AuthenticationForCustomer/isAuthenticated']);
       // }, 1000);
     }, //end mounted   
 

@@ -11,7 +11,7 @@
 @section('content')
 
        
-<customer-admin-wrapper></customer-admin-wrapper>
+<h1>Not Use</h1>>
 
 
 @endsection

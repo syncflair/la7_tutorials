@@ -168,7 +168,7 @@
         // },
 
         computed: {
-            ...mapState( 'AuthenticationForWebsite', ['authCustomer'] ),
+            ...mapState( 'AuthenticationForCustomer', ['authCustomer'] ),
             ...mapState( 'commonStoreForAll', ['Divisions','Districts','Dist_Zones'] )            
         }, 
 
@@ -189,7 +189,7 @@
                 .then(({ data }) => { 
                     console.log(data)
                     if(data.success){ 
-                      this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerAddress', this.authCustomer.id); //get auth customer address 
+                      this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerAddress', this.authCustomer.id); //get auth customer address 
                       this.$Progress.finish();  
                       toastr.success(data.success);             
                       this.form.reset();  //reset from after submit                 
@@ -217,7 +217,7 @@
                 .then(({ data }) => { 
 
                     if(data.success){
-                      this.$store.dispatch('AuthenticationForWebsite/fetchAuthCustomerAddress', this.authCustomer.id); //get auth customer address 
+                      this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerAddress', this.authCustomer.id); //get auth customer address 
                       this.$Progress.finish(); 
                       toastr.success(data.success);               
                       //this.form.reset();  //reset from after submit

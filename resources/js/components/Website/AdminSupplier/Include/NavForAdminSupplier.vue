@@ -6,7 +6,8 @@
                 <img src="https://sorboraho.s3-ap-southeast-1.amazonaws.com/users/mahmudur-rahman-wYAVdNBwSUHZaf4VQcBeE2R806wJqwZT7zHgEl0h.png" alt="User Image" class="img-circle elevation-2">
             </div> -->
             <div class="info border- bg-gray-1- rounded-lg-"> 
-                    <span v-show="authCustomer" class="font-size-10 text-black"> {{authCustomer.name}} </span>
+                    <!-- <span v-show="authCustomer" class="font-size-10 text-black"> {{authCustomer.name}} </span> -->
+                    <span>name name</span>
                     <br> 
                     <span class="btn- px-1 bg-success text-white font-size-9- rounded-lg">
                         <i class="fas fa-check font-size-8"></i>
@@ -19,53 +20,40 @@
         <ul id="sidebarNav" class="list-unstyled dropdown-list dropdown-list-custome">
             <!-- Menu List -->
             <li class="border-bottom-">
-                <router-link to="/auth/my-dashboard" class="dropdown-item dropdown-item-custome transition-3d-hover" 
+                <router-link to="/sspa/my-dashboard" class="dropdown-item dropdown-item-custome transition-3d-hover" 
                 	:class="[currentPage.includes('my-dashboard')] ? ActiveLinkClass : '' " >
-                    <!-- <i class="fas fa-tachometer-alt"></i>  -->Dashboard
+                    <!-- <i class="fas fa-tachometer-alt"></i>  --> Dashboard
                 </router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-orders"
-	            	:class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' " >
-                    <!-- <i class="font-size-18 ec ec-shopping-bag"></i>  -->My Orders
-                    <!-- <i class="fas fa-shopping-bag"></i> --> 
-                    <!-- <i class="far fa-times-circle"></i> -->
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-orders"
+	            	:class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' " >My Orders
 	            </router-link>
             </li>
-            <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-cart"
-                :class="[currentPage.includes('my-cart')] ? ActiveLinkClass : '' "  >
-                <!-- <i class="far fa-heart"></i> -->
-                <!-- <i class="font-size-18 ec ec-favorites"></i>  -->My Cart
-                </router-link>
+            <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-products"
+                :class="[currentPage.includes('my-products')] ? ActiveLinkClass : '' "  >Product List </router-link>
             </li>
-            <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-wishlist"
-            	:class="[currentPage.includes('my-wishlist')] ? ActiveLinkClass : '' "  >
-                <!-- <i class="far fa-heart"></i> -->
-                <!-- <i class="font-size-18 ec ec-favorites"></i>  -->Wishlist
-            	</router-link>
+            <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-return"
+            	:class="[currentPage.includes('my-return')] ? ActiveLinkClass : '' "  >Return</router-link>
             </li>    
             
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-profile"
-	            	:class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' "  >
-                    <!-- <i class="far fa-user"></i> -->
-                    <!-- <i class="font-size-18 ec ec-user"></i> --> My Profile
-	            </router-link>
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-replace"
+	            	:class="[currentPage.includes('my-eplace')] ? ActiveLinkClass : '' "  > Replace </router-link>
             </li>
-            <!-- <li>
-            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-address" 
-            	:class="[currentPage.includes('my-address')] ? ActiveLinkClass : '' " >Address Book </router-link>
-            </li> -->
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-vouchers" 
-            	:class="[currentPage.includes('my-vouchers')] ? ActiveLinkClass : '' " > 
-                <!-- <i class="fas fa-money-bill"></i> --><!--  <i class="font-size-18 ec ec-payment"></i>  -->Vouchers
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile" 
+            	:class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' " >My Profile </router-link>
+            </li>
+            <li>
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/amount-receivable" 
+            	:class="[currentPage.includes('amount-receivable')] ? ActiveLinkClass : '' " > 
+                <!-- <i class="fas fa-money-bill"></i> --><!--  <i class="font-size-18 ec ec-payment"></i>  -->Amount Receivable
             	</router-link>
             </li>
             <li>
-                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-reviews" 
-                :class="[currentPage.includes('my-reviews')] ? ActiveLinkClass : '' " > 
-                <!-- <i class="far fa-star"></i>  -->My Reviews
+                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-payment-history" 
+                :class="[currentPage.includes('my-payment-history')] ? ActiveLinkClass : '' " >Payment History
                 </router-link>
             </li>
             <li class="border-top-">
@@ -87,7 +75,7 @@
     import { mapState } from 'vuex' //for user MapState
     
     export default {
-        name: "nav-for-admin-customer-website-auth",
+        name: "nav-for-admin-supplier-website-auth",
         data (){      
             return { 
                 ActiveLinkClass: 'active',
@@ -112,14 +100,14 @@
             Logout(){  
               this.$Progress.start(); //using progress-bar package
 
-              axios.post('/customer/logout')
+              axios.post('/supplier/logout')
               .then(({ response }) => { 
                 //console.log(response); 
                 //if(response.success){             
                   // toastr.success(response.success);         
                   this.$Progress.finish();  
 
-                  this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false );  
+                  //this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false );  
                   
                   window.location = '/home';
 

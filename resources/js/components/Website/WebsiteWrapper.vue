@@ -128,7 +128,35 @@
         //Get props form views/admin/dashboard.blade.php
         // props:['user','permissions','settings'], 
 
-        props:['isitwebsite', 'authcustomer', 'isauthenticated'],         
+        //props:['isitwebsite', 'authcustomer', 'isauthenticated', 'authsupplier', 'issspaauthenticated'],
+        
+        props: {
+          isitwebsite:{
+            type: Number,
+            required: true,
+          },
+          
+          authcustomer: {
+            type: Object,
+            //required: true
+          },
+
+          isauthenticated:{
+            type: Boolean,
+            //required: true
+          },
+
+          authsupplier: {
+            type: Object,
+            //required: true
+          },
+
+          issspaauthenticated:{
+            type: Boolean,
+            //required: true
+          },
+        },
+
         data (){      
             return {
                 mainContentMarginTopWhenHeaderFiexd:'', 
@@ -180,8 +208,12 @@
 
         created(){
             //direct commit (mutations) to resources/js/store/commonStoreForAll.js
-            this.$store.commit('AuthenticationForWebsite/IS_AUTHENTICATED_CHECK', this.isauthenticated );             
-            this.$store.commit('AuthenticationForWebsite/AUTH_CUSTOMER_CHECK', this.authcustomer ); //commit from props
+            this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', this.isauthenticated );             
+            this.$store.commit('AuthenticationForCustomer/AUTH_CUSTOMER_CHECK', this.authcustomer ); //commit from props
+
+
+            this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', this.issspaauthenticated );             
+            this.$store.commit('AuthenticationForSupplier/AUTH_SUPPLIER_CHECK', this.authsupplier ); //commit from props
 
             this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite ); 
 
