@@ -10,7 +10,7 @@ const AuthenticationForSupplier ={
       /**************************************************/
       isSspaAuthenticated: false,  //use for customer admin area vue component middleware in app.js
       authSupplier: {}, 
-      //authSupplierAddress: {}, 
+      authVendor: {}, 
          
       
 	}),/*end state*/
@@ -32,7 +32,7 @@ const AuthenticationForSupplier ={
       AUTH_SUPPLIER_CHECK(state, data) { return state.authSupplier = data; }, // commit form WebsiteWrapper.vue
       AUTH_SUPPLIER_DATA(state, data) { return state.authSupplier = data; },
 
-      //AUTH_CUSTOMER_ADDRESS(state, data) { return state.authSupplierAddress = data; },      
+      AUTH_VENDOR_DATA(state, data) { return state.authVendor = data; },      
       
   },/*end Mutations*/
 
@@ -44,7 +44,14 @@ const AuthenticationForSupplier ={
         .then( (response) => {
           context.commit('AUTH_SUPPLIER_DATA', response.data);
         }).catch( () => { })
-    }, 
+    },
+
+    fetchAuthVendorData(context, payload){
+        axios.get('/sspa/getAuthVendorData?&vendor_id='+payload)
+        .then( (response) => {
+          context.commit('AUTH_VENDOR_DATA', response.data);
+        }).catch( () => { })
+    },  
 
     //get auth customer address after login
     // fetchAuthSupplierAddress(context, payload){

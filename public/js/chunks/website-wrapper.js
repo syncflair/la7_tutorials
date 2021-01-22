@@ -375,11 +375,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           // window.location = '/auth/my-dashboard';  
           //window.location = '/home'; 
           //this.$router.go();   
+          //window.location = '/home';    
+          //this.$router.reload(); //self reload                     
 
 
-          window.location = '/home'; //this.$router.reload(); //self reload                     
-          //this.$router.push({ path : '/home' });   //route after successfule submit                   
+          _this.$router.push({
+            path: '/home'
+          }); //route after successfule submit                   
           //this.$router.replace({ path : '/auth/my-dashboard' });   //route after successfule submit
+
 
           _this.form.reset(); //reset from after submit 
 
@@ -1408,15 +1412,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "HeaderTopbar-website",
   data: function data() {
     return {
-      ActiveLinkClass: 'active' //NavLinkShow: true,    
-
+      ActiveLinkClass: 'active'
     };
   },
   computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForCustomer', ['authCustomer'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForSupplier', ['authSupplier'])), {}, {
@@ -1424,26 +1426,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     currentPage: function currentPage() {
       return this.$route.path;
     },
-    NavLinkShow: function NavLinkShow() {
+    AccountNavLinkShow: function AccountNavLinkShow() {
       // // return ? false : true;
-      if (!this.authCustomer) {
-        return true;
-      } else if (!this.authSupplier) {
-        return true;
-      } // else if(!this.authCustomer || this.authSupplier){
-      //     return true;
-      // }else if(this.authCustomer || !this.authSupplier){
-      //     return true;
-      // }else if(this.authCustomer || this.authSupplier){
-      //     return false;
-      // }else if(this.authCustomer ){
-      //     return false;
-      // }else if(this.authSupplier){
-      //     return false;
-      // }
-      else {
-          return false;
-        } //return true;
+      //return this.authCustomer;
+      if (this.authCustomer || this.authSupplier) {
+        return false;
+      } else {
+        return true; //f
+      } //return true;
       // if(Object.values( this.authCustomer ).length == 0 ){ return true;}
       //if( Object.values( this.authSupplier ).length === 0 ){ return true;}
       // else if(Object.keys( this.authSupplier ).length == 0 ){ return true;}
@@ -1517,8 +1507,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   },
   //end Methods
-  created: function created() {
-    console.log(this.NavLinkShow);
+  created: function created() {//console.log(this.AccountNavLinkShow);
   }
 }); //end export default
 
@@ -4213,7 +4202,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _vm.NavLinkShow === true
+              _vm.AccountNavLinkShow === true
                 ? _c(
                     "li",
                     {
@@ -4539,7 +4528,7 @@ var render = function() {
                                   class:  true
                                     ? _vm.ActiveLinkClass
                                     : undefined,
-                                  attrs: { to: "/sspa/amount-receivable" }
+                                  attrs: { to: "/sspa/my-payment-receivable" }
                                 },
                                 [
                                   _c("i", {
@@ -4562,22 +4551,6 @@ var render = function() {
                                 [
                                   _c("i", { staticClass: "far fa-star" }),
                                   _vm._v(" Payment History")
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass:
-                                    "dropdown-item dropdown-item-custome transition-3d-hover",
-                                  class:  true
-                                    ? _vm.ActiveLinkClass
-                                    : undefined,
-                                  attrs: { to: "/sspa/my-profile" }
-                                },
-                                [
-                                  _c("i", { staticClass: "far fa-star" }),
-                                  _vm._v(" My Profile")
                                 ]
                               ),
                               _vm._v(" "),

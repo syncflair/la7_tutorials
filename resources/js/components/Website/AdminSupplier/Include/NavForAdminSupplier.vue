@@ -6,8 +6,7 @@
                 <img src="https://sorboraho.s3-ap-southeast-1.amazonaws.com/users/mahmudur-rahman-wYAVdNBwSUHZaf4VQcBeE2R806wJqwZT7zHgEl0h.png" alt="User Image" class="img-circle elevation-2">
             </div> -->
             <div class="info border- bg-gray-1- rounded-lg-"> 
-                    <!-- <span v-show="authCustomer" class="font-size-10 text-black"> {{authCustomer.name}} </span> -->
-                    <span>name name</span>
+                    <span v-show="authSupplier" class="font-size-10 text-black"> {{authSupplier.name}} </span>
                     <br> 
                     <span class="btn- px-1 bg-success text-white font-size-9- rounded-lg">
                         <i class="fas fa-check font-size-8"></i>
@@ -46,8 +45,8 @@
             	:class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' " >My Profile </router-link>
             </li>
             <li>
-            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/amount-receivable" 
-            	:class="[currentPage.includes('amount-receivable')] ? ActiveLinkClass : '' " > 
+            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-payment-receivable" 
+            	:class="[currentPage.includes('my-payment-receivable')] ? ActiveLinkClass : '' " > 
                 <!-- <i class="fas fa-money-bill"></i> --><!--  <i class="font-size-18 ec ec-payment"></i>  -->Amount Receivable
             	</router-link>
             </li>
@@ -84,7 +83,7 @@
 
         computed: {
 
-          ...mapState( 'AuthenticationForCustomer', ['authCustomer'] ),
+          ...mapState( 'AuthenticationForSupplier', ['authSupplier'] ),
 
           //for active link management
             currentPage(){
@@ -107,7 +106,7 @@
                   // toastr.success(response.success);         
                   this.$Progress.finish();  
 
-                  //this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false );  
+                  //this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', false );  
                   
                   window.location = '/home';
 

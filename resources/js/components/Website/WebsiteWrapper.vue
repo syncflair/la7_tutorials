@@ -194,8 +194,7 @@
                     this.topHeaderFixedClass = '';
                 }
             },
-
-         
+                     
         },
 
         methods: { 

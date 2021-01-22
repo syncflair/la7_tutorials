@@ -382,11 +382,11 @@
                     // window.location = '/auth/my-dashboard';  
                     //window.location = '/home'; 
                     //this.$router.go();   
-                    window.location = '/home';    
+                    //window.location = '/home';    
 
                     //this.$router.reload(); //self reload                     
                                       
-                    //this.$router.push({ path : '/home' });   //route after successfule submit                   
+                    this.$router.push({ path : '/home' });   //route after successfule submit                   
                     //this.$router.replace({ path : '/auth/my-dashboard' });   //route after successfule submit
 
                     this.form.reset();  //reset from after submit 

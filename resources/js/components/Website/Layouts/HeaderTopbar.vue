@@ -60,7 +60,7 @@
                                 </div>
                             </div>
                         </li> -->
-                        <li v-if="NavLinkShow === true" class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                        <li v-if="AccountNavLinkShow === true"  class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                             <!-- Account Sidebar Toggle Button -->
                             <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link"
                                 aria-controls="sidebarContent"
@@ -151,9 +151,8 @@
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-return" :class="[currentPage.includes('my-return')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-favorites"></i> Return</router-link>
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-replace" :class="[currentPage.includes('my-replace')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-user"></i> Replace</router-link>
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile" :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-user"></i> My Profile</router-link>
-                                        <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/amount-receivable" :class="[currentPage.includes('amount-receivable')] ? ActiveLinkClass : '' "><!-- <i class="fas fa-money-bill"></i> --> <i class="font-size-18 ec ec-payment"></i> Amount receivable</router-link>
+                                        <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-payment-receivable" :class="[currentPage.includes('my-payment-receivable')] ? ActiveLinkClass : '' "><!-- <i class="fas fa-money-bill"></i> --> <i class="font-size-18 ec ec-payment"></i> Amount receivable</router-link>
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-payment-history" :class="[currentPage.includes('my-payment-history')] ? ActiveLinkClass : '' "><i class="far fa-star"></i> Payment History</router-link>
-                                        <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile" :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' "><i class="far fa-star"></i> My Profile</router-link>
                                         <a @click.prevent="SupplierLogout()" class="dropdown-item dropdown-item-custome transition-3d-hover" href="javascript:;"> <i class="fas fa-sign-out-alt pl-1"></i> Logout</a>
                                     </div>
                                 </div>
@@ -178,8 +177,7 @@
 
         data (){      
             return {   
-                ActiveLinkClass: 'active', 
-                //NavLinkShow: true,    
+                ActiveLinkClass: 'active',     
             }
         },
 
@@ -194,29 +192,14 @@
                 return this.$route.path;
             },
 
-            NavLinkShow(){
+            AccountNavLinkShow(){
               // // return ? false : true;
-              if(!this.authCustomer  ){
-                  return true;
+              //return this.authCustomer;
+              if(this.authCustomer || this.authSupplier){
+                return false;
+              }else{
+                return true; //f
               }
-              else if(!this.authSupplier){
-                  return true;
-              }
-              // else if(!this.authCustomer || this.authSupplier){
-              //     return true;
-              // }else if(this.authCustomer || !this.authSupplier){
-              //     return true;
-              // }else if(this.authCustomer || this.authSupplier){
-              //     return false;
-              // }else if(this.authCustomer ){
-              //     return false;
-              // }else if(this.authSupplier){
-              //     return false;
-              // }
-              else{
-                  return false;
-              }
-
               //return true;
               // if(Object.values( this.authCustomer ).length == 0 ){ return true;}
               //if( Object.values( this.authSupplier ).length === 0 ){ return true;}
@@ -298,7 +281,7 @@
 		}, //end Methods
 
 		created(){
-      console.log(this.NavLinkShow);
+      //console.log(this.AccountNavLinkShow);
 		},
 		
 

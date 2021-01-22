@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminSupplier;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
+use App\Models\Supplier\Vendor;
 
 class AdminSupplierController extends Controller
 {
@@ -36,6 +37,19 @@ class AdminSupplierController extends Controller
 
         return response()->json($data);
     }
+
+
+    public function getAuthVendorData(Request $request){
+        if(Auth::guard('supplier')->check()){
+
+            $data = Vendor::with('UserStatus','belongsToBrandShop')
+                ->find($request->vendor_id);
+        }
+
+        return response()->json($data);
+    }
+
+
 
 
 }

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["supplier-dashboard-website-auth~supplier-orders-website-auth"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["supplier-dashboard-website-auth~supplier-orders-website-auth~supplier-payment-history-website-auth~s~5646f4dd"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Website/AdminSupplier/Include/NavForAdminSupplier.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************************************!*\
@@ -323,7 +323,7 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
-                  attrs: { to: "/sspa/amount-receivable" }
+                  attrs: { to: "/sspa/my-payment-receivable" }
                 },
                 [_vm._v("Amount Receivable\n            \t")]
               )

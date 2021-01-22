@@ -65,6 +65,8 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         //return $request->all();
+        //return response()->json($request->all());
+        
         $this->validate($request, [
             'name' => 'required|min:3|max:80', 
             'email' => 'required|email|unique:suppliers,email', 
@@ -174,6 +176,7 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
         $this->validate($request, [
             'name' => 'required|min:3|max:80', 
             'email' => 'required|email|unique:suppliers,email,'.$id, 

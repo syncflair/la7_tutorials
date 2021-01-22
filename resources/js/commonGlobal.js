@@ -19,13 +19,13 @@ export default {
             //isAuthenticated
       ),
 
-      // ...mapState( 
-      //       'AuthenticationForCustomer', ['isAuthenticated']
-      // ),
+      ...mapState( 
+            'AuthenticationForCustomer', ['isAuthenticated','authCustomer']
+      ),
 
-      // ...mapState( 
-      //       'AuthenticationForSupplier', ['isSspaAuthenticated','authSupplier']
-      // ),
+      ...mapState( 
+            'AuthenticationForSupplier', ['isSspaAuthenticated','authSupplier']
+      ),
 
       // ...mapState( 
       //       'AuthenticationForAdmin', ['isAdminAuthenticated']

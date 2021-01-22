@@ -365,6 +365,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
  //Load to all
 
  //Load to all
@@ -671,17 +673,35 @@ var render = function() {
                                     )
                                   ],
                                   1
-                                )
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "li",
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass:
+                                          "nav-link u-header__sub-menu-nav-link",
+                                        attrs: { to: "/sspa/my-profile" }
+                                      },
+                                      [_vm._v("Supplier Profile")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _vm._m(3)
                               ]
                             )
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(3),
-                        _vm._v(" "),
                         _vm._m(4),
                         _vm._v(" "),
-                        _vm._m(5)
+                        _vm._m(5),
+                        _vm._v(" "),
+                        _vm._m(6)
                       ]
                     )
                   ]
@@ -690,7 +710,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(6),
+          _vm._m(7),
           _vm._v(" "),
           _c(
             "div",
@@ -706,9 +726,9 @@ var render = function() {
                     staticClass: "d-flex list-unstyled mb-0 align-items-center"
                   },
                   [
-                    _vm._m(7),
-                    _vm._v(" "),
                     _vm._m(8),
+                    _vm._v(" "),
+                    _vm._m(9),
                     _vm._v(" "),
                     _c(
                       "li",
@@ -717,7 +737,7 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _vm._m(9)
+                    _vm._m(10)
                   ]
                 )
               ])
@@ -1498,6 +1518,21 @@ var staticRenderFns = [
         )
       ]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link u-header__sub-menu-nav-link",
+          attrs: { href: "/sspa/my-profile" }
+        },
+        [_vm._v("Supplier Profile link")]
+      )
+    ])
   },
   function() {
     var _vm = this

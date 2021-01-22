@@ -130,6 +130,18 @@ Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
   Route::post('supplier/logout', 'AuthSupplier\LoginController@logout')->name('supplier.logout');
 
   Route::get('sspa/getAuthSupplierData', 'AdminSupplier\AdminSupplierController@getAuthSupplierData');//AuthenticationForWebsite.js
+  Route::get('sspa/getAuthVendorData', 'AdminSupplier\AdminSupplierController@getAuthVendorData');//AuthenticationForWebsite.js
+
+  Route::get('sspa/my-profile', 'AdminSupplier\AdminSupplierProfileController@index'); //not nesessary 
+  Route::post('sspa/SupplierProfileUpdate', 'AdminSupplier\AdminSupplierProfileController@SupplierProfileUpdate');
+
+  Route::post('sspa/SendEmailChangeVerificationCode', 'AdminSupplier\AdminSupplierProfileController@SendEmailChangeVerificationCode');  
+  Route::post('sspa/SupplierChangeEmail', 'AdminSupplier\AdminSupplierProfileController@SupplierChangeEmail'); 
+   
+  Route::post('sspa/SupplierChangePhone', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePhone');  
+  Route::post('sspa/SupplierChangePassword', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePassword');  
+
+
 
 
 
