@@ -98,13 +98,12 @@ class AdminSupplierProfileController extends Controller
 		            	$supplier->email_verification_code = $random_number;
 		            	$supplier->save();
 
-
 		            DB::commit();  
 
 		            if($supplier != null){           
-		                $data = ["userInfo" => $request->all(), "tag" => "emailVerificationCode"];
+		                $data = ["userInfo" => $request->all(), "tag" => "sendEmailVerificationCode"];
 		                Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));                
-		                return response()->json(['success'=>'Email verification code send to your email.']);
+		                return response()->json(['success'=>'An email verification code send to your email.']);
 		                //return response()->json($request->all());  
 		            }
 
@@ -130,25 +129,69 @@ class AdminSupplierProfileController extends Controller
             'email_verification_code' => ['required'], 
         ]);
 
+        $existing_email_verification_code = Supplier::select('email_verification_code')		            										->where('id', $request->id)->first();
+
+    	if(Auth::guard('supplier')->check()){
+           
+            if(Auth::guard('supplier')->user()->id == $request->id ){
+
+           		try{
+		            DB::beginTransaction();	
+
+		            	if($existing_email_verification_code->email_verification_code != $request->email_verification_code){
+		            		return response()->json(['error'=>'Verification code not matched!.']); 
+		            	}else{
+			            	$supplier = Supplier::find($request->id);
+			            	$supplier->email = $request->new_email;
+			            	$supplier->email_verification_code = null;
+			            	$supplier->save();
+		            	}		            	
+
+		            DB::commit();  
+
+		            if($supplier != null){           
+		                $data = ["userInfo" => $request->all(), "tag" => "emailHasBeenChanged"];
+		                Mail::to($data['userInfo']['new_email'])->send(new SupplierNotificationMail( $data ));                
+		                return response()->json(['success'=>'Email has been changed.']); 
+		            }
+
+		        }catch(\Exception $e){
+		            //logger($e->getMessage());
+		            DB::rollBack();
+		            return response()->json(['errors'=> $e->getMessage() ], 500); 
+		        } //end try 
+
+            }else{
+	        	return response()->json(['error'=>'Something worng!.']); 
+	        }//End check Auth ID With Request ID
+
+        }//end Auth::guard Check
+
+    }
+
+
+    public function SendPhoneChangeVerificationCode(Request $request){  	
+
     	if(Auth::guard('supplier')->check()){
            
             if(Auth::guard('supplier')->user()->id == $request->id ){
 
            		try{
 		            DB::beginTransaction();
+		            
+		            	$random_number = rand(100000,999999); //6 disit rand number generate
+		            	$request->request->add(['generate_phone_verification_code' => $random_number ]); //add something new directly to the Request Object
 
-		            	// $supplier = Supplier::find($request->id)
-		            	$supplier = Supplier::where('id', '=', $request->id)
-		            		->where('email_verification_code','=', $request->email_verification_code);
-		            	$supplier->email = $request->new_email;
+		            	$supplier = Supplier::find($request->id);
+		            	$supplier->phone_verification_code = $random_number;
 		            	$supplier->save();
 
 		            DB::commit();  
 
 		            if($supplier != null){           
-		                //$data = ["userInfo" => $request->all(), "tag" => "register"];
+		                //$data = ["userInfo" => $request->all(), "tag" => "sendPhoneVerificationCode"];
 		                //Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));                
-		                return response()->json(['success'=>'Email update.']); 
+		                return response()->json(['success'=>'An phone verification code send to your phone.']); 
 		            }
 
 		        }catch(\Exception $e){
@@ -169,8 +212,11 @@ class AdminSupplierProfileController extends Controller
     public function SupplierChangePhone(Request $request){
 
     	$this->validate($request, [
-            'phone' => ['numeric','regex:/^01[1|3-9]\d{8}$/', 'unique:suppliers,phone'],
+            'new_phone' => ['required','numeric','regex:/^01[1|3-9]\d{8}$/', 'unique:suppliers,phone'],
+            'phone_verification_code' => ['required'], 
         ]);
+
+    	$existing_phone_verification_code = Supplier::select('phone_verification_code')		            										->where('id', $request->id)->first();
 
     	if(Auth::guard('supplier')->check()){
            
@@ -179,16 +225,21 @@ class AdminSupplierProfileController extends Controller
            		try{
 		            DB::beginTransaction();
 
-		            	$supplier = Supplier::find($request->id);
-		            	$supplier->phone = $request->phone;
-		            	$supplier->save();
+		            	if($existing_phone_verification_code->phone_verification_code != $request->phone_verification_code){
+		            		return response()->json(['error'=>'Verification code not matched!.']); 
+		            	}else{
+			            	$supplier = Supplier::find($request->id);
+			            	$supplier->phone = $request->new_phone;
+			            	$supplier->phone_verification_code = null;
+			            	$supplier->save();
+		            	}
 
 		            DB::commit();  
 
 		            if($supplier != null){           
 		                //$data = ["userInfo" => $request->all(), "tag" => "register"];
 		                //Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));                
-		                return response()->json(['success'=>'Phone number update.']); 
+		                return response()->json(['success'=>'Phone number has been changed.']); 
 		            }
 
 		        }catch(\Exception $e){

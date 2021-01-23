@@ -32,7 +32,7 @@ class Supplier extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token','email_verification_code'
+        'password', 'remember_token','email_verification_code', 'phone_verification_code'
     ];
 
     /**

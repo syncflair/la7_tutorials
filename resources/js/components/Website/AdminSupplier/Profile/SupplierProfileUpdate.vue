@@ -134,7 +134,7 @@
                                         <div class="row">
                                             <div class="col-md-6 offset-md-3">
                                                 <p class="text-white- text-secondary mb-3">
-                                                <strong>Existion Email:</strong> 
+                                                <strong>Existing email:</strong> 
                                                 <span class="text-blue">{{authSupplier.email}}</span>
                                             </p>
                                             </div>
@@ -177,17 +177,73 @@
                                 <!-- ######################################################################### -->
 
                                 <div class="tab-pane fade pt-2" id="pills-three-example1" role="tabpanel" aria-labelledby="pills-three-example1-tab">
+
+                                    <div v-if="!change_phone" class="col-lg-3 col-6 offset-3 mb-1 col-6-">
+                                        <dir class="row">
+                                            <dir class="col-12">
+                                                <h3 class=" mb-0 pb-1 pl-2- font-size-14">Phone</h3>
+                                                <p class="mb-1"> {{ authSupplier.phone }}</p>
+                                            </dir>
+                                            <dir class="col-12">
+                                                <div class="mb-3 text-left">
+                                                    <button type="button" @click.prevent="SendPhoneChangeVerificationCode()" class="btn btn-primary-dark-w px-5">Change Phone</button>
+                                                </div>
+                                            </dir>
+                                        </dir>                                        
+                                    </div>
+
                                     <!-- Phone Form -->
-                                    <form class="js-validate-" novalidate="novalidate-" @submit.prevent="SupplierChangePhone()">
+                                    <form v-if="change_phone" class="js-validate-" novalidate="novalidate-" @submit.prevent="SupplierChangePhone()">
+
+                                        <div class="row">
+                                            <div class="col-md-6 offset-md-3">
+                                                <p class="text-white- text-secondary mb-3">
+                                                <strong>Existing phone:</strong> 
+                                                <span class="text-blue">{{authSupplier.phone}}</span>
+                                            </p>
+                                            </div>
+                                        </div>
+
                                         <div class="row">
                                             <div class="col-md-6 offset-md-3">
                                                 <div class="js-form-message- mb-6">
-                                                    <label class="form-label">Phone</label>
-                                                    <input v-model="form.phone" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('phone') }" placeholder="" >
-                                                    <has-error :form="form" field="phone"></has-error>
+                                                    <label class="form-label">New phone</label>
+                                                    <!-- <input v-model="form.new_phone" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('new_phone') }" placeholder="Enter your new phone" >
+                                                    <has-error :form="form" field="new_phone"></has-error> -->
+                                                    <div class="input-group">
+                                                        <!-- <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="signinPhoneLabel">
+                                                                <i class="fas fa-mobile-alt"></i>
+                                                            </span>
+                                                        </div> -->
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text" id="signinPhoneLabel">
+                                                                <!-- <span class="fas fa-user"></span> --> +88
+                                                            </span>
+                                                        </div>
+                                                        <input v-model="form.new_phone" type="text" class="form-control" placeholder="Enter your new phone" :class="{ 'is-invalid': form.errors.has('new_phone') }" >
+                                                        <has-error :form="form" field="new_phone"></has-error>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 offset-md-3">
+                                                <div class="js-form-message- mb-3">
+                                                    <label class="form-label">Verification Code</label>
+                                                    <input v-model="form.phone_verification_code" type="text" class="form-control" :class="{ 'is-invalid': form.errors.has('phone_verification_code') }" placeholder="Enter your verification code">
+                                                    <has-error :form="form" field="phone_verification_code"></has-error>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <dir v-if="change_email" class="row">
+                                            <div class="col-md-6 offset-md-3">
+                                                <span class="small text-muted">Check your phone to verification code, if did't get <a @click.prevent="SendPhoneChangeVerificationCode()" href="#" > Resend</a></span>
+                                            </div>
+                                        </dir>
+
                                         <div class="mb-3 text-right">
                                             <button type="submit" class="btn btn-primary-dark-w px-5">Save Phone</button>
                                         </div>
@@ -273,6 +329,7 @@
 
                 //for change email address management
                 change_email: false,
+                change_phone: false,
 
 
                 //editMode: false, //Use this for add edit using the same form 
@@ -287,6 +344,9 @@
 
                     email_verification_code: '',
                     new_email: '',
+
+                    phone_verification_code: '',
+                    new_phone: '',
                     //gender:'', 
                     //date_of_birth:'',                 
                 }),
@@ -397,6 +457,32 @@
 
             CancelChangeEmail(){
                 this.change_email =false;
+                this.form.new_email = '';
+                this.form.email_verification_code = '';
+            },
+
+            
+
+            SendPhoneChangeVerificationCode(){
+                
+                this.$Progress.start(); //using progress-bar package
+
+                this.form.post('/sspa/SendPhoneChangeVerificationCode')
+                .then(({ data }) => { 
+                    this.$Progress.finish();
+                    if(data.success){
+                        toastr.success(data.success);
+                        this.change_phone =true;
+                    }
+                    if(data.error){
+                        this.$Progress.fail();
+                        toastr.warning(data.error);
+                    }
+                })
+                .catch( (data) => {
+                this.$Progress.fail();
+                //toastr.warning('The given data was invalid.');
+                })
             },
 
             SupplierChangePhone(){
@@ -408,6 +494,9 @@
                     if(data.success){
                         this.$store.dispatch('AuthenticationForSupplier/fetchAuthSupplierData'); //get auth customer data 
                         toastr.success(data.success); 
+                        this.change_phone = false;
+                        this.form.new_phone = '';
+                        this.form.phone_verification_code = '';
                     }
                     if(data.error){
                         this.$Progress.fail();
@@ -420,6 +509,13 @@
                 // console.log(data.message);
                 })
             },
+
+            CancelChangePhone(){
+                this.change_phone =false;
+                this.form.new_phone = '';
+                this.form.phone_verification_code = '';
+            },
+
 
             SupplierChangePassword(){
                 this.$Progress.start(); //using progress-bar package

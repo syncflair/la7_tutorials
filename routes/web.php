@@ -137,8 +137,10 @@ Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
 
   Route::post('sspa/SendEmailChangeVerificationCode', 'AdminSupplier\AdminSupplierProfileController@SendEmailChangeVerificationCode');  
   Route::post('sspa/SupplierChangeEmail', 'AdminSupplier\AdminSupplierProfileController@SupplierChangeEmail'); 
-   
-  Route::post('sspa/SupplierChangePhone', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePhone');  
+
+  Route::post('sspa/SendPhoneChangeVerificationCode', 'AdminSupplier\AdminSupplierProfileController@SendPhoneChangeVerificationCode');  
+  Route::post('sspa/SupplierChangePhone', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePhone');
+
   Route::post('sspa/SupplierChangePassword', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePassword');  
 
 
