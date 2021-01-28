@@ -223,6 +223,106 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  //for user MapState
 
@@ -230,6 +330,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "customer-Profile-Update-website-auth",
   data: function data() {
     return {
+      //for change email address management
+      change_email: false,
+      change_phone: false,
       gender_type: [{
         name: 'Male'
       }, {
@@ -247,7 +350,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         old_password: '',
         password_confirmation: '',
         gender: '',
-        date_of_birth: ''
+        date_of_birth: '',
+        email_verification_code: '',
+        new_email: '',
+        phone_verification_code: '',
+        new_phone: ''
       })
     };
   },
@@ -289,21 +396,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         toastr.warning('The given data was invalid.'); // console.log(data.message);
       });
     },
-    CustomerChangeEmail: function CustomerChangeEmail() {
+    SendCustomerEmailChangeVerificationCode: function SendCustomerEmailChangeVerificationCode() {
       var _this2 = this;
 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.post('/auth/CustomerChangeEmail').then(function (_ref2) {
+      this.form.post('/auth/SendCustomerEmailChangeVerificationCode').then(function (_ref2) {
         var data = _ref2.data;
 
         _this2.$Progress.finish();
 
         if (data.success) {
-          _this2.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
-
-
           toastr.success(data.success);
+          _this2.change_email = true;
         }
 
         if (data.error) {
@@ -312,17 +417,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           toastr.warning(data.error);
         }
       })["catch"](function (data) {
-        _this2.$Progress.fail();
+        _this2.$Progress.fail(); //toastr.warning('The given data was invalid.');
+        // console.log(data.message);
 
-        toastr.warning('The given data was invalid.'); // console.log(data.message);
       });
     },
-    CustomerChangePhone: function CustomerChangePhone() {
+    CustomerChangeEmail: function CustomerChangeEmail() {
       var _this3 = this;
 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.post('/auth/CustomerChangePhone').then(function (_ref3) {
+      this.form.post('/auth/CustomerChangeEmail').then(function (_ref3) {
         var data = _ref3.data;
 
         _this3.$Progress.finish();
@@ -332,6 +437,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
           toastr.success(data.success);
+          _this3.change_email = false;
+          _this3.form.new_email = '';
+          _this3.form.email_verification_code = '';
         }
 
         if (data.error) {
@@ -345,26 +453,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         toastr.warning('The given data was invalid.'); // console.log(data.message);
       });
     },
-    CustomerChangePassword: function CustomerChangePassword() {
+    CancelChangeEmail: function CancelChangeEmail() {
+      this.change_email = false;
+      this.form.new_email = '';
+      this.form.email_verification_code = '';
+    },
+    SendCustomerPhoneChangeVerificationCode: function SendCustomerPhoneChangeVerificationCode() {
       var _this4 = this;
 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.post('/auth/CustomerChangePassword').then(function (_ref4) {
+      this.form.post('/auth/SendCustomerPhoneChangeVerificationCode').then(function (_ref4) {
         var data = _ref4.data;
 
         _this4.$Progress.finish();
 
         if (data.success) {
-          //this.form.reset();  //reset from after submit
-          _this4.form.old_password = '';
-          _this4.form.password = '';
-          _this4.form.password_confirmation = '';
-
-          _this4.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data                         
-
-
-          toastr.success(data.success); //console.log(data.success); 
+          toastr.success(data.success);
+          _this4.change_phone = true;
         }
 
         if (data.error) {
@@ -373,7 +479,75 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           toastr.warning(data.error);
         }
       })["catch"](function (data) {
-        _this4.$Progress.fail();
+        _this4.$Progress.fail(); //toastr.warning('The given data was invalid.');
+
+      });
+    },
+    CustomerChangePhone: function CustomerChangePhone() {
+      var _this5 = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.post('/auth/CustomerChangePhone').then(function (_ref5) {
+        var data = _ref5.data;
+
+        _this5.$Progress.finish();
+
+        if (data.success) {
+          _this5.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
+
+
+          toastr.success(data.success);
+          _this5.change_phone = false;
+          _this5.form.new_phone = '';
+          _this5.form.phone_verification_code = '';
+        }
+
+        if (data.error) {
+          _this5.$Progress.fail();
+
+          toastr.warning(data.error);
+        }
+      })["catch"](function (data) {
+        _this5.$Progress.fail();
+
+        toastr.warning('The given data was invalid.'); // console.log(data.message);
+      });
+    },
+    CancelChangePhone: function CancelChangePhone() {
+      this.change_phone = false;
+      this.form.new_phone = '';
+      this.form.phone_verification_code = '';
+    },
+    CustomerChangePassword: function CustomerChangePassword() {
+      var _this6 = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.post('/auth/CustomerChangePassword').then(function (_ref6) {
+        var data = _ref6.data;
+
+        _this6.$Progress.finish();
+
+        if (data.success) {
+          //this.form.reset();  //reset from after submit
+          _this6.form.old_password = '';
+          _this6.form.password = '';
+          _this6.form.password_confirmation = '';
+
+          _this6.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data                         
+
+
+          toastr.success(data.success); //console.log(data.success); 
+        }
+
+        if (data.error) {
+          _this6.$Progress.fail();
+
+          toastr.warning(data.error);
+        }
+      })["catch"](function (data) {
+        _this6.$Progress.fail();
 
         toastr.warning('The given data was invalid.'); // console.log(data.message);
       });
@@ -658,70 +832,306 @@ var render = function() {
                       }
                     },
                     [
-                      _c(
-                        "form",
-                        {
-                          staticClass: "js-validate-",
-                          attrs: { novalidate: "novalidate-" },
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.CustomerChangeEmail()
-                            }
-                          }
-                        },
-                        [
-                          _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-md-6 offset-md-3" }, [
+                      !_vm.change_email
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "col-lg-3 col-6 offset-3 mb-1 col-6-"
+                            },
+                            [
                               _c(
-                                "div",
-                                { staticClass: "js-form-message- mb-6" },
+                                "dir",
+                                { staticClass: "row" },
                                 [
-                                  _c("label", { staticClass: "form-label" }, [
-                                    _vm._v("Email")
+                                  _c("dir", { staticClass: "col-12" }, [
+                                    _c(
+                                      "h3",
+                                      {
+                                        staticClass:
+                                          " mb-0 pb-1 pl-2- font-size-14"
+                                      },
+                                      [_vm._v("Email")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("p", { staticClass: "mb-1" }, [
+                                      _vm._v(
+                                        " " + _vm._s(_vm.authCustomer.email)
+                                      )
+                                    ])
                                   ]),
                                   _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.form.email,
-                                        expression: "form.email"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    class: {
-                                      "is-invalid": _vm.form.errors.has("email")
-                                    },
-                                    attrs: { type: "email" },
-                                    domProps: { value: _vm.form.email },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.form,
-                                          "email",
-                                          $event.target.value
+                                  _c("dir", { staticClass: "col-12" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "mb-3 text-left" },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-primary-dark-w px-5",
+                                            attrs: { type: "button" },
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                return _vm.SendCustomerEmailChangeVerificationCode()
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Change Email")]
                                         )
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("has-error", {
-                                    attrs: { form: _vm.form, field: "email" }
-                                  })
+                                      ]
+                                    )
+                                  ])
                                 ],
                                 1
                               )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(2)
-                        ]
-                      )
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.change_email
+                        ? _c(
+                            "form",
+                            {
+                              staticClass: "js-validate-",
+                              attrs: { novalidate: "novalidate-" },
+                              on: {
+                                submit: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.CustomerChangeEmail()
+                                }
+                              }
+                            },
+                            [
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-6 offset-md-3" },
+                                  [
+                                    _c(
+                                      "p",
+                                      {
+                                        staticClass:
+                                          "text-white- text-secondary mb-3"
+                                      },
+                                      [
+                                        _c("strong", [
+                                          _vm._v("Existing email:")
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          { staticClass: "text-blue" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(_vm.authCustomer.email)
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-6 offset-md-3" },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "js-form-message- mb-6" },
+                                      [
+                                        _c(
+                                          "label",
+                                          { staticClass: "form-label" },
+                                          [_vm._v("New email")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.form.new_email,
+                                              expression: "form.new_email"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          class: {
+                                            "is-invalid": _vm.form.errors.has(
+                                              "new_email"
+                                            )
+                                          },
+                                          attrs: {
+                                            type: "new_email",
+                                            placeholder:
+                                              "Enter your new email address"
+                                          },
+                                          domProps: {
+                                            value: _vm.form.new_email
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.form,
+                                                "new_email",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("has-error", {
+                                          attrs: {
+                                            form: _vm.form,
+                                            field: "new_email"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-6 offset-md-3" },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "js-form-message- mb-3" },
+                                      [
+                                        _c(
+                                          "label",
+                                          { staticClass: "form-label" },
+                                          [_vm._v("Verification Code")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.form
+                                                  .email_verification_code,
+                                              expression:
+                                                "form.email_verification_code"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          class: {
+                                            "is-invalid": _vm.form.errors.has(
+                                              "email_verification_code"
+                                            )
+                                          },
+                                          attrs: {
+                                            type: "text",
+                                            placeholder:
+                                              "Enter your verification code"
+                                          },
+                                          domProps: {
+                                            value:
+                                              _vm.form.email_verification_code
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.form,
+                                                "email_verification_code",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("has-error", {
+                                          attrs: {
+                                            form: _vm.form,
+                                            field: "email_verification_code"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _vm.change_email
+                                ? _c("dir", { staticClass: "row" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-md-6 offset-md-3" },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "small text-muted" },
+                                          [
+                                            _vm._v(
+                                              "Check your email to verification code, if did't get "
+                                            ),
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    $event.preventDefault()
+                                                    return _vm.SendCustomerEmailChangeVerificationCode()
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v(" Resend")]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "mb-3 text-right" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-primary-dark-w px-5",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.CancelChangePhone()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Cancel")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-primary-dark-w px-5",
+                                    attrs: { type: "submit" }
+                                  },
+                                  [_vm._v("Save Email")]
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        : _vm._e()
                     ]
                   ),
                   _vm._v(" "),
@@ -736,70 +1146,314 @@ var render = function() {
                       }
                     },
                     [
-                      _c(
-                        "form",
-                        {
-                          staticClass: "js-validate-",
-                          attrs: { novalidate: "novalidate-" },
-                          on: {
-                            submit: function($event) {
-                              $event.preventDefault()
-                              return _vm.CustomerChangePhone()
-                            }
-                          }
-                        },
-                        [
-                          _c("div", { staticClass: "row" }, [
-                            _c("div", { staticClass: "col-md-6 offset-md-3" }, [
+                      !_vm.change_phone
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "col-lg-3 col-6 offset-3 mb-1 col-6-"
+                            },
+                            [
                               _c(
-                                "div",
-                                { staticClass: "js-form-message- mb-6" },
+                                "dir",
+                                { staticClass: "row" },
                                 [
-                                  _c("label", { staticClass: "form-label" }, [
-                                    _vm._v("Phone")
+                                  _c("dir", { staticClass: "col-12" }, [
+                                    _c(
+                                      "h3",
+                                      {
+                                        staticClass:
+                                          " mb-0 pb-1 pl-2- font-size-14"
+                                      },
+                                      [_vm._v("Phone")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("p", { staticClass: "mb-1" }, [
+                                      _vm._v(
+                                        " " + _vm._s(_vm.authCustomer.phone)
+                                      )
+                                    ])
                                   ]),
                                   _vm._v(" "),
-                                  _c("input", {
-                                    directives: [
-                                      {
-                                        name: "model",
-                                        rawName: "v-model",
-                                        value: _vm.form.phone,
-                                        expression: "form.phone"
-                                      }
-                                    ],
-                                    staticClass: "form-control",
-                                    class: {
-                                      "is-invalid": _vm.form.errors.has("phone")
-                                    },
-                                    attrs: { type: "text", placeholder: "" },
-                                    domProps: { value: _vm.form.phone },
-                                    on: {
-                                      input: function($event) {
-                                        if ($event.target.composing) {
-                                          return
-                                        }
-                                        _vm.$set(
-                                          _vm.form,
-                                          "phone",
-                                          $event.target.value
+                                  _c("dir", { staticClass: "col-12" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "mb-3 text-left" },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass:
+                                              "btn btn-primary-dark-w px-5",
+                                            attrs: { type: "button" },
+                                            on: {
+                                              click: function($event) {
+                                                $event.preventDefault()
+                                                return _vm.SendCustomerPhoneChangeVerificationCode()
+                                              }
+                                            }
+                                          },
+                                          [_vm._v("Change Phone")]
                                         )
-                                      }
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("has-error", {
-                                    attrs: { form: _vm.form, field: "phone" }
-                                  })
+                                      ]
+                                    )
+                                  ])
                                 ],
                                 1
                               )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _vm._m(3)
-                        ]
-                      )
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.change_phone
+                        ? _c(
+                            "form",
+                            {
+                              staticClass: "js-validate-",
+                              attrs: { novalidate: "novalidate-" },
+                              on: {
+                                submit: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.CustomerChangePhone()
+                                }
+                              }
+                            },
+                            [
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-6 offset-md-3" },
+                                  [
+                                    _c(
+                                      "p",
+                                      {
+                                        staticClass:
+                                          "text-white- text-secondary mb-3"
+                                      },
+                                      [
+                                        _c("strong", [
+                                          _vm._v("Existing phone:")
+                                        ]),
+                                        _vm._v(" "),
+                                        _c(
+                                          "span",
+                                          { staticClass: "text-blue" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(_vm.authCustomer.phone)
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-6 offset-md-3" },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "js-form-message- mb-6" },
+                                      [
+                                        _c(
+                                          "label",
+                                          { staticClass: "form-label" },
+                                          [_vm._v("New Phone")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "div",
+                                          { staticClass: "input-group" },
+                                          [
+                                            _vm._m(2),
+                                            _vm._v(" "),
+                                            _c("input", {
+                                              directives: [
+                                                {
+                                                  name: "model",
+                                                  rawName: "v-model",
+                                                  value: _vm.form.new_phone,
+                                                  expression: "form.new_phone"
+                                                }
+                                              ],
+                                              staticClass: "form-control",
+                                              class: {
+                                                "is-invalid": _vm.form.errors.has(
+                                                  "new_phone"
+                                                )
+                                              },
+                                              attrs: {
+                                                type: "text",
+                                                placeholder:
+                                                  "Enter your new phone"
+                                              },
+                                              domProps: {
+                                                value: _vm.form.new_phone
+                                              },
+                                              on: {
+                                                input: function($event) {
+                                                  if ($event.target.composing) {
+                                                    return
+                                                  }
+                                                  _vm.$set(
+                                                    _vm.form,
+                                                    "new_phone",
+                                                    $event.target.value
+                                                  )
+                                                }
+                                              }
+                                            }),
+                                            _vm._v(" "),
+                                            _c("has-error", {
+                                              attrs: {
+                                                form: _vm.form,
+                                                field: "new_phone"
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "row" }, [
+                                _c(
+                                  "div",
+                                  { staticClass: "col-md-6 offset-md-3" },
+                                  [
+                                    _c(
+                                      "div",
+                                      { staticClass: "js-form-message- mb-3" },
+                                      [
+                                        _c(
+                                          "label",
+                                          { staticClass: "form-label" },
+                                          [_vm._v("Verification Code")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value:
+                                                _vm.form
+                                                  .phone_verification_code,
+                                              expression:
+                                                "form.phone_verification_code"
+                                            }
+                                          ],
+                                          staticClass: "form-control",
+                                          class: {
+                                            "is-invalid": _vm.form.errors.has(
+                                              "phone_verification_code"
+                                            )
+                                          },
+                                          attrs: {
+                                            type: "text",
+                                            placeholder:
+                                              "Enter your verification code"
+                                          },
+                                          domProps: {
+                                            value:
+                                              _vm.form.phone_verification_code
+                                          },
+                                          on: {
+                                            input: function($event) {
+                                              if ($event.target.composing) {
+                                                return
+                                              }
+                                              _vm.$set(
+                                                _vm.form,
+                                                "phone_verification_code",
+                                                $event.target.value
+                                              )
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(" "),
+                                        _c("has-error", {
+                                          attrs: {
+                                            form: _vm.form,
+                                            field: "phone_verification_code"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _vm.change_email
+                                ? _c("dir", { staticClass: "row" }, [
+                                    _c(
+                                      "div",
+                                      { staticClass: "col-md-6 offset-md-3" },
+                                      [
+                                        _c(
+                                          "span",
+                                          { staticClass: "small text-muted" },
+                                          [
+                                            _vm._v(
+                                              "Check your phone to verification code, if did't get "
+                                            ),
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: { href: "#" },
+                                                on: {
+                                                  click: function($event) {
+                                                    $event.preventDefault()
+                                                    return _vm.SendCustomerPhoneChangeVerificationCode()
+                                                  }
+                                                }
+                                              },
+                                              [_vm._v(" Resend")]
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "mb-3 text-right" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-primary-dark-w px-5",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.CancelChangeEmail()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Cancel")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-primary-dark-w px-5",
+                                    attrs: { type: "submit" }
+                                  },
+                                  [_vm._v("Save Phone")]
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        : _vm._e()
                     ]
                   ),
                   _vm._v(" "),
@@ -981,7 +1635,7 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _vm._m(4)
+                          _vm._m(3)
                         ]
                       )
                     ]
@@ -1162,29 +1816,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-3 text-right" }, [
+    return _c("div", { staticClass: "input-group-prepend" }, [
       _c(
-        "button",
-        {
-          staticClass: "btn btn-primary-dark-w px-5",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Save Email")]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-3 text-right" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary-dark-w px-5",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Save Phone")]
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "signinPhoneLabel" } },
+        [
+          _vm._v(
+            " +88\n                                                        "
+          )
+        ]
       )
     ])
   },

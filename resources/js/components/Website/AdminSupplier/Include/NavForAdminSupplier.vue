@@ -1,22 +1,32 @@
 <template>
 	<div class="mb-8 border- border-width-2- border-color-3- borders-radius-6">
         <!-- List -->
-        <div class="user-panel pl-2- pr-2- mt-2 pb-2 mb-1 d-flex border-bottom-primary- border-bottom border-top- section-title">
+        <div class="user-panel pl-2- pr-2- mt-0 pb-2 mb-1 d-flex border-bottom-primary- border-bottom border-top- section-title">
             <!-- <div class="image">
                 <img src="https://sorboraho.s3-ap-southeast-1.amazonaws.com/users/mahmudur-rahman-wYAVdNBwSUHZaf4VQcBeE2R806wJqwZT7zHgEl0h.png" alt="User Image" class="img-circle elevation-2">
             </div> -->
-            <div class="info border- bg-gray-1- rounded-lg-"> 
-                    <span v-show="authSupplier" class="font-size-10 text-black"> {{authSupplier.name}} </span>
-                    <br> 
-                    <span class="btn- px-1 bg-success text-white font-size-9- rounded-lg">
+            <div class="info border- bg-gray-1- rounded-lg- w-100"> 
+                    
+                    <div v-show="authVendor" class="col-lg-12 btn- px-1 pb-1 mt-1 mb-1 bg-primary text-black font-size-9- rounded-lg">
+                        <!-- <i class="fas fa-check font-size-8"></i> -->                          
+                         <small>{{authVendor.vendor_name}}</small>
+                    </div>
+
+                    <!-- <span v-show="authVendor" class="font-size-10 text-black"> {{authVendor.vendor_name}} </span> -->
+                    <div class="col-lg-12 text-center">                        
+                        <img v-if="authVendor.vendor_img" :src="authVendor.vendor_img" style="height: 70px; width: auto;" >
+                    </div>
+
+                    <div v-show="authSupplier" class="col-lg-12 font-size-10 pl-0 mt-2 mb-1 text-black"> {{authSupplier.name}} </div>
+
+                    <!-- <span class="btn- px-1 bg-success text-white font-size-9- rounded-lg">
                         <i class="fas fa-check font-size-8"></i>
-                        <!-- <i class="fas fa-user-check"></i> -->
                          <small>Verified</small>
-                    </span>
+                    </span> -->   
             </div>
         </div>
 
-        <ul id="sidebarNav" class="list-unstyled dropdown-list dropdown-list-custome">
+        <ul id="sidebarNav" class="list-unstyled dropdown-list dropdown-list-custome pb-3">
             <!-- Menu List -->
             <li class="border-bottom-">
                 <router-link to="/sspa/my-dashboard" class="dropdown-item dropdown-item-custome transition-3d-hover" 
@@ -83,7 +93,7 @@
 
         computed: {
 
-          ...mapState( 'AuthenticationForSupplier', ['authSupplier'] ),
+          ...mapState( 'AuthenticationForSupplier', ['authSupplier','authVendor'] ),
 
           //for active link management
             currentPage(){
@@ -125,6 +135,9 @@
         },           
 
         created(){
+            setTimeout(() => {
+                this.$store.dispatch('AuthenticationForSupplier/fetchAuthVendorData', this.authSupplier.vendor_id);  
+            }, 300);//call after 800 miliscound 
         },
            
         mounted() {

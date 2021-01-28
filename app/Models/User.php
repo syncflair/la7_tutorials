@@ -54,14 +54,14 @@ class User extends Authenticatable implements MustVerifyEmail
     //User belongsTo belongsToBranch
     public function belongsToBranch(){
         // return $this->belongsTo('App\Models\Settings\BranchInfo', 'branch_id')->select('id','branch_name');
-        return $this->belongsTo('Settings\BranchInfo', 'branch_id')->select('id','branch_name');
+        return $this->belongsTo('App\Models\Settings\BranchInfo', 'branch_id')->select('id','branch_name');
     }
 
     public function UserStatus(){
         //return $this->belongsTo('App\Models\UserStatus');
         //return $this->belongsTo(Models\Settings\UserStatus::class, 'user_id');
         // return $this->belongsTo('App\Models\Settings\UserStatus', 'status_id');
-        return $this->belongsTo('Settings\UserStatus', 'status_id');
+        return $this->belongsTo('App\Models\Settings\UserStatus', 'status_id');
     }
 
     //A User Has Many Products (hasMany())
@@ -70,9 +70,6 @@ class User extends Authenticatable implements MustVerifyEmail
         // return $this->hasMany(Models\Product::class);  
         return $this->hasMany(Product::class);  
     }
-
-
-
 
 
     //User belongs to Employee

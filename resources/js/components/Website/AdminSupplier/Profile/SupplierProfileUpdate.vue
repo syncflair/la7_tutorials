@@ -70,6 +70,7 @@
                                     <!-- Profile Form -->
                                     <form class="js-validate-" novalidate="novalidate-" @submit.prevent="SupplierProfileUpdate()">
                                         <div class="row text-center-">
+                                            
                                             <div class="col-md-12">
                                                 <div class="js-form-message- mb-4">
                                                     <label class="form-label"> Full Name </label>
@@ -77,6 +78,26 @@
                                                     <has-error :form="form" field="name"></has-error>
                                                 </div>
                                             </div>
+
+                                            <div class="col-md-12">
+                                                <div class="js-form-message- mb-4">
+                                                    <label class="form-label"> Address </label>
+                                                    <div class="input-group">
+                                                        <textarea v-model="form.supplier_address" name="supplier_address" class="form-control p-2" rows="2" placeholder="" style="margin-top: 0px; margin-bottom: 0px; " placeholder="Enter Address"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="js-form-message- mb-4">
+                                                    <label class="form-label"> Details </label>
+                                                    <div class="input-group">
+                                                        <textarea v-model="form.supplier_desc" name="supplier_desc" class="form-control p-2" rows="2" placeholder="" style="margin-top: 0px; margin-bottom: 0px; " placeholder="Enter Address"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            
 
                                             <!-- <div class="w-100"></div> -->
                                             <!-- data-live-search="true" -->
@@ -121,7 +142,7 @@
                                             </dir>
                                             <dir class="col-12">
                                                 <div class="mb-3 text-left">
-                                                    <button type="button" @click.prevent="SendEmailChangeVerificationCode()" class="btn btn-primary-dark-w px-5">Change Email</button>
+                                                    <button type="button" @click.prevent="SendSupplierEmailChangeVerificationCode()" class="btn btn-primary-dark-w px-5">Change Email</button>
                                                 </div>
                                             </dir>
                                         </dir>                                        
@@ -162,7 +183,7 @@
 
                                         <dir v-if="change_email" class="row">
                                             <div class="col-md-6 offset-md-3">
-                                                <span class="small text-muted">Check your email to verification code, if did't get <a @click.prevent="SendEmailChangeVerificationCode()" href="#" > Resend</a></span>
+                                                <span class="small text-muted">Check your email to verification code, if did't get <a @click.prevent="SendSupplierEmailChangeVerificationCode()" href="#" > Resend</a></span>
                                             </div>
                                         </dir>
 
@@ -186,7 +207,7 @@
                                             </dir>
                                             <dir class="col-12">
                                                 <div class="mb-3 text-left">
-                                                    <button type="button" @click.prevent="SendPhoneChangeVerificationCode()" class="btn btn-primary-dark-w px-5">Change Phone</button>
+                                                    <button type="button" @click.prevent="SendSupplierPhoneChangeVerificationCode()" class="btn btn-primary-dark-w px-5">Change Phone</button>
                                                 </div>
                                             </dir>
                                         </dir>                                        
@@ -240,11 +261,12 @@
 
                                         <dir v-if="change_email" class="row">
                                             <div class="col-md-6 offset-md-3">
-                                                <span class="small text-muted">Check your phone to verification code, if did't get <a @click.prevent="SendPhoneChangeVerificationCode()" href="#" > Resend</a></span>
+                                                <span class="small text-muted">Check your phone to verification code, if did't get <a @click.prevent="SendSupplierPhoneChangeVerificationCode()" href="#" > Resend</a></span>
                                             </div>
                                         </dir>
 
                                         <div class="mb-3 text-right">
+                                            <button @click.prevent="CancelChangePhone()" type="button" class="btn btn-primary-dark-w px-5">Cancel</button>
                                             <button type="submit" class="btn btn-primary-dark-w px-5">Save Phone</button>
                                         </div>
                                     </form>
@@ -341,6 +363,8 @@
                     password:'', 
                     old_password:'', 
                     password_confirmation: '',
+                    supplier_address:'',
+                    supplier_desc:'',
 
                     email_verification_code: '',
                     new_email: '',
@@ -407,11 +431,11 @@
             },
 
 
-            SendEmailChangeVerificationCode(){
+            SendSupplierEmailChangeVerificationCode(){
                 
                 this.$Progress.start(); //using progress-bar package
 
-                this.form.post('/sspa/SendEmailChangeVerificationCode')
+                this.form.post('/sspa/SendSupplierEmailChangeVerificationCode')
                 .then(({ data }) => { 
                     this.$Progress.finish();
                     if(data.success){
@@ -463,11 +487,11 @@
 
             
 
-            SendPhoneChangeVerificationCode(){
+            SendSupplierPhoneChangeVerificationCode(){
                 
                 this.$Progress.start(); //using progress-bar package
 
-                this.form.post('/sspa/SendPhoneChangeVerificationCode')
+                this.form.post('/sspa/SendSupplierPhoneChangeVerificationCode')
                 .then(({ data }) => { 
                     this.$Progress.finish();
                     if(data.success){

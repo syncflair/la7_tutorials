@@ -20,6 +20,7 @@ class AdminPurchaseController extends Controller
 
     public function index()
     {
-        return view('AdminChild.AdminPurchase.DashboardPurchase');
+        // return view('AdminChild.AdminPurchase.DashboardPurchase');
+        return view('AdminChild.DashboardAdminChild');  
     }
 }

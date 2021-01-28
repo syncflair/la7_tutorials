@@ -20,7 +20,10 @@ class AdminDeliveryController extends Controller
 
     public function index()
     {
-        return view('AdminChild.AdminDelivery.DashboardDelivery');
+       
+        return view('AdminChild.DashboardAdminChild');
+
+        
     }
 
 }

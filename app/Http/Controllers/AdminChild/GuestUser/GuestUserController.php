@@ -20,7 +20,8 @@ class GuestUserController extends Controller
 
     public function index()
     {
-        return view('AdminChild.GuestUser.DashboardGuestUser');
+        // return view('AdminChild.GuestUser.DashboardGuestUser');
+        return view('AdminChild.DashboardAdminChild'); 
     }
 
 

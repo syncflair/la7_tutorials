@@ -39,32 +39,36 @@
                                     <span class="text-blue">{{authVendor.vendor_code}}</span></p>
                                 <p class="text-white- text-secondary mb-2" title="Vendor Type">Type:
                                     <span class="text-blue"> {{authVendor.vendor_type}}</span></p>
-                                <p v-if="authVendor.brand_shop_id" class="text-white- text-secondary mb-2" title="Brand Shop">Brand Shop: <span class="text-blue">{{authVendor.belongs_to_brand_shop['brand_shop_title']}}</span></p>  
-                            </div>
-
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-4-">
+                                <p v-if="authVendor.brand_shop_id" class="text-white- text-secondary mb-2" title="Brand Shop">Brand Shop: <span class="text-blue">{{authVendor.belongs_to_brand_shop['brand_shop_title']}}</span></p> 
                                 <p v-if="authVendor.vendor_nid" class="text-white- text-secondary mb-2">NID: 
                                     <span class="text-blue">{{authVendor.vendor_nid}}</span></p>
                                 <p v-if="authVendor.vendor_tin" class="text-white- text-secondary mb-2">TIN: 
                                     <span class="text-blue">{{authVendor.vendor_tin}}</span></p>
                                 <p v-if="authVendor.vendor_bank_details" class="text-white- text-secondary mb-2">Financial: 
-                                    <span class="text-blue">{{authVendor.vendor_bank_details}}</span></p>
+                                    <span class="text-blue">{{authVendor.vendor_bank_details}}</span></p> 
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-4-">
+                                
+                                <p v-if="authVendor.vendor_contact_name" class="text-white- text-secondary mb-2">Contact Name: 
+                                    <span class="text-blue">{{authVendor.vendor_contact_name}}</span></p>
                                 <p class="text-white- text-secondary mb-2">
                                     <i class="fas fa-at"></i> <span class="text-blue">{{authVendor.vendor_email}}</span>
                                 </p>
                                 <p class="text-white- text-secondary mb-2">
                                     <i class="fas fa-phone"></i> <span class="text-blue">{{authVendor.vendor_phone}}</span>
                                 </p>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-12 col-md-3 col-3- text-center">
-                                <img v-if="authVendor.vendor_img" :src="authVendor.vendor_img" style="height: 120px; width: 150px;" >
-                            </div>
-
-                            <div class="col-12">
                                 <p v-if="authVendor.vendor_desc" class="text-white- text-secondary mb-2" title="Vendor Type">Details: <span class="text-blue">{{authVendor.vendor_desc}}</span></p>                                
                                 <p class="text-white- text-secondary mb-2" title="Vendor Type">Address: <span class="text-blue">{{authVendor.vendor_address}}</span></p>
                             </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-3 col-3- text-center d-none d-xl-block">
+                                <img v-if="authVendor.vendor_img" :src="authVendor.vendor_img" style="height: 120px; width: 150px;" >
+                            </div>
+
+                            <!-- <div class="col-12">
+                                
+                            </div> -->
 
                         </div> 
                         <!-- <div class="icon"><i class="font-size-18 ec ec-shopping-bag"></i></div>  -->
@@ -77,7 +81,7 @@
                         <div class="inner">
 
                             <h5 class="text-white- text-secondary" ><small>My Info</small></h5> 
-                            <p class="text-white- text-secondary mb-2"><i class="fas fa-at"></i> {{authSupplier.name}}</p>
+                            <p class="text-white- text-secondary mb-2"> {{authSupplier.name}}</p>
                             <p class="text-white- text-secondary mb-2"><i class="fas fa-at"></i> {{authSupplier.email}}</p>
                             <p class="text-white- text-secondary mb-2"><i class="fas fa-phone"></i> {{authSupplier.phone}}</p>
 
@@ -97,7 +101,7 @@
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-success- bg-white">
                         <div class="inner">
-                            <h3 class="text-white- text-secondary" >58793 <sup style="font-size: 20px;">TK</sup></h3> 
+                            <h3 class="text-white- text-secondary" >5,87,93.00 <sup style="font-size: 20px;">TK</sup></h3> 
                             <p class="text-white- text-secondary">Payment Receivable</p>
                         </div> 
                         <div class="icon"><i class="far fa-money-bill-alt"></i></div> 

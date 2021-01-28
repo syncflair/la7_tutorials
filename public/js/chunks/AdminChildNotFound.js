@@ -123,13 +123,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "mb-4 mt-3 lead" }, [
           _vm._v("The page you are looking for was not found.")
-        ]),
-        _vm._v(" "),
-        _c(
-          "a",
-          { staticClass: "btn btn-link", attrs: { href: "/dashboard" } },
-          [_vm._v("Back to Dashboard")]
-        )
+        ])
       ]
     )
   ])

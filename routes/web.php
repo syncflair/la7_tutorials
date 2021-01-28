@@ -77,9 +77,14 @@ Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
   Route::resource('auth/my-profile', 'AdminCustomer\AdminCustomerProfileController',
     ['except'=>['create','show','edit','update'] ]);
   Route::get('auth/my-profile-update', 'AdminCustomer\AdminCustomerProfileUpdateController@index');
-  Route::post('auth/CustomerProfileUpdate', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerProfileUpdate');    
+  Route::post('auth/CustomerProfileUpdate', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerProfileUpdate'); 
+
+  Route::post('auth/SendCustomerEmailChangeVerificationCode', 'AdminCustomer\AdminCustomerProfileUpdateController@SendCustomerEmailChangeVerificationCode'); 
   Route::post('auth/CustomerChangeEmail', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangeEmail');
+
+  Route::post('auth/SendCustomerPhoneChangeVerificationCode', 'AdminCustomer\AdminCustomerProfileUpdateController@SendCustomerPhoneChangeVerificationCode'); 
   Route::post('auth/CustomerChangePhone', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangePhone');
+
   Route::post('auth/CustomerChangePassword', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangePassword');
 
   
@@ -132,15 +137,13 @@ Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
   Route::get('sspa/getAuthSupplierData', 'AdminSupplier\AdminSupplierController@getAuthSupplierData');//AuthenticationForWebsite.js
   Route::get('sspa/getAuthVendorData', 'AdminSupplier\AdminSupplierController@getAuthVendorData');//AuthenticationForWebsite.js
 
+
   Route::get('sspa/my-profile', 'AdminSupplier\AdminSupplierProfileController@index'); //not nesessary 
   Route::post('sspa/SupplierProfileUpdate', 'AdminSupplier\AdminSupplierProfileController@SupplierProfileUpdate');
-
-  Route::post('sspa/SendEmailChangeVerificationCode', 'AdminSupplier\AdminSupplierProfileController@SendEmailChangeVerificationCode');  
+  Route::post('sspa/SendSupplierEmailChangeVerificationCode', 'AdminSupplier\AdminSupplierProfileController@SendSupplierEmailChangeVerificationCode');  
   Route::post('sspa/SupplierChangeEmail', 'AdminSupplier\AdminSupplierProfileController@SupplierChangeEmail'); 
-
-  Route::post('sspa/SendPhoneChangeVerificationCode', 'AdminSupplier\AdminSupplierProfileController@SendPhoneChangeVerificationCode');  
+  Route::post('sspa/SendSupplierPhoneChangeVerificationCode', 'AdminSupplier\AdminSupplierProfileController@SendSupplierPhoneChangeVerificationCode');  
   Route::post('sspa/SupplierChangePhone', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePhone');
-
   Route::post('sspa/SupplierChangePassword', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePassword');  
 
 
@@ -515,6 +518,10 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
   /**************************************** Admin Delivery middleware ***************************************************/
   Route::group(['middleware'=>['AdminDelivery','auth','verified'] ], function(){
       Route::get('dashboard-delivery', 'AdminChild\AdminDelivery\AdminDeliveryController@index')->name('dashboard-delivery');
+      Route::get('spaa/delivery-report', 'AdminChild\AdminDelivery\AdminDeliveryController@index');
+      Route::get('spaa/delivery-complete', 'AdminChild\AdminDelivery\AdminDeliveryController@index');
+      Route::get('spaa/delivery-failed', 'AdminChild\AdminDelivery\AdminDeliveryController@index');
+      Route::get('spaa/delivery-pending', 'AdminChild\AdminDelivery\AdminDeliveryController@index');
   });
   /****************************************end Admin Delivery middleware ***********************************************/
 
@@ -548,6 +555,18 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
   });
   /****************************************end Admin Sales middleware ***********************************************/
 
+   /**************************************** Admin Monitoring middleware ***************************************************/
+  Route::group(['middleware'=>['AdminReport','auth','verified'] ], function(){
+      Route::get('dashboard-report', 'AdminChild\AdminReport\AdminReportController@index')->name('dashboard-report');
+  });
+  /****************************************end Admin monitoring middleware ***********************************************/
+
+   /**************************************** Admin Monitoring middleware ***************************************************/
+  Route::group(['middleware'=>['AdminMonitoring','auth','verified'] ], function(){
+      Route::get('dashboard-monitoring', 'AdminChild\AdminMonitoring\AdminMonitoringController@index')->name('dashboard-monitoring');
+  });
+  /****************************************end Admin monitoring middleware ***********************************************/
+
   /**************************************** Guest User middleware ***************************************************/
   Route::group(['middleware'=>['GuestUser','auth','verified'] ], function(){
       Route::get('dashboard-guest-user', 'AdminChild\GuestUser\GuestUserController@index')->name('dashboard-guest-user');
@@ -556,15 +575,20 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 
   Route::get('/spaa/{anypath}', function () {
     if (Auth::check()) {
-        if (auth()->user()->role_id == 7) { return view('AdminChild.adminSales.DashboardSales'); }
-        elseif (auth()->user()->role_id == 8) { return view('AdminChild.adminPurchase.DashboardPurchase'); }
-        elseif (auth()->user()->role_id == 9) { return view('AdminChild.adminStorage.DashboardStorage'); }
-        elseif (auth()->user()->role_id == 10) { return view('AdminChild.adminOrder.DashboardOrder'); }
-        elseif (auth()->user()->role_id == 11) { return view('AdminChild.adminPackaging.DashboardPackaging'); }
-        elseif (auth()->user()->role_id == 13) { return view('AdminChild.adminDelivery.DashboardDelivery'); }
-        elseif (auth()->user()->role_id == 14) { return view('AdminChild.adminSupervisor.DashboardSupervisor'); }
-        //this is guest user that only for verification check
-        elseif (auth()->user()->role_id == 17) { return view('AdminChild.GuestUser.DashboardGuestUser'); }  
+        if (auth()->user()->role_id == in_array(Auth::user()->role->id, array(7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17 ) )) 
+          { return view('AdminChild.DashboardAdminChild'); }
+
+        //if (auth()->user()->role_id == 7) { return view('AdminChild.DashboardAdminChild'); }
+        // elseif (auth()->user()->role_id == 8) { return view('AdminChild.DashboardAdminChild'); }
+        // elseif (auth()->user()->role_id == 9) { return view('AdminChild.DashboardAdminChild'); }
+        // elseif (auth()->user()->role_id == 10) { return view('AdminChild.DashboardAdminChild'); }
+        // elseif (auth()->user()->role_id == 11) { return view('AdminChild.DashboardAdminChild'); }
+        // elseif (auth()->user()->role_id == 13) { return view('AdminChild.DashboardAdminChild'); }
+        // elseif (auth()->user()->role_id == 14) { return view('AdminChild.DashboardAdminChild'); }
+        // elseif (auth()->user()->role_id == 15) { return view('AdminChild.DashboardAdminChild'); }
+        // elseif (auth()->user()->role_id == 16) { return view('AdminChild.DashboardAdminChild'); }
+        // //this is guest user that only for verification check
+        // elseif (auth()->user()->role_id == 17) { return view('AdminChild.DashboardAdminChild'); }  
     }else{
       //abort(403, 'Unauthorized action.');
       //abort(404);

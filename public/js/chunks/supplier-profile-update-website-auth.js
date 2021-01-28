@@ -327,6 +327,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
  //for user MapState
 
@@ -353,6 +375,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         password: '',
         old_password: '',
         password_confirmation: '',
+        supplier_address: '',
+        supplier_desc: '',
         email_verification_code: '',
         new_email: '',
         phone_verification_code: '',
@@ -414,12 +438,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         toastr.warning('The given data was invalid.'); // console.log(data.message);
       });
     },
-    SendEmailChangeVerificationCode: function SendEmailChangeVerificationCode() {
+    SendSupplierEmailChangeVerificationCode: function SendSupplierEmailChangeVerificationCode() {
       var _this3 = this;
 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.post('/sspa/SendEmailChangeVerificationCode').then(function (_ref2) {
+      this.form.post('/sspa/SendSupplierEmailChangeVerificationCode').then(function (_ref2) {
         var data = _ref2.data;
 
         _this3.$Progress.finish();
@@ -476,12 +500,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.form.new_email = '';
       this.form.email_verification_code = '';
     },
-    SendPhoneChangeVerificationCode: function SendPhoneChangeVerificationCode() {
+    SendSupplierPhoneChangeVerificationCode: function SendSupplierPhoneChangeVerificationCode() {
       var _this5 = this;
 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.post('/sspa/SendPhoneChangeVerificationCode').then(function (_ref4) {
+      this.form.post('/sspa/SendSupplierPhoneChangeVerificationCode').then(function (_ref4) {
         var data = _ref4.data;
 
         _this5.$Progress.finish();
@@ -697,6 +721,108 @@ var render = function() {
                                 ],
                                 1
                               )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c(
+                                "div",
+                                { staticClass: "js-form-message- mb-4" },
+                                [
+                                  _c("label", { staticClass: "form-label" }, [
+                                    _vm._v(" Address ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "input-group" }, [
+                                    _c("textarea", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.supplier_address,
+                                          expression: "form.supplier_address"
+                                        }
+                                      ],
+                                      staticClass: "form-control p-2",
+                                      staticStyle: {
+                                        "margin-top": "0px",
+                                        "margin-bottom": "0px"
+                                      },
+                                      attrs: {
+                                        name: "supplier_address",
+                                        rows: "2",
+                                        placeholder: "",
+                                        placeholder: "Enter Address"
+                                      },
+                                      domProps: {
+                                        value: _vm.form.supplier_address
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.form,
+                                            "supplier_address",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ])
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-md-12" }, [
+                              _c(
+                                "div",
+                                { staticClass: "js-form-message- mb-4" },
+                                [
+                                  _c("label", { staticClass: "form-label" }, [
+                                    _vm._v(" Details ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "input-group" }, [
+                                    _c("textarea", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.form.supplier_desc,
+                                          expression: "form.supplier_desc"
+                                        }
+                                      ],
+                                      staticClass: "form-control p-2",
+                                      staticStyle: {
+                                        "margin-top": "0px",
+                                        "margin-bottom": "0px"
+                                      },
+                                      attrs: {
+                                        name: "supplier_desc",
+                                        rows: "2",
+                                        placeholder: "",
+                                        placeholder: "Enter Address"
+                                      },
+                                      domProps: {
+                                        value: _vm.form.supplier_desc
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.$set(
+                                            _vm.form,
+                                            "supplier_desc",
+                                            $event.target.value
+                                          )
+                                        }
+                                      }
+                                    })
+                                  ])
+                                ]
+                              )
                             ])
                           ]),
                           _vm._v(" "),
@@ -759,7 +885,7 @@ var render = function() {
                                             on: {
                                               click: function($event) {
                                                 $event.preventDefault()
-                                                return _vm.SendEmailChangeVerificationCode()
+                                                return _vm.SendSupplierEmailChangeVerificationCode()
                                               }
                                             }
                                           },
@@ -975,7 +1101,7 @@ var render = function() {
                                                 on: {
                                                   click: function($event) {
                                                     $event.preventDefault()
-                                                    return _vm.SendEmailChangeVerificationCode()
+                                                    return _vm.SendSupplierEmailChangeVerificationCode()
                                                   }
                                                 }
                                               },
@@ -1073,7 +1199,7 @@ var render = function() {
                                             on: {
                                               click: function($event) {
                                                 $event.preventDefault()
-                                                return _vm.SendPhoneChangeVerificationCode()
+                                                return _vm.SendSupplierPhoneChangeVerificationCode()
                                               }
                                             }
                                           },
@@ -1297,7 +1423,7 @@ var render = function() {
                                                 on: {
                                                   click: function($event) {
                                                     $event.preventDefault()
-                                                    return _vm.SendPhoneChangeVerificationCode()
+                                                    return _vm.SendSupplierPhoneChangeVerificationCode()
                                                   }
                                                 }
                                               },
@@ -1310,7 +1436,31 @@ var render = function() {
                                   ])
                                 : _vm._e(),
                               _vm._v(" "),
-                              _vm._m(3)
+                              _c("div", { staticClass: "mb-3 text-right" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-primary-dark-w px-5",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.CancelChangePhone()
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Cancel")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-primary-dark-w px-5",
+                                    attrs: { type: "submit" }
+                                  },
+                                  [_vm._v("Save Phone")]
+                                )
+                              ])
                             ],
                             1
                           )
@@ -1496,7 +1646,7 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _vm._m(4)
+                          _vm._m(3)
                         ]
                       )
                     ]
@@ -1686,21 +1836,6 @@ var staticRenderFns = [
             " +88\n                                                        "
           )
         ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-3 text-right" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary-dark-w px-5",
-          attrs: { type: "submit" }
-        },
-        [_vm._v("Save Phone")]
       )
     ])
   },

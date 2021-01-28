@@ -4,23 +4,8 @@
 <section class="content">      
 <div class="container-fluid">   
         
-  <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container">
-        <div class="row mb-2">
-          <div class="col-sm-6 col-6">
-            <h5 class="m-0- text-dark">Profile</h5>
-          </div><!-- /.col -->
-          <div class="col-sm-6 col-6">
-            <ol class="breadcrumb float-right">
-              <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="#">Profile</a></li>
-              <!-- <li class="breadcrumb-item active">Top Navigation</li> -->
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
+    <!-- Content Header (Page header) -->
+    <Breadcrumb></Breadcrumb>
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -38,16 +23,16 @@
                   <img v-if="authUser.avatar != null" class="profile-user-img img-fluid img-circle" :src="authUser.avatar" alt="User profile picture">
                 </div>
 
-                <h3 class="profile-username text-center">{{UserInfo.name}}</h3>
+                <h3 class="profile-username text-center">{{authUserInfo.name}}</h3>
 
-                <p class="text-muted text-center" v-if="UserInfo.belongs_to_employee != null">{{UserInfo.belongs_to_employee['belongs_to_j_ob_title']['job_title_name']}}</p>
+                <p class="text-muted text-center" v-if="authUserInfo.belongs_to_employee != null">{{authUserInfo.belongs_to_employee['belongs_to_j_ob_title']['job_title_name']}}</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
-                  <li class="list-group-item" v-if="UserInfo.belongs_to_branch != null">
-                    <b>Branch</b> <a class="float-right">{{ UserInfo.belongs_to_branch['branch_name'] }}</a>
+                  <li class="list-group-item" v-if="authUserInfo.belongs_to_branch != null">
+                    <b>Branch</b> <a class="float-right">{{ authUserInfo.belongs_to_branch['branch_name'] }}</a>
                   </li>
-                  <li class="list-group-item" v-if="UserInfo.belongs_to_employee != null">
-                    <b>Job Type</b> <a class="float-right">{{UserInfo.belongs_to_employee['emp_job_type']}}</a>
+                  <li class="list-group-item" v-if="authUserInfo.belongs_to_employee != null">
+                    <b>Job Type</b> <a class="float-right">{{authUserInfo.belongs_to_employee['emp_job_type']}}</a>
                   </li>                  
                 </ul>
 
@@ -89,19 +74,20 @@
                       </div>
                       <!-- /.timeline-label -->
                       <!-- timeline item -->
-                      <div v-if="UserInfo.belongs_to_employee != null">                        
+                      <div v-if="authUserInfo.belongs_to_employee != null">                        
                         <i class="far fa-id-badge bg-primary"></i>
                         <div class="timeline-item">
                           <!-- <span class="time"><i class="far fa-clock"></i> 12:05</span> -->
-                          <p class="timeline-header"><strong>Name:</strong> {{UserInfo.belongs_to_employee.emp_name}}</p>
-                          <p class="timeline-header"><strong>Office ID:</strong> {{UserInfo.belongs_to_employee.employee_code}}</p>
-                          <p class="timeline-header"><strong>Job Status:</strong> {{UserInfo.belongs_to_employee.emp_job_status}}</p>
-                          <p class="timeline-header"><strong>Job Type:</strong> {{UserInfo.belongs_to_employee.emp_job_type}}</p>
-                          <p class="timeline-header"><strong>Designation:</strong> {{UserInfo.belongs_to_employee['belongs_to_j_ob_title']['job_title_name']}}</p>
-                          <p class="timeline-header"><strong>Join Date:</strong> {{UserInfo.belongs_to_employee['emp_hire_date'] | formatDate }}</p>
+                          <p class="timeline-header"><strong>Name:</strong> {{authUserInfo.belongs_to_employee.emp_name}}</p>
+                          <p class="timeline-header"><strong>Office ID:</strong> {{authUserInfo.belongs_to_employee.employee_code}}</p>
+                          <p class="timeline-header"><strong>Job Status:</strong> {{authUserInfo.belongs_to_employee.emp_job_status}}</p>
+                          <p class="timeline-header"><strong>Job Type:</strong> {{authUserInfo.belongs_to_employee.emp_job_type}}</p>
+                          <p class="timeline-header"><strong>Branch:</strong> {{ authUserInfo.belongs_to_branch['branch_name'] }}</p>
+                          <p class="timeline-header"><strong>Designation:</strong> {{authUserInfo.belongs_to_employee['belongs_to_j_ob_title']['job_title_name']}}</p>
+                          <p class="timeline-header"><strong>Join Date:</strong> {{authUserInfo.belongs_to_employee['emp_hire_date'] | formatDate }}</p>
 
-                          <div class="timeline-body" v-if="UserInfo.belongs_to_employee.emp_desc != null"> 
-                            {{UserInfo.belongs_to_employee.emp_desc}}
+                          <div class="timeline-body" v-if="authUserInfo.belongs_to_employee.emp_desc != null"> 
+                            {{authUserInfo.belongs_to_employee.emp_desc}}
                           </div>
 
                         </div>
@@ -109,24 +95,24 @@
                       <!-- END timeline item -->
 
                       <!-- timeline item -->
-                      <div v-if="UserInfo.belongs_to_employee != null">
+                      <div v-if="authUserInfo.belongs_to_employee != null">
                         <i class="fas fa-envelope bg-primary"></i>
                         <!-- <i class="fas fa-user bg-info"></i> -->
                         <div class="timeline-item">
                           <!-- <span class="time"><i class="far fa-clock"></i> 5 mins ago</span> -->
-                          <h3 class="timeline-header border-0"><strong>Email: </strong>{{UserInfo.belongs_to_employee['emp_email']}}</h3>
+                          <h3 class="timeline-header border-0"><strong>Email: </strong>{{authUserInfo.belongs_to_employee['emp_email']}}</h3>
                         </div>
                       </div>
                       <!-- END timeline item -->
 
                       <!-- timeline item -->
-                      <div v-if="UserInfo.belongs_to_employee != null">
+                      <div v-if="authUserInfo.belongs_to_employee != null">
                         <!-- <i class="fas fa-envelope bg-primary"></i> -->
                         <i class="fas fa-mobile-alt bg-primary"></i>
                         <!-- <i class="fas fa-user bg-info"></i> -->
                         <div class="timeline-item">
                           <!-- <span class="time"><i class="far fa-clock"></i> 5 mins ago</span> -->
-                          <h3 class="timeline-header border-0"><strong>Phone: </strong>{{UserInfo.belongs_to_employee['emp_phone']}}</h3>
+                          <h3 class="timeline-header border-0"><strong>Phone: </strong>{{authUserInfo.belongs_to_employee['emp_phone']}}</h3>
                         </div>
                       </div>
                       <!-- END timeline item -->
@@ -165,21 +151,21 @@
                       <div class="time-label"> <span class="bg-danger"> My Detials </span> </div>
                       <!-- /.timeline-label -->
                       <!-- timeline item -->
-                      <div v-if="UserInfo.belongs_to_employee != null">
+                      <div v-if="authUserInfo.belongs_to_employee != null">
                         <i class="fas fa-info-circle bg-primary"></i>
 
                         <div class="timeline-item">
                           <h3 class="timeline-header">Personal Details</h3>
                           <div class="timeline-body">
-                            <p class="timeline-header mb-0"><strong>DOB:</strong> {{UserInfo.belongs_to_employee.emp_dob}}</p>
-                            <p class="timeline-header mb-0"><strong>Gender:</strong> {{UserInfo.belongs_to_employee.emp_gender}}</p>
-                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_father_name !=null"><strong>Father Name:</strong> {{UserInfo.belongs_to_employee.emp_father_name}}</p>
-                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_mother_name !=null"><strong>Mother Name:</strong> {{UserInfo.belongs_to_employee.emp_mother_name}}</p>
-                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_wife_name !=null"><strong>Wife Name:</strong> {{UserInfo.belongs_to_employee.emp_wife_name}}</p>
-                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_tin !=null"><strong>TIN:</strong> {{UserInfo.belongs_to_employee.emp_tin}}</p>
-                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_nid !=null"><strong>NID:</strong> {{UserInfo.belongs_to_employee.emp_nid}}</p>
-                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_driving_license !=null"><strong>Driving License:</strong> {{UserInfo.belongs_to_employee.emp_driving_license}}</p>
-                            <p class="timeline-header mb-0" v-if="UserInfo.belongs_to_employee.emp_passport !=null"><strong>Passport:</strong> {{UserInfo.belongs_to_employee.emp_passport}}</p>
+                            <p class="timeline-header mb-0"><strong>DOB:</strong> {{authUserInfo.belongs_to_employee.emp_dob}}</p>
+                            <p class="timeline-header mb-0"><strong>Gender:</strong> {{authUserInfo.belongs_to_employee.emp_gender}}</p>
+                            <p class="timeline-header mb-0" v-if="authUserInfo.belongs_to_employee.emp_father_name !=null"><strong>Father Name:</strong> {{authUserInfo.belongs_to_employee.emp_father_name}}</p>
+                            <p class="timeline-header mb-0" v-if="authUserInfo.belongs_to_employee.emp_mother_name !=null"><strong>Mother Name:</strong> {{authUserInfo.belongs_to_employee.emp_mother_name}}</p>
+                            <p class="timeline-header mb-0" v-if="authUserInfo.belongs_to_employee.emp_wife_name !=null"><strong>Wife Name:</strong> {{authUserInfo.belongs_to_employee.emp_wife_name}}</p>
+                            <p class="timeline-header mb-0" v-if="authUserInfo.belongs_to_employee.emp_tin !=null"><strong>TIN:</strong> {{authUserInfo.belongs_to_employee.emp_tin}}</p>
+                            <p class="timeline-header mb-0" v-if="authUserInfo.belongs_to_employee.emp_nid !=null"><strong>NID:</strong> {{authUserInfo.belongs_to_employee.emp_nid}}</p>
+                            <p class="timeline-header mb-0" v-if="authUserInfo.belongs_to_employee.emp_driving_license !=null"><strong>Driving License:</strong> {{authUserInfo.belongs_to_employee.emp_driving_license}}</p>
+                            <p class="timeline-header mb-0" v-if="authUserInfo.belongs_to_employee.emp_passport !=null"><strong>Passport:</strong> {{authUserInfo.belongs_to_employee.emp_passport}}</p>
                           </div>
                           <!-- <div class="timeline-footer">
                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
@@ -190,52 +176,52 @@
                       <!-- END timeline item -->
 
                       <!-- timeline item -->
-                      <div v-if="UserInfo.belongs_to_employee != null">
+                      <div v-if="authUserInfo.belongs_to_employee != null">
                         <i class="far fa-address-card bg-primary"></i>
                         <div class="timeline-item">
                           <h3 class="timeline-header">Address</h3>
                           <div class="timeline-body">
-                            <p class="timeline-header" v-if="UserInfo.belongs_to_employee.emp_Present_address !=null"><strong>Present Address:</strong> {{UserInfo.belongs_to_employee.emp_Present_address}}</p>
-                            <p class="timeline-header" v-if="UserInfo.belongs_to_employee.emp_permanent_address !=null"><strong>Permanent Address:</strong> {{UserInfo.belongs_to_employee.emp_permanent_address}}</p>     
+                            <p class="timeline-header" v-if="authUserInfo.belongs_to_employee.emp_Present_address !=null"><strong>Present Address:</strong> {{authUserInfo.belongs_to_employee.emp_Present_address}}</p>
+                            <p class="timeline-header" v-if="authUserInfo.belongs_to_employee.emp_permanent_address !=null"><strong>Permanent Address:</strong> {{authUserInfo.belongs_to_employee.emp_permanent_address}}</p>     
                           </div>
                         </div>
                       </div>
                       <!-- END timeline item -->
 
                       <!-- timeline item -->
-                      <div v-if="UserInfo.belongs_to_employee != null">
+                      <div v-if="authUserInfo.belongs_to_employee != null">
                         <i class="fas fa-graduation-cap bg-success"></i>
                         <div class="timeline-item">
                           <h3 class="timeline-header">Qualification</h3>
                           <div class="timeline-body">
-                            <p class="timeline-header" v-if="UserInfo.belongs_to_employee.emp_qualification !=null"> {{UserInfo.belongs_to_employee.emp_qualification}}</p>   
+                            <p class="timeline-header" v-if="authUserInfo.belongs_to_employee.emp_qualification !=null"> {{authUserInfo.belongs_to_employee.emp_qualification}}</p>   
                           </div>
                         </div>
                       </div>
                       <!-- END timeline item -->
 
                        <!-- timeline item -->
-                      <div v-if="UserInfo.belongs_to_employee != null">
+                      <div v-if="authUserInfo.belongs_to_employee != null">
                         <!-- <i class="far fa-address-card bg-primary"></i> -->
                         <i class="fas fa-briefcase bg-primary"></i>
                         <!-- <i class="far fa-address-book"></i> -->
                         <div class="timeline-item">
                           <h3 class="timeline-header">Experience</h3>
                           <div class="timeline-body">
-                            <p class="timeline-header" v-if="UserInfo.belongs_to_employee.emp_experience !=null"> {{UserInfo.belongs_to_employee.emp_experience}}</p>   
+                            <p class="timeline-header" v-if="authUserInfo.belongs_to_employee.emp_experience !=null"> {{authUserInfo.belongs_to_employee.emp_experience}}</p>   
                           </div>
                         </div>
                       </div>
                       <!-- END timeline item -->
 
                        <!-- timeline item -->
-                      <div v-if="UserInfo.belongs_to_employee != null">
+                      <div v-if="authUserInfo.belongs_to_employee != null">
                         <!-- <i class="far fa-address-card bg-primary"></i> -->
                         <i class="fas fa-history bg-warning"></i>
                         <div class="timeline-item">
                           <h3 class="timeline-header">Job History</h3>
                           <div class="timeline-body">
-                            <p class="timeline-header" v-if="UserInfo.belongs_to_employee.emp_previous_job_history !=null"> {{UserInfo.belongs_to_employee.emp_previous_job_history}}</p>   
+                            <p class="timeline-header" v-if="authUserInfo.belongs_to_employee.emp_previous_job_history !=null"> {{authUserInfo.belongs_to_employee.emp_previous_job_history}}</p>   
                           </div>
                         </div>
                       </div>
@@ -337,7 +323,7 @@
     <!-- /.content -->
 
     <!-- {{authUser.id}} -->
-    <!-- {{UserInfo}} -->
+    <!-- {{authUserInfo}} -->
 
 
 </div>
@@ -346,6 +332,7 @@
 
 <script>
     import { mapState } from 'vuex' //for user MapState
+    import Breadcrumb from '../Layouts/Breadcrumb.vue' //Load to every page
     export default {
         name: "admin-child-profile-master",
         //Get props form views/admin/dashboard.blade.php
@@ -357,8 +344,6 @@
 
             //for images manipulation
             show_image_name: null, //use only to show image name in text field
-
-            UserInfo: '',
 
             // Create a new form instance
             form: new Form({
@@ -378,9 +363,13 @@
           }
         },
 
+        components:{ 
+            Breadcrumb,
+        },
+
         computed: {
           ...mapState( 
-             'commonStoreForAll', ['authUser', 'systemSettings']
+             'AuthenticationForAdmin', ['authUser', 'systemSettings','authUserInfo']
           ),
         },
 
@@ -416,20 +405,6 @@
               // console.log(e.target.files[0].name);
           }, 
 
-          fetchUserStatus(){
-            //this.$Progress.start(); //using progress-bar package
-
-            axios.get('/spaa/admin-child-profille-info?&id='+ this.authUser.id)
-              .then( ( response ) => {
-
-                this.UserInfo = response.data; 
-                //console.log(response);
-              })
-              .catch( (errors) => {  
-                //toastr.warning('Something is wrong!');
-              })
-          },
-
           ChangePassword(){
             this.$Progress.start(); //using progress-bar package
             this.form.put('/spaa/admin-child-profille-change-password/'+ this.form.id)
@@ -463,7 +438,8 @@
         },           
 
         created(){
-          this.fetchUserStatus();
+          this.$store.dispatch('AuthenticationForAdmin/fetchAuthUserInfo', this.authUser.id);
+          // this.fetchUserStatus();
           this.fillData(this.authUser);          
         },
            

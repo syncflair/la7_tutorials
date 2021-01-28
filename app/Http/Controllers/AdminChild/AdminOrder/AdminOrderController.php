@@ -20,7 +20,8 @@ class AdminOrderController extends Controller
 
     public function index()
     {
-        return view('AdminChild.AdminOrder.DashboardOrder');
+        // return view('AdminChild.AdminOrder.DashboardOrder');
+        return view('AdminChild.DashboardAdminChild');  
     }
 
 }

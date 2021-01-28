@@ -67,6 +67,12 @@ class LoginController extends Controller
         elseif (auth()->user()->role_id == 14) { /*Supervisor = 14*/
             return route('dashboard-supervisor');
         }
+        elseif (auth()->user()->role_id == 15) { /*report = 15*/
+            return route('dashboard-report');
+        }
+        elseif (auth()->user()->role_id == 16) { /*monitoring = 16*/
+            return route('dashboard-monitoring');
+        }
 
         //this is guest user that only for verification check
         elseif (auth()->user()->role_id == 17) { /*guest = 17*/

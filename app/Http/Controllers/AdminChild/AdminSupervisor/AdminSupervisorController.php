@@ -20,7 +20,8 @@ class AdminSupervisorController extends Controller
 
     public function index()
     {
-        return view('AdminChild.AdminSupervisor.DashboardSupervisor');
+        // return view('AdminChild.AdminSupervisor.DashboardSupervisor');
+        return view('AdminChild.DashboardAdminChild'); 
     }
 
 }

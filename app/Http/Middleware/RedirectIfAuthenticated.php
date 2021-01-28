@@ -70,6 +70,12 @@ class RedirectIfAuthenticated
                     elseif (Auth::guard($guard)->check() && Auth::user()->role->id==14){ /*Supervisor = 14*/
                         return redirect()->route('dashboard-supervisor');
                     }
+                    elseif (Auth::guard($guard)->check() && Auth::user()->role->id==15){ /*report = 15*/
+                        return redirect()->route('dashboard-report');
+                    }
+                    elseif (Auth::guard($guard)->check() && Auth::user()->role->id==16){ /*monitoring = 15*/
+                        return redirect()->route('dashboard-monitoring');
+                    }
                     elseif (Auth::guard($guard)->check() && Auth::user()->role->id==17){ /*Supervisor = 14*/
                         return redirect()->route('dashboard-guest-user');
                     }

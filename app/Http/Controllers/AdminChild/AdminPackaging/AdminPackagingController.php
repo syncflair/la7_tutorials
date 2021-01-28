@@ -20,6 +20,7 @@ class AdminPackagingController extends Controller
 
     public function index()
     {
-        return view('AdminChild.AdminPackaging.DashboardPackaging');
+        // return view('AdminChild.AdminPackaging.DashboardPackaging');
+        return view('AdminChild.DashboardAdminChild');  
     }
 }

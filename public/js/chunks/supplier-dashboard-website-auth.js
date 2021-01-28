@@ -163,6 +163,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
  //for user MapState
 
@@ -319,14 +323,8 @@ var render = function() {
                               ])
                             ]
                           )
-                        : _vm._e()
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "col-xs-12 col-sm-12 col-md-4 col-4-" },
-                    [
+                        : _vm._e(),
+                      _vm._v(" "),
                       _vm.authVendor.vendor_nid
                         ? _c(
                             "p",
@@ -372,6 +370,29 @@ var render = function() {
                               ])
                             ]
                           )
+                        : _vm._e()
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "col-xs-12 col-sm-12 col-md-4 col-4-" },
+                    [
+                      _vm.authVendor.vendor_contact_name
+                        ? _c(
+                            "p",
+                            { staticClass: "text-white- text-secondary mb-2" },
+                            [
+                              _vm._v(
+                                "Contact Name: \r\n                                    "
+                              ),
+                              _c("span", { staticClass: "text-blue" }, [
+                                _vm._v(
+                                  _vm._s(_vm.authVendor.vendor_contact_name)
+                                )
+                              ])
+                            ]
+                          )
                         : _vm._e(),
                       _vm._v(" "),
                       _c(
@@ -396,6 +417,36 @@ var render = function() {
                             _vm._v(_vm._s(_vm.authVendor.vendor_phone))
                           ])
                         ]
+                      ),
+                      _vm._v(" "),
+                      _vm.authVendor.vendor_desc
+                        ? _c(
+                            "p",
+                            {
+                              staticClass: "text-white- text-secondary mb-2",
+                              attrs: { title: "Vendor Type" }
+                            },
+                            [
+                              _vm._v("Details: "),
+                              _c("span", { staticClass: "text-blue" }, [
+                                _vm._v(_vm._s(_vm.authVendor.vendor_desc))
+                              ])
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _c(
+                        "p",
+                        {
+                          staticClass: "text-white- text-secondary mb-2",
+                          attrs: { title: "Vendor Type" }
+                        },
+                        [
+                          _vm._v("Address: "),
+                          _c("span", { staticClass: "text-blue" }, [
+                            _vm._v(_vm._s(_vm.authVendor.vendor_address))
+                          ])
+                        ]
                       )
                     ]
                   ),
@@ -404,7 +455,7 @@ var render = function() {
                     "div",
                     {
                       staticClass:
-                        "col-xs-12 col-sm-12 col-md-3 col-3- text-center"
+                        "col-xs-12 col-sm-12 col-md-3 col-3- text-center d-none d-xl-block"
                     },
                     [
                       _vm.authVendor.vendor_img
@@ -414,39 +465,7 @@ var render = function() {
                           })
                         : _vm._e()
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-12" }, [
-                    _vm.authVendor.vendor_desc
-                      ? _c(
-                          "p",
-                          {
-                            staticClass: "text-white- text-secondary mb-2",
-                            attrs: { title: "Vendor Type" }
-                          },
-                          [
-                            _vm._v("Details: "),
-                            _c("span", { staticClass: "text-blue" }, [
-                              _vm._v(_vm._s(_vm.authVendor.vendor_desc))
-                            ])
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      {
-                        staticClass: "text-white- text-secondary mb-2",
-                        attrs: { title: "Vendor Type" }
-                      },
-                      [
-                        _vm._v("Address: "),
-                        _c("span", { staticClass: "text-blue" }, [
-                          _vm._v(_vm._s(_vm.authVendor.vendor_address))
-                        ])
-                      ]
-                    )
-                  ])
+                  )
                 ])
               ])
             ]),
@@ -462,10 +481,7 @@ var render = function() {
                     _c(
                       "p",
                       { staticClass: "text-white- text-secondary mb-2" },
-                      [
-                        _c("i", { staticClass: "fas fa-at" }),
-                        _vm._v(" " + _vm._s(_vm.authSupplier.name))
-                      ]
+                      [_vm._v(" " + _vm._s(_vm.authSupplier.name))]
                     ),
                     _vm._v(" "),
                     _c(
@@ -627,7 +643,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "inner" }, [
       _c("h3", { staticClass: "text-white- text-secondary" }, [
-        _vm._v("58793 "),
+        _vm._v("5,87,93.00 "),
         _c("sup", { staticStyle: { "font-size": "20px" } }, [_vm._v("TK")])
       ]),
       _vm._v(" "),

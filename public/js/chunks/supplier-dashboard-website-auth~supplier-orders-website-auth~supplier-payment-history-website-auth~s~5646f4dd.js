@@ -88,6 +88,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -97,7 +107,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ActiveLinkClass: 'active'
     };
   },
-  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForSupplier', ['authSupplier'])), {}, {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForSupplier', ['authSupplier', 'authVendor'])), {}, {
     //for active link management
     currentPage: function currentPage() {
       return this.$route.path;
@@ -130,7 +140,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     } //End Logout 
 
   },
-  created: function created() {},
+  created: function created() {
+    var _this2 = this;
+
+    setTimeout(function () {
+      _this2.$store.dispatch('AuthenticationForSupplier/fetchAuthVendorData', _this2.authSupplier.vendor_id);
+    }, 300); //call after 800 miliscound 
+  },
   mounted: function mounted() {// console.log(this.baseURL);
   }
 });
@@ -163,37 +179,64 @@ var render = function() {
         "div",
         {
           staticClass:
-            "user-panel pl-2- pr-2- mt-2 pb-2 mb-1 d-flex border-bottom-primary- border-bottom border-top- section-title"
+            "user-panel pl-2- pr-2- mt-0 pb-2 mb-1 d-flex border-bottom-primary- border-bottom border-top- section-title"
         },
         [
-          _c("div", { staticClass: "info border- bg-gray-1- rounded-lg-" }, [
-            _c(
-              "span",
-              {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: _vm.authSupplier,
-                    expression: "authSupplier"
-                  }
-                ],
-                staticClass: "font-size-10 text-black"
-              },
-              [_vm._v(" " + _vm._s(_vm.authSupplier.name) + " ")]
-            ),
-            _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
-            _vm._m(0)
-          ])
+          _c(
+            "div",
+            { staticClass: "info border- bg-gray-1- rounded-lg- w-100" },
+            [
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.authVendor,
+                      expression: "authVendor"
+                    }
+                  ],
+                  staticClass:
+                    "col-lg-12 btn- px-1 pb-1 mt-1 mb-1 bg-primary text-black font-size-9- rounded-lg"
+                },
+                [_c("small", [_vm._v(_vm._s(_vm.authVendor.vendor_name))])]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-12 text-center" }, [
+                _vm.authVendor.vendor_img
+                  ? _c("img", {
+                      staticStyle: { height: "70px", width: "auto" },
+                      attrs: { src: _vm.authVendor.vendor_img }
+                    })
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.authSupplier,
+                      expression: "authSupplier"
+                    }
+                  ],
+                  staticClass:
+                    "col-lg-12 font-size-10 pl-0 mt-2 mb-1 text-black"
+                },
+                [_vm._v(" " + _vm._s(_vm.authSupplier.name) + " ")]
+              )
+            ]
+          )
         ]
       ),
       _vm._v(" "),
       _c(
         "ul",
         {
-          staticClass: "list-unstyled dropdown-list dropdown-list-custome",
+          staticClass: "list-unstyled dropdown-list dropdown-list-custome pb-3",
           attrs: { id: "sidebarNav" }
         },
         [
@@ -375,24 +418,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      {
-        staticClass: "btn- px-1 bg-success text-white font-size-9- rounded-lg"
-      },
-      [
-        _c("i", { staticClass: "fas fa-check font-size-8" }),
-        _vm._v(" "),
-        _c("small", [_vm._v("Verified")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

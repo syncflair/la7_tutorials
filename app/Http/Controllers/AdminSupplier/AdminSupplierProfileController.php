@@ -4,7 +4,6 @@ namespace App\Http\Controllers\AdminSupplier;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Supplier;
@@ -54,6 +53,8 @@ class AdminSupplierProfileController extends Controller
 
 		            	$supplier = Supplier::find($request->id);
 		            	$supplier->name = $request->name;
+		            	$supplier->supplier_desc = $request->supplier_desc;
+		            	$supplier->supplier_address = $request->supplier_address;
 		            	//$supplier->gender = $request->gender;
 		            	//$supplier->date_of_birth = $request->date_of_birth;
 		            	$supplier->save();
@@ -82,7 +83,7 @@ class AdminSupplierProfileController extends Controller
     } //End SupplierProfileUpdate
 
 
-    public function SendEmailChangeVerificationCode(Request $request){  	
+    public function SendSupplierEmailChangeVerificationCode(Request $request){  	
 
     	if(Auth::guard('supplier')->check()){
            
@@ -170,7 +171,7 @@ class AdminSupplierProfileController extends Controller
     }
 
 
-    public function SendPhoneChangeVerificationCode(Request $request){  	
+    public function SendSupplierPhoneChangeVerificationCode(Request $request){  	
 
     	if(Auth::guard('supplier')->check()){
            

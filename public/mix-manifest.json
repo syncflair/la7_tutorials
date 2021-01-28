@@ -259,5 +259,14 @@
     "/js/chunks/switch-app.js": "/js/chunks/switch-app.js",
     "/js/chunks/viewCategory-com.js": "/js/chunks/viewCategory-com.js",
     "/js/chunks/website-wrapper.js": "/js/chunks/website-wrapper.js",
-    "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundSupplierAdmin~PermissionAddForm-com~auto-complete-app~fo~91884e0b.js": "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundSupplierAdmin~PermissionAddForm-com~auto-complete-app~fo~91884e0b.js"
+    "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundSupplierAdmin~PermissionAddForm-com~auto-complete-app~fo~91884e0b.js": "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundSupplierAdmin~PermissionAddForm-com~auto-complete-app~fo~91884e0b.js",
+    "/js/chunks/DeliveryReportAdminChildDelivery.js": "/js/chunks/DeliveryReportAdminChildDelivery.js",
+    "/js/chunks/DeliveryCompleteAdminChildDelivery.js": "/js/chunks/DeliveryCompleteAdminChildDelivery.js",
+    "/js/chunks/DeliveryPendingAdminChildDelivery.js": "/js/chunks/DeliveryPendingAdminChildDelivery.js",
+    "/js/chunks/DeliveryFailedAdminChildDelivery.js": "/js/chunks/DeliveryFailedAdminChildDelivery.js",
+    "/js/chunks/AdminChildUserNotification.js": "/js/chunks/AdminChildUserNotification.js",
+    "/js/chunks/DashboardAdminChildMonitoring.js": "/js/chunks/DashboardAdminChildMonitoring.js",
+    "/js/chunks/DashboardAdminChildReport.js": "/js/chunks/DashboardAdminChildReport.js",
+    "/js/chunks/vendors~auto-complete-app~multi-select-app~switch-app.js": "/js/chunks/vendors~auto-complete-app~multi-select-app~switch-app.js",
+    "/js/chunks/vendors~AdminChildNotFound~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-sele~0d37d582.js": "/js/chunks/vendors~AdminChildNotFound~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-sele~0d37d582.js"
 }

@@ -87,6 +87,8 @@ class Kernel extends HttpKernel
 
         'AdminCustomer' => \App\Http\Middleware\AdminCustomerMiddleware::class,
         'AdminSupplier' => \App\Http\Middleware\AdminSupplierMiddleware::class,
+        'AdminReport' => \App\Http\Middleware\AdminReportMiddleware::class,
+        'AdminMonitoring' => \App\Http\Middleware\AdminMonitoringMiddleware::class,
         'GuestUser' => \App\Http\Middleware\GuestUserMiddleware::class,
 
 

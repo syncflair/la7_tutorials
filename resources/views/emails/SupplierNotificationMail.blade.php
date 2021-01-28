@@ -12,25 +12,31 @@
 @section('content')
 
   <h2 >Hello,  <strong> {{$email_data['userInfo']['name']}}</strong></h2>
-    
    
 
-  <p class="mt-10 mb-10">
+
     @if($email_data['tag'] == 'inactive')
 
-      <strong>Opps!</strong>, Your account  <strong> inactive </strong> by admin, Please contact with admin to re-active your account.  <br>
+      <p class="mt-10 mb-10">
+        <strong>Opps!</strong>, Your account  <strong> inactive </strong> by admin, Please contact with admin to re-active your account.
+      </p>  <br>
     
     @elseif($email_data['tag'] == 'active')
 
-      <strong>Congratulation !</strong>, Your account is <strong> active </strong> by admin, Now you can login to your account  <br>
+      <p class="mt-10 mb-10">
+        <strong>Congratulation !</strong>, Your account is <strong> active </strong> by admin, Now you can login to your account 
+      </p> <br>
     
     @elseif($email_data['tag'] == 'varify')
 
-      <strong>Congratulation !</strong>, Your account is <strong> varified </strong> by Admin, Now you can login to your account  <br>
+      <p class="mt-10 mb-10">
+        <strong>Congratulation !</strong>, Your account is <strong> varified </strong> by Admin, Now you can login to your account
+      </p>  <br>
 
     @elseif($email_data['tag'] == 'register')
-
-      <strong>Congratulation</strong>, You are registered by sorboraho.com admin. Your Login credential details bellow: <br> <br>
+      <p class="mt-10 mb-10">
+        <strong>Congratulation</strong>, You are registered by sorboraho.com admin. Your Login credential details bellow:
+      </p> <br> <br>
 
       <div  style="padding-left: 20px; margin-top: 10px; margin-bottom: 10px;">
         <table class="table">
@@ -46,11 +52,14 @@
 
     @elseif($email_data['tag'] == 'sendEmailVerificationCode') 
 
-      Your email change verification code : <strong> {{ $email_data['userInfo']['generate_email_verification_code'] }} </strong><br>
+      <p class="mt-10 mb-10">
+        Your email change verification code : <strong> {{ $email_data['userInfo']['generate_email_verification_code'] }} </strong>
+      </p><br>
 
     @elseif($email_data['tag'] == 'emailHasBeenChanged')
-
-      <strong>Congratulation</strong>, Your email is now registered to sorboraho.com. Your details bellow: <br> <br>
+      <p class="mt-10 mb-10">
+        <strong>Congratulation</strong>, Your email is now registered to sorboraho.com. Your details bellow: 
+      </p><br> <br>
 
       <div  style="padding-left: 20px; margin-top: 10px; margin-bottom: 10px;">
         <table class="table">
@@ -66,7 +75,7 @@
       </div>
 
     @endif
-  </p>
+
 
 
  <!--  @if($email_data['tag'] == 'register')

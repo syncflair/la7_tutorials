@@ -28,32 +28,27 @@
                                 <h3 class="section-title- mb-0 pb-1 pl-2- font-size-18">My Profile</h3>
                             </div>
 
-                            <div class="col-lg-3 col-6 mb-1 col-6-">
+                            <div class="col-lg-4 col-6 mb-1 col-6-">
                                 <h3 class=" mb-0 pb-1 pl-2- font-size-14">Full Name</h3>
                                 <p> {{ authSupplier.name }}</p>
                             </div>
 
-                            <div class="col-lg-3 col-6 col-6-">
+                            <div class="col-lg-4 col-6 col-6-">
                                 <h3 class=" mb-0 pb-1 pl-2- font-size-14">Email Address</h3>
                                 <p> {{authSupplier.email }}</p>
                             </div>
 
-                            <div class="col-lg-2 col-6 mb-1 col-6-">
+                            <div class="col-lg-4 col-6 mb-1 col-6-">
                                 <h3 class=" mb-0 pb-1 pl-2- font-size-14">Phone</h3>
                                 <p> +88 {{ authSupplier.phone }}</p>
                             </div>
 
-                            <div class="col-lg-2 col-6 mb-1 col-6-">
-                                <h3 class=" mb-0 pb-1 pl-2- font-size-14">Sypplier Type</h3>
-                                <p class="green"> {{ authSupplier.supplier_type }}</p>
-                            </div>
-
-                            <div class="col-lg-3 col-6 mb-1 col-6-">
+                            <div class="col-lg-6 col-6 mb-1 col-6-">
                                 <h3 class=" mb-0 pb-1 pl-2- font-size-14">Address</h3>
                                 <p> {{ authSupplier.supplier_address }}</p>
                             </div>
 
-                            <div class="col-lg-3 col-6 mb-1 col-6-">
+                            <div class="col-lg-6 col-6 mb-1 col-6-">
                                 <h3 class=" mb-0 pb-1 pl-2- font-size-14">Details</h3>
                                 <p> {{ authSupplier.supplier_desc }}</p>
                             </div>

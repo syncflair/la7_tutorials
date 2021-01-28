@@ -98,11 +98,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
  //for user MapState
 
@@ -190,7 +185,7 @@ var render = function() {
               _c("div", { staticClass: "row pb-7 mb-7" }, [
                 _vm._m(0),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-3 col-6 mb-1 col-6-" }, [
+                _c("div", { staticClass: "col-lg-4 col-6 mb-1 col-6-" }, [
                   _c("h3", { staticClass: " mb-0 pb-1 pl-2- font-size-14" }, [
                     _vm._v("Full Name")
                   ]),
@@ -198,7 +193,7 @@ var render = function() {
                   _c("p", [_vm._v(" " + _vm._s(_vm.authSupplier.name))])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-3 col-6 col-6-" }, [
+                _c("div", { staticClass: "col-lg-4 col-6 col-6-" }, [
                   _c("h3", { staticClass: " mb-0 pb-1 pl-2- font-size-14" }, [
                     _vm._v("Email Address")
                   ]),
@@ -206,7 +201,7 @@ var render = function() {
                   _c("p", [_vm._v(" " + _vm._s(_vm.authSupplier.email))])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-2 col-6 mb-1 col-6-" }, [
+                _c("div", { staticClass: "col-lg-4 col-6 mb-1 col-6-" }, [
                   _c("h3", { staticClass: " mb-0 pb-1 pl-2- font-size-14" }, [
                     _vm._v("Phone")
                   ]),
@@ -214,17 +209,7 @@ var render = function() {
                   _c("p", [_vm._v(" +88 " + _vm._s(_vm.authSupplier.phone))])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-2 col-6 mb-1 col-6-" }, [
-                  _c("h3", { staticClass: " mb-0 pb-1 pl-2- font-size-14" }, [
-                    _vm._v("Sypplier Type")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "green" }, [
-                    _vm._v(" " + _vm._s(_vm.authSupplier.supplier_type))
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-lg-3 col-6 mb-1 col-6-" }, [
+                _c("div", { staticClass: "col-lg-6 col-6 mb-1 col-6-" }, [
                   _c("h3", { staticClass: " mb-0 pb-1 pl-2- font-size-14" }, [
                     _vm._v("Address")
                   ]),
@@ -234,7 +219,7 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-3 col-6 mb-1 col-6-" }, [
+                _c("div", { staticClass: "col-lg-6 col-6 mb-1 col-6-" }, [
                   _c("h3", { staticClass: " mb-0 pb-1 pl-2- font-size-14" }, [
                     _vm._v("Details")
                   ]),

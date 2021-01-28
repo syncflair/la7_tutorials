@@ -31689,6 +31689,25 @@ THEMES:
 
 /*Admin Lte Css Import*/
 
+.dropdown-item-custome.active {
+  color: rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  background-color: unset !important;
+  box-shadow: unset !important;
+}
+
+.dropdown-item-custome:hover {
+  font-weight: 700 !important;
+}
+
+.dropdown-item-custome.router-link-active.active {
+  font-weight: 700 !important;
+}
+
+.card {
+  box-shadow: unset !important;
+}
+
 .LogoTextStyle {
   color: #ffffff;
   font-weight: bold;

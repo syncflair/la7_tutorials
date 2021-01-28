@@ -200,6 +200,28 @@ router.beforeEach((to, from, next) => {
     }, 500);//call after 300 miliscound
   }
 
+  //admin authentication for Delivery role
+  else if(to.meta.authRequiredDelivery === true){
+    setTimeout(() => {
+      // store.state.AuthenticationForAdmin.authUser.role_id
+      const isAdminAuthenticated = store.state.AuthenticationForAdmin.isAdminAuthenticated;//this.isAdminAuthenticated; get form AuthenticationForCustomer.js
+      if (  isAdminAuthenticated !== true) next( window.location = '/login-abc' )
+      if( store.state.AuthenticationForAdmin.authUser.role_id !== 13 && isAdminAuthenticated === true) next({name: 'AdminChildPageNotFound'})
+      else next()
+    }, 500);//call after 300 miliscound
+  }
+
+  //admin authentication for Delivery role
+  else if(to.meta.authRequiredOrder === true){
+    setTimeout(() => {
+      // store.state.AuthenticationForAdmin.authUser.role_id
+      const isAdminAuthenticated = store.state.AuthenticationForAdmin.isAdminAuthenticated;//this.isAdminAuthenticated; get form AuthenticationForCustomer.js
+      if (  isAdminAuthenticated !== true) next( window.location = '/login-abc' )
+      if( store.state.AuthenticationForAdmin.authUser.role_id !== 10 && isAdminAuthenticated === true) next({name: 'AdminChildPageNotFound'})
+      else next()
+    }, 500);//call after 300 miliscound
+  }
+
   else {
       next()
   }
@@ -243,6 +265,12 @@ const app = new Vue({
     }, 
 
     mounted() {
+      setTimeout(() => {
+        //console.log(store.state.AuthenticationForAdmin.authUser.role_id);
+        //console.log(store.state.AuthenticationForAdmin.isAdminAuthenticated);
+
+
+      }, 500);
       // console.log(store.state.AuthenticationForCustomer.isAuthenticated); //get access to state
       //console.log(store.getters['AuthenticationForCustomer/isAuthenticated']); //get access to getters
       

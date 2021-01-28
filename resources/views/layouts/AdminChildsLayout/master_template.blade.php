@@ -1,42 +1,19 @@
 @include('layouts.AdminChildsLayout.head')
 
 
-<body class="hold-transition sidebar-collapse layout-top-nav">
-<div class="wrapper" id="app">
-
-  <!-- Navbar -->
-  @include('layouts.AdminChildsLayout.navbar')
-  <!-- /.navbar -->
-
-  <!-- Main Sidebar Container -->
-  @include('layouts.AdminChildsLayout.aside_left')
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+  <body class="hold-transition sidebar-collapse layout-top-nav">
 
 
-    @yield('content')    
-   
+    <div class="wrapper" id="app">
 
-  </div>
-  <!-- /.content-wrapper -->
+      @yield('content')    
+      
+    </div>
+    <!-- ./app -->
 
-  <!-- Control Sidebar -->
- 	@include('layouts.AdminChildsLayout.aside_right')
-  <!-- /.control-sidebar -->
-
-  <!-- Main Footer -->
-  @include('layouts.AdminChildsLayout.footer')
-  
-</div>
-<!-- ./wrapper -->
-
-<!-- REQUIRED SCRIPTS -->
+    <!-- REQUIRED SCRIPTS -->
+    @include('layouts.AdminChildsLayout.script')
 
 
-<!-- Scripts -->
-@include('layouts.AdminChildsLayout.script')
-
-
-</body>
+  </body>
 </html>

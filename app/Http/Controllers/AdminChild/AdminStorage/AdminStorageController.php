@@ -20,7 +20,10 @@ class AdminStorageController extends Controller
 
     public function index()
     {
-        return view('AdminChild.AdminStorage.DashboardStorage');
+        // return view('AdminChild.AdminStorage.DashboardStorage');
+
+        
+        return view('AdminChild.DashboardAdminChild'); 
     }
 
 }
