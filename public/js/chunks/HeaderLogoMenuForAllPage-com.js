@@ -691,17 +691,19 @@ var render = function() {
                                   1
                                 ),
                                 _vm._v(" "),
-                                _vm._m(3)
+                                _vm._m(3),
+                                _vm._v(" "),
+                                _vm._m(4)
                               ]
                             )
                           ]
                         ),
                         _vm._v(" "),
-                        _vm._m(4),
-                        _vm._v(" "),
                         _vm._m(5),
                         _vm._v(" "),
-                        _vm._m(6)
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _vm._m(7)
                       ]
                     )
                   ]
@@ -710,7 +712,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _vm._m(7),
+          _vm._m(8),
           _vm._v(" "),
           _c(
             "div",
@@ -726,9 +728,9 @@ var render = function() {
                     staticClass: "d-flex list-unstyled mb-0 align-items-center"
                   },
                   [
-                    _vm._m(8),
-                    _vm._v(" "),
                     _vm._m(9),
+                    _vm._v(" "),
+                    _vm._m(10),
                     _vm._v(" "),
                     _c(
                       "li",
@@ -737,7 +739,7 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _vm._m(10)
+                    _vm._m(11)
                   ]
                 )
               ])
@@ -1531,6 +1533,21 @@ var staticRenderFns = [
           attrs: { href: "/sspa/my-profile" }
         },
         [_vm._v("Supplier Profile link")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", [
+      _c(
+        "a",
+        {
+          staticClass: "nav-link u-header__sub-menu-nav-link",
+          attrs: { href: "/spaa/admin-user-profile" }
+        },
+        [_vm._v("Admin Child Profile")]
       )
     ])
   },

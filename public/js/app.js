@@ -93137,7 +93137,8 @@ var routes = [//export const routes = [
   },
   meta: {
     authRequiredOrder: true,
-    title: 'Dashboard'
+    title: 'Dashboard',
+    breadcrumb: 'Dashboard'
   }
 }, //Admin Sales
 {
@@ -93208,7 +93209,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Profile',
-    breadcrumb: 'Profile'
+    breadcrumb: 'Profile',
+    authRequiredAdminChild: true
   }
 }, {
   path: '/spaa/admin-user-notification',
@@ -93218,7 +93220,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Notification',
-    breadcrumb: 'Notification'
+    breadcrumb: 'Notification',
+    authRequiredAdminChild: true
   }
 }, //not found page for Admin child
 {
@@ -93228,7 +93231,7 @@ var routes = [//export const routes = [
     return Promise.all(/*! import() | AdminChildNotFound */[__webpack_require__.e("vendors~AdminChildNotFound~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-sele~0d37d582"), __webpack_require__.e("AdminChildNotFound")]).then(__webpack_require__.bind(null, /*! ./components/AdminChild/GlobalComponents/NotFound.vue */ "./resources/js/components/AdminChild/GlobalComponents/NotFound.vue"));
   },
   meta: {
-    title: 'Page not found'
+    title: 'Not found'
   }
 },
 /********************************************************/
@@ -93756,8 +93759,7 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | 404Public-website */ "404Public-website").then(__webpack_require__.bind(null, /*! ./components/Website/Public/404/404Public.vue */ "./resources/js/components/Website/Public/404/404Public.vue"));
   },
   meta: {
-    title: 'Page Not Found',
-    breadcrumb: 'Page Not Found'
+    breadcrumb: 'Not Found'
   }
 }]; //end routes
 //const router = new VueRouter({
@@ -94153,6 +94155,12 @@ _VueRouters__WEBPACK_IMPORTED_MODULE_2__["default"].beforeEach(function (to, fro
             if (isAdminAuthenticated !== true) next(window.location = '/login-abc');
             if (_VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForAdmin.authUser.role_id !== 13 && isAdminAuthenticated === true) next({
               name: 'AdminChildPageNotFound'
+            });
+            if (to.name === 'AdminChildProfileMaster' && _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({
+              name: 'AdminChildProfileMaster'
+            });
+            if (to.name === 'AdminChildNotificationMaster' && _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({
+              name: 'AdminChildNotificationMaster'
             });else next();
           }, 500); //call after 300 miliscound
         } //admin authentication for Delivery role
@@ -94164,6 +94172,12 @@ _VueRouters__WEBPACK_IMPORTED_MODULE_2__["default"].beforeEach(function (to, fro
               if (isAdminAuthenticated !== true) next(window.location = '/login-abc');
               if (_VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForAdmin.authUser.role_id !== 10 && isAdminAuthenticated === true) next({
                 name: 'AdminChildPageNotFound'
+              });
+              if (to.name === 'AdminChildProfileMaster' && _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({
+                name: 'AdminChildProfileMaster'
+              });
+              if (to.name === 'AdminChildNotificationMaster' && _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({
+                name: 'AdminChildNotificationMaster'
               });else next();
             }, 500); //call after 300 miliscound
           } else {
@@ -94185,7 +94199,7 @@ var app = new Vue({
     //for title
     '$route': {
       handler: function handler(to, from) {
-        document.title = to.meta.title || 'Sorboraho'; // document.title = ${process.env.APP_NAME}
+        document.title = to.meta.title || 'Sorboraho';
       } //immediate: true,
 
     }
@@ -94309,8 +94323,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       //myName: 'Md. Mahmudur Rahman',
-      baseURL: window.location.origin //window.location.host -- to get host name, use for full path img 
-
+      baseURL: window.location.origin,
+      //window.location.host -- to get host name, use for full path img 
+      NoImageAvailable: '/FilesStorage/CommonFiles/no-img.png'
     };
   },
   computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'systemSettings'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['isitwebsiteCheck'] //isAuthenticated

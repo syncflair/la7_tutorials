@@ -47,13 +47,13 @@
               <router-link to="/dashboard-order" class="nav-link dropdown-item-custome" :class="[currentPage.includes('dashboard-order')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-tachometer-alt text-warning"></i> <p>Dashboard</p></router-link>              
             </li> 
             <li class="nav-item">
-              <router-link to="/order-all" class="nav-link dropdown-item-custome" :class="[currentPage.includes('order-all')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-tachometer-alt text-warning"></i> <p>All Order</p></router-link>
+              <router-link to="/spaa/order-all" class="nav-link dropdown-item-custome" :class="[currentPage.includes('order-all')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-list-ul text-warning"></i> <p>All Order</p></router-link>
             </li> 
             <li class="nav-item">
-              <router-link to="/order-complete" class="nav-link dropdown-item-custome" :class="[currentPage.includes('order-complete')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-tachometer-alt text-warning"></i> <p>Order Complete</p></router-link>
+              <router-link to="/spaa/order-complete" class="nav-link dropdown-item-custome" :class="[currentPage.includes('order-complete')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-list-ul text-warning"></i> <p>Order Complete</p></router-link>
             </li> 
             <li class="nav-item">
-              <router-link to="/order-failed" class="nav-link dropdown-item-custome" :class="[currentPage.includes('order-failed')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-tachometer-alt text-warning"></i> <p>Order failed</p></router-link>
+              <router-link to="/spaa/order-failed" class="nav-link dropdown-item-custome" :class="[currentPage.includes('order-failed')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-list-ul text-warning"></i> <p>Order failed</p></router-link>
             </li>
 
 

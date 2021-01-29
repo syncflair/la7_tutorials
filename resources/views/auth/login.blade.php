@@ -1,5 +1,6 @@
 @extends('layouts.auth_master_adminlte')
-@section('title') {{ ucfirst(\Request::segment(1)) }} @endsection
+<!-- @section('title') {{ ucfirst(\Request::segment(1)) }} @endsection -->
+@section('title', 'Login') 
 
 @section('style')
  <style type="text/css">

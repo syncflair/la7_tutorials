@@ -219,7 +219,7 @@
                                     <li><router-link to="/sspa/login" class="nav-link u-header__sub-menu-nav-link" >Supplier Login</router-link></li>
                                     <li><router-link to="/sspa/my-profile" class="nav-link u-header__sub-menu-nav-link" >Supplier Profile</router-link></li>
                                     <li><a href="/sspa/my-profile" class="nav-link u-header__sub-menu-nav-link" >Supplier Profile link</a></li>
-
+                                    <li><a href="/spaa/admin-user-profile" class="nav-link u-header__sub-menu-nav-link" >Admin Child Profile</a></li>
 
                                 </ul>
                                 <!-- End Submenu -->

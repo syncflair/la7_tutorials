@@ -20,7 +20,7 @@
     <!-- /.content-wrapper -->
 
     <!-- Right Asside - Control Sidebar -->
-        <AssideRightForAdminChild></AssideRightForAdminChild>
+    <!-- <AssideRightForAdminChild></AssideRightForAdminChild> -->
     <!-- /. Right Asside - control-sidebar -->
 
     <!-- Footer -->
@@ -33,11 +33,9 @@
 
 <script>
 
-    //const HeaderLogoSearchIconsForHome = () => import( /* webpackChunkName: "HeaderLogoSearchIconsForHome-com" */ './Layouts/HeaderLogoSearchIconsForHome.vue')
-
    import NavbarTop from './Layouts/NavbarTop.vue' //Load to every page
    import AssideLeftForAdminChild from './Layouts/AssideLeftForAdminChild.vue' //Load to every page
-   import AssideRightForAdminChild from './Layouts/AssideRightForAdminChild.vue' //Load to every page
+   //import AssideRightForAdminChild from './Layouts/AssideRightForAdminChild.vue' //Load to every page
    import FooterforAdminChild from './Layouts/FooterforAdminChild.vue' //Load to every page
 
 
@@ -52,7 +50,9 @@
         },
 
         components:{ 
-            NavbarTop, AssideLeftForAdminChild, AssideRightForAdminChild,
+            NavbarTop, 
+            AssideLeftForAdminChild, 
+            //AssideRightForAdminChild,
             FooterforAdminChild, 
         },
 

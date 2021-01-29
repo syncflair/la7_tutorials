@@ -12,21 +12,67 @@
     <div class="content">
       <div class="container">
 
-        <div class="row">
-          <div class="col-md-3">
 
-            <!-- Profile Image -->
+        <div class="row">
+          <div class="col-12 offset-1-">
+            
+            <div class="card card-widget widget-user">
+              <!-- Add the bg color to the header using any of the bg-* classes -->
+              <div class="widget-user-header bg-info">
+                <h3 class="widget-user-username">{{authUserInfo.name}}</h3>
+                <h5 v-if="authUserInfo.belongs_to_employee != null" class="widget-user-desc">{{authUserInfo.belongs_to_employee['belongs_to_j_ob_title']['job_title_name']}}</h5>
+              </div>
+
+              <div class="widget-user-image">
+                <img v-if="authUserInfo.belongs_to_employee['avavtar'] === null" class="img-circle elevation-2" :src="NoImageAvailable" alt="">
+                <img v-if="authUserInfo.belongs_to_employee['avatar'] !== null" class="img-circle elevation-2" :src="authUserInfo.belongs_to_employee['avatar']" alt="" style="height: 85px;">
+              </div>
+
+              <div class="card-footer bg-white">
+                <div class="row">
+                  <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                      <h5 v-if="authUserInfo.belongs_to_branch != null" class="description-header">{{ authUserInfo.belongs_to_branch['branch_name'] }}</h5>
+                      <span class="description-text">Branch</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-4 border-right">
+                    <div class="description-block">
+                      <h5 v-if="authUserInfo.belongs_to_employee != null" class="description-header">{{authUserInfo.belongs_to_employee['emp_job_type']}}</h5>
+                      <span class="description-text">Employee Type</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-4">
+                    <div class="description-block">
+                      <h5 class="description-header">{{authUserInfo.belongs_to_employee['emp_hire_date'] | formatDate }}</h5>
+                      <span class="description-text">Join</span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row">
+         
+          <!-- <div class="col-md-3">
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <img v-if="authUser.avatar === null" class="profile-user-img img-fluid img-circle" :src="'../'+NoIconUrl" alt="User profile picture">
-                  <img v-if="authUser.avatar != null" class="profile-user-img img-fluid img-circle" :src="authUser.avatar" alt="User profile picture">
+                  <img v-if="authUserInfo.belongs_to_employee === null" class="profile-user-img img-fluid img-circle" :src="NoImageAvailable" alt="User profile picture">
+                  <img v-if="authUserInfo.belongs_to_employee !== null" class="profile-user-img img-fluid img-circle" :src="authUserInfo.belongs_to_employee['avatar']" alt="User profile picture">
                 </div>
-
                 <h3 class="profile-username text-center">{{authUserInfo.name}}</h3>
-
                 <p class="text-muted text-center" v-if="authUserInfo.belongs_to_employee != null">{{authUserInfo.belongs_to_employee['belongs_to_j_ob_title']['job_title_name']}}</p>
-
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item" v-if="authUserInfo.belongs_to_branch != null">
                     <b>Branch</b> <a class="float-right">{{ authUserInfo.belongs_to_branch['branch_name'] }}</a>
@@ -35,19 +81,12 @@
                     <b>Job Type</b> <a class="float-right">{{authUserInfo.belongs_to_employee['emp_job_type']}}</a>
                   </li>                  
                 </ul>
-
-                <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
+          </div> -->
 
-            <!-- About Me Box -->
-         
-            <!-- /.card -->
-          </div>
           <!-- /.col -->
-          <div class="col-md-9">
+          <div class="col-md-10 offset-md-1 ">
             <div class="card">
               <div class="card-header p-2">
                 <ul class="nav nav-pills">
@@ -262,7 +301,7 @@
                           <label>Current Password</label>                   
                         </div>
                         <div class="col-sm-9">
-                          <input v-model="form.current_password" type="current_password" ref="current_password" name="current_password" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('current_password') }" placeholder="Current Password">
+                          <input v-model="form.current_password" type="current_password" name="current_password" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('current_password') }" placeholder="Current Password">
                           <has-error :form="form" field="current_password"></has-error>
                         </div> 
                       </div>
@@ -272,7 +311,7 @@
                           <label>New Password</label>                   
                         </div>
                         <div class="col-sm-9">
-                          <input v-model="form.password" type="password" ref="password" name="password" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('password') }" placeholder="New Password">
+                          <input v-model="form.password" type="password" name="password" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('password') }" placeholder="New Password">
                           <has-error :form="form" field="password"></has-error>
                         </div> 
                       </div>
@@ -282,7 +321,7 @@
                           <label>New Password Confirm</label>                    
                         </div>
                         <div class="col-sm-9">
-                          <input v-model="form.password_confirmation" type="password" ref="password_confirmation" name="password_confirmation" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" placeholder="Confirm new Password">
+                          <input v-model="form.password_confirmation" type="password" name="password_confirmation" class="form-control form-control-sm" :class="{ 'is-invalid': form.errors.has('password_confirmation') }" placeholder="Confirm new Password">
                           <has-error :form="form" field="password_confirmation"></has-error>
                         </div> 
                       </div>
@@ -338,7 +377,7 @@
         //Get props form views/admin/dashboard.blade.php
         data (){      
           return {
-            NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
+            //NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
             ShowOnChangeImage:null, 
             deleteImageIcon: false, //Delete Image icon if image exist
 
@@ -357,7 +396,7 @@
               // status_id: '',
               // employee_id: '',
               // branch_id: '',
-              // avatar: '',
+              //avatar: '',
             })
                           
           }
@@ -438,7 +477,9 @@
         },           
 
         created(){
-          this.$store.dispatch('AuthenticationForAdmin/fetchAuthUserInfo', this.authUser.id);
+          //setTimeout(() => {
+            this.$store.dispatch('AuthenticationForAdmin/fetchAuthUserInfo', this.authUser.id);
+          //}, 500);//call after 300 miliscound
           // this.fetchUserStatus();
           this.fillData(this.authUser);          
         },

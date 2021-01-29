@@ -207,6 +207,9 @@ router.beforeEach((to, from, next) => {
       const isAdminAuthenticated = store.state.AuthenticationForAdmin.isAdminAuthenticated;//this.isAdminAuthenticated; get form AuthenticationForCustomer.js
       if (  isAdminAuthenticated !== true) next( window.location = '/login-abc' )
       if( store.state.AuthenticationForAdmin.authUser.role_id !== 13 && isAdminAuthenticated === true) next({name: 'AdminChildPageNotFound'})
+      if (to.name === 'AdminChildProfileMaster' && store.state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true ) next({ name: 'AdminChildProfileMaster' }) 
+      if (to.name === 'AdminChildNotificationMaster' && store.state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({ name: 'AdminChildNotificationMaster' }) 
+      
       else next()
     }, 500);//call after 300 miliscound
   }
@@ -218,6 +221,9 @@ router.beforeEach((to, from, next) => {
       const isAdminAuthenticated = store.state.AuthenticationForAdmin.isAdminAuthenticated;//this.isAdminAuthenticated; get form AuthenticationForCustomer.js
       if (  isAdminAuthenticated !== true) next( window.location = '/login-abc' )
       if( store.state.AuthenticationForAdmin.authUser.role_id !== 10 && isAdminAuthenticated === true) next({name: 'AdminChildPageNotFound'})
+      if (to.name === 'AdminChildProfileMaster' && store.state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({ name: 'AdminChildProfileMaster' }) 
+      if (to.name === 'AdminChildNotificationMaster' && store.state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({ name: 'AdminChildNotificationMaster' }) 
+
       else next()
     }, 500);//call after 300 miliscound
   }
@@ -244,7 +250,6 @@ const app = new Vue({
       '$route':{
         handler: (to, from) => {
           document.title = to.meta.title || 'Sorboraho'
-          // document.title = ${process.env.APP_NAME}
         },
          //immediate: true,
       }

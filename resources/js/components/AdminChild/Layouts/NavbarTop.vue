@@ -55,7 +55,7 @@
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                <!-- <img src="" alt="User Avatar" class="img-size-50 mr-3 img-circle"> -->
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Brad Diesel
@@ -71,7 +71,7 @@
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <!-- <img src="" alt="User Avatar" class="img-size-50 img-circle mr-3"> -->
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     John Pierce
@@ -87,7 +87,7 @@
             <a href="#" class="dropdown-item">
               <!-- Message Start -->
               <div class="media">
-                <img src="" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                <!-- <img src="" alt="User Avatar" class="img-size-50 img-circle mr-3"> -->
                 <div class="media-body">
                   <h3 class="dropdown-item-title">
                     Nora Silvester
@@ -100,7 +100,7 @@
               <!-- Message End -->
             </a>
             <div class="dropdown-divider"></div>
-            <router-link to="" class="dropdown-item dropdown-footer">See All Messages</router-link>
+            <router-link to="/spaa/admin-user-notification" class="dropdown-item dropdown-footer">See All Messages</router-link>
           </div>
         </li>
         <!-- Notifications Dropdown Menu -->
@@ -127,13 +127,14 @@
               <span class="float-right text-muted text-sm">2 days</span>
             </a>
             <div class="dropdown-divider"></div>
-            <router-link to="/spaa/admin-user-notification"" class="dropdown-item dropdown-footer">See All Notifications</router-link>
+            <router-link to="/spaa/admin-user-notification" class="dropdown-item dropdown-footer">See All Notifications</router-link>
           </div>
         </li>
-        <li class="nav-item">
+        
+        <!-- <li class="nav-item">
           <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i
               class="fas fa-th-large"></i></a>
-        </li>
+        </li> -->
 
         <li class="nav-item dropdown">
 
@@ -155,6 +156,10 @@
 
               <!-- #################################### Order manager Menu ######################################## -->
               <span v-if="authUser.role_id === 10"> <!--Role 10 is Order manager -->
+                <li><router-link to="/dashboard-order" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('dashboard-order')] ? ActiveLinkClass : '' "> Dashboard</router-link></li>
+                <li><router-link to="/spaa/order-all" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('order-all')] ? ActiveLinkClass : '' "> All Order</router-link></li>
+                <li><router-link to="/spaa/order-complete" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('order-complete')] ? ActiveLinkClass : '' "> Order Complete</router-link></li>
+                <li><router-link to="/spaa/order-failed" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('order-failed')] ? ActiveLinkClass : '' "> Order failed</router-link></li>
               </span><!--End Role 13 is Order manager -->
 
               <!-- #################################### Packaging Menu ########################################### -->

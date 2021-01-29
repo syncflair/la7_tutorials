@@ -174,7 +174,7 @@ const routes = [
 	{ path: '/dashboard-packaging', component: () => import(/* webpackChunkName: "DashboardAdminChildPackaging" */ './components/AdminChild/AdminPackaging/DashboardAdminChildPackaging.vue'), meta: { title: 'Dashboard'} },
 	
 	//Admin Order
-	{ path: '/dashboard-Order', name: 'DashboardOrder', component: () => import(/* webpackChunkName: "DashboardAdminChildOrder" */ './components/AdminChild/AdminOrder/DashboardAdminChildOrder.vue'), meta: {authRequiredOrder: true, title: 'Dashboard'} },
+	{ path: '/dashboard-Order', name: 'DashboardOrder', component: () => import(/* webpackChunkName: "DashboardAdminChildOrder" */ './components/AdminChild/AdminOrder/DashboardAdminChildOrder.vue'), meta: {authRequiredOrder: true, title: 'Dashboard', breadcrumb: 'Dashboard',} },
 	
 
 	//Admin Sales
@@ -192,12 +192,14 @@ const routes = [
 	{ path: '/dashboard-GuestUser', name: 'DashboardGuestUser', component: () => import(/* webpackChunkName: "DashboardAdminChildGuestUser" */ './components/AdminChild/AdminGuestUser/DashboardAdminChildGuestUser.vue'), meta: { title: 'Dashboard'} },
 
 	//Common component for all Admin child
-	{ path: '/spaa/admin-user-profile', name: 'AdminChildProfileMaster', component: () => import(/* webpackChunkName: "AdminChildUserProfile" */ './components/AdminChild/AdminChildProfile/AdminChildProfileMaster.vue'), meta: { title: 'Profile', breadcrumb: 'Profile'} },
-	{ path: '/spaa/admin-user-notification', name: 'AdminChildNotificationMaster', component: () => import(/* webpackChunkName: "AdminChildUserNotification" */ './components/AdminChild/AdminChildProfile/AdminChildNotificaionMaster.vue'), meta: { title: 'Notification', breadcrumb: 'Notification'} },
+	{ path: '/spaa/admin-user-profile', name: 'AdminChildProfileMaster', component: () => import(/* webpackChunkName: "AdminChildUserProfile" */ './components/AdminChild/AdminChildProfile/AdminChildProfileMaster.vue'), 
+		meta: { title: 'Profile', breadcrumb: 'Profile', authRequiredAdminChild: true,} },
+	{ path: '/spaa/admin-user-notification', name: 'AdminChildNotificationMaster', component: () => import(/* webpackChunkName: "AdminChildUserNotification" */ './components/AdminChild/AdminChildProfile/AdminChildNotificaionMaster.vue'),
+		meta: { title: 'Notification', breadcrumb: 'Notification', authRequiredAdminChild: true,} },
 	
 
 	//not found page for Admin child
-	{ path: '/spaa/*', name: 'AdminChildPageNotFound', component: () => import(/* webpackChunkName: "AdminChildNotFound" */'./components/AdminChild/GlobalComponents/NotFound.vue'), meta: { title: 'Page not found'} },
+	{ path: '/spaa/*', name: 'AdminChildPageNotFound', component: () => import(/* webpackChunkName: "AdminChildNotFound" */'./components/AdminChild/GlobalComponents/NotFound.vue'), meta: { title: 'Not found'} },
 
 
 
@@ -318,7 +320,7 @@ const routes = [
 
   	//not found page for website
 	{ path: '/sspa/*', name: 'SSPA_NotFoundPublic', component: () => import(/* webpackChunkName: "404Public-website" */ './components/Website/Public/404/404Public.vue'), meta: { title: 'Page Not Found', breadcrumb: 'Page Not Found'}},
-	{ path: '/*', name: 'NotFoundPublic', component: () => import(/* webpackChunkName: "404Public-website" */ './components/Website/Public/404/404Public.vue'), meta: { title: 'Page Not Found', breadcrumb: 'Page Not Found'}},
+	{ path: '/*', name: 'NotFoundPublic', component: () => import(/* webpackChunkName: "404Public-website" */ './components/Website/Public/404/404Public.vue'), meta: { breadcrumb: 'Not Found'}},
 
 
 

@@ -31719,3 +31719,7 @@ THEMES:
   margin-bottom: 0;
 }
 
+.small-box {
+  box-shadow: unset !important;
+}
+

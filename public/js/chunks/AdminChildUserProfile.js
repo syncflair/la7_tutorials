@@ -349,6 +349,45 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
  //Load to every page
@@ -358,7 +397,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   //Get props form views/admin/dashboard.blade.php
   data: function data() {
     return {
-      NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
+      //NoIconUrl: 'FilesStorage/CommonFiles/no-img.png',
       ShowOnChangeImage: null,
       deleteImageIcon: false,
       //Delete Image icon if image exist
@@ -376,7 +415,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         // status_id: '',
         // employee_id: '',
         // branch_id: '',
-        // avatar: '',
+        //avatar: '',
 
       })
     };
@@ -458,7 +497,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {
-    this.$store.dispatch('AuthenticationForAdmin/fetchAuthUserInfo', this.authUser.id); // this.fetchUserStatus();
+    //setTimeout(() => {
+    this.$store.dispatch('AuthenticationForAdmin/fetchAuthUserInfo', this.authUser.id); //}, 500);//call after 300 miliscound
+    // this.fetchUserStatus();
 
     this.fillData(this.authUser);
   },
@@ -536,39 +577,15 @@ var render = function() {
         _c("div", { staticClass: "content" }, [
           _c("div", { staticClass: "container" }, [
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-3" }, [
-                _c("div", { staticClass: "card card-primary card-outline" }, [
-                  _c("div", { staticClass: "card-body box-profile" }, [
-                    _c("div", { staticClass: "text-center" }, [
-                      _vm.authUser.avatar === null
-                        ? _c("img", {
-                            staticClass:
-                              "profile-user-img img-fluid img-circle",
-                            attrs: {
-                              src: "../" + _vm.NoIconUrl,
-                              alt: "User profile picture"
-                            }
-                          })
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.authUser.avatar != null
-                        ? _c("img", {
-                            staticClass:
-                              "profile-user-img img-fluid img-circle",
-                            attrs: {
-                              src: _vm.authUser.avatar,
-                              alt: "User profile picture"
-                            }
-                          })
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c("h3", { staticClass: "profile-username text-center" }, [
+              _c("div", { staticClass: "col-12 offset-1-" }, [
+                _c("div", { staticClass: "card card-widget widget-user" }, [
+                  _c("div", { staticClass: "widget-user-header bg-info" }, [
+                    _c("h3", { staticClass: "widget-user-username" }, [
                       _vm._v(_vm._s(_vm.authUserInfo.name))
                     ]),
                     _vm._v(" "),
                     _vm.authUserInfo.belongs_to_employee != null
-                      ? _c("p", { staticClass: "text-muted text-center" }, [
+                      ? _c("h5", { staticClass: "widget-user-desc" }, [
                           _vm._v(
                             _vm._s(
                               _vm.authUserInfo.belongs_to_employee[
@@ -577,17 +594,35 @@ var render = function() {
                             )
                           )
                         ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "widget-user-image" }, [
+                    _vm.authUserInfo.belongs_to_employee["avavtar"] === null
+                      ? _c("img", {
+                          staticClass: "img-circle elevation-2",
+                          attrs: { src: _vm.NoImageAvailable, alt: "" }
+                        })
                       : _vm._e(),
                     _vm._v(" "),
-                    _c(
-                      "ul",
-                      { staticClass: "list-group list-group-unbordered mb-3" },
-                      [
-                        _vm.authUserInfo.belongs_to_branch != null
-                          ? _c("li", { staticClass: "list-group-item" }, [
-                              _c("b", [_vm._v("Branch")]),
-                              _vm._v(" "),
-                              _c("a", { staticClass: "float-right" }, [
+                    _vm.authUserInfo.belongs_to_employee["avatar"] !== null
+                      ? _c("img", {
+                          staticClass: "img-circle elevation-2",
+                          staticStyle: { height: "85px" },
+                          attrs: {
+                            src: _vm.authUserInfo.belongs_to_employee["avatar"],
+                            alt: ""
+                          }
+                        })
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-footer bg-white" }, [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-sm-4 border-right" }, [
+                        _c("div", { staticClass: "description-block" }, [
+                          _vm.authUserInfo.belongs_to_branch != null
+                            ? _c("h5", { staticClass: "description-header" }, [
                                 _vm._v(
                                   _vm._s(
                                     _vm.authUserInfo.belongs_to_branch[
@@ -596,14 +631,18 @@ var render = function() {
                                   )
                                 )
                               ])
-                            ])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.authUserInfo.belongs_to_employee != null
-                          ? _c("li", { staticClass: "list-group-item" }, [
-                              _c("b", [_vm._v("Job Type")]),
-                              _vm._v(" "),
-                              _c("a", { staticClass: "float-right" }, [
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "description-text" }, [
+                            _vm._v("Branch")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-4 border-right" }, [
+                        _c("div", { staticClass: "description-block" }, [
+                          _vm.authUserInfo.belongs_to_employee != null
+                            ? _c("h5", { staticClass: "description-header" }, [
                                 _vm._v(
                                   _vm._s(
                                     _vm.authUserInfo.belongs_to_employee[
@@ -612,15 +651,41 @@ var render = function() {
                                   )
                                 )
                               ])
-                            ])
-                          : _vm._e()
-                      ]
-                    )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "description-text" }, [
+                            _vm._v("Employee Type")
+                          ])
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-4" }, [
+                        _c("div", { staticClass: "description-block" }, [
+                          _c("h5", { staticClass: "description-header" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("formatDate")(
+                                  _vm.authUserInfo.belongs_to_employee[
+                                    "emp_hire_date"
+                                  ]
+                                )
+                              )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "description-text" }, [
+                            _vm._v("Join")
+                          ])
+                        ])
+                      ])
+                    ])
                   ])
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-9" }, [
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-10 offset-md-1 " }, [
                 _c("div", { staticClass: "card" }, [
                   _vm._m(0),
                   _vm._v(" "),
@@ -1374,7 +1439,6 @@ var render = function() {
                                           expression: "form.current_password"
                                         }
                                       ],
-                                      ref: "current_password",
                                       staticClass:
                                         "form-control form-control-sm",
                                       class: {
@@ -1431,7 +1495,6 @@ var render = function() {
                                           expression: "form.password"
                                         }
                                       ],
-                                      ref: "password",
                                       staticClass:
                                         "form-control form-control-sm",
                                       class: {
@@ -1487,7 +1550,6 @@ var render = function() {
                                             "form.password_confirmation"
                                         }
                                       ],
-                                      ref: "password_confirmation",
                                       staticClass:
                                         "form-control form-control-sm",
                                       class: {
