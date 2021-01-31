@@ -22,8 +22,8 @@ class AdminSupplierController extends Controller
 
     public function index()
     {
-        // return view('AdminSupplier.DashboardSupplier'); //
-        return view('website.home'); 
+        return view('AdminSupplier.DashboardSupplier'); //
+        // return view('website.home'); 
     }
 
     public function getAuthSupplierData(){

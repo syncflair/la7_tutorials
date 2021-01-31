@@ -5,7 +5,7 @@
 
       <!-- Role base route for admin child dashboard -->
       
-      <router-link to="/dashboard-delivery" class="navbar-brand">
+      <router-link to="/dashboard-supplier" class="navbar-brand">
       
         <img src="" alt="Sorboraho Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8; max-width: 200px !important;">
@@ -127,7 +127,7 @@
               <span class="float-right text-muted text-sm">2 days</span>
             </a>
             <div class="dropdown-divider"></div>
-            <router-link to="/spaa/admin-user-notification" class="dropdown-item dropdown-footer">See All Notifications</router-link>
+            <router-link to="#" class="dropdown-item dropdown-footer">See All Notifications</router-link>
           </div>
         </li>
         
@@ -139,61 +139,47 @@
         <li class="nav-item dropdown">
 
           
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{authUser.name}}</a>
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{authSupplier.name}}</a>
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow dropdown-menu-right">
 
-              <!-- #################################### Sales Menu ########################################### -->
-              <span v-if="authUser.role_id === 7"> <!--Role 7 is Sales -->
-              </span><!--End Role 13 is Sales -->
-
-              <!-- #################################### Purchase Menu ########################################### -->
-              <span v-if="authUser.role_id === 8"> <!--Role 8 is Purchase -->
-              </span><!--End Role 13 is Purchase -->
-
-              <!-- #################################### Store Menu ########################################### -->
-              <span v-if="authUser.role_id === 9"> <!--Role 7 is Store -->
-              </span><!--End Role 13 is Store -->
-
-              <!-- #################################### Order manager Menu ######################################## -->
-              <span v-if="authUser.role_id === 10"> <!--Role 10 is Order manager -->
-                <li><router-link to="/dashboard-order" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('dashboard-order')] ? ActiveLinkClass : '' "> Dashboard</router-link></li>
-                <li><router-link to="/spaa/order-all" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('order-all')] ? ActiveLinkClass : '' "> All Order</router-link></li>
-                <li><router-link to="/spaa/order-complete" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('order-complete')] ? ActiveLinkClass : '' "> Order Complete</router-link></li>
-                <li><router-link to="/spaa/order-failed" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('order-failed')] ? ActiveLinkClass : '' "> Order failed</router-link></li>
-              </span><!--End Role 13 is Order manager -->
-
-              <!-- #################################### Packaging Menu ########################################### -->
-              <span v-if="authUser.role_id === 11"> <!--Role 11 is Packaging -->
-              </span><!--End Role 13 is Packaging -->
-
-              <!-- #################################### Order Collect Menu ######################################## -->
-              <span v-if="authUser.role_id === 12"> <!--Role 12 is Order Collect -->
-              </span><!--End Role 13 is Order Collect -->
-
-              <!-- #################################### Delivery Menu ########################################### -->
-              <span v-if="authUser.role_id === 13"> <!--Role 13 is Delivery -->
-                <li><router-link to="/dashboard-delivery" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('dashboard-delivery')] ? ActiveLinkClass : '' "> Dashboard</router-link></li>                
-                <li><router-link to="/spaa/delivery-pending" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('delivery-pending')] ? ActiveLinkClass : '' "> Delivery Pending</router-link></li>
-                <li><router-link to="/spaa/delivery-complete" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('delivery-complete')] ? ActiveLinkClass : '' "> Delivery Complete</router-link></li>
-                <li><router-link to="/spaa/delivery-failed" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('delivery-failed')] ? ActiveLinkClass : '' "> Delivery Failed</router-link></li>
-                <li><router-link to="/spaa/delivery-report" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('admin-user-profile')] ? ActiveLinkClass : '' "> Report / History</router-link></li>
-              </span><!--End Role 13 is Delivery -->
-
-              <!-- #################################### Supervisor Menu ########################################### -->
-              <span v-if="authUser.role_id === 14"> <!--Role 14 is Supervisor -->
-              </span><!--End Role 13 is Supervisor -->
-
-              <!-- #################################### Report Menu ########################################### -->
-              <span v-if="authUser.role_id === 15"> <!--Role 15 is Report -->
-              </span><!--End Role 13 is Report -->
-
-              <!-- #################################### Monitoring Menu ########################################### -->
-              <span v-if="authUser.role_id === 16"> <!--Role 16 is Monitoring -->
-              </span><!--End Role 13 is Monitoring -->
-
-              <!-- #################################### Guest Menu ########################################### -->
-              <span v-if="authUser.role_id === 17"> <!--Role 17 is Guest -->
-              </span><!--End Role 13 is Guest -->
+              <li class="border-bottom-">
+                <router-link to="/sspa/my-dashboard" class="dropdown-item dropdown-item-custome transition-3d-hover" 
+                  :class="[currentPage.includes('my-dashboard')] ? ActiveLinkClass : '' " >
+                    <!-- <i class="fas fa-tachometer-alt"></i>  --> Dashboard
+                </router-link>
+              </li>
+              <li>
+                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-orders"
+                  :class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' " >My Orders
+                </router-link>
+              </li>
+              <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-products"
+                  :class="[currentPage.includes('my-products')] ? ActiveLinkClass : '' "  >Product List </router-link>
+              </li>
+              <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-return"
+                :class="[currentPage.includes('my-return')] ? ActiveLinkClass : '' "  >Return</router-link>
+              </li>    
+              
+              <li>
+                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-replace"
+                  :class="[currentPage.includes('my-eplace')] ? ActiveLinkClass : '' "  > Replace </router-link>
+              </li>
+              <li>
+                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile" 
+                :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' " >My Profile </router-link>
+              </li>
+              <li>
+                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-payment-receivable" 
+                :class="[currentPage.includes('my-payment-receivable')] ? ActiveLinkClass : '' " > 
+                  <!-- <i class="fas fa-money-bill"></i> --><!--  <i class="font-size-18 ec ec-payment"></i>  -->Amount Receivable
+                </router-link>
+              </li>
+              <li>
+                  <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-payment-history" 
+                  :class="[currentPage.includes('my-payment-history')] ? ActiveLinkClass : '' " >Payment History
+                  </router-link>
+              </li>
+              
 
               <li><router-link to="/spaa/admin-user-profile" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('admin-user-profile')] ? ActiveLinkClass : '' "> My Profile</router-link></li>
 
@@ -215,7 +201,7 @@
 <script>
     import { mapState } from 'vuex' //for user MapState    
     export default {
-        name: "admin-child-navbar-top-component",
+        name: "supplier-admin-navbar-top-component",
         data (){      
             return {  
               ActiveLinkClass: 'active',         
@@ -224,7 +210,7 @@
 
         computed: {
 
-          ...mapState( 'AuthenticationForAdmin', ['authUser','systemSettings'] ),
+          ...mapState( 'AuthenticationForSupplier', ['authSupplier'] ),
 
           //for active link management
           currentPage(){
@@ -240,11 +226,11 @@
 
             Logout(){  
               this.$Progress.start(); //using progress-bar package
-              axios.post('/logout')
+              axios.post('/supplier/logout')
               .then(({ response }) => {         
                   this.$Progress.finish();  
                   //this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', false );                    
-                  window.location = '/home';
+                  window.location = '/supplier/login';
                   //this.$router.push({ path : '/home' });   //route after successfule 
                   //this.$router.replace({ path : '/home' });   //route after successfule 
                   //this.$router.go('/home');                  

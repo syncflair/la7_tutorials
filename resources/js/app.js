@@ -185,8 +185,9 @@ router.beforeEach((to, from, next) => {
   //For Supplier authentication
   else if(to.meta.authRequiredSupplier === true ){
     setTimeout(() => {
-      const isAuthenticated = store.state.AuthenticationForSupplier.isSspaAuthenticated;//this.isSsapAuthenticated get form AuthenticationForCustomer.js
-      if ( isAuthenticated !== true) next({ name: 'SupplierLogin' })
+      const isSspaAuthenticated = store.state.AuthenticationForSupplier.isSspaAuthenticated;//this.isSsapAuthenticated get form AuthenticationForCustomer.js
+      // if ( isSspaAuthenticated !== true) next({ name: 'SupplierLogin' })
+      if ( isSspaAuthenticated !== true) next( window.location = '/supplier/login')
       else next()
     }, 800);//call after 800 miliscound
   }

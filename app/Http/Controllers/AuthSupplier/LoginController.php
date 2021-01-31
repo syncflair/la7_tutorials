@@ -31,8 +31,8 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        //return view('AuthSupplier.login'); //for login.blade.php
-        return view('website.home'); //for vue
+        return view('AuthSupplier.login'); //for login.blade.php
+        // return view('website.home'); //for vue
     }
 
 
@@ -99,7 +99,10 @@ class LoginController extends Controller
     {
     	if (Auth::guard('supplier')->check() ) {
 	    	// return route('dashboard-supplier');
-            return route('sspa/my-dashboard');
+            // return route('sspa/my-dashboard');
+            //return route('sspa/dashboard-supplier');
+            return redirect()->route('dashboard-supplier');
+            // return redirect()->route('sspa/dashboard-supplier');
 	    }
     }  
 
@@ -111,29 +114,29 @@ class LoginController extends Controller
             // Authentication passed...            
             //return redirect()->intended('dashboard-supplier'); //if not this route this will redirect using middleware
 
-            return response()->json(['success'=>'1']); 
+            //return response()->json(['success'=>'1']); 
             return redirect()->intended('sspa/my-dashboard'); //if not this route this will redirect using middleware
         }
 
         if ( Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ]) OR Auth::guard('supplier')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ]) ) {            
             Auth::guard('supplier')->logout();
             //return abort(401, 'You Account is not active, Please contact with Authority ');
-            // Session::put('error','You Account is not active, Please contact with Authority');
-            return response()->json(['error'=>'You Account is not active, Please contact with Authority']);
+            Session::put('error','You Account is not active, Please contact with Authority');
+            //return response()->json(['error'=>'You Account is not active, Please contact with Authority']);
             return redirect()->back();  
         }
         if ( Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 3 ]) OR Auth::guard('supplier')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 3 ]) ) {
             Auth::guard('supplier')->logout();
             //return abort(401, 'Your Account is Pending now. Please contact with Authority');
-            // Session::put('error','Your Account is Pending now, Please contact with Authority'); 
-            return response()->json(['error'=>'Your Account is Pending now, Please contact with Authority']);
+            Session::put('error','Your Account is Pending now, Please contact with Authority'); 
+            //return response()->json(['error'=>'Your Account is Pending now, Please contact with Authority']);
             return redirect()->back();  
         }
         if ( Auth::guard('supplier')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 4 ]) OR Auth::guard('supplier')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 4 ]) ) {
             Auth::guard('supplier')->logout();
             //return abort(401, 'Your Account is Block now, Please contact with Authority');
-            //Session::put('error','Your Account is Not Verified, Please verify from email or contact with Authority'); 
-            return response()->json(['error'=>'Your Account is Not Verified, Please verify from email or contact with Authority']);
+            Session::put('error','Your Account is Not Verified, Please verify from email or contact with Authority'); 
+            //return response()->json(['error'=>'Your Account is Not Verified, Please verify from email or contact with Authority']);
             return redirect()->back(); 
         }
         

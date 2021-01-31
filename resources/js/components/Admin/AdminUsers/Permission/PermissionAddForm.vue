@@ -276,13 +276,3 @@
   }
 
 </script>
-
-<style>
-  .mycheckbox{width: 18px; position: relative; height: 18px; display: block;}
-
-  /*Title Box Design*/
-   .titleBox{border:1px solid pink; border-radius: 3px;}
-   .titleText{position:relative; top:-0.9em; margin-left:1em; display:inline; background-color:white; padding:2px 5px 2px 5px; }
-   .TitelBoxInput{margin-left:15px;  margin-bottom:5px;}
-   /*--/Title Box Design*/
-</style>

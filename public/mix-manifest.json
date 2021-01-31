@@ -255,5 +255,21 @@
     "/js/chunks/switch-app.js": "/js/chunks/switch-app.js",
     "/js/chunks/viewCategory-com.js": "/js/chunks/viewCategory-com.js",
     "/js/chunks/website-wrapper.js": "/js/chunks/website-wrapper.js",
-    "/js/chunks/vendors~AdminChildNotFound~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-sele~0d37d582.js": "/js/chunks/vendors~AdminChildNotFound~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-sele~0d37d582.js"
+    "/js/chunks/vendors~AdminChildNotFound~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-sele~0d37d582.js": "/js/chunks/vendors~AdminChildNotFound~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-sele~0d37d582.js",
+    "/js/chunks/vendors~AdminChildNotFound~NotFound~auto-complete-app~formComponent~multi-select-app~switch-app.js": "/js/chunks/vendors~AdminChildNotFound~NotFound~auto-complete-app~formComponent~multi-select-app~switch-app.js",
+    "/js/chunks/DashboardSupplierAdmin.js": "/js/chunks/DashboardSupplierAdmin.js",
+    "/js/chunks/NotFoundSupplierAdmin.js": "/js/chunks/NotFoundSupplierAdmin.js",
+    "/js/chunks/SupplierAllOrder.js": "/js/chunks/SupplierAllOrder.js",
+    "/js/chunks/SupplierAmountReceivable.js": "/js/chunks/SupplierAmountReceivable.js",
+    "/js/chunks/SupplierNewOrderList.js": "/js/chunks/SupplierNewOrderList.js",
+    "/js/chunks/SupplierOrderDelivered.js": "/js/chunks/SupplierOrderDelivered.js",
+    "/js/chunks/SupplierPaymentHistory.js": "/js/chunks/SupplierPaymentHistory.js",
+    "/js/chunks/SupplierProductList.js": "/js/chunks/SupplierProductList.js",
+    "/js/chunks/SupplierProductReplace.js": "/js/chunks/SupplierProductReplace.js",
+    "/js/chunks/SupplierProductReturn.js": "/js/chunks/SupplierProductReturn.js",
+    "/js/chunks/SupplierProfileMaster.js": "/js/chunks/SupplierProfileMaster.js",
+    "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundSupplierAdmin~auto-complete-app~formComponent~multi-sele~89fddd62.js": "/js/chunks/vendors~AdminChildNotFound~NotFound~NotFoundSupplierAdmin~auto-complete-app~formComponent~multi-sele~89fddd62.js",
+    "/js/chunks/supplier-orders-website-auth~supplier-payment-history-website-auth~supplier-payment-receivable-websi~ed3105ca.js": "/js/chunks/supplier-orders-website-auth~supplier-payment-history-website-auth~supplier-payment-receivable-websi~ed3105ca.js",
+    "/js/chunks/supplier-orders-website-auth~supplier-payment-history-website-auth~supplier-payment-receivable-websi~470f53ab.js": "/js/chunks/supplier-orders-website-auth~supplier-payment-history-website-auth~supplier-payment-receivable-websi~470f53ab.js",
+    "/js/chunks/DashboardSupplierAdmin~supplier-product-return-website-auth.js": "/js/chunks/DashboardSupplierAdmin~supplier-product-return-website-auth.js"
 }

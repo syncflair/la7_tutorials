@@ -1,6 +1,6 @@
 @extends('layouts.AdminSupplierLayout.master_template')
 @section('title')
-  Dashboard | {{ Auth::guard('supplier')->user()->name}}
+  Dashboard | {{ Auth::guard('supplier')->user()->name }}
 @endsection
 
 @section('extra_css')
@@ -10,8 +10,14 @@
 
 @section('content')
 
-       
-  <supplier-admin-wrapper></supplier-admin-wrapper>
+	@if(Auth::guard('supplier')->check())
+	    <supplier-admin-wrapper 
+	        :issspaauthenticated="true" 
+	        :authsupplier="{{ Auth::guard('supplier')->user() }}" 
+	    ></supplier-admin-wrapper>
+
+	@endif 
+
 
 
 @endsection
@@ -19,3 +25,11 @@
 @section('extra_script')
     <!--Extra Script-->
 @endsection
+
+
+
+
+
+
+
+

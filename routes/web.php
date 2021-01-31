@@ -116,8 +116,8 @@ Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
 /***************************************************************************/
 /* Suppliers Route for public*/
 /***************************************************************************/
-Route::get('sspa/login', 'AuthSupplier\LoginController@showLoginForm')->name('supplier.login');
-// Route::get('supplier/login', 'AuthSupplier\LoginController@showLoginForm')->name('supplier.login');
+// Route::get('sspa/login', 'AuthSupplier\LoginController@showLoginForm')->name('supplier.login');
+Route::get('supplier/login', 'AuthSupplier\LoginController@showLoginForm')->name('supplier.login');
 Route::post('supplier/login', 'AuthSupplier\LoginController@login');
 // Password Reset Routes for customers
 Route::get('supplier/password/reset','AuthSupplier\ForgotPasswordController@showLinkRequestForm')->name('supplier.password.request');
@@ -131,7 +131,7 @@ Route::post('supplier/password/reset','AuthSupplier\ResetPasswordController@rese
 /***************************************************************************/
 Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
   Route::get('sspa/my-dashboard', 'AdminSupplier\AdminSupplierController@index')->name('dashboard-supplier');
-  // Route::get('/dashboard-supplier', 'AdminSupplier\AdminSupplierController@index')->name('dashboard-supplier');
+  // Route::get('sspa/dashboard-supplier', 'AdminSupplier\AdminSupplierController@index')->name('dashboard-supplier');
   Route::post('supplier/logout', 'AuthSupplier\LoginController@logout')->name('supplier.logout');
 
   Route::get('sspa/getAuthSupplierData', 'AdminSupplier\AdminSupplierController@getAuthSupplierData');//AuthenticationForWebsite.js
@@ -144,7 +144,9 @@ Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
   Route::post('sspa/SupplierChangeEmail', 'AdminSupplier\AdminSupplierProfileController@SupplierChangeEmail'); 
   Route::post('sspa/SendSupplierPhoneChangeVerificationCode', 'AdminSupplier\AdminSupplierProfileController@SendSupplierPhoneChangeVerificationCode');  
   Route::post('sspa/SupplierChangePhone', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePhone');
-  Route::post('sspa/SupplierChangePassword', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePassword');  
+  Route::post('sspa/SupplierChangePassword', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePassword');
+
+  Route::get('sspa/my-return', 'AdminSupplier\AdminSupplierProfileController@index');    
 
 
 
@@ -153,8 +155,8 @@ Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
 
   // Vue: single page application (SPA )- Any route that not match that redirect to dashboard-supplier. 
   Route::get('/spas/{anypath}', function () {
-    // return view('adminSupplier.DashboardSupplier'); 
-    return view('website.home'); 
+    return view('adminSupplier.DashboardSupplier'); 
+    // return view('website.home'); 
   })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
 });
 /***************************************************************************/

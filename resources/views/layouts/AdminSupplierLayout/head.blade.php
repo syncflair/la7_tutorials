@@ -11,6 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="icon" href="{{asset('/FilesStorage/CommonFiles/favicon.png')}}" sizes="16x16" type="image/png">
 
   <title>@yield('title')</title>
+  
  <!-- Styles -->  
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link href="{{ asset('css/auth_user_style.css') }}" rel="stylesheet">

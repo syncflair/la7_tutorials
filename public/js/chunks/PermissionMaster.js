@@ -73,7 +73,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 var PermissionAddForm = function PermissionAddForm() {
-  return Promise.all(/*! import() | PermissionAddForm-com */[__webpack_require__.e("vendors~AdminChildNotFound~NotFound~PermissionAddForm-com~auto-complete-app~formComponent~multi-sele~0d37d582"), __webpack_require__.e("PermissionAddForm-com")]).then(__webpack_require__.bind(null, /*! ./PermissionAddForm */ "./resources/js/components/Admin/AdminUsers/Permission/PermissionAddForm.vue"));
+  return __webpack_require__.e(/*! import() | PermissionAddForm-com */ "PermissionAddForm-com").then(__webpack_require__.bind(null, /*! ./PermissionAddForm */ "./resources/js/components/Admin/AdminUsers/Permission/PermissionAddForm.vue"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({

@@ -34,7 +34,8 @@ class AdminSupplierProfileController extends Controller
      */
     public function index()
     {
-        return view('website.home'); 
+        // return view('website.home'); 
+        return view('AdminSupplier.DashboardSupplier'); //
     }
 
 

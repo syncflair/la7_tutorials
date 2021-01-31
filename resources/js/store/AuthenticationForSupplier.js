@@ -1,9 +1,9 @@
 const AuthenticationForSupplier ={
 
-	namespaced: true,
-	
-	state: () => ({
-	    //accessable from any where
+  namespaced: true,
+  
+  state: () => ({
+      //accessable from any where
 
       /**************************************************/
       /* Use for Customer authentication*/ 
@@ -13,10 +13,10 @@ const AuthenticationForSupplier ={
       authVendor: {}, 
          
       
-	}),/*end state*/
+  }),/*end state*/
 
   getters: {      
-    	//isSspaAuthenticated: state => { return state.isSspaAuthenticated }, //not used
+      //isSspaAuthenticated: state => { return state.isSspaAuthenticated }, //not used
   },/*end getters*/
 
 

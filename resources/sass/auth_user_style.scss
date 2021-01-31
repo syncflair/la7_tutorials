@@ -11,3 +11,22 @@
 .LogoTextStyle{
 	color:#ffffff; font-weight: bold; padding: 5px; border: 1px solid #f0f0f0; border-radius: 5px; background-color: rgb(255,69,0); text-align: center; margin-bottom: 0;
 }
+
+
+
+//menu of admin panel (supplier)
+.dropdown-item-custome.active {
+    //color: #212529;
+    color: rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+    background-color:unset !important;
+    box-shadow: unset !important;
+}
+.dropdown-item-custome:hover{
+	font-weight: 700 !important;
+}
+.dropdown-item-custome.router-link-active.active{
+	//color: #ffffff;
+    font-weight: 700 !important;
+    //background-color: #007bff;
+}

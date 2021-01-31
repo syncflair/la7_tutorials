@@ -34,14 +34,15 @@ class RedirectIfAuthenticated
             case 'customer':
                     if (Auth::guard('customer')->check() ){
                          // return redirect()->route('dashboard-customer'); //call by route name
-                         // return redirect()->route('/auth/my-dashboard');
-                         return redirect()->route('customer-dashboard'); //call by route name
+                         // return redirect()->route('auth/my-dashboard');
+                         return redirect()->route('/auth/my-dashboard');
                     }
                 break;
 
             case 'supplier':
                     if(Auth::guard('supplier')->check() ){
                          return redirect()->route('dashboard-supplier');
+                         //return redirect()->route('sspa/dashboard-supplier');
                     }
                 break;
             
