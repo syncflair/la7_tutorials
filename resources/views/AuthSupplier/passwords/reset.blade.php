@@ -89,15 +89,15 @@
           </div>
           <!-- /.col -->
           <div class="col-6">
-            <button type="submit" class="btn btn-primary btn-block">{{ __('Reset Password') }}</button>
+            <button type="submit" class="btn btn-primary- btn-block btn-warning  btn-flat-">{{ __('Reset Password') }}</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
 
       <br/>
-      <a href="/" class="text-center">Back to Home</a> Or
-      <a href="{{ route('supplier.login') }}" class="text-center">Login</a>
+      <a href="/" class="text-center text-small link-muted">Back to Home</a> Or
+      <a href="{{ route('supplier.login') }}" class="text-center text-small link-muted">Login</a>
     </div>
     <!-- /.form-box -->
   </div><!-- /.card -->

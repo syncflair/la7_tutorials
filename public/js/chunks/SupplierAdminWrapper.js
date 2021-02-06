@@ -116,6 +116,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -431,6 +435,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState    
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -446,7 +460,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$route.path;
     }
   }),
-  watch: {},
   components: {},
   methods: {
     Logout: function Logout() {
@@ -471,7 +484,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   },
   created: function created() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {//console.log('Width: '+this.window.width+ ' Height: ' + this.window.height );
+  }
 });
 
 /***/ }),
@@ -612,7 +626,7 @@ var render = function() {
                       class:  true
                         ? _vm.ActiveLinkClass
                         : undefined,
-                      attrs: { to: "/dashboard-order" }
+                      attrs: { to: "/sspa/my-dashboard" }
                     },
                     [
                       _c("i", {
@@ -638,14 +652,14 @@ var render = function() {
                       class:  true
                         ? _vm.ActiveLinkClass
                         : undefined,
-                      attrs: { to: "/spaa/order-all" }
+                      attrs: { to: "/sspa/my-orders" }
                     },
                     [
                       _c("i", {
                         staticClass: "nav-icon fas fa-list-ul text-warning"
                       }),
                       _vm._v(" "),
-                      _c("p", [_vm._v("All Order")])
+                      _c("p", [_vm._v("My Orders")])
                     ]
                   )
                 ],
@@ -663,14 +677,14 @@ var render = function() {
                       class:  true
                         ? _vm.ActiveLinkClass
                         : undefined,
-                      attrs: { to: "/spaa/order-complete" }
+                      attrs: { to: "/sspa/my-return" }
                     },
                     [
                       _c("i", {
                         staticClass: "nav-icon fas fa-list-ul text-warning"
                       }),
                       _vm._v(" "),
-                      _c("p", [_vm._v("Order Complete")])
+                      _c("p", [_vm._v("Return")])
                     ]
                   )
                 ],
@@ -688,14 +702,14 @@ var render = function() {
                       class:  true
                         ? _vm.ActiveLinkClass
                         : undefined,
-                      attrs: { to: "/spaa/order-failed" }
+                      attrs: { to: "/sspa/my-replace" }
                     },
                     [
                       _c("i", {
                         staticClass: "nav-icon fas fa-list-ul text-warning"
                       }),
                       _vm._v(" "),
-                      _c("p", [_vm._v("Order failed")])
+                      _c("p", [_vm._v("Replace")])
                     ]
                   )
                 ],
@@ -713,15 +727,40 @@ var render = function() {
                       class:  true
                         ? _vm.ActiveLinkClass
                         : undefined,
-                      attrs: { to: "/dashboard-delivery" }
+                      attrs: { to: "/sspa/my-products" }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "nav-icon fab fa-product-hunt text-warning"
+                      }),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("Product List")])
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link dropdown-item-custome",
+                      class:  true
+                        ? _vm.ActiveLinkClass
+                        : undefined,
+                      attrs: { to: "/sspa/my-payment-receivable" }
                     },
                     [
                       _c("i", {
                         staticClass:
-                          "nav-icon fas fa-tachometer-alt text-warning"
+                          "nav-icon fas fa-file-invoice-dollar text-warning"
                       }),
                       _vm._v(" "),
-                      _c("p", [_vm._v("Dashboard --")])
+                      _c("p", [_vm._v("Amount Receivable")])
                     ]
                   )
                 ],
@@ -739,14 +778,14 @@ var render = function() {
                       class:  true
                         ? _vm.ActiveLinkClass
                         : undefined,
-                      attrs: { to: "/spaa/delivery-pending" }
+                      attrs: { to: "/sspa/my-payment-history" }
                     },
                     [
                       _c("i", {
-                        staticClass: "nav-icon fas fa-list-ul text-warning"
+                        staticClass: "nav-icon fas fa-history text-warning"
                       }),
                       _vm._v(" "),
-                      _c("p", [_vm._v("Delivery Pending")])
+                      _c("p", [_vm._v("Payment History")])
                     ]
                   )
                 ],
@@ -764,15 +803,14 @@ var render = function() {
                       class:  true
                         ? _vm.ActiveLinkClass
                         : undefined,
-                      attrs: { to: "/dashboard-delivery" }
+                      attrs: { to: "/sspa/my-profile" }
                     },
                     [
                       _c("i", {
-                        staticClass:
-                          "nav-icon fas fa-tachometer-alt text-warning"
+                        staticClass: "nav-icon far fa-user text-warning"
                       }),
                       _vm._v(" "),
-                      _c("p", [_vm._v("Dashboard")])
+                      _c("p", [_vm._v(" My Profile")])
                     ]
                   )
                 ],
@@ -794,7 +832,7 @@ var render = function() {
                   },
                   [
                     _c("i", {
-                      staticClass: "nav-icon-  fas fa-sign-out-alt text-warning"
+                      staticClass: "nav-icon  fas fa-sign-out-alt text-warning"
                     }),
                     _vm._v(" Logout")
                   ]
@@ -951,46 +989,50 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("li", { staticClass: "nav-item dropdown" }, [
-                _vm._m(5),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "dropdown-menu dropdown-menu-lg dropdown-menu-right"
-                  },
-                  [
-                    _c("span", { staticClass: "dropdown-header" }, [
-                      _vm._v("15 Notifications")
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "dropdown-divider" }),
-                    _vm._v(" "),
-                    _vm._m(6),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "dropdown-divider" }),
-                    _vm._v(" "),
-                    _vm._m(7),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "dropdown-divider" }),
-                    _vm._v(" "),
-                    _vm._m(8),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "dropdown-divider" }),
-                    _vm._v(" "),
-                    _c(
-                      "router-link",
-                      {
-                        staticClass: "dropdown-item dropdown-footer",
-                        attrs: { to: "#" }
-                      },
-                      [_vm._v("See All Notifications")]
-                    )
-                  ],
-                  1
-                )
-              ]),
+              _c(
+                "li",
+                { staticClass: "nav-item dropdown d-none- d-xl-block-" },
+                [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "dropdown-menu dropdown-menu-lg dropdown-menu-right"
+                    },
+                    [
+                      _c("span", { staticClass: "dropdown-header" }, [
+                        _vm._v("15 Notifications")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "dropdown-divider" }),
+                      _vm._v(" "),
+                      _vm._m(6),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "dropdown-divider" }),
+                      _vm._v(" "),
+                      _vm._m(7),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "dropdown-divider" }),
+                      _vm._v(" "),
+                      _vm._m(8),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "dropdown-divider" }),
+                      _vm._v(" "),
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "dropdown-item dropdown-footer",
+                          attrs: { to: "#" }
+                        },
+                        [_vm._v("See All Notifications")]
+                      )
+                    ],
+                    1
+                  )
+                ]
+              ),
               _vm._v(" "),
               _c("li", { staticClass: "nav-item dropdown" }, [
                 _c(
@@ -1005,7 +1047,23 @@ var render = function() {
                       "aria-expanded": "false"
                     }
                   },
-                  [_vm._v(_vm._s(_vm.authSupplier.name))]
+                  [
+                    _vm.DisplayResponsiveElement
+                      ? _c(
+                          "span",
+                          { attrs: { title: _vm.authSupplier.name } },
+                          [_vm._v("My Account")]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    !_vm.DisplayResponsiveElement
+                      ? _c(
+                          "span",
+                          { attrs: { title: _vm.authSupplier.name } },
+                          [_c("i", { staticClass: "far fa-user-circle" })]
+                        )
+                      : _vm._e()
+                  ]
                 ),
                 _vm._v(" "),
                 _c(
@@ -1016,6 +1074,19 @@ var render = function() {
                     attrs: { "aria-labelledby": "dropdownSubMenu1" }
                   },
                   [
+                    _c("li", [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: { href: "javascript:void(0);" }
+                        },
+                        [_vm._v(" " + _vm._s(_vm.authSupplier.name) + " ")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", { staticClass: "dropdown-divider" }),
+                    _vm._v(" "),
                     _c(
                       "li",
                       { staticClass: "border-bottom-" },
@@ -1050,25 +1121,6 @@ var render = function() {
                             attrs: { to: "/sspa/my-orders" }
                           },
                           [_vm._v("My Orders\r\n                ")]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass:
-                              "dropdown-item dropdown-item-custome transition-3d-hover",
-                            class:  true
-                              ? _vm.ActiveLinkClass
-                              : undefined,
-                            attrs: { to: "/sspa/my-products" }
-                          },
-                          [_vm._v("Product List ")]
                         )
                       ],
                       1
@@ -1123,9 +1175,9 @@ var render = function() {
                             class:  true
                               ? _vm.ActiveLinkClass
                               : undefined,
-                            attrs: { to: "/sspa/my-profile" }
+                            attrs: { to: "/sspa/my-products" }
                           },
-                          [_vm._v("My Profile ")]
+                          [_vm._v("Product List ")]
                         )
                       ],
                       1
@@ -1175,13 +1227,14 @@ var render = function() {
                         _c(
                           "router-link",
                           {
-                            staticClass: "dropdown-item dropdown-item-custome",
+                            staticClass:
+                              "dropdown-item dropdown-item-custome transition-3d-hover",
                             class:  true
                               ? _vm.ActiveLinkClass
                               : undefined,
-                            attrs: { to: "/spaa/admin-user-profile" }
+                            attrs: { to: "/sspa/my-profile" }
                           },
-                          [_vm._v(" My Profile")]
+                          [_vm._v("My Profile ")]
                         )
                       ],
                       1

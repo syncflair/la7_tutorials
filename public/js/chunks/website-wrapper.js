@@ -1865,11 +1865,7 @@ var HeaderVerticalAndSearchForAllPage = function HeaderVerticalAndSearchForAllPa
   data: function data() {
     return {
       mainContentMarginTopWhenHeaderFiexd: '',
-      topHeaderFixedClass: '',
-      window: {
-        width: 0,
-        height: 0
-      }
+      topHeaderFixedClass: ''
     };
   },
   components: {
@@ -1887,7 +1883,11 @@ var HeaderVerticalAndSearchForAllPage = function HeaderVerticalAndSearchForAllPa
     FooterFixed: _Layouts_FooterFixed_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
   },
   watch: {
-    /*Add Remove Class based on window width change*/
+    /*************************************************************************************/
+
+    /*Add Remove Class based on window width change (Call from CommonGlobal.js)*/
+
+    /*************************************************************************************/
     'window.width': function windowWidth(val) {
       if (val < 1200) {
         this.mainContentMarginTopWhenHeaderFiexd = 'mainContentMarginTopWhenHeaderFiexd';
@@ -1898,13 +1898,7 @@ var HeaderVerticalAndSearchForAllPage = function HeaderVerticalAndSearchForAllPa
       }
     }
   },
-  methods: {
-    /*Window resize handle*/
-    handleResize: function handleResize() {
-      this.window.width = window.innerWidth;
-      this.window.height = window.innerHeight;
-    }
-  },
+  methods: {},
   created: function created() {
     //direct commit (mutations) to resources/js/store/commonStoreForAll.js
     this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', this.isauthenticated);
@@ -1913,15 +1907,9 @@ var HeaderVerticalAndSearchForAllPage = function HeaderVerticalAndSearchForAllPa
     this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', this.issspaauthenticated);
     this.$store.commit('AuthenticationForSupplier/AUTH_SUPPLIER_CHECK', this.authsupplier); //commit from props
 
-    this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite); //window resize is call
-
-    window.addEventListener('resize', this.handleResize);
-    this.handleResize();
+    this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite);
   },
-  destroyed: function destroyed() {
-    //window resize is destroy
-    window.removeEventListener('resize', this.handleResize);
-  },
+  destroyed: function destroyed() {},
   mounted: function mounted() {//initialization of slick carousel (Slick Slider call from here, otherwise it get error)
     //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
     // alert(this.$refs.screenWidth.clientHeight +' '+  this.$refs.screenWidth.clientWidth);

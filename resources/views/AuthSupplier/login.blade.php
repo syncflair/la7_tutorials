@@ -14,7 +14,7 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">{{ __('Supplier Login') }}</p>
+      <p class="login-box-msg">{{ __('Supplier Signin') }}</p>
 
       
       <!--Display message-->
@@ -74,18 +74,34 @@
           <div class="col-8">
             <div class="icheck-primary">
               <input type="checkbox" id="remember" name="remember" checked="{{ old('remember') ? 'checked' : '' }}">   
-              <label for="remember">
+              <label for="remember" class="text-small text-muted">
                 {{ __('Remember Me') }}
               </label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">{{ __('Login') }}</button>
+            <button type="submit" class="btn btn-primary- btn-block btn-warning btn-flat-">{{ __('Login') }}</button>
           </div>
           <!-- /.col -->
         </div>
       </form>
+
+
+      <div class="row mt-3">
+        <div class="col-7">
+          @if (Route::has('password.request'))
+              <a class="btn- btn-link- text-small link-muted" href="{{ route('supplier.password.request') }}">
+                  {{ __('I forgot my password') }}
+              </a>
+          @endif          
+        </div>
+        <!-- /.col -->
+        <div class="col-5 text-right">
+          <a href="{{ route('supplier.request') }}" class="text-center text-small link-muted">Become supplier</a>
+        </div>
+        <!-- /.col -->
+      </div>
 
       <!-- <div class="social-auth-links text-center mb-3">
         <p>- OR -</p>
@@ -98,14 +114,16 @@
       </div> -->
       <!-- /.social-auth-links -->
 
-      <p class="mb-1">
+      <!-- <p class="mb-1">
       	@if (Route::has('password.request'))
             <a class="btn- btn-link-" href="{{ route('supplier.password.request') }}">
                 {{ __('I forgot my password') }}
             </a>
         @endif
-        <!--<a href="forgot-password.html">I forgot my password</a>-->
       </p>
+      <p class="mb-0">
+        <a href="{{ route('supplier.request') }}" class="text-center">Become supplier</a>
+      </p> -->
       <!-- <p class="mb-0">
       	@if (Route::has('register'))
             <a class="nav-link- text-center" href="{{ route('register') }}">{{ __('Register a new membership') }}</a>      

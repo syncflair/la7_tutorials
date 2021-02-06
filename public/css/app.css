@@ -15711,3 +15711,7 @@ button.toast-close-button {
   color: #6cb2eb !important;
 }
 
+body {
+  font-size: 14px !important;
+}
+

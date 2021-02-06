@@ -101,8 +101,9 @@ class LoginController extends Controller
     protected function redirectTo()
     {
         if (Auth::guard('customer')->check() ) {
-                // return route('dashboard-customer');
-                return route('auth/my-dashboard');
+                // return route('customer-dashboard');
+                return redirect()->route('customer-dashboard');
+                // return route('auth/my-dashboard');
         }    
     }  
 

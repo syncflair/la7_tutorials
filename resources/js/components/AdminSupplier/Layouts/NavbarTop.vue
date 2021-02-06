@@ -103,8 +103,9 @@
             <router-link to="/spaa/admin-user-notification" class="dropdown-item dropdown-footer">See All Messages</router-link>
           </div>
         </li>
+
         <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown d-none- d-xl-block-">
           <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
             <span class="badge badge-warning navbar-badge">15</span>
@@ -139,8 +140,16 @@
         <li class="nav-item dropdown">
 
           
-            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">{{authSupplier.name}}</a>
+            <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+              <span v-if="DisplayResponsiveElement" :title="authSupplier.name">My Account</span>
+              <span v-if="!DisplayResponsiveElement" :title="authSupplier.name"><i class="far fa-user-circle"></i></span>
+            </a>
+
             <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow dropdown-menu-right">
+
+              <li><a href="javascript:void(0);" class="dropdown-item"> {{authSupplier.name}} </a></li>
+
+              <li class="dropdown-divider"></li>
 
               <li class="border-bottom-">
                 <router-link to="/sspa/my-dashboard" class="dropdown-item dropdown-item-custome transition-3d-hover" 
@@ -148,14 +157,13 @@
                     <!-- <i class="fas fa-tachometer-alt"></i>  --> Dashboard
                 </router-link>
               </li>
+
               <li>
                 <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-orders"
                   :class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' " >My Orders
                 </router-link>
               </li>
-              <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-products"
-                  :class="[currentPage.includes('my-products')] ? ActiveLinkClass : '' "  >Product List </router-link>
-              </li>
+              
               <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-return"
                 :class="[currentPage.includes('my-return')] ? ActiveLinkClass : '' "  >Return</router-link>
               </li>    
@@ -164,10 +172,10 @@
                 <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-replace"
                   :class="[currentPage.includes('my-eplace')] ? ActiveLinkClass : '' "  > Replace </router-link>
               </li>
-              <li>
-                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile" 
-                :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' " >My Profile </router-link>
+              <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-products"
+                  :class="[currentPage.includes('my-products')] ? ActiveLinkClass : '' "  >Product List </router-link>
               </li>
+              
               <li>
                 <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-payment-receivable" 
                 :class="[currentPage.includes('my-payment-receivable')] ? ActiveLinkClass : '' " > 
@@ -180,8 +188,10 @@
                   </router-link>
               </li>
               
-
-              <li><router-link to="/spaa/admin-user-profile" class="dropdown-item dropdown-item-custome" :class="[currentPage.includes('admin-user-profile')] ? ActiveLinkClass : '' "> My Profile</router-link></li>
+              <li>
+                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile" 
+                :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' " >My Profile </router-link>
+              </li>
 
               <li class="dropdown-divider"></li>
                
@@ -202,23 +212,23 @@
     import { mapState } from 'vuex' //for user MapState    
     export default {
         name: "supplier-admin-navbar-top-component",
+
         data (){      
             return {  
-              ActiveLinkClass: 'active',         
+              ActiveLinkClass: 'active',               
             }
         },
 
         computed: {
 
-          ...mapState( 'AuthenticationForSupplier', ['authSupplier'] ),
+            ...mapState( 'AuthenticationForSupplier', ['authSupplier'] ),
 
-          //for active link management
-          currentPage(){
-              return this.$route.path;
-          },
+            //for active link management
+            currentPage(){
+                return this.$route.path;
+            },          
         },
-
-        watch: { }, 
+        
 
         components:{ }, 
 
@@ -246,6 +256,7 @@
         },
            
         mounted() {
+          //console.log('Width: '+this.window.width+ ' Height: ' + this.window.height );
         },
     }
 </script>

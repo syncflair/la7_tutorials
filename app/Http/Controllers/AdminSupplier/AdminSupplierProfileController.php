@@ -65,7 +65,7 @@ class AdminSupplierProfileController extends Controller
 		            if($supplier != null){           
 		                //$data = ["userInfo" => $request->all(), "tag" => "register"];
 		                //Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));                
-		                return response()->json(['success'=>'Profile update.']); 
+		                return response()->json(['success'=>'Data update successfull.']); 
 		            }
 
 		        }catch(\Exception $e){

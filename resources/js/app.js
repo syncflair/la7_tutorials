@@ -57,6 +57,7 @@ Vue.component('auto-complete-app', () => import(/* webpackChunkName: "auto-compl
 Vue.component('search-app-one', () => import(/* webpackChunkName: "search-app-one" */'./components/Admin/GlobalComponents/search-app-one.vue'));
 Vue.component('search-app-master', () => import(/* webpackChunkName: "search-app-master" */'./components/Admin/GlobalComponents/search-app-master.vue'));
 Vue.component('my-date-time-global', () => import(/* webpackChunkName: "my-date-time-global" */'./components/Admin/GlobalComponents/my-date-time-global'));
+Vue.component('display-notification-message-app', () => import(/* webpackChunkName: "display-notification-message-app-global" */'./components/Admin/GlobalComponents/display-notification-message-app'));
 
 
 //Global Components for Admin Childs (Order, Deliver, Packging etc)

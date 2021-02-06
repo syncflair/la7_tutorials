@@ -161,10 +161,7 @@
             return {
                 mainContentMarginTopWhenHeaderFiexd:'', 
                 topHeaderFixedClass:'',   
-                window: {
-                    width: 0,
-                    height: 0
-                }           
+                        
             }
         },
 
@@ -184,7 +181,9 @@
         },
 
         watch: {
-            /*Add Remove Class based on window width change*/
+            /*************************************************************************************/ 
+                /*Add Remove Class based on window width change (Call from CommonGlobal.js)*/
+            /*************************************************************************************/             
             'window.width': function (val) {                
                 if( val < 1200 ){
                     this.mainContentMarginTopWhenHeaderFiexd = 'mainContentMarginTopWhenHeaderFiexd';
@@ -198,11 +197,7 @@
         },
 
         methods: { 
-            /*Window resize handle*/
-            handleResize() {
-                this.window.width = window.innerWidth;
-                this.window.height = window.innerHeight;
-            }         
+                  
         },           
 
         created(){
@@ -216,14 +211,9 @@
 
             this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite ); 
 
-            //window resize is call
-            window.addEventListener('resize', this.handleResize);
-            this.handleResize();
         },
 
         destroyed() {
-            //window resize is destroy
-            window.removeEventListener('resize', this.handleResize);
         },
            
         mounted() {

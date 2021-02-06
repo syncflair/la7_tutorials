@@ -21,7 +21,7 @@
 
             <div class="card">
               <div class="card-header border-transparent pl-2">
-                <h3 class="card-title">Replace</h3>
+                <h3 class="card-title">Payment Receivable</h3>
 
                 <div class="card-tools">
                   <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse">

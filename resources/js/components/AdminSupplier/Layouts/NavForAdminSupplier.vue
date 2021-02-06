@@ -1,29 +1,40 @@
 <template>
 	<div class="mb-8 border- border-width-2- border-color-3- borders-radius-6">
         <!-- List -->
-        <div class="user-panel pl-2- pr-2- mt-0 pb-2 mb-1 d-flex border-bottom-primary- border-bottom border-top- section-title">
+        <div class="user-panel pl-2- pr-2- mt-0 pb-2 mb-1 d-flex border-bottom-primary- border-bottom- border-top- section-title">
             <!-- <div class="image">
                 <img src="https://sorboraho.s3-ap-southeast-1.amazonaws.com/users/mahmudur-rahman-wYAVdNBwSUHZaf4VQcBeE2R806wJqwZT7zHgEl0h.png" alt="User Image" class="img-circle elevation-2">
             </div> -->
-            <div class="info border- bg-gray-1- rounded-lg- w-100"> 
+            <div class="info- border- bg-gray-1- rounded-lg- w-100 border-bottom-"> 
                     
-                    <div v-show="authVendor" class="col-lg-12 btn- px-1 pb-1 mt-1 mb-1 bg-primary text-black font-size-9- rounded-lg">
-                        <!-- <i class="fas fa-check font-size-8"></i> -->                          
-                         <small>{{authVendor.vendor_name}}</small>
+                    <div v-show="authVendor" class="col-lg-12 btn- px-1- pl-0 pr-0 pb-1  bg-primary- text-black font-size-9- rounded-lg- border-bottom" style="overflow: auto;"> 
+                        <div class="" style="float: left; padding-right: 5px;">
+                            <!-- <img v-if="authVendor.vendor_img" :src="authVendor.vendor_img" class="rounded" style="width: 50; height: auto;" > -->
+                            <img v-if="authVendor.vendor_img" class="img-circle img-bordered-sm" :src="authVendor.vendor_img" alt="user image" style="width: 50; height: auto;">                           
+                        </div>
+                        <div class="pl-3" style="white-space: normal;">
+                            <small>{{authVendor.vendor_name}}</small>                            
+                        </div>
                     </div>
 
                     <!-- <span v-show="authVendor" class="font-size-10 text-black"> {{authVendor.vendor_name}} </span> -->
-                    <div class="col-lg-12 text-center">                        
+                    <!-- <div class="col-lg-12 text-center">                        
                         <img v-if="authVendor.vendor_img" :src="authVendor.vendor_img" style="height: 70px; width: auto;" >
-                    </div>
+                    </div> -->
 
-                    <div v-show="authSupplier" class="col-lg-12 font-size-10 pl-0 mt-2 mb-1 text-black"> {{authSupplier.name}} </div>
+                    <div v-show="authSupplier" class="col-lg-12 font-size-10 pl-0 mt-2 mb-1 text-black border-bottom"> 
+                        <span>{{authSupplier.name}}</span>
+                    </div>
 
                     <!-- <span class="btn- px-1 bg-success text-white font-size-9- rounded-lg">
                         <i class="fas fa-check font-size-8"></i>
                          <small>Verified</small>
-                    </span> -->   
+                    </span> -->  
             </div>
+
+           
+
+           
         </div>
 
         <ul id="sidebarNav" class="list-unstyled dropdown-list dropdown-list-custome pb-3">
@@ -39,9 +50,7 @@
 	            	:class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' " >My Orders
 	            </router-link>
             </li>
-            <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-products"
-                :class="[currentPage.includes('my-products')] ? ActiveLinkClass : '' "  >Product List </router-link>
-            </li>
+            
             <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-return"
             	:class="[currentPage.includes('my-return')] ? ActiveLinkClass : '' "  >Return</router-link>
             </li>    
@@ -50,10 +59,14 @@
             	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-replace"
 	            	:class="[currentPage.includes('my-eplace')] ? ActiveLinkClass : '' "  > Replace </router-link>
             </li>
-            <li>
-            	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile" 
-            	:class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' " >My Profile </router-link>
+            <li><router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-products"
+                :class="[currentPage.includes('my-products')] ? ActiveLinkClass : '' "  >Product List </router-link>
             </li>
+            
+            <!-- <li>
+                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile-update" 
+                :class="[currentPage.includes('my-profile-update')] ? ActiveLinkClass : '' " >My Profile Update </router-link>
+            </li> -->
             <li>
             	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-payment-receivable" 
             	:class="[currentPage.includes('my-payment-receivable')] ? ActiveLinkClass : '' " > 
@@ -65,7 +78,18 @@
                 :class="[currentPage.includes('my-payment-history')] ? ActiveLinkClass : '' " >Payment History
                 </router-link>
             </li>
-            <li class="border-top-">
+
+            <li>
+                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/supplier/login" 
+                :class="[currentPage.includes('my-payment-history')] ? ActiveLinkClass : '' " >Login
+                </router-link>
+            </li>
+            <li>
+                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile" 
+                :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' " >My Profile </router-link>
+            </li>
+
+            <li class="border-top- mt-2- pt-2-">
             	<a class="dropdown-item dropdown-item-custome transition-3d-hover" @click.prevent="Logout()" href="javascript:;"><i class="fas fa-sign-out-alt"></i> Logout</a>
                 <!-- <button type="submit" class="btn btn-block btn-sm btn-primary transition-3d-hover"><i class="fas fa-sign-out-alt"></i>  Logout</button> -->
             </li>

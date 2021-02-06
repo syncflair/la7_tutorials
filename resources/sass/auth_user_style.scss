@@ -1,12 +1,35 @@
-/*THis css Only For Customer Supplier Admin Dashboard*/
+/*THis css Only For admin child & Supplier Admin Dashboard*/
 
 /*Admin Lte Css Import*/
 @import 'admin_lte_css.scss';
 
+//Toastr
+//@import "toastr";
 
 
 
+/****************************************************/
+/*Customize Class style*/
+/****************************************************/
+
+.text-small{
+    font-size: 80%;
+    font-weight: 400;
+}
+.text-muted{
+    color: rgba(0, 0, 0, 0.2) !important;
+}
+.link-muted {
+    color: #8c98a4;
+    border-bottom: 1px dashed #97a4af;
+}
+
+
+
+
+/****************************************************/
 /*Customize style*/
+/****************************************************/
 
 .LogoTextStyle{
 	color:#ffffff; font-weight: bold; padding: 5px; border: 1px solid #f0f0f0; border-radius: 5px; background-color: rgb(255,69,0); text-align: center; margin-bottom: 0;
@@ -14,7 +37,10 @@
 
 
 
-//menu of admin panel (supplier)
+//menu of admin panel
+.dropdown-item-custome{
+    font-size:14px !important;
+}
 .dropdown-item-custome.active {
     //color: #212529;
     color: rgba(0, 0, 0, 0.5);
@@ -30,3 +56,47 @@
     font-weight: 700 !important;
     //background-color: #007bff;
 }
+
+@media (max-width: 1199px) {
+  .dropdown-list-custome > li {
+    float: left;
+  }
+}
+
+
+
+
+//card style overwrite
+.card{box-shadow: unset !important}
+
+.LogoTextStyle{
+    color:#ffffff; font-weight: bold; padding: 5px; border: 1px solid #f0f0f0; border-radius: 5px; background-color: rgb(255,69,0); text-align: center; margin-bottom: 0;
+}
+
+//Dashbord
+.small-box{
+    box-shadow: unset !important;
+}
+
+//table style customize
+.table-custome-one th{
+    font-weight:400;
+}
+.table-custome-one th, .table-custome-one td{
+    padding:5px 5px 5px 0px !important;
+}
+
+.table-custome-two th{
+    font-weight:400;
+}
+.table-custome-two th, .table-custome-two td{
+    padding:5px 10px 5px 10px !important;
+}
+
+//nav link style customize
+.nav-link-custome{
+    padding: 0.5rem .5rem;
+}
+
+
+

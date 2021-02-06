@@ -116,6 +116,10 @@ Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
 /***************************************************************************/
 /* Suppliers Route for public*/
 /***************************************************************************/
+Route::get('supplier/request', 'AuthSupplier\SupplierRequestController@showSupplierRequestForm')->name('supplier.request');
+Route::post('supplier/request', 'AuthSupplier\SupplierRequestController@SubmitSupplierRequestForm');
+
+
 // Route::get('sspa/login', 'AuthSupplier\LoginController@showLoginForm')->name('supplier.login');
 Route::get('supplier/login', 'AuthSupplier\LoginController@showLoginForm')->name('supplier.login');
 Route::post('supplier/login', 'AuthSupplier\LoginController@login');
@@ -138,7 +142,8 @@ Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
   Route::get('sspa/getAuthVendorData', 'AdminSupplier\AdminSupplierController@getAuthVendorData');//AuthenticationForWebsite.js
 
 
-  Route::get('sspa/my-profile', 'AdminSupplier\AdminSupplierProfileController@index'); //not nesessary 
+  Route::get('sspa/my-profile', 'AdminSupplier\AdminSupplierProfileController@index'); 
+  Route::get('sspa/my-profile-update', 'AdminSupplier\AdminSupplierProfileController@index'); 
   Route::post('sspa/SupplierProfileUpdate', 'AdminSupplier\AdminSupplierProfileController@SupplierProfileUpdate');
   Route::post('sspa/SendSupplierEmailChangeVerificationCode', 'AdminSupplier\AdminSupplierProfileController@SendSupplierEmailChangeVerificationCode');  
   Route::post('sspa/SupplierChangeEmail', 'AdminSupplier\AdminSupplierProfileController@SupplierChangeEmail'); 
@@ -146,7 +151,14 @@ Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
   Route::post('sspa/SupplierChangePhone', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePhone');
   Route::post('sspa/SupplierChangePassword', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePassword');
 
-  Route::get('sspa/my-return', 'AdminSupplier\AdminSupplierProfileController@index');    
+
+
+  Route::get('sspa/my-orders', 'AdminSupplier\AdminSupplierController@index');    
+  Route::get('sspa/my-products', 'AdminSupplier\AdminSupplierController@index');    
+  Route::get('sspa/my-return', 'AdminSupplier\AdminSupplierController@index');    
+  Route::get('sspa/my-replace', 'AdminSupplier\AdminSupplierController@index');    
+  Route::get('sspa/my-payment-receivable', 'AdminSupplier\AdminSupplierController@index');    
+  Route::get('sspa/my-payment-history', 'AdminSupplier\AdminSupplierController@index');      
 
 
 

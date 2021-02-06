@@ -4,160 +4,282 @@
 <section class="content">      
 <div class="container-fluid">   
         
-  <!-- Content Header (Page header) -->
-  <div class="content-header">
-    <div class="container">
-      <div class="row mb-2">
-        <div class="col-sm-6 col-6">
-          <h5 class="m-0- text-dark">Dashboard</h5>
-        </div><!-- /.col -->
-        <div class="col-sm-6 col-6">
-          <ol class="breadcrumb float-right">
-            <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <!-- <li class="breadcrumb-item active">Top Navigation</li> -->
-          </ol>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-  </div>
-  <!-- /.content-header -->
-
-
-
 
   <!-- Main content -->
-  <div class="content">
+  <div class="content pt-4">
     <div class="container">
 
 
 
       <div class="row">
-        <div class="d-none- d-xl-block- col-xl-2 col-wd-2gdot5-">
+        <div class="d-none d-xl-block d-md-block- mt-0 col-xl-2 col-wd-2gdot5-">
             <NavForAdminSupplier></NavForAdminSupplier>
         </div>
 
         <div class="bg-gray-1 rounded-lg- col-xl-10 col-wd-9gdot5-">
-          <div class="row pt-3">
+          <div class="row pt-3-">
 
-                <div class="col-lg-12 col-12">
-                    <div class="small-box bg-danger- bg-white">
-                        <div class="inner row">
-                            <div class="col-12">
-                                <h5 class="text-white- text-secondary" >
-                                    <small>
-                                        Supplier / Vendor Info 
+            <div class="col-lg-12"><!--Start first col-->
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Summary</h3>
 
-                                        <span v-if="authSupplier.status_id === 1"  class="btn- px-1 bg-success text-white font-size-9- rounded-lg">
-                                            <i class="fas fa-check font-size-8"></i>
-                                             <small>Verified</small>
-                                        </span> 
-                                    </small> 
-                                </h5>              
-                            </div>
-                            
-                            <div class="col-xs-12 col-sm-12 col-md-5 col-5-">
-                                
-                                <p class="text-white- text-secondary mb-2" title="Vendor Name">Name: 
-                                    <span class="text-blue">{{authVendor.vendor_name}}</span></p>
-                                <p class="text-white- text-secondary mb-2" title="Vendor Code">Code: 
-                                    <span class="text-blue">{{authVendor.vendor_code}}</span></p>
-                                <p class="text-white- text-secondary mb-2" title="Vendor Type">Type:
-                                    <span class="text-blue"> {{authVendor.vendor_type}}</span></p>
-                                <p v-if="authVendor.brand_shop_id" class="text-white- text-secondary mb-2" title="Brand Shop">Brand Shop: <span class="text-blue">{{authVendor.belongs_to_brand_shop['brand_shop_title']}}</span></p> 
-                                <p v-if="authVendor.vendor_nid" class="text-white- text-secondary mb-2">NID: 
-                                    <span class="text-blue">{{authVendor.vendor_nid}}</span></p>
-                                <p v-if="authVendor.vendor_tin" class="text-white- text-secondary mb-2">TIN: 
-                                    <span class="text-blue">{{authVendor.vendor_tin}}</span></p>
-                                <p v-if="authVendor.vendor_bank_details" class="text-white- text-secondary mb-2">Financial: 
-                                    <span class="text-blue">{{authVendor.vendor_bank_details}}</span></p> 
-                            </div>
-
-                            <div class="col-xs-12 col-sm-12 col-md-4 col-4-">
-                                
-                                <p v-if="authVendor.vendor_contact_name" class="text-white- text-secondary mb-2">Contact Name: 
-                                    <span class="text-blue">{{authVendor.vendor_contact_name}}</span></p>
-                                <p class="text-white- text-secondary mb-2">
-                                    <i class="fas fa-at"></i> <span class="text-blue">{{authVendor.vendor_email}}</span>
-                                </p>
-                                <p class="text-white- text-secondary mb-2">
-                                    <i class="fas fa-phone"></i> <span class="text-blue">{{authVendor.vendor_phone}}</span>
-                                </p>
-                                <p v-if="authVendor.vendor_desc" class="text-white- text-secondary mb-2" title="Vendor Type">Details: <span class="text-blue">{{authVendor.vendor_desc}}</span></p>                                
-                                <p class="text-white- text-secondary mb-2" title="Vendor Type">Address: <span class="text-blue">{{authVendor.vendor_address}}</span></p>
-                            </div>
-
-                            <div class="col-xs-12 col-sm-12 col-md-3 col-3- text-center d-none d-xl-block">
-                                <img v-if="authVendor.vendor_img" :src="authVendor.vendor_img" style="height: 120px; width: 150px;" >
-                            </div>
-
-                            <!-- <div class="col-12">
-                                
-                            </div> -->
-
-                        </div> 
-                        <!-- <div class="icon"><i class="font-size-18 ec ec-shopping-bag"></i></div>  -->
-                        <!-- <router-link to="/sspa/my-profile" class="small-box-footer text-secondary">Profile <i class="fas fa-arrow-circle-right"></i></router-link> -->
-                    </div>
+                  <div class="card-tools">
+                    <!-- <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                      <i class="fas fa-minus"></i></button> -->
+                    <!-- <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                      <i class="fas fa-times"></i></button> -->
+                  </div>
                 </div>
+                <div class="card-body" style="display: block;">
+                  <div class="row">
+                    <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
 
-                <div class="col-lg-3 col-6">
-                    <div class="small-box bg-danger- bg-white">
-                        <div class="inner">
+                      <div class="row"><!--row-->
+                        <div class="col-12 col-sm-4">
+                          <div class="info-box bg-light">
+                            <div class="info-box-content text-secondary">
+                              <span class="info-box-text text-center text-muted-">Order's</span>
+                              <span class="info-box-number text-center text-muted- mb-0">2300</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                          <div class="info-box bg-light">
+                            <div class="info-box-content text-secondary">
+                              <span class="info-box-text text-center text-muted-">Complete</span>
+                              <span class="info-box-number text-center text-muted- mb-0">2000</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                          <div class="info-box bg-light">
+                            <div class="info-box-content text-secondary">
+                              <span class="info-box-text text-center text-muted- green">Payment Receivable</span>
+                              <span class="info-box-number text-center text-muted- mb-0 green">20,786.00 <span>
+                            </span></span></div>
+                          </div>
+                        </div>
+                      </div><!--/row-->
 
-                            <h5 class="text-white- text-secondary" ><small>My Info</small></h5> 
-                            <p class="text-white- text-secondary mb-2"> {{authSupplier.name}}</p>
-                            <p class="text-white- text-secondary mb-2"><i class="fas fa-at"></i> {{authSupplier.email}}</p>
-                            <p class="text-white- text-secondary mb-2"><i class="fas fa-phone"></i> {{authSupplier.phone}}</p>
+                      <!--row-->
+                      <!-- <div class="row">
+                        <div class="col-lg-6 col-6">
+                            <div class="small-box bg-success bg-white-">
+                                <div class="inner">
+                                    <h3 class="text-white text-secondary-" >5,87,93.00 <sup style="font-size: 20px;">TK</sup></h3> 
+                                    <p class="text-white text-secondary-">Payment Receivable</p>
+                                </div> 
+                                <div class="icon"><i class="far fa-money-bill-alt"></i></div> 
+                                <router-link to="/sspa/my-payment-receivable" class="small-box-footer text-secondary">More info <i class="fas fa-arrow-circle-right"></i></router-link>
+                            </div>
+                        </div>
 
-                            <p v-if="authSupplier.status_id === 1" class="text-white- text-secondary mb-2">
-                                <span class="btn- px-1 bg-success text-white font-size-9- rounded-lg">
-                                    <i class="fas fa-check font-size-8"></i>
-                                     <small>Verified</small>
+                        <div class="col-lg-6 col-6">
+                            <div class="small-box bg-warning bg-white-">
+                                <div class="inner">
+                                    <h3 class="text-white text-secondary-">44</h3> 
+                                    <p class="text-white text-secondary-">Product</p>
+                                </div> 
+                                <div class="icon"><i class="fab fa-product-hunt"></i></div> 
+                                <router-link to="/sspa/my-products" class="small-box-footer text-secondary">More info <i class="fas fa-arrow-circle-right"></i></router-link>
+                            </div>
+                        </div>
+                      </div> --><!--/row-->
+
+                      
+                      <!--row-->
+                      <!-- <div class="row">
+                        <div class="col-12">
+                          <h4>Recent Activity</h4>
+                            <div class="post">
+                              <div class="user-block">
+                                <img class="img-circle img-bordered-sm" :src="baseURL+'/backend/AdminLTE/img/user1-128x128.jpg'" alt="user image">
+                                <span class="username">
+                                  <a href="#">Jonathan Burke Jr.</a>
                                 </span>
-                            </p>
+                                <span class="description">Shared publicly - 7:45 PM today</span>
+                              </div>
+                              <p>
+                                Lorem ipsum represents a long-held tradition for designers,
+                                typographers and the like. Some people hate it and argue for
+                                its demise, but others ignore.
+                              </p>
+                              <p>
+                                <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a>
+                              </p>
+                            </div>
 
-                        </div> 
-                        <!-- <div class="icon"><i class="font-size-18 ec ec-shopping-bag"></i></div>  -->
-                        <router-link to="/sspa/my-profile" class="small-box-footer text-secondary">Profile <i class="fas fa-arrow-circle-right"></i></router-link>
+                        </div>
+                      </div> --><!--/row-->
+
+                      <div class="row mt-2"><!--row-->
+                        <div class="col-12">
+                          <h6 class="text-secondary">Recent orders</h6>
+                          <div class="table-responsive">
+                            <table class="table m-0 table-custome-one">
+                              <thead class="text-secondary">
+                                <tr>
+                                  <th>Order ID</th>
+                                  <th>Item</th>
+                                  <th>Status</th>
+                                  <th>Popularity</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                                  <td>Call of Duty IV</td>
+                                  <td><span class="badge badge-success">Shipped</span></td>
+                                  <td>
+                                    <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                                  <td>Samsung Smart TV</td>
+                                  <td><span class="badge badge-warning">Pending</span></td>
+                                  <td>
+                                    <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                                  <td>iPhone 6 Plus</td>
+                                  <td><span class="badge badge-danger">Delivered</span></td>
+                                  <td>
+                                    <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                                  <td>Samsung Smart TV</td>
+                                  <td><span class="badge badge-info">Processing</span></td>
+                                  <td>
+                                    <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                                  <td>Samsung Smart TV</td>
+                                  <td><span class="badge badge-warning">Pending</span></td>
+                                  <td>
+                                    <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                                  <td>iPhone 6 Plus</td>
+                                  <td><span class="badge badge-danger">Delivered</span></td>
+                                  <td>
+                                    <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                                  <td>Call of Duty IV</td>
+                                  <td><span class="badge badge-success">Shipped</span></td>
+                                  <td>
+                                    <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <div class="card-footer- text-right">
+                            <a href="javascript:void(0)" class="uppercase">View All order's</a>
+                          </div>
+
+                        </div>
+                      </div><!--/row-->
+
+
                     </div>
-                </div>
 
-                <div class="col-lg-3 col-6">
-                    <div class="small-box bg-success- bg-white">
-                        <div class="inner">
-                            <h3 class="text-white- text-secondary" >5,87,93.00 <sup style="font-size: 20px;">TK</sup></h3> 
-                            <p class="text-white- text-secondary">Payment Receivable</p>
-                        </div> 
-                        <div class="icon"><i class="far fa-money-bill-alt"></i></div> 
-                        <router-link to="/sspa/my-payment-receivable" class="small-box-footer text-secondary">More info <i class="fas fa-arrow-circle-right"></i></router-link>
+                    <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+                      
+                      <div class="card">
+                          <div class="card-header bg-light">
+                            <!-- <h3 class="card-title">Latest Members</h3> -->
+                            <h5 class="card-title text-secondary mb-1-"><i class="fas fa-info-circle"></i> Supplier / Vendor Info </h5> 
+
+                            <div class="card-tools">
+                              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                              </button>
+                              <!-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
+                              </button> -->
+                            </div>
+                          </div>
+                          <!-- /.card-header -->
+                          <div class="card-body p-0 mt-2">
+                       
+                              <div v-if="authVendor.vendor_img" class="text-center">
+                                  <img class="img-circle img-bordered-sm" :src="authVendor.vendor_img" alt="user image" style="width: 50%;">
+                              </div>
+                             
+                              <div class="text-muted- text-secondary">
+                                <p class="text-sm mb-2">Vendor / Supplier
+                                  <b class="d-block">                            
+                                    <small title="Supplier / Vendor Code">({{authVendor.vendor_code}})</small> {{authVendor.vendor_name}}</b>
+                                </p>
+                                <p class="text-sm mb-2">Supplier Type
+                                  <b class="d-block">{{authVendor.vendor_type}}</b>
+                                </p>
+                                <p v-if="authVendor.brand_shop_id" class="text-sm mb-2">Brand shop
+                                  <b class="d-block">{{authVendor.belongs_to_brand_shop['brand_shop_title']}}</b>
+                                </p>
+                              </div>                      
+
+                              <h6 class="mt-4 text-muted- text-secondary">Contact Info</h6>
+                              <ul class="list-unstyled">
+                                <li v-if="authVendor.vendor_phone" class="pb-1">
+                                  <a href="javascript:void(0);" class="btn-link text-secondary"><small><i class="fas fa-phone"></i></small> {{authVendor.vendor_phone}} </a>
+                                </li>
+                                <li v-if="authVendor.vendor_email" class="pb-1">
+                                  <a href="javascript:void(0);" class="btn-link text-secondary"><small><i class="far fa-fw fa-envelope"></i></small> {{authVendor.vendor_email}}</a>
+                                </li>
+                                <li v-if="authVendor.vendor_address" class="pb-1">
+                                  <a href="javascript:void(0);" class="btn-link text-secondary"><small><i class="fas fa-map-marker-alt"></i></small> {{authVendor.vendor_address}}</a>
+                                </li>
+                              </ul>
+
+                              <h6 class="mt-4 text-muted- text-secondary">Other Info</h6>
+                              <ul class="list-unstyled">
+                                <li v-if="authVendor.vendor_tin">
+                                  <span class="btn-link- text-secondary"><small class="text-dark">TIN</small> {{authVendor.vendor_tin}}</span>
+                                </li>
+                                <li v-if="authVendor.vendor_nid">
+                                    <span class="btn-link- text-secondary"><small class="text-dark">NID</small> {{authVendor.vendor_nid}}</span>
+                                </li>
+                                <li v-if="authVendor.vendor_bank_details">
+                                    <span class="btn-link- text-secondary"><small class="text-dark">Financial</small> {{authVendor.vendor_bank_details}}</span>
+                                </li>
+                              </ul>
+
+                              <p v-if="authVendor.vendor_desc" class="text-white- text-justify text-muted- mb-3" title="Vendor Type">
+                              <span v-html="authVendor.vendor_desc"></span></p>
+
+                              <!-- <div class="text-center mt-5 mb-3">
+                                <a href="#" class="btn btn-sm btn-primary">Add files</a>
+                                <a href="#" class="btn btn-sm btn-warning">Report contact</a>
+                              </div> -->
+                            
+
+                          </div><!-- /.card-body -->
+                      </div>
+                      
+                     
                     </div>
+                  </div>
                 </div>
-
-                <div class="col-lg-3 col-6">
-                    <div class="small-box bg-warning- bg-white">
-                        <div class="inner">
-                            <h3 class="text-white- text-secondary">44</h3> 
-                            <p class="text-white- text-secondary">Product</p>
-                        </div> 
-                        <div class="icon"><i class="fab fa-product-hunt"></i></div> 
-                        <router-link to="/sspa/my-products" class="small-box-footer text-secondary">More info <i class="fas fa-arrow-circle-right"></i></router-link>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-6">
-                    <div class="small-box bg-info- bg-white">
-                        <div class="inner">
-                            <h3 class="text-white- text-secondary">150</h3> 
-                            <p class="text-white- text-secondary">Orders</p>
-                        </div> 
-                        <div class="icon"><i class="fas fa-shopping-cart"></i></div> 
-                        <router-link to="/sspa/my-orders" class="small-box-footer text-secondary">My Orders <i class="fas fa-arrow-circle-right"></i></router-link>
-                    </div>
-                </div>
+                <!-- /.card-body -->
+              </div>
+            </div><!--Start second col-->
 
 
-            </div>
+
+
+          </div>
         </div>
 
         

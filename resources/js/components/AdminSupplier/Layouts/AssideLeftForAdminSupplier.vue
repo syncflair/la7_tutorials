@@ -31,33 +31,37 @@
 
   
             <li class="nav-item">
-              <router-link to="/dashboard-order" class="nav-link dropdown-item-custome" :class="[currentPage.includes('dashboard-order')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-tachometer-alt text-warning"></i> <p>Dashboard</p></router-link>              
+              <router-link to="/sspa/my-dashboard" class="nav-link dropdown-item-custome" :class="[currentPage.includes('my-dashboard')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-tachometer-alt text-warning"></i> <p>Dashboard</p></router-link>              
             </li> 
             <li class="nav-item">
-              <router-link to="/spaa/order-all" class="nav-link dropdown-item-custome" :class="[currentPage.includes('order-all')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-list-ul text-warning"></i> <p>All Order</p></router-link>
+              <router-link to="/sspa/my-orders" class="nav-link dropdown-item-custome" :class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-list-ul text-warning"></i> <p>My Orders</p></router-link>
             </li> 
             <li class="nav-item">
-              <router-link to="/spaa/order-complete" class="nav-link dropdown-item-custome" :class="[currentPage.includes('order-complete')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-list-ul text-warning"></i> <p>Order Complete</p></router-link>
+              <router-link to="/sspa/my-return" class="nav-link dropdown-item-custome" :class="[currentPage.includes('my-return')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-list-ul text-warning"></i> <p>Return</p></router-link>
             </li> 
             <li class="nav-item">
-              <router-link to="/spaa/order-failed" class="nav-link dropdown-item-custome" :class="[currentPage.includes('order-failed')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-list-ul text-warning"></i> <p>Order failed</p></router-link>
+              <router-link to="/sspa/my-replace" class="nav-link dropdown-item-custome" :class="[currentPage.includes('my-eplace')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-list-ul text-warning"></i> <p>Replace</p></router-link>
             </li>
 
 
             <li class="nav-item">
-              <router-link to="/dashboard-delivery" class="nav-link dropdown-item-custome" :class="[currentPage.includes('dashboard-delivery')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-tachometer-alt text-warning"></i> <p>Dashboard --</p></router-link>
+              <router-link to="/sspa/my-products" class="nav-link dropdown-item-custome" :class="[currentPage.includes('my-products')] ? ActiveLinkClass : '' "> <i class="nav-icon fab fa-product-hunt text-warning"></i> <p>Product List</p></router-link>
             </li> 
             <li class="nav-item">
-              <router-link to="/spaa/delivery-pending" class="nav-link dropdown-item-custome" :class="[currentPage.includes('delivery-pending')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-list-ul text-warning"></i> <p>Delivery Pending</p></router-link>
+              <router-link to="/sspa/my-payment-receivable" class="nav-link dropdown-item-custome" :class="[currentPage.includes('my-payment-receivable')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-file-invoice-dollar text-warning"></i> <p>Amount Receivable</p></router-link>
             </li>
 
             <li class="nav-item">
-              <router-link to="/dashboard-delivery" class="nav-link dropdown-item-custome" :class="[currentPage.includes('dashboard-delivery')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-tachometer-alt text-warning"></i> <p>Dashboard</p></router-link>
-            </li>          
+              <router-link to="/sspa/my-payment-history" class="nav-link dropdown-item-custome" :class="[currentPage.includes('my-payment-history')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-history text-warning"></i> <p>Payment History</p></router-link>
+            </li> 
+
+            <li class="nav-item">
+              <router-link to="/sspa/my-profile" class="nav-link dropdown-item-custome" :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' "> <i class="nav-icon far fa-user text-warning"></i> <p> My Profile</p></router-link>
+            </li>           
        
 
           <li class="nav-item">
-            <a class="nav-link dropdown-item-custome pl-4-" @click.prevent="Logout()" href="javascript:;"><i class="nav-icon-  fas fa-sign-out-alt text-warning"></i> Logout</a>
+            <a class="nav-link dropdown-item-custome pl-4-" @click.prevent="Logout()" href="javascript:;"><i class="nav-icon  fas fa-sign-out-alt text-warning"></i> Logout</a>
           </li>
 
           <!-- <li class="nav-item has-treeview">

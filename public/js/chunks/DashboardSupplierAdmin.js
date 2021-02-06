@@ -193,6 +193,128 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 
@@ -240,14 +362,15 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("section", { staticClass: "content" }, [
     _c("div", { staticClass: "container-fluid" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "content pt-4" }, [
         _c("div", { staticClass: "container" }, [
           _c("div", { staticClass: "row" }, [
             _c(
               "div",
-              { staticClass: "d-none- d-xl-block- col-xl-2 col-wd-2gdot5-" },
+              {
+                staticClass:
+                  "d-none d-xl-block d-md-block- mt-0 col-xl-2 col-wd-2gdot5-"
+              },
               [_c("NavForAdminSupplier")],
               1
             ),
@@ -256,448 +379,385 @@ var render = function() {
               "div",
               { staticClass: "bg-gray-1 rounded-lg- col-xl-10 col-wd-9gdot5-" },
               [
-                _c("div", { staticClass: "row pt-3" }, [
-                  _c("div", { staticClass: "col-lg-12 col-12" }, [
-                    _c(
-                      "div",
-                      { staticClass: "small-box bg-danger- bg-white" },
-                      [
-                        _c("div", { staticClass: "inner row" }, [
-                          _c("div", { staticClass: "col-12" }, [
+                _c("div", { staticClass: "row pt-3-" }, [
+                  _c("div", { staticClass: "col-lg-12" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "card-body",
+                          staticStyle: { display: "block" }
+                        },
+                        [
+                          _c("div", { staticClass: "row" }, [
+                            _vm._m(1),
+                            _vm._v(" "),
                             _c(
-                              "h5",
-                              { staticClass: "text-white- text-secondary" },
+                              "div",
+                              {
+                                staticClass:
+                                  "col-12 col-md-12 col-lg-4 order-1 order-md-2"
+                              },
                               [
-                                _c("small", [
-                                  _vm._v(
-                                    "\r\n                                        Supplier / Vendor Info \r\n\r\n                                        "
-                                  ),
-                                  _vm.authSupplier.status_id === 1
-                                    ? _c(
-                                        "span",
+                                _c("div", { staticClass: "card" }, [
+                                  _vm._m(2),
+                                  _vm._v(" "),
+                                  _c(
+                                    "div",
+                                    { staticClass: "card-body p-0 mt-2" },
+                                    [
+                                      _vm.authVendor.vendor_img
+                                        ? _c(
+                                            "div",
+                                            { staticClass: "text-center" },
+                                            [
+                                              _c("img", {
+                                                staticClass:
+                                                  "img-circle img-bordered-sm",
+                                                staticStyle: { width: "50%" },
+                                                attrs: {
+                                                  src:
+                                                    _vm.authVendor.vendor_img,
+                                                  alt: "user image"
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        : _vm._e(),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
                                         {
                                           staticClass:
-                                            "btn- px-1 bg-success text-white font-size-9- rounded-lg"
+                                            "text-muted- text-secondary"
                                         },
                                         [
-                                          _c("i", {
-                                            staticClass:
-                                              "fas fa-check font-size-8"
-                                          }),
+                                          _c(
+                                            "p",
+                                            { staticClass: "text-sm mb-2" },
+                                            [
+                                              _vm._v(
+                                                "Vendor / Supplier\r\n                                  "
+                                              ),
+                                              _c(
+                                                "b",
+                                                { staticClass: "d-block" },
+                                                [
+                                                  _c(
+                                                    "small",
+                                                    {
+                                                      attrs: {
+                                                        title:
+                                                          "Supplier / Vendor Code"
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "(" +
+                                                          _vm._s(
+                                                            _vm.authVendor
+                                                              .vendor_code
+                                                          ) +
+                                                          ")"
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(
+                                                    " " +
+                                                      _vm._s(
+                                                        _vm.authVendor
+                                                          .vendor_name
+                                                      )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          ),
                                           _vm._v(" "),
-                                          _c("small", [_vm._v("Verified")])
+                                          _c(
+                                            "p",
+                                            { staticClass: "text-sm mb-2" },
+                                            [
+                                              _vm._v(
+                                                "Supplier Type\r\n                                  "
+                                              ),
+                                              _c(
+                                                "b",
+                                                { staticClass: "d-block" },
+                                                [
+                                                  _vm._v(
+                                                    _vm._s(
+                                                      _vm.authVendor.vendor_type
+                                                    )
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _vm.authVendor.brand_shop_id
+                                            ? _c(
+                                                "p",
+                                                { staticClass: "text-sm mb-2" },
+                                                [
+                                                  _vm._v(
+                                                    "Brand shop\r\n                                  "
+                                                  ),
+                                                  _c(
+                                                    "b",
+                                                    { staticClass: "d-block" },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          _vm.authVendor
+                                                            .belongs_to_brand_shop[
+                                                            "brand_shop_title"
+                                                          ]
+                                                        )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
                                         ]
-                                      )
-                                    : _vm._e()
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "h6",
+                                        {
+                                          staticClass:
+                                            "mt-4 text-muted- text-secondary"
+                                        },
+                                        [_vm._v("Contact Info")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "ul",
+                                        { staticClass: "list-unstyled" },
+                                        [
+                                          _vm.authVendor.vendor_phone
+                                            ? _c(
+                                                "li",
+                                                { staticClass: "pb-1" },
+                                                [
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      staticClass:
+                                                        "btn-link text-secondary",
+                                                      attrs: {
+                                                        href:
+                                                          "javascript:void(0);"
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._m(3),
+                                                      _vm._v(
+                                                        " " +
+                                                          _vm._s(
+                                                            _vm.authVendor
+                                                              .vendor_phone
+                                                          ) +
+                                                          " "
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.authVendor.vendor_email
+                                            ? _c(
+                                                "li",
+                                                { staticClass: "pb-1" },
+                                                [
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      staticClass:
+                                                        "btn-link text-secondary",
+                                                      attrs: {
+                                                        href:
+                                                          "javascript:void(0);"
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._m(4),
+                                                      _vm._v(
+                                                        " " +
+                                                          _vm._s(
+                                                            _vm.authVendor
+                                                              .vendor_email
+                                                          )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.authVendor.vendor_address
+                                            ? _c(
+                                                "li",
+                                                { staticClass: "pb-1" },
+                                                [
+                                                  _c(
+                                                    "a",
+                                                    {
+                                                      staticClass:
+                                                        "btn-link text-secondary",
+                                                      attrs: {
+                                                        href:
+                                                          "javascript:void(0);"
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._m(5),
+                                                      _vm._v(
+                                                        " " +
+                                                          _vm._s(
+                                                            _vm.authVendor
+                                                              .vendor_address
+                                                          )
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            : _vm._e()
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "h6",
+                                        {
+                                          staticClass:
+                                            "mt-4 text-muted- text-secondary"
+                                        },
+                                        [_vm._v("Other Info")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "ul",
+                                        { staticClass: "list-unstyled" },
+                                        [
+                                          _vm.authVendor.vendor_tin
+                                            ? _c("li", [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "btn-link- text-secondary"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "small",
+                                                      {
+                                                        staticClass: "text-dark"
+                                                      },
+                                                      [_vm._v("TIN")]
+                                                    ),
+                                                    _vm._v(
+                                                      " " +
+                                                        _vm._s(
+                                                          _vm.authVendor
+                                                            .vendor_tin
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.authVendor.vendor_nid
+                                            ? _c("li", [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "btn-link- text-secondary"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "small",
+                                                      {
+                                                        staticClass: "text-dark"
+                                                      },
+                                                      [_vm._v("NID")]
+                                                    ),
+                                                    _vm._v(
+                                                      " " +
+                                                        _vm._s(
+                                                          _vm.authVendor
+                                                            .vendor_nid
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              ])
+                                            : _vm._e(),
+                                          _vm._v(" "),
+                                          _vm.authVendor.vendor_bank_details
+                                            ? _c("li", [
+                                                _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "btn-link- text-secondary"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "small",
+                                                      {
+                                                        staticClass: "text-dark"
+                                                      },
+                                                      [_vm._v("Financial")]
+                                                    ),
+                                                    _vm._v(
+                                                      " " +
+                                                        _vm._s(
+                                                          _vm.authVendor
+                                                            .vendor_bank_details
+                                                        )
+                                                    )
+                                                  ]
+                                                )
+                                              ])
+                                            : _vm._e()
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _vm.authVendor.vendor_desc
+                                        ? _c(
+                                            "p",
+                                            {
+                                              staticClass:
+                                                "text-white- text-justify text-muted- mb-3",
+                                              attrs: { title: "Vendor Type" }
+                                            },
+                                            [
+                                              _c("span", {
+                                                domProps: {
+                                                  innerHTML: _vm._s(
+                                                    _vm.authVendor.vendor_desc
+                                                  )
+                                                }
+                                              })
+                                            ]
+                                          )
+                                        : _vm._e()
+                                    ]
+                                  )
                                 ])
                               ]
                             )
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "col-xs-12 col-sm-12 col-md-5 col-5-"
-                            },
-                            [
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "text-white- text-secondary mb-2",
-                                  attrs: { title: "Vendor Name" }
-                                },
-                                [
-                                  _vm._v(
-                                    "Name: \r\n                                    "
-                                  ),
-                                  _c("span", { staticClass: "text-blue" }, [
-                                    _vm._v(_vm._s(_vm.authVendor.vendor_name))
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "text-white- text-secondary mb-2",
-                                  attrs: { title: "Vendor Code" }
-                                },
-                                [
-                                  _vm._v(
-                                    "Code: \r\n                                    "
-                                  ),
-                                  _c("span", { staticClass: "text-blue" }, [
-                                    _vm._v(_vm._s(_vm.authVendor.vendor_code))
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "text-white- text-secondary mb-2",
-                                  attrs: { title: "Vendor Type" }
-                                },
-                                [
-                                  _vm._v(
-                                    "Type:\r\n                                    "
-                                  ),
-                                  _c("span", { staticClass: "text-blue" }, [
-                                    _vm._v(
-                                      " " + _vm._s(_vm.authVendor.vendor_type)
-                                    )
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _vm.authVendor.brand_shop_id
-                                ? _c(
-                                    "p",
-                                    {
-                                      staticClass:
-                                        "text-white- text-secondary mb-2",
-                                      attrs: { title: "Brand Shop" }
-                                    },
-                                    [
-                                      _vm._v("Brand Shop: "),
-                                      _c("span", { staticClass: "text-blue" }, [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.authVendor
-                                              .belongs_to_brand_shop[
-                                              "brand_shop_title"
-                                            ]
-                                          )
-                                        )
-                                      ])
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.authVendor.vendor_nid
-                                ? _c(
-                                    "p",
-                                    {
-                                      staticClass:
-                                        "text-white- text-secondary mb-2"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "NID: \r\n                                    "
-                                      ),
-                                      _c("span", { staticClass: "text-blue" }, [
-                                        _vm._v(
-                                          _vm._s(_vm.authVendor.vendor_nid)
-                                        )
-                                      ])
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.authVendor.vendor_tin
-                                ? _c(
-                                    "p",
-                                    {
-                                      staticClass:
-                                        "text-white- text-secondary mb-2"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "TIN: \r\n                                    "
-                                      ),
-                                      _c("span", { staticClass: "text-blue" }, [
-                                        _vm._v(
-                                          _vm._s(_vm.authVendor.vendor_tin)
-                                        )
-                                      ])
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _vm.authVendor.vendor_bank_details
-                                ? _c(
-                                    "p",
-                                    {
-                                      staticClass:
-                                        "text-white- text-secondary mb-2"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "Financial: \r\n                                    "
-                                      ),
-                                      _c("span", { staticClass: "text-blue" }, [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.authVendor.vendor_bank_details
-                                          )
-                                        )
-                                      ])
-                                    ]
-                                  )
-                                : _vm._e()
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "col-xs-12 col-sm-12 col-md-4 col-4-"
-                            },
-                            [
-                              _vm.authVendor.vendor_contact_name
-                                ? _c(
-                                    "p",
-                                    {
-                                      staticClass:
-                                        "text-white- text-secondary mb-2"
-                                    },
-                                    [
-                                      _vm._v(
-                                        "Contact Name: \r\n                                    "
-                                      ),
-                                      _c("span", { staticClass: "text-blue" }, [
-                                        _vm._v(
-                                          _vm._s(
-                                            _vm.authVendor.vendor_contact_name
-                                          )
-                                        )
-                                      ])
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                {
-                                  staticClass: "text-white- text-secondary mb-2"
-                                },
-                                [
-                                  _c("i", { staticClass: "fas fa-at" }),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "text-blue" }, [
-                                    _vm._v(_vm._s(_vm.authVendor.vendor_email))
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                {
-                                  staticClass: "text-white- text-secondary mb-2"
-                                },
-                                [
-                                  _c("i", { staticClass: "fas fa-phone" }),
-                                  _vm._v(" "),
-                                  _c("span", { staticClass: "text-blue" }, [
-                                    _vm._v(_vm._s(_vm.authVendor.vendor_phone))
-                                  ])
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _vm.authVendor.vendor_desc
-                                ? _c(
-                                    "p",
-                                    {
-                                      staticClass:
-                                        "text-white- text-secondary mb-2",
-                                      attrs: { title: "Vendor Type" }
-                                    },
-                                    [
-                                      _vm._v("Details: "),
-                                      _c("span", { staticClass: "text-blue" }, [
-                                        _vm._v(
-                                          _vm._s(_vm.authVendor.vendor_desc)
-                                        )
-                                      ])
-                                    ]
-                                  )
-                                : _vm._e(),
-                              _vm._v(" "),
-                              _c(
-                                "p",
-                                {
-                                  staticClass:
-                                    "text-white- text-secondary mb-2",
-                                  attrs: { title: "Vendor Type" }
-                                },
-                                [
-                                  _vm._v("Address: "),
-                                  _c("span", { staticClass: "text-blue" }, [
-                                    _vm._v(
-                                      _vm._s(_vm.authVendor.vendor_address)
-                                    )
-                                  ])
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "col-xs-12 col-sm-12 col-md-3 col-3- text-center d-none d-xl-block"
-                            },
-                            [
-                              _vm.authVendor.vendor_img
-                                ? _c("img", {
-                                    staticStyle: {
-                                      height: "120px",
-                                      width: "150px"
-                                    },
-                                    attrs: { src: _vm.authVendor.vendor_img }
-                                  })
-                                : _vm._e()
-                            ]
-                          )
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-3 col-6" }, [
-                    _c(
-                      "div",
-                      { staticClass: "small-box bg-danger- bg-white" },
-                      [
-                        _c("div", { staticClass: "inner" }, [
-                          _vm._m(1),
-                          _vm._v(" "),
-                          _c(
-                            "p",
-                            { staticClass: "text-white- text-secondary mb-2" },
-                            [_vm._v(" " + _vm._s(_vm.authSupplier.name))]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "p",
-                            { staticClass: "text-white- text-secondary mb-2" },
-                            [
-                              _c("i", { staticClass: "fas fa-at" }),
-                              _vm._v(" " + _vm._s(_vm.authSupplier.email))
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "p",
-                            { staticClass: "text-white- text-secondary mb-2" },
-                            [
-                              _c("i", { staticClass: "fas fa-phone" }),
-                              _vm._v(" " + _vm._s(_vm.authSupplier.phone))
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _vm.authSupplier.status_id === 1
-                            ? _c(
-                                "p",
-                                {
-                                  staticClass: "text-white- text-secondary mb-2"
-                                },
-                                [_vm._m(2)]
-                              )
-                            : _vm._e()
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "small-box-footer text-secondary",
-                            attrs: { to: "/sspa/my-profile" }
-                          },
-                          [
-                            _vm._v("Profile "),
-                            _c("i", {
-                              staticClass: "fas fa-arrow-circle-right"
-                            })
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-3 col-6" }, [
-                    _c(
-                      "div",
-                      { staticClass: "small-box bg-success- bg-white" },
-                      [
-                        _vm._m(3),
-                        _vm._v(" "),
-                        _vm._m(4),
-                        _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "small-box-footer text-secondary",
-                            attrs: { to: "/sspa/my-payment-receivable" }
-                          },
-                          [
-                            _vm._v("More info "),
-                            _c("i", {
-                              staticClass: "fas fa-arrow-circle-right"
-                            })
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-3 col-6" }, [
-                    _c(
-                      "div",
-                      { staticClass: "small-box bg-warning- bg-white" },
-                      [
-                        _vm._m(5),
-                        _vm._v(" "),
-                        _vm._m(6),
-                        _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "small-box-footer text-secondary",
-                            attrs: { to: "/sspa/my-products" }
-                          },
-                          [
-                            _vm._v("More info "),
-                            _c("i", {
-                              staticClass: "fas fa-arrow-circle-right"
-                            })
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-3 col-6" }, [
-                    _c(
-                      "div",
-                      { staticClass: "small-box bg-info- bg-white" },
-                      [
-                        _vm._m(7),
-                        _vm._v(" "),
-                        _vm._m(8),
-                        _vm._v(" "),
-                        _c(
-                          "router-link",
-                          {
-                            staticClass: "small-box-footer text-secondary",
-                            attrs: { to: "/sspa/my-orders" }
-                          },
-                          [
-                            _vm._v("My Orders "),
-                            _c("i", {
-                              staticClass: "fas fa-arrow-circle-right"
-                            })
-                          ]
-                        )
-                      ],
-                      1
-                    )
+                          ])
+                        ]
+                      )
+                    ])
                   ])
                 ])
               ]
@@ -713,34 +773,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "content-header" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row mb-2" }, [
-          _c("div", { staticClass: "col-sm-6 col-6" }, [
-            _c("h5", { staticClass: "m-0- text-dark" }, [_vm._v("Dashboard")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-sm-6 col-6" }, [
-            _c("ol", { staticClass: "breadcrumb float-right" }, [
-              _c("li", { staticClass: "breadcrumb-item" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Dashboard")])
-              ]),
-              _vm._v(" "),
-              _c("li", { staticClass: "breadcrumb-item" }, [
-                _c("a", { attrs: { href: "#" } }, [_vm._v("Home")])
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("h5", { staticClass: "text-white- text-secondary" }, [
-      _c("small", [_vm._v("My Info")])
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h3", { staticClass: "card-title" }, [_vm._v("Summary")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-tools" })
     ])
   },
   function() {
@@ -748,14 +784,334 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "span",
-      {
-        staticClass: "btn- px-1 bg-success text-white font-size-9- rounded-lg"
-      },
+      "div",
+      { staticClass: "col-12 col-md-12 col-lg-8 order-2 order-md-1" },
       [
-        _c("i", { staticClass: "fas fa-check font-size-8" }),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-12 col-sm-4" }, [
+            _c("div", { staticClass: "info-box bg-light" }, [
+              _c("div", { staticClass: "info-box-content text-secondary" }, [
+                _c(
+                  "span",
+                  { staticClass: "info-box-text text-center text-muted-" },
+                  [_vm._v("Order's")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: "info-box-number text-center text-muted- mb-0"
+                  },
+                  [_vm._v("2300")]
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 col-sm-4" }, [
+            _c("div", { staticClass: "info-box bg-light" }, [
+              _c("div", { staticClass: "info-box-content text-secondary" }, [
+                _c(
+                  "span",
+                  { staticClass: "info-box-text text-center text-muted-" },
+                  [_vm._v("Complete")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass: "info-box-number text-center text-muted- mb-0"
+                  },
+                  [_vm._v("2000")]
+                )
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-12 col-sm-4" }, [
+            _c("div", { staticClass: "info-box bg-light" }, [
+              _c("div", { staticClass: "info-box-content text-secondary" }, [
+                _c(
+                  "span",
+                  {
+                    staticClass: "info-box-text text-center text-muted- green"
+                  },
+                  [_vm._v("Payment Receivable")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    staticClass:
+                      "info-box-number text-center text-muted- mb-0 green"
+                  },
+                  [_vm._v("20,786.00 "), _c("span")]
+                )
+              ])
+            ])
+          ])
+        ]),
         _vm._v(" "),
-        _c("small", [_vm._v("Verified")])
+        _c("div", { staticClass: "row mt-2" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("h6", { staticClass: "text-secondary" }, [
+              _vm._v("Recent orders")
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "table-responsive" }, [
+              _c("table", { staticClass: "table m-0 table-custome-one" }, [
+                _c("thead", { staticClass: "text-secondary" }, [
+                  _c("tr", [
+                    _c("th", [_vm._v("Order ID")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Item")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Status")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Popularity")])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td", [
+                      _c(
+                        "a",
+                        { attrs: { href: "pages/examples/invoice.html" } },
+                        [_vm._v("OR9842")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Call of Duty IV")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("span", { staticClass: "badge badge-success" }, [
+                        _vm._v("Shipped")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "sparkbar",
+                          attrs: {
+                            "data-color": "#00a65a",
+                            "data-height": "20"
+                          }
+                        },
+                        [_vm._v("90,80,90,-70,61,-83,63")]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [
+                      _c(
+                        "a",
+                        { attrs: { href: "pages/examples/invoice.html" } },
+                        [_vm._v("OR1848")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Samsung Smart TV")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("span", { staticClass: "badge badge-warning" }, [
+                        _vm._v("Pending")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "sparkbar",
+                          attrs: {
+                            "data-color": "#f39c12",
+                            "data-height": "20"
+                          }
+                        },
+                        [_vm._v("90,80,-90,70,61,-83,68")]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [
+                      _c(
+                        "a",
+                        { attrs: { href: "pages/examples/invoice.html" } },
+                        [_vm._v("OR7429")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("iPhone 6 Plus")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("span", { staticClass: "badge badge-danger" }, [
+                        _vm._v("Delivered")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "sparkbar",
+                          attrs: {
+                            "data-color": "#f56954",
+                            "data-height": "20"
+                          }
+                        },
+                        [_vm._v("90,-80,90,70,-61,83,63")]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [
+                      _c(
+                        "a",
+                        { attrs: { href: "pages/examples/invoice.html" } },
+                        [_vm._v("OR7429")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Samsung Smart TV")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("span", { staticClass: "badge badge-info" }, [
+                        _vm._v("Processing")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "sparkbar",
+                          attrs: {
+                            "data-color": "#00c0ef",
+                            "data-height": "20"
+                          }
+                        },
+                        [_vm._v("90,80,-90,70,-61,83,63")]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [
+                      _c(
+                        "a",
+                        { attrs: { href: "pages/examples/invoice.html" } },
+                        [_vm._v("OR1848")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Samsung Smart TV")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("span", { staticClass: "badge badge-warning" }, [
+                        _vm._v("Pending")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "sparkbar",
+                          attrs: {
+                            "data-color": "#f39c12",
+                            "data-height": "20"
+                          }
+                        },
+                        [_vm._v("90,80,-90,70,61,-83,68")]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [
+                      _c(
+                        "a",
+                        { attrs: { href: "pages/examples/invoice.html" } },
+                        [_vm._v("OR7429")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("iPhone 6 Plus")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("span", { staticClass: "badge badge-danger" }, [
+                        _vm._v("Delivered")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "sparkbar",
+                          attrs: {
+                            "data-color": "#f56954",
+                            "data-height": "20"
+                          }
+                        },
+                        [_vm._v("90,-80,90,70,-61,83,63")]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("tr", [
+                    _c("td", [
+                      _c(
+                        "a",
+                        { attrs: { href: "pages/examples/invoice.html" } },
+                        [_vm._v("OR9842")]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Call of Duty IV")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("span", { staticClass: "badge badge-success" }, [
+                        _vm._v("Shipped")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "sparkbar",
+                          attrs: {
+                            "data-color": "#00a65a",
+                            "data-height": "20"
+                          }
+                        },
+                        [_vm._v("90,80,90,-70,61,-83,63")]
+                      )
+                    ])
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-footer- text-right" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "uppercase",
+                  attrs: { href: "javascript:void(0)" }
+                },
+                [_vm._v("View All order's")]
+              )
+            ])
+          ])
+        ])
       ]
     )
   },
@@ -763,14 +1119,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner" }, [
-      _c("h3", { staticClass: "text-white- text-secondary" }, [
-        _vm._v("5,87,93.00 "),
-        _c("sup", { staticStyle: { "font-size": "20px" } }, [_vm._v("TK")])
+    return _c("div", { staticClass: "card-header bg-light" }, [
+      _c("h5", { staticClass: "card-title text-secondary mb-1-" }, [
+        _c("i", { staticClass: "fas fa-info-circle" }),
+        _vm._v(" Supplier / Vendor Info ")
       ]),
       _vm._v(" "),
-      _c("p", { staticClass: "text-white- text-secondary" }, [
-        _vm._v("Payment Receivable")
+      _c("div", { staticClass: "card-tools" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-tool",
+            attrs: { type: "button", "data-card-widget": "collapse" }
+          },
+          [_c("i", { staticClass: "fas fa-minus" })]
+        )
       ])
     ])
   },
@@ -778,47 +1141,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "far fa-money-bill-alt" })
-    ])
+    return _c("small", [_c("i", { staticClass: "fas fa-phone" })])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner" }, [
-      _c("h3", { staticClass: "text-white- text-secondary" }, [_vm._v("44")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "text-white- text-secondary" }, [
-        _vm._v("Product")
-      ])
-    ])
+    return _c("small", [_c("i", { staticClass: "far fa-fw fa-envelope" })])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "fab fa-product-hunt" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "inner" }, [
-      _c("h3", { staticClass: "text-white- text-secondary" }, [_vm._v("150")]),
-      _vm._v(" "),
-      _c("p", { staticClass: "text-white- text-secondary" }, [_vm._v("Orders")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "fas fa-shopping-cart" })
-    ])
+    return _c("small", [_c("i", { staticClass: "fas fa-map-marker-alt" })])
   }
 ]
 render._withStripped = true

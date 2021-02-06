@@ -43,7 +43,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "js/chunks/" + ({"404Public-website":"404Public-website","AboutUsPublic-website":"AboutUsPublic-website","AccountDetailsMaster":"AccountDetailsMaster","AccountHeadsMaster":"AccountHeadsMaster","AdminChildUserNotification":"AdminChildUserNotification","AdminChildUserProfile":"AdminChildUserProfile","AdminChiledWrapper":"AdminChiledWrapper","AttirbuteMaster":"AttirbuteMaster","AttributeValueMaster":"AttributeValueMaster","BankAccountMaster":"BankAccountMaster","BranchInfo":"BranchInfo","BrandMaster":"BrandMaster","BrandPublic-website":"BrandPublic-website","BrandShopMaster":"BrandShopMaster","BrandShopPublic-website":"BrandShopPublic-website","BrandShopsListPublic-website":"BrandShopsListPublic-website","BrandsListPublic-website":"BrandsListPublic-website","CartPublic-website":"CartPublic-website","CashAccountMaster":"CashAccountMaster","CashFlowReportMaster":"CashFlowReportMaster","CategoriesPublic-website":"CategoriesPublic-website","Category-demo":"Category-demo","CategoryMaster":"CategoryMaster","ChartOfAccounts":"ChartOfAccounts","CheckoutPublic-website":"CheckoutPublic-website","ComparePublic-website":"ComparePublic-website","ContactPublic-website":"ContactPublic-website","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","CustomerGroupMaster":"CustomerGroupMaster","CustomerMaster":"CustomerMaster","CustomerMasterForm":"CustomerMasterForm","CustomerMasterList":"CustomerMasterList","CustomerMembershipMaster":"CustomerMembershipMaster","Dashboard":"Dashboard","DashboardAdminChildDelivery":"DashboardAdminChildDelivery","DashboardAdminChildGuestUser":"DashboardAdminChildGuestUser","DashboardAdminChildMonitoring":"DashboardAdminChildMonitoring","DashboardAdminChildOrder":"DashboardAdminChildOrder","DashboardAdminChildPackaging":"DashboardAdminChildPackaging","DashboardAdminChildPurchase":"DashboardAdminChildPurchase","DashboardAdminChildReport":"DashboardAdminChildReport","DashboardAdminChildSales":"DashboardAdminChildSales","DashboardAdminChildStorage":"DashboardAdminChildStorage","DashboardAdminChildSupervisor":"DashboardAdminChildSupervisor","DashboardSupplierAdmin~supplier-product-return-website-auth":"DashboardSupplierAdmin~supplier-product-return-website-auth","DashboardSupplierAdmin":"DashboardSupplierAdmin","supplier-product-return-website-auth":"supplier-product-return-website-auth","DealsListPublic-website":"DealsListPublic-website","DeliveryCompleteAdminChildDelivery":"DeliveryCompleteAdminChildDelivery","DeliveryFailedAdminChildDelivery":"DeliveryFailedAdminChildDelivery","DeliveryPendingAdminChildDelivery":"DeliveryPendingAdminChildDelivery","DeliveryReportAdminChildDelivery":"DeliveryReportAdminChildDelivery","DepartmentMaster":"DepartmentMaster","DistrictMaster":"DistrictMaster","DistrictZoneMaster":"DistrictZoneMaster","DivisionMaster":"DivisionMaster","EmployeeMaster":"EmployeeMaster","EmployeeMasterForm":"EmployeeMasterForm","EmployeeMasterList":"EmployeeMasterList","FAQPublic-website":"FAQPublic-website","GiftCardPublic-website":"GiftCardPublic-website","GiftVoucher":"GiftVoucher","HomePublic-website":"HomePublic-website","JobTitleMaster":"JobTitleMaster","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","LoanReportMaster":"LoanReportMaster","MembershipPublic-website":"MembershipPublic-website","Multicomponent":"Multicomponent","MyAccountPublic-website":"MyAccountPublic-website","OrderStatusMaster":"OrderStatusMaster","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","PaymentMethod":"PaymentMethod","PaymentStatusMaster":"PaymentStatusMaster","PermissionMaster":"PermissionMaster","ProductMaster":"ProductMaster","ProductMasterForm":"ProductMasterForm","ProductMasterList":"ProductMasterList","PurchaseOrderForm":"PurchaseOrderForm","PurchaseOrderList":"PurchaseOrderList","PurchaseOrderMaster":"PurchaseOrderMaster","PurchaseSingleOrderView":"PurchaseSingleOrderView","ReportMaster":"ReportMaster","ReturnActionMaster":"ReturnActionMaster","ReturnStatusMaster":"ReturnStatusMaster","Returns":"Returns","Reviews":"Reviews","RoleMaster":"RoleMaster","SalesReportMaster":"SalesReportMaster","SettingsMaster":"SettingsMaster","ShopPublic-website":"ShopPublic-website","SingleProductPublic-website":"SingleProductPublic-website","SpecificationMaster":"SpecificationMaster","StatusMaster":"StatusMaster","StockReportMaster":"StockReportMaster","StockStatusMaster":"StockStatusMaster","Store":"Store","SupplierAdminWrapper":"SupplierAdminWrapper","SupplierMaster":"SupplierMaster","SuppliersReportMaster":"SuppliersReportMaster","TermsAndConditionsPublic-website":"TermsAndConditionsPublic-website","TrackYourOrder-website":"TrackYourOrder-website","UnitsMaster":"UnitsMaster","UserMaster":"UserMaster","UserStatus":"UserStatus","VatRate":"VatRate","VendorMaster":"VendorMaster","VendorMasterForm":"VendorMasterForm","VendorMasterList":"VendorMasterList","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","WishlistPublic-website":"WishlistPublic-website","adminwrapper":"adminwrapper","counttest-sample":"counttest-sample","customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59":"customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59","customer-address-form-website-auth":"customer-address-form-website-auth","customer-address-website-auth":"customer-address-website-auth","customer-cart-website-auth":"customer-cart-website-auth","customer-dashboard-website-auth":"customer-dashboard-website-auth","customer-order-website-auth":"customer-order-website-auth","customer-profile-update-website-auth":"customer-profile-update-website-auth","customer-profile-website-auth":"customer-profile-website-auth","customer-reviews-website-auth":"customer-reviews-website-auth","customer-voucher-website-auth":"customer-voucher-website-auth","customer-wishlist-website-auth":"customer-wishlist-website-auth","customer-login-website":"customer-login-website","customer-password-recover-website":"customer-password-recover-website","customer-password-reset-website":"customer-password-reset-website","customer-register-website":"customer-register-website","multi-select-app-one-global":"multi-select-app-one-global","my-date-time-global":"my-date-time-global","pagination-app":"pagination-app","search-app-master":"search-app-master","search-app-one":"search-app-one","single-select-app-one-global":"single-select-app-one-global","single-select-app-two-global":"single-select-app-two-global","supplier-login-website":"supplier-login-website","vendors~AdminChildNotFound~NotFound~NotFoundSupplierAdmin~auto-complete-app~formComponent~multi-sele~89fddd62":"vendors~AdminChildNotFound~NotFound~NotFoundSupplierAdmin~auto-complete-app~formComponent~multi-sele~89fddd62","AdminChildNotFound":"AdminChildNotFound","NotFound":"NotFound","NotFoundSupplierAdmin":"NotFoundSupplierAdmin","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","website-wrapper":"website-wrapper","AccountDetailsMasterContent-com":"AccountDetailsMasterContent-com","AccountDetailsMasterForm-com":"AccountDetailsMasterForm-com","AccountDetailsMasterList-com":"AccountDetailsMasterList-com","AccountHeadsMasterForm-com":"AccountHeadsMasterForm-com","AccountHeadsMasterList-com":"AccountHeadsMasterList-com","AttributeMasterForm-com":"AttributeMasterForm-com","AttributeMasterList-com":"AttributeMasterList-com","AttributeValueMasterForm-com":"AttributeValueMasterForm-com","AttributeValueMasterList-com":"AttributeValueMasterList-com","BankAccountMasterContent-com":"BankAccountMasterContent-com","BankAccountMasterForm-com":"BankAccountMasterForm-com","BankAccountMasterList-com":"BankAccountMasterList-com","BranchForm-com":"BranchForm-com","BranchList-com":"BranchList-com","BrandMasterForm-com":"BrandMasterForm-com","BrandMasterList-com":"BrandMasterList-com","BrandShopMasterForm-com":"BrandShopMasterForm-com","BrandShopMasterList-com":"BrandShopMasterList-com","CashAccountMasterContent-com":"CashAccountMasterContent-com","CashAccountMasterForm-com":"CashAccountMasterForm-com","CashAccountMasterList-com":"CashAccountMasterList-com","CategoryMasterForm-com":"CategoryMasterForm-com","CategoryMasterList-com":"CategoryMasterList-com","ChartOfAccountsForm-com":"ChartOfAccountsForm-com","ChartOfAccountsList-com":"ChartOfAccountsList-com","CountryForm-com":"CountryForm-com","CountryList-com":"CountryList-com","CurrencyForm-com":"CurrencyForm-com","CurrencyList-com":"CurrencyList-com","CustomerGroupMasterForm-com":"CustomerGroupMasterForm-com","CustomerGroupMasterList-com":"CustomerGroupMasterList-com","CustomerMembershipMasterForm-com":"CustomerMembershipMasterForm-com","CustomerMembershipMasterList-com":"CustomerMembershipMasterList-com","DepartmentMaserForm-com":"DepartmentMaserForm-com","DepartmentMasterList-com":"DepartmentMasterList-com","DistrictMasterList-com":"DistrictMasterList-com","DistrictMasterform-com":"DistrictMasterform-com","DistrictZoneMasterForm-com":"DistrictZoneMasterForm-com","DistrictZoneMasterList-com":"DistrictZoneMasterList-com","DivisionMasterList-com":"DivisionMasterList-com","DivisionMasterform-com":"DivisionMasterform-com","JobTitleMasterForm-com":"JobTitleMasterForm-com","JobTitleMasterList-com":"JobTitleMasterList-com","LanguageForm-com":"LanguageForm-com","LanguageList-com":"LanguageList-com","LengthUnitForm-com":"LengthUnitForm-com","LengthUnitList-com":"LengthUnitList-com","ProductListMultiComponent-com":"ProductListMultiComponent-com","childCategory-com":"childCategory-com","countCategory-com":"countCategory-com","dataList-com":"dataList-com","formBox":"formBox","searchBox":"searchBox","viewCategory-com":"viewCategory-com","OrderStatusMasterForm-com":"OrderStatusMasterForm-com","OrderStatusMasterList-com":"OrderStatusMasterList-com","PackageUnitForm-com":"PackageUnitForm-com","PackageUnitList-com":"PackageUnitList-com","PaymentMethodForm-com":"PaymentMethodForm-com","PaymentMethodList-com":"PaymentMethodList-com","PaymentStatusMasterForm-com":"PaymentStatusMasterForm-com","PaymentStatusMasterList-com":"PaymentStatusMasterList-com","PermissionAddForm-com":"PermissionAddForm-com","ReportMasterContent-com":"ReportMasterContent-com","ReportMasterNav-com":"ReportMasterNav-com","ReturnActionMasterForm-com":"ReturnActionMasterForm-com","ReturnActionMasterList-com":"ReturnActionMasterList-com","ReturnStatusMasterForm-com":"ReturnStatusMasterForm-com","ReturnStatusMasterList-com":"ReturnStatusMasterList-com","RoleAdminMasterForm-com":"RoleAdminMasterForm-com","RoleAdminMasterList-com":"RoleAdminMasterList-com","SpecificationMasterForm-com":"SpecificationMasterForm-com","SpecificationMasterList-com":"SpecificationMasterList-com","StatusMasterForm-com":"StatusMasterForm-com","StatusMasterList-com":"StatusMasterList-com","StockStatusMasterForm-com":"StockStatusMasterForm-com","StockStatusMasterList-com":"StockStatusMasterList-com","SupplierMasterForm-com":"SupplierMasterForm-com","SupplierMasterList-com":"SupplierMasterList-com","UnitsMasterForm-com":"UnitsMasterForm-com","UnitsMasterList-com":"UnitsMasterList-com","UserMasterForm-com":"UserMasterForm-com","UserMasterList-com":"UserMasterList-com","UserStatusForm-com":"UserStatusForm-com","UserStatusList-com":"UserStatusList-com","VatRateForm-com":"VatRateForm-com","VatRateList-com":"VatRateList-com","WeightUnitForm-com":"WeightUnitForm-com","WeightUnitList-com":"WeightUnitList-com","HeaderLogoMenuForAllPage-com~HeaderLogoSearchIconsForHome-com":"HeaderLogoMenuForAllPage-com~HeaderLogoSearchIconsForHome-com","HeaderLogoMenuForAllPage-com":"HeaderLogoMenuForAllPage-com","HeaderLogoSearchIconsForHome-com":"HeaderLogoSearchIconsForHome-com","HeaderVerticalAndSearchForAllPage-com":"HeaderVerticalAndSearchForAllPage-com","HeaderVerticalAndSecondaryMenuForHome-com":"HeaderVerticalAndSecondaryMenuForHome-com","AdjustBankAccountForm-com":"AdjustBankAccountForm-com","AdjustCashAccountForm-com":"AdjustCashAccountForm-com"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "js/chunks/" + ({"404Public-website":"404Public-website","AboutUsPublic-website":"AboutUsPublic-website","AccountDetailsMaster":"AccountDetailsMaster","AccountHeadsMaster":"AccountHeadsMaster","AdminChildUserNotification":"AdminChildUserNotification","AdminChildUserProfile":"AdminChildUserProfile","AdminChiledWrapper":"AdminChiledWrapper","AttirbuteMaster":"AttirbuteMaster","AttributeValueMaster":"AttributeValueMaster","BankAccountMaster":"BankAccountMaster","BranchInfo":"BranchInfo","BrandMaster":"BrandMaster","BrandPublic-website":"BrandPublic-website","BrandShopMaster":"BrandShopMaster","BrandShopPublic-website":"BrandShopPublic-website","BrandShopsListPublic-website":"BrandShopsListPublic-website","BrandsListPublic-website":"BrandsListPublic-website","CartPublic-website":"CartPublic-website","CashAccountMaster":"CashAccountMaster","CashFlowReportMaster":"CashFlowReportMaster","CategoriesPublic-website":"CategoriesPublic-website","Category-demo":"Category-demo","CategoryMaster":"CategoryMaster","ChartOfAccounts":"ChartOfAccounts","CheckoutPublic-website":"CheckoutPublic-website","ComparePublic-website":"ComparePublic-website","ContactPublic-website":"ContactPublic-website","CountryMaster":"CountryMaster","CurrencyMarster":"CurrencyMarster","CustomerGroupMaster":"CustomerGroupMaster","CustomerMaster":"CustomerMaster","CustomerMasterForm":"CustomerMasterForm","CustomerMasterList":"CustomerMasterList","CustomerMembershipMaster":"CustomerMembershipMaster","Dashboard":"Dashboard","DashboardAdminChildDelivery":"DashboardAdminChildDelivery","DashboardAdminChildGuestUser":"DashboardAdminChildGuestUser","DashboardAdminChildMonitoring":"DashboardAdminChildMonitoring","DashboardAdminChildOrder":"DashboardAdminChildOrder","DashboardAdminChildPackaging":"DashboardAdminChildPackaging","DashboardAdminChildPurchase":"DashboardAdminChildPurchase","DashboardAdminChildReport":"DashboardAdminChildReport","DashboardAdminChildSales":"DashboardAdminChildSales","DashboardAdminChildStorage":"DashboardAdminChildStorage","DashboardAdminChildSupervisor":"DashboardAdminChildSupervisor","DashboardSupplierAdmin~supplier-orders-auth-sspa~supplier-payment-history-auth-sspa~supplier-payment~1a2e7930":"DashboardSupplierAdmin~supplier-orders-auth-sspa~supplier-payment-history-auth-sspa~supplier-payment~1a2e7930","DashboardSupplierAdmin":"DashboardSupplierAdmin","supplier-orders-auth-sspa":"supplier-orders-auth-sspa","supplier-payment-history-auth-sspa":"supplier-payment-history-auth-sspa","supplier-payment-receivable-auth-sspa":"supplier-payment-receivable-auth-sspa","supplier-product-replace-auth-sspa":"supplier-product-replace-auth-sspa","supplier-product-return-auth-sspa":"supplier-product-return-auth-sspa","supplier-products-auth-sspa":"supplier-products-auth-sspa","supplier-profile-auth-sspa":"supplier-profile-auth-sspa","supplier-profile-update-auth-sspa":"supplier-profile-update-auth-sspa","DealsListPublic-website":"DealsListPublic-website","DeliveryCompleteAdminChildDelivery":"DeliveryCompleteAdminChildDelivery","DeliveryFailedAdminChildDelivery":"DeliveryFailedAdminChildDelivery","DeliveryPendingAdminChildDelivery":"DeliveryPendingAdminChildDelivery","DeliveryReportAdminChildDelivery":"DeliveryReportAdminChildDelivery","DepartmentMaster":"DepartmentMaster","DistrictMaster":"DistrictMaster","DistrictZoneMaster":"DistrictZoneMaster","DivisionMaster":"DivisionMaster","EmployeeMaster":"EmployeeMaster","EmployeeMasterForm":"EmployeeMasterForm","EmployeeMasterList":"EmployeeMasterList","FAQPublic-website":"FAQPublic-website","GiftCardPublic-website":"GiftCardPublic-website","GiftVoucher":"GiftVoucher","HomePublic-website":"HomePublic-website","JobTitleMaster":"JobTitleMaster","LanguageMaster":"LanguageMaster","LengthUnit":"LengthUnit","LoanReportMaster":"LoanReportMaster","MembershipPublic-website":"MembershipPublic-website","Multicomponent":"Multicomponent","MyAccountPublic-website":"MyAccountPublic-website","OrderStatusMaster":"OrderStatusMaster","Orders":"Orders","OrganizationInfo":"OrganizationInfo","PackageUnit":"PackageUnit","PaymentMethod":"PaymentMethod","PaymentStatusMaster":"PaymentStatusMaster","PermissionMaster":"PermissionMaster","ProductMaster":"ProductMaster","ProductMasterForm":"ProductMasterForm","ProductMasterList":"ProductMasterList","PurchaseOrderForm":"PurchaseOrderForm","PurchaseOrderList":"PurchaseOrderList","PurchaseOrderMaster":"PurchaseOrderMaster","PurchaseSingleOrderView":"PurchaseSingleOrderView","ReportMaster":"ReportMaster","ReturnActionMaster":"ReturnActionMaster","ReturnStatusMaster":"ReturnStatusMaster","Returns":"Returns","Reviews":"Reviews","RoleMaster":"RoleMaster","SalesReportMaster":"SalesReportMaster","SettingsMaster":"SettingsMaster","ShopPublic-website":"ShopPublic-website","SingleProductPublic-website":"SingleProductPublic-website","SpecificationMaster":"SpecificationMaster","StatusMaster":"StatusMaster","StockReportMaster":"StockReportMaster","StockStatusMaster":"StockStatusMaster","Store":"Store","SupplierAdminWrapper":"SupplierAdminWrapper","SupplierMaster":"SupplierMaster","SuppliersReportMaster":"SuppliersReportMaster","TermsAndConditionsPublic-website":"TermsAndConditionsPublic-website","TrackYourOrder-website":"TrackYourOrder-website","UnitsMaster":"UnitsMaster","UserMaster":"UserMaster","UserStatus":"UserStatus","VatRate":"VatRate","VendorMaster":"VendorMaster","VendorMasterForm":"VendorMasterForm","VendorMasterList":"VendorMasterList","VuexComponent":"VuexComponent","WeightUnit":"WeightUnit","WishlistPublic-website":"WishlistPublic-website","adminwrapper":"adminwrapper","counttest-sample":"counttest-sample","customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59":"customer-address-form-website-auth~customer-address-website-auth~customer-cart-website-auth~customer~37d4ee59","customer-address-form-website-auth":"customer-address-form-website-auth","customer-address-website-auth":"customer-address-website-auth","customer-cart-website-auth":"customer-cart-website-auth","customer-dashboard-website-auth":"customer-dashboard-website-auth","customer-order-website-auth":"customer-order-website-auth","customer-profile-update-website-auth":"customer-profile-update-website-auth","customer-profile-website-auth":"customer-profile-website-auth","customer-reviews-website-auth":"customer-reviews-website-auth","customer-voucher-website-auth":"customer-voucher-website-auth","customer-wishlist-website-auth":"customer-wishlist-website-auth","customer-login-website":"customer-login-website","customer-password-recover-website":"customer-password-recover-website","customer-password-reset-website":"customer-password-reset-website","customer-register-website":"customer-register-website","display-notification-message-app-global":"display-notification-message-app-global","multi-select-app-one-global":"multi-select-app-one-global","my-date-time-global":"my-date-time-global","pagination-app":"pagination-app","search-app-master":"search-app-master","search-app-one":"search-app-one","single-select-app-one-global":"single-select-app-one-global","single-select-app-two-global":"single-select-app-two-global","vendors~AdminChildNotFound~NotFound~NotFoundSupplierAdmin~auto-complete-app~formComponent~multi-sele~89fddd62":"vendors~AdminChildNotFound~NotFound~NotFoundSupplierAdmin~auto-complete-app~formComponent~multi-sele~89fddd62","AdminChildNotFound":"AdminChildNotFound","NotFound":"NotFound","NotFoundSupplierAdmin":"NotFoundSupplierAdmin","auto-complete-app":"auto-complete-app","formComponent":"formComponent","multi-select-app":"multi-select-app","switch-app":"switch-app","website-wrapper":"website-wrapper","AccountDetailsMasterContent-com":"AccountDetailsMasterContent-com","AccountDetailsMasterForm-com":"AccountDetailsMasterForm-com","AccountDetailsMasterList-com":"AccountDetailsMasterList-com","AccountHeadsMasterForm-com":"AccountHeadsMasterForm-com","AccountHeadsMasterList-com":"AccountHeadsMasterList-com","AttributeMasterForm-com":"AttributeMasterForm-com","AttributeMasterList-com":"AttributeMasterList-com","AttributeValueMasterForm-com":"AttributeValueMasterForm-com","AttributeValueMasterList-com":"AttributeValueMasterList-com","BankAccountMasterContent-com":"BankAccountMasterContent-com","BankAccountMasterForm-com":"BankAccountMasterForm-com","BankAccountMasterList-com":"BankAccountMasterList-com","BranchForm-com":"BranchForm-com","BranchList-com":"BranchList-com","BrandMasterForm-com":"BrandMasterForm-com","BrandMasterList-com":"BrandMasterList-com","BrandShopMasterForm-com":"BrandShopMasterForm-com","BrandShopMasterList-com":"BrandShopMasterList-com","CashAccountMasterContent-com":"CashAccountMasterContent-com","CashAccountMasterForm-com":"CashAccountMasterForm-com","CashAccountMasterList-com":"CashAccountMasterList-com","CategoryMasterForm-com":"CategoryMasterForm-com","CategoryMasterList-com":"CategoryMasterList-com","ChartOfAccountsForm-com":"ChartOfAccountsForm-com","ChartOfAccountsList-com":"ChartOfAccountsList-com","CountryForm-com":"CountryForm-com","CountryList-com":"CountryList-com","CurrencyForm-com":"CurrencyForm-com","CurrencyList-com":"CurrencyList-com","CustomerGroupMasterForm-com":"CustomerGroupMasterForm-com","CustomerGroupMasterList-com":"CustomerGroupMasterList-com","CustomerMembershipMasterForm-com":"CustomerMembershipMasterForm-com","CustomerMembershipMasterList-com":"CustomerMembershipMasterList-com","DepartmentMaserForm-com":"DepartmentMaserForm-com","DepartmentMasterList-com":"DepartmentMasterList-com","DistrictMasterList-com":"DistrictMasterList-com","DistrictMasterform-com":"DistrictMasterform-com","DistrictZoneMasterForm-com":"DistrictZoneMasterForm-com","DistrictZoneMasterList-com":"DistrictZoneMasterList-com","DivisionMasterList-com":"DivisionMasterList-com","DivisionMasterform-com":"DivisionMasterform-com","JobTitleMasterForm-com":"JobTitleMasterForm-com","JobTitleMasterList-com":"JobTitleMasterList-com","LanguageForm-com":"LanguageForm-com","LanguageList-com":"LanguageList-com","LengthUnitForm-com":"LengthUnitForm-com","LengthUnitList-com":"LengthUnitList-com","ProductListMultiComponent-com":"ProductListMultiComponent-com","childCategory-com":"childCategory-com","countCategory-com":"countCategory-com","dataList-com":"dataList-com","formBox":"formBox","searchBox":"searchBox","viewCategory-com":"viewCategory-com","OrderStatusMasterForm-com":"OrderStatusMasterForm-com","OrderStatusMasterList-com":"OrderStatusMasterList-com","PackageUnitForm-com":"PackageUnitForm-com","PackageUnitList-com":"PackageUnitList-com","PaymentMethodForm-com":"PaymentMethodForm-com","PaymentMethodList-com":"PaymentMethodList-com","PaymentStatusMasterForm-com":"PaymentStatusMasterForm-com","PaymentStatusMasterList-com":"PaymentStatusMasterList-com","PermissionAddForm-com":"PermissionAddForm-com","ReportMasterContent-com":"ReportMasterContent-com","ReportMasterNav-com":"ReportMasterNav-com","ReturnActionMasterForm-com":"ReturnActionMasterForm-com","ReturnActionMasterList-com":"ReturnActionMasterList-com","ReturnStatusMasterForm-com":"ReturnStatusMasterForm-com","ReturnStatusMasterList-com":"ReturnStatusMasterList-com","RoleAdminMasterForm-com":"RoleAdminMasterForm-com","RoleAdminMasterList-com":"RoleAdminMasterList-com","SpecificationMasterForm-com":"SpecificationMasterForm-com","SpecificationMasterList-com":"SpecificationMasterList-com","StatusMasterForm-com":"StatusMasterForm-com","StatusMasterList-com":"StatusMasterList-com","StockStatusMasterForm-com":"StockStatusMasterForm-com","StockStatusMasterList-com":"StockStatusMasterList-com","SupplierMasterForm-com":"SupplierMasterForm-com","SupplierMasterList-com":"SupplierMasterList-com","UnitsMasterForm-com":"UnitsMasterForm-com","UnitsMasterList-com":"UnitsMasterList-com","UserMasterForm-com":"UserMasterForm-com","UserMasterList-com":"UserMasterList-com","UserStatusForm-com":"UserStatusForm-com","UserStatusList-com":"UserStatusList-com","VatRateForm-com":"VatRateForm-com","VatRateList-com":"VatRateList-com","WeightUnitForm-com":"WeightUnitForm-com","WeightUnitList-com":"WeightUnitList-com","HeaderLogoMenuForAllPage-com~HeaderLogoSearchIconsForHome-com":"HeaderLogoMenuForAllPage-com~HeaderLogoSearchIconsForHome-com","HeaderLogoMenuForAllPage-com":"HeaderLogoMenuForAllPage-com","HeaderLogoSearchIconsForHome-com":"HeaderLogoSearchIconsForHome-com","HeaderVerticalAndSearchForAllPage-com":"HeaderVerticalAndSearchForAllPage-com","HeaderVerticalAndSecondaryMenuForHome-com":"HeaderVerticalAndSecondaryMenuForHome-com","AdjustBankAccountForm-com":"AdjustBankAccountForm-com","AdjustCashAccountForm-com":"AdjustCashAccountForm-com"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function
@@ -93236,54 +93236,110 @@ var routes = [//export const routes = [
 },
 /********************************************************/
 
-/* Supplier Admin Routes */
+/* Supplier Admin Area for website (sspa = supplier single page application ) */
 
 /********************************************************/
-//{ path: '/sspa/dashboard-supplier', component: () => import(/* webpackChunkName: "DashboardSupplierAdmin" */ './components/AdminSupplier/Dashboard/DashboardSupplierAdmin.vue'), meta: { title: 'Dashboard'} },
 {
+  path: '/supplier/login',
+  name: 'SupplierLogin',
+  meta: {
+    title: 'Login'
+  },
+  beforeEnter: function beforeEnter(to, from, next) {
+    if (to.name === 'SupplierLogin' && _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForSupplier.isSspaAuthenticated === true) next({
+      name: 'SSPA-SupplierDashboard'
+    });else next();
+  }
+}, {
   path: '/sspa/my-dashboard',
+  name: 'SSPA-SupplierDashboard',
   component: function component() {
-    return Promise.all(/*! import() | DashboardSupplierAdmin */[__webpack_require__.e("DashboardSupplierAdmin~supplier-product-return-website-auth"), __webpack_require__.e("DashboardSupplierAdmin")]).then(__webpack_require__.bind(null, /*! ./components/AdminSupplier/Dashboard/DashboardSupplierAdmin.vue */ "./resources/js/components/AdminSupplier/Dashboard/DashboardSupplierAdmin.vue"));
+    return Promise.all(/*! import() | DashboardSupplierAdmin */[__webpack_require__.e("DashboardSupplierAdmin~supplier-orders-auth-sspa~supplier-payment-history-auth-sspa~supplier-payment~1a2e7930"), __webpack_require__.e("DashboardSupplierAdmin")]).then(__webpack_require__.bind(null, /*! ./components/AdminSupplier/Dashboard/DashboardSupplierAdmin.vue */ "./resources/js/components/AdminSupplier/Dashboard/DashboardSupplierAdmin.vue"));
   },
   meta: {
     title: 'Dashboard'
   }
-}, // { path: '/spas/supplier-profile', component: () => import(/* webpackChunkName: "SupplierProfileMaster" */ './components/AdminSupplier/Profile/SupplierProfileMaster.vue'), meta: { title: 'Profile'} },
-// { path: '/spas/supplier-new-order-list', component: () => import(/* webpackChunkName: "SupplierNewOrderList" */ './components/AdminSupplier/Orders/SupplierNewOrderList.vue'), meta: { title: 'New Order'} },
-// { path: '/spas/supplier-all-order', component: () => import(/* webpackChunkName: "SupplierAllOrder" */ './components/AdminSupplier/Orders/SupplierAllOrder.vue'), meta: { title: 'All Order'} },
-// { path: '/spas/supplier-order-delivered', component: () => import(/* webpackChunkName: "SupplierOrderDelivered" */ './components/AdminSupplier/Orders/SupplierOrderDelivered.vue'), meta: { title: 'Order Delivered'} },
-// { path: '/spas/supplier-product-list', component: () => import(/* webpackChunkName: "SupplierProductList" */ './components/AdminSupplier/Product/SupplierProductList.vue'), meta: { title: 'Products'} },
-// { path: '/spas/supplier-payment-history', component: () => import(/* webpackChunkName: "SupplierPaymentHistory" */ './components/AdminSupplier/Payment/SupplierPaymentHistory.vue'), meta: { title: 'Payment History'} },
-// { path: '/spas/supplier-amount-receivable', component: () => import(/* webpackChunkName: "SupplierAmountReceivable" */ './components/AdminSupplier/Payment/SupplierAmountReceivable.vue'), meta: { title: 'Amount Receivable'} },
-// { path: '/spas/supplier-producct-Return', component: () => import(/* webpackChunkName: "SupplierProductReturn" */ './components/AdminSupplier/Return/SupplierProductReturn.vue'), meta: { title: 'Return'} },
-// { path: '/spas/supplier-producct-Replace', component: () => import(/* webpackChunkName: "SupplierProductReplace" */ './components/AdminSupplier/Replace/SupplierProductReplace.vue'), meta: { title: 'Replace'} },
-// //not found page for Customer Admin Panel	
-// { path: '/spas/*', name: 'SSPA_NotFound', component: () => import(/* webpackChunkName: "NotFoundSupplierAdmin" */'./components/AdminSupplier/GlobalComponents/NotFound.vue'), meta: { title: 'Page not found'} },
-
-/********************************************************/
-
-/* Supplier Admin Area for website (sspa = supplier single page application ) */
-
-/********************************************************/
-//{ path: '/sspa/my-dashboard', name: 'SupplierDashboard', component: () => import(/* webpackChunkName: "supplier-dashboard-website-auth" */ './components/Website/AdminSupplier/Dashboard/SupplierDashboard.vue'), meta: {authRequiredSupplier: true, title: 'Dashboard Supplier',} },
-// { path: '/sspa/my-orders', name: 'SupplierOrders', component: () => import(/* webpackChunkName: "supplier-orders-website-auth" */ './components/Website/AdminSupplier/Order/SupplierOrders.vue'), meta: {authRequiredSupplier: true, title: 'Orders',} },
-// { path: '/sspa/my-products', name: 'SupplierProducts', component: () => import(/* webpackChunkName: "supplier-products-website-auth" */ './components/Website/AdminSupplier/Product/SupplierProducts.vue'), meta: {authRequiredSupplier: true, title: 'Products',} },
-// { path: '/sspa/my-profile', name: 'SupplierProfile', component: () => import(/* webpackChunkName: "supplier-profile-website-auth" */ './components/Website/AdminSupplier/Profile/SupplierProfile.vue'), meta: { authRequiredSupplier: true, title: 'Profile',} },
-// { path: '/sspa/my-profile-update', name: 'SupplierProfileUpdate', component: () => import(/* webpackChunkName: "supplier-profile-update-website-auth" */ './components/Website/AdminSupplier/Profile/SupplierProfileUpdate.vue'), meta: { authRequiredSupplier: true, title: 'Profile Update',} },
-// { path: '/sspa/my-replace', name: 'SupplierProductReplace', component: () => import(/* webpackChunkName: "supplier-product-replace-website-auth" */ './components/Website/AdminSupplier/Replace/SupplierProductReplace.vue'), meta: { authRequiredSupplier: true, title: 'Replace',} },
-{
-  path: '/sspa/my-return',
-  name: 'SupplierProductReturn',
+}, {
+  path: '/sspa/my-orders',
+  name: 'SSPA-SupplierOrders',
   component: function component() {
-    return Promise.all(/*! import() | supplier-product-return-website-auth */[__webpack_require__.e("DashboardSupplierAdmin~supplier-product-return-website-auth"), __webpack_require__.e("supplier-product-return-website-auth")]).then(__webpack_require__.bind(null, /*! ./components/AdminSupplier/Return/SupplierProductReturn.vue */ "./resources/js/components/AdminSupplier/Return/SupplierProductReturn.vue"));
+    return Promise.all(/*! import() | supplier-orders-auth-sspa */[__webpack_require__.e("DashboardSupplierAdmin~supplier-orders-auth-sspa~supplier-payment-history-auth-sspa~supplier-payment~1a2e7930"), __webpack_require__.e("supplier-orders-auth-sspa")]).then(__webpack_require__.bind(null, /*! ./components/AdminSupplier/Orders/SupplierOrders.vue */ "./resources/js/components/AdminSupplier/Orders/SupplierOrders.vue"));
+  },
+  meta: {
+    authRequiredSupplier: true,
+    title: 'Orders'
+  }
+}, {
+  path: '/sspa/my-products',
+  name: 'SSPA-SupplierProducts',
+  component: function component() {
+    return Promise.all(/*! import() | supplier-products-auth-sspa */[__webpack_require__.e("DashboardSupplierAdmin~supplier-orders-auth-sspa~supplier-payment-history-auth-sspa~supplier-payment~1a2e7930"), __webpack_require__.e("supplier-products-auth-sspa")]).then(__webpack_require__.bind(null, /*! ./components/AdminSupplier/Product/SupplierProducts.vue */ "./resources/js/components/AdminSupplier/Product/SupplierProducts.vue"));
+  },
+  meta: {
+    authRequiredSupplier: true,
+    title: 'Products'
+  }
+}, {
+  path: '/sspa/my-profile',
+  name: 'SSPA-SupplierProfile',
+  component: function component() {
+    return Promise.all(/*! import() | supplier-profile-auth-sspa */[__webpack_require__.e("DashboardSupplierAdmin~supplier-orders-auth-sspa~supplier-payment-history-auth-sspa~supplier-payment~1a2e7930"), __webpack_require__.e("supplier-profile-auth-sspa")]).then(__webpack_require__.bind(null, /*! ./components/AdminSupplier/Profile/SupplierProfile.vue */ "./resources/js/components/AdminSupplier/Profile/SupplierProfile.vue"));
+  },
+  meta: {
+    authRequiredSupplier: true,
+    title: 'Profile'
+  }
+}, {
+  path: '/sspa/my-profile-update',
+  name: 'SSPA-SupplierProfileUpdate',
+  component: function component() {
+    return Promise.all(/*! import() | supplier-profile-update-auth-sspa */[__webpack_require__.e("DashboardSupplierAdmin~supplier-orders-auth-sspa~supplier-payment-history-auth-sspa~supplier-payment~1a2e7930"), __webpack_require__.e("supplier-profile-update-auth-sspa")]).then(__webpack_require__.bind(null, /*! ./components/AdminSupplier/Profile/SupplierProfileUpdate.vue */ "./resources/js/components/AdminSupplier/Profile/SupplierProfileUpdate.vue"));
+  },
+  meta: {
+    authRequiredSupplier: true,
+    title: 'Profile Update'
+  }
+}, {
+  path: '/sspa/my-replace',
+  name: 'SSPA-SupplierProductReplace',
+  component: function component() {
+    return Promise.all(/*! import() | supplier-product-replace-auth-sspa */[__webpack_require__.e("DashboardSupplierAdmin~supplier-orders-auth-sspa~supplier-payment-history-auth-sspa~supplier-payment~1a2e7930"), __webpack_require__.e("supplier-product-replace-auth-sspa")]).then(__webpack_require__.bind(null, /*! ./components/AdminSupplier/Replace/SupplierProductReplace.vue */ "./resources/js/components/AdminSupplier/Replace/SupplierProductReplace.vue"));
+  },
+  meta: {
+    authRequiredSupplier: true,
+    title: 'Replace'
+  }
+}, {
+  path: '/sspa/my-return',
+  name: 'SSPA-SupplierProductReturn',
+  component: function component() {
+    return Promise.all(/*! import() | supplier-product-return-auth-sspa */[__webpack_require__.e("DashboardSupplierAdmin~supplier-orders-auth-sspa~supplier-payment-history-auth-sspa~supplier-payment~1a2e7930"), __webpack_require__.e("supplier-product-return-auth-sspa")]).then(__webpack_require__.bind(null, /*! ./components/AdminSupplier/Return/SupplierProductReturn.vue */ "./resources/js/components/AdminSupplier/Return/SupplierProductReturn.vue"));
   },
   meta: {
     authRequiredSupplier: true,
     title: 'Return'
   }
-}, // { path: '/sspa/my-payment-receivable', name: 'SupplierPaymentReceivable', component: () => import(/* webpackChunkName: "supplier-payment-receivable-website-auth" */ './components/Website/AdminSupplier/Payment/SupplierPaymentReceivable.vue'), meta: { authRequiredSupplier: true, title: 'Payment',} },
-// { path: '/sspa/my-payment-history', name: 'SupplierPaymentHistore', component: () => import(/* webpackChunkName: "supplier-payment-history-website-auth" */ './components/Website/AdminSupplier/Payment/SupplierPaymentHistory.vue'), meta: { authRequiredSupplier: true, title: 'History',} },
-{
+}, {
+  path: '/sspa/my-payment-receivable',
+  name: 'SSPA-SupplierPaymentReceivable',
+  component: function component() {
+    return Promise.all(/*! import() | supplier-payment-receivable-auth-sspa */[__webpack_require__.e("DashboardSupplierAdmin~supplier-orders-auth-sspa~supplier-payment-history-auth-sspa~supplier-payment~1a2e7930"), __webpack_require__.e("supplier-payment-receivable-auth-sspa")]).then(__webpack_require__.bind(null, /*! ./components/AdminSupplier/Payment/SupplierPaymentReceivable.vue */ "./resources/js/components/AdminSupplier/Payment/SupplierPaymentReceivable.vue"));
+  },
+  meta: {
+    authRequiredSupplier: true,
+    title: 'Payment'
+  }
+}, {
+  path: '/sspa/my-payment-history',
+  name: 'SSPA-SupplierPaymentHistore',
+  component: function component() {
+    return Promise.all(/*! import() | supplier-payment-history-auth-sspa */[__webpack_require__.e("DashboardSupplierAdmin~supplier-orders-auth-sspa~supplier-payment-history-auth-sspa~supplier-payment~1a2e7930"), __webpack_require__.e("supplier-payment-history-auth-sspa")]).then(__webpack_require__.bind(null, /*! ./components/AdminSupplier/Payment/SupplierPaymentHistory.vue */ "./resources/js/components/AdminSupplier/Payment/SupplierPaymentHistory.vue"));
+  },
+  meta: {
+    authRequiredSupplier: true,
+    title: 'History'
+  }
+}, {
   path: '/sspa/*',
   name: 'SSPA_NotFound',
   component: function component() {
@@ -93293,7 +93349,6 @@ var routes = [//export const routes = [
     title: 'Page not found'
   }
 }, //not found page for website
-// { path: '/sspa/*', name: 'SSPA_NotFoundPublic', component: () => import(/* webpackChunkName: "404Public-website" */ './components/Website/Public/404/404Public.vue'), meta: { title: 'Page Not Found', breadcrumb: 'Page Not Found'}},
 
 /********************************************************/
 
@@ -93673,22 +93728,7 @@ var routes = [//export const routes = [
   }
 }, // { path: '/auth/my-reviews', name: 'CustomerReviews', component: () => import(/* webpackChunkName: "customer-reviews-website-auth" */ './components/Website/AdminCustomer/Review/CustomerReviews.vue'),  meta: { title: 'Reviews', breadcrumb: 'Reviews'} },
 // meta: { title: 'Reviews', breadcrumb: 'Reviews'}
-//Authentication Supplier link
 {
-  path: '/sspa/login',
-  name: 'SupplierLogin',
-  component: function component() {
-    return __webpack_require__.e(/*! import() | supplier-login-website */ "supplier-login-website").then(__webpack_require__.bind(null, /*! ./components/Website/AuthSupplier/login.vue */ "./resources/js/components/Website/AuthSupplier/login.vue"));
-  },
-  meta: {
-    title: 'Login'
-  },
-  beforeEnter: function beforeEnter(to, from, next) {
-    if (to.name === 'SupplierLogin' && _VueVuex__WEBPACK_IMPORTED_MODULE_1__["default"].state.AuthenticationForSupplier.isSspaAuthenticated === true) next({
-      name: 'SupplierDashboard'
-    });else next();
-  }
-}, {
   path: '/*',
   name: 'NotFoundPublic',
   component: function component() {
@@ -93949,6 +93989,9 @@ Vue.component('search-app-master', function () {
 });
 Vue.component('my-date-time-global', function () {
   return __webpack_require__.e(/*! import() | my-date-time-global */ "my-date-time-global").then(__webpack_require__.bind(null, /*! ./components/Admin/GlobalComponents/my-date-time-global */ "./resources/js/components/Admin/GlobalComponents/my-date-time-global.vue"));
+});
+Vue.component('display-notification-message-app', function () {
+  return __webpack_require__.e(/*! import() | display-notification-message-app-global */ "display-notification-message-app-global").then(__webpack_require__.bind(null, /*! ./components/Admin/GlobalComponents/display-notification-message-app */ "./resources/js/components/Admin/GlobalComponents/display-notification-message-app.vue"));
 }); //Global Components for Admin Childs (Order, Deliver, Packging etc)
 
 Vue.component('admin-child-wrapper', function () {
@@ -94260,11 +94303,27 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       //myName: 'Md. Mahmudur Rahman',
       baseURL: window.location.origin,
       //window.location.host -- to get host name, use for full path img 
-      NoImageAvailable: '/FilesStorage/CommonFiles/no-img.png'
+      NoImageAvailable: '/FilesStorage/CommonFiles/no-img.png',
+      window: {
+        width: 0,
+        height: 0
+      },
+      DisplayResponsiveElement: true,
+      //useing for Display responsive element based on window.width
+      //Custome message display for success or warning
+      display_notification_message: false,
+      notification_message_text: '',
+      notification_message_type: ''
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'systemSettings'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['isitwebsiteCheck'] //isAuthenticated
-  )), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForCustomer', ['isAuthenticated', 'authCustomer'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('AuthenticationForSupplier', ['isSspaAuthenticated', 'authSupplier'])), {}, {
+  computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForAll', ['authUser', 'systemSettings'])), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])('commonStoreForWebsite', ['isitwebsiteCheck'] //isAuthenticated
+  )), {}, {
+    // ...mapState( 
+    //       'AuthenticationForCustomer', ['isAuthenticated','authCustomer']
+    // ),
+    // ...mapState( 
+    //       'AuthenticationForSupplier', ['isSspaAuthenticated','authSupplier']
+    // ),
     // ...mapState( 
     //       'AuthenticationForAdmin', ['isAdminAuthenticated']
     // ),
@@ -94276,7 +94335,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     // },
 
   }),
-  methods: {// isViewPermitted(modules){
+  watch: {
+    /*************************************************************************************/
+
+    /*Add Remove Class based on window width change (Call from CommonGlobal.js)*/
+
+    /*************************************************************************************/
+    'window.width': function windowWidth(val) {
+      if (val < 1200) {
+        this.DisplayResponsiveElement = false;
+      } else if (val > 1200) {
+        this.DisplayResponsiveElement = true;
+      }
+    }
+  },
+  methods: {
+    /*Window resize handle*/
+    handleResize: function handleResize() {
+      this.window.width = window.innerWidth;
+      this.window.height = window.innerHeight;
+    },
+    //Custome message display for success or warning
+    display_message_function: function display_message_function(message, type) {
+      var _this = this;
+
+      this.display_notification_message = true;
+      this.notification_message_text = message; //show message
+
+      this.notification_message_type = type; //show message type (success, warning)
+      //remove message
+
+      setTimeout(function () {
+        if (_this.notification_message_text !== '') {
+          _this.display_notification_message = false;
+        }
+      }, 9000); //call after 10000 miliscound
+    } // isViewPermitted(modules){
     //     //return this.authPermissionsDecode.;
     // }, 
     // isReadPermitted(module){
@@ -94306,13 +94400,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //     }
     //     return isPermitted
     // }
+
   },
-  created: function created() {//console.log(this.authPermissionsData);
+  created: function created() {
+    //console.log(this.authPermissionsData);
     //console.log(this.authUser.role);
     //console.log(JSON.parse(this.authPermissions.permission).role.edit);
     //console.log(this.systemSettings);
+    //window resize is call
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+  },
+  destroyed: function destroyed() {
+    //window resize is destroy
+    window.removeEventListener('resize', this.handleResize);
   },
   mounted: function mounted() {
+    // console.log('Width: '+this.window.width+ ' Height: ' + this.window.height );
+
     /*
       This is for check that the application is browse as website(public) or as admin, 
       if browse as website then it's value is '1', and if browse as admin then it's value in '' (Empty).
