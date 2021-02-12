@@ -142,122 +142,143 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
-    _c("div", { staticClass: "col-md-2 col-sm-2 col-xs-6 pl-0" }, [
-      _c("span", [
-        _c("strong", [_vm._v("Total: ")]),
-        _vm._v(_vm._s(this.pagination.total) + " ")
-      ]),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: this.pagination.total != 0,
-              expression: "this.pagination.total != 0"
-            }
-          ]
-        },
-        [
-          _c("strong", [_vm._v("From: ")]),
-          _vm._v(_vm._s(this.pagination.from) + " ")
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "span",
-        {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: this.pagination.total != 0,
-              expression: "this.pagination.total != 0"
-            }
-          ]
-        },
-        [
-          _c("strong", [_vm._v("to ")]),
-          _vm._v(_vm._s(this.pagination.to) + " ")
-        ]
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-md-3 col-sm-3 col-xs-6  pl-0 pr-0" }, [
-      _c("div", { staticClass: "input-group input-control-sm" }, [
-        _vm._m(0),
+    _c(
+      "div",
+      {
+        staticClass:
+          "col-md-2 col-sm-2 col-xs-6 pl-0 d-none d-xl-block d-md-block"
+      },
+      [
+        _c("span", [
+          _c("strong", [_vm._v("Total: ")]),
+          _vm._v(_vm._s(this.pagination.total) + " ")
+        ]),
         _vm._v(" "),
         _c(
-          "select",
+          "span",
           {
             directives: [
               {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.pagination.per_page,
-                expression: "pagination.per_page"
+                name: "show",
+                rawName: "v-show",
+                value: this.pagination.total != 0,
+                expression: "this.pagination.total != 0"
               }
-            ],
-            staticClass: "form-control form-control-sm",
-            on: {
-              change: [
-                function($event) {
-                  var $$selectedVal = Array.prototype.filter
-                    .call($event.target.options, function(o) {
-                      return o.selected
-                    })
-                    .map(function(o) {
-                      var val = "_value" in o ? o._value : o.value
-                      return val
-                    })
-                  _vm.$set(
-                    _vm.pagination,
-                    "per_page",
-                    $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                  )
-                },
-                function($event) {
-                  return _vm.onChange($event)
-                }
-              ]
-            }
+            ]
           },
           [
-            _c("option", { attrs: { value: "10" } }, [_vm._v("10")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "15" } }, [_vm._v("15")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "20" } }, [_vm._v("20")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "25" } }, [_vm._v("25")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "50" } }, [_vm._v("50")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "100" } }, [_vm._v("100")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "250" } }, [_vm._v("250")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "500" } }, [_vm._v("500")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "1000" } }, [_vm._v("1000")])
+            _c("strong", [_vm._v("From: ")]),
+            _vm._v(_vm._s(this.pagination.from) + " ")
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          {
+            directives: [
+              {
+                name: "show",
+                rawName: "v-show",
+                value: this.pagination.total != 0,
+                expression: "this.pagination.total != 0"
+              }
+            ]
+          },
+          [
+            _c("strong", [_vm._v("to ")]),
+            _vm._v(_vm._s(this.pagination.to) + " ")
           ]
         )
-      ])
-    ]),
+      ]
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-2 col-sm-2 col-xs-6  pl-2 text-right" }, [
-      _c("span", [
-        _c("strong", [_vm._v("Page: ")]),
-        _vm._v(
-          " " +
-            _vm._s(_vm.pagination.current_page) +
-            " of " +
-            _vm._s(_vm.pagination.last_page)
-        )
-      ])
-    ]),
+    _c(
+      "div",
+      {
+        staticClass:
+          "col-md-3 col-sm-3 col-xs-6  pl-0 pr-0 d-none d-xl-block d-md-block"
+      },
+      [
+        _c("div", { staticClass: "input-group input-control-sm" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.pagination.per_page,
+                  expression: "pagination.per_page"
+                }
+              ],
+              staticClass: "form-control form-control-sm",
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.pagination,
+                      "per_page",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
+                  function($event) {
+                    return _vm.onChange($event)
+                  }
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { value: "10" } }, [_vm._v("10")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "15" } }, [_vm._v("15")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "20" } }, [_vm._v("20")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "25" } }, [_vm._v("25")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "50" } }, [_vm._v("50")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "100" } }, [_vm._v("100")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "250" } }, [_vm._v("250")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "500" } }, [_vm._v("500")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1000" } }, [_vm._v("1000")])
+            ]
+          )
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass:
+          "col-md-2 col-sm-2 col-xs-6  pl-2 text-right d-none d-xl-block d-md-block"
+      },
+      [
+        _c("span", [
+          _c("strong", [_vm._v("Page: ")]),
+          _vm._v(
+            " " +
+              _vm._s(_vm.pagination.current_page) +
+              " of " +
+              _vm._s(_vm.pagination.last_page)
+          )
+        ])
+      ]
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "col-md-5 col-sm-5 col-xs-6 pr-0" }, [
       _c("nav", { attrs: { "aria-label": "..." } }, [

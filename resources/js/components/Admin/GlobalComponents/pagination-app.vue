@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-	<div class="col-md-2 col-sm-2 col-xs-6 pl-0">
+	<div class="col-md-2 col-sm-2 col-xs-6 pl-0 d-none d-xl-block d-md-block">
 		<span><strong>Total: </strong>{{ this.pagination.total }} </span>
 		<span v-show="this.pagination.total != 0"><strong>From: </strong>{{ this.pagination.from }} </span> 
 		<span v-show="this.pagination.total != 0"><strong>to </strong>{{ this.pagination.to }} </span>
@@ -8,7 +8,7 @@
 		<!-- <span><strong>Page: </strong> {{pagination.current_page}} of {{pagination.last_page}}</span> -->
 	</div>
 
-	<div class="col-md-3 col-sm-3 col-xs-6  pl-0 pr-0">
+	<div class="col-md-3 col-sm-3 col-xs-6  pl-0 pr-0 d-none d-xl-block d-md-block">
 		<div class="input-group input-control-sm">
 		  <label><strong>Per Page: </strong></label>
 	      <select class="form-control form-control-sm" v-model="pagination.per_page" @change="onChange($event)">
@@ -25,7 +25,7 @@
 		</div>
 	</div>
 
-	<div class="col-md-2 col-sm-2 col-xs-6  pl-2 text-right">
+	<div class="col-md-2 col-sm-2 col-xs-6  pl-2 text-right d-none d-xl-block d-md-block">
 		<span><strong>Page: </strong> {{pagination.current_page}} of {{pagination.last_page}}</span>
 	</div>
 

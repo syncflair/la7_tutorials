@@ -9,6 +9,7 @@ const ProductMasterStore ={
             current_page: 1,                
             per_page: 0,
         },
+        
         autoCompleteData: {},
 
         //for Single Select
@@ -75,7 +76,8 @@ const ProductMasterStore ={
 
         //For Search
         searching(context, payload){        
-            let searchKey = payload.search_key; let searchOption = payload.search_option; //alert(query2);
+            let searchKey = payload.search_key; 
+            let searchOption = payload.search_option; //alert(query2);
             axios.get('/spa/searchProductData?page='+ 
                         context.state.pagination.current_page + '&perPage=' +
                         context.state.pagination.per_page + 

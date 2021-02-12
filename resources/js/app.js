@@ -11,6 +11,23 @@ window.Vue = require('vue');
 Vue.config.productionTip = false //turn on production mode Remove when upload to public
 
 
+/*Vue Lazy load image*/
+// import VueLazyload from 'vue-lazyload'
+
+// Vue.use(VueLazyload)
+
+// or with options
+// const loadimage = require('./assets/loading.gif')
+// const errorimage = require('./assets/error.gif')
+
+// Vue.use(VueLazyload, {
+//   preLoad: 1.3,
+//   error: errorimage,
+//   loading: loadimage,
+//   attempt: 1
+// })
+
+
 /*VueProgressBar*/
 import VueProgressBar from 'vue-progressbar'
 const options = { color: '#28a745', failedColor: '#dc3545', thickness: '2px',

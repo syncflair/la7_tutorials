@@ -97,7 +97,7 @@
     <ul class="navbar-nav ml-auto">
 
       <!-- Show Clock Here -->
-      <li class="nav-item">        
+      <li class="nav-item d-none d-md-block d-xl-block">        
         <a class="nav-link" href="#" role="button">  
           <i class="far fa-clock"></i>       
           <my-date-time-global />

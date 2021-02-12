@@ -16,10 +16,11 @@ Route::get('test-log', function () {
 //testQuery();
 /*Enable Query Log to check raw sql query*/
 DB::listen(function($sql) {
-   //print_r($sql->sql); 
-   //dd($sql->sql);
+   // print_r($sql->sql); 
+   // dd($sql->sql);
     //print_r($sql->time);
 });
+
 //print_r( RoleId() );
 //echo \Config::get('constants.CommonFilesPath'); //get constants from app/config/constants.php
 //use Illuminate\Support\Facades\Route;
@@ -81,9 +82,12 @@ Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
 
   Route::post('auth/SendCustomerEmailChangeVerificationCode', 'AdminCustomer\AdminCustomerProfileUpdateController@SendCustomerEmailChangeVerificationCode'); 
   Route::post('auth/CustomerChangeEmail', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangeEmail');
+  Route::post('auth/CancelChangeEmail', 'AdminCustomer\AdminCustomerProfileUpdateController@CancelChangeEmail');
+
 
   Route::post('auth/SendCustomerPhoneChangeVerificationCode', 'AdminCustomer\AdminCustomerProfileUpdateController@SendCustomerPhoneChangeVerificationCode'); 
   Route::post('auth/CustomerChangePhone', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangePhone');
+  Route::post('auth/CancelChangePhone', 'AdminCustomer\AdminCustomerProfileUpdateController@CancelChangePhone');
 
   Route::post('auth/CustomerChangePassword', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangePassword');
 
@@ -147,14 +151,22 @@ Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
   Route::post('sspa/SupplierProfileUpdate', 'AdminSupplier\AdminSupplierProfileController@SupplierProfileUpdate');
   Route::post('sspa/SendSupplierEmailChangeVerificationCode', 'AdminSupplier\AdminSupplierProfileController@SendSupplierEmailChangeVerificationCode');  
   Route::post('sspa/SupplierChangeEmail', 'AdminSupplier\AdminSupplierProfileController@SupplierChangeEmail'); 
+  Route::post('sspa/CancelChangeEmail', 'AdminSupplier\AdminSupplierProfileController@CancelChangeEmail');
+
   Route::post('sspa/SendSupplierPhoneChangeVerificationCode', 'AdminSupplier\AdminSupplierProfileController@SendSupplierPhoneChangeVerificationCode');  
   Route::post('sspa/SupplierChangePhone', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePhone');
+  Route::post('sspa/CancelChangePhone', 'AdminSupplier\AdminSupplierProfileController@CancelChangePhone');
+
   Route::post('sspa/SupplierChangePassword', 'AdminSupplier\AdminSupplierProfileController@SupplierChangePassword');
 
 
 
-  Route::get('sspa/my-orders', 'AdminSupplier\AdminSupplierController@index');    
-  Route::get('sspa/my-products', 'AdminSupplier\AdminSupplierController@index');    
+  Route::get('sspa/my-orders', 'AdminSupplier\AdminSupplierController@index');  
+
+  Route::get('sspa/my-products', 'AdminSupplier\AdminSupplierProductController@index'); 
+  Route::get('sspa/get-product-list-for-admin-supplier', 'AdminSupplier\AdminSupplierProductController@ProductListForAdminSupplier'); 
+  Route::post('sspa/supplier-getProcuctCategoryList/', 'AdminSupplier\AdminSupplierProductController@selectedProductCategoryList');
+
   Route::get('sspa/my-return', 'AdminSupplier\AdminSupplierController@index');    
   Route::get('sspa/my-replace', 'AdminSupplier\AdminSupplierController@index');    
   Route::get('sspa/my-payment-receivable', 'AdminSupplier\AdminSupplierController@index');    

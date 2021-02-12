@@ -122,6 +122,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -316,6 +318,25 @@ var render = function() {
                   class:  true
                     ? _vm.ActiveLinkClass
                     : undefined,
+                  attrs: { to: "/sspa/my-profile" }
+                },
+                [_vm._v("My Profile ")]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "li",
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass:
+                    "dropdown-item dropdown-item-custome transition-3d-hover",
+                  class:  true
+                    ? _vm.ActiveLinkClass
+                    : undefined,
                   attrs: { to: "/sspa/my-orders" }
                 },
                 [_vm._v("My Orders\n\t            ")]
@@ -433,25 +454,6 @@ var render = function() {
                   attrs: { to: "/supplier/login" }
                 },
                 [_vm._v("Login\n                ")]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass:
-                    "dropdown-item dropdown-item-custome transition-3d-hover",
-                  class:  true
-                    ? _vm.ActiveLinkClass
-                    : undefined,
-                  attrs: { to: "/sspa/my-profile" }
-                },
-                [_vm._v("My Profile ")]
               )
             ],
             1

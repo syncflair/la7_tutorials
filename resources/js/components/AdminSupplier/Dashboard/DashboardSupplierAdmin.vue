@@ -33,7 +33,7 @@
                 </div>
                 <div class="card-body" style="display: block;">
                   <div class="row">
-                    <div class="col-12 col-md-12 col-lg-8 order-2 order-md-1">
+                    <div class="col-12 col-md-12 col-lg-8 order-2- order-md-1- mb-4">
 
                       <div class="row"><!--row-->
                         <div class="col-12 col-sm-4">
@@ -196,10 +196,12 @@
 
                     </div>
 
-                    <div class="col-12 col-md-12 col-lg-4 order-1 order-md-2">
+                    <div class="col-12 col-md-12 col-lg-4 order-1- order-md-2-">
                       
                       <div class="card">
-                          <div class="card-header bg-light">
+                          <div class="card-header bg-light" 
+                                style="box-shadow: 0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%); border-radius: 0.25rem;">
+                                
                             <!-- <h3 class="card-title">Latest Members</h3> -->
                             <h5 class="card-title text-secondary mb-1-"><i class="fas fa-info-circle"></i> Supplier / Vendor Info </h5> 
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Models\Supplier\Vendor;
 
+
 class AdminSupplierController extends Controller
 {
     /**
@@ -34,7 +35,6 @@ class AdminSupplierController extends Controller
         }
 
         // $data = Auth::user();
-
         return response()->json($data);
     }
 

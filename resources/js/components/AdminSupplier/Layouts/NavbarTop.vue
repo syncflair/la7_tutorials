@@ -12,7 +12,7 @@
         <!-- <span class="brand-text font-weight-light">Dashboard</span> --> <!-- {{ Auth::user()->role_id }} -->
       </router-link>
 
-      <a class="navbar-brand" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      <!-- <a class="navbar-brand" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a> -->
     
 
       <!-- 
@@ -45,6 +45,11 @@
 
       <!-- Right navbar links -->
       <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+        <li>
+          <a class="navbar-brand" data-widget="pushmenu" href="#" role="button" title="Left side menu expand & Close">
+            <i class="fas fa-bars"></i>
+          </a>
+        </li>
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
@@ -158,6 +163,11 @@
                 </router-link>
               </li>
 
+               <li>
+                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile" 
+                :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' " >My Profile </router-link>
+              </li>
+
               <li>
                 <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-orders"
                   :class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' " >My Orders
@@ -188,11 +198,6 @@
                   </router-link>
               </li>
               
-              <li>
-                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile" 
-                :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' " >My Profile </router-link>
-              </li>
-
               <li class="dropdown-divider"></li>
                
               <li>

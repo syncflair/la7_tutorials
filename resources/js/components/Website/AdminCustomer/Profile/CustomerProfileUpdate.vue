@@ -162,7 +162,7 @@
                                         </dir>
 
                                         <div class="mb-3 text-right">
-                                            <button @click.prevent="CancelChangePhone()" type="button" class="btn btn-primary-dark-w px-5">Cancel</button>
+                                            <button @click.prevent="CancelChangeEmail()" type="button" class="btn btn-primary-dark-w px-5">Cancel</button>
                                             <button type="submit" class="btn btn-primary-dark-w px-5">Save Email</button>
                                         </div>
                                     </form>
@@ -240,7 +240,7 @@
                                         </dir>
 
                                         <div class="mb-3 text-right">
-                                            <button @click.prevent="CancelChangeEmail()" type="button" class="btn btn-primary-dark-w px-5">Cancel</button>
+                                            <button @click.prevent="CancelChangePhone()" type="button" class="btn btn-primary-dark-w px-5">Cancel</button>
                                             <button type="submit" class="btn btn-primary-dark-w px-5">Save Phone</button>
                                         </div>
                                     </form>
@@ -377,9 +377,9 @@
                     //console.log(data);
                 })
                 .catch( (data) => {
-                this.$Progress.fail();
-                toastr.warning('The given data was invalid.');
-                // console.log(data.message);
+                    this.$Progress.fail();
+                    toastr.warning('The given data was invalid.');
+                    // console.log(data.message);
                 })
             },
 
@@ -400,9 +400,9 @@
                     }
                 })
                 .catch( (data) => {
-                this.$Progress.fail();
-                //toastr.warning('The given data was invalid.');
-                // console.log(data.message);
+                    this.$Progress.fail();
+                    //toastr.warning('The given data was invalid.');
+                    // console.log(data.message);
                 })
             },
 
@@ -425,16 +425,32 @@
                     }
                 })
                 .catch( (data) => {
-                this.$Progress.fail();
-                toastr.warning('The given data was invalid.');
-                // console.log(data.message);
+                    this.$Progress.fail();
+                    toastr.warning('The given data was invalid.');
+                    // console.log(data.message);
                 })
             },
 
-            CancelChangeEmail(){
-                this.change_email =false;
-                this.form.new_email = '';
-                this.form.email_verification_code = '';
+            CancelChangeEmail(){                
+                this.$Progress.start(); //using progress-bar package
+
+                this.form.post('/auth/CancelChangeEmail')
+                .then(({ data }) => { 
+                    this.$Progress.finish();
+                    if(data.success){
+                        toastr.success(data.success); 
+                        this.change_email =false;
+                        this.form.new_email = '';
+                        this.form.email_verification_code = '';
+                    }
+                    if(data.error){
+                        this.$Progress.fail();
+                        toastr.warning(data.error);
+                    }
+                })
+                .catch( (data) => {
+                    this.$Progress.fail();
+                })
             },
 
 
@@ -455,8 +471,8 @@
                     }
                 })
                 .catch( (data) => {
-                this.$Progress.fail();
-                //toastr.warning('The given data was invalid.');
+                    this.$Progress.fail();
+                    //toastr.warning('The given data was invalid.');
                 })
             },
 
@@ -479,16 +495,32 @@
                     }
                 })
                 .catch( (data) => {
-                this.$Progress.fail();
-                toastr.warning('The given data was invalid.');
-                // console.log(data.message);
+                    this.$Progress.fail();
+                    toastr.warning('The given data was invalid.');
+                    // console.log(data.message);
                 })
             }, 
 
             CancelChangePhone(){
-                this.change_phone =false;
-                this.form.new_phone = '';
-                this.form.phone_verification_code = '';
+                this.$Progress.start(); //using progress-bar package
+
+                this.form.post('/auth/CancelChangePhone')
+                .then(({ data }) => { 
+                    this.$Progress.finish();
+                    if(data.success){
+                        toastr.success(data.success); 
+                        this.change_phone =false;
+                        this.form.new_phone = '';
+                        this.form.phone_verification_code = '';
+                    }
+                    if(data.error){
+                        this.$Progress.fail();
+                        toastr.warning(data.error);
+                    }
+                })
+                .catch( (data) => {
+                    this.$Progress.fail();
+                })
             },             
 
             CustomerChangePassword(){
@@ -513,9 +545,9 @@
                     }
                 })
                 .catch( (data) => {
-                this.$Progress.fail();
-                toastr.warning('The given data was invalid.');
-                // console.log(data.message);
+                    this.$Progress.fail();
+                    toastr.warning('The given data was invalid.');
+                    // console.log(data.message);
                 })
             }
 

@@ -315,6 +315,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
  //for user MapState
 
 
@@ -398,7 +400,7 @@ var render = function() {
                               "div",
                               {
                                 staticClass:
-                                  "col-12 col-md-12 col-lg-4 order-1 order-md-2"
+                                  "col-12 col-md-12 col-lg-4 order-1- order-md-2-"
                               },
                               [
                                 _c("div", { staticClass: "card" }, [
@@ -785,7 +787,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      { staticClass: "col-12 col-md-12 col-lg-8 order-2 order-md-1" },
+      { staticClass: "col-12 col-md-12 col-lg-8 order-2- order-md-1- mb-4" },
       [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-12 col-sm-4" }, [
@@ -1119,23 +1121,33 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header bg-light" }, [
-      _c("h5", { staticClass: "card-title text-secondary mb-1-" }, [
-        _c("i", { staticClass: "fas fa-info-circle" }),
-        _vm._v(" Supplier / Vendor Info ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-tools" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-tool",
-            attrs: { type: "button", "data-card-widget": "collapse" }
-          },
-          [_c("i", { staticClass: "fas fa-minus" })]
-        )
-      ])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "card-header bg-light",
+        staticStyle: {
+          "box-shadow": "0 0 1px rgb(0 0 0 / 13%), 0 1px 3px rgb(0 0 0 / 20%)",
+          "border-radius": "0.25rem"
+        }
+      },
+      [
+        _c("h5", { staticClass: "card-title text-secondary mb-1-" }, [
+          _c("i", { staticClass: "fas fa-info-circle" }),
+          _vm._v(" Supplier / Vendor Info ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-tools" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-tool",
+              attrs: { type: "button", "data-card-widget": "collapse" }
+            },
+            [_c("i", { staticClass: "fas fa-minus" })]
+          )
+        ])
+      ]
+    )
   },
   function() {
     var _vm = this

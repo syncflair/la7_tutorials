@@ -45,7 +45,7 @@
           <tr> <td>Password:</td> <td>{{$email_data['userInfo']['password']}} </td></tr>
           <tr> 
             <td>Login:</td> 
-            <td><a class="btn btn-default link-style"  target="_blank" href="{{ url('sspa/login') }}">Login</a> </td>
+            <td><a class="btn btn-default link-style"  target="_blank" href="{{ url('supplier/login') }}">Login</a> </td>
           </tr>
         </table>
       </div>

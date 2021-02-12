@@ -167,6 +167,41 @@ class AdminCustomerProfileUpdateController extends Controller
     }
 
 
+    public function CancelChangeEmail(Request $request){
+
+    	if(Auth::guard('customer')->check()){
+           
+            if(Auth::guard('customer')->user()->id == $request->id ){
+
+           		try{
+		            DB::beginTransaction();
+
+		            	$customer = Customer::find($request->id);
+		            	$customer->email_verification_code = null;
+		            	$customer->save();
+
+		            DB::commit();  
+
+		            if($customer != null){           
+		                // $data = ["userInfo" => $request->all(), "tag" => "emailHasBeenChanged"];
+		                // Mail::to($data['userInfo']['new_email'])->send(new CustomerNotificationMail( $data ));                
+		                return response()->json(['success'=>'Email change request is canceled']); 
+		            }
+
+		        }catch(\Exception $e){
+		            //logger($e->getMessage());
+		            DB::rollBack();
+		            return response()->json(['errors'=> $e->getMessage() ], 500); 
+		        } //end try 
+
+            }else{
+	        	return response()->json(['error'=>'Something worng!.']); 
+	        }//End check Auth ID With Request ID
+
+        }//end Auth::guard Check
+    }//end CancelChangeEmail()
+
+
     public function SendCustomerPhoneChangeVerificationCode(Request $request){  	
 
     	if(Auth::guard('customer')->check()){
@@ -236,6 +271,40 @@ class AdminCustomerProfileUpdateController extends Controller
 		                //$data = ["userInfo" => $request->all(), "tag" => "register"];
 		                //Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));                
 		                return response()->json(['success'=>'Phone number update.']); 
+		            }
+
+		        }catch(\Exception $e){
+		            //logger($e->getMessage());
+		            DB::rollBack();
+		            return response()->json(['errors'=> $e->getMessage() ], 500); 
+		        } //end try 
+
+            }else{
+	        	return response()->json(['error'=>'Something worng!.']); 
+	        }//End check Auth ID With Request ID
+
+        }//end Auth::guard Check
+    }
+
+    public function CancelChangePhone(Request $request){
+
+    	if(Auth::guard('customer')->check()){
+           
+            if(Auth::guard('customer')->user()->id == $request->id ){
+
+           		try{
+		            DB::beginTransaction();
+
+		            	$customer = Customer::find($request->id);
+		            	$customer->phone_verification_code = null;
+		            	$customer->save();		            	
+
+		            DB::commit();  
+
+		            if($customer != null){           
+		                //$data = ["userInfo" => $request->all(), "tag" => "register"];
+		                //Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));                
+		                return response()->json(['success'=>'Phone change request is canceled']); 
 		            }
 
 		        }catch(\Exception $e){

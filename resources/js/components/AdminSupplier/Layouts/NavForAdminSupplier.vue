@@ -46,6 +46,11 @@
                 </router-link>
             </li>
             <li>
+                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile" 
+                :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' " >My Profile </router-link>
+            </li>
+            
+            <li>
             	<router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-orders"
 	            	:class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' " >My Orders
 	            </router-link>
@@ -84,10 +89,7 @@
                 :class="[currentPage.includes('my-payment-history')] ? ActiveLinkClass : '' " >Login
                 </router-link>
             </li>
-            <li>
-                <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile" 
-                :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' " >My Profile </router-link>
-            </li>
+            
 
             <li class="border-top- mt-2- pt-2-">
             	<a class="dropdown-item dropdown-item-custome transition-3d-hover" @click.prevent="Logout()" href="javascript:;"><i class="fas fa-sign-out-alt"></i> Logout</a>

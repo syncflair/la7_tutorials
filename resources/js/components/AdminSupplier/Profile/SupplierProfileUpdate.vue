@@ -498,9 +498,27 @@
             },
 
             CancelChangeEmail(){
-                this.change_email =false;
-                this.form.new_email = '';
-                this.form.email_verification_code = '';
+                this.$Progress.start(); //using progress-bar package
+
+                this.form.post('/sspa/CancelChangeEmail')
+                .then(({ data }) => { 
+                    this.$Progress.finish();
+                    if(data.success){
+                        //toastr.success(data.success); 
+                        this.display_message_function(data.success, 'success');
+                        this.change_email =false;
+                        this.form.new_email = '';
+                        this.form.email_verification_code = '';
+                    }
+                    if(data.error){
+                        this.$Progress.fail();
+                        //toastr.warning(data.error);
+                        this.display_message_function(data.error, 'warning');
+                    }
+                })
+                .catch( (data) => {
+                  this.$Progress.fail();
+                })
             },
 
 
@@ -558,9 +576,27 @@
             },
 
             CancelChangePhone(){
-                this.change_phone =false;
-                this.form.new_phone = '';
-                this.form.phone_verification_code = '';
+                this.$Progress.start(); //using progress-bar package
+
+                this.form.post('/sspa/CancelChangePhone')
+                .then(({ data }) => { 
+                    this.$Progress.finish();
+                    if(data.success){
+                        //toastr.success(data.success); 
+                        this.display_message_function(data.success, 'success');
+                        this.change_phone =false;
+                        this.form.new_phone = '';
+                        this.form.phone_verification_code = '';
+                    }
+                    if(data.error){
+                        this.$Progress.fail();
+                        //toastr.warning(data.error);
+                        this.display_message_function(data.error, 'warning');
+                    }
+                })
+                .catch( (data) => {
+                  this.$Progress.fail();
+                })
             },
 
 

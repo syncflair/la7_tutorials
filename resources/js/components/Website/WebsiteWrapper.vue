@@ -100,17 +100,17 @@
     import HeaderTopbar from './Layouts/HeaderTopbar.vue' //Load to every page
     
 
-    //import HeaderLogoSearchIconsForHome from './Layouts/HeaderLogoSearchIconsForHome.vue' //Load to only Home
-    //import HeaderVerticalAndSecondaryMenuForHome from './Layouts/HeaderVerticalAndSecondaryMenuForHome.vue' //Load to only Home
-    const HeaderLogoSearchIconsForHome = () => import( /* webpackChunkName: "HeaderLogoSearchIconsForHome-com" */ './Layouts/HeaderLogoSearchIconsForHome.vue')
-    const HeaderVerticalAndSecondaryMenuForHome = () => import( /* webpackChunkName: "HeaderVerticalAndSecondaryMenuForHome-com" */ './Layouts/HeaderVerticalAndSecondaryMenuForHome.vue')
+    import HeaderLogoSearchIconsForHome from './Layouts/HeaderLogoSearchIconsForHome.vue' //Load to only Home
+    import HeaderVerticalAndSecondaryMenuForHome from './Layouts/HeaderVerticalAndSecondaryMenuForHome.vue' //Load to only Home
+    // const HeaderLogoSearchIconsForHome = () => import( /* webpackChunkName: "HeaderLogoSearchIconsForHome-com" */ './Layouts/HeaderLogoSearchIconsForHome.vue')
+    // const HeaderVerticalAndSecondaryMenuForHome = () => import( /* webpackChunkName: "HeaderVerticalAndSecondaryMenuForHome-com" */ './Layouts/HeaderVerticalAndSecondaryMenuForHome.vue')
 
    //import SidebarNavigationHeader1 from './Layouts/SidebarNavigationHeader1.vue' //Load to all
 
-    //import HeaderLogoMenuForAllPage from './Layouts/HeaderLogoMenuForAllPage.vue' //Load to all page without home
-    //import HeaderVerticalAndSearchForAllPage from './Layouts/HeaderVerticalAndSearchForAllPage.vue' //Load to all page without home
-    const HeaderLogoMenuForAllPage = () => import( /* webpackChunkName: "HeaderLogoMenuForAllPage-com" */ './Layouts/HeaderLogoMenuForAllPage.vue')
-    const HeaderVerticalAndSearchForAllPage = () => import( /* webpackChunkName: "HeaderVerticalAndSearchForAllPage-com" */ './Layouts/HeaderVerticalAndSearchForAllPage.vue')
+    import HeaderLogoMenuForAllPage from './Layouts/HeaderLogoMenuForAllPage.vue' //Load to all page without home
+    import HeaderVerticalAndSearchForAllPage from './Layouts/HeaderVerticalAndSearchForAllPage.vue' //Load to all page without home
+    // const HeaderLogoMenuForAllPage = () => import( /* webpackChunkName: "HeaderLogoMenuForAllPage-com" */ './Layouts/HeaderLogoMenuForAllPage.vue')
+    // const HeaderVerticalAndSearchForAllPage = () => import( /* webpackChunkName: "HeaderVerticalAndSearchForAllPage-com" */ './Layouts/HeaderVerticalAndSearchForAllPage.vue')
     
     import Breadcrumb from './Layouts/Breadcrumb.vue' //Load to every page
     import AccountSidebarNavigationToggler from './Layouts/AccountSidebarNavigationToggler.vue' //Load to every page

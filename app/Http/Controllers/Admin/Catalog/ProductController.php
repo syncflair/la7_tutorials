@@ -76,7 +76,7 @@ class ProductController extends Controller
        //return $request->all();
 
         $this->validate($request, [
-            'sys_pro_name' => 'required|min:2|max:40|unique:products,sys_pro_name',
+            'sys_pro_name' => 'required|min:2|max:100|unique:products,sys_pro_name',
             'pro_type' => 'required',
             //'*.category_name' => 'required|min:2|max:40',
         ],[
@@ -202,7 +202,7 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'sys_pro_name' => 'required|min:2|max:40|unique:products,sys_pro_name,'.$id,
+            'sys_pro_name' => 'required|min:2|max:100|unique:products,sys_pro_name,'.$id,
             'pro_type' => 'required',
             //'*.category_name' => 'required|min:2|max:40',
         ]);

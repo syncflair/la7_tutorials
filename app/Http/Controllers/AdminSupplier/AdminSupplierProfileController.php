@@ -168,7 +168,41 @@ class AdminSupplierProfileController extends Controller
 	        }//End check Auth ID With Request ID
 
         }//end Auth::guard Check
+    }
 
+
+    public function CancelChangeEmail(Request $request){
+
+    	if(Auth::guard('supplier')->check()){
+           
+            if(Auth::guard('supplier')->user()->id == $request->id ){
+
+           		try{
+		            DB::beginTransaction();	
+
+		            	$supplier = Supplier::find($request->id);
+		            	$supplier->email_verification_code = null;
+		            	$supplier->save();	            	
+
+		            DB::commit();  
+
+		            if($supplier != null){           
+		                // $data = ["userInfo" => $request->all(), "tag" => "emailHasBeenChanged"];
+		                // Mail::to($data['userInfo']['new_email'])->send(new SupplierNotificationMail( $data ));                
+		                return response()->json(['success'=>'Email change request is canceled.']); 
+		            }
+
+		        }catch(\Exception $e){
+		            //logger($e->getMessage());
+		            DB::rollBack();
+		            return response()->json(['errors'=> $e->getMessage() ], 500); 
+		        } //end try 
+
+            }else{
+	        	return response()->json(['error'=>'Something worng!.']); 
+	        }//End check Auth ID With Request ID
+
+        }//end Auth::guard Check
     }
 
 
@@ -242,6 +276,41 @@ class AdminSupplierProfileController extends Controller
 		                //$data = ["userInfo" => $request->all(), "tag" => "register"];
 		                //Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));                
 		                return response()->json(['success'=>'Phone number has been changed.']); 
+		            }
+
+		        }catch(\Exception $e){
+		            //logger($e->getMessage());
+		            DB::rollBack();
+		            return response()->json(['errors'=> $e->getMessage() ], 500); 
+		        } //end try 
+
+            }else{
+	        	return response()->json(['error'=>'Something worng!.']); 
+	        }//End check Auth ID With Request ID
+
+        }//end Auth::guard Check
+    }
+
+
+    public function CancelChangePhone(Request $request){
+
+    	if(Auth::guard('supplier')->check()){
+           
+            if(Auth::guard('supplier')->user()->id == $request->id ){
+
+           		try{
+		            DB::beginTransaction();
+
+		            	$supplier = Supplier::find($request->id);
+		            	$supplier->phone_verification_code = null;
+		            	$supplier->save();
+
+		            DB::commit();  
+
+		            if($supplier != null){           
+		                //$data = ["userInfo" => $request->all(), "tag" => "register"];
+		                //Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));                
+		                return response()->json(['success'=>'Phone change request is canceled.']); 
 		            }
 
 		        }catch(\Exception $e){

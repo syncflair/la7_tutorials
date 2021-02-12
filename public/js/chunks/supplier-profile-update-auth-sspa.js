@@ -514,25 +514,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     CancelChangeEmail: function CancelChangeEmail() {
-      this.change_email = false;
-      this.form.new_email = '';
-      this.form.email_verification_code = '';
-    },
-    SendSupplierPhoneChangeVerificationCode: function SendSupplierPhoneChangeVerificationCode() {
       var _this4 = this;
 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.post('/sspa/SendSupplierPhoneChangeVerificationCode').then(function (_ref4) {
+      this.form.post('/sspa/CancelChangeEmail').then(function (_ref4) {
         var data = _ref4.data;
 
         _this4.$Progress.finish();
 
         if (data.success) {
-          //toastr.success(data.success);
+          //toastr.success(data.success); 
           _this4.display_message_function(data.success, 'success');
 
-          _this4.change_phone = true;
+          _this4.change_email = false;
+          _this4.form.new_email = '';
+          _this4.form.email_verification_code = '';
         }
 
         if (data.error) {
@@ -542,30 +539,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           _this4.display_message_function(data.error, 'warning');
         }
       })["catch"](function (data) {
-        _this4.$Progress.fail(); //toastr.warning('The given data was invalid.');
-
+        _this4.$Progress.fail();
       });
     },
-    SupplierChangePhone: function SupplierChangePhone() {
+    SendSupplierPhoneChangeVerificationCode: function SendSupplierPhoneChangeVerificationCode() {
       var _this5 = this;
 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.post('/sspa/SupplierChangePhone').then(function (_ref5) {
+      this.form.post('/sspa/SendSupplierPhoneChangeVerificationCode').then(function (_ref5) {
         var data = _ref5.data;
 
         _this5.$Progress.finish();
 
         if (data.success) {
-          _this5.$store.dispatch('AuthenticationForSupplier/fetchAuthSupplierData'); //get auth customer data 
-          //toastr.success(data.success); 
-
-
+          //toastr.success(data.success);
           _this5.display_message_function(data.success, 'success');
 
-          _this5.change_phone = false;
-          _this5.form.new_phone = '';
-          _this5.form.phone_verification_code = '';
+          _this5.change_phone = true;
         }
 
         if (data.error) {
@@ -577,38 +568,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })["catch"](function (data) {
         _this5.$Progress.fail(); //toastr.warning('The given data was invalid.');
 
-
-        _this5.display_message_function('The given data was invalid!', 'warning'); // console.log(data.message);
-
       });
     },
-    CancelChangePhone: function CancelChangePhone() {
-      this.change_phone = false;
-      this.form.new_phone = '';
-      this.form.phone_verification_code = '';
-    },
-    SupplierChangePassword: function SupplierChangePassword() {
+    SupplierChangePhone: function SupplierChangePhone() {
       var _this6 = this;
 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.post('/sspa/SupplierChangePassword').then(function (_ref6) {
+      this.form.post('/sspa/SupplierChangePhone').then(function (_ref6) {
         var data = _ref6.data;
 
         _this6.$Progress.finish();
 
         if (data.success) {
-          //this.form.reset();  //reset from after submit
-          _this6.form.old_password = '';
-          _this6.form.password = '';
-          _this6.form.password_confirmation = '';
-
-          _this6.$store.dispatch('AuthenticationForSupplier/fetchAuthSupplierData'); //get auth customer data                         
+          _this6.$store.dispatch('AuthenticationForSupplier/fetchAuthSupplierData'); //get auth customer data 
           //toastr.success(data.success); 
 
 
-          _this6.display_message_function(data.success, 'success'); //console.log(data.success); 
+          _this6.display_message_function(data.success, 'success');
 
+          _this6.change_phone = false;
+          _this6.form.new_phone = '';
+          _this6.form.phone_verification_code = '';
         }
 
         if (data.error) {
@@ -622,6 +603,73 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
         _this6.display_message_function('The given data was invalid!', 'warning'); // console.log(data.message);
+
+      });
+    },
+    CancelChangePhone: function CancelChangePhone() {
+      var _this7 = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.post('/sspa/CancelChangePhone').then(function (_ref7) {
+        var data = _ref7.data;
+
+        _this7.$Progress.finish();
+
+        if (data.success) {
+          //toastr.success(data.success); 
+          _this7.display_message_function(data.success, 'success');
+
+          _this7.change_phone = false;
+          _this7.form.new_phone = '';
+          _this7.form.phone_verification_code = '';
+        }
+
+        if (data.error) {
+          _this7.$Progress.fail(); //toastr.warning(data.error);
+
+
+          _this7.display_message_function(data.error, 'warning');
+        }
+      })["catch"](function (data) {
+        _this7.$Progress.fail();
+      });
+    },
+    SupplierChangePassword: function SupplierChangePassword() {
+      var _this8 = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.post('/sspa/SupplierChangePassword').then(function (_ref8) {
+        var data = _ref8.data;
+
+        _this8.$Progress.finish();
+
+        if (data.success) {
+          //this.form.reset();  //reset from after submit
+          _this8.form.old_password = '';
+          _this8.form.password = '';
+          _this8.form.password_confirmation = '';
+
+          _this8.$store.dispatch('AuthenticationForSupplier/fetchAuthSupplierData'); //get auth customer data                         
+          //toastr.success(data.success); 
+
+
+          _this8.display_message_function(data.success, 'success'); //console.log(data.success); 
+
+        }
+
+        if (data.error) {
+          _this8.$Progress.fail(); //toastr.warning(data.error);
+
+
+          _this8.display_message_function(data.error, 'warning');
+        }
+      })["catch"](function (data) {
+        _this8.$Progress.fail(); //toastr.warning('The given data was invalid.');
+
+
+        _this8.display_message_function('The given data was invalid!', 'warning'); // console.log(data.message);
 
       });
     }

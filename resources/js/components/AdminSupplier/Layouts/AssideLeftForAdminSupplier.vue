@@ -33,6 +33,11 @@
             <li class="nav-item">
               <router-link to="/sspa/my-dashboard" class="nav-link dropdown-item-custome" :class="[currentPage.includes('my-dashboard')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-tachometer-alt text-warning"></i> <p>Dashboard</p></router-link>              
             </li> 
+
+            <li class="nav-item">
+              <router-link to="/sspa/my-profile" class="nav-link dropdown-item-custome" :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' "> <i class="nav-icon far fa-user text-warning"></i> <p> My Profile</p></router-link>
+            </li> 
+            
             <li class="nav-item">
               <router-link to="/sspa/my-orders" class="nav-link dropdown-item-custome" :class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-list-ul text-warning"></i> <p>My Orders</p></router-link>
             </li> 
@@ -55,9 +60,7 @@
               <router-link to="/sspa/my-payment-history" class="nav-link dropdown-item-custome" :class="[currentPage.includes('my-payment-history')] ? ActiveLinkClass : '' "> <i class="nav-icon fas fa-history text-warning"></i> <p>Payment History</p></router-link>
             </li> 
 
-            <li class="nav-item">
-              <router-link to="/sspa/my-profile" class="nav-link dropdown-item-custome" :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' "> <i class="nav-icon far fa-user text-warning"></i> <p> My Profile</p></router-link>
-            </li>           
+                      
        
 
           <li class="nav-item">

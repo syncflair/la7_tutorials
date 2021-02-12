@@ -89,7 +89,8 @@ class RouteServiceProvider extends ServiceProvider
 
 
      /**
-     * Define the "backend" routes for the application.
+     * Custome by sumon for new route file
+     * Define the "backend" routes for the application. 
      *
      * These routes all receive session state, CSRF protection, etc.
      *
@@ -103,6 +104,7 @@ class RouteServiceProvider extends ServiceProvider
     }
 
      /**
+     * Custome by sumon for new route file
      * Define the "spa" routes for the application.
      *
      * These routes all receive session state, CSRF protection, etc.

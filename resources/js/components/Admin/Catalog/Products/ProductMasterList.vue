@@ -119,8 +119,8 @@
                   </a>
                 </div>
               </div><!--End Dropdown List -->
-
             </td>
+            
           </tr>
 
           <tr v-show="products && !products.length">
@@ -187,7 +187,8 @@
           ...mapState( 
              'ProductMasterStore', ['products', 'pagination','autoCompleteData']
           ),
-           // use for sortable
+
+          // use for sortable
           sortedProducts() {
             let fo = Object.values(this.products).sort((a,b) => {
               let modifier = 1;

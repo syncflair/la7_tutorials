@@ -46,6 +46,24 @@ class Product extends Model
     }
 
     //Product hasMany image
+    public function hasManyCategory()
+    {
+       return $this->hasMany(Category::class, 'id');
+           // return $this->belongsToMany(Category::class, 'id')
+            // ->whereIn('categories.id', [11,15,5]);
+             //->whereIn('categories.id', 'pro_category');
+
+
+
+            // ->where('id', 'like' '%pro_category%');
+            // ->wherePivotIn('id', [11,15,5]);
+            // ->leftJoin('products', 'sales_order_items.catalog_product_id', '=', 'catalog_products.id')        
+            //->select('catalog_products.*');
+        // ->join('products', 'categories.id', '=', 'products.id')
+        // ->whereIn('catitem_item.catitem_id', $cats)
+    }
+
+    //Product hasMany image
     public function hasManyImage()
     {
        return $this->hasMany(Image::class, 'product_id');

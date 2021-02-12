@@ -120,6 +120,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -235,6 +238,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -652,6 +660,31 @@ var render = function() {
                       class:  true
                         ? _vm.ActiveLinkClass
                         : undefined,
+                      attrs: { to: "/sspa/my-profile" }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "nav-icon far fa-user text-warning"
+                      }),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(" My Profile")])
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "li",
+                { staticClass: "nav-item" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "nav-link dropdown-item-custome",
+                      class:  true
+                        ? _vm.ActiveLinkClass
+                        : undefined,
                       attrs: { to: "/sspa/my-orders" }
                     },
                     [
@@ -792,31 +825,6 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c(
-                "li",
-                { staticClass: "nav-item" },
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "nav-link dropdown-item-custome",
-                      class:  true
-                        ? _vm.ActiveLinkClass
-                        : undefined,
-                      attrs: { to: "/sspa/my-profile" }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "nav-icon far fa-user text-warning"
-                      }),
-                      _vm._v(" "),
-                      _c("p", [_vm._v(" My Profile")])
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
               _c("li", { staticClass: "nav-item" }, [
                 _c(
                   "a",
@@ -945,8 +953,6 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _vm._m(0),
-          _vm._v(" "),
           _c(
             "ul",
             {
@@ -954,6 +960,8 @@ var render = function() {
                 "order-1 order-md-3 navbar-nav navbar-no-expand ml-auto"
             },
             [
+              _vm._m(0),
+              _vm._v(" "),
               _c("li", { staticClass: "nav-item dropdown" }, [
                 _vm._m(1),
                 _vm._v(" "),
@@ -1118,6 +1126,25 @@ var render = function() {
                             class:  true
                               ? _vm.ActiveLinkClass
                               : undefined,
+                            attrs: { to: "/sspa/my-profile" }
+                          },
+                          [_vm._v("My Profile ")]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass:
+                              "dropdown-item dropdown-item-custome transition-3d-hover",
+                            class:  true
+                              ? _vm.ActiveLinkClass
+                              : undefined,
                             attrs: { to: "/sspa/my-orders" }
                           },
                           [_vm._v("My Orders\r\n                ")]
@@ -1221,25 +1248,6 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _c(
-                      "li",
-                      [
-                        _c(
-                          "router-link",
-                          {
-                            staticClass:
-                              "dropdown-item dropdown-item-custome transition-3d-hover",
-                            class:  true
-                              ? _vm.ActiveLinkClass
-                              : undefined,
-                            attrs: { to: "/sspa/my-profile" }
-                          },
-                          [_vm._v("My Profile ")]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
                     _c("li", { staticClass: "dropdown-divider" }),
                     _vm._v(" "),
                     _c("li", [
@@ -1277,14 +1285,21 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "navbar-brand",
-        attrs: { "data-widget": "pushmenu", href: "#", role: "button" }
-      },
-      [_c("i", { staticClass: "fas fa-bars" })]
-    )
+    return _c("li", [
+      _c(
+        "a",
+        {
+          staticClass: "navbar-brand",
+          attrs: {
+            "data-widget": "pushmenu",
+            href: "#",
+            role: "button",
+            title: "Left side menu expand & Close"
+          }
+        },
+        [_c("i", { staticClass: "fas fa-bars" })]
+      )
+    ])
   },
   function() {
     var _vm = this

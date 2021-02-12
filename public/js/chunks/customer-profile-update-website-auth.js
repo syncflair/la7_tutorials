@@ -454,23 +454,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     CancelChangeEmail: function CancelChangeEmail() {
-      this.change_email = false;
-      this.form.new_email = '';
-      this.form.email_verification_code = '';
-    },
-    SendCustomerPhoneChangeVerificationCode: function SendCustomerPhoneChangeVerificationCode() {
       var _this4 = this;
 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.post('/auth/SendCustomerPhoneChangeVerificationCode').then(function (_ref4) {
+      this.form.post('/auth/CancelChangeEmail').then(function (_ref4) {
         var data = _ref4.data;
 
         _this4.$Progress.finish();
 
         if (data.success) {
           toastr.success(data.success);
-          _this4.change_phone = true;
+          _this4.change_email = false;
+          _this4.form.new_email = '';
+          _this4.form.email_verification_code = '';
         }
 
         if (data.error) {
@@ -479,28 +476,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           toastr.warning(data.error);
         }
       })["catch"](function (data) {
-        _this4.$Progress.fail(); //toastr.warning('The given data was invalid.');
-
+        _this4.$Progress.fail();
       });
     },
-    CustomerChangePhone: function CustomerChangePhone() {
+    SendCustomerPhoneChangeVerificationCode: function SendCustomerPhoneChangeVerificationCode() {
       var _this5 = this;
 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.post('/auth/CustomerChangePhone').then(function (_ref5) {
+      this.form.post('/auth/SendCustomerPhoneChangeVerificationCode').then(function (_ref5) {
         var data = _ref5.data;
 
         _this5.$Progress.finish();
 
         if (data.success) {
-          _this5.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
-
-
           toastr.success(data.success);
-          _this5.change_phone = false;
-          _this5.form.new_phone = '';
-          _this5.form.phone_verification_code = '';
+          _this5.change_phone = true;
         }
 
         if (data.error) {
@@ -509,36 +500,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           toastr.warning(data.error);
         }
       })["catch"](function (data) {
-        _this5.$Progress.fail();
+        _this5.$Progress.fail(); //toastr.warning('The given data was invalid.');
 
-        toastr.warning('The given data was invalid.'); // console.log(data.message);
       });
     },
-    CancelChangePhone: function CancelChangePhone() {
-      this.change_phone = false;
-      this.form.new_phone = '';
-      this.form.phone_verification_code = '';
-    },
-    CustomerChangePassword: function CustomerChangePassword() {
+    CustomerChangePhone: function CustomerChangePhone() {
       var _this6 = this;
 
       this.$Progress.start(); //using progress-bar package
 
-      this.form.post('/auth/CustomerChangePassword').then(function (_ref6) {
+      this.form.post('/auth/CustomerChangePhone').then(function (_ref6) {
         var data = _ref6.data;
 
         _this6.$Progress.finish();
 
         if (data.success) {
-          //this.form.reset();  //reset from after submit
-          _this6.form.old_password = '';
-          _this6.form.password = '';
-          _this6.form.password_confirmation = '';
-
-          _this6.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data                         
+          _this6.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
 
 
-          toastr.success(data.success); //console.log(data.success); 
+          toastr.success(data.success);
+          _this6.change_phone = false;
+          _this6.form.new_phone = '';
+          _this6.form.phone_verification_code = '';
         }
 
         if (data.error) {
@@ -548,6 +531,65 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         }
       })["catch"](function (data) {
         _this6.$Progress.fail();
+
+        toastr.warning('The given data was invalid.'); // console.log(data.message);
+      });
+    },
+    CancelChangePhone: function CancelChangePhone() {
+      var _this7 = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.post('/auth/CancelChangePhone').then(function (_ref7) {
+        var data = _ref7.data;
+
+        _this7.$Progress.finish();
+
+        if (data.success) {
+          toastr.success(data.success);
+          _this7.change_phone = false;
+          _this7.form.new_phone = '';
+          _this7.form.phone_verification_code = '';
+        }
+
+        if (data.error) {
+          _this7.$Progress.fail();
+
+          toastr.warning(data.error);
+        }
+      })["catch"](function (data) {
+        _this7.$Progress.fail();
+      });
+    },
+    CustomerChangePassword: function CustomerChangePassword() {
+      var _this8 = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.post('/auth/CustomerChangePassword').then(function (_ref8) {
+        var data = _ref8.data;
+
+        _this8.$Progress.finish();
+
+        if (data.success) {
+          //this.form.reset();  //reset from after submit
+          _this8.form.old_password = '';
+          _this8.form.password = '';
+          _this8.form.password_confirmation = '';
+
+          _this8.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data                         
+
+
+          toastr.success(data.success); //console.log(data.success); 
+        }
+
+        if (data.error) {
+          _this8.$Progress.fail();
+
+          toastr.warning(data.error);
+        }
+      })["catch"](function (data) {
+        _this8.$Progress.fail();
 
         toastr.warning('The given data was invalid.'); // console.log(data.message);
       });
@@ -1112,7 +1154,7 @@ var render = function() {
                                     on: {
                                       click: function($event) {
                                         $event.preventDefault()
-                                        return _vm.CancelChangePhone()
+                                        return _vm.CancelChangeEmail()
                                       }
                                     }
                                   },
@@ -1434,7 +1476,7 @@ var render = function() {
                                     on: {
                                       click: function($event) {
                                         $event.preventDefault()
-                                        return _vm.CancelChangeEmail()
+                                        return _vm.CancelChangePhone()
                                       }
                                     }
                                   },
