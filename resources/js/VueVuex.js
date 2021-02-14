@@ -1,4 +1,5 @@
-import Vue from 'vue'
+// import Vue from 'vue'
+import Vue from 'vue/dist/vue'; //for laravel-mix 6
 import Vuex from 'vuex'
 
 Vue.use(Vuex)

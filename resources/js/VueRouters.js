@@ -1,4 +1,5 @@
-import Vue from 'vue';
+// import Vue from 'vue';
+import Vue from 'vue/dist/vue'; //for laravel-mix 6
 import store from './VueVuex' /*this.$store is not available in the router object. So import vuex here to use store*/
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)

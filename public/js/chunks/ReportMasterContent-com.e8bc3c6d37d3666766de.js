@@ -1,0 +1,1 @@
+(self.webpackChunk=self.webpackChunk||[]).push([[6285],{77869:(e,t,n)=>{"use strict";n.r(t),n.d(t,{default:()=>s});const r={name:"ReportMasterContent",components:{},data:function(){return{}},methods:{},created:function(){}};const s=(0,n(51900).Z)(r,(function(){var e=this.$createElement;return(this._self._c||e)("router-view")}),[],!1,null,null,null).exports}}]);

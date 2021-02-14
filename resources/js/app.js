@@ -7,7 +7,11 @@
 require('./bootstrap');
 
 /*Vue*/
-window.Vue = require('vue');
+// import Vue from 'vue/dist/vue'; //for laravel-mix 6
+// window.Vue = Vue;
+
+// window.Vue = require('vue');
+window.Vue = require('vue/dist/vue'); //for laravel-mix 6
 Vue.config.productionTip = false //turn on production mode Remove when upload to public
 
 
@@ -33,7 +37,7 @@ import VueProgressBar from 'vue-progressbar'
 const options = { color: '#28a745', failedColor: '#dc3545', thickness: '2px',
   transition: { speed: '0.2s', opacity: '0.6s', termination: 300 },
   autoRevert: true, location: 'top', inverse: false }
-Vue.use(VueProgressBar, options)
+Vue.use(VueProgressBar, options);
 
 /*Vuex*/
   import store from './VueVuex'
@@ -301,6 +305,8 @@ const app = new Vue({
       // setTimeout(() => {
       //   console.log(store.getters['AuthenticationForCustomer/isAuthenticated']);
       // }, 1000);
+
+
     }, //end mounted   
 
 

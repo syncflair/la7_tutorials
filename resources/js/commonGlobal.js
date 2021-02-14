@@ -148,6 +148,9 @@ export default {
 
     mounted(){
 
+      // console.log(window.Vue);
+      // console.log(Vue);
+
       // console.log('Width: '+this.window.width+ ' Height: ' + this.window.height );
       /*
         This is for check that the application is browse as website(public) or as admin, 
