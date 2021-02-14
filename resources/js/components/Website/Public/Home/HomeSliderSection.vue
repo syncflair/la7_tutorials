@@ -32,7 +32,7 @@
                         <div class="col-xl-5 col-6  d-flex align-items-center"
                             data-scs-animation-in="zoomIn"
                             data-scs-animation-delay="500">
-                            <img class="img-fluid" src="website/assets/img/416X420/img1.png" alt="Image Description">
+                            <img class="img-fluid" v-lazy="baseURL+'/website/assets/img/416X420/img1.png'" alt="Image Description">
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                         <div class="col-xl-5 col-6  d-flex align-items-center"
                             data-scs-animation-in="fadeInUp"
                             data-scs-animation-delay="500">
-                            <img class="img-fluid" src="website/assets/img/416X420/img2.png" alt="Image Description">
+                            <img class="img-fluid" v-lazy="baseURL+'/website/assets/img/416X420/img2.png'" alt="Image Description">
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                         <div class="col-xl-5 col-6  d-flex align-items-center"
                             data-scs-animation-in="fadeInRight"
                             data-scs-animation-delay="500">
-                            <img class="img-fluid" src="website/assets/img/416X420/img3.png" alt="Image Description">
+                            <img class="img-fluid" v-lazy="baseURL+'website/assets/img/416X420/img3.png'" alt="Image Description">
                         </div>
                     </div>
                 </div>

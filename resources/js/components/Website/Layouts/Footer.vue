@@ -338,19 +338,20 @@
                     <div class="mb-3 mb-md-0">© <a href="/home" class="font-weight-bold text-gray-90">SORBORAHO</a> - All rights Reserved</div>
                     <div class="text-md-right">
                         <span class="d-inline-block bg-white border rounded p-1">
-                            <img class="max-width-5" :src="baseURL+'/website/assets/img/100X60/img1.jpg'" alt="Image Description">
+                            <img class="max-width-5" v-lazy="baseURL+'/website/assets/img/100X60/img1.jpg'" alt="Image Description">
                         </span>
                         <span class="d-inline-block bg-white border rounded p-1">
-                            <img class="max-width-5" :src="baseURL+'/website/assets/img/100X60/img2.jpg'" alt="Image Description">
+                            <img class="max-width-5" v-lazy="baseURL+'/website/assets/img/100X60/img2.jpg'" alt="Image Description">
                         </span>
                         <span class="d-inline-block bg-white border rounded p-1">
-                            <img class="max-width-5" :src="baseURL+'/website/assets/img/100X60/img3.jpg'" alt="Image Description">
+                            <img class="max-width-5" v-lazy="baseURL+'/website/assets/img/100X60/img3.jpg'" alt="Image Description">
                         </span>
                         <span class="d-inline-block bg-white border rounded p-1">
-                            <img class="max-width-5" :src="baseURL+'/website/assets/img/100X60/img4.jpg'" alt="Image Description">
+                            <img class="max-width-5" v-lazy="baseURL+'/website/assets/img/100X60/img4.jpg'" alt="Image Description">
                         </span>
                         <span class="d-inline-block bg-white border rounded p-1">
-                            <img class="max-width-5" :src="baseURL+'/website/assets/img/100X60/img5.jpg'" alt="Image Description">
+                            <img class="max-width-5" v-lazy="baseURL+'/website/assets/img/100X60/img5.jpg'" alt="Image Description">
+                            <!-- <img class="max-width-5" :src="baseURL+'/website/assets/img/100X60/img5.jpg'" alt="Image Description"> -->
                         </span>
                     </div>
                 </div>

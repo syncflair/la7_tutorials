@@ -70,7 +70,7 @@
                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                             <div class="mb-2">
-                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="website/assets/img/212X200/img2.jpg" alt="Image Description"></a>
+                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" v-lazy="baseURL+'/website/assets/img/212X200/img2.jpg'" alt="Image Description"></a>
                             </div>
                             <div class="flex-center-between mb-1">
                                 <div class="prodcut-price">
@@ -99,7 +99,7 @@
                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                             <div class="mb-2">
-                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="website/assets/img/212X200/img2.jpg" alt="Image Description"></a>
+                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" v-lazy="baseURL+'/website/assets/img/212X200/img2.jpg'" alt="Image Description"></a>
                             </div>
                             <div class="flex-center-between mb-1">
                                 <div class="prodcut-price">
@@ -128,7 +128,7 @@
                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                             <div class="mb-2">
-                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="website/assets/img/212X200/img3.jpg" alt="Image Description"></a>
+                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" v-lazy="baseURL+'/website/assets/img/212X200/img3.jpg'" alt="Image Description"></a>
                             </div>
                             <div class="flex-center-between mb-1">
                                 <div class="prodcut-price">
@@ -157,7 +157,7 @@
                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                             <div class="mb-2">
-                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="website/assets/img/212X200/img4.jpg" alt="Image Description"></a>
+                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" v-lazy="baseURL+'/website/assets/img/212X200/img4.jpg'" alt="Image Description"></a>
                             </div>
                             <div class="flex-center-between mb-1">
                                 <div class="prodcut-price">
@@ -186,7 +186,7 @@
                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                             <div class="mb-2">
-                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="website/assets/img/212X200/img5.jpg" alt="Image Description"></a>
+                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" v-lazy="baseURL+'/website/assets/img/212X200/img5.jpg'" alt="Image Description"></a>
                             </div>
                             <div class="flex-center-between mb-1">
                                 <div class="prodcut-price">
@@ -215,7 +215,7 @@
                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                             <div class="mb-2">
-                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="website/assets/img/212X200/img6.jpg" alt="Image Description"></a>
+                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" v-lazy="baseURL+'/website/assets/img/212X200/img6.jpg'" alt="Image Description"></a>
                             </div>
                             <div class="flex-center-between mb-1">
                                 <div class="prodcut-price">
@@ -244,7 +244,7 @@
                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                             <div class="mb-2">
-                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="website/assets/img/212X200/img7.jpg" alt="Image Description"></a>
+                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" v-lazy="baseURL+'/website/assets/img/212X200/img7.jpg'" alt="Image Description"></a>
                             </div>
                             <div class="flex-center-between mb-1">
                                 <div class="prodcut-price">
@@ -273,7 +273,7 @@
                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                             <div class="mb-2">
-                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="website/assets/img/212X200/img1.jpg" alt="Image Description"></a>
+                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" v-lazy="baseURL+'/website/assets/img/212X200/img1.jpg'" alt="Image Description"></a>
                             </div>
                             <div class="flex-center-between mb-1">
                                 <div class="prodcut-price">
@@ -302,7 +302,7 @@
                             <div class="mb-2"><a href="../shop/product-categories-7-column-full-width.html" class="font-size-12 text-gray-5">Speakers</a></div>
                             <h5 class="mb-1 product-item__title"><a href="../shop/single-product-fullwidth.html" class="text-blue font-weight-bold">Wireless Audio System Multiroom 360 degree Full base audio</a></h5>
                             <div class="mb-2">
-                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" src="website/assets/img/212X200/img1.jpg" alt="Image Description"></a>
+                                <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid" v-lazy="baseURL+'/website/assets/img/212X200/img1.jpg'" alt="Image Description"></a>
                             </div>
                             <div class="flex-center-between mb-1">
                                 <div class="prodcut-price">

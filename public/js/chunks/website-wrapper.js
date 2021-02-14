@@ -979,6 +979,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Footer-website",
   components: {},
@@ -6429,11 +6430,18 @@ var render = function() {
               { staticClass: "d-inline-block bg-white border rounded p-1" },
               [
                 _c("img", {
+                  directives: [
+                    {
+                      name: "lazy",
+                      rawName: "v-lazy",
+                      value:
+                        _vm.baseURL + "/website/assets/img/100X60/img1.jpg",
+                      expression:
+                        "baseURL+'/website/assets/img/100X60/img1.jpg'"
+                    }
+                  ],
                   staticClass: "max-width-5",
-                  attrs: {
-                    src: _vm.baseURL + "/website/assets/img/100X60/img1.jpg",
-                    alt: "Image Description"
-                  }
+                  attrs: { alt: "Image Description" }
                 })
               ]
             ),
@@ -6443,11 +6451,18 @@ var render = function() {
               { staticClass: "d-inline-block bg-white border rounded p-1" },
               [
                 _c("img", {
+                  directives: [
+                    {
+                      name: "lazy",
+                      rawName: "v-lazy",
+                      value:
+                        _vm.baseURL + "/website/assets/img/100X60/img2.jpg",
+                      expression:
+                        "baseURL+'/website/assets/img/100X60/img2.jpg'"
+                    }
+                  ],
                   staticClass: "max-width-5",
-                  attrs: {
-                    src: _vm.baseURL + "/website/assets/img/100X60/img2.jpg",
-                    alt: "Image Description"
-                  }
+                  attrs: { alt: "Image Description" }
                 })
               ]
             ),
@@ -6457,11 +6472,18 @@ var render = function() {
               { staticClass: "d-inline-block bg-white border rounded p-1" },
               [
                 _c("img", {
+                  directives: [
+                    {
+                      name: "lazy",
+                      rawName: "v-lazy",
+                      value:
+                        _vm.baseURL + "/website/assets/img/100X60/img3.jpg",
+                      expression:
+                        "baseURL+'/website/assets/img/100X60/img3.jpg'"
+                    }
+                  ],
                   staticClass: "max-width-5",
-                  attrs: {
-                    src: _vm.baseURL + "/website/assets/img/100X60/img3.jpg",
-                    alt: "Image Description"
-                  }
+                  attrs: { alt: "Image Description" }
                 })
               ]
             ),
@@ -6471,11 +6493,18 @@ var render = function() {
               { staticClass: "d-inline-block bg-white border rounded p-1" },
               [
                 _c("img", {
+                  directives: [
+                    {
+                      name: "lazy",
+                      rawName: "v-lazy",
+                      value:
+                        _vm.baseURL + "/website/assets/img/100X60/img4.jpg",
+                      expression:
+                        "baseURL+'/website/assets/img/100X60/img4.jpg'"
+                    }
+                  ],
                   staticClass: "max-width-5",
-                  attrs: {
-                    src: _vm.baseURL + "/website/assets/img/100X60/img4.jpg",
-                    alt: "Image Description"
-                  }
+                  attrs: { alt: "Image Description" }
                 })
               ]
             ),
@@ -6485,11 +6514,18 @@ var render = function() {
               { staticClass: "d-inline-block bg-white border rounded p-1" },
               [
                 _c("img", {
+                  directives: [
+                    {
+                      name: "lazy",
+                      rawName: "v-lazy",
+                      value:
+                        _vm.baseURL + "/website/assets/img/100X60/img5.jpg",
+                      expression:
+                        "baseURL+'/website/assets/img/100X60/img5.jpg'"
+                    }
+                  ],
                   staticClass: "max-width-5",
-                  attrs: {
-                    src: _vm.baseURL + "/website/assets/img/100X60/img5.jpg",
-                    alt: "Image Description"
-                  }
+                  attrs: { alt: "Image Description" }
                 })
               ]
             )
@@ -15987,16 +16023,9 @@ var render = function() {
                   })
                 : _vm._e(),
               _vm._v(" "),
-              _c("HeaderVerticalAndSecondaryMenuForHome", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: this.$route.path === "/home",
-                    expression: "this.$route.path === '/home' "
-                  }
-                ]
-              }),
+              this.$route.path === "/home"
+                ? _c("HeaderVerticalAndSecondaryMenuForHome")
+                : _vm._e(),
               _vm._v(" "),
               this.$route.path !== "/home"
                 ? _c("HeaderLogoMenuForAllPage", {
@@ -16004,16 +16033,9 @@ var render = function() {
                   })
                 : _vm._e(),
               _vm._v(" "),
-              _c("HeaderVerticalAndSearchForAllPage", {
-                directives: [
-                  {
-                    name: "show",
-                    rawName: "v-show",
-                    value: this.$route.path !== "/home",
-                    expression: "this.$route.path !== '/home' "
-                  }
-                ]
-              })
+              this.$route.path !== "/home"
+                ? _c("HeaderVerticalAndSearchForAllPage")
+                : _vm._e()
             ],
             1
           )

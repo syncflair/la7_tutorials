@@ -40,7 +40,7 @@
                             <div class="mb-4 mb-md-0">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid mx-auto" src="website/assets/img/380X350/img1.jpg" alt="Image Description"></a>
+                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid mx-auto" v-lazy="baseURL+'/website/assets/img/380X350/img1.jpg'" alt="Image Description"></a>
                                     </div>
 
                                     <!-- <div class="col-auto d-none d-xl-block d-wd-none">
@@ -185,7 +185,7 @@
                             <div class="mb-4 mb-md-0">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid mx-auto" src="website/assets/img/380X350/img2.jpg" alt="Image Description"></a>
+                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid mx-auto" v-lazy="baseURL+'/website/assets/img/380X350/img2.jpg'" alt="Image Description"></a>
                                     </div>
 
                                     <!-- <div class="col-auto d-none d-xl-block d-wd-none">
@@ -338,7 +338,7 @@
                             <div class="mb-4 mb-md-0">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid mx-auto" src="website/assets/img/380X350/img1.jpg" alt="Image Description"></a>
+                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid mx-auto" v-lazy="baseURL+'/website/assets/img/380X350/img1.jpg'" alt="Image Description"></a>
                                     </div>
 
                                     <!-- <div class="col-auto d-none d-xl-block d-wd-none">
@@ -483,7 +483,7 @@
                             <div class="mb-4 mb-md-0">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid mx-auto" src="website/assets/img/380X350/img2.jpg" alt="Image Description"></a>
+                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid mx-auto" v-lazy="baseURL+'/website/assets/img/380X350/img2.jpg'" alt="Image Description"></a>
                                     </div>
 
                                     <!-- <div class="col-auto d-none d-xl-block d-wd-none">
@@ -628,7 +628,7 @@
                             <div class="mb-4 mb-md-0">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid mx-auto" src="website/assets/img/380X350/img1.jpg" alt="Image Description"></a>
+                                        <a href="../shop/single-product-fullwidth.html" class="d-block text-center"><img class="img-fluid mx-auto" v-lazy="baseURL+'/website/assets/img/380X350/img1.jpg'" alt="Image Description"></a>
                                     </div>
 
                                     <!-- <div class="col-auto d-none d-xl-block d-wd-none">
