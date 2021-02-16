@@ -2056,6 +2056,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _HomeSliderSection_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HomeSliderSection.vue */ "./resources/js/components/Website/Public/Home/HomeSliderSection.vue");
 /* harmony import */ var _CommonLayouts_FeatureList_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../CommonLayouts/FeatureList.vue */ "./resources/js/components/Website/Public/CommonLayouts/FeatureList.vue");
 /* harmony import */ var _CommonLayouts_BannerSmallFour_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../CommonLayouts/BannerSmallFour.vue */ "./resources/js/components/Website/Public/CommonLayouts/BannerSmallFour.vue");
@@ -2068,6 +2069,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CommonLayouts_BannerFull_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../CommonLayouts/BannerFull.vue */ "./resources/js/components/Website/Public/CommonLayouts/BannerFull.vue");
 /* harmony import */ var _CommonLayouts_BannerSmallTwo_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../CommonLayouts/BannerSmallTwo.vue */ "./resources/js/components/Website/Public/CommonLayouts/BannerSmallTwo.vue");
 /* harmony import */ var _CommonLayouts_FooterTopWidget_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../CommonLayouts/FooterTopWidget.vue */ "./resources/js/components/Website/Public/CommonLayouts/FooterTopWidget.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2154,6 +2161,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+ //for user MapState
+
  //Load to only Home Page
 
 
@@ -2189,32 +2200,116 @@ __webpack_require__.r(__webpack_exports__);
     BannerSmallTwo: _CommonLayouts_BannerSmallTwo_vue__WEBPACK_IMPORTED_MODULE_10__.default,
     FooterTopWidget: _CommonLayouts_FooterTopWidget_vue__WEBPACK_IMPORTED_MODULE_11__.default
   },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_12__.mapState)('AuthenticationForCustomer', ['authCustomer'])),
   methods: {},
   created: function created() {//this.$store.dispatch('commonStoreForWebsite/fetchAuthCustomerData'); //get auth customer data 
   },
   mounted: function mounted() {
-    // initialization of countdowns
-    var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
-      yearsElSelector: '.js-cd-years',
-      monthsElSelector: '.js-cd-months',
-      daysElSelector: '.js-cd-days',
-      hoursElSelector: '.js-cd-hours',
-      minutesElSelector: '.js-cd-minutes',
-      secondsElSelector: '.js-cd-seconds'
-    }); // $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
-    //      e.preventDefault();
-    //      var target = $(this).data('target');
-    //      if($(this).attr('aria-expanded') === "true") {
-    //          $(target).collapse('hide');
-    //      } else {
-    //          $(target).collapse('show');
-    //      }
-    //  });
+    //call from AccountSidebarNavigationToggler.vue component
+    FireEvent.$on('Call_HSCore_components_HSUnfold', function () {
+      setTimeout(function () {
+        // initialization of unfold component
+        $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+      }, 600);
+    });
+    this.$nextTick(function () {
+      //initialization of HSMegaMenu component
+      $('.js-mega-menu').HSMegaMenu({
+        event: 'hover',
+        direction: 'horizontal',
+        pageContainer: $('.container'),
+        breakpoint: 767.98,
+        hideTimeOut: 0
+      }); // initialization of svg injector module
 
-    setTimeout(function () {
-      // initialization of slick carousel (Slick Slider call from here, otherwise it get error)
-      $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
-    }, 2500);
+      $.HSCore.components.HSSVGIngector.init('.js-svg-injector'); // initialization of header
+
+      $.HSCore.components.HSHeader.init($('#header')); // initialization of animation
+
+      $.HSCore.components.HSOnScrollAnimation.init('[data-animation]'); // initialization of unfold component
+
+      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+        afterOpen: function afterOpen() {
+          $(this).find('input[type="search"]').focus();
+        }
+      }); // initialization of countdowns
+
+      var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+        yearsElSelector: '.js-cd-years',
+        monthsElSelector: '.js-cd-months',
+        daysElSelector: '.js-cd-days',
+        hoursElSelector: '.js-cd-hours',
+        minutesElSelector: '.js-cd-minutes',
+        secondsElSelector: '.js-cd-seconds'
+      }); // initialization of malihu scrollbar
+
+      $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar')); // initialization of forms
+
+      $.HSCore.components.HSFocusState.init(); // initialization of form validation
+      // $.HSCore.components.HSValidation.init('.js-validate', {
+      //     rules: {
+      //         confirmPassword: {
+      //             equalTo: '#signupPassword'
+      //         }
+      //     }
+      // });
+      // initialization of show animations
+
+      $.HSCore.components.HSShowAnimation.init('.js-animation-link'); // initialization of fancybox
+      // initialization of popups
+
+      $.HSCore.components.HSFancyBox.init('.js-fancybox'); // initialization of slick carousel
+
+      $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel'); // initialization of go to
+
+      $.HSCore.components.HSGoTo.init('.js-go-to'); // initialization of hamburgers
+
+      $.HSCore.components.HSHamburgers.init('#hamburgerTrigger'); // initialization of unfold component
+
+      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+        beforeClose: function beforeClose() {
+          $('#hamburgerTrigger').removeClass('is-active');
+        },
+        afterClose: function afterClose() {
+          $('#headerSidebarList .collapse.show').collapse('hide');
+        }
+      });
+      $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
+        e.preventDefault();
+        var target = $(this).data('target');
+
+        if ($(this).attr('aria-expanded') === "true") {
+          $(target).collapse('hide');
+        } else {
+          $(target).collapse('show');
+        }
+      }); // initialization of unfold component
+
+      $.HSCore.components.HSUnfold.init($('[data-unfold-target]')); // initialization of select picker
+
+      $.HSCore.components.HSSelectPicker.init('.js-select'); // initialization of HSScrollNav component
+      // $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
+      //   duration: 700
+      // });
+      // initialization of quantity counter
+      //$.HSCore.components.HSQantityCounter.init('.js-quantity');
+      // initialization of forms
+      //$.HSCore.components.HSRangeSlider.init('.js-range-slider');
+    }); //end this.$nextTick
+    //############### Windown Load / $(window).on('load', function () {} ###############################
+    // window.addEventListener('load', () => {                
+    // })
+    //############## Windown ready / $(document).on('ready', function () {} #############################
+    // document.onreadystatechange = () => { 
+    //   if (document.readyState == "complete") { 
+    //   } 
+    // }//end Document.onreadyStatechange
+    // setTimeout(() => {            
+    //     // initialization of slick carousel (Slick Slider call from here, otherwise it get error)
+    //     $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+    // }, 2500);
+  },
+  updated: function updated() {// console.log('run-code')
   }
 });
 
@@ -3324,6 +3419,15 @@ __webpack_require__.r(__webpack_exports__);
     //          $(".js-slick-carousel").not('.slick-initialized').slick()
     //   // Handler for .ready() called. Put the Slick Slider etc. init code here.
     // })
+    // initialization of countdowns
+    // var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+    //     yearsElSelector: '.js-cd-years',
+    //     monthsElSelector: '.js-cd-months',
+    //     daysElSelector: '.js-cd-days',
+    //     hoursElSelector: '.js-cd-hours',
+    //     minutesElSelector: '.js-cd-minutes',
+    //     secondsElSelector: '.js-cd-seconds'
+    // });
   }
 });
 
@@ -9251,6 +9355,8 @@ var render = function() {
     [
       _c("HomeSliderSection"),
       _vm._v(" "),
+      _c("span", [_vm._v(_vm._s(_vm.authCustomer))]),
+      _vm._v(" "),
       _c(
         "div",
         { staticClass: "container" },
@@ -13081,7 +13187,7 @@ var render = function() {
             staticClass:
               "section-title section-title__full mb-0 pb-2 font-size-22"
           },
-          [_vm._v("Deals of The Day")]
+          [_vm._v("Deals of The Day test")]
         ),
         _vm._v(" "),
         _vm._m(0),
@@ -13101,7 +13207,481 @@ var render = function() {
       1
     ),
     _vm._v(" "),
-    _vm._m(1)
+    _c(
+      "div",
+      {
+        staticClass:
+          "js-slick-carousel u-slick overflow-hidden u-slick-overflow-visble pt-3 pb-6 px-1",
+        attrs: {
+          "data-pagi-classes":
+            "text-center right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-4",
+          "data-slides-show": "7",
+          "data-slides-scroll": "1",
+          "data-responsive":
+            '[{\r\n          "breakpoint": 1400,\r\n          "settings": {\r\n            "slidesToShow": 7\r\n          }\r\n        }, {\r\n            "breakpoint": 1200,\r\n            "settings": {\r\n              "slidesToShow": 7\r\n            }\r\n        }, {\r\n          "breakpoint": 992,\r\n          "settings": {\r\n            "slidesToShow": 4\r\n          }\r\n        }, {\r\n          "breakpoint": 768,\r\n          "settings": {\r\n            "slidesToShow": 3\r\n          }\r\n        }, {\r\n          "breakpoint": 554,\r\n          "settings": {\r\n            "slidesToShow": 2\r\n          }\r\n        }]'
+        }
+      },
+      [
+        _c("div", { staticClass: "js-slide products-group" }, [
+          _c("div", { staticClass: "product-item" }, [
+            _c("div", { staticClass: "product-item__outer h-100" }, [
+              _c(
+                "div",
+                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
+                [
+                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _vm._m(2),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block text-center",
+                          attrs: {
+                            href: "../shop/single-product-fullwidth.html"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            directives: [
+                              {
+                                name: "lazy",
+                                rawName: "v-lazy",
+                                value:
+                                  _vm.baseURL +
+                                  "/website/assets/img/212X200/img2.jpg",
+                                expression:
+                                  "baseURL+'/website/assets/img/212X200/img2.jpg'"
+                              }
+                            ],
+                            staticClass: "img-fluid",
+                            attrs: { alt: "Image Description" }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(3)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(4)
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "js-slide products-group" }, [
+          _c("div", { staticClass: "product-item" }, [
+            _c("div", { staticClass: "product-item__outer h-100" }, [
+              _c(
+                "div",
+                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
+                [
+                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
+                    _vm._m(5),
+                    _vm._v(" "),
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block text-center",
+                          attrs: {
+                            href: "../shop/single-product-fullwidth.html"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            directives: [
+                              {
+                                name: "lazy",
+                                rawName: "v-lazy",
+                                value:
+                                  _vm.baseURL +
+                                  "/website/assets/img/212X200/img2.jpg",
+                                expression:
+                                  "baseURL+'/website/assets/img/212X200/img2.jpg'"
+                              }
+                            ],
+                            staticClass: "img-fluid",
+                            attrs: { alt: "Image Description" }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(7)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(8)
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "js-slide products-group" }, [
+          _c("div", { staticClass: "product-item" }, [
+            _c("div", { staticClass: "product-item__outer h-100" }, [
+              _c(
+                "div",
+                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
+                [
+                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
+                    _vm._m(9),
+                    _vm._v(" "),
+                    _vm._m(10),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block text-center",
+                          attrs: {
+                            href: "../shop/single-product-fullwidth.html"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            directives: [
+                              {
+                                name: "lazy",
+                                rawName: "v-lazy",
+                                value:
+                                  _vm.baseURL +
+                                  "/website/assets/img/212X200/img3.jpg",
+                                expression:
+                                  "baseURL+'/website/assets/img/212X200/img3.jpg'"
+                              }
+                            ],
+                            staticClass: "img-fluid",
+                            attrs: { alt: "Image Description" }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(11)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(12)
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "js-slide products-group" }, [
+          _c("div", { staticClass: "product-item" }, [
+            _c("div", { staticClass: "product-item__outer h-100" }, [
+              _c(
+                "div",
+                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
+                [
+                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
+                    _vm._m(13),
+                    _vm._v(" "),
+                    _vm._m(14),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block text-center",
+                          attrs: {
+                            href: "../shop/single-product-fullwidth.html"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            directives: [
+                              {
+                                name: "lazy",
+                                rawName: "v-lazy",
+                                value:
+                                  _vm.baseURL +
+                                  "/website/assets/img/212X200/img4.jpg",
+                                expression:
+                                  "baseURL+'/website/assets/img/212X200/img4.jpg'"
+                              }
+                            ],
+                            staticClass: "img-fluid",
+                            attrs: { alt: "Image Description" }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(15)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(16)
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "js-slide products-group" }, [
+          _c("div", { staticClass: "product-item" }, [
+            _c("div", { staticClass: "product-item__outer h-100" }, [
+              _c(
+                "div",
+                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
+                [
+                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
+                    _vm._m(17),
+                    _vm._v(" "),
+                    _vm._m(18),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block text-center",
+                          attrs: {
+                            href: "../shop/single-product-fullwidth.html"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            directives: [
+                              {
+                                name: "lazy",
+                                rawName: "v-lazy",
+                                value:
+                                  _vm.baseURL +
+                                  "/website/assets/img/212X200/img5.jpg",
+                                expression:
+                                  "baseURL+'/website/assets/img/212X200/img5.jpg'"
+                              }
+                            ],
+                            staticClass: "img-fluid",
+                            attrs: { alt: "Image Description" }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(19)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(20)
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "js-slide products-group" }, [
+          _c("div", { staticClass: "product-item" }, [
+            _c("div", { staticClass: "product-item__outer h-100" }, [
+              _c(
+                "div",
+                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
+                [
+                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
+                    _vm._m(21),
+                    _vm._v(" "),
+                    _vm._m(22),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block text-center",
+                          attrs: {
+                            href: "../shop/single-product-fullwidth.html"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            directives: [
+                              {
+                                name: "lazy",
+                                rawName: "v-lazy",
+                                value:
+                                  _vm.baseURL +
+                                  "/website/assets/img/212X200/img6.jpg",
+                                expression:
+                                  "baseURL+'/website/assets/img/212X200/img6.jpg'"
+                              }
+                            ],
+                            staticClass: "img-fluid",
+                            attrs: { alt: "Image Description" }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(23)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(24)
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "js-slide products-group" }, [
+          _c("div", { staticClass: "product-item" }, [
+            _c("div", { staticClass: "product-item__outer h-100" }, [
+              _c(
+                "div",
+                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
+                [
+                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
+                    _vm._m(25),
+                    _vm._v(" "),
+                    _vm._m(26),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block text-center",
+                          attrs: {
+                            href: "../shop/single-product-fullwidth.html"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            directives: [
+                              {
+                                name: "lazy",
+                                rawName: "v-lazy",
+                                value:
+                                  _vm.baseURL +
+                                  "/website/assets/img/212X200/img7.jpg",
+                                expression:
+                                  "baseURL+'/website/assets/img/212X200/img7.jpg'"
+                              }
+                            ],
+                            staticClass: "img-fluid",
+                            attrs: { alt: "Image Description" }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(27)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(28)
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "js-slide products-group" }, [
+          _c("div", { staticClass: "product-item" }, [
+            _c("div", { staticClass: "product-item__outer h-100" }, [
+              _c(
+                "div",
+                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
+                [
+                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
+                    _vm._m(29),
+                    _vm._v(" "),
+                    _vm._m(30),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block text-center",
+                          attrs: {
+                            href: "../shop/single-product-fullwidth.html"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            directives: [
+                              {
+                                name: "lazy",
+                                rawName: "v-lazy",
+                                value:
+                                  _vm.baseURL +
+                                  "/website/assets/img/212X200/img1.jpg",
+                                expression:
+                                  "baseURL+'/website/assets/img/212X200/img1.jpg'"
+                              }
+                            ],
+                            staticClass: "img-fluid",
+                            attrs: { alt: "Image Description" }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(31)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(32)
+                ]
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "js-slide products-group" }, [
+          _c("div", { staticClass: "product-item" }, [
+            _c("div", { staticClass: "product-item__outer h-100" }, [
+              _c(
+                "div",
+                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
+                [
+                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
+                    _vm._m(33),
+                    _vm._v(" "),
+                    _vm._m(34),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "d-block text-center",
+                          attrs: {
+                            href: "../shop/single-product-fullwidth.html"
+                          }
+                        },
+                        [
+                          _c("img", {
+                            directives: [
+                              {
+                                name: "lazy",
+                                rawName: "v-lazy",
+                                value:
+                                  _vm.baseURL +
+                                  "/website/assets/img/212X200/img1.jpg",
+                                expression:
+                                  "baseURL+'/website/assets/img/212X200/img1.jpg'"
+                              }
+                            ],
+                            staticClass: "img-fluid",
+                            attrs: { alt: "Image Description" }
+                          })
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(35)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(36)
+                ]
+              )
+            ])
+          ])
+        ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -13115,7 +13695,7 @@ var staticRenderFns = [
         staticClass:
           "js-countdown ml-md-5 mt-md-n1 border-top border-color-1 border-md-top-0 w-100 w-md-auto pt-2 pt-md-0 mb-2 mb-md-0",
         attrs: {
-          "data-end-date": "2021/01/30 21:30:00",
+          "data-end-date": "2021/02/27 21:30:00",
           "data-days-format": "%D",
           "data-hours-format": "%H",
           "data-minutes-format": "%M",
@@ -13142,7 +13722,7 @@ var staticRenderFns = [
               _c("span", { staticClass: "js-cd-days" })
             ]),
             _vm._v(" "),
-            _c("div", {}, [_vm._v("::")]),
+            _c("div", {}, [_vm._v(":")]),
             _vm._v(" "),
             _c("div", { staticClass: "px-1" }, [
               _c("span", { staticClass: "js-cd-hours" })
@@ -13168,1201 +13748,784 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass:
-          "js-slick-carousel u-slick overflow-hidden u-slick-overflow-visble pt-3 pb-6 px-1",
-        attrs: {
-          "data-pagi-classes":
-            "text-center right-0 bottom-1 left-0 u-slick__pagination u-slick__pagination--long mb-0 z-index-n1 mt-4",
-          "data-slides-show": "7",
-          "data-slides-scroll": "1",
-          "data-responsive":
-            '[{\r\n          "breakpoint": 1400,\r\n          "settings": {\r\n            "slidesToShow": 7\r\n          }\r\n        }, {\r\n            "breakpoint": 1200,\r\n            "settings": {\r\n              "slidesToShow": 7\r\n            }\r\n        }, {\r\n          "breakpoint": 992,\r\n          "settings": {\r\n            "slidesToShow": 4\r\n          }\r\n        }, {\r\n          "breakpoint": 768,\r\n          "settings": {\r\n            "slidesToShow": 3\r\n          }\r\n        }, {\r\n          "breakpoint": 554,\r\n          "settings": {\r\n            "slidesToShow": 2\r\n          }\r\n        }]'
-        }
-      },
-      [
-        _c("div", { staticClass: "js-slide products-group" }, [
-          _c("div", { staticClass: "product-item" }, [
-            _c("div", { staticClass: "product-item__outer h-100" }, [
-              _c(
-                "div",
-                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
-                [
-                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "font-size-12 text-gray-5",
-                          attrs: {
-                            href:
-                              "../shop/product-categories-7-column-full-width.html"
-                          }
-                        },
-                        [_vm._v("Speakers")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "mb-1 product-item__title" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "text-blue font-weight-bold",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "Wireless Audio System Multiroom 360 degree Full base audio"
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "d-block text-center",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "img-fluid",
-                            attrs: {
-                              src: "website/assets/img/212X200/img2.jpg",
-                              alt: "Image Description"
-                            }
-                          })
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex-center-between mb-1" }, [
-                      _c("div", { staticClass: "prodcut-price" }, [
-                        _c("div", { staticClass: "text-gray-100" }, [
-                          _vm._v("$685,00")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "d-none d-xl-block prodcut-add-cart" },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "btn-add-cart btn-primary transition-3d-hover",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [_c("i", { staticClass: "ec ec-add-to-cart" })]
-                          )
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-item__footer" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "border-top pt-2 flex-center-between flex-wrap"
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/compare.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-compare mr-1 font-size-15"
-                            }),
-                            _vm._v(" Compare")
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/wishlist.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-favorites mr-1 font-size-15"
-                            }),
-                            _vm._v(" Wishlist")
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "js-slide products-group" }, [
-          _c("div", { staticClass: "product-item" }, [
-            _c("div", { staticClass: "product-item__outer h-100" }, [
-              _c(
-                "div",
-                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
-                [
-                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "font-size-12 text-gray-5",
-                          attrs: {
-                            href:
-                              "../shop/product-categories-7-column-full-width.html"
-                          }
-                        },
-                        [_vm._v("Speakers")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "mb-1 product-item__title" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "text-blue font-weight-bold",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "Wireless Audio System Multiroom 360 degree Full base audio"
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "d-block text-center",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "img-fluid",
-                            attrs: {
-                              src: "website/assets/img/212X200/img2.jpg",
-                              alt: "Image Description"
-                            }
-                          })
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex-center-between mb-1" }, [
-                      _c("div", { staticClass: "prodcut-price" }, [
-                        _c("div", { staticClass: "text-gray-100" }, [
-                          _vm._v("$685,00")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "d-none d-xl-block prodcut-add-cart" },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "btn-add-cart btn-primary transition-3d-hover",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [_c("i", { staticClass: "ec ec-add-to-cart" })]
-                          )
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-item__footer" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "border-top pt-2 flex-center-between flex-wrap"
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/compare.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-compare mr-1 font-size-15"
-                            }),
-                            _vm._v(" Compare")
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/wishlist.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-favorites mr-1 font-size-15"
-                            }),
-                            _vm._v(" Wishlist")
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "js-slide products-group" }, [
-          _c("div", { staticClass: "product-item" }, [
-            _c("div", { staticClass: "product-item__outer h-100" }, [
-              _c(
-                "div",
-                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
-                [
-                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "font-size-12 text-gray-5",
-                          attrs: {
-                            href:
-                              "../shop/product-categories-7-column-full-width.html"
-                          }
-                        },
-                        [_vm._v("Speakers")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "mb-1 product-item__title" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "text-blue font-weight-bold",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "Wireless Audio System Multiroom 360 degree Full base audio"
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "d-block text-center",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "img-fluid",
-                            attrs: {
-                              src: "website/assets/img/212X200/img3.jpg",
-                              alt: "Image Description"
-                            }
-                          })
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex-center-between mb-1" }, [
-                      _c("div", { staticClass: "prodcut-price" }, [
-                        _c("div", { staticClass: "text-gray-100" }, [
-                          _vm._v("$685,00")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "d-none d-xl-block prodcut-add-cart" },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "btn-add-cart btn-primary transition-3d-hover",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [_c("i", { staticClass: "ec ec-add-to-cart" })]
-                          )
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-item__footer" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "border-top pt-2 flex-center-between flex-wrap"
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/compare.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-compare mr-1 font-size-15"
-                            }),
-                            _vm._v(" Compare")
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/wishlist.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-favorites mr-1 font-size-15"
-                            }),
-                            _vm._v(" Wishlist")
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "js-slide products-group" }, [
-          _c("div", { staticClass: "product-item" }, [
-            _c("div", { staticClass: "product-item__outer h-100" }, [
-              _c(
-                "div",
-                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
-                [
-                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "font-size-12 text-gray-5",
-                          attrs: {
-                            href:
-                              "../shop/product-categories-7-column-full-width.html"
-                          }
-                        },
-                        [_vm._v("Speakers")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "mb-1 product-item__title" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "text-blue font-weight-bold",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "Wireless Audio System Multiroom 360 degree Full base audio"
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "d-block text-center",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "img-fluid",
-                            attrs: {
-                              src: "website/assets/img/212X200/img4.jpg",
-                              alt: "Image Description"
-                            }
-                          })
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex-center-between mb-1" }, [
-                      _c("div", { staticClass: "prodcut-price" }, [
-                        _c("div", { staticClass: "text-gray-100" }, [
-                          _vm._v("$685,00")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "d-none d-xl-block prodcut-add-cart" },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "btn-add-cart btn-primary transition-3d-hover",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [_c("i", { staticClass: "ec ec-add-to-cart" })]
-                          )
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-item__footer" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "border-top pt-2 flex-center-between flex-wrap"
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/compare.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-compare mr-1 font-size-15"
-                            }),
-                            _vm._v(" Compare")
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/wishlist.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-favorites mr-1 font-size-15"
-                            }),
-                            _vm._v(" Wishlist")
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "js-slide products-group" }, [
-          _c("div", { staticClass: "product-item" }, [
-            _c("div", { staticClass: "product-item__outer h-100" }, [
-              _c(
-                "div",
-                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
-                [
-                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "font-size-12 text-gray-5",
-                          attrs: {
-                            href:
-                              "../shop/product-categories-7-column-full-width.html"
-                          }
-                        },
-                        [_vm._v("Speakers")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "mb-1 product-item__title" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "text-blue font-weight-bold",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "Wireless Audio System Multiroom 360 degree Full base audio"
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "d-block text-center",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "img-fluid",
-                            attrs: {
-                              src: "website/assets/img/212X200/img5.jpg",
-                              alt: "Image Description"
-                            }
-                          })
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex-center-between mb-1" }, [
-                      _c("div", { staticClass: "prodcut-price" }, [
-                        _c("div", { staticClass: "text-gray-100" }, [
-                          _vm._v("$685,00")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "d-none d-xl-block prodcut-add-cart" },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "btn-add-cart btn-primary transition-3d-hover",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [_c("i", { staticClass: "ec ec-add-to-cart" })]
-                          )
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-item__footer" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "border-top pt-2 flex-center-between flex-wrap"
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/compare.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-compare mr-1 font-size-15"
-                            }),
-                            _vm._v(" Compare")
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/wishlist.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-favorites mr-1 font-size-15"
-                            }),
-                            _vm._v(" Wishlist")
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "js-slide products-group" }, [
-          _c("div", { staticClass: "product-item" }, [
-            _c("div", { staticClass: "product-item__outer h-100" }, [
-              _c(
-                "div",
-                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
-                [
-                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "font-size-12 text-gray-5",
-                          attrs: {
-                            href:
-                              "../shop/product-categories-7-column-full-width.html"
-                          }
-                        },
-                        [_vm._v("Speakers")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "mb-1 product-item__title" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "text-blue font-weight-bold",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "Wireless Audio System Multiroom 360 degree Full base audio"
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "d-block text-center",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "img-fluid",
-                            attrs: {
-                              src: "website/assets/img/212X200/img6.jpg",
-                              alt: "Image Description"
-                            }
-                          })
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex-center-between mb-1" }, [
-                      _c("div", { staticClass: "prodcut-price" }, [
-                        _c("div", { staticClass: "text-gray-100" }, [
-                          _vm._v("$685,00")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "d-none d-xl-block prodcut-add-cart" },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "btn-add-cart btn-primary transition-3d-hover",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [_c("i", { staticClass: "ec ec-add-to-cart" })]
-                          )
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-item__footer" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "border-top pt-2 flex-center-between flex-wrap"
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/compare.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-compare mr-1 font-size-15"
-                            }),
-                            _vm._v(" Compare")
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/wishlist.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-favorites mr-1 font-size-15"
-                            }),
-                            _vm._v(" Wishlist")
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "js-slide products-group" }, [
-          _c("div", { staticClass: "product-item" }, [
-            _c("div", { staticClass: "product-item__outer h-100" }, [
-              _c(
-                "div",
-                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
-                [
-                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "font-size-12 text-gray-5",
-                          attrs: {
-                            href:
-                              "../shop/product-categories-7-column-full-width.html"
-                          }
-                        },
-                        [_vm._v("Speakers")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "mb-1 product-item__title" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "text-blue font-weight-bold",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "Wireless Audio System Multiroom 360 degree Full base audio"
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "d-block text-center",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "img-fluid",
-                            attrs: {
-                              src: "website/assets/img/212X200/img7.jpg",
-                              alt: "Image Description"
-                            }
-                          })
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex-center-between mb-1" }, [
-                      _c("div", { staticClass: "prodcut-price" }, [
-                        _c("div", { staticClass: "text-gray-100" }, [
-                          _vm._v("$685,00")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "d-none d-xl-block prodcut-add-cart" },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "btn-add-cart btn-primary transition-3d-hover",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [_c("i", { staticClass: "ec ec-add-to-cart" })]
-                          )
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-item__footer" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "border-top pt-2 flex-center-between flex-wrap"
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/compare.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-compare mr-1 font-size-15"
-                            }),
-                            _vm._v(" Compare")
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/wishlist.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-favorites mr-1 font-size-15"
-                            }),
-                            _vm._v(" Wishlist")
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "js-slide products-group" }, [
-          _c("div", { staticClass: "product-item" }, [
-            _c("div", { staticClass: "product-item__outer h-100" }, [
-              _c(
-                "div",
-                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
-                [
-                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "font-size-12 text-gray-5",
-                          attrs: {
-                            href:
-                              "../shop/product-categories-7-column-full-width.html"
-                          }
-                        },
-                        [_vm._v("Speakers")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "mb-1 product-item__title" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "text-blue font-weight-bold",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "Wireless Audio System Multiroom 360 degree Full base audio"
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "d-block text-center",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "img-fluid",
-                            attrs: {
-                              src: "website/assets/img/212X200/img1.jpg",
-                              alt: "Image Description"
-                            }
-                          })
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex-center-between mb-1" }, [
-                      _c("div", { staticClass: "prodcut-price" }, [
-                        _c("div", { staticClass: "text-gray-100" }, [
-                          _vm._v("$685,00")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "d-none d-xl-block prodcut-add-cart" },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "btn-add-cart btn-primary transition-3d-hover",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [_c("i", { staticClass: "ec ec-add-to-cart" })]
-                          )
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-item__footer" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "border-top pt-2 flex-center-between flex-wrap"
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/compare.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-compare mr-1 font-size-15"
-                            }),
-                            _vm._v(" Compare")
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/wishlist.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-favorites mr-1 font-size-15"
-                            }),
-                            _vm._v(" Wishlist")
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "js-slide products-group" }, [
-          _c("div", { staticClass: "product-item" }, [
-            _c("div", { staticClass: "product-item__outer h-100" }, [
-              _c(
-                "div",
-                { staticClass: "product-item__inner px-wd-4 p-2 p-md-3" },
-                [
-                  _c("div", { staticClass: "product-item__body pb-xl-2" }, [
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "font-size-12 text-gray-5",
-                          attrs: {
-                            href:
-                              "../shop/product-categories-7-column-full-width.html"
-                          }
-                        },
-                        [_vm._v("Speakers")]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("h5", { staticClass: "mb-1 product-item__title" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "text-blue font-weight-bold",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "Wireless Audio System Multiroom 360 degree Full base audio"
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "mb-2" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "d-block text-center",
-                          attrs: {
-                            href: "../shop/single-product-fullwidth.html"
-                          }
-                        },
-                        [
-                          _c("img", {
-                            staticClass: "img-fluid",
-                            attrs: {
-                              src: "website/assets/img/212X200/img1.jpg",
-                              alt: "Image Description"
-                            }
-                          })
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "flex-center-between mb-1" }, [
-                      _c("div", { staticClass: "prodcut-price" }, [
-                        _c("div", { staticClass: "text-gray-100" }, [
-                          _vm._v("$685,00")
-                        ])
-                      ]),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "d-none d-xl-block prodcut-add-cart" },
-                        [
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "btn-add-cart btn-primary transition-3d-hover",
-                              attrs: {
-                                href: "../shop/single-product-fullwidth.html"
-                              }
-                            },
-                            [_c("i", { staticClass: "ec ec-add-to-cart" })]
-                          )
-                        ]
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "product-item__footer" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass:
-                          "border-top pt-2 flex-center-between flex-wrap"
-                      },
-                      [
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/compare.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-compare mr-1 font-size-15"
-                            }),
-                            _vm._v(" Compare")
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "a",
-                          {
-                            staticClass: "text-gray-6 font-size-13",
-                            attrs: { href: "../shop/wishlist.html" }
-                          },
-                          [
-                            _c("i", {
-                              staticClass: "ec ec-favorites mr-1 font-size-15"
-                            }),
-                            _vm._v(" Wishlist")
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ])
-          ])
-        ])
-      ]
-    )
+    return _c("div", { staticClass: "mb-2" }, [
+      _c(
+        "a",
+        {
+          staticClass: "font-size-12 text-gray-5",
+          attrs: { href: "../shop/product-categories-7-column-full-width.html" }
+        },
+        [_vm._v("Speakers")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "mb-1 product-item__title" }, [
+      _c(
+        "a",
+        {
+          staticClass: "text-blue font-weight-bold",
+          attrs: { href: "../shop/single-product-fullwidth.html" }
+        },
+        [_vm._v("Wireless Audio System Multiroom 360 degree Full base audio")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex-center-between mb-1" }, [
+      _c("div", { staticClass: "prodcut-price" }, [
+        _c("div", { staticClass: "text-gray-100" }, [_vm._v("$685,00")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-none d-xl-block prodcut-add-cart" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn-add-cart btn-primary transition-3d-hover",
+            attrs: { href: "../shop/single-product-fullwidth.html" }
+          },
+          [_c("i", { staticClass: "ec ec-add-to-cart" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-item__footer" }, [
+      _c(
+        "div",
+        { staticClass: "border-top pt-2 flex-center-between flex-wrap" },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/compare.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-compare mr-1 font-size-15" }),
+              _vm._v(" Compare")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/wishlist.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-favorites mr-1 font-size-15" }),
+              _vm._v(" Wishlist")
+            ]
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-2" }, [
+      _c(
+        "a",
+        {
+          staticClass: "font-size-12 text-gray-5",
+          attrs: { href: "../shop/product-categories-7-column-full-width.html" }
+        },
+        [_vm._v("Speakers")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "mb-1 product-item__title" }, [
+      _c(
+        "a",
+        {
+          staticClass: "text-blue font-weight-bold",
+          attrs: { href: "../shop/single-product-fullwidth.html" }
+        },
+        [_vm._v("Wireless Audio System Multiroom 360 degree Full base audio")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex-center-between mb-1" }, [
+      _c("div", { staticClass: "prodcut-price" }, [
+        _c("div", { staticClass: "text-gray-100" }, [_vm._v("$685,00")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-none d-xl-block prodcut-add-cart" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn-add-cart btn-primary transition-3d-hover",
+            attrs: { href: "../shop/single-product-fullwidth.html" }
+          },
+          [_c("i", { staticClass: "ec ec-add-to-cart" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-item__footer" }, [
+      _c(
+        "div",
+        { staticClass: "border-top pt-2 flex-center-between flex-wrap" },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/compare.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-compare mr-1 font-size-15" }),
+              _vm._v(" Compare")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/wishlist.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-favorites mr-1 font-size-15" }),
+              _vm._v(" Wishlist")
+            ]
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-2" }, [
+      _c(
+        "a",
+        {
+          staticClass: "font-size-12 text-gray-5",
+          attrs: { href: "../shop/product-categories-7-column-full-width.html" }
+        },
+        [_vm._v("Speakers")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "mb-1 product-item__title" }, [
+      _c(
+        "a",
+        {
+          staticClass: "text-blue font-weight-bold",
+          attrs: { href: "../shop/single-product-fullwidth.html" }
+        },
+        [_vm._v("Wireless Audio System Multiroom 360 degree Full base audio")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex-center-between mb-1" }, [
+      _c("div", { staticClass: "prodcut-price" }, [
+        _c("div", { staticClass: "text-gray-100" }, [_vm._v("$685,00")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-none d-xl-block prodcut-add-cart" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn-add-cart btn-primary transition-3d-hover",
+            attrs: { href: "../shop/single-product-fullwidth.html" }
+          },
+          [_c("i", { staticClass: "ec ec-add-to-cart" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-item__footer" }, [
+      _c(
+        "div",
+        { staticClass: "border-top pt-2 flex-center-between flex-wrap" },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/compare.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-compare mr-1 font-size-15" }),
+              _vm._v(" Compare")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/wishlist.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-favorites mr-1 font-size-15" }),
+              _vm._v(" Wishlist")
+            ]
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-2" }, [
+      _c(
+        "a",
+        {
+          staticClass: "font-size-12 text-gray-5",
+          attrs: { href: "../shop/product-categories-7-column-full-width.html" }
+        },
+        [_vm._v("Speakers")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "mb-1 product-item__title" }, [
+      _c(
+        "a",
+        {
+          staticClass: "text-blue font-weight-bold",
+          attrs: { href: "../shop/single-product-fullwidth.html" }
+        },
+        [_vm._v("Wireless Audio System Multiroom 360 degree Full base audio")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex-center-between mb-1" }, [
+      _c("div", { staticClass: "prodcut-price" }, [
+        _c("div", { staticClass: "text-gray-100" }, [_vm._v("$685,00")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-none d-xl-block prodcut-add-cart" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn-add-cart btn-primary transition-3d-hover",
+            attrs: { href: "../shop/single-product-fullwidth.html" }
+          },
+          [_c("i", { staticClass: "ec ec-add-to-cart" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-item__footer" }, [
+      _c(
+        "div",
+        { staticClass: "border-top pt-2 flex-center-between flex-wrap" },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/compare.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-compare mr-1 font-size-15" }),
+              _vm._v(" Compare")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/wishlist.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-favorites mr-1 font-size-15" }),
+              _vm._v(" Wishlist")
+            ]
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-2" }, [
+      _c(
+        "a",
+        {
+          staticClass: "font-size-12 text-gray-5",
+          attrs: { href: "../shop/product-categories-7-column-full-width.html" }
+        },
+        [_vm._v("Speakers")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "mb-1 product-item__title" }, [
+      _c(
+        "a",
+        {
+          staticClass: "text-blue font-weight-bold",
+          attrs: { href: "../shop/single-product-fullwidth.html" }
+        },
+        [_vm._v("Wireless Audio System Multiroom 360 degree Full base audio")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex-center-between mb-1" }, [
+      _c("div", { staticClass: "prodcut-price" }, [
+        _c("div", { staticClass: "text-gray-100" }, [_vm._v("$685,00")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-none d-xl-block prodcut-add-cart" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn-add-cart btn-primary transition-3d-hover",
+            attrs: { href: "../shop/single-product-fullwidth.html" }
+          },
+          [_c("i", { staticClass: "ec ec-add-to-cart" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-item__footer" }, [
+      _c(
+        "div",
+        { staticClass: "border-top pt-2 flex-center-between flex-wrap" },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/compare.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-compare mr-1 font-size-15" }),
+              _vm._v(" Compare")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/wishlist.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-favorites mr-1 font-size-15" }),
+              _vm._v(" Wishlist")
+            ]
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-2" }, [
+      _c(
+        "a",
+        {
+          staticClass: "font-size-12 text-gray-5",
+          attrs: { href: "../shop/product-categories-7-column-full-width.html" }
+        },
+        [_vm._v("Speakers")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "mb-1 product-item__title" }, [
+      _c(
+        "a",
+        {
+          staticClass: "text-blue font-weight-bold",
+          attrs: { href: "../shop/single-product-fullwidth.html" }
+        },
+        [_vm._v("Wireless Audio System Multiroom 360 degree Full base audio")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex-center-between mb-1" }, [
+      _c("div", { staticClass: "prodcut-price" }, [
+        _c("div", { staticClass: "text-gray-100" }, [_vm._v("$685,00")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-none d-xl-block prodcut-add-cart" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn-add-cart btn-primary transition-3d-hover",
+            attrs: { href: "../shop/single-product-fullwidth.html" }
+          },
+          [_c("i", { staticClass: "ec ec-add-to-cart" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-item__footer" }, [
+      _c(
+        "div",
+        { staticClass: "border-top pt-2 flex-center-between flex-wrap" },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/compare.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-compare mr-1 font-size-15" }),
+              _vm._v(" Compare")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/wishlist.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-favorites mr-1 font-size-15" }),
+              _vm._v(" Wishlist")
+            ]
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-2" }, [
+      _c(
+        "a",
+        {
+          staticClass: "font-size-12 text-gray-5",
+          attrs: { href: "../shop/product-categories-7-column-full-width.html" }
+        },
+        [_vm._v("Speakers")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "mb-1 product-item__title" }, [
+      _c(
+        "a",
+        {
+          staticClass: "text-blue font-weight-bold",
+          attrs: { href: "../shop/single-product-fullwidth.html" }
+        },
+        [_vm._v("Wireless Audio System Multiroom 360 degree Full base audio")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex-center-between mb-1" }, [
+      _c("div", { staticClass: "prodcut-price" }, [
+        _c("div", { staticClass: "text-gray-100" }, [_vm._v("$685,00")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-none d-xl-block prodcut-add-cart" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn-add-cart btn-primary transition-3d-hover",
+            attrs: { href: "../shop/single-product-fullwidth.html" }
+          },
+          [_c("i", { staticClass: "ec ec-add-to-cart" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-item__footer" }, [
+      _c(
+        "div",
+        { staticClass: "border-top pt-2 flex-center-between flex-wrap" },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/compare.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-compare mr-1 font-size-15" }),
+              _vm._v(" Compare")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/wishlist.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-favorites mr-1 font-size-15" }),
+              _vm._v(" Wishlist")
+            ]
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-2" }, [
+      _c(
+        "a",
+        {
+          staticClass: "font-size-12 text-gray-5",
+          attrs: { href: "../shop/product-categories-7-column-full-width.html" }
+        },
+        [_vm._v("Speakers")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "mb-1 product-item__title" }, [
+      _c(
+        "a",
+        {
+          staticClass: "text-blue font-weight-bold",
+          attrs: { href: "../shop/single-product-fullwidth.html" }
+        },
+        [_vm._v("Wireless Audio System Multiroom 360 degree Full base audio")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex-center-between mb-1" }, [
+      _c("div", { staticClass: "prodcut-price" }, [
+        _c("div", { staticClass: "text-gray-100" }, [_vm._v("$685,00")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-none d-xl-block prodcut-add-cart" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn-add-cart btn-primary transition-3d-hover",
+            attrs: { href: "../shop/single-product-fullwidth.html" }
+          },
+          [_c("i", { staticClass: "ec ec-add-to-cart" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-item__footer" }, [
+      _c(
+        "div",
+        { staticClass: "border-top pt-2 flex-center-between flex-wrap" },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/compare.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-compare mr-1 font-size-15" }),
+              _vm._v(" Compare")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/wishlist.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-favorites mr-1 font-size-15" }),
+              _vm._v(" Wishlist")
+            ]
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "mb-2" }, [
+      _c(
+        "a",
+        {
+          staticClass: "font-size-12 text-gray-5",
+          attrs: { href: "../shop/product-categories-7-column-full-width.html" }
+        },
+        [_vm._v("Speakers")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("h5", { staticClass: "mb-1 product-item__title" }, [
+      _c(
+        "a",
+        {
+          staticClass: "text-blue font-weight-bold",
+          attrs: { href: "../shop/single-product-fullwidth.html" }
+        },
+        [_vm._v("Wireless Audio System Multiroom 360 degree Full base audio")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "flex-center-between mb-1" }, [
+      _c("div", { staticClass: "prodcut-price" }, [
+        _c("div", { staticClass: "text-gray-100" }, [_vm._v("$685,00")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "d-none d-xl-block prodcut-add-cart" }, [
+        _c(
+          "a",
+          {
+            staticClass: "btn-add-cart btn-primary transition-3d-hover",
+            attrs: { href: "../shop/single-product-fullwidth.html" }
+          },
+          [_c("i", { staticClass: "ec ec-add-to-cart" })]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "product-item__footer" }, [
+      _c(
+        "div",
+        { staticClass: "border-top pt-2 flex-center-between flex-wrap" },
+        [
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/compare.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-compare mr-1 font-size-15" }),
+              _vm._v(" Compare")
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "a",
+            {
+              staticClass: "text-gray-6 font-size-13",
+              attrs: { href: "../shop/wishlist.html" }
+            },
+            [
+              _c("i", { staticClass: "ec ec-favorites mr-1 font-size-15" }),
+              _vm._v(" Wishlist")
+            ]
+          )
+        ]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -14387,1630 +14550,1404 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "mb-6" }, [
+    _c("h4", { staticClass: "font-size-22 text-gray-100 mb-3" }, [
+      _vm._v("Deals of the Week")
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass:
+          "p-xl-4 p-wd-0 border border-width-2 border-primary borders-radius-20 border-wd-0"
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "js-slick-carousel u-slick u-slick--gutters-2 u-slick-deal-arrow__border",
+            attrs: {
+              "data-slides-show": "2",
+              "data-slides-scroll": "1",
+              "data-pagi-classes":
+                "text-center d-xl-none d-wd-flex mt-4 u-slick__pagination u-slick__pagination--long",
+              "data-arrows-classes":
+                "d-none d-xl-inline-flex d-wd-none align-items-center u-slick__arrow-normal u-slick-deal-arrow position-absolute z-index-9 font-size-18 top-3",
+              "data-arrow-left-classes":
+                "fa fa-angle-left right-xl-220 u-slick-deal-arrow__left",
+              "data-arrow-right-classes":
+                "fa fa-angle-right right-1 u-slick-deal-arrow__right",
+              "data-responsive":
+                '[{\r\n                "breakpoint": 1399,\r\n                "settings": {\r\n                    "slidesToShow": 2\r\n                }\r\n            }, {\r\n                "breakpoint": 768,\r\n                "settings": {\r\n                    "slidesToShow": 1\r\n                }\r\n            }, {\r\n                "breakpoint": 554,\r\n                "settings": {\r\n                    "slidesToShow": 1\r\n                }\r\n            }]'
+            }
+          },
+          [
+            _c("div", { staticClass: "js-slide" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "p-4 p-xl-0 p-wd-4 border border-xl-0 border-width-2 border-primary borders-radius-20 bg-white"
+                },
+                [
+                  _c("div", { staticClass: "row align-items-md-center" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col-md-6 col-xl-6 col-wd-6 px-0 align-self-center"
+                      },
+                      [
+                        _vm._m(0),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mb-4 mb-md-0" }, [
+                          _c("div", { staticClass: "row align-items-center" }, [
+                            _c("div", { staticClass: "col" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "d-block text-center",
+                                  attrs: {
+                                    href:
+                                      "../shop/single-product-fullwidth.html"
+                                  }
+                                },
+                                [
+                                  _c("img", {
+                                    directives: [
+                                      {
+                                        name: "lazy",
+                                        rawName: "v-lazy",
+                                        value:
+                                          _vm.baseURL +
+                                          "/website/assets/img/380X350/img1.jpg",
+                                        expression:
+                                          "baseURL+'/website/assets/img/380X350/img1.jpg'"
+                                      }
+                                    ],
+                                    staticClass: "img-fluid mx-auto",
+                                    attrs: { alt: "Image Description" }
+                                  })
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(1)
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "js-slide" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "p-4 p-xl-0 p-wd-4 border border-xl-0 border-width-2 border-primary borders-radius-20 bg-white"
+                },
+                [
+                  _c("div", { staticClass: "row align-items-md-center" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col-md-6 col-xl-6 col-wd-6 px-0 align-self-center"
+                      },
+                      [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mb-4 mb-md-0" }, [
+                          _c("div", { staticClass: "row align-items-center" }, [
+                            _c("div", { staticClass: "col" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "d-block text-center",
+                                  attrs: {
+                                    href:
+                                      "../shop/single-product-fullwidth.html"
+                                  }
+                                },
+                                [
+                                  _c("img", {
+                                    directives: [
+                                      {
+                                        name: "lazy",
+                                        rawName: "v-lazy",
+                                        value:
+                                          _vm.baseURL +
+                                          "/website/assets/img/380X350/img2.jpg",
+                                        expression:
+                                          "baseURL+'/website/assets/img/380X350/img2.jpg'"
+                                      }
+                                    ],
+                                    staticClass: "img-fluid mx-auto",
+                                    attrs: { alt: "Image Description" }
+                                  })
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(3)
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "js-slide" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "p-4 p-xl-0 p-wd-4 border border-xl-0 border-width-2 border-primary borders-radius-20 bg-white"
+                },
+                [
+                  _c("div", { staticClass: "row align-items-md-center" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col-md-6 col-xl-6 col-wd-6 px-0 align-self-center"
+                      },
+                      [
+                        _vm._m(4),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mb-4 mb-md-0" }, [
+                          _c("div", { staticClass: "row align-items-center" }, [
+                            _c("div", { staticClass: "col" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "d-block text-center",
+                                  attrs: {
+                                    href:
+                                      "../shop/single-product-fullwidth.html"
+                                  }
+                                },
+                                [
+                                  _c("img", {
+                                    directives: [
+                                      {
+                                        name: "lazy",
+                                        rawName: "v-lazy",
+                                        value:
+                                          _vm.baseURL +
+                                          "/website/assets/img/380X350/img1.jpg",
+                                        expression:
+                                          "baseURL+'/website/assets/img/380X350/img1.jpg'"
+                                      }
+                                    ],
+                                    staticClass: "img-fluid mx-auto",
+                                    attrs: { alt: "Image Description" }
+                                  })
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(5)
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "js-slide" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "p-4 p-xl-0 p-wd-4 border border-xl-0 border-width-2 border-primary borders-radius-20 bg-white"
+                },
+                [
+                  _c("div", { staticClass: "row align-items-md-center" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col-md-6 col-xl-6 col-wd-6 px-0 align-self-center"
+                      },
+                      [
+                        _vm._m(6),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mb-4 mb-md-0" }, [
+                          _c("div", { staticClass: "row align-items-center" }, [
+                            _c("div", { staticClass: "col" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "d-block text-center",
+                                  attrs: {
+                                    href:
+                                      "../shop/single-product-fullwidth.html"
+                                  }
+                                },
+                                [
+                                  _c("img", {
+                                    directives: [
+                                      {
+                                        name: "lazy",
+                                        rawName: "v-lazy",
+                                        value:
+                                          _vm.baseURL +
+                                          "/website/assets/img/380X350/img2.jpg",
+                                        expression:
+                                          "baseURL+'/website/assets/img/380X350/img2.jpg'"
+                                      }
+                                    ],
+                                    staticClass: "img-fluid mx-auto",
+                                    attrs: { alt: "Image Description" }
+                                  })
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(7)
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "js-slide" }, [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "p-4 p-xl-0 p-wd-4 border border-xl-0 border-width-2 border-primary borders-radius-20 bg-white"
+                },
+                [
+                  _c("div", { staticClass: "row align-items-md-center" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "col-md-6 col-xl-6 col-wd-6 px-0 align-self-center"
+                      },
+                      [
+                        _vm._m(8),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "mb-4 mb-md-0" }, [
+                          _c("div", { staticClass: "row align-items-center" }, [
+                            _c("div", { staticClass: "col" }, [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "d-block text-center",
+                                  attrs: {
+                                    href:
+                                      "../shop/single-product-fullwidth.html"
+                                  }
+                                },
+                                [
+                                  _c("img", {
+                                    directives: [
+                                      {
+                                        name: "lazy",
+                                        rawName: "v-lazy",
+                                        value:
+                                          _vm.baseURL +
+                                          "/website/assets/img/380X350/img1.jpg",
+                                        expression:
+                                          "baseURL+'/website/assets/img/380X350/img1.jpg'"
+                                      }
+                                    ],
+                                    staticClass: "img-fluid mx-auto",
+                                    attrs: { alt: "Image Description" }
+                                  })
+                                ]
+                              )
+                            ])
+                          ])
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(9)
+                  ])
+                ]
+              )
+            ])
+          ]
+        )
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-6" }, [
-      _c("h4", { staticClass: "font-size-22 text-gray-100 mb-3" }, [
-        _vm._v("Deals of the Week")
-      ]),
-      _vm._v(" "),
+    return _c(
+      "div",
+      {
+        staticClass:
+          "d-inline-flex justify-content-between align-items-center position-absolute left-3 top-0 z-index-9"
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "d-flex align-items-center flex-column justify-content-center bg-primary rounded-pill height-75 width-75 text-lh-1"
+          },
+          [
+            _c("span", { staticClass: "font-size-12" }, [_vm._v("Save")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "font-size-20 font-weight-bold" }, [
+              _vm._v("$120")
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6 col-xl-6 col-wd-6" }, [
       _c(
         "div",
-        {
-          staticClass:
-            "p-xl-4 p-wd-0 border border-width-2 border-primary borders-radius-20 border-wd-0"
-        },
+        { staticClass: "space-top-xl-2 space-top-wd-0 mt-xl-4 mt-wd-0" },
         [
+          _c(
+            "h5",
+            {
+              staticClass:
+                "mb-3 mb-xl-2 mb-wd-1 font-size-14 text-center mx-auto max-width-180 text-lh-18"
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "text-blue font-weight-bold",
+                  attrs: { href: "../shop/single-product-fullwidth.html" }
+                },
+                [_vm._v("Game Console Controller + USB 3.0 Cable")]
+              )
+            ]
+          ),
+          _vm._v(" "),
           _c(
             "div",
             {
               staticClass:
-                "js-slick-carousel u-slick u-slick--gutters-2 u-slick-deal-arrow__border",
-              attrs: {
-                "data-slides-show": "2",
-                "data-slides-scroll": "1",
-                "data-pagi-classes":
-                  "text-center d-xl-none d-wd-flex mt-4 u-slick__pagination u-slick__pagination--long",
-                "data-arrows-classes":
-                  "d-none d-xl-inline-flex d-wd-none align-items-center u-slick__arrow-normal u-slick-deal-arrow position-absolute z-index-9 font-size-18 top-3",
-                "data-arrow-left-classes":
-                  "fa fa-angle-left right-xl-220 u-slick-deal-arrow__left",
-                "data-arrow-right-classes":
-                  "fa fa-angle-right right-1 u-slick-deal-arrow__right",
-                "data-responsive":
-                  '[{\r\n                "breakpoint": 1399,\r\n                "settings": {\r\n                    "slidesToShow": 2\r\n                }\r\n            }, {\r\n                "breakpoint": 768,\r\n                "settings": {\r\n                    "slidesToShow": 1\r\n                }\r\n            }, {\r\n                "breakpoint": 554,\r\n                "settings": {\r\n                    "slidesToShow": 1\r\n                }\r\n            }]'
-              }
+                "d-flex align-items-center justify-content-center mb-3"
             },
             [
-              _c("div", { staticClass: "js-slide" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "p-4 p-xl-0 p-wd-4 border border-xl-0 border-width-2 border-primary borders-radius-20 bg-white"
-                  },
-                  [
-                    _c("div", { staticClass: "row align-items-md-center" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "col-md-6 col-xl-6 col-wd-6 px-0 align-self-center"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "d-inline-flex justify-content-between align-items-center position-absolute left-3 top-0 z-index-9"
-                            },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "d-flex align-items-center flex-column justify-content-center bg-primary rounded-pill height-75 width-75 text-lh-1"
-                                },
-                                [
-                                  _c("span", { staticClass: "font-size-12" }, [
-                                    _vm._v("Save")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "font-size-20 font-weight-bold"
-                                    },
-                                    [_vm._v("$120")]
-                                  )
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "mb-4 mb-md-0" }, [
-                            _c(
-                              "div",
-                              { staticClass: "row align-items-center" },
-                              [
-                                _c("div", { staticClass: "col" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "d-block text-center",
-                                      attrs: {
-                                        href:
-                                          "../shop/single-product-fullwidth.html"
-                                      }
-                                    },
-                                    [
-                                      _c("img", {
-                                        staticClass: "img-fluid mx-auto",
-                                        attrs: {
-                                          src:
-                                            "website/assets/img/380X350/img1.jpg",
-                                          alt: "Image Description"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ])
-                              ]
-                            )
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6 col-xl-6 col-wd-6" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "space-top-xl-2 space-top-wd-0 mt-xl-4 mt-wd-0"
-                          },
-                          [
-                            _c(
-                              "h5",
-                              {
-                                staticClass:
-                                  "mb-3 mb-xl-2 mb-wd-1 font-size-14 text-center mx-auto max-width-180 text-lh-18"
-                              },
-                              [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "text-blue font-weight-bold",
-                                    attrs: {
-                                      href:
-                                        "../shop/single-product-fullwidth.html"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "Game Console Controller + USB 3.0 Cable"
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "d-flex align-items-center justify-content-center mb-3"
-                              },
-                              [
-                                _c(
-                                  "del",
-                                  {
-                                    staticClass: "font-size-18 mr-2 text-gray-2"
-                                  },
-                                  [_vm._v("$99,00")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "ins",
-                                  {
-                                    staticClass:
-                                      "font-size-xl-30 font-size-wd-25 text-red text-decoration-none"
-                                  },
-                                  [_vm._v("$79,00")]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "mb-4 mb-xl-5 mb-wd-2 pb-wd-1 mx-2"
-                              },
-                              [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "d-flex justify-content-between align-items-center mb-2"
-                                  },
-                                  [
-                                    _c("span", {}, [
-                                      _vm._v("Availavle: "),
-                                      _c("strong", [_vm._v("6")])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("span", {}, [
-                                      _vm._v("Already Sold: "),
-                                      _c("strong", [_vm._v("28")])
-                                    ])
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "rounded-pill bg-gray-3 height-wd-14 height-xl-20 position-relative"
-                                  },
-                                  [
-                                    _c("span", {
-                                      staticClass:
-                                        "position-absolute left-0 top-0 bottom-0 rounded-pill w-30 bg-primary"
-                                    })
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mb-2" }, [
-                              _c(
-                                "h6",
-                                {
-                                  staticClass:
-                                    "font-size-15 text-gray-2 text-center mb-xl-3 mb-wd-2"
-                                },
-                                [_vm._v("Hurry Up! Offer ends in:")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "js-countdown d-flex justify-content-center",
-                                  attrs: {
-                                    "data-end-date": "2020/12/10 21:30:00",
-                                    "data-days-format": "%D",
-                                    "data-hours-format": "%H",
-                                    "data-minutes-format": "%M",
-                                    "data-seconds-format": "%S"
-                                  }
-                                },
-                                [
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-days"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("DAY")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "mx-1 pt-1 text-gray-2 font-size-24"
-                                    },
-                                    [_vm._v(":")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-hours"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("HOURS")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "mx-1 pt-1 text-gray-2 font-size-24"
-                                    },
-                                    [_vm._v(":")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-minutes"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("MINS")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "mx-1 pt-1 text-gray-2 font-size-24"
-                                    },
-                                    [_vm._v(":")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-seconds"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("SECS")]
-                                    )
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]
-                        )
-                      ])
-                    ])
-                  ]
-                )
+              _c("del", { staticClass: "font-size-18 mr-2 text-gray-2" }, [
+                _vm._v("$99,00")
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "js-slide" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "p-4 p-xl-0 p-wd-4 border border-xl-0 border-width-2 border-primary borders-radius-20 bg-white"
-                  },
-                  [
-                    _c("div", { staticClass: "row align-items-md-center" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "col-md-6 col-xl-6 col-wd-6 px-0 align-self-center"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "d-inline-flex justify-content-between align-items-center position-absolute left-3 top-0 z-index-9"
-                            },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "d-flex align-items-center flex-column justify-content-center bg-primary rounded-pill height-75 width-75 text-lh-1"
-                                },
-                                [
-                                  _c("span", { staticClass: "font-size-12" }, [
-                                    _vm._v("Save")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "font-size-20 font-weight-bold"
-                                    },
-                                    [_vm._v("$120")]
-                                  )
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "mb-4 mb-md-0" }, [
-                            _c(
-                              "div",
-                              { staticClass: "row align-items-center" },
-                              [
-                                _c("div", { staticClass: "col" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "d-block text-center",
-                                      attrs: {
-                                        href:
-                                          "../shop/single-product-fullwidth.html"
-                                      }
-                                    },
-                                    [
-                                      _c("img", {
-                                        staticClass: "img-fluid mx-auto",
-                                        attrs: {
-                                          src:
-                                            "website/assets/img/380X350/img2.jpg",
-                                          alt: "Image Description"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ])
-                              ]
-                            )
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6 col-xl-6 col-wd-6" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "space-top-xl-2 space-top-wd-0 mt-xl-4 mt-wd-0"
-                          },
-                          [
-                            _c(
-                              "h5",
-                              {
-                                staticClass:
-                                  "mb-3 mb-xl-2 mb-wd-1 font-size-14 text-center mx-auto max-width-180 text-lh-18"
-                              },
-                              [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "text-blue font-weight-bold",
-                                    attrs: {
-                                      href:
-                                        "../shop/single-product-fullwidth.html"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "Game Console Controller + USB 3.0 Cable"
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "d-flex align-items-center justify-content-center mb-3"
-                              },
-                              [
-                                _c(
-                                  "del",
-                                  {
-                                    staticClass: "font-size-18 mr-2 text-gray-2"
-                                  },
-                                  [_vm._v("$99,00")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "ins",
-                                  {
-                                    staticClass:
-                                      "font-size-xl-30 font-size-wd-25 text-red text-decoration-none"
-                                  },
-                                  [_vm._v("$79,00")]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "mb-4 mb-xl-5 mb-wd-2 pb-wd-1 mx-2"
-                              },
-                              [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "d-flex justify-content-between align-items-center mb-2"
-                                  },
-                                  [
-                                    _c("span", {}, [
-                                      _vm._v("Availavle: "),
-                                      _c("strong", [_vm._v("6")])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("span", {}, [
-                                      _vm._v("Already Sold: "),
-                                      _c("strong", [_vm._v("28")])
-                                    ])
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "rounded-pill bg-gray-3 height-wd-14 height-xl-20 position-relative"
-                                  },
-                                  [
-                                    _c("span", {
-                                      staticClass:
-                                        "position-absolute left-0 top-0 bottom-0 rounded-pill w-30 bg-primary"
-                                    })
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mb-2" }, [
-                              _c(
-                                "h6",
-                                {
-                                  staticClass:
-                                    "font-size-15 text-gray-2 text-center mb-xl-3 mb-wd-2"
-                                },
-                                [_vm._v("Hurry Up! Offer ends in:")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "js-countdown d-flex justify-content-center",
-                                  attrs: {
-                                    "data-end-date": "2021/01/05",
-                                    "data-days-format": "%D",
-                                    "data-hours-format": "%H",
-                                    "data-minutes-format": "%M",
-                                    "data-seconds-format": "%S"
-                                  }
-                                },
-                                [
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-days"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("DAY")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "mx-1 pt-1 text-gray-2 font-size-24"
-                                    },
-                                    [_vm._v(":")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-hours"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("HOURS")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "mx-1 pt-1 text-gray-2 font-size-24"
-                                    },
-                                    [_vm._v(":")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-minutes"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("MINS")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "mx-1 pt-1 text-gray-2 font-size-24"
-                                    },
-                                    [_vm._v(":")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-seconds"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("SECS")]
-                                    )
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]
-                        )
-                      ])
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "js-slide" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "p-4 p-xl-0 p-wd-4 border border-xl-0 border-width-2 border-primary borders-radius-20 bg-white"
-                  },
-                  [
-                    _c("div", { staticClass: "row align-items-md-center" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "col-md-6 col-xl-6 col-wd-6 px-0 align-self-center"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "d-inline-flex justify-content-between align-items-center position-absolute left-3 top-0 z-index-9"
-                            },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "d-flex align-items-center flex-column justify-content-center bg-primary rounded-pill height-75 width-75 text-lh-1"
-                                },
-                                [
-                                  _c("span", { staticClass: "font-size-12" }, [
-                                    _vm._v("Save")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "font-size-20 font-weight-bold"
-                                    },
-                                    [_vm._v("$120")]
-                                  )
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "mb-4 mb-md-0" }, [
-                            _c(
-                              "div",
-                              { staticClass: "row align-items-center" },
-                              [
-                                _c("div", { staticClass: "col" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "d-block text-center",
-                                      attrs: {
-                                        href:
-                                          "../shop/single-product-fullwidth.html"
-                                      }
-                                    },
-                                    [
-                                      _c("img", {
-                                        staticClass: "img-fluid mx-auto",
-                                        attrs: {
-                                          src:
-                                            "website/assets/img/380X350/img1.jpg",
-                                          alt: "Image Description"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ])
-                              ]
-                            )
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6 col-xl-6 col-wd-6" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "space-top-xl-2 space-top-wd-0 mt-xl-4 mt-wd-0"
-                          },
-                          [
-                            _c(
-                              "h5",
-                              {
-                                staticClass:
-                                  "mb-3 mb-xl-2 mb-wd-1 font-size-14 text-center mx-auto max-width-180 text-lh-18"
-                              },
-                              [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "text-blue font-weight-bold",
-                                    attrs: {
-                                      href:
-                                        "../shop/single-product-fullwidth.html"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "Game Console Controller + USB 3.0 Cable"
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "d-flex align-items-center justify-content-center mb-3"
-                              },
-                              [
-                                _c(
-                                  "del",
-                                  {
-                                    staticClass: "font-size-18 mr-2 text-gray-2"
-                                  },
-                                  [_vm._v("$99,00")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "ins",
-                                  {
-                                    staticClass:
-                                      "font-size-xl-30 font-size-wd-25 text-red text-decoration-none"
-                                  },
-                                  [_vm._v("$79,00")]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "mb-4 mb-xl-5 mb-wd-2 pb-wd-1 mx-2"
-                              },
-                              [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "d-flex justify-content-between align-items-center mb-2"
-                                  },
-                                  [
-                                    _c("span", {}, [
-                                      _vm._v("Availavle: "),
-                                      _c("strong", [_vm._v("6")])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("span", {}, [
-                                      _vm._v("Already Sold: "),
-                                      _c("strong", [_vm._v("28")])
-                                    ])
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "rounded-pill bg-gray-3 height-wd-14 height-xl-20 position-relative"
-                                  },
-                                  [
-                                    _c("span", {
-                                      staticClass:
-                                        "position-absolute left-0 top-0 bottom-0 rounded-pill w-30 bg-primary"
-                                    })
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mb-2" }, [
-                              _c(
-                                "h6",
-                                {
-                                  staticClass:
-                                    "font-size-15 text-gray-2 text-center mb-xl-3 mb-wd-2"
-                                },
-                                [_vm._v("Hurry Up! Offer ends in:")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "js-countdown d-flex justify-content-center",
-                                  attrs: {
-                                    "data-end-date": "2020/11/30",
-                                    "data-hours-format": "%H",
-                                    "data-minutes-format": "%M",
-                                    "data-seconds-format": "%S"
-                                  }
-                                },
-                                [
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-hours"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("HOURS")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "mx-1 pt-1 text-gray-2 font-size-24"
-                                    },
-                                    [_vm._v(":")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-minutes"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("MINS")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "mx-1 pt-1 text-gray-2 font-size-24"
-                                    },
-                                    [_vm._v(":")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-seconds"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("SECS")]
-                                    )
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]
-                        )
-                      ])
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "js-slide" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "p-4 p-xl-0 p-wd-4 border border-xl-0 border-width-2 border-primary borders-radius-20 bg-white"
-                  },
-                  [
-                    _c("div", { staticClass: "row align-items-md-center" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "col-md-6 col-xl-6 col-wd-6 px-0 align-self-center"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "d-inline-flex justify-content-between align-items-center position-absolute left-3 top-0 z-index-9"
-                            },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "d-flex align-items-center flex-column justify-content-center bg-primary rounded-pill height-75 width-75 text-lh-1"
-                                },
-                                [
-                                  _c("span", { staticClass: "font-size-12" }, [
-                                    _vm._v("Save")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "font-size-20 font-weight-bold"
-                                    },
-                                    [_vm._v("$120")]
-                                  )
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "mb-4 mb-md-0" }, [
-                            _c(
-                              "div",
-                              { staticClass: "row align-items-center" },
-                              [
-                                _c("div", { staticClass: "col" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "d-block text-center",
-                                      attrs: {
-                                        href:
-                                          "../shop/single-product-fullwidth.html"
-                                      }
-                                    },
-                                    [
-                                      _c("img", {
-                                        staticClass: "img-fluid mx-auto",
-                                        attrs: {
-                                          src:
-                                            "website/assets/img/380X350/img2.jpg",
-                                          alt: "Image Description"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ])
-                              ]
-                            )
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6 col-xl-6 col-wd-6" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "space-top-xl-2 space-top-wd-0 mt-xl-4 mt-wd-0"
-                          },
-                          [
-                            _c(
-                              "h5",
-                              {
-                                staticClass:
-                                  "mb-3 mb-xl-2 mb-wd-1 font-size-14 text-center mx-auto max-width-180 text-lh-18"
-                              },
-                              [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "text-blue font-weight-bold",
-                                    attrs: {
-                                      href:
-                                        "../shop/single-product-fullwidth.html"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "Game Console Controller + USB 3.0 Cable"
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "d-flex align-items-center justify-content-center mb-3"
-                              },
-                              [
-                                _c(
-                                  "del",
-                                  {
-                                    staticClass: "font-size-18 mr-2 text-gray-2"
-                                  },
-                                  [_vm._v("$99,00")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "ins",
-                                  {
-                                    staticClass:
-                                      "font-size-xl-30 font-size-wd-25 text-red text-decoration-none"
-                                  },
-                                  [_vm._v("$79,00")]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "mb-4 mb-xl-5 mb-wd-2 pb-wd-1 mx-2"
-                              },
-                              [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "d-flex justify-content-between align-items-center mb-2"
-                                  },
-                                  [
-                                    _c("span", {}, [
-                                      _vm._v("Availavle: "),
-                                      _c("strong", [_vm._v("6")])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("span", {}, [
-                                      _vm._v("Already Sold: "),
-                                      _c("strong", [_vm._v("28")])
-                                    ])
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "rounded-pill bg-gray-3 height-wd-14 height-xl-20 position-relative"
-                                  },
-                                  [
-                                    _c("span", {
-                                      staticClass:
-                                        "position-absolute left-0 top-0 bottom-0 rounded-pill w-30 bg-primary"
-                                    })
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mb-2" }, [
-                              _c(
-                                "h6",
-                                {
-                                  staticClass:
-                                    "font-size-15 text-gray-2 text-center mb-xl-3 mb-wd-2"
-                                },
-                                [_vm._v("Hurry Up! Offer ends in:")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "js-countdown d-flex justify-content-center",
-                                  attrs: {
-                                    "data-end-date": "2020/11/30",
-                                    "data-hours-format": "%H",
-                                    "data-minutes-format": "%M",
-                                    "data-seconds-format": "%S"
-                                  }
-                                },
-                                [
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-hours"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("HOURS")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "mx-1 pt-1 text-gray-2 font-size-24"
-                                    },
-                                    [_vm._v(":")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-minutes"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("MINS")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "mx-1 pt-1 text-gray-2 font-size-24"
-                                    },
-                                    [_vm._v(":")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-seconds"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("SECS")]
-                                    )
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]
-                        )
-                      ])
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "js-slide" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "p-4 p-xl-0 p-wd-4 border border-xl-0 border-width-2 border-primary borders-radius-20 bg-white"
-                  },
-                  [
-                    _c("div", { staticClass: "row align-items-md-center" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "col-md-6 col-xl-6 col-wd-6 px-0 align-self-center"
-                        },
-                        [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "d-inline-flex justify-content-between align-items-center position-absolute left-3 top-0 z-index-9"
-                            },
-                            [
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "d-flex align-items-center flex-column justify-content-center bg-primary rounded-pill height-75 width-75 text-lh-1"
-                                },
-                                [
-                                  _c("span", { staticClass: "font-size-12" }, [
-                                    _vm._v("Save")
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "font-size-20 font-weight-bold"
-                                    },
-                                    [_vm._v("$120")]
-                                  )
-                                ]
-                              )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "mb-4 mb-md-0" }, [
-                            _c(
-                              "div",
-                              { staticClass: "row align-items-center" },
-                              [
-                                _c("div", { staticClass: "col" }, [
-                                  _c(
-                                    "a",
-                                    {
-                                      staticClass: "d-block text-center",
-                                      attrs: {
-                                        href:
-                                          "../shop/single-product-fullwidth.html"
-                                      }
-                                    },
-                                    [
-                                      _c("img", {
-                                        staticClass: "img-fluid mx-auto",
-                                        attrs: {
-                                          src:
-                                            "website/assets/img/380X350/img1.jpg",
-                                          alt: "Image Description"
-                                        }
-                                      })
-                                    ]
-                                  )
-                                ])
-                              ]
-                            )
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "col-md-6 col-xl-6 col-wd-6" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass:
-                              "space-top-xl-2 space-top-wd-0 mt-xl-4 mt-wd-0"
-                          },
-                          [
-                            _c(
-                              "h5",
-                              {
-                                staticClass:
-                                  "mb-3 mb-xl-2 mb-wd-1 font-size-14 text-center mx-auto max-width-180 text-lh-18"
-                              },
-                              [
-                                _c(
-                                  "a",
-                                  {
-                                    staticClass: "text-blue font-weight-bold",
-                                    attrs: {
-                                      href:
-                                        "../shop/single-product-fullwidth.html"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "Game Console Controller + USB 3.0 Cable"
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass:
-                                  "d-flex align-items-center justify-content-center mb-3"
-                              },
-                              [
-                                _c(
-                                  "del",
-                                  {
-                                    staticClass: "font-size-18 mr-2 text-gray-2"
-                                  },
-                                  [_vm._v("$99,00")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "ins",
-                                  {
-                                    staticClass:
-                                      "font-size-xl-30 font-size-wd-25 text-red text-decoration-none"
-                                  },
-                                  [_vm._v("$79,00")]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "mb-4 mb-xl-5 mb-wd-2 pb-wd-1 mx-2"
-                              },
-                              [
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "d-flex justify-content-between align-items-center mb-2"
-                                  },
-                                  [
-                                    _c("span", {}, [
-                                      _vm._v("Availavle: "),
-                                      _c("strong", [_vm._v("6")])
-                                    ]),
-                                    _vm._v(" "),
-                                    _c("span", {}, [
-                                      _vm._v("Already Sold: "),
-                                      _c("strong", [_vm._v("28")])
-                                    ])
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  {
-                                    staticClass:
-                                      "rounded-pill bg-gray-3 height-wd-14 height-xl-20 position-relative"
-                                  },
-                                  [
-                                    _c("span", {
-                                      staticClass:
-                                        "position-absolute left-0 top-0 bottom-0 rounded-pill w-30 bg-primary"
-                                    })
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "mb-2" }, [
-                              _c(
-                                "h6",
-                                {
-                                  staticClass:
-                                    "font-size-15 text-gray-2 text-center mb-xl-3 mb-wd-2"
-                                },
-                                [_vm._v("Hurry Up! Offer ends in:")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                {
-                                  staticClass:
-                                    "js-countdown d-flex justify-content-center",
-                                  attrs: {
-                                    "data-end-date": "2020/11/30",
-                                    "data-hours-format": "%H",
-                                    "data-minutes-format": "%M",
-                                    "data-seconds-format": "%S"
-                                  }
-                                },
-                                [
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-hours"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("HOURS")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "mx-1 pt-1 text-gray-2 font-size-24"
-                                    },
-                                    [_vm._v(":")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-minutes"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("MINS")]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "div",
-                                    {
-                                      staticClass:
-                                        "mx-1 pt-1 text-gray-2 font-size-24"
-                                    },
-                                    [_vm._v(":")]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("div", { staticClass: "text-lh-1" }, [
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
-                                      },
-                                      [
-                                        _c("span", {
-                                          staticClass: "js-cd-seconds"
-                                        })
-                                      ]
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass:
-                                          "text-gray-2 font-size-12 text-center"
-                                      },
-                                      [_vm._v("SECS")]
-                                    )
-                                  ])
-                                ]
-                              )
-                            ])
-                          ]
-                        )
-                      ])
-                    ])
-                  ]
-                )
-              ])
+              _c(
+                "ins",
+                {
+                  staticClass:
+                    "font-size-xl-30 font-size-wd-25 text-red text-decoration-none"
+                },
+                [_vm._v("$79,00")]
+              )
             ]
-          )
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-4 mb-xl-5 mb-wd-2 pb-wd-1 mx-2" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "d-flex justify-content-between align-items-center mb-2"
+              },
+              [
+                _c("span", {}, [
+                  _vm._v("Availavle: "),
+                  _c("strong", [_vm._v("6")])
+                ]),
+                _vm._v(" "),
+                _c("span", {}, [
+                  _vm._v("Already Sold: "),
+                  _c("strong", [_vm._v("28")])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-pill bg-gray-3 height-wd-14 height-xl-20 position-relative"
+              },
+              [
+                _c("span", {
+                  staticClass:
+                    "position-absolute left-0 top-0 bottom-0 rounded-pill w-30 bg-primary"
+                })
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-2" }, [
+            _c(
+              "h6",
+              {
+                staticClass:
+                  "font-size-15 text-gray-2 text-center mb-xl-3 mb-wd-2"
+              },
+              [_vm._v("Hurry Up! Offer ends in:")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "js-countdown d-flex justify-content-center",
+                attrs: {
+                  "data-end-date": "2020/12/10 21:30:00",
+                  "data-days-format": "%D",
+                  "data-hours-format": "%H",
+                  "data-minutes-format": "%M",
+                  "data-seconds-format": "%S"
+                }
+              },
+              [
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-days" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("DAY")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mx-1 pt-1 text-gray-2 font-size-24" },
+                  [_vm._v(":")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-hours" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("HOURS")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mx-1 pt-1 text-gray-2 font-size-24" },
+                  [_vm._v(":")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-minutes" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("MINS")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mx-1 pt-1 text-gray-2 font-size-24" },
+                  [_vm._v(":")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-seconds" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("SECS")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "d-inline-flex justify-content-between align-items-center position-absolute left-3 top-0 z-index-9"
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "d-flex align-items-center flex-column justify-content-center bg-primary rounded-pill height-75 width-75 text-lh-1"
+          },
+          [
+            _c("span", { staticClass: "font-size-12" }, [_vm._v("Save")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "font-size-20 font-weight-bold" }, [
+              _vm._v("$120")
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6 col-xl-6 col-wd-6" }, [
+      _c(
+        "div",
+        { staticClass: "space-top-xl-2 space-top-wd-0 mt-xl-4 mt-wd-0" },
+        [
+          _c(
+            "h5",
+            {
+              staticClass:
+                "mb-3 mb-xl-2 mb-wd-1 font-size-14 text-center mx-auto max-width-180 text-lh-18"
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "text-blue font-weight-bold",
+                  attrs: { href: "../shop/single-product-fullwidth.html" }
+                },
+                [_vm._v("Game Console Controller + USB 3.0 Cable")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "d-flex align-items-center justify-content-center mb-3"
+            },
+            [
+              _c("del", { staticClass: "font-size-18 mr-2 text-gray-2" }, [
+                _vm._v("$99,00")
+              ]),
+              _vm._v(" "),
+              _c(
+                "ins",
+                {
+                  staticClass:
+                    "font-size-xl-30 font-size-wd-25 text-red text-decoration-none"
+                },
+                [_vm._v("$79,00")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-4 mb-xl-5 mb-wd-2 pb-wd-1 mx-2" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "d-flex justify-content-between align-items-center mb-2"
+              },
+              [
+                _c("span", {}, [
+                  _vm._v("Availavle: "),
+                  _c("strong", [_vm._v("6")])
+                ]),
+                _vm._v(" "),
+                _c("span", {}, [
+                  _vm._v("Already Sold: "),
+                  _c("strong", [_vm._v("28")])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-pill bg-gray-3 height-wd-14 height-xl-20 position-relative"
+              },
+              [
+                _c("span", {
+                  staticClass:
+                    "position-absolute left-0 top-0 bottom-0 rounded-pill w-30 bg-primary"
+                })
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-2" }, [
+            _c(
+              "h6",
+              {
+                staticClass:
+                  "font-size-15 text-gray-2 text-center mb-xl-3 mb-wd-2"
+              },
+              [_vm._v("Hurry Up! Offer ends in:")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "js-countdown d-flex justify-content-center",
+                attrs: {
+                  "data-end-date": "2021/01/05",
+                  "data-days-format": "%D",
+                  "data-hours-format": "%H",
+                  "data-minutes-format": "%M",
+                  "data-seconds-format": "%S"
+                }
+              },
+              [
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-days" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("DAY")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mx-1 pt-1 text-gray-2 font-size-24" },
+                  [_vm._v(":")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-hours" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("HOURS")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mx-1 pt-1 text-gray-2 font-size-24" },
+                  [_vm._v(":")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-minutes" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("MINS")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mx-1 pt-1 text-gray-2 font-size-24" },
+                  [_vm._v(":")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-seconds" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("SECS")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "d-inline-flex justify-content-between align-items-center position-absolute left-3 top-0 z-index-9"
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "d-flex align-items-center flex-column justify-content-center bg-primary rounded-pill height-75 width-75 text-lh-1"
+          },
+          [
+            _c("span", { staticClass: "font-size-12" }, [_vm._v("Save")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "font-size-20 font-weight-bold" }, [
+              _vm._v("$120")
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6 col-xl-6 col-wd-6" }, [
+      _c(
+        "div",
+        { staticClass: "space-top-xl-2 space-top-wd-0 mt-xl-4 mt-wd-0" },
+        [
+          _c(
+            "h5",
+            {
+              staticClass:
+                "mb-3 mb-xl-2 mb-wd-1 font-size-14 text-center mx-auto max-width-180 text-lh-18"
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "text-blue font-weight-bold",
+                  attrs: { href: "../shop/single-product-fullwidth.html" }
+                },
+                [_vm._v("Game Console Controller + USB 3.0 Cable")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "d-flex align-items-center justify-content-center mb-3"
+            },
+            [
+              _c("del", { staticClass: "font-size-18 mr-2 text-gray-2" }, [
+                _vm._v("$99,00")
+              ]),
+              _vm._v(" "),
+              _c(
+                "ins",
+                {
+                  staticClass:
+                    "font-size-xl-30 font-size-wd-25 text-red text-decoration-none"
+                },
+                [_vm._v("$79,00")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-4 mb-xl-5 mb-wd-2 pb-wd-1 mx-2" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "d-flex justify-content-between align-items-center mb-2"
+              },
+              [
+                _c("span", {}, [
+                  _vm._v("Availavle: "),
+                  _c("strong", [_vm._v("6")])
+                ]),
+                _vm._v(" "),
+                _c("span", {}, [
+                  _vm._v("Already Sold: "),
+                  _c("strong", [_vm._v("28")])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-pill bg-gray-3 height-wd-14 height-xl-20 position-relative"
+              },
+              [
+                _c("span", {
+                  staticClass:
+                    "position-absolute left-0 top-0 bottom-0 rounded-pill w-30 bg-primary"
+                })
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-2" }, [
+            _c(
+              "h6",
+              {
+                staticClass:
+                  "font-size-15 text-gray-2 text-center mb-xl-3 mb-wd-2"
+              },
+              [_vm._v("Hurry Up! Offer ends in:")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "js-countdown d-flex justify-content-center",
+                attrs: {
+                  "data-end-date": "2020/11/30",
+                  "data-hours-format": "%H",
+                  "data-minutes-format": "%M",
+                  "data-seconds-format": "%S"
+                }
+              },
+              [
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-hours" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("HOURS")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mx-1 pt-1 text-gray-2 font-size-24" },
+                  [_vm._v(":")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-minutes" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("MINS")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mx-1 pt-1 text-gray-2 font-size-24" },
+                  [_vm._v(":")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-seconds" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("SECS")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "d-inline-flex justify-content-between align-items-center position-absolute left-3 top-0 z-index-9"
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "d-flex align-items-center flex-column justify-content-center bg-primary rounded-pill height-75 width-75 text-lh-1"
+          },
+          [
+            _c("span", { staticClass: "font-size-12" }, [_vm._v("Save")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "font-size-20 font-weight-bold" }, [
+              _vm._v("$120")
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6 col-xl-6 col-wd-6" }, [
+      _c(
+        "div",
+        { staticClass: "space-top-xl-2 space-top-wd-0 mt-xl-4 mt-wd-0" },
+        [
+          _c(
+            "h5",
+            {
+              staticClass:
+                "mb-3 mb-xl-2 mb-wd-1 font-size-14 text-center mx-auto max-width-180 text-lh-18"
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "text-blue font-weight-bold",
+                  attrs: { href: "../shop/single-product-fullwidth.html" }
+                },
+                [_vm._v("Game Console Controller + USB 3.0 Cable")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "d-flex align-items-center justify-content-center mb-3"
+            },
+            [
+              _c("del", { staticClass: "font-size-18 mr-2 text-gray-2" }, [
+                _vm._v("$99,00")
+              ]),
+              _vm._v(" "),
+              _c(
+                "ins",
+                {
+                  staticClass:
+                    "font-size-xl-30 font-size-wd-25 text-red text-decoration-none"
+                },
+                [_vm._v("$79,00")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-4 mb-xl-5 mb-wd-2 pb-wd-1 mx-2" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "d-flex justify-content-between align-items-center mb-2"
+              },
+              [
+                _c("span", {}, [
+                  _vm._v("Availavle: "),
+                  _c("strong", [_vm._v("6")])
+                ]),
+                _vm._v(" "),
+                _c("span", {}, [
+                  _vm._v("Already Sold: "),
+                  _c("strong", [_vm._v("28")])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-pill bg-gray-3 height-wd-14 height-xl-20 position-relative"
+              },
+              [
+                _c("span", {
+                  staticClass:
+                    "position-absolute left-0 top-0 bottom-0 rounded-pill w-30 bg-primary"
+                })
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-2" }, [
+            _c(
+              "h6",
+              {
+                staticClass:
+                  "font-size-15 text-gray-2 text-center mb-xl-3 mb-wd-2"
+              },
+              [_vm._v("Hurry Up! Offer ends in:")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "js-countdown d-flex justify-content-center",
+                attrs: {
+                  "data-end-date": "2020/11/30",
+                  "data-hours-format": "%H",
+                  "data-minutes-format": "%M",
+                  "data-seconds-format": "%S"
+                }
+              },
+              [
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-hours" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("HOURS")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mx-1 pt-1 text-gray-2 font-size-24" },
+                  [_vm._v(":")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-minutes" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("MINS")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mx-1 pt-1 text-gray-2 font-size-24" },
+                  [_vm._v(":")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-seconds" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("SECS")]
+                  )
+                ])
+              ]
+            )
+          ])
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass:
+          "d-inline-flex justify-content-between align-items-center position-absolute left-3 top-0 z-index-9"
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass:
+              "d-flex align-items-center flex-column justify-content-center bg-primary rounded-pill height-75 width-75 text-lh-1"
+          },
+          [
+            _c("span", { staticClass: "font-size-12" }, [_vm._v("Save")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "font-size-20 font-weight-bold" }, [
+              _vm._v("$120")
+            ])
+          ]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-6 col-xl-6 col-wd-6" }, [
+      _c(
+        "div",
+        { staticClass: "space-top-xl-2 space-top-wd-0 mt-xl-4 mt-wd-0" },
+        [
+          _c(
+            "h5",
+            {
+              staticClass:
+                "mb-3 mb-xl-2 mb-wd-1 font-size-14 text-center mx-auto max-width-180 text-lh-18"
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticClass: "text-blue font-weight-bold",
+                  attrs: { href: "../shop/single-product-fullwidth.html" }
+                },
+                [_vm._v("Game Console Controller + USB 3.0 Cable")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "d-flex align-items-center justify-content-center mb-3"
+            },
+            [
+              _c("del", { staticClass: "font-size-18 mr-2 text-gray-2" }, [
+                _vm._v("$99,00")
+              ]),
+              _vm._v(" "),
+              _c(
+                "ins",
+                {
+                  staticClass:
+                    "font-size-xl-30 font-size-wd-25 text-red text-decoration-none"
+                },
+                [_vm._v("$79,00")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-4 mb-xl-5 mb-wd-2 pb-wd-1 mx-2" }, [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "d-flex justify-content-between align-items-center mb-2"
+              },
+              [
+                _c("span", {}, [
+                  _vm._v("Availavle: "),
+                  _c("strong", [_vm._v("6")])
+                ]),
+                _vm._v(" "),
+                _c("span", {}, [
+                  _vm._v("Already Sold: "),
+                  _c("strong", [_vm._v("28")])
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass:
+                  "rounded-pill bg-gray-3 height-wd-14 height-xl-20 position-relative"
+              },
+              [
+                _c("span", {
+                  staticClass:
+                    "position-absolute left-0 top-0 bottom-0 rounded-pill w-30 bg-primary"
+                })
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "mb-2" }, [
+            _c(
+              "h6",
+              {
+                staticClass:
+                  "font-size-15 text-gray-2 text-center mb-xl-3 mb-wd-2"
+              },
+              [_vm._v("Hurry Up! Offer ends in:")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "js-countdown d-flex justify-content-center",
+                attrs: {
+                  "data-end-date": "2020/11/30",
+                  "data-hours-format": "%H",
+                  "data-minutes-format": "%M",
+                  "data-seconds-format": "%S"
+                }
+              },
+              [
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-hours" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("HOURS")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mx-1 pt-1 text-gray-2 font-size-24" },
+                  [_vm._v(":")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-minutes" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("MINS")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "mx-1 pt-1 text-gray-2 font-size-24" },
+                  [_vm._v(":")]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "text-lh-1" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "text-gray-2 font-size-30 bg-gray-4 py-2 px-2 rounded-sm mb-2"
+                    },
+                    [_c("span", { staticClass: "js-cd-seconds" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "text-gray-2 font-size-12 text-center" },
+                    [_vm._v("SECS")]
+                  )
+                ])
+              ]
+            )
+          ])
         ]
       )
     ])

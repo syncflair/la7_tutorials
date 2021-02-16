@@ -379,18 +379,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           //this.$router.go();   
           //window.location = '/home';    
           //this.$router.reload(); //self reload                     
-
-
-          _this.$router.push({
-            path: '/home'
-          }); //route after successfule submit                   
-          //this.$router.replace({ path : '/auth/my-dashboard' });   //route after successfule submit
+          //this.$router.push({ path : '/home' }).catch(err => {});   //route after successfule submit                   
+          //this.$router.replace({ path : '/home' }).catch(err => {});   //route after successfule submit
 
 
           _this.form.reset(); //reset from after submit 
+          //toastr.success('Login successfule'); 
 
 
-          toastr.success('Login successfule');
+          FireEvent.$emit('Call_HSCore_components_HSUnfold'); // initialization of unfold component
         }
 
         if (data.error) {
@@ -483,7 +480,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     } //End reset password
 
   },
-  created: function created() {},
+  created: function created() {
+    var _this4 = this;
+
+    //call this action from HeaderTopBar.vue component
+    FireEvent.$on('FocusUsername', function () {
+      setTimeout(function () {
+        _this4.$refs.username.focus();
+      }, 600);
+    });
+  },
   mounted: function mounted() {}
 });
 
@@ -1014,7 +1020,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _CartLink_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CartLink.vue */ "./resources/js/components/Website/Layouts/CartLink.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -1194,18 +1207,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+ //for user MapState
+
  //Load to all
 //import CartPopup from './CartPopup.vue' //Load to all
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Header-Logo-Search-Icons-For-Home-website",
   data: function data() {
-    return {};
+    return {
+      ActiveLinkClass: 'active'
+    };
   },
   components: {
     CartLink: _CartLink_vue__WEBPACK_IMPORTED_MODULE_0__.default //CartPopup,
 
   },
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapState)('AuthenticationForCustomer', ['authCustomer'])), {}, {
+    //for active link management
+    currentPage: function currentPage() {
+      return this.$route.path;
+    }
+  }),
   methods: {},
   created: function created() {},
   mounted: function mounted() {}
@@ -2038,6 +2074,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
  //for user MapState
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2047,7 +2084,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ActiveLinkClass: 'active'
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('AuthenticationForCustomer', ['authCustomer'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('AuthenticationForSupplier', ['authSupplier'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('AuthenticationForCustomer', ['authCustomer'])), {}, {
+    // ...mapState( 'AuthenticationForSupplier', ['authSupplier'] ),
     //for active link management
     currentPage: function currentPage() {
       return this.$route.path;
@@ -2055,7 +2093,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     AccountNavLinkShow: function AccountNavLinkShow() {
       // // return ? false : true;
       //return this.authCustomer;
-      if (this.authCustomer || this.authSupplier) {
+      if (this.authCustomer) {
+        // if(this.authCustomer || this.authSupplier){
         return false;
       } else {
         return true; //f
@@ -2075,6 +2114,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       // if (this.$route.path !== HomePath) {
       // 	this.$router.push(HomePath)
       // }
+    },
+    FocusUsername: function FocusUsername() {
+      FireEvent.$emit('FocusUsername'); //call to AccountSidebarNavigationToggler.vue component for focus username                
     },
     CustomerLogout: function CustomerLogout() {
       var _this = this;
@@ -2098,38 +2140,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         window.location = '/home'; //this.$router.push({ path : '/auth/login' });   //route after successfule 
         //this.$router.replace({ path : '/auth/login' });   //route after successfule 
         //this.$router.go('/auth/login');
-
-        toastr.success('Logout successfule'); //}
+        //toastr.success('Logout successfule'); 
+        //}
       })["catch"](function () {
         _this.$Progress.fail();
       });
-    },
-    //End Customer Logout  
-    SupplierLogout: function SupplierLogout() {
-      var _this2 = this;
-
-      this.$Progress.start(); //using progress-bar package
-
-      axios.post('/supplier/logout').then(function (_ref2) {
-        var response = _ref2.response;
-
-        _this2.$Progress.finish(); //for security reson, Best Policy for API Based Authentication
-        //localStorage.setItem('isAuthenticated', false);  
-        //localStorage.removeItem('isAuthenticated');  
-
-
-        _this2.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', false); //
-
-
-        window.location = '/home'; //this.$router.push({ path : '/auth/login' });   //route after successfule 
-        //this.$router.replace({ path : '/auth/login' });   //route after successfule 
-        //this.$router.go('/auth/login');
-
-        toastr.success('Logout successfule');
-      })["catch"](function () {
-        _this2.$Progress.fail();
-      });
-    } //End Supplier Logout  
+    } //End Customer Logout  
+    // SupplierLogout(){  
+    //   this.$Progress.start(); //using progress-bar package
+    //   axios.post('/supplier/logout')
+    //   .then(({ response }) => {          
+    //       this.$Progress.finish(); 
+    //       //for security reson, Best Policy for API Based Authentication
+    //       //localStorage.setItem('isAuthenticated', false);  
+    //       //localStorage.removeItem('isAuthenticated');  
+    //       this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', false ); //
+    //       window.location = '/home';
+    //       //this.$router.push({ path : '/auth/login' });   //route after successfule 
+    //       //this.$router.replace({ path : '/auth/login' });   //route after successfule 
+    //       //this.$router.go('/auth/login');
+    //       toastr.success('Logout successfule'); 
+    //   })
+    //   .catch( () => {
+    //     this.$Progress.fail();
+    //   })   
+    // },  //End Supplier Logout  
 
   },
   //end Methods
@@ -3827,15 +3862,15 @@ __webpack_require__.r(__webpack_exports__);
     isauthenticated: {
       type: Boolean //required: true
 
-    },
-    authsupplier: {
-      type: Object //required: true
+    } // authsupplier: {
+    //   type: Object,
+    //   //required: true
+    // },
+    // issspaauthenticated:{
+    //   type: Boolean,
+    //   //required: true
+    // },
 
-    },
-    issspaauthenticated: {
-      type: Boolean //required: true
-
-    }
   },
   data: function data() {
     return {
@@ -3857,6 +3892,7 @@ __webpack_require__.r(__webpack_exports__);
     FooterComponent: _Layouts_Footer_vue__WEBPACK_IMPORTED_MODULE_9__.default,
     FooterFixed: _Layouts_FooterFixed_vue__WEBPACK_IMPORTED_MODULE_10__.default
   },
+  computed: {},
   watch: {
     /*************************************************************************************/
 
@@ -3878,14 +3914,17 @@ __webpack_require__.r(__webpack_exports__);
     //direct commit (mutations) to resources/js/store/commonStoreForAll.js
     this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', this.isauthenticated);
     this.$store.commit('AuthenticationForCustomer/AUTH_CUSTOMER_CHECK', this.authcustomer); //commit from props
-
-    this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', this.issspaauthenticated);
-    this.$store.commit('AuthenticationForSupplier/AUTH_SUPPLIER_CHECK', this.authsupplier); //commit from props
+    //this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', this.issspaauthenticated );             
+    //this.$store.commit('AuthenticationForSupplier/AUTH_SUPPLIER_CHECK', this.authsupplier ); //commit from props
 
     this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite);
   },
   destroyed: function destroyed() {},
-  mounted: function mounted() {//initialization of slick carousel (Slick Slider call from here, otherwise it get error)
+  mounted: function mounted() {// console.log('website-wrapper');
+    // console.log('Height: ' +window.innerHeight + ' - Width: ' + window.innerWidth);
+    // //  [App.vue specific] When App.vue is finish loading finish the progress bar
+    // this.$Progress.finish()
+    //initialization of slick carousel (Slick Slider call from here, otherwise it get error)
     //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
     // alert(this.$refs.screenWidth.clientHeight +' '+  this.$refs.screenWidth.clientWidth);
     //this.toggleBodyClass('screenWidth', 'TestClassTEse');
@@ -3895,7 +3934,7 @@ __webpack_require__.r(__webpack_exports__);
     //console.log(window.innerHeight);
     //alert('Height: ' +window.innerHeight + ' - Width: ' + window.innerWidth);
     //alert(this.$refs.screenWidth.clientHeight + '-' + this.$refs.screenWidth.clientWidth); //working
-    //console.log('Width: '+this.window.width+ ' Height: ' + this.window.height );   
+    //console.log('Width: '+this.window.width+ ' Height: ' + this.window.height );  
   }
 });
 
@@ -5055,6 +5094,7 @@ var render = function() {
                                             expression: "form.username"
                                           }
                                         ],
+                                        ref: "username",
                                         staticClass: "form-control",
                                         class: {
                                           "is-invalid": _vm.form.errors.has(
@@ -6994,7 +7034,46 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _vm._m(0)
+                    !_vm.authCustomer
+                      ? _c(
+                          "li",
+                          {
+                            staticClass:
+                              "col d-xl-none- d-xl-block px-2 px-sm-3"
+                          },
+                          [_vm._m(0)]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.authCustomer
+                      ? _c(
+                          "li",
+                          {
+                            staticClass:
+                              "col d-xl-none- d-xl-block px-2 px-sm-3"
+                          },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "text-gray-90",
+                                attrs: {
+                                  to: "/auth/my-dashboard",
+                                  "data-toggle": "tooltip",
+                                  "data-placement": "top",
+                                  title: "My Account"
+                                }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "font-size-22 ec ec-user"
+                                })
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e()
                   ]
                 )
               ])
@@ -7010,33 +7089,31 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "col d-xl-none- d-xl-block px-2 px-sm-3" }, [
-      _c(
-        "a",
-        {
-          staticClass: "u-header-topbar__nav-link",
-          attrs: {
-            id: "sidebarNavToggler",
-            href: "javascript:;",
-            role: "button",
-            "data-toggle": "tooltip",
-            "data-placement": "top",
-            title: "My Account",
-            "aria-controls": "sidebarContent",
-            "aria-haspopup": "true",
-            "aria-expanded": "false",
-            "data-unfold-event": "click",
-            "data-unfold-hide-on-scroll": "false",
-            "data-unfold-target": "#sidebarContent",
-            "data-unfold-type": "css-animation",
-            "data-unfold-animation-in": "fadeInRight",
-            "data-unfold-animation-out": "fadeOutRight",
-            "data-unfold-duration": "500"
-          }
-        },
-        [_c("i", { staticClass: "ec ec-user mr-1" })]
-      )
-    ])
+    return _c(
+      "a",
+      {
+        staticClass: "u-header-topbar__nav-link",
+        attrs: {
+          id: "sidebarNavToggler",
+          href: "javascript:;",
+          role: "button",
+          "data-toggle": "tooltip",
+          "data-placement": "top",
+          title: "My Account",
+          "aria-controls": "sidebarContent",
+          "aria-haspopup": "true",
+          "aria-expanded": "false",
+          "data-unfold-event": "click",
+          "data-unfold-hide-on-scroll": "false",
+          "data-unfold-target": "#sidebarContent",
+          "data-unfold-type": "css-animation",
+          "data-unfold-animation-in": "fadeInRight",
+          "data-unfold-animation-out": "fadeOutRight",
+          "data-unfold-duration": "500"
+        }
+      },
+      [_c("i", { staticClass: "ec ec-user mr-1" })]
+    )
   }
 ]
 render._withStripped = true
@@ -8983,14 +9060,51 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _vm.AccountNavLinkShow === true
+              _vm._m(1),
+              _vm._v(" "),
+              !_vm.authCustomer
                 ? _c(
                     "li",
                     {
                       staticClass:
                         "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"
                     },
-                    [_vm._m(1)]
+                    [
+                      _c(
+                        "a",
+                        {
+                          staticClass: "u-header-topbar__nav-link",
+                          attrs: {
+                            id: "sidebarNavToggler",
+                            href: "javascript:;",
+                            role: "button",
+                            "aria-controls": "sidebarContent",
+                            "aria-haspopup": "true",
+                            "aria-expanded": "false",
+                            "data-unfold-event": "click",
+                            "data-unfold-hide-on-scroll": "false",
+                            "data-unfold-target": "#sidebarContent",
+                            "data-unfold-type": "css-animation",
+                            "data-unfold-animation-in": "fadeInRight",
+                            "data-unfold-animation-out": "fadeOutRight",
+                            "data-unfold-duration": "500"
+                          },
+                          on: {
+                            click: function($event) {
+                              return _vm.FocusUsername()
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "ec ec-user mr-1" }),
+                          _vm._v(" Register "),
+                          _c("span", { staticClass: "text-gray-50" }, [
+                            _vm._v("or")
+                          ]),
+                          _vm._v(" Sign in\n                            ")
+                        ]
+                      )
+                    ]
                   )
                 : _vm._e(),
               _vm._v(" "),
@@ -9178,216 +9292,6 @@ var render = function() {
                       ])
                     ]
                   )
-                : _vm._e(),
-              _vm._v(" "),
-              _vm.authSupplier
-                ? _c(
-                    "li",
-                    {
-                      staticClass:
-                        "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single"
-                    },
-                    [
-                      _c("div", { staticClass: "d-flex align-items-center" }, [
-                        _c("div", { staticClass: "position-relative" }, [
-                          _vm._m(3),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            {
-                              staticClass: "dropdown-menu dropdown-unfold",
-                              attrs: {
-                                id: "MyAccountDropdown",
-                                "aria-labelledby": "MyAccountDropdownInvoker"
-                              }
-                            },
-                            [
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass:
-                                    "dropdown-item active- dropdown-item-custome transition-3d-hover",
-                                  class: [
-                                    _vm.currentPage.includes("my-dashboard")
-                                  ]
-                                    ? _vm.ActiveLinkClass
-                                    : 0,
-                                  attrs: { to: "/sspa/my-dashboard" }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-tachometer-alt"
-                                  }),
-                                  _vm._v(" Dashboard")
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass:
-                                    "dropdown-item dropdown-item-custome transition-3d-hover",
-                                  class: [_vm.currentPage.includes("my-orders")]
-                                    ? _vm.ActiveLinkClass
-                                    : 0,
-                                  attrs: { to: "/sspa/my-orders" }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass:
-                                      "font-size-18 ec ec-shopping-bag"
-                                  }),
-                                  _vm._v(" My Orders")
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass:
-                                    "dropdown-item dropdown-item-custome transition-3d-hover",
-                                  class: [
-                                    _vm.currentPage.includes("my-products")
-                                  ]
-                                    ? _vm.ActiveLinkClass
-                                    : 0,
-                                  attrs: { to: "/sspa/my-products" }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "font-size-18 ec ec-favorites"
-                                  }),
-                                  _vm._v(" Product List")
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass:
-                                    "dropdown-item dropdown-item-custome transition-3d-hover",
-                                  class: [_vm.currentPage.includes("my-return")]
-                                    ? _vm.ActiveLinkClass
-                                    : 0,
-                                  attrs: { to: "/sspa/my-return" }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "font-size-18 ec ec-favorites"
-                                  }),
-                                  _vm._v(" Return")
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass:
-                                    "dropdown-item dropdown-item-custome transition-3d-hover",
-                                  class: [
-                                    _vm.currentPage.includes("my-replace")
-                                  ]
-                                    ? _vm.ActiveLinkClass
-                                    : 0,
-                                  attrs: { to: "/sspa/my-replace" }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "font-size-18 ec ec-user"
-                                  }),
-                                  _vm._v(" Replace")
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass:
-                                    "dropdown-item dropdown-item-custome transition-3d-hover",
-                                  class: [
-                                    _vm.currentPage.includes("my-profile")
-                                  ]
-                                    ? _vm.ActiveLinkClass
-                                    : 0,
-                                  attrs: { to: "/sspa/my-profile" }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "font-size-18 ec ec-user"
-                                  }),
-                                  _vm._v(" My Profile")
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass:
-                                    "dropdown-item dropdown-item-custome transition-3d-hover",
-                                  class: [
-                                    _vm.currentPage.includes(
-                                      "my-payment-receivable"
-                                    )
-                                  ]
-                                    ? _vm.ActiveLinkClass
-                                    : 0,
-                                  attrs: { to: "/sspa/my-payment-receivable" }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "font-size-18 ec ec-payment"
-                                  }),
-                                  _vm._v(" Amount receivable")
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "router-link",
-                                {
-                                  staticClass:
-                                    "dropdown-item dropdown-item-custome transition-3d-hover",
-                                  class: [
-                                    _vm.currentPage.includes(
-                                      "my-payment-history"
-                                    )
-                                  ]
-                                    ? _vm.ActiveLinkClass
-                                    : 0,
-                                  attrs: { to: "/sspa/my-payment-history" }
-                                },
-                                [
-                                  _c("i", { staticClass: "far fa-star" }),
-                                  _vm._v(" Payment History")
-                                ]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "a",
-                                {
-                                  staticClass:
-                                    "dropdown-item dropdown-item-custome transition-3d-hover",
-                                  attrs: { href: "javascript:;" },
-                                  on: {
-                                    click: function($event) {
-                                      $event.preventDefault()
-                                      return _vm.SupplierLogout()
-                                    }
-                                  }
-                                },
-                                [
-                                  _c("i", {
-                                    staticClass: "fas fa-sign-out-alt pl-1"
-                                  }),
-                                  _vm._v(" Logout")
-                                ]
-                              )
-                            ],
-                            1
-                          )
-                        ])
-                      ])
-                    ]
-                  )
                 : _vm._e()
             ])
           ])
@@ -9417,70 +9321,83 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c(
-      "a",
-      {
-        staticClass: "u-header-topbar__nav-link",
-        attrs: {
-          id: "sidebarNavToggler",
-          href: "javascript:;",
-          role: "button",
-          "aria-controls": "sidebarContent",
-          "aria-haspopup": "true",
-          "aria-expanded": "false",
-          "data-unfold-event": "click",
-          "data-unfold-hide-on-scroll": "false",
-          "data-unfold-target": "#sidebarContent",
-          "data-unfold-type": "css-animation",
-          "data-unfold-animation-in": "fadeInRight",
-          "data-unfold-animation-out": "fadeOutRight",
-          "data-unfold-duration": "500"
-        }
-      },
-      [
-        _c("i", { staticClass: "ec ec-user mr-1" }),
-        _vm._v(" Register "),
-        _c("span", { staticClass: "text-gray-50" }, [_vm._v("or")]),
-        _vm._v(" Sign in\n                            ")
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
+      "li",
       {
         staticClass:
-          "dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal",
-        attrs: {
-          id: "MyAccountDropdownInvoker",
-          href: "javascript:;",
-          role: "button",
-          "aria-controls": "MyAccountDropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false",
-          "data-unfold-event": "click",
-          "data-unfold-target": "#MyAccountDropdown",
-          "data-unfold-type": "css-animation",
-          "data-unfold-duration": "300",
-          "data-unfold-delay": "300",
-          "data-unfold-hide-on-scroll": "true",
-          "data-unfold-animation-in": "slideInUp",
-          "data-unfold-animation-out": "fadeOut"
-        }
+          "list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single"
       },
       [
-        _c(
-          "span",
-          { staticClass: "d-none d-sm-inline-flex align-items-center" },
-          [
-            _c("i", { staticClass: "ec ec-user mr-1" }),
-            _vm._v(
-              "\n                                             My Account\n                                        "
+        _c("div", { staticClass: "d-flex align-items-center" }, [
+          _c("div", { staticClass: "position-relative" }, [
+            _c(
+              "a",
+              {
+                staticClass:
+                  "dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal",
+                attrs: {
+                  id: "languageDropdownInvoker",
+                  href: "javascript:;",
+                  role: "button",
+                  "aria-controls": "languageDropdown",
+                  "aria-haspopup": "true",
+                  "aria-expanded": "false",
+                  "data-unfold-event": "hover",
+                  "data-unfold-target": "#languageDropdown",
+                  "data-unfold-type": "css-animation",
+                  "data-unfold-duration": "300",
+                  "data-unfold-delay": "300",
+                  "data-unfold-hide-on-scroll": "true",
+                  "data-unfold-animation-in": "slideInUp",
+                  "data-unfold-animation-out": "fadeOut"
+                }
+              },
+              [
+                _c("span", { staticClass: "d-inline-block d-sm-none" }, [
+                  _vm._v("US")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  { staticClass: "d-none d-sm-inline-flex align-items-center" },
+                  [
+                    _c("i", { staticClass: "ec ec-dollar mr-1" }),
+                    _vm._v(" Dollar (US)")
+                  ]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "dropdown-menu dropdown-unfold",
+                attrs: {
+                  id: "languageDropdown",
+                  "aria-labelledby": "languageDropdownInvoker"
+                }
+              },
+              [
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item active", attrs: { href: "#" } },
+                  [_vm._v("English")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item", attrs: { href: "#" } },
+                  [_vm._v("Deutsch")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { staticClass: "dropdown-item", attrs: { href: "#" } },
+                  [_vm._v("Español‎")]
+                )
+              ]
             )
-          ]
-        )
+          ])
+        ])
       ]
     )
   },
@@ -14711,7 +14628,44 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(2)
+          _c(
+            "footer",
+            {
+              staticClass: "svg-preloader u-header-sidebar__footer",
+              attrs: { id: "SVGwaveWithDots" }
+            },
+            [
+              _vm._m(2),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "position-absolute right-0 bottom-0 left-0 z-index-n1"
+                },
+                [
+                  _c("img", {
+                    directives: [
+                      {
+                        name: "lazy",
+                        rawName: "v-lazy",
+                        value:
+                          _vm.baseURL +
+                          "/website/assets/svg/components/wave-bottom-with-dots.svg",
+                        expression:
+                          "baseURL+'/website/assets/svg/components/wave-bottom-with-dots.svg'"
+                      }
+                    ],
+                    staticClass: "js-svg-injector",
+                    attrs: {
+                      alt: "Image Description",
+                      "data-parent": "#SVGwaveWithDots"
+                    }
+                  })
+                ]
+              )
+            ]
+          )
         ])
       ])
     ]
@@ -15917,66 +15871,40 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "footer",
-      {
-        staticClass: "svg-preloader u-header-sidebar__footer",
-        attrs: { id: "SVGwaveWithDots" }
-      },
-      [
-        _c("ul", { staticClass: "list-inline mb-0" }, [
-          _c("li", { staticClass: "list-inline-item pr-3" }, [
-            _c(
-              "a",
-              {
-                staticClass: "u-header-sidebar__footer-link text-gray-90",
-                attrs: { href: "#" }
-              },
-              [_vm._v("Privacy")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-inline-item pr-3" }, [
-            _c(
-              "a",
-              {
-                staticClass: "u-header-sidebar__footer-link text-gray-90",
-                attrs: { href: "#" }
-              },
-              [_vm._v("Terms")]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "list-inline-item" }, [
-            _c(
-              "a",
-              {
-                staticClass: "u-header-sidebar__footer-link text-gray-90",
-                attrs: { href: "#" }
-              },
-              [_c("i", { staticClass: "fas fa-info-circle" })]
-            )
-          ])
-        ]),
-        _vm._v(" "),
+    return _c("ul", { staticClass: "list-inline mb-0" }, [
+      _c("li", { staticClass: "list-inline-item pr-3" }, [
         _c(
-          "div",
+          "a",
           {
-            staticClass: "position-absolute right-0 bottom-0 left-0 z-index-n1"
+            staticClass: "u-header-sidebar__footer-link text-gray-90",
+            attrs: { href: "#" }
           },
-          [
-            _c("img", {
-              staticClass: "js-svg-injector",
-              attrs: {
-                src: "website/assets/svg/components/wave-bottom-with-dots.svg",
-                alt: "Image Description",
-                "data-parent": "#SVGwaveWithDots"
-              }
-            })
-          ]
+          [_vm._v("Privacy")]
         )
-      ]
-    )
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "list-inline-item pr-3" }, [
+        _c(
+          "a",
+          {
+            staticClass: "u-header-sidebar__footer-link text-gray-90",
+            attrs: { href: "#" }
+          },
+          [_vm._v("Terms")]
+        )
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "list-inline-item" }, [
+        _c(
+          "a",
+          {
+            staticClass: "u-header-sidebar__footer-link text-gray-90",
+            attrs: { href: "#" }
+          },
+          [_c("i", { staticClass: "fas fa-info-circle" })]
+        )
+      ])
+    ])
   }
 ]
 render._withStripped = true

@@ -1,9 +1,9 @@
 <template>
 <div class="mb-3">
     <div class="d-flex border-bottom border-color-1 flex-lg-nowrap flex-wrap border-md-down-top-0 border-sm-bottom-0 mb-2 mb-md-0">
-        <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Deals of The Day</h3>
+        <h3 class="section-title section-title__full mb-0 pb-2 font-size-22">Deals of The Day test</h3>
         <div class="js-countdown ml-md-5 mt-md-n1 border-top border-color-1 border-md-top-0 w-100 w-md-auto pt-2 pt-md-0 mb-2 mb-md-0"
-            data-end-date="2021/01/30 21:30:00"
+            data-end-date="2021/02/27 21:30:00"
             data-days-format="%D"
             data-hours-format="%H"
             data-minutes-format="%M"
@@ -15,7 +15,7 @@
                 <div class="px-1">
                     <span class="js-cd-days"></span>
                 </div>
-                <div class="">::</div>
+                <div class="">:</div>
                 <div class="px-1">
                     <span class="js-cd-hours"></span>
                 </div>
@@ -348,6 +348,16 @@
    //          $(".js-slick-carousel").not('.slick-initialized').slick()
 			//   // Handler for .ready() called. Put the Slick Slider etc. init code here.
 			// })
+
+            // initialization of countdowns
+                // var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+                //     yearsElSelector: '.js-cd-years',
+                //     monthsElSelector: '.js-cd-months',
+                //     daysElSelector: '.js-cd-days',
+                //     hoursElSelector: '.js-cd-hours',
+                //     minutesElSelector: '.js-cd-minutes',
+                //     secondsElSelector: '.js-cd-seconds'
+                // });
         },
     }
 </script>

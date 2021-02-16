@@ -50,7 +50,7 @@
                                                         <span class="fas fa-user"></span>
                                                     </span>
                                                 </div>
-                                                <input v-model="form.username" type="email" class="form-control" name="username" placeholder="Email Or Phone" 
+                                                <input v-model="form.username" type="email" ref="username" class="form-control" name="username" placeholder="Email Or Phone" 
                                                 :class="{ 'is-invalid': form.errors.has('username') }">
                                                 <has-error :form="form" field="username"></has-error>
                                                 <!-- <alert-errors :form="form" message="There were some problems with your input."></alert-errors> -->
@@ -386,12 +386,14 @@
 
                     //this.$router.reload(); //self reload                     
                                       
-                    this.$router.push({ path : '/home' });   //route after successfule submit                   
-                    //this.$router.replace({ path : '/auth/my-dashboard' });   //route after successfule submit
+                    //this.$router.push({ path : '/home' }).catch(err => {});   //route after successfule submit                   
+                    //this.$router.replace({ path : '/home' }).catch(err => {});   //route after successfule submit
 
                     this.form.reset();  //reset from after submit 
 
-                    toastr.success('Login successfule'); 
+                    //toastr.success('Login successfule'); 
+
+                    FireEvent.$emit('Call_HSCore_components_HSUnfold'); // initialization of unfold component
                 }
 
                 if(data.error){
@@ -495,6 +497,12 @@
         },           
 
         created(){
+            //call this action from HeaderTopBar.vue component
+            FireEvent.$on('FocusUsername', () => {
+              setTimeout(() => {
+                    this.$refs.username.focus(); 
+               }, 600);
+            });
         },
            
         mounted() {

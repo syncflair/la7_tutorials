@@ -127,7 +127,7 @@
                   //this.$router.replace({ path : '/home' });   //route after successfule 
                   //this.$router.go('/home');
                   
-                  toastr.success('Logout successfule'); 
+                  //toastr.success('Logout successfule'); 
                 //}
 
               })

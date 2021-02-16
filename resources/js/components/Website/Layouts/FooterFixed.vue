@@ -143,7 +143,7 @@
                             <!-- End Cart Sidebar Toggle Button -->
                         </li>
 
-                        <li class="col d-xl-none- d-xl-block px-2 px-sm-3">
+                        <li v-if="!authCustomer"  class="col d-xl-none- d-xl-block px-2 px-sm-3">
                             <!-- <router-link to="/my-account" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="My Account"><i class="font-size-22 ec ec-user"></i></router-link> -->
 
                             <!-- Account Sidebar Toggle Button -->
@@ -167,6 +167,19 @@
                             <!-- End Account Sidebar Toggle Button -->
                         </li> 
 
+                        <li v-if="authCustomer"  class="col d-xl-none- d-xl-block px-2 px-sm-3">
+                            <router-link to="/auth/my-dashboard" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="My Account"><i class="font-size-22 ec ec-user"></i></router-link>
+
+                            <!-- Account Sidebar Toggle Button -->
+                            <!-- <router-link  to="/auth/my-dashboard" class="u-header-topbar__nav-link-"
+                                
+                                <i class="ec ec-user mr-1"></i> 
+                            </router-link> -->
+                            <!-- End Account Sidebar Toggle Button -->
+                        </li> 
+
+
+                       
                                             
 
                     </ul>
@@ -178,6 +191,9 @@
 </div>
 </template>
 <script>
+
+    import { mapState } from 'vuex' //for user MapState
+
     import CartLink from './CartLink.vue' //Load to all
    //import CartPopup from './CartPopup.vue' //Load to all
 
@@ -185,12 +201,24 @@
 
         name: "Header-Logo-Search-Icons-For-Home-website",
         data (){      
-            return {                            
+            return {   
+                ActiveLinkClass: 'active',                           
             }
         },
         components:{
             CartLink, 
             //CartPopup,
+        },
+
+        computed: {
+
+          ...mapState( 'AuthenticationForCustomer', ['authCustomer'] ),
+
+          //for active link management
+            currentPage(){
+                return this.$route.path;
+            },
+
         },
 
         methods: {          

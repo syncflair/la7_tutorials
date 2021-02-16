@@ -1856,7 +1856,36 @@ __webpack_require__.r(__webpack_exports__);
 /*this.$store is not available in the router object. So import vuex here to use store*/
 
 
-vue_dist_vue__WEBPACK_IMPORTED_MODULE_1___default().use(vue_router__WEBPACK_IMPORTED_MODULE_2__.default);
+vue_dist_vue__WEBPACK_IMPORTED_MODULE_1___default().use(vue_router__WEBPACK_IMPORTED_MODULE_2__.default); // const originalPush = VueRouter.prototype.push;
+// VueRouter.prototype.push = function push(location) {
+//   return originalPush.call(this, location).catch(err => err);
+// }
+//Variable for progress for vue route progress bar FOR page change
+
+var progressMeta = {
+  func: [{
+    call: 'color',
+    modifier: 'temp',
+    argument: '#ffb000'
+  }, {
+    call: 'fail',
+    modifier: 'temp',
+    argument: '#6e0000'
+  }, {
+    call: 'location',
+    modifier: 'temp',
+    argument: 'top'
+  }, // {call: 'transition', modifier: 'temp', argument: {speed: '0.2s', opacity: '0.6s', termination: 300}}
+  {
+    call: 'transition',
+    modifier: 'temp',
+    argument: {
+      speed: '1.5s',
+      opacity: '0.6s',
+      termination: 400
+    }
+  }]
+};
 /*Global Components is Here*/
 //Vue.component('counttest', require('./components/countTest.vue'));
 
@@ -2943,6 +2972,10 @@ var routes = [//export const routes = [
   name: 'HomePublic',
   component: function component() {
     return __webpack_require__.e(/*! import() | HomePublic-website */ "HomePublic-website").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Website/Public/Home/HomePublic.vue */ "./resources/js/components/Website/Public/Home/HomePublic.vue"));
+  },
+  meta: {
+    title: 'Home',
+    progress: progressMeta
   }
 }, {
   path: '/shop',
@@ -2952,7 +2985,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Shop',
-    breadcrumb: 'Shop'
+    breadcrumb: 'Shop',
+    progress: progressMeta
   }
 }, {
   path: '/categories',
@@ -2961,7 +2995,8 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | CategoriesPublic-website */ "CategoriesPublic-website").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Website/Public/Category/CategoriesPublic.vue */ "./resources/js/components/Website/Public/Category/CategoriesPublic.vue"));
   },
   meta: {
-    title: 'Categories'
+    title: 'Categories',
+    progress: progressMeta
   }
 }, {
   path: '/deals-of-day',
@@ -2971,7 +3006,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Deals',
-    breadcrumb: 'Deals'
+    breadcrumb: 'Deals',
+    progress: progressMeta
   }
 }, {
   path: '/brands',
@@ -2981,7 +3017,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Brands',
-    breadcrumb: 'Brands'
+    breadcrumb: 'Brands',
+    progress: progressMeta
   }
 }, {
   path: '/brand',
@@ -2997,7 +3034,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Brand Shops',
-    breadcrumb: 'Brand Shops'
+    breadcrumb: 'Brand Shops',
+    progress: progressMeta
   }
 }, {
   path: '/brand-shop',
@@ -3007,7 +3045,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Brand Shops',
-    breadcrumb: 'Brand Shop'
+    breadcrumb: 'Brand Shop',
+    progress: progressMeta
   }
 }, {
   path: '/single-product',
@@ -3016,7 +3055,8 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | SingleProductPublic-website */ "SingleProductPublic-website").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Website/Public/Product/SingleProductPublic.vue */ "./resources/js/components/Website/Public/Product/SingleProductPublic.vue"));
   },
   meta: {
-    breadcrumb: 'Single Product'
+    breadcrumb: 'Single Product',
+    progress: progressMeta
   }
 }, {
   path: '/contact',
@@ -3026,7 +3066,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Contact',
-    breadcrumb: 'Contact'
+    breadcrumb: 'Contact',
+    progress: progressMeta
   }
 }, {
   path: '/about',
@@ -3036,7 +3077,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'About Us',
-    breadcrumb: 'About Us'
+    breadcrumb: 'About Us',
+    progress: progressMeta
   }
 }, {
   path: '/gift-card',
@@ -3046,7 +3088,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Gift Card',
-    breadcrumb: 'Gift Card'
+    breadcrumb: 'Gift Card',
+    progress: progressMeta
   }
 }, {
   path: '/membership',
@@ -3056,7 +3099,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Membership',
-    breadcrumb: 'Membership'
+    breadcrumb: 'Membership',
+    progress: progressMeta
   }
 }, {
   path: '/terms-and-conditions',
@@ -3065,7 +3109,8 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | TermsAndConditionsPublic-website */ "TermsAndConditionsPublic-website").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Website/Public/TAC/TermsAndConditionsPublic.vue */ "./resources/js/components/Website/Public/TAC/TermsAndConditionsPublic.vue"));
   },
   meta: {
-    breadcrumb: 'TAC'
+    breadcrumb: 'TAC',
+    progress: progressMeta
   }
 }, {
   path: '/faq',
@@ -3075,7 +3120,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'FAQ',
-    breadcrumb: 'FAQ'
+    breadcrumb: 'FAQ',
+    progress: progressMeta
   }
 }, {
   path: '/track-order',
@@ -3085,7 +3131,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Track Order',
-    breadcrumb: 'Track Order'
+    breadcrumb: 'Track Order',
+    progress: progressMeta
   }
 }, {
   path: '/cart',
@@ -3095,7 +3142,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Cart',
-    breadcrumb: 'Cart'
+    breadcrumb: 'Cart',
+    progress: progressMeta
   }
 }, {
   path: '/checkout',
@@ -3105,7 +3153,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Checkout',
-    breadcrumb: 'Checkout'
+    breadcrumb: 'Checkout',
+    progress: progressMeta
   }
 }, {
   path: '/wishlist',
@@ -3115,7 +3164,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Wishlist',
-    breadcrumb: 'Wishlist'
+    breadcrumb: 'Wishlist',
+    progress: progressMeta
   }
 }, {
   path: '/compare',
@@ -3125,7 +3175,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Compare',
-    breadcrumb: 'Compare'
+    breadcrumb: 'Compare',
+    progress: progressMeta
   }
 }, {
   path: '/my-account',
@@ -3135,7 +3186,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'My Account',
-    breadcrumb: 'My Account'
+    breadcrumb: 'My Account',
+    progress: progressMeta
   }
 }, {
   path: '/404',
@@ -3145,7 +3197,8 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Page Not Found',
-    breadcrumb: 'Page Not Found'
+    breadcrumb: 'Page Not Found',
+    progress: progressMeta
   }
 }, //Authentication Customer link
 {
@@ -3155,7 +3208,8 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | customer-login-website */ "customer-login-website").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Website/AuthCustomer/login.vue */ "./resources/js/components/Website/AuthCustomer/login.vue"));
   },
   meta: {
-    title: 'Login'
+    title: 'Login',
+    progress: progressMeta
   },
   beforeEnter: function beforeEnter(to, from, next) {
     // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
@@ -3170,7 +3224,8 @@ var routes = [//export const routes = [
     return __webpack_require__.e(/*! import() | customer-register-website */ "customer-register-website").then(__webpack_require__.bind(__webpack_require__, /*! ./components/Website/AuthCustomer/register.vue */ "./resources/js/components/Website/AuthCustomer/register.vue"));
   },
   meta: {
-    title: 'Signup'
+    title: 'Signup',
+    progress: progressMeta
   },
   beforeEnter: function beforeEnter(to, from, next) {
     // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
@@ -3511,15 +3566,19 @@ Vue.config.productionTip = false; //turn on production mode Remove when upload t
 
 
 Vue.use(vue_lazyload__WEBPACK_IMPORTED_MODULE_0__.default); //with options
-// const loadimage = require( window.location.origin + '/static/loading.gif')
+//const loadimage = require('./static/images/loading.gif');
+// const loadimage = require( window.location.origin + '/static/images/loading.gif')
 // const errorimage = require('./assets/error.gif')
-// Vue.use(VueLazyload, {
-//   preLoad: 1.3,
-//   //error: errorimage,
-//   loading: loadimage,
-//   attempt: 1
-// })
 
+Vue.use(vue_lazyload__WEBPACK_IMPORTED_MODULE_0__.default, {
+  preLoad: 1.3,
+  //error: errorimage,
+  loading: './static/images/loading.gif',
+  // loading: loadimage,
+  attempt: 1,
+  // the default is ['scroll', 'wheel', 'mousewheel', 'resize', 'animationend', 'transitionend']
+  listenEvents: ['scroll']
+});
 /*
 *VueProgressBar
 */
@@ -3830,14 +3889,142 @@ var app = new Vue({
   /*// Register components as globaly ....*/
   components: {//counttest, 
   },
+  created: function created() {
+    var _this = this;
+
+    // console.log(store.state.commonStoreForWebsite.isitwebsiteCheck);
+    // alert(store.state.AuthenticationForCustomer.isAuthenticated);
+    //  [App.vue specific] When App.vue is first loaded start the progress bar
+    this.$Progress.start(); //  hook the progress bar to start before we move router-view
+
+    this.$router.beforeEach(function (to, from, next) {
+      //  does the page we want to go to have a meta.progress object
+      if (to.meta.progress !== undefined) {
+        var meta = to.meta.progress; // parse meta tags
+
+        _this.$Progress.parseMeta(meta);
+      } //  start the progress bar
+
+
+      _this.$Progress.start(); //  continue to next page
+
+
+      next();
+    }); //  hook the progress bar to finish after we've finished moving router-view
+
+    this.$router.afterEach(function (to, from) {
+      //  finish the progress bar
+      _this.$Progress.finish();
+    });
+  },
   mounted: function mounted() {
-    setTimeout(function () {//console.log(store.state.AuthenticationForAdmin.authUser.role_id);
+    //  [App.vue specific] When App.vue is finish loading finish the progress bar
+    this.$Progress.finish();
+    setTimeout(function () {//console.log(store.state.commonStoreForWebsite.isitwebsiteCheck);
+      //console.log(store.state.AuthenticationForAdmin.authUser.role_id);
       //console.log(store.state.AuthenticationForAdmin.isAdminAuthenticated);
     }, 500); // console.log(store.state.AuthenticationForCustomer.isAuthenticated); //get access to state
     //console.log(store.getters['AuthenticationForCustomer/isAuthenticated']); //get access to getters
     // setTimeout(() => {
     //   console.log(store.getters['AuthenticationForCustomer/isAuthenticated']);
     // }, 1000);
+    //setTimeout(() => {   
+    // if(this.isitwebsiteCheck !=  0 ){       
+    // if(store.state.commonStoreForWebsite.isitwebsiteCheck !=  0 ){      
+    //     //console.log('Work Fine');    
+    //     //############### Windown Load / $(window).on('load', function () {} ###############################
+    //     window.addEventListener('load', () => {
+    //         //initialization of HSMegaMenu component
+    //         $('.js-mega-menu').HSMegaMenu({
+    //             event: 'hover',
+    //             direction: 'horizontal',
+    //             pageContainer: $('.container'),
+    //             breakpoint: 767.98,
+    //             hideTimeOut: 0
+    //         });               
+    //         // initialization of svg injector module
+    //         $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
+    //     })
+    //     //############## Windown ready / $(document).on('ready', function () {} #############################
+    //     document.onreadystatechange = () => { 
+    //       if (document.readyState == "complete") { 
+    //          // initialization of header
+    //         $.HSCore.components.HSHeader.init($('#header'));
+    //         // initialization of animation
+    //         $.HSCore.components.HSOnScrollAnimation.init('[data-animation]');
+    //         // initialization of unfold component
+    //         $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+    //             afterOpen: function () {
+    //                 $(this).find('input[type="search"]').focus();
+    //             }
+    //         });
+    //         // initialization of popups
+    //         $.HSCore.components.HSFancyBox.init('.js-fancybox');
+    //         // initialization of countdowns
+    //         var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+    //             yearsElSelector: '.js-cd-years',
+    //             monthsElSelector: '.js-cd-months',
+    //             daysElSelector: '.js-cd-days',
+    //             hoursElSelector: '.js-cd-hours',
+    //             minutesElSelector: '.js-cd-minutes',
+    //             secondsElSelector: '.js-cd-seconds'
+    //         });
+    //         // initialization of malihu scrollbar
+    //         $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+    //         // initialization of forms
+    //         $.HSCore.components.HSFocusState.init();
+    //         // initialization of form validation
+    //         // $.HSCore.components.HSValidation.init('.js-validate', {
+    //         //     rules: {
+    //         //         confirmPassword: {
+    //         //             equalTo: '#signupPassword'
+    //         //         }
+    //         //     }
+    //         // });
+    //         // initialization of show animations
+    //         $.HSCore.components.HSShowAnimation.init('.js-animation-link');
+    //         // initialization of fancybox
+    //         $.HSCore.components.HSFancyBox.init('.js-fancybox');
+    //         // initialization of slick carousel
+    //         $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+    //         // initialization of go to
+    //         $.HSCore.components.HSGoTo.init('.js-go-to');
+    //         // initialization of hamburgers
+    //         $.HSCore.components.HSHamburgers.init('#hamburgerTrigger');
+    //         // initialization of unfold component
+    //         $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+    //             beforeClose: function () {
+    //                 $('#hamburgerTrigger').removeClass('is-active');
+    //             },
+    //             afterClose: function() {
+    //                 $('#headerSidebarList .collapse.show').collapse('hide');
+    //             }
+    //         });
+    //         $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
+    //             e.preventDefault();
+    //             var target = $(this).data('target');
+    //             if($(this).attr('aria-expanded') === "true") {
+    //                 $(target).collapse('hide');
+    //             } else {
+    //                 $(target).collapse('show');
+    //             }
+    //         });
+    //         // initialization of unfold component
+    //         $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+    //         // initialization of select picker
+    //         $.HSCore.components.HSSelectPicker.init('.js-select');
+    //         // initialization of HSScrollNav component
+    //         // $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
+    //         //   duration: 700
+    //         // });
+    //         // initialization of quantity counter
+    //         $.HSCore.components.HSQantityCounter.init('.js-quantity');
+    //         // initialization of forms
+    //         //$.HSCore.components.HSRangeSlider.init('.js-range-slider');
+    //       } 
+    //     }//end Document.onreadyStatechange       
+    // }//end authUser Check 
+    //}, 2500); 
   } //end mounted   
 
 });
@@ -3955,8 +4142,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       notification_message_type: ''
     };
   },
-  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('commonStoreForAll', ['authUser', 'systemSettings'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('commonStoreForWebsite', ['isitwebsiteCheck'] //isAuthenticated
-  )), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('commonStoreForAll', ['authUser', 'systemSettings'])), {}, {
+    // ...mapState( 
+    //       'commonStoreForWebsite', ['isitwebsiteCheck']
+    //       //isAuthenticated
+    // ),
     // ...mapState( 
     //       'AuthenticationForCustomer', ['isAuthenticated','authCustomer']
     // ),
@@ -4042,6 +4232,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   },
   created: function created() {
+    // console.log('Ok')
     //console.log(this.authPermissionsData);
     //console.log(this.authUser.role);
     //console.log(JSON.parse(this.authPermissions.permission).role.edit);
@@ -4054,7 +4245,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //window resize is destroy
     window.removeEventListener('resize', this.handleResize);
   },
-  mounted: function mounted() {
+  mounted: function mounted() {// console.log(store.state.commonStoreForWebsite.isitwebsiteCheck);
+    // console.log(this.$route.meta);
     // console.log(window.Vue);
     // console.log(Vue);
     // console.log('Width: '+this.window.width+ ' Height: ' + this.window.height );
@@ -4064,97 +4256,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if browse as website then it's value is '1', and if browse as admin then it's value in '' (Empty).
       if value is '1' then work the bellow code (Template script) for website only
     */
-    //console.log('Website:' + this.isitwebsiteCheck);
-    // if(this.isitwebsiteCheck != ''){
-    if (this.isitwebsiteCheck != 0) {
-      //############################# Windown Load ###################################            
-      //initialization of HSMegaMenu component
-      $('.js-mega-menu').HSMegaMenu({
-        event: 'hover',
-        direction: 'horizontal',
-        pageContainer: $('.container'),
-        breakpoint: 767.98,
-        hideTimeOut: 0
-      }); // initialization of svg injector module
-
-      $.HSCore.components.HSSVGIngector.init('.js-svg-injector'); //############################# Windown ready ###################################
-      // initialization of header
-
-      $.HSCore.components.HSHeader.init($('#header')); // initialization of animation
-
-      $.HSCore.components.HSOnScrollAnimation.init('[data-animation]'); // initialization of unfold component
-
-      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-        afterOpen: function afterOpen() {
-          $(this).find('input[type="search"]').focus();
-        }
-      }); // initialization of popups
-
-      $.HSCore.components.HSFancyBox.init('.js-fancybox'); // // initialization of countdowns
-      // var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
-      //     yearsElSelector: '.js-cd-years',
-      //     monthsElSelector: '.js-cd-months',
-      //     daysElSelector: '.js-cd-days',
-      //     hoursElSelector: '.js-cd-hours',
-      //     minutesElSelector: '.js-cd-minutes',
-      //     secondsElSelector: '.js-cd-seconds'
-      // });
-      // initialization of malihu scrollbar
-
-      $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar')); // initialization of forms
-
-      $.HSCore.components.HSFocusState.init(); // initialization of form validation
-      // $.HSCore.components.HSValidation.init('.js-validate', {
-      //     rules: {
-      //         confirmPassword: {
-      //             equalTo: '#signupPassword'
-      //         }
-      //     }
-      // });
-      // initialization of show animations
-
-      $.HSCore.components.HSShowAnimation.init('.js-animation-link'); // initialization of fancybox
-
-      $.HSCore.components.HSFancyBox.init('.js-fancybox'); //Slick slider call from HomePublic.vue component
-      // initialization of slick carousel
-      //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
-      // initialization of go to
-
-      $.HSCore.components.HSGoTo.init('.js-go-to'); // initialization of hamburgers
-
-      $.HSCore.components.HSHamburgers.init('#hamburgerTrigger'); // initialization of unfold component
-
-      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-        beforeClose: function beforeClose() {
-          $('#hamburgerTrigger').removeClass('is-active');
-        },
-        afterClose: function afterClose() {
-          $('#headerSidebarList .collapse.show').collapse('hide');
-        }
-      });
-      $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
-        e.preventDefault();
-        var target = $(this).data('target');
-
-        if ($(this).attr('aria-expanded') === "true") {
-          $(target).collapse('hide');
-        } else {
-          $(target).collapse('show');
-        }
-      }); // initialization of unfold component
-
-      $.HSCore.components.HSUnfold.init($('[data-unfold-target]')); // initialization of select picker
-      //$.HSCore.components.HSSelectPicker.init('.js-select');
-      // initialization of HSScrollNav component
-      // $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
-      //   duration: 700
-      // });
-      // initialization of quantity counter
-
-      $.HSCore.components.HSQantityCounter.init('.js-quantity'); // initialization of forms
-      //$.HSCore.components.HSRangeSlider.init('.js-range-slider');
-    } //end authUser Check        
-
   }
 }); //End Export default
 

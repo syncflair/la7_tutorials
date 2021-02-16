@@ -24,24 +24,34 @@
   Vue.use(VueLazyload)
 
   //with options
-  // const loadimage = require( window.location.origin + '/static/loading.gif')
+  //const loadimage = require('./static/images/loading.gif');
+  // const loadimage = require( window.location.origin + '/static/images/loading.gif')
   // const errorimage = require('./assets/error.gif')
 
-  // Vue.use(VueLazyload, {
-  //   preLoad: 1.3,
-  //   //error: errorimage,
-  //   loading: loadimage,
-  //   attempt: 1
-  // })
+  Vue.use(VueLazyload, {
+    preLoad: 1.3,
+    //error: errorimage,
+    loading: './static/images/loading.gif',
+    // loading: loadimage,
+    attempt: 1,
+    // the default is ['scroll', 'wheel', 'mousewheel', 'resize', 'animationend', 'transitionend']
+    listenEvents: [ 'scroll' ]
+  })
 
 
 /*
 *VueProgressBar
 */
   import VueProgressBar from 'vue-progressbar'
-  const options = { color: '#28a745', failedColor: '#dc3545', thickness: '2px',
+  
+  const options = { 
+    color: '#28a745', 
+    failedColor: '#dc3545', 
+    thickness: '2px',
     transition: { speed: '0.2s', opacity: '0.6s', termination: 300 },
-    autoRevert: true, location: 'top', inverse: false }
+    autoRevert: true, 
+    location: 'top', 
+    inverse: false }
   Vue.use(VueProgressBar, options);
 
 /*
@@ -67,6 +77,7 @@
   //   mode: 'history', //history mode - remove # (hash) from url
   //   //mode: 'hash', //hash mode = use # (hash) to url (Default mode)
   // })
+
 /*Import & Use Vue Router*/ 
 
 
@@ -293,6 +304,7 @@ router.beforeEach((to, from, next) => {
 
 
 const app = new Vue({
+
     el: '#app',
     router, //use Vue router from globally
     store,
@@ -325,12 +337,42 @@ const app = new Vue({
       //counttest, 
     }, 
 
+    created(){ 
+      // console.log(store.state.commonStoreForWebsite.isitwebsiteCheck);
+      // alert(store.state.AuthenticationForCustomer.isAuthenticated);
+
+      //  [App.vue specific] When App.vue is first loaded start the progress bar
+        this.$Progress.start()
+        //  hook the progress bar to start before we move router-view
+        this.$router.beforeEach((to, from, next) => {
+          //  does the page we want to go to have a meta.progress object
+          if (to.meta.progress !== undefined) {
+            let meta = to.meta.progress
+            // parse meta tags
+            this.$Progress.parseMeta(meta)
+          }
+          //  start the progress bar
+          this.$Progress.start()
+          //  continue to next page
+          next()
+        })
+        //  hook the progress bar to finish after we've finished moving router-view
+        this.$router.afterEach((to, from) => {
+          //  finish the progress bar
+          this.$Progress.finish()
+        })
+
+    },
+
     mounted() {
+      //  [App.vue specific] When App.vue is finish loading finish the progress bar
+      this.$Progress.finish();
+
+
       setTimeout(() => {
+        //console.log(store.state.commonStoreForWebsite.isitwebsiteCheck);
         //console.log(store.state.AuthenticationForAdmin.authUser.role_id);
         //console.log(store.state.AuthenticationForAdmin.isAdminAuthenticated);
-
-
       }, 500);
       // console.log(store.state.AuthenticationForCustomer.isAuthenticated); //get access to state
       //console.log(store.getters['AuthenticationForCustomer/isAuthenticated']); //get access to getters
@@ -338,6 +380,134 @@ const app = new Vue({
       // setTimeout(() => {
       //   console.log(store.getters['AuthenticationForCustomer/isAuthenticated']);
       // }, 1000);
+
+      
+      //setTimeout(() => {   
+        // if(this.isitwebsiteCheck !=  0 ){       
+        // if(store.state.commonStoreForWebsite.isitwebsiteCheck !=  0 ){      
+        //     //console.log('Work Fine');    
+
+        //     //############### Windown Load / $(window).on('load', function () {} ###############################
+        //     window.addEventListener('load', () => {
+        //         //initialization of HSMegaMenu component
+        //         $('.js-mega-menu').HSMegaMenu({
+        //             event: 'hover',
+        //             direction: 'horizontal',
+        //             pageContainer: $('.container'),
+        //             breakpoint: 767.98,
+        //             hideTimeOut: 0
+        //         });               
+
+        //         // initialization of svg injector module
+        //         $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
+        //     })
+            
+
+        //     //############## Windown ready / $(document).on('ready', function () {} #############################
+        //     document.onreadystatechange = () => { 
+        //       if (document.readyState == "complete") { 
+        //          // initialization of header
+        //         $.HSCore.components.HSHeader.init($('#header'));
+
+        //         // initialization of animation
+        //         $.HSCore.components.HSOnScrollAnimation.init('[data-animation]');
+
+        //         // initialization of unfold component
+        //         $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+        //             afterOpen: function () {
+        //                 $(this).find('input[type="search"]').focus();
+        //             }
+        //         });
+
+        //         // initialization of popups
+        //         $.HSCore.components.HSFancyBox.init('.js-fancybox');
+
+        //         // initialization of countdowns
+        //         var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+        //             yearsElSelector: '.js-cd-years',
+        //             monthsElSelector: '.js-cd-months',
+        //             daysElSelector: '.js-cd-days',
+        //             hoursElSelector: '.js-cd-hours',
+        //             minutesElSelector: '.js-cd-minutes',
+        //             secondsElSelector: '.js-cd-seconds'
+        //         });
+
+        //         // initialization of malihu scrollbar
+        //         $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+
+        //         // initialization of forms
+        //         $.HSCore.components.HSFocusState.init();
+
+        //         // initialization of form validation
+        //         // $.HSCore.components.HSValidation.init('.js-validate', {
+        //         //     rules: {
+        //         //         confirmPassword: {
+        //         //             equalTo: '#signupPassword'
+        //         //         }
+        //         //     }
+        //         // });
+
+        //         // initialization of show animations
+        //         $.HSCore.components.HSShowAnimation.init('.js-animation-link');
+
+        //         // initialization of fancybox
+        //         $.HSCore.components.HSFancyBox.init('.js-fancybox');
+
+        //         // initialization of slick carousel
+        //         $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+
+        //         // initialization of go to
+        //         $.HSCore.components.HSGoTo.init('.js-go-to');
+
+        //         // initialization of hamburgers
+        //         $.HSCore.components.HSHamburgers.init('#hamburgerTrigger');
+
+        //         // initialization of unfold component
+        //         $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+        //             beforeClose: function () {
+        //                 $('#hamburgerTrigger').removeClass('is-active');
+        //             },
+        //             afterClose: function() {
+        //                 $('#headerSidebarList .collapse.show').collapse('hide');
+        //             }
+        //         });
+
+        //         $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
+        //             e.preventDefault();
+
+        //             var target = $(this).data('target');
+
+        //             if($(this).attr('aria-expanded') === "true") {
+        //                 $(target).collapse('hide');
+        //             } else {
+        //                 $(target).collapse('show');
+        //             }
+        //         });
+
+        //         // initialization of unfold component
+        //         $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+
+        //         // initialization of select picker
+        //         $.HSCore.components.HSSelectPicker.init('.js-select');
+
+
+        //         // initialization of HSScrollNav component
+        //         // $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
+        //         //   duration: 700
+        //         // });
+
+        //         // initialization of quantity counter
+        //         $.HSCore.components.HSQantityCounter.init('.js-quantity');
+
+        //         // initialization of forms
+        //         //$.HSCore.components.HSRangeSlider.init('.js-range-slider');
+
+
+        //       } 
+        //     }//end Document.onreadyStatechange       
+          
+        // }//end authUser Check 
+      //}, 2500); 
 
 
     }, //end mounted   

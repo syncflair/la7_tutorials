@@ -178,6 +178,8 @@
         },
            
         mounted() {
+
+            // console.log('Height: ' +window.innerHeight + ' - Width: ' + window.innerWidth);
             //initialization of slick carousel (Slick Slider call from here, otherwise it get error)
             //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
 

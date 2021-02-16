@@ -294,7 +294,7 @@
 
                 <!-- SVG Background Shape -->
                 <div class="position-absolute right-0 bottom-0 left-0 z-index-n1">
-                    <img class="js-svg-injector" src="website/assets/svg/components/wave-bottom-with-dots.svg" alt="Image Description"
+                    <img class="js-svg-injector" v-lazy="baseURL+'/website/assets/svg/components/wave-bottom-with-dots.svg'" alt="Image Description"
                     data-parent="#SVGwaveWithDots">
                 </div>
                 <!-- End SVG Background Shape -->

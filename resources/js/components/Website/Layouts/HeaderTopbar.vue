@@ -33,7 +33,8 @@
                         <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                             <router-link to="#" class="u-header-topbar__nav-link"><i class="ec ec-transport mr-1"></i>Get Apps</router-link>
                         </li>
-                        <!-- <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
+
+                        <li class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
                             <div class="d-flex align-items-center">
                                 <div class="position-relative">
                                     <a id="languageDropdownInvoker" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" role="button"
@@ -59,8 +60,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </li> -->
-                        <li v-if="AccountNavLinkShow === true"  class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                        </li>
+
+                        <li v-if="!authCustomer"  class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                             <!-- Account Sidebar Toggle Button -->
                             <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link"
                                 aria-controls="sidebarContent"
@@ -72,7 +74,8 @@
                                 data-unfold-type="css-animation"
                                 data-unfold-animation-in="fadeInRight"
                                 data-unfold-animation-out="fadeOutRight"
-                                data-unfold-duration="500">
+                                data-unfold-duration="500"
+                                @click="FocusUsername()">
                                 <i class="ec ec-user mr-1"></i> Register <span class="text-gray-50">or</span> Sign in
                             </a>
                             <!-- End Account Sidebar Toggle Button -->
@@ -118,10 +121,10 @@
                                 <!-- End Language -->
                             </div>
                         </li>
-
+<!-- 
                         <li v-if="authSupplier" class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
                             <div class="d-flex align-items-center">
-                                <!-- Language -->
+                                
                                 <div class="position-relative">
                                     <a id="MyAccountDropdownInvoker" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" role="button"
                                         aria-controls="MyAccountDropdown"
@@ -135,9 +138,7 @@
                                         data-unfold-hide-on-scroll="true"
                                         data-unfold-animation-in="slideInUp"
                                         data-unfold-animation-out="fadeOut">
-                                        <!-- <span class="d-inline-block d-sm-none">US</span> -->
                                         <span class="d-none d-sm-inline-flex align-items-center">
-                                            <!-- <i class="ec ec-dollar mr-1"></i> -->
                                             <i class="ec ec-user mr-1"></i>
                                              My Account
                                         </span>
@@ -151,14 +152,14 @@
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-return" :class="[currentPage.includes('my-return')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-favorites"></i> Return</router-link>
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-replace" :class="[currentPage.includes('my-replace')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-user"></i> Replace</router-link>
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-profile" :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-user"></i> My Profile</router-link>
-                                        <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-payment-receivable" :class="[currentPage.includes('my-payment-receivable')] ? ActiveLinkClass : '' "><!-- <i class="fas fa-money-bill"></i> --> <i class="font-size-18 ec ec-payment"></i> Amount receivable</router-link>
+                                        <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-payment-receivable" :class="[currentPage.includes('my-payment-receivable')] ? ActiveLinkClass : '' "> <i class="font-size-18 ec ec-payment"></i> Amount receivable</router-link>
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/sspa/my-payment-history" :class="[currentPage.includes('my-payment-history')] ? ActiveLinkClass : '' "><i class="far fa-star"></i> Payment History</router-link>
                                         <a @click.prevent="SupplierLogout()" class="dropdown-item dropdown-item-custome transition-3d-hover" href="javascript:;"> <i class="fas fa-sign-out-alt pl-1"></i> Logout</a>
                                     </div>
                                 </div>
-                                <!-- End Language -->
+                                
                             </div>
-                        </li>
+                        </li> -->
 
 
                     </ul>
@@ -185,7 +186,7 @@
         computed: {
 
           ...mapState( 'AuthenticationForCustomer', ['authCustomer'] ),
-          ...mapState( 'AuthenticationForSupplier', ['authSupplier'] ),
+          // ...mapState( 'AuthenticationForSupplier', ['authSupplier'] ),
 
           //for active link management
             currentPage(){
@@ -195,7 +196,8 @@
             AccountNavLinkShow(){
               // // return ? false : true;
               //return this.authCustomer;
-              if(this.authCustomer || this.authSupplier){
+              if(this.authCustomer){
+              // if(this.authCustomer || this.authSupplier){
                 return false;
               }else{
                 return true; //f
@@ -222,6 +224,10 @@
 	    		// }
 	    	},
 
+            FocusUsername(){
+                FireEvent.$emit('FocusUsername'); //call to AccountSidebarNavigationToggler.vue component for focus username                
+            },
+
             CustomerLogout(){  
               this.$Progress.start(); //using progress-bar package
 
@@ -243,7 +249,7 @@
                   //this.$router.push({ path : '/auth/login' });   //route after successfule 
                   //this.$router.replace({ path : '/auth/login' });   //route after successfule 
                   //this.$router.go('/auth/login');
-                  toastr.success('Logout successfule'); 
+                  //toastr.success('Logout successfule'); 
                 //}
 
               })
@@ -252,31 +258,31 @@
               })   
             },  //End Customer Logout  
 
-            SupplierLogout(){  
-              this.$Progress.start(); //using progress-bar package
+            // SupplierLogout(){  
+            //   this.$Progress.start(); //using progress-bar package
 
-              axios.post('/supplier/logout')
-              .then(({ response }) => {          
-                  this.$Progress.finish(); 
+            //   axios.post('/supplier/logout')
+            //   .then(({ response }) => {          
+            //       this.$Progress.finish(); 
 
-                  //for security reson, Best Policy for API Based Authentication
-                  //localStorage.setItem('isAuthenticated', false);  
-                  //localStorage.removeItem('isAuthenticated');  
+            //       //for security reson, Best Policy for API Based Authentication
+            //       //localStorage.setItem('isAuthenticated', false);  
+            //       //localStorage.removeItem('isAuthenticated');  
 
-                  this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', false ); //
+            //       this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', false ); //
 
-                  window.location = '/home';
+            //       window.location = '/home';
 
-                  //this.$router.push({ path : '/auth/login' });   //route after successfule 
-                  //this.$router.replace({ path : '/auth/login' });   //route after successfule 
-                  //this.$router.go('/auth/login');
-                  toastr.success('Logout successfule'); 
+            //       //this.$router.push({ path : '/auth/login' });   //route after successfule 
+            //       //this.$router.replace({ path : '/auth/login' });   //route after successfule 
+            //       //this.$router.go('/auth/login');
+            //       toastr.success('Logout successfule'); 
 
-              })
-              .catch( () => {
-                this.$Progress.fail();
-              })   
-            },  //End Supplier Logout  
+            //   })
+            //   .catch( () => {
+            //     this.$Progress.fail();
+            //   })   
+            // },  //End Supplier Logout  
 
 		}, //end Methods
 

@@ -4,8 +4,13 @@
 /*!*********************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Website/Public/Wishlist/WishlistPublic.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************************************************************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 //
 //
 //
@@ -91,6 +96,105 @@
 //
 //
 //
+//import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
+//import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
+//const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "wishlist-Public-website",
+  data: function data() {
+    return {};
+  },
+  components: {//HeaderTopbar, FooterComponent,
+  },
+  methods: {},
+  created: function created() {},
+  mounted: function mounted() {
+    this.$nextTick(function () {
+      //initialization of HSMegaMenu component
+      $('.js-mega-menu').HSMegaMenu({
+        event: 'hover',
+        direction: 'horizontal',
+        pageContainer: $('.container'),
+        breakpoint: 767.98,
+        hideTimeOut: 0
+      }); // initialization of svg injector module
+
+      $.HSCore.components.HSSVGIngector.init('.js-svg-injector'); // initialization of header
+
+      $.HSCore.components.HSHeader.init($('#header')); // initialization of animation
+
+      $.HSCore.components.HSOnScrollAnimation.init('[data-animation]'); // initialization of unfold component
+
+      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+        afterOpen: function afterOpen() {
+          $(this).find('input[type="search"]').focus();
+        }
+      }); // initialization of countdowns
+      // var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+      //     yearsElSelector: '.js-cd-years',
+      //     monthsElSelector: '.js-cd-months',
+      //     daysElSelector: '.js-cd-days',
+      //     hoursElSelector: '.js-cd-hours',
+      //     minutesElSelector: '.js-cd-minutes',
+      //     secondsElSelector: '.js-cd-seconds'
+      // });
+      // initialization of malihu scrollbar
+
+      $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar')); // initialization of forms
+
+      $.HSCore.components.HSFocusState.init(); // initialization of form validation
+      // $.HSCore.components.HSValidation.init('.js-validate', {
+      //     rules: {
+      //         confirmPassword: {
+      //             equalTo: '#signupPassword'
+      //         }
+      //     }
+      // });
+      // initialization of show animations
+
+      $.HSCore.components.HSShowAnimation.init('.js-animation-link'); // initialization of fancybox
+      // initialization of popups
+
+      $.HSCore.components.HSFancyBox.init('.js-fancybox'); // initialization of slick carousel
+      // $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+      // initialization of go to
+
+      $.HSCore.components.HSGoTo.init('.js-go-to'); // initialization of hamburgers
+
+      $.HSCore.components.HSHamburgers.init('#hamburgerTrigger'); // initialization of unfold component
+
+      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+        beforeClose: function beforeClose() {
+          $('#hamburgerTrigger').removeClass('is-active');
+        },
+        afterClose: function afterClose() {
+          $('#headerSidebarList .collapse.show').collapse('hide');
+        }
+      });
+      $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
+        e.preventDefault();
+        var target = $(this).data('target');
+
+        if ($(this).attr('aria-expanded') === "true") {
+          $(target).collapse('hide');
+        } else {
+          $(target).collapse('show');
+        }
+      }); // initialization of unfold component
+
+      $.HSCore.components.HSUnfold.init($('[data-unfold-target]')); // initialization of select picker
+      // $.HSCore.components.HSSelectPicker.init('.js-select');
+      // initialization of HSScrollNav component
+      // $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
+      //   duration: 700
+      // });
+      // initialization of quantity counter
+      //$.HSCore.components.HSQantityCounter.init('.js-quantity');
+      // initialization of forms
+      //$.HSCore.components.HSRangeSlider.init('.js-range-slider');
+    }); //end this.$nextTick
+  }
+});
 
 /***/ }),
 
@@ -107,9 +211,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _WishlistPublic_vue_vue_type_template_id_9c31709e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WishlistPublic.vue?vue&type=template&id=9c31709e& */ "./resources/js/components/Website/Public/Wishlist/WishlistPublic.vue?vue&type=template&id=9c31709e&");
 /* harmony import */ var _WishlistPublic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WishlistPublic.vue?vue&type=script&lang=js& */ "./resources/js/components/Website/Public/Wishlist/WishlistPublic.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _WishlistPublic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _WishlistPublic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[__WEBPACK_IMPORT_KEY__]
-/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -148,11 +249,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WishlistPublic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./WishlistPublic.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/Website/Public/Wishlist/WishlistPublic.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WishlistPublic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WishlistPublic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ var __WEBPACK_REEXPORT_OBJECT__ = {};
-/* harmony reexport (unknown) */ for(const __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WishlistPublic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== "default") __WEBPACK_REEXPORT_OBJECT__[__WEBPACK_IMPORT_KEY__] = () => _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WishlistPublic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[__WEBPACK_IMPORT_KEY__]
-/* harmony reexport (unknown) */ __webpack_require__.d(__webpack_exports__, __WEBPACK_REEXPORT_OBJECT__);
- /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WishlistPublic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default())); 
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WishlistPublic_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 

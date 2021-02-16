@@ -155,12 +155,12 @@
                             </router-link> -->
 
                             <!-- cart link  -->
-                            <CartLink></CartLink>
+                            <!-- <CartLink></CartLink> -->
                             <!-- End cart link  -->
                             
                         </li>
 
-                        <li class="col d-xl-none px-2 px-sm-3">
+                        <li v-if="!authCustomer" class="col d-xl-none px-2 px-sm-3">
                             <!-- <router-link to="/my-account" class="text-gray-90" data-toggle="tooltip" data-placement="top" title="My Account"><i class="font-size-22 ec ec-user"></i></router-link> -->
 
                             <!-- Account Sidebar Toggle Button -->
@@ -175,10 +175,50 @@
                                 data-unfold-animation-in="fadeInRight"
                                 data-unfold-animation-out="fadeOutRight"
                                 data-unfold-duration="500">
-                                <i class="ec ec-user mr-1"></i> 
+                                <i class="ec ec-user mr-1">tt</i> 
                                 <!-- Register <span class="text-gray-50">or</span> Sign in -->
                             </a>
                             <!-- End Account Sidebar Toggle Button -->
+                        </li>
+
+                        <li v-if="authCustomer" class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
+                            <div class="d-flex align-items-center">
+                                <!-- Language -->
+                                <div class="position-relative">
+                                    <a id="MyAccountDropdownInvoker" class="dropdown-nav-link dropdown-toggle d-flex align-items-center u-header-topbar__nav-link font-weight-normal" href="javascript:;" role="button"
+                                        aria-controls="MyAccountDropdown"
+                                        aria-haspopup="true"
+                                        aria-expanded="false"
+                                        data-unfold-event="click"
+                                        data-unfold-target="#MyAccountDropdown"
+                                        data-unfold-type="css-animation"
+                                        data-unfold-duration="300"
+                                        data-unfold-delay="300"
+                                        data-unfold-hide-on-scroll="true"
+                                        data-unfold-animation-in="slideInUp"
+                                        data-unfold-animation-out="fadeOut">
+                                        <!-- <span class="d-inline-block d-sm-none">US</span> -->
+                                        <span class="d-none d-sm-inline-flex align-items-center title="My Account">
+                                            <!-- <i class="ec ec-dollar mr-1"></i> -->
+                                            <i class="ec ec-user mr-1"></i>                                             
+                                        </span>
+                                    </a>
+
+                                    <div id="MyAccountDropdown" class="dropdown-menu dropdown-unfold" aria-labelledby="MyAccountDropdownInvoker">
+                                        <router-link class="dropdown-item active- dropdown-item-custome transition-3d-hover" to="/auth/my-dashboard" 
+                                        :class="[currentPage.includes('my-dashboard')] ? ActiveLinkClass : '' "><i class="fas fa-tachometer-alt"></i> Dashboard</router-link>
+                                        <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-orders" :class="[currentPage.includes('my-orders')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-shopping-bag"></i> My Orders</router-link>
+                                        <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-cart" :class="[currentPage.includes('my-cart')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-favorites"></i> My Cart</router-link>
+                                        <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-wishlist" :class="[currentPage.includes('my-wishlist')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-favorites"></i> My Wishlist</router-link>
+                                        <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-profile" :class="[currentPage.includes('my-profile')] ? ActiveLinkClass : '' "><i class="font-size-18 ec ec-user"></i> My Profile</router-link>
+                                        <!-- <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-address" :class="[currentPage.includes('my-address')] ? ActiveLinkClass : '' " ><i class="far fa-address-book pl-1"></i> Address</router-link> -->
+                                        <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-vouchers" :class="[currentPage.includes('my-vouchers')] ? ActiveLinkClass : '' "><!-- <i class="fas fa-money-bill"></i> --> <i class="font-size-18 ec ec-payment"></i> My Vouchers</router-link>
+                                        <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-reviews" :class="[currentPage.includes('my-reviews')] ? ActiveLinkClass : '' "><i class="far fa-star"></i> My Reviews</router-link>
+                                        <a @click.prevent="CustomerLogout()" class="dropdown-item dropdown-item-custome transition-3d-hover" href="javascript:;"> <i class="fas fa-sign-out-alt pl-1"></i> Logout</a>
+                                    </div>
+                                </div>
+                                <!-- End Language -->
+                            </div>
                         </li>
 
                     </ul>
@@ -190,6 +230,10 @@
 </div>
 </template>
 <script>
+
+    import { mapState } from 'vuex' //for user MapState
+
+
 	import SidebarNavigationHeader1 from './SidebarNavigationHeader1.vue' //Load to all
     import CartLink from './CartLink.vue' //Load to all
     // import CartPopup from './CartPopup.vue' //Load to all
@@ -198,13 +242,24 @@
 
         name: "Header-Logo-Search-Icons-For-Home-website",
         data (){      
-            return {                            
+            return {  
+                ActiveLinkClass: 'active',                           
             }
         },
         components:{
             SidebarNavigationHeader1,
             CartLink, 
             //CartPopup,
+        },
+
+        computed: {
+
+          ...mapState( 'AuthenticationForCustomer', ['authCustomer'] ),
+
+          //for active link management
+            currentPage(){
+                return this.$route.path;
+            },
         },
 
         methods: {          

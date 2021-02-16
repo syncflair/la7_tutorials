@@ -146,15 +146,15 @@
             //required: true
           },
 
-          authsupplier: {
-            type: Object,
-            //required: true
-          },
+          // authsupplier: {
+          //   type: Object,
+          //   //required: true
+          // },
 
-          issspaauthenticated:{
-            type: Boolean,
-            //required: true
-          },
+          // issspaauthenticated:{
+          //   type: Boolean,
+          //   //required: true
+          // },
         },
 
         data (){      
@@ -180,6 +180,10 @@
             FooterFixed,
         },
 
+        computed: {
+
+        },
+
         watch: {
             /*************************************************************************************/ 
                 /*Add Remove Class based on window width change (Call from CommonGlobal.js)*/
@@ -201,22 +205,32 @@
         },           
 
         created(){
+
             //direct commit (mutations) to resources/js/store/commonStoreForAll.js
             this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', this.isauthenticated );             
             this.$store.commit('AuthenticationForCustomer/AUTH_CUSTOMER_CHECK', this.authcustomer ); //commit from props
 
 
-            this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', this.issspaauthenticated );             
-            this.$store.commit('AuthenticationForSupplier/AUTH_SUPPLIER_CHECK', this.authsupplier ); //commit from props
+            //this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', this.issspaauthenticated );             
+            //this.$store.commit('AuthenticationForSupplier/AUTH_SUPPLIER_CHECK', this.authsupplier ); //commit from props
 
             this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite ); 
 
         },
 
         destroyed() {
+
         },
            
         mounted() {
+            
+            // console.log('website-wrapper');
+            // console.log('Height: ' +window.innerHeight + ' - Width: ' + window.innerWidth);
+
+            // //  [App.vue specific] When App.vue is finish loading finish the progress bar
+            // this.$Progress.finish()
+
+            
             //initialization of slick carousel (Slick Slider call from here, otherwise it get error)
             //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
 
@@ -231,7 +245,13 @@
 
 
             //alert(this.$refs.screenWidth.clientHeight + '-' + this.$refs.screenWidth.clientWidth); //working
-            //console.log('Width: '+this.window.width+ ' Height: ' + this.window.height );   
+            //console.log('Width: '+this.window.width+ ' Height: ' + this.window.height );  
+
+            
+
+
+
+
         }
     }
 </script>
