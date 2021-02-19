@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB; //for database transection
 
 use Illuminate\Support\Facades\Mail;
-use App\Mail\CustomerNotificationMail;
+// use App\Mail\CustomerNotificationMail;
+
+use Carbon\Carbon;
+use App\Jobs\CustomerNotificationMailJob;
 
 
 class AdminCustomerProfileUpdateController extends Controller
@@ -97,9 +100,16 @@ class AdminCustomerProfileUpdateController extends Controller
 
 		            DB::commit();  
 
-		            if($customer != null){           
-		                $data = ["userInfo" => $request->all(), "tag" => "sendEmailVerificationCode"];
-		                Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));                
+		            if($customer != null){      
+
+		            	// send all mail in the queue job.
+			            $data = ["userInfo" => $request->all(), "tag" => "sendEmailVerificationCode"]; //pass with tag
+			            $job = (new CustomerNotificationMailJob($data))->delay( Carbon::now()->addSeconds(5) ); 
+			            dispatch($job);
+
+		                // $data = ["userInfo" => $request->all(), "tag" => "sendEmailVerificationCode"];
+		                // Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data )); 
+
 		                return response()->json(['success'=>'An email verification code send to your email.']);
 		                //return response()->json($request->all());  
 		            }
@@ -146,9 +156,17 @@ class AdminCustomerProfileUpdateController extends Controller
 
 		            DB::commit();  
 
-		            if($customer != null){           
-		                $data = ["userInfo" => $request->all(), "tag" => "emailHasBeenChanged"];
-		                Mail::to($data['userInfo']['new_email'])->send(new CustomerNotificationMail( $data ));                
+		            if($customer != null){   
+
+		            	// send all mail in the queue job.
+			            $data = ["userInfo" => $request->all(), "tag" => "emailHasBeenChanged"]; //pass with tag
+			            $job = (new CustomerNotificationMailJob($data))->delay( Carbon::now()->addSeconds(5) ); 
+			            dispatch($job);
+
+		                // $data = ["userInfo" => $request->all(), "tag" => "emailHasBeenChanged"];
+		                // Mail::to($data['userInfo']['new_email'])->send(new CustomerNotificationMail( $data )); 
+
+
 		                return response()->json(['success'=>'Email update.']); 
 		            }
 

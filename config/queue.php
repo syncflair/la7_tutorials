@@ -12,7 +12,8 @@ return [
     | syntax for every one. Here you may define a default connection.
     |
     */
-
+    //QUEUE_CONNECTION=sync default in .env, now change it to QUEUE_CONNECTION=database for enabling email queue 
+     
     'default' => env('QUEUE_CONNECTION', 'sync'),
 
     /*

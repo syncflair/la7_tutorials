@@ -10,7 +10,10 @@
 
 		<div class="logo pt-10"> 
 			<a href="{{ OrganizationInformation()->org_url }}" target="_blank">
-				<img src="{{asset( OrganizationInformation()->org_logo )}}" alt="Sorboraho Logo">
+				<!-- <img src="{{asset( OrganizationInformation()->org_logo )}}" alt="Sorboraho Logo"> -->
+				<img src="{{ asset( OrganizationInformation()->org_logo ) }}" alt="Sorboraho Logo">
+
+
 			</a>
 		</div>
 

@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB; //for database transection
 
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SupplierNotificationMail;
+use Carbon\Carbon;
+use App\Jobs\SupplierNotificationMailJob;
 
 class AdminSupplierProfileController extends Controller
 {
@@ -102,9 +103,18 @@ class AdminSupplierProfileController extends Controller
 
 		            DB::commit();  
 
-		            if($supplier != null){           
-		                $data = ["userInfo" => $request->all(), "tag" => "sendEmailVerificationCode"];
-		                Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));                
+		            if($supplier != null){  
+
+		            	// send all mail in the queue job.
+			            $data = ["userInfo" => $request->all(), "tag" => "sendEmailVerificationCode"]; //pass with tag
+			            $job = (new SupplierNotificationMailJob($data))
+			                        ->delay( Carbon::now()->addSeconds(5) ); 
+			            dispatch($job);
+
+		                // $data = ["userInfo" => $request->all(), "tag" => "sendEmailVerificationCode"];
+		                // Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
+
+
 		                return response()->json(['success'=>'An email verification code send to your email.']);
 		                //return response()->json($request->all());  
 		            }
@@ -151,9 +161,18 @@ class AdminSupplierProfileController extends Controller
 
 		            DB::commit();  
 
-		            if($supplier != null){           
-		                $data = ["userInfo" => $request->all(), "tag" => "emailHasBeenChanged"];
-		                Mail::to($data['userInfo']['new_email'])->send(new SupplierNotificationMail( $data ));                
+		            if($supplier != null){  
+
+		                 // send all mail in the queue job.
+			            $data = ["userInfo" => $request->all(), "tag" => "emailHasBeenChanged"]; //pass with tag
+			            $job = (new SupplierNotificationMailJob($data))
+			                        ->delay( Carbon::now()->addSeconds(5) ); 
+			            dispatch($job);  
+
+
+		                // $data = ["userInfo" => $request->all(), "tag" => "emailHasBeenChanged"];
+		                // Mail::to($data['userInfo']['new_email'])->send(new SupplierNotificationMail( $data )); 
+
 		                return response()->json(['success'=>'Email has been changed.']); 
 		            }
 

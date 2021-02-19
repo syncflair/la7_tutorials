@@ -33,7 +33,8 @@ class CreateCustomersTable extends Migration
             //$table->unsignedBigInteger('customer_type_id')->default(1);             
             $table->unsignedBigInteger('status_id')->default(4); //4 Not Verified
             $table->boolean('enable_notify')->default(false);
-            $table->string('avatar')->nullable();            
+            $table->string('avatar')->nullable();
+            $table->timestamp('last_login_at')->nullable(); //use to check last login             
             $table->rememberToken();
             $table->unsignedBigInteger('created_by')->nullable()->comment('Created by User');  
             $table->unsignedBigInteger('updated_by')->nullable()->comment('Updated by User'); 

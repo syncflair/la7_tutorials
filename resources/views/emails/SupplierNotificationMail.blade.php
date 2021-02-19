@@ -15,25 +15,25 @@
    
 
 
-    @if($email_data['tag'] == 'inactive')
+    @if($email_data['tag'] == 'inactiveByAdmin')
 
       <p class="mt-10 mb-10">
         <strong>Opps!</strong>, Your account  <strong> inactive </strong> by admin, Please contact with admin to re-active your account.
       </p>  <br>
     
-    @elseif($email_data['tag'] == 'active')
+    @elseif($email_data['tag'] == 'activeByAdmin')
 
       <p class="mt-10 mb-10">
         <strong>Congratulation !</strong>, Your account is <strong> active </strong> by admin, Now you can login to your account 
       </p> <br>
     
-    @elseif($email_data['tag'] == 'varify')
+    @elseif($email_data['tag'] == 'varifyByAdmin')
 
       <p class="mt-10 mb-10">
         <strong>Congratulation !</strong>, Your account is <strong> varified </strong> by Admin, Now you can login to your account
       </p>  <br>
 
-    @elseif($email_data['tag'] == 'register')
+    @elseif($email_data['tag'] == 'registerByAdmin')
       <p class="mt-10 mb-10">
         <strong>Congratulation</strong>, You are registered by sorboraho.com admin. Your Login credential details bellow:
       </p> <br> <br>

@@ -17,8 +17,11 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 
 use Illuminate\Support\Str; //for str::random
-use App\Mail\CustomerRegisterVerificationMail;
+
 use Illuminate\Support\Facades\Mail;
+//use Carbon\Carbon;
+use Illuminate\Support\Carbon;
+use App\Jobs\CustomerNotificationMailJob;
 
 class RegisterController extends Controller
 {
@@ -136,7 +139,15 @@ class RegisterController extends Controller
         ]);
 
         if($customer != null){
-            Mail::to($customer->email)->send(new CustomerRegisterVerificationMail($customer)); //for verification email send to customer
+
+            // send all mail in the queue job.
+            $data = ["userInfo" => $customer, "tag" => "NewCustomerRegister"]; //pass with tag
+            $job = (new CustomerNotificationMailJob($data))
+                        ->delay( Carbon::now()->addSeconds(5) ); 
+            dispatch($job);
+
+            //Mail::to($customer->email)->send(new CustomerRegisterVerificationMail($customer));
+            //$customer->notify(new VerifyEmail($customer)); //if using notification like this
         }
 
         Return $customer;

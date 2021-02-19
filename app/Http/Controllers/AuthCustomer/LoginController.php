@@ -12,6 +12,7 @@ use Illuminate\Validation\ValidationException;
 //use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request; //custome 
 use Session;
+use Carbon\Carbon;
 
 
 class LoginController extends Controller
@@ -115,8 +116,13 @@ class LoginController extends Controller
             // Authentication passed...
            // return redirect()->intended('dashboard-customer'); //if not this route this will redirect using middleware
 
-           return response()->json(['success'=>'1']); 
-           return redirect()->intended('auth/my-dashboard'); //if not this route this will redirect using middleware
+            //last login time update
+            // Auth::guard('customer')->user()->last_login_at = new DateTime();
+            Auth::guard('customer')->user()->last_login_at = Carbon::now()->toDateTimeString();
+            Auth::guard('customer')->user()->save();
+
+            return response()->json(['success'=>'1']); 
+            return redirect()->intended('auth/my-dashboard'); //if not this route this will redirect using middleware
         }
 
         if ( Auth::guard('customer')->attempt(['email'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ]) OR Auth::guard('customer')->attempt(['phone'=>$request->{$this->username()}, 'password'=>$request->password, 'status_id'=> 2 ]) ) {            

@@ -20,6 +20,7 @@ class SupplierResetPasswordNotification extends Notification
      */
     public function __construct($token)
     {
+        //Data pass from controller using this __construct
         $this->token = $token;
     }
 
@@ -31,7 +32,7 @@ class SupplierResetPasswordNotification extends Notification
      */
     public function via($notifiable)
     {
-        //when use sms need to change return ['sms']
+        //when use sms need to change return ['sms'] OR use Multi chanel like ['mail','sms']
         return ['mail'];
     }
 
@@ -45,6 +46,7 @@ class SupplierResetPasswordNotification extends Notification
     {
         return (new MailMessage)
                     ->line('You are receiving this email because we received a password reset request for your account.')
+                    // ->line('Use more line to call line() function again')
                     ->action('Reset Password', route('supplier.password.reset', $this->token))
                     //->action('Reset Password', url('client.password.reset', $this->$token))
                     ->line('This password reset link will expire in 60 minutes.');

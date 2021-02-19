@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('employee_id')->unique()->nullable()->comment('Connect with employee'); 
             $table->unsignedInteger('branch_id'); 
             $table->string('avatar')->nullable();            
+            // $table->timestamp('last_login_at')->nullable(); //use to check last login           
             $table->rememberToken();
             $table->timestamps();
         });

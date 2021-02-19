@@ -8,11 +8,15 @@ use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Facades\Hash;
 use App\Mail\CustomerRegisterByAdminMail;
-use App\Mail\CustomerNotificationMail;
+// use App\Mail\CustomerNotificationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB; //for database transection
 use App\Models\Customer;
 use App\Models\Customer\CustomerAddress;
+
+
+use Carbon\Carbon;
+use App\Jobs\CustomerNotificationMailJob;
 
 
 class CustomerController extends Controller
@@ -117,8 +121,15 @@ class CustomerController extends Controller
             DB::commit();  
 
             if($customer != null){           
-                $data = ["userInfo" => $request->all(), "tag" => "register"];
-                Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));                
+                 // send all mail in the queue job.
+                $data = ["userInfo" => $request->all(), "tag" => "registerByAdmin"]; //pass with tag
+                $job = (new CustomerNotificationMailJob($data))
+                            ->delay( Carbon::now()->addSeconds(5) ); 
+                dispatch($job);
+
+                // $data = ["userInfo" => $request->all(), "tag" => "registerByAdmin"];
+                // Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));  
+
                 return response()->json(['success'=>'Customer Created.']); 
             }
 
@@ -332,9 +343,16 @@ class CustomerController extends Controller
         $data->updated_by = \Auth::user()->id; 
         $data->save();
 
-        if($data){           
-            $data = ["userInfo" => $data, "tag" => "varify"];
-            Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));
+        if($data){          
+
+             // send all mail in the queue job.
+            $data = ["userInfo" => $data, "tag" => "varifyByAdmin"]; //pass with tag
+            $job = (new CustomerNotificationMailJob($data))
+                        ->delay( Carbon::now()->addSeconds(5) ); 
+            dispatch($job);
+            
+            // $data = ["userInfo" => $data, "tag" => "varify"];
+            // Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));
 
             return response()->json(['success'=> 'Customer verified now']);
         }
@@ -346,9 +364,16 @@ class CustomerController extends Controller
         $data->status_id = 2; 
         $data->save();
 
-        if($data){           
-            $data = ["userInfo" => $data, "tag" => "inactive"];
-            Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));
+        if($data){      
+
+            // send all mail in the queue job.
+            $data = ["userInfo" => $data, "tag" => "inactiveByAdmin"]; //pass with tag
+            $job = (new CustomerNotificationMailJob($data))
+                        ->delay( Carbon::now()->addSeconds(5) ); 
+            dispatch($job);
+
+            // $data = ["userInfo" => $data, "tag" => "inactive"];
+            // Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));
 
             return response()->json(['success'=> 'Inactive Customer']);
         }         
@@ -359,9 +384,16 @@ class CustomerController extends Controller
         $data->status_id = 1; 
         $data->save();
 
-        if($data){           
-            $data = ["userInfo" => $data, "tag" => "active"];
-            Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));
+        if($data){  
+
+            // send all mail in the queue job.
+            $data = ["userInfo" => $data, "tag" => "activeByAdmin"]; //pass with tag
+            $job = (new CustomerNotificationMailJob($data))
+                        ->delay( Carbon::now()->addSeconds(5) ); 
+            dispatch($job);  
+
+            // $data = ["userInfo" => $data, "tag" => "active"];
+            // Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));
 
             return response()->json(['success'=> 'Active Customer']);
         }

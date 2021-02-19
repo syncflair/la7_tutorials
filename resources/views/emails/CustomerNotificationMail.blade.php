@@ -15,25 +15,43 @@
     
    
 
-    @if($email_data['tag'] == 'inactive')
+    @if($email_data['tag'] == 'inactiveByAdmin')
+
       <p class="mt-10 mb-10">
-        <strong>Opps!</strong>, Your account  <strong> inactive </strong> by admin, Please contact with admin to re-active your account.
-      </p>  <br>
+        <strong>Opps!</strong> <br>
+
+        Your account  <strong> inactive </strong> by admin.
+      </p>  
+      <p class="mt-10 mb-10">
+        Please contact with support team of <a class="btn btn-default link-style"  target="_blank" href="https://sorboraho.com">Sorboraho</a> to re-active your account.
+      </p> 
     
-    @elseif($email_data['tag'] == 'active')
-      <p class="mt-10 mb-10">
-        <strong>Congratulation !</strong>, Your account is <strong> active </strong> by admin, Now you can login to your account 
-      <p><br> 
+    @elseif($email_data['tag'] == 'activeByAdmin')
 
-    @elseif($email_data['tag'] == 'varify')
       <p class="mt-10 mb-10">
-        <strong>Congratulation !</strong>, Your account is <strong> varified </strong> by Admin, Now you can login to your account
-      <p><br>
+        <strong>Congratulation !</strong>
+      <p class="mt-10 mb-10">
+        Your account is <strong> active </strong> by admin, Now you can <a class="btn btn-default link-style"  target="_blank" href="{{ url('auth/login') }}">login</a> to your account 
+      <p>
 
-    @elseif($email_data['tag'] == 'register')
+    @elseif($email_data['tag'] == 'varifyByAdmin')
+
       <p class="mt-10 mb-10">
-        <strong>Congratulation</strong>, You are registered by sorboraho.com admin. Your Login credential details bellow: 
-      </p><br>
+        <strong>Congratulation !</strong>
+      <p>
+      <p class="mt-10 mb-10">
+        Your account is <strong> varified </strong> by Admin, Now you can <a class="btn btn-default link-style"  target="_blank" href="{{ url('auth/login') }}">login</a> to your account
+      <p>
+
+    @elseif($email_data['tag'] == 'registerByAdmin')
+
+      <p class="mt-10 mb-10">
+        <strong>Congratulation</strong>, You are registered by sorboraho.com admin.
+      </p>
+
+      <p class="mt-10 mb-10">
+        Keep your login credetial safe. Your Login credential details bellow: 
+      </p>
 
       <div  style="padding-left: 20px; margin-top: 10px; margin-bottom: 10px;">
         <table class="table">
@@ -42,14 +60,24 @@
           <tr> <td>Password:</td> <td>{{$email_data['userInfo']['password']}} </td></tr>
           <tr> 
               <td>Login:</td> 
-              <td><a class="btn btn-default link-style"  target="_blank" href="{{ url('customer/login') }}">Login</a> </td>
+              <td><a class="btn btn-default link-style"  target="_blank" href="{{ url('auth/login') }}">Login</a> </td>
           </tr>
         </table>
       </div>
 
     @elseif($email_data['tag'] == 'sendEmailVerificationCode')
+
       <p class="mt-10 mb-10">
         Your email change verification code : <strong> {{ $email_data['userInfo']['generate_email_verification_code'] }} </strong><br>
+      </p>
+
+    @elseif($email_data['tag'] == 'sendEmailToInactiveCustomer')
+      <p class="mt-10 mb-10">
+        You last login to <a href="https://sorboraho.com">sorboraho</a> 
+
+          {{ \Carbon\Carbon::parse($email_data['userInfo']['last_login_at'])->diffForHumans() }}.
+
+         please <strong> <a class="btn btn-default link-style"  target="_blank" href="{{ url('auth/login') }}">Login</a> </strong><br>
       </p>
 
     @elseif($email_data['tag'] == 'emailHasBeenChanged')
@@ -68,6 +96,21 @@
             <td><a class="btn btn-default link-style"  target="_blank" href="{{ url('auth/login') }}">Login</a> </td>
           </tr>
         </table>
+      </div>
+
+
+    @elseif($email_data['tag'] == 'NewCustomerRegister')
+
+      <p class="mt-10 mb-10">
+        <strong>Congratulation</strong>, You are registered to sorboraho.com. 
+      </p>
+
+      <p class="mt-10 mb-10">
+        Please confirm your verification link: <a href="{{ url('customer/verify', $email_data['userInfo']['email_verification_code'] )}}">Verify you email</a>.
+      </p>
+      
+      <div style="margin-top: 20px;">
+        <a class="btn btn-default link-style"  target="_blank" href="{{ url('auth/login') }}">Login</a>    
       </div>
 
     @endif

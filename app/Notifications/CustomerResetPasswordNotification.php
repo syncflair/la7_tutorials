@@ -20,6 +20,7 @@ class CustomerResetPasswordNotification extends Notification
      */
     public function __construct($token)
     {
+        //Data pass from controller using this __construct
         $this->token = $token;
     }
 
@@ -31,7 +32,7 @@ class CustomerResetPasswordNotification extends Notification
      */
     public function via($notifiable)
     {
-        //when use sms need to change return ['sms']
+        //when use sms need to change return ['sms'] OR use Multi chanel like ['mail','sms']
         return ['mail'];
     }
 

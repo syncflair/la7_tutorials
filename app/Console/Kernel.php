@@ -1,9 +1,10 @@
-<?php
+<?php // # php artisan schedule:run  (run this command all the time) / schedule all custome command here
 
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+//use App\Console\Commands\MailToInactiveCustomer;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        \App\Console\Commands\MailToInactiveCustomer::class,
     ];
 
     /**
@@ -25,6 +26,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        $schedule->command('mail:email-to-inactive-customer')->dailyAt('13:00'); //->daily(); run this command dayly at 1:00 PM
     }
 
     /**

@@ -31,8 +31,12 @@
 		.logo{text-align: center;} 
 		.logo img{width: 100px; height: 100px}
 
-		.table-social{border:unset !important; display: inline-table;}
-		.table-social tr td{padding: 2px 5px 2px 5px;}
+		/*.table-social{border:unset !important; display: inline-table;}
+		.table-social tr td{padding: 2px 5px 2px 5px;}*/
+		.social-contant{ display: table;   /* Allow the centering to work */ margin: 0 auto; }
+		.social-ul{ padding-left: 0px; list-style: none; //text-align: center;}
+		.social-ul li{ display:inline;  }
+		.social-ul li a{ padding: 2px;}
 		.img-size{width: 20px; height: 20px;}
 		.main-footer{padding: 5px; text-align: center; }
 		.main-footer a{color:#f6993f; text-decoration: none;}

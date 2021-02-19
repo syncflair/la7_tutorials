@@ -11,12 +11,16 @@ use Illuminate\Support\Str; //for str::random
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Carbon;
 //use App\Mail\SupplierRegisterByAdminMail;
-use App\Mail\SupplierNotificationMail;
-use Illuminate\Support\Facades\Mail;
 use App\Models\Supplier;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Config; //that for call constants form app/config
+
+
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Carbon;
+// use Carbon\Carbon;
+use App\Jobs\SupplierNotificationMailJob;
 
 
 class SupplierController extends Controller
@@ -136,9 +140,16 @@ class SupplierController extends Controller
 
         $supplier = Supplier::create($data); 
 
-        if($supplier){           
-            $data = ["userInfo" => $request->all(), "tag" => "register"];
-            Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
+        if($supplier){    
+
+            // send all mail in the queue job.
+            $data = ["userInfo" => $request->all(), "tag" => "registerByAdmin"]; //pass with tag
+            $job = (new SupplierNotificationMailJob($data))
+                        ->delay( Carbon::now()->addSeconds(5) ); 
+            dispatch($job);
+
+            // $data = ["userInfo" => $request->all(), "tag" => "register"];
+            // Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
 
             return response()->json(['success'=>'Supplier inserted']);
         }
@@ -400,9 +411,16 @@ class SupplierController extends Controller
         $data->updated_by = \Auth::user()->id; 
         $data->save();
 
-        if($data){           
-            $data = ["userInfo" => $data, "tag" => "varify"];
-            Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
+        if($data){   
+
+            // send all mail in the queue job.
+            $data = ["userInfo" => $data, "tag" => "varifyByAdmin"]; //pass with tag
+            $job = (new SupplierNotificationMailJob($data))
+                        ->delay( Carbon::now()->addSeconds(5) ); 
+            dispatch($job);
+
+            // $data = ["userInfo" => $data, "tag" => "varify"];
+            // Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
 
             return response()->json(['success'=> 'Supplier verified now']);
         }
@@ -414,9 +432,16 @@ class SupplierController extends Controller
         $data->status_id = 2; 
         $data->save();
 
-        if($data){           
-            $data = ["userInfo" => $data, "tag" => "inactive"];
-            Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
+        if($data){ 
+
+            // send all mail in the queue job.
+            $data = ["userInfo" => $data, "tag" => "inactiveByAdmin"]; //pass with tag
+            $job = (new SupplierNotificationMailJob($data))
+                        ->delay( Carbon::now()->addSeconds(5) ); 
+            dispatch($job);
+
+            // $data = ["userInfo" => $data, "tag" => "inactive"];
+            // Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
 
             return response()->json(['success'=> 'Inactive Supplier']);
         }
@@ -428,9 +453,16 @@ class SupplierController extends Controller
         $data->status_id = 1; 
         $data->save();
 
-        if($data){           
-            $data = ["userInfo" => $data, "tag" => "active"];
-            Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
+        if($data){       
+
+            // send all mail in the queue job.
+            $data = ["userInfo" => $data, "tag" => "activeByAdmin"]; //pass with tag
+            $job = (new SupplierNotificationMailJob($data))
+                        ->delay( Carbon::now()->addSeconds(5) ); 
+            dispatch($job);
+
+            // $data = ["userInfo" => $data, "tag" => "active"];
+            // Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
 
             return response()->json(['success'=> 'Active Supplier']);
         }  
