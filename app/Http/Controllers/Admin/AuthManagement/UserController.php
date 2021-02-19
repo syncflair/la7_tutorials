@@ -13,7 +13,8 @@ use Illuminate\Support\Str; //for str::random
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Config; //get constant velue without - \Config::get('constants.UserFliesPath'); app/config
 
-use App\Mail\UserNotification;
+// use App\Mail\UserNotification;
+use App\Jobs\UserNotificationMailJob;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Carbon;
 
@@ -98,6 +99,8 @@ class UserController extends Controller
         $data['password'] = Hash::make($request->password); //make hash password
         //$request['password'] = Hash::make($request->password); //make hash password
         //unset($request['confirm_password']); //unset confirm_password from send to database
+       
+        $data['email_verified_at'] = $request->status_id != 1 ? NULL : Carbon::now(); 
 
         $image_base64 = $request->avatar;
 
@@ -132,9 +135,24 @@ class UserController extends Controller
         }   
 
         $user = User::create($data); 
-        if($request->status_id != 1){ //if user status is assigned to active than mail not send
-            $user->sendEmailVerificationNotification();  ////for verification email send
-        }
+
+        if($user != null){
+            if($request->status_id != 1){ //if user status is assigned to active than mail not send
+                $user->sendEmailVerificationNotification();  ////for verification email send
+
+                $data = ["userInfo" => $request->all(), "tag" => "registerByAdminWithVerify"]; //pass with tag
+                $job = (new UserNotificationMailJob($data))
+                            ->delay( Carbon::now()->addSeconds(5) ); 
+                dispatch($job);
+            }else{
+
+                // send all mail in the queue job.
+                $data = ["userInfo" => $request->all(), "tag" => "registerByAdminWithoutVerify"]; //pass with tag
+                $job = (new UserNotificationMailJob($data))
+                            ->delay( Carbon::now()->addSeconds(5) ); 
+                dispatch($job);
+            }
+        }        
 
         return response()->json(['success'=>'User Created']);
        // \Mail::to($user->email)->send(new VerificationEmail($user)); //for verification email send         
@@ -375,23 +393,42 @@ class UserController extends Controller
         $user->status_id = 1 ; 
         $user->save();
 
+        // send all mail in the queue job.
+        $data = ["userInfo" => $user, "tag" => "verifyByAdmin"]; //pass with tag
+        $job = (new UserNotificationMailJob($data))
+                    ->delay( Carbon::now()->addSeconds(5) ); 
+        dispatch($job);
+
         //\Mail::to($user->email)->send(new userAcknowledge($id)); //for verification email send
-        Mail::to($user->email)->send(new UserNotification($user)); //for verification email send
+        // Mail::to($user->email)->send(new UserNotification($user)); //for verification email send
         return response()->json(['success'=> $user->name.' is verifyed Now']);
     }
 
     public function inactive_user($id){
-        $data = User::find($id);
-        $data->status_id = 2; 
-        $data->save();
+        $user = User::find($id);
+        $user->status_id = 2; 
+        $user->save();
+
+        // send all mail in the queue job.
+        $data = ["userInfo" => $user, "tag" => "inactiveByAdmin"]; //pass with tag
+        $job = (new UserNotificationMailJob($data))
+                    ->delay( Carbon::now()->addSeconds(5) ); 
+        dispatch($job);
         //Mail::to($user->email)->send(new UserNotification($user)); //for verification email send
         return response()->json(['success'=> 'Inactive User']);
     }
 
     public function active_user($id){
-        $data = User::find($id);
-        $data->status_id = 1; 
-        $data->save();
+        $user = User::find($id);
+        $user->status_id = 1; 
+        $user->save();
+
+         // send all mail in the queue job.
+        $data = ["userInfo" => $user, "tag" => "activeByAdmin"]; //pass with tag
+        $job = (new UserNotificationMailJob($data))
+                    ->delay( Carbon::now()->addSeconds(5) ); 
+        dispatch($job);
+
         //Mail::to($user->email)->send(new UserNotification($user)); //for verification email send
         return response()->json(['success'=> 'Active User']);
     }

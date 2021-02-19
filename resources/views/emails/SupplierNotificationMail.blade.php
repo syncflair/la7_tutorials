@@ -33,7 +33,7 @@
         <strong>Congratulation !</strong>, Your account is <strong> varified </strong> by Admin, Now you can login to your account
       </p>  <br>
 
-    @elseif($email_data['tag'] == 'registerByAdmin')
+    @elseif($email_data['tag'] == 'registerByAdminWithoutVerify')
       <p class="mt-10 mb-10">
         <strong>Congratulation</strong>, You are registered by sorboraho.com admin. Your Login credential details bellow:
       </p> <br> <br>
@@ -42,13 +42,37 @@
         <table class="table">
           <tr> <td>Email:</td> <td>{{$email_data['userInfo']['email']}} </td></tr>
           <tr> <td>Phone:</td> <td>{{$email_data['userInfo']['phone']}} </td></tr>
-          <tr> <td>Password:</td> <td>{{$email_data['userInfo']['password']}} </td></tr>
-          <tr> 
-            <td>Login:</td> 
-            <td><a class="btn btn-default link-style"  target="_blank" href="{{ url('supplier/login') }}">Login</a> </td>
-          </tr>
+          <tr> <td>Password:</td> <td>{{$email_data['userInfo']['password']}} </td></tr>     
         </table>
-      </div>
+      </div><br>
+
+      <p class="mt-10 mb-10">
+        Your <a class="btn btn-default link-style"  target="_blank" href="{{ url('supplier/login') }}">Login</a> URL, Please don't share your login url.
+      </p> 
+
+    @elseif($email_data['tag'] == 'registerByAdminWithVerify')
+      <p class="mt-10 mb-10">
+        <strong>Congratulation</strong>, You are registered by sorboraho.com admin.
+      </p> <br> 
+
+      <p class="mt-10 mb-10">
+        Your email is not verified. Please confirm your verification link: <a href="{{ url('supplier/verify', $email_data['userInfo']['generate_email_verification_code'] )}}">Verify you email</a>.
+      </p><br>
+
+      <p class="mt-10 mb-10">
+        Your Login credential details bellow:
+      </p>
+      <div  style="padding-left: 20px; margin-top: 10px; margin-bottom: 10px;">
+        <table class="table">
+          <tr> <td>Email:</td> <td>{{$email_data['userInfo']['email']}} </td></tr>
+          <tr> <td>Phone:</td> <td>{{$email_data['userInfo']['phone']}} </td></tr>
+          <tr> <td>Password:</td> <td>{{$email_data['userInfo']['password']}} </td></tr>     
+        </table>
+      </div><br>
+
+      <p class="mt-10 mb-10">
+        Your <a class="btn btn-default link-style"  target="_blank" href="{{ url('supplier/login') }}">Login</a> URL, Please don't share your login url.
+      </p>
 
     @elseif($email_data['tag'] == 'sendEmailVerificationCode') 
 

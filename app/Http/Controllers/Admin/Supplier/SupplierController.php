@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str; //for str::random
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Carbon;
 //use App\Mail\SupplierRegisterByAdminMail;
 use App\Models\Supplier;
 
@@ -86,6 +85,9 @@ class SupplierController extends Controller
             'status_id.required' => 'The User Status field is required.',
             'vendor_id.required' => 'Please Select Vendor.',
         ]);
+
+        $random_hash = sha1(Str::random(40)); //Hash::make(Str::random(40)) 
+        $request->request->add(['generate_email_verification_code' => $random_hash ]); //add something new directly to the Request Object
        
         $data =array();
         $data['name']=$request->name;
@@ -94,8 +96,11 @@ class SupplierController extends Controller
         $data['vendor_id']=$request->vendor_id;       
         $data['status_id']=$request->status_id;        
         $data['supplier_desc']=$request->supplier_desc;        
-        $data['supplier_address']=$request->supplier_address;       
+        $data['supplier_address']=$request->supplier_address;  
+        $data['email_verification_code']= $random_hash;     
         $data['password'] = Hash::make($request->password); //make hash password
+
+        $data['email_verified_at'] = $request->status_id != 1 ? NULL : Carbon::now(); 
 
         $data['created_by']= \Auth::user()->id;  
 
@@ -140,13 +145,22 @@ class SupplierController extends Controller
 
         $supplier = Supplier::create($data); 
 
-        if($supplier){    
+        if($supplier != null){           
 
-            // send all mail in the queue job.
-            $data = ["userInfo" => $request->all(), "tag" => "registerByAdmin"]; //pass with tag
-            $job = (new SupplierNotificationMailJob($data))
-                        ->delay( Carbon::now()->addSeconds(5) ); 
-            dispatch($job);
+            if($request->status_id != 1){ //if user status is assigned to active than mail not send
+
+                $data = ["userInfo" => $request->all(), "tag" => "registerByAdminWithVerify"]; //pass with tag
+                $job = (new SupplierNotificationMailJob($data))
+                            ->delay( Carbon::now()->addSeconds(5) ); 
+                dispatch($job);
+            }else{
+
+                // send all mail in the queue job.
+                $data = ["userInfo" => $request->all(), "tag" => "registerByAdminWithoutVerify"]; //pass with tag
+                $job = (new SupplierNotificationMailJob($data))
+                            ->delay( Carbon::now()->addSeconds(5) ); 
+                dispatch($job);
+            }
 
             // $data = ["userInfo" => $request->all(), "tag" => "register"];
             // Mail::to($data['userInfo']['email'])->send(new SupplierNotificationMail( $data ));
@@ -155,6 +169,36 @@ class SupplierController extends Controller
         }
             
     }
+
+
+
+    public function verifyUser(Request $request){
+        //dd($request->token);
+       $verifySupplier = Supplier::where('email_verification_code', $request->token)->first();
+       //dd($verifySupplier);
+
+       if($verifySupplier != null){
+            $verifySupplier->status_id = 1;
+            $verifySupplier->email_verified_at = now(); //Carbon::now();
+            $verifySupplier->email_verification_code = null;
+            $verifySupplier->save();
+
+            // session::put('success','You verified now, Please login');  
+            //return response()->json(['error'=>'You verified now, Please login']);          
+            //return redirect()->route('Supplier.login');
+            return redirect()->route('supplier.login');
+            //return redirect()->intended();
+
+       }elseif($verifySupplier == null){
+            // session::put('error','Your e-mail is already verified, Please Login or Contact with Admin');  
+            //return response()->json(['error'=>'Your e-mail is already verified, Please Login or Contact with Admin']);
+            //return redirect()->route('Supplier.login');
+            return redirect()->route('supplier.login');
+            //return redirect()->intended();
+       }
+    }
+
+
 
     /**
      * Display the specified resource.

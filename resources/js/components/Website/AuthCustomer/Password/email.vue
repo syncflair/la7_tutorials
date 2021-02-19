@@ -111,6 +111,8 @@
         },
            
         mounted() {
+
+            
              this.$nextTick(function () {
 
                 //initialization of HSMegaMenu component

@@ -133,6 +133,8 @@ Route::post('supplier/password/email','AuthSupplier\ForgotPasswordController@sen
 Route::get('supplier/password/reset/{token}','AuthSupplier\ResetPasswordController@showResetForm')->name('supplier.password.reset');
 Route::post('supplier/password/reset','AuthSupplier\ResetPasswordController@reset')->name('supplier.password.update');
 
+Route::get('/supplier/verify/{token}', 'Admin\Supplier\SupplierController@verifyUser'); //Supplier verification route
+
 
 /***************************************************************************/
 /* Supplier authenticatiion and AdminSupplier middleware */
@@ -211,8 +213,8 @@ Route::group(['middleware'=>['AdminSupplier','auth:supplier'] ], function(){
   Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
   // Registration Routes...
-  Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-  Route::post('register', 'Auth\RegisterController@register');
+  //Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+  //Route::post('register', 'Auth\RegisterController@register');
 
   // Password Reset Routes...
   Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');

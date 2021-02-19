@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 use Illuminate\Support\Facades\Hash;
-use App\Mail\CustomerRegisterByAdminMail;
+use Illuminate\Support\Str; //for str::random
+// use App\Mail\CustomerRegisterByAdminMail;
 // use App\Mail\CustomerNotificationMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\DB; //for database transection
@@ -84,6 +85,9 @@ class CustomerController extends Controller
         try{
             DB::beginTransaction();
 
+            $random_hash = sha1(Str::random(40)); //Hash::make(Str::random(40)) 
+            $request->request->add(['generate_email_verification_code' => $random_hash ]); //add something new directly to the Request Object
+
             $customer = Customer::create([
                 'customer_code' => customer_code_generate(),
                 'coa_code' => 103, //Asset - Accounts Receivable 103
@@ -94,6 +98,7 @@ class CustomerController extends Controller
                 'status_id' => $request->status_id,
                 'customer_group_id' => $request->customer_group_id,
                 'customer_membership_id' => $request->customer_membership_id,
+                'email_verification_code'=> $random_hash,
                 //'customer_group' => $request->customer_group,
                 'enable_notify' => $request->enable_notify == NULL ? 0 : $request->enable_notify,
                 'created_by' => \Auth::user()->id, 
@@ -120,13 +125,24 @@ class CustomerController extends Controller
 
             DB::commit();  
 
-            if($customer != null){           
-                 // send all mail in the queue job.
-                $data = ["userInfo" => $request->all(), "tag" => "registerByAdmin"]; //pass with tag
-                $job = (new CustomerNotificationMailJob($data))
-                            ->delay( Carbon::now()->addSeconds(5) ); 
-                dispatch($job);
+            if($customer != null){    
 
+                if($request->status_id != 1){ //if user status is assigned to active than mail not send
+                
+                    $data = ["userInfo" => $request->all(), "tag" => "registerByAdminWithVerify"]; //pass with tag
+                    $job = (new CustomerNotificationMailJob($data))
+                                ->delay( Carbon::now()->addSeconds(5) ); 
+                    dispatch($job);
+
+                }else{
+
+                    $data = ["userInfo" => $request->all(), "tag" => "registerByAdminWithoutVeriry"]; //pass with tag
+                    $job = (new CustomerNotificationMailJob($data))
+                                ->delay( Carbon::now()->addSeconds(5) ); 
+                    dispatch($job);
+
+                }
+                
                 // $data = ["userInfo" => $request->all(), "tag" => "registerByAdmin"];
                 // Mail::to($data['userInfo']['email'])->send(new CustomerNotificationMail( $data ));  
 

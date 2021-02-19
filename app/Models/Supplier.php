@@ -22,7 +22,7 @@ class Supplier extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'phone', 'password', 'supplier_type', 'status_id','vendor_id','avatar','supplier_desc','supplier_address','created_by','updated_by', 'email_verification_code','phone_verification_code','brand_shop_id'
+        'name', 'email', 'phone', 'password', 'supplier_type', 'status_id','vendor_id','avatar','supplier_desc','supplier_address','created_by','updated_by', 'email_verified_at','email_verification_code','phone_verification_code','brand_shop_id'
     ];
 
 

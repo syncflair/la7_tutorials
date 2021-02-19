@@ -160,6 +160,7 @@ class RegisterController extends Controller
 
        if($verifyCustomer != null){
             $verifyCustomer->status_id = 1;
+            $verifyCustomer->email_verified_at = now(); //Carbon::now();
             $verifyCustomer->email_verification_code = null;
             $verifyCustomer->save();
 
