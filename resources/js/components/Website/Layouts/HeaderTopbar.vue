@@ -75,7 +75,7 @@
                                 data-unfold-animation-in="fadeInRight"
                                 data-unfold-animation-out="fadeOutRight"
                                 data-unfold-duration="500"
-                                @click="FocusUsername()">
+                                @click.once="FocusUsername()">
                                 <i class="ec ec-user mr-1"></i> Register <span class="text-gray-50">or</span> Sign in
                             </a>
                             <!-- End Account Sidebar Toggle Button -->
@@ -193,20 +193,20 @@
                 return this.$route.path;
             },
 
-            AccountNavLinkShow(){
-              // // return ? false : true;
-              //return this.authCustomer;
-              if(this.authCustomer){
-              // if(this.authCustomer || this.authSupplier){
-                return false;
-              }else{
-                return true; //f
-              }
-              //return true;
-              // if(Object.values( this.authCustomer ).length == 0 ){ return true;}
-              //if( Object.values( this.authSupplier ).length === 0 ){ return true;}
-              // else if(Object.keys( this.authSupplier ).length == 0 ){ return true;}
-            },
+            // AccountNavLinkShow(){
+            //   // // return ? false : true;
+            //   //return this.authCustomer;
+            //   if(this.authCustomer){
+            //   // if(this.authCustomer || this.authSupplier){
+            //     return false;
+            //   }else{
+            //     return true; //f
+            //   }
+            //   //return true;
+            //   // if(Object.values( this.authCustomer ).length == 0 ){ return true;}
+            //   //if( Object.values( this.authSupplier ).length === 0 ){ return true;}
+            //   // else if(Object.keys( this.authSupplier ).length == 0 ){ return true;}
+            // },
 
         },
 	    

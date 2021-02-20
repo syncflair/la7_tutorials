@@ -17,6 +17,7 @@ class CreateSettingsTable extends Migration
             $table->bigIncrements('id');  
             $table->string('site_title', 191)->nullable()->comment('Site title');
             $table->string('site_admin_email', 191)->nullable()->comment('Admin Email of the site');
+            $table->string('notify_by_email', 191)->nullable()->comment('All system notification send by this email address');
             $table->text('site_desc')->nullable()->comment('Site description');
             $table->text('site_keys')->nullable()->comment('meta keys');
             $table->string('site_url', 191)->nullable()->comment('Site url');

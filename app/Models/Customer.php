@@ -7,7 +7,6 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\CustomerResetPasswordNotification;
-// use App\Jobs\CustomerNotificationEmailJob;
 
 class Customer extends Authenticatable
 {
@@ -89,11 +88,7 @@ class Customer extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
 
-        // $data = ["userInfo" => $token, "tag" => "CustomerResetPasswordNotificationToken"];
-        // // send all mail in the queue.
-        // $job = (new CustomerNotificationEmailJob($data))
-        //             ->delay( Carbon::now()->addSeconds(5) ); 
-        // dispatch($job);
+
         //$this->notify(new ResetPasswordNotification($token)); //default 
         $this->notify(new CustomerResetPasswordNotification($token)); // working
     }

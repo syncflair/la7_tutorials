@@ -349,6 +349,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {//HeaderTopbar, FooterComponent,
   },
   methods: {
+    sidebarContentClose: function sidebarContentClose() {
+      //close sidebar content after submit
+      setTimeout(function () {
+        $("#sidebarContentClose").trigger('click');
+      }, 300);
+    },
     // Submit the form via a POST request
     CustomerLogin: function CustomerLogin() {
       var _this = this;
@@ -367,9 +373,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (data.success) {
           _this.$Progress.finish();
 
-          _this.display_error = false; //$('#sidebarContent').hide();     
+          _this.display_error = false;
 
-          $("#sidebarContent").fadeOut("slow"); // Hide login sidebar 
+          _this.sidebarContentClose();
 
           _this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true);
 
@@ -422,7 +428,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //console.log(data); 
         _this2.$Progress.finish();
 
-        $('#sidebarContent').hide('fist', function () {});
+        _this2.sidebarContentClose();
+
         window.location = '/home'; //this.$router.push({ path : '/home' });   //route after successfule submit                   
         // this.$router.push({ path : '/auth/login' });   //route after successfule submit                   
         //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit 
@@ -465,8 +472,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //console.log(data);    
         _this3.$Progress.finish();
 
-        $('#sidebarContent').hide('fist', function () {}); //this.$router.push({ path : '/auth/login' });   //route after successfule submit                   
+        _this3.sidebarContentClose(); //this.$router.push({ path : '/auth/login' });   //route after successfule submit                   
         //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit
+
 
         _this3.form.reset(); //reset from after submit 
 
@@ -2089,21 +2097,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     //for active link management
     currentPage: function currentPage() {
       return this.$route.path;
-    },
-    AccountNavLinkShow: function AccountNavLinkShow() {
-      // // return ? false : true;
-      //return this.authCustomer;
-      if (this.authCustomer) {
-        // if(this.authCustomer || this.authSupplier){
-        return false;
-      } else {
-        return true; //f
-      } //return true;
-      // if(Object.values( this.authCustomer ).length == 0 ){ return true;}
-      //if( Object.values( this.authSupplier ).length === 0 ){ return true;}
-      // else if(Object.keys( this.authSupplier ).length == 0 ){ return true;}
+    } // AccountNavLinkShow(){
+    //   // // return ? false : true;
+    //   //return this.authCustomer;
+    //   if(this.authCustomer){
+    //   // if(this.authCustomer || this.authSupplier){
+    //     return false;
+    //   }else{
+    //     return true; //f
+    //   }
+    //   //return true;
+    //   // if(Object.values( this.authCustomer ).length == 0 ){ return true;}
+    //   //if( Object.values( this.authSupplier ).length === 0 ){ return true;}
+    //   // else if(Object.keys( this.authSupplier ).length == 0 ){ return true;}
+    // },
 
-    }
   }),
   components: {//UnitsMasterList, UnitsMasterForm,
   },
@@ -5731,6 +5739,7 @@ var staticRenderFns = [
           staticClass: "close ml-auto",
           attrs: {
             type: "button",
+            id: "sidebarContentClose",
             "aria-controls": "sidebarContent",
             "aria-haspopup": "true",
             "aria-expanded": "false",
@@ -9090,7 +9099,7 @@ var render = function() {
                             "data-unfold-duration": "500"
                           },
                           on: {
-                            click: function($event) {
+                            "~click": function($event) {
                               return _vm.FocusUsername()
                             }
                           }

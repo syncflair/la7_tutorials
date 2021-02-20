@@ -341,6 +341,56 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
  //for user MapState
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -359,8 +409,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //General Settings
         site_title: '',
         site_admin_email: '',
+        notify_by_email: '',
         site_desc: '',
         site_keys: '',
+        site_meta: '',
         site_url: '',
         //option
         language_id: '',
@@ -418,18 +470,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       });
     },
     updateSettingsMasterInfo: function updateSettingsMasterInfo() {
+      var _this2 = this;
+
+      this.$Progress.start(); //using progress-bar package
+
       this.form.put('/spa/Settings-Info/' + this.form.id).then(function (_ref) {
         var data = _ref.data;
 
         //console.log(data.data);
         if (data.success) {
+          _this2.$Progress.finish();
+
           toastr.success(data.success);
         }
 
         if (data.errors) {
+          _this2.$Progress.fail();
+
           toastr.warning(data.errors);
         }
       })["catch"](function () {
+        _this2.$Progress.fail();
+
         toastr.warning('Something is wrong!');
       });
     } //Make image as base64 
@@ -572,6 +634,7 @@ var render = function() {
                       _c(
                         "form",
                         {
+                          attrs: { id: "setting-master-form" },
                           on: {
                             submit: function($event) {
                               $event.preventDefault()
@@ -711,6 +774,67 @@ var render = function() {
                                                             name: "model",
                                                             rawName: "v-model",
                                                             value:
+                                                              _vm.form.site_url,
+                                                            expression:
+                                                              "form.site_url"
+                                                          }
+                                                        ],
+                                                        staticClass:
+                                                          "form-control",
+                                                        attrs: {
+                                                          type: "text",
+                                                          name: "site_url",
+                                                          placeholder:
+                                                            "Ex. http://sorboraho.com"
+                                                        },
+                                                        domProps: {
+                                                          value:
+                                                            _vm.form.site_url
+                                                        },
+                                                        on: {
+                                                          input: function(
+                                                            $event
+                                                          ) {
+                                                            if (
+                                                              $event.target
+                                                                .composing
+                                                            ) {
+                                                              return
+                                                            }
+                                                            _vm.$set(
+                                                              _vm.form,
+                                                              "site_url",
+                                                              $event.target
+                                                                .value
+                                                            )
+                                                          }
+                                                        }
+                                                      })
+                                                    ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "row form-group"
+                                                },
+                                                [
+                                                  _vm._m(5),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "col-sm-10"
+                                                    },
+                                                    [
+                                                      _c("input", {
+                                                        directives: [
+                                                          {
+                                                            name: "model",
+                                                            rawName: "v-model",
+                                                            value:
                                                               _vm.form
                                                                 .site_admin_email,
                                                             expression:
@@ -775,7 +899,7 @@ var render = function() {
                                                   staticClass: "row form-group"
                                                 },
                                                 [
-                                                  _vm._m(5),
+                                                  _vm._m(6),
                                                   _vm._v(" "),
                                                   _c(
                                                     "div",
@@ -789,22 +913,30 @@ var render = function() {
                                                             name: "model",
                                                             rawName: "v-model",
                                                             value:
-                                                              _vm.form.site_url,
+                                                              _vm.form
+                                                                .notify_by_email,
                                                             expression:
-                                                              "form.site_url"
+                                                              "form.notify_by_email"
                                                           }
                                                         ],
                                                         staticClass:
                                                           "form-control",
+                                                        class: {
+                                                          "is-invalid": _vm.form.errors.has(
+                                                            "notify_by_email"
+                                                          )
+                                                        },
                                                         attrs: {
                                                           type: "text",
-                                                          name: "site_url",
+                                                          name:
+                                                            "notify_by_email",
                                                           placeholder:
-                                                            "Ex. http://sorboraho.com"
+                                                            "Verify by email"
                                                         },
                                                         domProps: {
                                                           value:
-                                                            _vm.form.site_url
+                                                            _vm.form
+                                                              .notify_by_email
                                                         },
                                                         on: {
                                                           input: function(
@@ -818,7 +950,78 @@ var render = function() {
                                                             }
                                                             _vm.$set(
                                                               _vm.form,
-                                                              "site_url",
+                                                              "notify_by_email",
+                                                              $event.target
+                                                                .value
+                                                            )
+                                                          }
+                                                        }
+                                                      }),
+                                                      _vm._v(" "),
+                                                      _c("has-error", {
+                                                        attrs: {
+                                                          form: _vm.form,
+                                                          field:
+                                                            "notify_by_email"
+                                                        }
+                                                      })
+                                                    ],
+                                                    1
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "row form-group"
+                                                },
+                                                [
+                                                  _vm._m(7),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "col-sm-10"
+                                                    },
+                                                    [
+                                                      _c("textarea", {
+                                                        directives: [
+                                                          {
+                                                            name: "model",
+                                                            rawName: "v-model",
+                                                            value:
+                                                              _vm.form
+                                                                .site_keys,
+                                                            expression:
+                                                              "form.site_keys"
+                                                          }
+                                                        ],
+                                                        ref: "site_keys",
+                                                        staticClass:
+                                                          "form-control",
+                                                        attrs: {
+                                                          name: "site_keys",
+                                                          placeholder:
+                                                            "Site Keys"
+                                                        },
+                                                        domProps: {
+                                                          value:
+                                                            _vm.form.site_keys
+                                                        },
+                                                        on: {
+                                                          input: function(
+                                                            $event
+                                                          ) {
+                                                            if (
+                                                              $event.target
+                                                                .composing
+                                                            ) {
+                                                              return
+                                                            }
+                                                            _vm.$set(
+                                                              _vm.form,
+                                                              "site_keys",
                                                               $event.target
                                                                 .value
                                                             )
@@ -836,7 +1039,69 @@ var render = function() {
                                                   staticClass: "row form-group"
                                                 },
                                                 [
-                                                  _vm._m(6),
+                                                  _vm._m(8),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "col-sm-10"
+                                                    },
+                                                    [
+                                                      _c("textarea", {
+                                                        directives: [
+                                                          {
+                                                            name: "model",
+                                                            rawName: "v-model",
+                                                            value:
+                                                              _vm.form
+                                                                .site_meta,
+                                                            expression:
+                                                              "form.site_meta"
+                                                          }
+                                                        ],
+                                                        ref: "site_meta",
+                                                        staticClass:
+                                                          "form-control",
+                                                        attrs: {
+                                                          name: "site_meta",
+                                                          placeholder:
+                                                            "Site meta"
+                                                        },
+                                                        domProps: {
+                                                          value:
+                                                            _vm.form.site_meta
+                                                        },
+                                                        on: {
+                                                          input: function(
+                                                            $event
+                                                          ) {
+                                                            if (
+                                                              $event.target
+                                                                .composing
+                                                            ) {
+                                                              return
+                                                            }
+                                                            _vm.$set(
+                                                              _vm.form,
+                                                              "site_meta",
+                                                              $event.target
+                                                                .value
+                                                            )
+                                                          }
+                                                        }
+                                                      })
+                                                    ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "row form-group"
+                                                },
+                                                [
+                                                  _vm._m(9),
                                                   _vm._v(" "),
                                                   _c(
                                                     "div",
@@ -890,67 +1155,6 @@ var render = function() {
                                                     ]
                                                   )
                                                 ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass: "row form-group"
-                                                },
-                                                [
-                                                  _vm._m(7),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass: "col-sm-10"
-                                                    },
-                                                    [
-                                                      _c("textarea", {
-                                                        directives: [
-                                                          {
-                                                            name: "model",
-                                                            rawName: "v-model",
-                                                            value:
-                                                              _vm.form
-                                                                .site_keys,
-                                                            expression:
-                                                              "form.site_keys"
-                                                          }
-                                                        ],
-                                                        ref: "site_keys",
-                                                        staticClass:
-                                                          "form-control",
-                                                        attrs: {
-                                                          name: "site_keys",
-                                                          placeholder: "Meta"
-                                                        },
-                                                        domProps: {
-                                                          value:
-                                                            _vm.form.site_keys
-                                                        },
-                                                        on: {
-                                                          input: function(
-                                                            $event
-                                                          ) {
-                                                            if (
-                                                              $event.target
-                                                                .composing
-                                                            ) {
-                                                              return
-                                                            }
-                                                            _vm.$set(
-                                                              _vm.form,
-                                                              "site_keys",
-                                                              $event.target
-                                                                .value
-                                                            )
-                                                          }
-                                                        }
-                                                      })
-                                                    ]
-                                                  )
-                                                ]
                                               )
                                             ]
                                           )
@@ -958,270 +1162,7 @@ var render = function() {
                                       ]
                                     ),
                                     _vm._v(" "),
-                                    _c(
-                                      "div",
-                                      {
-                                        staticClass: "tab-pane fade show",
-                                        attrs: {
-                                          id: "tabs-body-two",
-                                          role: "tabpanel",
-                                          "aria-labelledby": "tab-two"
-                                        }
-                                      },
-                                      [
-                                        _c("div", { staticClass: "row" }, [
-                                          _c(
-                                            "div",
-                                            {
-                                              staticClass: "col-md-10 offset-1"
-                                            },
-                                            [
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass: "row form-group"
-                                                },
-                                                [
-                                                  _vm._m(8),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass: "col-sm-10"
-                                                    },
-                                                    [
-                                                      _c(
-                                                        "select",
-                                                        {
-                                                          directives: [
-                                                            {
-                                                              name: "model",
-                                                              rawName:
-                                                                "v-model",
-                                                              value:
-                                                                _vm.form
-                                                                  .language_id,
-                                                              expression:
-                                                                "form.language_id"
-                                                            }
-                                                          ],
-                                                          staticClass:
-                                                            "form-control form-control-sm-",
-                                                          attrs: {
-                                                            name: "language_id"
-                                                          },
-                                                          on: {
-                                                            change: function(
-                                                              $event
-                                                            ) {
-                                                              var $$selectedVal = Array.prototype.filter
-                                                                .call(
-                                                                  $event.target
-                                                                    .options,
-                                                                  function(o) {
-                                                                    return o.selected
-                                                                  }
-                                                                )
-                                                                .map(function(
-                                                                  o
-                                                                ) {
-                                                                  var val =
-                                                                    "_value" in
-                                                                    o
-                                                                      ? o._value
-                                                                      : o.value
-                                                                  return val
-                                                                })
-                                                              _vm.$set(
-                                                                _vm.form,
-                                                                "language_id",
-                                                                $event.target
-                                                                  .multiple
-                                                                  ? $$selectedVal
-                                                                  : $$selectedVal[0]
-                                                              )
-                                                            }
-                                                          }
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                disabled: "",
-                                                                value: ""
-                                                              }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "Select Status .."
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _vm._l(
-                                                            _vm.allLanguages,
-                                                            function(lan) {
-                                                              return _c(
-                                                                "option",
-                                                                {
-                                                                  key: lan.id,
-                                                                  domProps: {
-                                                                    value:
-                                                                      lan.id
-                                                                  }
-                                                                },
-                                                                [
-                                                                  _vm._v(
-                                                                    "\r\n\t\t\t                      \t" +
-                                                                      _vm._s(
-                                                                        lan.lang_name
-                                                                      ) +
-                                                                      " ( " +
-                                                                      _vm._s(
-                                                                        lan.lang_code
-                                                                      ) +
-                                                                      " )\r\n\t\t\t                      "
-                                                                  )
-                                                                ]
-                                                              )
-                                                            }
-                                                          )
-                                                        ],
-                                                        2
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              ),
-                                              _vm._v(" "),
-                                              _c(
-                                                "div",
-                                                {
-                                                  staticClass: "row form-group"
-                                                },
-                                                [
-                                                  _vm._m(9),
-                                                  _vm._v(" "),
-                                                  _c(
-                                                    "div",
-                                                    {
-                                                      staticClass: "col-sm-10"
-                                                    },
-                                                    [
-                                                      _c(
-                                                        "select",
-                                                        {
-                                                          directives: [
-                                                            {
-                                                              name: "model",
-                                                              rawName:
-                                                                "v-model",
-                                                              value:
-                                                                _vm.form
-                                                                  .currency_id,
-                                                              expression:
-                                                                "form.currency_id"
-                                                            }
-                                                          ],
-                                                          staticClass:
-                                                            "form-control form-control-sm-",
-                                                          attrs: {
-                                                            name: "currency_id"
-                                                          },
-                                                          on: {
-                                                            change: function(
-                                                              $event
-                                                            ) {
-                                                              var $$selectedVal = Array.prototype.filter
-                                                                .call(
-                                                                  $event.target
-                                                                    .options,
-                                                                  function(o) {
-                                                                    return o.selected
-                                                                  }
-                                                                )
-                                                                .map(function(
-                                                                  o
-                                                                ) {
-                                                                  var val =
-                                                                    "_value" in
-                                                                    o
-                                                                      ? o._value
-                                                                      : o.value
-                                                                  return val
-                                                                })
-                                                              _vm.$set(
-                                                                _vm.form,
-                                                                "currency_id",
-                                                                $event.target
-                                                                  .multiple
-                                                                  ? $$selectedVal
-                                                                  : $$selectedVal[0]
-                                                              )
-                                                            }
-                                                          }
-                                                        },
-                                                        [
-                                                          _c(
-                                                            "option",
-                                                            {
-                                                              attrs: {
-                                                                disabled: "",
-                                                                value: ""
-                                                              }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                "Select Status .."
-                                                              )
-                                                            ]
-                                                          ),
-                                                          _vm._v(" "),
-                                                          _vm._l(
-                                                            _vm.allCurrencies,
-                                                            function(curr) {
-                                                              return _c(
-                                                                "option",
-                                                                {
-                                                                  key: curr.id,
-                                                                  domProps: {
-                                                                    value:
-                                                                      curr.id
-                                                                  }
-                                                                },
-                                                                [
-                                                                  _vm._v(
-                                                                    "\r\n\t\t\t                      \t" +
-                                                                      _vm._s(
-                                                                        curr.currency_name
-                                                                      ) +
-                                                                      " ( " +
-                                                                      _vm._s(
-                                                                        curr.currency_code
-                                                                      ) +
-                                                                      " / " +
-                                                                      _vm._s(
-                                                                        curr.currency_short_code
-                                                                      ) +
-                                                                      " )\r\n\t\t\t                      "
-                                                                  )
-                                                                ]
-                                                              )
-                                                            }
-                                                          )
-                                                        ],
-                                                        2
-                                                      )
-                                                    ]
-                                                  )
-                                                ]
-                                              )
-                                            ]
-                                          )
-                                        ])
-                                      ]
-                                    ),
+                                    _vm._m(10),
                                     _vm._v(" "),
                                     _c(
                                       "div",
@@ -1247,7 +1188,7 @@ var render = function() {
                                                   staticClass: "row form-group"
                                                 },
                                                 [
-                                                  _vm._m(10),
+                                                  _vm._m(11),
                                                   _vm._v(" "),
                                                   _c(
                                                     "div",
@@ -1413,7 +1354,7 @@ var render = function() {
                                                         "row form-group"
                                                     },
                                                     [
-                                                      _vm._m(11),
+                                                      _vm._m(12),
                                                       _vm._v(" "),
                                                       _c(
                                                         "div",
@@ -1480,7 +1421,7 @@ var render = function() {
                                                   staticClass: "row form-group"
                                                 },
                                                 [
-                                                  _vm._m(12),
+                                                  _vm._m(13),
                                                   _vm._v(" "),
                                                   _c(
                                                     "div",
@@ -1650,7 +1591,7 @@ var render = function() {
                                                         "row form-group"
                                                     },
                                                     [
-                                                      _vm._m(13),
+                                                      _vm._m(14),
                                                       _vm._v(" "),
                                                       _c(
                                                         "div",
@@ -1719,7 +1660,7 @@ var render = function() {
                                                         "row form-group"
                                                     },
                                                     [
-                                                      _vm._m(14),
+                                                      _vm._m(15),
                                                       _vm._v(" "),
                                                       _c(
                                                         "div",
@@ -1786,7 +1727,7 @@ var render = function() {
                                                   staticClass: "row form-group"
                                                 },
                                                 [
-                                                  _vm._m(15),
+                                                  _vm._m(16),
                                                   _vm._v(" "),
                                                   _c(
                                                     "div",
@@ -1801,7 +1742,7 @@ var render = function() {
                                                             "table-sm table table-striped"
                                                         },
                                                         [
-                                                          _vm._m(16),
+                                                          _vm._m(17),
                                                           _vm._v(" "),
                                                           _vm._l(
                                                             _vm.form
@@ -2185,8 +2126,273 @@ var render = function() {
                                         }
                                       },
                                       [
+                                        _c("div", { staticClass: "row" }, [
+                                          _c(
+                                            "div",
+                                            {
+                                              staticClass: "col-md-10 offset-1"
+                                            },
+                                            [
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "row form-group"
+                                                },
+                                                [
+                                                  _vm._m(18),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "col-sm-10"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "select",
+                                                        {
+                                                          directives: [
+                                                            {
+                                                              name: "model",
+                                                              rawName:
+                                                                "v-model",
+                                                              value:
+                                                                _vm.form
+                                                                  .language_id,
+                                                              expression:
+                                                                "form.language_id"
+                                                            }
+                                                          ],
+                                                          staticClass:
+                                                            "form-control form-control-sm-",
+                                                          attrs: {
+                                                            name: "language_id"
+                                                          },
+                                                          on: {
+                                                            change: function(
+                                                              $event
+                                                            ) {
+                                                              var $$selectedVal = Array.prototype.filter
+                                                                .call(
+                                                                  $event.target
+                                                                    .options,
+                                                                  function(o) {
+                                                                    return o.selected
+                                                                  }
+                                                                )
+                                                                .map(function(
+                                                                  o
+                                                                ) {
+                                                                  var val =
+                                                                    "_value" in
+                                                                    o
+                                                                      ? o._value
+                                                                      : o.value
+                                                                  return val
+                                                                })
+                                                              _vm.$set(
+                                                                _vm.form,
+                                                                "language_id",
+                                                                $event.target
+                                                                  .multiple
+                                                                  ? $$selectedVal
+                                                                  : $$selectedVal[0]
+                                                              )
+                                                            }
+                                                          }
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "option",
+                                                            {
+                                                              attrs: {
+                                                                disabled: "",
+                                                                value: ""
+                                                              }
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Select Status .."
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _vm._l(
+                                                            _vm.allLanguages,
+                                                            function(lan) {
+                                                              return _c(
+                                                                "option",
+                                                                {
+                                                                  key: lan.id,
+                                                                  domProps: {
+                                                                    value:
+                                                                      lan.id
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "\r\n\t\t\t\t                      \t" +
+                                                                      _vm._s(
+                                                                        lan.lang_name
+                                                                      ) +
+                                                                      " ( " +
+                                                                      _vm._s(
+                                                                        lan.lang_code
+                                                                      ) +
+                                                                      " )\r\n\t\t\t\t                      "
+                                                                  )
+                                                                ]
+                                                              )
+                                                            }
+                                                          )
+                                                        ],
+                                                        2
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticClass: "row form-group"
+                                                },
+                                                [
+                                                  _vm._m(19),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "div",
+                                                    {
+                                                      staticClass: "col-sm-10"
+                                                    },
+                                                    [
+                                                      _c(
+                                                        "select",
+                                                        {
+                                                          directives: [
+                                                            {
+                                                              name: "model",
+                                                              rawName:
+                                                                "v-model",
+                                                              value:
+                                                                _vm.form
+                                                                  .currency_id,
+                                                              expression:
+                                                                "form.currency_id"
+                                                            }
+                                                          ],
+                                                          staticClass:
+                                                            "form-control form-control-sm-",
+                                                          attrs: {
+                                                            name: "currency_id"
+                                                          },
+                                                          on: {
+                                                            change: function(
+                                                              $event
+                                                            ) {
+                                                              var $$selectedVal = Array.prototype.filter
+                                                                .call(
+                                                                  $event.target
+                                                                    .options,
+                                                                  function(o) {
+                                                                    return o.selected
+                                                                  }
+                                                                )
+                                                                .map(function(
+                                                                  o
+                                                                ) {
+                                                                  var val =
+                                                                    "_value" in
+                                                                    o
+                                                                      ? o._value
+                                                                      : o.value
+                                                                  return val
+                                                                })
+                                                              _vm.$set(
+                                                                _vm.form,
+                                                                "currency_id",
+                                                                $event.target
+                                                                  .multiple
+                                                                  ? $$selectedVal
+                                                                  : $$selectedVal[0]
+                                                              )
+                                                            }
+                                                          }
+                                                        },
+                                                        [
+                                                          _c(
+                                                            "option",
+                                                            {
+                                                              attrs: {
+                                                                disabled: "",
+                                                                value: ""
+                                                              }
+                                                            },
+                                                            [
+                                                              _vm._v(
+                                                                "Select Status .."
+                                                              )
+                                                            ]
+                                                          ),
+                                                          _vm._v(" "),
+                                                          _vm._l(
+                                                            _vm.allCurrencies,
+                                                            function(curr) {
+                                                              return _c(
+                                                                "option",
+                                                                {
+                                                                  key: curr.id,
+                                                                  domProps: {
+                                                                    value:
+                                                                      curr.id
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "\r\n\t\t\t\t                      \t" +
+                                                                      _vm._s(
+                                                                        curr.currency_name
+                                                                      ) +
+                                                                      " ( " +
+                                                                      _vm._s(
+                                                                        curr.currency_code
+                                                                      ) +
+                                                                      " / " +
+                                                                      _vm._s(
+                                                                        curr.currency_short_code
+                                                                      ) +
+                                                                      " )\r\n\t\t\t\t                      "
+                                                                  )
+                                                                ]
+                                                              )
+                                                            }
+                                                          )
+                                                        ],
+                                                        2
+                                                      )
+                                                    ]
+                                                  )
+                                                ]
+                                              )
+                                            ]
+                                          )
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass: "tab-pane fade show",
+                                        attrs: {
+                                          id: "tabs-body-five",
+                                          role: "tabpanel",
+                                          "aria-labelledby": "tab-five"
+                                        }
+                                      },
+                                      [
                                         _vm._v(
-                                          "\r\n              \t  \t\tFour\r\n              \t  \t"
+                                          "\r\n              \t  \t\tFive\r\n              \t  \t"
                                         )
                                       ]
                                     )
@@ -2196,9 +2402,11 @@ var render = function() {
                             ]
                           ),
                           _vm._v(" "),
-                          _vm._m(17)
+                          _c("div", { staticClass: "form-group mt-2" })
                         ]
-                      )
+                      ),
+                      _vm._v(" "),
+                      _vm._m(20)
                     ])
                   ]
                 )
@@ -2291,7 +2499,7 @@ var staticRenderFns = [
                   "aria-selected": "false"
                 }
               },
-              [_vm._v("Options")]
+              [_vm._v("Media")]
             )
           ]),
           _vm._v(" "),
@@ -2327,7 +2535,25 @@ var staticRenderFns = [
                   "aria-selected": "false"
                 }
               },
-              [_vm._v("Others")]
+              [_vm._v("Options")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link",
+                attrs: {
+                  id: "tabs-five",
+                  "data-toggle": "pill",
+                  href: "#tabs-body-five",
+                  role: "tab",
+                  "aria-controls": "tabs-body-five",
+                  "aria-selected": "false"
+                }
+              },
+              [_vm._v("Five")]
             )
           ])
         ]
@@ -2347,14 +2573,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-sm-2 text-right" }, [
-      _c("label", { staticClass: "pt-2" }, [_vm._v("Admin Email")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-2 text-right" }, [
       _c("label", { staticClass: "pt-2" }, [_vm._v("URL")])
     ])
   },
@@ -2363,7 +2581,23 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-sm-2 text-right" }, [
-      _c("label", { staticClass: "pt-2" }, [_vm._v("Site Details")])
+      _c("label", { staticClass: "pt-2" }, [_vm._v("Admin Email")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-2 text-right" }, [
+      _c("label", { staticClass: "pt-2" }, [_vm._v("Notify by email")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-2 text-right" }, [
+      _c("label", { staticClass: "pt-2" }, [_vm._v("Keys")])
     ])
   },
   function() {
@@ -2379,16 +2613,43 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-sm-2 text-right" }, [
-      _c("label", { staticClass: "pt-2" }, [_vm._v("Select Language")])
+      _c("label", { staticClass: "pt-2" }, [_vm._v("Site Details")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-sm-2 text-right" }, [
-      _c("label", { staticClass: "pt-2" }, [_vm._v("Select Currency")])
-    ])
+    return _c(
+      "div",
+      {
+        staticClass: "tab-pane fade show",
+        attrs: {
+          id: "tabs-body-two",
+          role: "tabpanel",
+          "aria-labelledby": "tab-two"
+        }
+      },
+      [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-10 offset-1" }, [
+            _vm._v("\r\n   \t  \t\t\t\t    \tlogo\r\n\t\t\t            ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-10 offset-1" }, [
+            _vm._v("\r\n   \t  \t\t\t\t    \tfavicon\r\n\t\t\t            ")
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-10 offset-1" }, [
+            _vm._v("\r\n   \t  \t\t\t\t    \twatermark\r\n\t\t\t            ")
+          ])
+        ])
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -2458,16 +2719,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group mt-2" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-primary btn-flat btn-sm",
-          attrs: { type: "submit" }
-        },
-        [_c("i", { staticClass: "far fa-edit" }), _vm._v(" Update")]
-      )
+    return _c("div", { staticClass: "col-sm-2 text-right" }, [
+      _c("label", { staticClass: "pt-2" }, [_vm._v("Select Language")])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-2 text-right" }, [
+      _c("label", { staticClass: "pt-2" }, [_vm._v("Select Currency")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "btn btn-primary btn-flat btn-sm",
+        attrs: { type: "submit", form: "setting-master-form" }
+      },
+      [_c("i", { staticClass: "far fa-edit" }), _vm._v(" Update")]
+    )
   }
 ]
 render._withStripped = true

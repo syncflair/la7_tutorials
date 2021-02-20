@@ -1,4 +1,4 @@
-<?php
+<?php ///php artisan queue:work
 
 namespace App\Jobs;
 

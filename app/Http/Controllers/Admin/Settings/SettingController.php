@@ -93,8 +93,10 @@ class SettingController extends Controller
         $data =array();
         $data['site_title']=$request->site_title;
         $data['site_admin_email']=$request->site_admin_email;
+        $data['notify_by_email']=$request->notify_by_email;
         $data['site_desc']=$request->site_desc;
         $data['site_keys']= $request->site_keys;//slug_generator get from helper 
+        $data['site_meta']= $request->site_meta; 
         $data['site_url']=$request->site_url; 
         $data['language_id']=$request->language_id; 
         $data['currency_id']=$request->currency_id; 

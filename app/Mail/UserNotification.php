@@ -31,7 +31,7 @@ class UserNotification extends Mailable
     public function build()
     {
         //return $this->markdown('emails.user_notification');
-        return $this->from('info@sorboaho.com')
+        return $this->from( systemSettingsAll()->notify_by_email )
                     ->subject('Notification From Shorboraho')
                     ->markdown('emails.user_notification')
                     ->with('data', $this->data );

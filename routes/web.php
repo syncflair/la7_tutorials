@@ -1,5 +1,7 @@
 <?php
-//print_r(systemSettingsAll()->image_resolution[0]);
+// print_r(systemSettingsAll()->image_resolution['0']);
+// print_r(systemSettingsAll()->image_resolution);
+//print_r(systemSettingsAll()->site_admin_email);
 //print_r(systemSettingsGetResolution('user-img'));
 
 //Logging test

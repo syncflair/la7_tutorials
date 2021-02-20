@@ -33,7 +33,7 @@ class SupplierNotificationMail extends Mailable
         //return $this->view('view.name');
 
         return $this
-            ->from('info@sorboraho.com')
+            ->from( systemSettingsAll()->notify_by_email )
             ->subject('Welcome to Sorboraho.com')
             ->view('emails.SupplierNotificationMail', ['email_data' => $this->email_data]);
     }

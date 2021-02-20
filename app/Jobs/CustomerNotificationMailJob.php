@@ -12,6 +12,7 @@ use Illuminate\Queue\SerializesModels;
 use App\Mail\CustomerNotificationMail;
 use Illuminate\Support\Facades\Mail;
 
+
 class CustomerNotificationMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
@@ -39,6 +40,8 @@ class CustomerNotificationMailJob implements ShouldQueue
  
         $email = new CustomerNotificationMail($this->data);
         Mail::to($this->data['userInfo']['email'])->send($email);
+
+
 
         // $data = ["userInfo" => $this->customer, "tag" => "NewCustomerRegister"]; //pass tag
         // $email = new CustomerNotificationMail($data);

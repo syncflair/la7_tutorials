@@ -32,8 +32,10 @@ class CustomerNotificationMail extends Mailable
     {
         //return $this->view('view.name');
 
+        // systemSettingsAll()->site_admin_email //Get from helper
+
         return $this
-            ->from('info@sorboraho.com')
+            ->from( systemSettingsAll()->notify_by_email )
             ->subject('Welcome to Sorboraho.com')
             ->view('emails.CustomerNotificationMail', ['email_data' => $this->email_data]);
     }

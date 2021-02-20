@@ -37,7 +37,7 @@ class UserNotificationMail extends Mailable
         //             ->with('data', $this->data );
 
         return $this
-            ->from('info@sorboraho.com')
+            ->from( systemSettingsAll()->notify_by_email )
             ->subject('Welcome to Sorboraho.com')
             ->view('emails.UserNotificationMail', ['email_data' => $this->email_data]);
     }

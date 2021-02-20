@@ -5,7 +5,7 @@
                 <div class="js-scrollbar u-header-sidebar__footer-offset pb-3">
                     <!-- Toggle Button -->
                     <div class="d-flex align-items-center pt-4 px-7">
-                        <button type="button" class="close ml-auto"
+                        <button type="button" class="close ml-auto" id="sidebarContentClose"
                             aria-controls="sidebarContent"
                             aria-haspopup="true"
                             aria-expanded="false"
@@ -354,7 +354,16 @@
             //HeaderTopbar, FooterComponent,
         }, 
 
-        methods: {  
+        methods: { 
+
+            sidebarContentClose(){
+                //close sidebar content after submit
+                setTimeout(() => {
+                    $("#sidebarContentClose").trigger('click');
+                }, 300);
+            },
+            
+
             // Submit the form via a POST request
             CustomerLogin() {  
               this.$Progress.start(); //using progress-bar package
@@ -372,8 +381,7 @@
                     this.$Progress.finish();
                     this.display_error = false;
                   
-                    //$('#sidebarContent').hide();     
-                    $("#sidebarContent").fadeOut("slow"); // Hide login sidebar 
+                    this.sidebarContentClose();
 
                     this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true ); 
 
@@ -428,9 +436,7 @@
 
                     this.$Progress.finish(); 
 
-                    $('#sidebarContent').hide('fist',function(){}); 
-
-                    
+                    this.sidebarContentClose();                   
 
                     window.location = '/home';                  
 
@@ -479,9 +485,8 @@
               .then(({ data }) => { 
                 //console.log(data);    
                     this.$Progress.finish();
-
-                    $('#sidebarContent').hide('fist',function(){});
-
+                 
+                    this.sidebarContentClose();
                     //this.$router.push({ path : '/auth/login' });   //route after successfule submit                   
                     //this.$router.replace({ path : '/dashboard-customer' });   //route after successfule submit
                     this.form.reset();  //reset from after submit 
@@ -490,7 +495,7 @@
               .catch( () => {
                 this.$Progress.fail();
                 toastr.warning('Something is wrong!');
-              }) 
+              })               
 
             }, //End reset password
     

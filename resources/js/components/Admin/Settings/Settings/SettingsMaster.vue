@@ -34,7 +34,7 @@
 	    <div class="card-header"><h4>Settings</h4></div>
 	      <div class="card-body card-body-custome">
 
-            <form @submit.prevent="updateSettingsMasterInfo()" >
+            <form id="setting-master-form" @submit.prevent="updateSettingsMasterInfo()" >
 
               <div class="card card-primary card-outline card-outline-tabs"><!--card-outline-tabs-->
               	
@@ -44,17 +44,21 @@
 			          <a class="nav-link active" id="tab-one" data-toggle="pill" href="#tabs-body-one" role="tab" aria-controls="tabs-body-one" aria-selected="true">General</a>
 			        </li>
 			        <li class="nav-item">
-			          <a class="nav-link" id="tabs-two" data-toggle="pill" href="#tabs-body-two" role="tab" aria-controls="tabs-body-two" aria-selected="false">Options</a>
+			          <a class="nav-link" id="tabs-two" data-toggle="pill" href="#tabs-body-two" role="tab" aria-controls="tabs-body-two" aria-selected="false">Media</a>
 			        </li>
 			        <li class="nav-item">
 			          <a class="nav-link" id="tabs-three" data-toggle="pill" href="#tabs-body-three" role="tab" aria-controls="tabs-body-three" aria-selected="false">Image Settings</a>
 			        </li>
 			        <li class="nav-item">
-			          <a class="nav-link" id="tabs-four" data-toggle="pill" href="#tabs-body-four" role="tab" aria-controls="tabs-body-four" aria-selected="false">Others</a>
+			          <a class="nav-link" id="tabs-four" data-toggle="pill" href="#tabs-body-four" role="tab" aria-controls="tabs-body-four" aria-selected="false">Options</a>
+			        </li>
+			        <li class="nav-item">
+			          <a class="nav-link" id="tabs-five" data-toggle="pill" href="#tabs-body-five" role="tab" aria-controls="tabs-body-five" aria-selected="false">Five</a>
 			        </li>
 			      </ul>
               	</div><!--End card-header tab-->
-              	<div class="card-body"><!--card-body tab-->
+
+              	<div class="card-body"><!--card-body tab-->              		
               	  <div class="tab-content" id="custom-tabs-Content"> <!--custom-tabs-Content-->
 
               	  	<div class="tab-pane fade active show" id="tabs-body-one" role="tabpanel" aria-labelledby="tab-one">
@@ -73,6 +77,15 @@
 
 			              <div class="row form-group">
 			                <div class="col-sm-2 text-right">
+			                  <label class="pt-2">URL</label>                      
+			                </div>
+			                <div class="col-sm-10">
+			                  <input v-model="form.site_url" type="text" name="site_url" class="form-control" placeholder="Ex. http://sorboraho.com">
+			                </div> 
+			              </div>
+
+			              <div class="row form-group">
+			                <div class="col-sm-2 text-right">
 			                  <label class="pt-2">Admin Email</label>                      
 			                </div>
 			                <div class="col-sm-10">
@@ -83,10 +96,30 @@
 
 			              <div class="row form-group">
 			                <div class="col-sm-2 text-right">
-			                  <label class="pt-2">URL</label>                      
+			                  <label class="pt-2">Notify by email</label>                      
 			                </div>
 			                <div class="col-sm-10">
-			                  <input v-model="form.site_url" type="text" name="site_url" class="form-control" placeholder="Ex. http://sorboraho.com">
+			                  <input v-model="form.notify_by_email" type="text" name="notify_by_email" class="form-control" :class="{ 'is-invalid': form.errors.has('notify_by_email') }" placeholder="Verify by email">
+                      		  <has-error :form="form" field="notify_by_email"></has-error>
+			                </div> 
+			              </div>
+
+
+			              <div class="row form-group">
+			                <div class="col-sm-2 text-right">
+			                  <label class="pt-2">Keys</label>                      
+			                </div>
+			                <div class="col-sm-10">
+                      		  <textarea v-model="form.site_keys" ref="site_keys" name="site_keys" class="form-control" placeholder="Site Keys"></textarea>
+			                </div> 
+			              </div>	
+
+			              <div class="row form-group">
+			                <div class="col-sm-2 text-right">
+			                  <label class="pt-2">Meta</label>                      
+			                </div>
+			                <div class="col-sm-10">
+                      		  <textarea v-model="form.site_meta" ref="site_meta" name="site_meta" class="form-control" placeholder="Site meta"></textarea>
 			                </div> 
 			              </div>
 
@@ -97,16 +130,7 @@
 			                <div class="col-sm-10">
                       		  <textarea v-model="form.site_desc" ref="site_desc" name="site_desc" class="form-control" placeholder="Site Descsiption"></textarea>
 			                </div> 
-			              </div>	
-
-			              <div class="row form-group">
-			                <div class="col-sm-2 text-right">
-			                  <label class="pt-2">Meta</label>                      
-			                </div>
-			                <div class="col-sm-10">
-                      		  <textarea v-model="form.site_keys" ref="site_keys" name="site_keys" class="form-control" placeholder="Meta"></textarea>
-			                </div> 
-			              </div>	
+			              </div>
 
 
    	  					</div>
@@ -117,35 +141,19 @@
 
               	  	  <div class="row">
    	  				    <div class="col-md-10 offset-1">
+   	  				    	logo
+			            </div>
+			          </div>
 
-	              	  	  <div class="row form-group">
-			                <div class="col-sm-2 text-right">
-			                  <label class="pt-2">Select Language</label>                      
-			                </div>
-			                <div class="col-sm-10">
-                      		  <select v-model="form.language_id" class="form-control form-control-sm-" name="language_id" >
-			                      <option disabled value="">Select Status ..</option>                
-			                      <option v-for="lan in allLanguages" :key="lan.id" v-bind:value="lan.id">
-			                      	{{lan.lang_name}} ( {{lan.lang_code}} )
-			                      </option> 
-			                  </select>
-			                </div> 
-				          </div>
+			          <div class="row">
+   	  				    <div class="col-md-10 offset-1">
+   	  				    	favicon
+			            </div>
+			          </div>
 
-				          <div class="row form-group">
-			                <div class="col-sm-2 text-right">
-			                  <label class="pt-2">Select Currency</label>                      
-			                </div>
-			                <div class="col-sm-10">
-                      		  <select v-model="form.currency_id" class="form-control form-control-sm-" name="currency_id" >
-			                      <option disabled value="">Select Status ..</option>                
-			                      <option v-for="curr in allCurrencies" :key="curr.id" v-bind:value="curr.id">
-			                      	{{curr.currency_name}} ( {{curr.currency_code}} / {{curr.currency_short_code}} )
-			                      </option> 
-			                  </select>
-			                </div> 
-				          </div>
-
+			          <div class="row">
+   	  				    <div class="col-md-10 offset-1">
+   	  				    	watermark
 			            </div>
 			          </div>
 
@@ -292,8 +300,44 @@
               	  	</div><!--teb-three-->
 
               	  	<div class="tab-pane fade show" id="tabs-body-four" role="tabpanel" aria-labelledby="tab-four">
-              	  		Four
+              	  		<div class="row">
+	   	  				    <div class="col-md-10 offset-1">
+
+		              	  	  <div class="row form-group">
+				                <div class="col-sm-2 text-right">
+				                  <label class="pt-2">Select Language</label>                      
+				                </div>
+				                <div class="col-sm-10">
+	                      		  <select v-model="form.language_id" class="form-control form-control-sm-" name="language_id" >
+				                      <option disabled value="">Select Status ..</option>                
+				                      <option v-for="lan in allLanguages" :key="lan.id" v-bind:value="lan.id">
+				                      	{{lan.lang_name}} ( {{lan.lang_code}} )
+				                      </option> 
+				                  </select>
+				                </div> 
+					          </div>
+
+					          <div class="row form-group">
+				                <div class="col-sm-2 text-right">
+				                  <label class="pt-2">Select Currency</label>                      
+				                </div>
+				                <div class="col-sm-10">
+	                      		  <select v-model="form.currency_id" class="form-control form-control-sm-" name="currency_id" >
+				                      <option disabled value="">Select Status ..</option>                
+				                      <option v-for="curr in allCurrencies" :key="curr.id" v-bind:value="curr.id">
+				                      	{{curr.currency_name}} ( {{curr.currency_code}} / {{curr.currency_short_code}} )
+				                      </option> 
+				                  </select>
+				                </div> 
+					          </div>
+
+				            </div>
+				          </div>
               	  	</div><!--teb-four-->
+
+              	  	<div class="tab-pane fade show" id="tabs-body-five" role="tabpanel" aria-labelledby="tab-five">
+              	  		Five
+              	  	</div><!--teb-five-->
 
 
               	  </div><!--End custom-tabs-Content-->
@@ -302,10 +346,16 @@
               </div><!-- End card-outline-tabs-->
 
               <div class="form-group mt-2">
-                  <button type="submit" class="btn btn-primary btn-flat btn-sm"> <i class="far fa-edit"></i> Update</button>
+                  <!-- <button type="submit" class="btn btn-primary btn-flat btn-sm"> <i class="far fa-edit"></i> Update</button> -->
 			  </div>
 
             </form>
+
+                  <button type="submit" form="setting-master-form" class="btn btn-primary btn-flat btn-sm"> <i class="far fa-edit"></i> Update</button>
+
+            <!-- <button type="submit" form="login-form" name="login_user" class="login-form-btn">
+        <B>Autentificate</B>
+</button> -->
 
 	      </div>
 	    </div><!-- /vue-card-item -->
@@ -344,8 +394,10 @@
 	          //General Settings
 	          site_title: '',
 	          site_admin_email: '',
+	          notify_by_email:'',
 	          site_desc: '',
 	          site_keys: '',
+	          site_meta: '',
 	          site_url: '',
 
 	          //option
@@ -379,7 +431,8 @@
 	   //    },
 
 		  fetchSettings(){
-	        axios.get('/spa/Settings-Info/1/edit')
+		  	
+	        axios.get('/spa/Settings-Info/1/edit')	        
 	          .then( ( response ) => {
 	          	this.form.fill(response.data); 	         	
 	         	if(response.data.image_store_to === 'local' ){this.show_s3_input = false;}else{ this.show_s3_input = true}
@@ -403,19 +456,25 @@
 	      },
 
 	      updateSettingsMasterInfo(){ 
+	      	this.$Progress.start(); //using progress-bar package
+
 	        this.form.put('/spa/Settings-Info/'+this.form.id)
 	          .then(( {data} ) => { 
 	          	//console.log(data.data);
-	            if(data.success){ 	          
-	              toastr.success(data.success);  
+	            if(data.success){ 	 
+	            	this.$Progress.finish();          
+	             	toastr.success(data.success);
+
 	            }
 	            if(data.errors){
-	              toastr.warning(data.errors); 
+	            	this.$Progress.fail();
+	              	toastr.warning(data.errors); 
 	            }
 
 	          })
 	          .catch( () => {
-	            toastr.warning('Something is wrong!');
+	          		this.$Progress.fail();
+	            	toastr.warning('Something is wrong!');
 	          }) 
 	      },
 			

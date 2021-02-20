@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class CustomerResetPasswordNotification extends Notification
+class CustomerResetPasswordNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -45,7 +45,7 @@ class CustomerResetPasswordNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('You are receiving this email because we received a password reset request for your account.')
+                    ->line('You are receiving this email because we received a password reset request for your shorboraho account.')
                     ->action('Reset Password', route('customer.password.reset', $this->token))
                     //->action('Reset Password', url('customer.password.reset', $this->$token))
                     ->line('This password reset link will expire in 60 minutes.');

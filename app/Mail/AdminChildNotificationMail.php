@@ -33,7 +33,7 @@ class AdminChildNotificationMail extends Mailable
         //return $this->view('view.name');
 
         return $this
-            ->from('info@sorboraho.com')
+            ->from( systemSettingsAll()->notify_by_email )
             ->subject('Email from Sorboraho.com')
             ->view('emails.AdminChildNotificationMail', ['email_data' => $this->email_data]);
     }
