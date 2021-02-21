@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB; //for database transection
 use App\Models\Customer;
 use App\Models\Customer\CustomerAddress;
 
+use Illuminate\Support\Facades\Cache;
 
 use Carbon\Carbon;
 use App\Jobs\CustomerNotificationMailJob;
@@ -35,11 +36,26 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-       if(!empty($request->perPage)){
+        
+
+        //cache configure
+        // $data = Cache::remember('cache_user_data', 30, function () {
+
+        //     if(!empty($request->perPage)){
+        //         $perPage = $request->perPage;
+        //     }else{
+        //         $perPage = 10;
+        //     }
+
+        //     return Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->paginate($perPage);
+        // });
+
+
+        if(!empty($request->perPage)){
             $perPage = $request->perPage;
-       }else{
+        }else{
             $perPage = 100;
-       }
+        }
 
         $data = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->paginate($perPage);
 

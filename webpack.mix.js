@@ -46,6 +46,13 @@ mix.sass('resources/sass/app.scss', 'public/css') //user for all
 //     'public/css/vendor/videojs.css'
 // ], 'public/css/all.css');
 
+/*
+* Versioning / Cache Busting
+* versioned files are usually unnecessary in development, you may instruct the versioning process to only run during npm run prod:
+*/
+if (mix.inProduction()) {
+    mix.version();
+}
 
 /*
 * move vue chunks file to js/chunks folder. By default this will generated in Public folder 
@@ -65,6 +72,23 @@ mix.webpackConfig({
     // },
     
 });
+
+/*
+* BrowserSync can automatically monitor your files for changes, and inject your changes into the browser without
+* requiring a manual refresh. You may enable support for this by calling the mix.browserSync() method
+* dependency:  npm install browser-sync browser-sync-webpack-plugin@2.2.2 --save-dev --legacy-peer-deps
+*/
+// mix.browserSync({
+//     proxy: 'http://192.168.0.100:8000'
+//     // files: [
+//     //     './app/**/*',
+//     //     './routes/**/*',
+//     //     './public/css/*.css',
+//     //     './public/js/*.js',
+//     //     './resources/views/**/*.blade.php',
+//     //     './resources/lang/**/*',
+//     // ]
+// });
 
 
 /*
@@ -87,6 +111,9 @@ mix.webpackConfig({
 // mix.options({
 //     legacyNodePolyfills: true
 // });
+
+
+
 
 
 
