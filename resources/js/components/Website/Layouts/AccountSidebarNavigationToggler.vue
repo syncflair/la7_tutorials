@@ -402,6 +402,12 @@
                     //toastr.success('Login successfule'); 
 
                     FireEvent.$emit('Call_HSCore_components_HSUnfold'); // initialization of unfold component
+
+
+                    //for api
+                    // localStorage.setItem('Auth_token', data.data.token ); //set token to store
+                    // this.$router.push({ path : '/dashboard' }).catch(err => {});  
+
                 }
 
                 if(data.error){

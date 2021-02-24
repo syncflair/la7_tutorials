@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Sorboraho'),
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://sorboraho.com'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -65,9 +65,10 @@ return [
     | will be used by the PHP date and date-time functions. We have gone
     | ahead and set this to a sensible default for you out of the box.
     |
+    | 'timezone' => 'UTC', //default
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Dhaka',
 
     /*
     |--------------------------------------------------------------------------
@@ -116,10 +117,11 @@ return [
     | This key is used by the Illuminate encrypter service and should be set
     | to a random, 32 character string, otherwise these encrypted strings
     | will not be safe. Please do this before deploying an application!
-    |
+    | 
+    |'key' => env('APP_KEY'), //default
     */
 
-    'key' => env('APP_KEY'),
+    'key' => env('APP_KEY', 'base64:JPgv29nx4LJJRGIyqRWoIjpxNzzy98SqPCVtB/hC13w='),
 
     'cipher' => 'AES-256-CBC',
 

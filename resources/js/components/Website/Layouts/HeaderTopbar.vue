@@ -252,6 +252,11 @@
                   //toastr.success('Logout successfule'); 
                 //}
 
+                //for api
+                // localStorage.removeItem('tokenName'); //remove token
+                // this.$router.push({ path : '/' }); //redirect
+                //this.$router.push({ path : '/home' }).catch(err => {});  
+
               })
               .catch( () => {
                 this.$Progress.fail();

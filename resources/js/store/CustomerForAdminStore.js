@@ -5,6 +5,7 @@ const CustomerForAdminStore ={
 	state: () => ({
         //accessable from any where 
         customers: {},
+
         pagination: { 
             current_page: 1,                
             per_page: 0,
@@ -29,15 +30,29 @@ const CustomerForAdminStore ={
 
 
     actions: {
-        fetchData(context, payload){
-            let perPageVelue ;
-            if(!payload){
-                perPageVelue = 100
-            }else{
-                perPageVelue = payload
-            }
+        // fetchData(context, payload){
+        //     let perPageVelue ;
+        //     if(!payload){
+        //         perPageVelue = 100
+        //     }else{
+        //         perPageVelue = payload
+        //     }
 
-          axios.get('/spa/customer-Info?page=' + context.state.pagination.current_page +'&perPage=' + perPageVelue)
+        //   axios.get('/spa/customer-Info?page=' + context.state.pagination.current_page +'&perPage=' + perPageVelue)
+        //   .then( (response) => {
+        //     context.commit('FETCH_DATA', response.data.data); //use for only show data
+        //     context.commit('FATCH_PAGINATION', response.data) //for pagination
+        //     //console.log(response.data);
+        //   })
+        //   .catch( () => {  
+        //     //toastr.warning('Something is wrong!');
+        //   })
+        // },
+
+
+        fetchData(context, payload){            
+
+          axios.get('/spa/customer-Info?page=' + payload )
           .then( (response) => {
             context.commit('FETCH_DATA', response.data.data); //use for only show data
             context.commit('FATCH_PAGINATION', response.data) //for pagination

@@ -15,6 +15,15 @@ Constants:
 
 
 
+//status code list
+//429 too many request
+//201 data created
+//200 success
+//401 Unauthorized
+
+
+
+
 
 
 

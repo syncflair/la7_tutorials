@@ -12,12 +12,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -165,6 +185,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       // use for sortable
       currentSort: 'name',
       currentSortDir: 'asc',
+      lists: [],
+      page: 1,
       //User for search
       filterBy: 'name',
       // this is use for which field use for auto search, default
@@ -191,7 +213,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     sortedCustomers: function sortedCustomers() {
       var _this = this;
 
-      var fo = Object.values(this.customers).sort(function (a, b) {
+      // let fo = Object.values(this.customers).sort((a,b) => {
+      var fo = Object.values(this.lists).sort(function (a, b) {
         var modifier = 1;
         if (_this.currentSortDir === 'desc') modifier = -1;
         if (a[_this.currentSort] < b[_this.currentSort]) return -1 * modifier;
@@ -361,8 +384,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.$store.dispatch('CustomerForAdminStore/fetchData', this.pagination.per_page);
       this.$Progress.finish(); //console.log(this.pagination.total);
     },
+    infiniteHandler: function infiniteHandler($state) {
+      var _this6 = this;
+
+      //let vm =this;
+      axios.get('/spa/customer-Info?page=' + this.page) // .then( ( {response} ) => {
+      .then(function (response) {
+        //console.log(response);
+        if (response.data.data.length) {
+          var _this6$lists;
+
+          _this6.page += 1;
+
+          (_this6$lists = _this6.lists).push.apply(_this6$lists, _toConsumableArray(response.data.data));
+
+          $state.loaded();
+        } else {
+          $state.complete();
+        }
+      }); // this.page = this.page + 1;
+    },
     reloadThis: function reloadThis() {
-      this.fetchData();
+      this.infiniteHandler(); // this.fetchData();
     },
     ViewDetails: function ViewDetails() {
       alert('ok');
@@ -375,7 +418,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       FireEvent.$emit('editCustomer', data);
     },
     DeleteData: function DeleteData(id) {
-      var _this6 = this;
+      var _this7 = this;
 
       Swal.fire({
         title: 'Are you sure to Delete?',
@@ -387,7 +430,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          _this6.$Progress.start();
+          _this7.$Progress.start();
 
           axios["delete"]('/spa/customer-Info/' + id).then(function (_ref5) {
             var data = _ref5.data;
@@ -395,7 +438,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             if (data.success) {
               FireEvent.$emit('AfterChange'); //$emit is create an event. this will reload data after create or update               
 
-              _this6.$Progress.finish();
+              _this7.$Progress.finish();
 
               toastr.warning(data.success);
             }
@@ -404,12 +447,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               toastr.warning(data.errors);
             }
           })["catch"](function () {
-            _this6.$Progress.fail();
+            _this7.$Progress.fail();
 
             toastr.warning('Something is wrong!');
           });
         } else {
-          _this6.$Progress.finish();
+          _this7.$Progress.finish();
 
           toastr.info('Your data is safe!');
         }
@@ -428,20 +471,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   },
   created: function created() {
-    var _this7 = this;
-
-    this.$store.dispatch('CustomerForAdminStore/fetchData'); //call this function at first loading from Action with Modules namespace 
-
-    FireEvent.$on('AfterChange', function () {
-      _this7.$Progress.start();
-
-      _this7.$store.dispatch('CustomerForAdminStore/fetchData', _this7.pagination.per_page);
-
-      _this7.$Progress.finish();
-    }); //this event call from Pagination-app component for change number of data show per page
-
-    FireEvent.$on('changPerPage', function (data) {
-      _this7.$store.dispatch('CustomerForAdminStore/fetchData', data);
+    //this.infiniteHandler();
+    //this.$store.dispatch('CustomerForAdminStore/fetchData'); //call this function at first loading from Action with Modules namespace 
+    // FireEvent.$on('AfterChange', () => {
+    //     this.$Progress.start();
+    //     this.infiniteHandler();
+    //     //this.$store.dispatch('CustomerForAdminStore/fetchData', this.pagination.per_page);
+    //     this.$Progress.finish();
+    // }); 
+    //this event call from Pagination-app component for change number of data show per page
+    FireEvent.$on('changPerPage', function (data) {//this.infiniteHandler();
+      //this.$store.dispatch('CustomerForAdminStore/fetchData',data);
     });
   },
   mounted: function mounted() {//console.log(this.categories)   
@@ -754,338 +794,317 @@ var render = function() {
           _vm._v(" "),
           _c(
             "tbody",
-            [
-              _vm._l(_vm.sortedCustomers, function(customer, index) {
-                return _c("tr", { key: index }, [
-                  _c("td", { attrs: { scope: "col" } }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.selectedCheckbox,
-                          expression: "selectedCheckbox"
-                        }
-                      ],
-                      attrs: { type: "checkbox", name: "" },
-                      domProps: {
-                        value: customer.id,
-                        checked: Array.isArray(_vm.selectedCheckbox)
-                          ? _vm._i(_vm.selectedCheckbox, customer.id) > -1
-                          : _vm.selectedCheckbox
-                      },
-                      on: {
-                        change: function($event) {
-                          var $$a = _vm.selectedCheckbox,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = customer.id,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                (_vm.selectedCheckbox = $$a.concat([$$v]))
-                            } else {
-                              $$i > -1 &&
-                                (_vm.selectedCheckbox = $$a
-                                  .slice(0, $$i)
-                                  .concat($$a.slice($$i + 1)))
-                            }
+            _vm._l(_vm.sortedCustomers, function(customer, index) {
+              return _c("tr", { key: index }, [
+                _c("td", { attrs: { scope: "col" } }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.selectedCheckbox,
+                        expression: "selectedCheckbox"
+                      }
+                    ],
+                    attrs: { type: "checkbox", name: "" },
+                    domProps: {
+                      value: customer.id,
+                      checked: Array.isArray(_vm.selectedCheckbox)
+                        ? _vm._i(_vm.selectedCheckbox, customer.id) > -1
+                        : _vm.selectedCheckbox
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.selectedCheckbox,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = customer.id,
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              (_vm.selectedCheckbox = $$a.concat([$$v]))
                           } else {
-                            _vm.selectedCheckbox = $$c
+                            $$i > -1 &&
+                              (_vm.selectedCheckbox = $$a
+                                .slice(0, $$i)
+                                .concat($$a.slice($$i + 1)))
                           }
+                        } else {
+                          _vm.selectedCheckbox = $$c
                         }
                       }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { attrs: { scope: "col" } }, [
-                    _c("small", [_vm._v(_vm._s(customer.customer_code) + " ")])
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { attrs: { scope: "col" } }, [
-                    _vm._v(" " + _vm._s(customer.name) + " ")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(customer.email) + " ")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(" " + _vm._s(customer.phone) + " ")]),
-                  _vm._v(" "),
-                  _c("td", [
-                    customer.customer_group_id != 0
-                      ? _c("span", [
-                          _vm._v(
-                            " " +
-                              _vm._s(
-                                customer.belongs_to_customer_group.group_name
-                              ) +
-                              " "
-                          )
-                        ])
-                      : _vm._e()
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticStyle: { "text-align": "center" } }, [
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: customer.status_id === 1,
-                            expression: "customer.status_id === 1"
-                          }
-                        ],
-                        attrs: { title: "Active Customer, Click to inactive" },
-                        on: {
-                          click: function($event) {
-                            return _vm.inactiveCustomer(customer.id)
-                          }
-                        }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "fas fa-user-check green pointer"
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: customer.status_id === 2,
-                            expression: "customer.status_id === 2"
-                          }
-                        ],
-                        attrs: { title: "Inactive Customer, Click to active" },
-                        on: {
-                          click: function($event) {
-                            return _vm.activeCustomer(customer.id)
-                          }
-                        }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "fas fa-user-times yellow pointer"
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: customer.status_id === 3,
-                            expression: "customer.status_id === 3"
-                          }
-                        ],
-                        attrs: { title: "Panding Customer, Click to active" },
-                        on: {
-                          click: function($event) {
-                            return _vm.activeCustomer(customer.id)
-                          }
-                        }
-                      },
-                      [_c("i", { staticClass: "fas fa-user-lock red pointer" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        directives: [
-                          {
-                            name: "show",
-                            rawName: "v-show",
-                            value: customer.status_id === 4,
-                            expression: "customer.status_id === 4"
-                          }
-                        ],
-                        attrs: {
-                          title: "Not Verified Customer, Click to verify"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.verifyByUser(customer.id)
-                          }
-                        }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "fas fa-user-secret red pointer",
-                          staticStyle: { "font-size": "22px !important" }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticStyle: { "text-align": "center" } }, [
-                    _c("input", {
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", { attrs: { scope: "col" } }, [
+                  _c("small", [_vm._v(_vm._s(customer.customer_code) + " ")])
+                ]),
+                _vm._v(" "),
+                _c("td", { attrs: { scope: "col" } }, [
+                  _vm._v(" " + _vm._s(customer.name) + " ")
+                ]),
+                _vm._v(" "),
+                _c("td", [_vm._v(" " + _vm._s(customer.email) + " ")]),
+                _vm._v(" "),
+                _c("td", [_vm._v(" " + _vm._s(customer.phone) + " ")]),
+                _vm._v(" "),
+                _c("td", [
+                  customer.customer_group_id != 0
+                    ? _c("span", [
+                        _vm._v(
+                          " " +
+                            _vm._s(
+                              customer.belongs_to_customer_group.group_name
+                            ) +
+                            " "
+                        )
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "center" } }, [
+                  _c(
+                    "span",
+                    {
                       directives: [
                         {
-                          name: "model",
-                          rawName: "v-model",
-                          value: customer.enable_notify,
-                          expression: "customer.enable_notify"
+                          name: "show",
+                          rawName: "v-show",
+                          value: customer.status_id === 1,
+                          expression: "customer.status_id === 1"
+                        }
+                      ],
+                      attrs: { title: "Active Customer, Click to inactive" },
+                      on: {
+                        click: function($event) {
+                          return _vm.inactiveCustomer(customer.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fas fa-user-check green pointer"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: customer.status_id === 2,
+                          expression: "customer.status_id === 2"
+                        }
+                      ],
+                      attrs: { title: "Inactive Customer, Click to active" },
+                      on: {
+                        click: function($event) {
+                          return _vm.activeCustomer(customer.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fas fa-user-times yellow pointer"
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: customer.status_id === 3,
+                          expression: "customer.status_id === 3"
+                        }
+                      ],
+                      attrs: { title: "Panding Customer, Click to active" },
+                      on: {
+                        click: function($event) {
+                          return _vm.activeCustomer(customer.id)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-user-lock red pointer" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "span",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: customer.status_id === 4,
+                          expression: "customer.status_id === 4"
                         }
                       ],
                       attrs: {
-                        type: "checkbox",
-                        name: "enable_notify",
-                        value: "1"
-                      },
-                      domProps: {
-                        checked: Array.isArray(customer.enable_notify)
-                          ? _vm._i(customer.enable_notify, "1") > -1
-                          : customer.enable_notify
+                        title: "Not Verified Customer, Click to verify"
                       },
                       on: {
                         click: function($event) {
-                          return _vm.ChangeNotify(customer.id, $event)
-                        },
-                        change: function($event) {
-                          var $$a = customer.enable_notify,
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = "1",
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                _vm.$set(
-                                  customer,
-                                  "enable_notify",
-                                  $$a.concat([$$v])
-                                )
-                            } else {
-                              $$i > -1 &&
-                                _vm.$set(
-                                  customer,
-                                  "enable_notify",
-                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                )
-                            }
-                          } else {
-                            _vm.$set(customer, "enable_notify", $$c)
-                          }
+                          return _vm.verifyByUser(customer.id)
                         }
                       }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _c(
-                      "span",
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fas fa-user-secret red pointer",
+                        staticStyle: { "font-size": "22px !important" }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", { staticStyle: { "text-align": "center" } }, [
+                  _c("input", {
+                    directives: [
                       {
-                        staticClass: "pointer",
-                        attrs: {
-                          title: _vm._f("formatDate")(customer.created_at)
+                        name: "model",
+                        rawName: "v-model",
+                        value: customer.enable_notify,
+                        expression: "customer.enable_notify"
+                      }
+                    ],
+                    attrs: {
+                      type: "checkbox",
+                      name: "enable_notify",
+                      value: "1"
+                    },
+                    domProps: {
+                      checked: Array.isArray(customer.enable_notify)
+                        ? _vm._i(customer.enable_notify, "1") > -1
+                        : customer.enable_notify
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.ChangeNotify(customer.id, $event)
+                      },
+                      change: function($event) {
+                        var $$a = customer.enable_notify,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = "1",
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(
+                                customer,
+                                "enable_notify",
+                                $$a.concat([$$v])
+                              )
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                customer,
+                                "enable_notify",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(customer, "enable_notify", $$c)
                         }
-                      },
-                      [_c("i", { staticClass: "far fa-calendar-check" })]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-right" }, [
-                    _c(
-                      "div",
-                      {
-                        staticClass: "btn-group option-dropdown-manu-style left"
-                      },
-                      [
-                        _vm._m(1, true),
-                        _vm._v(" "),
-                        _c(
-                          "div",
-                          { staticClass: "dropdown-menu dropdown-menu-right" },
-                          [
-                            _c(
-                              "a",
-                              {
-                                staticClass: "dropdown-item pointer",
-                                on: {
-                                  click: function($event) {
-                                    return _vm.ViewDetails(customer.id)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", { staticClass: "fas fa-eye primary" }),
-                                _vm._v(" View ")
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "router-link",
-                              {
-                                staticClass: "dropdown-item pointer",
-                                attrs: {
-                                  to: {
-                                    name: "CustomerMasterForm",
-                                    params: { data: customer }
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "fas fa-edit primary "
-                                }),
-                                _vm._v(" Edit\r\n                  ")
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "dropdown-divider" }),
-                            _vm._v(" "),
-                            _c(
-                              "a",
-                              {
-                                staticClass: "dropdown-item pointer",
-                                attrs: { id: "delete" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.DeleteData(customer.id)
-                                  }
-                                }
-                              },
-                              [
-                                _c("i", {
-                                  staticClass: "far fa-trash-alt red"
-                                }),
-                                _vm._v(" Delete\r\n                  ")
-                              ]
-                            )
-                          ],
-                          1
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              }),
-              _vm._v(" "),
-              _c(
-                "tr",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.customers && !_vm.customers.length,
-                      expression: "customers && !customers.length"
+                      }
                     }
-                  ]
-                },
-                [_vm._m(2)]
-              )
-            ],
-            2
+                  })
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "pointer",
+                      attrs: {
+                        title: _vm._f("formatDate")(customer.created_at)
+                      }
+                    },
+                    [_c("i", { staticClass: "far fa-calendar-check" })]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", { staticClass: "text-right" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "btn-group option-dropdown-manu-style left"
+                    },
+                    [
+                      _vm._m(1, true),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "dropdown-menu dropdown-menu-right" },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "dropdown-item pointer",
+                              on: {
+                                click: function($event) {
+                                  return _vm.ViewDetails(customer.id)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-eye primary" }),
+                              _vm._v(" View ")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "dropdown-item pointer",
+                              attrs: {
+                                to: {
+                                  name: "CustomerMasterForm",
+                                  params: { data: customer }
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "fas fa-edit primary " }),
+                              _vm._v(" Edit\r\n                  ")
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "dropdown-divider" }),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "dropdown-item pointer",
+                              attrs: { id: "delete" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.DeleteData(customer.id)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", { staticClass: "far fa-trash-alt red" }),
+                              _vm._v(" Delete\r\n                  ")
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ])
+              ])
+            }),
+            0
           )
         ]
       )
@@ -1095,16 +1114,39 @@ var render = function() {
       "div",
       { staticClass: "card-footer" },
       [
-        _vm.pagination.last_page >= 1
-          ? _c("pagination-app", {
-              attrs: { pagination: _vm.pagination, offset: 5 },
-              on: {
-                paginate: function($event) {
-                  return _vm.fetchData()
-                }
-              }
-            })
-          : _vm._e()
+        _c(
+          "infinite-loading",
+          {
+            attrs: { spinner: "spiral" },
+            on: {
+              distance: function($event) {
+                1
+              },
+              infinite: _vm.infiniteHandler
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "text-warning text-center text-bold",
+                attrs: { slot: "no-more" },
+                slot: "no-more"
+              },
+              [_vm._v("No more data")]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "text-danger text-center text-bold",
+                attrs: { slot: "no-results" },
+                slot: "no-results"
+              },
+              [_vm._v("No results")]
+            )
+          ]
+        )
       ],
       1
     )
@@ -1140,21 +1182,6 @@ var staticRenderFns = [
       },
       [_c("i", { staticClass: "fas fa-ellipsis-v" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", { attrs: { colspan: "10" } }, [
-      _c(
-        "div",
-        {
-          staticClass: "alert alert-warning text-center red mb-0",
-          attrs: { role: "alert" }
-        },
-        [_vm._v("Sorry : No data found.")]
-      )
-    ])
   }
 ]
 render._withStripped = true

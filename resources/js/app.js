@@ -82,11 +82,10 @@
 
 
 
-
 /*
 * Global Components
 */
-  //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+  //Vue.component('example-component', require('./components/ExampleComponent.vue').default);  
   Vue.component('website-wrapper', () => import(/* webpackChunkName: "website-wrapper" */'./components/Website/WebsiteWrapper.vue')); //Website component
 
   Vue.component('adminwrapper', () => import(/* webpackChunkName: "adminwrapper" */'./components/Admin/AdminWrapper.vue')); //admin dashboard
@@ -106,17 +105,23 @@
   //Global Components for Admin Childs (Order, Deliver, Packging etc)
   Vue.component('admin-child-wrapper', () => import(/* webpackChunkName: "AdminChiledWrapper" */'./components/AdminChild/AdminChildWrapper.vue'));
 
-
   //Global Components for Supplier
   Vue.component('supplier-admin-wrapper', () => import(/* webpackChunkName: "SupplierAdminWrapper" */'./components/AdminSupplier/SupplierAdminWrapper.vue'));
-
 
   //import counttest from './components/Admin/MultiComponent/countTest.vue';
   Vue.component('counttest', () => import(/* webpackChunkName: "counttest-sample" */'./components/Admin/MultiComponent/countTest.vue'));
 
-
   //pagination
   Vue.component('pagination', require('laravel-vue-pagination'));
+
+
+  /*
+  * vue-infinite-loading
+  */ 
+  import InfiniteLoading from 'vue-infinite-loading';
+  Vue.use(InfiniteLoading, { /* options */ });
+  //vue-infinite-loading
+  //Vue.component('InfiniteLoading', require('vue-infinite-loading'));
 
 
 /*

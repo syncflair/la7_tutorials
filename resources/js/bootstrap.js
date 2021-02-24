@@ -65,6 +65,15 @@ window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+
+// window.axios.defaults.baseURL = 'https://api.example.com';
+// // Important: If axios is used with multiple domains, the AUTH_TOKEN will be sent to all of them.
+// // See below for an example using Custom instance defaults instead.
+// window.AUTH_TOKEN = locaStorage.getItem('get_AUTH_TOKEN'); //get from local storage
+// window.axios.defaults.headers.common['Authorization'] = 'Bearer '+AUTH_TOKEN;
+// window.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+// window.axios.defaults.headers.post['Content-Type'] = 'application/json';
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Customer;
 
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -37,29 +38,62 @@ class CustomerController extends Controller
     public function index(Request $request)
     {
         
-
-        //cache configure
-        // $data = Cache::remember('cache_user_data', 30, function () {
-
-        //     if(!empty($request->perPage)){
-        //         $perPage = $request->perPage;
-        //     }else{
-        //         $perPage = 10;
-        //     }
-
-        //     return Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->paginate($perPage);
-        // });
-
-
-        if(!empty($request->perPage)){
-            $perPage = $request->perPage;
-        }else{
-            $perPage = 100;
+        //$currentPage = request()->get('page',1);
+        $page = 0;
+        if($request->has('page')){
+            // $page = $request->input('page');
+            $page = $request->page;
         }
 
-        $data = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->paginate($perPage);
+        $key = 'customer_page_'.$page; //define uniq key 
+
+        $data = Cache::remember($key, 120, function () {
+                // return Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->take(10)->get();
+                return Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->paginate(10);
+            });
+
+        // $data = Cache::get($key);
+
+        // if(!$data){
+        //     // $customer = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->offset(10)->get();
+        //     //$customer = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->take(10)->get();
+        //     // $customer = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->paginate(10);
+
+        //     // Cache::forever($key, $customer);
+
+
+
+        //     // dump('Cache miss, run query');
+        // }else{
+        //     // dump('Cache Hit');
+        // }
+
+        // $currentPage = $request->page;
+        //cache configure
+        // $data = Cache::remember('cacheCustomerData-'.$currentPage, 120, function () {
+
+        //     // return Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->take(100)->get();
+        //     return Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->paginate(10);
+        // });
+
+        // if(!empty($request->perPage)){
+        //     $perPage = $request->perPage;
+        // }else{
+        //     $perPage = 100;
+        // }
+
+        // $data = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->paginate(10);
+        // $data = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->take(10)->get();
+        // $data = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->offset(10)->get();
+
+        // DB::connection()->enableQueryLog();
+        //     $data = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->paginate(10);            
+        // $queryLog =DB::getQueryLog();
+        // print_r($queryLog);
 
         return response()->json($data);
+
+
     }
 
     /**

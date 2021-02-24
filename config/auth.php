@@ -32,6 +32,7 @@ return [
     | mechanisms used by this application to persist your user's data.
     |
     | Supported: "session", "token"
+    | customer-api, supplier-api
     |
     */
 
@@ -52,7 +53,7 @@ return [
             'provider' => 'customers',
         ],
 
-        'customer-api' => [
+        'api-customer' => [
             'driver' => 'token',
             'provider' => 'customers',
             'hash' => false,
@@ -64,7 +65,7 @@ return [
             'provider' => 'suppliers',
         ],
 
-        'supplier-api' => [
+        'api-supplier' => [
             'driver' => 'token',
             'provider' => 'suppliers',
             'hash' => false,

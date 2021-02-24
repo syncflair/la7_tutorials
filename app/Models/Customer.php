@@ -45,6 +45,20 @@ class Customer extends Authenticatable
     ];
 
 
+     /**
+     * Eloquent models dispatch several events, allowing you to hook into the following moments in a model's lifecycle: 
+     * retrieved, creating, created, updating, updated, saving, saved, deleting, deleted, restoring, restored, and replicating.
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => \App\Events\AdminCustomer\customerCreatedEvent::class,
+        'updated' => \App\Events\AdminCustomer\customerUpdatedEvent::class,
+        'deleted' => \App\Events\AdminCustomer\customerDeletedEvent::class,
+    ];
+
+
     //My Custome Relation --  user belong to this Role 
     // public function customerType(){
     //     //return $this->belongsTo('App\Models\Role');

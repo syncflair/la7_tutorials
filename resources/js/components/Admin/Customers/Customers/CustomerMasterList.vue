@@ -44,6 +44,7 @@
           <!-- :key="customer.id" -->
           <!-- <tr v-for="(customer, index) in customers.data" :key="index"> -->
           <tr v-for="(customer, index) in sortedCustomers" :key="index">
+          <!-- <tr v-for="(customer, index) in lists" :key="index"> -->
 
             <td scope="col"> <input type="checkbox" v-model="selectedCheckbox" name="" :value="customer.id"></td>
             
@@ -107,24 +108,31 @@
 
           </tr>
 
-          <tr v-show="customers && !customers.length">
+          <!-- <tr v-show="customers && !customers.length"> -->
+          <!-- <tr v-show="lists && !lists.length">
             <td colspan="10">
               <div class="alert alert-warning text-center red mb-0" role="alert" >Sorry : No data found.</div>
             </td>
-          </tr>
+          </tr> -->
 
         </tbody>
       </table>
 
     </div>
 
-    <div class="card-footer">      
-      <pagination-app 
+    <div class="card-footer">  
+      <infinite-loading spinner="spiral" @distance="1" @infinite="infiniteHandler">
+        <div slot="no-more" class="text-warning text-center text-bold">No more data</div>
+        <div slot="no-results" class="text-danger text-center text-bold">No results</div>
+      </infinite-loading>    
+
+      <!-- <infinite-loading @distance="1" @infinite="infiniteHandler"></infinite-loading>     -->
+      <!-- <pagination-app 
           v-if="pagination.last_page >= 1"  
           :pagination="pagination"
           :offset="5"
           @paginate="fetchData()"
-      ></pagination-app>
+      ></pagination-app> -->
     </div>
 
     <!-- sortable data test -->
@@ -150,6 +158,9 @@
           currentSort:'name',
           currentSortDir:'asc',
 
+          lists:[],
+          page:1,
+
           //User for search
           filterBy:'name', // this is use for which field use for auto search, default
           SearchByOptions:[
@@ -158,7 +169,8 @@
             {'field_name':'phone', 'show_name':'Phone'},
             {'field_name':'group_name', 'show_name':'Group'},
             {'field_name':'us_name', 'show_name':'Status'},
-          ],             
+          ],
+            
         }
       },
 
@@ -168,7 +180,8 @@
           ),
            // use for sortable
           sortedCustomers() {
-            let fo = Object.values(this.customers).sort((a,b) => {
+            // let fo = Object.values(this.customers).sort((a,b) => {
+            let fo = Object.values(this.lists).sort((a,b) => {
               let modifier = 1;
               if(this.currentSortDir === 'desc') modifier = -1;
               if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
@@ -327,8 +340,31 @@
           //console.log(this.pagination.total);
         },
 
+        infiniteHandler($state) {
+            //let vm =this;
+            axios.get('/spa/customer-Info?page=' + this.page)
+                 
+              // .then( ( {response} ) => {
+              .then( (response) => {
+                //console.log(response);
+                if (response.data.data.length) {
+
+                  this.page += 1;
+                  this.lists.push(...response.data.data);
+                  $state.loaded();
+
+                } else {
+                  $state.complete();
+                }
+
+              });
+
+            // this.page = this.page + 1;
+        },
+
         reloadThis(){
-          this.fetchData();
+          this.infiniteHandler();
+          // this.fetchData();
         },
 
         ViewDetails(){
@@ -397,19 +433,21 @@
       },
 
       created(){ 
+          //this.infiniteHandler();
+          //this.$store.dispatch('CustomerForAdminStore/fetchData'); //call this function at first loading from Action with Modules namespace 
 
-          this.$store.dispatch('CustomerForAdminStore/fetchData'); //call this function at first loading from Action with Modules namespace 
 
-
-          FireEvent.$on('AfterChange', () => {
-              this.$Progress.start();
-              this.$store.dispatch('CustomerForAdminStore/fetchData', this.pagination.per_page);
-              this.$Progress.finish();
-          }); 
+          // FireEvent.$on('AfterChange', () => {
+          //     this.$Progress.start();
+          //     this.infiniteHandler();
+          //     //this.$store.dispatch('CustomerForAdminStore/fetchData', this.pagination.per_page);
+          //     this.$Progress.finish();
+          // }); 
 
           //this event call from Pagination-app component for change number of data show per page
           FireEvent.$on('changPerPage', (data) => {
-            this.$store.dispatch('CustomerForAdminStore/fetchData',data);
+            //this.infiniteHandler();
+            //this.$store.dispatch('CustomerForAdminStore/fetchData',data);
           });
 
 
