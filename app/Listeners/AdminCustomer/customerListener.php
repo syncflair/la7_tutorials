@@ -29,7 +29,7 @@ class customerListener
      */
     public function handle($event)
     {
-        
+   
         Cache::forget('cacheCustomerData');
         // $data = Customer::with('belongsToCustomerGroup','belongsToCustomerMembership','hasManyAddress')->take(100)->get();
 

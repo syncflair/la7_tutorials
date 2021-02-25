@@ -3,6 +3,7 @@
 namespace App\Models\Catalog;
 
 use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -34,6 +35,20 @@ class Product extends Model
         //'pro_shops' => 'array',        
         //'multi_image' => 'array',        
     ];
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    // protected static function booted()
+    // {
+    //     // static::addGlobalScope(new AncientScope);
+    //     static::creating(function($product){
+    //         $product->pro_slug = Str::slug($product->sys_pro_name); //Str::slug('Laravel 5 Framework', '-');
+    //     });
+    // }
+
 
     //Product belongs to Status Master
     public function belongsToStatusMaster(){

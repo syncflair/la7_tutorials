@@ -87,7 +87,8 @@ class ProductController extends Controller
 
         $data =array();
         $data['sys_pro_name']=$request->sys_pro_name;
-        $data['pro_slug']= slug_generator($request->sys_pro_name);//slug_generator get from helper
+        $data['pro_slug']= slug_generator($request->sys_pro_name);//slug_generator get from helper 
+        //Str::slug('Laravel 5 Framework', '-');
         $data['pro_type']=$request->pro_type;
         // $data['status_m_id']=$request->status_m_id;        
         $data['pro_status']=$request->pro_status;
