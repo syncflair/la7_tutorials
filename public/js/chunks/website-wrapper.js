@@ -394,6 +394,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
           FireEvent.$emit('Call_HSCore_components_HSUnfold'); // initialization of unfold component
+          //for api
+          // localStorage.setItem('Auth_token', data.data.token ); //set token to store
+          // this.$router.push({ path : '/dashboard' }).catch(err => {});  
         }
 
         if (data.error) {
@@ -2150,6 +2153,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         //this.$router.go('/auth/login');
         //toastr.success('Logout successfule'); 
         //}
+        //for api
+        // localStorage.removeItem('tokenName'); //remove token
+        // this.$router.push({ path : '/' }); //redirect
+        //this.$router.push({ path : '/home' }).catch(err => {});  
       })["catch"](function () {
         _this.$Progress.fail();
       });

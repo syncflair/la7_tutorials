@@ -18,8 +18,8 @@
 
 
         <!-- Main CSS -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-        <!-- <link href="{{ mix('css/app.css') }}" rel="stylesheet"> --> <!--For production / enable version in mix-->
+        <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> -->
+        <link href="{{ mix('css/app.css') }}" rel="stylesheet"> <!--For production / enable version in mix-->
 
 
         <!-- CSS Implementing Plugins -->

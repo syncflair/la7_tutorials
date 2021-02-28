@@ -17,8 +17,11 @@
 
 
 	<!-- Styles -->  
-	<link href="{{ asset('css/app.css') }}" rel="stylesheet"><!--comon style-->
-	<link href="{{ asset('css/style.css') }}" rel="stylesheet"><!--All style for admin-->
+	<!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --><!--comon style-->
+	<!-- <link href="{{ asset('css/style.css') }}" rel="stylesheet"> --><!--All style for admin-->
+
+	<link href="{{ mix('css/app.css') }}" rel="stylesheet"><!--comon style-->
+	<link href="{{ mix('css/style.css') }}" rel="stylesheet"><!--All style for admin-->
 
 	 
 
