@@ -279,9 +279,11 @@ const routes = [
 	//Authentication Customer link
 	{ path: '/auth/login', name: 'CustomerLogin', component: () => import(/* webpackChunkName: "customer-login-website" */ './components/Website/AuthCustomer/login.vue'), meta: { title: 'Login', progress: progressMeta},
 		beforeEnter: (to, from, next) => {
-	  		// const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
-	        if (to.name === 'CustomerLogin' && store.state.AuthenticationForCustomer.isAuthenticated === true) next({ name: 'CustomerDashboard' }) 
+		  setTimeout(() => {
+	  		// const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;  to.name === 'CustomerLogin' &&
+	        if ( store.state.AuthenticationForCustomer.isAuthenticated === true) next({ name: 'CustomerDashboard' }) 
 	        else next()
+	      }, 500);//call after 500 miliscound
 	    }
 	},
 	{ path: '/auth/register', name: 'CustomerRegister', component: () => import(/* webpackChunkName: "customer-register-website" */ './components/Website/AuthCustomer/register.vue'), meta: { title: 'Signup', progress: progressMeta },

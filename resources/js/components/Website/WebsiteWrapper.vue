@@ -136,15 +136,15 @@
             required: true,
           },
           
-          authcustomer: {
-            type: Object,
-            //required: true
-          },
+          // authcustomer: {
+          //   type: Object,
+          //   //required: true
+          // },
 
-          isauthenticated:{
-            type: Boolean,
-            //required: true
-          },
+          // isauthenticated:{
+          //   type: Boolean,
+          //   //required: true
+          // },
 
           // authsupplier: {
           //   type: Object,
@@ -184,7 +184,7 @@
 
         },
 
-        watch: {
+        watch: {            
             /*************************************************************************************/ 
                 /*Add Remove Class based on window width change (Call from CommonGlobal.js)*/
             /*************************************************************************************/             
@@ -205,16 +205,30 @@
         },           
 
         created(){
-
+            // console.log(this.spac_access_token);
+            // setTimeout(() => { 
+              if( localStorage.getItem('_spac_at') === 'undefined' && localStorage.getItem('_spac_et') === 'undefined' 
+                && localStorage.getItem('_spac_rt') === 'undefined'){
+                this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false ); 
+              }else if( localStorage.getItem('_spac_at') === null && localStorage.getItem('_spac_et') === null 
+                && localStorage.getItem('_spac_rt') === null){
+                // }else if (this.spac_access_token === null){
+                this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false ); 
+              }else{
+                this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true ); 
+              }
+            // }, 10);//call after 10000 miliscound
+             
             //direct commit (mutations) to resources/js/store/commonStoreForAll.js
-            this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', this.isauthenticated );             
-            this.$store.commit('AuthenticationForCustomer/AUTH_CUSTOMER_CHECK', this.authcustomer ); //commit from props
+            //this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', this.isauthenticated );             
+            //this.$store.commit('AuthenticationForCustomer/AUTH_CUSTOMER_CHECK', this.authcustomer ); //commit from props
 
 
             //this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', this.issspaauthenticated );             
             //this.$store.commit('AuthenticationForSupplier/AUTH_SUPPLIER_CHECK', this.authsupplier ); //commit from props
 
-            this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite ); 
+            // this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite ); 
+            this.$store.commit('AuthenticationForCustomer/IS_IT_WEBSITE_CHECK', this.isitwebsite ); 
 
         },
 
@@ -223,6 +237,10 @@
         },
            
         mounted() {
+
+            //console.log(localStorage.getItem('access_token'));
+            // console.log('One ' + ACCESS_TOKEN);
+            // console.log('store' + ACCESS_TOKEN);
             
             // console.log('website-wrapper');
             // console.log('Height: ' +window.innerHeight + ' - Width: ' + window.innerWidth);
@@ -245,7 +263,15 @@
 
 
             //alert(this.$refs.screenWidth.clientHeight + '-' + this.$refs.screenWidth.clientWidth); //working
-            //console.log('Width: '+this.window.width+ ' Height: ' + this.window.height );  
+            //console.log('Width: '+this.window.width+ ' Height: ' + this.window.height ); 
+
+            //call from AccountSidebarNavigationToggler.vue component
+            FireEvent.$on('Call_HSCore_components_HSUnfold', () => {
+                setTimeout(() => {
+                    // initialization of unfold component
+                    $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+               }, 600);
+            }); 
 
             
 

@@ -20,7 +20,8 @@ class AdminCustomerMiddleware
        //my Custome Code
          /*customer type = 1 for customer*/
         //if (Auth::guard('customer')->check() && Auth::guard('customer')->user()->customerType->id ==1) {
-        if (Auth::guard('customer')->check() ) {
+        // if (Auth::guard('customer')->check() ) { //for session Authentication
+        if (Auth::guard('api-customer')->check() ) {
             return $next($request);
         }else{
             // return redirect()->route('customer.login');

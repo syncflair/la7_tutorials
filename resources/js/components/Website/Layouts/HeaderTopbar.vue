@@ -62,7 +62,8 @@
                             </div>
                         </li>
 
-                        <li v-if="!authCustomer"  class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
+                        <!-- <li v-if="!authCustomer"  class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border"> -->
+                        <li v-if="!isAuthenticated"  class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border">
                             <!-- Account Sidebar Toggle Button -->
                             <a id="sidebarNavToggler" href="javascript:;" role="button" class="u-header-topbar__nav-link"
                                 aria-controls="sidebarContent"
@@ -81,7 +82,8 @@
                             <!-- End Account Sidebar Toggle Button -->
                         </li>
 
-                        <li v-if="authCustomer" class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
+                        <!-- <li v-if="authCustomer" class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single"> -->
+                        <li v-if="isAuthenticated" class="list-inline-item mr-0 u-header-topbar__nav-item u-header-topbar__nav-item-border u-header-topbar__nav-item-no-border u-header-topbar__nav-item-border-single">
                             <div class="d-flex align-items-center">
                                 <!-- Language -->
                                 <div class="position-relative">
@@ -115,7 +117,7 @@
                                         <!-- <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-address" :class="[currentPage.includes('my-address')] ? ActiveLinkClass : '' " ><i class="far fa-address-book pl-1"></i> Address</router-link> -->
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-vouchers" :class="[currentPage.includes('my-vouchers')] ? ActiveLinkClass : '' "><!-- <i class="fas fa-money-bill"></i> --> <i class="font-size-18 ec ec-payment"></i> My Vouchers</router-link>
                                         <router-link class="dropdown-item dropdown-item-custome transition-3d-hover" to="/auth/my-reviews" :class="[currentPage.includes('my-reviews')] ? ActiveLinkClass : '' "><i class="far fa-star"></i> My Reviews</router-link>
-                                        <a @click.prevent="CustomerLogout()" class="dropdown-item dropdown-item-custome transition-3d-hover" href="javascript:;"> <i class="fas fa-sign-out-alt pl-1"></i> Logout</a>
+                                        <a @click.prevent="CustomerLogoutAPI()" class="dropdown-item dropdown-item-custome transition-3d-hover" href="javascript:;"> <i class="fas fa-sign-out-alt pl-1"></i> Logout</a>
                                     </div>
                                 </div>
                                 <!-- End Language -->
@@ -185,7 +187,7 @@
 
         computed: {
 
-          ...mapState( 'AuthenticationForCustomer', ['authCustomer'] ),
+          ...mapState( 'AuthenticationForCustomer', ['authCustomer', 'isAuthenticated'] ),
           // ...mapState( 'AuthenticationForSupplier', ['authSupplier'] ),
 
           //for active link management
@@ -214,7 +216,10 @@
 	    	//UnitsMasterList, UnitsMasterForm,
 	    },		
 
-		methods:{
+		methods:{  
+        
+           
+
 			GotoHome(){
 				//alert('0k');
 	    		//this.$router.push({ name: 'home' });
@@ -240,7 +245,7 @@
 
                   //for security reson, Best Policy for API Based Authentication
                   //localStorage.setItem('isAuthenticated', false);  
-                  //localStorage.removeItem('isAuthenticated');  
+                  // localStorage.removeItem('_spac_at');  
 
                   this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false ); //
 
@@ -262,6 +267,44 @@
                 this.$Progress.fail();
               })   
             },  //End Customer Logout  
+
+            CustomerLogoutAPI(){  
+              this.$Progress.start(); //using progress-bar package
+
+              this.$store.dispatch('AuthenticationForCustomer/logoutCustomerApi'); //get auth customer data 
+
+              // axios.post('/api/afc/logout')
+              // .then(({ response }) => { 
+              //   //console.log(response); 
+              //   //if(response.success){             
+              //     // toastr.success(response.success);         
+              //     this.$Progress.finish(); 
+
+              //     //for security reson, Best Policy for API Based Authentication  
+              //     localStorage.removeItem('_spac_at');  
+              //     localStorage.removeItem('_SPAC_RT');  
+              //     localStorage.removeItem('_spac_ug');  
+              //     this.$store.commit('AuthenticationForCustomer/ACCESS_TOKEN_SET', '' );
+              //     this.$store.commit('AuthenticationForCustomer/REFRESH_TOKEN_SET', '' );
+              //     this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false );
+
+              //     window.location = '/home';
+
+              //   //for api
+              //   // localStorage.removeItem('tokenName'); //remove token
+              //   // this.$router.push({ path : '/' }); //redirect
+              //   //this.$router.push({ path : '/home' }).catch(err => {});  
+
+              // })
+              // .catch( () => {
+              //   this.$Progress.fail();
+              // })  
+
+              this.$Progress.finish();
+
+            },  //End Customer Logout  
+
+
 
             // SupplierLogout(){  
             //   this.$Progress.start(); //using progress-bar package
@@ -292,7 +335,12 @@
 		}, //end Methods
 
 		created(){
-      //console.log(this.AccountNavLinkShow);
+          //console.log(this.AccountNavLinkShow);
+
+              // setTimeout(() => {              
+              // }, 3000);//call after 10000 miliscound
+
+              
 		},
 		
 

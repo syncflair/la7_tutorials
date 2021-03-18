@@ -115,9 +115,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 //import BrandCarouselComponent from '../Layouts/BrandCarouselComponent.vue' //this component load to every page of website
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Contact-Public-website",
@@ -349,323 +346,311 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row mb-10 mt-6-" }, [
-        _c("div", { staticClass: "col-lg-7 col-xl-6 mb-8 mb-lg-0" }, [
-          _c("div", { staticClass: "mr-xl-6" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "form",
-              {
-                staticClass: "js-validate-",
-                attrs: { novalidate: "novalidate-" },
-                on: {
-                  submit: function($event) {
-                    $event.preventDefault()
-                    return _vm.SendPublicQueryEmail()
-                  }
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row mb-10 mt-6-" }, [
+      _c("div", { staticClass: "col-lg-7 col-xl-6 mb-8 mb-lg-0" }, [
+        _c("div", { staticClass: "mr-xl-6" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              staticClass: "js-validate-",
+              attrs: { novalidate: "novalidate-" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.SendPublicQueryEmail()
                 }
-              },
-              [
-                _c("div", { staticClass: "row" }, [
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c(
-                      "div",
-                      { staticClass: "js-form-message mb-4" },
-                      [
-                        _vm._m(1),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.firstName,
-                              expression: "form.firstName"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("firstName")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "firstName",
-                            placeholder: "",
-                            "aria-label": "",
-                            "data-msg": "Please enter your frist name.",
-                            "data-error-class": "u-has-error",
-                            "data-success-class": "u-has-success",
-                            autocomplete: "off"
-                          },
-                          domProps: { value: _vm.form.firstName },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "firstName",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "firstName" }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c(
-                      "div",
-                      { staticClass: "js-form-message mb-4" },
-                      [
-                        _vm._m(2),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.lastName,
-                              expression: "form.lastName"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: {
-                            "is-invalid": _vm.form.errors.has("lastName")
-                          },
-                          attrs: {
-                            type: "text",
-                            name: "lastName",
-                            placeholder: "",
-                            "aria-label": "",
-                            "data-msg": "Please enter your last name.",
-                            "data-error-class": "u-has-error",
-                            "data-success-class": "u-has-success"
-                          },
-                          domProps: { value: _vm.form.lastName },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.form,
-                                "lastName",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "lastName" }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c(
-                      "div",
-                      { staticClass: "js-form-message mb-4" },
-                      [
-                        _vm._m(3),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.form.email,
-                              expression: "form.email"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          class: { "is-invalid": _vm.form.errors.has("email") },
-                          attrs: {
-                            type: "text",
-                            name: "email",
-                            placeholder: "",
-                            "aria-label": "",
-                            "data-msg": "Please enter your Email.",
-                            "data-error-class": "u-has-error",
-                            "data-success-class": "u-has-success"
-                          },
-                          domProps: { value: _vm.form.email },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(_vm.form, "email", $event.target.value)
-                            }
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("has-error", {
-                          attrs: { form: _vm.form, field: "email" }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c("div", { staticClass: "js-form-message mb-4" }, [
-                      _c("label", { staticClass: "form-label" }, [
-                        _vm._v(" Phone ")
-                      ]),
+              }
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c(
+                    "div",
+                    { staticClass: "js-form-message mb-4" },
+                    [
+                      _vm._m(1),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.form.phone,
-                            expression: "form.phone"
+                            value: _vm.form.firstName,
+                            expression: "form.firstName"
                           }
                         ],
                         staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.form.errors.has("firstName")
+                        },
                         attrs: {
                           type: "text",
-                          name: "phone",
+                          name: "firstName",
                           placeholder: "",
                           "aria-label": "",
-                          "data-msg": "Please enter your Phone.",
+                          "data-msg": "Please enter your frist name.",
                           "data-error-class": "u-has-error",
-                          "data-success-class": "u-has-success"
+                          "data-success-class": "u-has-success",
+                          autocomplete: "off"
                         },
-                        domProps: { value: _vm.form.phone },
+                        domProps: { value: _vm.form.firstName },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(_vm.form, "phone", $event.target.value)
+                            _vm.$set(_vm.form, "firstName", $event.target.value)
                           }
                         }
+                      }),
+                      _vm._v(" "),
+                      _c("has-error", {
+                        attrs: { form: _vm.form, field: "firstName" }
                       })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-12" }, [
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c(
+                    "div",
+                    { staticClass: "js-form-message mb-4" },
+                    [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.lastName,
+                            expression: "form.lastName"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: {
+                          "is-invalid": _vm.form.errors.has("lastName")
+                        },
+                        attrs: {
+                          type: "text",
+                          name: "lastName",
+                          placeholder: "",
+                          "aria-label": "",
+                          "data-msg": "Please enter your last name.",
+                          "data-error-class": "u-has-error",
+                          "data-success-class": "u-has-success"
+                        },
+                        domProps: { value: _vm.form.lastName },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "lastName", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("has-error", {
+                        attrs: { form: _vm.form, field: "lastName" }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c(
+                    "div",
+                    { staticClass: "js-form-message mb-4" },
+                    [
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.email,
+                            expression: "form.email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: { "is-invalid": _vm.form.errors.has("email") },
+                        attrs: {
+                          type: "text",
+                          name: "email",
+                          placeholder: "",
+                          "aria-label": "",
+                          "data-msg": "Please enter your Email.",
+                          "data-error-class": "u-has-error",
+                          "data-success-class": "u-has-success"
+                        },
+                        domProps: { value: _vm.form.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "email", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("has-error", {
+                        attrs: { form: _vm.form, field: "email" }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "js-form-message mb-4" }, [
+                    _c("label", { staticClass: "form-label" }, [
+                      _vm._v(" Phone ")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.phone,
+                          expression: "form.phone"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        name: "phone",
+                        placeholder: "",
+                        "aria-label": "",
+                        "data-msg": "Please enter your Phone.",
+                        "data-error-class": "u-has-error",
+                        "data-success-class": "u-has-success"
+                      },
+                      domProps: { value: _vm.form.phone },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "phone", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c(
+                    "div",
+                    { staticClass: "js-form-message mb-4" },
+                    [
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.form.subject,
+                            expression: "form.subject"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        class: { "is-invalid": _vm.form.errors.has("subject") },
+                        attrs: {
+                          type: "text",
+                          name: "subject",
+                          placeholder: "",
+                          "aria-label": "",
+                          "data-msg": "Please enter subject.",
+                          "data-error-class": "u-has-error",
+                          "data-success-class": "u-has-success"
+                        },
+                        domProps: { value: _vm.form.subject },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.form, "subject", $event.target.value)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("has-error", {
+                        attrs: { form: _vm.form, field: "subject" }
+                      })
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "js-form-message mb-4" }, [
+                    _vm._m(5),
+                    _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "js-form-message mb-4" },
+                      { staticClass: "input-group" },
                       [
-                        _vm._m(4),
-                        _vm._v(" "),
-                        _c("input", {
+                        _c("textarea", {
                           directives: [
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.form.subject,
-                              expression: "form.subject"
+                              value: _vm.form.visitorQuery,
+                              expression: "form.visitorQuery"
                             }
                           ],
-                          staticClass: "form-control",
+                          staticClass: "form-control p-5",
                           class: {
-                            "is-invalid": _vm.form.errors.has("subject")
+                            "is-invalid": _vm.form.errors.has("visitorQuery")
                           },
                           attrs: {
-                            type: "text",
-                            name: "subject",
-                            placeholder: "",
-                            "aria-label": "",
-                            "data-msg": "Please enter subject.",
-                            "data-error-class": "u-has-error",
-                            "data-success-class": "u-has-success"
+                            rows: "4",
+                            name: "visitorQuery",
+                            placeholder: ""
                           },
-                          domProps: { value: _vm.form.subject },
+                          domProps: { value: _vm.form.visitorQuery },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.$set(_vm.form, "subject", $event.target.value)
+                              _vm.$set(
+                                _vm.form,
+                                "visitorQuery",
+                                $event.target.value
+                              )
                             }
                           }
                         }),
                         _vm._v(" "),
                         _c("has-error", {
-                          attrs: { form: _vm.form, field: "subject" }
+                          attrs: { form: _vm.form, field: "visitorQuery" }
                         })
                       ],
                       1
                     )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-12" }, [
-                    _c("div", { staticClass: "js-form-message mb-4" }, [
-                      _vm._m(5),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "input-group" },
-                        [
-                          _c("textarea", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.form.visitorQuery,
-                                expression: "form.visitorQuery"
-                              }
-                            ],
-                            staticClass: "form-control p-5",
-                            class: {
-                              "is-invalid": _vm.form.errors.has("visitorQuery")
-                            },
-                            attrs: {
-                              rows: "4",
-                              name: "visitorQuery",
-                              placeholder: ""
-                            },
-                            domProps: { value: _vm.form.visitorQuery },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(
-                                  _vm.form,
-                                  "visitorQuery",
-                                  $event.target.value
-                                )
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("has-error", {
-                            attrs: { form: _vm.form, field: "visitorQuery" }
-                          })
-                        ],
-                        1
-                      )
-                    ])
                   ])
-                ]),
-                _vm._v(" "),
-                _vm._m(6)
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _vm._m(7)
-      ])
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(6)
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(7)
     ])
   ])
 }
@@ -769,7 +754,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("address", { staticClass: "mb-6 text-lh-23" }, [
         _vm._v(
-          "\r\n                    100/1, Golartake,\r\n                    Mirpur 1, Dhaka 1216,\r\n                    Bangladesh\r\n                    "
+          "\r\n                100/1, Golartake,\r\n                Mirpur 1, Dhaka 1216,\r\n                Bangladesh\r\n                "
         ),
         _c("div", {}, [_vm._v("Support +880 1714 017558")]),
         _vm._v(" "),

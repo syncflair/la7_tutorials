@@ -18,6 +18,25 @@
 
 
 /*
+* Vuex
+*/
+  import store from './VueVuex'
+
+/*
+* Import & Use Vue Router
+*/ 
+  // import VueRouter from 'vue-router'
+  // Vue.use(VueRouter)
+
+  //Import Vue Routers form VueRouters.js file
+  //import {routes} from './VueRouters' //import VueRouters (Customize)
+  import router from './VueRouters' //import VueRouters (Customize)
+
+/*Import & Use Vue Router*/ 
+
+
+
+/*
 *Vue Lazy load image
 */
   import VueLazyload from 'vue-lazyload'
@@ -54,31 +73,7 @@
     inverse: false }
   Vue.use(VueProgressBar, options);
 
-/*
-* Vuex
-*/
-  import store from './VueVuex'
 
-/*
-* Import & Use Vue Router
-*/ 
-  // import VueRouter from 'vue-router'
-  // Vue.use(VueRouter)
-
-  //Import Vue Routers form VueRouters.js file
-  //import {routes} from './VueRouters' //import VueRouters (Customize)
-  import router from './VueRouters' //import VueRouters (Customize)
-
-
-
-  //Use vue router
-  // const router = new VueRouter({
-  //   routes, // short for `routes: routes`
-  //   mode: 'history', //history mode - remove # (hash) from url
-  //   //mode: 'hash', //hash mode = use # (hash) to url (Default mode)
-  // })
-
-/*Import & Use Vue Router*/ 
 
 
 
@@ -232,7 +227,97 @@
   Vue.mixin(common)
 
 
+/* ####################### axios interceptor ###########################################*/
+  // Add a request interceptor
+  // axios.interceptors.request.use( (config) =>  {
+  //   store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //refresh token
+  // // axios.interceptors.response.use( (config) => {
+  //     // alert('test ok');
+  //     // assume your access token is stored in local storage 
+  //     // (it should really be somewhere more secure but I digress for simplicity)
+  //     // let token = localStorage.getItem('access_token')
+  //     // if (token) {
+  //     //    config.headers['Authorization'] = `Bearer ${token}`
+  //     // }
+  //     //store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //get auth customer data 
+  //     //this.$store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //get auth customer data 
+  //     return config;
+  //   }, (error) =>  {
+  //     return Promise.reject(error);
+  //   });
 
+
+  
+  
+  // Add a response interceptor
+  axios.interceptors.response.use( 
+    (config) => {
+      //console.log(config);
+      // alert('refresh');
+      // const ExpireTokenIn = Date.now() + (localStorage.getItem('_spac_et') * 1000);
+      // console.log('Expire Time: '+ ExpireTokenIn + ' Now: '+ Date.now() );
+      // if(ExpireTokenIn < Date.now() ){
+      //   // store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi', '');
+      //   alert('refresh ---');
+      // } 
+
+      
+      return config; 
+    }, 
+    (error) =>  {
+
+      // Do something with request error
+      // console.log(error.response);
+      const originalRequest = error.config;
+
+      //Execute only for website
+      // if(store.state.AuthenticationForCustomer.isitwebsiteCheck === 1){
+           // Handle Session Timeouts  401 (Unauthorized) Unauthenticated
+          // if (error.response.status === 401 && !originalRequest._retry ) {
+          if (error.response.status === 401 ) {
+
+            if( localStorage.getItem('_spac_at') === 'undefined' && localStorage.getItem('_spac_rt') === 'undefined' 
+                && localStorage.getItem('_spac_et') === 'undefined'){
+                
+              store.dispatch('AuthenticationForCustomer/clearTokenFromLocalStoreApi');
+              
+            }else{
+              // originalRequest._retry = true;
+              store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi', originalRequest);
+            }            
+
+            // return axios(error.response.config.url); //previous route
+          }
+          
+          // // Handle Forbidden
+          // if (status === 403) {
+          //     console.log({403:error});
+          // }
+
+          // // Handle  Not Found
+          // if (status === 404) {
+          //     console.log({404:error});
+          // }
+      // }
+
+      return Promise.reject(error);
+    });
+  
+
+    // axios.interceptors.response.use(undefined, function (err) {
+    //   return new Promise(function (resolve, reject) {
+    //     if (err.response.status === 401 ) {
+    //     // if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+    //     // if you ever get an unauthorized, logout the user
+    //       // this.$store.dispatch(AUTH_LOGOUT)
+    //        store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //refresh token
+    //     // you can also redirect to /login if needed !
+    //     }
+    //     throw err;
+    //   });
+    // });
+
+/* ####################### axios interceptor ###########################################*/
 
 
 /*
@@ -250,7 +335,7 @@ router.beforeEach((to, from, next) => {
         // if (protectedCustomerRoutes.includes(to.name) && isAuthenticated !== true) next({ name: 'CustomerLogin' })
         if ( isAuthenticated !== true) next({ name: 'CustomerLogin' })
         else next()
-    }, 500);//call after 500 miliscound
+    }, 800);//call after 500 miliscound
   }
 
   //For Supplier authentication
@@ -308,6 +393,15 @@ router.beforeEach((to, from, next) => {
 /* ####################### End router middleware ###########################################*/
 
 
+
+
+
+
+ 
+
+
+
+
 const app = new Vue({
 
     el: '#app',
@@ -325,7 +419,9 @@ const app = new Vue({
           document.title = to.meta.title || 'Sorboraho'
         },
          //immediate: true,
-      }
+      },
+
+
     },  
 
     computed: {
@@ -342,11 +438,12 @@ const app = new Vue({
       //counttest, 
     }, 
 
-    created(){ 
+    created(){
+
       // console.log(store.state.commonStoreForWebsite.isitwebsiteCheck);
       // alert(store.state.AuthenticationForCustomer.isAuthenticated);
 
-      //  [App.vue specific] When App.vue is first loaded start the progress bar
+      //[App.vue specific] When App.vue is first loaded start the progress bar
         this.$Progress.start()
         //  hook the progress bar to start before we move router-view
         this.$router.beforeEach((to, from, next) => {
@@ -370,7 +467,7 @@ const app = new Vue({
     },
 
     mounted() {
-      //  [App.vue specific] When App.vue is finish loading finish the progress bar
+      //[App.vue specific] When App.vue is finish loading finish the progress bar
       this.$Progress.finish();
 
 

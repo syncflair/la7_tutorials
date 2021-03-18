@@ -360,14 +360,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   },
   created: function created() {
-    var _this2 = this;
-
     this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
+    // setTimeout(() => {
 
-    setTimeout(function () {
-      _this2.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerAddress', _this2.authCustomer.id); //get auth customer address
-
-    }, 2400);
+    this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerAddress', this.authCustomer.id); //get auth customer address
+    // },2400); 
   },
   mounted: function mounted() {
     //console.log(this.authCustomerAddress);

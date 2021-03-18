@@ -8,9 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\CustomerResetPasswordNotification;
 
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\HasApiTokens; //for passport
+
 class Customer extends Authenticatable
 {
-    use Notifiable;
+    use HasApiTokens, Notifiable; //HasApiTokens, for passport
 
 
     protected $guard = 'customer'; //customer.... 
@@ -43,6 +47,33 @@ class Customer extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+   
+    /**
+     * Find the user instance for the given username.
+     *
+     * @param  string  $username
+     * @return \App\Models\Customer
+     */
+    public function findForPassport($username)
+    {
+        return $this->where('email', $username)
+                    ->orWhere('phone', $username)
+                    ->first();
+        // return $this->where('username', $username)->first(); //default
+    }
+
+    /**
+     * Validate the password of the user for the Passport password grant.
+     *
+     * @param  string  $password
+     * @return bool
+     */
+    public function validateForPassportPasswordGrant($password)
+    {
+        return Hash::check($password, $this->password);
+    }
 
 
      /**
@@ -91,7 +122,6 @@ class Customer extends Authenticatable
        return $this->hasMany(Customer\CustomerAddress::class, 'customer_id');
     }
 
-
     /**
      * Send the password reset notification.
      *
@@ -101,12 +131,12 @@ class Customer extends Authenticatable
     //Overwrite this function to customize password reset email
     public function sendPasswordResetNotification($token)
     {
-
-
         //$this->notify(new ResetPasswordNotification($token)); //default 
         $this->notify(new CustomerResetPasswordNotification($token)); // working
     }
 
+
+    
     
 
 }

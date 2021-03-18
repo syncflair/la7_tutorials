@@ -55,6 +55,8 @@ try {
 
 } catch (e) {}
 
+// import store from './VueVuex'
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -63,16 +65,27 @@ try {
 
 window.axios = require('axios');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
 // window.axios.defaults.baseURL = 'https://api.example.com';
-// // Important: If axios is used with multiple domains, the AUTH_TOKEN will be sent to all of them.
+// // Important: If axios is used with multiple domains, the _spac_at (customer access token) will be sent to all of them.
 // // See below for an example using Custom instance defaults instead.
-// window.AUTH_TOKEN = locaStorage.getItem('get_AUTH_TOKEN'); //get from local storage
-// window.axios.defaults.headers.common['Authorization'] = 'Bearer '+AUTH_TOKEN;
+window.axios.defaults.headers.post['Accept'] = 'application/json';
+window.axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+window._spac_at = localStorage.getItem('_spac_at'); //get from local storage
+window._spac_rt = localStorage.getItem('_spac_rt'); //get from local storage
+if(_spac_at !== null){    
+    window.axios.defaults.headers.common['Authorization'] = 'Bearer '+_spac_at;
+    window.axios.defaults.headers.common['RefreshToken'] = _spac_rt;
+}
+// window.axios.defaults.headers.common['Authorization'] = 'Bearer '+store.state.AuthenticationForCustomer.spac_access_token;
 // window.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-// window.axios.defaults.headers.post['Content-Type'] = 'application/json';
+
+
+
+
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

@@ -2086,6 +2086,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
  //for user MapState
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2095,7 +2097,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       ActiveLinkClass: 'active'
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('AuthenticationForCustomer', ['authCustomer'])), {}, {
+  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('AuthenticationForCustomer', ['authCustomer', 'isAuthenticated'])), {}, {
     // ...mapState( 'AuthenticationForSupplier', ['authSupplier'] ),
     //for active link management
     currentPage: function currentPage() {
@@ -2142,7 +2144,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         // toastr.success(response.success);         
         _this.$Progress.finish(); //for security reson, Best Policy for API Based Authentication
         //localStorage.setItem('isAuthenticated', false);  
-        //localStorage.removeItem('isAuthenticated');  
+        // localStorage.removeItem('_spac_at');  
 
 
         _this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false); //
@@ -2160,6 +2162,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })["catch"](function () {
         _this.$Progress.fail();
       });
+    },
+    //End Customer Logout  
+    CustomerLogoutAPI: function CustomerLogoutAPI() {
+      this.$Progress.start(); //using progress-bar package
+
+      this.$store.dispatch('AuthenticationForCustomer/logoutCustomerApi'); //get auth customer data 
+      // axios.post('/api/afc/logout')
+      // .then(({ response }) => { 
+      //   //console.log(response); 
+      //   //if(response.success){             
+      //     // toastr.success(response.success);         
+      //     this.$Progress.finish(); 
+      //     //for security reson, Best Policy for API Based Authentication  
+      //     localStorage.removeItem('_spac_at');  
+      //     localStorage.removeItem('_SPAC_RT');  
+      //     localStorage.removeItem('_spac_ug');  
+      //     this.$store.commit('AuthenticationForCustomer/ACCESS_TOKEN_SET', '' );
+      //     this.$store.commit('AuthenticationForCustomer/REFRESH_TOKEN_SET', '' );
+      //     this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false );
+      //     window.location = '/home';
+      //   //for api
+      //   // localStorage.removeItem('tokenName'); //remove token
+      //   // this.$router.push({ path : '/' }); //redirect
+      //   //this.$router.push({ path : '/home' }).catch(err => {});  
+      // })
+      // .catch( () => {
+      //   this.$Progress.fail();
+      // })  
+
+      this.$Progress.finish();
     } //End Customer Logout  
     // SupplierLogout(){  
     //   this.$Progress.start(); //using progress-bar package
@@ -2184,6 +2216,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   //end Methods
   created: function created() {//console.log(this.AccountNavLinkShow);
+    // setTimeout(() => {              
+    // }, 3000);//call after 10000 miliscound
   }
 }); //end export default
 
@@ -3869,15 +3903,15 @@ __webpack_require__.r(__webpack_exports__);
     isitwebsite: {
       type: Number,
       required: true
-    },
-    authcustomer: {
-      type: Object //required: true
-
-    },
-    isauthenticated: {
-      type: Boolean //required: true
-
-    } // authsupplier: {
+    } // authcustomer: {
+    //   type: Object,
+    //   //required: true
+    // },
+    // isauthenticated:{
+    //   type: Boolean,
+    //   //required: true
+    // },
+    // authsupplier: {
     //   type: Object,
     //   //required: true
     // },
@@ -3926,16 +3960,32 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {},
   created: function created() {
+    // console.log(this.spac_access_token);
+    // setTimeout(() => { 
+    if (localStorage.getItem('_spac_at') === 'undefined' && localStorage.getItem('_spac_et') === 'undefined' && localStorage.getItem('_spac_rt') === 'undefined') {
+      this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false);
+    } else if (localStorage.getItem('_spac_at') === null && localStorage.getItem('_spac_et') === null && localStorage.getItem('_spac_rt') === null) {
+      // }else if (this.spac_access_token === null){
+      this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false);
+    } else {
+      this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true);
+    } // }, 10);//call after 10000 miliscound
     //direct commit (mutations) to resources/js/store/commonStoreForAll.js
-    this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', this.isauthenticated);
-    this.$store.commit('AuthenticationForCustomer/AUTH_CUSTOMER_CHECK', this.authcustomer); //commit from props
+    //this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', this.isauthenticated );             
+    //this.$store.commit('AuthenticationForCustomer/AUTH_CUSTOMER_CHECK', this.authcustomer ); //commit from props
     //this.$store.commit('AuthenticationForSupplier/IS_AUTHENTICATED_CHECK', this.issspaauthenticated );             
     //this.$store.commit('AuthenticationForSupplier/AUTH_SUPPLIER_CHECK', this.authsupplier ); //commit from props
+    // this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite ); 
 
-    this.$store.commit('commonStoreForWebsite/IS_IT_WEBSITE_CHECK', this.isitwebsite);
+
+    this.$store.commit('AuthenticationForCustomer/IS_IT_WEBSITE_CHECK', this.isitwebsite);
   },
   destroyed: function destroyed() {},
-  mounted: function mounted() {// console.log('website-wrapper');
+  mounted: function mounted() {
+    //console.log(localStorage.getItem('access_token'));
+    // console.log('One ' + ACCESS_TOKEN);
+    // console.log('store' + ACCESS_TOKEN);
+    // console.log('website-wrapper');
     // console.log('Height: ' +window.innerHeight + ' - Width: ' + window.innerWidth);
     // //  [App.vue specific] When App.vue is finish loading finish the progress bar
     // this.$Progress.finish()
@@ -3949,7 +3999,14 @@ __webpack_require__.r(__webpack_exports__);
     //console.log(window.innerHeight);
     //alert('Height: ' +window.innerHeight + ' - Width: ' + window.innerWidth);
     //alert(this.$refs.screenWidth.clientHeight + '-' + this.$refs.screenWidth.clientWidth); //working
-    //console.log('Width: '+this.window.width+ ' Height: ' + this.window.height );  
+    //console.log('Width: '+this.window.width+ ' Height: ' + this.window.height ); 
+    //call from AccountSidebarNavigationToggler.vue component
+    FireEvent.$on('Call_HSCore_components_HSUnfold', function () {
+      setTimeout(function () {
+        // initialization of unfold component
+        $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+      }, 600);
+    });
   }
 });
 
@@ -9078,7 +9135,7 @@ var render = function() {
               _vm._v(" "),
               _vm._m(1),
               _vm._v(" "),
-              !_vm.authCustomer
+              !_vm.isAuthenticated
                 ? _c(
                     "li",
                     {
@@ -9124,7 +9181,7 @@ var render = function() {
                   )
                 : _vm._e(),
               _vm._v(" "),
-              _vm.authCustomer
+              _vm.isAuthenticated
                 ? _c(
                     "li",
                     {
@@ -9290,7 +9347,7 @@ var render = function() {
                                   on: {
                                     click: function($event) {
                                       $event.preventDefault()
-                                      return _vm.CustomerLogout()
+                                      return _vm.CustomerLogoutAPI()
                                     }
                                   }
                                 },

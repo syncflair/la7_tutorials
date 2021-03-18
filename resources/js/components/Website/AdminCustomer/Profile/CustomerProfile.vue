@@ -200,9 +200,9 @@
         created(){
             this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
 
-            setTimeout(() => {
+            // setTimeout(() => {
                 this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerAddress', this.authCustomer.id); //get auth customer address
-            },2400); 
+            // },2400); 
               
         },
            

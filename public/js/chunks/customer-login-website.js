@@ -11,6 +11,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -129,9 +136,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+ //for user MapState
 //import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
 //import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
 //const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "customer-login-Public-website",
   data: function data() {
@@ -148,8 +160,7 @@ __webpack_require__.r(__webpack_exports__);
       })
     };
   },
-  components: {//HeaderTopbar, FooterComponent,
-  },
+  components: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('AuthenticationForCustomer', ['spac_access_token'])),
   methods: {
     // Submit the form via a POST request
     CustomerLogin: function CustomerLogin() {
@@ -160,13 +171,13 @@ __webpack_require__.r(__webpack_exports__);
       this.form.post('/customer/login').then(function (_ref) {
         var data = _ref.data;
 
-        //console.log(data.success); 
+        // console.log(data.success); 
         if (data.success) {
           _this.$Progress.finish();
 
-          _this.display_error = false; //console.log(data);
+          _this.display_error = false; // console.log(data);
           //for security reson, Best Policy for API Based Authentication
-          //localStorage.setItem('isAuthenticated', true); 
+          // localStorage.setItem('c_access_token', true); 
 
           _this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true);
 
@@ -206,10 +217,96 @@ __webpack_require__.r(__webpack_exports__);
         _this.$Progress.fail(); //toastr.warning('Something is wrong!');
 
       });
-    } //End Customer Login        
+    },
+    //End Customer Login    
+    getUser: function getUser() {
+      this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
+    },
+    CustomerLoginAPI: function CustomerLoginAPI() {
+      var _this2 = this;
+
+      this.$Progress.start(); //using progress-bar package
+
+      this.form.post('/api/afc/login').then(function (_ref2) {
+        var data = _ref2.data;
+
+        //console.log(data);
+        if (data) {
+          // if(data.access_token){ 
+          _this2.$Progress.finish();
+
+          _this2.display_error = false; //for security reson, Best Policy for API Based Authentication
+
+          localStorage.setItem('_spac_at', data.access_token);
+          localStorage.setItem('_spac_rt', data.refresh_token);
+          localStorage.setItem('_spac_et', data.expires_in);
+          localStorage.setItem('_spac_ug', 'spac');
+
+          _this2.$store.commit('AuthenticationForCustomer/ACCESS_TOKEN_SET', data.access_token);
+
+          _this2.$store.commit('AuthenticationForCustomer/REFRESH_TOKEN_SET', data.refresh_token);
+
+          _this2.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true);
+
+          axios.defaults.headers.common["Authorization"] = 'Bearer ' + data.access_token; //update axios header
+
+          axios.defaults.headers.common["RefreshToken"] = data.refresh_token; //update axios header
+
+          _this2.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
+          // console.log(this.spa_spac_at);
+
+
+          FireEvent.$emit('Call_HSCore_components_HSUnfold'); // initialization of unfold component
+          // window.location = '/auth/my-dashboard';   
+          // window.location = '/home';                       
+
+          _this2.$router.push({
+            path: '/auth/my-dashboard'
+          })["catch"](function (err) {}); //route after successfule submit                   
+          //this.$router.replace({ path : '/home' }).catch(err => {});   //route after successfule submit
+          //this.$router.go('/auth/my-dashboard');
+
+
+          _this2.form.reset(); //reset from after submit
+          //toastr.success('Login successfule'); 
+
+        }
+
+        if (data.error) {
+          _this2.$Progress.finish();
+
+          _this2.display_error = true;
+          _this2.error_message = data.error;
+          toastr.warning(data.error); // console.log(data);
+
+          localStorage.removeItem('_spac_at');
+        }
+
+        if (data.errors) {
+          _this2.$Progress.finish();
+
+          _this2.display_error = false;
+          localStorage.removeItem('_spac_at');
+        }
+      })["catch"](function () {
+        _this2.display_error = false;
+
+        _this2.$Progress.fail();
+
+        localStorage.removeItem('_spac_at');
+        localStorage.removeItem('_spac_rt');
+        localStorage.removeItem('_spac_ug'); //toastr.warning('Something is wrong!');
+      });
+    } //End Customer Login    
 
   },
-  created: function created() {},
+  created: function created() {// FireEvent.$on('AfterLogin', () => {
+    //     // alert('ok');
+    //     setTimeout(() => {                
+    //         this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
+    //     }, 5000);//call after 10000 miliscound
+    // });
+  },
   mounted: function mounted() {
     this.$nextTick(function () {
       //initialization of HSMegaMenu component
@@ -408,7 +505,7 @@ var render = function() {
                 on: {
                   submit: function($event) {
                     $event.preventDefault()
-                    return _vm.CustomerLogin()
+                    return _vm.CustomerLoginAPI()
                   }
                 }
               },
@@ -584,6 +681,20 @@ var render = function() {
                         }
                       },
                       [_vm._v("Signup\r\n                        ")]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.getUser()
+                          }
+                        }
+                      },
+                      [_vm._v("get user ")]
                     )
                   ],
                   1

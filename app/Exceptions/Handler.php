@@ -88,9 +88,8 @@ class Handler extends ExceptionHandler
         //$guard = array_get($exception->$guards(), 0); //return string, get from auth guard like 'web','supplier' or 'customer' 
         $guard = Arr::get($exception->guards(), 0);
         switch ($guard) {
-            case 'customer':
-                $login = 'customer.login';
-                // $login = 'customer.login';
+            case 'web':
+                $login = 'login-abc';
                 break;
 
             case 'supplier':
@@ -98,7 +97,7 @@ class Handler extends ExceptionHandler
                 break;
 
             default:
-                $login = 'login-abc';
+                $login = 'customer.login';
                 break;
         }
 
@@ -106,3 +105,18 @@ class Handler extends ExceptionHandler
         return redirect()->guest(route($login)); //redirect dynamicaly
     }
 }
+
+
+// switch ($guard) {
+//     case 'customer':
+//         $login = 'customer.login';
+//         break;
+
+//     case 'supplier':
+//         $login = 'supplier.login';
+//         break;
+
+//     default:
+//         $login = 'login-abc';
+//         break;
+// }

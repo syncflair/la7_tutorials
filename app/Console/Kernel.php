@@ -1,4 +1,6 @@
-<?php // # php artisan schedule:run  (run this command all the time) / schedule all custome command here
+<?php 
+// # php artisan schedule:run  (run this command all the time) // schedule all custome command here 
+// Add php artisan schedule:run commend to chron job of live server...
 
 namespace App\Console;
 
@@ -15,6 +17,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \App\Console\Commands\MailToInactiveCustomer::class,
+        \App\Console\Commands\removeRevodedOAuthAccessTokenAndRefreshAccessToken::class,
     ];
 
     /**
@@ -26,8 +29,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-
         $schedule->command('mail:email-to-inactive-customer')->dailyAt('13:00'); //->daily(); run this command dayly at 1:00 PM
+        $schedule->command('remove:revoked-oauth-token')->dailyAt('14:00'); //->daily(); run this command dayly at 2:00 PM
     }
 
     /**

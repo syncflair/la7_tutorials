@@ -18,6 +18,11 @@ return [
         'passwords' => 'users',
     ],
 
+    // 'defaults' => [
+    //     'guard' => 'customer',
+    //     'passwords' => 'customers',
+    // ],
+
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -32,7 +37,19 @@ return [
     | mechanisms used by this application to persist your user's data.
     |
     | Supported: "session", "token"
-    | customer-api, supplier-api
+    | 
+
+        'customer-api' => [
+            'driver' => 'token',
+            'provider' => 'customers',
+            'hash' => false,
+        ],
+
+        'api-supplier' => [
+            'driver' => 'token',
+            'provider' => 'suppliers',
+            'hash' => false,
+        ],
     |
     */
 
@@ -43,9 +60,9 @@ return [
         ],        
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
-            'hash' => false,
+            //'hash' => false,
         ],
 
         'customer' => [
@@ -54,9 +71,9 @@ return [
         ],
 
         'api-customer' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'customers',
-            'hash' => false,
+            //'hash' => false,
         ],
 
 
@@ -66,9 +83,9 @@ return [
         ],
 
         'api-supplier' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'suppliers',
-            'hash' => false,
+            //'hash' => false,
         ],
     ],
 

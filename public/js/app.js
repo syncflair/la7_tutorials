@@ -3212,10 +3212,12 @@ var routes = [//export const routes = [
     progress: progressMeta
   },
   beforeEnter: function beforeEnter(to, from, next) {
-    // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
-    if (to.name === 'CustomerLogin' && _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForCustomer.isAuthenticated === true) next({
-      name: 'CustomerDashboard'
-    });else next();
+    setTimeout(function () {
+      // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;  to.name === 'CustomerLogin' &&
+      if (_VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForCustomer.isAuthenticated === true) next({
+        name: 'CustomerDashboard'
+      });else next();
+    }, 500); //call after 500 miliscound
   }
 }, {
   path: '/auth/register',
@@ -3526,11 +3528,11 @@ vue_dist_vue__WEBPACK_IMPORTED_MODULE_0___default().use(vuex__WEBPACK_IMPORTED_M
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_lazyload__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-lazyload */ "./node_modules/vue-lazyload/vue-lazyload.esm.js");
-/* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-progressbar */ "./node_modules/vue-progressbar/dist/vue-progressbar.js");
-/* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_progressbar__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _VueVuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VueVuex */ "./resources/js/VueVuex.js");
-/* harmony import */ var _VueRouters__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./VueRouters */ "./resources/js/VueRouters.js");
+/* harmony import */ var _VueVuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./VueVuex */ "./resources/js/VueVuex.js");
+/* harmony import */ var _VueRouters__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./VueRouters */ "./resources/js/VueRouters.js");
+/* harmony import */ var vue_lazyload__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-lazyload */ "./node_modules/vue-lazyload/vue-lazyload.esm.js");
+/* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-progressbar */ "./node_modules/vue-progressbar/dist/vue-progressbar.js");
+/* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_progressbar__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var vue_infinite_loading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-infinite-loading */ "./node_modules/vue-infinite-loading/dist/vue-infinite-loading.js");
 /* harmony import */ var vue_infinite_loading__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_infinite_loading__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
@@ -3563,16 +3565,33 @@ window.Vue = __webpack_require__(/*! vue/dist/vue */ "./node_modules/vue/dist/vu
 Vue.config.productionTip = false; //turn on production mode Remove when upload to public
 
 /*
+* Vuex
+*/
+
+
+/*
+* Import & Use Vue Router
+*/
+// import VueRouter from 'vue-router'
+// Vue.use(VueRouter)
+//Import Vue Routers form VueRouters.js file
+//import {routes} from './VueRouters' //import VueRouters (Customize)
+
+ //import VueRouters (Customize)
+
+/*Import & Use Vue Router*/
+
+/*
 *Vue Lazy load image
 */
 
 
-Vue.use(vue_lazyload__WEBPACK_IMPORTED_MODULE_0__.default); //with options
+Vue.use(vue_lazyload__WEBPACK_IMPORTED_MODULE_2__.default); //with options
 //const loadimage = require('./static/images/loading.gif');
 // const loadimage = require( window.location.origin + '/static/images/loading.gif')
 // const errorimage = require('./assets/error.gif')
 
-Vue.use(vue_lazyload__WEBPACK_IMPORTED_MODULE_0__.default, {
+Vue.use(vue_lazyload__WEBPACK_IMPORTED_MODULE_2__.default, {
   preLoad: 1.3,
   //error: errorimage,
   loading: './static/images/loading.gif',
@@ -3599,30 +3618,7 @@ var options = {
   location: 'top',
   inverse: false
 };
-Vue.use((vue_progressbar__WEBPACK_IMPORTED_MODULE_1___default()), options);
-/*
-* Vuex
-*/
-
-
-/*
-* Import & Use Vue Router
-*/
-// import VueRouter from 'vue-router'
-// Vue.use(VueRouter)
-//Import Vue Routers form VueRouters.js file
-//import {routes} from './VueRouters' //import VueRouters (Customize)
-
- //import VueRouters (Customize)
-//Use vue router
-// const router = new VueRouter({
-//   routes, // short for `routes: routes`
-//   mode: 'history', //history mode - remove # (hash) from url
-//   //mode: 'hash', //hash mode = use # (hash) to url (Default mode)
-// })
-
-/*Import & Use Vue Router*/
-
+Vue.use((vue_progressbar__WEBPACK_IMPORTED_MODULE_3___default()), options);
 /*
 * Global Components
 */
@@ -3800,28 +3796,101 @@ window.FireEvent = FireEvent;
 
 
 Vue.mixin(_commonGlobal__WEBPACK_IMPORTED_MODULE_11__.default);
+/* ####################### axios interceptor ###########################################*/
+// Add a request interceptor
+// axios.interceptors.request.use( (config) =>  {
+//   store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //refresh token
+// // axios.interceptors.response.use( (config) => {
+//     // alert('test ok');
+//     // assume your access token is stored in local storage 
+//     // (it should really be somewhere more secure but I digress for simplicity)
+//     // let token = localStorage.getItem('access_token')
+//     // if (token) {
+//     //    config.headers['Authorization'] = `Bearer ${token}`
+//     // }
+//     //store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //get auth customer data 
+//     //this.$store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //get auth customer data 
+//     return config;
+//   }, (error) =>  {
+//     return Promise.reject(error);
+//   });
+// Add a response interceptor
+
+axios.interceptors.response.use(function (config) {
+  //console.log(config);
+  // alert('refresh');
+  // const ExpireTokenIn = Date.now() + (localStorage.getItem('_spac_et') * 1000);
+  // console.log('Expire Time: '+ ExpireTokenIn + ' Now: '+ Date.now() );
+  // if(ExpireTokenIn < Date.now() ){
+  //   // store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi', '');
+  //   alert('refresh ---');
+  // } 
+  return config;
+}, function (error) {
+  // Do something with request error
+  // console.log(error.response);
+  var originalRequest = error.config; //Execute only for website
+  // if(store.state.AuthenticationForCustomer.isitwebsiteCheck === 1){
+  // Handle Session Timeouts  401 (Unauthorized) Unauthenticated
+  // if (error.response.status === 401 && !originalRequest._retry ) {
+
+  if (error.response.status === 401) {
+    if (localStorage.getItem('_spac_at') === 'undefined' && localStorage.getItem('_spac_rt') === 'undefined' && localStorage.getItem('_spac_et') === 'undefined') {
+      _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.dispatch('AuthenticationForCustomer/clearTokenFromLocalStoreApi');
+    } else {
+      // originalRequest._retry = true;
+      _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi', originalRequest);
+    } // return axios(error.response.config.url); //previous route
+
+  } // // Handle Forbidden
+  // if (status === 403) {
+  //     console.log({403:error});
+  // }
+  // // Handle  Not Found
+  // if (status === 404) {
+  //     console.log({404:error});
+  // }
+  // }
+
+
+  return Promise.reject(error);
+}); // axios.interceptors.response.use(undefined, function (err) {
+//   return new Promise(function (resolve, reject) {
+//     if (err.response.status === 401 ) {
+//     // if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+//     // if you ever get an unauthorized, logout the user
+//       // this.$store.dispatch(AUTH_LOGOUT)
+//        store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //refresh token
+//     // you can also redirect to /login if needed !
+//     }
+//     throw err;
+//   });
+// });
+
+/* ####################### axios interceptor ###########################################*/
+
 /*
 * ####################### router middleware ###########################################
 */
 
-_VueRouters__WEBPACK_IMPORTED_MODULE_3__.default.beforeEach(function (to, from, next) {
+_VueRouters__WEBPACK_IMPORTED_MODULE_1__.default.beforeEach(function (to, from, next) {
   //For customer authentication
   if (to.meta.authRequiredCustomer === true) {
     setTimeout(function () {
       // const protectedCustomerRoutes = ['CustomerDashboard', 'CustomerOrder', 'CustomerCart', 'CustomerProfile', 'CustomerProfileUpdate',
       //  'CustomerAddressForm', 'CustomerWishlist', 'CustomerVoucher', 'CustomerReviews'];
       // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
-      var isAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_2__.default.state.AuthenticationForCustomer.isAuthenticated; //this.isAuthenticated; //publish from commonGlobal.js and get form AuthenticationForCustomer.js
+      var isAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForCustomer.isAuthenticated; //this.isAuthenticated; //publish from commonGlobal.js and get form AuthenticationForCustomer.js
       // if (protectedCustomerRoutes.includes(to.name) && isAuthenticated !== true) next({ name: 'CustomerLogin' })
 
       if (isAuthenticated !== true) next({
         name: 'CustomerLogin'
       });else next();
-    }, 500); //call after 500 miliscound
+    }, 800); //call after 500 miliscound
   } //For Supplier authentication
   else if (to.meta.authRequiredSupplier === true) {
       setTimeout(function () {
-        var isSspaAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_2__.default.state.AuthenticationForSupplier.isSspaAuthenticated; //this.isSsapAuthenticated get form AuthenticationForCustomer.js
+        var isSspaAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForSupplier.isSspaAuthenticated; //this.isSsapAuthenticated get form AuthenticationForCustomer.js
         // if ( isSspaAuthenticated !== true) next({ name: 'SupplierLogin' })
 
         if (isSspaAuthenticated !== true) next(window.location = '/supplier/login');else next();
@@ -3829,7 +3898,7 @@ _VueRouters__WEBPACK_IMPORTED_MODULE_3__.default.beforeEach(function (to, from, 
     } //For admin authentication
     else if (to.meta.authRequiredAdmin === true) {
         setTimeout(function () {
-          var isAdminAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_2__.default.state.AuthenticationForAdmin.isAdminAuthenticated; //this.isAdminAuthenticated; get form AuthenticationForCustomer.js
+          var isAdminAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForAdmin.isAdminAuthenticated; //this.isAdminAuthenticated; get form AuthenticationForCustomer.js
 
           if (isAdminAuthenticated !== true) next(window.location = '/login-abc');else next();
         }, 500); //call after 300 miliscound
@@ -3837,16 +3906,16 @@ _VueRouters__WEBPACK_IMPORTED_MODULE_3__.default.beforeEach(function (to, from, 
       else if (to.meta.authRequiredDelivery === true) {
           setTimeout(function () {
             // store.state.AuthenticationForAdmin.authUser.role_id
-            var isAdminAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_2__.default.state.AuthenticationForAdmin.isAdminAuthenticated; //this.isAdminAuthenticated; get form AuthenticationForCustomer.js
+            var isAdminAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForAdmin.isAdminAuthenticated; //this.isAdminAuthenticated; get form AuthenticationForCustomer.js
 
             if (isAdminAuthenticated !== true) next(window.location = '/login-abc');
-            if (_VueVuex__WEBPACK_IMPORTED_MODULE_2__.default.state.AuthenticationForAdmin.authUser.role_id !== 13 && isAdminAuthenticated === true) next({
+            if (_VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForAdmin.authUser.role_id !== 13 && isAdminAuthenticated === true) next({
               name: 'AdminChildPageNotFound'
             });
-            if (to.name === 'AdminChildProfileMaster' && _VueVuex__WEBPACK_IMPORTED_MODULE_2__.default.state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({
+            if (to.name === 'AdminChildProfileMaster' && _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({
               name: 'AdminChildProfileMaster'
             });
-            if (to.name === 'AdminChildNotificationMaster' && _VueVuex__WEBPACK_IMPORTED_MODULE_2__.default.state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({
+            if (to.name === 'AdminChildNotificationMaster' && _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({
               name: 'AdminChildNotificationMaster'
             });else next();
           }, 500); //call after 300 miliscound
@@ -3854,16 +3923,16 @@ _VueRouters__WEBPACK_IMPORTED_MODULE_3__.default.beforeEach(function (to, from, 
         else if (to.meta.authRequiredOrder === true) {
             setTimeout(function () {
               // store.state.AuthenticationForAdmin.authUser.role_id
-              var isAdminAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_2__.default.state.AuthenticationForAdmin.isAdminAuthenticated; //this.isAdminAuthenticated; get form AuthenticationForCustomer.js
+              var isAdminAuthenticated = _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForAdmin.isAdminAuthenticated; //this.isAdminAuthenticated; get form AuthenticationForCustomer.js
 
               if (isAdminAuthenticated !== true) next(window.location = '/login-abc');
-              if (_VueVuex__WEBPACK_IMPORTED_MODULE_2__.default.state.AuthenticationForAdmin.authUser.role_id !== 10 && isAdminAuthenticated === true) next({
+              if (_VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForAdmin.authUser.role_id !== 10 && isAdminAuthenticated === true) next({
                 name: 'AdminChildPageNotFound'
               });
-              if (to.name === 'AdminChildProfileMaster' && _VueVuex__WEBPACK_IMPORTED_MODULE_2__.default.state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({
+              if (to.name === 'AdminChildProfileMaster' && _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({
                 name: 'AdminChildProfileMaster'
               });
-              if (to.name === 'AdminChildNotificationMaster' && _VueVuex__WEBPACK_IMPORTED_MODULE_2__.default.state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({
+              if (to.name === 'AdminChildNotificationMaster' && _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForAdmin.isAdminAuthenticated === true && to.meta.authRequiredAdminChild === true) next({
                 name: 'AdminChildNotificationMaster'
               });else next();
             }, 500); //call after 300 miliscound
@@ -3876,9 +3945,9 @@ _VueRouters__WEBPACK_IMPORTED_MODULE_3__.default.beforeEach(function (to, from, 
 
 var app = new Vue({
   el: '#app',
-  router: _VueRouters__WEBPACK_IMPORTED_MODULE_3__.default,
+  router: _VueRouters__WEBPACK_IMPORTED_MODULE_1__.default,
   //use Vue router from globally
-  store: _VueVuex__WEBPACK_IMPORTED_MODULE_2__.default,
+  store: _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default,
   data: function data() {
     return {};
   },
@@ -3906,7 +3975,7 @@ var app = new Vue({
 
     // console.log(store.state.commonStoreForWebsite.isitwebsiteCheck);
     // alert(store.state.AuthenticationForCustomer.isAuthenticated);
-    //  [App.vue specific] When App.vue is first loaded start the progress bar
+    //[App.vue specific] When App.vue is first loaded start the progress bar
     this.$Progress.start(); //  hook the progress bar to start before we move router-view
 
     this.$router.beforeEach(function (to, from, next) {
@@ -3930,7 +3999,7 @@ var app = new Vue({
     });
   },
   mounted: function mounted() {
-    //  [App.vue specific] When App.vue is finish loading finish the progress bar
+    //[App.vue specific] When App.vue is finish loading finish the progress bar
     this.$Progress.finish();
     setTimeout(function () {//console.log(store.state.commonStoreForWebsite.isitwebsiteCheck);
       //console.log(store.state.AuthenticationForAdmin.authUser.role_id);
@@ -4089,7 +4158,8 @@ try {
   // require('overlayscrollbars');
   // //require('../../vendor/almasaeed2010/adminlte/dist/js/adminlte');  
 
-} catch (e) {}
+} catch (e) {} // import store from './VueVuex'
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -4097,14 +4167,22 @@ try {
  */
 
 
-window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'; // window.axios.defaults.baseURL = 'https://api.example.com';
-// // Important: If axios is used with multiple domains, the AUTH_TOKEN will be sent to all of them.
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js"); // window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.baseURL = 'https://api.example.com';
+// // Important: If axios is used with multiple domains, the _spac_at (customer access token) will be sent to all of them.
 // // See below for an example using Custom instance defaults instead.
-// window.AUTH_TOKEN = locaStorage.getItem('get_AUTH_TOKEN'); //get from local storage
-// window.axios.defaults.headers.common['Authorization'] = 'Bearer '+AUTH_TOKEN;
+
+window.axios.defaults.headers.post['Accept'] = 'application/json';
+window.axios.defaults.headers.post['Content-Type'] = 'application/json';
+window._spac_at = localStorage.getItem('_spac_at'); //get from local storage
+
+window._spac_rt = localStorage.getItem('_spac_rt'); //get from local storage
+
+if (_spac_at !== null) {
+  window.axios.defaults.headers.common['Authorization'] = 'Bearer ' + _spac_at;
+  window.axios.defaults.headers.common['RefreshToken'] = _spac_rt;
+} // window.axios.defaults.headers.common['Authorization'] = 'Bearer '+store.state.AuthenticationForCustomer.spac_access_token;
 // window.axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-// window.axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -4161,14 +4239,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       notification_message_type: ''
     };
   },
-  computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('commonStoreForAll', ['authUser', 'systemSettings'])), {}, {
-    // ...mapState( 
-    //       'commonStoreForWebsite', ['isitwebsiteCheck']
-    //       //isAuthenticated
-    // ),
-    // ...mapState( 
-    //       'AuthenticationForCustomer', ['isAuthenticated','authCustomer']
-    // ),
+  computed: _objectSpread(_objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('commonStoreForAll', ['authUser', 'systemSettings'])), (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapState)('AuthenticationForCustomer', ['isAuthenticated', 'authCustomer', 'spac_access_token', 'isitwebsiteCheck'] // 'AuthenticationForCustomer', ['isAuthenticated','authCustomer', 'spac_access_token', 'isitwebsiteCheck']
+  )), {}, {
     // ...mapState( 
     //       'AuthenticationForSupplier', ['isSspaAuthenticated','authSupplier']
     // ),
@@ -4560,10 +4632,14 @@ var AuthenticationForCustomer = {
       /* Use for Customer authentication*/
 
       /**************************************************/
+      spac_access_token: localStorage.getItem('_spac_at'),
+      spac_refresh_token: localStorage.getItem('_spac_rt'),
+      spac_expire_token: localStorage.getItem('_spac_et'),
       isAuthenticated: false,
       //use for customer admin area vue component middleware in app.js
       authCustomer: {},
-      authCustomerAddress: {}
+      authCustomerAddress: {},
+      isitwebsiteCheck: ''
     };
   },
 
@@ -4586,11 +4662,20 @@ var AuthenticationForCustomer = {
     IS_AUTHENTICATED_CHECK: function IS_AUTHENTICATED_CHECK(state, data) {
       return state.isAuthenticated = data;
     },
-    //commit from resources/js/components/Website/WebsiteWrapper.vue
-    AUTH_CUSTOMER_CHECK: function AUTH_CUSTOMER_CHECK(state, data) {
-      return state.authCustomer = data;
+    ACCESS_TOKEN_SET: function ACCESS_TOKEN_SET(state, data) {
+      return state.spac_access_token = data;
     },
-    // commit form WebsiteWrapper.vue
+    REFRESH_TOKEN_SET: function REFRESH_TOKEN_SET(state, data) {
+      return state.spac_refresh_token = data;
+    },
+    EXPIRE_TOKEN_SET: function EXPIRE_TOKEN_SET(state, data) {
+      return state.spac_expire_token = data;
+    },
+    IS_IT_WEBSITE_CHECK: function IS_IT_WEBSITE_CHECK(state, data) {
+      return state.isitwebsiteCheck = data;
+    },
+    //commit from resources/js/components/Website/WebsiteWrapper.vue
+    //AUTH_CUSTOMER_CHECK(state, data) { return state.authCustomer = data; }, // commit form WebsiteWrapper.vue
     AUTH_CUSTOMER_DATA: function AUTH_CUSTOMER_DATA(state, data) {
       return state.authCustomer = data;
     },
@@ -4601,17 +4686,69 @@ var AuthenticationForCustomer = {
 
   /*end Mutations*/
   actions: {
+    refreshTokenCustomerApi: function refreshTokenCustomerApi(context, payload) {
+      var originalRequest = payload;
+      axios.post('/api/afc/refresh-token').then(function (response) {
+        // console.log(response);
+        localStorage.setItem('_spac_at', response.data.access_token);
+        localStorage.setItem('_spac_rt', response.data.refresh_token);
+        localStorage.setItem('_spac_et', response.data.expires_in);
+        localStorage.setItem('_spac_ug', 'spac');
+        context.commit('IS_AUTHENTICATED_CHECK', true);
+        context.commit('ACCESS_TOKEN_SET', response.data.access_token);
+        context.commit('REFRESH_TOKEN_SET', response.data.refresh_token);
+        context.commit('EXPIRE_TOKEN_SET', response.data.expires_in);
+        axios.defaults.headers.common["Authorization"] = 'Bearer ' + response.data.access_token; //update axios header
+
+        axios.defaults.headers.common["RefreshToken"] = response.data.refresh_token; //update axios header
+        // this.fetchAuthCustomerData(); 
+
+        return axios.request(originalRequest.url); //previous route
+        // console.log(originalRequest);
+      })["catch"](function () {// window.location = '/auth/login';
+      });
+    },
     //get auth customer data after login if any later update 
+    // fetchAuthCustomerData(context){
+    //     axios.get('/auth/getAuthCustomerData')
+    //     .then( (response) => {
+    //       context.commit('AUTH_CUSTOMER_DATA', response.data);
+    //     }).catch( () => { })
+    // }, 
     fetchAuthCustomerData: function fetchAuthCustomerData(context) {
-      axios.get('/auth/getAuthCustomerData').then(function (response) {
+      axios.get('/api/afc/customer').then(function (response) {
         context.commit('AUTH_CUSTOMER_DATA', response.data);
       })["catch"](function () {});
     },
     //get auth customer address after login
     fetchAuthCustomerAddress: function fetchAuthCustomerAddress(context, payload) {
-      axios.get('/auth/getAuthCustomerAddress?&id=' + payload).then(function (response) {
+      // axios.get('/auth/getAuthCustomerAddress?&id='+payload)
+      axios.get('/api/afc/getAuthCustomerAddress?&id=' + payload).then(function (response) {
         context.commit('AUTH_CUSTOMER_ADDRESS', response.data);
       })["catch"](function () {});
+    },
+    //get auth customer address after login
+    logoutCustomerApi: function logoutCustomerApi(context) {
+      axios.post('/api/afc/logout').then(function (response) {
+        localStorage.removeItem('_spac_at');
+        localStorage.removeItem('_spac_rt');
+        localStorage.removeItem('_spac_ug');
+        localStorage.removeItem('_spac_et');
+        context.commit('IS_AUTHENTICATED_CHECK', false);
+        context.commit('ACCESS_TOKEN_SET', '');
+        context.commit('REFRESH_TOKEN_SET', '');
+        window.location = '/home'; // window.location = '/auth/login';
+      })["catch"](function () {});
+    },
+    clearTokenFromLocalStoreApi: function clearTokenFromLocalStoreApi() {
+      localStorage.removeItem('_spac_at');
+      localStorage.removeItem('_spac_rt');
+      localStorage.removeItem('_spac_ug');
+      localStorage.removeItem('_spac_et');
+      context.commit('IS_AUTHENTICATED_CHECK', false);
+      context.commit('ACCESS_TOKEN_SET', '');
+      context.commit('REFRESH_TOKEN_SET', '');
+      window.location = '/home'; // this.$router.push({ path : '/auth/login' }).catch(err => {}); 
     }
   }
   /*end actions*/

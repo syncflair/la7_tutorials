@@ -8,27 +8,23 @@
 @section('content')
 
 
-	
+	<website-wrapper 
+        :isitwebsite="1" 
+    ></website-wrapper>
 
     <!-- Router-view passing through admin wrapper component -->
-    @if( Auth::guard('customer')->check() )
+    <!-- @if( Auth::guard('customer')->check() )
 	    <website-wrapper 
 	    	:isitwebsite="1"
             :isauthenticated="true" 
 	    	:authcustomer="{{ Auth::guard('customer')->user() }}" 
 	    ></website-wrapper>
-  <!--   @elseif(Auth::guard('supplier')->check())
-        <website-wrapper 
-            :isitwebsite="1"
-            :issspaauthenticated="true" 
-            :authsupplier="{{ Auth::guard('supplier')->user() }}" 
-        ></website-wrapper> -->
     @else
     	<website-wrapper 
 	    	:isitwebsite="1" 
             :isauthenticated="false"
 	    ></website-wrapper>
-    @endif
+    @endif -->
 
     <!-- Auth::guard('customer')->check() ? Auth::guard('customer')->user() : 'null' -->
 

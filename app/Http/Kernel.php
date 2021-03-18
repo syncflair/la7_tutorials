@@ -70,6 +70,18 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
 
+        //Header
+        'customer_header_api' => \App\Http\Middleware\AuthHeaderCustomer::class,
+        'supplier_header_api' => \App\Http\Middleware\AuthHeaderSupplier::class,
+
+        //passport / My custome middleware
+        'refresh_token_customer' => \App\Http\Middleware\RefreshTokenForAdminCustomerMiddleware::class,
+
+        //Passport includes two middleware
+        'scopes' => \Laravel\Passport\Http\Middleware\CheckScopes::class,
+        'scope' => \Laravel\Passport\Http\Middleware\CheckForAnyScope::class,
+
+
         //my Custome
         //'MyRouteMid' => \App\Http\Middleware\MyRouteMiddleware::class,       
         'AuthPermission' => \App\Http\Middleware\AuthPermission::class,

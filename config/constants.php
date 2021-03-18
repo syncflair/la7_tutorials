@@ -25,8 +25,10 @@ return [
     | FileStorage Directory Constant
     |-------------------------------------------------------------------------
     */
+
     's3_url' => 'https://sorboraho.s3-ap-southeast-1.amazonaws.com/',
-    'watermark' => 'FilesStorage/CommonFiles/watermark.png',
+    // 'watermark' => 'FilesStorage/CommonFiles/watermark.png',
+    'watermark' => 'static/images/watermark.png',
 
 
     'CommonFilesPath' => 'FilesStorage/CommonFiles/',

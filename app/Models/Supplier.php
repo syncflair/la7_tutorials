@@ -8,10 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\SupplierResetPasswordNotification;
 
+use Laravel\Passport\HasApiTokens; //for passport
 
 class Supplier extends Authenticatable
 {
-    use Notifiable;
+
+    use HasApiTokens, Notifiable; //HasApiTokens, for passport
 
 
     protected $guard = 'supplier'; //custome....

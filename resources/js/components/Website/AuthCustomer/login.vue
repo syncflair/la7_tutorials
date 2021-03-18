@@ -12,7 +12,7 @@
                 </div>
                 <!-- <p class="text-gray-90 mb-4">Welcome to SORBORAHO! Sign in to your account.</p> -->
                 <!-- End Title -->
-                <form class="js-validate-" novalidate="novalidate-" @submit.prevent="CustomerLogin()">
+                <form class="js-validate-" novalidate="novalidate-" @submit.prevent="CustomerLoginAPI()">
                     
                     <div v-if="display_error" class="text-danger text-center mb-3">
                         <span class="small text-muted-">{{error_message }}</span>
@@ -85,6 +85,9 @@
                            data-link-group="idForm"
                            data-animation-in="slideInUp">Signup
                         </router-link>
+
+                        <a class="" href="#" @click.prevent="getUser()">get user </a>
+
                     </div>
 
 
@@ -117,6 +120,8 @@
 </span>
 </template>
 <script>
+
+    import { mapState } from 'vuex' //for user MapState
     //import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
     //import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
     //const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
@@ -138,6 +143,9 @@
 
         components:{ 
             //HeaderTopbar, FooterComponent,
+            ...mapState( 
+                    'AuthenticationForCustomer', ['spac_access_token']
+              ),
         }, 
 
         methods: {  
@@ -147,18 +155,18 @@
 
               this.form.post('/customer/login')
               .then(({ data }) => { 
-                    //console.log(data.success); 
+                    // console.log(data.success); 
 
                     if(data.success){ 
                       this.$Progress.finish();
                       this.display_error = false; 
-                      //console.log(data);
+
+                      // console.log(data);
 
                       //for security reson, Best Policy for API Based Authentication
-                      //localStorage.setItem('isAuthenticated', true); 
+                      // localStorage.setItem('c_access_token', true); 
 
                       this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true ); 
-
                       this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
 
                       // window.location = '/auth/my-dashboard';   
@@ -190,10 +198,94 @@
                 //toastr.warning('Something is wrong!');
               })   
 
-            },  //End Customer Login        
+            },  //End Customer Login    
+
+
+            getUser(){
+                this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
+            },
+
+            CustomerLoginAPI() {  
+              this.$Progress.start(); //using progress-bar package
+
+              this.form.post('/api/afc/login' )
+              .then(({ data }) => { 
+                    //console.log(data);
+
+                    if(data){ 
+                    // if(data.access_token){ 
+                      this.$Progress.finish();
+                      this.display_error = false; 
+                      
+
+
+                        //for security reson, Best Policy for API Based Authentication
+                        localStorage.setItem('_spac_at', data.access_token);                      
+                        localStorage.setItem('_spac_rt', data.refresh_token);                      
+                        localStorage.setItem('_spac_et', data.expires_in);                      
+                        localStorage.setItem('_spac_ug', 'spac');                      
+
+                        this.$store.commit('AuthenticationForCustomer/ACCESS_TOKEN_SET', data.access_token );                        
+                        this.$store.commit('AuthenticationForCustomer/REFRESH_TOKEN_SET', data.refresh_token );                        
+                        this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true ); 
+
+                        axios.defaults.headers.common["Authorization"] = 'Bearer ' + data.access_token; //update axios header
+                        axios.defaults.headers.common["RefreshToken"] = data.refresh_token; //update axios header
+
+                        this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
+                        // console.log(this.spa_spac_at);
+
+                        FireEvent.$emit('Call_HSCore_components_HSUnfold'); // initialization of unfold component
+
+                        
+
+
+                      // window.location = '/auth/my-dashboard';   
+                      // window.location = '/home';                       
+                      this.$router.push({ path : '/auth/my-dashboard' }).catch(err => {});   //route after successfule submit                   
+                      //this.$router.replace({ path : '/home' }).catch(err => {});   //route after successfule submit
+                      //this.$router.go('/auth/my-dashboard');
+
+                      this.form.reset();  //reset from after submit
+
+                      //toastr.success('Login successfule'); 
+                    }
+
+                    if(data.error){
+                        this.$Progress.finish(); 
+                        this.display_error = true;
+                        this.error_message = data.error;
+                        toastr.warning(data.error);
+                        // console.log(data);
+                        localStorage.removeItem('_spac_at');
+                    }
+
+                    if(data.errors){
+                        this.$Progress.finish(); 
+                        this.display_error = false;  
+                        localStorage.removeItem('_spac_at');                      
+                    }
+              })
+              .catch( () => {
+                this.display_error = false;
+                this.$Progress.fail();
+                localStorage.removeItem('_spac_at');
+                localStorage.removeItem('_spac_rt');
+                localStorage.removeItem('_spac_ug');
+                //toastr.warning('Something is wrong!');
+              })   
+
+            },  //End Customer Login    
         },           
 
         created(){
+            // FireEvent.$on('AfterLogin', () => {
+            //     // alert('ok');
+            //     setTimeout(() => {                
+            //         this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
+            //     }, 5000);//call after 10000 miliscound
+            // });
+            
         },
            
         mounted() {

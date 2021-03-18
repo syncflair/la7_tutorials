@@ -168,6 +168,8 @@ return [
          * Package Service Providers...
          */
 
+        Laravel\Passport\PassportServiceProvider::class, //for passport 
+
         /*
          * Application Service Providers...
          */

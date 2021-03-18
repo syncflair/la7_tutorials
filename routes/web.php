@@ -1,4 +1,16 @@
 <?php
+
+
+
+
+// if(isset($_COOKIE['sorboraho_session'])) {
+//     $data = $_COOKIE['sorboraho_session'];
+//     dd($data);
+// }
+
+
+// echo url('/login');
+// echo config('app.url'); //get from app/config/
 // print_r(systemSettingsAll()->image_resolution['0']);
 // print_r(systemSettingsAll()->image_resolution);
 //print_r(systemSettingsAll()->site_admin_email);
@@ -70,7 +82,8 @@ Route::post('customer/password/reset','AuthCustomer\ResetPasswordController@rese
 /***************************************************************************/
 /* Customer authenticatiion and AdminCustomer middleware */
 /***************************************************************************/
-Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){
+Route::group(['middleware'=>['AdminCustomer','auth:api-customer'] ],  function(){
+// Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){ 
   // Route::get('/dashboard-customer', 'AdminCustomer\AdminCustomerController@index')->name('dashboard-customer');
   Route::get('auth/my-dashboard', 'AdminCustomer\AdminCustomerController@index')->name('customer-dashboard');
   Route::post('customer/logout', 'AuthCustomer\LoginController@logout')->name('customer.logout');
@@ -636,7 +649,7 @@ Route::group(['middleware'=>['admin','auth','AuthPermission','verified'] ], func
 Route::get('/home', function () {
     //App::setLocale('bn'); //app()->getLocale()
     return view('website.home');    
-});
+})->name('home');
 
 // Route::get('/auth/login', 'AuthCustomer\LoginController@showLoginForm')->name('customer.login');
 
@@ -677,6 +690,9 @@ Route::get('/{anypath}', function () {
 Route::get('/auth/{anypath}', function () {
       return view('website.home'); 
 })->where(['anypath' => '([A-z\d\-\/_.]+)?' ]);
+
+
+
 
 
 

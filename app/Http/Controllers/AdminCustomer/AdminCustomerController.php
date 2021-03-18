@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use App\Models\Customer;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminCustomerController extends Controller
 {
@@ -14,17 +15,17 @@ class AdminCustomerController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-       $this->middleware('auth:customer');
-    }
+    // public function __construct()
+    // {
+    //    $this->middleware('auth:customer');
+    // }
 
 
     public function index()
     {
-        // return view('AdminCustomer.DashboardCustomer');
-        return view('website.home'); 
+        // return view('website.home'); 
         // return route('auth/customer-dashboard');
+        return redirect()->intended('auth/my-dashboard');
     }
 
     public function getAuthCustomerData(){

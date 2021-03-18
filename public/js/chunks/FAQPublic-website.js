@@ -269,8 +269,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 //import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
 //import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
 //const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
@@ -468,628 +466,626 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "mb-12 text-center" }, [
-          _c("h1", [_vm._v("Frequently Asked Questions")]),
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "mb-12 text-center" }, [
+        _c("h1", [_vm._v("Frequently Asked Questions")]),
+        _vm._v(" "),
+        _c("p", { staticClass: "text-gray-44" }, [
+          _vm._v("This Agreement was last modified on 18th february 2019")
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "border-bottom border-color-1 mb-8 rounded-0" },
+        [
+          _c("h3", { staticClass: "section-title mb-0 pb-2 font-size-25" }, [
+            _vm._v("Shipping Information")
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row mb-8" }, [
+        _c("div", { staticClass: "col-lg-6 mb-5 mb-lg-8" }, [
+          _c(
+            "h3",
+            {
+              staticClass:
+                "font-size-18 font-weight-semi-bold text-gray-39 mb-4"
+            },
+            [_vm._v("What Shipping Methods Are Available?")]
+          ),
           _vm._v(" "),
-          _c("p", { staticClass: "text-gray-44" }, [
-            _vm._v("This Agreement was last modified on 18th february 2019")
+          _c("p", { staticClass: "text-gray-90" }, [
+            _vm._v(
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sapien lorem, consectetur et turpis id, blandit interdum metus. Morbi sed ligula id elit mollis efficitur ut nec ligula. Proin erat magna, pellentesque at elementum at, eleifend a tortor."
+            )
           ])
         ]),
         _vm._v(" "),
+        _c("div", { staticClass: "col-lg-6 mb-5 mb-lg-8" }, [
+          _c(
+            "h3",
+            {
+              staticClass:
+                "font-size-18 font-weight-semi-bold text-gray-39 mb-4"
+            },
+            [_vm._v("How Long Will it Take To Get My Package?")]
+          ),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-gray-90" }, [
+            _vm._v(
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sapien lorem, consectetur et turpis id, blandit interdum metus. Morbi sed ligula id elit mollis efficitur ut nec ligula. Proin erat magna, pellentesque at elementum at, eleifend a tortor."
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-6 mb-5 mb-lg-8" }, [
+          _c(
+            "h3",
+            {
+              staticClass:
+                "font-size-18 font-weight-semi-bold text-gray-39 mb-4"
+            },
+            [_vm._v("How Do I Track My Order?")]
+          ),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-gray-90" }, [
+            _vm._v(
+              "Integer ex turpis, venenatis vitae nibh vel, vestibulum maximus quam. Ut pretium orci ac vestibulum porttitor. Fusce tempus diam quis justo porttitor gravida."
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-6 mb-5 mb-lg-8" }, [
+          _c(
+            "h3",
+            {
+              staticClass:
+                "font-size-18 font-weight-semi-bold text-gray-39 mb-4"
+            },
+            [_vm._v("Do I Need A Account To Place Order?")]
+          ),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-gray-90" }, [
+            _vm._v(
+              "Integer ex turpis, venenatis vitae nibh vel, vestibulum maximus quam. Ut pretium orci ac vestibulum porttitor. Fusce tempus diam quis justo porttitor gravida."
+            )
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-12 text-center" }, [
+        _c("h1", [_vm._v("FAQ Second Version")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-12", attrs: { id: "basicsAccordion" } }, [
         _c(
           "div",
-          { staticClass: "border-bottom border-color-1 mb-8 rounded-0" },
+          {
+            staticClass:
+              "card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0"
+          },
           [
-            _c("h3", { staticClass: "section-title mb-0 pb-2 font-size-25" }, [
-              _vm._v("Shipping Information")
-            ])
-          ]
-        ),
-        _vm._v(" "),
-        _c("div", { staticClass: "row mb-8" }, [
-          _c("div", { staticClass: "col-lg-6 mb-5 mb-lg-8" }, [
-            _c(
-              "h3",
-              {
-                staticClass:
-                  "font-size-18 font-weight-semi-bold text-gray-39 mb-4"
-              },
-              [_vm._v("What Shipping Methods Are Available?")]
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-gray-90" }, [
-              _vm._v(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sapien lorem, consectetur et turpis id, blandit interdum metus. Morbi sed ligula id elit mollis efficitur ut nec ligula. Proin erat magna, pellentesque at elementum at, eleifend a tortor."
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6 mb-5 mb-lg-8" }, [
-            _c(
-              "h3",
-              {
-                staticClass:
-                  "font-size-18 font-weight-semi-bold text-gray-39 mb-4"
-              },
-              [_vm._v("How Long Will it Take To Get My Package?")]
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-gray-90" }, [
-              _vm._v(
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sapien lorem, consectetur et turpis id, blandit interdum metus. Morbi sed ligula id elit mollis efficitur ut nec ligula. Proin erat magna, pellentesque at elementum at, eleifend a tortor."
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6 mb-5 mb-lg-8" }, [
-            _c(
-              "h3",
-              {
-                staticClass:
-                  "font-size-18 font-weight-semi-bold text-gray-39 mb-4"
-              },
-              [_vm._v("How Do I Track My Order?")]
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-gray-90" }, [
-              _vm._v(
-                "Integer ex turpis, venenatis vitae nibh vel, vestibulum maximus quam. Ut pretium orci ac vestibulum porttitor. Fusce tempus diam quis justo porttitor gravida."
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-lg-6 mb-5 mb-lg-8" }, [
-            _c(
-              "h3",
-              {
-                staticClass:
-                  "font-size-18 font-weight-semi-bold text-gray-39 mb-4"
-              },
-              [_vm._v("Do I Need A Account To Place Order?")]
-            ),
-            _vm._v(" "),
-            _c("p", { staticClass: "text-gray-90" }, [
-              _vm._v(
-                "Integer ex turpis, venenatis vitae nibh vel, vestibulum maximus quam. Ut pretium orci ac vestibulum porttitor. Fusce tempus diam quis justo porttitor gravida."
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-12 text-center" }, [
-          _c("h1", [_vm._v("FAQ Second Version")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-12", attrs: { id: "basicsAccordion" } }, [
-          _c(
-            "div",
-            {
-              staticClass:
-                "card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0"
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "card-header card-collapse bg-transparent-on-hover border-0",
-                  attrs: { id: "basicsHeadingOne" }
-                },
-                [
-                  _c("h5", { staticClass: "mb-0" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "px-0 btn btn-link btn-block d-flex justify-content-between card-btn py-3 font-size-25 border-0",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "collapse",
-                          "data-target": "#basicsCollapseOner",
-                          "aria-expanded": "true",
-                          "aria-controls": "basicsCollapseOner"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                            What Shipping Methods Are Available?\r\n\r\n                            "
-                        ),
-                        _c("span", { staticClass: "card-btn-arrow" }, [
-                          _c("i", {
-                            staticClass:
-                              "fas fa-chevron-down text-gray-90 font-size-18"
-                          })
-                        ])
-                      ]
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "collapse show",
-                  attrs: {
-                    id: "basicsCollapseOner",
-                    "aria-labelledby": "basicsHeadingOne",
-                    "data-parent": "#basicsAccordion"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "card-body pl-0 pb-8" }, [
-                    _c("p", { staticClass: "mb-0" }, [
-                      _vm._v(
-                        "In egestas, libero vitae scelerisque tristique, turpis augue faucibus dolor, at aliquet ligula massa at justo. Donec viverra tortor quis tortor pretium, in pretium risus finibus. Integer viverra pretium auctor. Aliquam eget convallis eros, varius sagittis nulla. Suspendisse potenti. Aenean consequat ex sit amet metus ultrices tristique. Nam ac nunc augue. Suspendisse finibus in dolor eget volutpat."
-                      )
-                    ])
-                  ])
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0"
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "card-header card-collapse bg-transparent-on-hover border-0",
-                  attrs: { id: "basicsHeadingTwo" }
-                },
-                [
-                  _c("h5", { staticClass: "mb-0" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "px-0 btn btn-link btn-block d-flex justify-content-between card-btn collapsed py-3 font-size-25 border-0",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "collapse",
-                          "data-target": "#basicsCollapseTwo",
-                          "aria-expanded": "false",
-                          "aria-controls": "basicsCollapseTwo"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                            How Long Will it Take To Get My Package?\r\n\r\n                            "
-                        ),
-                        _c("span", { staticClass: "card-btn-arrow" }, [
-                          _c("i", {
-                            staticClass:
-                              "fas fa-chevron-down text-gray-90 font-size-18"
-                          })
-                        ])
-                      ]
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "collapse",
-                  attrs: {
-                    id: "basicsCollapseTwo",
-                    "aria-labelledby": "basicsHeadingTwo",
-                    "data-parent": "#basicsAccordion"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "card-body pl-0 pb-8" }, [
-                    _c("p", { staticClass: "mb-0" }, [
-                      _vm._v(
-                        "In egestas, libero vitae scelerisque tristique, turpis augue faucibus dolor, at aliquet ligula massa at justo. Donec viverra tortor quis tortor pretium, in pretium risus finibus. Integer viverra pretium auctor. Aliquam eget convallis eros, varius sagittis nulla. Suspendisse potenti. Aenean consequat ex sit amet metus ultrices tristique. Nam ac nunc augue. Suspendisse finibus in dolor eget volutpat."
-                      )
-                    ])
-                  ])
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0"
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "card-header card-collapse bg-transparent-on-hover border-0",
-                  attrs: { id: "basicsHeadingThree" }
-                },
-                [
-                  _c("h5", { staticClass: "mb-0" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "px-0 btn btn-link btn-block d-flex justify-content-between card-btn collapsed py-3 font-size-25 border-0",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "collapse",
-                          "data-target": "#basicsCollapseThree",
-                          "aria-expanded": "false",
-                          "aria-controls": "basicsCollapseThree"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                            How Do I Track My Order?\r\n\r\n                            "
-                        ),
-                        _c("span", { staticClass: "card-btn-arrow" }, [
-                          _c("i", {
-                            staticClass:
-                              "fas fa-chevron-down text-gray-90 font-size-18"
-                          })
-                        ])
-                      ]
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "collapse",
-                  attrs: {
-                    id: "basicsCollapseThree",
-                    "aria-labelledby": "basicsHeadingThree",
-                    "data-parent": "#basicsAccordion"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "card-body pl-0 pb-8" }, [
-                    _c("p", { staticClass: "mb-0" }, [
-                      _vm._v(
-                        "In egestas, libero vitae scelerisque tristique, turpis augue faucibus dolor, at aliquet ligula massa at justo. Donec viverra tortor quis tortor pretium, in pretium risus finibus. Integer viverra pretium auctor. Aliquam eget convallis eros, varius sagittis nulla. Suspendisse potenti. Aenean consequat ex sit amet metus ultrices tristique. Nam ac nunc augue. Suspendisse finibus in dolor eget volutpat."
-                      )
-                    ])
-                  ])
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0"
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "card-header card-collapse bg-transparent-on-hover border-0",
-                  attrs: { id: "basicsHeadingFour" }
-                },
-                [
-                  _c("h5", { staticClass: "mb-0" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "px-0 btn btn-link btn-block d-flex justify-content-between card-btn collapsed py-3 font-size-25 border-0",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "collapse",
-                          "data-target": "#basicsCollapseFour",
-                          "aria-expanded": "false",
-                          "aria-controls": "basicsCollapseFour"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                            How Do I Place an Order?\r\n\r\n                            "
-                        ),
-                        _c("span", { staticClass: "card-btn-arrow" }, [
-                          _c("i", {
-                            staticClass:
-                              "fas fa-chevron-down text-gray-90 font-size-18"
-                          })
-                        ])
-                      ]
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "collapse",
-                  attrs: {
-                    id: "basicsCollapseFour",
-                    "aria-labelledby": "basicsHeadingFour",
-                    "data-parent": "#basicsAccordion"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "card-body pl-0 pb-8" }, [
-                    _c("p", { staticClass: "mb-0" }, [
-                      _vm._v(
-                        "In egestas, libero vitae scelerisque tristique, turpis augue faucibus dolor, at aliquet ligula massa at justo. Donec viverra tortor quis tortor pretium, in pretium risus finibus. Integer viverra pretium auctor. Aliquam eget convallis eros, varius sagittis nulla. Suspendisse potenti. Aenean consequat ex sit amet metus ultrices tristique. Nam ac nunc augue. Suspendisse finibus in dolor eget volutpat."
-                      )
-                    ])
-                  ])
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0"
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "card-header card-collapse bg-transparent-on-hover border-0",
-                  attrs: { id: "basicsHeadingFive" }
-                },
-                [
-                  _c("h5", { staticClass: "mb-0" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "px-0 btn btn-link btn-block d-flex justify-content-between card-btn collapsed py-3 font-size-25 border-0",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "collapse",
-                          "data-target": "#basicsCollapseFive",
-                          "aria-expanded": "false",
-                          "aria-controls": "basicsCollapseFive"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                            How Should I to Contact if I Have Any Queries?\r\n\r\n                            "
-                        ),
-                        _c("span", { staticClass: "card-btn-arrow" }, [
-                          _c("i", {
-                            staticClass:
-                              "fas fa-chevron-down text-gray-90 font-size-18"
-                          })
-                        ])
-                      ]
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "collapse",
-                  attrs: {
-                    id: "basicsCollapseFive",
-                    "aria-labelledby": "basicsHeadingFive",
-                    "data-parent": "#basicsAccordion"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "card-body pl-0 pb-8" }, [
-                    _c("p", { staticClass: "mb-0" }, [
-                      _vm._v(
-                        "In egestas, libero vitae scelerisque tristique, turpis augue faucibus dolor, at aliquet ligula massa at justo. Donec viverra tortor quis tortor pretium, in pretium risus finibus. Integer viverra pretium auctor. Aliquam eget convallis eros, varius sagittis nulla. Suspendisse potenti. Aenean consequat ex sit amet metus ultrices tristique. Nam ac nunc augue. Suspendisse finibus in dolor eget volutpat."
-                      )
-                    ])
-                  ])
-                ]
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "card mb-3 border-top-0 border-left-0 border-right-0 border-color-1"
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "card-header card-collapse bg-transparent-on-hover border-0",
-                  attrs: { id: "basicsHeadingSix" }
-                },
-                [
-                  _c("h5", { staticClass: "mb-0" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass:
-                          "px-0 btn btn-link btn-block d-flex justify-content-between card-btn collapsed py-3 font-size-25 border-0",
-                        attrs: {
-                          type: "button",
-                          "data-toggle": "collapse",
-                          "data-target": "#basicsCollapseSix",
-                          "aria-expanded": "false",
-                          "aria-controls": "basicsCollapseSix"
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                            Do I Need an Account to Place an Order?\r\n\r\n                            "
-                        ),
-                        _c("span", { staticClass: "card-btn-arrow" }, [
-                          _c("i", {
-                            staticClass:
-                              "fas fa-chevron-down text-gray-90 font-size-18"
-                          })
-                        ])
-                      ]
-                    )
-                  ])
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "collapse",
-                  attrs: {
-                    id: "basicsCollapseSix",
-                    "aria-labelledby": "basicsHeadingSix",
-                    "data-parent": "#basicsAccordion"
-                  }
-                },
-                [
-                  _c("div", { staticClass: "card-body pl-0" }, [
-                    _c("p", { staticClass: "mb-0" }, [
-                      _vm._v(
-                        "In egestas, libero vitae scelerisque tristique, turpis augue faucibus dolor, at aliquet ligula massa at justo. Donec viverra tortor quis tortor pretium, in pretium risus finibus. Integer viverra pretium auctor. Aliquam eget convallis eros, varius sagittis nulla. Suspendisse potenti. Aenean consequat ex sit amet metus ultrices tristique. Nam ac nunc augue. Suspendisse finibus in dolor eget volutpat."
-                      )
-                    ])
-                  ])
-                ]
-              )
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mb-8" }, [
-          _c("div", { staticClass: "py-2 border-top border-bottom" }, [
             _c(
               "div",
               {
-                staticClass: "js-slick-carousel u-slick my-1",
-                attrs: {
-                  "data-slides-show": "5",
-                  "data-slides-scroll": "1",
-                  "data-arrows-classes":
-                    "d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y",
-                  "data-arrow-left-classes":
-                    "fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9",
-                  "data-arrow-right-classes":
-                    "fa fa-angle-right u-slick__arrow-classic-inner--right",
-                  "data-responsive":
-                    '[{\r\n                        "breakpoint": 992,\r\n                        "settings": {\r\n                            "slidesToShow": 2\r\n                        }\r\n                    }, {\r\n                        "breakpoint": 768,\r\n                        "settings": {\r\n                            "slidesToShow": 1\r\n                        }\r\n                    }, {\r\n                        "breakpoint": 554,\r\n                        "settings": {\r\n                            "slidesToShow": 1\r\n                        }\r\n                    }]'
-                }
+                staticClass:
+                  "card-header card-collapse bg-transparent-on-hover border-0",
+                attrs: { id: "basicsHeadingOne" }
               },
               [
-                _c("div", { staticClass: "js-slide" }, [
+                _c("h5", { staticClass: "mb-0" }, [
                   _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                    "button",
+                    {
+                      staticClass:
+                        "px-0 btn btn-link btn-block d-flex justify-content-between card-btn py-3 font-size-25 border-0",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "collapse",
+                        "data-target": "#basicsCollapseOner",
+                        "aria-expanded": "true",
+                        "aria-controls": "basicsCollapseOner"
+                      }
+                    },
                     [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img1.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img2.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img3.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img4.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img5.png",
-                          alt: "Image Description"
-                        }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "js-slide" }, [
-                  _c(
-                    "a",
-                    { staticClass: "link-hover__brand", attrs: { href: "#" } },
-                    [
-                      _c("img", {
-                        staticClass: "img-fluid m-auto max-height-50",
-                        attrs: {
-                          src: "website/assets/img/200X60/img6.png",
-                          alt: "Image Description"
-                        }
-                      })
+                      _vm._v(
+                        "\r\n                        What Shipping Methods Are Available?\r\n\r\n                        "
+                      ),
+                      _c("span", { staticClass: "card-btn-arrow" }, [
+                        _c("i", {
+                          staticClass:
+                            "fas fa-chevron-down text-gray-90 font-size-18"
+                        })
+                      ])
                     ]
                   )
                 ])
               ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "collapse show",
+                attrs: {
+                  id: "basicsCollapseOner",
+                  "aria-labelledby": "basicsHeadingOne",
+                  "data-parent": "#basicsAccordion"
+                }
+              },
+              [
+                _c("div", { staticClass: "card-body pl-0 pb-8" }, [
+                  _c("p", { staticClass: "mb-0" }, [
+                    _vm._v(
+                      "In egestas, libero vitae scelerisque tristique, turpis augue faucibus dolor, at aliquet ligula massa at justo. Donec viverra tortor quis tortor pretium, in pretium risus finibus. Integer viverra pretium auctor. Aliquam eget convallis eros, varius sagittis nulla. Suspendisse potenti. Aenean consequat ex sit amet metus ultrices tristique. Nam ac nunc augue. Suspendisse finibus in dolor eget volutpat."
+                    )
+                  ])
+                ])
+              ]
             )
-          ])
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0"
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "card-header card-collapse bg-transparent-on-hover border-0",
+                attrs: { id: "basicsHeadingTwo" }
+              },
+              [
+                _c("h5", { staticClass: "mb-0" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "px-0 btn btn-link btn-block d-flex justify-content-between card-btn collapsed py-3 font-size-25 border-0",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "collapse",
+                        "data-target": "#basicsCollapseTwo",
+                        "aria-expanded": "false",
+                        "aria-controls": "basicsCollapseTwo"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                        How Long Will it Take To Get My Package?\r\n\r\n                        "
+                      ),
+                      _c("span", { staticClass: "card-btn-arrow" }, [
+                        _c("i", {
+                          staticClass:
+                            "fas fa-chevron-down text-gray-90 font-size-18"
+                        })
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "collapse",
+                attrs: {
+                  id: "basicsCollapseTwo",
+                  "aria-labelledby": "basicsHeadingTwo",
+                  "data-parent": "#basicsAccordion"
+                }
+              },
+              [
+                _c("div", { staticClass: "card-body pl-0 pb-8" }, [
+                  _c("p", { staticClass: "mb-0" }, [
+                    _vm._v(
+                      "In egestas, libero vitae scelerisque tristique, turpis augue faucibus dolor, at aliquet ligula massa at justo. Donec viverra tortor quis tortor pretium, in pretium risus finibus. Integer viverra pretium auctor. Aliquam eget convallis eros, varius sagittis nulla. Suspendisse potenti. Aenean consequat ex sit amet metus ultrices tristique. Nam ac nunc augue. Suspendisse finibus in dolor eget volutpat."
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0"
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "card-header card-collapse bg-transparent-on-hover border-0",
+                attrs: { id: "basicsHeadingThree" }
+              },
+              [
+                _c("h5", { staticClass: "mb-0" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "px-0 btn btn-link btn-block d-flex justify-content-between card-btn collapsed py-3 font-size-25 border-0",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "collapse",
+                        "data-target": "#basicsCollapseThree",
+                        "aria-expanded": "false",
+                        "aria-controls": "basicsCollapseThree"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                        How Do I Track My Order?\r\n\r\n                        "
+                      ),
+                      _c("span", { staticClass: "card-btn-arrow" }, [
+                        _c("i", {
+                          staticClass:
+                            "fas fa-chevron-down text-gray-90 font-size-18"
+                        })
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "collapse",
+                attrs: {
+                  id: "basicsCollapseThree",
+                  "aria-labelledby": "basicsHeadingThree",
+                  "data-parent": "#basicsAccordion"
+                }
+              },
+              [
+                _c("div", { staticClass: "card-body pl-0 pb-8" }, [
+                  _c("p", { staticClass: "mb-0" }, [
+                    _vm._v(
+                      "In egestas, libero vitae scelerisque tristique, turpis augue faucibus dolor, at aliquet ligula massa at justo. Donec viverra tortor quis tortor pretium, in pretium risus finibus. Integer viverra pretium auctor. Aliquam eget convallis eros, varius sagittis nulla. Suspendisse potenti. Aenean consequat ex sit amet metus ultrices tristique. Nam ac nunc augue. Suspendisse finibus in dolor eget volutpat."
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0"
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "card-header card-collapse bg-transparent-on-hover border-0",
+                attrs: { id: "basicsHeadingFour" }
+              },
+              [
+                _c("h5", { staticClass: "mb-0" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "px-0 btn btn-link btn-block d-flex justify-content-between card-btn collapsed py-3 font-size-25 border-0",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "collapse",
+                        "data-target": "#basicsCollapseFour",
+                        "aria-expanded": "false",
+                        "aria-controls": "basicsCollapseFour"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                        How Do I Place an Order?\r\n\r\n                        "
+                      ),
+                      _c("span", { staticClass: "card-btn-arrow" }, [
+                        _c("i", {
+                          staticClass:
+                            "fas fa-chevron-down text-gray-90 font-size-18"
+                        })
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "collapse",
+                attrs: {
+                  id: "basicsCollapseFour",
+                  "aria-labelledby": "basicsHeadingFour",
+                  "data-parent": "#basicsAccordion"
+                }
+              },
+              [
+                _c("div", { staticClass: "card-body pl-0 pb-8" }, [
+                  _c("p", { staticClass: "mb-0" }, [
+                    _vm._v(
+                      "In egestas, libero vitae scelerisque tristique, turpis augue faucibus dolor, at aliquet ligula massa at justo. Donec viverra tortor quis tortor pretium, in pretium risus finibus. Integer viverra pretium auctor. Aliquam eget convallis eros, varius sagittis nulla. Suspendisse potenti. Aenean consequat ex sit amet metus ultrices tristique. Nam ac nunc augue. Suspendisse finibus in dolor eget volutpat."
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "card mb-3 border-top-0 border-left-0 border-right-0 border-color-1 rounded-0"
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "card-header card-collapse bg-transparent-on-hover border-0",
+                attrs: { id: "basicsHeadingFive" }
+              },
+              [
+                _c("h5", { staticClass: "mb-0" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "px-0 btn btn-link btn-block d-flex justify-content-between card-btn collapsed py-3 font-size-25 border-0",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "collapse",
+                        "data-target": "#basicsCollapseFive",
+                        "aria-expanded": "false",
+                        "aria-controls": "basicsCollapseFive"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                        How Should I to Contact if I Have Any Queries?\r\n\r\n                        "
+                      ),
+                      _c("span", { staticClass: "card-btn-arrow" }, [
+                        _c("i", {
+                          staticClass:
+                            "fas fa-chevron-down text-gray-90 font-size-18"
+                        })
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "collapse",
+                attrs: {
+                  id: "basicsCollapseFive",
+                  "aria-labelledby": "basicsHeadingFive",
+                  "data-parent": "#basicsAccordion"
+                }
+              },
+              [
+                _c("div", { staticClass: "card-body pl-0 pb-8" }, [
+                  _c("p", { staticClass: "mb-0" }, [
+                    _vm._v(
+                      "In egestas, libero vitae scelerisque tristique, turpis augue faucibus dolor, at aliquet ligula massa at justo. Donec viverra tortor quis tortor pretium, in pretium risus finibus. Integer viverra pretium auctor. Aliquam eget convallis eros, varius sagittis nulla. Suspendisse potenti. Aenean consequat ex sit amet metus ultrices tristique. Nam ac nunc augue. Suspendisse finibus in dolor eget volutpat."
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass:
+              "card mb-3 border-top-0 border-left-0 border-right-0 border-color-1"
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass:
+                  "card-header card-collapse bg-transparent-on-hover border-0",
+                attrs: { id: "basicsHeadingSix" }
+              },
+              [
+                _c("h5", { staticClass: "mb-0" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "px-0 btn btn-link btn-block d-flex justify-content-between card-btn collapsed py-3 font-size-25 border-0",
+                      attrs: {
+                        type: "button",
+                        "data-toggle": "collapse",
+                        "data-target": "#basicsCollapseSix",
+                        "aria-expanded": "false",
+                        "aria-controls": "basicsCollapseSix"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                        Do I Need an Account to Place an Order?\r\n\r\n                        "
+                      ),
+                      _c("span", { staticClass: "card-btn-arrow" }, [
+                        _c("i", {
+                          staticClass:
+                            "fas fa-chevron-down text-gray-90 font-size-18"
+                        })
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "collapse",
+                attrs: {
+                  id: "basicsCollapseSix",
+                  "aria-labelledby": "basicsHeadingSix",
+                  "data-parent": "#basicsAccordion"
+                }
+              },
+              [
+                _c("div", { staticClass: "card-body pl-0" }, [
+                  _c("p", { staticClass: "mb-0" }, [
+                    _vm._v(
+                      "In egestas, libero vitae scelerisque tristique, turpis augue faucibus dolor, at aliquet ligula massa at justo. Donec viverra tortor quis tortor pretium, in pretium risus finibus. Integer viverra pretium auctor. Aliquam eget convallis eros, varius sagittis nulla. Suspendisse potenti. Aenean consequat ex sit amet metus ultrices tristique. Nam ac nunc augue. Suspendisse finibus in dolor eget volutpat."
+                    )
+                  ])
+                ])
+              ]
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "mb-8" }, [
+        _c("div", { staticClass: "py-2 border-top border-bottom" }, [
+          _c(
+            "div",
+            {
+              staticClass: "js-slick-carousel u-slick my-1",
+              attrs: {
+                "data-slides-show": "5",
+                "data-slides-scroll": "1",
+                "data-arrows-classes":
+                  "d-none d-lg-inline-block u-slick__arrow-normal u-slick__arrow-centered--y",
+                "data-arrow-left-classes":
+                  "fa fa-angle-left u-slick__arrow-classic-inner--left z-index-9",
+                "data-arrow-right-classes":
+                  "fa fa-angle-right u-slick__arrow-classic-inner--right",
+                "data-responsive":
+                  '[{\r\n                    "breakpoint": 992,\r\n                    "settings": {\r\n                        "slidesToShow": 2\r\n                    }\r\n                }, {\r\n                    "breakpoint": 768,\r\n                    "settings": {\r\n                        "slidesToShow": 1\r\n                    }\r\n                }, {\r\n                    "breakpoint": 554,\r\n                    "settings": {\r\n                        "slidesToShow": 1\r\n                    }\r\n                }]'
+              }
+            },
+            [
+              _c("div", { staticClass: "js-slide" }, [
+                _c(
+                  "a",
+                  { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                  [
+                    _c("img", {
+                      staticClass: "img-fluid m-auto max-height-50",
+                      attrs: {
+                        src: "website/assets/img/200X60/img1.png",
+                        alt: "Image Description"
+                      }
+                    })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "js-slide" }, [
+                _c(
+                  "a",
+                  { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                  [
+                    _c("img", {
+                      staticClass: "img-fluid m-auto max-height-50",
+                      attrs: {
+                        src: "website/assets/img/200X60/img2.png",
+                        alt: "Image Description"
+                      }
+                    })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "js-slide" }, [
+                _c(
+                  "a",
+                  { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                  [
+                    _c("img", {
+                      staticClass: "img-fluid m-auto max-height-50",
+                      attrs: {
+                        src: "website/assets/img/200X60/img3.png",
+                        alt: "Image Description"
+                      }
+                    })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "js-slide" }, [
+                _c(
+                  "a",
+                  { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                  [
+                    _c("img", {
+                      staticClass: "img-fluid m-auto max-height-50",
+                      attrs: {
+                        src: "website/assets/img/200X60/img4.png",
+                        alt: "Image Description"
+                      }
+                    })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "js-slide" }, [
+                _c(
+                  "a",
+                  { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                  [
+                    _c("img", {
+                      staticClass: "img-fluid m-auto max-height-50",
+                      attrs: {
+                        src: "website/assets/img/200X60/img5.png",
+                        alt: "Image Description"
+                      }
+                    })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "js-slide" }, [
+                _c(
+                  "a",
+                  { staticClass: "link-hover__brand", attrs: { href: "#" } },
+                  [
+                    _c("img", {
+                      staticClass: "img-fluid m-auto max-height-50",
+                      attrs: {
+                        src: "website/assets/img/200X60/img6.png",
+                        alt: "Image Description"
+                      }
+                    })
+                  ]
+                )
+              ])
+            ]
+          )
         ])
       ])
     ])

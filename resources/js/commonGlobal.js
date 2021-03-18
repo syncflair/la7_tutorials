@@ -12,6 +12,7 @@ export default {
               width: 0,
               height: 0
           },
+
           DisplayResponsiveElement: true, //useing for Display responsive element based on window.width
 
           //Custome message display for success or warning
@@ -32,9 +33,10 @@ export default {
       //       //isAuthenticated
       // ),
 
-      // ...mapState( 
-      //       'AuthenticationForCustomer', ['isAuthenticated','authCustomer']
-      // ),
+      ...mapState( 
+            'AuthenticationForCustomer', ['isAuthenticated','authCustomer', 'spac_access_token', 'isitwebsiteCheck']
+            // 'AuthenticationForCustomer', ['isAuthenticated','authCustomer', 'spac_access_token', 'isitwebsiteCheck']
+      ),
 
       // ...mapState( 
       //       'AuthenticationForSupplier', ['isSspaAuthenticated','authSupplier']
@@ -67,6 +69,7 @@ export default {
                     this.DisplayResponsiveElement = true;                
             }
         },
+
                  
     },
 
@@ -140,8 +143,8 @@ export default {
 
         //window resize is call
         window.addEventListener('resize', this.handleResize);
-        this.handleResize();
-    },
+            this.handleResize();
+        },
 
     destroyed() {
         //window resize is destroy

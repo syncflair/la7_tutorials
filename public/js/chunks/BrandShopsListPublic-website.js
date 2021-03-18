@@ -2208,8 +2208,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 //import HeaderTopbar from '../Layouts/HeaderTopbar.vue' //this component load to every page of website
 //import FooterComponent from '../Layouts/Footer.vue' //this component load to every page of website
 //const HeaderTopbar = () => import( /* webpackChunkName: "HeaderTopbar-website" */ '../Layouts/HeaderTopbar') 
@@ -2400,140 +2398,129 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("span", [
-    _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "mb-12" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "tab-content", attrs: { id: "pills-tabContent" } },
-          [
-            _c(
-              "div",
-              {
-                staticClass: "tab-pane fade pt-2 show active",
-                attrs: {
-                  id: "pills-one-example1",
-                  role: "tabpanel",
-                  "aria-labelledby": "pills-one-example1-tab",
-                  "data-target-group": "groups"
-                }
-              },
-              [
-                _c(
-                  "ul",
-                  {
-                    staticClass: "row list-unstyled products-group no-gutters"
-                  },
-                  [
-                    _c(
-                      "li",
-                      {
-                        staticClass: "col-6 col-md-3 col-xl-1gdot7 product-item"
-                      },
-                      [
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "mb-12" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "tab-content", attrs: { id: "pills-tabContent" } },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "tab-pane fade pt-2 show active",
+              attrs: {
+                id: "pills-one-example1",
+                role: "tabpanel",
+                "aria-labelledby": "pills-one-example1-tab",
+                "data-target-group": "groups"
+              }
+            },
+            [
+              _c(
+                "ul",
+                { staticClass: "row list-unstyled products-group no-gutters" },
+                [
+                  _c(
+                    "li",
+                    {
+                      staticClass: "col-6 col-md-3 col-xl-1gdot7 product-item"
+                    },
+                    [
+                      _c("div", { staticClass: "product-item__outer h-100" }, [
                         _c(
                           "div",
-                          { staticClass: "product-item__outer h-100" },
+                          { staticClass: "product-item__inner px-xl-4 p-3" },
                           [
                             _c(
                               "div",
-                              {
-                                staticClass: "product-item__inner px-xl-4 p-3"
-                              },
+                              { staticClass: "product-item__body pb-xl-2" },
                               [
                                 _c(
                                   "div",
-                                  { staticClass: "product-item__body pb-xl-2" },
+                                  { staticClass: "mb-2" },
                                   [
                                     _c(
-                                      "div",
-                                      { staticClass: "mb-2" },
-                                      [
-                                        _c(
-                                          "router-link",
-                                          {
-                                            staticClass: "d-block text-center",
-                                            attrs: { to: "/brand-shop" }
-                                          },
-                                          [
-                                            _c("img", {
-                                              staticClass: "img-fluid",
-                                              attrs: {
-                                                src:
-                                                  "website/assets/img/212X200/img1.jpg",
-                                                alt: "Image Description"
-                                              }
-                                            })
-                                          ]
-                                        )
-                                      ],
-                                      1
-                                    ),
-                                    _vm._v(" "),
-                                    _c(
-                                      "div",
+                                      "router-link",
                                       {
-                                        staticClass: "mb-2",
-                                        staticStyle: { "text-align": "center" }
+                                        staticClass: "d-block text-center",
+                                        attrs: { to: "/brand-shop" }
                                       },
                                       [
-                                        _c(
-                                          "router-link",
-                                          {
-                                            staticClass:
-                                              "font-size-12 text-gray-5",
-                                            attrs: { to: "/brand-shop" }
-                                          },
-                                          [_vm._v("Speakers")]
-                                        )
-                                      ],
-                                      1
+                                        _c("img", {
+                                          staticClass: "img-fluid",
+                                          attrs: {
+                                            src:
+                                              "website/assets/img/212X200/img1.jpg",
+                                            alt: "Image Description"
+                                          }
+                                        })
+                                      ]
                                     )
-                                  ]
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass: "mb-2",
+                                    staticStyle: { "text-align": "center" }
+                                  },
+                                  [
+                                    _c(
+                                      "router-link",
+                                      {
+                                        staticClass: "font-size-12 text-gray-5",
+                                        attrs: { to: "/brand-shop" }
+                                      },
+                                      [_vm._v("Speakers")]
+                                    )
+                                  ],
+                                  1
                                 )
                               ]
                             )
                           ]
                         )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm._m(1),
-                    _vm._m(2),
-                    _vm._m(3),
-                    _vm._m(4),
-                    _vm._m(5),
-                    _vm._m(6),
-                    _vm._m(7),
-                    _vm._m(8),
-                    _vm._m(9),
-                    _vm._m(10),
-                    _vm._m(11),
-                    _vm._m(12),
-                    _vm._m(13),
-                    _vm._m(14),
-                    _vm._m(15),
-                    _vm._m(16),
-                    _vm._m(17),
-                    _vm._m(18),
-                    _vm._m(19)
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _vm._m(20),
-            _vm._v(" "),
-            _vm._m(21),
-            _vm._v(" "),
-            _vm._m(22)
-          ]
-        ),
-        _vm._v(" "),
-        _vm._m(23)
-      ])
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._m(2),
+                  _vm._m(3),
+                  _vm._m(4),
+                  _vm._m(5),
+                  _vm._m(6),
+                  _vm._m(7),
+                  _vm._m(8),
+                  _vm._m(9),
+                  _vm._m(10),
+                  _vm._m(11),
+                  _vm._m(12),
+                  _vm._m(13),
+                  _vm._m(14),
+                  _vm._m(15),
+                  _vm._m(16),
+                  _vm._m(17),
+                  _vm._m(18),
+                  _vm._m(19)
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(20),
+          _vm._v(" "),
+          _vm._m(21),
+          _vm._v(" "),
+          _vm._m(22)
+        ]
+      ),
+      _vm._v(" "),
+      _vm._m(23)
     ])
   ])
 }
@@ -2685,7 +2672,7 @@ var staticRenderFns = [
                 })
               ]
             ),
-            _vm._v(" of 3\r\n                    "),
+            _vm._v(" of 3\r\n                "),
             _c(
               "a",
               {

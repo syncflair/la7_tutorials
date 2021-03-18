@@ -115,7 +115,6 @@
 //
 //
 //
-//
 
 /***/ }),
 
@@ -221,311 +220,286 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("span", [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "mb-4" }, [
-          _c("h1", { staticClass: "text-center" }, [_vm._v("My Account")])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "my-4 my-xl-8" }, [
-          _c("div", { staticClass: "row" }, [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "col-md-5 ml-xl-auto mr-md-auto mr-xl-0 mb-8 mb-md-0"
-              },
-              [
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "mb-4" }, [
+        _c("h1", { staticClass: "text-center" }, [_vm._v("My Account")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "my-4 my-xl-8" }, [
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            {
+              staticClass: "col-md-5 ml-xl-auto mr-md-auto mr-xl-0 mb-8 mb-md-0"
+            },
+            [
+              _c("div", { staticClass: "border-bottom border-color-1 mb-6" }, [
                 _c(
-                  "div",
-                  { staticClass: "border-bottom border-color-1 mb-6" },
-                  [
-                    _c(
-                      "h3",
-                      {
-                        staticClass:
-                          "d-inline-block section-title mb-0 pb-2 font-size-26"
-                      },
-                      [_vm._v("Login")]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-gray-90 mb-4" }, [
-                  _vm._v("Welcome back! Sign in to your account.")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "form",
-                  {
-                    staticClass: "js-validate",
-                    attrs: { novalidate: "novalidate" }
-                  },
-                  [
-                    _c("div", { staticClass: "js-form-message form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-label",
-                          attrs: { for: "signinSrEmailExample3" }
-                        },
-                        [
-                          _vm._v(
-                            "Username or Email address\r\n                                "
-                          ),
-                          _c("span", { staticClass: "text-danger" }, [
-                            _vm._v("*")
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "email",
-                          name: "email",
-                          id: "signinSrEmailExample3",
-                          placeholder: "Username or Email address",
-                          "aria-label": "Username or Email address",
-                          required: "",
-                          "data-msg": "Please enter a valid email address.",
-                          "data-error-class": "u-has-error",
-                          "data-success-class": "u-has-success"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "js-form-message form-group" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "form-label",
-                          attrs: { for: "signinSrPasswordExample2" }
-                        },
-                        [
-                          _vm._v("Password "),
-                          _c("span", { staticClass: "text-danger" }, [
-                            _vm._v("*")
-                          ])
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "password",
-                          name: "password",
-                          id: "signinSrPasswordExample2",
-                          placeholder: "Password",
-                          "aria-label": "Password",
-                          required: "",
-                          "data-msg":
-                            "Your password is invalid. Please try again.",
-                          "data-error-class": "u-has-error",
-                          "data-success-class": "u-has-success"
-                        }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "js-form-message mb-3" }, [
-                      _c(
-                        "div",
-                        {
-                          staticClass:
-                            "custom-control custom-checkbox d-flex align-items-center"
-                        },
-                        [
-                          _c("input", {
-                            staticClass: "custom-control-input",
-                            attrs: {
-                              type: "checkbox",
-                              id: "rememberCheckbox",
-                              name: "rememberCheckbox",
-                              required: "",
-                              "data-error-class": "u-has-error",
-                              "data-success-class": "u-has-success"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            {
-                              staticClass: "custom-control-label form-label",
-                              attrs: { for: "rememberCheckbox" }
-                            },
-                            [
-                              _vm._v(
-                                "\r\n                                    Remember me\r\n                                "
-                              )
-                            ]
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "mb-1" }, [
-                      _c("div", { staticClass: "mb-3" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary-dark-w px-5",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("Login")]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "mb-2" }, [
-                        _c(
-                          "a",
-                          { staticClass: "text-blue", attrs: { href: "#" } },
-                          [_vm._v("Lost your password?")]
-                        )
-                      ])
-                    ])
-                  ]
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-1 d-none d-md-block" }, [
-              _c("div", { staticClass: "flex-content-center h-100" }, [
-                _c("div", { staticClass: "width-1 bg-1 h-100" }),
-                _vm._v(" "),
-                _c(
-                  "div",
+                  "h3",
                   {
                     staticClass:
-                      "width-50 height-50 border border-color-1 rounded-circle flex-content-center font-italic bg-white position-absolute"
+                      "d-inline-block section-title mb-0 pb-2 font-size-26"
                   },
-                  [_vm._v("or")]
+                  [_vm._v("Login")]
                 )
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-md-5 ml-md-auto ml-xl-0 mr-xl-auto" },
-              [
-                _c(
-                  "div",
-                  { staticClass: "border-bottom border-color-1 mb-6" },
-                  [
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "text-gray-90 mb-4" }, [
+                _vm._v("Welcome back! Sign in to your account.")
+              ]),
+              _vm._v(" "),
+              _c(
+                "form",
+                {
+                  staticClass: "js-validate",
+                  attrs: { novalidate: "novalidate" }
+                },
+                [
+                  _c("div", { staticClass: "js-form-message form-group" }, [
                     _c(
-                      "h3",
+                      "label",
                       {
-                        staticClass:
-                          "d-inline-block section-title mb-0 pb-2 font-size-26"
+                        staticClass: "form-label",
+                        attrs: { for: "signinSrEmailExample3" }
                       },
-                      [_vm._v("Register")]
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-gray-90 mb-4" }, [
-                  _vm._v(
-                    "Create new account today to reap the benefits of a personalized shopping experience."
-                  )
-                ]),
-                _vm._v(" "),
-                _c(
-                  "form",
-                  {
-                    staticClass: "js-validate",
-                    attrs: { novalidate: "novalidate" }
-                  },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "js-form-message form-group mb-5" },
                       [
-                        _c(
-                          "label",
-                          {
-                            staticClass: "form-label",
-                            attrs: { for: "RegisterSrEmailExample3" }
-                          },
-                          [
-                            _vm._v(
-                              "Email address\r\n                                "
-                            ),
-                            _c("span", { staticClass: "text-danger" }, [
-                              _vm._v("*")
-                            ])
-                          ]
+                        _vm._v(
+                          "Username or Email address\r\n                            "
                         ),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "email",
-                            name: "email",
-                            id: "RegisterSrEmailExample3",
-                            placeholder: "Email address",
-                            "aria-label": "Email address",
-                            required: "",
-                            "data-msg": "Please enter a valid email address.",
-                            "data-error-class": "u-has-error",
-                            "data-success-class": "u-has-success"
-                          }
-                        })
+                        _c("span", { staticClass: "text-danger" }, [
+                          _vm._v("*")
+                        ])
                       ]
                     ),
                     _vm._v(" "),
-                    _c("p", { staticClass: "text-gray-90 mb-4" }, [
-                      _vm._v(
-                        "Your personal data will be used to support your experience throughout this website, to manage your account, and for other purposes described in our "
-                      ),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "email",
+                        name: "email",
+                        id: "signinSrEmailExample3",
+                        placeholder: "Username or Email address",
+                        "aria-label": "Username or Email address",
+                        required: "",
+                        "data-msg": "Please enter a valid email address.",
+                        "data-error-class": "u-has-error",
+                        "data-success-class": "u-has-success"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "js-form-message form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "form-label",
+                        attrs: { for: "signinSrPasswordExample2" }
+                      },
+                      [
+                        _vm._v("Password "),
+                        _c("span", { staticClass: "text-danger" }, [
+                          _vm._v("*")
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "password",
+                        name: "password",
+                        id: "signinSrPasswordExample2",
+                        placeholder: "Password",
+                        "aria-label": "Password",
+                        required: "",
+                        "data-msg":
+                          "Your password is invalid. Please try again.",
+                        "data-error-class": "u-has-error",
+                        "data-success-class": "u-has-success"
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "js-form-message mb-3" }, [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "custom-control custom-checkbox d-flex align-items-center"
+                      },
+                      [
+                        _c("input", {
+                          staticClass: "custom-control-input",
+                          attrs: {
+                            type: "checkbox",
+                            id: "rememberCheckbox",
+                            name: "rememberCheckbox",
+                            required: "",
+                            "data-error-class": "u-has-error",
+                            "data-success-class": "u-has-success"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "label",
+                          {
+                            staticClass: "custom-control-label form-label",
+                            attrs: { for: "rememberCheckbox" }
+                          },
+                          [
+                            _vm._v(
+                              "\r\n                                Remember me\r\n                            "
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "mb-1" }, [
+                    _c("div", { staticClass: "mb-3" }, [
                       _c(
-                        "a",
-                        { staticClass: "text-blue", attrs: { href: "#" } },
-                        [_vm._v("privacy policy.")]
+                        "button",
+                        {
+                          staticClass: "btn btn-primary-dark-w px-5",
+                          attrs: { type: "submit" }
+                        },
+                        [_vm._v("Login")]
                       )
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "mb-6" }, [
-                      _c("div", { staticClass: "mb-3" }, [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary-dark-w px-5",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("Register")]
-                        )
-                      ])
+                    _c("div", { staticClass: "mb-2" }, [
+                      _c(
+                        "a",
+                        { staticClass: "text-blue", attrs: { href: "#" } },
+                        [_vm._v("Lost your password?")]
+                      )
                     ])
-                  ]
-                ),
-                _vm._v(" "),
-                _c("h3", { staticClass: "font-size-18 mb-3" }, [
-                  _vm._v("Sign up today and you will be able to :")
+                  ])
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1 d-none d-md-block" }, [
+            _c("div", { staticClass: "flex-content-center h-100" }, [
+              _c("div", { staticClass: "width-1 bg-1 h-100" }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "width-50 height-50 border border-color-1 rounded-circle flex-content-center font-italic bg-white position-absolute"
+                },
+                [_vm._v("or")]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-5 ml-md-auto ml-xl-0 mr-xl-auto" }, [
+            _c("div", { staticClass: "border-bottom border-color-1 mb-6" }, [
+              _c(
+                "h3",
+                {
+                  staticClass:
+                    "d-inline-block section-title mb-0 pb-2 font-size-26"
+                },
+                [_vm._v("Register")]
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "text-gray-90 mb-4" }, [
+              _vm._v(
+                "Create new account today to reap the benefits of a personalized shopping experience."
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "form",
+              {
+                staticClass: "js-validate",
+                attrs: { novalidate: "novalidate" }
+              },
+              [
+                _c("div", { staticClass: "js-form-message form-group mb-5" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "form-label",
+                      attrs: { for: "RegisterSrEmailExample3" }
+                    },
+                    [
+                      _vm._v("Email address\r\n                            "),
+                      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "email",
+                      name: "email",
+                      id: "RegisterSrEmailExample3",
+                      placeholder: "Email address",
+                      "aria-label": "Email address",
+                      required: "",
+                      "data-msg": "Please enter a valid email address.",
+                      "data-error-class": "u-has-error",
+                      "data-success-class": "u-has-success"
+                    }
+                  })
                 ]),
                 _vm._v(" "),
-                _c("ul", { staticClass: "list-group list-group-borderless" }, [
-                  _c("li", { staticClass: "list-group-item px-0" }, [
-                    _c("i", {
-                      staticClass: "fas fa-check mr-2 text-green font-size-16"
-                    }),
-                    _vm._v(" Speed your way through checkout")
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "list-group-item px-0" }, [
-                    _c("i", {
-                      staticClass: "fas fa-check mr-2 text-green font-size-16"
-                    }),
-                    _vm._v(" Track your orders easily")
-                  ]),
-                  _vm._v(" "),
-                  _c("li", { staticClass: "list-group-item px-0" }, [
-                    _c("i", {
-                      staticClass: "fas fa-check mr-2 text-green font-size-16"
-                    }),
-                    _vm._v(" Keep a record of all your purchases")
+                _c("p", { staticClass: "text-gray-90 mb-4" }, [
+                  _vm._v(
+                    "Your personal data will be used to support your experience throughout this website, to manage your account, and for other purposes described in our "
+                  ),
+                  _c("a", { staticClass: "text-blue", attrs: { href: "#" } }, [
+                    _vm._v("privacy policy.")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "mb-6" }, [
+                  _c("div", { staticClass: "mb-3" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary-dark-w px-5",
+                        attrs: { type: "submit" }
+                      },
+                      [_vm._v("Register")]
+                    )
                   ])
                 ])
               ]
-            )
+            ),
+            _vm._v(" "),
+            _c("h3", { staticClass: "font-size-18 mb-3" }, [
+              _vm._v("Sign up today and you will be able to :")
+            ]),
+            _vm._v(" "),
+            _c("ul", { staticClass: "list-group list-group-borderless" }, [
+              _c("li", { staticClass: "list-group-item px-0" }, [
+                _c("i", {
+                  staticClass: "fas fa-check mr-2 text-green font-size-16"
+                }),
+                _vm._v(" Speed your way through checkout")
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "list-group-item px-0" }, [
+                _c("i", {
+                  staticClass: "fas fa-check mr-2 text-green font-size-16"
+                }),
+                _vm._v(" Track your orders easily")
+              ]),
+              _vm._v(" "),
+              _c("li", { staticClass: "list-group-item px-0" }, [
+                _c("i", {
+                  staticClass: "fas fa-check mr-2 text-green font-size-16"
+                }),
+                _vm._v(" Keep a record of all your purchases")
+              ])
+            ])
           ])
         ])
       ])

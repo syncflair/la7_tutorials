@@ -1,4 +1,4 @@
-<?php //Custome Artisan command by sumon
+<?php //Custome Artisan command by sumon (php artisan make:command commandName)
 
 namespace App\Console\Commands;
 

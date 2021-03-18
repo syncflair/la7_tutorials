@@ -16,6 +16,13 @@ Sorboraho is a ecommerce project developing by Laravel and Vuejs
 
 ## Contibution Gideline
 
+## Custome http status Code by sorboraho
+	
+	- 1121 Inactive User 
+	- 1122 Pending User
+	- 1123 Not Verified User
+
+	
 
 
 
