@@ -1053,7 +1053,11 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     // setTimeout(() => {
     // initialization of slick carousel (Slick Slider call from here, otherwise it get error)
-    $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel'); // }, 3500);
+    //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+    // }, 3500);
+    this.$nextTick(function () {
+      FireEvent.$emit('Call_all_javascript_function_for_theme'); // call all javascript for theme
+    }); //end this.$nextTick
   }
 });
 

@@ -1,22 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\AdminCustomer;
+namespace App\Http\Controllers\API\V1\Customer\AdminCustomer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AdminCustomerReviewsController extends Controller
+class AdminCustomerOrdersController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-       $this->middleware('auth:customer');
-    }
-    
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +14,7 @@ class AdminCustomerReviewsController extends Controller
      */
     public function index()
     {
-        return view('website.home'); 
+        //
     }
 
     /**

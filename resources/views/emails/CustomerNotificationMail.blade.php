@@ -144,6 +144,17 @@
         Please confirm your verification link: <a href="{{ url('auth/password-recover', $email_data['userInfo'] )}}">Verify you email</a>.
       </p> -->
 
+    @elseif($email_data['tag'] == 'NewCustomerRegisterByAPI')
+
+      <p class="mt-10 mb-10">
+        <strong>Congratulation</strong>, You are registered to sorboraho.com. 
+      </p>
+
+      <p class="mt-10 mb-10">
+        Happy Shopping..
+      </p>
+      
+
     @endif
 
 

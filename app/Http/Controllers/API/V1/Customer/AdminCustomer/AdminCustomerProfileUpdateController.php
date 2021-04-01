@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\AdminCustomer;
+namespace App\Http\Controllers\API\V1\Customer\AdminCustomer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+
 use Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Customer;
@@ -17,7 +18,6 @@ use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use App\Jobs\CustomerNotificationMailJob;
 
-
 class AdminCustomerProfileUpdateController extends Controller
 {
     /**
@@ -27,28 +27,19 @@ class AdminCustomerProfileUpdateController extends Controller
      */
     public function __construct()
     {
-       $this->middleware('auth:customer');
+       $this->middleware('auth:api-customer');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('website.home'); 
-    }
-
+    
     public function CustomerProfileUpdate(Request $request){
 
     	$this->validate($request, [
             'name' => ['required','string','max:100']  
         ]);
 
-    	if(Auth::guard('customer')->check()){
+    	if(Auth::guard('api-customer')->check()){
            
-            if(Auth::guard('customer')->user()->id == $request->id ){
+            if(Auth::guard('api-customer')->user()->id == $request->id ){
 
            		try{
 		            DB::beginTransaction();
@@ -77,6 +68,8 @@ class AdminCustomerProfileUpdateController extends Controller
 	        	return response()->json(['error'=>'Something worng!.']); 
 	        }//End check Auth ID With Request ID
 
+        }else{
+        	return response()->json(['error'=>'Please try again.']); 
         }//end Auth::guard Check
 
 
@@ -84,9 +77,9 @@ class AdminCustomerProfileUpdateController extends Controller
 
     public function SendCustomerEmailChangeVerificationCode(Request $request){  	
 
-    	if(Auth::guard('customer')->check()){
+    	if(Auth::guard('api-customer')->check()){
            
-            if(Auth::guard('customer')->user()->id == $request->id ){
+            if(Auth::guard('api-customer')->user()->id == $request->id ){
 
            		try{
 		            DB::beginTransaction();
@@ -138,9 +131,9 @@ class AdminCustomerProfileUpdateController extends Controller
 
 		$existing_email_verification_code = Customer::select('email_verification_code')		            										->where('id', $request->id)->first();
 
-    	if(Auth::guard('customer')->check()){
+    	if(Auth::guard('api-customer')->check()){
            
-            if(Auth::guard('customer')->user()->id == $request->id ){
+            if(Auth::guard('api-customer')->user()->id == $request->id ){
 
            		try{
 		            DB::beginTransaction();
@@ -187,9 +180,9 @@ class AdminCustomerProfileUpdateController extends Controller
 
     public function CancelChangeEmail(Request $request){
 
-    	if(Auth::guard('customer')->check()){
+    	if(Auth::guard('api-customer')->check()){
            
-            if(Auth::guard('customer')->user()->id == $request->id ){
+            if(Auth::guard('api-customer')->user()->id == $request->id ){
 
            		try{
 		            DB::beginTransaction();
@@ -222,9 +215,9 @@ class AdminCustomerProfileUpdateController extends Controller
 
     public function SendCustomerPhoneChangeVerificationCode(Request $request){  	
 
-    	if(Auth::guard('customer')->check()){
+    	if(Auth::guard('api-customer')->check()){
            
-            if(Auth::guard('customer')->user()->id == $request->id ){
+            if(Auth::guard('api-customer')->user()->id == $request->id ){
 
            		try{
 		            DB::beginTransaction();
@@ -267,9 +260,9 @@ class AdminCustomerProfileUpdateController extends Controller
 
         $existing_phone_verification_code = Customer::select('phone_verification_code')		            										->where('id', $request->id)->first();
 
-    	if(Auth::guard('customer')->check()){
+    	if(Auth::guard('api-customer')->check()){
            
-            if(Auth::guard('customer')->user()->id == $request->id ){
+            if(Auth::guard('api-customer')->user()->id == $request->id ){
 
            		try{
 		            DB::beginTransaction();
@@ -306,9 +299,9 @@ class AdminCustomerProfileUpdateController extends Controller
 
     public function CancelChangePhone(Request $request){
 
-    	if(Auth::guard('customer')->check()){
+    	if(Auth::guard('api-customer')->check()){
            
-            if(Auth::guard('customer')->user()->id == $request->id ){
+            if(Auth::guard('api-customer')->user()->id == $request->id ){
 
            		try{
 		            DB::beginTransaction();
@@ -347,9 +340,9 @@ class AdminCustomerProfileUpdateController extends Controller
             'password_confirmation' => 'required|same:password',
         ]);
 
-    	if(Auth::guard('customer')->check()){
+    	if(Auth::guard('api-customer')->check()){
            
-            if(Auth::guard('customer')->user()->id == $request->id ){
+            if(Auth::guard('api-customer')->user()->id == $request->id ){
 
             	$existing_password = Customer::select('password')->where('id', $request->id)->first(); 
                 $existing_customer_password = $existing_password->password;

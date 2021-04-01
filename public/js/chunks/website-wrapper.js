@@ -360,8 +360,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       this.$Progress.start(); //using progress-bar package
+      // this.form.post('/customer/login')
 
-      this.form.post('/customer/login') // axios.post('/customer/login',{
+      this.form.post('/api/afc/login') // axios.post('/customer/login',{
       //       username: this.form.login.username,
       //       password: this.form.login.password
       //   }
@@ -370,16 +371,37 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var data = _ref.data;
 
         //console.log(data);                 
-        if (data.success) {
+        if (data) {
+          // if(data.success){ 
           _this.$Progress.finish();
 
           _this.display_error = false;
 
-          _this.sidebarContentClose();
+          _this.sidebarContentClose(); //for security reson, Best Policy for API Based Authentication
+
+
+          localStorage.setItem('_spac_et', Date.now() + data.expires_in * 1000); //add with current time
+
+          localStorage.setItem('_spac_at', data.access_token);
+          localStorage.setItem('_spac_rt', data.refresh_token); // localStorage.setItem('_spac_et', data.expires_in);             
+
+          localStorage.setItem('_spac_ug', 'spac');
+
+          _this.$store.commit('AuthenticationForCustomer/ACCESS_TOKEN_SET', data.access_token);
+
+          _this.$store.commit('AuthenticationForCustomer/REFRESH_TOKEN_SET', data.refresh_token);
 
           _this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true);
 
-          _this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data      
+          axios.defaults.headers.common["Authorization"] = 'Bearer ' + data.access_token; //update axios header
+
+          axios.defaults.headers.common["RefreshToken"] = data.refresh_token; //update axios header
+
+          _this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
+          // console.log(this.spa_spac_at);
+
+
+          FireEvent.$emit('Call_HSCore_components_HSUnfold'); // initialization of unfold component 
           // window.location = '/auth/my-dashboard';  
           //window.location = '/home'; 
           //this.$router.go();   
@@ -388,15 +410,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           //this.$router.push({ path : '/home' }).catch(err => {});   //route after successfule submit                   
           //this.$router.replace({ path : '/home' }).catch(err => {});   //route after successfule submit
 
-
           _this.form.reset(); //reset from after submit 
           //toastr.success('Login successfule'); 
 
 
-          FireEvent.$emit('Call_HSCore_components_HSUnfold'); // initialization of unfold component
-          //for api
+          console.log(_this.$route.path);
+
+          if (_this.$route.path === '/auth/login') {
+            _this.$router.push({
+              path: '/auth/my-dashboard'
+            })["catch"](function (err) {});
+          } else if (_this.$route.path === '/auth/register') {
+            _this.$router.push({
+              path: '/auth/my-dashboard'
+            })["catch"](function (err) {});
+          } //for api
           // localStorage.setItem('Auth_token', data.data.token ); //set token to store
           // this.$router.push({ path : '/dashboard' }).catch(err => {});  
+
         }
 
         if (data.error) {
@@ -3756,6 +3787,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _Layouts_HeaderTopbar_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Layouts/HeaderTopbar.vue */ "./resources/js/components/Website/Layouts/HeaderTopbar.vue");
 /* harmony import */ var _Layouts_HeaderLogoSearchIconsForHome_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Layouts/HeaderLogoSearchIconsForHome.vue */ "./resources/js/components/Website/Layouts/HeaderLogoSearchIconsForHome.vue");
 /* harmony import */ var _Layouts_HeaderVerticalAndSecondaryMenuForHome_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Layouts/HeaderVerticalAndSecondaryMenuForHome.vue */ "./resources/js/components/Website/Layouts/HeaderVerticalAndSecondaryMenuForHome.vue");
@@ -3767,6 +3799,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Layouts_GoToTopButton_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Layouts/GoToTopButton.vue */ "./resources/js/components/Website/Layouts/GoToTopButton.vue");
 /* harmony import */ var _Layouts_Footer_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Layouts/Footer.vue */ "./resources/js/components/Website/Layouts/Footer.vue");
 /* harmony import */ var _Layouts_FooterFixed_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Layouts/FooterFixed.vue */ "./resources/js/components/Website/Layouts/FooterFixed.vue");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3865,7 +3903,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
- //Load to every page
+ //for user MapState
+
+ //Load to every page   
 
  //Load to only Home
 
@@ -3941,7 +3981,7 @@ __webpack_require__.r(__webpack_exports__);
     FooterComponent: _Layouts_Footer_vue__WEBPACK_IMPORTED_MODULE_9__.default,
     FooterFixed: _Layouts_FooterFixed_vue__WEBPACK_IMPORTED_MODULE_10__.default
   },
-  computed: {},
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_11__.mapState)('AuthenticationForCustomer', ['isAuthenticated'])),
   watch: {
     /*************************************************************************************/
 
@@ -3962,10 +4002,9 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     // console.log(this.spac_access_token);
     // setTimeout(() => { 
-    if (localStorage.getItem('_spac_at') === 'undefined' && localStorage.getItem('_spac_et') === 'undefined' && localStorage.getItem('_spac_rt') === 'undefined') {
-      this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false);
-    } else if (localStorage.getItem('_spac_at') === null && localStorage.getItem('_spac_et') === null && localStorage.getItem('_spac_rt') === null) {
-      // }else if (this.spac_access_token === null){
+    if (localStorage.getItem('_spac_at') === 'undefined' && localStorage.getItem('_spac_rt') === 'undefined') {
+      this.$store.dispatch('AuthenticationForCustomer/clearTokenFromLocalStoreApi');
+    } else if (localStorage.getItem('_spac_at') === null && localStorage.getItem('_spac_rt') === null) {
       this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false);
     } else {
       this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true);
@@ -3982,15 +4021,32 @@ __webpack_require__.r(__webpack_exports__);
   },
   destroyed: function destroyed() {},
   mounted: function mounted() {
-    //console.log(localStorage.getItem('access_token'));
+    this.$nextTick(function () {
+      var _this = this;
+
+      // console.log(this.isAuthenticated); // console.log(this.$route.path);
+      if (this.isAuthenticated) {
+        // console.log(this.$route.path);
+        var authenticationRoutes = ['CustomerLogin', 'CustomerRegister', 'CustomerPasswordRecover', 'CustomerPasswordReset'];
+
+        if (authenticationRoutes.includes(this.$route.name)) {
+          this.$router.push({
+            path: '/auth/my-dashboard'
+          })["catch"](function (err) {});
+          console.log(this.$route.name);
+        }
+
+        setTimeout(function () {
+          _this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData');
+        }, 300);
+      }
+    }); //console.log(localStorage.getItem('access_token'));
     // console.log('One ' + ACCESS_TOKEN);
     // console.log('store' + ACCESS_TOKEN);
     // console.log('website-wrapper');
     // console.log('Height: ' +window.innerHeight + ' - Width: ' + window.innerWidth);
     // //  [App.vue specific] When App.vue is finish loading finish the progress bar
     // this.$Progress.finish()
-    //initialization of slick carousel (Slick Slider call from here, otherwise it get error)
-    //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
     // alert(this.$refs.screenWidth.clientHeight +' '+  this.$refs.screenWidth.clientWidth);
     //this.toggleBodyClass('screenWidth', 'TestClassTEse');
     // document.getElementsByClassName('screenWidth').classList.add('testClass');
@@ -4001,12 +4057,101 @@ __webpack_require__.r(__webpack_exports__);
     //alert(this.$refs.screenWidth.clientHeight + '-' + this.$refs.screenWidth.clientWidth); //working
     //console.log('Width: '+this.window.width+ ' Height: ' + this.window.height ); 
     //call from AccountSidebarNavigationToggler.vue component
+
     FireEvent.$on('Call_HSCore_components_HSUnfold', function () {
       setTimeout(function () {
         // initialization of unfold component
         $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
       }, 600);
     });
+    FireEvent.$on('Call_all_javascript_function_for_theme', function () {
+      setTimeout(function () {
+        // console.log('All javascript Loaded');
+        //initialization of HSMegaMenu component
+        $('.js-mega-menu').HSMegaMenu({
+          event: 'hover',
+          direction: 'horizontal',
+          pageContainer: $('.container'),
+          breakpoint: 767.98,
+          hideTimeOut: 0
+        }); // initialization of svg injector module
+
+        $.HSCore.components.HSSVGIngector.init('.js-svg-injector'); // initialization of header
+
+        $.HSCore.components.HSHeader.init($('#header')); // initialization of animation
+
+        $.HSCore.components.HSOnScrollAnimation.init('[data-animation]'); // initialization of unfold component
+
+        $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+          afterOpen: function afterOpen() {
+            $(this).find('input[type="search"]').focus();
+          }
+        }); // initialization of countdowns
+
+        var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+          yearsElSelector: '.js-cd-years',
+          monthsElSelector: '.js-cd-months',
+          daysElSelector: '.js-cd-days',
+          hoursElSelector: '.js-cd-hours',
+          minutesElSelector: '.js-cd-minutes',
+          secondsElSelector: '.js-cd-seconds'
+        }); // initialization of malihu scrollbar
+
+        $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar')); // initialization of forms
+
+        $.HSCore.components.HSFocusState.init(); // initialization of form validation
+        // $.HSCore.components.HSValidation.init('.js-validate', {
+        //     rules: {
+        //         confirmPassword: {
+        //             equalTo: '#signupPassword'
+        //         }
+        //     }
+        // });
+        // initialization of show animations
+
+        $.HSCore.components.HSShowAnimation.init('.js-animation-link'); // initialization of fancybox
+        // initialization of popups
+
+        $.HSCore.components.HSFancyBox.init('.js-fancybox'); // initialization of slick carousel
+
+        $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel'); // initialization of go to
+
+        $.HSCore.components.HSGoTo.init('.js-go-to'); // initialization of hamburgers
+
+        $.HSCore.components.HSHamburgers.init('#hamburgerTrigger'); // initialization of unfold component
+
+        $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+          beforeClose: function beforeClose() {
+            $('#hamburgerTrigger').removeClass('is-active');
+          },
+          afterClose: function afterClose() {
+            $('#headerSidebarList .collapse.show').collapse('hide');
+          }
+        });
+        $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
+          e.preventDefault();
+          var target = $(this).data('target');
+
+          if ($(this).attr('aria-expanded') === "true") {
+            $(target).collapse('hide');
+          } else {
+            $(target).collapse('show');
+          }
+        }); // initialization of unfold component
+
+        $.HSCore.components.HSUnfold.init($('[data-unfold-target]')); // initialization of select picker
+
+        $.HSCore.components.HSSelectPicker.init('.js-select'); // initialization of HSScrollNav component
+
+        $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
+          duration: 700
+        }); // initialization of quantity counter
+
+        $.HSCore.components.HSQantityCounter.init('.js-quantity'); // initialization of forms
+
+        $.HSCore.components.HSRangeSlider.init('.js-range-slider');
+      }, 0); //end setTimeout
+    }); // end Call_all_javascript_function_for_theme
   }
 });
 

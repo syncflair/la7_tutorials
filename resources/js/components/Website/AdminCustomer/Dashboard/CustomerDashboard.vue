@@ -16,11 +16,12 @@
             <div class="row pt-3">
                 <div class="col-lg-3 col-6">
                     <div class="small-box bg-danger- bg-white">
-                        <div class="inner">
+                        
+                        <div v-show="authCustomer" class="inner">
 
                             <h5 class="text-white- text-secondary" ><small>{{authCustomer.name}}</small></h5> 
-                            <p class="text-white- text-secondary mb-2"><i class="fas fa-at"></i> {{authCustomer.email}}</p>
-                            <p class="text-white- text-secondary mb-2"><i class="fas fa-phone"></i> {{authCustomer.phone}}</p>
+                            <p v-if="authCustomer.email" class="text-white- text-secondary mb-2"><i class="fas fa-at"></i> {{authCustomer.email}}</p>
+                            <p v-if="authCustomer.email" class="text-white- text-secondary mb-2"><i class="fas fa-phone"></i> {{authCustomer.phone}}</p>
 
                             <p v-if="authCustomer.status_id === 1" class="text-white- text-secondary mb-2">
                                 <span class="btn- px-1 bg-success text-white font-size-9- rounded-lg">
@@ -28,8 +29,9 @@
                                      <small>Verified</small>
                                 </span>
                             </p>
+                        </div>
 
-                        </div> 
+
                         <!-- <div class="icon"><i class="font-size-18 ec ec-shopping-bag"></i></div>  -->
                         <router-link to="/auth/my-profile" class="small-box-footer text-secondary">Profile <i class="fas fa-arrow-circle-right"></i></router-link>
                     </div>
@@ -153,120 +155,18 @@
         },           
 
         created(){
-            this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data            
+                      
         },
            
-        mounted() {
+        mounted() {            
 
-                        this.$nextTick(function () {
+            this.$nextTick(function () {
 
-                //initialization of HSMegaMenu component
-                $('.js-mega-menu').HSMegaMenu({
-                    event: 'hover',
-                    direction: 'horizontal',
-                    pageContainer: $('.container'),
-                    breakpoint: 767.98,
-                    hideTimeOut: 0
-                });               
+                setTimeout(() => {
+                    this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data  
+                }, 200); 
 
-                // initialization of svg injector module
-                $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
-
-
-                     // initialization of header
-                $.HSCore.components.HSHeader.init($('#header'));
-
-                // initialization of animation
-                $.HSCore.components.HSOnScrollAnimation.init('[data-animation]');
-
-                // initialization of unfold component
-                $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-                    afterOpen: function () {
-                        $(this).find('input[type="search"]').focus();
-                    }
-                });
-
-                // initialization of countdowns
-                // var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
-                //     yearsElSelector: '.js-cd-years',
-                //     monthsElSelector: '.js-cd-months',
-                //     daysElSelector: '.js-cd-days',
-                //     hoursElSelector: '.js-cd-hours',
-                //     minutesElSelector: '.js-cd-minutes',
-                //     secondsElSelector: '.js-cd-seconds'
-                // });
-
-                // initialization of malihu scrollbar
-                $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
-
-                // initialization of forms
-                $.HSCore.components.HSFocusState.init();
-
-                // initialization of form validation
-                // $.HSCore.components.HSValidation.init('.js-validate', {
-                //     rules: {
-                //         confirmPassword: {
-                //             equalTo: '#signupPassword'
-                //         }
-                //     }
-                // });
-
-                // initialization of show animations
-                $.HSCore.components.HSShowAnimation.init('.js-animation-link');
-
-                // initialization of fancybox
-                // initialization of popups
-                $.HSCore.components.HSFancyBox.init('.js-fancybox');
-
-                // initialization of slick carousel
-                // $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
-
-                // initialization of go to
-                $.HSCore.components.HSGoTo.init('.js-go-to');
-
-                // initialization of hamburgers
-                $.HSCore.components.HSHamburgers.init('#hamburgerTrigger');
-
-                // initialization of unfold component
-                $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-                    beforeClose: function () {
-                        $('#hamburgerTrigger').removeClass('is-active');
-                    },
-                    afterClose: function() {
-                        $('#headerSidebarList .collapse.show').collapse('hide');
-                    }
-                });
-
-                $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
-                    e.preventDefault();
-
-                    var target = $(this).data('target');
-
-                    if($(this).attr('aria-expanded') === "true") {
-                        $(target).collapse('hide');
-                    } else {
-                        $(target).collapse('show');
-                    }
-                });
-
-                // initialization of unfold component
-                $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
-
-                // initialization of select picker
-                // $.HSCore.components.HSSelectPicker.init('.js-select');
-
-
-                // initialization of HSScrollNav component
-                // $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
-                //   duration: 700
-                // });
-
-                // initialization of quantity counter
-                //$.HSCore.components.HSQantityCounter.init('.js-quantity');
-
-                // initialization of forms
-                //$.HSCore.components.HSRangeSlider.init('.js-range-slider');
-
+                FireEvent.$emit('Call_all_javascript_function_for_theme'); // call all javascript for theme
 
             })//end this.$nextTick  
 

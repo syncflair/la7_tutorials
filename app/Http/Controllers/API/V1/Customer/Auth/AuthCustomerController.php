@@ -15,9 +15,6 @@ use Illuminate\Support\Facades\Validator;
 // use Illuminate\Http\Response;
 use Illuminate\Http\Client\Response;
 
-use Illuminate\Support\Carbon;
-use App\Jobs\CustomerNotificationMailJob;
-
 use Illuminate\Support\Facades\Session;
 // use Illuminate\Support\Facades\Config; //call app.url form app/config/app - Config::get('app.url')
 
@@ -29,6 +26,9 @@ use GuzzleHttp\Client;
 // use Laravel\Passport\Passport; //for passport
 // use App;
 use Illuminate\Support\Facades\Route;
+
+use Illuminate\Support\Carbon;
+use App\Jobs\CustomerNotificationMailJob;
 
 
 
@@ -137,7 +137,6 @@ class AuthCustomerController extends Controller
 			//if some how not logout from previous token
 			$tokenRepository = app('Laravel\Passport\TokenRepository');
 	    	$refreshTokenRepository = app('Laravel\Passport\RefreshTokenRepository');
-	    	// $user = $request->user();
 	        $user = auth('api-customer')->user();
 	        if ($user) {
 	            $tokenRepository->revokeAccessToken($user->token()->id); //revok token
@@ -190,23 +189,58 @@ class AuthCustomerController extends Controller
 
 	public function register(Request $request){
 
-		$validator = Validator::make($request->all(), [ 
-            'name' => 'required', 
-            'email' => 'required|email|unique:users', 
-            'password' => 'required', 
-            'c_password' => 'required|same:password', 
+		$request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:customers'],
+            'phone' => ['required', 'numeric','regex:/^01[1|3-9]\d{8}$/', 'unique:customers'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        if ($validator->fails()) { 
-            return response()->json(['error'=>$validator->errors()], 401);            
+        $customer = Customer::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password),
+            // 'email_verification_code'=> sha1(Str::random(40)), //Hash::make(Str::random(40))
+            //'email_verification_code'=> null, //Hash::make(Str::random(40))
+            'email_verified_at' => now(),
+            'customer_code' => customer_code_generate(), //this code will insert when register
+            //'coa_code' => 103, //managed by database default value
+        ]);
+
+        if($customer != null){
+
+            // send all mail in the queue job.
+            $data = ["userInfo" => $customer, "tag" => "NewCustomerRegisterByAPI"]; //pass with tag
+            $job = (new CustomerNotificationMailJob($data))
+                        ->delay( Carbon::now()->addSeconds(5) ); 
+            dispatch($job);
+
+            //Mail::to($customer->email)->send(new CustomerRegisterVerificationMail($customer));
+            //$customer->notify(new VerifyEmail($customer)); //if using notification like this
         }
 
-        $password = $request->password;
-        $input = $request->all(); 
-        $input['password'] = bcrypt($input['password']); 
-        $user = User::create($input); 
-        $oClient = OClient::where('password_client', 1)->first();
-        return $this->getTokenAndRefreshToken($oClient, $user->email, $password);
+        return response()->json('Registration successfule,');
+        // Return $customer;
+
+		// $validator = Validator::make($request->all(), [ 
+  //           'name' => 'required', 
+  //           'email' => 'required|email|unique:users', 
+  //           'password' => 'required', 
+  //           'c_password' => 'required|same:password', 
+  //       ]);
+
+  //       if ($validator->fails()) { 
+  //           return response()->json(['error'=>$validator->errors()], 401);            
+  //       }
+
+  //       $password = $request->password;
+  //       $input = $request->all(); 
+  //       $input['password'] = bcrypt($input['password']); 
+  //       'password' => Hash::make($data['password']),
+  //       $user = User::create($input); 
+  //       $oClient = OClient::where('password_client', 1)->first();
+  //       return $this->getTokenAndRefreshToken($oClient, $user->email, $password);
 		//return response()->json('Working, test success for register');
 		// return response()->json($data);
 	}

@@ -526,8 +526,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       this.$Progress.start(); //using progress-bar package
+      // this.form.post('/auth/CustomerProfileUpdate')
 
-      this.form.post('/auth/CustomerProfileUpdate').then(function (_ref) {
+      this.form.post('/api/afc/CustomerProfileUpdate').then(function (_ref) {
         var data = _ref.data;
 
         _this.$Progress.finish();
@@ -546,17 +547,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         } //console.log(data);
 
       })["catch"](function (data) {
-        _this.$Progress.fail();
+        _this.$Progress.fail(); //toastr.warning('The given data was invalid.');
+        // console.log(data.message);
 
-        toastr.warning('The given data was invalid.'); // console.log(data.message);
       });
     },
     SendCustomerEmailChangeVerificationCode: function SendCustomerEmailChangeVerificationCode() {
       var _this2 = this;
 
       this.$Progress.start(); //using progress-bar package
+      // this.form.post('/auth/SendCustomerEmailChangeVerificationCode')
 
-      this.form.post('/auth/SendCustomerEmailChangeVerificationCode').then(function (_ref2) {
+      this.form.post('/api/afc/SendCustomerEmailChangeVerificationCode').then(function (_ref2) {
         var data = _ref2.data;
 
         _this2.$Progress.finish();
@@ -581,8 +583,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this3 = this;
 
       this.$Progress.start(); //using progress-bar package
+      // this.form.post('/auth/CustomerChangeEmail')
 
-      this.form.post('/auth/CustomerChangeEmail').then(function (_ref3) {
+      this.form.post('/api/afc/CustomerChangeEmail').then(function (_ref3) {
         var data = _ref3.data;
 
         _this3.$Progress.finish();
@@ -612,8 +615,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this4 = this;
 
       this.$Progress.start(); //using progress-bar package
+      // this.form.post('/auth/CancelChangeEmail')
 
-      this.form.post('/auth/CancelChangeEmail').then(function (_ref4) {
+      this.form.post('/api/afc/CancelChangeEmail').then(function (_ref4) {
         var data = _ref4.data;
 
         _this4.$Progress.finish();
@@ -638,8 +642,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this5 = this;
 
       this.$Progress.start(); //using progress-bar package
+      // this.form.post('/auth/SendCustomerPhoneChangeVerificationCode')
 
-      this.form.post('/auth/SendCustomerPhoneChangeVerificationCode').then(function (_ref5) {
+      this.form.post('/api/afc/SendCustomerPhoneChangeVerificationCode').then(function (_ref5) {
         var data = _ref5.data;
 
         _this5.$Progress.finish();
@@ -663,8 +668,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this6 = this;
 
       this.$Progress.start(); //using progress-bar package
+      // this.form.post('/auth/CustomerChangePhone')
 
-      this.form.post('/auth/CustomerChangePhone').then(function (_ref6) {
+      this.form.post('/api/afc/CustomerChangePhone').then(function (_ref6) {
         var data = _ref6.data;
 
         _this6.$Progress.finish();
@@ -694,8 +700,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this7 = this;
 
       this.$Progress.start(); //using progress-bar package
+      // this.form.post('/auth/CancelChangePhone')
 
-      this.form.post('/auth/CancelChangePhone').then(function (_ref7) {
+      this.form.post('/api/afc/CancelChangePhone').then(function (_ref7) {
         var data = _ref7.data;
 
         _this7.$Progress.finish();
@@ -720,8 +727,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this8 = this;
 
       this.$Progress.start(); //using progress-bar package
+      // this.form.post('/auth/CustomerChangePassword')
 
-      this.form.post('/auth/CustomerChangePassword').then(function (_ref8) {
+      this.form.post('/api/afc/CustomerChangePassword').then(function (_ref8) {
         var data = _ref8.data;
 
         _this8.$Progress.finish();
@@ -757,88 +765,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     this.$nextTick(function () {
-      //initialization of HSMegaMenu component
-      $('.js-mega-menu').HSMegaMenu({
-        event: 'hover',
-        direction: 'horizontal',
-        pageContainer: $('.container'),
-        breakpoint: 767.98,
-        hideTimeOut: 0
-      }); // initialization of svg injector module
-
-      $.HSCore.components.HSSVGIngector.init('.js-svg-injector'); // initialization of header
-
-      $.HSCore.components.HSHeader.init($('#header')); // initialization of animation
-
-      $.HSCore.components.HSOnScrollAnimation.init('[data-animation]'); // initialization of unfold component
-
-      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-        afterOpen: function afterOpen() {
-          $(this).find('input[type="search"]').focus();
-        }
-      }); // initialization of countdowns
-      // var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
-      //     yearsElSelector: '.js-cd-years',
-      //     monthsElSelector: '.js-cd-months',
-      //     daysElSelector: '.js-cd-days',
-      //     hoursElSelector: '.js-cd-hours',
-      //     minutesElSelector: '.js-cd-minutes',
-      //     secondsElSelector: '.js-cd-seconds'
-      // });
-      // initialization of malihu scrollbar
-
-      $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar')); // initialization of forms
-
-      $.HSCore.components.HSFocusState.init(); // initialization of form validation
-      // $.HSCore.components.HSValidation.init('.js-validate', {
-      //     rules: {
-      //         confirmPassword: {
-      //             equalTo: '#signupPassword'
-      //         }
-      //     }
-      // });
-      // initialization of show animations
-
-      $.HSCore.components.HSShowAnimation.init('.js-animation-link'); // initialization of fancybox
-      // initialization of popups
-
-      $.HSCore.components.HSFancyBox.init('.js-fancybox'); // initialization of slick carousel
-      // $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
-      // initialization of go to
-
-      $.HSCore.components.HSGoTo.init('.js-go-to'); // initialization of hamburgers
-
-      $.HSCore.components.HSHamburgers.init('#hamburgerTrigger'); // initialization of unfold component
-
-      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-        beforeClose: function beforeClose() {
-          $('#hamburgerTrigger').removeClass('is-active');
-        },
-        afterClose: function afterClose() {
-          $('#headerSidebarList .collapse.show').collapse('hide');
-        }
-      });
-      $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
-        e.preventDefault();
-        var target = $(this).data('target');
-
-        if ($(this).attr('aria-expanded') === "true") {
-          $(target).collapse('hide');
-        } else {
-          $(target).collapse('show');
-        }
-      }); // initialization of unfold component
-
-      $.HSCore.components.HSUnfold.init($('[data-unfold-target]')); // initialization of select picker
-      // $.HSCore.components.HSSelectPicker.init('.js-select');
-      // initialization of HSScrollNav component
-      // $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
-      //   duration: 700
-      // });
-      // initialization of quantity counter
-      //$.HSCore.components.HSQantityCounter.init('.js-quantity');
-      // initialization of forms
-      //$.HSCore.components.HSRangeSlider.init('.js-range-slider');
+      FireEvent.$emit('Call_all_javascript_function_for_theme'); // call all javascript for theme
     }); //end this.$nextTick
   }
 });
@@ -1036,9 +963,7 @@ var render = function() {
               [_vm._v(" " + _vm._s(_vm.authCustomer.name) + " ")]
             ),
             _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
-            _vm._m(0)
+            _c("br")
           ])
         ]
       ),
@@ -1209,24 +1134,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      {
-        staticClass: "btn- px-1 bg-success text-white font-size-9- rounded-lg"
-      },
-      [
-        _c("i", { staticClass: "fas fa-check font-size-8" }),
-        _vm._v(" "),
-        _c("small", [_vm._v("Verified")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -2063,7 +1971,7 @@ var render = function() {
                                 )
                               ]),
                               _vm._v(" "),
-                              _vm.change_email
+                              _vm.change_phone
                                 ? _c("dir", { staticClass: "row" }, [
                                     _c(
                                       "div",

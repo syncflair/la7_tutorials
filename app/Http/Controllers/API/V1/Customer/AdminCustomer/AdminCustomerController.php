@@ -33,7 +33,7 @@ class AdminCustomerController extends Controller
     	
     }
 
-	public function getUser(Request $request){
+	public function getAuthCustomerData(Request $request){
 
 
 		// if ( $request->user()->token()->expires_at < Carbon::now() ) {
@@ -63,17 +63,9 @@ class AdminCustomerController extends Controller
 		// return response()->json($data);
 
 		return response()->json($data);
-
-	
-
 		
 	}
 
-
-	public function hasExpired(){
-        // return Carbon::now()->gte( $this->updated_at->addSeconds($this->expires_in) );
-        return now()->gte( $this->updated_at->addSeconds($this->expires_at) );
-    }
 
 
 }

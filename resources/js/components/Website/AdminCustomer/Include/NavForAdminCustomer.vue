@@ -8,11 +8,11 @@
             <div class="info border- bg-gray-1- rounded-lg-"> 
                     <span v-show="authCustomer" class="font-size-10 text-black"> {{authCustomer.name}} </span>
                     <br> 
-                    <span class="btn- px-1 bg-success text-white font-size-9- rounded-lg">
-                        <i class="fas fa-check font-size-8"></i>
-                        <!-- <i class="fas fa-user-check"></i> -->
+                    <!-- <span class="btn- px-1 bg-success text-white font-size-9- rounded-lg">
+                        <i class="fas fa-check font-size-8"></i>                        
                          <small>Verified</small>
-                    </span>
+                    </span> -->
+                    <!-- <i class="fas fa-user-check"></i> -->
             </div>
         </div>
 

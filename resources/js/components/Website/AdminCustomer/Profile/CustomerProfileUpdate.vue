@@ -233,7 +233,7 @@
                                             </div>
                                         </div>
 
-                                        <dir v-if="change_email" class="row">
+                                        <dir v-if="change_phone" class="row">
                                             <div class="col-md-6 offset-md-3">
                                                 <span class="small text-muted">Check your phone to verification code, if did't get <a @click.prevent="SendCustomerPhoneChangeVerificationCode()" href="#" > Resend</a></span>
                                             </div>
@@ -363,7 +363,8 @@
             CustomerProfileUpdate(){
                 this.$Progress.start(); //using progress-bar package
 
-                this.form.post('/auth/CustomerProfileUpdate')
+                // this.form.post('/auth/CustomerProfileUpdate')
+                this.form.post('/api/afc/CustomerProfileUpdate')
                 .then(({ data }) => { 
                     this.$Progress.finish();
                     if(data.success){
@@ -378,7 +379,7 @@
                 })
                 .catch( (data) => {
                     this.$Progress.fail();
-                    toastr.warning('The given data was invalid.');
+                    //toastr.warning('The given data was invalid.');
                     // console.log(data.message);
                 })
             },
@@ -387,7 +388,8 @@
                 
                 this.$Progress.start(); //using progress-bar package
 
-                this.form.post('/auth/SendCustomerEmailChangeVerificationCode')
+                // this.form.post('/auth/SendCustomerEmailChangeVerificationCode')
+                this.form.post('/api/afc/SendCustomerEmailChangeVerificationCode')
                 .then(({ data }) => { 
                     this.$Progress.finish();
                     if(data.success){
@@ -409,7 +411,8 @@
             CustomerChangeEmail(){
                 this.$Progress.start(); //using progress-bar package
 
-                this.form.post('/auth/CustomerChangeEmail')
+                // this.form.post('/auth/CustomerChangeEmail')
+                this.form.post('/api/afc/CustomerChangeEmail')
                 .then(({ data }) => { 
                     this.$Progress.finish();
                     if(data.success){
@@ -434,7 +437,8 @@
             CancelChangeEmail(){                
                 this.$Progress.start(); //using progress-bar package
 
-                this.form.post('/auth/CancelChangeEmail')
+                // this.form.post('/auth/CancelChangeEmail')
+                this.form.post('/api/afc/CancelChangeEmail')
                 .then(({ data }) => { 
                     this.$Progress.finish();
                     if(data.success){
@@ -458,7 +462,8 @@
                 
                 this.$Progress.start(); //using progress-bar package
 
-                this.form.post('/auth/SendCustomerPhoneChangeVerificationCode')
+                // this.form.post('/auth/SendCustomerPhoneChangeVerificationCode')
+                this.form.post('/api/afc/SendCustomerPhoneChangeVerificationCode')
                 .then(({ data }) => { 
                     this.$Progress.finish();
                     if(data.success){
@@ -479,7 +484,8 @@
             CustomerChangePhone(){
                 this.$Progress.start(); //using progress-bar package
 
-                this.form.post('/auth/CustomerChangePhone')
+                // this.form.post('/auth/CustomerChangePhone')
+                this.form.post('/api/afc/CustomerChangePhone')
                 .then(({ data }) => { 
                     this.$Progress.finish();
                     if(data.success){
@@ -504,7 +510,8 @@
             CancelChangePhone(){
                 this.$Progress.start(); //using progress-bar package
 
-                this.form.post('/auth/CancelChangePhone')
+                // this.form.post('/auth/CancelChangePhone')
+                this.form.post('/api/afc/CancelChangePhone')
                 .then(({ data }) => { 
                     this.$Progress.finish();
                     if(data.success){
@@ -526,7 +533,8 @@
             CustomerChangePassword(){
                 this.$Progress.start(); //using progress-bar package
 
-                this.form.post('/auth/CustomerChangePassword')
+                // this.form.post('/auth/CustomerChangePassword')
+                this.form.post('/api/afc/CustomerChangePassword')
                 .then(({ data }) => { 
                     this.$Progress.finish();
                     if(data.success){
@@ -561,117 +569,10 @@
            
         mounted() {
 
-                        this.$nextTick(function () {
-
-                //initialization of HSMegaMenu component
-                $('.js-mega-menu').HSMegaMenu({
-                    event: 'hover',
-                    direction: 'horizontal',
-                    pageContainer: $('.container'),
-                    breakpoint: 767.98,
-                    hideTimeOut: 0
-                });               
-
-                // initialization of svg injector module
-                $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
-
-
-                     // initialization of header
-                $.HSCore.components.HSHeader.init($('#header'));
-
-                // initialization of animation
-                $.HSCore.components.HSOnScrollAnimation.init('[data-animation]');
-
-                // initialization of unfold component
-                $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-                    afterOpen: function () {
-                        $(this).find('input[type="search"]').focus();
-                    }
-                });
-
-                // initialization of countdowns
-                // var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
-                //     yearsElSelector: '.js-cd-years',
-                //     monthsElSelector: '.js-cd-months',
-                //     daysElSelector: '.js-cd-days',
-                //     hoursElSelector: '.js-cd-hours',
-                //     minutesElSelector: '.js-cd-minutes',
-                //     secondsElSelector: '.js-cd-seconds'
-                // });
-
-                // initialization of malihu scrollbar
-                $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
-
-                // initialization of forms
-                $.HSCore.components.HSFocusState.init();
-
-                // initialization of form validation
-                // $.HSCore.components.HSValidation.init('.js-validate', {
-                //     rules: {
-                //         confirmPassword: {
-                //             equalTo: '#signupPassword'
-                //         }
-                //     }
-                // });
-
-                // initialization of show animations
-                $.HSCore.components.HSShowAnimation.init('.js-animation-link');
-
-                // initialization of fancybox
-                // initialization of popups
-                $.HSCore.components.HSFancyBox.init('.js-fancybox');
-
-                // initialization of slick carousel
-                // $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
-
-                // initialization of go to
-                $.HSCore.components.HSGoTo.init('.js-go-to');
-
-                // initialization of hamburgers
-                $.HSCore.components.HSHamburgers.init('#hamburgerTrigger');
-
-                // initialization of unfold component
-                $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-                    beforeClose: function () {
-                        $('#hamburgerTrigger').removeClass('is-active');
-                    },
-                    afterClose: function() {
-                        $('#headerSidebarList .collapse.show').collapse('hide');
-                    }
-                });
-
-                $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
-                    e.preventDefault();
-
-                    var target = $(this).data('target');
-
-                    if($(this).attr('aria-expanded') === "true") {
-                        $(target).collapse('hide');
-                    } else {
-                        $(target).collapse('show');
-                    }
-                });
-
-                // initialization of unfold component
-                $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
-
-                // initialization of select picker
-                // $.HSCore.components.HSSelectPicker.init('.js-select');
-
-
-                // initialization of HSScrollNav component
-                // $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
-                //   duration: 700
-                // });
-
-                // initialization of quantity counter
-                //$.HSCore.components.HSQantityCounter.init('.js-quantity');
-
-                // initialization of forms
-                //$.HSCore.components.HSRangeSlider.init('.js-range-slider');
-
-
+            this.$nextTick(function () {
+                FireEvent.$emit('Call_all_javascript_function_for_theme'); // call all javascript for theme
             })//end this.$nextTick
+            
         },
     }
 </script>

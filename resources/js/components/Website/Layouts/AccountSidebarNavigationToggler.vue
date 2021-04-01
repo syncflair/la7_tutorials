@@ -368,7 +368,8 @@
             CustomerLogin() {  
               this.$Progress.start(); //using progress-bar package
 
-              this.form.post('/customer/login')
+              // this.form.post('/customer/login')
+              this.form.post('/api/afc/login' )              
               // axios.post('/customer/login',{
               //       username: this.form.login.username,
               //       password: this.form.login.password
@@ -377,15 +378,33 @@
               .then(({ data }) => { 
                 //console.log(data);                 
 
-                if(data.success){ 
+                if(data){ 
+                // if(data.success){ 
                     this.$Progress.finish();
                     this.display_error = false;
                   
                     this.sidebarContentClose();
 
+                    //for security reson, Best Policy for API Based Authentication
+                    localStorage.setItem('_spac_et', Date.now() + data.expires_in * 1000 );  //add with current time
+                    localStorage.setItem('_spac_at', data.access_token);                      
+                    localStorage.setItem('_spac_rt', data.refresh_token);                      
+                    // localStorage.setItem('_spac_et', data.expires_in);             
+                    
+                    localStorage.setItem('_spac_ug', 'spac');                      
+
+                    this.$store.commit('AuthenticationForCustomer/ACCESS_TOKEN_SET', data.access_token );                        
+                    this.$store.commit('AuthenticationForCustomer/REFRESH_TOKEN_SET', data.refresh_token );                        
                     this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true ); 
 
-                    this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data      
+                    axios.defaults.headers.common["Authorization"] = 'Bearer ' + data.access_token; //update axios header
+                    axios.defaults.headers.common["RefreshToken"] = data.refresh_token; //update axios header
+
+                    this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data 
+                    // console.log(this.spa_spac_at);
+
+                    FireEvent.$emit('Call_HSCore_components_HSUnfold'); // initialization of unfold component 
+    
 
                     // window.location = '/auth/my-dashboard';  
                     //window.location = '/home'; 
@@ -401,7 +420,12 @@
 
                     //toastr.success('Login successfule'); 
 
-                    FireEvent.$emit('Call_HSCore_components_HSUnfold'); // initialization of unfold component
+                    console.log(this.$route.path);
+                    if(this.$route.path === '/auth/login'){
+                        this.$router.push({ path : '/auth/my-dashboard' }).catch(err => {}); 
+                    }else if(this.$route.path === '/auth/register'){
+                        this.$router.push({ path : '/auth/my-dashboard' }).catch(err => {});     
+                    }
 
 
                     //for api

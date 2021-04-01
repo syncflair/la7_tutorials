@@ -3212,12 +3212,12 @@ var routes = [//export const routes = [
     progress: progressMeta
   },
   beforeEnter: function beforeEnter(to, from, next) {
-    setTimeout(function () {
-      // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;  to.name === 'CustomerLogin' &&
-      if (_VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForCustomer.isAuthenticated === true) next({
-        name: 'CustomerDashboard'
-      });else next();
-    }, 500); //call after 500 miliscound
+    //setTimeout(() => {
+    // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;  to.name === 'CustomerLogin' &&
+    //if ( to.name === 'CustomerLogin' && store.state.AuthenticationForCustomer.isAuthenticated === true) next({ name: 'CustomerDashboard' }) 
+    if (_VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForCustomer.isAuthenticated === true) next({
+      name: 'CustomerDashboard'
+    });else next(); //}, 500);//call after 500 miliscound
   }
 }, {
   path: '/auth/register',
@@ -3231,7 +3231,8 @@ var routes = [//export const routes = [
   },
   beforeEnter: function beforeEnter(to, from, next) {
     // const isAuthenticated = localStorage.getItem('isAuthenticated') ? true : false ;
-    if (to.name === 'CustomerRegister' && _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForCustomer.isAuthenticated === true) next({
+    // if (to.name === 'CustomerRegister' && store.state.AuthenticationForCustomer.isAuthenticated === true) next({ name: 'CustomerDashboard' }) 
+    if (_VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForCustomer.isAuthenticated === true) next({
       name: 'CustomerDashboard'
     });else next();
   }
@@ -3243,6 +3244,11 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Recover Password'
+  },
+  beforeEnter: function beforeEnter(to, from, next) {
+    if (_VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForCustomer.isAuthenticated === true) next({
+      name: 'CustomerDashboard'
+    });else next();
   }
 }, {
   path: '/auth/password-recover/:token',
@@ -3252,6 +3258,11 @@ var routes = [//export const routes = [
   },
   meta: {
     title: 'Reset Password'
+  },
+  beforeEnter: function beforeEnter(to, from, next) {
+    if (_VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForCustomer.isAuthenticated === true) next({
+      name: 'CustomerDashboard'
+    });else next();
   }
 },
 /********************************************************/
@@ -3546,19 +3557,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.common.js");
 /* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(vform__WEBPACK_IMPORTED_MODULE_10__);
 /* harmony import */ var _commonGlobal__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./commonGlobal */ "./resources/js/commonGlobal.js");
+var _this = undefined;
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //define currentDateTime (Custome by sumon)
+
+
+var CurrentDateTime = new Date();
+window.CurrentDateTime = CurrentDateTime;
 /*
 * Vue
 */
 // import Vue from 'vue/dist/vue'; //for laravel-mix 6
 // window.Vue = Vue;
 // window.Vue = require('vue');
-
 
 window.Vue = __webpack_require__(/*! vue/dist/vue */ "./node_modules/vue/dist/vue.js"); //for laravel-mix 6
 
@@ -3798,33 +3814,36 @@ window.FireEvent = FireEvent;
 Vue.mixin(_commonGlobal__WEBPACK_IMPORTED_MODULE_11__.default);
 /* ####################### axios interceptor ###########################################*/
 // Add a request interceptor
-// axios.interceptors.request.use( (config) =>  {
-//   store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //refresh token
-// // axios.interceptors.response.use( (config) => {
-//     // alert('test ok');
-//     // assume your access token is stored in local storage 
-//     // (it should really be somewhere more secure but I digress for simplicity)
-//     // let token = localStorage.getItem('access_token')
-//     // if (token) {
-//     //    config.headers['Authorization'] = `Bearer ${token}`
-//     // }
-//     //store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //get auth customer data 
-//     //this.$store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //get auth customer data 
-//     return config;
-//   }, (error) =>  {
-//     return Promise.reject(error);
-//   });
-// Add a response interceptor
+
+axios.interceptors.request.use(function (config) {
+  //console.log(config);
+  // const ExpireTokenIn = localStorage.getItem('_spac_et') - 10000;          
+  // console.log(ExpireTokenIn +'-'+ localStorage.getItem('_spac_et'));
+  //this is for customer
+  if (_VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.state.AuthenticationForCustomer.isitwebsiteCheck === 1) {
+    if (config.url !== '/api/afc/refresh-token') {
+      // const ExpireTokenIn = localStorage.getItem('_spac_et') - 10000; 
+      //if expire time is not null
+      if (localStorage.getItem('_spac_et') !== null) {
+        //if expire time lass then Current time
+        if (localStorage.getItem('_spac_et') < Date.now()) {
+          //now refresh token
+          _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi', config); //refresh token
+        }
+      } // else{
+      //   store.dispatch('AuthenticationForCustomer/clearTokenFromLocalStoreApi');
+      // }  
+
+    }
+  } //check is website or not
+
+
+  return config; // return Promise.resolve(config);
+}, function (error) {
+  return Promise.reject(error);
+}); // Add a response interceptor
 
 axios.interceptors.response.use(function (config) {
-  //console.log(config);
-  // alert('refresh');
-  // const ExpireTokenIn = Date.now() + (localStorage.getItem('_spac_et') * 1000);
-  // console.log('Expire Time: '+ ExpireTokenIn + ' Now: '+ Date.now() );
-  // if(ExpireTokenIn < Date.now() ){
-  //   // store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi', '');
-  //   alert('refresh ---');
-  // } 
   return config;
 }, function (error) {
   // Do something with request error
@@ -3835,12 +3854,15 @@ axios.interceptors.response.use(function (config) {
   // if (error.response.status === 401 && !originalRequest._retry ) {
 
   if (error.response.status === 401) {
-    if (localStorage.getItem('_spac_at') === 'undefined' && localStorage.getItem('_spac_rt') === 'undefined' && localStorage.getItem('_spac_et') === 'undefined') {
+    if (localStorage.getItem('_spac_at') === 'undefined' && localStorage.getItem('_spac_rt') === 'undefined') {
       _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.dispatch('AuthenticationForCustomer/clearTokenFromLocalStoreApi');
-    } else {
-      // originalRequest._retry = true;
-      _VueVuex__WEBPACK_IMPORTED_MODULE_0__.default.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi', originalRequest);
-    } // return axios(error.response.config.url); //previous route
+    } else if (localStorage.getItem('_spac_at') === null && localStorage.getItem('_spac_rt') === null) {
+      _this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false);
+    } // else{
+    //   // originalRequest._retry = true;
+    //   store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi', originalRequest); //refresh token after 401
+    // }            
+    // return axios(error.response.config.url); //previous route
 
   } // // Handle Forbidden
   // if (status === 403) {
@@ -3971,7 +3993,7 @@ var app = new Vue({
   components: {//counttest, 
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     // console.log(store.state.commonStoreForWebsite.isitwebsiteCheck);
     // alert(store.state.AuthenticationForCustomer.isAuthenticated);
@@ -3983,11 +4005,11 @@ var app = new Vue({
       if (to.meta.progress !== undefined) {
         var meta = to.meta.progress; // parse meta tags
 
-        _this.$Progress.parseMeta(meta);
+        _this2.$Progress.parseMeta(meta);
       } //  start the progress bar
 
 
-      _this.$Progress.start(); //  continue to next page
+      _this2.$Progress.start(); //  continue to next page
 
 
       next();
@@ -3995,7 +4017,7 @@ var app = new Vue({
 
     this.$router.afterEach(function (to, from) {
       //  finish the progress bar
-      _this.$Progress.finish();
+      _this2.$Progress.finish();
     });
   },
   mounted: function mounted() {
@@ -4009,103 +4031,6 @@ var app = new Vue({
     // setTimeout(() => {
     //   console.log(store.getters['AuthenticationForCustomer/isAuthenticated']);
     // }, 1000);
-    //setTimeout(() => {   
-    // if(this.isitwebsiteCheck !=  0 ){       
-    // if(store.state.commonStoreForWebsite.isitwebsiteCheck !=  0 ){      
-    //     //console.log('Work Fine');    
-    //     //############### Windown Load / $(window).on('load', function () {} ###############################
-    //     window.addEventListener('load', () => {
-    //         //initialization of HSMegaMenu component
-    //         $('.js-mega-menu').HSMegaMenu({
-    //             event: 'hover',
-    //             direction: 'horizontal',
-    //             pageContainer: $('.container'),
-    //             breakpoint: 767.98,
-    //             hideTimeOut: 0
-    //         });               
-    //         // initialization of svg injector module
-    //         $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
-    //     })
-    //     //############## Windown ready / $(document).on('ready', function () {} #############################
-    //     document.onreadystatechange = () => { 
-    //       if (document.readyState == "complete") { 
-    //          // initialization of header
-    //         $.HSCore.components.HSHeader.init($('#header'));
-    //         // initialization of animation
-    //         $.HSCore.components.HSOnScrollAnimation.init('[data-animation]');
-    //         // initialization of unfold component
-    //         $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-    //             afterOpen: function () {
-    //                 $(this).find('input[type="search"]').focus();
-    //             }
-    //         });
-    //         // initialization of popups
-    //         $.HSCore.components.HSFancyBox.init('.js-fancybox');
-    //         // initialization of countdowns
-    //         var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
-    //             yearsElSelector: '.js-cd-years',
-    //             monthsElSelector: '.js-cd-months',
-    //             daysElSelector: '.js-cd-days',
-    //             hoursElSelector: '.js-cd-hours',
-    //             minutesElSelector: '.js-cd-minutes',
-    //             secondsElSelector: '.js-cd-seconds'
-    //         });
-    //         // initialization of malihu scrollbar
-    //         $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
-    //         // initialization of forms
-    //         $.HSCore.components.HSFocusState.init();
-    //         // initialization of form validation
-    //         // $.HSCore.components.HSValidation.init('.js-validate', {
-    //         //     rules: {
-    //         //         confirmPassword: {
-    //         //             equalTo: '#signupPassword'
-    //         //         }
-    //         //     }
-    //         // });
-    //         // initialization of show animations
-    //         $.HSCore.components.HSShowAnimation.init('.js-animation-link');
-    //         // initialization of fancybox
-    //         $.HSCore.components.HSFancyBox.init('.js-fancybox');
-    //         // initialization of slick carousel
-    //         $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
-    //         // initialization of go to
-    //         $.HSCore.components.HSGoTo.init('.js-go-to');
-    //         // initialization of hamburgers
-    //         $.HSCore.components.HSHamburgers.init('#hamburgerTrigger');
-    //         // initialization of unfold component
-    //         $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-    //             beforeClose: function () {
-    //                 $('#hamburgerTrigger').removeClass('is-active');
-    //             },
-    //             afterClose: function() {
-    //                 $('#headerSidebarList .collapse.show').collapse('hide');
-    //             }
-    //         });
-    //         $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
-    //             e.preventDefault();
-    //             var target = $(this).data('target');
-    //             if($(this).attr('aria-expanded') === "true") {
-    //                 $(target).collapse('hide');
-    //             } else {
-    //                 $(target).collapse('show');
-    //             }
-    //         });
-    //         // initialization of unfold component
-    //         $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
-    //         // initialization of select picker
-    //         $.HSCore.components.HSSelectPicker.init('.js-select');
-    //         // initialization of HSScrollNav component
-    //         // $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
-    //         //   duration: 700
-    //         // });
-    //         // initialization of quantity counter
-    //         $.HSCore.components.HSQantityCounter.init('.js-quantity');
-    //         // initialization of forms
-    //         //$.HSCore.components.HSRangeSlider.init('.js-range-slider');
-    //       } 
-    //     }//end Document.onreadyStatechange       
-    // }//end authUser Check 
-    //}, 2500); 
   } //end mounted   
 
 });
@@ -4686,13 +4611,17 @@ var AuthenticationForCustomer = {
 
   /*end Mutations*/
   actions: {
+    // loginCustomerApi(){      
+    // },
     refreshTokenCustomerApi: function refreshTokenCustomerApi(context, payload) {
       var originalRequest = payload;
       axios.post('/api/afc/refresh-token').then(function (response) {
-        // console.log(response);
+        // const expireTime = CurrentDateTime.setSeconds( CurrentDateTime.getSeconds() + response.data.expires_in * 1000 ); 
+        localStorage.setItem('_spac_et', Date.now() + response.data.expires_in * 1000); //add with current time 
+
         localStorage.setItem('_spac_at', response.data.access_token);
-        localStorage.setItem('_spac_rt', response.data.refresh_token);
-        localStorage.setItem('_spac_et', response.data.expires_in);
+        localStorage.setItem('_spac_rt', response.data.refresh_token); // localStorage.setItem('_spac_et', response.data.expires_in);                
+
         localStorage.setItem('_spac_ug', 'spac');
         context.commit('IS_AUTHENTICATED_CHECK', true);
         context.commit('ACCESS_TOKEN_SET', response.data.access_token);
@@ -4701,11 +4630,15 @@ var AuthenticationForCustomer = {
         axios.defaults.headers.common["Authorization"] = 'Bearer ' + response.data.access_token; //update axios header
 
         axios.defaults.headers.common["RefreshToken"] = response.data.refresh_token; //update axios header
-        // this.fetchAuthCustomerData(); 
 
-        return axios.request(originalRequest.url); //previous route
-        // console.log(originalRequest);
-      })["catch"](function () {// window.location = '/auth/login';
+        if (originalRequest !== '') {
+          // this.fetchAuthCustomerData(); 
+          return axios.request(originalRequest.url); //previous route
+          // console.log(originalRequest);
+        }
+      })["catch"](function () {// this.clearTokenFromLocalStoreApi();
+        // window.location = '/auth/login';
+        // this.$router.push({ path : '/auth/login' }).catch(err => {}); 
       });
     },
     //get auth customer data after login if any later update 
@@ -4716,7 +4649,7 @@ var AuthenticationForCustomer = {
     //     }).catch( () => { })
     // }, 
     fetchAuthCustomerData: function fetchAuthCustomerData(context) {
-      axios.get('/api/afc/customer').then(function (response) {
+      axios.get('/api/afc/getAuthCustomerData').then(function (response) {
         context.commit('AUTH_CUSTOMER_DATA', response.data);
       })["catch"](function () {});
     },
@@ -4735,20 +4668,19 @@ var AuthenticationForCustomer = {
         localStorage.removeItem('_spac_ug');
         localStorage.removeItem('_spac_et');
         context.commit('IS_AUTHENTICATED_CHECK', false);
-        context.commit('ACCESS_TOKEN_SET', '');
-        context.commit('REFRESH_TOKEN_SET', '');
         window.location = '/home'; // window.location = '/auth/login';
       })["catch"](function () {});
     },
-    clearTokenFromLocalStoreApi: function clearTokenFromLocalStoreApi() {
+    clearTokenFromLocalStoreApi: function clearTokenFromLocalStoreApi(context) {
       localStorage.removeItem('_spac_at');
       localStorage.removeItem('_spac_rt');
       localStorage.removeItem('_spac_ug');
       localStorage.removeItem('_spac_et');
-      context.commit('IS_AUTHENTICATED_CHECK', false);
-      context.commit('ACCESS_TOKEN_SET', '');
-      context.commit('REFRESH_TOKEN_SET', '');
-      window.location = '/home'; // this.$router.push({ path : '/auth/login' }).catch(err => {}); 
+      context.commit('IS_AUTHENTICATED_CHECK', false); // window.location = '/home';
+
+      this.$router.push({
+        path: '/auth/login'
+      })["catch"](function (err) {});
     }
   }
   /*end actions*/

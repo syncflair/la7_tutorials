@@ -47,15 +47,19 @@ const AuthenticationForCustomer ={
 
   actions: {  
 
+    // loginCustomerApi(){      
+    // },
+
     refreshTokenCustomerApi(context, payload){
         const originalRequest = payload
         axios.post('/api/afc/refresh-token')
-        .then( (response) => {
+        .then( (response) => {          
 
-          // console.log(response);
+          // const expireTime = CurrentDateTime.setSeconds( CurrentDateTime.getSeconds() + response.data.expires_in * 1000 ); 
+          localStorage.setItem('_spac_et', Date.now() + response.data.expires_in * 1000 );  //add with current time 
           localStorage.setItem('_spac_at', response.data.access_token);                      
           localStorage.setItem('_spac_rt', response.data.refresh_token);   
-          localStorage.setItem('_spac_et', response.data.expires_in);                      
+          // localStorage.setItem('_spac_et', response.data.expires_in);                
           localStorage.setItem('_spac_ug', 'spac'); 
 
           context.commit('IS_AUTHENTICATED_CHECK', true);
@@ -66,11 +70,18 @@ const AuthenticationForCustomer ={
           axios.defaults.headers.common["Authorization"] = 'Bearer ' + response.data.access_token; //update axios header
           axios.defaults.headers.common["RefreshToken"] = response.data.refresh_token; //update axios header
 
-          // this.fetchAuthCustomerData(); 
-          return axios.request(originalRequest.url); //previous route
-          // console.log(originalRequest);
+
+          if(originalRequest !== ''){
+            // this.fetchAuthCustomerData(); 
+            return axios.request(originalRequest.url); //previous route
+            // console.log(originalRequest);
+          }          
+
         }).catch( () => { 
-            // window.location = '/auth/login';
+            // this.clearTokenFromLocalStoreApi();
+             // window.location = '/auth/login';
+            // this.$router.push({ path : '/auth/login' }).catch(err => {}); 
+
         })
     },   
     
@@ -83,7 +94,7 @@ const AuthenticationForCustomer ={
     // }, 
 
     fetchAuthCustomerData(context){
-        axios.get('/api/afc/customer')
+        axios.get('/api/afc/getAuthCustomerData')
         .then( (response) => {
           context.commit('AUTH_CUSTOMER_DATA', response.data);
         }).catch( () => { })
@@ -109,8 +120,6 @@ const AuthenticationForCustomer ={
           localStorage.removeItem('_spac_ug'); 
           localStorage.removeItem('_spac_et');    
           context.commit('IS_AUTHENTICATED_CHECK', false);
-          context.commit('ACCESS_TOKEN_SET', '');
-          context.commit('REFRESH_TOKEN_SET', '');
 
           window.location = '/home';
           // window.location = '/auth/login';
@@ -119,17 +128,15 @@ const AuthenticationForCustomer ={
         }).catch( () => { })
     },  
 
-    clearTokenFromLocalStoreApi(){
+    clearTokenFromLocalStoreApi(context){
       localStorage.removeItem('_spac_at');  
       localStorage.removeItem('_spac_rt');  
       localStorage.removeItem('_spac_ug'); 
       localStorage.removeItem('_spac_et');    
-      context.commit('IS_AUTHENTICATED_CHECK', false);
-      context.commit('ACCESS_TOKEN_SET', '');
-      context.commit('REFRESH_TOKEN_SET', '');
+      context.commit('IS_AUTHENTICATED_CHECK', false);      
 
-      window.location = '/home';
-      // this.$router.push({ path : '/auth/login' }).catch(err => {}); 
+      // window.location = '/home';
+      this.$router.push({ path : '/auth/login' }).catch(err => {}); 
     }
 
   } /*end actions*/ 

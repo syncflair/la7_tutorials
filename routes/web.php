@@ -62,64 +62,84 @@ Route::get('email-temp', function () {
 /* customers Route for public*/
 /***************************************************************************/
 // Route::get('customer/login', 'AuthCustomer\LoginController@showLoginForm')->name('customer.login');
-Route::get('/auth/login', 'AuthCustomer\LoginController@showLoginForm')->name('customer.login');
-Route::post('customer/login', 'AuthCustomer\LoginController@login');
+// Route::get('/auth/login', 'AuthCustomer\LoginController@showLoginForm')->name('customer.login');
+Route::get('/auth/login', 'API\V1\Customer\Auth\LoginController@showLoginForm')->name('customer.login');
+// Route::post('customer/login', 'AuthCustomer\LoginController@login');
 // Route::post('customer/login', 'AuthCustomer\LoginController@login')->name('customer.login');
 // Route::get('customer/register', 'AuthCustomer\RegisterController@showRegisterForm')->name('customer.register');
-Route::get('auth/register', 'AuthCustomer\RegisterController@showRegisterForm')->name('customer.register');
-Route::post('customer/register', 'AuthCustomer\RegisterController@register');
+// Route::get('auth/register', 'AuthCustomer\RegisterController@showRegisterForm')->name('customer.register');
+// Route::post('customer/register', 'AuthCustomer\RegisterController@register');
+
+Route::get('auth/register', 'API\V1\Customer\Auth\RegisterController@showRegisterForm')->name('customer.register');
+Route::post('customer/register', 'API\V1\Customer\Auth\RegisterController@register');
+
 // Route::post('customer/register', 'AuthCustomer\RegisterController@register')->name('customer.register');
-Route::get('/customer/verify/{token}', 'AuthCustomer\RegisterController@verifyUser'); //customer verification route 
+// Route::get('/customer/verify/{token}', 'AuthCustomer\RegisterController@verifyUser'); //customer verification route 
+Route::get('/customer/verify/{token}', 'API\V1\Customer\Auth\RegisterController@verifyUser'); //customer verification route 
 // Password Reset Routes for customers
 // Route::get('customer/password/reset','AuthCustomer\ForgotPasswordController@showLinkRequestForm')->name('customer.password.request');
-Route::get('/auth/password-recover','AuthCustomer\ForgotPasswordController@showLinkRequestForm')->name('customer.password.request');
-Route::post('customer/password/email','AuthCustomer\ForgotPasswordController@sendResetLinkEmail')->name('customer.password.email');
+
+//Route::get('/auth/password-recover','AuthCustomer\ForgotPasswordController@showLinkRequestForm')->name('customer.password.request');
+Route::get('/auth/password-recover','API\V1\Customer\Auth\ForgotPasswordController@showLinkRequestForm')->name('customer.password.request');
+Route::post('customer/password/email','API\V1\Customer\Auth\ForgotPasswordController@sendResetLinkEmail')->name('customer.password.email');
+// Route::post('customer/password/email','AuthCustomer\ForgotPasswordController@sendResetLinkEmail')->name('customer.password.email');
 // Route::get('customer/password/reset/{token}','AuthCustomer\ResetPasswordController@showResetForm')->name('customer.password.reset');
-Route::get('/auth/password-recover/{token}','AuthCustomer\ResetPasswordController@showResetForm')->name('customer.password.reset');
-Route::post('customer/password/reset','AuthCustomer\ResetPasswordController@reset')->name('customer.password.update');
+
+// Route::get('/auth/password-recover/{token}','AuthCustomer\ResetPasswordController@showResetForm')->name('customer.password.reset');
+// Route::post('customer/password/reset','AuthCustomer\ResetPasswordController@reset')->name('customer.password.update');
+Route::get('/auth/password-recover/{token}','API\V1\Customer\Auth\ResetPasswordController@showResetForm')->name('customer.password.reset');
+Route::post('customer/password/reset','API\V1\Customer\Auth\ResetPasswordController@reset')->name('customer.password.update');
 
 
 /***************************************************************************/
 /* Customer authenticatiion and AdminCustomer middleware */
 /***************************************************************************/
-Route::group(['middleware'=>['AdminCustomer','auth:api-customer'] ],  function(){
+Route::group(['middleware'=>['AdminCustomer'] ],  function(){
 // Route::group(['middleware'=>['AdminCustomer','auth:customer'] ], function(){ 
-  // Route::get('/dashboard-customer', 'AdminCustomer\AdminCustomerController@index')->name('dashboard-customer');
   Route::get('auth/my-dashboard', 'AdminCustomer\AdminCustomerController@index')->name('customer-dashboard');
-  Route::post('customer/logout', 'AuthCustomer\LoginController@logout')->name('customer.logout');
+  Route::get('auth/my-address', 'AdminCustomer\AdminCustomerController@index');
+  Route::get('auth/my-address-update', 'AdminCustomer\AdminCustomerController@index');
+  Route::get('auth/my-profile', 'AdminCustomer\AdminCustomerController@index');
+  Route::get('auth/my-profile-update', 'AdminCustomer\AdminCustomerController@index');
+  Route::get('auth/my-orders', 'AdminCustomer\AdminCustomerController@index');
+  Route::get('auth/my-wishlist', 'AdminCustomer\AdminCustomerController@index');
+  Route::get('auth/my-vouchers', 'AdminCustomer\AdminCustomerController@index');
+  Route::get('auth/my-reviews', 'AdminCustomer\AdminCustomerController@index');
 
-  Route::get('auth/getAuthCustomerData', 'AdminCustomer\AdminCustomerController@getAuthCustomerData');//AuthenticationForWebsite.js
+  // Route::post('customer/logout', 'AuthCustomer\LoginController@logout')->name('customer.logout');
 
-  Route::resource('auth/my-profile', 'AdminCustomer\AdminCustomerProfileController',
-    ['except'=>['create','show','edit','update'] ]);
-  Route::get('auth/my-profile-update', 'AdminCustomer\AdminCustomerProfileUpdateController@index');
-  Route::post('auth/CustomerProfileUpdate', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerProfileUpdate'); 
+  // Route::get('auth/getAuthCustomerData', 'AdminCustomer\AdminCustomerController@getAuthCustomerData');//AuthenticationForWebsite.js
 
-  Route::post('auth/SendCustomerEmailChangeVerificationCode', 'AdminCustomer\AdminCustomerProfileUpdateController@SendCustomerEmailChangeVerificationCode'); 
-  Route::post('auth/CustomerChangeEmail', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangeEmail');
-  Route::post('auth/CancelChangeEmail', 'AdminCustomer\AdminCustomerProfileUpdateController@CancelChangeEmail');
+  // Route::resource('auth/my-profile', 'AdminCustomer\AdminCustomerProfileController',
+  //   ['except'=>['create','show','edit','update'] ]);
 
+  // Route::get('auth/my-profile-update', 'AdminCustomer\AdminCustomerProfileUpdateController@index');
+  // Route::post('auth/CustomerProfileUpdate', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerProfileUpdate'); 
 
-  Route::post('auth/SendCustomerPhoneChangeVerificationCode', 'AdminCustomer\AdminCustomerProfileUpdateController@SendCustomerPhoneChangeVerificationCode'); 
-  Route::post('auth/CustomerChangePhone', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangePhone');
-  Route::post('auth/CancelChangePhone', 'AdminCustomer\AdminCustomerProfileUpdateController@CancelChangePhone');
-
-  Route::post('auth/CustomerChangePassword', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangePassword');
-
+  // Route::post('auth/SendCustomerEmailChangeVerificationCode', 'AdminCustomer\AdminCustomerProfileUpdateController@SendCustomerEmailChangeVerificationCode'); 
+  // Route::post('auth/CustomerChangeEmail', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangeEmail');
+  // Route::post('auth/CancelChangeEmail', 'AdminCustomer\AdminCustomerProfileUpdateController@CancelChangeEmail');
   
-  Route::resource('auth/my-orders', 'AdminCustomer\AdminCustomerOrdersController',
-    ['except'=>['create','show','edit','update'] ]);
-  Route::resource('auth/my-address', 'AdminCustomer\AdminCustomerAddressController',
-    ['except'=>['create','show','edit'] ]);
-  Route::get('auth/getAuthCustomerAddress', 'AdminCustomer\AdminCustomerAddressController@getAuthCustomerAddress');
-  Route::resource('auth/my-address-update', 'AdminCustomer\AdminCustomerAddressUpdateController',
-    ['except'=>['create','show','edit','update'] ]);
-  Route::resource('auth/my-wishlist', 'AdminCustomer\AdminCustomerWishlistController',
-    ['except'=>['create','show','edit','update'] ]);
-  Route::resource('auth/my-vouchers', 'AdminCustomer\AdminCustomerVouchersController',
-    ['except'=>['create','show','edit','update'] ]);
-  Route::resource('auth/my-reviews', 'AdminCustomer\AdminCustomerReviewsController',
-    ['except'=>['create','show','edit','update'] ]);
+  // Route::post('auth/SendCustomerPhoneChangeVerificationCode', 'AdminCustomer\AdminCustomerProfileUpdateController@SendCustomerPhoneChangeVerificationCode'); 
+  // Route::post('auth/CustomerChangePhone', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangePhone');
+  // Route::post('auth/CancelChangePhone', 'AdminCustomer\AdminCustomerProfileUpdateController@CancelChangePhone');
+
+  // Route::post('auth/CustomerChangePassword', 'AdminCustomer\AdminCustomerProfileUpdateController@CustomerChangePassword');
+  
+  // Route::resource('auth/my-orders', 'AdminCustomer\AdminCustomerOrdersController',
+  //   ['except'=>['create','show','edit','update'] ]);
+  // Route::resource('auth/my-address', 'AdminCustomer\AdminCustomerAddressController',
+  //   ['except'=>['create','show','edit'] ]);
+  // Route::get('auth/getAuthCustomerAddress', 'AdminCustomer\AdminCustomerAddressController@getAuthCustomerAddress');
+
+  // Route::resource('auth/my-address-update', 'AdminCustomer\AdminCustomerAddressUpdateController',
+  //   ['except'=>['create','show','edit','update'] ]);
+  // Route::resource('auth/my-wishlist', 'AdminCustomer\AdminCustomerWishlistController',
+  //   ['except'=>['create','show','edit','update'] ]);
+  // Route::resource('auth/my-vouchers', 'AdminCustomer\AdminCustomerVouchersController',
+  //   ['except'=>['create','show','edit','update'] ]);
+  // Route::resource('auth/my-reviews', 'AdminCustomer\AdminCustomerReviewsController',
+  //   ['except'=>['create','show','edit','update'] ]);
 
 
   // Vue: single page application (SPA)- Any route that not match that redirect to dashboard-customer. 

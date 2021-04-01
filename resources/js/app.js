@@ -6,6 +6,10 @@
 
   require('./bootstrap');
 
+  //define currentDateTime (Custome by sumon)
+  const CurrentDateTime = new Date();
+  window.CurrentDateTime = CurrentDateTime; 
+
 /*
 * Vue
 */
@@ -229,39 +233,44 @@
 
 /* ####################### axios interceptor ###########################################*/
   // Add a request interceptor
-  // axios.interceptors.request.use( (config) =>  {
-  //   store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //refresh token
-  // // axios.interceptors.response.use( (config) => {
-  //     // alert('test ok');
-  //     // assume your access token is stored in local storage 
-  //     // (it should really be somewhere more secure but I digress for simplicity)
-  //     // let token = localStorage.getItem('access_token')
-  //     // if (token) {
-  //     //    config.headers['Authorization'] = `Bearer ${token}`
-  //     // }
-  //     //store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //get auth customer data 
-  //     //this.$store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi'); //get auth customer data 
-  //     return config;
-  //   }, (error) =>  {
-  //     return Promise.reject(error);
-  //   });
+  axios.interceptors.request.use( (config) =>  {
+   
+    //console.log(config);
+
+      // const ExpireTokenIn = localStorage.getItem('_spac_et') - 10000;          
+      // console.log(ExpireTokenIn +'-'+ localStorage.getItem('_spac_et'));
+     
+      //this is for customer
+      if(store.state.AuthenticationForCustomer.isitwebsiteCheck === 1){
+
+        if(config.url !== '/api/afc/refresh-token'){
+          // const ExpireTokenIn = localStorage.getItem('_spac_et') - 10000; 
+          //if expire time is not null
+          if(localStorage.getItem('_spac_et') !== null){
+            //if expire time lass then Current time
+            if( localStorage.getItem('_spac_et') < Date.now() ){
+              //now refresh token
+              store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi', config); //refresh token
+            }
+          }
+          // else{
+          //   store.dispatch('AuthenticationForCustomer/clearTokenFromLocalStoreApi');
+          // }  
+        }
+      }//check is website or not
+
+      return config; 
+      // return Promise.resolve(config);
+    }, (error) =>  {
+      return Promise.reject(error);
+    });
 
 
   
   
   // Add a response interceptor
   axios.interceptors.response.use( 
-    (config) => {
-      //console.log(config);
-      // alert('refresh');
-      // const ExpireTokenIn = Date.now() + (localStorage.getItem('_spac_et') * 1000);
-      // console.log('Expire Time: '+ ExpireTokenIn + ' Now: '+ Date.now() );
-      // if(ExpireTokenIn < Date.now() ){
-      //   // store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi', '');
-      //   alert('refresh ---');
-      // } 
-
-      
+    (config) => {  
       return config; 
     }, 
     (error) =>  {
@@ -274,17 +283,19 @@
       // if(store.state.AuthenticationForCustomer.isitwebsiteCheck === 1){
            // Handle Session Timeouts  401 (Unauthorized) Unauthenticated
           // if (error.response.status === 401 && !originalRequest._retry ) {
+          
           if (error.response.status === 401 ) {
 
-            if( localStorage.getItem('_spac_at') === 'undefined' && localStorage.getItem('_spac_rt') === 'undefined' 
-                && localStorage.getItem('_spac_et') === 'undefined'){
-                
-              store.dispatch('AuthenticationForCustomer/clearTokenFromLocalStoreApi');
-              
-            }else{
-              // originalRequest._retry = true;
-              store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi', originalRequest);
-            }            
+            if( localStorage.getItem('_spac_at') === 'undefined' && localStorage.getItem('_spac_rt') === 'undefined'){                
+              store.dispatch('AuthenticationForCustomer/clearTokenFromLocalStoreApi');              
+            }
+            else if( localStorage.getItem('_spac_at') === null && localStorage.getItem('_spac_rt') === null ){
+                this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false );
+            }
+            // else{
+            //   // originalRequest._retry = true;
+            //   store.dispatch('AuthenticationForCustomer/refreshTokenCustomerApi', originalRequest); //refresh token after 401
+            // }            
 
             // return axios(error.response.config.url); //previous route
           }
@@ -483,133 +494,6 @@ const app = new Vue({
       //   console.log(store.getters['AuthenticationForCustomer/isAuthenticated']);
       // }, 1000);
 
-      
-      //setTimeout(() => {   
-        // if(this.isitwebsiteCheck !=  0 ){       
-        // if(store.state.commonStoreForWebsite.isitwebsiteCheck !=  0 ){      
-        //     //console.log('Work Fine');    
-
-        //     //############### Windown Load / $(window).on('load', function () {} ###############################
-        //     window.addEventListener('load', () => {
-        //         //initialization of HSMegaMenu component
-        //         $('.js-mega-menu').HSMegaMenu({
-        //             event: 'hover',
-        //             direction: 'horizontal',
-        //             pageContainer: $('.container'),
-        //             breakpoint: 767.98,
-        //             hideTimeOut: 0
-        //         });               
-
-        //         // initialization of svg injector module
-        //         $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
-        //     })
-            
-
-        //     //############## Windown ready / $(document).on('ready', function () {} #############################
-        //     document.onreadystatechange = () => { 
-        //       if (document.readyState == "complete") { 
-        //          // initialization of header
-        //         $.HSCore.components.HSHeader.init($('#header'));
-
-        //         // initialization of animation
-        //         $.HSCore.components.HSOnScrollAnimation.init('[data-animation]');
-
-        //         // initialization of unfold component
-        //         $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-        //             afterOpen: function () {
-        //                 $(this).find('input[type="search"]').focus();
-        //             }
-        //         });
-
-        //         // initialization of popups
-        //         $.HSCore.components.HSFancyBox.init('.js-fancybox');
-
-        //         // initialization of countdowns
-        //         var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
-        //             yearsElSelector: '.js-cd-years',
-        //             monthsElSelector: '.js-cd-months',
-        //             daysElSelector: '.js-cd-days',
-        //             hoursElSelector: '.js-cd-hours',
-        //             minutesElSelector: '.js-cd-minutes',
-        //             secondsElSelector: '.js-cd-seconds'
-        //         });
-
-        //         // initialization of malihu scrollbar
-        //         $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
-
-        //         // initialization of forms
-        //         $.HSCore.components.HSFocusState.init();
-
-        //         // initialization of form validation
-        //         // $.HSCore.components.HSValidation.init('.js-validate', {
-        //         //     rules: {
-        //         //         confirmPassword: {
-        //         //             equalTo: '#signupPassword'
-        //         //         }
-        //         //     }
-        //         // });
-
-        //         // initialization of show animations
-        //         $.HSCore.components.HSShowAnimation.init('.js-animation-link');
-
-        //         // initialization of fancybox
-        //         $.HSCore.components.HSFancyBox.init('.js-fancybox');
-
-        //         // initialization of slick carousel
-        //         $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
-
-        //         // initialization of go to
-        //         $.HSCore.components.HSGoTo.init('.js-go-to');
-
-        //         // initialization of hamburgers
-        //         $.HSCore.components.HSHamburgers.init('#hamburgerTrigger');
-
-        //         // initialization of unfold component
-        //         $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-        //             beforeClose: function () {
-        //                 $('#hamburgerTrigger').removeClass('is-active');
-        //             },
-        //             afterClose: function() {
-        //                 $('#headerSidebarList .collapse.show').collapse('hide');
-        //             }
-        //         });
-
-        //         $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
-        //             e.preventDefault();
-
-        //             var target = $(this).data('target');
-
-        //             if($(this).attr('aria-expanded') === "true") {
-        //                 $(target).collapse('hide');
-        //             } else {
-        //                 $(target).collapse('show');
-        //             }
-        //         });
-
-        //         // initialization of unfold component
-        //         $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
-
-        //         // initialization of select picker
-        //         $.HSCore.components.HSSelectPicker.init('.js-select');
-
-
-        //         // initialization of HSScrollNav component
-        //         // $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
-        //         //   duration: 700
-        //         // });
-
-        //         // initialization of quantity counter
-        //         $.HSCore.components.HSQantityCounter.init('.js-quantity');
-
-        //         // initialization of forms
-        //         //$.HSCore.components.HSRangeSlider.init('.js-range-slider');
-
-
-        //       } 
-        //     }//end Document.onreadyStatechange       
-          
-        // }//end authUser Check 
-      //}, 2500); 
 
 
     }, //end mounted   

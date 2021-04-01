@@ -56,7 +56,7 @@
         <a class="text-small link-muted text-center" href="{{ route('supplier.login') }}">Back to Login</a>
       </p>
       <!-- <p class="mb-0">
-        <a href="{{ route('register') }}" class="text-center">Register a new membership</a>
+        <a href="" class="text-center">Register a new membership</a>
       </p> -->
     </div>
     <!-- /.login-card-body -->

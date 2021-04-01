@@ -77,7 +77,7 @@ class Handler extends ExceptionHandler
         return parent::render($request, $exception);
     }//*/
 
-
+    //https://pusher.com/tutorials/multiple-authentication-guards-laravel
     //my custome for multiAuth redirect login route
     protected function unauthenticated($request, AuthenticationException $exception)
     {
@@ -96,13 +96,21 @@ class Handler extends ExceptionHandler
                 $login = 'supplier.login';
                 break;
 
-            default:
+            case 'customer':
                 $login = 'customer.login';
+                break;
+
+            default:
+                // $login = 'home';
+                return redirect()->intended('/home');
+                // $login = 'customer.login';
                 break;
         }
 
         
         return redirect()->guest(route($login)); //redirect dynamicaly
+        // return redirect()->intended(route($login));
+        // return redirect()->intended($login);
     }
 }
 

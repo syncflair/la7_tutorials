@@ -61,9 +61,9 @@ class AdminCustomerAddressController extends Controller
         ]);
 
         //return response()->json($request->all());        
-        if(Auth::guard('customer')->check()){
+        if(Auth::guard('api-customer')->check()){
            
-            if(Auth::guard('customer')->user()->id == $request->customer_id ){
+            if(Auth::guard('api-customer')->user()->id == $request->customer_id ){
 
                 // $this->validate($request, [
                 //     'customer_id' => 'required',
@@ -135,9 +135,9 @@ class AdminCustomerAddressController extends Controller
         ]
         );
 
-        if(Auth::guard('customer')->check()){
+        if(Auth::guard('api-customer')->check()){
            
-            if(Auth::guard('customer')->user()->id == $request->customer_id ){
+            if(Auth::guard('api-customer')->user()->id == $request->customer_id ){
 
                 $data =array();
                 //$data['customer_id']=$request->customer_id;
@@ -175,7 +175,7 @@ class AdminCustomerAddressController extends Controller
     {
         //return response()->json($id);
 
-        if(Auth::guard('customer')->check()){
+        if(Auth::guard('api-customer')->check()){
            
             $data = CustomerAddress::findOrFail($id)->delete();        
             if($data){

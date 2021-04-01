@@ -97,8 +97,9 @@
 </template>
 
 <script>
-    import HeaderTopbar from './Layouts/HeaderTopbar.vue' //Load to every page
-    
+    import { mapState } from 'vuex' //for user MapState
+
+    import HeaderTopbar from './Layouts/HeaderTopbar.vue' //Load to every page   
 
     import HeaderLogoSearchIconsForHome from './Layouts/HeaderLogoSearchIconsForHome.vue' //Load to only Home
     import HeaderVerticalAndSecondaryMenuForHome from './Layouts/HeaderVerticalAndSecondaryMenuForHome.vue' //Load to only Home
@@ -181,7 +182,7 @@
         },
 
         computed: {
-
+            ...mapState( 'AuthenticationForCustomer', ['isAuthenticated'] ),
         },
 
         watch: {            
@@ -201,21 +202,21 @@
         },
 
         methods: { 
+
                   
         },           
 
         created(){
             // console.log(this.spac_access_token);
             // setTimeout(() => { 
-              if( localStorage.getItem('_spac_at') === 'undefined' && localStorage.getItem('_spac_et') === 'undefined' 
-                && localStorage.getItem('_spac_rt') === 'undefined'){
-                this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false ); 
-              }else if( localStorage.getItem('_spac_at') === null && localStorage.getItem('_spac_et') === null 
-                && localStorage.getItem('_spac_rt') === null){
-                // }else if (this.spac_access_token === null){
-                this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false ); 
-              }else{
-                this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true ); 
+              if( localStorage.getItem('_spac_at') === 'undefined' && localStorage.getItem('_spac_rt') === 'undefined'){
+                this.$store.dispatch('AuthenticationForCustomer/clearTokenFromLocalStoreApi' ); 
+              }
+              else if( localStorage.getItem('_spac_at') === null && localStorage.getItem('_spac_rt') === null ){
+                this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', false );   
+              }
+              else{
+                this.$store.commit('AuthenticationForCustomer/IS_AUTHENTICATED_CHECK', true );   
               }
             // }, 10);//call after 10000 miliscound
              
@@ -238,6 +239,26 @@
            
         mounted() {
 
+            this.$nextTick(function () {
+                
+                // console.log(this.isAuthenticated); // console.log(this.$route.path);
+                if(this.isAuthenticated){
+                    // console.log(this.$route.path);
+                    const authenticationRoutes = ['CustomerLogin', 'CustomerRegister', 'CustomerPasswordRecover', 'CustomerPasswordReset'];
+                    
+                    if(authenticationRoutes.includes(this.$route.name)){
+                        this.$router.push({ path : '/auth/my-dashboard' }).catch(err => {});
+                        console.log(this.$route.name);                 
+                    }
+                  
+                    
+                    setTimeout(() => {
+                        this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData');
+                    }, 300);
+                }
+
+            });
+
             //console.log(localStorage.getItem('access_token'));
             // console.log('One ' + ACCESS_TOKEN);
             // console.log('store' + ACCESS_TOKEN);
@@ -247,10 +268,6 @@
 
             // //  [App.vue specific] When App.vue is finish loading finish the progress bar
             // this.$Progress.finish()
-
-            
-            //initialization of slick carousel (Slick Slider call from here, otherwise it get error)
-            //$.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
 
 
             // alert(this.$refs.screenWidth.clientHeight +' '+  this.$refs.screenWidth.clientWidth);
@@ -272,6 +289,126 @@
                     $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
                }, 600);
             }); 
+
+
+            FireEvent.$on('Call_all_javascript_function_for_theme', () => {
+              setTimeout(() => {
+
+                // console.log('All javascript Loaded');
+
+                //initialization of HSMegaMenu component
+                $('.js-mega-menu').HSMegaMenu({
+                    event: 'hover',
+                    direction: 'horizontal',
+                    pageContainer: $('.container'),
+                    breakpoint: 767.98,
+                    hideTimeOut: 0
+                });               
+
+                // initialization of svg injector module
+                $.HSCore.components.HSSVGIngector.init('.js-svg-injector');
+
+
+                     // initialization of header
+                $.HSCore.components.HSHeader.init($('#header'));
+
+                // initialization of animation
+                $.HSCore.components.HSOnScrollAnimation.init('[data-animation]');
+
+                // initialization of unfold component
+                $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+                    afterOpen: function () {
+                        $(this).find('input[type="search"]').focus();
+                    }
+                });
+
+                
+
+                // initialization of countdowns
+                var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
+                    yearsElSelector: '.js-cd-years',
+                    monthsElSelector: '.js-cd-months',
+                    daysElSelector: '.js-cd-days',
+                    hoursElSelector: '.js-cd-hours',
+                    minutesElSelector: '.js-cd-minutes',
+                    secondsElSelector: '.js-cd-seconds'
+                });
+
+                // initialization of malihu scrollbar
+                $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar'));
+
+                // initialization of forms
+                $.HSCore.components.HSFocusState.init();
+
+                // initialization of form validation
+                // $.HSCore.components.HSValidation.init('.js-validate', {
+                //     rules: {
+                //         confirmPassword: {
+                //             equalTo: '#signupPassword'
+                //         }
+                //     }
+                // });
+
+                // initialization of show animations
+                $.HSCore.components.HSShowAnimation.init('.js-animation-link');
+
+                // initialization of fancybox
+                // initialization of popups
+                $.HSCore.components.HSFancyBox.init('.js-fancybox');
+
+                // initialization of slick carousel
+                $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
+
+                // initialization of go to
+                $.HSCore.components.HSGoTo.init('.js-go-to');
+
+                // initialization of hamburgers
+                $.HSCore.components.HSHamburgers.init('#hamburgerTrigger');
+
+                // initialization of unfold component
+                $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
+                    beforeClose: function () {
+                        $('#hamburgerTrigger').removeClass('is-active');
+                    },
+                    afterClose: function() {
+                        $('#headerSidebarList .collapse.show').collapse('hide');
+                    }
+                });
+
+                $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
+                    e.preventDefault();
+
+                    var target = $(this).data('target');
+
+                    if($(this).attr('aria-expanded') === "true") {
+                        $(target).collapse('hide');
+                    } else {
+                        $(target).collapse('show');
+                    }
+                });
+
+                // initialization of unfold component
+                $.HSCore.components.HSUnfold.init($('[data-unfold-target]'));
+
+                // initialization of select picker
+                $.HSCore.components.HSSelectPicker.init('.js-select');
+
+
+                // initialization of HSScrollNav component
+                $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
+                  duration: 700
+                });
+
+                // initialization of quantity counter
+                $.HSCore.components.HSQantityCounter.init('.js-quantity');
+
+                // initialization of forms
+                $.HSCore.components.HSRangeSlider.init('.js-range-slider');
+
+
+
+               }, 0);//end setTimeout
+            }); // end Call_all_javascript_function_for_theme
 
             
 

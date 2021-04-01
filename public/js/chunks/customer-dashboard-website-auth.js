@@ -148,6 +148,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
  //for user MapState
 
@@ -161,93 +163,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     NavForAdminCustomer: _Include_NavForAdminCustomer__WEBPACK_IMPORTED_MODULE_0__.default
   },
   methods: {},
-  created: function created() {
-    this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data            
-  },
+  created: function created() {},
   mounted: function mounted() {
     this.$nextTick(function () {
-      //initialization of HSMegaMenu component
-      $('.js-mega-menu').HSMegaMenu({
-        event: 'hover',
-        direction: 'horizontal',
-        pageContainer: $('.container'),
-        breakpoint: 767.98,
-        hideTimeOut: 0
-      }); // initialization of svg injector module
+      var _this = this;
 
-      $.HSCore.components.HSSVGIngector.init('.js-svg-injector'); // initialization of header
+      setTimeout(function () {
+        _this.$store.dispatch('AuthenticationForCustomer/fetchAuthCustomerData'); //get auth customer data  
 
-      $.HSCore.components.HSHeader.init($('#header')); // initialization of animation
-
-      $.HSCore.components.HSOnScrollAnimation.init('[data-animation]'); // initialization of unfold component
-
-      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-        afterOpen: function afterOpen() {
-          $(this).find('input[type="search"]').focus();
-        }
-      }); // initialization of countdowns
-      // var countdowns = $.HSCore.components.HSCountdown.init('.js-countdown', {
-      //     yearsElSelector: '.js-cd-years',
-      //     monthsElSelector: '.js-cd-months',
-      //     daysElSelector: '.js-cd-days',
-      //     hoursElSelector: '.js-cd-hours',
-      //     minutesElSelector: '.js-cd-minutes',
-      //     secondsElSelector: '.js-cd-seconds'
-      // });
-      // initialization of malihu scrollbar
-
-      $.HSCore.components.HSMalihuScrollBar.init($('.js-scrollbar')); // initialization of forms
-
-      $.HSCore.components.HSFocusState.init(); // initialization of form validation
-      // $.HSCore.components.HSValidation.init('.js-validate', {
-      //     rules: {
-      //         confirmPassword: {
-      //             equalTo: '#signupPassword'
-      //         }
-      //     }
-      // });
-      // initialization of show animations
-
-      $.HSCore.components.HSShowAnimation.init('.js-animation-link'); // initialization of fancybox
-      // initialization of popups
-
-      $.HSCore.components.HSFancyBox.init('.js-fancybox'); // initialization of slick carousel
-      // $.HSCore.components.HSSlickCarousel.init('.js-slick-carousel');
-      // initialization of go to
-
-      $.HSCore.components.HSGoTo.init('.js-go-to'); // initialization of hamburgers
-
-      $.HSCore.components.HSHamburgers.init('#hamburgerTrigger'); // initialization of unfold component
-
-      $.HSCore.components.HSUnfold.init($('[data-unfold-target]'), {
-        beforeClose: function beforeClose() {
-          $('#hamburgerTrigger').removeClass('is-active');
-        },
-        afterClose: function afterClose() {
-          $('#headerSidebarList .collapse.show').collapse('hide');
-        }
-      });
-      $('#headerSidebarList [data-toggle="collapse"]').on('click', function (e) {
-        e.preventDefault();
-        var target = $(this).data('target');
-
-        if ($(this).attr('aria-expanded') === "true") {
-          $(target).collapse('hide');
-        } else {
-          $(target).collapse('show');
-        }
-      }); // initialization of unfold component
-
-      $.HSCore.components.HSUnfold.init($('[data-unfold-target]')); // initialization of select picker
-      // $.HSCore.components.HSSelectPicker.init('.js-select');
-      // initialization of HSScrollNav component
-      // $.HSCore.components.HSScrollNav.init($('.js-scroll-nav'), {
-      //   duration: 700
-      // });
-      // initialization of quantity counter
-      //$.HSCore.components.HSQantityCounter.init('.js-quantity');
-      // initialization of forms
-      //$.HSCore.components.HSRangeSlider.init('.js-range-slider');
+      }, 200);
+      FireEvent.$emit('Call_all_javascript_function_for_theme'); // call all javascript for theme
     }); //end this.$nextTick  
   }
 });
@@ -586,37 +511,55 @@ var render = function() {
                 "div",
                 { staticClass: "small-box bg-danger- bg-white" },
                 [
-                  _c("div", { staticClass: "inner" }, [
-                    _c("h5", { staticClass: "text-white- text-secondary" }, [
-                      _c("small", [_vm._v(_vm._s(_vm.authCustomer.name))])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      { staticClass: "text-white- text-secondary mb-2" },
-                      [
-                        _c("i", { staticClass: "fas fa-at" }),
-                        _vm._v(" " + _vm._s(_vm.authCustomer.email))
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      { staticClass: "text-white- text-secondary mb-2" },
-                      [
-                        _c("i", { staticClass: "fas fa-phone" }),
-                        _vm._v(" " + _vm._s(_vm.authCustomer.phone))
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _vm.authCustomer.status_id === 1
-                      ? _c(
-                          "p",
-                          { staticClass: "text-white- text-secondary mb-2" },
-                          [_vm._m(0)]
-                        )
-                      : _vm._e()
-                  ]),
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.authCustomer,
+                          expression: "authCustomer"
+                        }
+                      ],
+                      staticClass: "inner"
+                    },
+                    [
+                      _c("h5", { staticClass: "text-white- text-secondary" }, [
+                        _c("small", [_vm._v(_vm._s(_vm.authCustomer.name))])
+                      ]),
+                      _vm._v(" "),
+                      _vm.authCustomer.email
+                        ? _c(
+                            "p",
+                            { staticClass: "text-white- text-secondary mb-2" },
+                            [
+                              _c("i", { staticClass: "fas fa-at" }),
+                              _vm._v(" " + _vm._s(_vm.authCustomer.email))
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.authCustomer.email
+                        ? _c(
+                            "p",
+                            { staticClass: "text-white- text-secondary mb-2" },
+                            [
+                              _c("i", { staticClass: "fas fa-phone" }),
+                              _vm._v(" " + _vm._s(_vm.authCustomer.phone))
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.authCustomer.status_id === 1
+                        ? _c(
+                            "p",
+                            { staticClass: "text-white- text-secondary mb-2" },
+                            [_vm._m(0)]
+                          )
+                        : _vm._e()
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
                     "router-link",
@@ -848,9 +791,7 @@ var render = function() {
               [_vm._v(" " + _vm._s(_vm.authCustomer.name) + " ")]
             ),
             _vm._v(" "),
-            _c("br"),
-            _vm._v(" "),
-            _vm._m(0)
+            _c("br")
           ])
         ]
       ),
@@ -1021,24 +962,7 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      {
-        staticClass: "btn- px-1 bg-success text-white font-size-9- rounded-lg"
-      },
-      [
-        _c("i", { staticClass: "fas fa-check font-size-8" }),
-        _vm._v(" "),
-        _c("small", [_vm._v("Verified")])
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
